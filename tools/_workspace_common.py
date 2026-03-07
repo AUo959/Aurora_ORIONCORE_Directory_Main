@@ -1,0 +1,475 @@
+from __future__ import annotations
+
+import csv
+import hashlib
+import json
+import os
+import re
+import subprocess
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+CATALOG_DIR = ROOT / "catalog"
+DOCS_DIR = ROOT / "docs"
+REPORTS_ANALYSIS_DIR = ROOT / "reports" / "analysis"
+TRACKED_FILE_SIZE_LIMIT_BYTES = 1_000_000
+
+ARCHIVE_EXTENSIONS = {
+    ".zip",
+    ".7z",
+    ".rar",
+    ".tar",
+    ".gz",
+    ".tgz",
+    ".bz2",
+    ".xz",
+    ".dmg",
+    ".iso",
+}
+
+BINARY_EXTENSIONS = {
+    ".pkg",
+    ".msi",
+    ".exe",
+    ".bin",
+    ".img",
+}
+
+TEXT_LIKE_EXTENSIONS = {
+    ".md",
+    ".markdown",
+    ".txt",
+    ".json",
+    ".jsonl",
+    ".yaml",
+    ".yml",
+    ".csv",
+    ".py",
+    ".sh",
+    ".toml",
+}
+
+MANAGED_ROOT_PATHS = {
+    "README.md",
+    ".gitignore",
+    ".gitattributes",
+    ".githooks",
+    "docs",
+    "catalog",
+    "tools",
+    "reports",
+    "archives",
+    "intake",
+    "repos",
+    "projects",
+    "_staging",
+}
+
+ARCHIVE_ZONE_NAMES = (
+    "au_archive",
+    "zip_archives",
+    "zipwiz",
+    "complete archive",
+    "unzipped archives",
+    "archive",
+)
+
+
+def now_iso_utc() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def resolve_root(root: str | None = None) -> Path:
+    return Path(root).expanduser().resolve() if root else ROOT
+
+
+def relpath(path: Path, root: Path) -> str:
+    return path.resolve().relative_to(root).as_posix()
+
+
+def ensure_parent(path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+
+def load_yaml_like(path: Path) -> Any:
+    text = path.read_text(encoding="utf-8")
+    try:
+        import yaml  # type: ignore
+
+        return yaml.safe_load(text)
+    except Exception:
+        return json.loads(text)
+
+
+def dump_yaml_like(data: Any, path: Path) -> None:
+    ensure_parent(path)
+    try:
+        import yaml  # type: ignore
+
+        rendered = yaml.safe_dump(
+            data,
+            sort_keys=False,
+            allow_unicode=False,
+            default_flow_style=False,
+        )
+    except Exception:
+        rendered = json.dumps(data, indent=2) + "\n"
+    path.write_text(rendered, encoding="utf-8")
+
+
+def write_json(path: Path, data: Any) -> None:
+    ensure_parent(path)
+    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+
+def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+    ensure_parent(path)
+    with path.open("w", encoding="utf-8") as handle:
+        for row in rows:
+            handle.write(json.dumps(row, sort_keys=False) + "\n")
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def git(
+    args: list[str],
+    cwd: Path,
+    check: bool = True,
+    text: bool = True,
+) -> subprocess.CompletedProcess[str]:
+    env = os.environ.copy()
+    for key in ("GIT_DIR", "GIT_WORK_TREE", "GIT_INDEX_FILE", "GIT_PREFIX"):
+        env.pop(key, None)
+    return subprocess.run(
+        ["git", *args],
+        cwd=cwd,
+        check=check,
+        text=text,
+        capture_output=True,
+        env=env,
+    )
+
+
+def discover_nested_repos(root: Path) -> list[str]:
+    repos: set[str] = set()
+    for current_root, dirnames, filenames in os.walk(root):
+        current = Path(current_root)
+        if current == root / ".git":
+            dirnames[:] = []
+            continue
+        dirnames[:] = [
+            name
+            for name in sorted(dirnames)
+            if name != ".git"
+            and not name.startswith(".git_decommissioned")
+            and name != "__pycache__"
+        ]
+        if current != root and (current / ".git").exists():
+            repos.add(relpath(current, root))
+            dirnames[:] = []
+            continue
+        if ".git" in filenames:
+            repos.add(relpath(current, root))
+            dirnames[:] = []
+    return sorted(repos)
+
+
+def top_level_entries(root: Path) -> list[Path]:
+    return sorted(
+        [path for path in root.iterdir() if path.name != ".git"],
+        key=lambda item: item.name.lower(),
+    )
+
+
+def is_archive_or_binary(path: Path) -> bool:
+    suffix = path.suffix.lower()
+    return suffix in ARCHIVE_EXTENSIONS or suffix in BINARY_EXTENSIONS
+
+
+def iter_archive_artifacts(root: Path) -> list[Path]:
+    artifacts: list[Path] = []
+    for current_root, dirnames, filenames in os.walk(root):
+        current = Path(current_root)
+        dirnames[:] = [
+            name
+            for name in sorted(dirnames)
+            if name != ".git"
+            and not name.startswith(".git_decommissioned")
+            and name != "__pycache__"
+        ]
+        if current != root and (current / ".git").exists():
+            dirnames[:] = [name for name in dirnames if name != ".git"]
+        for filename in sorted(filenames):
+            path = current / filename
+            if is_archive_or_binary(path):
+                artifacts.append(path)
+    return sorted(artifacts, key=lambda item: relpath(item, root))
+
+
+def normalize_family(name: str) -> str:
+    stem = Path(name).stem.lower()
+    stem = re.sub(r"\(\d+\)", "", stem)
+    stem = re.sub(r"\s+\d+$", "", stem)
+    stem = re.sub(r"[_-]?copy$", "", stem)
+    stem = re.sub(r"\b\d{4}[-_]\d{2}[-_]\d{2}\b", "", stem)
+    stem = re.sub(r"\b\d{8}\b", "", stem)
+    stem = re.sub(r"[^a-z0-9]+", "-", stem)
+    return stem.strip("-") or "unclassified"
+
+
+def canonical_candidate(paths: list[str]) -> str:
+    def score(path: str) -> tuple[int, int, str]:
+        lowered = path.lower()
+        preferred = 0
+        if any(token in lowered for token in ("au_archive", "zip_archives", "zipwiz", "deploy")):
+            preferred += 20
+        if any(token in lowered for token in ("complete archive 4_19 copy", "unzipped archives")):
+            preferred -= 20
+        return (-preferred, len(Path(path).parts), path)
+
+    return sorted(paths, key=score)[0]
+
+
+def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> dict[str, str]:
+    relative = relpath(entry, root)
+    name = entry.name
+    lowered = name.lower()
+
+    def base_record(
+        kind: str,
+        logical_zone: str,
+        planned_path: str,
+        git_boundary: str,
+        storage_tier: str,
+        retention_policy: str,
+        owner: str,
+        status: str,
+    ) -> dict[str, str]:
+        return {
+            "id": normalize_family(relative),
+            "kind": kind,
+            "current_path": relative,
+            "logical_zone": logical_zone,
+            "planned_path": planned_path,
+            "git_boundary": git_boundary,
+            "storage_tier": storage_tier,
+            "retention_policy": retention_policy,
+            "owner": owner,
+            "status": status,
+        }
+
+    if name in {"docs", "catalog", "tools"}:
+        return base_record(
+            kind="control_surface",
+            logical_zone=name,
+            planned_path=relative,
+            git_boundary="root",
+            storage_tier="workspace-control",
+            retention_policy="versioned",
+            owner="workspace-admin",
+            status="managed",
+        )
+    if name == "reports":
+        return base_record(
+            kind="report_zone",
+            logical_zone="reports",
+            planned_path=relative,
+            git_boundary="root",
+            storage_tier="workspace-control",
+            retention_policy="versioned",
+            owner="operations",
+            status="managed",
+        )
+    if name in {"archives", "intake", "repos", "projects", "_staging"}:
+        return base_record(
+            kind="logical_zone",
+            logical_zone=name,
+            planned_path=relative,
+            git_boundary="root",
+            storage_tier="workspace-control",
+            retention_policy="versioned",
+            owner="workspace-admin",
+            status="managed",
+        )
+    if name in {".gitignore", ".gitattributes"}:
+        return base_record(
+            kind="policy_file",
+            logical_zone="docs",
+            planned_path=relative,
+            git_boundary="root",
+            storage_tier="workspace-control",
+            retention_policy="versioned",
+            owner="workspace-admin",
+            status="managed",
+        )
+    if name == ".githooks":
+        return base_record(
+            kind="hook_policy",
+            logical_zone="tools",
+            planned_path=relative,
+            git_boundary="root",
+            storage_tier="workspace-control",
+            retention_policy="versioned",
+            owner="workspace-admin",
+            status="managed",
+        )
+    if name == "README.md":
+        return base_record(
+            kind="workspace_doc",
+            logical_zone="docs",
+            planned_path=relative,
+            git_boundary="root",
+            storage_tier="workspace-control",
+            retention_policy="versioned",
+            owner="workspace-admin",
+            status="managed",
+        )
+    if name.startswith(".git_decommissioned"):
+        return base_record(
+            kind="rollback_artifact",
+            logical_zone="_staging",
+            planned_path=relative,
+            git_boundary="none",
+            storage_tier="workspace-meta",
+            retention_policy="preserve",
+            owner="workspace-admin",
+            status="protected",
+        )
+    if relative in nested_repo_roots or any(
+        repo == relative or repo.startswith(f"{relative}/") for repo in nested_repo_roots
+    ):
+        return base_record(
+            kind="repo_hub",
+            logical_zone="repos",
+            planned_path=relative,
+            git_boundary="nested",
+            storage_tier="source",
+            retention_policy="preserve",
+            owner="repository-owner",
+            status="protected",
+        )
+    if name == "Automation_Reports":
+        return base_record(
+            kind="report_collection",
+            logical_zone="reports",
+            planned_path="reports/automation/archive-entropy-guard/2026-03-07",
+            git_boundary="none",
+            storage_tier="operational-report",
+            retention_policy="archive-after-migration",
+            owner="operations",
+            status="planned_move",
+        )
+    if entry.is_dir() and any(token in lowered for token in ARCHIVE_ZONE_NAMES):
+        return base_record(
+            kind="archive_family",
+            logical_zone="archives",
+            planned_path=relative,
+            git_boundary="none",
+            storage_tier="cold-archive",
+            retention_policy="quarantine-before-delete",
+            owner="archive-admin",
+            status="deferred",
+        )
+    if entry.is_file() and is_archive_or_binary(entry):
+        return base_record(
+            kind="archive_artifact",
+            logical_zone="archives",
+            planned_path=relative,
+            git_boundary="none",
+            storage_tier="cold-archive",
+            retention_policy="quarantine-before-delete",
+            owner="archive-admin",
+            status="deferred",
+        )
+    if entry.is_file() and entry.suffix.lower() == ".md" and "report" in lowered:
+        return base_record(
+            kind="analysis_report",
+            logical_zone="reports",
+            planned_path=f"reports/analysis/{name}",
+            git_boundary="none",
+            storage_tier="operational-report",
+            retention_policy="versioned",
+            owner="operations",
+            status="planned_move",
+        )
+    if entry.is_file() and entry.suffix.lower() in {
+        ".md",
+        ".yaml",
+        ".yml",
+        ".json",
+        ".csv",
+        ".py",
+        ".txt",
+        ".vsig",
+    }:
+        if name == "REPO_BOUNDARY_NOTICE.md":
+            return base_record(
+                kind="workspace_doc",
+                logical_zone="docs",
+                planned_path="docs/repo-boundary-notice.md",
+                git_boundary="none",
+                storage_tier="workspace-control",
+                retention_policy="versioned",
+                owner="workspace-admin",
+                status="planned_move",
+            )
+        return base_record(
+            kind="intake_file",
+            logical_zone="intake",
+            planned_path=f"intake/{name}",
+            git_boundary="none",
+            storage_tier="review",
+            retention_policy="review",
+            owner="intake-review",
+            status="planned_move",
+        )
+    if entry.is_file():
+        return base_record(
+            kind="intake_file",
+            logical_zone="intake",
+            planned_path=f"intake/{name}",
+            git_boundary="none",
+            storage_tier="review",
+            retention_policy="review",
+            owner="intake-review",
+            status="planned_move",
+        )
+    if name in {".DS_Store", ".pytest_cache", ".gitwiz", ".codex_skill_edits"} or lowered.startswith(
+        ".pytest"
+    ):
+        return base_record(
+            kind="cache_or_local_artifact",
+            logical_zone="_staging",
+            planned_path=relative,
+            git_boundary="none",
+            storage_tier="ephemeral",
+            retention_policy="regenerate",
+            owner="local-user",
+            status="ignored",
+        )
+    return base_record(
+        kind="intake_collection",
+        logical_zone="intake",
+        planned_path=f"intake/{name}",
+        git_boundary="none",
+        storage_tier="review",
+        retention_policy="review",
+        owner="intake-review",
+        status="planned_move",
+    )
+
+
+def write_csv(path: Path, rows: list[dict[str, str]], fieldnames: list[str]) -> None:
+    ensure_parent(path)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
