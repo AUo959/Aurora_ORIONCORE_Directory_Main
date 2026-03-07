@@ -14,7 +14,7 @@
 !/reports/analysis/
 !/reports/analysis/**
 !/reports/automation/
-!/reports/automation/.gitkeep
+!/reports/automation/**
 !/archives/
 !/archives/.gitkeep
 !/intake/
@@ -35,4 +35,3 @@ __pycache__/
 *.tmp
 *.log
 _entropy_quarantine/
-

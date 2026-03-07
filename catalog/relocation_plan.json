@@ -10,7 +10,7 @@
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
-      "status": "planned",
+      "status": "applied",
       "summary": "Low-risk migration candidate for legacy Automation_Reports markdown files.",
       "rollback_manifest": "catalog/rollback_wave2_automation_reports_initial.json",
       "operations": [
@@ -23,8 +23,8 @@
           "post_hash": "4b3056919fce2997beb20505561f6dc6629dda9e2355e0d694b766e5cc333459",
           "rollback_source": "Automation_Reports/archive_entropy_guard_2026-03-07.md",
           "reason": "Migrate legacy automation outputs into canonical reports/automation storage.",
-          "approved": false,
-          "applied_at": null
+          "approved": true,
+          "applied_at": "2026-03-07T20:00:08Z"
         },
         {
           "batch_id": "wave2_automation_reports_initial",
@@ -35,8 +35,8 @@
           "post_hash": "30401ef320538193dec464f37eca4d0d15c5bcd149ea2702985bd0202ae0b29c",
           "rollback_source": "Automation_Reports/archive_entropy_guard_report_2026-03-07.md",
           "reason": "Migrate legacy automation outputs into canonical reports/automation storage.",
-          "approved": false,
-          "applied_at": null
+          "approved": true,
+          "applied_at": "2026-03-07T20:00:08Z"
         }
       ]
     },
