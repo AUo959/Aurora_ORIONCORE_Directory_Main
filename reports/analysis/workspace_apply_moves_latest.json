@@ -1,19 +1,23 @@
 {
-  "generated_at": "2026-03-07T20:00:08Z",
+  "generated_at": "2026-03-07T20:02:35Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "dry_run": false,
   "moved": [
     {
-      "source": "Automation_Reports/archive_entropy_guard_2026-03-07.md",
-      "destination": "reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_2026-03-07.md"
+      "source": "REPO_BOUNDARY_NOTICE.md",
+      "destination": "docs/repo-boundary-notice.md"
     },
     {
-      "source": "Automation_Reports/archive_entropy_guard_report_2026-03-07.md",
-      "destination": "reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_report_2026-03-07.md"
+      "source": "aurora_cloudbank_symbolic_architecture_discovery_report.md",
+      "destination": "reports/analysis/aurora_cloudbank_symbolic_architecture_discovery_report.md"
+    },
+    {
+      "source": "deep-research-report.md",
+      "destination": "reports/analysis/deep-research-report.md"
     }
   ],
   "skipped": [],
   "errors": [],
   "mode": "forward",
-  "batch_id": "wave2_automation_reports_initial"
+  "batch_id": "wave2_root_docs_and_analysis_initial"
 }

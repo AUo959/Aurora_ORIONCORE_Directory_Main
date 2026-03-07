@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-07T19:51:06Z",
+  "generated_at": "2026-03-07T20:02:40Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "logical_taxonomy": [
     "repos",
@@ -734,18 +734,6 @@
       "status": "managed"
     },
     {
-      "id": "repo-boundary-notice",
-      "kind": "workspace_doc",
-      "current_path": "REPO_BOUNDARY_NOTICE.md",
-      "logical_zone": "docs",
-      "planned_path": "docs/repo-boundary-notice.md",
-      "git_boundary": "none",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "planned_move"
-    },
-    {
       "id": "recovery-codes",
       "kind": "intake_collection",
       "current_path": "Recovery Codes",
@@ -914,18 +902,6 @@
       "status": "deferred"
     },
     {
-      "id": "aurora-cloudbank-symbolic-architecture-discovery-report",
-      "kind": "analysis_report",
-      "current_path": "aurora_cloudbank_symbolic_architecture_discovery_report.md",
-      "logical_zone": "reports",
-      "planned_path": "reports/analysis/aurora_cloudbank_symbolic_architecture_discovery_report.md",
-      "git_boundary": "none",
-      "storage_tier": "operational-report",
-      "retention_policy": "versioned",
-      "owner": "operations",
-      "status": "planned_move"
-    },
-    {
       "id": "catalog",
       "kind": "control_surface",
       "current_path": "catalog",
@@ -936,18 +912,6 @@
       "retention_policy": "versioned",
       "owner": "workspace-admin",
       "status": "managed"
-    },
-    {
-      "id": "deep-research-report",
-      "kind": "analysis_report",
-      "current_path": "deep-research-report.md",
-      "logical_zone": "reports",
-      "planned_path": "reports/analysis/deep-research-report.md",
-      "git_boundary": "none",
-      "storage_tier": "operational-report",
-      "retention_policy": "versioned",
-      "owner": "operations",
-      "status": "planned_move"
     },
     {
       "id": "docs",

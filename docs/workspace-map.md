@@ -1,8 +1,8 @@
 # Workspace Map
 
-- Generated: `2026-03-07T19:51:06Z`
+- Generated: `2026-03-07T20:02:40Z`
 - Root: `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `87`
+- Top-level entries cataloged: `84`
 - Nested repos registered: `3`
 - Archive or binary artifacts inventoried: `1278`
 
@@ -11,10 +11,10 @@
 - `_staging`: `5` top-level entries
 - `archives`: `33` top-level entries
 - `catalog`: `1` top-level entries
-- `docs`: `5` top-level entries
+- `docs`: `4` top-level entries
 - `intake`: `33` top-level entries
 - `projects`: `1` top-level entries
-- `reports`: `4` top-level entries
+- `reports`: `2` top-level entries
 - `repos`: `3` top-level entries
 - `tools`: `2` top-level entries
 
@@ -49,7 +49,6 @@
 - `PROJECT_SPACE_BANNER.md` -> `intake/PROJECT_SPACE_BANNER.md` (intake_file)
 - `Perplexity_Research` -> `intake/Perplexity_Research` (intake_collection)
 - `Quantum_Forge_Index` -> `intake/Quantum_Forge_Index` (intake_collection)
-- `REPO_BOUNDARY_NOTICE.md` -> `docs/repo-boundary-notice.md` (workspace_doc)
 - `Recovery Codes` -> `intake/Recovery Codes` (intake_collection)
 - `Sort Later` -> `intake/Sort Later` (intake_collection)
 - `Streamdeck_Glyphs` -> `intake/Streamdeck_Glyphs` (intake_collection)
@@ -57,8 +56,6 @@
 - `THREADCORE_GUMAS_Master_Restore_v1_RC.yaml` -> `intake/THREADCORE_GUMAS_Master_Restore_v1_RC.yaml` (intake_file)
 - `Threadcore_Index` -> `intake/Threadcore_Index` (intake_collection)
 - `agent_template_quantum_elira.vsig` -> `intake/agent_template_quantum_elira.vsig` (intake_file)
-- `aurora_cloudbank_symbolic_architecture_discovery_report.md` -> `reports/analysis/aurora_cloudbank_symbolic_architecture_discovery_report.md` (analysis_report)
-- `deep-research-report.md` -> `reports/analysis/deep-research-report.md` (analysis_report)
 - `exported-assets — LaFinca` -> `intake/exported-assets — LaFinca` (intake_collection)
 - `loom_gitbridge_wiring.py` -> `intake/loom_gitbridge_wiring.py` (intake_file)
 - `reflective_autonomy_system_code (1).py` -> `intake/reflective_autonomy_system_code (1).py` (intake_file)
