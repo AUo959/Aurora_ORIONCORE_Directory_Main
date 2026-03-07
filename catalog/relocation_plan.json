@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-03-07T19:41:58Z",
+  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "policy": {
+    "default_mode": "dry-run",
+    "delete_allowed": false,
+    "quarantine_required": true
+  },
+  "manifest_generated_at": "2026-03-07T19:41:49Z",
+  "batches": [
+    {
+      "batch_id": "wave2_automation_reports_initial",
+      "status": "planned",
+      "summary": "Low-risk migration candidate for legacy Automation_Reports markdown files.",
+      "rollback_manifest": "catalog/rollback_wave2_automation_reports_initial.json",
+      "operations": [
+        {
+          "batch_id": "wave2_automation_reports_initial",
+          "source": "Automation_Reports/archive_entropy_guard_2026-03-07.md",
+          "destination": "reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_2026-03-07.md",
+          "operation": "move",
+          "pre_hash": "4b3056919fce2997beb20505561f6dc6629dda9e2355e0d694b766e5cc333459",
+          "post_hash": "4b3056919fce2997beb20505561f6dc6629dda9e2355e0d694b766e5cc333459",
+          "rollback_source": "Automation_Reports/archive_entropy_guard_2026-03-07.md",
+          "reason": "Migrate legacy automation outputs into canonical reports/automation storage.",
+          "approved": false,
+          "applied_at": null
+        },
+        {
+          "batch_id": "wave2_automation_reports_initial",
+          "source": "Automation_Reports/archive_entropy_guard_report_2026-03-07.md",
+          "destination": "reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_report_2026-03-07.md",
+          "operation": "move",
+          "pre_hash": "30401ef320538193dec464f37eca4d0d15c5bcd149ea2702985bd0202ae0b29c",
+          "post_hash": "30401ef320538193dec464f37eca4d0d15c5bcd149ea2702985bd0202ae0b29c",
+          "rollback_source": "Automation_Reports/archive_entropy_guard_report_2026-03-07.md",
+          "reason": "Migrate legacy automation outputs into canonical reports/automation storage.",
+          "approved": false,
+          "applied_at": null
+        }
+      ]
+    }
+  ]
+}

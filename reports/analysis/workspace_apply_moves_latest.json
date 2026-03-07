@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-03-07T19:41:58Z",
+  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "dry_run": true,
+  "moved": [
+    {
+      "source": "Automation_Reports/archive_entropy_guard_2026-03-07.md",
+      "destination": "reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_2026-03-07.md"
+    },
+    {
+      "source": "Automation_Reports/archive_entropy_guard_report_2026-03-07.md",
+      "destination": "reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_report_2026-03-07.md"
+    }
+  ],
+  "skipped": [],
+  "errors": [],
+  "mode": "forward",
+  "batch_id": "wave2_automation_reports_initial"
+}

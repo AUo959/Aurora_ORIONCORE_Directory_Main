@@ -1,0 +1,31 @@
+{
+  "batch_id": "wave2_automation_reports_initial_rollback",
+  "for_batch": "wave2_automation_reports_initial",
+  "generated_at": "2026-03-07T19:41:58Z",
+  "operations": [
+    {
+      "batch_id": "wave2_automation_reports_initial_rollback",
+      "source": "reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_2026-03-07.md",
+      "destination": "Automation_Reports/archive_entropy_guard_2026-03-07.md",
+      "operation": "move",
+      "pre_hash": "4b3056919fce2997beb20505561f6dc6629dda9e2355e0d694b766e5cc333459",
+      "post_hash": "4b3056919fce2997beb20505561f6dc6629dda9e2355e0d694b766e5cc333459",
+      "rollback_source": "reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_2026-03-07.md",
+      "reason": "Rollback for wave2_automation_reports_initial",
+      "approved": false,
+      "applied_at": null
+    },
+    {
+      "batch_id": "wave2_automation_reports_initial_rollback",
+      "source": "reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_report_2026-03-07.md",
+      "destination": "Automation_Reports/archive_entropy_guard_report_2026-03-07.md",
+      "operation": "move",
+      "pre_hash": "30401ef320538193dec464f37eca4d0d15c5bcd149ea2702985bd0202ae0b29c",
+      "post_hash": "30401ef320538193dec464f37eca4d0d15c5bcd149ea2702985bd0202ae0b29c",
+      "rollback_source": "reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_report_2026-03-07.md",
+      "reason": "Rollback for wave2_automation_reports_initial",
+      "approved": false,
+      "applied_at": null
+    }
+  ]
+}
