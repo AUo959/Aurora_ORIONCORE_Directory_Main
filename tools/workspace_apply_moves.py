@@ -38,7 +38,11 @@ def update_alias_status(root: Path, rows: list[dict[str, str]]) -> None:
         if key in row_map:
             row_map[key]["status"] = row["status"]
     with alias_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["legacy_path", "canonical_path", "status"])
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=["legacy_path", "canonical_path", "status"],
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(sorted(row_map.values(), key=lambda item: item["legacy_path"]))
 

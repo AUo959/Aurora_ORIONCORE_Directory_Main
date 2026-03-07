@@ -1,3 +1,6 @@
 legacy_path,canonical_path,status
 Automation_Reports/archive_entropy_guard_2026-03-07.md,reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_2026-03-07.md,pending
 Automation_Reports/archive_entropy_guard_report_2026-03-07.md,reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_report_2026-03-07.md,pending
+REPO_BOUNDARY_NOTICE.md,docs/repo-boundary-notice.md,pending
+aurora_cloudbank_symbolic_architecture_discovery_report.md,reports/analysis/aurora_cloudbank_symbolic_architecture_discovery_report.md,pending
+deep-research-report.md,reports/analysis/deep-research-report.md,pending
