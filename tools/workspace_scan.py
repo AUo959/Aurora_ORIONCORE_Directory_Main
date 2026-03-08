@@ -11,12 +11,14 @@ from _workspace_common import (
     CATALOG_DIR,
     DOCS_DIR,
     REPORTS_ANALYSIS_DIR,
+    apply_classification_override,
     canonical_candidate,
     classify_top_level,
     discover_nested_repos,
     dump_yaml_like,
     git,
     iter_archive_artifacts,
+    load_classification_overrides,
     normalize_family,
     now_iso_utc,
     relpath,
@@ -102,6 +104,8 @@ def write_workspace_map(
     manifest: dict[str, object],
     repo_registry: dict[str, object],
     archive_inventory: list[dict[str, object]],
+    overrides_path: Path,
+    overrides_count: int,
 ) -> None:
     entries = list(manifest["entries"])
     repos = list(repo_registry["repos"])
@@ -120,6 +124,7 @@ def write_workspace_map(
         f"- Top-level entries cataloged: `{len(entries)}`",
         f"- Nested repos registered: `{len(repos)}`",
         f"- Archive or binary artifacts inventoried: `{len(archive_inventory)}`",
+        f"- Classification overrides loaded: `{overrides_count}` from `{overrides_path.relative_to(root)}`",
         "",
         "## Zones",
         "",
@@ -139,7 +144,13 @@ def write_workspace_map(
         for entry in planned_moves:
             lines.append(
                 f"- `{entry['current_path']}` -> `{entry['planned_path']}` "
-                f"({entry['kind']})"
+                f"({entry['kind']}"
+                + (
+                    f", batch `{entry['batch_id']}`"
+                    if entry.get("batch_id")
+                    else ""
+                )
+                + ")"
             )
     else:
         lines.append("- None")
@@ -156,8 +167,9 @@ def write_workspace_map(
             "",
             "1. `README.md` for the control-plane rules.",
             "2. `catalog/workspace_manifest.yaml` for top-level classification.",
-            "3. `catalog/repo_registry.yaml` for nested repo validation boundaries.",
-            "4. `catalog/relocation_plan.json` before any move execution.",
+            "3. `catalog/classification_overrides.yaml` for persistent non-default routing.",
+            "4. `catalog/repo_registry.yaml` for nested repo validation boundaries.",
+            "5. `catalog/relocation_plan.json` before any move execution.",
         ]
     )
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -190,9 +202,14 @@ def main() -> int:
 
     root = resolve_root(args.root)
     nested_repo_roots = discover_nested_repos(root)
+    overrides_path = root / "catalog" / "classification_overrides.yaml"
+    overrides = load_classification_overrides(overrides_path)
 
     entries = [
-        classify_top_level(entry, root=root, nested_repo_roots=set(nested_repo_roots))
+        apply_classification_override(
+            classify_top_level(entry, root=root, nested_repo_roots=set(nested_repo_roots)),
+            overrides,
+        )
         for entry in top_level_entries(root)
     ]
     entries = sorted(entries, key=lambda item: item["current_path"])
@@ -230,6 +247,8 @@ def main() -> int:
         "nested_repo_count": len(repo_registry["repos"]),
         "archive_artifact_count": archive_stats.get("artifacts", 0),
         "archive_artifact_bytes": archive_stats.get("bytes", 0),
+        "planned_move_count": sum(1 for entry in entries if entry["status"] == "planned_move"),
+        "override_count": len(overrides),
     }
 
     manifest_out = Path(args.manifest_out) if args.manifest_out else root / "catalog" / "workspace_manifest.yaml"
@@ -242,7 +261,15 @@ def main() -> int:
     dump_yaml_like(repo_registry, repo_registry_out)
     write_jsonl(inventory_out, archive_inventory)
     write_json(summary_out, summary)
-    write_workspace_map(root, workspace_map_out, manifest, repo_registry, archive_inventory)
+    write_workspace_map(
+        root,
+        workspace_map_out,
+        manifest,
+        repo_registry,
+        archive_inventory,
+        overrides_path,
+        len(overrides),
+    )
     return 0
 
 

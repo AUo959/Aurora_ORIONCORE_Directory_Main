@@ -17,6 +17,7 @@ nested repo internals stay out of root Git history.
 
 - Human overview: [docs/workspace-map.md](/Users/travisstreets/Library/Mobile%20Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/docs/workspace-map.md)
 - Source of truth: [catalog/workspace_manifest.yaml](/Users/travisstreets/Library/Mobile%20Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/workspace_manifest.yaml)
+- Persistent overrides: [catalog/classification_overrides.yaml](/Users/travisstreets/Library/Mobile%20Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/classification_overrides.yaml)
 - Nested repos: [catalog/repo_registry.yaml](/Users/travisstreets/Library/Mobile%20Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/repo_registry.yaml)
 - Planned moves only: [catalog/relocation_plan.json](/Users/travisstreets/Library/Mobile%20Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/relocation_plan.json)
 
@@ -38,17 +39,19 @@ nested repo internals stay out of root Git history.
 ```bash
 python3 tools/workspace_scan.py
 python3 tools/workspace_plan_moves.py
-python3 tools/workspace_apply_moves.py --batch-id wave2_automation_reports_initial
+python3 tools/workspace_apply_moves.py --batch-id wave3_small_intake_files_initial
 python3 tools/workspace_verify.py --check-determinism --exercise-relocation
 ```
 
 ## Operating Rules
 
 - Do not restore `.git_decommissioned_*`; it remains a rollback artifact only.
+- Keep non-control content routed through `catalog/classification_overrides.yaml`; do not hand-edit the generated manifest.
 - Do not move nested repos until their surrounding automation and scripts resolve
   through `catalog/repo_registry.yaml`.
 - Do not delete duplicates directly. Plan quarantine moves first, verify hashes,
   then review before any hard delete.
 - Keep tracked files below the workspace control-plane size ceiling enforced by
   `tools/workspace_verify.py`.
-
+- `intake/`, `projects/`, `archives/`, `repos/`, and `_staging/` are organization
+  zones, not tracked content stores in phase 1.

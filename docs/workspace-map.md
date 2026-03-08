@@ -1,18 +1,19 @@
 # Workspace Map
 
-- Generated: `2026-03-07T20:02:40Z`
+- Generated: `2026-03-08T00:01:40Z`
 - Root: `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
 - Top-level entries cataloged: `84`
 - Nested repos registered: `3`
 - Archive or binary artifacts inventoried: `1278`
+- Classification overrides loaded: `0` from `catalog/classification_overrides.yaml`
 
 ## Zones
 
-- `_staging`: `5` top-level entries
+- `_staging`: `6` top-level entries
 - `archives`: `33` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `4` top-level entries
-- `intake`: `33` top-level entries
+- `intake`: `32` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `2` top-level entries
 - `repos`: `3` top-level entries
@@ -26,7 +27,6 @@
 
 ## Planned Move Candidates
 
-- `.DS_Store` -> `intake/.DS_Store` (intake_file)
 - `AURIC_AGENT_CORE_v1.0.yaml` -> `intake/AURIC_AGENT_CORE_v1.0.yaml` (intake_file)
 - `AU_CORE_MASTER_TREE_CORRECTED (3).yaml` -> `intake/AU_CORE_MASTER_TREE_CORRECTED (3).yaml` (intake_file)
 - `Auora2.5_DEV` -> `intake/Auora2.5_DEV` (intake_collection)
@@ -77,5 +77,6 @@
 
 1. `README.md` for the control-plane rules.
 2. `catalog/workspace_manifest.yaml` for top-level classification.
-3. `catalog/repo_registry.yaml` for nested repo validation boundaries.
-4. `catalog/relocation_plan.json` before any move execution.
+3. `catalog/classification_overrides.yaml` for persistent non-default routing.
+4. `catalog/repo_registry.yaml` for nested repo validation boundaries.
+5. `catalog/relocation_plan.json` before any move execution.

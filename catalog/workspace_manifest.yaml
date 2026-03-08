@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-07T20:02:40Z",
+  "generated_at": "2026-03-08T00:01:40Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "logical_taxonomy": [
     "repos",
@@ -15,15 +15,15 @@
   "entries": [
     {
       "id": "ds-store",
-      "kind": "intake_file",
+      "kind": "cache_or_local_artifact",
       "current_path": ".DS_Store",
-      "logical_zone": "intake",
-      "planned_path": "intake/.DS_Store",
+      "logical_zone": "_staging",
+      "planned_path": ".DS_Store",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "ephemeral",
+      "retention_policy": "regenerate",
+      "owner": "local-user",
+      "status": "ignored"
     },
     {
       "id": "codex-skill-edits",

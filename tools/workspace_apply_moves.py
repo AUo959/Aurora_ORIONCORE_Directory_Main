@@ -14,7 +14,7 @@ from _workspace_common import (
     load_yaml_like,
     now_iso_utc,
     resolve_root,
-    sha256_file,
+    sha256_path,
     write_json,
 )
 
@@ -66,12 +66,13 @@ def execute_operations(
         destination = root / str(operation["destination"])
         pre_hash = str(operation["pre_hash"])
         post_hash = str(operation["post_hash"])
+        path_kind = str(operation.get("path_kind") or ("tree" if source.is_dir() else "file"))
         if not source.exists():
             result["errors"].append(
                 {"source": str(operation["source"]), "error": "source_missing"}
             )
             continue
-        current_hash = sha256_file(source)
+        current_hash = sha256_path(source)
         if current_hash != pre_hash:
             result["errors"].append(
                 {
@@ -84,7 +85,11 @@ def execute_operations(
             continue
         if not execute:
             result["moved"].append(
-                {"source": str(operation["source"]), "destination": str(operation["destination"])}
+                {
+                    "source": str(operation["source"]),
+                    "destination": str(operation["destination"]),
+                    "path_kind": path_kind,
+                }
             )
             continue
         ensure_parent(destination)
@@ -94,7 +99,7 @@ def execute_operations(
             )
             continue
         shutil.move(str(source), str(destination))
-        moved_hash = sha256_file(destination)
+        moved_hash = sha256_path(destination)
         if moved_hash != post_hash:
             result["errors"].append(
                 {
@@ -107,7 +112,11 @@ def execute_operations(
             continue
         operation["applied_at"] = now_iso_utc()
         result["moved"].append(
-            {"source": str(operation["source"]), "destination": str(operation["destination"])}
+            {
+                "source": str(operation["source"]),
+                "destination": str(operation["destination"]),
+                "path_kind": path_kind,
+            }
         )
         alias_updates.append(
             {

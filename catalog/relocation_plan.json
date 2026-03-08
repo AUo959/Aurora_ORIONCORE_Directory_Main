@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-03-07T20:02:49Z",
+  "generated_at": "2026-03-08T00:02:35Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-03-07T20:02:40Z",
+  "manifest_generated_at": "2026-03-08T00:01:40Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",

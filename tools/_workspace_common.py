@@ -67,6 +67,13 @@ MANAGED_ROOT_PATHS = {
     "_staging",
 }
 
+LOCAL_ARTIFACT_NAMES = {
+    ".DS_Store",
+    ".pytest_cache",
+    ".gitwiz",
+    ".codex_skill_edits",
+}
+
 ARCHIVE_ZONE_NAMES = (
     "au_archive",
     "zip_archives",
@@ -137,6 +144,33 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def sha256_tree(path: Path) -> str:
+    rows: list[str] = []
+    for child in sorted(path.rglob("*")):
+        if not child.is_file():
+            continue
+        relative = child.relative_to(path).as_posix()
+        rows.append(f"{relative}\t{sha256_file(child)}\t{child.stat().st_size}")
+    payload = "\n".join(rows).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def sha256_path(path: Path) -> str:
+    if path.is_file():
+        return sha256_file(path)
+    if path.is_dir():
+        return sha256_tree(path)
+    raise FileNotFoundError(path)
+
+
+def detect_path_kind(path: Path) -> str:
+    if path.is_dir():
+        return "tree"
+    if path.is_file():
+        return "file"
+    raise FileNotFoundError(path)
 
 
 def git(
@@ -236,6 +270,39 @@ def canonical_candidate(paths: list[str]) -> str:
         return (-preferred, len(Path(path).parts), path)
 
     return sorted(paths, key=score)[0]
+
+
+def load_classification_overrides(path: Path) -> dict[str, dict[str, Any]]:
+    if not path.exists():
+        return {}
+    raw = load_yaml_like(path) or {}
+    if isinstance(raw, dict):
+        rows = raw.get("overrides", [])
+    elif isinstance(raw, list):
+        rows = raw
+    else:
+        raise ValueError(f"Unsupported overrides payload in {path}")
+    overrides: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        if not isinstance(row, dict) or "current_path" not in row:
+            raise ValueError(f"Invalid override row in {path}: {row!r}")
+        overrides[str(row["current_path"])] = dict(row)
+    return overrides
+
+
+def apply_classification_override(
+    entry: dict[str, Any],
+    overrides: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    override = overrides.get(str(entry["current_path"]))
+    if not override:
+        return entry
+    merged = dict(entry)
+    for key, value in override.items():
+        if key == "current_path":
+            continue
+        merged[key] = value
+    return merged
 
 
 def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> dict[str, str]:
@@ -356,6 +423,17 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             owner="repository-owner",
             status="protected",
         )
+    if name in LOCAL_ARTIFACT_NAMES or lowered.startswith(".pytest"):
+        return base_record(
+            kind="cache_or_local_artifact",
+            logical_zone="_staging",
+            planned_path=relative,
+            git_boundary="none",
+            storage_tier="ephemeral",
+            retention_policy="regenerate",
+            owner="local-user",
+            status="ignored",
+        )
     if name == "Automation_Reports":
         return base_record(
             kind="report_collection",
@@ -441,19 +519,6 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             retention_policy="review",
             owner="intake-review",
             status="planned_move",
-        )
-    if name in {".DS_Store", ".pytest_cache", ".gitwiz", ".codex_skill_edits"} or lowered.startswith(
-        ".pytest"
-    ):
-        return base_record(
-            kind="cache_or_local_artifact",
-            logical_zone="_staging",
-            planned_path=relative,
-            git_boundary="none",
-            storage_tier="ephemeral",
-            retention_policy="regenerate",
-            owner="local-user",
-            status="ignored",
         )
     return base_record(
         kind="intake_collection",
