@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-03-08T00:07:19Z",
+  "generated_at": "2026-03-08T00:10:10Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
-  "top_level_entry_count": 84,
+  "top_level_entry_count": 71,
   "logical_zone_counts": {
     "_staging": 9,
     "docs": 4,
     "tools": 2,
-    "intake": 16,
     "archives": 33,
     "projects": 13,
     "repos": 3,
     "reports": 3,
+    "intake": 3,
     "catalog": 1
   },
   "nested_repo_count": 3,
   "archive_artifact_count": 1278,
   "archive_artifact_bytes": 17114900811,
-  "planned_move_count": 19,
+  "planned_move_count": 6,
   "override_count": 32
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-08T00:07:10Z",
+  "generated_at": "2026-03-08T00:10:01Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "logical_taxonomy": [
     "repos",
@@ -110,19 +110,6 @@
       "status": "ignored"
     },
     {
-      "id": "auric-agent-core-v1-0",
-      "kind": "intake_file",
-      "current_path": "AURIC_AGENT_CORE_v1.0.yaml",
-      "logical_zone": "intake",
-      "planned_path": "intake/AURIC_AGENT_CORE_v1.0.yaml",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_intake_files_initial"
-    },
-    {
       "id": "au-archive-323-326",
       "kind": "archive_family",
       "current_path": "AU_Archive_323_326",
@@ -157,19 +144,6 @@
       "retention_policy": "quarantine-before-delete",
       "owner": "archive-admin",
       "status": "deferred"
-    },
-    {
-      "id": "au-core-master-tree-corrected",
-      "kind": "intake_file",
-      "current_path": "AU_CORE_MASTER_TREE_CORRECTED (3).yaml",
-      "logical_zone": "intake",
-      "planned_path": "intake/AU_CORE_MASTER_TREE_CORRECTED (3).yaml",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "anchor-harmony-capsule-dr-srpv1",
@@ -364,19 +338,6 @@
       "status": "deferred"
     },
     {
-      "id": "aurora-core-transferable-node-rebuild",
-      "kind": "intake_file",
-      "current_path": "Aurora_Core_Transferable_Node_Rebuild.json",
-      "logical_zone": "intake",
-      "planned_path": "intake/Aurora_Core_Transferable_Node_Rebuild.json",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_intake_files_initial"
-    },
-    {
       "id": "aurora-multilang-projectspace-starterpack-v1",
       "kind": "project_bundle",
       "current_path": "Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
@@ -474,32 +435,6 @@
       "owner": "operations",
       "status": "migrated_empty",
       "notes": "Empty legacy shell retained pending a dedicated cleanup batch."
-    },
-    {
-      "id": "bridgewalker-to-emergentecho-link",
-      "kind": "intake_file",
-      "current_path": "Bridgewalker_to_EmergentEcho_link.json",
-      "logical_zone": "intake",
-      "planned_path": "intake/Bridgewalker_to_EmergentEcho_link.json",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_intake_files_initial"
-    },
-    {
-      "id": "cicada-symbolic-module-v1-0",
-      "kind": "intake_file",
-      "current_path": "CICADA_Symbolic_Module_v1.0.md",
-      "logical_zone": "intake",
-      "planned_path": "intake/CICADA_Symbolic_Module_v1.0.md",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "canonrec",
@@ -646,19 +581,6 @@
       "status": "deferred"
     },
     {
-      "id": "gumas-staff-core-module-rebuild",
-      "kind": "intake_file",
-      "current_path": "GUMAS_Staff_Core_Module_Rebuild.json",
-      "logical_zone": "intake",
-      "planned_path": "intake/GUMAS_Staff_Core_Module_Rebuild.json",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_intake_files_initial"
-    },
-    {
       "id": "non-can-reports",
       "kind": "report_collection",
       "current_path": "Non_can_reports",
@@ -672,19 +594,6 @@
       "batch_id": "wave3_small_structured_dirs_initial"
     },
     {
-      "id": "note-22-50-59",
-      "kind": "intake_file",
-      "current_path": "Note 2025-06-03 22-50-59.txt",
-      "logical_zone": "intake",
-      "planned_path": "intake/Note 2025-06-03 22-50-59.txt",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_intake_files_initial"
-    },
-    {
       "id": "opal2-modular-system-dev",
       "kind": "project_bundle",
       "current_path": "Opal2_Modular_System_Dev",
@@ -696,19 +605,6 @@
       "owner": "project-review",
       "status": "planned_move",
       "batch_id": "wave3_small_structured_dirs_initial"
-    },
-    {
-      "id": "project-space-banner",
-      "kind": "intake_file",
-      "current_path": "PROJECT_SPACE_BANNER.md",
-      "logical_zone": "intake",
-      "planned_path": "intake/PROJECT_SPACE_BANNER.md",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "perplexity-research",
@@ -785,32 +681,6 @@
       "status": "deferred"
     },
     {
-      "id": "symbolic-module-specs-constellink-oraculith",
-      "kind": "intake_file",
-      "current_path": "Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json",
-      "logical_zone": "intake",
-      "planned_path": "intake/Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_intake_files_initial"
-    },
-    {
-      "id": "threadcore-gumas-master-restore-v1-rc",
-      "kind": "intake_file",
-      "current_path": "THREADCORE_GUMAS_Master_Restore_v1_RC.yaml",
-      "logical_zone": "intake",
-      "planned_path": "intake/THREADCORE_GUMAS_Master_Restore_v1_RC.yaml",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_intake_files_initial"
-    },
-    {
       "id": "threadcore-index",
       "kind": "empty_placeholder",
       "current_path": "Threadcore_Index",
@@ -881,19 +751,6 @@
       "retention_policy": "versioned",
       "owner": "workspace-admin",
       "status": "managed"
-    },
-    {
-      "id": "agent-template-quantum-elira",
-      "kind": "intake_file",
-      "current_path": "agent_template_quantum_elira.vsig",
-      "logical_zone": "intake",
-      "planned_path": "intake/agent_template_quantum_elira.vsig",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "archives",
@@ -968,19 +825,6 @@
       "status": "managed"
     },
     {
-      "id": "loom-gitbridge-wiring",
-      "kind": "intake_file",
-      "current_path": "loom_gitbridge_wiring.py",
-      "logical_zone": "intake",
-      "planned_path": "intake/loom_gitbridge_wiring.py",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_intake_files_initial"
-    },
-    {
       "id": "projects",
       "kind": "logical_zone",
       "current_path": "projects",
@@ -991,19 +835,6 @@
       "retention_policy": "versioned",
       "owner": "workspace-admin",
       "status": "managed"
-    },
-    {
-      "id": "reflective-autonomy-system-code",
-      "kind": "intake_file",
-      "current_path": "reflective_autonomy_system_code (1).py",
-      "logical_zone": "intake",
-      "planned_path": "intake/reflective_autonomy_system_code (1).py",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "reports",

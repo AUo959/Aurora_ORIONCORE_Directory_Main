@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-03-08T00:07:19Z",
+  "generated_at": "2026-03-08T00:10:10Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-03-08T00:07:10Z",
+  "manifest_generated_at": "2026-03-08T00:10:01Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
@@ -86,7 +86,7 @@
     },
     {
       "batch_id": "wave3_small_intake_files_initial",
-      "status": "planned",
+      "status": "applied",
       "summary": "Small loose root files into intake.",
       "rollback_manifest": "catalog/rollback_wave3_small_intake_files_initial.json",
       "operations": [
@@ -99,8 +99,8 @@
           "post_hash": "66b5b91a7a35a0d8fb63e7aadbfa928c68ade1c5e3011077b32d9f09ee3eb972",
           "rollback_source": "AURIC_AGENT_CORE_v1.0.yaml",
           "reason": "Relocate AURIC_AGENT_CORE_v1.0.yaml into intake/AURIC_AGENT_CORE_v1.0.yaml.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:09:55Z",
           "path_kind": "file"
         },
         {
@@ -112,8 +112,8 @@
           "post_hash": "4a9374114753ac389e214436ad617663d09c41bbbbca455ceb490794215fd88b",
           "rollback_source": "AU_CORE_MASTER_TREE_CORRECTED (3).yaml",
           "reason": "Relocate AU_CORE_MASTER_TREE_CORRECTED (3).yaml into intake/AU_CORE_MASTER_TREE_CORRECTED (3).yaml.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:09:55Z",
           "path_kind": "file"
         },
         {
@@ -125,8 +125,8 @@
           "post_hash": "1b29b229a94d8783d9b0bfed58c5f3ab1fe6ecece04e34210bf60373d370e819",
           "rollback_source": "Aurora_Core_Transferable_Node_Rebuild.json",
           "reason": "Relocate Aurora_Core_Transferable_Node_Rebuild.json into intake/Aurora_Core_Transferable_Node_Rebuild.json.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:09:55Z",
           "path_kind": "file"
         },
         {
@@ -138,8 +138,8 @@
           "post_hash": "6a4e379f6ebfc64f96cdcce21f96dd1b3476e71fc67057c5c77e47197f1fae88",
           "rollback_source": "Bridgewalker_to_EmergentEcho_link.json",
           "reason": "Relocate Bridgewalker_to_EmergentEcho_link.json into intake/Bridgewalker_to_EmergentEcho_link.json.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:09:55Z",
           "path_kind": "file"
         },
         {
@@ -151,8 +151,8 @@
           "post_hash": "5cdf0465d31c04eff46b805b770ee17f499707ae15b953245d8711cc801e97da",
           "rollback_source": "CICADA_Symbolic_Module_v1.0.md",
           "reason": "Relocate CICADA_Symbolic_Module_v1.0.md into intake/CICADA_Symbolic_Module_v1.0.md.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:09:55Z",
           "path_kind": "file"
         },
         {
@@ -164,8 +164,8 @@
           "post_hash": "2a9946b4dfc25b37cdb7994c1aa32e2d62e76e4c08241874e13dcb99b41f46e2",
           "rollback_source": "GUMAS_Staff_Core_Module_Rebuild.json",
           "reason": "Relocate GUMAS_Staff_Core_Module_Rebuild.json into intake/GUMAS_Staff_Core_Module_Rebuild.json.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:09:55Z",
           "path_kind": "file"
         },
         {
@@ -177,8 +177,8 @@
           "post_hash": "61ef2a3569034ff9b80252d1b06cb8ec6342b332d91fa26df9915f96b0efa9aa",
           "rollback_source": "Note 2025-06-03 22-50-59.txt",
           "reason": "Relocate Note 2025-06-03 22-50-59.txt into intake/Note 2025-06-03 22-50-59.txt.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:09:55Z",
           "path_kind": "file"
         },
         {
@@ -190,8 +190,8 @@
           "post_hash": "3b3cbf41da1d247925c5c723047ac55739ca4275dda03a2d86e02d9179cc9dea",
           "rollback_source": "PROJECT_SPACE_BANNER.md",
           "reason": "Relocate PROJECT_SPACE_BANNER.md into intake/PROJECT_SPACE_BANNER.md.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:09:55Z",
           "path_kind": "file"
         },
         {
@@ -203,8 +203,8 @@
           "post_hash": "0a265bed171222bc2375f325bffd554eff1bfcac59cb390ef3e3d783baf07126",
           "rollback_source": "Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json",
           "reason": "Relocate Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json into intake/Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:09:55Z",
           "path_kind": "file"
         },
         {
@@ -216,8 +216,8 @@
           "post_hash": "c3ea7905cab5bde5ad724adc61e84f4950890485977f65997aae461646b1a77a",
           "rollback_source": "THREADCORE_GUMAS_Master_Restore_v1_RC.yaml",
           "reason": "Relocate THREADCORE_GUMAS_Master_Restore_v1_RC.yaml into intake/THREADCORE_GUMAS_Master_Restore_v1_RC.yaml.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:09:55Z",
           "path_kind": "file"
         },
         {
@@ -229,8 +229,8 @@
           "post_hash": "5bc639b87e4db8f42e6fbd44e6b70f9a1d32c17a67335c85a8418d1630b1c97a",
           "rollback_source": "agent_template_quantum_elira.vsig",
           "reason": "Relocate agent_template_quantum_elira.vsig into intake/agent_template_quantum_elira.vsig.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:09:55Z",
           "path_kind": "file"
         },
         {
@@ -242,8 +242,8 @@
           "post_hash": "946f8f8d423f388fa829cf54233518c4d240bafc4b1f1f3e3d5d9f0e4b80b94a",
           "rollback_source": "loom_gitbridge_wiring.py",
           "reason": "Relocate loom_gitbridge_wiring.py into intake/loom_gitbridge_wiring.py.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:09:55Z",
           "path_kind": "file"
         },
         {
@@ -255,8 +255,8 @@
           "post_hash": "48291850614b335cf7792d73ddd4e8e307c4188feed93dc0f13a9348c0cab37c",
           "rollback_source": "reflective_autonomy_system_code (1).py",
           "reason": "Relocate reflective_autonomy_system_code (1).py into intake/reflective_autonomy_system_code (1).py.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:09:55Z",
           "path_kind": "file"
         }
       ]

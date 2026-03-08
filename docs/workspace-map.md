@@ -1,8 +1,8 @@
 # Workspace Map
 
-- Generated: `2026-03-08T00:07:10Z`
+- Generated: `2026-03-08T00:10:01Z`
 - Root: `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `84`
+- Top-level entries cataloged: `71`
 - Nested repos registered: `3`
 - Archive or binary artifacts inventoried: `1278`
 - Classification overrides loaded: `32` from `catalog/classification_overrides.yaml`
@@ -13,7 +13,7 @@
 - `archives`: `33` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `4` top-level entries
-- `intake`: `16` top-level entries
+- `intake`: `3` top-level entries
 - `projects`: `13` top-level entries
 - `reports`: `3` top-level entries
 - `repos`: `3` top-level entries
@@ -27,25 +27,12 @@
 
 ## Planned Move Candidates
 
-- `AURIC_AGENT_CORE_v1.0.yaml` -> `intake/AURIC_AGENT_CORE_v1.0.yaml` (intake_file, batch `wave3_small_intake_files_initial`)
-- `AU_CORE_MASTER_TREE_CORRECTED (3).yaml` -> `intake/AU_CORE_MASTER_TREE_CORRECTED (3).yaml` (intake_file, batch `wave3_small_intake_files_initial`)
-- `Aurora_Core_Transferable_Node_Rebuild.json` -> `intake/Aurora_Core_Transferable_Node_Rebuild.json` (intake_file, batch `wave3_small_intake_files_initial`)
 - `Aurora_Multilang_ProjectSpace_StarterPack_v1.0` -> `projects/Aurora_Multilang_ProjectSpace_StarterPack_v1.0` (project_bundle, batch `wave3_small_structured_dirs_initial`)
 - `Aurora_Reorganization` -> `_staging/Aurora_Reorganization` (legacy_tool_bundle, batch `wave3_staging_isolation_initial`)
-- `Bridgewalker_to_EmergentEcho_link.json` -> `intake/Bridgewalker_to_EmergentEcho_link.json` (intake_file, batch `wave3_small_intake_files_initial`)
-- `CICADA_Symbolic_Module_v1.0.md` -> `intake/CICADA_Symbolic_Module_v1.0.md` (intake_file, batch `wave3_small_intake_files_initial`)
-- `GUMAS_Staff_Core_Module_Rebuild.json` -> `intake/GUMAS_Staff_Core_Module_Rebuild.json` (intake_file, batch `wave3_small_intake_files_initial`)
 - `Non_can_reports` -> `reports/analysis/non_can_reports` (report_collection, batch `wave3_small_structured_dirs_initial`)
-- `Note 2025-06-03 22-50-59.txt` -> `intake/Note 2025-06-03 22-50-59.txt` (intake_file, batch `wave3_small_intake_files_initial`)
 - `Opal2_Modular_System_Dev` -> `projects/Opal2_Modular_System_Dev` (project_bundle, batch `wave3_small_structured_dirs_initial`)
-- `PROJECT_SPACE_BANNER.md` -> `intake/PROJECT_SPACE_BANNER.md` (intake_file, batch `wave3_small_intake_files_initial`)
 - `Quantum_Forge_Index` -> `projects/Quantum_Forge_Index` (project_index, batch `wave3_small_structured_dirs_initial`)
 - `Recovery Codes` -> `_staging/Recovery Codes` (sensitive_material, batch `wave3_staging_isolation_initial`)
-- `Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json` -> `intake/Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json` (intake_file, batch `wave3_small_intake_files_initial`)
-- `THREADCORE_GUMAS_Master_Restore_v1_RC.yaml` -> `intake/THREADCORE_GUMAS_Master_Restore_v1_RC.yaml` (intake_file, batch `wave3_small_intake_files_initial`)
-- `agent_template_quantum_elira.vsig` -> `intake/agent_template_quantum_elira.vsig` (intake_file, batch `wave3_small_intake_files_initial`)
-- `loom_gitbridge_wiring.py` -> `intake/loom_gitbridge_wiring.py` (intake_file, batch `wave3_small_intake_files_initial`)
-- `reflective_autonomy_system_code (1).py` -> `intake/reflective_autonomy_system_code (1).py` (intake_file, batch `wave3_small_intake_files_initial`)
 
 ## Largest Archive/Binary Artifacts
 

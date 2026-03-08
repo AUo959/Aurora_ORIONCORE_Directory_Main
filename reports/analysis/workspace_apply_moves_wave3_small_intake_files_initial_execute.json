@@ -1,0 +1,76 @@
+{
+  "generated_at": "2026-03-08T00:09:55Z",
+  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "dry_run": false,
+  "moved": [
+    {
+      "source": "AURIC_AGENT_CORE_v1.0.yaml",
+      "destination": "intake/AURIC_AGENT_CORE_v1.0.yaml",
+      "path_kind": "file"
+    },
+    {
+      "source": "AU_CORE_MASTER_TREE_CORRECTED (3).yaml",
+      "destination": "intake/AU_CORE_MASTER_TREE_CORRECTED (3).yaml",
+      "path_kind": "file"
+    },
+    {
+      "source": "Aurora_Core_Transferable_Node_Rebuild.json",
+      "destination": "intake/Aurora_Core_Transferable_Node_Rebuild.json",
+      "path_kind": "file"
+    },
+    {
+      "source": "Bridgewalker_to_EmergentEcho_link.json",
+      "destination": "intake/Bridgewalker_to_EmergentEcho_link.json",
+      "path_kind": "file"
+    },
+    {
+      "source": "CICADA_Symbolic_Module_v1.0.md",
+      "destination": "intake/CICADA_Symbolic_Module_v1.0.md",
+      "path_kind": "file"
+    },
+    {
+      "source": "GUMAS_Staff_Core_Module_Rebuild.json",
+      "destination": "intake/GUMAS_Staff_Core_Module_Rebuild.json",
+      "path_kind": "file"
+    },
+    {
+      "source": "Note 2025-06-03 22-50-59.txt",
+      "destination": "intake/Note 2025-06-03 22-50-59.txt",
+      "path_kind": "file"
+    },
+    {
+      "source": "PROJECT_SPACE_BANNER.md",
+      "destination": "intake/PROJECT_SPACE_BANNER.md",
+      "path_kind": "file"
+    },
+    {
+      "source": "Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json",
+      "destination": "intake/Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json",
+      "path_kind": "file"
+    },
+    {
+      "source": "THREADCORE_GUMAS_Master_Restore_v1_RC.yaml",
+      "destination": "intake/THREADCORE_GUMAS_Master_Restore_v1_RC.yaml",
+      "path_kind": "file"
+    },
+    {
+      "source": "agent_template_quantum_elira.vsig",
+      "destination": "intake/agent_template_quantum_elira.vsig",
+      "path_kind": "file"
+    },
+    {
+      "source": "loom_gitbridge_wiring.py",
+      "destination": "intake/loom_gitbridge_wiring.py",
+      "path_kind": "file"
+    },
+    {
+      "source": "reflective_autonomy_system_code (1).py",
+      "destination": "intake/reflective_autonomy_system_code (1).py",
+      "path_kind": "file"
+    }
+  ],
+  "skipped": [],
+  "errors": [],
+  "mode": "forward",
+  "batch_id": "wave3_small_intake_files_initial"
+}
