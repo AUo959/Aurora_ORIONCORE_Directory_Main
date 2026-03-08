@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-03-08T00:02:35Z",
+  "generated_at": "2026-03-08T00:07:19Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-03-08T00:01:40Z",
+  "manifest_generated_at": "2026-03-08T00:07:10Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
@@ -81,6 +81,277 @@
           "reason": "Migrate low-risk root docs and analysis reports into canonical control-plane zones.",
           "approved": true,
           "applied_at": "2026-03-07T20:02:35Z"
+        }
+      ]
+    },
+    {
+      "batch_id": "wave3_small_intake_files_initial",
+      "status": "planned",
+      "summary": "Small loose root files into intake.",
+      "rollback_manifest": "catalog/rollback_wave3_small_intake_files_initial.json",
+      "operations": [
+        {
+          "batch_id": "wave3_small_intake_files_initial",
+          "source": "AURIC_AGENT_CORE_v1.0.yaml",
+          "destination": "intake/AURIC_AGENT_CORE_v1.0.yaml",
+          "operation": "move",
+          "pre_hash": "66b5b91a7a35a0d8fb63e7aadbfa928c68ade1c5e3011077b32d9f09ee3eb972",
+          "post_hash": "66b5b91a7a35a0d8fb63e7aadbfa928c68ade1c5e3011077b32d9f09ee3eb972",
+          "rollback_source": "AURIC_AGENT_CORE_v1.0.yaml",
+          "reason": "Relocate AURIC_AGENT_CORE_v1.0.yaml into intake/AURIC_AGENT_CORE_v1.0.yaml.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave3_small_intake_files_initial",
+          "source": "AU_CORE_MASTER_TREE_CORRECTED (3).yaml",
+          "destination": "intake/AU_CORE_MASTER_TREE_CORRECTED (3).yaml",
+          "operation": "move",
+          "pre_hash": "4a9374114753ac389e214436ad617663d09c41bbbbca455ceb490794215fd88b",
+          "post_hash": "4a9374114753ac389e214436ad617663d09c41bbbbca455ceb490794215fd88b",
+          "rollback_source": "AU_CORE_MASTER_TREE_CORRECTED (3).yaml",
+          "reason": "Relocate AU_CORE_MASTER_TREE_CORRECTED (3).yaml into intake/AU_CORE_MASTER_TREE_CORRECTED (3).yaml.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave3_small_intake_files_initial",
+          "source": "Aurora_Core_Transferable_Node_Rebuild.json",
+          "destination": "intake/Aurora_Core_Transferable_Node_Rebuild.json",
+          "operation": "move",
+          "pre_hash": "1b29b229a94d8783d9b0bfed58c5f3ab1fe6ecece04e34210bf60373d370e819",
+          "post_hash": "1b29b229a94d8783d9b0bfed58c5f3ab1fe6ecece04e34210bf60373d370e819",
+          "rollback_source": "Aurora_Core_Transferable_Node_Rebuild.json",
+          "reason": "Relocate Aurora_Core_Transferable_Node_Rebuild.json into intake/Aurora_Core_Transferable_Node_Rebuild.json.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave3_small_intake_files_initial",
+          "source": "Bridgewalker_to_EmergentEcho_link.json",
+          "destination": "intake/Bridgewalker_to_EmergentEcho_link.json",
+          "operation": "move",
+          "pre_hash": "6a4e379f6ebfc64f96cdcce21f96dd1b3476e71fc67057c5c77e47197f1fae88",
+          "post_hash": "6a4e379f6ebfc64f96cdcce21f96dd1b3476e71fc67057c5c77e47197f1fae88",
+          "rollback_source": "Bridgewalker_to_EmergentEcho_link.json",
+          "reason": "Relocate Bridgewalker_to_EmergentEcho_link.json into intake/Bridgewalker_to_EmergentEcho_link.json.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave3_small_intake_files_initial",
+          "source": "CICADA_Symbolic_Module_v1.0.md",
+          "destination": "intake/CICADA_Symbolic_Module_v1.0.md",
+          "operation": "move",
+          "pre_hash": "5cdf0465d31c04eff46b805b770ee17f499707ae15b953245d8711cc801e97da",
+          "post_hash": "5cdf0465d31c04eff46b805b770ee17f499707ae15b953245d8711cc801e97da",
+          "rollback_source": "CICADA_Symbolic_Module_v1.0.md",
+          "reason": "Relocate CICADA_Symbolic_Module_v1.0.md into intake/CICADA_Symbolic_Module_v1.0.md.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave3_small_intake_files_initial",
+          "source": "GUMAS_Staff_Core_Module_Rebuild.json",
+          "destination": "intake/GUMAS_Staff_Core_Module_Rebuild.json",
+          "operation": "move",
+          "pre_hash": "2a9946b4dfc25b37cdb7994c1aa32e2d62e76e4c08241874e13dcb99b41f46e2",
+          "post_hash": "2a9946b4dfc25b37cdb7994c1aa32e2d62e76e4c08241874e13dcb99b41f46e2",
+          "rollback_source": "GUMAS_Staff_Core_Module_Rebuild.json",
+          "reason": "Relocate GUMAS_Staff_Core_Module_Rebuild.json into intake/GUMAS_Staff_Core_Module_Rebuild.json.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave3_small_intake_files_initial",
+          "source": "Note 2025-06-03 22-50-59.txt",
+          "destination": "intake/Note 2025-06-03 22-50-59.txt",
+          "operation": "move",
+          "pre_hash": "61ef2a3569034ff9b80252d1b06cb8ec6342b332d91fa26df9915f96b0efa9aa",
+          "post_hash": "61ef2a3569034ff9b80252d1b06cb8ec6342b332d91fa26df9915f96b0efa9aa",
+          "rollback_source": "Note 2025-06-03 22-50-59.txt",
+          "reason": "Relocate Note 2025-06-03 22-50-59.txt into intake/Note 2025-06-03 22-50-59.txt.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave3_small_intake_files_initial",
+          "source": "PROJECT_SPACE_BANNER.md",
+          "destination": "intake/PROJECT_SPACE_BANNER.md",
+          "operation": "move",
+          "pre_hash": "3b3cbf41da1d247925c5c723047ac55739ca4275dda03a2d86e02d9179cc9dea",
+          "post_hash": "3b3cbf41da1d247925c5c723047ac55739ca4275dda03a2d86e02d9179cc9dea",
+          "rollback_source": "PROJECT_SPACE_BANNER.md",
+          "reason": "Relocate PROJECT_SPACE_BANNER.md into intake/PROJECT_SPACE_BANNER.md.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave3_small_intake_files_initial",
+          "source": "Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json",
+          "destination": "intake/Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json",
+          "operation": "move",
+          "pre_hash": "0a265bed171222bc2375f325bffd554eff1bfcac59cb390ef3e3d783baf07126",
+          "post_hash": "0a265bed171222bc2375f325bffd554eff1bfcac59cb390ef3e3d783baf07126",
+          "rollback_source": "Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json",
+          "reason": "Relocate Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json into intake/Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave3_small_intake_files_initial",
+          "source": "THREADCORE_GUMAS_Master_Restore_v1_RC.yaml",
+          "destination": "intake/THREADCORE_GUMAS_Master_Restore_v1_RC.yaml",
+          "operation": "move",
+          "pre_hash": "c3ea7905cab5bde5ad724adc61e84f4950890485977f65997aae461646b1a77a",
+          "post_hash": "c3ea7905cab5bde5ad724adc61e84f4950890485977f65997aae461646b1a77a",
+          "rollback_source": "THREADCORE_GUMAS_Master_Restore_v1_RC.yaml",
+          "reason": "Relocate THREADCORE_GUMAS_Master_Restore_v1_RC.yaml into intake/THREADCORE_GUMAS_Master_Restore_v1_RC.yaml.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave3_small_intake_files_initial",
+          "source": "agent_template_quantum_elira.vsig",
+          "destination": "intake/agent_template_quantum_elira.vsig",
+          "operation": "move",
+          "pre_hash": "5bc639b87e4db8f42e6fbd44e6b70f9a1d32c17a67335c85a8418d1630b1c97a",
+          "post_hash": "5bc639b87e4db8f42e6fbd44e6b70f9a1d32c17a67335c85a8418d1630b1c97a",
+          "rollback_source": "agent_template_quantum_elira.vsig",
+          "reason": "Relocate agent_template_quantum_elira.vsig into intake/agent_template_quantum_elira.vsig.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave3_small_intake_files_initial",
+          "source": "loom_gitbridge_wiring.py",
+          "destination": "intake/loom_gitbridge_wiring.py",
+          "operation": "move",
+          "pre_hash": "946f8f8d423f388fa829cf54233518c4d240bafc4b1f1f3e3d5d9f0e4b80b94a",
+          "post_hash": "946f8f8d423f388fa829cf54233518c4d240bafc4b1f1f3e3d5d9f0e4b80b94a",
+          "rollback_source": "loom_gitbridge_wiring.py",
+          "reason": "Relocate loom_gitbridge_wiring.py into intake/loom_gitbridge_wiring.py.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave3_small_intake_files_initial",
+          "source": "reflective_autonomy_system_code (1).py",
+          "destination": "intake/reflective_autonomy_system_code (1).py",
+          "operation": "move",
+          "pre_hash": "48291850614b335cf7792d73ddd4e8e307c4188feed93dc0f13a9348c0cab37c",
+          "post_hash": "48291850614b335cf7792d73ddd4e8e307c4188feed93dc0f13a9348c0cab37c",
+          "rollback_source": "reflective_autonomy_system_code (1).py",
+          "reason": "Relocate reflective_autonomy_system_code (1).py into intake/reflective_autonomy_system_code (1).py.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        }
+      ]
+    },
+    {
+      "batch_id": "wave3_small_structured_dirs_initial",
+      "status": "planned",
+      "summary": "Small structured root directories into canonical reports/projects zones.",
+      "rollback_manifest": "catalog/rollback_wave3_small_structured_dirs_initial.json",
+      "operations": [
+        {
+          "batch_id": "wave3_small_structured_dirs_initial",
+          "source": "Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
+          "destination": "projects/Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
+          "operation": "move",
+          "pre_hash": "4f02cf3dd27bcdff866c15b0d9a32341dbd43835fb4f185ada27366f0e42b184",
+          "post_hash": "4f02cf3dd27bcdff866c15b0d9a32341dbd43835fb4f185ada27366f0e42b184",
+          "rollback_source": "Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
+          "reason": "Relocate Aurora_Multilang_ProjectSpace_StarterPack_v1.0 into projects/Aurora_Multilang_ProjectSpace_StarterPack_v1.0.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "tree"
+        },
+        {
+          "batch_id": "wave3_small_structured_dirs_initial",
+          "source": "Non_can_reports",
+          "destination": "reports/analysis/non_can_reports",
+          "operation": "move",
+          "pre_hash": "bb0fccc38aa0bd8a90e5f64b082f6606120c069ccdf00c0de6f48af555986281",
+          "post_hash": "bb0fccc38aa0bd8a90e5f64b082f6606120c069ccdf00c0de6f48af555986281",
+          "rollback_source": "Non_can_reports",
+          "reason": "Relocate Non_can_reports into reports/analysis/non_can_reports.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "tree"
+        },
+        {
+          "batch_id": "wave3_small_structured_dirs_initial",
+          "source": "Opal2_Modular_System_Dev",
+          "destination": "projects/Opal2_Modular_System_Dev",
+          "operation": "move",
+          "pre_hash": "a5c5add800323391e5ac92c4f96d46388045964f48cc4c61e2a9c09ad179849d",
+          "post_hash": "a5c5add800323391e5ac92c4f96d46388045964f48cc4c61e2a9c09ad179849d",
+          "rollback_source": "Opal2_Modular_System_Dev",
+          "reason": "Relocate Opal2_Modular_System_Dev into projects/Opal2_Modular_System_Dev.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "tree"
+        },
+        {
+          "batch_id": "wave3_small_structured_dirs_initial",
+          "source": "Quantum_Forge_Index",
+          "destination": "projects/Quantum_Forge_Index",
+          "operation": "move",
+          "pre_hash": "bb5cc8a90e00f36030ce219236ef9d3ecaa3df29ccf100ecd66ada9c47a2c9eb",
+          "post_hash": "bb5cc8a90e00f36030ce219236ef9d3ecaa3df29ccf100ecd66ada9c47a2c9eb",
+          "rollback_source": "Quantum_Forge_Index",
+          "reason": "Relocate Quantum_Forge_Index into projects/Quantum_Forge_Index.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "tree"
+        }
+      ]
+    },
+    {
+      "batch_id": "wave3_staging_isolation_initial",
+      "status": "planned",
+      "summary": "Sensitive or legacy root directories into _staging isolation.",
+      "rollback_manifest": "catalog/rollback_wave3_staging_isolation_initial.json",
+      "operations": [
+        {
+          "batch_id": "wave3_staging_isolation_initial",
+          "source": "Aurora_Reorganization",
+          "destination": "_staging/Aurora_Reorganization",
+          "operation": "move",
+          "pre_hash": "789fb853fa7be5ed0a15bb907be9f94a864fd0d7e5bdf1c3fcaf5932ea3ab0e0",
+          "post_hash": "789fb853fa7be5ed0a15bb907be9f94a864fd0d7e5bdf1c3fcaf5932ea3ab0e0",
+          "rollback_source": "Aurora_Reorganization",
+          "reason": "Relocate Aurora_Reorganization into _staging/Aurora_Reorganization.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "tree"
+        },
+        {
+          "batch_id": "wave3_staging_isolation_initial",
+          "source": "Recovery Codes",
+          "destination": "_staging/Recovery Codes",
+          "operation": "move",
+          "pre_hash": "01fad38d138cce839d92abfe59a97efa58453a9cbc618838d8fe09ec56282d39",
+          "post_hash": "01fad38d138cce839d92abfe59a97efa58453a9cbc618838d8fe09ec56282d39",
+          "rollback_source": "Recovery Codes",
+          "reason": "Relocate Recovery Codes into _staging/Recovery Codes.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "tree"
         }
       ]
     }

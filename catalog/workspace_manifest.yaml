@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-08T00:01:40Z",
+  "generated_at": "2026-03-08T00:07:10Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "logical_taxonomy": [
     "repos",
@@ -119,7 +119,8 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "planned_move",
+      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "au-archive-323-326",
@@ -167,7 +168,8 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "planned_move",
+      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "anchor-harmony-capsule-dr-srpv1",
@@ -339,27 +341,27 @@
     },
     {
       "id": "auora2",
-      "kind": "intake_collection",
+      "kind": "project_bundle",
       "current_path": "Auora2.5_DEV",
-      "logical_zone": "intake",
-      "planned_path": "intake/Auora2.5_DEV",
+      "logical_zone": "projects",
+      "planned_path": "projects/Auora2.5_DEV",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "source-bundle",
+      "retention_policy": "review-before-physical-move",
+      "owner": "project-review",
+      "status": "deferred"
     },
     {
       "id": "aurora-quantum-en",
-      "kind": "intake_collection",
+      "kind": "log_bundle",
       "current_path": "Aurora-quantum-en",
-      "logical_zone": "intake",
-      "planned_path": "intake/Aurora-quantum-en",
+      "logical_zone": "_staging",
+      "planned_path": "_staging/Aurora-quantum-en",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "isolated",
+      "retention_policy": "preserve",
+      "owner": "workspace-admin",
+      "status": "deferred"
     },
     {
       "id": "aurora-core-transferable-node-rebuild",
@@ -371,19 +373,21 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "planned_move",
+      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "aurora-multilang-projectspace-starterpack-v1",
-      "kind": "intake_collection",
+      "kind": "project_bundle",
       "current_path": "Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
-      "logical_zone": "intake",
-      "planned_path": "intake/Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
+      "logical_zone": "projects",
+      "planned_path": "projects/Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "source-bundle",
+      "retention_policy": "review-before-physical-move",
+      "owner": "project-review",
+      "status": "planned_move",
+      "batch_id": "wave3_small_structured_dirs_initial"
     },
     {
       "id": "aurora-multilang-projectspace-starterpack-v1-0",
@@ -399,51 +403,52 @@
     },
     {
       "id": "aurora-new-11-9",
-      "kind": "intake_collection",
+      "kind": "project_bundle",
       "current_path": "Aurora_New_11_9",
-      "logical_zone": "intake",
-      "planned_path": "intake/Aurora_New_11_9",
+      "logical_zone": "projects",
+      "planned_path": "projects/Aurora_New_11_9",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "source-bundle",
+      "retention_policy": "review-before-physical-move",
+      "owner": "project-review",
+      "status": "deferred"
     },
     {
       "id": "aurora-new-9-22",
-      "kind": "intake_collection",
+      "kind": "project_bundle",
       "current_path": "Aurora_New_9_22",
-      "logical_zone": "intake",
-      "planned_path": "intake/Aurora_New_9_22",
+      "logical_zone": "projects",
+      "planned_path": "projects/Aurora_New_9_22",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "source-bundle",
+      "retention_policy": "review-before-physical-move",
+      "owner": "project-review",
+      "status": "deferred"
     },
     {
       "id": "aurora-project-cloudhub-deploy",
-      "kind": "intake_collection",
+      "kind": "project_bundle",
       "current_path": "Aurora_Project_Cloudhub_Deploy",
-      "logical_zone": "intake",
-      "planned_path": "intake/Aurora_Project_Cloudhub_Deploy",
+      "logical_zone": "projects",
+      "planned_path": "projects/Aurora_Project_Cloudhub_Deploy",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "source-bundle",
+      "retention_policy": "review-before-physical-move",
+      "owner": "project-review",
+      "status": "deferred"
     },
     {
       "id": "aurora-reorganization",
-      "kind": "intake_collection",
+      "kind": "legacy_tool_bundle",
       "current_path": "Aurora_Reorganization",
-      "logical_zone": "intake",
-      "planned_path": "intake/Aurora_Reorganization",
+      "logical_zone": "_staging",
+      "planned_path": "_staging/Aurora_Reorganization",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "isolated",
+      "retention_policy": "preserve",
+      "owner": "workspace-admin",
+      "status": "planned_move",
+      "batch_id": "wave3_staging_isolation_initial"
     },
     {
       "id": "aurora-sim-architecture",
@@ -462,12 +467,13 @@
       "kind": "report_collection",
       "current_path": "Automation_Reports",
       "logical_zone": "reports",
-      "planned_path": "reports/automation/archive-entropy-guard/2026-03-07",
+      "planned_path": "reports/automation/legacy/Automation_Reports",
       "git_boundary": "none",
       "storage_tier": "operational-report",
       "retention_policy": "archive-after-migration",
       "owner": "operations",
-      "status": "planned_move"
+      "status": "migrated_empty",
+      "notes": "Empty legacy shell retained pending a dedicated cleanup batch."
     },
     {
       "id": "bridgewalker-to-emergentecho-link",
@@ -479,7 +485,8 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "planned_move",
+      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "cicada-symbolic-module-v1-0",
@@ -491,7 +498,8 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "planned_move",
+      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "canonrec",
@@ -543,15 +551,15 @@
     },
     {
       "id": "gui-cloudhub",
-      "kind": "intake_collection",
+      "kind": "project_bundle",
       "current_path": "GUI_Cloudhub",
-      "logical_zone": "intake",
-      "planned_path": "intake/GUI_Cloudhub",
+      "logical_zone": "projects",
+      "planned_path": "projects/GUI_Cloudhub",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "source-bundle",
+      "retention_policy": "review-before-physical-move",
+      "owner": "project-review",
+      "status": "deferred"
     },
     {
       "id": "gumas-master-transfer-bundle-v1-rc",
@@ -579,15 +587,15 @@
     },
     {
       "id": "gumas-sim-2",
-      "kind": "intake_collection",
+      "kind": "project_bundle",
       "current_path": "GUMAS_SIM_2.0",
-      "logical_zone": "intake",
-      "planned_path": "intake/GUMAS_SIM_2.0",
+      "logical_zone": "projects",
+      "planned_path": "projects/GUMAS_SIM_2.0",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "source-bundle",
+      "retention_policy": "review-before-physical-move",
+      "owner": "project-review",
+      "status": "deferred"
     },
     {
       "id": "gumas-sim-2-0",
@@ -647,19 +655,21 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "planned_move",
+      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "non-can-reports",
-      "kind": "intake_collection",
+      "kind": "report_collection",
       "current_path": "Non_can_reports",
-      "logical_zone": "intake",
-      "planned_path": "intake/Non_can_reports",
+      "logical_zone": "reports",
+      "planned_path": "reports/analysis/non_can_reports",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "operational-report",
+      "retention_policy": "versioned",
+      "owner": "operations",
+      "status": "planned_move",
+      "batch_id": "wave3_small_structured_dirs_initial"
     },
     {
       "id": "note-22-50-59",
@@ -671,19 +681,21 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "planned_move",
+      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "opal2-modular-system-dev",
-      "kind": "intake_collection",
+      "kind": "project_bundle",
       "current_path": "Opal2_Modular_System_Dev",
-      "logical_zone": "intake",
-      "planned_path": "intake/Opal2_Modular_System_Dev",
+      "logical_zone": "projects",
+      "planned_path": "projects/Opal2_Modular_System_Dev",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "source-bundle",
+      "retention_policy": "review-before-physical-move",
+      "owner": "project-review",
+      "status": "planned_move",
+      "batch_id": "wave3_small_structured_dirs_initial"
     },
     {
       "id": "project-space-banner",
@@ -695,31 +707,33 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "planned_move",
+      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "perplexity-research",
-      "kind": "intake_collection",
+      "kind": "research_bundle",
       "current_path": "Perplexity_Research",
-      "logical_zone": "intake",
-      "planned_path": "intake/Perplexity_Research",
+      "logical_zone": "projects",
+      "planned_path": "projects/Perplexity_Research",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "reference-bundle",
+      "retention_policy": "review-before-physical-move",
+      "owner": "project-review",
+      "status": "deferred"
     },
     {
       "id": "quantum-forge-index",
-      "kind": "intake_collection",
+      "kind": "project_index",
       "current_path": "Quantum_Forge_Index",
-      "logical_zone": "intake",
-      "planned_path": "intake/Quantum_Forge_Index",
+      "logical_zone": "projects",
+      "planned_path": "projects/Quantum_Forge_Index",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "source-bundle",
+      "retention_policy": "review-before-physical-move",
+      "owner": "project-review",
+      "status": "planned_move",
+      "batch_id": "wave3_small_structured_dirs_initial"
     },
     {
       "id": "readme",
@@ -735,15 +749,16 @@
     },
     {
       "id": "recovery-codes",
-      "kind": "intake_collection",
+      "kind": "sensitive_material",
       "current_path": "Recovery Codes",
-      "logical_zone": "intake",
-      "planned_path": "intake/Recovery Codes",
+      "logical_zone": "_staging",
+      "planned_path": "_staging/Recovery Codes",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "isolated",
+      "retention_policy": "preserve",
+      "owner": "security-review",
+      "status": "planned_move",
+      "batch_id": "wave3_staging_isolation_initial"
     },
     {
       "id": "sort-later",
@@ -755,19 +770,19 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "deferred"
     },
     {
       "id": "streamdeck-glyphs",
-      "kind": "intake_collection",
+      "kind": "asset_bundle",
       "current_path": "Streamdeck_Glyphs",
-      "logical_zone": "intake",
-      "planned_path": "intake/Streamdeck_Glyphs",
+      "logical_zone": "projects",
+      "planned_path": "projects/Streamdeck_Glyphs",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "source-bundle",
+      "retention_policy": "review-before-physical-move",
+      "owner": "project-review",
+      "status": "deferred"
     },
     {
       "id": "symbolic-module-specs-constellink-oraculith",
@@ -779,7 +794,8 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "planned_move",
+      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "threadcore-gumas-master-restore-v1-rc",
@@ -791,11 +807,12 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "planned_move",
+      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "threadcore-index",
-      "kind": "intake_collection",
+      "kind": "empty_placeholder",
       "current_path": "Threadcore_Index",
       "logical_zone": "intake",
       "planned_path": "intake/Threadcore_Index",
@@ -803,7 +820,7 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "deferred_empty"
     },
     {
       "id": "unzipped-archives",
@@ -875,7 +892,8 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "planned_move",
+      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "archives",
@@ -927,15 +945,15 @@
     },
     {
       "id": "exported-assets-lafinca",
-      "kind": "intake_collection",
+      "kind": "asset_bundle",
       "current_path": "exported-assets \u2014 LaFinca",
-      "logical_zone": "intake",
-      "planned_path": "intake/exported-assets \u2014 LaFinca",
+      "logical_zone": "projects",
+      "planned_path": "projects/exported-assets \u2014 LaFinca",
       "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move"
+      "storage_tier": "source-bundle",
+      "retention_policy": "review-before-physical-move",
+      "owner": "project-review",
+      "status": "deferred"
     },
     {
       "id": "intake",
@@ -959,7 +977,8 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "planned_move",
+      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "projects",
@@ -983,7 +1002,8 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "planned_move"
+      "status": "planned_move",
+      "batch_id": "wave3_small_intake_files_initial"
     },
     {
       "id": "reports",

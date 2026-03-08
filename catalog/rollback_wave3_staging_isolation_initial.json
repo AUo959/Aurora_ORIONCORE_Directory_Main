@@ -1,0 +1,33 @@
+{
+  "batch_id": "wave3_staging_isolation_initial_rollback",
+  "for_batch": "wave3_staging_isolation_initial",
+  "generated_at": "2026-03-08T00:07:19Z",
+  "operations": [
+    {
+      "batch_id": "wave3_staging_isolation_initial_rollback",
+      "source": "_staging/Aurora_Reorganization",
+      "destination": "Aurora_Reorganization",
+      "operation": "move",
+      "pre_hash": "789fb853fa7be5ed0a15bb907be9f94a864fd0d7e5bdf1c3fcaf5932ea3ab0e0",
+      "post_hash": "789fb853fa7be5ed0a15bb907be9f94a864fd0d7e5bdf1c3fcaf5932ea3ab0e0",
+      "rollback_source": "_staging/Aurora_Reorganization",
+      "reason": "Rollback for wave3_staging_isolation_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "tree"
+    },
+    {
+      "batch_id": "wave3_staging_isolation_initial_rollback",
+      "source": "_staging/Recovery Codes",
+      "destination": "Recovery Codes",
+      "operation": "move",
+      "pre_hash": "01fad38d138cce839d92abfe59a97efa58453a9cbc618838d8fe09ec56282d39",
+      "post_hash": "01fad38d138cce839d92abfe59a97efa58453a9cbc618838d8fe09ec56282d39",
+      "rollback_source": "_staging/Recovery Codes",
+      "reason": "Rollback for wave3_staging_isolation_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "tree"
+    }
+  ]
+}

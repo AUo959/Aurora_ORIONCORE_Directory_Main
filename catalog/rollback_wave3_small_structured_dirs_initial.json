@@ -1,0 +1,59 @@
+{
+  "batch_id": "wave3_small_structured_dirs_initial_rollback",
+  "for_batch": "wave3_small_structured_dirs_initial",
+  "generated_at": "2026-03-08T00:07:19Z",
+  "operations": [
+    {
+      "batch_id": "wave3_small_structured_dirs_initial_rollback",
+      "source": "projects/Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
+      "destination": "Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
+      "operation": "move",
+      "pre_hash": "4f02cf3dd27bcdff866c15b0d9a32341dbd43835fb4f185ada27366f0e42b184",
+      "post_hash": "4f02cf3dd27bcdff866c15b0d9a32341dbd43835fb4f185ada27366f0e42b184",
+      "rollback_source": "projects/Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
+      "reason": "Rollback for wave3_small_structured_dirs_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "tree"
+    },
+    {
+      "batch_id": "wave3_small_structured_dirs_initial_rollback",
+      "source": "reports/analysis/non_can_reports",
+      "destination": "Non_can_reports",
+      "operation": "move",
+      "pre_hash": "bb0fccc38aa0bd8a90e5f64b082f6606120c069ccdf00c0de6f48af555986281",
+      "post_hash": "bb0fccc38aa0bd8a90e5f64b082f6606120c069ccdf00c0de6f48af555986281",
+      "rollback_source": "reports/analysis/non_can_reports",
+      "reason": "Rollback for wave3_small_structured_dirs_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "tree"
+    },
+    {
+      "batch_id": "wave3_small_structured_dirs_initial_rollback",
+      "source": "projects/Opal2_Modular_System_Dev",
+      "destination": "Opal2_Modular_System_Dev",
+      "operation": "move",
+      "pre_hash": "a5c5add800323391e5ac92c4f96d46388045964f48cc4c61e2a9c09ad179849d",
+      "post_hash": "a5c5add800323391e5ac92c4f96d46388045964f48cc4c61e2a9c09ad179849d",
+      "rollback_source": "projects/Opal2_Modular_System_Dev",
+      "reason": "Rollback for wave3_small_structured_dirs_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "tree"
+    },
+    {
+      "batch_id": "wave3_small_structured_dirs_initial_rollback",
+      "source": "projects/Quantum_Forge_Index",
+      "destination": "Quantum_Forge_Index",
+      "operation": "move",
+      "pre_hash": "bb5cc8a90e00f36030ce219236ef9d3ecaa3df29ccf100ecd66ada9c47a2c9eb",
+      "post_hash": "bb5cc8a90e00f36030ce219236ef9d3ecaa3df29ccf100ecd66ada9c47a2c9eb",
+      "rollback_source": "projects/Quantum_Forge_Index",
+      "reason": "Rollback for wave3_small_structured_dirs_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "tree"
+    }
+  ]
+}
