@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-03-08T00:11:35Z",
+  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "dry_run": true,
+  "moved": [
+    {
+      "source": "projects/Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
+      "destination": "Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
+      "path_kind": "tree"
+    },
+    {
+      "source": "reports/analysis/non_can_reports",
+      "destination": "Non_can_reports",
+      "path_kind": "tree"
+    },
+    {
+      "source": "projects/Opal2_Modular_System_Dev",
+      "destination": "Opal2_Modular_System_Dev",
+      "path_kind": "tree"
+    },
+    {
+      "source": "projects/Quantum_Forge_Index",
+      "destination": "Quantum_Forge_Index",
+      "path_kind": "tree"
+    }
+  ],
+  "skipped": [],
+  "errors": [],
+  "mode": "rollback",
+  "batch_id": "wave3_small_structured_dirs_initial_rollback"
+}

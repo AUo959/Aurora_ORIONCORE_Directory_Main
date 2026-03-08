@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-08T00:10:01Z",
+  "generated_at": "2026-03-08T00:11:35Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "logical_taxonomy": [
     "repos",
@@ -338,19 +338,6 @@
       "status": "deferred"
     },
     {
-      "id": "aurora-multilang-projectspace-starterpack-v1",
-      "kind": "project_bundle",
-      "current_path": "Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
-      "logical_zone": "projects",
-      "planned_path": "projects/Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
-      "git_boundary": "none",
-      "storage_tier": "source-bundle",
-      "retention_policy": "review-before-physical-move",
-      "owner": "project-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_structured_dirs_initial"
-    },
-    {
       "id": "aurora-multilang-projectspace-starterpack-v1-0",
       "kind": "archive_artifact",
       "current_path": "Aurora_Multilang_ProjectSpace_StarterPack_v1.0.zip",
@@ -581,32 +568,6 @@
       "status": "deferred"
     },
     {
-      "id": "non-can-reports",
-      "kind": "report_collection",
-      "current_path": "Non_can_reports",
-      "logical_zone": "reports",
-      "planned_path": "reports/analysis/non_can_reports",
-      "git_boundary": "none",
-      "storage_tier": "operational-report",
-      "retention_policy": "versioned",
-      "owner": "operations",
-      "status": "planned_move",
-      "batch_id": "wave3_small_structured_dirs_initial"
-    },
-    {
-      "id": "opal2-modular-system-dev",
-      "kind": "project_bundle",
-      "current_path": "Opal2_Modular_System_Dev",
-      "logical_zone": "projects",
-      "planned_path": "projects/Opal2_Modular_System_Dev",
-      "git_boundary": "none",
-      "storage_tier": "source-bundle",
-      "retention_policy": "review-before-physical-move",
-      "owner": "project-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_structured_dirs_initial"
-    },
-    {
       "id": "perplexity-research",
       "kind": "research_bundle",
       "current_path": "Perplexity_Research",
@@ -617,19 +578,6 @@
       "retention_policy": "review-before-physical-move",
       "owner": "project-review",
       "status": "deferred"
-    },
-    {
-      "id": "quantum-forge-index",
-      "kind": "project_index",
-      "current_path": "Quantum_Forge_Index",
-      "logical_zone": "projects",
-      "planned_path": "projects/Quantum_Forge_Index",
-      "git_boundary": "none",
-      "storage_tier": "source-bundle",
-      "retention_policy": "review-before-physical-move",
-      "owner": "project-review",
-      "status": "planned_move",
-      "batch_id": "wave3_small_structured_dirs_initial"
     },
     {
       "id": "readme",

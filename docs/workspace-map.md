@@ -1,8 +1,8 @@
 # Workspace Map
 
-- Generated: `2026-03-08T00:10:01Z`
+- Generated: `2026-03-08T00:11:35Z`
 - Root: `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `71`
+- Top-level entries cataloged: `67`
 - Nested repos registered: `3`
 - Archive or binary artifacts inventoried: `1278`
 - Classification overrides loaded: `32` from `catalog/classification_overrides.yaml`
@@ -14,8 +14,8 @@
 - `catalog`: `1` top-level entries
 - `docs`: `4` top-level entries
 - `intake`: `3` top-level entries
-- `projects`: `13` top-level entries
-- `reports`: `3` top-level entries
+- `projects`: `10` top-level entries
+- `reports`: `2` top-level entries
 - `repos`: `3` top-level entries
 - `tools`: `2` top-level entries
 
@@ -27,11 +27,7 @@
 
 ## Planned Move Candidates
 
-- `Aurora_Multilang_ProjectSpace_StarterPack_v1.0` -> `projects/Aurora_Multilang_ProjectSpace_StarterPack_v1.0` (project_bundle, batch `wave3_small_structured_dirs_initial`)
 - `Aurora_Reorganization` -> `_staging/Aurora_Reorganization` (legacy_tool_bundle, batch `wave3_staging_isolation_initial`)
-- `Non_can_reports` -> `reports/analysis/non_can_reports` (report_collection, batch `wave3_small_structured_dirs_initial`)
-- `Opal2_Modular_System_Dev` -> `projects/Opal2_Modular_System_Dev` (project_bundle, batch `wave3_small_structured_dirs_initial`)
-- `Quantum_Forge_Index` -> `projects/Quantum_Forge_Index` (project_index, batch `wave3_small_structured_dirs_initial`)
 - `Recovery Codes` -> `_staging/Recovery Codes` (sensitive_material, batch `wave3_staging_isolation_initial`)
 
 ## Largest Archive/Binary Artifacts

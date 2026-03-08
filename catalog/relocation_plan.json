@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-03-08T00:10:10Z",
+  "generated_at": "2026-03-08T00:11:44Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-03-08T00:10:01Z",
+  "manifest_generated_at": "2026-03-08T00:11:35Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
@@ -263,7 +263,7 @@
     },
     {
       "batch_id": "wave3_small_structured_dirs_initial",
-      "status": "planned",
+      "status": "applied",
       "summary": "Small structured root directories into canonical reports/projects zones.",
       "rollback_manifest": "catalog/rollback_wave3_small_structured_dirs_initial.json",
       "operations": [
@@ -276,8 +276,8 @@
           "post_hash": "4f02cf3dd27bcdff866c15b0d9a32341dbd43835fb4f185ada27366f0e42b184",
           "rollback_source": "Aurora_Multilang_ProjectSpace_StarterPack_v1.0",
           "reason": "Relocate Aurora_Multilang_ProjectSpace_StarterPack_v1.0 into projects/Aurora_Multilang_ProjectSpace_StarterPack_v1.0.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:11:35Z",
           "path_kind": "tree"
         },
         {
@@ -289,8 +289,8 @@
           "post_hash": "bb0fccc38aa0bd8a90e5f64b082f6606120c069ccdf00c0de6f48af555986281",
           "rollback_source": "Non_can_reports",
           "reason": "Relocate Non_can_reports into reports/analysis/non_can_reports.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:11:35Z",
           "path_kind": "tree"
         },
         {
@@ -302,8 +302,8 @@
           "post_hash": "a5c5add800323391e5ac92c4f96d46388045964f48cc4c61e2a9c09ad179849d",
           "rollback_source": "Opal2_Modular_System_Dev",
           "reason": "Relocate Opal2_Modular_System_Dev into projects/Opal2_Modular_System_Dev.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:11:35Z",
           "path_kind": "tree"
         },
         {
@@ -315,8 +315,8 @@
           "post_hash": "bb5cc8a90e00f36030ce219236ef9d3ecaa3df29ccf100ecd66ada9c47a2c9eb",
           "rollback_source": "Quantum_Forge_Index",
           "reason": "Relocate Quantum_Forge_Index into projects/Quantum_Forge_Index.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:11:35Z",
           "path_kind": "tree"
         }
       ]
