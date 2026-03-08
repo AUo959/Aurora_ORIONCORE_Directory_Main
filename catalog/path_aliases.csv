@@ -3,7 +3,7 @@ AURIC_AGENT_CORE_v1.0.yaml,intake/AURIC_AGENT_CORE_v1.0.yaml,active
 AU_CORE_MASTER_TREE_CORRECTED (3).yaml,intake/AU_CORE_MASTER_TREE_CORRECTED (3).yaml,active
 Aurora_Core_Transferable_Node_Rebuild.json,intake/Aurora_Core_Transferable_Node_Rebuild.json,active
 Aurora_Multilang_ProjectSpace_StarterPack_v1.0,projects/Aurora_Multilang_ProjectSpace_StarterPack_v1.0,active
-Aurora_Reorganization,_staging/Aurora_Reorganization,pending
+Aurora_Reorganization,_staging/Aurora_Reorganization,active
 Automation_Reports/archive_entropy_guard_2026-03-07.md,reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_2026-03-07.md,active
 Automation_Reports/archive_entropy_guard_report_2026-03-07.md,reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_report_2026-03-07.md,active
 Bridgewalker_to_EmergentEcho_link.json,intake/Bridgewalker_to_EmergentEcho_link.json,active
@@ -15,7 +15,7 @@ Opal2_Modular_System_Dev,projects/Opal2_Modular_System_Dev,active
 PROJECT_SPACE_BANNER.md,intake/PROJECT_SPACE_BANNER.md,active
 Quantum_Forge_Index,projects/Quantum_Forge_Index,active
 REPO_BOUNDARY_NOTICE.md,docs/repo-boundary-notice.md,active
-Recovery Codes,_staging/Recovery Codes,pending
+Recovery Codes,_staging/Recovery Codes,active
 Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json,intake/Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json,active
 THREADCORE_GUMAS_Master_Restore_v1_RC.yaml,intake/THREADCORE_GUMAS_Master_Restore_v1_RC.yaml,active
 agent_template_quantum_elira.vsig,intake/agent_template_quantum_elira.vsig,active

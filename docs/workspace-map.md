@@ -1,15 +1,15 @@
 # Workspace Map
 
-- Generated: `2026-03-08T00:11:35Z`
+- Generated: `2026-03-08T00:14:03Z`
 - Root: `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `67`
+- Top-level entries cataloged: `65`
 - Nested repos registered: `3`
 - Archive or binary artifacts inventoried: `1278`
 - Classification overrides loaded: `32` from `catalog/classification_overrides.yaml`
 
 ## Zones
 
-- `_staging`: `9` top-level entries
+- `_staging`: `7` top-level entries
 - `archives`: `33` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `4` top-level entries
@@ -27,8 +27,7 @@
 
 ## Planned Move Candidates
 
-- `Aurora_Reorganization` -> `_staging/Aurora_Reorganization` (legacy_tool_bundle, batch `wave3_staging_isolation_initial`)
-- `Recovery Codes` -> `_staging/Recovery Codes` (sensitive_material, batch `wave3_staging_isolation_initial`)
+- None
 
 ## Largest Archive/Binary Artifacts
 

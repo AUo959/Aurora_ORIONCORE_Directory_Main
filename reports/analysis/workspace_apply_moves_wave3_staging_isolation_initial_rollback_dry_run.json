@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-03-08T00:14:03Z",
+  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "dry_run": true,
+  "moved": [
+    {
+      "source": "_staging/Aurora_Reorganization",
+      "destination": "Aurora_Reorganization",
+      "path_kind": "tree"
+    },
+    {
+      "source": "_staging/Recovery Codes",
+      "destination": "Recovery Codes",
+      "path_kind": "tree"
+    }
+  ],
+  "skipped": [],
+  "errors": [],
+  "mode": "rollback",
+  "batch_id": "wave3_staging_isolation_initial_rollback"
+}

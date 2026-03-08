@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-03-08T00:11:44Z",
+  "generated_at": "2026-03-08T00:14:12Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-03-08T00:11:35Z",
+  "manifest_generated_at": "2026-03-08T00:14:03Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
@@ -323,7 +323,7 @@
     },
     {
       "batch_id": "wave3_staging_isolation_initial",
-      "status": "planned",
+      "status": "applied",
       "summary": "Sensitive or legacy root directories into _staging isolation.",
       "rollback_manifest": "catalog/rollback_wave3_staging_isolation_initial.json",
       "operations": [
@@ -336,8 +336,8 @@
           "post_hash": "789fb853fa7be5ed0a15bb907be9f94a864fd0d7e5bdf1c3fcaf5932ea3ab0e0",
           "rollback_source": "Aurora_Reorganization",
           "reason": "Relocate Aurora_Reorganization into _staging/Aurora_Reorganization.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:14:03Z",
           "path_kind": "tree"
         },
         {
@@ -349,8 +349,8 @@
           "post_hash": "01fad38d138cce839d92abfe59a97efa58453a9cbc618838d8fe09ec56282d39",
           "rollback_source": "Recovery Codes",
           "reason": "Relocate Recovery Codes into _staging/Recovery Codes.",
-          "approved": false,
-          "applied_at": null,
+          "approved": true,
+          "applied_at": "2026-03-08T00:14:03Z",
           "path_kind": "tree"
         }
       ]

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-08T00:11:35Z",
+  "generated_at": "2026-03-08T00:14:03Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "logical_taxonomy": [
     "repos",
@@ -386,19 +386,6 @@
       "status": "deferred"
     },
     {
-      "id": "aurora-reorganization",
-      "kind": "legacy_tool_bundle",
-      "current_path": "Aurora_Reorganization",
-      "logical_zone": "_staging",
-      "planned_path": "_staging/Aurora_Reorganization",
-      "git_boundary": "none",
-      "storage_tier": "isolated",
-      "retention_policy": "preserve",
-      "owner": "workspace-admin",
-      "status": "planned_move",
-      "batch_id": "wave3_staging_isolation_initial"
-    },
-    {
       "id": "aurora-sim-architecture",
       "kind": "repo_hub",
       "current_path": "Aurora_Sim_Architecture",
@@ -590,19 +577,6 @@
       "retention_policy": "versioned",
       "owner": "workspace-admin",
       "status": "managed"
-    },
-    {
-      "id": "recovery-codes",
-      "kind": "sensitive_material",
-      "current_path": "Recovery Codes",
-      "logical_zone": "_staging",
-      "planned_path": "_staging/Recovery Codes",
-      "git_boundary": "none",
-      "storage_tier": "isolated",
-      "retention_policy": "preserve",
-      "owner": "security-review",
-      "status": "planned_move",
-      "batch_id": "wave3_staging_isolation_initial"
     },
     {
       "id": "sort-later",
