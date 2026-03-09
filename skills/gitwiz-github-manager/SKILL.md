@@ -1,6 +1,6 @@
 ---
 name: gitwiz-github-manager
-description: Manage Git and GitHub operations for the Aurora / ORIONCORE workspace with project-specific safety rules. Use when users ask to configure remotes, create GitHub repos, publish branches, back up or replace bootstrap GitHub history, push root or nested repos, diagnose auth/SSH issues, or perform repo-aware GitHub setup across the root control-plane repo and named nested repos. Do not use for general code changes, CI failure debugging, or PR comment handling unless the task is primarily about repo publishing and remote state.
+description: Manage Git and GitHub operations for the Aurora / ORIONCORE workspace with project-specific safety rules. Use when users ask to configure remotes, create GitHub repos, scan local-vs-remote drift, draft PR packets, publish branches, back up or replace bootstrap GitHub history, push root or nested repos, diagnose auth/SSH issues, or perform repo-aware GitHub setup across the root control-plane repo and named nested repos. Do not use for general code changes, CI failure debugging, or PR comment handling unless the task is primarily about repo publishing and remote state.
 ---
 
 # GITWIZ GitHub Manager
@@ -16,6 +16,9 @@ Trigger on requests such as:
 - "publish this branch"
 - "make this repo native to GitHub"
 - "create the GitHub repo for this nested repo"
+- "scan what is missing from GitHub"
+- "audit local vs remote drift"
+- "draft the PR to sync this repo"
 - "replace the bootstrap repo with the real history"
 - "configure SSH for GitHub"
 - "push main safely"
@@ -71,6 +74,23 @@ Choose the working directory that actually contains the target repo:
 - Prefer SSH remotes for ongoing use.
 - Prefer preserving remote history by branching it before replacing it.
 
+## Bundled Scripts
+
+Use these instead of improvising audit logic:
+
+- `scripts/gitwiz_sync_audit.py`
+  - scans root or named nested repos
+  - reports local dirty state, remotes, upstream tracking, ahead/behind, and sync actions
+  - writes JSON and Markdown reports
+- `scripts/gitwiz_pr_packet.py`
+  - drafts a PR packet from the current branch against a base ref
+  - writes JSON and Markdown packets
+  - use after the branch is committed and pushed, or when you need a PR-ready summary
+
+Default output location for both:
+
+- `reports/analysis/gitwiz/`
+
 ## Standard Workflow
 
 ### 1. Inspect First
@@ -109,6 +129,12 @@ Choose the right lane:
   - then use `--force-with-lease`
 - Nested repo publishing:
   - only after explicit user instruction naming the nested repo
+- Sync audit:
+  - run `gitwiz_sync_audit.py`
+  - inspect suggested actions before mutating Git state
+- PR drafting:
+  - run `gitwiz_pr_packet.py`
+  - use the generated packet as the basis for a GitHub PR body
 
 ### 2A. Native GitHub Repo Creation
 
@@ -123,6 +149,39 @@ When the user wants a "native remote" or asks to create the GitHub repo:
 5. After repo creation, add `origin`, verify the remote branch state, then publish the requested branch.
 
 Do not assume GitHub CLI exists. Fall back to SSH plus a user-provided URL when it does not.
+
+### 2B. Local-vs-Remote Sync Audit
+
+When the user wants to know whether GitHub faithfully reflects local project state:
+
+1. Run `gitwiz_sync_audit.py`.
+2. Use `--repo root`, `--repo all`, or a named nested repo.
+3. Pass `--canonical-root` when nested repos are outside the current Codex worktree.
+4. Use `--fetch` when an up-to-date remote-tracking view matters and network access is allowed.
+5. Read the generated Markdown and JSON reports before deciding to commit, push, or open a PR.
+
+Recommended patterns:
+
+- root repo only:
+  - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo root`
+- all repos with canonical workspace access:
+  - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo all --canonical-root "<canonical-workspace-root>"`
+
+Treat this as the first step before any "make GitHub match local" workflow.
+
+### 2C. PR Packet Drafting
+
+When a local branch should become a reviewable GitHub update:
+
+1. Make sure the branch exists and is committed.
+2. Push the branch if remote review is intended.
+3. Run `gitwiz_pr_packet.py` against the correct base ref.
+4. If `gh` is available, use the generated packet as the PR title/body input.
+5. If `gh` is unavailable, return the packet path and summarize the proposed PR in the response.
+
+Recommended pattern:
+
+- `python3 skills/gitwiz-github-manager/scripts/gitwiz_pr_packet.py --repo-name root --base origin/main`
 
 ### 3. SSH-First GitHub Setup
 
@@ -207,6 +266,7 @@ After remote changes, report:
 - whether `main` and the current feature branch are both backed up remotely
 - any preserved backup branches
 - whether any named nested repo remotes were changed
+- paths to any generated sync-audit or PR-packet artifacts
 
 ### 9. Remote Naming and Defaults
 

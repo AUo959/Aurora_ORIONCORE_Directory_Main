@@ -87,6 +87,8 @@ Purpose:
 
 - GitHub remote setup
 - SSH-first auth flow
+- local-vs-remote sync audits
+- PR packet drafting for sync work
 - safe branch publication
 - backup-before-force replacement of bootstrap remote history
 - named nested repo publishing
@@ -97,6 +99,15 @@ Important distinction:
 - `.gitwiz` in the workspace manifest is an ignored local artifact slot
 - it is not the source of truth for the skill
 - the versioned skill source is `skills/gitwiz-github-manager/`
+
+Primary commands:
+
+- root sync audit:
+  - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo root`
+- all-repo sync audit:
+  - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo all --canonical-root "<canonical-workspace-root>"`
+- PR packet draft:
+  - `python3 skills/gitwiz-github-manager/scripts/gitwiz_pr_packet.py --repo-name root --base origin/main`
 
 ## Execution Rules
 
