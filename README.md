@@ -6,8 +6,10 @@ Root control-plane repository for the Aurora ORIONCORE project.
 
 ```
 Aurora_ORIONCORE_Directory_Main/
-├── docs/               # Project documentation
+├── .editorconfig       # Editor configuration
 ├── .github/            # GitHub templates and workflows
+├── .gitignore          # Git ignore rules
+├── docs/               # Project documentation
 ├── CONTRIBUTING.md     # Contribution guidelines
 ├── LICENSE             # MIT License
 └── README.md           # This file
