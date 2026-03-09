@@ -3,6 +3,7 @@
 !/.gitattributes
 !/.githooks/
 !/.githooks/pre-commit
+!/AGENTS.md
 !/README.md
 !/docs/
 !/docs/**
