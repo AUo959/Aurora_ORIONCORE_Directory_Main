@@ -1,4 +1,4 @@
-# Aurora ORIONCORE Directory Main
+# Aurora_ORIONCORE_Directory_Main
 
 Root control-plane repository for the Aurora ORIONCORE project.
 
