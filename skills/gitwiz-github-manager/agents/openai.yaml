@@ -1,0 +1,4 @@
+interface:
+  display_name: "GITWIZ GitHub Manager"
+  short_description: "Project-aware GitHub remote and branch management"
+  default_prompt: "Use GITWIZ to inspect this Aurora / ORIONCORE repo, configure or verify its GitHub remote safely, and publish the correct branch without disturbing unrelated repos."
