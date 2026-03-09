@@ -3,7 +3,7 @@
 **Version**: 2.2.6b / QEM-SN1-AS3-TRUSTED  
 **Last Updated**: 2025-04-07  
 **Status**: ✅ Production-Ready  
-**Location**: `/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/GUI_Cloudhub/`
+**Location**: `GUI_Cloudhub/`
 
 ---
 

@@ -11,6 +11,7 @@ from _workspace_common import (
     now_iso_utc,
     relpath,
     resolve_root,
+    serialized_root,
     sha256_path,
     write_csv,
     write_json,
@@ -207,7 +208,7 @@ def main() -> int:
 
     relocation_plan = {
         "generated_at": now_iso_utc(),
-        "root": str(root),
+        "root": serialized_root(root),
         "policy": {
             "default_mode": "dry-run",
             "delete_allowed": False,

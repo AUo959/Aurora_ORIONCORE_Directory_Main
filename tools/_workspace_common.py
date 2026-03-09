@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 import re
+import shlex
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -90,6 +91,15 @@ def now_iso_utc() -> str:
 
 def resolve_root(root: str | None = None) -> Path:
     return Path(root).expanduser().resolve() if root else ROOT
+
+
+def serialized_root(root: Path) -> str:
+    del root
+    return "."
+
+
+def display_root(root: Path) -> str:
+    return root.name or serialized_root(root)
 
 
 def relpath(path: Path, root: Path) -> str:
@@ -189,6 +199,15 @@ def git(
         text=text,
         capture_output=True,
         env=env,
+    )
+
+
+def repo_validation_command(repo_rel: str) -> str:
+    quoted_repo = shlex.quote(Path(repo_rel).as_posix())
+    env_prefix = "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX"
+    return (
+        f"{env_prefix} git -C {quoted_repo} rev-parse HEAD && "
+        f"{env_prefix} git -C {quoted_repo} status --short --branch"
     )
 
 

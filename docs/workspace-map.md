@@ -1,7 +1,7 @@
 # Workspace Map
 
 - Generated: `2026-03-08T00:14:03Z`
-- Root: `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
+- Root: `Aurora_ORIONCORE_Directory_Main`
 - Top-level entries cataloged: `65`
 - Nested repos registered: `3`
 - Archive or binary artifacts inventoried: `1278`

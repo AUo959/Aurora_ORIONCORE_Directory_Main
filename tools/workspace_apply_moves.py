@@ -14,6 +14,7 @@ from _workspace_common import (
     load_yaml_like,
     now_iso_utc,
     resolve_root,
+    serialized_root,
     sha256_path,
     write_json,
 )
@@ -54,7 +55,7 @@ def execute_operations(
 ) -> dict[str, object]:
     result = {
         "generated_at": now_iso_utc(),
-        "root": str(root),
+        "root": serialized_root(root),
         "dry_run": not execute,
         "moved": [],
         "skipped": [],

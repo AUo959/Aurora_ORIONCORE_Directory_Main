@@ -3,7 +3,7 @@
 **Version**: v2.5.0 (Pre-Release/Development)  
 **Last Updated**: 2025-08-21  
 **Status**: 🟡 Pre-Deployment (Staging/Validation Phase)  
-**Location**: `/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/Auora2.5_DEV/`
+**Location**: `Auora2.5_DEV/`
 
 ---
 

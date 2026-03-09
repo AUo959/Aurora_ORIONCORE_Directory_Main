@@ -1,6 +1,6 @@
 {
   "generated_at": "2026-03-08T00:14:12Z",
-  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "root": ".",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,

@@ -3,7 +3,7 @@
 **Version**: 2.5.1 (Production)  
 **Last Updated**: 2025-08-19  
 **Status**: ✅ Production-Ready  
-**Location**: `/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/Aurora_Project_Cloudhub_Deploy/`
+**Location**: `Aurora_Project_Cloudhub_Deploy/`
 
 ---
 

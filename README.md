@@ -15,11 +15,11 @@ nested repo internals stay out of root Git history.
 
 ## Start Here
 
-- Human overview: [docs/workspace-map.md](/Users/travisstreets/Library/Mobile%20Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/docs/workspace-map.md)
-- Source of truth: [catalog/workspace_manifest.yaml](/Users/travisstreets/Library/Mobile%20Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/workspace_manifest.yaml)
-- Persistent overrides: [catalog/classification_overrides.yaml](/Users/travisstreets/Library/Mobile%20Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/classification_overrides.yaml)
-- Nested repos: [catalog/repo_registry.yaml](/Users/travisstreets/Library/Mobile%20Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/repo_registry.yaml)
-- Planned moves only: [catalog/relocation_plan.json](/Users/travisstreets/Library/Mobile%20Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/relocation_plan.json)
+- Human overview: [docs/workspace-map.md](docs/workspace-map.md)
+- Source of truth: [catalog/workspace_manifest.yaml](catalog/workspace_manifest.yaml)
+- Persistent overrides: [catalog/classification_overrides.yaml](catalog/classification_overrides.yaml)
+- Nested repos: [catalog/repo_registry.yaml](catalog/repo_registry.yaml)
+- Planned moves only: [catalog/relocation_plan.json](catalog/relocation_plan.json)
 
 ## Logical Zones
 

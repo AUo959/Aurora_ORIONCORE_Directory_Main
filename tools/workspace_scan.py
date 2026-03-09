@@ -14,6 +14,7 @@ from _workspace_common import (
     apply_classification_override,
     canonical_candidate,
     classify_top_level,
+    display_root,
     discover_nested_repos,
     dump_yaml_like,
     git,
@@ -21,8 +22,10 @@ from _workspace_common import (
     load_classification_overrides,
     normalize_family,
     now_iso_utc,
+    repo_validation_command,
     relpath,
     resolve_root,
+    serialized_root,
     sha256_file,
     top_level_entries,
     write_json,
@@ -36,19 +39,13 @@ def repo_registry_entry(root: Path, repo_rel: str) -> dict[str, str]:
     head_sha = git(["rev-parse", "HEAD"], cwd=repo_path).stdout.strip()
     remotes = git(["remote"], cwd=repo_path).stdout.split()
     remote_status = "configured" if remotes else "no_remote_configured"
-    validation_command = (
-        f"env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX "
-        f"git -C '{repo_path}' rev-parse HEAD && "
-        f"env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX "
-        f"git -C '{repo_path}' status --short --branch"
-    )
     return {
         "name": repo_path.name,
         "path": repo_rel,
         "branch": branch,
         "head_sha": head_sha,
         "remote_status": remote_status,
-        "validation_command": validation_command,
+        "validation_command": repo_validation_command(repo_rel),
         "move_policy": "frozen_until_registry_adoption",
     }
 
@@ -120,7 +117,7 @@ def write_workspace_map(
         "# Workspace Map",
         "",
         f"- Generated: `{manifest['generated_at']}`",
-        f"- Root: `{root}`",
+        f"- Root: `{display_root(root)}`",
         f"- Top-level entries cataloged: `{len(entries)}`",
         f"- Nested repos registered: `{len(repos)}`",
         f"- Archive or binary artifacts inventoried: `{len(archive_inventory)}`",
@@ -216,7 +213,7 @@ def main() -> int:
 
     manifest = {
         "generated_at": now_iso_utc(),
-        "root": str(root),
+        "root": serialized_root(root),
         "logical_taxonomy": [
             "repos",
             "projects",
@@ -233,7 +230,7 @@ def main() -> int:
 
     repo_registry = {
         "generated_at": now_iso_utc(),
-        "root": str(root),
+        "root": serialized_root(root),
         "repos": [repo_registry_entry(root, repo_rel) for repo_rel in nested_repo_roots],
     }
 
@@ -241,7 +238,7 @@ def main() -> int:
 
     summary = {
         "generated_at": now_iso_utc(),
-        "root": str(root),
+        "root": serialized_root(root),
         "top_level_entry_count": len(entries),
         "logical_zone_counts": dict(Counter(entry["logical_zone"] for entry in entries)),
         "nested_repo_count": len(repo_registry["repos"]),

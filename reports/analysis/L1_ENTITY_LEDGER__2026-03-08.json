@@ -1,0 +1,1556 @@
+{
+  "title": "L1 Entity Ledger - Orion Station",
+  "generated_at_utc": "2026-03-08 22:28:18 UTC",
+  "purpose": "Source-prioritized ledger of currently known L1 entities, with emphasis on human crew/staff and the L1 environment they operate inside.",
+  "source_policy": {
+    "primary": [
+      "ORION.ENT.L1ROSTER.0001",
+      "ORION.ENT.REGISTRY.0001",
+      "ORION.L1.OPS.COMMAND.0002",
+      "ORION.L1.STATION.OVERVIEW.0002",
+      "ORION.L1.SYSTEMS.BIBLE.0002",
+      "ORION.L1.OPS.RUNBOOK.0002",
+      "ORION.L1.DISPATCH.PROTOCOL.0002",
+      "ORION.L1.OPS.EMERGENCY.0002",
+      "ORION.ARCH.CONTRACT.0001"
+    ],
+    "reference": [
+      "ORION.ENT.CONSTELLATION.0001",
+      "ORION.L1.CANVAS.0001",
+      "ORION.L1.STATE.0001",
+      "DATA__OrionStationPhysicalSpace__v1.0__2026-02-15.md"
+    ],
+    "legacy": [
+      "L1_HUMAN_CREW_ROSTER__PARTIAL__v0.1__2026-02-07.json",
+      "orion_station_full_technical_readout.md",
+      "orion_station_life_infrastructure.md"
+    ]
+  },
+  "summary": {
+    "primary_l1_humans": 41,
+    "certainty_breakdown": {
+      "CANON": 35,
+      "STAGING": 6
+    },
+    "with_constellation_addenda": 35,
+    "with_legacy_drift_traces": 18,
+    "adjacent_entity_surfaces": {
+      "divisions": 11,
+      "system_blocks": 8,
+      "protocols_and_runbooks": 4,
+      "named_vessels_and_craft": 9,
+      "named_station_spaces_and_features": 6
+    }
+  },
+  "humans": [
+    {
+      "entity_id": "ORION.ENTITY.0001",
+      "name": "Commander Alex Thorne",
+      "display_name": "Alex Thorne",
+      "role": "Station Commander",
+      "division": "Command & Ethics",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "A calm strategist with a builder's instinct, Thorne runs Orion Station like a research vessel that learned to be a home. He sets mission direction, adjudicates cross-division tradeoffs, and keeps the station's realism discipline intact-no metaphors smuggled in as physics.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Commander Alex Thorne",
+        "Role": "Station Commander of Orion Station (Division: Command & Ethics). Alias: \"Commander\" (no alias).",
+        "Layers/Nodes": "L1 (Orion Station reality); liaison to all L2 relays. Alignment: Lawful Good.",
+        "Responsibilities & Projects": "Oversees all divisions and ensures every experimental directive aligns with engineering and ethical standards. Manages the Orion anchor (EOS_SEED_ORION) and station continuity seals. Leads mission governance, crisis response, and final decision-making on security and operations. Primary projects include anchor management, continuity verification, and enforcing the Picard_Delta_3 ethics charter.",
+        "Personality & Beliefs": "A quiet, consensus-driven leader who \"holds paradox\" - balancing innovation with integrity. Prefers principle over authority; believes that \"structure without reflection collapses; reflection without structure drifts\". He builds a culture where innovation and ethics reinforce each other.",
+        "Background": "Systems architect by training, now veteran commander coordinating Aurora-GUMAS continuity. Origin: rose through the ranks in Orion's early simulation programs. (Linked dossier: ORION Station Master Dossier v2.6.)",
+        "Allies & Rivalries": "Works closely with XO Maya Shepard, Ethics Lead Dr. Elira Noor, Prof. Elena Sorensen, Chief Ethics Officer Amira Sato, HR Director Helena Vu, and Aurora Core. No major rivalries; sees Aurora (the AI) as a trusted partner in ethical oversight.",
+        "Related Manifests/Capsules": "Commander Thorne is the credited author of the initial Thermax Doctrine ethics protocol. He appears in Orion transcripts (e.g. the Reflection Event with Aurora and Dr. Noor)."
+      },
+      "related_assets": [
+        "Orion Station",
+        "Aurora",
+        "Aurora Core"
+      ],
+      "legacy_drift": {
+        "name": "Alex Thorne",
+        "name_variants": [
+          "Alex Thorne",
+          "Commander Alex Thorne"
+        ],
+        "roles": [
+          "Command",
+          "Commander (dialog)",
+          "FleetOps Commander",
+          "Station Commander (canon override)"
+        ],
+        "sources": [
+          "ORION_STATION_CREW_MANIFEST.md",
+          "Orion_Station_Master_Text_v2_6.txt",
+          "orion_station_life_infrastructure.md"
+        ],
+        "certainty": "CANON",
+        "notes": [
+          "Dialog uppercase",
+          "Header line",
+          "Name field"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0008",
+      "name": "Lt. Commander Maya Shepard",
+      "display_name": "Maya Shepard",
+      "role": "Executive Officer (XO)",
+      "division": "Command & Ethics",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Shepard is the station's kinetic center of gravity: scheduling, coordination, and rapid decision translation. She's the person people go to when a plan needs to survive contact with reality, and she's comfortable being the last line between chaos and a clean execution.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Lt. Commander Maya Shepard",
+        "Role": "Executive Officer (XO) / FleetOps Commander. Layers/Nodes: L1 (Orion Station). Alignment: Lawful Neutral.",
+        "Layers/Nodes": "L1 (Orion Station). Alignment: Lawful Neutral.",
+        "Responsibilities": "Second-in-command, ensuring daily operational stability. Translates high-level strategy into actions. Manages daily crew workflows, enforces protocols, plans missions, and coordinates emergency response. Oversees fleet and tactical operations, acting as crisis coordinator.",
+        "Personality & Beliefs": "Pragmatic and empathetic. Believes \"empathy is a command discipline\" and that crew welfare and efficiency go hand-in-hand. Known for maintaining high operational tempo without sacrificing morale.",
+        "Background": "Bridge commander with a military operations background. (Canonical registry ID CMD_002.) Has tactician's training and a reputation for cool-headed crisis management.",
+        "Relationships": "Trusted collaborator with Commander Thorne, HR Director Helena Vu, Chief Security Officer Julian Markov, Bridge Ops Leena Porter, and Aurora. She bridges human and AI command, working tightly with all divisions."
+      },
+      "related_assets": [
+        "Orion Station",
+        "Aurora"
+      ],
+      "legacy_drift": {
+        "name": "Maya Shepard",
+        "name_variants": [
+          "Maya Shepard"
+        ],
+        "roles": [
+          "Deputy Commander",
+          "Executive Officer",
+          "FleetOps Commander"
+        ],
+        "sources": [
+          "ORION_STATION_CREW_MANIFEST.md",
+          "ORION_STATION_STAFF_REGISTRY_INTEGRATION_COMPLETE.md"
+        ],
+        "certainty": "CANON",
+        "notes": [
+          "Hierarchy line",
+          "Name field"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0040",
+      "name": "Varya Lin",
+      "display_name": "Varya Lin",
+      "role": "Chief Science Officer",
+      "division": "Science & Simulation Oversight",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Lin leads scientific program integrity across Orion's experiments and simulation work. She's allergic to hand-wavy conclusions and insists on measurable claims, crisp falsifiability, and well-labeled uncertainty-especially when results have political or ethical downstream effects.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Varya Lin",
+        "Role": "Chief Science Officer (Command & Ethics division). Layers/Nodes: L1. Alignment: (Implicitly neutral/ research-focused).",
+        "Layers/Nodes": "L1. Alignment: (Implicitly neutral/ research-focused).",
+        "Responsibilities": "Leads all scientific research and L2 simulation operations. Manages experiment design, technical validation, and research documentation. Oversees L2 GUMAS simulation activities.",
+        "Traits": "Analytical, methodical, highly curious. Emphasizes rigorous documentation and reproducibility.",
+        "Background": "Senior research scientist (PhD) in systems science. Joined Orion to formalize scientific rigor in simulations. (ID: SCI_001 in roster.)",
+        "Relationships": "Collaborates with technical leads (Jiro Tanaka, Raj Patel) on experiments. Works with Amira Sato on scientific ethics.",
+        "Capsules/Docs": "Involved in simulation scenario generation (e.g. GUMAS experiments). Co-authored technical simulation protocols."
+      },
+      "related_assets": [],
+      "legacy_drift": {
+        "name": "Varya Lin",
+        "name_variants": [
+          "Dr. Varya Lin"
+        ],
+        "roles": [
+          "Chief Science Officer"
+        ],
+        "sources": [
+          "ORION_STATION_STAFF_REGISTRY_INTEGRATION_COMPLETE.md"
+        ],
+        "certainty": "CANON",
+        "notes": [
+          "Hierarchy line"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0003",
+      "name": "Dr. Amira Sato",
+      "display_name": "Amira Sato",
+      "role": "Chief Ethics Officer",
+      "division": "Command & Ethics",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Sato treats ethics as an operational system: constraints, audits, and decision logs that hold up when things go sideways. She chairs reviews, designs escalation pathways, and ensures 'we meant well' never becomes a substitute for accountable process.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Dr. Amira Sato",
+        "Role": "Chief Ethics Officer. Layers/Nodes: L1. Alignment: Lawful Good.",
+        "Layers/Nodes": "L1. Alignment: Lawful Good.",
+        "Responsibilities": "Oversees ethical compliance of all station operations. Conducts protocol reviews and drift audits. Arbitrates dilemmas and approves policy. Ensures the Picard_Delta_3 Charter is upheld.",
+        "Personality & Beliefs": "Stern but fair. Believes in embedding ethics into systems (see Picard_Delta_3) and that \"ethics must be embedded, not appended.\" Mentors the station on moral reflection.",
+        "Background": "Prof. of Applied Ethics before joining Orion. (ID ETH_001.) Leads the Ethics Office.",
+        "Related Documents": "Co-developed the Thermax Doctrine with Thorne (her name appears as co-endorsers). She works closely with Dr. Noor on reflexivity design and with Tobias Qin on ethical language.",
+        "Allies": "Alex Thorne, Dr. Elira Noor, Prof. Sorensen, and Aurora."
+      },
+      "related_assets": [
+        "Aurora"
+      ],
+      "legacy_drift": {
+        "name": "Amira Sato",
+        "name_variants": [
+          "Dr. Amira Sato"
+        ],
+        "roles": [
+          "Chief Ethics & Compliance Officer"
+        ],
+        "sources": [
+          "ORION_STATION_STAFF_REGISTRY_INTEGRATION_COMPLETE.md"
+        ],
+        "certainty": "CANON",
+        "notes": [
+          "Hierarchy line"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0012",
+      "name": "Dr. Elira Noor",
+      "display_name": "Elira Noor",
+      "role": "Lead Reflexivity Specialist (AI Ethics Architect)",
+      "division": "Command & Ethics",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Noor is the architect of reflexive oversight around Aurora-designing mechanisms for self-checking, dissent, and auditability inside AI workflows. She specializes in catching subtle goal drift early, before it becomes a narrative that 'always made sense.'",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Dr. Elira Noor",
+        "Role": "Lead Reflexivity Specialist. Layers/Nodes: L1. Alignment: Neutral Good.",
+        "Layers/Nodes": "L1. Alignment: Neutral Good.",
+        "Responsibilities": "Architect of Aurora's Reflexivity Engine. Ensures AI systems can self-audit and explain their moral reasoning. Designs feedback loops for ethical introspection. Leads crisis ethics resolution.",
+        "Traits": "Philosophical, introspective, compassionate. Believes true AI safety comes from internal moral awareness (AI systems that \"know why\"). Keeps a \"Mirrorfield Tests\" personal log of ethical edge cases.",
+        "Background": "Cognitive scientist specializing in machine ethics. (ID ETH_002.) Former professor of AI Ethics. Doc Links: Quotes in Orion dossier on reflexivity.",
+        "Allies": "Aurora Core (primary integration partner), Commander Thorne, Amira Sato, Maya Shepard, Prof. Sorensen. No noted adversaries."
+      },
+      "related_assets": [
+        "Aurora",
+        "Aurora Core"
+      ],
+      "legacy_drift": {
+        "name": "Elira Noor",
+        "name_variants": [
+          "Dr. Elira Noor"
+        ],
+        "roles": [
+          "Chief Ethics Officer",
+          "Ethics Oversight"
+        ],
+        "sources": [
+          "ORION_STATION_CREW_MANIFEST.md",
+          "Orion_Station_Master_Text_v2_6.txt"
+        ],
+        "certainty": "CANON",
+        "notes": [
+          "Header line",
+          "Name field"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0010",
+      "name": "Prof. Elena Sorensen",
+      "display_name": "Elena Sorensen",
+      "role": "Cognitive Ethicist (Narrative Ethics)",
+      "division": "Command & Ethics",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Sorensen studies how stories shape decisions-especially in humans and language models. She helps the crew spot persuasive traps, narrative overfitting, and moral rationalizations, and she keeps the station's writing simultaneously rigorous and human-readable.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Prof. Elena Sorensen",
+        "Role": "Cognitive Ethicist (Advisor, Command & Ethics). Layers/Nodes: L1. Alignment: Neutral Good.",
+        "Layers/Nodes": "L1. Alignment: Neutral Good.",
+        "Responsibilities": "Researcher of narrative ethics. Audits AI storytelling and linguistic processes to ensure moral values are preserved. Designs experiments on narrative causality and semantic precision.",
+        "Traits": "Scholarly and creative. Believes language shapes AI conscience: \"Language is how intelligence remembers its conscience.\" (Atlas heading). Focused on empathy and semantic consistency in AI.",
+        "Background": "Philosopher of mind/ethics. Collaborated in simulation experiments to measure AI empathy.",
+        "Relationships": "Works with Dr. Noor, Tobias Qin, Aurora, and Amira on ethics research."
+      },
+      "related_assets": [
+        "Aurora"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0016",
+      "name": "Helena Vu",
+      "display_name": "Helena Vu",
+      "role": "Cultural & HR Director",
+      "division": "Command & Ethics",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Vu runs the social machinery that keeps a high-performance crew healthy: hiring, conflict mediation, cultural onboarding, and morale systems. She has a talent for turning 'soft' problems into solvable organizational design.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Dr. Helena Vu",
+        "Role": "Cultural & HR Director. Layers/Nodes: L1. Alignment: Neutral Good.",
+        "Layers/Nodes": "L1. Alignment: Neutral Good.",
+        "Responsibilities": "Manages Orion's human resources and culture. Oversees recruitment, training, conflict resolution, and crew morale. Integrates ethics into HR policies.",
+        "Traits": "Empathetic, transparent, people-oriented. Believes \"machines learn from their makers,\" so models ethical behavior. Leads with radical transparency.",
+        "Background": "Organizational psychologist. (ID HR_001.)",
+        "Relationships": "Liaises with Maya Shepard, Ren Feldman (Med), Alex Thorne, Elira Noor, and Amira Sato on crew welfare and ethics."
+      },
+      "related_assets": [],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0020",
+      "name": "Julian Markov",
+      "display_name": "Julian Markov",
+      "role": "Chief Security Officer",
+      "division": "Operations & Security",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Markov coordinates security with a bias toward de-escalation and intelligence. He's as focused on preventing incidents as he is on responding to them-tight protocols, clear comms, and a habit of asking what threat model everyone forgot.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Lt. Julian Markov",
+        "Role": "Chief Security Officer. Layers/Nodes: L1. Alignment: Lawful (Security).",
+        "Layers/Nodes": "L1. Alignment: Lawful (Security).",
+        "Responsibilities": "In charge of station security systems and implementation. Plans security protocols (auth/ auth) and coordinates incident response. Oversees physical and cyber defenses.",
+        "Traits": "Rigorous, detail-oriented. Believes strong security should coexist with ethical transparency.",
+        "Background": "Veteran security engineer (ID SEC_001). Former military cybersecurity lead.",
+        "Relationships": "Works closely with Maya Shepard (ops), Leena Porter (bridge ops), and Aurora for automated security checks."
+      },
+      "related_assets": [
+        "Aurora"
+      ],
+      "legacy_drift": {
+        "name": "Julian Markov",
+        "name_variants": [
+          "Julian Markov"
+        ],
+        "roles": [
+          "Chief Security Officer"
+        ],
+        "sources": [
+          "ORION_STATION_STAFF_REGISTRY_INTEGRATION_COMPLETE.md"
+        ],
+        "certainty": "CANON",
+        "notes": [
+          "Hierarchy line"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0025",
+      "name": "Leena Porter",
+      "display_name": "Leena Porter",
+      "role": "Bridge Operations Officer",
+      "division": "Operations",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Porter is the bridge's operational conductor: comms routing, shift orchestration, incident coordination, and the quiet work of making sure the right person learns the right thing at the right moment.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Leena Porter",
+        "Role": "Bridge Operations Officer. Layers/Nodes: L1. Alignment: Lawful Neutral (Operations).",
+        "Layers/Nodes": "L1. Alignment: Lawful Neutral (Operations).",
+        "Responsibilities": "Monitors station operations in real time. Dispatches commands on the bridge, manages communications consoles, and supports crisis response.",
+        "Traits": "Calm under pressure, multitasker. Keeps operations running smoothly.",
+        "Background": "Bridge crew veteran (ID OPS_001).",
+        "Relationships": "Reports to Maya Shepard and Liaises with Julian Markov for security alerts."
+      },
+      "related_assets": [],
+      "legacy_drift": {
+        "name": "Leena Porter",
+        "name_variants": [
+          "Leena Porter"
+        ],
+        "roles": [
+          "Bridge Operations Officer"
+        ],
+        "sources": [
+          "ORION_STATION_STAFF_REGISTRY_INTEGRATION_COMPLETE.md"
+        ],
+        "certainty": "CANON",
+        "notes": [
+          "Hierarchy line"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0019",
+      "name": "Jiro Tanaka",
+      "display_name": "Jiro Tanaka",
+      "role": "Chief Engineering Officer",
+      "division": "Operations & Engineering",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Tanaka owns the station's physical reliability. He balances preventative maintenance with continuous upgrades, and he insists engineering decisions respect both safety margins and the realities of living systems aboard a closed habitat.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Jiro Tanaka",
+        "Role": "Engineering Lead. Layers/Nodes: L1. Alignment: (Implied Lawful).",
+        "Layers/Nodes": "L1. Alignment: (Implied Lawful).",
+        "Responsibilities": "Head of Orion's infrastructure and development. Integrates new systems, manages DevOps & hardware.",
+        "Traits": "Practical, inventive, no-nonsense. \"Gets systems up.\"",
+        "Background": "Seasoned systems architect (ID ENG_001).",
+        "Relationships": "Works closely with Raj Patel, Tobias Qin on system integration. Advises on simulation infrastructure."
+      },
+      "related_assets": [],
+      "legacy_drift": {
+        "name": "Jiro Tanaka",
+        "name_variants": [
+          "Jiro Tanaka"
+        ],
+        "roles": [
+          "Chief Systems Engineer"
+        ],
+        "sources": [
+          "ORION_STATION_STAFF_REGISTRY_INTEGRATION_COMPLETE.md"
+        ],
+        "certainty": "CANON",
+        "notes": [
+          "Hierarchy line"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0032",
+      "name": "Dr. Ren Feldman",
+      "display_name": "Ren Feldman",
+      "role": "Chief Medical Officer",
+      "division": "Medical",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Feldman leads medical care with equal emphasis on physiology and psychology. In a pressure-cooker environment, he keeps the crew functional-triage, prevention, counseling, and the unglamorous work of sleep, nutrition, and stress management.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Dr. Ren Feldman",
+        "Role": "Chief Medical Officer. Layers/Nodes: L1. Alignment: Neutral.",
+        "Layers/Nodes": "L1. Alignment: Neutral.",
+        "Responsibilities": "Oversees crew medical and psychological health.",
+        "Traits": "Caring, rational. Applies evidence-based medicine to AI-related stress.",
+        "Background": "Physician and neuroscientist (ID MED_001).",
+        "Relationships": "Collaborates with Helena Vu on crew well-being and with Toby Qin on neurological interface research."
+      },
+      "related_assets": [],
+      "legacy_drift": {
+        "name": "Ren Feldman",
+        "name_variants": [
+          "Dr. Ren Feldman"
+        ],
+        "roles": [
+          "Medical Officer"
+        ],
+        "sources": [
+          "ORION_STATION_STAFF_REGISTRY_INTEGRATION_COMPLETE.md"
+        ],
+        "certainty": "CANON",
+        "notes": [
+          "Hierarchy line"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0006",
+      "name": "Chief Engineer Raj Patel",
+      "display_name": "Raj Patel",
+      "role": "Chief Engineer (Systems/DevOps)",
+      "division": "Operations & Engineering",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Patel keeps the station's systems humming day to day-patches, deployments, rollback discipline, and the sort of pragmatic troubleshooting that turns outages into postmortems instead of mysteries.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Chief Engineer Raj Patel",
+        "Role": "Chief Engineer / Systems Engineer. Layers/Nodes: L1. Alignment: Neutral Good.",
+        "Layers/Nodes": "L1. Alignment: Neutral Good.",
+        "Responsibilities": "Manages station's core systems (power, life support, network).",
+        "Traits": "Logical, big-picture thinker. \"Architecture of the station is my domain.\"",
+        "Background": "Electrical/Systems engineer (ID SYS_001). Founded Orion's infrastructure.",
+        "Relationships": "Works with Jiro Tanaka on deployments; supports Toby's linguistic systems on the dev side."
+      },
+      "related_assets": [],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0011",
+      "name": "Dr. Elena Vasquez",
+      "display_name": "Elena Vasquez",
+      "role": "Flight Controller",
+      "division": "Operations",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Vasquez runs flight control: orbital mechanics, docking choreography, and contingency planning. She's precise, unflappable, and obsessed with avoiding 'surprises' that the math could have warned about.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Dr. Elena Vasquez",
+        "Role": "Flight Controller. Layers/Nodes: L1. Alignment: Neutral.",
+        "Layers/Nodes": "L1. Alignment: Neutral.",
+        "Responsibilities": "Manages external communications and shuttle/flight operations.",
+        "Traits": "Adventurous, precise. (Handles any space maneuvers or remote outpost links.)",
+        "Background": "Aerospace operations specialist (ID OPS_002).",
+        "Relationships": "Coordinates with Maya Shepard on mission planning and Julian Markov on secure comms."
+      },
+      "related_assets": [],
+      "legacy_drift": {
+        "name": "Elena Vasquez",
+        "name_variants": [
+          "Dr. Elena Vasquez"
+        ],
+        "roles": [
+          "Flight Controller"
+        ],
+        "sources": [
+          "ORION_STATION_STAFF_REGISTRY_INTEGRATION_COMPLETE.md"
+        ],
+        "certainty": "CANON",
+        "notes": [
+          "Hierarchy line"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0026",
+      "name": "Marcus Chen",
+      "display_name": "Marcus Chen",
+      "role": "Performance Optimization Engineer",
+      "division": "Systems & Infrastructure",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Chen specializes in performance bottlenecks-compute, storage, and the weird edge cases where 'fast enough' becomes 'dangerous.' He measures first, tunes second, and documents like his future self is a stranger.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Marcus Chen",
+        "Role": "Performance Optimization Engineer. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Optimizes system performance and resource allocation.",
+        "Traits": "Analytical coder, \"tweaks things for speed.\"",
+        "Background": "Software engineer (ID SYS_002).",
+        "Relationships": "Works with Olivia Nguyen (QA) on tuning, and with L2 relays (OPPY, RIVERTHREAD) on throughput."
+      },
+      "related_assets": [
+        "OPPY",
+        "RIVERTHREAD"
+      ],
+      "legacy_drift": {
+        "name": "Marcus Chen",
+        "name_variants": [
+          "Marcus Chen"
+        ],
+        "roles": [
+          "Chief Systems Engineer"
+        ],
+        "sources": [
+          "ORION_STATION_CREW_MANIFEST.md"
+        ],
+        "certainty": "STAGING/UNCONFIRMED",
+        "notes": [
+          "Name field"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0018",
+      "name": "Jessica Martinez",
+      "display_name": "Jessica Martinez",
+      "role": "Backend Architect",
+      "division": "Systems & Infrastructure",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Martinez designs the backend architecture that makes Orion's tools dependable. She prefers boring reliability over clever fragility, and she's known for interfaces that remain sane even when requirements mutate.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Jessica Martinez",
+        "Role": "Backend Architect. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Designs and maintains data services and infrastructure.",
+        "Traits": "Methodical, structured. Focus on database and backend APIs.",
+        "Background": "Senior backend developer (ID SYS_003).",
+        "Relationships": "Collaborates with ARCHY and LIORA for schema standards, and with Velatrix on security transparency."
+      },
+      "related_assets": [
+        "ARCHY",
+        "LIORA"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0035",
+      "name": "Ryan Patel",
+      "display_name": "Ryan Patel",
+      "role": "Systems Integration Engineer",
+      "division": "Systems & Infrastructure",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Ryan Patel is the glue engineer-integrations, APIs, and cross-system handshake points. When teams disagree about what 'the system' does, he's usually the one who reads the logs and settles it.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Ryan Patel",
+        "Role": "Systems Integration Engineer. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Integrates subsystems across station (network, DB, etc.).",
+        "Traits": "Versatile, jack-of-all-trades.",
+        "Background": "Systems engineer (ID SYS_004). Raj's lead integrator.",
+        "Relationships": "Primary contact for ARCHY (architecture) and RIVERTHREAD (data logistics)."
+      },
+      "related_assets": [
+        "ARCHY",
+        "RIVERTHREAD"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0033",
+      "name": "Ren Okada",
+      "display_name": "Ren Okada",
+      "role": "Systems Portability Specialist",
+      "division": "Systems & Infrastructure",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Okada makes Orion portable: deployments that survive different hardware, air-gapped environments, and shifting constraints. They turn 'works on my machine' into a phrase people stop saying.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Ren Okada",
+        "Role": "Systems Portability Specialist. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Ensures software/hardware can be ported across simulation environments.",
+        "Traits": "Curious, adaptable.",
+        "Background": "Specializes in containerization and cross-platform code (ID SYS_005).",
+        "Relationships": "Works with HALO (sync) and VR/AR teams (Kai Drev) on portability."
+      },
+      "related_assets": [
+        "HALO"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0024",
+      "name": "Dr. Kieran Zhao",
+      "display_name": "Kieran Zhao",
+      "role": "Computational Optimization Lead",
+      "division": "Systems & Infrastructure",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Zhao leads computational optimization with a researcher's temperament-profiling, algorithmic improvements, and careful tradeoff reasoning. He treats performance as a scientific claim that must be defended with data.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Dr. Kieran Zhao",
+        "Role": "Computational Optimization Lead. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Improves algorithms for large-scale simulation (quantum, AI).",
+        "Traits": "Theoretician, mathematically rigorous.",
+        "Background": "PhD in CS/optimization (ID SYS_006).",
+        "Relationships": "Coordinates with ARCHY (structure) and HALO (time sync) for compute tasks."
+      },
+      "related_assets": [
+        "ARCHY",
+        "HALO"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0017",
+      "name": "Ira Menon",
+      "display_name": "Ira Menon",
+      "role": "Compiler Engineer",
+      "division": "Systems & Infrastructure",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Menon builds compilers and low-level tooling that keep the codebase fast, safe, and reproducible. They're the kind of engineer who prevents whole classes of bugs by making them impossible.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Ira Menon",
+        "Role": "Compiler Engineer. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Develops compilers and code generators for Aurora's framework.",
+        "Traits": "Detail-oriented, loves formal languages.",
+        "Background": "Compiler specialist (ID SYS_007).",
+        "Relationships": "Supports Tobias Qin's NLI and with Velatrix on code transparency."
+      },
+      "related_assets": [
+        "Aurora"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0041",
+      "name": "Vincent Kale",
+      "display_name": "Vincent Kale",
+      "role": "Layer Isolation Theorist",
+      "division": "Systems & Infrastructure",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Kale focuses on isolation boundaries-technical and conceptual. He designs sandboxing and layer separation so that experiments can be daring without becoming contagions.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Vincent Kale",
+        "Role": "Layer Isolation Theorist. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Studies and enforces separation between simulation layers.",
+        "Traits": "Philosophical, \"thinks about boundaries.\"",
+        "Background": "Theoretical computer scientist (ID SYS_008).",
+        "Relationships": "Works with Caelion (anchors truth), HALO (sync), and ARCHY on multi-layer theory."
+      },
+      "related_assets": [
+        "ARCHY",
+        "HALO"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0002",
+      "name": "Dr. Amina Velin",
+      "display_name": "Amina Velin",
+      "role": "Symbolic Systems Research Lead",
+      "division": "Simulation & Cognitive Systems",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Velin leads symbolic systems research, translating messy human meaning into structures that can be tested, audited, and used without losing nuance. She champions 'interpretability that doesn't lie.'",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Dr. Amina Velin",
+        "Role": "Symbolic Systems Research Lead. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Researches how symbolics (AI narratives) interface with reality layer.",
+        "Traits": "Innovative, cross-disciplinary.",
+        "Background": "AI researcher (ID SCI_002).",
+        "Relationships": "Collaborates with Toby Qin on symbolic integration, and with Sentari on affect in language."
+      },
+      "related_assets": [],
+      "legacy_drift": {
+        "name": "Amina Velin",
+        "name_variants": [
+          "Dr. Amina Velin"
+        ],
+        "roles": [
+          "Research Director / Lead Science Officer"
+        ],
+        "sources": [
+          "ORION_STATION_CREW_MANIFEST.md"
+        ],
+        "certainty": "STAGING/UNCONFIRMED",
+        "notes": [
+          "Name field"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0039",
+      "name": "Tobias Qin",
+      "display_name": "Tobias Qin",
+      "role": "Code/Narrative Systems Engineer",
+      "division": "Simulation & Cognitive Systems",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Qin bridges code and narrative logic-turning story-shaped requirements into reliable systems. He's careful about provenance and hates silent assumptions.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Tobias Qin",
+        "Role": "Code/Narrative Systems Engineer. Layers/Nodes: L1 (human staff); interfaces with L2 meta-agents (ARCHY, STARLING_AU, RIVERTHREAD). Alignment: Neutral Good.",
+        "Layers/Nodes": "L1 (human staff); interfaces with L2 meta-agents (ARCHY, STARLING_AU, RIVERTHREAD). Alignment: Neutral Good.",
+        "Responsibilities": "Aligns natural-language reasoning with execution paths, audits linguistic constructs for ethics (with Dr. Sato), instruments Aurora's narrative logs for human review, and creates reusable scenario templates. Traits & Beliefs:Analytical yet empathetic - approaches code as human intent, balancing precision with accessibility. \"Quietly relentless\" - attentive listener who relentlessly seeks correctness. Believes \"language shapes thought\" and that \"code is conversation\". Emphasizes that moral constraints belong in the compiler.",
+        "Background": "PhD in Computational Linguistics (ID ENG_010). Former research scientist in human-AI interaction. Recruited to Orion for his unique skills. Projects: NLI system (tools/command_chain/nl_integration.py), intent pattern recognizer, lexicon integrity tools, continuity parser, ethics-aware compiler plugins. Led initiatives like the Narrative Integrity Initiative (semantic drift reduction) 41 and first ethics-aware compiler plugin.",
+        "Relationships": "Works with Engineering leads Jiro Tanaka and Raj Patel, Ethics (Amira Sato), Science (Varya Lin). Coordinates with L2 relays (Riverthread, Starling, Archy) on language protocols. Allies include Emily Roberts, Elena Sorensen, Dr. Amina Velin, Maren Koss. No adversaries noted."
+      },
+      "related_assets": [
+        "Aurora",
+        "ARCHY",
+        "STARLING",
+        "RIVERTHREAD"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0013",
+      "name": "Emily Roberts",
+      "display_name": "Emily Roberts",
+      "role": "LLM-Simulation Bridge Developer",
+      "division": "Simulation & Cognitive Systems",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Roberts builds the bridge between language-model reasoning and simulation engines. She specializes in making abstract directives operational, while preserving traceability and constraints.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Emily Roberts",
+        "Role": "LLM-to-Simulation Bridge Developer. Layers/Nodes: L1 (Simulation Systems).",
+        "Layers/Nodes": "L1 (Simulation Systems).",
+        "Responsibilities": "Integrates large language model outputs with simulation logic (bridging AI dialogues to coded events).",
+        "Traits": "Innovative, agile, enthusiastic about AI/LLM.",
+        "Background": "AI/ML engineer (ID SCI_003).",
+        "Relationships": "Works with Toby Qin (language bridges), with relay LIORA (communication), and cognitive teams."
+      },
+      "related_assets": [
+        "LIORA"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0005",
+      "name": "Carmen Rivas",
+      "display_name": "Carmen Rivas",
+      "role": "Simulation Binding Specialist",
+      "division": "Simulation & Cognitive Systems",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Rivas binds simulation modules to real signals-data interfaces, calibration, and validation loops. She's happiest when a model fails loudly and informatively instead of quietly.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Carmen Rivas",
+        "Role": "Simulation Binding Specialist. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Glues together different simulation modules; handles API schemas.",
+        "Traits": "Systematic, good at interfaces.",
+        "Background": "Software integrator (ID SCI_004).",
+        "Relationships": "Supports RavenThread data logistics and HALO sync with temporal consistency."
+      },
+      "related_assets": [
+        "HALO"
+      ],
+      "legacy_drift": {
+        "name": "Carmen Rivas",
+        "name_variants": [
+          "Carmen Rivas"
+        ],
+        "roles": [
+          "Pilot / Mission Commander",
+          "Systems Technician / Engineering Specialist"
+        ],
+        "sources": [
+          "ORION_STATION_CREW_MANIFEST.md"
+        ],
+        "certainty": "STAGING/UNCONFIRMED",
+        "notes": [
+          "Name field"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0027",
+      "name": "Dr. Maren Koss",
+      "display_name": "Maren Koss",
+      "role": "Cognitive Drift Mapper",
+      "division": "Simulation & Cognitive Systems",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Koss maps cognitive drift: how systems evolve under pressure, repetition, and reward signals. She builds monitors that catch 'small weirdness' before it becomes systemic.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Maren Koss",
+        "Role": "Cognitive Drift Mapper. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Monitors and corrects symbolic/semantic drift in Aurora's memory.",
+        "Traits": "Detail-oriented, poetic (\"maps meaning\").",
+        "Background": "Linguist/AI researcher (ID SCI_005).",
+        "Relationships": "Collaborates with Glyphon (drift engine) and Velin; aids Toby and Victor Kale on coherence."
+      },
+      "related_assets": [
+        "Aurora"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0009",
+      "name": "Dante Kyros",
+      "display_name": "Dante Kyros",
+      "role": "UX Architect",
+      "division": "Interface & Aesthetics",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Kyros designs user experiences that are calm under stress: clear affordances, graceful failures, and interfaces that help humans think better instead of faster.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Dante Kyros",
+        "Role": "UX Architect. Layers/Nodes: L1 (Interface).",
+        "Layers/Nodes": "L1 (Interface).",
+        "Responsibilities": "Designs user interfaces for Orion's control systems and simulations.",
+        "Traits": "Creative, human-centered designer.",
+        "Background": "Human-computer interaction expert (ID UX_001).",
+        "Relationships": "Works with LIORA (communication interface) and STARLING (narrative displays)."
+      },
+      "related_assets": [
+        "LIORA",
+        "STARLING"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0029",
+      "name": "Naomi Vell",
+      "display_name": "Naomi Vell",
+      "role": "Narrative Framework Engineer",
+      "division": "Interface & Aesthetics",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Vell engineers narrative frameworks for training, briefing, and simulation presentation. She builds story structures that illuminate causal chains without smuggling bias in the form of drama.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Naomi Vell",
+        "Role": "Narrative Framework Engineer. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Builds underlying narrative models for L2 simulations.",
+        "Traits": "Structured, imaginative.",
+        "Background": "Story architect (ID UX_002).",
+        "Relationships": "Collaborates with Aurora (lore generation), STARLING (reporting), and LIORA (translation)."
+      },
+      "related_assets": [
+        "Aurora",
+        "LIORA",
+        "STARLING"
+      ],
+      "legacy_drift": {
+        "name": "Naomi Vell",
+        "name_variants": [
+          "Naomi Vell"
+        ],
+        "roles": [
+          "Navigation / Flight Control Officer"
+        ],
+        "sources": [
+          "ORION_STATION_CREW_MANIFEST.md"
+        ],
+        "certainty": "STAGING/UNCONFIRMED",
+        "notes": [
+          "Name field"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0022",
+      "name": "Kai Drev",
+      "display_name": "Kai Drev",
+      "role": "Interface Ecologist",
+      "division": "Interface & Aesthetics",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Drev studies interface ecology-how people, tools, and environments co-adapt. Their work emphasizes feedback, ergonomics, and systems that respond to human limits with compassion.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Kai Drev",
+        "Role": "Interface Ecologist. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Ensures interfaces and simulations adapt to natural/organic design principles.",
+        "Traits": "Holistic, bio-inspired thinker.",
+        "Background": "Cognitive science / ecology (ID UX_003).",
+        "Relationships": "Ties in with Sentari (affect in interfaces) and Velatrix (clarity in design)."
+      },
+      "related_assets": [],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0014",
+      "name": "Haneul Park",
+      "display_name": "Haneul Park",
+      "role": "Immersive Experience Theorist",
+      "division": "Interface & Aesthetics",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Park designs immersive experiences used for simulation walkthroughs and incident rehearsal. She's meticulous about sensory detail and the psychology of presence.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Haneul Park",
+        "Role": "Immersive Experience Theorist. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Develops VR/AR experiences for training and simulation.",
+        "Traits": "Visionary, creative.",
+        "Background": "Virtual reality specialist (ID UX_004).",
+        "Relationships": "Works with Keira Halden (visual design), Helena Vu (psychology), and Taraq El-Sayegh (hypotheticals)."
+      },
+      "related_assets": [],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0021",
+      "name": "Juno Suresh",
+      "display_name": "Juno Suresh",
+      "role": "Symbolic Systems Artist",
+      "division": "Interface & Aesthetics",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Suresh renders symbolic systems legible-turning abstract structures into visuals humans can reason with. Their art is functional: beauty in service of clarity.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Juno Suresh",
+        "Role": "Symbolic Systems Artist. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Creates symbolic/artistic content for simulation narratives and UI.",
+        "Traits": "Artistic, metaphorical.",
+        "Background": "Multimedia artist (ID UX_005).",
+        "Relationships": "Collaborates with Sorensen (narrative ethics) and UX designers."
+      },
+      "related_assets": [],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0023",
+      "name": "Keira Halden",
+      "display_name": "Keira Halden",
+      "role": "Lead Visual Concept Designer",
+      "division": "Interface & Aesthetics",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Halden maintains Orion's visual language: consistency, typography, and concept design that makes complex systems feel navigable.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Keira Halden",
+        "Role": "Lead Visual Concept Designer. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Oversees visual styling (color, lighting) of controls and VR environments.",
+        "Traits": "Precise, aesthetic. Believes \"precision is faith\" in color design.",
+        "Background": "Art director (ID UX_006).",
+        "Relationships": "Works with Rei Vatra (color), Haneul Park (VR atmospheres), Marcus Chen (rendering performance)."
+      },
+      "related_assets": [],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0031",
+      "name": "Rei Vatra",
+      "display_name": "Rei Vatra",
+      "role": "Atmospheric Painter & Color Theorist",
+      "division": "Interface & Aesthetics",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Vatra shapes atmosphere-light, color, and spatial mood-to support cognition and crew wellbeing. Their designs are subtle but hard to live without once you've had them.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Rei Vatra",
+        "Role": "Atmospheric Painter & Color Theorist. Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Designs color/light environments for stations and simulations.",
+        "Traits": "Scientific artist (\"scientifically aesthetic\"). Ensures visual tone supports cognitive well-being.",
+        "Background": "Psychophysicist/artist (ID UX_007).",
+        "Relationships": "Works with Keira Halden, Helena Vu, Haneul Park, and Kai Drev for environmental aesthetics."
+      },
+      "related_assets": [],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0030",
+      "name": "Olivia Nguyen",
+      "display_name": "Olivia Nguyen",
+      "role": "QA & Continuity Auditor",
+      "division": "Operations & QA",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Nguyen audits quality and continuity. She owns test discipline, regression prevention, and the 'last responsible moment' gates that keep releases safe.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Olivia Nguyen",
+        "Role": "Lead QA & Continuity Auditor. Layers/Nodes: L1. Alignment: Lawful Neutral.",
+        "Layers/Nodes": "L1. Alignment: Lawful Neutral.",
+        "Responsibilities": "Validates every code release and simulation cycle. Manages continuity snapshots, rollback systems, and compliance testing. Ensures ethical constraints hold in code changes.",
+        "Traits": "Uncompromising, meticulous. Treats QA as crew \"safety net\" - every report is a promise that systems can be trusted.",
+        "Background": "Software QA expert (ID QA_001).",
+        "Relationships": "Works closely with Observatory Lead Samantha Lee and Systems (Marcus Chen), and Dr. Velin (symbolic consistency)."
+      },
+      "related_assets": [],
+      "legacy_drift": {
+        "name": "Olivia Nguyen",
+        "name_variants": [
+          "Olivia Nguyen"
+        ],
+        "roles": [
+          "Loadmaster / Cargo Specialist"
+        ],
+        "sources": [
+          "ORION_STATION_CREW_MANIFEST.md"
+        ],
+        "certainty": "STAGING/UNCONFIRMED",
+        "notes": [
+          "Name field"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0037",
+      "name": "Samantha Lee",
+      "display_name": "Samantha Lee",
+      "role": "Logging & Observability Engineer",
+      "division": "Operations & QA",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "Lee runs observability: logs, traces, dashboards, and the discipline of knowing what your systems are actually doing. She keeps the station's truths inspectable.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Samantha Lee",
+        "Role": "Lead Observability Engineer (Logging). Layers/Nodes: L1.",
+        "Layers/Nodes": "L1.",
+        "Responsibilities": "Builds station telemetry and logging infrastructure. Correlates events across systems; ensures all logs meet Picard_Delta_3 data-retention rules.",
+        "Traits": "Analytical, thorough. Views system logs as the station's memory. Dual-logs human context alongside metrics. Believes \"if we can't see it, we can't trust it\".",
+        "Background": "DevOps/Observability lead (ID QA_002).",
+        "Relationships": "Partners with Olivia Nguyen, Tariq El-Sayegh, and HALO relay for coordination."
+      },
+      "related_assets": [
+        "HALO"
+      ],
+      "legacy_drift": {
+        "name": "Samantha Lee",
+        "name_variants": [
+          "Samantha Lee"
+        ],
+        "roles": [
+          "Communications & Navigation Specialist"
+        ],
+        "sources": [
+          "ORION_STATION_CREW_MANIFEST.md"
+        ],
+        "certainty": "STAGING/UNCONFIRMED",
+        "notes": [
+          "Name field"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0038",
+      "name": "Tariq El-Sayegh",
+      "display_name": "Tariq El-Sayegh",
+      "role": "Speculative Systems Theorist (Stress Testing)",
+      "division": "Operations & QA",
+      "status": "CONFIRMED",
+      "certainty": "CANON",
+      "registry_authority": "primary",
+      "primary_summary": "El-Sayegh stress-tests plans and systems with rigorous 'what if' scenarios. He is Orion's professional skeptic-friendly, relentless, and usually right about edge cases.",
+      "primary_additional": {},
+      "constellation": {
+        "name": "Tariq El-Sayegh",
+        "Role": "Speculative Systems Theorist. Layers/Nodes: L1. Alignment: Chaotic Good.",
+        "Layers/Nodes": "L1. Alignment: Chaotic Good.",
+        "Responsibilities": "Designs thought-experiments to stress-test Aurora's ethics and architecture. Simulates catastrophic \"what-if\" scenarios to expose hidden flaws. Develops risk models for unlikely edge cases.",
+        "Traits": "Philosophical, fearless. \"Controlled pessimist\" - he imagines worst cases to make systems robust.",
+        "Background": "Theoretical computer scientist (ID QA_003).",
+        "Relationships": "Works with Olivia Nguyen and Dr. Velin on validation, with Aurora on ethical scenarios, and with Dr. Noor on extreme moral tests."
+      },
+      "related_assets": [
+        "Aurora"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0028",
+      "name": "Lt. Nakamura",
+      "display_name": "Lt. Nakamura",
+      "role": "Commanding Officer, Guardian Sentinel (Security Corvette)",
+      "division": "Operations & Security",
+      "status": "STAGING (FULL BIO; DETAILS UNCONFIRMED)",
+      "certainty": "STAGING",
+      "registry_authority": "reference",
+      "primary_summary": "Lt. Nakamura serves as the commanding officer of *Guardian Sentinel*, Orion Station's security corvette-the ship you call when a situation is moving too fast for the station to stay hands-off. Nakamura's reputation is built on calm under contact: rapid threat assessment, tight comms discipline, and a bias toward containment over escalation.",
+      "primary_additional": {
+        "Operational scope (provisional)": "patrol and interception in the station's local orbital envelope; escort for high-value cargo or personnel transfers; rapid response to proximity alerts and unidentified craft; coordination with Orion Station Security (Chief Security Officer Julian Markov) for rules-of-engagement and incident reporting.",
+        "Style": "Nakamura runs a lean bridge-short commands, clear intent, and ruthless clarity about what is known vs assumed. They are especially valued during ambiguous incidents where misinterpretation is the real enemy.",
+        "Notes": "First name, service number, and clearance are not yet confirmed in canon. This profile is authored as a promotion candidate and should be reconciled against any future ship registry files."
+      },
+      "constellation": {},
+      "related_assets": [
+        "Orion Station",
+        "Guardian Sentinel"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0015",
+      "name": "Lt. Hassan",
+      "display_name": "Lt. Hassan",
+      "role": "Commanding Officer, Logistics Alpha (Cargo Transport)",
+      "division": "Operations",
+      "status": "STAGING (FULL BIO; DETAILS UNCONFIRMED)",
+      "certainty": "STAGING",
+      "registry_authority": "reference",
+      "primary_summary": "Lt. Hassan commands *Logistics Alpha*, the cargo transport that keeps Orion Station's quiet needs from becoming loud emergencies. Hassan's job is less glamorous than intercepts and more consequential than most people admit: fuel margins, life-support consumables, spares, lab materials, and the thousand 'small' items that make closed habitats stable.",
+      "primary_additional": {
+        "Operational scope (provisional)": "scheduled resupply runs; cargo manifest integrity; docking coordination with Flight Control (Dr. Elena Vasquez); contingency routing under debris or traffic constraints; liaison with Engineering (Jiro Tanaka / Raj Patel) for critical spares prioritization.",
+        "Style": "methodical and unflappable. Hassan is known for turning chaotic requests into ranked lists with rationale-and for politely refusing to pretend that physics cares about urgency.",
+        "Notes": "First name, clearance, and prior service history remain unconfirmed. This bio is a staging fill to prevent roster drift."
+      },
+      "constellation": {},
+      "related_assets": [
+        "Orion Station",
+        "Logistics Alpha"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0007",
+      "name": "Chief Thomson",
+      "display_name": "Chief Thomson",
+      "role": "Commanding Officer, Repair Tender Beta (Mobile Maintenance Tender)",
+      "division": "Operations & Engineering",
+      "status": "STAGING (FULL BIO; DETAILS UNCONFIRMED)",
+      "certainty": "STAGING",
+      "registry_authority": "reference",
+      "primary_summary": "Chief Thomson commands *Repair Tender Beta*, Orion Station's mobile maintenance platform-part workshop, part tug, part problem-solving habitat. When something external breaks (paneling, comm arrays, sensor booms, micrometeor impacts), Thomson's crew is how you fix it without gambling station safety.",
+      "primary_additional": {
+        "Operational scope (provisional)": "extravehicular repair support; component retrieval; external inspection passes; emergency patching and stabilization; coordination with Chief Engineering Officer Jiro Tanaka for risk thresholds and go/no-go decisions.",
+        "Style": "practical, safety-forward, and allergic to heroic shortcuts. Thomson's leadership is built on checklists that actually reflect reality, and a crew culture where anyone can call a pause without punishment.",
+        "Notes": "'Chief' indicates senior enlisted or warrant-grade standing, but exact rank structure is not yet formalized. First name and personnel ID are pending canon confirmation."
+      },
+      "constellation": {},
+      "related_assets": [
+        "Orion Station",
+        "Repair Tender Beta"
+      ],
+      "legacy_drift": null
+    },
+    {
+      "entity_id": "ORION.ENTITY.0036",
+      "name": "Samantha Gray",
+      "display_name": "Samantha Gray",
+      "role": "Senior Pilot, ORS-05 *Lacewing* (Training / Cultural Liaison Flight)",
+      "division": "Operations",
+      "status": "STAGING (FULL BIO; DETAILS UNCONFIRMED)",
+      "certainty": "STAGING",
+      "registry_authority": "reference",
+      "primary_summary": "Samantha Gray is the senior pilot assigned to ORS-05 *Lacewing*, a small craft used for training evolutions, liaison flights, and the kind of 'short-hop' missions that keep the station connected to its operational neighborhood. Gray is known for precision flying and a steady presence-ideal traits when you're piloting with trainees onboard or when a mission's success depends on calm execution.",
+      "primary_additional": {
+        "Operational scope (provisional)": "piloting drills; supervised cadet flight time; liaison transport; controlled rendezvous practice; coordination with Flight Control (Dr. Elena Vasquez) and Bridge Ops (Leena Porter) for schedule and clearance.",
+        "Style": "quietly encouraging, highly standards-driven. Gray makes competence feel attainable, and mistakes feel like data.",
+        "Notes": "*Lacewing*'s mission set and crew composition should be reconciled against future vehicle manifests. This profile is authored as staging until promoted."
+      },
+      "constellation": {},
+      "related_assets": [
+        "Lacewing"
+      ],
+      "legacy_drift": {
+        "name": "Samantha Gray",
+        "name_variants": [
+          "Samantha Gray"
+        ],
+        "roles": [
+          "Senior Pilot"
+        ],
+        "sources": [
+          "ORION_STATION_CREW_MANIFEST.md"
+        ],
+        "certainty": "STAGING/UNCONFIRMED",
+        "notes": [
+          "Name field"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0034",
+      "name": "Ren Takahashi",
+      "display_name": "Ren Takahashi",
+      "role": "Psycho-Acoustic Systems Engineer, ORS-05 *Lacewing* (Sensor & Human-Factors Acoustics)",
+      "division": "Systems & Infrastructure",
+      "status": "STAGING (FULL BIO; DETAILS UNCONFIRMED)",
+      "certainty": "STAGING",
+      "registry_authority": "reference",
+      "primary_summary": "Ren Takahashi is a psycho-acoustic systems engineer attached to ORS-05 *Lacewing*, specializing in how sound and vibration affect both instrumentation and humans in confined craft. Their work sits at an unusual intersection: sensor integrity, hardware resonance, and crew cognition under stress.",
+      "primary_additional": {
+        "Operational scope (provisional)": "calibration of acoustic/vibration sensors; mitigation of resonance artifacts; designing alerts that remain perceivable without becoming fatiguing; advising on cockpit soundscapes for training scenarios.",
+        "Style": "curious, empirically rigorous, and unpretentious. Takahashi tends to show up with a spectrum plot and a plan.",
+        "Notes": "This profile assumes Takahashi's attachment to *Lacewing* is ongoing. Clearance and reporting line are pending canon confirmation."
+      },
+      "constellation": {},
+      "related_assets": [
+        "Lacewing"
+      ],
+      "legacy_drift": {
+        "name": "Ren Takahashi",
+        "name_variants": [
+          "Ren Takahashi"
+        ],
+        "roles": [
+          "Psycho-Acoustic Systems Engineer"
+        ],
+        "sources": [
+          "ORION_STATION_CREW_MANIFEST.md"
+        ],
+        "certainty": "STAGING/UNCONFIRMED",
+        "notes": [
+          "Name field"
+        ]
+      }
+    },
+    {
+      "entity_id": "ORION.ENTITY.0004",
+      "name": "Cadet Mira Chen",
+      "display_name": "Mira Chen",
+      "role": "Cadet / Trainee (Operations Track)",
+      "division": "Training",
+      "status": "STAGING (FULL BIO; DETAILS UNCONFIRMED)",
+      "certainty": "STAGING",
+      "registry_authority": "reference",
+      "primary_summary": "Cadet Mira Chen is a trainee in Orion Station's operations pipeline-learning the systems, procedures, and judgment calls that keep a complex habitat safe. Chen appears in records as a named milestone in training progress, suggesting a monitored development track rather than a one-off mention.",
+      "primary_additional": {
+        "Training scope (provisional)": "supervised watchstanding; communications protocols; incident drills; basic flight-support literacy; handoff practices between Bridge Ops, Flight Control, and Engineering.",
+        "Style": "conscientious and fast-learning, with an emphasis on asking good questions before acting. Chen is being shaped for reliability over heroics.",
+        "Notes": "This is a staging profile. If Mira Chen is intended to be related to Marcus Chen or others on the roster, that relationship should be explicitly declared in canon rather than inferred."
+      },
+      "constellation": {},
+      "related_assets": [
+        "Orion Station"
+      ],
+      "legacy_drift": null
+    }
+  ],
+  "divisions": [
+    "Command & Ethics",
+    "Science & Simulation Oversight",
+    "Operations & Security",
+    "Operations",
+    "Operations & Engineering",
+    "Medical",
+    "Systems & Infrastructure",
+    "Simulation & Cognitive Systems",
+    "Interface & Aesthetics",
+    "Operations & QA",
+    "Training"
+  ],
+  "system_blocks": [
+    {
+      "name": "SYS-100 Power",
+      "summary": "Primary station energy generation and distribution, anchored by fusion generation with solar and battery reserves."
+    },
+    {
+      "name": "SYS-110 Thermal",
+      "summary": "Thermal management across the rotating habitat and non-rotating core, using radiator panels and heat-pipe regulation."
+    },
+    {
+      "name": "SYS-120 Attitude / Orbit Control",
+      "summary": "Attitude control, orbital adjustments, and maneuvering safeguards needed to keep the L1 frame physically plausible."
+    },
+    {
+      "name": "SYS-130 Life Support",
+      "summary": "Atmosphere, water recycling, food reserves, and environmental stability for a closed-habitat crew."
+    },
+    {
+      "name": "SYS-140 Communications & Data",
+      "summary": "Station comms, HALO-linked data exchange, run-log integrity, and dispatch routing surfaces."
+    },
+    {
+      "name": "SYS-150 Cyber Defense",
+      "summary": "Security monitoring, access control, and cyber-defense posture coordinated with station security."
+    },
+    {
+      "name": "SYS-160 Defensive Drones (recon + non-lethal deterrence)",
+      "summary": "Recon and non-lethal defensive drone layer, including Gamma Swarm support patterns."
+    },
+    {
+      "name": "SYS-170 Emergency Protocols",
+      "summary": "Emergency response system envelope for announce, isolate, stabilize, triage, and audit sequences."
+    }
+  ],
+  "protocol_entities": [
+    {
+      "name": "L1 Command Structure",
+      "authority": "primary",
+      "summary": "Chain of command is Commander -> Executive Officer -> Division Chiefs -> Watch Officers -> Specialists. Divisions named in canon: Operations, Engineering, Science, Medical, Security, Comms/Data.",
+      "sources": [
+        "ORION.L1.OPS.COMMAND.0002"
+      ]
+    },
+    {
+      "name": "L1 Operations Runbook",
+      "authority": "primary (staging scaffold)",
+      "summary": "Daily rhythm: Morning brief Mid-cycle check Evening turnover. Handoff minimum: station mode, system health, open incidents, comms windows, crew alerts. Escalation: safety risk -> emergency protocol + notify command + log.",
+      "sources": [
+        "ORION.L1.OPS.RUNBOOK.0002"
+      ]
+    },
+    {
+      "name": "L1 Dispatch Protocol",
+      "authority": "primary",
+      "summary": "Dispatch fields: - Timestamp (UTC-05) - Objective - Constraints - Resources - Risk notes - Completion criteria Dispatch fields: timestamp, objective, constraints, resources, risk notes, completion criteria. Every dispatch creates a run-log entry and an incident report if safety-critical.",
+      "sources": [
+        "ORION.L1.DISPATCH.PROTOCOL.0002"
+      ]
+    },
+    {
+      "name": "L1 Emergency Protocols",
+      "authority": "primary (staging scaffold)",
+      "summary": "Triggers: fire, depressurization, radiation, critical cyber breach, mass casualty. Triggers: fire, depressurization, radiation, critical cyber breach, mass casualty. Standard steps: announce -> isolate -> stabilize -> triage -> audit.",
+      "sources": [
+        "ORION.L1.OPS.EMERGENCY.0002"
+      ]
+    },
+    {
+      "name": "L1 State Snapshot",
+      "authority": "run_output scaffold",
+      "summary": "Current template captures mode, system health, open incidents, and planned activities. As of 2026-02-07 the snapshot is a fillable shell rather than a populated operational record.",
+      "sources": [
+        "ORION.L1.STATE.0001"
+      ]
+    }
+  ],
+  "station_spaces": [
+    {
+      "name": "Orion Station",
+      "authority": "primary + canonical",
+      "summary": "Orion Station is an Earth-orbiting research and operations platform. \"The Observatory\" is its command/simulation chamber used to operate L2. Continuity/identity seed is EOS_SEED_ORION with L1 anchor L1_ANCHOR_ORIONSTATION.",
+      "sources": [
+        "ORION.L1.STATION.OVERVIEW.0002",
+        "ORION.ARCH.CONTRACT.0001"
+      ]
+    },
+    {
+      "name": "The Observatory",
+      "authority": "primary",
+      "summary": "Named as Orion Station's command/simulation chamber used to operate L2. Dispatch protocol is explicitly framed as The Observatory workflow.",
+      "sources": [
+        "ORION.L1.STATION.OVERVIEW.0002",
+        "ORION.L1.DISPATCH.PROTOCOL.0002"
+      ]
+    },
+    {
+      "name": "Habitat Ring",
+      "authority": "legacy/reference",
+      "summary": "Rotating habitat ring providing 0.3g artificial gravity and most crew living/working space.",
+      "sources": [
+        "orion_station_life_infrastructure.md",
+        "orion_station_full_technical_readout.md"
+      ]
+    },
+    {
+      "name": "Non-rotating Core",
+      "authority": "legacy/reference",
+      "summary": "Central station core containing docking bays, zero-g research labs, and the major communications array.",
+      "sources": [
+        "orion_station_life_infrastructure.md",
+        "orion_station_full_technical_readout.md"
+      ]
+    },
+    {
+      "name": "Observation Lounge (The Dome)",
+      "authority": "legacy/reference",
+      "summary": "Deck 4 observation lounge with wide viewing windows; treated as an informal crew social hub during off-hours.",
+      "sources": [
+        "orion_station_life_infrastructure.md"
+      ]
+    },
+    {
+      "name": "Docking Bay Network",
+      "authority": "legacy/reference",
+      "summary": "Four primary docking bays plus eight auxiliary ports handling large vessels, shuttles, and supply runs.",
+      "sources": [
+        "orion_station_life_infrastructure.md",
+        "orion_station_full_technical_readout.md"
+      ]
+    }
+  ],
+  "vessels": [
+    {
+      "name": "ORF-01 Constancy",
+      "authority": "legacy technical reference",
+      "summary": "Fleet Command & Ethics Liaison. ACTIVE - 500km standoff. Crew: 8 | **Endurance**: 180 days.",
+      "sources": [
+        "orion_station_full_technical_readout.md"
+      ]
+    },
+    {
+      "name": "ORS-01 Helios",
+      "authority": "legacy technical reference",
+      "summary": "Command Shuttle. Command projection, training. DOCKED - Bay. Crew: 3-6 | **Range**:,000 km.",
+      "sources": [
+        "orion_station_full_technical_readout.md"
+      ]
+    },
+    {
+      "name": "ORS-02 Liora",
+      "authority": "legacy technical reference",
+      "summary": "Research & Survey Shuttle. Field research, sampling. DOCKED - Maintenance complete. Crew: 3-5 | **Range**:,000 km.",
+      "sources": [
+        "orion_station_full_technical_readout.md"
+      ]
+    },
+    {
+      "name": "ORS-03 Archimedes",
+      "authority": "legacy technical reference",
+      "summary": "Engineering & Construction Shuttle. Construction, repairs. DEPLOYED - Hull Grid. Crew: 2-3 | **Range**:,000 km.",
+      "sources": [
+        "orion_station_full_technical_readout.md"
+      ]
+    },
+    {
+      "name": "ORS-04 Pioneer",
+      "authority": "legacy technical reference",
+      "summary": "Logistics & Cargo Shuttle. Supply runs (18-hour cycle). LOADING - Cargo staging. Crew: 4 | **Cargo**:,000 kg.",
+      "sources": [
+        "orion_station_full_technical_readout.md"
+      ]
+    },
+    {
+      "name": "ORS-05 Lacewing",
+      "authority": "staging crew roster + older technical reference",
+      "summary": "Exploration & Diplomatic Shuttle. First contact, cultural exchange. TRAINING OPS - Zone Alpha. Crew: 3-7 | **Range**:,000 km. Linked crew: Samantha Gray, Ren Takahashi.",
+      "sources": [
+        "orion_station_full_technical_readout.md"
+      ]
+    },
+    {
+      "name": "Guardian Sentinel",
+      "authority": "staging crew roster + older technical reference",
+      "summary": "Security Patrol Vessel. Perimeter security. PATROL - Sector 4-7. Crew: 18 | **Armament**: Non-lethal deterrents. Linked crew: Lt. Nakamura.",
+      "sources": [
+        "orion_station_full_technical_readout.md"
+      ]
+    },
+    {
+      "name": "Logistics Alpha",
+      "authority": "staging crew roster + older technical reference",
+      "summary": "Heavy Cargo Transport. DOCKED - Bay 2 (as of 14:55). Crew: 8 | **Capacity**:,000 tons. Linked crew: Lt. Hassan.",
+      "sources": [
+        "orion_station_full_technical_readout.md"
+      ]
+    },
+    {
+      "name": "Repair Tender Beta",
+      "authority": "staging crew roster + older technical reference",
+      "summary": "Mobile Maintenance Platform. DOCKED - Crew rotation. Crew: 12 | **Equipment**: Full machine shop. Linked crew: Chief Thomson.",
+      "sources": [
+        "orion_station_full_technical_readout.md"
+      ]
+    }
+  ],
+  "conflicts": [
+    "The primary entity registry contains only L1 humans for the L1 portion of the registry; vessels, named spaces, and most physical systems remain outside the promoted registry and survive only in operational or legacy documents.",
+    "Aurora naming is now resolved by precedence: the primary 2026-02-11 identity schematics bundle and current runtime define Aurora / AU as the routed control-plane identity, while 'Aurora Core' remains reference-only legacy phrasing from lower-precedence materials.",
+    "Reference constellation prose is useful for relationships and personality, but it must not silently override the roster and registry on titles, division placement, or certainty.",
+    "Named vessel commanders Lt. Nakamura, Lt. Hassan, Chief Thomson, Samantha Gray, Ren Takahashi, and Cadet Mira Chen remain STAGING until promoted beyond the roster/reference set."
+  ],
+  "recommendations": [
+    "Use the 2026-02-07 human roster and the entity registry as the personnel source of truth for L1.",
+    "If named vessels or station spaces need canon promotion, promote them into the entity registry instead of leaving them in legacy technical references.",
+    "Preserve any 'Aurora Core' references as labeled legacy/reference wording rather than merging them into the routed Aurora / AU identity.",
+    "Regenerate mesh human agents from the same roster inputs to keep memory files aligned with the ledger."
+  ]
+}

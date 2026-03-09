@@ -3,7 +3,7 @@
 **Version**: v2.2.6 → v3.5_macroready  
 **Last Updated**: 2025-06-20  
 **Status**: ✅ Production Deployment (Active Permanent Node)  
-**Location**: `/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/Au_Archive_620_623/`
+**Location**: `Au_Archive_620_623/`
 
 ---
 

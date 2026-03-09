@@ -1,6 +1,6 @@
 # Archive Entropy Guard Report
 Date: 2026-03-07 (America/New_York)
-Workspace: /Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main
+Workspace: Aurora_ORIONCORE_Directory_Main (local workspace root)
 
 ## Executive Summary
 - Archive files scanned: 1,238

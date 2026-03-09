@@ -3,7 +3,7 @@
 **Version**: v2.2.6b / Chamber Edition  
 **Last Updated**: 2025-04-25  
 **Status**: ✅ Production-Ready (Sealed & Ritual-Safe)  
-**Location**: `/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/ZipWiz_Chamber_6_28/`
+**Location**: `ZipWiz_Chamber_6_28/`
 
 ---
 

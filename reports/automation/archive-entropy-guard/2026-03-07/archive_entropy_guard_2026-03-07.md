@@ -1,6 +1,6 @@
 # Archive Entropy Guard Report
 Date: 2026-03-07
-Workspace: /Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main
+Workspace: Aurora_ORIONCORE_Directory_Main (local workspace root)
 
 ## Snapshot
 - Total workspace size: **19G**
@@ -40,7 +40,7 @@ Workspace: /Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aur
 
 ## Safe Move Commands (non-destructive)
 ```bash
-cd "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main"
+cd "<workspace-root>"
 STAGE="$PWD/_entropy_staging/2026-03-07"
 mkdir -p "$STAGE"
 

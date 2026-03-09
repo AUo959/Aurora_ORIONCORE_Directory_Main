@@ -3,7 +3,7 @@
 **Version**: v2.0 → v2.3.0  
 **Last Updated**: 2025-05-27  
 **Status**: ✅ Active Operations (Unified Deployment)  
-**Location**: `/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/Au_Archive_527/`
+**Location**: `Au_Archive_527/`
 
 ---
 

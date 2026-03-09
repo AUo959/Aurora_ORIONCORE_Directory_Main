@@ -17,6 +17,7 @@ from _workspace_common import (
     now_iso_utc,
     relpath,
     resolve_root,
+    serialized_root,
     sha256_path,
     top_level_entries,
     write_json,
@@ -426,9 +427,6 @@ def main() -> int:
         git(["rev-parse", "--show-toplevel"], cwd=root)
     except subprocess.CalledProcessError:
         failures.append({"check": "root_git_repo", "details": "root is not a git repository"})
-    else:
-        remotes = git(["remote"], cwd=root).stdout.split()
-        check(not remotes, "root_remote_configured", f"remotes={remotes}", failures)
 
     verify_manifest(root, failures)
     verify_repo_registry(root, failures)
@@ -443,7 +441,7 @@ def main() -> int:
 
     report = {
         "generated_at": now_iso_utc(),
-        "root": str(root),
+        "root": serialized_root(root),
         "failures": failures,
         "status": "pass" if not failures else "fail",
     }

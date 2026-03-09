@@ -1,6 +1,6 @@
 {
   "generated_at": "2026-03-08T00:14:03Z",
-  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "root": ".",
   "repos": [
     {
       "name": "aurora-cloudbank-symbolic-main",
@@ -8,7 +8,7 @@
       "branch": "main",
       "head_sha": "42e0b9fb9f1e0e10a9091d595cf2811f2c14eacf",
       "remote_status": "no_remote_configured",
-      "validation_command": "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C '/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main' rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C '/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main' status --short --branch",
+      "validation_command": "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main status --short --branch",
       "move_policy": "frozen_until_registry_adoption"
     },
     {
@@ -17,7 +17,7 @@
       "branch": "main",
       "head_sha": "259bdc1b36f78237aac6cd6044ab1767dc84f844",
       "remote_status": "no_remote_configured",
-      "validation_command": "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C '/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/CanonRec' rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C '/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/CanonRec' status --short --branch",
+      "validation_command": "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/CanonRec rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/CanonRec status --short --branch",
       "move_policy": "frozen_until_registry_adoption"
     },
     {
@@ -26,7 +26,7 @@
       "branch": "main",
       "head_sha": "db13ac7c97fdcab65a9ba051e23defc19ff4922f",
       "remote_status": "no_remote_configured",
-      "validation_command": "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C '/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0' rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C '/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0' status --short --branch",
+      "validation_command": "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0 rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0 status --short --branch",
       "move_policy": "frozen_until_registry_adoption"
     }
   ]
