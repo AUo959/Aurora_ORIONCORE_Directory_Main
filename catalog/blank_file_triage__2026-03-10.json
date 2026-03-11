@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-03-10",
+  "scope": {
+    "excluded": [
+      "GUMAS_SIM_2.5/CanonRec",
+      "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0",
+      ".git",
+      ".venv",
+      "node_modules",
+      ".pytest_cache"
+    ],
+    "criteria": [
+      "zero-byte files",
+      "zip files of size <= 36 bytes treated as empty-wrapper candidates"
+    ]
+  },
+  "activation_profile_resolution": {
+    "status": "preferred_candidate_identified",
+    "preferred_instruction_profile": "Complete Archive 4_19 copy/aurora_instruction_profile.json",
+    "instruction_profile_family_normalized_sha256": "f9b2e59a0d51cefb81abe4d59cc963bac7bd03dd8c703279d2431103545b7c81",
+    "paired_safety_lock_source": "Complete Archive 4_19 copy/Archy_Continuity_Thread_v1.0.zip::aurora_safety_lock.json",
+    "notes": [
+      "Legacy 2025 instruction-profile copies resolve to one logical object.",
+      "The 2026 mesh profile is a later runtime reinterpretation and is excluded from the Riverthread 808 recovery path.",
+      "The ZIPWIZ reference hash for the instruction profile does not match any recovered surviving copy."
+    ],
+    "report_ref": "reports/analysis/AURORA_ACTIVATION_STACK_PROFILE_RESOLUTION__2026-03-10.md"
+  },
+  "triage": {
+    "keep": [
+      {
+        "group": "intentional_empty_package_markers",
+        "reason": "Empty __init__.py files are valid package markers and do not indicate failed recovery.",
+        "paths": [
+          "GUMAS_SIM_2.0/02_DEVELOPMENT/Engine/Staging_Branches/GUMAS_Staging_v1/GUMAS_Staging/STAGING_CONTEXT_BUNDLE__v1/26_engine_2.0/modules/__init__.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/__init__.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora/utils/__init__.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora/cli/__init__.py"
+        ]
+      },
+      {
+        "group": "empty_config_sentinel",
+        "reason": "An empty .npmrc is a valid repo-local sentinel state and is not evidence of failed recovery by itself.",
+        "paths": [
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.npmrc"
+        ]
+      }
+    ],
+    "quarantine": [
+      {
+        "group": "empty_wrapper_archives_and_invalid_backups",
+        "reason": "These are zero-byte or EOCD-only archives that represent failed exports, invalid backups, or empty wrapper artifacts. Preserve for provenance until explicit cleanup.",
+        "paths": [
+          "FlowState_ThreadCore_BUNDLE.zip",
+          "GUMAS_RECOV_ARCHIVE_A01.zip",
+          "Au_Archive_62_619/GUMAS_RECOV_ARCHIVE_A01.zip",
+          "Aurora_New_11_9/Aurora_New_11_9_BACKUP_2026-02-15.zip",
+          "Au_Archive_412_417/GUMAS_Aurora_Ascendant_v2_1.zip",
+          "Au_Archive_412_417/Aurora_Quicksave_DR-SRP_EthicalSecurity_v1.0.zip",
+          "Au_Archive_412_417/Aurora_Staff_Reintegration_Protocol_Step1.zip",
+          "Aurora_Sim_Architecture/GUMAS_Transferable_Module_Bundle 2 2025-04-01 08_24_45.zip",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/exports/T1_replay_bundle_001.zip",
+          "Au_Archive_527/FlowState_ThreadCore_BUNDLE.zip",
+          "Aurora_New_9_22/THREADCORE_macrodrift_v3.6B_bundle-1.zip",
+          "Aurora_New_9_22/THREADCORE_macrodrift_v3.6B_bundle.zip",
+          "Aurora_New_9_22/Aurora_PATCH_GPT-Editor_T2_v1.0_REBUILT.zip",
+          "Complete Archive 4_19 copy/GUMAS_Aurora_Ascendant_v2_1.zip",
+          "Complete Archive 4_19 copy/Aurora_Quicksave_DR-SRP_EthicalSecurity_v1.0.zip",
+          "Complete Archive 4_19 copy/Aurora_Staff_Reintegration_Protocol_Step1.zip",
+          "Complete Archive 4_19 copy/Aurora_Pilot_999_Continuum_Echo_v1.zip",
+          "Complete Archive 4_19 copy/exports/T1_replay_bundle_001.zip",
+          "Au_Archive_45_49/Aurora_Pilot_999_Continuum_Echo_v1.zip",
+          "Au_Archive_620_623/COMMAND_NODE_SYMBOLIC_v1.zip"
+        ]
+      },
+      {
+        "group": "security_sensitive_blank_surfaces",
+        "reason": "These names imply credentials or binary logic. Because they are blank, they should be isolated and treated as misleading placeholders rather than normal files.",
+        "paths": [
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/private-key.asc",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.aurora/gpg/gpg_config.json",
+          "Complete Archive 4_19 copy/CookieAuth.dll"
+        ]
+      },
+      {
+        "group": "active_repo_blank_placeholders",
+        "reason": "These blank files live in the active nested repo and should be reviewed before removal because they may be placeholders for linked docs, planned scripts, or future tests.",
+        "paths": [
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/conftest.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/advanced_issue_resolver.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/test_basic_functionality.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/aurora_opal2_integration.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/test_simple.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/test_code_quality.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/robust_git_manager.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/test_critical_issue_resolver.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/migrate",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/test_aurora_opal2_integration.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/demo_opal2_integration.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/simple_git_operations.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/tools/workflow/aurora_failure_prevention_system.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/GPG_SETUP_GUIDE.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/SONNET4_ENHANCEMENT_GUIDE.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/completed/PERSISTENT_ENVIRONMENT_SETUP_COMPLETE.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/completed/GPG_SETUP_COMPLETE.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/completed/TESTING_SETUP_COMPLETE.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/completed/TESTING_STATUS_COMPLETE.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/completed/COMMIT_OPERATION_COMPLETE.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/status/DEPLOYMENT_STATUS_FINAL.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/status/DEPLOYMENT_STATUS_SUMMARY.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/guides/TESTING_STRATEGY.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/guides/MERGE_CONFLICT_RESOLUTION.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/guides/TESTING_QUICK_START.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/guides/FINAL_DEPLOYMENT_SOLUTION.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/guides/GPG_SETUP_GUIDE.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/guides/ORION_STATION_DEPLOYMENT_READY.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/guides/MANUAL_GIT_OPERATIONS_GUIDE.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/guides/PERSISTENT_DEPENDENCIES_SETUP.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/archived/requirements-test.txt",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/archived/PUSH_OPERATION_SUMMARY.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/reports/OPAL2_INTEGRATION_COMPLETION_REPORT.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/reports/GIT_OPERATIONS_ANALYSIS.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/static/README.md",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/research/quantum_research_acceleration_engine.py",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/orchestrators/holographic_interface_orchestrator_fixed.js",
+          "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/interaction/multi_modal_interaction_system.py"
+        ]
+      },
+      {
+        "group": "archived_misc_blank_placeholders",
+        "reason": "These are blank historical surfaces outside the active nested repo. Preserve in quarantine until a provenance cleanup pass decides whether they should be collapsed into duplicates or deleted.",
+        "paths": [
+          "Sort Later/preload",
+          "Complete Archive 4_19 copy/preload",
+          "Complete Archive 4_19 copy/AuroraMasterArchive/PixelDND_ScrollSite/CloudVault.py",
+          "Complete Archive 4_19 copy/PixelDND_ScrollSite/CloudVault.py"
+        ]
+      }
+    ],
+    "safe_to_remove": [
+      {
+        "group": "redundant_extracted_duplicates",
+        "reason": "This is a duplicate empty-wrapper artifact living under an extracted/sorted derivative tree rather than a primary archive surface.",
+        "paths": [
+          "Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/GUMAS_Transferable_Module_Bundle 2 2025-04-01 08_24_45.zip"
+        ]
+      }
+    ]
+  }
+}

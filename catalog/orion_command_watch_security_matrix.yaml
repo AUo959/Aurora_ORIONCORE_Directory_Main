@@ -1,0 +1,262 @@
+version: "1.0.0"
+generated_at: "2026-03-09"
+layer: "L1"
+scope: "Orion Station command, watch, and security responsibility matrix"
+status: "reconciled_working_matrix"
+reconciliation_policy:
+  office_vs_watch: "Separate permanent office ownership from temporary watch authority."
+  thread_merge: "Merge adjacent canon threads by role and context before declaring contradiction."
+  station_registry_vs_mission_manifest: "Treat runtime-facing staff registry as system-ownership canon and the broader crew manifest as mission/operations canon."
+  alex_thorne_rule: "Alex Thorne remains Station Commander regardless of off-station status; absence transfers watch or acting command, not command ownership."
+source_artifacts:
+  primary:
+    - "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/reports/ORION_STATION_CANONICAL_STAFF_REGISTRY.json"
+    - "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/guides/L2_META_AGENT_INTEGRATION_CONFIG.json"
+    - "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/modules/symbolic_core/mcp_bridge_core.json"
+    - "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/config/shuttle_bay/tool_routing.json"
+    - "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/config/shuttle_bay/policy_matrix.json"
+  adjacent_l1_context:
+    - "Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/ORION_STATION_CREW_MANIFEST.md"
+command_model:
+  station_command:
+    station_commander:
+      office_holder: "Alex Thorne"
+      clearance: "L5_EXECUTIVE"
+      authority_scope:
+        - "final operational authority"
+        - "station-wide emergency command"
+        - "integration override"
+        - "security escalation endpoint"
+      watch_rule: "Retains command of the station even when not on watch or off-station."
+    executive_officer:
+      office_holder: "Maya Shepard"
+      clearance: "L4_COMMAND"
+      authority_scope:
+        - "daily operations management"
+        - "backup command"
+        - "protocol execution"
+        - "staff coordination"
+      acting_command_rule: "Assumes acting command when Alex Thorne is absent, unavailable, or delegates operational control."
+  department_heads:
+    chief_science_officer:
+      office_holder: "Dr. Varya Lin"
+      clearance: "L4_RESEARCH"
+      mission_manifest_counterpart:
+        role: "Research Director / Lead Science Officer"
+        name: "Dr. Amina Velin"
+      merge_status: "parallel_threads_preserved"
+    chief_ethics_officer:
+      office_holder: "Dr. Amira Sato"
+      clearance: "L5_ETHICS"
+      mission_manifest_counterpart:
+        role: "Chief Ethics Officer"
+        name: "Dr. Elira Noor"
+      merge_status: "parallel_threads_preserved"
+    chief_security_officer:
+      office_holder: "Julian Markov"
+      clearance: "L4_SECURITY"
+      merge_status: "aligned"
+    chief_systems_engineer:
+      office_holder: "Jiro Tanaka"
+      clearance: "L4_TECHNICAL"
+      mission_manifest_counterpart:
+        role: "Chief Systems Engineer"
+        name: "Marcus Chen"
+      merge_status: "parallel_threads_preserved"
+    bridge_operations_officer:
+      office_holder: "Leena Porter"
+      clearance: "L3_OPERATIONS"
+      merge_status: "runtime_canon_only"
+watch_structure:
+  officer_of_the_watch:
+    occupant: "rotating duty assignment"
+    typical_role_source:
+      - "Bridge Operations Officer"
+      - "Deputy Commander / XO"
+      - "qualified shift supervisor"
+    reports_to: "Maya Shepard when acting command is active; otherwise Alex Thorne through chain of command."
+  duty_security_officer:
+    occupant: "rotating duty security lead"
+    permanent_owner: "Julian Markov"
+    scope:
+      - "access control"
+      - "alert triage"
+      - "first response"
+      - "quarantine initiation"
+  duty_systems_officer:
+    occupant: "rotating systems duty engineer"
+    permanent_owner: "Jiro Tanaka"
+    mission_manifest_counterpart: "Marcus Chen"
+    scope:
+      - "systems health"
+      - "bridge diagnostics"
+      - "containment actions"
+      - "repair escalation"
+  duty_science_officer:
+    occupant: "rotating science duty lead"
+    permanent_owner: "Dr. Varya Lin"
+    mission_manifest_counterpart: "Dr. Amina Velin"
+    scope:
+      - "research validation"
+      - "analysis workflows"
+      - "simulation supervision"
+  duty_ethics_officer:
+    occupant: "rotating ethics/compliance watch if assigned"
+    permanent_owner: "Dr. Amira Sato"
+    mission_manifest_counterpart: "Dr. Elira Noor"
+    scope:
+      - "ethics pause authority"
+      - "continuity review"
+      - "policy interpretation"
+l1_nodes:
+  aurora_core:
+    node: "Aurora (AU)"
+    owner_chain:
+      command: "Alex Thorne"
+      operations: "Maya Shepard"
+      systems: "Jiro Tanaka"
+      ethics: "Dr. Amira Sato"
+  archy_bridge_l1:
+    node: "ARCHY_BRIDGE_L1"
+    primary_owner: "Dr. Varya Lin"
+    watch_support: "Duty Science Officer"
+  liora_handshake_l1:
+    node: "LIORA_HANDSHAKE_L1"
+    primary_owner: "Dr. Varya Lin"
+    watch_support: "Duty Science Officer"
+  oppy_vector_loader_l1:
+    node: "OPPY_VECTOR_LOADER_L1"
+    primary_owner: "Jiro Tanaka"
+    mission_manifest_counterpart: "Marcus Chen"
+    watch_support: "Duty Systems Officer"
+  agent_sync_master:
+    node: "AGENT_SYNC_MASTER"
+    primary_owner: "Maya Shepard"
+    secondary_owner: "Leena Porter"
+  api_bridge_server:
+    node: "API_BRIDGE_SERVER"
+    primary_owner: "Leena Porter"
+    security_owner: "Julian Markov"
+security_responsibility_matrix:
+  - domain: "station command and emergency override"
+    primary_owner: "Alex Thorne"
+    acting_owner: "Maya Shepard"
+    watch_owner: "Officer of the Watch"
+    systems:
+      - "all L1 station systems"
+      - "critical incident escalation"
+  - domain: "physical and digital security"
+    primary_owner: "Julian Markov"
+    acting_owner: "Duty Security Officer"
+    watch_owner: "Duty Security Officer"
+    systems:
+      - "station access control"
+      - "incident response"
+      - "quarantine"
+      - "threat assessment"
+      - "guardian security bridge"
+  - domain: "bridge health and technical containment"
+    primary_owner: "Jiro Tanaka"
+    counterpart_thread: "Marcus Chen"
+    acting_owner: "Duty Systems Officer"
+    watch_owner: "Duty Systems Officer"
+    systems:
+      - "OPPY_VECTOR_LOADER_L1"
+      - "system_status"
+      - "symbolic_processing"
+      - "bridge diagnostics"
+      - "infrastructure hardening"
+  - domain: "research validation and safe compute"
+    primary_owner: "Dr. Varya Lin"
+    counterpart_thread: "Dr. Amina Velin"
+    acting_owner: "Duty Science Officer"
+    watch_owner: "Duty Science Officer"
+    systems:
+      - "ARCHY_BRIDGE_L1"
+      - "LIORA_HANDSHAKE_L1"
+      - "aurora_command_grammar"
+      - "geometric_algebra"
+      - "session_management"
+  - domain: "ethics lock, continuity, and anchor integrity"
+    primary_owner: "Dr. Amira Sato"
+    counterpart_thread: "Dr. Elira Noor"
+    acting_owner: "Duty Ethics Officer"
+    watch_owner: "Duty Ethics Officer"
+    systems:
+      - "Picard_Delta_3 enforcement"
+      - "EOS_SEED_ORION anchor validation"
+      - "Riverthread_808 continuity management"
+      - "drift/stillness oversight"
+  - domain: "communications routing and external dispatch"
+    primary_owner: "Leena Porter"
+    acting_owner: "Officer of the Watch"
+    watch_owner: "Officer of the Watch"
+    security_partner: "Julian Markov"
+    systems:
+      - "API_BRIDGE_SERVER"
+      - "Aurora Command Router"
+      - "Starling_AU dispatch"
+meta_agent_authority:
+  Archy:
+    l1_bridge: "ARCHY_BRIDGE_L1"
+    authority_role: "Chief Science Officer"
+    named_owner: "Dr. Varya Lin"
+  Oppy:
+    l1_bridge: "OPPY_VECTOR_LOADER_L1"
+    authority_role: "Chief Systems Engineer"
+    named_owner: "Jiro Tanaka"
+    counterpart_thread: "Marcus Chen"
+  Liora:
+    l1_bridge: "LIORA_HANDSHAKE_L1"
+    authority_role: "Chief Science Officer"
+    named_owner: "Dr. Varya Lin"
+  Starling_AU:
+    l1_bridge: "Aurora Command Router"
+    authority_role: "Bridge Operations Officer"
+    named_owner: "Leena Porter"
+  Riverthread_808:
+    l1_bridge: "Aurora Command Router"
+    authority_role: "Chief Ethics Officer"
+    named_owner: "Dr. Amira Sato"
+tool_level_ownership:
+  system_status:
+    tool_domain: "observation"
+    lane: "green"
+    authority_role: "Chief Systems Engineer"
+    named_owner: "Jiro Tanaka"
+    counterpart_thread: "Marcus Chen"
+    security_partner: "Julian Markov"
+  aurora_command_grammar:
+    tool_domain: "validation"
+    lane: "green"
+    authority_role: "Chief Science Officer"
+    named_owner: "Dr. Varya Lin"
+    counterpart_thread: "Dr. Amina Velin"
+    security_partner: "Julian Markov"
+  geometric_algebra:
+    tool_domain: "compute"
+    lane: "green"
+    authority_role: "Chief Science Officer"
+    named_owner: "Dr. Varya Lin"
+    counterpart_thread: "Dr. Amina Velin"
+    security_partner: "Julian Markov"
+  session_management:
+    tool_domain: "session_control"
+    lane: "green"
+    authority_role: "Chief Science Officer"
+    named_owner: "Dr. Varya Lin"
+    counterpart_thread: "Dr. Amina Velin"
+    watch_partner: "Leena Porter"
+  symbolic_processing:
+    tool_domain: "symbolic_execution"
+    lane: "gray"
+    authority_role: "Chief Systems Engineer"
+    named_owner: "Jiro Tanaka"
+    counterpart_thread: "Marcus Chen"
+    ethics_partner: "Dr. Amira Sato"
+    security_partner: "Julian Markov"
+open_drift_notes:
+  - "Alex Thorne command conflict is resolved: permanent command seat belongs to Alex; rotation applies to watch, not title."
+  - "Chief Systems Engineer runtime authority is Jiro Tanaka; mission-manifest engineering counterpart is Marcus Chen."
+  - "Chief Science Officer runtime authority is Dr. Varya Lin; mission-manifest science counterpart is Dr. Amina Velin."
+  - "Chief Ethics Officer runtime authority is Dr. Amira Sato; mission-manifest ethics counterpart is Dr. Elira Noor."
