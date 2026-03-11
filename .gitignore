@@ -51,3 +51,5 @@ __pycache__/
 *.tmp
 *.log
 _entropy_quarantine/
+/reports/analysis/gitwiz/GITWIZ_*.json
+/reports/analysis/gitwiz/GITWIZ_*.md
