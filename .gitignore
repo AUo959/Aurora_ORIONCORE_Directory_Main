@@ -11,6 +11,8 @@
 !/catalog/**
 !/tools/
 !/tools/**
+!/tests/
+!/tests/**
 !/reports/
 !/reports/analysis/
 !/reports/analysis/**

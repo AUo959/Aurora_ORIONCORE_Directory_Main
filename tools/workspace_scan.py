@@ -11,15 +11,14 @@ from _workspace_common import (
     CATALOG_DIR,
     DOCS_DIR,
     REPORTS_ANALYSIS_DIR,
-    apply_classification_override,
     canonical_candidate,
-    classify_top_level,
     display_root,
     discover_nested_repos,
     dump_yaml_like,
     git,
     iter_archive_artifacts,
     load_classification_overrides,
+    top_level_policy_records,
     normalize_family,
     now_iso_utc,
     repo_validation_command,
@@ -27,7 +26,6 @@ from _workspace_common import (
     resolve_root,
     serialized_root,
     sha256_file,
-    top_level_entries,
     write_json,
     write_jsonl,
 )
@@ -202,13 +200,11 @@ def main() -> int:
     overrides_path = root / "catalog" / "classification_overrides.yaml"
     overrides = load_classification_overrides(overrides_path)
 
-    entries = [
-        apply_classification_override(
-            classify_top_level(entry, root=root, nested_repo_roots=set(nested_repo_roots)),
-            overrides,
-        )
-        for entry in top_level_entries(root)
-    ]
+    entries = top_level_policy_records(
+        root,
+        overrides=overrides,
+        nested_repo_roots=set(nested_repo_roots),
+    )
     entries = sorted(entries, key=lambda item: item["current_path"])
 
     manifest = {

@@ -1,23 +1,46 @@
 {
-  "generated_at": "2026-03-07T20:02:35Z",
+  "generated_at": "2026-03-11T00:25:06Z",
   "root": ".",
   "dry_run": false,
   "moved": [
     {
-      "source": "REPO_BOUNDARY_NOTICE.md",
-      "destination": "docs/repo-boundary-notice.md"
+      "source": "Image.png",
+      "destination": "intake/Image.png",
+      "path_kind": "file"
     },
     {
-      "source": "aurora_cloudbank_symbolic_architecture_discovery_report.md",
-      "destination": "reports/analysis/aurora_cloudbank_symbolic_architecture_discovery_report.md"
+      "source": "Threadcore Library",
+      "destination": "intake/Threadcore Library",
+      "path_kind": "tree"
     },
     {
-      "source": "deep-research-report.md",
-      "destination": "reports/analysis/deep-research-report.md"
+      "source": "text.txt",
+      "destination": "intake/text.txt",
+      "path_kind": "file"
+    },
+    {
+      "source": "textAu.txt",
+      "destination": "intake/textAu.txt",
+      "path_kind": "file"
+    },
+    {
+      "source": "textAu2.txt",
+      "destination": "intake/textAu2.txt",
+      "path_kind": "file"
+    },
+    {
+      "source": "textAu3.txt",
+      "destination": "intake/textAu3.txt",
+      "path_kind": "file"
+    },
+    {
+      "source": "textAu4.txt",
+      "destination": "intake/textAu4.txt",
+      "path_kind": "file"
     }
   ],
   "skipped": [],
   "errors": [],
   "mode": "forward",
-  "batch_id": "wave2_root_docs_and_analysis_initial"
+  "batch_id": "wave4_root_intake_cleanup_initial"
 }

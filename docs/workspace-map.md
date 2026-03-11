@@ -1,27 +1,27 @@
 # Workspace Map
 
-- Generated: `2026-03-08T00:14:03Z`
+- Generated: `2026-03-11T00:25:12Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `65`
+- Top-level entries cataloged: `72`
 - Nested repos registered: `3`
-- Archive or binary artifacts inventoried: `1278`
+- Archive or binary artifacts inventoried: `1225`
 - Classification overrides loaded: `32` from `catalog/classification_overrides.yaml`
 
 ## Zones
 
 - `_staging`: `7` top-level entries
-- `archives`: `33` top-level entries
+- `archives`: `36` top-level entries
 - `catalog`: `1` top-level entries
-- `docs`: `4` top-level entries
+- `docs`: `5` top-level entries
 - `intake`: `3` top-level entries
 - `projects`: `10` top-level entries
-- `reports`: `2` top-level entries
+- `reports`: `3` top-level entries
 - `repos`: `3` top-level entries
-- `tools`: `2` top-level entries
+- `tools`: `4` top-level entries
 
 ## Active Nested Repos
 
-- `aurora-cloudbank-symbolic-main` at `Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `main`, remote `no_remote_configured`)
+- `aurora-cloudbank-symbolic-main` at `Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `main`, remote `configured`)
 - `CanonRec` at `GUMAS_SIM_2.5/CanonRec` (branch `main`, remote `no_remote_configured`)
 - `DuelSim_v2.0` at `GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0` (branch `main`, remote `no_remote_configured`)
 

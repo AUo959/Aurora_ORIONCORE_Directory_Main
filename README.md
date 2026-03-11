@@ -40,8 +40,18 @@ nested repo internals stay out of root Git history.
 python3 tools/workspace_scan.py
 python3 tools/workspace_plan_moves.py
 python3 tools/workspace_apply_moves.py --batch-id wave3_small_intake_files_initial
+python3 tools/workspace_verify.py
+python3 tools/workspace_verify.py --persist-report
+python3 tools/workspace_verify.py --report-out /tmp/workspace_verify.json
 python3 tools/workspace_verify.py --check-determinism --exercise-relocation
 ```
+
+`python3 tools/workspace_verify.py` is side-effect free by default and prints a
+JSON report to stdout. Use `--persist-report` to refresh the tracked
+`reports/analysis/workspace_verify_latest.json` artifact, or `--report-out` to
+write the report to an explicit path. The pre-commit hook continues to call
+`python3 tools/workspace_verify.py --git-pre-commit` and only blocks commits on
+blocking findings.
 
 ## Operating Rules
 

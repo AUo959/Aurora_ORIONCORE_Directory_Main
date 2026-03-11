@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-08T00:14:03Z",
+  "generated_at": "2026-03-11T00:25:12Z",
   "root": ".",
   "logical_taxonomy": [
     "repos",
@@ -108,6 +108,18 @@
       "retention_policy": "regenerate",
       "owner": "local-user",
       "status": "ignored"
+    },
+    {
+      "id": "agents",
+      "kind": "workspace_doc",
+      "current_path": "AGENTS.md",
+      "logical_zone": "docs",
+      "planned_path": "AGENTS.md",
+      "git_boundary": "root",
+      "storage_tier": "workspace-control",
+      "retention_policy": "versioned",
+      "owner": "workspace-admin",
+      "status": "managed"
     },
     {
       "id": "au-archive-323-326",
@@ -323,7 +335,8 @@
       "storage_tier": "source-bundle",
       "retention_policy": "review-before-physical-move",
       "owner": "project-review",
-      "status": "deferred"
+      "status": "deferred",
+      "batch_id": "wave4_root_intake_cleanup_initial"
     },
     {
       "id": "aurora-quantum-en",
@@ -335,7 +348,8 @@
       "storage_tier": "isolated",
       "retention_policy": "preserve",
       "owner": "workspace-admin",
-      "status": "deferred"
+      "status": "deferred",
+      "batch_id": "wave4_root_intake_cleanup_initial"
     },
     {
       "id": "aurora-multilang-projectspace-starterpack-v1-0",
@@ -359,7 +373,8 @@
       "storage_tier": "source-bundle",
       "retention_policy": "review-before-physical-move",
       "owner": "project-review",
-      "status": "deferred"
+      "status": "deferred",
+      "batch_id": "wave4_root_intake_cleanup_initial"
     },
     {
       "id": "aurora-new-9-22",
@@ -371,7 +386,8 @@
       "storage_tier": "source-bundle",
       "retention_policy": "review-before-physical-move",
       "owner": "project-review",
-      "status": "deferred"
+      "status": "deferred",
+      "batch_id": "wave4_root_intake_cleanup_initial"
     },
     {
       "id": "aurora-project-cloudhub-deploy",
@@ -383,7 +399,8 @@
       "storage_tier": "source-bundle",
       "retention_policy": "review-before-physical-move",
       "owner": "project-review",
-      "status": "deferred"
+      "status": "deferred",
+      "batch_id": "wave4_root_intake_cleanup_initial"
     },
     {
       "id": "aurora-sim-architecture",
@@ -468,7 +485,8 @@
       "storage_tier": "source-bundle",
       "retention_policy": "review-before-physical-move",
       "owner": "project-review",
-      "status": "deferred"
+      "status": "deferred",
+      "batch_id": "wave4_root_intake_cleanup_initial"
     },
     {
       "id": "gumas-master-transfer-bundle-v1-rc",
@@ -504,7 +522,8 @@
       "storage_tier": "source-bundle",
       "retention_policy": "review-before-physical-move",
       "owner": "project-review",
-      "status": "deferred"
+      "status": "deferred",
+      "batch_id": "wave4_root_intake_cleanup_initial"
     },
     {
       "id": "gumas-sim-2-0",
@@ -555,6 +574,42 @@
       "status": "deferred"
     },
     {
+      "id": "legacy-promotion-candidate-pack-v0-2-0-2026-03-10",
+      "kind": "archive_artifact",
+      "current_path": "Legacy_Promotion_Candidate_Pack__v0.2.0__2026-03-10.zip",
+      "logical_zone": "archives",
+      "planned_path": "Legacy_Promotion_Candidate_Pack__v0.2.0__2026-03-10.zip",
+      "git_boundary": "none",
+      "storage_tier": "cold-archive",
+      "retention_policy": "quarantine-before-delete",
+      "owner": "archive-admin",
+      "status": "deferred"
+    },
+    {
+      "id": "legacy-recovery-packet-v0-1-2026-03-10",
+      "kind": "archive_artifact",
+      "current_path": "Legacy_Recovery_Packet__v0.1__2026-03-10.zip",
+      "logical_zone": "archives",
+      "planned_path": "Legacy_Recovery_Packet__v0.1__2026-03-10.zip",
+      "git_boundary": "none",
+      "storage_tier": "cold-archive",
+      "retention_policy": "quarantine-before-delete",
+      "owner": "archive-admin",
+      "status": "deferred"
+    },
+    {
+      "id": "orion-ord-promotionworkbench-v0-5-0-2026-03-10-structured-archive",
+      "kind": "archive_artifact",
+      "current_path": "ORION_ORD__PromotionWorkbench__v0.5.0__2026-03-10__STRUCTURED_ARCHIVE.zip",
+      "logical_zone": "archives",
+      "planned_path": "ORION_ORD__PromotionWorkbench__v0.5.0__2026-03-10__STRUCTURED_ARCHIVE.zip",
+      "git_boundary": "none",
+      "storage_tier": "cold-archive",
+      "retention_policy": "quarantine-before-delete",
+      "owner": "archive-admin",
+      "status": "deferred"
+    },
+    {
       "id": "perplexity-research",
       "kind": "research_bundle",
       "current_path": "Perplexity_Research",
@@ -564,7 +619,8 @@
       "storage_tier": "reference-bundle",
       "retention_policy": "review-before-physical-move",
       "owner": "project-review",
-      "status": "deferred"
+      "status": "deferred",
+      "batch_id": "wave4_root_intake_cleanup_initial"
     },
     {
       "id": "readme",
@@ -588,7 +644,8 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "deferred"
+      "status": "deferred",
+      "batch_id": "wave4_root_intake_cleanup_initial"
     },
     {
       "id": "streamdeck-glyphs",
@@ -600,7 +657,8 @@
       "storage_tier": "source-bundle",
       "retention_policy": "review-before-physical-move",
       "owner": "project-review",
-      "status": "deferred"
+      "status": "deferred",
+      "batch_id": "wave4_root_intake_cleanup_initial"
     },
     {
       "id": "threadcore-index",
@@ -612,7 +670,8 @@
       "storage_tier": "review",
       "retention_policy": "review",
       "owner": "intake-review",
-      "status": "deferred_empty"
+      "status": "deferred_empty",
+      "batch_id": "wave4_root_intake_cleanup_initial"
     },
     {
       "id": "unzipped-archives",
@@ -699,6 +758,18 @@
       "status": "deferred"
     },
     {
+      "id": "aurora-cloudbank-symbolic-architecture-discovery-report",
+      "kind": "analysis_report",
+      "current_path": "aurora_cloudbank_symbolic_architecture_discovery_report.md",
+      "logical_zone": "reports",
+      "planned_path": "aurora_cloudbank_symbolic_architecture_discovery_report.md",
+      "git_boundary": "root",
+      "storage_tier": "operational-report",
+      "retention_policy": "versioned",
+      "owner": "operations",
+      "status": "managed"
+    },
+    {
       "id": "catalog",
       "kind": "control_surface",
       "current_path": "catalog",
@@ -732,7 +803,8 @@
       "storage_tier": "source-bundle",
       "retention_policy": "review-before-physical-move",
       "owner": "project-review",
-      "status": "deferred"
+      "status": "deferred",
+      "batch_id": "wave4_root_intake_cleanup_initial"
     },
     {
       "id": "intake",
@@ -776,6 +848,30 @@
       "current_path": "repos",
       "logical_zone": "repos",
       "planned_path": "repos",
+      "git_boundary": "root",
+      "storage_tier": "workspace-control",
+      "retention_policy": "versioned",
+      "owner": "workspace-admin",
+      "status": "managed"
+    },
+    {
+      "id": "skills",
+      "kind": "control_surface",
+      "current_path": "skills",
+      "logical_zone": "tools",
+      "planned_path": "skills",
+      "git_boundary": "root",
+      "storage_tier": "workspace-control",
+      "retention_policy": "versioned",
+      "owner": "workspace-admin",
+      "status": "managed"
+    },
+    {
+      "id": "tests",
+      "kind": "control_surface",
+      "current_path": "tests",
+      "logical_zone": "tools",
+      "planned_path": "tests",
       "git_boundary": "root",
       "storage_tier": "workspace-control",
       "retention_policy": "versioned",

@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-03-08T00:14:12Z",
+  "generated_at": "2026-03-11T00:25:12Z",
   "root": ".",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-03-08T00:14:03Z",
+  "manifest_generated_at": "2026-03-11T00:23:53Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
@@ -352,6 +352,105 @@
           "approved": true,
           "applied_at": "2026-03-08T00:14:03Z",
           "path_kind": "tree"
+        }
+      ]
+    },
+    {
+      "batch_id": "wave4_root_intake_cleanup_initial",
+      "status": "applied",
+      "summary": "Late-discovered loose root files and collections into intake.",
+      "rollback_manifest": "catalog/rollback_wave4_root_intake_cleanup_initial.json",
+      "operations": [
+        {
+          "batch_id": "wave4_root_intake_cleanup_initial",
+          "source": "Image.png",
+          "destination": "intake/Image.png",
+          "operation": "move",
+          "pre_hash": "0e0269373cab8e13ddb339aa2340e6db200d22ddd653c1999e2c22ffd2e6b796",
+          "post_hash": "0e0269373cab8e13ddb339aa2340e6db200d22ddd653c1999e2c22ffd2e6b796",
+          "rollback_source": "Image.png",
+          "reason": "Relocate Image.png into intake/Image.png.",
+          "approved": false,
+          "applied_at": "2026-03-11T00:25:06Z",
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave4_root_intake_cleanup_initial",
+          "source": "Threadcore Library",
+          "destination": "intake/Threadcore Library",
+          "operation": "move",
+          "pre_hash": "ba55d7bcbdcd34d2750e890c5887830f0b425be230e9456178ca3927fa18e771",
+          "post_hash": "ba55d7bcbdcd34d2750e890c5887830f0b425be230e9456178ca3927fa18e771",
+          "rollback_source": "Threadcore Library",
+          "reason": "Relocate Threadcore Library into intake/Threadcore Library.",
+          "approved": false,
+          "applied_at": "2026-03-11T00:25:06Z",
+          "path_kind": "tree"
+        },
+        {
+          "batch_id": "wave4_root_intake_cleanup_initial",
+          "source": "text.txt",
+          "destination": "intake/text.txt",
+          "operation": "move",
+          "pre_hash": "63d3c28e729dfcb1ccec6076aaadba997f4eeb207198ae889cef391991435659",
+          "post_hash": "63d3c28e729dfcb1ccec6076aaadba997f4eeb207198ae889cef391991435659",
+          "rollback_source": "text.txt",
+          "reason": "Relocate text.txt into intake/text.txt.",
+          "approved": false,
+          "applied_at": "2026-03-11T00:25:06Z",
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave4_root_intake_cleanup_initial",
+          "source": "textAu.txt",
+          "destination": "intake/textAu.txt",
+          "operation": "move",
+          "pre_hash": "ea96c92c9122b5fa9510a5c519922ac27410067a0aa815000f6af5e08f2dadc4",
+          "post_hash": "ea96c92c9122b5fa9510a5c519922ac27410067a0aa815000f6af5e08f2dadc4",
+          "rollback_source": "textAu.txt",
+          "reason": "Relocate textAu.txt into intake/textAu.txt.",
+          "approved": false,
+          "applied_at": "2026-03-11T00:25:06Z",
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave4_root_intake_cleanup_initial",
+          "source": "textAu2.txt",
+          "destination": "intake/textAu2.txt",
+          "operation": "move",
+          "pre_hash": "295320e0a1c6fa67488bb70b459cfea9793d834d84b1d44e6a730cfdb7e11347",
+          "post_hash": "295320e0a1c6fa67488bb70b459cfea9793d834d84b1d44e6a730cfdb7e11347",
+          "rollback_source": "textAu2.txt",
+          "reason": "Relocate textAu2.txt into intake/textAu2.txt.",
+          "approved": false,
+          "applied_at": "2026-03-11T00:25:06Z",
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave4_root_intake_cleanup_initial",
+          "source": "textAu3.txt",
+          "destination": "intake/textAu3.txt",
+          "operation": "move",
+          "pre_hash": "8aad263ea5775e58b905d74e77acd0e8a54216fab0109bc181d2a0bbe6768279",
+          "post_hash": "8aad263ea5775e58b905d74e77acd0e8a54216fab0109bc181d2a0bbe6768279",
+          "rollback_source": "textAu3.txt",
+          "reason": "Relocate textAu3.txt into intake/textAu3.txt.",
+          "approved": false,
+          "applied_at": "2026-03-11T00:25:06Z",
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave4_root_intake_cleanup_initial",
+          "source": "textAu4.txt",
+          "destination": "intake/textAu4.txt",
+          "operation": "move",
+          "pre_hash": "a8c2eeb88394a07e754b01f226c24814384e0d7b91448db835fe77858c5f9d1e",
+          "post_hash": "a8c2eeb88394a07e754b01f226c24814384e0d7b91448db835fe77858c5f9d1e",
+          "rollback_source": "textAu4.txt",
+          "reason": "Relocate textAu4.txt into intake/textAu4.txt.",
+          "approved": false,
+          "applied_at": "2026-03-11T00:25:06Z",
+          "path_kind": "file"
         }
       ]
     }
