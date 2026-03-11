@@ -22,6 +22,7 @@ BATCH_SUMMARIES = {
     "wave3_small_intake_files_initial": "Small loose root files into intake.",
     "wave3_small_structured_dirs_initial": "Small structured root directories into canonical reports/projects zones.",
     "wave3_staging_isolation_initial": "Sensitive or legacy root directories into _staging isolation.",
+    "wave4_root_intake_cleanup_initial": "Late-discovered loose root files and collections into intake.",
 }
 
 

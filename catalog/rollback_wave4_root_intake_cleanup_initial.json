@@ -1,0 +1,98 @@
+{
+  "batch_id": "wave4_root_intake_cleanup_initial_rollback",
+  "for_batch": "wave4_root_intake_cleanup_initial",
+  "generated_at": "2026-03-11T00:25:12Z",
+  "operations": [
+    {
+      "batch_id": "wave4_root_intake_cleanup_initial_rollback",
+      "source": "intake/Image.png",
+      "destination": "Image.png",
+      "operation": "move",
+      "pre_hash": "0e0269373cab8e13ddb339aa2340e6db200d22ddd653c1999e2c22ffd2e6b796",
+      "post_hash": "0e0269373cab8e13ddb339aa2340e6db200d22ddd653c1999e2c22ffd2e6b796",
+      "rollback_source": "intake/Image.png",
+      "reason": "Rollback for wave4_root_intake_cleanup_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    },
+    {
+      "batch_id": "wave4_root_intake_cleanup_initial_rollback",
+      "source": "intake/Threadcore Library",
+      "destination": "Threadcore Library",
+      "operation": "move",
+      "pre_hash": "ba55d7bcbdcd34d2750e890c5887830f0b425be230e9456178ca3927fa18e771",
+      "post_hash": "ba55d7bcbdcd34d2750e890c5887830f0b425be230e9456178ca3927fa18e771",
+      "rollback_source": "intake/Threadcore Library",
+      "reason": "Rollback for wave4_root_intake_cleanup_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "tree"
+    },
+    {
+      "batch_id": "wave4_root_intake_cleanup_initial_rollback",
+      "source": "intake/text.txt",
+      "destination": "text.txt",
+      "operation": "move",
+      "pre_hash": "63d3c28e729dfcb1ccec6076aaadba997f4eeb207198ae889cef391991435659",
+      "post_hash": "63d3c28e729dfcb1ccec6076aaadba997f4eeb207198ae889cef391991435659",
+      "rollback_source": "intake/text.txt",
+      "reason": "Rollback for wave4_root_intake_cleanup_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    },
+    {
+      "batch_id": "wave4_root_intake_cleanup_initial_rollback",
+      "source": "intake/textAu.txt",
+      "destination": "textAu.txt",
+      "operation": "move",
+      "pre_hash": "ea96c92c9122b5fa9510a5c519922ac27410067a0aa815000f6af5e08f2dadc4",
+      "post_hash": "ea96c92c9122b5fa9510a5c519922ac27410067a0aa815000f6af5e08f2dadc4",
+      "rollback_source": "intake/textAu.txt",
+      "reason": "Rollback for wave4_root_intake_cleanup_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    },
+    {
+      "batch_id": "wave4_root_intake_cleanup_initial_rollback",
+      "source": "intake/textAu2.txt",
+      "destination": "textAu2.txt",
+      "operation": "move",
+      "pre_hash": "295320e0a1c6fa67488bb70b459cfea9793d834d84b1d44e6a730cfdb7e11347",
+      "post_hash": "295320e0a1c6fa67488bb70b459cfea9793d834d84b1d44e6a730cfdb7e11347",
+      "rollback_source": "intake/textAu2.txt",
+      "reason": "Rollback for wave4_root_intake_cleanup_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    },
+    {
+      "batch_id": "wave4_root_intake_cleanup_initial_rollback",
+      "source": "intake/textAu3.txt",
+      "destination": "textAu3.txt",
+      "operation": "move",
+      "pre_hash": "8aad263ea5775e58b905d74e77acd0e8a54216fab0109bc181d2a0bbe6768279",
+      "post_hash": "8aad263ea5775e58b905d74e77acd0e8a54216fab0109bc181d2a0bbe6768279",
+      "rollback_source": "intake/textAu3.txt",
+      "reason": "Rollback for wave4_root_intake_cleanup_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    },
+    {
+      "batch_id": "wave4_root_intake_cleanup_initial_rollback",
+      "source": "intake/textAu4.txt",
+      "destination": "textAu4.txt",
+      "operation": "move",
+      "pre_hash": "a8c2eeb88394a07e754b01f226c24814384e0d7b91448db835fe77858c5f9d1e",
+      "post_hash": "a8c2eeb88394a07e754b01f226c24814384e0d7b91448db835fe77858c5f9d1e",
+      "rollback_source": "intake/textAu4.txt",
+      "reason": "Rollback for wave4_root_intake_cleanup_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    }
+  ]
+}

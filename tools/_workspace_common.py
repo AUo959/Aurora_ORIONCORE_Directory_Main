@@ -53,6 +53,7 @@ TEXT_LIKE_EXTENSIONS = {
 }
 
 MANAGED_ROOT_PATHS = {
+    "AGENTS.md",
     "README.md",
     ".gitignore",
     ".gitattributes",
@@ -60,6 +61,8 @@ MANAGED_ROOT_PATHS = {
     "docs",
     "catalog",
     "tools",
+    "tests",
+    "skills",
     "reports",
     "archives",
     "intake",
@@ -83,6 +86,11 @@ ARCHIVE_ZONE_NAMES = (
     "unzipped archives",
     "archive",
 )
+
+SANCTIONED_ROOT_ANALYSIS_DOCS = {
+    "aurora_cloudbank_symbolic_architecture_discovery_report.md",
+}
+ROOT_INTAKE_CLEANUP_BATCH_ID = "wave4_root_intake_cleanup_initial"
 
 
 def now_iso_utc() -> str:
@@ -259,7 +267,9 @@ def iter_archive_artifacts(root: Path) -> list[Path]:
             and name != "__pycache__"
         ]
         if current != root and (current / ".git").exists():
-            dirnames[:] = [name for name in dirnames if name != ".git"]
+            # Nested repos are opaque to the root control-plane inventory.
+            dirnames[:] = []
+            continue
         for filename in sorted(filenames):
             path = current / filename
             if is_archive_or_binary(path):
@@ -309,6 +319,36 @@ def load_classification_overrides(path: Path) -> dict[str, dict[str, Any]]:
     return overrides
 
 
+def top_level_policy_records(
+    root: Path,
+    overrides: dict[str, dict[str, Any]] | None = None,
+    nested_repo_roots: set[str] | None = None,
+) -> list[dict[str, Any]]:
+    effective_overrides = (
+        overrides
+        if overrides is not None
+        else load_classification_overrides(root / "catalog" / "classification_overrides.yaml")
+    )
+    effective_nested_repo_roots = (
+        nested_repo_roots if nested_repo_roots is not None else set(discover_nested_repos(root))
+    )
+    return [
+        apply_classification_override(
+            classify_top_level(entry, root=root, nested_repo_roots=effective_nested_repo_roots),
+            effective_overrides,
+        )
+        for entry in top_level_entries(root)
+    ]
+
+
+def manifest_enforced_current_paths(entries: list[dict[str, Any]]) -> set[str]:
+    return {
+        str(entry["current_path"])
+        for entry in entries
+        if str(entry.get("status", "")).strip() != "ignored"
+    }
+
+
 def apply_classification_override(
     entry: dict[str, Any],
     overrides: dict[str, dict[str, Any]],
@@ -338,8 +378,9 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
         retention_policy: str,
         owner: str,
         status: str,
+        batch_id: str = "",
     ) -> dict[str, str]:
-        return {
+        record = {
             "id": normalize_family(relative),
             "kind": kind,
             "current_path": relative,
@@ -351,11 +392,25 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             "owner": owner,
             "status": status,
         }
+        if batch_id:
+            record["batch_id"] = batch_id
+        return record
 
     if name in {"docs", "catalog", "tools"}:
         return base_record(
             kind="control_surface",
             logical_zone=name,
+            planned_path=relative,
+            git_boundary="root",
+            storage_tier="workspace-control",
+            retention_policy="versioned",
+            owner="workspace-admin",
+            status="managed",
+        )
+    if name in {"tests", "skills"}:
+        return base_record(
+            kind="control_surface",
+            logical_zone="tools",
             planned_path=relative,
             git_boundary="root",
             storage_tier="workspace-control",
@@ -407,7 +462,7 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             owner="workspace-admin",
             status="managed",
         )
-    if name == "README.md":
+    if name in {"README.md", "AGENTS.md"}:
         return base_record(
             kind="workspace_doc",
             logical_zone="docs",
@@ -416,6 +471,17 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             storage_tier="workspace-control",
             retention_policy="versioned",
             owner="workspace-admin",
+            status="managed",
+        )
+    if relative in SANCTIONED_ROOT_ANALYSIS_DOCS:
+        return base_record(
+            kind="analysis_report",
+            logical_zone="reports",
+            planned_path=relative,
+            git_boundary="root",
+            storage_tier="operational-report",
+            retention_policy="versioned",
+            owner="operations",
             status="managed",
         )
     if name.startswith(".git_decommissioned"):
@@ -527,6 +593,7 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             retention_policy="review",
             owner="intake-review",
             status="planned_move",
+            batch_id=ROOT_INTAKE_CLEANUP_BATCH_ID,
         )
     if entry.is_file():
         return base_record(
@@ -538,6 +605,7 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             retention_policy="review",
             owner="intake-review",
             status="planned_move",
+            batch_id=ROOT_INTAKE_CLEANUP_BATCH_ID,
         )
     return base_record(
         kind="intake_collection",
@@ -548,6 +616,7 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
         retention_policy="review",
         owner="intake-review",
         status="planned_move",
+        batch_id=ROOT_INTAKE_CLEANUP_BATCH_ID,
     )
 
 
