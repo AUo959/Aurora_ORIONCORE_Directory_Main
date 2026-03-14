@@ -1,0 +1,355 @@
+{
+  "validation_run": {
+    "timestamp": "2026-03-14T02:03:18.296386Z",
+    "timestamp_source": "WALL_CLOCK_UTC",
+    "hash_canon_version": "CANONREC_HASH_CANON_V1",
+    "hash_canon_rules_ref": "validate_entity.py::_canonicalize_for_hash",
+    "output_hash_alg": "SHA256",
+    "output_hash_scope": "RUN_ARTIFACT_INCLUDING_TIMESTAMPS",
+    "output_hash": "8169313ad012794ab0f964a9a8a269aa090f5996819e04f0e5dcfeff792ac103",
+    "content_hash_alg": "SHA256",
+    "content_hash_scope": "SEMANTIC_OUTPUT_EXCLUDING_TIMESTAMPS",
+    "content_hash_excluded_fields": [
+      "timestamp",
+      "timestamp_source"
+    ],
+    "content_hash": "fef87992c1969efb5e9e695c6ee7cf3f08f549698a2b2a6e50cd6316f5918efe",
+    "receipt_id_policy": "receipt_id = content_hash",
+    "receipt_id": "fef87992c1969efb5e9e695c6ee7cf3f08f549698a2b2a6e50cd6316f5918efe",
+    "entities_checked": 10,
+    "passed": 10,
+    "blocked": 0
+  },
+  "reports": [
+    {
+      "entity_name": "Chancellor Zylox Rhaegos",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:03:18.296083Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 1
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "General Kael Durn",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:03:18.296185Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 1
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Grand Strategist Lirian Vael-Torin",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:03:18.296192Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 1
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Director Varek Norr",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:03:18.296196Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 1
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Chief Marshal Vael Saros",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:03:18.296200Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 1
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "High Chancellor Renn Valcor",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:03:18.296203Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 1
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Admiral Selene Arcturus",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:03:18.296207Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 1
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Director Callan Deyrus",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:03:18.296210Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 1
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Minister Anaya Ral-Seyr",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:03:18.296213Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 1
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Prime Construct",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:03:18.296217Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 1
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    }
+  ]
+}

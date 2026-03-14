@@ -661,6 +661,19 @@
       "batch_id": "wave4_root_intake_cleanup_initial"
     },
     {
+      "id": "threadcore-library",
+      "kind": "intake_collection",
+      "current_path": "Threadcore Library",
+      "logical_zone": "intake",
+      "planned_path": "intake/Threadcore Library",
+      "git_boundary": "none",
+      "storage_tier": "review",
+      "retention_policy": "review",
+      "owner": "intake-review",
+      "status": "planned_move",
+      "batch_id": "wave4_root_intake_cleanup_initial"
+    },
+    {
       "id": "threadcore-index",
       "kind": "empty_placeholder",
       "current_path": "Threadcore_Index",

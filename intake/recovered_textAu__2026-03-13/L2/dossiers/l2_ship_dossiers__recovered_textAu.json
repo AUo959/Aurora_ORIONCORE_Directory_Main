@@ -1,0 +1,27 @@
+[
+  {
+    "canonical_id": "SHIP-GU-JUDICATOR-01",
+    "canonical_name": "Judicator Prime",
+    "aliases": ["The Judicator Prime"],
+    "entity_kind": "ship",
+    "certainty": "UNCONFIRMED",
+    "doc_sources": [
+      "intake/textAu.txt",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md"
+    ],
+    "notes": "Recovered primarily through crew-role associations rather than a dedicated ship dossier. Class and registry remain unresolved.",
+    "type": "Union fleet flagship (class unconfirmed)",
+    "faction": "POL-GU-001",
+    "registry_class": "Unconfirmed; recovery hints at later Vanguard-class association but does not prove it.",
+    "placement_rule": "Mobile Union flagship assigned by fleet operation rather than fixed coordinates.",
+    "crew_notes": [
+      "Commanding officer: CHAR-GU-TANN-01",
+      "Executive officer: CHAR-GU-LYRA-VOSS-01",
+      "Chief medical officer: CHAR-GU-NIA-VERAN-01",
+      "Tactical operations: CHAR-GU-ARIN-TAVOS-01",
+      "Chief engineer: CHAR-GU-RHEN-KAILO-01",
+      "Sentinel commander: CHAR-GU-RADEK-01",
+      "Chief science officer: CHAR-GU-KOVAS-01"
+    ]
+  }
+]

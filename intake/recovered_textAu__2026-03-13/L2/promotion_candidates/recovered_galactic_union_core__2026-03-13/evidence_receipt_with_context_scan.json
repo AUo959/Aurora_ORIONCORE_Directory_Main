@@ -1,0 +1,353 @@
+{
+  "gate": "EVIDENCE",
+  "kind": "EG_LITE_PROTO_RECEIPT",
+  "verdict": "PASS",
+  "timestamp": "2026-03-14T02:11:13.225370Z",
+  "timestamp_source": "WALL_CLOCK_UTC",
+  "hash_canon_version": "CANONREC_EVIDENCE_HASH_CANON_V1",
+  "hash_canon_rules_ref": "emit_evidence_receipt.py::_canonicalize_for_hash",
+  "source_validation_run": {
+    "receipt_id": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3",
+    "output_hash": "1ca4ebc237941dc8d8f7baa831bbb497d574219160484fbedc62664b9d0ebe97",
+    "content_hash": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3",
+    "hash_canon_version": "CANONREC_HASH_CANON_V1",
+    "hash_canon_rules_ref": "validate_entity.py::_canonicalize_for_hash"
+  },
+  "inputs": {
+    "validation_run_file": "intake/recovered_textAu__2026-03-13/L2/promotion_candidates/recovered_galactic_union_core__2026-03-13/validation/combined_validation_run_with_context_scan.json",
+    "canon_targets_file": "intake/recovered_textAu__2026-03-13/L2/promotion_candidates/recovered_galactic_union_core__2026-03-13/canon_targets.json",
+    "canon_targets": [
+      "promotion_polities__recovered_galactic_union_core.json",
+      "promotion_characters__recovered_galactic_union_core.json",
+      "promotion_entities__recovered_galactic_union_core.json"
+    ]
+  },
+  "claims": [
+    {
+      "claim_id": "CLM-ee45e7f8844c",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "Admiral Selene Arcturus",
+      "layer": "L2",
+      "entity_type": "character",
+      "claim_text": "Validation observed entity 'Admiral Selene Arcturus' as L2/character with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "bc4d5dbfb28fda87cfef28f340d19594423f29c32072853d02cce2a3c592d15f"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-366ecc37e048",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "Chancellor Zylox Rhaegos",
+      "layer": "L2",
+      "entity_type": "character",
+      "claim_text": "Validation observed entity 'Chancellor Zylox Rhaegos' as L2/character with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "17590591e181e2c24bfce861aa793fb951838cc42a4b8996ad7921dcc194b746"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-316b887ba39e",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "Chief Marshal Vael Saros",
+      "layer": "L2",
+      "entity_type": "character",
+      "claim_text": "Validation observed entity 'Chief Marshal Vael Saros' as L2/character with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "a206a858be3f1dfb385fe9a00465d89463a56abef713f6cf38426614bc56d36e"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-b0f4b579d2e9",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "Director Callan Deyrus",
+      "layer": "L2",
+      "entity_type": "character",
+      "claim_text": "Validation observed entity 'Director Callan Deyrus' as L2/character with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "135670726e78a439ab99f031e2e5b19fcfbfbb90506584b6fdef5c0e977c653c"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-fa90870d4145",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "Director Varek Norr",
+      "layer": "L2",
+      "entity_type": "character",
+      "claim_text": "Validation observed entity 'Director Varek Norr' as L2/character with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "8a28cc6746905b7f1d816925b1f3b488d9a49ead48f9b5af0c1bf51089c9a057"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-5afc20e93a51",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "General Kael Durn",
+      "layer": "L2",
+      "entity_type": "character",
+      "claim_text": "Validation observed entity 'General Kael Durn' as L2/character with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "fa9c83be3488f0b4a4f916800344916e0b68e35dc53050154ab130e87d659d21"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-84b581342ccc",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "Grand Strategist Lirian Vael-Torin",
+      "layer": "L2",
+      "entity_type": "character",
+      "claim_text": "Validation observed entity 'Grand Strategist Lirian Vael-Torin' as L2/character with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "e42b013e4118c5c0111c1a641e2f1cdd9abc22112ab3f0e5b73c5c9e4a0d164c"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-836befdbf41b",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "High Chancellor Renn Valcor",
+      "layer": "L2",
+      "entity_type": "character",
+      "claim_text": "Validation observed entity 'High Chancellor Renn Valcor' as L2/character with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "614406dda4cbe6aecd4acc34b7a686dd5a8de85c4d4b16fb14698d05e2707302"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-4c970b5baa57",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "Minister Anaya Ral-Seyr",
+      "layer": "L2",
+      "entity_type": "character",
+      "claim_text": "Validation observed entity 'Minister Anaya Ral-Seyr' as L2/character with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "1647a68e33d9c68b1dbce49700be78a7cdf7b066582219434d575306e200f019"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-af7cc60c28b3",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "Prime Construct",
+      "layer": "L2",
+      "entity_type": "character",
+      "claim_text": "Validation observed entity 'Prime Construct' as L2/character with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "03ea6269fc1122a6ebbfa2f59924db21dfc759cc77f07ffb60cc77f376b375f1"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-071f202610da",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "Crimson Pact",
+      "layer": "L2",
+      "entity_type": "polity",
+      "claim_text": "Validation observed entity 'Crimson Pact' as L2/polity with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "42e71b8be19bf3285487239cabacc659797d93b2e16b1580eac8b12e193ccc71"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-54e5dc164a71",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "Galactic Union",
+      "layer": "L2",
+      "entity_type": "polity",
+      "claim_text": "Validation observed entity 'Galactic Union' as L2/polity with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "4a8fdb5fb0d7d91206bf4a07b4b04a72339f1411a2ad054a671590ebf6c144b1"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-2741dbbcfa6e",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "PMC Syndicate",
+      "layer": "L2",
+      "entity_type": "polity",
+      "claim_text": "Validation observed entity 'PMC Syndicate' as L2/polity with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "4c83937c753e7a4ed6cd0d7c54b70efd93751d9105813d7c1a7a22690ec6eb25"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-58dcb22d6080",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "Prime Construct Polity",
+      "layer": "L2",
+      "entity_type": "polity",
+      "claim_text": "Validation observed entity 'Prime Construct Polity' as L2/polity with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "e0a55b43c9307663f47005231655fe7ab84f07c39c8df41a200f87f0304f7c85"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-4aac7584642d",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "Separatist Confederation",
+      "layer": "L2",
+      "entity_type": "polity",
+      "claim_text": "Validation observed entity 'Separatist Confederation' as L2/polity with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "790f91e471837ac78fe640a90ed296714fcc3fe27fe7f1a0307e3b2c857b27a9"
+        }
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "claim_id": "CLM-4dec687bc8cf",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "Velar Imperium",
+      "layer": "L2",
+      "entity_type": "polity",
+      "claim_text": "Validation observed entity 'Velar Imperium' as L2/polity with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "1e0f346dfba52d00b61ba7aa815dae8511b911148c12499eef521731740bd366"
+        }
+      ],
+      "status": "SUPPORTED"
+    }
+  ],
+  "summary": {
+    "total_claims": 16,
+    "supported": 16,
+    "assumptions": 0,
+    "unknown": 0
+  },
+  "output_hash_alg": "SHA256",
+  "output_hash_scope": "EVIDENCE_RECEIPT_RUN_ARTIFACT_INCLUDING_TIMESTAMPS",
+  "output_hash": "360a80a1bb9210f0e10f5e10b6cc4978b92b0190e9f628e93376c5a7598e8ea1",
+  "content_hash_alg": "SHA256",
+  "content_hash_scope": "EVIDENCE_RECEIPT_SEMANTIC_OUTPUT_EXCLUDING_VOLATILE_FIELDS",
+  "content_hash_excluded_fields": [
+    "timestamp",
+    "timestamp_source",
+    "inputs.validation_run_file",
+    "inputs.canon_targets_file",
+    "output_hash",
+    "content_hash"
+  ],
+  "content_hash": "bf542e62426ac750cd3c87c70b65f6149001cdb72b9d2af449b02d8340108093",
+  "receipt_id_policy": "receipt_id = content_hash",
+  "receipt_id": "bf542e62426ac750cd3c87c70b65f6149001cdb72b9d2af449b02d8340108093"
+}

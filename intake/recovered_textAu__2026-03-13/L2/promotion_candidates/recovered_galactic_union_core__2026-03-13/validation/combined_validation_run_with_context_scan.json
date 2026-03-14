@@ -1,0 +1,729 @@
+{
+  "validation_run": {
+    "timestamp": "2026-03-14T02:10:55.032789Z",
+    "timestamp_source": "WALL_CLOCK_UTC",
+    "hash_canon_version": "CANONREC_HASH_CANON_V1",
+    "hash_canon_rules_ref": "validate_entity.py::_canonicalize_for_hash",
+    "output_hash_alg": "SHA256",
+    "output_hash_scope": "RUN_ARTIFACT_INCLUDING_TIMESTAMPS",
+    "output_hash": "1ca4ebc237941dc8d8f7baa831bbb497d574219160484fbedc62664b9d0ebe97",
+    "content_hash_alg": "SHA256",
+    "content_hash_scope": "SEMANTIC_OUTPUT_EXCLUDING_TIMESTAMPS",
+    "content_hash_excluded_fields": [
+      "timestamp",
+      "timestamp_source"
+    ],
+    "content_hash": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3",
+    "receipt_id_policy": "receipt_id = content_hash",
+    "receipt_id": "96ed9bd4990d3aae43a262bd08d9718af06397db07782ab4c1bde4dd9b90c5d3",
+    "entities_checked": 16,
+    "passed": 16,
+    "blocked": 0
+  },
+  "reports": [
+    {
+      "entity_name": "Galactic Union",
+      "layer": "L2",
+      "entity_type": "polity",
+      "timestamp": "2026-03-14T02:10:47.402693Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 9,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "subtype",
+        "government_type"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'Galactic Union' appears 16 time(s) across 9 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Prime Construct Polity",
+      "layer": "L2",
+      "entity_type": "polity",
+      "timestamp": "2026-03-14T02:10:47.948325Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 9,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "subtype",
+        "government_type"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'Prime Construct Polity' appears 3 time(s) across 3 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Separatist Confederation",
+      "layer": "L2",
+      "entity_type": "polity",
+      "timestamp": "2026-03-14T02:10:48.425598Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 9,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "subtype",
+        "government_type"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'Separatist Confederation' appears 10 time(s) across 7 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "PMC Syndicate",
+      "layer": "L2",
+      "entity_type": "polity",
+      "timestamp": "2026-03-14T02:10:48.896243Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 9,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "subtype",
+        "government_type"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'PMC Syndicate' appears 11 time(s) across 8 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Velar Imperium",
+      "layer": "L2",
+      "entity_type": "polity",
+      "timestamp": "2026-03-14T02:10:49.382201Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 9,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "subtype",
+        "government_type"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'Velar Imperium' appears 10 time(s) across 8 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Crimson Pact",
+      "layer": "L2",
+      "entity_type": "polity",
+      "timestamp": "2026-03-14T02:10:49.874635Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 9,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "subtype",
+        "government_type"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'Crimson Pact' appears 11 time(s) across 8 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Chancellor Zylox Rhaegos",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:10:50.344387Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'Chancellor Zylox Rhaegos' appears 7 time(s) across 6 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "General Kael Durn",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:10:50.815379Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'General Kael Durn' appears 6 time(s) across 6 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Grand Strategist Lirian Vael-Torin",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:10:51.284704Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'Grand Strategist Lirian Vael-Torin' appears 5 time(s) across 5 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Director Varek Norr",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:10:51.747045Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'Director Varek Norr' appears 4 time(s) across 4 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Chief Marshal Vael Saros",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:10:52.220609Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'Chief Marshal Vael Saros' appears 4 time(s) across 4 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "High Chancellor Renn Valcor",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:10:52.701447Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'High Chancellor Renn Valcor' appears 4 time(s) across 4 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Admiral Selene Arcturus",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:10:53.170566Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'Admiral Selene Arcturus' appears 4 time(s) across 4 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Director Callan Deyrus",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:10:53.638946Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'Director Callan Deyrus' appears 4 time(s) across 4 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Minister Anaya Ral-Seyr",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:10:54.101083Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 0,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'Minister Anaya Ral-Seyr' appears 4 time(s) across 4 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        }
+      ]
+    },
+    {
+      "entity_name": "Prime Construct",
+      "layer": "L2",
+      "entity_type": "character",
+      "timestamp": "2026-03-14T02:10:54.565486Z",
+      "timestamp_source": "WALL_CLOCK_UTC",
+      "required_fields_total": 10,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "passed": true,
+      "summary": {
+        "blocks": 0,
+        "warnings": 1,
+        "infos": 3
+      },
+      "findings": [
+        {
+          "severity": "INFO",
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'GUMAS_SIM_2.5' across 6 preferred canonical roots."
+        },
+        {
+          "severity": "INFO",
+          "code": "CANON_REFERENCE_MATCHES",
+          "message": "Identity 'Prime Construct' appears 11 time(s) across 8 file(s) in preferred canon roots.",
+          "field": "canonical_name"
+        },
+        {
+          "severity": "INFO",
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks."
+        },
+        {
+          "severity": "WARN",
+          "code": "BATCH_DUPLICATE",
+          "message": "Intra-batch name collision: Multiple entities share name 'prime construct': Prime Construct Polity (via alias 'Prime Construct'), Prime Construct",
+          "field": "name/canonical_name"
+        }
+      ]
+    }
+  ]
+}
