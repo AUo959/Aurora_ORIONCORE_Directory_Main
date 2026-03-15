@@ -25,6 +25,18 @@
 !/repos/
 !/projects/
 !/_staging/
+!/GUMAS_SIM_2.5/
+/GUMAS_SIM_2.5/*
+!/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/
+/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/*
+!/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/hourly_retrospective.py
+!/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/engine_advanced.py
+!/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19/
+/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19/*
+!/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19/l2_source_manifest.json
+!/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19/l2_state.py
+!/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19/l2_phase2.py
+!/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19/models_v3_ext.py
 
 /archives/*
 !/archives/.gitkeep
