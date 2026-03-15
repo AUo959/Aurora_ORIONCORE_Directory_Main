@@ -1,0 +1,71 @@
+{
+  "schema_version": "l2-source-manifest-v1",
+  "sources": [
+    {
+      "source_id": "world_bible",
+      "parser": "world_bible",
+      "path": "GUMAS_SIM_2.0/03_SIMULATION/Location_Data/Sim_Locations/L2_SYSTEM__GUMAS_L2_World_Bible__v0.2__2026-02-08__BAY02_0809.md",
+      "default_certainty": "STAGING"
+    },
+    {
+      "source_id": "location_authority_table",
+      "parser": "location_authority_table",
+      "path": "GUMAS_SIM_2.0/03_SIMULATION/Location_Data/Sim_Locations/L2_MAP__LOCATION_AUTHORITY_TABLE__v0.1__2026-02-08__BAY02_0809.md",
+      "default_certainty": "STAGING"
+    },
+    {
+      "source_id": "marshals_ledger",
+      "parser": "marshals_ledger",
+      "path": "GUMAS_SIM_2.0/03_SIMULATION/Entity_Profiles/Marshals_Sentinels/marshals_sentinel_ledger.md",
+      "default_certainty": "STAGING"
+    },
+    {
+      "source_id": "marshals_sim_capture",
+      "parser": "marshals_sim_capture",
+      "path": "GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/l_2_sim_capture_marshals_ranger_sentinel_thread_v_1_0.md",
+      "default_certainty": "CANON"
+    },
+    {
+      "source_id": "varek_norr_profile",
+      "parser": "mission_csv",
+      "path": "GUMAS_SIM_2.0/03_SIMULATION/Mission_Logs/SimLogsBuild/Director_Varek_Norr_-_Profile___Capabilities.csv",
+      "default_certainty": "STAGING"
+    },
+    {
+      "source_id": "obsidian_dawn_briefing",
+      "parser": "mission_csv",
+      "path": "GUMAS_SIM_2.0/03_SIMULATION/Mission_Logs/SimLogsBuild/Operation_Obsidian_Dawn_-_Mission_Briefing.csv",
+      "default_certainty": "STAGING"
+    },
+    {
+      "source_id": "obsidian_dawn_execution",
+      "parser": "mission_csv",
+      "path": "GUMAS_SIM_2.0/03_SIMULATION/Mission_Logs/SimLogsBuild/Operation_Obsidian_Dawn_-_Mission_Execution.csv",
+      "default_certainty": "STAGING"
+    },
+    {
+      "source_id": "obsidian_dawn_outcome",
+      "parser": "mission_csv",
+      "path": "GUMAS_SIM_2.0/03_SIMULATION/Mission_Logs/SimLogsBuild/Operation_Obsidian_Dawn_-_Mission_Outcome.csv",
+      "default_certainty": "STAGING"
+    },
+    {
+      "source_id": "runtime_reference_packet",
+      "parser": "runtime_reference_packet",
+      "path": "GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/L2_GUMAS_RUNTIME_REFERENCE_PACKET_v0.4.md",
+      "default_certainty": "STAGING"
+    },
+    {
+      "source_id": "ship_registry",
+      "parser": "ship_registry",
+      "path": "GUMAS_SIM_2.0/04_DOCUMENTATION/GUMAS_Legacy/Original_Materials/GUMAS_OG/L2_GUMAS_SHIP_REGISTRY_v1.0.md",
+      "default_certainty": "STAGING"
+    },
+    {
+      "source_id": "origin_dossier_logistics",
+      "parser": "origin_dossier_logistics",
+      "path": "GUMAS_SIM_2.0/04_DOCUMENTATION/GUMAS_Legacy/Original_Materials/GUMAS_OG/gumas_origin_thread_synthesis_staging_dossier_v_0 (1) copy.md",
+      "default_certainty": "STAGING"
+    }
+  ]
+}
