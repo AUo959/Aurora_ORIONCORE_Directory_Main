@@ -1,6 +1,6 @@
 # Workspace Map
 
-- Generated: `2026-03-15T03:11:34Z`
+- Generated: `2026-03-15T03:22:06Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
 - Top-level entries cataloged: `76`
 - Nested repos registered: `3`
@@ -23,7 +23,7 @@
 
 - `aurora-cloudbank-symbolic-main` at `Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `main`, remote `configured`)
 - `CanonRec` at `GUMAS_SIM_2.5/CanonRec` (branch `main`, remote `no_remote_configured`)
-- `DuelSim_v2.0` at `GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0` (branch `main`, remote `no_remote_configured`)
+- `DuelSim_v2.0` at `GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0` (branch `main`, remote `configured`)
 
 ## Planned Move Candidates
 
