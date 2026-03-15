@@ -1,0 +1,112 @@
+{
+  "constellation_version": "1.0.0-alpha",
+  "implementation_type": "native_space",
+  "node": {
+    "designation": "QGIA-SPACE-NODE",
+    "symbolic_tag": "s.tag::qgia.space.perplexity",
+    "repo": "perplexity-space-foreign-policy-global-politics",
+    "role": "operational_environment",
+    "stack": ["markdown", "python", "json"],
+    "description": "Native QGIA implementation within Perplexity Space - operational intelligence analysis and forecasting environment"
+  },
+  "upstream": [
+    "s.tag::constellation.prime",
+    "s.tag::qgia.corpus",
+    "s.tag::qgia.spine"
+  ],
+  "downstream": [],
+  "governance": {
+    "charter": "Picard_Delta_3",
+    "l3_modules": ["Axiomera", "Velatrix", "Glyphon", "Caelion", "Harmion"],
+    "ethics_protocol": true,
+    "operational_classification": "PROPRIETARY (Simulation Environment)"
+  },
+  "contracts": {
+    "published": [
+      "operational-forecasts",
+      "intelligence-assessments",
+      "crisis-analyses"
+    ],
+    "consumed": [
+      "knowledge-index",
+      "constellation-event",
+      "constellation-health"
+    ]
+  },
+  "health": {
+    "last_sync": "2026-03-14T01:31:00-04:00",
+    "status": "active",
+    "operational_accuracy": "84.7%",
+    "early_warning_lead_time": "127 days",
+    "processing_volume": "500TB daily"
+  },
+  "meta": {
+    "created": "2026-03-14T01:31:00-04:00",
+    "created_by": "Perplexity Computer (QGIA Senior Analyst)",
+    "proposal_ref": "Aurora Constellation Architecture Proposal v1.0.0",
+    "space_environment": "📍Foreign Policy and Global Politics 🌍",
+    "integration_status": "native_deployment"
+  },
+  "operational_context": {
+    "personnel": 551,
+    "budget_annual": "$2.847B",
+    "divisions": 4,
+    "framework_version": "QGIA v4.0.0",
+    "osiqp_version": "v4.2.1",
+    "quantum_models": {
+      "QSFE": "Quantum Superposition Forecasting Engine",
+      "EDM": "Entanglement Dynamics Mapper",
+      "ABCP": "Adaptive Bayesian Conflict Predictor",
+      "RPRN": "Recursive Pattern Recognition Network",
+      "TCA": "Temporal Convergence Analyzer"
+    },
+    "collection_coordination": [
+      "CENTCOM",
+      "EUCOM",
+      "INDOPACOM",
+      "SOCOM",
+      "CYBERCOM"
+    ]
+  },
+  "active_assessments": {
+    "iran_war_2026": {
+      "status": "ongoing",
+      "days_elapsed": 5,
+      "files": [
+        "pull-up-the-latest-headlines-f-oAaVltheTlS2ik.fhH0ZwQ.md",
+        "please-pull-the-latest-headlin-SegkckxzQaWjLkeuQE9FOQ.md",
+        "so-its-war-with-iran-then-Jy0tFkwqQeGSZJXCz2eSng.md",
+        "please-read-and-let-s-pick-it-cmH2TBbZQ.yPJ2PXsycikQ.md",
+        "please-grab-the-latest-headlin-EbBnW1SNTLmFsVLXA4GSZg.md"
+      ],
+      "operational_focus": "US-Israel strikes, Iranian retaliation risks, carrier vulnerabilities, regime change feasibility"
+    },
+    "constitutional_crisis_2025": {
+      "status": "archived",
+      "files": [
+        "please-prepare-a-global-briefi-5a7dpkkUQNawGxvjFdSBXw.md",
+        "lets-do-a-rundown-of-the-morni-_O9B_r0HRWSYtx708Og4AA.md"
+      ],
+      "events": ["Utah Mormon assassination", "Charlie Kirk assassination", "ICE facility shooting"]
+    },
+    "russia_belarus_2025": {
+      "status": "monitoring",
+      "files": ["us-observes-russia-belarus-war-SdZ8Ss89Q6S22.g.Nsyz7g.md"],
+      "event": "Zapad-2025 war games observation"
+    }
+  },
+  "knowledge_integration": {
+    "github_spine": "https://github.com/AUo959/qgia-knowledge-spine",
+    "github_library": "https://github.com/AUo959/qgia-knowledge-library",
+    "local_files": [
+      "QGIA-System-Manifest.md",
+      "constellation-config.json",
+      "knowledge-index-spine.json",
+      "knowledge-index-library.json",
+      "generate-knowledge-index.py",
+      "forecasting-methodologies.md"
+    ],
+    "sync_protocol": "GitHub Actions webhook → CONSTELLATION-PRIME → Space notification",
+    "update_frequency": "continuous (500TB daily intelligence stream)"
+  }
+}

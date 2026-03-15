@@ -1,4 +1,4 @@
-generated_at: '2026-03-15T03:04:32Z'
+generated_at: '2026-03-15T03:11:34Z'
 root: .
 logical_taxonomy:
 - repos
@@ -540,72 +540,6 @@ entries:
   owner: project-review
   status: deferred
   batch_id: wave4_root_intake_cleanup_initial
-- id: qgia-deployment-package
-  kind: intake_file
-  current_path: QGIA-Deployment-Package.md
-  logical_zone: intake
-  planned_path: intake/QGIA-Deployment-Package.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: qgia-knowledge-index
-  kind: intake_file
-  current_path: QGIA-Knowledge-Index.md
-  logical_zone: intake
-  planned_path: intake/QGIA-Knowledge-Index.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: qgia-quick-reference
-  kind: intake_file
-  current_path: QGIA-Quick-Reference.md
-  logical_zone: intake
-  planned_path: intake/QGIA-Quick-Reference.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: qgia-system-manifest
-  kind: intake_file
-  current_path: QGIA-System-Manifest.md
-  logical_zone: intake
-  planned_path: intake/QGIA-System-Manifest.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: qgia-system-spec-v4
-  kind: intake_file
-  current_path: QGIA-System-Spec-v4.md
-  logical_zone: intake
-  planned_path: intake/QGIA-System-Spec-v4.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: qgia-architecture
-  kind: intake_file
-  current_path: QGIA_ARCHITECTURE.md
-  logical_zone: intake
-  planned_path: intake/QGIA_ARCHITECTURE.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: readme
   kind: workspace_doc
   current_path: README.md
@@ -701,16 +635,19 @@ entries:
   owner: archive-admin
   status: deferred
 - id: entropy-quarantine
-  kind: intake_collection
+  kind: quarantine_zone
   current_path: _entropy_quarantine
-  logical_zone: intake
-  planned_path: intake/_entropy_quarantine
+  logical_zone: _staging
+  planned_path: _entropy_quarantine
   git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
+  storage_tier: quarantine
+  retention_policy: review-before-delete
+  owner: workspace-admin
+  status: protected
   batch_id: wave4_root_intake_cleanup_initial
+  notes: Verified-duplicate archive quarantine. Files are byte-for-byte identical
+    to their canonical copies. Safe to delete once reviewed. See _entropy_quarantine/RESTORE_MANIFEST.json
+    to restore any file.
 - id: staging
   kind: logical_zone
   current_path: _staging
@@ -761,17 +698,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: constellation-config
-  kind: intake_file
-  current_path: constellation-config.json
-  logical_zone: intake
-  planned_path: intake/constellation-config.json
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: docs
   kind: control_surface
   current_path: docs
@@ -813,28 +739,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: qgia-agent-registry-full
-  kind: intake_file
-  current_path: qgia_agent_registry_full.json
-  logical_zone: intake
-  planned_path: intake/qgia_agent_registry_full.json
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: qgia-trust-network
-  kind: intake_file
-  current_path: qgia_trust_network.json
-  logical_zone: intake
-  planned_path: intake/qgia_trust_network.json
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: reports
   kind: report_zone
   current_path: reports

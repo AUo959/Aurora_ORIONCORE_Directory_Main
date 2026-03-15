@@ -1,6 +1,18 @@
 {
   "overrides": [
     {
+      "current_path": "_entropy_quarantine",
+      "kind": "quarantine_zone",
+      "logical_zone": "_staging",
+      "planned_path": "_entropy_quarantine",
+      "git_boundary": "none",
+      "storage_tier": "quarantine",
+      "retention_policy": "review-before-delete",
+      "owner": "workspace-admin",
+      "status": "protected",
+      "notes": "Verified-duplicate archive quarantine. Files are byte-for-byte identical to their canonical copies. Safe to delete once reviewed. See _entropy_quarantine/RESTORE_MANIFEST.json to restore any file."
+    },
+    {
       "current_path": "AURIC_AGENT_CORE_v1.0.yaml",
       "batch_id": "wave3_small_intake_files_initial"
     },

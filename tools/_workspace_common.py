@@ -281,6 +281,7 @@ def iter_archive_artifacts(root: Path) -> list[Path]:
             if name != ".git"
             and not name.startswith(".git_decommissioned")
             and name != "__pycache__"
+            and name != "_entropy_quarantine"
         ]
         if current != root and (current / ".git").exists():
             # Nested repos are opaque to the root control-plane inventory.

@@ -1,19 +1,19 @@
 # Workspace Map
 
-- Generated: `2026-03-15T03:04:32Z`
+- Generated: `2026-03-15T03:11:34Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `85`
+- Top-level entries cataloged: `76`
 - Nested repos registered: `3`
-- Archive or binary artifacts inventoried: `1238`
-- Classification overrides loaded: `32` from `catalog/classification_overrides.yaml`
+- Archive or binary artifacts inventoried: `573`
+- Classification overrides loaded: `33` from `catalog/classification_overrides.yaml`
 
 ## Zones
 
-- `_staging`: `7` top-level entries
+- `_staging`: `8` top-level entries
 - `archives`: `38` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `5` top-level entries
-- `intake`: `14` top-level entries
+- `intake`: `4` top-level entries
 - `projects`: `10` top-level entries
 - `reports`: `3` top-level entries
 - `repos`: `3` top-level entries
@@ -27,30 +27,20 @@
 
 ## Planned Move Candidates
 
-- `QGIA-Deployment-Package.md` -> `intake/QGIA-Deployment-Package.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `QGIA-Knowledge-Index.md` -> `intake/QGIA-Knowledge-Index.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `QGIA-Quick-Reference.md` -> `intake/QGIA-Quick-Reference.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `QGIA-System-Manifest.md` -> `intake/QGIA-System-Manifest.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `QGIA-System-Spec-v4.md` -> `intake/QGIA-System-Spec-v4.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `QGIA_ARCHITECTURE.md` -> `intake/QGIA_ARCHITECTURE.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Threadcore Library` -> `intake/Threadcore Library` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
-- `_entropy_quarantine` -> `intake/_entropy_quarantine` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
-- `constellation-config.json` -> `intake/constellation-config.json` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `qgia_agent_registry_full.json` -> `intake/qgia_agent_registry_full.json` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `qgia_trust_network.json` -> `intake/qgia_trust_network.json` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 
 ## Largest Archive/Binary Artifacts
 
-- `Au_Archive_412_417/2.2.6b+Archives  2.zip`: `845.1 MiB` [hash_duplicate]
-- `_entropy_quarantine/Au_Archive_412_417/2.2.6b+Archives .zip`: `845.1 MiB` [hash_duplicate]
-- `_entropy_quarantine/Complete Archive 4_19 copy/2.2.6b+Archives  2.zip`: `845.1 MiB` [hash_duplicate]
-- `_entropy_quarantine/Complete Archive 4_19 copy/2.2.6b+Archives .zip`: `845.1 MiB` [hash_duplicate]
+- `Au_Archive_412_417/2.2.6b+Archives  2.zip`: `845.1 MiB` [unique]
 - `ZipWiz_Chamber_6_28/ZIPWIZ_Documents.zip`: `675.6 MiB` [unique]
 - `ZIP_Archives/9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2026-02-05-19-12-28-22da4e485f0b487cae0716c77b02b379.zip`: `503.5 MiB` [unique]
 - `ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs2 2.zip`: `481.1 MiB` [family_variant]
 - `ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs2.zip`: `481.1 MiB` [family_variant]
-- `Au_Archive_412_417/4:11:AuDev.zip`: `385.4 MiB` [hash_duplicate]
-- `_entropy_quarantine/Complete Archive 4_19 copy/4:11:AuDev.zip`: `385.4 MiB` [hash_duplicate]
+- `Au_Archive_412_417/4:11:AuDev.zip`: `385.4 MiB` [unique]
+- `Aurora_Sim_Architecture/openai-cookbook-main.zip`: `333.1 MiB` [unique]
+- `Complete Archive 4_19 copy/MicrosoftTeams.pkg`: `296.6 MiB` [unique]
+- `Streamdeck_Glyphs/Stream_Deck_6.8.1.21263(2).msi`: `240.1 MiB` [unique]
+- `Au_Archive_62_619/GUI_Cloudhub.zip`: `189.4 MiB` [unique]
 
 ## Reading Order
 
