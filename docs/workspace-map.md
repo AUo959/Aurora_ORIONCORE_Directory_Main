@@ -1,19 +1,19 @@
 # Workspace Map
 
-- Generated: `2026-03-11T00:25:12Z`
+- Generated: `2026-03-15T02:54:56Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `72`
+- Top-level entries cataloged: `85`
 - Nested repos registered: `3`
-- Archive or binary artifacts inventoried: `1225`
+- Archive or binary artifacts inventoried: `1238`
 - Classification overrides loaded: `32` from `catalog/classification_overrides.yaml`
 
 ## Zones
 
 - `_staging`: `7` top-level entries
-- `archives`: `36` top-level entries
+- `archives`: `39` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `5` top-level entries
-- `intake`: `3` top-level entries
+- `intake`: `13` top-level entries
 - `projects`: `10` top-level entries
 - `reports`: `3` top-level entries
 - `repos`: `3` top-level entries
@@ -27,7 +27,16 @@
 
 ## Planned Move Candidates
 
-- None
+- `QGIA-Deployment-Package.md` -> `intake/QGIA-Deployment-Package.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `QGIA-Knowledge-Index.md` -> `intake/QGIA-Knowledge-Index.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `QGIA-Quick-Reference.md` -> `intake/QGIA-Quick-Reference.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `QGIA-System-Manifest.md` -> `intake/QGIA-System-Manifest.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `QGIA-System-Spec-v4.md` -> `intake/QGIA-System-Spec-v4.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `QGIA_ARCHITECTURE.md` -> `intake/QGIA_ARCHITECTURE.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `Threadcore Library` -> `intake/Threadcore Library` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
+- `constellation-config.json` -> `intake/constellation-config.json` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `qgia_agent_registry_full.json` -> `intake/qgia_agent_registry_full.json` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `qgia_trust_network.json` -> `intake/qgia_trust_network.json` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 
 ## Largest Archive/Binary Artifacts
 

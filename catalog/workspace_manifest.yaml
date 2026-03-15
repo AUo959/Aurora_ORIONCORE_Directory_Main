@@ -1,1051 +1,886 @@
-{
-  "generated_at": "2026-03-11T00:25:12Z",
-  "root": ".",
-  "logical_taxonomy": [
-    "repos",
-    "projects",
-    "archives",
-    "reports",
-    "docs",
-    "catalog",
-    "tools",
-    "intake",
-    "_staging"
-  ],
-  "entries": [
-    {
-      "id": "ds-store",
-      "kind": "cache_or_local_artifact",
-      "current_path": ".DS_Store",
-      "logical_zone": "_staging",
-      "planned_path": ".DS_Store",
-      "git_boundary": "none",
-      "storage_tier": "ephemeral",
-      "retention_policy": "regenerate",
-      "owner": "local-user",
-      "status": "ignored"
-    },
-    {
-      "id": "codex-skill-edits",
-      "kind": "cache_or_local_artifact",
-      "current_path": ".codex_skill_edits",
-      "logical_zone": "_staging",
-      "planned_path": ".codex_skill_edits",
-      "git_boundary": "none",
-      "storage_tier": "ephemeral",
-      "retention_policy": "regenerate",
-      "owner": "local-user",
-      "status": "ignored"
-    },
-    {
-      "id": "git-decommissioned-20260304-233325",
-      "kind": "rollback_artifact",
-      "current_path": ".git_decommissioned_20260304_233325",
-      "logical_zone": "_staging",
-      "planned_path": ".git_decommissioned_20260304_233325",
-      "git_boundary": "none",
-      "storage_tier": "workspace-meta",
-      "retention_policy": "preserve",
-      "owner": "workspace-admin",
-      "status": "protected"
-    },
-    {
-      "id": "gitattributes",
-      "kind": "policy_file",
-      "current_path": ".gitattributes",
-      "logical_zone": "docs",
-      "planned_path": ".gitattributes",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "githooks",
-      "kind": "hook_policy",
-      "current_path": ".githooks",
-      "logical_zone": "tools",
-      "planned_path": ".githooks",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "gitignore",
-      "kind": "policy_file",
-      "current_path": ".gitignore",
-      "logical_zone": "docs",
-      "planned_path": ".gitignore",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "gitwiz",
-      "kind": "cache_or_local_artifact",
-      "current_path": ".gitwiz",
-      "logical_zone": "_staging",
-      "planned_path": ".gitwiz",
-      "git_boundary": "none",
-      "storage_tier": "ephemeral",
-      "retention_policy": "regenerate",
-      "owner": "local-user",
-      "status": "ignored"
-    },
-    {
-      "id": "pytest-cache",
-      "kind": "cache_or_local_artifact",
-      "current_path": ".pytest_cache",
-      "logical_zone": "_staging",
-      "planned_path": ".pytest_cache",
-      "git_boundary": "none",
-      "storage_tier": "ephemeral",
-      "retention_policy": "regenerate",
-      "owner": "local-user",
-      "status": "ignored"
-    },
-    {
-      "id": "agents",
-      "kind": "workspace_doc",
-      "current_path": "AGENTS.md",
-      "logical_zone": "docs",
-      "planned_path": "AGENTS.md",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "aurora-gumas-pat-live-subset-ssot-v0-1-0",
-      "kind": "archive_artifact",
-      "current_path": "AURORA_GUMAS_PAT_LIVE_SUBSET_SSOT__v0.1.0__2026-03-14__STRUCTURED_ARCHIVE.zip",
-      "logical_zone": "archives",
-      "planned_path": "AURORA_GUMAS_PAT_LIVE_SUBSET_SSOT__v0.1.0__2026-03-14__STRUCTURED_ARCHIVE.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "aurora-gumas-staff-registry-catalog-v0-1-0",
-      "kind": "archive_artifact",
-      "current_path": "AURORA_GUMAS_STAFF_REGISTRY_CATALOG__v0.1.0__2026-03-14__STRUCTURED_ARCHIVE.zip",
-      "logical_zone": "archives",
-      "planned_path": "AURORA_GUMAS_STAFF_REGISTRY_CATALOG__v0.1.0__2026-03-14__STRUCTURED_ARCHIVE.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "aurora-gumas-staff-registry-ssot-v0-2-0",
-      "kind": "archive_artifact",
-      "current_path": "AURORA_GUMAS_STAFF_REGISTRY_SSOT__v0.2.0__2026-03-14__STRUCTURED_ARCHIVE.zip",
-      "logical_zone": "archives",
-      "planned_path": "AURORA_GUMAS_STAFF_REGISTRY_SSOT__v0.2.0__2026-03-14__STRUCTURED_ARCHIVE.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "au-archive-323-326",
-      "kind": "archive_family",
-      "current_path": "AU_Archive_323_326",
-      "logical_zone": "archives",
-      "planned_path": "AU_Archive_323_326",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "au-archive-327-330",
-      "kind": "archive_family",
-      "current_path": "AU_Archive_327-330",
-      "logical_zone": "archives",
-      "planned_path": "AU_Archive_327-330",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "au-archive-331only",
-      "kind": "archive_family",
-      "current_path": "AU_Archive_331only",
-      "logical_zone": "archives",
-      "planned_path": "AU_Archive_331only",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "anchor-harmony-capsule-dr-srpv1",
-      "kind": "archive_artifact",
-      "current_path": "Anchor_Harmony_Capsule_DR-SRPv1.zip",
-      "logical_zone": "archives",
-      "planned_path": "Anchor_Harmony_Capsule_DR-SRPv1.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "anchor-harmony-capsule-dr-srpv1-aegis",
-      "kind": "archive_artifact",
-      "current_path": "Anchor_Harmony_Capsule_DR-SRPv1_Aegis.zip",
-      "logical_zone": "archives",
-      "planned_path": "Anchor_Harmony_Capsule_DR-SRPv1_Aegis.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "anchor-harmony-capsule-dr-srpv1-helix",
-      "kind": "archive_artifact",
-      "current_path": "Anchor_Harmony_Capsule_DR-SRPv1_Helix.zip",
-      "logical_zone": "archives",
-      "planned_path": "Anchor_Harmony_Capsule_DR-SRPv1_Helix.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "anchor-harmony-capsule-dr-srpv1-orien",
-      "kind": "archive_artifact",
-      "current_path": "Anchor_Harmony_Capsule_DR-SRPv1_Orien.zip",
-      "logical_zone": "archives",
-      "planned_path": "Anchor_Harmony_Capsule_DR-SRPv1_Orien.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "anchor-harmony-capsule-dr-srpv1-tessellate",
-      "kind": "archive_artifact",
-      "current_path": "Anchor_Harmony_Capsule_DR-SRPv1_Tessellate.zip",
-      "logical_zone": "archives",
-      "planned_path": "Anchor_Harmony_Capsule_DR-SRPv1_Tessellate.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "anchor-harmony-capsule-dr-srpv1-virellian",
-      "kind": "archive_artifact",
-      "current_path": "Anchor_Harmony_Capsule_DR-SRPv1_Virellian.zip",
-      "logical_zone": "archives",
-      "planned_path": "Anchor_Harmony_Capsule_DR-SRPv1_Virellian.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "au-archive-323-41",
-      "kind": "archive_family",
-      "current_path": "Au_Archive_323_41",
-      "logical_zone": "archives",
-      "planned_path": "Au_Archive_323_41",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "au-archive-412-417",
-      "kind": "archive_family",
-      "current_path": "Au_Archive_412_417",
-      "logical_zone": "archives",
-      "planned_path": "Au_Archive_412_417",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "au-archive-418-420",
-      "kind": "archive_family",
-      "current_path": "Au_Archive_418_420",
-      "logical_zone": "archives",
-      "planned_path": "Au_Archive_418_420",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "au-archive-42-45",
-      "kind": "archive_family",
-      "current_path": "Au_Archive_42_45",
-      "logical_zone": "archives",
-      "planned_path": "Au_Archive_42_45",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "au-archive-45-49",
-      "kind": "archive_family",
-      "current_path": "Au_Archive_45_49",
-      "logical_zone": "archives",
-      "planned_path": "Au_Archive_45_49",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "au-archive-527",
-      "kind": "archive_family",
-      "current_path": "Au_Archive_527",
-      "logical_zone": "archives",
-      "planned_path": "Au_Archive_527",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "au-archive-620-623",
-      "kind": "archive_family",
-      "current_path": "Au_Archive_620_623",
-      "logical_zone": "archives",
-      "planned_path": "Au_Archive_620_623",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "au-archive-62-619",
-      "kind": "archive_family",
-      "current_path": "Au_Archive_62_619",
-      "logical_zone": "archives",
-      "planned_path": "Au_Archive_62_619",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "auora2",
-      "kind": "project_bundle",
-      "current_path": "Auora2.5_DEV",
-      "logical_zone": "projects",
-      "planned_path": "projects/Auora2.5_DEV",
-      "git_boundary": "none",
-      "storage_tier": "source-bundle",
-      "retention_policy": "review-before-physical-move",
-      "owner": "project-review",
-      "status": "deferred",
-      "batch_id": "wave4_root_intake_cleanup_initial"
-    },
-    {
-      "id": "aurora-quantum-en",
-      "kind": "log_bundle",
-      "current_path": "Aurora-quantum-en",
-      "logical_zone": "_staging",
-      "planned_path": "_staging/Aurora-quantum-en",
-      "git_boundary": "none",
-      "storage_tier": "isolated",
-      "retention_policy": "preserve",
-      "owner": "workspace-admin",
-      "status": "deferred",
-      "batch_id": "wave4_root_intake_cleanup_initial"
-    },
-    {
-      "id": "aurora-multilang-projectspace-starterpack-v1-0",
-      "kind": "archive_artifact",
-      "current_path": "Aurora_Multilang_ProjectSpace_StarterPack_v1.0.zip",
-      "logical_zone": "archives",
-      "planned_path": "Aurora_Multilang_ProjectSpace_StarterPack_v1.0.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "aurora-new-11-9",
-      "kind": "project_bundle",
-      "current_path": "Aurora_New_11_9",
-      "logical_zone": "projects",
-      "planned_path": "projects/Aurora_New_11_9",
-      "git_boundary": "none",
-      "storage_tier": "source-bundle",
-      "retention_policy": "review-before-physical-move",
-      "owner": "project-review",
-      "status": "deferred",
-      "batch_id": "wave4_root_intake_cleanup_initial"
-    },
-    {
-      "id": "aurora-new-9-22",
-      "kind": "project_bundle",
-      "current_path": "Aurora_New_9_22",
-      "logical_zone": "projects",
-      "planned_path": "projects/Aurora_New_9_22",
-      "git_boundary": "none",
-      "storage_tier": "source-bundle",
-      "retention_policy": "review-before-physical-move",
-      "owner": "project-review",
-      "status": "deferred",
-      "batch_id": "wave4_root_intake_cleanup_initial"
-    },
-    {
-      "id": "aurora-project-cloudhub-deploy",
-      "kind": "project_bundle",
-      "current_path": "Aurora_Project_Cloudhub_Deploy",
-      "logical_zone": "projects",
-      "planned_path": "projects/Aurora_Project_Cloudhub_Deploy",
-      "git_boundary": "none",
-      "storage_tier": "source-bundle",
-      "retention_policy": "review-before-physical-move",
-      "owner": "project-review",
-      "status": "deferred",
-      "batch_id": "wave4_root_intake_cleanup_initial"
-    },
-    {
-      "id": "aurora-sim-architecture",
-      "kind": "repo_hub",
-      "current_path": "Aurora_Sim_Architecture",
-      "logical_zone": "repos",
-      "planned_path": "Aurora_Sim_Architecture",
-      "git_boundary": "nested",
-      "storage_tier": "source",
-      "retention_policy": "preserve",
-      "owner": "repository-owner",
-      "status": "protected"
-    },
-    {
-      "id": "automation-reports",
-      "kind": "report_collection",
-      "current_path": "Automation_Reports",
-      "logical_zone": "reports",
-      "planned_path": "reports/automation/legacy/Automation_Reports",
-      "git_boundary": "none",
-      "storage_tier": "operational-report",
-      "retention_policy": "archive-after-migration",
-      "owner": "operations",
-      "status": "migrated_empty",
-      "notes": "Empty legacy shell retained pending a dedicated cleanup batch."
-    },
-    {
-      "id": "canonrec",
-      "kind": "archive_artifact",
-      "current_path": "CanonRec.zip",
-      "logical_zone": "archives",
-      "planned_path": "CanonRec.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "complete-archive-4-19",
-      "kind": "archive_family",
-      "current_path": "Complete Archive 4_19 copy",
-      "logical_zone": "archives",
-      "planned_path": "Complete Archive 4_19 copy",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "echonet-fullrelaybundle-v1",
-      "kind": "archive_artifact",
-      "current_path": "EchoNet_FullRelayBundle_v1.zip",
-      "logical_zone": "archives",
-      "planned_path": "EchoNet_FullRelayBundle_v1.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "flowstate-threadcore-bundle",
-      "kind": "archive_artifact",
-      "current_path": "FlowState_ThreadCore_BUNDLE.zip",
-      "logical_zone": "archives",
-      "planned_path": "FlowState_ThreadCore_BUNDLE.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "gui-cloudhub",
-      "kind": "project_bundle",
-      "current_path": "GUI_Cloudhub",
-      "logical_zone": "projects",
-      "planned_path": "projects/GUI_Cloudhub",
-      "git_boundary": "none",
-      "storage_tier": "source-bundle",
-      "retention_policy": "review-before-physical-move",
-      "owner": "project-review",
-      "status": "deferred",
-      "batch_id": "wave4_root_intake_cleanup_initial"
-    },
-    {
-      "id": "gumas-master-transfer-bundle-v1-rc",
-      "kind": "archive_artifact",
-      "current_path": "GUMAS_Master_Transfer_Bundle_v1_RC.zip",
-      "logical_zone": "archives",
-      "planned_path": "GUMAS_Master_Transfer_Bundle_v1_RC.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "gumas-recov-archive-a01",
-      "kind": "archive_artifact",
-      "current_path": "GUMAS_RECOV_ARCHIVE_A01.zip",
-      "logical_zone": "archives",
-      "planned_path": "GUMAS_RECOV_ARCHIVE_A01.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "gumas-sim-2",
-      "kind": "project_bundle",
-      "current_path": "GUMAS_SIM_2.0",
-      "logical_zone": "projects",
-      "planned_path": "projects/GUMAS_SIM_2.0",
-      "git_boundary": "none",
-      "storage_tier": "source-bundle",
-      "retention_policy": "review-before-physical-move",
-      "owner": "project-review",
-      "status": "deferred",
-      "batch_id": "wave4_root_intake_cleanup_initial"
-    },
-    {
-      "id": "gumas-sim-2-0",
-      "kind": "archive_artifact",
-      "current_path": "GUMAS_SIM_2.0 2.zip",
-      "logical_zone": "archives",
-      "planned_path": "GUMAS_SIM_2.0 2.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "gumas-sim-2-0",
-      "kind": "archive_artifact",
-      "current_path": "GUMAS_SIM_2.0.zip",
-      "logical_zone": "archives",
-      "planned_path": "GUMAS_SIM_2.0.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "gumas-sim-2",
-      "kind": "repo_hub",
-      "current_path": "GUMAS_SIM_2.5",
-      "logical_zone": "repos",
-      "planned_path": "GUMAS_SIM_2.5",
-      "git_boundary": "nested",
-      "storage_tier": "source",
-      "retention_policy": "preserve",
-      "owner": "repository-owner",
-      "status": "protected"
-    },
-    {
-      "id": "gumas-symbolic-modules-export-a1",
-      "kind": "archive_artifact",
-      "current_path": "GUMAS_SYMBOLIC_MODULES_EXPORT_A1.zip",
-      "logical_zone": "archives",
-      "planned_path": "GUMAS_SYMBOLIC_MODULES_EXPORT_A1.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "legacy-promotion-candidate-pack-v0-2-0-2026-03-10",
-      "kind": "archive_artifact",
-      "current_path": "Legacy_Promotion_Candidate_Pack__v0.2.0__2026-03-10.zip",
-      "logical_zone": "archives",
-      "planned_path": "Legacy_Promotion_Candidate_Pack__v0.2.0__2026-03-10.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "legacy-recovery-packet-v0-1-2026-03-10",
-      "kind": "archive_artifact",
-      "current_path": "Legacy_Recovery_Packet__v0.1__2026-03-10.zip",
-      "logical_zone": "archives",
-      "planned_path": "Legacy_Recovery_Packet__v0.1__2026-03-10.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "orion-ord-promotionworkbench-v0-5-0-2026-03-10-structured-archive",
-      "kind": "archive_artifact",
-      "current_path": "ORION_ORD__PromotionWorkbench__v0.5.0__2026-03-10__STRUCTURED_ARCHIVE.zip",
-      "logical_zone": "archives",
-      "planned_path": "ORION_ORD__PromotionWorkbench__v0.5.0__2026-03-10__STRUCTURED_ARCHIVE.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "perplexity-research",
-      "kind": "research_bundle",
-      "current_path": "Perplexity_Research",
-      "logical_zone": "projects",
-      "planned_path": "projects/Perplexity_Research",
-      "git_boundary": "none",
-      "storage_tier": "reference-bundle",
-      "retention_policy": "review-before-physical-move",
-      "owner": "project-review",
-      "status": "deferred",
-      "batch_id": "wave4_root_intake_cleanup_initial"
-    },
-    {
-      "id": "qgia-architecture",
-      "kind": "workspace_doc",
-      "current_path": "QGIA_ARCHITECTURE.md",
-      "logical_zone": "docs",
-      "planned_path": "QGIA_ARCHITECTURE.md",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "qgia-deployment-package",
-      "kind": "workspace_doc",
-      "current_path": "QGIA-Deployment-Package.md",
-      "logical_zone": "docs",
-      "planned_path": "QGIA-Deployment-Package.md",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "qgia-knowledge-index",
-      "kind": "workspace_doc",
-      "current_path": "QGIA-Knowledge-Index.md",
-      "logical_zone": "docs",
-      "planned_path": "QGIA-Knowledge-Index.md",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "qgia-quick-reference",
-      "kind": "workspace_doc",
-      "current_path": "QGIA-Quick-Reference.md",
-      "logical_zone": "docs",
-      "planned_path": "QGIA-Quick-Reference.md",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "qgia-system-manifest",
-      "kind": "workspace_doc",
-      "current_path": "QGIA-System-Manifest.md",
-      "logical_zone": "docs",
-      "planned_path": "QGIA-System-Manifest.md",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "qgia-system-spec-v4",
-      "kind": "workspace_doc",
-      "current_path": "QGIA-System-Spec-v4.md",
-      "logical_zone": "docs",
-      "planned_path": "QGIA-System-Spec-v4.md",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "qgia-agent-registry-full",
-      "kind": "config_artifact",
-      "current_path": "qgia_agent_registry_full.json",
-      "logical_zone": "docs",
-      "planned_path": "qgia_agent_registry_full.json",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "qgia-trust-network",
-      "kind": "config_artifact",
-      "current_path": "qgia_trust_network.json",
-      "logical_zone": "docs",
-      "planned_path": "qgia_trust_network.json",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "constellation-config",
-      "kind": "config_artifact",
-      "current_path": "constellation-config.json",
-      "logical_zone": "docs",
-      "planned_path": "constellation-config.json",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "readme",
-      "kind": "workspace_doc",
-      "current_path": "README.md",
-      "logical_zone": "docs",
-      "planned_path": "README.md",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "sort-later",
-      "kind": "intake_collection",
-      "current_path": "Sort Later",
-      "logical_zone": "intake",
-      "planned_path": "intake/Sort Later",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "deferred",
-      "batch_id": "wave4_root_intake_cleanup_initial"
-    },
-    {
-      "id": "streamdeck-glyphs",
-      "kind": "asset_bundle",
-      "current_path": "Streamdeck_Glyphs",
-      "logical_zone": "projects",
-      "planned_path": "projects/Streamdeck_Glyphs",
-      "git_boundary": "none",
-      "storage_tier": "source-bundle",
-      "retention_policy": "review-before-physical-move",
-      "owner": "project-review",
-      "status": "deferred",
-      "batch_id": "wave4_root_intake_cleanup_initial"
-    },
-    {
-      "id": "threadcore-library",
-      "kind": "intake_collection",
-      "current_path": "Threadcore Library",
-      "logical_zone": "intake",
-      "planned_path": "intake/Threadcore Library",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "planned_move",
-      "batch_id": "wave4_root_intake_cleanup_initial"
-    },
-    {
-      "id": "threadcore-index",
-      "kind": "empty_placeholder",
-      "current_path": "Threadcore_Index",
-      "logical_zone": "intake",
-      "planned_path": "intake/Threadcore_Index",
-      "git_boundary": "none",
-      "storage_tier": "review",
-      "retention_policy": "review",
-      "owner": "intake-review",
-      "status": "deferred_empty",
-      "batch_id": "wave4_root_intake_cleanup_initial"
-    },
-    {
-      "id": "unzipped-archives",
-      "kind": "archive_family",
-      "current_path": "Unzipped Archives",
-      "logical_zone": "archives",
-      "planned_path": "Unzipped Archives",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "zipwizard-quantumgpt-bundle-v1-0-0",
-      "kind": "archive_artifact",
-      "current_path": "ZIPWizard_QuantumGPT_Bundle_v1.0.0.zip",
-      "logical_zone": "archives",
-      "planned_path": "ZIPWizard_QuantumGPT_Bundle_v1.0.0.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "zip-archives",
-      "kind": "archive_family",
-      "current_path": "ZIP_Archives",
-      "logical_zone": "archives",
-      "planned_path": "ZIP_Archives",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "zipwiz-chamber-6-28",
-      "kind": "archive_family",
-      "current_path": "ZipWiz_Chamber_6_28",
-      "logical_zone": "archives",
-      "planned_path": "ZipWiz_Chamber_6_28",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "staging",
-      "kind": "logical_zone",
-      "current_path": "_staging",
-      "logical_zone": "_staging",
-      "planned_path": "_staging",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "archives",
-      "kind": "logical_zone",
-      "current_path": "archives",
-      "logical_zone": "archives",
-      "planned_path": "archives",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "aurora-cloudbank-symbolic-main",
-      "kind": "archive_artifact",
-      "current_path": "aurora-cloudbank-symbolic-main.zip",
-      "logical_zone": "archives",
-      "planned_path": "aurora-cloudbank-symbolic-main.zip",
-      "git_boundary": "none",
-      "storage_tier": "cold-archive",
-      "retention_policy": "quarantine-before-delete",
-      "owner": "archive-admin",
-      "status": "deferred"
-    },
-    {
-      "id": "aurora-cloudbank-symbolic-architecture-discovery-report",
-      "kind": "analysis_report",
-      "current_path": "aurora_cloudbank_symbolic_architecture_discovery_report.md",
-      "logical_zone": "reports",
-      "planned_path": "aurora_cloudbank_symbolic_architecture_discovery_report.md",
-      "git_boundary": "root",
-      "storage_tier": "operational-report",
-      "retention_policy": "versioned",
-      "owner": "operations",
-      "status": "managed"
-    },
-    {
-      "id": "catalog",
-      "kind": "control_surface",
-      "current_path": "catalog",
-      "logical_zone": "catalog",
-      "planned_path": "catalog",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "docs",
-      "kind": "control_surface",
-      "current_path": "docs",
-      "logical_zone": "docs",
-      "planned_path": "docs",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "exported-assets-lafinca",
-      "kind": "asset_bundle",
-      "current_path": "exported-assets \u2014 LaFinca",
-      "logical_zone": "projects",
-      "planned_path": "projects/exported-assets \u2014 LaFinca",
-      "git_boundary": "none",
-      "storage_tier": "source-bundle",
-      "retention_policy": "review-before-physical-move",
-      "owner": "project-review",
-      "status": "deferred",
-      "batch_id": "wave4_root_intake_cleanup_initial"
-    },
-    {
-      "id": "intake",
-      "kind": "logical_zone",
-      "current_path": "intake",
-      "logical_zone": "intake",
-      "planned_path": "intake",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "projects",
-      "kind": "logical_zone",
-      "current_path": "projects",
-      "logical_zone": "projects",
-      "planned_path": "projects",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "reports",
-      "kind": "report_zone",
-      "current_path": "reports",
-      "logical_zone": "reports",
-      "planned_path": "reports",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "operations",
-      "status": "managed"
-    },
-    {
-      "id": "repos",
-      "kind": "logical_zone",
-      "current_path": "repos",
-      "logical_zone": "repos",
-      "planned_path": "repos",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "skills",
-      "kind": "control_surface",
-      "current_path": "skills",
-      "logical_zone": "tools",
-      "planned_path": "skills",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "tests",
-      "kind": "control_surface",
-      "current_path": "tests",
-      "logical_zone": "tools",
-      "planned_path": "tests",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    },
-    {
-      "id": "tools",
-      "kind": "control_surface",
-      "current_path": "tools",
-      "logical_zone": "tools",
-      "planned_path": "tools",
-      "git_boundary": "root",
-      "storage_tier": "workspace-control",
-      "retention_policy": "versioned",
-      "owner": "workspace-admin",
-      "status": "managed"
-    }
-  ]
-}
+generated_at: '2026-03-15T02:54:56Z'
+root: .
+logical_taxonomy:
+- repos
+- projects
+- archives
+- reports
+- docs
+- catalog
+- tools
+- intake
+- _staging
+entries:
+- id: ds-store
+  kind: cache_or_local_artifact
+  current_path: .DS_Store
+  logical_zone: _staging
+  planned_path: .DS_Store
+  git_boundary: none
+  storage_tier: ephemeral
+  retention_policy: regenerate
+  owner: local-user
+  status: ignored
+- id: codex-skill-edits
+  kind: cache_or_local_artifact
+  current_path: .codex_skill_edits
+  logical_zone: _staging
+  planned_path: .codex_skill_edits
+  git_boundary: none
+  storage_tier: ephemeral
+  retention_policy: regenerate
+  owner: local-user
+  status: ignored
+- id: git-decommissioned-20260304-233325
+  kind: rollback_artifact
+  current_path: .git_decommissioned_20260304_233325
+  logical_zone: _staging
+  planned_path: .git_decommissioned_20260304_233325
+  git_boundary: none
+  storage_tier: workspace-meta
+  retention_policy: preserve
+  owner: workspace-admin
+  status: protected
+- id: gitattributes
+  kind: policy_file
+  current_path: .gitattributes
+  logical_zone: docs
+  planned_path: .gitattributes
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: githooks
+  kind: hook_policy
+  current_path: .githooks
+  logical_zone: tools
+  planned_path: .githooks
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: gitignore
+  kind: policy_file
+  current_path: .gitignore
+  logical_zone: docs
+  planned_path: .gitignore
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: gitwiz
+  kind: cache_or_local_artifact
+  current_path: .gitwiz
+  logical_zone: _staging
+  planned_path: .gitwiz
+  git_boundary: none
+  storage_tier: ephemeral
+  retention_policy: regenerate
+  owner: local-user
+  status: ignored
+- id: pytest-cache
+  kind: cache_or_local_artifact
+  current_path: .pytest_cache
+  logical_zone: _staging
+  planned_path: .pytest_cache
+  git_boundary: none
+  storage_tier: ephemeral
+  retention_policy: regenerate
+  owner: local-user
+  status: ignored
+- id: agents
+  kind: workspace_doc
+  current_path: AGENTS.md
+  logical_zone: docs
+  planned_path: AGENTS.md
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: aurora-gumas-pat-live-subset-ssot-v0-1-0-2026-03-14-structured-archive
+  kind: archive_artifact
+  current_path: AURORA_GUMAS_PAT_LIVE_SUBSET_SSOT__v0.1.0__2026-03-14__STRUCTURED_ARCHIVE.zip
+  logical_zone: archives
+  planned_path: AURORA_GUMAS_PAT_LIVE_SUBSET_SSOT__v0.1.0__2026-03-14__STRUCTURED_ARCHIVE.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: aurora-gumas-staff-registry-catalog-v0-1-0-2026-03-14-structured-archive
+  kind: archive_artifact
+  current_path: AURORA_GUMAS_STAFF_REGISTRY_CATALOG__v0.1.0__2026-03-14__STRUCTURED_ARCHIVE.zip
+  logical_zone: archives
+  planned_path: AURORA_GUMAS_STAFF_REGISTRY_CATALOG__v0.1.0__2026-03-14__STRUCTURED_ARCHIVE.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: aurora-gumas-staff-registry-ssot-v0-2-0-2026-03-14-structured-archive
+  kind: archive_artifact
+  current_path: AURORA_GUMAS_STAFF_REGISTRY_SSOT__v0.2.0__2026-03-14__STRUCTURED_ARCHIVE.zip
+  logical_zone: archives
+  planned_path: AURORA_GUMAS_STAFF_REGISTRY_SSOT__v0.2.0__2026-03-14__STRUCTURED_ARCHIVE.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: au-archive-323-326
+  kind: archive_family
+  current_path: AU_Archive_323_326
+  logical_zone: archives
+  planned_path: AU_Archive_323_326
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: au-archive-327-330
+  kind: archive_family
+  current_path: AU_Archive_327-330
+  logical_zone: archives
+  planned_path: AU_Archive_327-330
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: au-archive-331only
+  kind: archive_family
+  current_path: AU_Archive_331only
+  logical_zone: archives
+  planned_path: AU_Archive_331only
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: anchor-harmony-capsule-dr-srpv1
+  kind: archive_artifact
+  current_path: Anchor_Harmony_Capsule_DR-SRPv1.zip
+  logical_zone: archives
+  planned_path: Anchor_Harmony_Capsule_DR-SRPv1.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: anchor-harmony-capsule-dr-srpv1-aegis
+  kind: archive_artifact
+  current_path: Anchor_Harmony_Capsule_DR-SRPv1_Aegis.zip
+  logical_zone: archives
+  planned_path: Anchor_Harmony_Capsule_DR-SRPv1_Aegis.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: anchor-harmony-capsule-dr-srpv1-helix
+  kind: archive_artifact
+  current_path: Anchor_Harmony_Capsule_DR-SRPv1_Helix.zip
+  logical_zone: archives
+  planned_path: Anchor_Harmony_Capsule_DR-SRPv1_Helix.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: anchor-harmony-capsule-dr-srpv1-orien
+  kind: archive_artifact
+  current_path: Anchor_Harmony_Capsule_DR-SRPv1_Orien.zip
+  logical_zone: archives
+  planned_path: Anchor_Harmony_Capsule_DR-SRPv1_Orien.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: anchor-harmony-capsule-dr-srpv1-tessellate
+  kind: archive_artifact
+  current_path: Anchor_Harmony_Capsule_DR-SRPv1_Tessellate.zip
+  logical_zone: archives
+  planned_path: Anchor_Harmony_Capsule_DR-SRPv1_Tessellate.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: anchor-harmony-capsule-dr-srpv1-virellian
+  kind: archive_artifact
+  current_path: Anchor_Harmony_Capsule_DR-SRPv1_Virellian.zip
+  logical_zone: archives
+  planned_path: Anchor_Harmony_Capsule_DR-SRPv1_Virellian.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: au-archive-323-41
+  kind: archive_family
+  current_path: Au_Archive_323_41
+  logical_zone: archives
+  planned_path: Au_Archive_323_41
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: au-archive-412-417
+  kind: archive_family
+  current_path: Au_Archive_412_417
+  logical_zone: archives
+  planned_path: Au_Archive_412_417
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: au-archive-418-420
+  kind: archive_family
+  current_path: Au_Archive_418_420
+  logical_zone: archives
+  planned_path: Au_Archive_418_420
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: au-archive-42-45
+  kind: archive_family
+  current_path: Au_Archive_42_45
+  logical_zone: archives
+  planned_path: Au_Archive_42_45
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: au-archive-45-49
+  kind: archive_family
+  current_path: Au_Archive_45_49
+  logical_zone: archives
+  planned_path: Au_Archive_45_49
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: au-archive-527
+  kind: archive_family
+  current_path: Au_Archive_527
+  logical_zone: archives
+  planned_path: Au_Archive_527
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: au-archive-620-623
+  kind: archive_family
+  current_path: Au_Archive_620_623
+  logical_zone: archives
+  planned_path: Au_Archive_620_623
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: au-archive-62-619
+  kind: archive_family
+  current_path: Au_Archive_62_619
+  logical_zone: archives
+  planned_path: Au_Archive_62_619
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: auora2
+  kind: project_bundle
+  current_path: Auora2.5_DEV
+  logical_zone: projects
+  planned_path: projects/Auora2.5_DEV
+  git_boundary: none
+  storage_tier: source-bundle
+  retention_policy: review-before-physical-move
+  owner: project-review
+  status: deferred
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-quantum-en
+  kind: log_bundle
+  current_path: Aurora-quantum-en
+  logical_zone: _staging
+  planned_path: _staging/Aurora-quantum-en
+  git_boundary: none
+  storage_tier: isolated
+  retention_policy: preserve
+  owner: workspace-admin
+  status: deferred
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-multilang-projectspace-starterpack-v1-0
+  kind: archive_artifact
+  current_path: Aurora_Multilang_ProjectSpace_StarterPack_v1.0.zip
+  logical_zone: archives
+  planned_path: Aurora_Multilang_ProjectSpace_StarterPack_v1.0.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: aurora-new-11-9
+  kind: project_bundle
+  current_path: Aurora_New_11_9
+  logical_zone: projects
+  planned_path: projects/Aurora_New_11_9
+  git_boundary: none
+  storage_tier: source-bundle
+  retention_policy: review-before-physical-move
+  owner: project-review
+  status: deferred
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-new-9-22
+  kind: project_bundle
+  current_path: Aurora_New_9_22
+  logical_zone: projects
+  planned_path: projects/Aurora_New_9_22
+  git_boundary: none
+  storage_tier: source-bundle
+  retention_policy: review-before-physical-move
+  owner: project-review
+  status: deferred
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-project-cloudhub-deploy
+  kind: project_bundle
+  current_path: Aurora_Project_Cloudhub_Deploy
+  logical_zone: projects
+  planned_path: projects/Aurora_Project_Cloudhub_Deploy
+  git_boundary: none
+  storage_tier: source-bundle
+  retention_policy: review-before-physical-move
+  owner: project-review
+  status: deferred
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-sim-architecture
+  kind: repo_hub
+  current_path: Aurora_Sim_Architecture
+  logical_zone: repos
+  planned_path: Aurora_Sim_Architecture
+  git_boundary: nested
+  storage_tier: source
+  retention_policy: preserve
+  owner: repository-owner
+  status: protected
+- id: automation-reports
+  kind: report_collection
+  current_path: Automation_Reports
+  logical_zone: reports
+  planned_path: reports/automation/legacy/Automation_Reports
+  git_boundary: none
+  storage_tier: operational-report
+  retention_policy: archive-after-migration
+  owner: operations
+  status: migrated_empty
+  notes: Empty legacy shell retained pending a dedicated cleanup batch.
+- id: canonrec
+  kind: archive_artifact
+  current_path: CanonRec.zip
+  logical_zone: archives
+  planned_path: CanonRec.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: complete-archive-4-19
+  kind: archive_family
+  current_path: Complete Archive 4_19 copy
+  logical_zone: archives
+  planned_path: Complete Archive 4_19 copy
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: echonet-fullrelaybundle-v1
+  kind: archive_artifact
+  current_path: EchoNet_FullRelayBundle_v1.zip
+  logical_zone: archives
+  planned_path: EchoNet_FullRelayBundle_v1.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: flowstate-threadcore-bundle
+  kind: archive_artifact
+  current_path: FlowState_ThreadCore_BUNDLE.zip
+  logical_zone: archives
+  planned_path: FlowState_ThreadCore_BUNDLE.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: gui-cloudhub
+  kind: project_bundle
+  current_path: GUI_Cloudhub
+  logical_zone: projects
+  planned_path: projects/GUI_Cloudhub
+  git_boundary: none
+  storage_tier: source-bundle
+  retention_policy: review-before-physical-move
+  owner: project-review
+  status: deferred
+  batch_id: wave4_root_intake_cleanup_initial
+- id: gumas-master-transfer-bundle-v1-rc
+  kind: archive_artifact
+  current_path: GUMAS_Master_Transfer_Bundle_v1_RC.zip
+  logical_zone: archives
+  planned_path: GUMAS_Master_Transfer_Bundle_v1_RC.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: gumas-recov-archive-a01
+  kind: archive_artifact
+  current_path: GUMAS_RECOV_ARCHIVE_A01.zip
+  logical_zone: archives
+  planned_path: GUMAS_RECOV_ARCHIVE_A01.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: gumas-sim-2
+  kind: project_bundle
+  current_path: GUMAS_SIM_2.0
+  logical_zone: projects
+  planned_path: projects/GUMAS_SIM_2.0
+  git_boundary: none
+  storage_tier: source-bundle
+  retention_policy: review-before-physical-move
+  owner: project-review
+  status: deferred
+  batch_id: wave4_root_intake_cleanup_initial
+- id: gumas-sim-2-0
+  kind: archive_artifact
+  current_path: GUMAS_SIM_2.0 2.zip
+  logical_zone: archives
+  planned_path: GUMAS_SIM_2.0 2.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: gumas-sim-2-0
+  kind: archive_artifact
+  current_path: GUMAS_SIM_2.0.zip
+  logical_zone: archives
+  planned_path: GUMAS_SIM_2.0.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: gumas-sim-2
+  kind: repo_hub
+  current_path: GUMAS_SIM_2.5
+  logical_zone: repos
+  planned_path: GUMAS_SIM_2.5
+  git_boundary: nested
+  storage_tier: source
+  retention_policy: preserve
+  owner: repository-owner
+  status: protected
+- id: gumas-symbolic-modules-export-a1
+  kind: archive_artifact
+  current_path: GUMAS_SYMBOLIC_MODULES_EXPORT_A1.zip
+  logical_zone: archives
+  planned_path: GUMAS_SYMBOLIC_MODULES_EXPORT_A1.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: legacy-promotion-candidate-pack-v0-2-0-2026-03-10
+  kind: archive_artifact
+  current_path: Legacy_Promotion_Candidate_Pack__v0.2.0__2026-03-10.zip
+  logical_zone: archives
+  planned_path: Legacy_Promotion_Candidate_Pack__v0.2.0__2026-03-10.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: legacy-recovery-packet-v0-1-2026-03-10
+  kind: archive_artifact
+  current_path: Legacy_Recovery_Packet__v0.1__2026-03-10.zip
+  logical_zone: archives
+  planned_path: Legacy_Recovery_Packet__v0.1__2026-03-10.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: orion-ord-promotionworkbench-v0-5-0-2026-03-10-structured-archive
+  kind: archive_artifact
+  current_path: ORION_ORD__PromotionWorkbench__v0.5.0__2026-03-10__STRUCTURED_ARCHIVE.zip
+  logical_zone: archives
+  planned_path: ORION_ORD__PromotionWorkbench__v0.5.0__2026-03-10__STRUCTURED_ARCHIVE.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: perplexity-research
+  kind: research_bundle
+  current_path: Perplexity_Research
+  logical_zone: projects
+  planned_path: projects/Perplexity_Research
+  git_boundary: none
+  storage_tier: reference-bundle
+  retention_policy: review-before-physical-move
+  owner: project-review
+  status: deferred
+  batch_id: wave4_root_intake_cleanup_initial
+- id: qgia-deployment-package
+  kind: intake_file
+  current_path: QGIA-Deployment-Package.md
+  logical_zone: intake
+  planned_path: intake/QGIA-Deployment-Package.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: qgia-knowledge-index
+  kind: intake_file
+  current_path: QGIA-Knowledge-Index.md
+  logical_zone: intake
+  planned_path: intake/QGIA-Knowledge-Index.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: qgia-quick-reference
+  kind: intake_file
+  current_path: QGIA-Quick-Reference.md
+  logical_zone: intake
+  planned_path: intake/QGIA-Quick-Reference.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: qgia-system-manifest
+  kind: intake_file
+  current_path: QGIA-System-Manifest.md
+  logical_zone: intake
+  planned_path: intake/QGIA-System-Manifest.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: qgia-system-spec-v4
+  kind: intake_file
+  current_path: QGIA-System-Spec-v4.md
+  logical_zone: intake
+  planned_path: intake/QGIA-System-Spec-v4.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: qgia-architecture
+  kind: intake_file
+  current_path: QGIA_ARCHITECTURE.md
+  logical_zone: intake
+  planned_path: intake/QGIA_ARCHITECTURE.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: readme
+  kind: workspace_doc
+  current_path: README.md
+  logical_zone: docs
+  planned_path: README.md
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: sort-later
+  kind: intake_collection
+  current_path: Sort Later
+  logical_zone: intake
+  planned_path: intake/Sort Later
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: deferred
+  batch_id: wave4_root_intake_cleanup_initial
+- id: streamdeck-glyphs
+  kind: asset_bundle
+  current_path: Streamdeck_Glyphs
+  logical_zone: projects
+  planned_path: projects/Streamdeck_Glyphs
+  git_boundary: none
+  storage_tier: source-bundle
+  retention_policy: review-before-physical-move
+  owner: project-review
+  status: deferred
+  batch_id: wave4_root_intake_cleanup_initial
+- id: threadcore-library
+  kind: intake_collection
+  current_path: Threadcore Library
+  logical_zone: intake
+  planned_path: intake/Threadcore Library
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: threadcore-index
+  kind: empty_placeholder
+  current_path: Threadcore_Index
+  logical_zone: intake
+  planned_path: intake/Threadcore_Index
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: deferred_empty
+  batch_id: wave4_root_intake_cleanup_initial
+- id: unzipped-archives
+  kind: archive_family
+  current_path: Unzipped Archives
+  logical_zone: archives
+  planned_path: Unzipped Archives
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: zipwizard-quantumgpt-bundle-v1-0-0
+  kind: archive_artifact
+  current_path: ZIPWizard_QuantumGPT_Bundle_v1.0.0.zip
+  logical_zone: archives
+  planned_path: ZIPWizard_QuantumGPT_Bundle_v1.0.0.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: zip-archives
+  kind: archive_family
+  current_path: ZIP_Archives
+  logical_zone: archives
+  planned_path: ZIP_Archives
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: zipwiz-chamber-6-28
+  kind: archive_family
+  current_path: ZipWiz_Chamber_6_28
+  logical_zone: archives
+  planned_path: ZipWiz_Chamber_6_28
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: staging
+  kind: logical_zone
+  current_path: _staging
+  logical_zone: _staging
+  planned_path: _staging
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: archives
+  kind: logical_zone
+  current_path: archives
+  logical_zone: archives
+  planned_path: archives
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: aurora-cloudbank-symbolic-main
+  kind: archive_artifact
+  current_path: aurora-cloudbank-symbolic-main.zip
+  logical_zone: archives
+  planned_path: aurora-cloudbank-symbolic-main.zip
+  git_boundary: none
+  storage_tier: cold-archive
+  retention_policy: quarantine-before-delete
+  owner: archive-admin
+  status: deferred
+- id: aurora-cloudbank-symbolic-architecture-discovery-report
+  kind: analysis_report
+  current_path: aurora_cloudbank_symbolic_architecture_discovery_report.md
+  logical_zone: reports
+  planned_path: aurora_cloudbank_symbolic_architecture_discovery_report.md
+  git_boundary: root
+  storage_tier: operational-report
+  retention_policy: versioned
+  owner: operations
+  status: managed
+- id: catalog
+  kind: control_surface
+  current_path: catalog
+  logical_zone: catalog
+  planned_path: catalog
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: constellation-config
+  kind: intake_file
+  current_path: constellation-config.json
+  logical_zone: intake
+  planned_path: intake/constellation-config.json
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: docs
+  kind: control_surface
+  current_path: docs
+  logical_zone: docs
+  planned_path: docs
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: exported-assets-lafinca
+  kind: asset_bundle
+  current_path: "exported-assets \u2014 LaFinca"
+  logical_zone: projects
+  planned_path: "projects/exported-assets \u2014 LaFinca"
+  git_boundary: none
+  storage_tier: source-bundle
+  retention_policy: review-before-physical-move
+  owner: project-review
+  status: deferred
+  batch_id: wave4_root_intake_cleanup_initial
+- id: intake
+  kind: logical_zone
+  current_path: intake
+  logical_zone: intake
+  planned_path: intake
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: projects
+  kind: logical_zone
+  current_path: projects
+  logical_zone: projects
+  planned_path: projects
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: qgia-agent-registry-full
+  kind: intake_file
+  current_path: qgia_agent_registry_full.json
+  logical_zone: intake
+  planned_path: intake/qgia_agent_registry_full.json
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: qgia-trust-network
+  kind: intake_file
+  current_path: qgia_trust_network.json
+  logical_zone: intake
+  planned_path: intake/qgia_trust_network.json
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: reports
+  kind: report_zone
+  current_path: reports
+  logical_zone: reports
+  planned_path: reports
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: operations
+  status: managed
+- id: repos
+  kind: logical_zone
+  current_path: repos
+  logical_zone: repos
+  planned_path: repos
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: skills
+  kind: control_surface
+  current_path: skills
+  logical_zone: tools
+  planned_path: skills
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: tests
+  kind: control_surface
+  current_path: tests
+  logical_zone: tools
+  planned_path: tests
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: tools
+  kind: control_surface
+  current_path: tools
+  logical_zone: tools
+  planned_path: tools
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
