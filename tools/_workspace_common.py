@@ -156,12 +156,28 @@ def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
             handle.write(json.dumps(row, sort_keys=False) + "\n")
 
 
+_SHA256_ERROR_SENTINEL = "error:unreadable"
+
+
 def sha256_file(path: Path) -> str:
+    """Return the SHA-256 hex digest of *path*.
+
+    On platforms where large files live on a FUSE/cloud-backed mount (e.g.
+    iCloud Drive via the macOS VM bridge), reading very large files can
+    raise ``OSError: [Errno 35] Resource temporarily unavailable`` or
+    ``Resource deadlock avoided``.  Rather than crashing the entire scan,
+    we catch those errors and return a sentinel string so the rest of the
+    inventory continues normally.  Callers that need a real hash can retry
+    the specific file later.
+    """
     digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    try:
+        with path.open("rb") as handle:
+            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(chunk)
+        return digest.hexdigest()
+    except OSError:
+        return _SHA256_ERROR_SENTINEL
 
 
 def sha256_tree(path: Path) -> str:
