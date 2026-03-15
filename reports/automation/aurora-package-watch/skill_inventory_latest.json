@@ -1,0 +1,32 @@
+{
+  "skills_root": "/Users/travisstreets/.codex/skills",
+  "count": 25,
+  "names": [
+    "aurora-canon-reconciler",
+    "aurora-exec-brief-pipeline",
+    "aurora-governance-orchestrator",
+    "aurora-narrative-tone-governor",
+    "aurora-python-ingest-autowire",
+    "aurora-quantum-forge-ops",
+    "aurora-repo-stabilizer",
+    "aurora-script-governor",
+    "aurora-selective-integration",
+    "aurora-skill-finder",
+    "chatgpt-apps",
+    "develop-web-game",
+    "doc",
+    "gh-address-comments",
+    "gh-fix-ci",
+    "gitwiz-github-manager",
+    "gumas-simulation-engine",
+    "imagegen",
+    "jupyter-notebook",
+    "mesh-router",
+    "pdf",
+    "security-best-practices",
+    "security-threat-model",
+    "threadcore-governor",
+    "zipwiz-governor"
+  ],
+  "hash16": "8a77a5f9ffa62d0b"
+}
