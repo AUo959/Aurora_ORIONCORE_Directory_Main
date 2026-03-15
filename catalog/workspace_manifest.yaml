@@ -1,4 +1,4 @@
-generated_at: '2026-03-15T03:22:06Z'
+generated_at: '2026-03-15T03:48:17Z'
 root: .
 logical_taxonomy:
 - repos
@@ -301,28 +301,6 @@ entries:
   retention_policy: quarantine-before-delete
   owner: archive-admin
   status: deferred
-- id: auora2
-  kind: project_bundle
-  current_path: Auora2.5_DEV
-  logical_zone: projects
-  planned_path: projects/Auora2.5_DEV
-  git_boundary: none
-  storage_tier: source-bundle
-  retention_policy: review-before-physical-move
-  owner: project-review
-  status: deferred
-  batch_id: wave4_root_intake_cleanup_initial
-- id: aurora-quantum-en
-  kind: log_bundle
-  current_path: Aurora-quantum-en
-  logical_zone: _staging
-  planned_path: _staging/Aurora-quantum-en
-  git_boundary: none
-  storage_tier: isolated
-  retention_policy: preserve
-  owner: workspace-admin
-  status: deferred
-  batch_id: wave4_root_intake_cleanup_initial
 - id: aurora-multilang-projectspace-starterpack-v1-0
   kind: archive_artifact
   current_path: Aurora_Multilang_ProjectSpace_StarterPack_v1.0.zip
@@ -333,39 +311,6 @@ entries:
   retention_policy: quarantine-before-delete
   owner: archive-admin
   status: deferred
-- id: aurora-new-11-9
-  kind: project_bundle
-  current_path: Aurora_New_11_9
-  logical_zone: projects
-  planned_path: projects/Aurora_New_11_9
-  git_boundary: none
-  storage_tier: source-bundle
-  retention_policy: review-before-physical-move
-  owner: project-review
-  status: deferred
-  batch_id: wave4_root_intake_cleanup_initial
-- id: aurora-new-9-22
-  kind: project_bundle
-  current_path: Aurora_New_9_22
-  logical_zone: projects
-  planned_path: projects/Aurora_New_9_22
-  git_boundary: none
-  storage_tier: source-bundle
-  retention_policy: review-before-physical-move
-  owner: project-review
-  status: deferred
-  batch_id: wave4_root_intake_cleanup_initial
-- id: aurora-project-cloudhub-deploy
-  kind: project_bundle
-  current_path: Aurora_Project_Cloudhub_Deploy
-  logical_zone: projects
-  planned_path: projects/Aurora_Project_Cloudhub_Deploy
-  git_boundary: none
-  storage_tier: source-bundle
-  retention_policy: review-before-physical-move
-  owner: project-review
-  status: deferred
-  batch_id: wave4_root_intake_cleanup_initial
 - id: aurora-sim-architecture
   kind: repo_hub
   current_path: Aurora_Sim_Architecture
@@ -376,17 +321,6 @@ entries:
   retention_policy: preserve
   owner: repository-owner
   status: protected
-- id: automation-reports
-  kind: report_collection
-  current_path: Automation_Reports
-  logical_zone: reports
-  planned_path: reports/automation/legacy/Automation_Reports
-  git_boundary: none
-  storage_tier: operational-report
-  retention_policy: archive-after-migration
-  owner: operations
-  status: migrated_empty
-  notes: Empty legacy shell retained pending a dedicated cleanup batch.
 - id: canonrec
   kind: archive_artifact
   current_path: CanonRec.zip
@@ -427,17 +361,6 @@ entries:
   retention_policy: quarantine-before-delete
   owner: archive-admin
   status: deferred
-- id: gui-cloudhub
-  kind: project_bundle
-  current_path: GUI_Cloudhub
-  logical_zone: projects
-  planned_path: projects/GUI_Cloudhub
-  git_boundary: none
-  storage_tier: source-bundle
-  retention_policy: review-before-physical-move
-  owner: project-review
-  status: deferred
-  batch_id: wave4_root_intake_cleanup_initial
 - id: gumas-master-transfer-bundle-v1-rc
   kind: archive_artifact
   current_path: GUMAS_Master_Transfer_Bundle_v1_RC.zip
@@ -448,17 +371,6 @@ entries:
   retention_policy: quarantine-before-delete
   owner: archive-admin
   status: deferred
-- id: gumas-sim-2
-  kind: project_bundle
-  current_path: GUMAS_SIM_2.0
-  logical_zone: projects
-  planned_path: projects/GUMAS_SIM_2.0
-  git_boundary: none
-  storage_tier: source-bundle
-  retention_policy: review-before-physical-move
-  owner: project-review
-  status: deferred
-  batch_id: wave4_root_intake_cleanup_initial
 - id: gumas-sim-2-0
   kind: archive_artifact
   current_path: GUMAS_SIM_2.0 2.zip
@@ -529,17 +441,6 @@ entries:
   retention_policy: quarantine-before-delete
   owner: archive-admin
   status: deferred
-- id: perplexity-research
-  kind: research_bundle
-  current_path: Perplexity_Research
-  logical_zone: projects
-  planned_path: projects/Perplexity_Research
-  git_boundary: none
-  storage_tier: reference-bundle
-  retention_policy: review-before-physical-move
-  owner: project-review
-  status: deferred
-  batch_id: wave4_root_intake_cleanup_initial
 - id: readme
   kind: workspace_doc
   current_path: README.md
@@ -550,50 +451,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: sort-later
-  kind: intake_collection
-  current_path: Sort Later
-  logical_zone: intake
-  planned_path: intake/Sort Later
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: deferred
-  batch_id: wave4_root_intake_cleanup_initial
-- id: streamdeck-glyphs
-  kind: asset_bundle
-  current_path: Streamdeck_Glyphs
-  logical_zone: projects
-  planned_path: projects/Streamdeck_Glyphs
-  git_boundary: none
-  storage_tier: source-bundle
-  retention_policy: review-before-physical-move
-  owner: project-review
-  status: deferred
-  batch_id: wave4_root_intake_cleanup_initial
-- id: threadcore-library
-  kind: intake_collection
-  current_path: Threadcore Library
-  logical_zone: intake
-  planned_path: intake/Threadcore Library
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: threadcore-index
-  kind: empty_placeholder
-  current_path: Threadcore_Index
-  logical_zone: intake
-  planned_path: intake/Threadcore_Index
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: deferred_empty
-  batch_id: wave4_root_intake_cleanup_initial
 - id: unzipped-archives
   kind: archive_family
   current_path: Unzipped Archives
@@ -708,17 +565,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: exported-assets-lafinca
-  kind: asset_bundle
-  current_path: "exported-assets \u2014 LaFinca"
-  logical_zone: projects
-  planned_path: "projects/exported-assets \u2014 LaFinca"
-  git_boundary: none
-  storage_tier: source-bundle
-  retention_policy: review-before-physical-move
-  owner: project-review
-  status: deferred
-  batch_id: wave4_root_intake_cleanup_initial
 - id: intake
   kind: logical_zone
   current_path: intake

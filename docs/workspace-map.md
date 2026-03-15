@@ -1,21 +1,21 @@
 # Workspace Map
 
-- Generated: `2026-03-15T03:22:06Z`
+- Generated: `2026-03-15T03:48:17Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `76`
+- Top-level entries cataloged: `62`
 - Nested repos registered: `3`
 - Archive or binary artifacts inventoried: `573`
-- Classification overrides loaded: `33` from `catalog/classification_overrides.yaml`
+- Classification overrides loaded: `1` from `catalog/classification_overrides.yaml`
 
 ## Zones
 
-- `_staging`: `8` top-level entries
+- `_staging`: `7` top-level entries
 - `archives`: `38` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `5` top-level entries
-- `intake`: `4` top-level entries
-- `projects`: `10` top-level entries
-- `reports`: `3` top-level entries
+- `intake`: `1` top-level entries
+- `projects`: `1` top-level entries
+- `reports`: `2` top-level entries
 - `repos`: `3` top-level entries
 - `tools`: `4` top-level entries
 
@@ -27,7 +27,7 @@
 
 ## Planned Move Candidates
 
-- `Threadcore Library` -> `intake/Threadcore Library` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
+- None
 
 ## Largest Archive/Binary Artifacts
 
@@ -39,7 +39,7 @@
 - `Au_Archive_412_417/4:11:AuDev.zip`: `385.4 MiB` [unique]
 - `Aurora_Sim_Architecture/openai-cookbook-main.zip`: `333.1 MiB` [unique]
 - `Complete Archive 4_19 copy/MicrosoftTeams.pkg`: `296.6 MiB` [unique]
-- `Streamdeck_Glyphs/Stream_Deck_6.8.1.21263(2).msi`: `240.1 MiB` [unique]
+- `projects/Streamdeck_Glyphs/Stream_Deck_6.8.1.21263(2).msi`: `240.1 MiB` [unique]
 - `Au_Archive_62_619/GUI_Cloudhub.zip`: `189.4 MiB` [unique]
 
 ## Reading Order
