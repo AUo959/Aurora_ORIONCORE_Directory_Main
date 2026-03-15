@@ -1,6 +1,6 @@
 # Workspace Map
 
-- Generated: `2026-03-15T02:54:56Z`
+- Generated: `2026-03-15T03:04:32Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
 - Top-level entries cataloged: `85`
 - Nested repos registered: `3`
@@ -10,10 +10,10 @@
 ## Zones
 
 - `_staging`: `7` top-level entries
-- `archives`: `39` top-level entries
+- `archives`: `38` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `5` top-level entries
-- `intake`: `13` top-level entries
+- `intake`: `14` top-level entries
 - `projects`: `10` top-level entries
 - `reports`: `3` top-level entries
 - `repos`: `3` top-level entries
@@ -34,6 +34,7 @@
 - `QGIA-System-Spec-v4.md` -> `intake/QGIA-System-Spec-v4.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `QGIA_ARCHITECTURE.md` -> `intake/QGIA_ARCHITECTURE.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Threadcore Library` -> `intake/Threadcore Library` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
+- `_entropy_quarantine` -> `intake/_entropy_quarantine` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 - `constellation-config.json` -> `intake/constellation-config.json` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `qgia_agent_registry_full.json` -> `intake/qgia_agent_registry_full.json` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `qgia_trust_network.json` -> `intake/qgia_trust_network.json` (intake_file, batch `wave4_root_intake_cleanup_initial`)
@@ -41,15 +42,15 @@
 ## Largest Archive/Binary Artifacts
 
 - `Au_Archive_412_417/2.2.6b+Archives  2.zip`: `845.1 MiB` [hash_duplicate]
-- `Au_Archive_412_417/2.2.6b+Archives .zip`: `845.1 MiB` [hash_duplicate]
-- `Complete Archive 4_19 copy/2.2.6b+Archives  2.zip`: `845.1 MiB` [hash_duplicate]
-- `Complete Archive 4_19 copy/2.2.6b+Archives .zip`: `845.1 MiB` [hash_duplicate]
+- `_entropy_quarantine/Au_Archive_412_417/2.2.6b+Archives .zip`: `845.1 MiB` [hash_duplicate]
+- `_entropy_quarantine/Complete Archive 4_19 copy/2.2.6b+Archives  2.zip`: `845.1 MiB` [hash_duplicate]
+- `_entropy_quarantine/Complete Archive 4_19 copy/2.2.6b+Archives .zip`: `845.1 MiB` [hash_duplicate]
 - `ZipWiz_Chamber_6_28/ZIPWIZ_Documents.zip`: `675.6 MiB` [unique]
 - `ZIP_Archives/9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2026-02-05-19-12-28-22da4e485f0b487cae0716c77b02b379.zip`: `503.5 MiB` [unique]
 - `ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs2 2.zip`: `481.1 MiB` [family_variant]
 - `ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs2.zip`: `481.1 MiB` [family_variant]
 - `Au_Archive_412_417/4:11:AuDev.zip`: `385.4 MiB` [hash_duplicate]
-- `Complete Archive 4_19 copy/4:11:AuDev.zip`: `385.4 MiB` [hash_duplicate]
+- `_entropy_quarantine/Complete Archive 4_19 copy/4:11:AuDev.zip`: `385.4 MiB` [hash_duplicate]
 
 ## Reading Order
 

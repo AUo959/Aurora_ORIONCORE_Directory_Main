@@ -1,4 +1,4 @@
-generated_at: '2026-03-15T02:54:56Z'
+generated_at: '2026-03-15T03:04:32Z'
 root: .
 logical_taxonomy:
 - repos
@@ -448,16 +448,6 @@ entries:
   retention_policy: quarantine-before-delete
   owner: archive-admin
   status: deferred
-- id: gumas-recov-archive-a01
-  kind: archive_artifact
-  current_path: GUMAS_RECOV_ARCHIVE_A01.zip
-  logical_zone: archives
-  planned_path: GUMAS_RECOV_ARCHIVE_A01.zip
-  git_boundary: none
-  storage_tier: cold-archive
-  retention_policy: quarantine-before-delete
-  owner: archive-admin
-  status: deferred
 - id: gumas-sim-2
   kind: project_bundle
   current_path: GUMAS_SIM_2.0
@@ -710,6 +700,17 @@ entries:
   retention_policy: quarantine-before-delete
   owner: archive-admin
   status: deferred
+- id: entropy-quarantine
+  kind: intake_collection
+  current_path: _entropy_quarantine
+  logical_zone: intake
+  planned_path: intake/_entropy_quarantine
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: staging
   kind: logical_zone
   current_path: _staging
