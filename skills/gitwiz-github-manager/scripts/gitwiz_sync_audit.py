@@ -51,7 +51,21 @@ def load_repo_registry(workspace_root: Path) -> list[dict[str, Any]]:
     registry_path = workspace_root / "catalog" / "repo_registry.yaml"
     if not registry_path.exists():
         return []
-    return json.loads(registry_path.read_text(encoding="utf-8")).get("repos", [])
+    raw = registry_path.read_text(encoding="utf-8").strip()
+    if not raw:
+        return []
+    # repo_registry.yaml is written by workspace_scan.py using dump_yaml_like,
+    # which produces JSON-compatible output. However it may be true YAML on disk,
+    # so try JSON first and fall back to yaml.safe_load.
+    try:
+        return json.loads(raw).get("repos", [])
+    except json.JSONDecodeError:
+        pass
+    try:
+        import yaml  # type: ignore
+        return (yaml.safe_load(raw) or {}).get("repos", [])
+    except Exception:
+        return []
 
 
 def parse_remote_map(remote_output: str) -> dict[str, dict[str, str]]:
