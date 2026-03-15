@@ -1,8 +1,8 @@
 # Workspace Map
 
-- Generated: `2026-03-15T03:48:17Z`
+- Generated: `2026-03-15T04:24:35Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `62`
+- Top-level entries cataloged: `74`
 - Nested repos registered: `3`
 - Archive or binary artifacts inventoried: `573`
 - Classification overrides loaded: `1` from `catalog/classification_overrides.yaml`
@@ -13,7 +13,7 @@
 - `archives`: `38` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `5` top-level entries
-- `intake`: `1` top-level entries
+- `intake`: `13` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `2` top-level entries
 - `repos`: `3` top-level entries
@@ -27,7 +27,18 @@
 
 ## Planned Move Candidates
 
-- None
+- `Aurora_Project_Context_Onboarding_Brief.html` -> `intake/Aurora_Project_Context_Onboarding_Brief.html` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `aurora-exec-brief-pipeline.skill` -> `intake/aurora-exec-brief-pipeline.skill` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `aurora-governance-orchestrator.skill` -> `intake/aurora-governance-orchestrator.skill` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `aurora-narrative-tone-governor.skill` -> `intake/aurora-narrative-tone-governor.skill` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `aurora-quantum-forge-ops.skill` -> `intake/aurora-quantum-forge-ops.skill` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `aurora-repo-stabilizer.skill` -> `intake/aurora-repo-stabilizer.skill` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `aurora-script-governor.skill` -> `intake/aurora-script-governor.skill` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `aurora-selective-integration.skill` -> `intake/aurora-selective-integration.skill` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `aurora-skill-finder.skill` -> `intake/aurora-skill-finder.skill` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `gumas-simulation-engine.skill` -> `intake/gumas-simulation-engine.skill` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `threadcore-governor.skill` -> `intake/threadcore-governor.skill` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `zipwiz-governor.skill` -> `intake/zipwiz-governor.skill` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 
 ## Largest Archive/Binary Artifacts
 

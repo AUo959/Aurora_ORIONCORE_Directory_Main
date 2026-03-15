@@ -588,6 +588,17 @@ class GUMASAdvancedEngine(BaseGUMASEngine):
             )
             self._apply_v3_event_to_base(normalized, base_result)
 
+    @staticmethod
+    def _resilience_scale(pop_stability: float) -> float:
+        """Dampen drain penalties when population stability is already low.
+
+        Returns a multiplier in [0.3, 1.0].  At high stability the full
+        penalty applies; at rock-bottom stability the drain is reduced to
+        30% — preventing runaway collapse while preserving crisis severity
+        when factions are healthy enough to absorb the hit.
+        """
+        return 0.3 + 0.7 * min(1.0, max(0.0, pop_stability))
+
     def _apply_v3_event_to_base(self, event: Dict[str, Any], result: TickResult) -> None:
         state = self.get_state()
         etype = event.get("type")
@@ -597,9 +608,11 @@ class GUMASAdvancedEngine(BaseGUMASEngine):
             dst = state.factions.get(event.get("destination", ""))
             mag = float(event.get("magnitude", 0.0))
             if src:
-                src.population_stability = self._clamp(src.population_stability - mag * 0.03)
+                scale = self._resilience_scale(src.population_stability)
+                src.population_stability = self._clamp(src.population_stability - mag * 0.03 * scale)
             if dst:
-                dst.population_stability = self._clamp(dst.population_stability - mag * 0.02)
+                scale = self._resilience_scale(dst.population_stability)
+                dst.population_stability = self._clamp(dst.population_stability - mag * 0.02 * scale)
                 dst.economic_strength = min(
                     dst.economic_potential,
                     dst.economic_strength + mag * 0.01,
@@ -609,7 +622,8 @@ class GUMASAdvancedEngine(BaseGUMASEngine):
             fid = event.get("faction_id")
             faction = state.factions.get(fid or "")
             if faction:
-                faction.population_stability = self._clamp(faction.population_stability - 0.05)
+                scale = self._resilience_scale(faction.population_stability)
+                faction.population_stability = self._clamp(faction.population_stability - 0.05 * scale)
                 faction.economic_strength = max(0.05, faction.economic_strength - 0.02)
                 leader = self._get_faction_leader(fid)
                 if leader:
@@ -693,15 +707,17 @@ class GUMASAdvancedEngine(BaseGUMASEngine):
             fid = event.get("faction_id")
             faction = state.factions.get(fid or "")
             if faction:
-                faction.population_stability = self._clamp(faction.population_stability - 0.06)
+                scale = self._resilience_scale(faction.population_stability)
+                faction.population_stability = self._clamp(faction.population_stability - 0.06 * scale)
                 faction.economic_strength = max(0.05, faction.economic_strength - 0.02)
 
         elif etype == "CIVIL_WAR_ONSET":
             fid = event.get("faction_id")
             faction = state.factions.get(fid or "")
             if faction:
+                scale = self._resilience_scale(faction.population_stability)
                 faction.military_strength = max(0.05, faction.military_strength - 0.04)
-                faction.population_stability = self._clamp(faction.population_stability - 0.08)
+                faction.population_stability = self._clamp(faction.population_stability - 0.08 * scale)
 
         elif etype == "STATE_FRAGMENTATION":
             if event.get("picard_delta_3_required") and not self._check_ethics(
@@ -719,10 +735,11 @@ class GUMASAdvancedEngine(BaseGUMASEngine):
             split = float(event.get("territory_split", 0.1))
             faction = state.factions.get(fid or "")
             if faction:
+                scale = self._resilience_scale(faction.population_stability)
                 faction.military_strength = max(0.05, faction.military_strength * (1.0 - split * 0.6))
                 faction.economic_strength = max(0.05, faction.economic_strength * (1.0 - split * 0.7))
                 faction.population_stability = self._clamp(
-                    faction.population_stability * (1.0 - split * 0.5)
+                    faction.population_stability * (1.0 - split * 0.5 * scale)
                 )
 
         elif etype == "SEPARATIST_DECLARATION":
@@ -736,9 +753,10 @@ class GUMASAdvancedEngine(BaseGUMASEngine):
             fid = event.get("faction_id")
             faction = state.factions.get(fid or "")
             if faction:
+                scale = self._resilience_scale(faction.population_stability)
                 faction.military_strength = self._clamp(faction.military_strength + 0.03)
                 faction.economic_strength = max(0.05, faction.economic_strength - 0.03)
-                faction.population_stability = self._clamp(faction.population_stability - 0.03)
+                faction.population_stability = self._clamp(faction.population_stability - 0.03 * scale)
 
     def _ensure_bilateral_treaty(self, faction_a: str, faction_b: str) -> None:
         state = self.get_state()

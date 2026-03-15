@@ -1,4 +1,4 @@
-generated_at: '2026-03-15T03:48:17Z'
+generated_at: '2026-03-15T04:24:35Z'
 root: .
 logical_taxonomy:
 - repos
@@ -311,6 +311,17 @@ entries:
   retention_policy: quarantine-before-delete
   owner: archive-admin
   status: deferred
+- id: aurora-project-context-onboarding-brief
+  kind: intake_file
+  current_path: Aurora_Project_Context_Onboarding_Brief.html
+  logical_zone: intake
+  planned_path: intake/Aurora_Project_Context_Onboarding_Brief.html
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: aurora-sim-architecture
   kind: repo_hub
   current_path: Aurora_Sim_Architecture
@@ -535,6 +546,94 @@ entries:
   retention_policy: quarantine-before-delete
   owner: archive-admin
   status: deferred
+- id: aurora-exec-brief-pipeline
+  kind: intake_file
+  current_path: aurora-exec-brief-pipeline.skill
+  logical_zone: intake
+  planned_path: intake/aurora-exec-brief-pipeline.skill
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-governance-orchestrator
+  kind: intake_file
+  current_path: aurora-governance-orchestrator.skill
+  logical_zone: intake
+  planned_path: intake/aurora-governance-orchestrator.skill
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-narrative-tone-governor
+  kind: intake_file
+  current_path: aurora-narrative-tone-governor.skill
+  logical_zone: intake
+  planned_path: intake/aurora-narrative-tone-governor.skill
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-quantum-forge-ops
+  kind: intake_file
+  current_path: aurora-quantum-forge-ops.skill
+  logical_zone: intake
+  planned_path: intake/aurora-quantum-forge-ops.skill
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-repo-stabilizer
+  kind: intake_file
+  current_path: aurora-repo-stabilizer.skill
+  logical_zone: intake
+  planned_path: intake/aurora-repo-stabilizer.skill
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-script-governor
+  kind: intake_file
+  current_path: aurora-script-governor.skill
+  logical_zone: intake
+  planned_path: intake/aurora-script-governor.skill
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-selective-integration
+  kind: intake_file
+  current_path: aurora-selective-integration.skill
+  logical_zone: intake
+  planned_path: intake/aurora-selective-integration.skill
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-skill-finder
+  kind: intake_file
+  current_path: aurora-skill-finder.skill
+  logical_zone: intake
+  planned_path: intake/aurora-skill-finder.skill
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: aurora-cloudbank-symbolic-architecture-discovery-report
   kind: analysis_report
   current_path: aurora_cloudbank_symbolic_architecture_discovery_report.md
@@ -565,6 +664,17 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
+- id: gumas-simulation-engine
+  kind: intake_file
+  current_path: gumas-simulation-engine.skill
+  logical_zone: intake
+  planned_path: intake/gumas-simulation-engine.skill
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: intake
   kind: logical_zone
   current_path: intake
@@ -625,6 +735,17 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
+- id: threadcore-governor
+  kind: intake_file
+  current_path: threadcore-governor.skill
+  logical_zone: intake
+  planned_path: intake/threadcore-governor.skill
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: tools
   kind: control_surface
   current_path: tools
@@ -635,3 +756,14 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
+- id: zipwiz-governor
+  kind: intake_file
+  current_path: zipwiz-governor.skill
+  logical_zone: intake
+  planned_path: intake/zipwiz-governor.skill
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial

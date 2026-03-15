@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-03-15T03:48:24Z",
+  "generated_at": "2026-03-15T04:24:42Z",
   "root": ".",
-  "top_level_entry_count": 62,
+  "top_level_entry_count": 74,
   "logical_zone_counts": {
     "_staging": 7,
     "docs": 5,
     "tools": 4,
     "archives": 38,
+    "intake": 13,
     "repos": 3,
     "reports": 2,
     "catalog": 1,
-    "intake": 1,
     "projects": 1
   },
   "nested_repo_count": 3,
   "archive_artifact_count": 573,
   "archive_artifact_bytes": 7803066847,
-  "planned_move_count": 0,
+  "planned_move_count": 12,
   "override_count": 1
 }
