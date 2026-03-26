@@ -31,6 +31,86 @@ def write_file(path: Path, content: str) -> None:
     path.write_text(content, encoding="utf-8")
 
 
+def yaml_scalar(value: object) -> str:
+    if value is None:
+        return "null"
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, (int, float)):
+        return str(value)
+    return json.dumps(value)
+
+
+def render_yaml_like(value: object, indent: int = 0) -> list[str]:
+    prefix = " " * indent
+    if isinstance(value, dict):
+        if not value:
+            return [f"{prefix}{{}}"]
+        lines: list[str] = []
+        for key, child in value.items():
+            if isinstance(child, dict):
+                if child:
+                    lines.append(f"{prefix}{key}:")
+                    lines.extend(render_yaml_like(child, indent + 2))
+                else:
+                    lines.append(f"{prefix}{key}: {{}}")
+            elif isinstance(child, list):
+                if child:
+                    lines.append(f"{prefix}{key}:")
+                    lines.extend(render_yaml_like(child, indent + 2))
+                else:
+                    lines.append(f"{prefix}{key}: []")
+            else:
+                lines.append(f"{prefix}{key}: {yaml_scalar(child)}")
+        return lines
+    if isinstance(value, list):
+        if not value:
+            return [f"{prefix}[]"]
+        lines = []
+        for child in value:
+            if isinstance(child, dict):
+                if not child:
+                    lines.append(f"{prefix}- {{}}")
+                    continue
+                entries = list(child.items())
+                first_key, first_value = entries[0]
+                if isinstance(first_value, (dict, list)):
+                    lines.append(f"{prefix}- {first_key}:")
+                    lines.extend(render_yaml_like(first_value, indent + 4))
+                else:
+                    lines.append(f"{prefix}- {first_key}: {yaml_scalar(first_value)}")
+                for key, grandchild in entries[1:]:
+                    if isinstance(grandchild, dict):
+                        if grandchild:
+                            lines.append(f"{prefix}  {key}:")
+                            lines.extend(render_yaml_like(grandchild, indent + 4))
+                        else:
+                            lines.append(f"{prefix}  {key}: {{}}")
+                    elif isinstance(grandchild, list):
+                        if grandchild:
+                            lines.append(f"{prefix}  {key}:")
+                            lines.extend(render_yaml_like(grandchild, indent + 4))
+                        else:
+                            lines.append(f"{prefix}  {key}: []")
+                    else:
+                        lines.append(f"{prefix}  {key}: {yaml_scalar(grandchild)}")
+                continue
+            if isinstance(child, list):
+                if child:
+                    lines.append(f"{prefix}-")
+                    lines.extend(render_yaml_like(child, indent + 2))
+                else:
+                    lines.append(f"{prefix}- []")
+                continue
+            lines.append(f"{prefix}- {yaml_scalar(child)}")
+        return lines
+    return [f"{prefix}{yaml_scalar(value)}"]
+
+
+def write_yaml_like(path: Path, value: object) -> None:
+    write_file(path, "\n".join(render_yaml_like(value)) + "\n")
+
+
 def copy_repo_file(source_relative: str, destination_root: Path) -> None:
     source = REPO_ROOT / source_relative
     destination = destination_root / source_relative
@@ -145,6 +225,78 @@ def test_archive_inventory_skips_nested_repo_internals(tmp_path: Path) -> None:
 def test_workspace_verify_passes_with_current_root_surface(workspace_root: Path) -> None:
     result = run_verify(workspace_root)
     report = json.loads(result.stdout)
+    assert result.returncode == 0
+    assert report["status"] == "pass"
+    assert report["summary"]["finding_count"] == 0
+
+
+def test_load_yaml_like_parses_generated_yaml_without_pyyaml(tmp_path: Path) -> None:
+    payload = tmp_path / "sample.yaml"
+    write_file(
+        payload,
+        "\n".join(
+            [
+                "generated_at: '2026-03-16T04:27:34Z'",
+                "root: .",
+                "entries:",
+                "- id: sample-entry",
+                "  status: managed",
+                "  count: 2",
+                "  enabled: true",
+                "  notes: Verified-duplicate archive quarantine. Files are byte-for-byte identical",
+                "    to their canonical copies. Safe to delete once reviewed.",
+            ]
+        )
+        + "\n",
+    )
+
+    loaded = workspace_common.load_yaml_like(payload)
+
+    assert loaded["generated_at"] == "2026-03-16T04:27:34Z"
+    assert loaded["root"] == "."
+    assert loaded["entries"][0]["count"] == 2
+    assert loaded["entries"][0]["enabled"] is True
+    assert loaded["entries"][0]["notes"] == (
+        "Verified-duplicate archive quarantine. Files are byte-for-byte identical "
+        "to their canonical copies. Safe to delete once reviewed."
+    )
+
+
+def test_dump_yaml_like_preserves_yaml_like_shape(tmp_path: Path) -> None:
+    payload = tmp_path / "roundtrip.yaml"
+    data = {
+        "generated_at": "2026-03-26T00:00:00Z",
+        "root": ".",
+        "repos": [
+            {
+                "name": "aurora-cloudbank-symbolic-main",
+                "branch": "main",
+                "enabled": True,
+            }
+        ],
+    }
+
+    workspace_common.dump_yaml_like(data, payload)
+
+    rendered = payload.read_text(encoding="utf-8")
+    assert rendered.startswith('generated_at: "2026-03-26T00:00:00Z"\n')
+    assert not rendered.lstrip().startswith("{")
+    assert workspace_common.load_yaml_like(payload) == data
+
+
+def test_workspace_verify_accepts_yaml_manifest_and_registry_files(workspace_root: Path) -> None:
+    manifest_path = workspace_root / "catalog" / "workspace_manifest.yaml"
+    registry_path = workspace_root / "catalog" / "repo_registry.yaml"
+
+    manifest = workspace_common.load_yaml_like(manifest_path)
+    registry = workspace_common.load_yaml_like(registry_path)
+
+    write_yaml_like(manifest_path, manifest)
+    write_yaml_like(registry_path, registry)
+
+    result = run_verify(workspace_root)
+    report = json.loads(result.stdout)
+
     assert result.returncode == 0
     assert report["status"] == "pass"
     assert report["summary"]["finding_count"] == 0

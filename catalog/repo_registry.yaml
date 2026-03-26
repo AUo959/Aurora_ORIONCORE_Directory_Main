@@ -1,33 +1,24 @@
-generated_at: '2026-03-16T04:27:34Z'
-root: .
+generated_at: "2026-03-26T02:57:30Z"
+root: "."
 repos:
-- name: aurora-cloudbank-symbolic-main
-  path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
-  branch: main
-  head_sha: 42e0b9fb9f1e0e10a9091d595cf2811f2c14eacf
-  remote_status: configured
-  validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
-    git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse
-    HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C
-    GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main status --short
-    --branch
-  move_policy: frozen_until_registry_adoption
-- name: CanonRec
-  path: GUMAS_SIM_2.5/CanonRec
-  branch: main
-  head_sha: 259bdc1b36f78237aac6cd6044ab1767dc84f844
-  remote_status: no_remote_configured
-  validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
-    git -C GUMAS_SIM_2.5/CanonRec rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE
-    -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/CanonRec status --short --branch
-  move_policy: frozen_until_registry_adoption
-- name: DuelSim_v2.0
-  path: GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0
-  branch: main
-  head_sha: db13ac7c97fdcab65a9ba051e23defc19ff4922f
-  remote_status: configured
-  validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
-    git -C GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0 rev-parse HEAD && env -u GIT_DIR -u
-    GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0
-    status --short --branch
-  move_policy: frozen_until_registry_adoption
+  - name: "aurora-cloudbank-symbolic-main"
+    path: "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main"
+    branch: "main"
+    head_sha: "accab1ad01de382ec7fcd0a68b83f56e61fc5cb6"
+    remote_status: "configured"
+    validation_command: "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main status --short --branch"
+    move_policy: "frozen_until_registry_adoption"
+  - name: "CanonRec"
+    path: "GUMAS_SIM_2.5/CanonRec"
+    branch: "main"
+    head_sha: "259bdc1b36f78237aac6cd6044ab1767dc84f844"
+    remote_status: "configured"
+    validation_command: "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/CanonRec rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/CanonRec status --short --branch"
+    move_policy: "frozen_until_registry_adoption"
+  - name: "DuelSim_v2.0"
+    path: "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0"
+    branch: "main"
+    head_sha: "db13ac7c97fdcab65a9ba051e23defc19ff4922f"
+    remote_status: "configured"
+    validation_command: "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0 rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0 status --short --branch"
+    move_policy: "frozen_until_registry_adoption"

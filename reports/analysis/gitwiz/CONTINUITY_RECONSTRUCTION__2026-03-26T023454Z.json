@@ -1,0 +1,205 @@
+{
+  "generated_at_utc": "2026-03-26 02:34:54 UTC",
+  "generated_at_compact": "2026-03-26T023454Z",
+  "workspace_root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "status": "review_required",
+  "root": {
+    "live_branch": "codex/root-control-plane-local-2026-03-25",
+    "published_commit": "5a7a634d714493ca5a71640d0b9641d02a7e9872",
+    "rescue_branch": "rescue/root-control-plane-dirty-workingcopy-2026-03-25",
+    "rescue_commit": "42a0432",
+    "rescue_scope": {
+      "files_changed": 154,
+      "insertions": 43852,
+      "deletions": 549,
+      "top_level_counts": {
+        "reports": 70,
+        "catalog": 32,
+        "docs": 27,
+        "tools": 18,
+        "GUMAS_SIM_2.5": 3,
+        "skills": 2,
+        "tests": 2
+      }
+    },
+    "classification": {
+      "generated_control_surfaces": [
+        "catalog/workspace_manifest.yaml",
+        "catalog/relocation_plan.json",
+        "catalog/path_aliases.csv",
+        "catalog/repo_registry.yaml",
+        "reports/analysis/workspace_scan_summary.json",
+        "reports/analysis/workspace_verify_latest.json"
+      ],
+      "durable_tooling_candidates": [
+        "catalog/schemas/",
+        "tools/threadcore_deploy_accesskey.py",
+        "tools/threadcore_echochain_link.py",
+        "tools/threadcore_visible_node.py",
+        "tools/aurora_qem_patch_release.py",
+        "skills/gitwiz-github-manager/",
+        "tests/test_gitwiz_sync_audit.py",
+        "tests/test_workspace_verify.py"
+      ],
+      "recovered_evidence_candidates": [
+        "catalog/draft_manifests/recovered/",
+        "docs/draft_protocols/recovered/",
+        "reports/analysis/recovered_root_text_batch__2026-03-20/",
+        "reports/analysis/canon_support/"
+      ]
+    },
+    "recommended_batches": [
+      {
+        "id": "root_batch_1",
+        "label": "tooling_and_schema_surface",
+        "priority": "high",
+        "paths": [
+          "catalog/schemas/",
+          "catalog/gitwiz_hygiene_policy.yaml",
+          "tools/threadcore_deploy_accesskey.py",
+          "tools/threadcore_echochain_link.py",
+          "tools/threadcore_visible_node.py",
+          "tools/aurora_qem_patch_release.py",
+          "skills/gitwiz-github-manager/",
+          "tests/test_gitwiz_sync_audit.py",
+          "tests/test_workspace_verify.py"
+        ]
+      },
+      {
+        "id": "root_batch_2",
+        "label": "recovered_reports_and_protocols",
+        "priority": "medium",
+        "paths": [
+          "catalog/draft_manifests/recovered/",
+          "docs/draft_protocols/recovered/",
+          "reports/analysis/recovered_root_text_batch__2026-03-20/",
+          "reports/analysis/canon_support/",
+          "docs/GFA_POSTURE.md"
+        ]
+      },
+      {
+        "id": "root_batch_3",
+        "label": "regenerated_control_surfaces",
+        "priority": "low",
+        "paths": [
+          "catalog/workspace_manifest.yaml",
+          "catalog/relocation_plan.json",
+          "catalog/path_aliases.csv",
+          "catalog/repo_registry.yaml",
+          "reports/analysis/workspace_scan_summary.json",
+          "reports/analysis/workspace_verify_latest.json"
+        ],
+        "note": "Regenerate from the canonical workspace instead of replaying blindly."
+      }
+    ]
+  },
+  "cloudbank": {
+    "live_branch": "main",
+    "published_main_commit": "accab1ad01de382ec7fcd0a68b83f56e61fc5cb6",
+    "published_salvage_commit": "b5feb4d57ab8ee571b8892e96535c5fc9e96bcbf",
+    "rescue_branch": "rescue/cloudbank-dirty-workingcopy-2026-03-25",
+    "rescue_commit": "724c001b",
+    "rescue_scope_vs_salvage": {
+      "status_counts": {
+        "added": 37,
+        "modified": 10,
+        "renamed": 1,
+        "deleted": 424
+      },
+      "top_level_counts": {
+        "docs": 138,
+        ".aurora": 36,
+        "scripts": 26,
+        "venv_opal2": 16,
+        "src": 15,
+        ".security": 13,
+        ".github": 11,
+        "runtime": 7
+      }
+    },
+    "already_preserved_by_published_salvage": [
+      "docs/PHASE1_MESH_RUNTIME_BOUNDARY.md",
+      "tests/test_mesh_runtime_api_surface.py",
+      "tests/test_mesh_runtime_surface.py",
+      "tests/test_reflective_autonomy_reexports.py",
+      "tests/threadcore_command_node.test.js",
+      "services/command_node/modules/threadcore.js",
+      "modules/reflective_autonomy/",
+      "src/mesh/live_agents.py"
+    ],
+    "local_only_continuity_candidates": [
+      ".aurora/",
+      "deployment/launchd/com.aurora.mesh-runtime.plist",
+      "runtime/mesh/mesh.db",
+      "runtime/mesh/transcripts/",
+      "scripts/git-hooks/pre-commit",
+      "scripts/git_pre_commit_hook.py",
+      "scripts/install_git_hooks.sh",
+      "scripts/install_mesh_runtime_launch_agent.sh",
+      "scripts/mesh-runtime-launch.sh",
+      "scripts/uninstall_mesh_runtime_launch_agent.sh",
+      ".gitignore",
+      ".husky/pre-commit",
+      ".pre-commit-config.yaml",
+      "package.json"
+    ],
+    "recommended_batches": [
+      {
+        "id": "cloudbank_batch_1",
+        "label": "aurora_continuity_state_snapshot",
+        "priority": "high",
+        "paths": [
+          ".aurora/"
+        ],
+        "note": "Treat as local continuity and runtime state first, not canonical source by default."
+      },
+      {
+        "id": "cloudbank_batch_2",
+        "label": "runtime_bootstrap_and_hook_surface",
+        "priority": "medium",
+        "paths": [
+          ".gitignore",
+          ".husky/pre-commit",
+          ".pre-commit-config.yaml",
+          "package.json",
+          "deployment/launchd/com.aurora.mesh-runtime.plist",
+          "scripts/git-hooks/pre-commit",
+          "scripts/git_pre_commit_hook.py",
+          "scripts/install_git_hooks.sh",
+          "scripts/install_mesh_runtime_launch_agent.sh",
+          "scripts/mesh-runtime-launch.sh",
+          "scripts/uninstall_mesh_runtime_launch_agent.sh"
+        ]
+      },
+      {
+        "id": "cloudbank_batch_3",
+        "label": "runtime_artifact_quarantine",
+        "priority": "medium",
+        "paths": [
+          "runtime/mesh/mesh.db",
+          "runtime/mesh/transcripts/"
+        ],
+        "note": "Keep as evidence or local runtime artifacts unless an explicit publication flow says otherwise."
+      },
+      {
+        "id": "cloudbank_batch_4",
+        "label": "legacy_deletion_set_review",
+        "priority": "low",
+        "paths": [
+          "docs/",
+          "scripts/",
+          "src/",
+          ".github/",
+          ".security/"
+        ],
+        "note": "Do not replay the 424-file deletion block wholesale. Review by subsystem."
+      }
+    ]
+  },
+  "durability": {
+    "root_patch_backup": "/tmp/root_control_plane_dirty_2026-03-25.patch",
+    "root_untracked_backup": "/tmp/root_control_plane_untracked_2026-03-25.tar",
+    "cloudbank_patch_backup": "/tmp/cloudbank_draft_working_2026-03-25.patch",
+    "cloudbank_untracked_backup": "/tmp/cloudbank_draft_untracked_2026-03-25.tar"
+  }
+}
