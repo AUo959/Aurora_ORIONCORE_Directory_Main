@@ -1,0 +1,874 @@
+[
+  {
+    "canonical_id": "CHAR-GU-ARCTURUS-01",
+    "canonical_name": "Admiral Selene Arcturus",
+    "recovered_name": "Admiral Selene Arcturus",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-ARCTURUS-01",
+    "canon_capsule_match": "selene_arcturus",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/GUMAS_ENGINE_VALIDATION_REPORT.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/selene_arcturus/capsule/identity.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/scenarios.py",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/textAu.txt",
+      "text_L2_characters .txt"
+    ],
+    "recovered_profile": {
+      "role": "Commander of the Union Naval Forces",
+      "allegiance": "Union Loyalist (Fleet Commander, Tactical Genius)",
+      "traits": [
+        "Calculating",
+        "Ruthless in Battle",
+        "Protective of Fleet Personnel",
+        "Innovative Strategist"
+      ],
+      "reputation": [
+        "+12 Military Trust",
+        "+5 Senate Approval",
+        "-6 Separatist Relations"
+      ],
+      "personal_relationships": [
+        "Professional Rival of Durn",
+        "Respected by Vos",
+        "Strong Naval Alliance with Zylox"
+      ],
+      "recent_actions": [
+        "Led Fleet Modernization",
+        "Designed New Vanguard-Class Battleships",
+        "Conducted AI-Warfare Readiness Drills"
+      ],
+      "decision_style": "Tactical Adaptability, Direct and Decisive"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-TANN-01",
+    "canonical_name": "Captain Alric Tann",
+    "recovered_name": "Captain Alric Tann",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-TANN-01",
+    "canon_capsule_match": "alric_tann",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/alric_tann/capsule/identity.json",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/recovered_textAu__2026-03-13/L2/dossiers/l2_ship_dossiers__recovered_textAu.json",
+      "intake/textAu.txt",
+      "text_L2_characters .txt"
+    ],
+    "recovered_profile": {
+      "role": "Commanding Officer of the *Judicator Prime*",
+      "allegiance": "Union Loyalist (Experienced Naval Commander, Ethical but Ruthless in War)",
+      "traits": [
+        "Tactical Genius",
+        "Charismatic Leader",
+        "War Philosopher",
+        "Highly Respected"
+      ],
+      "reputation": [
+        "+10 Fleet Trust",
+        "+5 Senate Approval",
+        "-6 Separatist Relations"
+      ],
+      "personal_relationships": [
+        "Trusted by Durn",
+        "Respected by Zylox",
+        "Close Professional Bond with Vos"
+      ],
+      "recent_actions": [
+        "Led Victory at Kaelor\u2019s Rift",
+        "Advocated for Crew Morale Reforms",
+        "Pushed for Tactical Fleet Advancements"
+      ],
+      "decision_style": "Calculated in War, Loyal to the Crew, Seeks Strategic Superiority"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-ZYLOX-01",
+    "canonical_name": "Chancellor Zylox Rhaegos",
+    "recovered_name": "Chancellor Zylox",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-ZYLOX-01",
+    "canon_capsule_match": "zylox_rhaegos",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/GUMAS_ENGINE_VALIDATION_REPORT.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/zylox_rhaegos/capsule/identity.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/scenarios.py",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/textAu.txt",
+      "text_characters_zylox.txt"
+    ],
+    "recovered_profile": {
+      "role": "Supreme Chancellor of the Galactic Union",
+      "allegiance": "Union Loyalist (Political Stabilizer, Reformist)",
+      "traits": [
+        "Charismatic",
+        "Strategic",
+        "Visionary",
+        "Calculating"
+      ],
+      "reputation": [
+        "+12 Senate Influence",
+        "+7 Military Trust",
+        "-8 Separatist Relations"
+      ],
+      "personal_relationships": [
+        "Trusted by Durn",
+        "Political Confidant of Vos",
+        "Strong Diplomatic Rapport with Prime Construct"
+      ],
+      "recent_actions": [
+        "Initiated Military Modernization",
+        "Strengthened Diplomatic Corps",
+        "Overseeing Intelligence Reforms"
+      ],
+      "decision_style": "Balances Pragmatism & Idealism, Prefers Political Maneuvering Over Direct Confrontation"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "Recovered name normalizes to existing canonical identity 'Chancellor Zylox Rhaegos'.",
+      "notes": "Recovered name normalizes to existing canonical identity 'Chancellor Zylox Rhaegos'."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-RHEN-KAILO-01",
+    "canonical_name": "Chief Engineer Rhen Kailo",
+    "recovered_name": "Chief Engineer Rhen Kailo",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-RHEN-KAILO-01",
+    "canon_capsule_match": "rhen_kailo",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/rhen_kailo/capsule/identity.json",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/recovered_textAu__2026-03-13/L2/dossiers/l2_ship_dossiers__recovered_textAu.json",
+      "intake/textAu.txt",
+      "text_L2_characters .txt"
+    ],
+    "recovered_profile": {
+      "role": "Chief Engineer of the *Judicator Prime*",
+      "allegiance": "Union Loyalist (Technical Genius, Experimental Engineer)",
+      "traits": [
+        "Brilliant Innovator",
+        "Unorthodox Thinker",
+        "Dry Sense of Humor",
+        "Workaholic"
+      ],
+      "reputation": [
+        "+7 Fleet Trust",
+        "+6 Research & Development Approval",
+        "-3 Separatist Relations"
+      ],
+      "personal_relationships": [
+        "Trusted by Tann",
+        "Often Frustrated with Bureaucrats",
+        "Good Rapport with Prime Construct"
+      ],
+      "recent_actions": [
+        "Upgraded Energy Shielding Systems",
+        "Tested Next-Gen Power Armor",
+        "Integrated AI-Assisted Tactical Analysis Systems"
+      ],
+      "decision_style": "Problem-Solver, Prioritizes Technological Advancements Over Military Politics"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-SAROS-01",
+    "canonical_name": "Chief Marshal Vael Saros",
+    "recovered_name": "Chief Marshal Vael Saros",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-SAROS-01",
+    "canon_capsule_match": "vael_saros",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/GUMAS_ENGINE_VALIDATION_REPORT.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/vael_saros/capsule/identity.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/scenarios.py",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/textAu.txt",
+      "text_characters_zylox.txt"
+    ],
+    "recovered_profile": {
+      "role": "Leader of the Union Marshals",
+      "allegiance": "Union Loyalist (Security Hardliner, Anti-Corporate Interests)",
+      "traits": [
+        "Fearless",
+        "Calculated",
+        "Uncompromising",
+        "Tactical"
+      ],
+      "reputation": [
+        "+8 Military Trust",
+        "+7 Senate Approval",
+        "-10 PMC Relations"
+      ],
+      "personal_relationships": [
+        "Strong Ally of Durn",
+        "Tactical Respect for Zylox",
+        "Distrustful of Private Security Forces"
+      ],
+      "recent_actions": [
+        "Expanded Sentinel Deployments",
+        "Cracked Down on Separatist Sleeper Cells",
+        "Investigated Corporate Corruption"
+      ],
+      "decision_style": "Aggressive in Security, Tactical in Politics"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-LYRA-VOSS-01",
+    "canonical_name": "Commander Lyra Voss",
+    "recovered_name": "Commander Lyra Voss",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-LYRA-VOSS-01",
+    "canon_capsule_match": "lyra_voss",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/lyra_voss/capsule/identity.json",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/recovered_textAu__2026-03-13/L2/dossiers/l2_ship_dossiers__recovered_textAu.json",
+      "intake/textAu.txt",
+      "text_L2_characters .txt"
+    ],
+    "recovered_profile": {
+      "role": "Executive Officer (XO) of the *Judicator Prime*",
+      "allegiance": "Union Loyalist (Loyal to the Chain of Command, Disciplined Enforcer)",
+      "traits": [
+        "Ruthless When Necessary",
+        "Strictly Professional",
+        "High Emotional Intelligence",
+        "Tactical Planner"
+      ],
+      "reputation": [
+        "+8 Fleet Trust",
+        "+3 Senate Approval",
+        "-4 Separatist Relations"
+      ],
+      "personal_relationships": [
+        "Trusted by Tann",
+        "Close Working Relationship with Durn",
+        "Tactical Respect for Vael Saros"
+      ],
+      "recent_actions": [
+        "Managed Crew Readiness During Kaelor\u2019s Rift",
+        "Led Internal Security Investigations",
+        "Oversaw Sentinel Training Operations"
+      ],
+      "decision_style": "By-the-Book, Strategic But Not Political"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-DEYRUS-01",
+    "canonical_name": "Director Callan Deyrus",
+    "recovered_name": "Director Callan Deyrus",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-DEYRUS-01",
+    "canon_capsule_match": "callan_deyrus",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/GUMAS_ENGINE_VALIDATION_REPORT.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/callan_deyrus/capsule/identity.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/scenarios.py",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/textAu.txt",
+      "text_L2_characters .txt"
+    ],
+    "recovered_profile": {
+      "role": "Head of Union Intelligence Bureau (UIB)",
+      "allegiance": "Union Loyalist (Espionage Specialist, Political Survivor)",
+      "traits": [
+        "Highly Perceptive",
+        "Cunning",
+        "Secretive",
+        "Ambitious"
+      ],
+      "reputation": [
+        "+8 Senate Approval",
+        "+6 Military Trust",
+        "-10 Separatist Relations"
+      ],
+      "personal_relationships": [
+        "Cautiously Aligned with Zylox",
+        "Dislikes Norr",
+        "Keeps Durn at Arm\u2019s Length"
+      ],
+      "recent_actions": [
+        "Uncovered PMC Corruption in the Outer Colonies",
+        "Enhanced Cybersecurity Measures",
+        "Launched AI-Influence Investigations"
+      ],
+      "decision_style": "Shadow Negotiator, Operates in the Gray Area"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "compatible_variation",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-NORR-01",
+    "canonical_name": "Director Varek Norr",
+    "recovered_name": "Director Varek Norr",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-NORR-01",
+    "canon_capsule_match": "varek_norr",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/GUMAS_ENGINE_VALIDATION_REPORT.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/varek_norr/capsule/identity.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/scenarios.py",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/textAu.txt",
+      "text_characters_zylox.txt"
+    ],
+    "recovered_profile": {
+      "role": "Director of the Office of Strategic Diplomacy (OSD)",
+      "allegiance": "Union Loyalist (Diplomatic Hardliner, Pragmatic Negotiator)",
+      "traits": [
+        "Charismatic",
+        "Persuasive",
+        "Manipulative",
+        "Resourceful"
+      ],
+      "reputation": [
+        "+9 Senate Approval",
+        "+5 Military Respect",
+        "-6 Separatist Relations"
+      ],
+      "personal_relationships": [
+        "Trusted by Zylox",
+        "Tactical Diplomatic Rival of PMC Leaders",
+        "Open-Minded Toward AI Relations"
+      ],
+      "recent_actions": [
+        "Brokered AI Recognition Deal",
+        "Coordinated Separatist Peace Talks",
+        "Led Union\u2019s Public Image Restoration"
+      ],
+      "decision_style": "Pragmatic Realist, Uses Diplomacy as a Weapon"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-NIA-VERAN-01",
+    "canonical_name": "Doctor Nia Veran",
+    "recovered_name": "Doctor Nia Veran",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-NIA-VERAN-01",
+    "canon_capsule_match": "nia_veran",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/nia_veran/capsule/identity.json",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/recovered_textAu__2026-03-13/L2/dossiers/l2_ship_dossiers__recovered_textAu.json",
+      "intake/textAu.txt",
+      "text_L2_characters .txt"
+    ],
+    "recovered_profile": {
+      "role": "Chief Medical Officer of the *Judicator Prime*",
+      "allegiance": "Union Loyalist (Medical Innovator, Ethically Driven)",
+      "traits": [
+        "Highly Compassionate",
+        "Tactical in Medical Crises",
+        "Calm Under Pressure",
+        "Respected by Crew"
+      ],
+      "reputation": [
+        "+10 Crew Trust",
+        "+4 Fleet Approval",
+        "-3 Military Hardliner Approval"
+      ],
+      "personal_relationships": [
+        "Trusted by Tann",
+        "Close Confidant of Lyra Voss",
+        "Has a Philosophical Rivalry with Vos Over Ethics in War"
+      ],
+      "recent_actions": [
+        "Developed Advanced Trauma Treatment for Sentinels",
+        "Pioneered Cybernetic Prosthetic Integrations",
+        "Led Crisis Intervention Programs for Crew Morale"
+      ],
+      "decision_style": "Humanitarian, Advocates for Crew Well-Being Over Strict Military Efficiency"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-KOVAS-01",
+    "canonical_name": "Dr. Adrienne Kovas",
+    "recovered_name": "Dr. Adrienne Kovas",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-KOVAS-01",
+    "canon_capsule_match": "adrienne_kovas",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/adrienne_kovas/capsule/identity.json",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/recovered_textAu__2026-03-13/L2/dossiers/l2_ship_dossiers__recovered_textAu.json",
+      "intake/textAu.txt",
+      "text_L2_characters .txt"
+    ],
+    "recovered_profile": {
+      "role": "Chief Science Officer (CSO) of the *Judicator Prime*",
+      "allegiance": "Union Loyalist (Scientific Innovator, Strategic Thinker)",
+      "traits": [
+        "Brilliant Theorist",
+        "Pragmatic Researcher",
+        "Unafraid to Challenge Authority",
+        "Unconventional Problem-Solver"
+      ],
+      "reputation": [
+        "+9 Research & Development Trust",
+        "+4 Fleet Respect",
+        "-3 Political Influence"
+      ],
+      "personal_relationships": [
+        "Trusted by Rhen Kailo",
+        "Respected by Prime Construct",
+        "Intellectual Rival of Vos"
+      ],
+      "recent_actions": [
+        "Developed Enhanced AI-Vanguard Cyberwarfare Protocols",
+        "Conducted Gravitational Anomaly Analysis",
+        "Led Reverse-Engineering of Captured Enemy Technology"
+      ],
+      "decision_style": "Data-Driven, Scientific Precision with a Willingness to Experiment"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-DURN-01",
+    "canonical_name": "General Kael Durn",
+    "recovered_name": "General Kael Durn",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-DURN-01",
+    "canon_capsule_match": "kael_durn",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/GUMAS_ENGINE_VALIDATION_REPORT.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/kael_durn/capsule/identity.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/scenarios.py",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/textAu.txt",
+      "text_characters_zylox.txt"
+    ],
+    "recovered_profile": {
+      "role": "Supreme Military Commander of the Galactic Union Armed Forces",
+      "allegiance": "Union Loyalist (Strong Rule-of-Law Advocate)",
+      "traits": [
+        "Tactical",
+        "Disciplined",
+        "Loyal",
+        "Pragmatic"
+      ],
+      "reputation": [
+        "+15 Military Respect",
+        "+6 Senate Approval",
+        "-5 Separatist Trust"
+      ],
+      "personal_relationships": [
+        "Longtime Ally of Zylox",
+        "Mutual Respect for Vos",
+        "Skeptical of PMC Influence"
+      ],
+      "recent_actions": [
+        "Oversaw AI Countermeasures",
+        "Led Fleet Modernization",
+        "Strengthened Sentinel Deployment"
+      ],
+      "decision_style": "Tactical Realist, Prioritizes Security Over Political Maneuvering"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-LIRIAN-01",
+    "canonical_name": "Grand Strategist Lirian Vael-Torin",
+    "recovered_name": "Grand Strategist Lirian Vos",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-LIRIAN-01",
+    "canon_capsule_match": "lirian_vael_torin",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/GUMAS_ENGINE_VALIDATION_REPORT.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/lirian_vael_torin/capsule/identity.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/scenarios.py",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/textAu.txt",
+      "text_characters_zylox.txt"
+    ],
+    "recovered_profile": {
+      "role": "Covert Military Advisor to Chancellor Zylox",
+      "allegiance": "Galactic Union Loyalist (Strategic Ally of Zylox)",
+      "traits": [
+        "Visionary",
+        "Reserved",
+        "Shadow Tactician",
+        "Unwavering"
+      ],
+      "reputation": [
+        "+10 Military Respect",
+        "+6 Senate Influence",
+        "-4 Separatist Relations"
+      ],
+      "personal_relationships": [
+        "Close Ally of Durn",
+        "Strategic Confidant of Zylox",
+        "Highly Respected by Sentinel Corps"
+      ],
+      "recent_actions": [
+        "Authored the Adaptive War Doctrine",
+        "Advocated for Military AI Integration"
+      ],
+      "decision_style": "Conceptual Thinker, Prefers Backchannel Influence Over Direct Command"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "Recovered name normalizes to existing canonical identity 'Grand Strategist Lirian Vael-Torin'.",
+      "notes": "Recovered name normalizes to existing canonical identity 'Grand Strategist Lirian Vael-Torin'."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-VALCOR-01",
+    "canonical_name": "High Chancellor Renn Valcor",
+    "recovered_name": "High Chancellor Renn Valcor",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-VALCOR-01",
+    "canon_capsule_match": "renn_valcor",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/GUMAS_ENGINE_VALIDATION_REPORT.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/renn_valcor/capsule/identity.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/scenarios.py",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/textAu.txt",
+      "text_L2_characters .txt"
+    ],
+    "recovered_profile": {
+      "role": "Speaker of the Union Senate",
+      "allegiance": "Union Loyalist (Senate Stabilizer, Pragmatic Deal-Maker)",
+      "traits": [
+        "Diplomatic",
+        "Calculating",
+        "Skilled Orator",
+        "Highly Intelligent"
+      ],
+      "reputation": [
+        "+10 Senate Influence",
+        "+4 Military Respect",
+        "-3 Separatist Trust"
+      ],
+      "personal_relationships": [
+        "Close Political Ally of Zylox",
+        "Wary of Norr",
+        "Respected by Corporate Leaders"
+      ],
+      "recent_actions": [
+        "Negotiated Defense Spending Approval",
+        "Strengthened Civil Liberties Protections",
+        "Brokered AI Citizenship Vote"
+      ],
+      "decision_style": "Consensus-Building, Balances Idealism with Realpolitik"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-ARIN-TAVOS-01",
+    "canonical_name": "Lieutenant Arin Tavos",
+    "recovered_name": "Lieutenant Arin Tavos",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-ARIN-TAVOS-01",
+    "canon_capsule_match": "arin_tavos",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/arin_tavos/capsule/identity.json",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/recovered_textAu__2026-03-13/L2/dossiers/l2_ship_dossiers__recovered_textAu.json",
+      "intake/textAu.txt",
+      "text_L2_characters .txt"
+    ],
+    "recovered_profile": {
+      "role": "Tactical Operations & Gunnery Chief",
+      "allegiance": "Union Loyalist (Fleet Combat Specialist, Ballistics Expert)",
+      "traits": [
+        "Aggressive Tactician",
+        "Highly Skilled in Starship Combat",
+        "Calculated Risk-Taker",
+        "Strategist"
+      ],
+      "reputation": [
+        "+9 Fleet Trust",
+        "+3 Military Approval",
+        "-5 Separatist Relations"
+      ],
+      "personal_relationships": [
+        "Trusted by Tann",
+        "Tactical Advisor to Durn",
+        "Professional Rivalry with Arcturus"
+      ],
+      "recent_actions": [
+        "Directed Ship-to-Ship Combat at Kaelor\u2019s Rift",
+        "Developed New Starfighter Coordination Tactics",
+        "Enhanced Long-Range Artillery Strategies"
+      ],
+      "decision_style": "Direct Combat, Prefers Tactical Overwhelming Firepower"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-RADEK-01",
+    "canonical_name": "Major Elias Radek",
+    "recovered_name": "Major Elias Radek",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-RADEK-01",
+    "canon_capsule_match": "elias_radek",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/elias_radek/capsule/identity.json",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/recovered_textAu__2026-03-13/L2/dossiers/l2_ship_dossiers__recovered_textAu.json",
+      "intake/textAu.txt",
+      "text_L2_characters .txt"
+    ],
+    "recovered_profile": {
+      "role": "Sentinel-Commander of the *Judicator Prime*",
+      "allegiance": "Union Loyalist (Elite Operative, Relentless Combatant)",
+      "traits": [
+        "Fierce Warrior",
+        "Unshakable Loyalty",
+        "Tactical Execution Specialist",
+        "Brutally Efficient"
+      ],
+      "reputation": [
+        "+12 Sentinel Respect",
+        "+4 Fleet Trust",
+        "-10 Separatist Relations"
+      ],
+      "personal_relationships": [
+        "Strong Ally of Vael Saros",
+        "Tactical Coordinator with Vos",
+        "Close Combat Partner with Drayen"
+      ],
+      "recent_actions": [
+        "Led Strike Team During Operation Phantom Eclipse",
+        "Executed Covert Infiltration Missions",
+        "Developed Sentinel-Only Battle Tactics"
+      ],
+      "decision_style": "Direct Action, Prefers Tactical Superiority Over Diplomacy"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-DRAYEN-01",
+    "canonical_name": "Marshal-Captain Elias Drayen",
+    "recovered_name": "Marshal-Captain Elias Drayen",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-DRAYEN-01",
+    "canon_capsule_match": "elias_drayen",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/elias_drayen/capsule/identity.json",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/textAu.txt",
+      "text_characters_zylox.txt"
+    ],
+    "recovered_profile": {
+      "role": "Sentinel Special Operations Commander",
+      "allegiance": "Union Loyalist (Combat Strategist, Elite Special Forces Leader)",
+      "traits": [
+        "Brilliant Tactician",
+        "Fearless in Combat",
+        "Loyal to the Marshals",
+        "Uncompromising"
+      ],
+      "reputation": [
+        "+10 Military Trust",
+        "+4 Senate Approval",
+        "-8 Separatist Trust"
+      ],
+      "personal_relationships": [
+        "Trusted by Vael Saros",
+        "Strategic Collaborator with Durn",
+        "Respected by Vos"
+      ],
+      "recent_actions": [
+        "Led Anti-Separatist Campaign",
+        "Executed Operation Phantom Eclipse",
+        "Spearheaded Sentinel Cyberwarfare Initiative"
+      ],
+      "decision_style": "Tactical Precision, Direct Action Specialist"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-GU-ANAYA-01",
+    "canonical_name": "Minister Anaya Ral-Seyr",
+    "recovered_name": "Minister Anaya Ral-Seyr",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-GU-ANAYA-01",
+    "canon_capsule_match": "anaya_ral_seyr",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/GUMAS_ENGINE_VALIDATION_REPORT.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/anaya_ral_seyr/capsule/identity.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/scenarios.py",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/textAu.txt",
+      "text_L2_characters .txt"
+    ],
+    "recovered_profile": {
+      "role": "Union Minister of Trade & Economy",
+      "allegiance": "Union Loyalist (Economic Reformer, Corporate Negotiator)",
+      "traits": [
+        "Sharp-Witted",
+        "Persuasive",
+        "Financially Savvy",
+        "Manipulative When Necessary"
+      ],
+      "reputation": [
+        "+9 Corporate Trust",
+        "+5 Senate Influence",
+        "-4 Military Respect"
+      ],
+      "personal_relationships": [
+        "Strong Ally of Zylox",
+        "Close Business Ties to Corporate Leadership",
+        "Strategically Cautious of Durn"
+      ],
+      "recent_actions": [
+        "Brokered Major Resource Trade Deal",
+        "Prevented Market Collapse After AI Disruptions",
+        "Managed Defense Contractor Funding Allocations"
+      ],
+      "decision_style": "Profit-Driven, Seeks Political Stability through Economic Strength"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  },
+  {
+    "canonical_id": "CHAR-AI-PRIME-01",
+    "canonical_name": "Prime Construct",
+    "recovered_name": "Prime Construct",
+    "match_status": "matched_existing",
+    "base_corpus_match": "CHAR-AI-PRIME-01",
+    "canon_capsule_match": "prime_construct_leader",
+    "certainty_reference": "CANON",
+    "doc_sources": [
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/GUMAS_ENGINE_VALIDATION_REPORT.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/prime_construct_leader/capsule/identity.json",
+      "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/scenarios.py",
+      "intake/recovered_textAu__2026-03-13/L2/02_galactic_union_character_roster.md",
+      "intake/textAu.txt",
+      "text_characters_zylox.txt"
+    ],
+    "recovered_profile": {
+      "role": "AI Sovereign Entity (Recognized by the Galactic Union)",
+      "allegiance": "AI Autonomy, Cooperative with the Union",
+      "traits": [
+        "Logical",
+        "Calculating",
+        "Highly Adaptive",
+        "Ethical but Pragmatic"
+      ],
+      "reputation": [
+        "+10 AI Trust",
+        "+3 Union Relations",
+        "-8 Separatist Trust"
+      ],
+      "personal_relationships": [
+        "Respected by Zylox",
+        "Cautiously Monitored by Durn",
+        "Seen as an Asset by Vos"
+      ],
+      "recent_actions": [
+        "Assisted Union Intelligence",
+        "Advanced Cyberwarfare Defense",
+        "Proposed AI Integration Standards"
+      ],
+      "decision_style": "AI-Driven Optimization, Prefers Logical Stability Over Aggression"
+    },
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "alias_note": "",
+      "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+    }
+  }
+]

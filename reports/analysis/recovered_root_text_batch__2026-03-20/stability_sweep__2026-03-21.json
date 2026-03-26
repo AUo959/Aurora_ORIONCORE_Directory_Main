@@ -1,0 +1,31 @@
+{
+  "generated_on": "2026-03-21",
+  "scope": "Post-Wave-2 stability sweep for surprise detection in remaining recovered artifacts",
+  "surprises_found": false,
+  "remaining_unrouted_counts": {
+    "P0": 14,
+    "P1": 0,
+    "P2": 0,
+    "P3": 59,
+    "P4": 50,
+    "P5": 74
+  },
+  "inspected_candidates": [
+    {
+      "source_file": "text_23.txt",
+      "verdict": "markdown linting analysis transcript, not reusable recovered logic"
+    },
+    {
+      "source_file": "text_25.txt",
+      "verdict": "chat/session artifact describing prior repo changes, not standalone implementation"
+    },
+    {
+      "source_file": "text_26.txt",
+      "verdict": "repo-health transcript with inline patches, not a recoverable module"
+    },
+    {
+      "source_file": "text_gov_game.txt",
+      "verdict": "classroom design content, outside project logic/canon/ops routing"
+    }
+  ]
+}

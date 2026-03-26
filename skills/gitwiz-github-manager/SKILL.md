@@ -31,6 +31,8 @@ Treat the workspace as multiple repos with different responsibilities:
 
 - Root control-plane repo:
   - current repo or workspace root
+  - the control plane for the full Aurora / ORIONCORE project workspace
+  - the policy and routing surface for currently registered repos and any future repos that become part of this project
 - Nested repos:
   - `Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
   - `GUMAS_SIM_2.5/CanonRec`
@@ -39,6 +41,9 @@ Treat the workspace as multiple repos with different responsibilities:
 Rules:
 
 - Never assume a request for the root repo also applies to nested repos.
+- Treat the root repo as the control plane, not as a replacement checkout for nested repo source history.
+- Treat `catalog/repo_registry.yaml` as the machine-readable list of repos currently registered for operations in this workspace.
+- If additional repos become part of the project later, register them in `catalog/repo_registry.yaml` before treating them as in-scope for automation, sync audits, or publication workflows.
 - Never add, change, or push nested repo remotes unless the user names that repo explicitly.
 - Read `catalog/repo_registry.yaml` before operating on nested repos.
 - In Codex worktrees, nested repo paths may not exist under the worktree root even if they exist in the canonical workspace. Distinguish worktree paths from canonical workspace paths before running hooks or validation.
@@ -71,6 +76,7 @@ Choose the working directory that actually contains the target repo:
 - Read `AGENTS.md` first when operating in the root repo. It is the fast operational reference for persistence, sync boundaries, repo scope, and current GitHub expectations.
 - `.gitwiz` in the workspace manifest is an ignored local artifact slot, not the source of truth for this skill.
 - This skill should live in versioned repo content and may also be copied into `~/.codex/skills/` for local availability.
+- Local repo copies are working clones, not authority by default. For named repos, treat the published GitHub branch as the authoritative baseline unless the user explicitly directs a different publication flow.
 - Prefer SSH remotes for ongoing use.
 - Prefer preserving remote history by branching it before replacing it.
 
@@ -81,6 +87,8 @@ Use these instead of improvising audit logic:
 - `scripts/gitwiz_sync_audit.py`
   - scans root or named nested repos
   - reports local dirty state, remotes, upstream tracking, ahead/behind, and sync actions
+  - supports repo-specific hygiene budgets via `catalog/gitwiz_hygiene_policy.yaml`
+  - can return non-zero exit status with `--fail-on` for automation or gating
   - writes JSON and Markdown reports
 - `scripts/gitwiz_pr_packet.py`
   - drafts a PR packet from the current branch against a base ref
@@ -163,11 +171,42 @@ When the user wants to know whether GitHub faithfully reflects local project sta
 Recommended patterns:
 
 - root repo only:
-  - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo root`
+  - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo root --policy catalog/gitwiz_hygiene_policy.yaml`
 - all repos with canonical workspace access:
-  - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo all --canonical-root "<canonical-workspace-root>"`
+  - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo all --canonical-root "<canonical-workspace-root>" --policy catalog/gitwiz_hygiene_policy.yaml`
+- fail when hygiene is already in the critical band:
+  - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo all --canonical-root "<canonical-workspace-root>" --policy catalog/gitwiz_hygiene_policy.yaml --fail-on critical`
 
 Treat this as the first step before any "make GitHub match local" workflow.
+
+### 2D. Drift Prevention In This Workspace
+
+This workspace does not behave like a single repo:
+
+- root is a control plane
+- `aurora-cloudbank-symbolic-main` is a large nested runtime repo
+- `CanonRec` and `DuelSim_v2.0` are separate nested repos with their own sync surfaces
+
+Because root Git status does not tell you whether the nested repos are quietly accumulating drift, use the all-repo audit as a routine hygiene check, not just as a publish-time diagnostic.
+
+Minimum cadence:
+
+1. Session start or handoff:
+   - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo all --canonical-root "<canonical-workspace-root>" --policy catalog/gitwiz_hygiene_policy.yaml`
+2. Before publish or parity claims:
+   - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo all --canonical-root "<canonical-workspace-root>" --policy catalog/gitwiz_hygiene_policy.yaml --fetch --fail-on critical`
+3. When a repo trips the warning budget on `main`:
+   - stop adding unrelated work
+   - move active work to a short-lived branch in that repo
+   - split the delta by repo and artifact class before it becomes a cleanup project
+
+The tracked `catalog/gitwiz_hygiene_policy.yaml` file is where this workspace encodes what "too much drift" means for each repo. Adjust that policy when the structure changes instead of relying on tribal memory.
+
+Control-plane rule:
+
+- the root repo governs repo-management policy for the whole project workspace
+- the audit and automation surface should operate on the repos listed in `catalog/repo_registry.yaml`
+- if a repo is part of the project but not yet listed there, treat that as a registration gap in the control plane, not as permission to improvise around it
 
 ### 2C. PR Packet Drafting
 
@@ -241,6 +280,11 @@ If the repo is dirty and the user wants to publish `main`:
 - do not check out `main` just to push it
 - push `refs/heads/main:refs/heads/main` directly
 - set upstream after the push
+
+Prevention note:
+
+- in this workspace, a dirty `main` should be treated as temporary working state, not a normal resting state
+- if `gitwiz_sync_audit.py` reports warning or critical hygiene on `main`, stop growing the change set and split it
 
 ### 7. Commit and Hook Rule
 

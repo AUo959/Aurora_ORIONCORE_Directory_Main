@@ -1,0 +1,6 @@
+AuroraLite_BridgeAgent_v1.0.zip
+├── aurora_prompt_injector.js         → Browser/Perplexity JS hook
+├── aurora_companion_manifest.json    → System descriptor for custom loaders
+├── symbolic_tag_guide.md             → Ref card for 🧠🪞♾️🧭 usage
+├── continuity_session_log_template.md → Editable trace log
+├── README_LiteDeploy.txt             → Quickstart for injection or bookmarklet

@@ -1,0 +1,360 @@
+[
+  {
+    "layer": "L2",
+    "recovered_name": "Admiral Selene Arcturus",
+    "canonical_name": "Admiral Selene Arcturus",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-ARCTURUS-01",
+    "canon_capsule_match": "selene_arcturus",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Captain Alric Tann",
+    "canonical_name": "Captain Alric Tann",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-TANN-01",
+    "canon_capsule_match": "alric_tann",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Chancellor Zylox",
+    "canonical_name": "Chancellor Zylox Rhaegos",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-ZYLOX-01",
+    "canon_capsule_match": "zylox_rhaegos",
+    "hard_collision": false,
+    "notes": "Recovered name normalizes to existing canonical identity 'Chancellor Zylox Rhaegos'."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Chief Engineer Rhen Kailo",
+    "canonical_name": "Chief Engineer Rhen Kailo",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-RHEN-KAILO-01",
+    "canon_capsule_match": "rhen_kailo",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Chief Marshal Vael Saros",
+    "canonical_name": "Chief Marshal Vael Saros",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-SAROS-01",
+    "canon_capsule_match": "vael_saros",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Commander Lyra Voss",
+    "canonical_name": "Commander Lyra Voss",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-LYRA-VOSS-01",
+    "canon_capsule_match": "lyra_voss",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Director Callan Deyrus",
+    "canonical_name": "Director Callan Deyrus",
+    "match_status": "matched_existing",
+    "role_alignment": "compatible_variation",
+    "base_corpus_match": "CHAR-GU-DEYRUS-01",
+    "canon_capsule_match": "callan_deyrus",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Director Varek Norr",
+    "canonical_name": "Director Varek Norr",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-NORR-01",
+    "canon_capsule_match": "varek_norr",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Doctor Nia Veran",
+    "canonical_name": "Doctor Nia Veran",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-NIA-VERAN-01",
+    "canon_capsule_match": "nia_veran",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Dr. Adrienne Kovas",
+    "canonical_name": "Dr. Adrienne Kovas",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-KOVAS-01",
+    "canon_capsule_match": "adrienne_kovas",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "General Kael Durn",
+    "canonical_name": "General Kael Durn",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-DURN-01",
+    "canon_capsule_match": "kael_durn",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Grand Strategist Lirian Vos",
+    "canonical_name": "Grand Strategist Lirian Vael-Torin",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-LIRIAN-01",
+    "canon_capsule_match": "lirian_vael_torin",
+    "hard_collision": false,
+    "notes": "Recovered name normalizes to existing canonical identity 'Grand Strategist Lirian Vael-Torin'."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "High Chancellor Renn Valcor",
+    "canonical_name": "High Chancellor Renn Valcor",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-VALCOR-01",
+    "canon_capsule_match": "renn_valcor",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Lieutenant Arin Tavos",
+    "canonical_name": "Lieutenant Arin Tavos",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-ARIN-TAVOS-01",
+    "canon_capsule_match": "arin_tavos",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Major Elias Radek",
+    "canonical_name": "Major Elias Radek",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-RADEK-01",
+    "canon_capsule_match": "elias_radek",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Marshal-Captain Elias Drayen",
+    "canonical_name": "Marshal-Captain Elias Drayen",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-DRAYEN-01",
+    "canon_capsule_match": "elias_drayen",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Minister Anaya Ral-Seyr",
+    "canonical_name": "Minister Anaya Ral-Seyr",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-GU-ANAYA-01",
+    "canon_capsule_match": "anaya_ral_seyr",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L2",
+    "recovered_name": "Prime Construct",
+    "canonical_name": "Prime Construct",
+    "match_status": "matched_existing",
+    "role_alignment": "aligned",
+    "base_corpus_match": "CHAR-AI-PRIME-01",
+    "canon_capsule_match": "prime_construct_leader",
+    "hard_collision": false,
+    "notes": "Recovered profile resolves to an active canon capsule and enriches an existing character identity."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Dr. Amelia Rivers",
+    "canonical_name": "Dr. Amelia Rivers",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0042",
+    "role_alignment": "aligned",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Prof. E. Sorensen",
+    "canonical_name": "Prof. Elena Sorensen",
+    "match_status": "probable_alias",
+    "matched_entity_id": "ORION.ENTITY.0010",
+    "role_alignment": "role_drift",
+    "hard_collision": false,
+    "notes": "Recovered name 'Prof. E. Sorensen' treated as alias of 'Prof. Elena Sorensen'."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Dr. Elira Noor",
+    "canonical_name": "Dr. Elira Noor",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0012",
+    "role_alignment": "aligned",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Kai Drev",
+    "canonical_name": "Kai Drev",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0022",
+    "role_alignment": "aligned",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Samantha Lee",
+    "canonical_name": "Samantha Lee",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0037",
+    "role_alignment": "aligned",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Alex Thorne",
+    "canonical_name": "Commander Alex Thorne",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0001",
+    "role_alignment": "role_drift",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Emily Roberts",
+    "canonical_name": "Emily Roberts",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0013",
+    "role_alignment": "compatible_variation",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Carmen Rivas",
+    "canonical_name": "Carmen Rivas",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0005",
+    "role_alignment": "aligned",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Naomi Vell",
+    "canonical_name": "Naomi Vell",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0029",
+    "role_alignment": "aligned",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Maren Koss",
+    "canonical_name": "Dr. Maren Koss",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0027",
+    "role_alignment": "aligned",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Ira Menon",
+    "canonical_name": "Ira Menon",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0017",
+    "role_alignment": "aligned",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Olivia Nguyen",
+    "canonical_name": "Olivia Nguyen",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0030",
+    "role_alignment": "role_drift",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Haneul Park",
+    "canonical_name": "Haneul Park",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0014",
+    "role_alignment": "aligned",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Tobias Qin",
+    "canonical_name": "Tobias Qin",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0039",
+    "role_alignment": "compatible_variation",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Dr. Amina Velin",
+    "canonical_name": "Dr. Amina Velin",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0002",
+    "role_alignment": "aligned",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  },
+  {
+    "layer": "L1",
+    "recovered_name": "Jessica Martinez",
+    "canonical_name": "Jessica Martinez",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0018",
+    "role_alignment": "role_drift",
+    "hard_collision": false,
+    "notes": "No hard clash detected."
+  }
+]

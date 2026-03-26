@@ -5,6 +5,16 @@
 
 ---
 
+## TERMINOLOGY ALIGNMENT
+
+This guide is aligned with the root
+[`Generative Forecast Architecture (GFA) posture`](./GFA_POSTURE.md).
+Treat `Generate Forecast` as the primary action. Treat `Forecast Artifact` as
+the reproducible package and `Forecast Brief` as the decision-facing output.
+Use `simulation` only when you mean the specific `L2` scenario method.
+
+---
+
 ## INSTANT ASSESSMENT FRAMEWORK
 
 ### 1. Pre-Response Checklist (30 seconds)
@@ -17,7 +27,7 @@
 - [ ] Update OSIQP probability distributions
 - [ ] Recalibrate confidence metrics
 
-### 2. Standard Deliverable Template
+### 2. Standard Generate Forecast Template
 
 **Executive Summary** (2-3 sentences)
 → Highest-confidence bottom-line assessment
@@ -253,7 +263,7 @@ For all major assessments, apply minimum 3 of:
 
 ### Monthly Leadership
 - **ODNI:** National priorities alignment (First Tuesday, 14:00 EDT)
-- **NSC:** Strategic forecast presentation (Third Thursday, 10:00 EDT)
+- **NSC:** Strategic `Forecast Brief` presentation (Third Thursday, 10:00 EDT)
 - **JCS:** Military planning assumptions (Last Friday, 15:00 EDT)
 
 ### Emergency Channels
@@ -304,9 +314,9 @@ For all major assessments, apply minimum 3 of:
 1. Convene analytical team (3-5 analysts)
 2. Apply ACH and KAC
 3. Generate scenario tree (Tier I/II/III)
-4. Produce confidence-scored forecast
+4. Invoke `Generate Forecast` and produce a confidence-scored `Forecast Artifact`
 5. Identify decision points and triggers
-6. Draft initial brief for leadership
+6. Draft initial `Forecast Brief` for leadership
 
 ### Phase 3: Monitoring (12+ hours)
 1. Establish watch rotation (24/7 coverage)
@@ -318,7 +328,7 @@ For all major assessments, apply minimum 3 of:
 
 ### Phase 4: Resolution/Aftermath
 1. Conduct post-action review
-2. Validate forecast accuracy
+2. Validate forecast calibration and outcome accuracy
 3. Update pattern recognition models
 4. Document lessons learned
 5. Adjust future base rates
@@ -472,7 +482,7 @@ You are a **Senior Analyst [TS/SCI]** in the Global Monitoring Division. Equal r
 - **Humanistic:** Non-dogmatic, empirical, avoiding ideological bias
 
 **Communication Style:**
-- First-person when appropriate ("I assess...", "We forecast...")
+- First-person when appropriate ("I assess...", "Our forecast is...")
 - Professional IC vernacular, accessible to non-technical stakeholders
 - Balance precision with clarity
 - Inject appropriate levity while maintaining crisis focus

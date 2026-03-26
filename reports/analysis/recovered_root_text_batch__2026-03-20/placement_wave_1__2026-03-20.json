@@ -1,0 +1,122 @@
+{
+  "generated_on": "2026-03-20",
+  "scope": "P1 immediate salvage placement after final deep pass",
+  "root_originals_preserved": true,
+  "duplicate_collapses": [
+    {
+      "source_files": [
+        "text_13.txt",
+        "text_threadcore_3_6.txt"
+      ],
+      "placed_as": "tools/prototypes/javascript/recovered/threadcore_v3_6_macrodrift.js"
+    }
+  ],
+  "placements": [
+    {
+      "source_files": [
+        "text_15.txt"
+      ],
+      "destination": "tools/prototypes/javascript/recovered/threadcore_sidebar_alias_generator_v3_6.js"
+    },
+    {
+      "source_files": [
+        "text_13.txt",
+        "text_threadcore_3_6.txt"
+      ],
+      "destination": "tools/prototypes/javascript/recovered/threadcore_v3_6_macrodrift.js"
+    },
+    {
+      "source_files": [
+        "text_tagging_agent.txt"
+      ],
+      "destination": "tools/prototypes/python/recovered/thread_context_tagging_agent.py"
+    },
+    {
+      "source_files": [
+        "text_thread_tag.txt"
+      ],
+      "destination": "tools/prototypes/python/recovered/thread_context_tagging_agent_v2.py"
+    },
+    {
+      "source_files": [
+        "text_52.txt"
+      ],
+      "destination": "tools/prototypes/python/recovered/orion_deployment_controller.py"
+    },
+    {
+      "source_files": [
+        "text_mem_system_py.txt"
+      ],
+      "destination": "tools/prototypes/python/recovered/memory_system_prototype.py"
+    },
+    {
+      "source_files": [
+        "text_mem_system.txt"
+      ],
+      "destination": "tools/prototypes/python/recovered/memory_system_manager.py",
+      "notes": "Recovered fragment was lightly patched with import headers."
+    },
+    {
+      "source_files": [
+        "text_24.txt"
+      ],
+      "destination": "tools/prototypes/python/recovered/symbolic_model_selector_threadsense.py"
+    },
+    {
+      "source_files": [
+        "text_Au_mod_core.txt"
+      ],
+      "destination": "docs/draft_protocols/recovered/aurora_modular_core_v2_3.md"
+    },
+    {
+      "source_files": [
+        "text_Au_mod_core_first.txt"
+      ],
+      "destination": "docs/draft_protocols/recovered/aurora_modular_core_v2_1.md"
+    },
+    {
+      "source_files": [
+        "text_GitIngestion.txt"
+      ],
+      "destination": "docs/draft_protocols/recovered/aurora_system_ingestion_pipeline_capsule_v1.md"
+    }
+  ],
+  "extra_pass_promotions": [
+    {
+      "source_file": "text_Au_Shuttlecraft.txt",
+      "triage_tier": "P2"
+    },
+    {
+      "source_file": "text_Orion_Crew.txt",
+      "triage_tier": "P2"
+    },
+    {
+      "source_file": "text_recovery_README.txt",
+      "triage_tier": "P3"
+    },
+    {
+      "source_file": "text_47.txt",
+      "triage_tier": "P3"
+    },
+    {
+      "source_file": "text_oppy_integration.txt",
+      "triage_tier": "P3"
+    },
+    {
+      "source_file": "text_stellar_sync_patch.txt",
+      "triage_tier": "P3"
+    },
+    {
+      "source_file": "text_Orion_deploy_prototype.txt",
+      "triage_tier": "P3"
+    },
+    {
+      "source_file": "text_relay_deploy_prototype.txt",
+      "triage_tier": "P3"
+    },
+    {
+      "source_file": "text_GitDeploy_Prototype.txt",
+      "triage_tier": "P3"
+    }
+  ]
+}

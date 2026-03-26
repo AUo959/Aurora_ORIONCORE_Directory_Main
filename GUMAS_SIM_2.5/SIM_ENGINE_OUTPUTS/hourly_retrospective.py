@@ -1324,6 +1324,32 @@ def main() -> int:
             trends=trends,
         )
 
+        # ── L2 crisis enrichment (soft import — degrades gracefully if absent) ──
+        try:
+            import runpy as _runpy
+            _ce_path = Path(__file__).resolve().parent / "crisis_escalation.py"
+            if not _ce_path.exists():
+                raise FileNotFoundError(f"crisis_escalation.py not found at {_ce_path}")
+            _ce_globals = _runpy.run_path(str(_ce_path))
+            _build_l2 = _ce_globals["build_l2_enriched_alerts"]
+            # In dry-run, simulation_snapshot_path is a temp file — fall back to live snapshot
+            _ce_snap = (
+                simulation_snapshot_path
+                if simulation_snapshot_path.exists()
+                else snapshot_path
+            )
+            _l2_alerts = _build_l2(_ce_snap)
+            alerts = alerts + _l2_alerts
+        except Exception as _ce_err:
+            # L2 enrichment unavailable — log to alerts but do not interrupt
+            alerts.append(
+                {
+                    "code": "L2_CRISIS_UNAVAILABLE",
+                    "severity": "watch",
+                    "message": f"L2 crisis module load failed: {_ce_err}",
+                }
+            )
+
         generated_at_utc = datetime.now(timezone.utc)
         stamp = generated_at_utc.strftime("%Y%m%dT%H%M%SZ")
         report_path: Path | None = report_dir / f"retrospective_{stamp}_turn_{current_metrics.turn:04d}.md"

@@ -1,0 +1,133 @@
+{
+  "generated_at": "2026-03-21T23:10:00-04:00",
+  "scope": {
+    "root_repo": ".",
+    "registered_nested_repos": [
+      "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "GUMAS_SIM_2.5/CanonRec",
+      "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0"
+    ]
+  },
+  "verification": {
+    "workspace_verify": {
+      "status": "pass",
+      "finding_count": 0
+    },
+    "workspace_verify_deep": {
+      "status": "pass",
+      "finding_count": 0
+    },
+    "repo_stabilizer_scan": {
+      "status": "pass",
+      "total_script_files": 0
+    }
+  },
+  "phases": [
+    {
+      "phase": 1,
+      "name": "stabilize_aurora_cloudbank_symbolic_main",
+      "status": "block",
+      "evidence": {
+        "head_matches_registry_sha": true,
+        "upstream_configured": false,
+        "worktree": {
+          "modified": 3,
+          "deleted": 427,
+          "untracked": 31,
+          "total": 461
+        },
+        "diff_stat": {
+          "files_changed": 430,
+          "insertions": 46,
+          "deletions": 128916
+        },
+        "deleted_top_level_counts": {
+          "docs": 136,
+          "scripts": 19,
+          "venv_opal2": 16,
+          "src": 15,
+          ".security": 13,
+          ".github": 11,
+          ".aurora": 9
+        },
+        "untracked_top_level_counts": {
+          ".aurora": 21,
+          "runtime": 5,
+          "scripts": 3,
+          "deployment": 1,
+          "config": 1
+        },
+        "launchd_path_mismatch": true,
+        "launchd_external_script_dependency": true
+      },
+      "assessment": "Likely unfinished migration with destructive drift risk.",
+      "recommended_actions": [
+        "freeze_repo",
+        "capture_backup_receipt",
+        "confirm_migration_intent",
+        "repair_launchd_wiring",
+        "configure_upstream_after_stabilization"
+      ]
+    },
+    {
+      "phase": 2,
+      "name": "reassert_root_control_plane_boundaries",
+      "status": "review",
+      "evidence": {
+        "root_tracks_gumas_files_outside_registered_nested_repos": 20,
+        "outside_nested_counts": {
+          "FORGE__GUMAS_v3.0__2026-02-19": 13,
+          "SIM_ENGINE_OUTPUTS": 7
+        },
+        "modified_root_tracked_l2_files": [
+          "GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19/l2_source_manifest.json",
+          "GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19/l2_state.py",
+          "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/hourly_retrospective.py"
+        ]
+      },
+      "assessment": "Likely root control-plane boundary drift.",
+      "recommended_actions": [
+        "decide_authoritative_home_for_forge_and_sim_outputs",
+        "move_implementation_surfaces_out_of_root_or_document_exception",
+        "avoid_publishing_more_l2_changes_from_root"
+      ]
+    },
+    {
+      "phase": 3,
+      "name": "reduce_relocation_and_intake_drift",
+      "status": "review",
+      "evidence": {
+        "planned_move_total": 252,
+        "planned_move_batches": {
+          "wave4_root_intake_cleanup_initial": 251,
+          "unbatched": 1
+        },
+        "planned_move_kind_counts": {
+          "intake_file": 250,
+          "intake_collection": 1,
+          "analysis_report": 1
+        },
+        "aurora_sim_architecture_root_planned_move": true,
+        "entropy_quarantine_protected": true,
+        "deep_research_report_inconsistency": {
+          "listed_as_moved_in_relocation_plan": true,
+          "still_planned_move_in_manifest": true,
+          "root_copy_present": true,
+          "reports_copy_present": true,
+          "hashes_match": false
+        }
+      },
+      "assessment": "Backlog is real; one relocation record is inconsistent and should be fixed first.",
+      "recommended_actions": [
+        "resolve_deep_research_report_authority",
+        "retain_entropy_quarantine_until_review_complete",
+        "process_wave4_as_bounded_batch",
+        "clear_aurora_sim_architecture_path_ambiguity"
+      ]
+    }
+  ],
+  "notes": [
+    "workspace_scan.py and workspace_plan_moves.py refreshed generated control surfaces during diagnosis",
+    "no code or policy fixes were applied in this phase"
+  ]
+}

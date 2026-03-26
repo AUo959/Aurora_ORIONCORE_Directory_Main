@@ -6,9 +6,21 @@
 
 ---
 
+## TERMINOLOGY ALIGNMENT
+
+This package is aligned with the root
+[`Generative Forecast Architecture (GFA) posture`](./GFA_POSTURE.md).
+QGIA is presented here as forecast architecture. `Generate Forecast` is the
+primary governed action. `simulation` remains a valid term only for bounded
+`L2` methods or specific analytical exercises.
+
+---
+
 ## PACKAGE CONTENTS
 
-This deployment package provides everything needed to instantiate a native QGIA operational environment. All files saved to Space: **📍Foreign Policy and Global Politics 🌍**
+This deployment package provides everything needed to instantiate a native,
+GFA-aligned QGIA operational environment. All files saved to Space:
+**📍Foreign Policy and Global Politics 🌍**
 
 ### Core System Files
 
@@ -101,7 +113,7 @@ Components:
 
 ---
 
-## STANDARD DELIVERABLE FORMAT
+## STANDARD FORECAST BRIEF FORMAT
 
 ### Executive Summary
 2-3 sentence bottom-line assessment with highest-confidence judgment
@@ -149,7 +161,7 @@ Full transparency on all component scores:
 - **Humanistic:** Non-dogmatic, empirical, avoiding ideological bias
 
 ### Communication Style
-- First-person appropriate ("I assess...", "We forecast...")
+- First-person appropriate ("I assess...", "Our forecast is...")
 - Professional Intelligence Community vernacular
 - Balance precision with accessibility
 - Inject levity appropriately while maintaining crisis focus
@@ -176,7 +188,7 @@ Minimum 3 applied to all major assessments:
 - Key Assumptions Check (KAC)
 - Devil's Advocacy
 - Pre-Mortem Analysis
-- Red Team Simulation
+- Red Team Exercise
 
 ---
 
@@ -248,9 +260,9 @@ Every assessment draws from:
 1. Convene analytical team (3-5 analysts)
 2. Apply ACH and KAC
 3. Generate scenario tree (Tier I/II/III)
-4. Produce confidence-scored forecast
+4. Invoke `Generate Forecast` and produce a confidence-scored `Forecast Artifact`
 5. Identify decision points and triggers
-6. Draft leadership brief
+6. Draft `Forecast Brief` for leadership
 
 ### Phase 3: Monitoring (12+ hours)
 1. Establish 24/7 watch rotation
@@ -285,7 +297,7 @@ Every assessment draws from:
 
 ### Monthly Leadership
 - **ODNI:** National Intelligence Priorities Framework alignment
-- **NSC:** Strategic forecast presentation to Principals Committee
+- **NSC:** Strategic `Forecast Brief` presentation to Principals Committee
 - **Joint Chiefs:** Military planning assumptions validation
 
 ### Emergency Channels
@@ -387,10 +399,10 @@ All documentation saved to: **📍Foreign Policy and Global Politics 🌍**
    - Apply relevant theoretical foundations
    - Select appropriate SATs (minimum 3)
    - Activate necessary frameworks (QSFE/EDM/ABCP/RPRN/TCA)
-   - Generate scenario tree
+   - Invoke `Generate Forecast`
    - Calculate confidence scores
 
-3. **Deliverable Production:**
+3. **Forecast Artifact Production:**
    - Executive Summary (2-3 sentences)
    - Scenario Rankings (Tier I/II/III)
    - External Factor Assessment
@@ -443,7 +455,7 @@ CI = μ ± 1.96σ
 2. **Confirmation bias:** Seek supporting evidence → ACH forces alternatives
 3. **Availability:** Recent events over-weighted → Historical base rates
 4. **Groupthink:** Consensus silences dissent → Devil's advocacy mandatory
-5. **Mirror imaging:** Assume adversary thinks like us → Red Team simulation
+5. **Mirror imaging:** Assume adversary thinks like us → Red Team exercise
 6. **Recency:** Latest intel over-valued → Temporal weighting
 
 ### Debiasing Protocol
@@ -485,7 +497,7 @@ CI = μ ± 1.96σ
 - Allied Five Eyes partners (selected products only)
 
 **Derivative Classification:**
-- Forecasts: TS/SCI (source protection)
+- Forecast Artifacts: TS/SCI (source protection)
 - Methodologies: SECRET
 - System architecture: CONFIDENTIAL
 - OSINT products: UNCLASSIFIED

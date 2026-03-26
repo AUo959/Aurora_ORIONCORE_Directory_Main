@@ -1,0 +1,306 @@
+[
+  {
+    "recovered_name": "Dr. Amelia Rivers",
+    "canonical_name": "Dr. Amelia Rivers",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0042",
+    "canonical_role_reference": "AI Systems Specialist",
+    "recovered_role": "AI Systems Specialist",
+    "recovered_guild": "Observers \ud83e\udde0",
+    "recovered_module": "Observer Deck",
+    "recovered_anchor_path": "orion.guild.observers.rivers.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Prof. E. Sorensen",
+    "canonical_name": "Prof. Elena Sorensen",
+    "match_status": "probable_alias",
+    "matched_entity_id": "ORION.ENTITY.0010",
+    "canonical_role_reference": "Cognitive Ethicist (Narrative Ethics)",
+    "recovered_role": "Narrative Expert",
+    "recovered_guild": "Weavers \ud83e\ude9e",
+    "recovered_module": "Ethics Chamber",
+    "recovered_anchor_path": "orion.guild.weavers.sorensen.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "role_drift",
+      "notes": "Recovered name 'Prof. E. Sorensen' treated as alias of 'Prof. Elena Sorensen'."
+    }
+  },
+  {
+    "recovered_name": "Dr. Elira Noor",
+    "canonical_name": "Dr. Elira Noor",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0012",
+    "canonical_role_reference": "Lead Reflexivity Specialist (AI Ethics Architect)",
+    "recovered_role": "Reflexivity Specialist",
+    "recovered_guild": "Chronomancers \u23f3",
+    "recovered_module": "Anchor Room",
+    "recovered_anchor_path": "orion.guild.chronomancers.noor.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Kai Drev",
+    "canonical_name": "Kai Drev",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0022",
+    "canonical_role_reference": "Interface Ecologist",
+    "recovered_role": "Interface Ecologist",
+    "recovered_guild": "Symbiotes \ud83c\udf31",
+    "recovered_module": "Spacetime Garden",
+    "recovered_anchor_path": "orion.guild.symbiotes.drev.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Samantha Lee",
+    "canonical_name": "Samantha Lee",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0037",
+    "canonical_role_reference": "Logging & Observability Engineer",
+    "recovered_role": "Observability Engineer",
+    "recovered_guild": "Sentinels \ud83d\udd0d",
+    "recovered_module": "Entropy Telescope",
+    "recovered_anchor_path": "orion.guild.sentinels.lee.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Alex Thorne",
+    "canonical_name": "Commander Alex Thorne",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0001",
+    "canonical_role_reference": "Station Commander",
+    "recovered_role": "Systems Architect",
+    "recovered_guild": "Envoys \ud83e\udded",
+    "recovered_module": "Observer Deck",
+    "recovered_anchor_path": "orion.guild.envoys.thorne.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "role_drift",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Emily Roberts",
+    "canonical_name": "Emily Roberts",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0013",
+    "canonical_role_reference": "LLM-Simulation Bridge Developer",
+    "recovered_role": "LLM-Sim Bridge Dev",
+    "recovered_guild": "Engineers \u2699\ufe0f",
+    "recovered_module": "Signal Lab",
+    "recovered_anchor_path": "orion.guild.engineers.roberts.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "compatible_variation",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Carmen Rivas",
+    "canonical_name": "Carmen Rivas",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0005",
+    "canonical_role_reference": "Simulation Binding Specialist",
+    "recovered_role": "Simulation Binding Specialist",
+    "recovered_guild": "Engineers \u2699\ufe0f",
+    "recovered_module": "Signal Lab",
+    "recovered_anchor_path": "orion.guild.engineers.rivas.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Naomi Vell",
+    "canonical_name": "Naomi Vell",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0029",
+    "canonical_role_reference": "Narrative Framework Engineer",
+    "recovered_role": "Narrative Framework Engineer",
+    "recovered_guild": "Weavers \ud83e\ude9e",
+    "recovered_module": "Commons + Ethics Chamber",
+    "recovered_anchor_path": "orion.guild.weavers.vell.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Maren Koss",
+    "canonical_name": "Dr. Maren Koss",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0027",
+    "canonical_role_reference": "Cognitive Drift Mapper",
+    "recovered_role": "Cognitive Drift Mapper",
+    "recovered_guild": "Weavers \ud83e\ude9e",
+    "recovered_module": "Narrative Gravity Well",
+    "recovered_anchor_path": "orion.guild.weavers.koss.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Ira Menon",
+    "canonical_name": "Ira Menon",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0017",
+    "canonical_role_reference": "Compiler Engineer",
+    "recovered_role": "Compiler Engineer",
+    "recovered_guild": "Engineers \u2699\ufe0f",
+    "recovered_module": "Signal Lab / Core Ring",
+    "recovered_anchor_path": "orion.guild.engineers.menon.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Olivia Nguyen",
+    "canonical_name": "Olivia Nguyen",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0030",
+    "canonical_role_reference": "QA & Continuity Auditor",
+    "recovered_role": "QA + Testing",
+    "recovered_guild": "Sentinels \ud83d\udd0d",
+    "recovered_module": "Diagnostics Ring",
+    "recovered_anchor_path": "orion.guild.sentinels.nguyen.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "role_drift",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Haneul Park",
+    "canonical_name": "Haneul Park",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0014",
+    "canonical_role_reference": "Immersive Experience Theorist",
+    "recovered_role": "Immersive Experience Theorist",
+    "recovered_guild": "Symbiotes \ud83c\udf31",
+    "recovered_module": "Spacetime Garden",
+    "recovered_anchor_path": "orion.guild.symbiotes.park.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Tobias Qin",
+    "canonical_name": "Tobias Qin",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0039",
+    "canonical_role_reference": "Code/Narrative Systems Engineer",
+    "recovered_role": "Code/Narrative Bridge Mapper",
+    "recovered_guild": "Weavers \ud83e\ude9e",
+    "recovered_module": "Gravity Well",
+    "recovered_anchor_path": "orion.guild.weavers.qin.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "compatible_variation",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Dr. Amina Velin",
+    "canonical_name": "Dr. Amina Velin",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0002",
+    "canonical_role_reference": "Symbolic Systems Research Lead",
+    "recovered_role": "Symbolic Systems Research Lead",
+    "recovered_guild": "Chronomancers \u23f3",
+    "recovered_module": "Narrative Gravity Well",
+    "recovered_anchor_path": "orion.guild.chronomancers.velin.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "aligned",
+      "notes": "No hard clash detected."
+    }
+  },
+  {
+    "recovered_name": "Jessica Martinez",
+    "canonical_name": "Jessica Martinez",
+    "match_status": "matched_primary",
+    "matched_entity_id": "ORION.ENTITY.0018",
+    "canonical_role_reference": "Backend Architect",
+    "recovered_role": "Backend Developer (Senior)",
+    "recovered_guild": "Engineers \u2699\ufe0f",
+    "recovered_module": "Signal Lab / Anchor Room",
+    "recovered_anchor_path": "orion.guild.engineers.martinez.term",
+    "doc_sources": [
+      "text_Orion_Crew.txt"
+    ],
+    "clash_check": {
+      "name_collision": false,
+      "role_alignment": "role_drift",
+      "notes": "No hard clash detected."
+    }
+  }
+]

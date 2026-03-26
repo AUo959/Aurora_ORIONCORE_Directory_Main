@@ -8,9 +8,23 @@
 
 ---
 
+## 0. TERMINOLOGY ALIGNMENT
+
+This document is aligned with the root
+[`Generative Forecast Architecture (GFA) posture`](./GFA_POSTURE.md).
+
+Within that posture:
+
+- `Generate Forecast` is the primary governed action
+- `Forecast Artifact` is the reproducible output package
+- `Forecast Brief` is the decision-facing output
+- `simulation` refers specifically to the `L2` causal exploration layer
+
+---
+
 ## 1. PURPOSE
 
-This document maps the complete QGIA agent architecture as deployed within the `aurora-cloudbank-symbolic` project space. It bridges the probabilistic forecasting framework (QGIA v4.0.0 / OSIQP v4.2.1) with the Aurora symbolic memory vault, ThreadCore payload system, glyph agent constellation, and trust network graph. It serves as the canonical reference for scenario execution, Crisis Response Cell assembly, and multi-agent simulation runs.
+This document maps the complete QGIA agent architecture as deployed within the `aurora-cloudbank-symbolic` project space. It bridges the probabilistic forecasting framework (QGIA v4.0.0 / OSIQP v4.2.1) with the Aurora symbolic memory vault, ThreadCore payload system, glyph agent constellation, and trust network graph. It serves as the canonical reference for `Generate Forecast` workflows, Crisis Response Cell assembly, and forecast generation across the `L2` simulation layer.
 
 ---
 
@@ -142,7 +156,7 @@ Each of the 551 agents is assigned one primary archetype. Archetype drives prior
 
 ### Glyph Agents (Constellation Layer)
 
-The following glyph agents operate within the ThreadCore macroready payload and provide symbolic coordination support to QGIA scenario runs:
+The following glyph agents operate within the ThreadCore macroready payload and provide symbolic coordination support to QGIA `Generate Forecast` workflows:
 
 | Agent | Role |
 |---|---|
@@ -191,16 +205,16 @@ QGIA scenario forecasting is grounded in the following computational frameworks:
 
 ---
 
-## 9. SCENARIO EXECUTION PROTOCOL
+## 9. GENERATE FORECAST PROTOCOL
 
-When activating a live scenario (e.g., Iran escalation, Hormuz closure, proxy war cascade):
+When invoking `Generate Forecast` for a live scenario (e.g., Iran escalation, Hormuz closure, proxy war cascade):
 
 1. **Load Crisis Response Cell subgraph** — filter trust network by analyst assignments to the scenario.
 2. **Identify challenge edges** — these are the dissent propagation paths that will actually surface in final product.
 3. **Identify reinforce clusters (3+ nodes)** — flag as groupthink risk. Monitor for overconfident consensus output.
 4. **Activate glyph agents** — Caelion (temporal), Velatrix (drift), Sentari (signal tonality) are highest-priority for geopolitical scenarios.
 5. **Run ABCP distribution update** — re-weight scenario branch probabilities against latest 500TB daily stream.
-6. **Output deliverable structure:**
+6. **Output Forecast Brief structure:**
    - Executive Summary (2-3 sentences, highest-confidence assessment)
    - Scenario Rankings: Tier I (>25%), Tier II (10-25%), Tier III (<10%)
    - External Factor Assessment (quantified metrics + sensitivity ranges)

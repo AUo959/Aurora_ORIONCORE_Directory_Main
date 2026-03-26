@@ -1,0 +1,116 @@
+{
+  "generated_at": "2026-03-21T21:57:35Z",
+  "packet_count": 6,
+  "packets": [
+    {
+      "entity_id": "ORION.ENTITY.0028",
+      "name": "Lt. Nakamura",
+      "role": "Commanding Officer, Guardian Sentinel (Security Corvette)",
+      "division": "Operations & Security",
+      "support_packet": "reports/analysis/canon_support/l1_promoted_character_packets__2026-03-20/packets/ORION.ENTITY.0028__lt_nakamura__promotion_packet__2026-03-20.md",
+      "ledger_json": "reports/analysis/L1_ENTITY_LEDGER__2026-03-08.json",
+      "ledger_markdown": "reports/analysis/L1_ENTITY_LEDGER__2026-03-08.md",
+      "promotion_audit": "reports/analysis/recovered_root_text_batch__2026-03-20/corpus/CHARACTER_PROMOTION_AUDIT__2026-03-20.md",
+      "source_artifacts": [
+        "projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/ORION_STATION_CREW_MANIFEST.md",
+        "projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/orion_station_full_technical_readout.md",
+        "reports/analysis/ORION_COMMAND_WATCH_SECURITY_MATRIX__2026-03-09.md"
+      ],
+      "related_assets": [
+        "Orion Station",
+        "Guardian Sentinel"
+      ]
+    },
+    {
+      "entity_id": "ORION.ENTITY.0015",
+      "name": "Lt. Hassan",
+      "role": "Commanding Officer, Logistics Alpha (Cargo Transport)",
+      "division": "Operations",
+      "support_packet": "reports/analysis/canon_support/l1_promoted_character_packets__2026-03-20/packets/ORION.ENTITY.0015__lt_hassan__promotion_packet__2026-03-20.md",
+      "ledger_json": "reports/analysis/L1_ENTITY_LEDGER__2026-03-08.json",
+      "ledger_markdown": "reports/analysis/L1_ENTITY_LEDGER__2026-03-08.md",
+      "promotion_audit": "reports/analysis/recovered_root_text_batch__2026-03-20/corpus/CHARACTER_PROMOTION_AUDIT__2026-03-20.md",
+      "source_artifacts": [
+        "projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/ORION_STATION_CREW_MANIFEST.md",
+        "projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/orion_station_full_technical_readout.md",
+        "reports/analysis/ORION_COMMAND_WATCH_SECURITY_MATRIX__2026-03-09.md"
+      ],
+      "related_assets": [
+        "Orion Station",
+        "Logistics Alpha"
+      ]
+    },
+    {
+      "entity_id": "ORION.ENTITY.0007",
+      "name": "Chief Thomson",
+      "role": "Commanding Officer, Repair Tender Beta (Mobile Maintenance Tender)",
+      "division": "Operations & Engineering",
+      "support_packet": "reports/analysis/canon_support/l1_promoted_character_packets__2026-03-20/packets/ORION.ENTITY.0007__chief_thomson__promotion_packet__2026-03-20.md",
+      "ledger_json": "reports/analysis/L1_ENTITY_LEDGER__2026-03-08.json",
+      "ledger_markdown": "reports/analysis/L1_ENTITY_LEDGER__2026-03-08.md",
+      "promotion_audit": "reports/analysis/recovered_root_text_batch__2026-03-20/corpus/CHARACTER_PROMOTION_AUDIT__2026-03-20.md",
+      "source_artifacts": [
+        "projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/ORION_STATION_CREW_MANIFEST.md",
+        "projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/orion_station_full_technical_readout.md",
+        "reports/analysis/ORION_COMMAND_WATCH_SECURITY_MATRIX__2026-03-09.md"
+      ],
+      "related_assets": [
+        "Orion Station",
+        "Repair Tender Beta"
+      ]
+    },
+    {
+      "entity_id": "ORION.ENTITY.0036",
+      "name": "Samantha Gray",
+      "role": "Senior Pilot, ORS-05 *Lacewing* (Training / Cultural Liaison Flight)",
+      "division": "Operations",
+      "support_packet": "reports/analysis/canon_support/l1_promoted_character_packets__2026-03-20/packets/ORION.ENTITY.0036__samantha_gray__promotion_packet__2026-03-20.md",
+      "ledger_json": "reports/analysis/L1_ENTITY_LEDGER__2026-03-08.json",
+      "ledger_markdown": "reports/analysis/L1_ENTITY_LEDGER__2026-03-08.md",
+      "promotion_audit": "reports/analysis/recovered_root_text_batch__2026-03-20/corpus/CHARACTER_PROMOTION_AUDIT__2026-03-20.md",
+      "source_artifacts": [
+        "projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/ORION_STATION_CREW_MANIFEST.md",
+        "projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/orion_station_full_technical_readout.md",
+        "reports/analysis/non_can_reports/AURORA_QUANTUM_FORGE_DEEP_DIVE.md"
+      ],
+      "related_assets": [
+        "Lacewing"
+      ]
+    },
+    {
+      "entity_id": "ORION.ENTITY.0034",
+      "name": "Ren Takahashi",
+      "role": "Psycho-Acoustic Systems Engineer, ORS-05 *Lacewing* (Sensor & Human-Factors Acoustics)",
+      "division": "Systems & Infrastructure",
+      "support_packet": "reports/analysis/canon_support/l1_promoted_character_packets__2026-03-20/packets/ORION.ENTITY.0034__ren_takahashi__promotion_packet__2026-03-20.md",
+      "ledger_json": "reports/analysis/L1_ENTITY_LEDGER__2026-03-08.json",
+      "ledger_markdown": "reports/analysis/L1_ENTITY_LEDGER__2026-03-08.md",
+      "promotion_audit": "reports/analysis/recovered_root_text_batch__2026-03-20/corpus/CHARACTER_PROMOTION_AUDIT__2026-03-20.md",
+      "source_artifacts": [
+        "projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/ORION_STATION_CREW_MANIFEST.md",
+        "projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/orion_station_full_technical_readout.md",
+        "reports/analysis/non_can_reports/AURORA_QUANTUM_FORGE_DEEP_DIVE.md"
+      ],
+      "related_assets": [
+        "Lacewing"
+      ]
+    },
+    {
+      "entity_id": "ORION.ENTITY.0004",
+      "name": "Cadet Mira Chen",
+      "role": "Cadet / Trainee (Operations Track)",
+      "division": "Training",
+      "support_packet": "reports/analysis/canon_support/l1_promoted_character_packets__2026-03-20/packets/ORION.ENTITY.0004__cadet_mira_chen__promotion_packet__2026-03-20.md",
+      "ledger_json": "reports/analysis/L1_ENTITY_LEDGER__2026-03-08.json",
+      "ledger_markdown": "reports/analysis/L1_ENTITY_LEDGER__2026-03-08.md",
+      "promotion_audit": "reports/analysis/recovered_root_text_batch__2026-03-20/corpus/CHARACTER_PROMOTION_AUDIT__2026-03-20.md",
+      "source_artifacts": [
+        "reports/analysis/ORION_COMMAND_WATCH_SECURITY_MATRIX__2026-03-09.md",
+        "projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/orion_station_full_technical_readout.md"
+      ],
+      "related_assets": [
+        "Orion Station"
+      ]
+    }
+  ]
+}

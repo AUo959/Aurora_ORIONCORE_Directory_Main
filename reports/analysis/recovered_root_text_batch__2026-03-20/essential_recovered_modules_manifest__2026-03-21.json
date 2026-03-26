@@ -1,0 +1,705 @@
+[
+  {
+    "id": "memory_system_prototype",
+    "category": "python_prototype",
+    "path": "tools/prototypes/python/recovered/memory_system_prototype.py",
+    "integration_path": "tools/prototypes/python/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "prototype_adoption",
+      "memory_subsystem_reuse"
+    ],
+    "notes": "Most complete recovered memory prototype.",
+    "utility_score": 0.93,
+    "improvement_score": 0.86,
+    "maintenance_burden": 0.3,
+    "conflict_risk": 0.22,
+    "specialist": "Simulation Systems",
+    "decision": "include"
+  },
+  {
+    "id": "symbolic_model_selector_threadsense",
+    "category": "python_prototype",
+    "path": "tools/prototypes/python/recovered/symbolic_model_selector_threadsense.py",
+    "integration_path": "tools/prototypes/python/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "selector_usage",
+      "context_switch_accuracy"
+    ],
+    "notes": "Reusable model-selection logic with clear adaptation hooks.",
+    "utility_score": 0.88,
+    "improvement_score": 0.78,
+    "maintenance_burden": 0.32,
+    "conflict_risk": 0.18,
+    "specialist": "Simulation Systems",
+    "decision": "include"
+  },
+  {
+    "id": "thread_context_tagging_agent_v2",
+    "category": "python_prototype",
+    "path": "tools/prototypes/python/recovered/thread_context_tagging_agent_v2.py",
+    "integration_path": "tools/prototypes/python/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "routing_accuracy",
+      "tag_use_frequency"
+    ],
+    "notes": "More complete tagging-agent variant with live directive support.",
+    "utility_score": 0.84,
+    "improvement_score": 0.74,
+    "maintenance_burden": 0.24,
+    "conflict_risk": 0.17,
+    "specialist": "Tooling",
+    "decision": "include"
+  },
+  {
+    "id": "threadcore_v3_6_macrodrift",
+    "category": "javascript_module",
+    "path": "tools/prototypes/javascript/recovered/threadcore_v3_6_macrodrift.js",
+    "integration_path": "tools/prototypes/javascript/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "module_reuse",
+      "alias_generation_success"
+    ],
+    "notes": "Most complete recovered THREADCORE JS surface.",
+    "utility_score": 0.91,
+    "improvement_score": 0.83,
+    "maintenance_burden": 0.34,
+    "conflict_risk": 0.25,
+    "specialist": "THREADCORE",
+    "decision": "include"
+  },
+  {
+    "id": "aurora_modular_core_v2_3",
+    "category": "protocol_doc",
+    "path": "docs/draft_protocols/recovered/aurora_modular_core_v2_3.md",
+    "integration_path": "docs/draft_protocols/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "protocol_reference",
+      "prompt_scaffold_reuse"
+    ],
+    "notes": "Strongest late-version Aurora modular core blueprint.",
+    "utility_score": 0.92,
+    "improvement_score": 0.82,
+    "maintenance_burden": 0.2,
+    "conflict_risk": 0.16,
+    "specialist": "Aurora Core",
+    "decision": "include"
+  },
+  {
+    "id": "aurora_system_ingestion_pipeline_capsule_v1",
+    "category": "protocol_doc",
+    "path": "docs/draft_protocols/recovered/aurora_system_ingestion_pipeline_capsule_v1.md",
+    "integration_path": "docs/draft_protocols/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "ingestion_pattern_reuse"
+    ],
+    "notes": "Narrative-form ingestion blueprint with strong system coverage.",
+    "utility_score": 0.87,
+    "improvement_score": 0.81,
+    "maintenance_burden": 0.22,
+    "conflict_risk": 0.18,
+    "specialist": "Ingest Pipeline",
+    "decision": "include"
+  },
+  {
+    "id": "aurora_system_ingestion_pipeline_capsule_v1_1",
+    "category": "config_manifest",
+    "path": "docs/draft_protocols/recovered/aurora_system_ingestion_pipeline_capsule_v1_1.yaml",
+    "integration_path": "docs/draft_protocols/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "manifest_reference",
+      "ingestion_audit"
+    ],
+    "notes": "Structured companion to the ingestion blueprint.",
+    "utility_score": 0.83,
+    "improvement_score": 0.76,
+    "maintenance_burden": 0.21,
+    "conflict_risk": 0.17,
+    "specialist": "Ingest Pipeline",
+    "decision": "include"
+  },
+  {
+    "id": "oppy_symbolic_capsule_integration_protocol",
+    "category": "protocol_doc",
+    "path": "docs/draft_protocols/recovered/oppy_symbolic_capsule_integration_protocol.md",
+    "integration_path": "docs/draft_protocols/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "integration_protocol_reuse"
+    ],
+    "notes": "Practical protocol surface for Oppy memory-architecture integration.",
+    "utility_score": 0.82,
+    "improvement_score": 0.72,
+    "maintenance_burden": 0.19,
+    "conflict_risk": 0.18,
+    "specialist": "Memory Systems",
+    "decision": "include"
+  },
+  {
+    "id": "zipwizard_recovery_readme_v2_3_1",
+    "category": "protocol_doc",
+    "path": "docs/draft_protocols/recovered/zipwizard_recovery_readme_v2_3_1.md",
+    "integration_path": "docs/draft_protocols/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "recovery_playbook_reference"
+    ],
+    "notes": "Clear recovery protocol surface for ZIPWIZ flows.",
+    "utility_score": 0.8,
+    "improvement_score": 0.7,
+    "maintenance_burden": 0.18,
+    "conflict_risk": 0.19,
+    "specialist": "ZIPWIZ",
+    "decision": "include"
+  },
+  {
+    "id": "aurora_l1_middleware_system_prompt",
+    "category": "agent_protocol",
+    "path": "docs/draft_protocols/recovered/agents/aurora_l1_middleware_system_prompt.md",
+    "integration_path": "docs/draft_protocols/agents/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "agent_prompt_reuse"
+    ],
+    "notes": "Most direct recovered statement of Aurora L1 middleware role.",
+    "utility_score": 0.9,
+    "improvement_score": 0.79,
+    "maintenance_burden": 0.18,
+    "conflict_risk": 0.18,
+    "specialist": "Aurora Core",
+    "decision": "include"
+  },
+  {
+    "id": "aurora_seed_pulse_999_comet_echo",
+    "category": "agent_protocol",
+    "path": "docs/draft_protocols/recovered/agents/aurora_seed_pulse_999_comet_echo.md",
+    "integration_path": "docs/draft_protocols/agents/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "seed_prompt_reuse"
+    ],
+    "notes": "Portable seed-pulse package with the fullest recovered content.",
+    "utility_score": 0.84,
+    "improvement_score": 0.73,
+    "maintenance_burden": 0.2,
+    "conflict_risk": 0.21,
+    "specialist": "Aurora Core",
+    "decision": "include"
+  },
+  {
+    "id": "threadcore_unified_thread_identity_tool_patched",
+    "category": "agent_protocol",
+    "path": "docs/draft_protocols/recovered/agents/threadcore_unified_thread_identity_tool_patched.md",
+    "integration_path": "docs/draft_protocols/agents/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "thread_identity_tool_use"
+    ],
+    "notes": "Functional thread identity tool with patched title rules.",
+    "utility_score": 0.81,
+    "improvement_score": 0.72,
+    "maintenance_burden": 0.19,
+    "conflict_risk": 0.17,
+    "specialist": "THREADCORE",
+    "decision": "include"
+  },
+  {
+    "id": "aurora_interlink_fabric_concept",
+    "category": "protocol_doc",
+    "path": "docs/draft_protocols/recovered/agents/aurora_interlink_fabric_concept.md",
+    "integration_path": "docs/draft_protocols/agents/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "architecture_reference"
+    ],
+    "notes": "Cross-platform Aurora interlink concept with clear transport and federation model.",
+    "utility_score": 0.78,
+    "improvement_score": 0.69,
+    "maintenance_burden": 0.24,
+    "conflict_risk": 0.22,
+    "specialist": "Architecture",
+    "decision": "include"
+  },
+  {
+    "id": "galactic_union_state_variables",
+    "category": "simulation_logic",
+    "path": "GUMAS_SIM_2.5/draft_logic/recovered/galactic_union_state_variables.md",
+    "integration_path": "GUMAS_SIM_2.5/draft_logic/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "logic_reference"
+    ],
+    "notes": "Compact state-variable seed with direct simulation value.",
+    "utility_score": 0.85,
+    "improvement_score": 0.76,
+    "maintenance_burden": 0.16,
+    "conflict_risk": 0.15,
+    "specialist": "Simulation Logic",
+    "decision": "include"
+  },
+  {
+    "id": "early_simulation_formulas",
+    "category": "simulation_logic",
+    "path": "GUMAS_SIM_2.5/draft_logic/recovered/early_simulation_formulas.md",
+    "integration_path": "GUMAS_SIM_2.5/draft_logic/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "formula_reference"
+    ],
+    "notes": "Canonical early formulas with direct mechanics use.",
+    "utility_score": 0.84,
+    "improvement_score": 0.74,
+    "maintenance_burden": 0.15,
+    "conflict_risk": 0.14,
+    "specialist": "Simulation Logic",
+    "decision": "include"
+  },
+  {
+    "id": "galactic_union_simulation_math_framework",
+    "category": "simulation_logic",
+    "path": "GUMAS_SIM_2.5/draft_logic/recovered/galactic_union_simulation_math_framework.md",
+    "integration_path": "GUMAS_SIM_2.5/draft_logic/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "math_framework_reference"
+    ],
+    "notes": "Most complete mathematical framing recovered for simulation export.",
+    "utility_score": 0.89,
+    "improvement_score": 0.8,
+    "maintenance_burden": 0.22,
+    "conflict_risk": 0.18,
+    "specialist": "Simulation Logic",
+    "decision": "include"
+  },
+  {
+    "id": "immersive_directive_protocol_spec",
+    "category": "simulation_logic",
+    "path": "GUMAS_SIM_2.5/draft_logic/recovered/immersive_directive_protocol_spec.md",
+    "integration_path": "GUMAS_SIM_2.5/draft_logic/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "subsimulation_mode_reference"
+    ],
+    "notes": "Clear subsimulation format spec with direct reuse potential.",
+    "utility_score": 0.79,
+    "improvement_score": 0.67,
+    "maintenance_burden": 0.13,
+    "conflict_risk": 0.14,
+    "specialist": "Simulation Logic",
+    "decision": "include"
+  },
+  {
+    "id": "factions_registry_draft",
+    "category": "worldbuilding_registry",
+    "path": "GUMAS_SIM_2.5/draft_worldbuilding/recovered/factions_registry_draft.yaml",
+    "integration_path": "GUMAS_SIM_2.5/draft_worldbuilding/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "registry_lookup"
+    ],
+    "notes": "High-value structured faction registry.",
+    "utility_score": 0.9,
+    "improvement_score": 0.79,
+    "maintenance_burden": 0.18,
+    "conflict_risk": 0.16,
+    "specialist": "Worldbuilding",
+    "decision": "include"
+  },
+  {
+    "id": "galactic_union_character_registry",
+    "category": "worldbuilding_registry",
+    "path": "GUMAS_SIM_2.5/draft_worldbuilding/recovered/galactic_union_character_registry.md",
+    "integration_path": "GUMAS_SIM_2.5/draft_worldbuilding/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "character_registry_lookup"
+    ],
+    "notes": "Broad recovered L2/L2-adjacent character registry with strong recall value.",
+    "utility_score": 0.86,
+    "improvement_score": 0.75,
+    "maintenance_burden": 0.25,
+    "conflict_risk": 0.22,
+    "specialist": "Worldbuilding",
+    "decision": "include"
+  },
+  {
+    "id": "zylox_and_union_command_character_profiles",
+    "category": "worldbuilding_registry",
+    "path": "GUMAS_SIM_2.5/draft_worldbuilding/recovered/zylox_and_union_command_character_profiles.md",
+    "integration_path": "GUMAS_SIM_2.5/draft_worldbuilding/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "character_profile_reference"
+    ],
+    "notes": "Recovered command-profile batch around Zylox and Union leadership.",
+    "utility_score": 0.84,
+    "improvement_score": 0.74,
+    "maintenance_burden": 0.24,
+    "conflict_risk": 0.22,
+    "specialist": "Worldbuilding",
+    "decision": "include"
+  },
+  {
+    "id": "aurora_shuttlecraft_registry",
+    "category": "worldbuilding_registry",
+    "path": "GUMAS_SIM_2.5/draft_worldbuilding/recovered/aurora_shuttlecraft_registry.md",
+    "integration_path": "GUMAS_SIM_2.5/draft_worldbuilding/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "registry_lookup"
+    ],
+    "notes": "Structured shuttlecraft registry with named agents and bindings.",
+    "utility_score": 0.8,
+    "improvement_score": 0.71,
+    "maintenance_burden": 0.2,
+    "conflict_risk": 0.18,
+    "specialist": "Worldbuilding",
+    "decision": "include"
+  },
+  {
+    "id": "orion_core_crew_registry_recovered",
+    "category": "canon_support",
+    "path": "reports/analysis/canon_support/recovered_root_sources__2026-03-21/orion_core_crew_registry__recovered.md",
+    "integration_path": "reports/analysis/canon_support/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "canon_support_reference"
+    ],
+    "notes": "Recovered crew registry already proven useful in canon reconciliation.",
+    "utility_score": 0.83,
+    "improvement_score": 0.7,
+    "maintenance_burden": 0.12,
+    "conflict_risk": 0.12,
+    "specialist": "Canon Support",
+    "decision": "include"
+  },
+  {
+    "id": "threadcore_symbolic_deployment_snapshot",
+    "category": "config_manifest",
+    "path": "GUMAS_SIM_2.5/draft_worldbuilding/recovered/threadcore_symbolic_deployment_snapshot.yaml",
+    "integration_path": "catalog/draft_manifests/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "deployment_snapshot_reference"
+    ],
+    "notes": "Structured deployment snapshot with staff, fleet, and interface surfaces.",
+    "utility_score": 0.82,
+    "improvement_score": 0.71,
+    "maintenance_burden": 0.2,
+    "conflict_risk": 0.19,
+    "specialist": "THREADCORE",
+    "decision": "include"
+  },
+  {
+    "id": "sigma_ingestion_operations_controller",
+    "category": "config_manifest",
+    "path": "catalog/draft_manifests/recovered/sigma_ingestion_operations_controller.yaml",
+    "integration_path": "catalog/draft_manifests/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "controller_manifest_reference"
+    ],
+    "notes": "Recovered controller manifest for ingestion operations.",
+    "utility_score": 0.81,
+    "improvement_score": 0.68,
+    "maintenance_burden": 0.19,
+    "conflict_risk": 0.18,
+    "specialist": "Ingest Pipeline",
+    "decision": "include"
+  },
+  {
+    "id": "vector_chain_context_transfer",
+    "category": "config_manifest",
+    "path": "catalog/draft_manifests/recovered/vector_chain_context_transfer.yaml",
+    "integration_path": "catalog/draft_manifests/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "continuity_transfer_reference"
+    ],
+    "notes": "High-signal continuity and deploy-state manifest.",
+    "utility_score": 0.8,
+    "improvement_score": 0.67,
+    "maintenance_burden": 0.18,
+    "conflict_risk": 0.17,
+    "specialist": "THREADCORE",
+    "decision": "include"
+  },
+  {
+    "id": "memory_system_manager",
+    "category": "python_prototype",
+    "path": "tools/prototypes/python/recovered/memory_system_manager.py",
+    "integration_path": "tools/prototypes/python/",
+    "redundancy_flag": 1,
+    "telemetry": [
+      "prototype_adoption"
+    ],
+    "notes": "Useful extension layer but dependent on the main prototype.",
+    "utility_score": 0.69,
+    "improvement_score": 0.58,
+    "maintenance_burden": 0.34,
+    "conflict_risk": 0.27,
+    "specialist": "Simulation Systems",
+    "decision": "backup_only"
+  },
+  {
+    "id": "thread_context_tagging_agent_v1",
+    "category": "python_prototype",
+    "path": "tools/prototypes/python/recovered/thread_context_tagging_agent.py",
+    "integration_path": "tools/prototypes/python/",
+    "redundancy_flag": 1,
+    "telemetry": [
+      "prototype_adoption"
+    ],
+    "notes": "Older tagging-agent baseline retained behind v2.",
+    "utility_score": 0.58,
+    "improvement_score": 0.41,
+    "maintenance_burden": 0.18,
+    "conflict_risk": 0.14,
+    "specialist": "Tooling",
+    "decision": "backup_only"
+  },
+  {
+    "id": "threadcore_sidebar_alias_generator_v3_6",
+    "category": "javascript_module",
+    "path": "tools/prototypes/javascript/recovered/threadcore_sidebar_alias_generator_v3_6.js",
+    "integration_path": "tools/prototypes/javascript/",
+    "redundancy_flag": 1,
+    "telemetry": [
+      "alias_generation_success"
+    ],
+    "notes": "Standalone subset of the fuller macrodrift module.",
+    "utility_score": 0.6,
+    "improvement_score": 0.44,
+    "maintenance_burden": 0.16,
+    "conflict_risk": 0.12,
+    "specialist": "THREADCORE",
+    "decision": "backup_only"
+  },
+  {
+    "id": "orion_deployment_controller",
+    "category": "python_prototype",
+    "path": "tools/prototypes/python/recovered/orion_deployment_controller.py",
+    "integration_path": "tools/prototypes/python/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "controller_reference"
+    ],
+    "notes": "Useful deploy prototype, but tightly coupled to symbolic snapshot inputs.",
+    "utility_score": 0.62,
+    "improvement_score": 0.49,
+    "maintenance_burden": 0.41,
+    "conflict_risk": 0.33,
+    "specialist": "Deploy Ops",
+    "decision": "backup_only"
+  },
+  {
+    "id": "symbiosis_threadcore_injection",
+    "category": "python_prototype",
+    "path": "tools/prototypes/python/recovered/symbiosis_threadcore_injection.py",
+    "integration_path": "tools/prototypes/python/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "patch_script_reference"
+    ],
+    "notes": "Recoverable patch script, but too invasive for default include.",
+    "utility_score": 0.63,
+    "improvement_score": 0.51,
+    "maintenance_burden": 0.52,
+    "conflict_risk": 0.49,
+    "specialist": "Patch Ops",
+    "decision": "backup_only"
+  },
+  {
+    "id": "aurora_modular_core_v2_1",
+    "category": "protocol_doc",
+    "path": "docs/draft_protocols/recovered/aurora_modular_core_v2_1.md",
+    "integration_path": "docs/draft_protocols/",
+    "redundancy_flag": 1,
+    "telemetry": [
+      "protocol_reference"
+    ],
+    "notes": "Earlier version retained as baseline behind v2.3.",
+    "utility_score": 0.56,
+    "improvement_score": 0.39,
+    "maintenance_burden": 0.12,
+    "conflict_risk": 0.1,
+    "specialist": "Aurora Core",
+    "decision": "backup_only"
+  },
+  {
+    "id": "injectable_patch_capsule_format_template",
+    "category": "protocol_doc",
+    "path": "docs/draft_protocols/recovered/injectable_patch_capsule_format_template.md",
+    "integration_path": "docs/draft_protocols/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "template_reference"
+    ],
+    "notes": "Template scaffolding retained for fallback authoring only.",
+    "utility_score": 0.52,
+    "improvement_score": 0.36,
+    "maintenance_burden": 0.1,
+    "conflict_risk": 0.12,
+    "specialist": "Protocol Docs",
+    "decision": "backup_only"
+  },
+  {
+    "id": "gpt_editor_augmentation_package",
+    "category": "agent_protocol",
+    "path": "docs/draft_protocols/recovered/agents/gpt_editor_augmentation_package.md",
+    "integration_path": "docs/draft_protocols/agents/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "editor_package_reference"
+    ],
+    "notes": "Useful editor-sync package, but not core enough for first include set.",
+    "utility_score": 0.61,
+    "improvement_score": 0.47,
+    "maintenance_burden": 0.28,
+    "conflict_risk": 0.25,
+    "specialist": "Aurora Core",
+    "decision": "backup_only"
+  },
+  {
+    "id": "aurora_cloudbank_runtime_vault_summary",
+    "category": "agent_protocol",
+    "path": "docs/draft_protocols/recovered/agents/aurora_cloudbank_runtime_vault_summary.md",
+    "integration_path": "docs/draft_protocols/agents/",
+    "redundancy_flag": 1,
+    "telemetry": [
+      "vault_doc_reference"
+    ],
+    "notes": "Compact variant retained behind the fuller quickstart document.",
+    "utility_score": 0.54,
+    "improvement_score": 0.33,
+    "maintenance_burden": 0.09,
+    "conflict_risk": 0.08,
+    "specialist": "Aurora Core",
+    "decision": "backup_only"
+  },
+  {
+    "id": "aurora_cloudbank_runtime_vault_quickstart",
+    "category": "agent_protocol",
+    "path": "docs/draft_protocols/recovered/agents/aurora_cloudbank_runtime_vault_quickstart.md",
+    "integration_path": "docs/draft_protocols/agents/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "vault_doc_reference"
+    ],
+    "notes": "Useful operational quickstart, but secondary to the core protocol docs.",
+    "utility_score": 0.64,
+    "improvement_score": 0.45,
+    "maintenance_burden": 0.11,
+    "conflict_risk": 0.1,
+    "specialist": "Aurora Core",
+    "decision": "backup_only"
+  },
+  {
+    "id": "auroralite_bridgeagent_bundle_manifest",
+    "category": "agent_protocol",
+    "path": "docs/draft_protocols/recovered/agents/auroralite_bridgeagent_bundle_manifest.txt",
+    "integration_path": "docs/draft_protocols/agents/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "bundle_manifest_reference"
+    ],
+    "notes": "Bundle manifest retained as packaging reference, not yet core.",
+    "utility_score": 0.59,
+    "improvement_score": 0.42,
+    "maintenance_burden": 0.1,
+    "conflict_risk": 0.11,
+    "specialist": "AuroraLite",
+    "decision": "backup_only"
+  },
+  {
+    "id": "quantum_symbolic_enhancement_roadmap",
+    "category": "agent_protocol",
+    "path": "docs/draft_protocols/recovered/agents/quantum_symbolic_enhancement_roadmap.md",
+    "integration_path": "docs/draft_protocols/agents/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "roadmap_reference"
+    ],
+    "notes": "Useful design roadmap, but still speculative.",
+    "utility_score": 0.57,
+    "improvement_score": 0.4,
+    "maintenance_burden": 0.13,
+    "conflict_risk": 0.17,
+    "specialist": "Architecture",
+    "decision": "backup_only"
+  },
+  {
+    "id": "galactic_union_memory_optimization_plan",
+    "category": "simulation_logic",
+    "path": "GUMAS_SIM_2.5/draft_logic/recovered/galactic_union_memory_optimization_plan.md",
+    "integration_path": "GUMAS_SIM_2.5/draft_logic/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "optimization_reference"
+    ],
+    "notes": "High-value optimization note, but secondary to the mathematical framework and formulas.",
+    "utility_score": 0.66,
+    "improvement_score": 0.51,
+    "maintenance_burden": 0.18,
+    "conflict_risk": 0.14,
+    "specialist": "Simulation Logic",
+    "decision": "backup_only"
+  },
+  {
+    "id": "constellation_registration_capsule",
+    "category": "config_manifest",
+    "path": "catalog/draft_manifests/recovered/constellation_registration_capsule.yaml",
+    "integration_path": "catalog/draft_manifests/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "registration_reference"
+    ],
+    "notes": "Useful registration artifact, but not essential in the first include set.",
+    "utility_score": 0.61,
+    "improvement_score": 0.44,
+    "maintenance_burden": 0.15,
+    "conflict_risk": 0.16,
+    "specialist": "THREADCORE",
+    "decision": "backup_only"
+  },
+  {
+    "id": "reflection_chamber_activation_capsule",
+    "category": "config_manifest",
+    "path": "catalog/draft_manifests/recovered/agents/reflection_chamber_activation_capsule.md",
+    "integration_path": "catalog/draft_manifests/agents/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "activation_capsule_reference"
+    ],
+    "notes": "Coherent chamber activation capsule retained for later ecosystem integration.",
+    "utility_score": 0.58,
+    "improvement_score": 0.41,
+    "maintenance_burden": 0.12,
+    "conflict_risk": 0.13,
+    "specialist": "Agent Ops",
+    "decision": "backup_only"
+  },
+  {
+    "id": "starling_au_commlink_capsule",
+    "category": "config_manifest",
+    "path": "catalog/draft_manifests/recovered/agents/starling_au_commlink_capsule.md",
+    "integration_path": "catalog/draft_manifests/agents/",
+    "redundancy_flag": 0,
+    "telemetry": [
+      "vessel_registry_reference"
+    ],
+    "notes": "Symbolic vessel commlink capsule kept as fallback world/agent registry material.",
+    "utility_score": 0.55,
+    "improvement_score": 0.37,
+    "maintenance_burden": 0.11,
+    "conflict_risk": 0.13,
+    "specialist": "Worldbuilding",
+    "decision": "backup_only"
+  }
+]

@@ -12,10 +12,10 @@ Purpose: source-prioritized ledger of all currently known L1 entities, with emph
 
 ## Summary
 
-- Primary L1 human entities in the current roster/registry: 41.
-- Certainty split: 35 CANON, 6 STAGING.
-- 35 of the 41 people also have constellation addenda with staging/reference background material.
-- 18 people have explicit legacy/conflict traces in the partial development roster extract.
+- Primary L1 human entities in the current roster/registry: 42.
+- Certainty split: 42 CANON, 0 STAGING.
+- 36 of the 42 people also have constellation addenda with staging/reference background material.
+- 23 people have explicit legacy/conflict traces in the partial development roster extract.
 - Additional L1-adjacent entity surfaces identified: 11 roster divisions, 8 system blocks, 4 protocols/runbooks, 9 named vessels/craft, and 6 named station spaces/features.
 
 ## Primary Human Ledger
@@ -43,6 +43,7 @@ Purpose: source-prioritized ledger of all currently known L1 entities, with emph
 | ORION.ENTITY.0017 | Ira Menon | Compiler Engineer | Systems & Infrastructure | CANON | primary |
 | ORION.ENTITY.0041 | Vincent Kale | Layer Isolation Theorist | Systems & Infrastructure | CANON | primary |
 | ORION.ENTITY.0002 | Dr. Amina Velin | Symbolic Systems Research Lead | Simulation & Cognitive Systems | CANON | primary |
+| ORION.ENTITY.0042 | Dr. Amelia Rivers | AI Systems Specialist | Simulation & Cognitive Systems | CANON | primary |
 | ORION.ENTITY.0039 | Tobias Qin | Code/Narrative Systems Engineer | Simulation & Cognitive Systems | CANON | primary |
 | ORION.ENTITY.0013 | Emily Roberts | LLM-Simulation Bridge Developer | Simulation & Cognitive Systems | CANON | primary |
 | ORION.ENTITY.0005 | Carmen Rivas | Simulation Binding Specialist | Simulation & Cognitive Systems | CANON | primary |
@@ -57,12 +58,12 @@ Purpose: source-prioritized ledger of all currently known L1 entities, with emph
 | ORION.ENTITY.0030 | Olivia Nguyen | QA & Continuity Auditor | Operations & QA | CANON | primary |
 | ORION.ENTITY.0037 | Samantha Lee | Logging & Observability Engineer | Operations & QA | CANON | primary |
 | ORION.ENTITY.0038 | Tariq El-Sayegh | Speculative Systems Theorist (Stress Testing) | Operations & QA | CANON | primary |
-| ORION.ENTITY.0028 | Lt. Nakamura | Commanding Officer, Guardian Sentinel (Security Corvette) | Operations & Security | STAGING | reference |
-| ORION.ENTITY.0015 | Lt. Hassan | Commanding Officer, Logistics Alpha (Cargo Transport) | Operations | STAGING | reference |
-| ORION.ENTITY.0007 | Chief Thomson | Commanding Officer, Repair Tender Beta (Mobile Maintenance Tender) | Operations & Engineering | STAGING | reference |
-| ORION.ENTITY.0036 | Samantha Gray | Senior Pilot, ORS-05 *Lacewing* (Training / Cultural Liaison Flight) | Operations | STAGING | reference |
-| ORION.ENTITY.0034 | Ren Takahashi | Psycho-Acoustic Systems Engineer, ORS-05 *Lacewing* (Sensor & Human-Factors Acoustics) | Systems & Infrastructure | STAGING | reference |
-| ORION.ENTITY.0004 | Cadet Mira Chen | Cadet / Trainee (Operations Track) | Training | STAGING | reference |
+| ORION.ENTITY.0028 | Lt. Nakamura | Commanding Officer, Guardian Sentinel (Security Corvette) | Operations & Security | CANON | primary |
+| ORION.ENTITY.0015 | Lt. Hassan | Commanding Officer, Logistics Alpha (Cargo Transport) | Operations | CANON | primary |
+| ORION.ENTITY.0007 | Chief Thomson | Commanding Officer, Repair Tender Beta (Mobile Maintenance Tender) | Operations & Engineering | CANON | primary |
+| ORION.ENTITY.0036 | Samantha Gray | Senior Pilot, ORS-05 *Lacewing* (Training / Cultural Liaison Flight) | Operations | CANON | primary |
+| ORION.ENTITY.0034 | Ren Takahashi | Psycho-Acoustic Systems Engineer, ORS-05 *Lacewing* (Sensor & Human-Factors Acoustics) | Systems & Infrastructure | CANON | primary |
+| ORION.ENTITY.0004 | Cadet Mira Chen | Cadet / Trainee (Operations Track) | Training | CANON | primary |
 
 ### Command & Ethics (6)
 
@@ -142,11 +143,12 @@ Purpose: source-prioritized ledger of all currently known L1 entities, with emph
 
 #### Lt. Nakamura - ORION.ENTITY.0028
 
-- Primary canon status: `STAGING (FULL BIO; DETAILS UNCONFIRMED)` / `STAGING` / registry authority `reference`.
+- Primary canon status: `CONFIRMED` / `CANON` / registry authority `primary`.
 - Primary role: Commanding Officer, Guardian Sentinel (Security Corvette).
 - Primary summary: Lt. Nakamura serves as the commanding officer of *Guardian Sentinel*, Orion Station's security corvette-the ship you call when a situation is moving too fast for the station to stay hands-off. Nakamura's reputation is built on calm under contact: rapid threat assessment, tight comms discipline, and a bias toward containment over escalation.
 - Related L1 assets mentioned in current/secondary material: Orion Station, Guardian Sentinel.
-- Primary addenda: Operational scope (provisional): patrol and interception in the station's local orbital envelope; escort for high-value cargo or personnel transfers; rapid response to proximity alerts and unidentified craft; coordination with Orion Station Security (Chief Security Officer Julian Markov) for rules-of-engagement and incident reporting. | Style: Nakamura runs a lean bridge-short commands, clear intent, and ruthless clarity about what is known vs assumed. They are especially valued during ambiguous incidents where misinterpretation is the real enemy. | Notes: First name, service number, and clearance are not yet confirmed in canon. This profile is authored as a promotion candidate and should be reconciled against any future ship registry files.
+- Primary addenda: Operational scope (provisional): patrol and interception in the station's local orbital envelope; escort for high-value cargo or personnel transfers; rapid response to proximity alerts and unidentified craft; coordination with Orion Station Security (Chief Security Officer Julian Markov) for rules-of-engagement and incident reporting. | Style: Nakamura runs a lean bridge-short commands, clear intent, and ruthless clarity about what is known vs assumed. They are especially valued during ambiguous incidents where misinterpretation is the real enemy. | Notes: First name, service number, and full personnel metadata are still sparse in surviving sources, but the command role is now confirmed across the crew manifest, technical readout, and watch/security matrix.
+- Legacy drift: certainty `PROMOTED_FROM_STAGING`; older roles/mentions `Commanding Officer, Guardian Sentinel (Security Corvette), Commander, Guardian Sentinel`; sources `projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/ORION_STATION_CREW_MANIFEST.md, projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/orion_station_full_technical_readout.md, reports/analysis/ORION_COMMAND_WATCH_SECURITY_MATRIX__2026-03-09.md`; notes `Crew manifest lists Nakamura as Guardian Sentinel commander, Technical readout preserves Guardian Sentinel patrol vessel assignment and crew profile, Watch/security matrix names Lt. Nakamura as perimeter-response support to station security`.
 
 
 ### Operations (4)
@@ -169,20 +171,21 @@ Purpose: source-prioritized ledger of all currently known L1 entities, with emph
 
 #### Lt. Hassan - ORION.ENTITY.0015
 
-- Primary canon status: `STAGING (FULL BIO; DETAILS UNCONFIRMED)` / `STAGING` / registry authority `reference`.
+- Primary canon status: `CONFIRMED` / `CANON` / registry authority `primary`.
 - Primary role: Commanding Officer, Logistics Alpha (Cargo Transport).
 - Primary summary: Lt. Hassan commands *Logistics Alpha*, the cargo transport that keeps Orion Station's quiet needs from becoming loud emergencies. Hassan's job is less glamorous than intercepts and more consequential than most people admit: fuel margins, life-support consumables, spares, lab materials, and the thousand 'small' items that make closed habitats stable.
 - Related L1 assets mentioned in current/secondary material: Orion Station, Logistics Alpha.
-- Primary addenda: Operational scope (provisional): scheduled resupply runs; cargo manifest integrity; docking coordination with Flight Control (Dr. Elena Vasquez); contingency routing under debris or traffic constraints; liaison with Engineering (Jiro Tanaka / Raj Patel) for critical spares prioritization. | Style: methodical and unflappable. Hassan is known for turning chaotic requests into ranked lists with rationale-and for politely refusing to pretend that physics cares about urgency. | Notes: First name, clearance, and prior service history remain unconfirmed. This bio is a staging fill to prevent roster drift.
+- Primary addenda: Operational scope (provisional): scheduled resupply runs; cargo manifest integrity; docking coordination with Flight Control (Dr. Elena Vasquez); contingency routing under debris or traffic constraints; liaison with Engineering (Jiro Tanaka / Raj Patel) for critical spares prioritization. | Style: methodical and unflappable. Hassan is known for turning chaotic requests into ranked lists with rationale-and for politely refusing to pretend that physics cares about urgency. | Notes: First name, clearance, and prior service history remain sparse in surviving sources, but the Logistics Alpha command role is now confirmed across the manifest and operational references.
+- Legacy drift: certainty `PROMOTED_FROM_STAGING`; older roles/mentions `Commanding Officer, Logistics Alpha (Cargo Transport), Commander, Logistics Alpha`; sources `projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/ORION_STATION_CREW_MANIFEST.md, projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/orion_station_full_technical_readout.md, reports/analysis/ORION_COMMAND_WATCH_SECURITY_MATRIX__2026-03-09.md`; notes `Crew manifest lists Hassan as Logistics Alpha commander, Technical readout preserves cargo platform class, capacity, and active loading status, Watch/security matrix preserves Hassan among named fleet and support commanders`.
 
 #### Samantha Gray - ORION.ENTITY.0036
 
-- Primary canon status: `STAGING (FULL BIO; DETAILS UNCONFIRMED)` / `STAGING` / registry authority `reference`.
+- Primary canon status: `CONFIRMED` / `CANON` / registry authority `primary`.
 - Primary role: Senior Pilot, ORS-05 *Lacewing* (Training / Cultural Liaison Flight).
 - Primary summary: Samantha Gray is the senior pilot assigned to ORS-05 *Lacewing*, a small craft used for training evolutions, liaison flights, and the kind of 'short-hop' missions that keep the station connected to its operational neighborhood. Gray is known for precision flying and a steady presence-ideal traits when you're piloting with trainees onboard or when a mission's success depends on calm execution.
 - Related L1 assets mentioned in current/secondary material: Lacewing.
-- Primary addenda: Operational scope (provisional): piloting drills; supervised cadet flight time; liaison transport; controlled rendezvous practice; coordination with Flight Control (Dr. Elena Vasquez) and Bridge Ops (Leena Porter) for schedule and clearance. | Style: quietly encouraging, highly standards-driven. Gray makes competence feel attainable, and mistakes feel like data. | Notes: *Lacewing*'s mission set and crew composition should be reconciled against future vehicle manifests. This profile is authored as staging until promoted.
-- Legacy drift: certainty `STAGING/UNCONFIRMED`; older roles/mentions `Senior Pilot`; sources `ORION_STATION_CREW_MANIFEST.md`; notes `Name field`.
+- Primary addenda: Operational scope (provisional): piloting drills; supervised cadet flight time; liaison transport; controlled rendezvous practice; coordination with Flight Control (Dr. Elena Vasquez) and Bridge Ops (Leena Porter) for schedule and clearance. | Style: quietly encouraging, highly standards-driven. Gray makes competence feel attainable, and mistakes feel like data. | Notes: *Lacewing* assignment, senior-pilot role, and active training/liaison context are now confirmed across the crew manifest and operational-structure references.
+- Legacy drift: certainty `PROMOTED_FROM_STAGING`; older roles/mentions `Senior Pilot, ORS-05 *Lacewing* (Training / Cultural Liaison Flight)`; sources `projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/ORION_STATION_CREW_MANIFEST.md, projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/orion_station_full_technical_readout.md, reports/analysis/ORION_COMMAND_WATCH_SECURITY_MATRIX__2026-03-09.md, reports/analysis/non_can_reports/AURORA_QUANTUM_FORGE_DEEP_DIVE.md`; notes `Crew manifest lists Gray as Lacewing senior pilot with VTOL and atmospheric-flight specialization, Technical readout preserves Lacewing mission class, crew band, and training-ops status, Operational structure notes Gray under Flight Control pilot staffing`.
 
 
 ### Operations & Engineering (3)
@@ -204,11 +207,12 @@ Purpose: source-prioritized ledger of all currently known L1 entities, with emph
 
 #### Chief Thomson - ORION.ENTITY.0007
 
-- Primary canon status: `STAGING (FULL BIO; DETAILS UNCONFIRMED)` / `STAGING` / registry authority `reference`.
+- Primary canon status: `CONFIRMED` / `CANON` / registry authority `primary`.
 - Primary role: Commanding Officer, Repair Tender Beta (Mobile Maintenance Tender).
 - Primary summary: Chief Thomson commands *Repair Tender Beta*, Orion Station's mobile maintenance platform-part workshop, part tug, part problem-solving habitat. When something external breaks (paneling, comm arrays, sensor booms, micrometeor impacts), Thomson's crew is how you fix it without gambling station safety.
 - Related L1 assets mentioned in current/secondary material: Orion Station, Repair Tender Beta.
-- Primary addenda: Operational scope (provisional): extravehicular repair support; component retrieval; external inspection passes; emergency patching and stabilization; coordination with Chief Engineering Officer Jiro Tanaka for risk thresholds and go/no-go decisions. | Style: practical, safety-forward, and allergic to heroic shortcuts. Thomson's leadership is built on checklists that actually reflect reality, and a crew culture where anyone can call a pause without punishment. | Notes: 'Chief' indicates senior enlisted or warrant-grade standing, but exact rank structure is not yet formalized. First name and personnel ID are pending canon confirmation.
+- Primary addenda: Operational scope (provisional): extravehicular repair support; component retrieval; external inspection passes; emergency patching and stabilization; coordination with Chief Engineering Officer Jiro Tanaka for risk thresholds and go/no-go decisions. | Style: practical, safety-forward, and allergic to heroic shortcuts. Thomson's leadership is built on checklists that actually reflect reality, and a crew culture where anyone can call a pause without punishment. | Notes: 'Chief' indicates senior enlisted or warrant-grade standing, and exact rank structure plus first name remain unspecified in surviving sources, but command of Repair Tender Beta is now confirmed by the manifest and current operations references.
+- Legacy drift: certainty `PROMOTED_FROM_STAGING`; older roles/mentions `Commanding Officer, Repair Tender Beta (Mobile Maintenance Tender), Commander, Repair Tender Beta`; sources `projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/ORION_STATION_CREW_MANIFEST.md, projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/orion_station_full_technical_readout.md, reports/analysis/ORION_COMMAND_WATCH_SECURITY_MATRIX__2026-03-09.md`; notes `Crew manifest lists Thomson as Repair Tender Beta commander, Technical readout preserves maintenance-tender class, crew, and docked rotation state, Watch/security matrix preserves Thomson among named fleet and support commanders`.
 
 
 ### Medical (1)
@@ -283,15 +287,15 @@ Purpose: source-prioritized ledger of all currently known L1 entities, with emph
 
 #### Ren Takahashi - ORION.ENTITY.0034
 
-- Primary canon status: `STAGING (FULL BIO; DETAILS UNCONFIRMED)` / `STAGING` / registry authority `reference`.
+- Primary canon status: `CONFIRMED` / `CANON` / registry authority `primary`.
 - Primary role: Psycho-Acoustic Systems Engineer, ORS-05 *Lacewing* (Sensor & Human-Factors Acoustics).
 - Primary summary: Ren Takahashi is a psycho-acoustic systems engineer attached to ORS-05 *Lacewing*, specializing in how sound and vibration affect both instrumentation and humans in confined craft. Their work sits at an unusual intersection: sensor integrity, hardware resonance, and crew cognition under stress.
 - Related L1 assets mentioned in current/secondary material: Lacewing.
-- Primary addenda: Operational scope (provisional): calibration of acoustic/vibration sensors; mitigation of resonance artifacts; designing alerts that remain perceivable without becoming fatiguing; advising on cockpit soundscapes for training scenarios. | Style: curious, empirically rigorous, and unpretentious. Takahashi tends to show up with a spectrum plot and a plan. | Notes: This profile assumes Takahashi's attachment to *Lacewing* is ongoing. Clearance and reporting line are pending canon confirmation.
-- Legacy drift: certainty `STAGING/UNCONFIRMED`; older roles/mentions `Psycho-Acoustic Systems Engineer`; sources `ORION_STATION_CREW_MANIFEST.md`; notes `Name field`.
+- Primary addenda: Operational scope (provisional): calibration of acoustic/vibration sensors; mitigation of resonance artifacts; designing alerts that remain perceivable without becoming fatiguing; advising on cockpit soundscapes for training scenarios. | Style: curious, empirically rigorous, and unpretentious. Takahashi tends to show up with a spectrum plot and a plan. | Notes: *Lacewing* attachment and psycho-acoustic specialization are now confirmed across the crew manifest and specialist-org references; reporting-line specifics remain sparse.
+- Legacy drift: certainty `PROMOTED_FROM_STAGING`; older roles/mentions `Psycho-Acoustic Systems Engineer, ORS-05 *Lacewing* (Sensor & Human-Factors Acoustics)`; sources `projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/ORION_STATION_CREW_MANIFEST.md, projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/orion_station_full_technical_readout.md, reports/analysis/ORION_COMMAND_WATCH_SECURITY_MATRIX__2026-03-09.md, reports/analysis/non_can_reports/AURORA_QUANTUM_FORGE_DEEP_DIVE.md`; notes `Crew manifest lists Takahashi as Lacewing psycho-acoustic engineer with cultural-contact calibration responsibilities, Technical readout preserves Lacewing mission context used by the engineering profile, Operational structure notes Takahashi under systems specialists`.
 
 
-### Simulation & Cognitive Systems (5)
+### Simulation & Cognitive Systems (6)
 
 #### Dr. Amina Velin - ORION.ENTITY.0002
 
@@ -300,6 +304,16 @@ Purpose: source-prioritized ledger of all currently known L1 entities, with emph
 - Primary summary: Velin leads symbolic systems research, translating messy human meaning into structures that can be tested, audited, and used without losing nuance. She champions 'interpretability that doesn't lie.'
 - Constellation addenda (reference/staging): Responsibilities: Researches how symbolics (AI narratives) interface with reality layer. | Background: AI researcher (ID SCI_002). | Relationships: Collaborates with Toby Qin on symbolic integration, and with Sentari on affect in language. | Traits: Innovative, cross-disciplinary.
 - Legacy drift: certainty `STAGING/UNCONFIRMED`; older roles/mentions `Research Director / Lead Science Officer`; sources `ORION_STATION_CREW_MANIFEST.md`; notes `Name field`.
+
+#### Dr. Amelia Rivers - ORION.ENTITY.0042
+
+- Primary canon status: `CONFIRMED` / `CANON` / registry authority `primary`.
+- Primary role: AI Systems Specialist.
+- Primary summary: Rivers specializes in station-side AI systems support, keeping observer-facing AI behavior legible, inspectable, and operationally useful. Her remit sits at the seam between active AI tooling and the human oversight surfaces that keep Orion's runtime understandable.
+- Primary addenda: Observer guild `Observers`; module `Observer Deck`; anchor path `orion.guild.observers.rivers.term`.
+- Related L1 assets mentioned in current/secondary material: Aurora, Observer Deck.
+- Constellation addenda (reference/staging): Responsibilities: Supports station AI systems and observer-facing runtime visibility, with emphasis on readable oversight surfaces rather than opaque automation. | Background: Recovered in the Orion crew registry as an Observers-guild specialist assigned to the Observer Deck. Also listed in intake/GUMAS_Staff_Core_Module_Rebuild.json as `AI Systems Specialist (Original Panel)`. | Relationships: No stable primary-canon relationship map was recovered; preserve as an observer-deck specialist adjacent to Aurora-facing AI operations. | Traits: Observant, systems-focused, calm under ambiguity.
+- Legacy drift: certainty `STAGING/UNCONFIRMED`; older roles/mentions `AI Systems Specialist, AI Systems Specialist (Original Panel)`; sources `text_Orion_Crew.txt, intake/GUMAS_Staff_Core_Module_Rebuild.json`; notes `Recovered crew registry line, Draft intake staff module`.
 
 #### Tobias Qin - ORION.ENTITY.0039
 
@@ -422,11 +436,12 @@ Purpose: source-prioritized ledger of all currently known L1 entities, with emph
 
 #### Cadet Mira Chen - ORION.ENTITY.0004
 
-- Primary canon status: `STAGING (FULL BIO; DETAILS UNCONFIRMED)` / `STAGING` / registry authority `reference`.
+- Primary canon status: `CONFIRMED` / `CANON` / registry authority `primary`.
 - Primary role: Cadet / Trainee (Operations Track).
 - Primary summary: Cadet Mira Chen is a trainee in Orion Station's operations pipeline-learning the systems, procedures, and judgment calls that keep a complex habitat safe. Chen appears in records as a named milestone in training progress, suggesting a monitored development track rather than a one-off mention.
 - Related L1 assets mentioned in current/secondary material: Orion Station.
-- Primary addenda: Training scope (provisional): supervised watchstanding; communications protocols; incident drills; basic flight-support literacy; handoff practices between Bridge Ops, Flight Control, and Engineering. | Style: conscientious and fast-learning, with an emphasis on asking good questions before acting. Chen is being shaped for reliability over heroics. | Notes: This is a staging profile. If Mira Chen is intended to be related to Marcus Chen or others on the roster, that relationship should be explicitly declared in canon rather than inferred.
+- Primary addenda: Training scope (provisional): supervised watchstanding; communications protocols; incident drills; basic flight-support literacy; handoff practices between Bridge Ops, Flight Control, and Engineering. | Style: conscientious and fast-learning, with an emphasis on asking good questions before acting. Chen is being shaped for reliability over heroics. | Notes: Training-track status is now confirmed by the watch/security matrix; the surviving mission references are most consistent with the documented Lacewing cadet-certification profile, but that vehicle link remains inferential.
+- Legacy drift: certainty `PROMOTED_FROM_STAGING`; older roles/mentions `Cadet / Trainee (Operations Track)`; sources `reports/analysis/ORION_COMMAND_WATCH_SECURITY_MATRIX__2026-03-09.md, projects/Aurora_New_11_9/01_OPERATIONS/Station_Infrastructure/orion_station_full_technical_readout.md`; notes `Watch/security matrix preserves Mira Chen among named fleet and support commanders/training personnel, Technical readout includes a cadet-certification mission on Lacewing that is consistent with the training profile, but does not name Chen directly`.
 
 ## L1 Environment And Assets
 
@@ -489,7 +504,7 @@ Purpose: source-prioritized ledger of all currently known L1 entities, with emph
 - The primary entity registry contains only L1 humans for the L1 portion of the registry; vessels, named spaces, and most physical systems remain outside the promoted registry and survive only in operational or legacy documents.
 - Aurora naming is now resolved by precedence: the primary 2026-02-11 identity schematics bundle and current runtime define Aurora / AU as the routed control-plane identity, while 'Aurora Core' remains reference-only legacy phrasing from lower-precedence materials.
 - Reference constellation prose is useful for relationships and personality, but it must not silently override the roster and registry on titles, division placement, or certainty.
-- Named vessel commanders Lt. Nakamura, Lt. Hassan, Chief Thomson, Samantha Gray, Ren Takahashi, and Cadet Mira Chen remain STAGING until promoted beyond the roster/reference set.
+- Named vessel commanders Lt. Nakamura, Lt. Hassan, Chief Thomson, Samantha Gray, Ren Takahashi, and Cadet Mira Chen are now promoted into the primary L1 roster after cross-source reconciliation.
 
 ## Recommended Next Steps
 

@@ -1,0 +1,164 @@
+{
+  "generated_on": "2026-03-21",
+  "scope": "Dedicated pass over remaining agent-residue artifacts after Waves 1 and 2 plus residual recovery",
+  "source_artifacts_reviewed": 26,
+  "genuine_agent_artifacts_routed": 19,
+  "named_recovered_copies_created": 17,
+  "remaining_unrouted_agent_residue": 0,
+  "duplicate_collapses": [
+    {
+      "source_files": [
+        "text_58.txt",
+        "text_59.txt",
+        "text_threadcore_summon.txt"
+      ],
+      "destination": "docs/draft_protocols/recovered/agents/threadcore_unified_deploy_v2_summon_ritual.md"
+    }
+  ],
+  "routed_groups": [
+    {
+      "destination_dir": "docs/draft_protocols/recovered/agents",
+      "items": [
+        {
+          "source_files": [
+            "text_125.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/agents/aurora_cloudbank_runtime_vault_summary.md"
+        },
+        {
+          "source_files": [
+            "text_au_runtime_vault.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/agents/aurora_cloudbank_runtime_vault_quickstart.md"
+        },
+        {
+          "source_files": [
+            "text_128.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/agents/zipwiz_augmented_universal_upgrade_protocol.md"
+        },
+        {
+          "source_files": [
+            "text_129.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/agents/aurora_seed_pulse_999_comet_echo.md"
+        },
+        {
+          "source_files": [
+            "text_136.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/agents/auroralite_bridgeagent_bundle_manifest.txt"
+        },
+        {
+          "source_files": [
+            "text_148.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/agents/aurora_l1_simulation_role_brief.md"
+        },
+        {
+          "source_files": [
+            "text_150.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/agents/aurora_l1_middleware_system_prompt.md"
+        },
+        {
+          "source_files": [
+            "text_116.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/agents/threadcore_unified_thread_identity_tool_patched.md"
+        },
+        {
+          "source_files": [
+            "text_threadcore_1_0.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/agents/threadcore_unified_thread_identity_tool_symbolic_v1.md"
+        },
+        {
+          "source_files": [
+            "text_58.txt",
+            "text_59.txt",
+            "text_threadcore_summon.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/agents/threadcore_unified_deploy_v2_summon_ritual.md"
+        },
+        {
+          "source_files": [
+            "text_39.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/agents/quantum_symbolic_enhancement_roadmap.md"
+        },
+        {
+          "source_files": [
+            "text_40.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/agents/aurora_interlink_fabric_concept.md"
+        },
+        {
+          "source_files": [
+            "text_GitDeploy.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/agents/gpt_editor_augmentation_package.md"
+        }
+      ]
+    },
+    {
+      "destination_dir": "catalog/draft_manifests/recovered/agents",
+      "items": [
+        {
+          "source_files": [
+            "text_chamber_activation.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/agents/reflection_chamber_activation_capsule.md"
+        },
+        {
+          "source_files": [
+            "text_87.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/agents/orion_standard_markers_toolkit_manifest.md"
+        },
+        {
+          "source_files": [
+            "text_65.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/agents/quantum_agent_seed_registered__eos_v1.md"
+        },
+        {
+          "source_files": [
+            "text_69.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/agents/starling_au_commlink_capsule.md"
+        }
+      ]
+    }
+  ],
+  "reclassified_non_agent_adjacent": [
+    {
+      "source_file": "4.txt",
+      "reason": "PR/feature-summary style implementation note, not an agent blueprint"
+    },
+    {
+      "source_file": "text_9.txt",
+      "reason": "CI/CD job summary, not an agent specification"
+    },
+    {
+      "source_file": "text_12.txt",
+      "reason": "commit / hook transcript, not an agent artifact"
+    },
+    {
+      "source_file": "text_145.txt",
+      "reason": "partial tuning note, too fragmentary to route as an agent document"
+    },
+    {
+      "source_file": "text_49.txt",
+      "reason": "exact-duplicate functional-layer fragment already represented by routed ingestion blueprint material"
+    },
+    {
+      "source_file": "text_50.txt",
+      "reason": "exact duplicate of text_49.txt"
+    },
+    {
+      "source_file": "text_Au_seed_1.txt",
+      "reason": "partial seed-pulse fragment already represented more completely by text_129.txt"
+    }
+  ]
+}

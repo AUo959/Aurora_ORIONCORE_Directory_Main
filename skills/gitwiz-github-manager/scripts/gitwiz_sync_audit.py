@@ -11,6 +11,27 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+DEFAULT_HYGIENE_POLICY: dict[str, Any] = {
+    "version": 1,
+    "defaults": {
+        "warning": {
+            "status_entries": 20,
+            "untracked_files": 8,
+            "deleted_files": 5,
+            "behind_commits": 25,
+        },
+        "critical": {
+            "status_entries": 75,
+            "untracked_files": 25,
+            "deleted_files": 25,
+            "behind_commits": 200,
+        },
+        "warn_on_dirty_main": True,
+        "warn_on_diverged_main": True,
+    },
+    "repos": {},
+}
+
 
 def utcnow_compact() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H%M%SZ")
@@ -47,25 +68,62 @@ def detect_workspace_root(explicit_root: str | None) -> Path:
         ) from exc
 
 
-def load_repo_registry(workspace_root: Path) -> list[dict[str, Any]]:
-    registry_path = workspace_root / "catalog" / "repo_registry.yaml"
-    if not registry_path.exists():
-        return []
-    raw = registry_path.read_text(encoding="utf-8").strip()
+def load_structured_file(path: Path) -> dict[str, Any]:
+    raw = path.read_text(encoding="utf-8").strip()
     if not raw:
-        return []
-    # repo_registry.yaml is written by workspace_scan.py using dump_yaml_like,
-    # which produces JSON-compatible output. However it may be true YAML on disk,
-    # so try JSON first and fall back to yaml.safe_load.
+        return {}
     try:
-        return json.loads(raw).get("repos", [])
+        loaded = json.loads(raw)
+        return loaded if isinstance(loaded, dict) else {}
     except json.JSONDecodeError:
         pass
     try:
         import yaml  # type: ignore
-        return (yaml.safe_load(raw) or {}).get("repos", [])
+
+        loaded = yaml.safe_load(raw) or {}
+        return loaded if isinstance(loaded, dict) else {}
     except Exception:
+        return {}
+
+
+def load_repo_registry(workspace_root: Path) -> list[dict[str, Any]]:
+    registry_path = workspace_root / "catalog" / "repo_registry.yaml"
+    if not registry_path.exists():
         return []
+    return load_structured_file(registry_path).get("repos", [])
+
+
+def merge_policy(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
+    merged: dict[str, Any] = {}
+    for key in set(base) | set(override):
+        base_value = base.get(key)
+        override_value = override.get(key)
+        if isinstance(base_value, dict) and isinstance(override_value, dict):
+            merged[key] = merge_policy(base_value, override_value)
+        elif key in override:
+            merged[key] = override_value
+        else:
+            merged[key] = base_value
+    return merged
+
+
+def load_hygiene_policy(workspace_root: Path, explicit_policy: str | None) -> dict[str, Any]:
+    if explicit_policy:
+        candidate = Path(explicit_policy).expanduser()
+        if not candidate.is_absolute():
+            candidate = workspace_root / candidate
+        policy_path = candidate.resolve()
+    else:
+        policy_path = workspace_root / "catalog" / "gitwiz_hygiene_policy.yaml"
+
+    if not policy_path.exists():
+        return DEFAULT_HYGIENE_POLICY
+
+    loaded = load_structured_file(policy_path)
+    if not loaded:
+        return DEFAULT_HYGIENE_POLICY
+
+    return merge_policy(DEFAULT_HYGIENE_POLICY, loaded)
 
 
 def parse_remote_map(remote_output: str) -> dict[str, dict[str, str]]:
@@ -118,6 +176,13 @@ def parse_status_lines(status_output: str) -> dict[str, Any]:
         else:
             counts["other"] += 1
     return {"counts": counts, "files": files}
+
+
+def count_tracked_changes(status_counts: dict[str, int]) -> int:
+    return sum(
+        int(status_counts.get(key, 0))
+        for key in ("modified", "added", "deleted", "renamed", "copied", "unmerged", "other")
+    )
 
 
 def resolve_target_paths(
@@ -205,7 +270,179 @@ def suggest_actions(summary: dict[str, Any]) -> list[str]:
     return actions
 
 
-def build_repo_summary(target: dict[str, Any], fetch: bool) -> dict[str, Any]:
+def repo_hygiene_policy(policy: dict[str, Any], repo_name: str) -> dict[str, Any]:
+    defaults = policy.get("defaults", {})
+    repo_overrides = policy.get("repos", {}).get(repo_name, {})
+    return merge_policy(defaults, repo_overrides)
+
+
+def hygiene_metric_values(summary: dict[str, Any]) -> dict[str, int]:
+    counts = summary.get("status_counts", {})
+    tracked_changes = count_tracked_changes(counts)
+    return {
+        "status_entries": tracked_changes + int(counts.get("untracked", 0)),
+        "tracked_changes": tracked_changes,
+        "untracked_files": int(counts.get("untracked", 0)),
+        "deleted_files": int(counts.get("deleted", 0)),
+        "ahead_commits": int(summary.get("ahead", 0)),
+        "behind_commits": int(summary.get("behind", 0)),
+    }
+
+
+def add_breach(
+    breaches: list[dict[str, Any]],
+    *,
+    level: str,
+    metric: str,
+    actual: int | str,
+    threshold: int | str,
+    message: str,
+) -> None:
+    breaches.append(
+        {
+            "level": level,
+            "metric": metric,
+            "actual": actual,
+            "threshold": threshold,
+            "message": message,
+        }
+    )
+
+
+def evaluate_hygiene(summary: dict[str, Any], policy: dict[str, Any]) -> dict[str, Any]:
+    breaches: list[dict[str, Any]] = []
+    if not summary["exists"]:
+        add_breach(
+            breaches,
+            level="critical",
+            metric="repo_presence",
+            actual="missing",
+            threshold="present",
+            message="Repo path is unavailable in the current execution context.",
+        )
+    elif not summary["remotes"]:
+        add_breach(
+            breaches,
+            level="warning",
+            metric="remote_config",
+            actual="missing",
+            threshold="configured",
+            message="Repo has no configured remote, so parity with GitHub cannot be verified.",
+        )
+
+    metrics = hygiene_metric_values(summary)
+    warning_thresholds = policy.get("warning", {})
+    critical_thresholds = policy.get("critical", {})
+    for metric, actual in metrics.items():
+        critical_threshold = critical_thresholds.get(metric)
+        warning_threshold = warning_thresholds.get(metric)
+        if isinstance(critical_threshold, int) and actual >= critical_threshold:
+            add_breach(
+                breaches,
+                level="critical",
+                metric=metric,
+                actual=actual,
+                threshold=critical_threshold,
+                message=f"{metric} is over the critical repo hygiene budget.",
+            )
+        elif isinstance(warning_threshold, int) and actual >= warning_threshold:
+            add_breach(
+                breaches,
+                level="warning",
+                metric=metric,
+                actual=actual,
+                threshold=warning_threshold,
+                message=f"{metric} is over the warning repo hygiene budget.",
+            )
+
+    if summary.get("branch") == "main" and summary.get("dirty") and policy.get("warn_on_dirty_main", True):
+        add_breach(
+            breaches,
+            level="warning",
+            metric="dirty_main",
+            actual=metrics["status_entries"],
+            threshold=0,
+            message="Working directly on main is accumulating uncommitted drift.",
+        )
+
+    if (
+        summary.get("branch") == "main"
+        and summary.get("sync_state") == "diverged"
+        and policy.get("warn_on_diverged_main", True)
+    ):
+        add_breach(
+            breaches,
+            level="warning",
+            metric="diverged_main",
+            actual=f"{summary.get('ahead', 0)}/{summary.get('behind', 0)}",
+            threshold="0/0",
+            message="Main has diverged from upstream; large sync work will compound if this is left open.",
+        )
+
+    status = "ok"
+    if any(breach["level"] == "critical" for breach in breaches):
+        status = "critical"
+    elif breaches:
+        status = "warning"
+
+    return {
+        "status": status,
+        "metrics": metrics,
+        "breaches": breaches,
+        "role": policy.get("role", ""),
+        "note": policy.get("note", ""),
+    }
+
+
+def dedupe_preserve_order(values: list[str]) -> list[str]:
+    seen: set[str] = set()
+    ordered: list[str] = []
+    for value in values:
+        if value in seen:
+            continue
+        seen.add(value)
+        ordered.append(value)
+    return ordered
+
+
+def hygiene_actions(summary: dict[str, Any], hygiene: dict[str, Any]) -> list[str]:
+    actions: list[str] = []
+    breach_metrics = {breach["metric"] for breach in hygiene["breaches"]}
+    if "dirty_main" in breach_metrics:
+        actions.append("Move active work off main into a short-lived branch before the delta grows further.")
+    if "status_entries" in breach_metrics or "tracked_changes" in breach_metrics:
+        actions.append("Split the local delta into smaller commit batches by repo and artifact class.")
+    if "untracked_files" in breach_metrics:
+        actions.append("Decide whether the untracked files are source, generated runtime state, or receipts, then either commit or ignore them.")
+    if "deleted_files" in breach_metrics:
+        actions.append("Review the deletion set explicitly before staging anything; this size usually means migration drift or path confusion.")
+    if "behind_commits" in breach_metrics or summary.get("sync_state") == "diverged":
+        actions.append("Fetch and reconcile upstream sooner; once behind grows into the hundreds, recovery becomes a dedicated sync project.")
+    if "remote_config" in breach_metrics:
+        actions.append("Configure a remote before treating this repo as part of the normal publication loop.")
+    if "repo_presence" in breach_metrics:
+        actions.append("Run the audit from the canonical workspace path so nested repo state is measured from the real checkout.")
+    return dedupe_preserve_order(actions)
+
+
+def overall_hygiene_status(repos: list[dict[str, Any]]) -> str:
+    statuses = {repo.get("hygiene", {}).get("status", "ok") for repo in repos}
+    if "critical" in statuses:
+        return "critical"
+    if "warning" in statuses:
+        return "warning"
+    return "ok"
+
+
+def should_fail(overall_status: str, fail_on: str) -> bool:
+    if fail_on == "none":
+        return False
+    if fail_on == "warning":
+        return overall_status in {"warning", "critical"}
+    return overall_status == "critical"
+
+
+def build_repo_summary(target: dict[str, Any], fetch: bool, hygiene_policy_config: dict[str, Any]) -> dict[str, Any]:
     chosen_path = choose_existing_path(target["candidate_paths"])
     summary: dict[str, Any] = {
         "name": target["name"],
@@ -232,10 +469,15 @@ def build_repo_summary(target: dict[str, Any], fetch: bool) -> dict[str, Any]:
         "status_lines": [],
         "sync_state": "missing",
         "suggested_actions": [],
+        "hygiene": {},
     }
 
     if not summary["exists"]:
+        repo_policy = repo_hygiene_policy(hygiene_policy_config, summary["name"])
+        summary["hygiene"] = evaluate_hygiene(summary, repo_policy)
         summary["suggested_actions"] = suggest_actions(summary)
+        summary["suggested_actions"].extend(hygiene_actions(summary, summary["hygiene"]))
+        summary["suggested_actions"] = dedupe_preserve_order(summary["suggested_actions"])
         return summary
 
     repo_path = Path(summary["resolved_path"])
@@ -267,27 +509,38 @@ def build_repo_summary(target: dict[str, Any], fetch: bool) -> dict[str, Any]:
     else:
         summary["sync_state"] = "in_sync"
 
+    repo_policy = repo_hygiene_policy(hygiene_policy_config, summary["name"])
+    summary["hygiene"] = evaluate_hygiene(summary, repo_policy)
     summary["suggested_actions"] = suggest_actions(summary)
+    summary["suggested_actions"].extend(hygiene_actions(summary, summary["hygiene"]))
+    summary["suggested_actions"] = dedupe_preserve_order(summary["suggested_actions"])
     return summary
 
 
 def markdown_report(report: dict[str, Any]) -> str:
+    overall_status = report.get("overall_hygiene_status", "ok")
+    critical_repos = [repo["name"] for repo in report["repos"] if repo.get("hygiene", {}).get("status") == "critical"]
+    warning_repos = [repo["name"] for repo in report["repos"] if repo.get("hygiene", {}).get("status") == "warning"]
     lines = [
         "# GITWIZ Sync Audit",
         "",
         f"Generated: {report['generated_at_utc']}",
         f"Workspace Root: `{report['workspace_root']}`",
         f"Canonical Root: `{report['canonical_root'] or 'not_provided'}`",
+        f"Policy Path: `{report.get('policy_path') or 'default'}`",
         "",
         "## Summary",
         "",
         f"- Target selection: `{report['selection']}`",
         f"- Repos scanned: `{len(report['repos'])}`",
+        f"- Overall hygiene status: `{overall_status}`",
     ]
     problem_repos = [repo["name"] for repo in report["repos"] if repo["sync_state"] != "in_sync"]
     lines.append(f"- Repos needing attention: `{len(problem_repos)}`")
     if problem_repos:
         lines.append(f"- Attention targets: {', '.join(problem_repos)}")
+    lines.append(f"- Warning hygiene targets: `{len(warning_repos)}`")
+    lines.append(f"- Critical hygiene targets: `{len(critical_repos)}`")
     lines.extend(["", "## Repo Findings", ""])
     for repo in report["repos"]:
         lines.append(f"### {repo['name']}")
@@ -295,6 +548,7 @@ def markdown_report(report: dict[str, Any]) -> str:
         lines.append(f"- Path: `{repo['resolved_path'] or repo['relative_path']}`")
         lines.append(f"- Exists: `{repo['exists']}`")
         lines.append(f"- Sync state: `{repo['sync_state']}`")
+        lines.append(f"- Hygiene status: `{repo.get('hygiene', {}).get('status', 'ok')}`")
         if repo["exists"]:
             lines.append(f"- Branch: `{repo['branch']}`")
             lines.append(f"- HEAD: `{repo['head_sha']}`")
@@ -307,6 +561,14 @@ def markdown_report(report: dict[str, Any]) -> str:
                 f"modified={counts['modified']}, added={counts['added']}, deleted={counts['deleted']}, "
                 f"renamed={counts['renamed']}, untracked={counts['untracked']}, unmerged={counts['unmerged']}"
             )
+            metrics = repo.get("hygiene", {}).get("metrics", {})
+            if metrics:
+                lines.append(
+                    "- Hygiene metrics: "
+                    f"status_entries={metrics['status_entries']}, tracked_changes={metrics['tracked_changes']}, "
+                    f"untracked_files={metrics['untracked_files']}, deleted_files={metrics['deleted_files']}, "
+                    f"behind_commits={metrics['behind_commits']}"
+                )
             if repo["remotes"]:
                 remote_summary = ", ".join(
                     f"{name}={values.get('fetch', values.get('push', ''))}" for name, values in sorted(repo["remotes"].items())
@@ -316,6 +578,17 @@ def markdown_report(report: dict[str, Any]) -> str:
                 lines.append("- Local status lines:")
                 for line in repo["status_lines"][:20]:
                     lines.append(f"  - `{line}`")
+        if repo.get("hygiene", {}).get("role"):
+            lines.append(f"- Repo role: `{repo['hygiene']['role']}`")
+        if repo.get("hygiene", {}).get("note"):
+            lines.append(f"- Hygiene note: {repo['hygiene']['note']}")
+        breaches = repo.get("hygiene", {}).get("breaches", [])
+        if breaches:
+            lines.append("- Hygiene breaches:")
+            for breach in breaches:
+                lines.append(
+                    f"  - `{breach['level']}` {breach['metric']}: actual=`{breach['actual']}` threshold=`{breach['threshold']}`"
+                )
         lines.append("- Suggested actions:")
         for action in repo["suggested_actions"]:
             lines.append(f"  - {action}")
@@ -329,21 +602,37 @@ def main() -> int:
     parser.add_argument("--workspace-root", help="Root workspace repo path. Defaults to current Git toplevel.")
     parser.add_argument("--canonical-root", help="Canonical workspace root used to resolve nested repos outside the current worktree.")
     parser.add_argument("--fetch", action="store_true", help="Fetch remotes before evaluating ahead/behind state.")
+    parser.add_argument("--policy", help="Repo hygiene policy file. Defaults to catalog/gitwiz_hygiene_policy.yaml when present.")
+    parser.add_argument(
+        "--fail-on",
+        choices=("none", "warning", "critical"),
+        default="none",
+        help="Return a non-zero exit code when the audit reaches the selected hygiene severity.",
+    )
     parser.add_argument("--output-dir", help="Directory to write JSON and Markdown reports into.")
     args = parser.parse_args()
 
     workspace_root = detect_workspace_root(args.workspace_root)
     canonical_root = Path(args.canonical_root).expanduser().resolve() if args.canonical_root else None
     repo_registry = load_repo_registry(workspace_root)
+    hygiene_policy = load_hygiene_policy(workspace_root, args.policy)
     targets = resolve_target_paths(workspace_root, canonical_root, repo_registry, args.repo)
-    repo_reports = [build_repo_summary(target, args.fetch) for target in targets]
+    repo_reports = [build_repo_summary(target, args.fetch, hygiene_policy) for target in targets]
+    overall_status = overall_hygiene_status(repo_reports)
+    policy_path = args.policy or (
+        "catalog/gitwiz_hygiene_policy.yaml"
+        if (workspace_root / "catalog" / "gitwiz_hygiene_policy.yaml").exists()
+        else ""
+    )
 
     report = {
         "generated_at_utc": utcnow_display(),
         "generated_at_compact": utcnow_compact(),
         "workspace_root": str(workspace_root),
         "canonical_root": str(canonical_root) if canonical_root else "",
+        "policy_path": policy_path,
         "selection": args.repo,
+        "overall_hygiene_status": overall_status,
         "repos": repo_reports,
     }
 
@@ -359,8 +648,20 @@ def main() -> int:
     json_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     md_path.write_text(markdown_report(report), encoding="utf-8")
 
-    print(json.dumps({"json_report": str(json_path), "markdown_report": str(md_path)}, indent=2))
-    return 0
+    exit_code = 1 if should_fail(overall_status, args.fail_on) else 0
+    print(
+        json.dumps(
+            {
+                "json_report": str(json_path),
+                "markdown_report": str(md_path),
+                "overall_hygiene_status": overall_status,
+                "fail_on": args.fail_on,
+                "exit_code": exit_code,
+            },
+            indent=2,
+        )
+    )
+    return exit_code
 
 
 if __name__ == "__main__":

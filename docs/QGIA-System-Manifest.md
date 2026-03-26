@@ -2,8 +2,18 @@
 
 **Generated**: March 14, 2026, 01:31 AM EDT  
 **Source Repositories**: [qgia-knowledge-spine](https://github.com/AUo959/qgia-knowledge-spine) | [qgia-knowledge-library](https://github.com/AUo959/qgia-knowledge-library)  
-**Classification**: PROPRIETARY (Simulation Environment)  
+**Classification**: PROPRIETARY (Forecast Architecture Environment)  
 **Constellation Version**: 1.0.0-alpha
+
+---
+
+## Terminology Alignment
+
+This manifest is aligned with the root
+[`Generative Forecast Architecture (GFA) posture`](./GFA_POSTURE.md).
+QGIA is treated here as forecast architecture. `Generate Forecast` is the
+primary governed action. `simulation` remains valid only when referring to the
+specific `L2` scenario engine or a bounded analytical method.
 
 ---
 
@@ -144,7 +154,7 @@ CONSTELLATION-PRIME (s.tag::constellation.prime)
 ### Classification Levels
 - **Methodological Documents**: UNCLASSIFIED // FOUO
 - **Operational Intelligence**: TS/SCI
-- **System Specifications**: PROPRIETARY (simulation)
+- **System Specifications**: PROPRIETARY (forecast architecture)
 
 ---
 
@@ -160,7 +170,7 @@ CONSTELLATION-PRIME (s.tag::constellation.prime)
 5. Update forecasts via Bayesian belief revision
 6. Validate through quantum coherence checks (≥0.60 threshold)
 7. Aggregate team forecasts with extremization
-8. Generate reporting package with confidence metrics
+8. Invoke `Generate Forecast` and save the resulting `Forecast Artifact` with confidence metrics
 
 **Deliverables**:
 - Probability statement (0.00-1.00 scale)
@@ -222,7 +232,7 @@ CONSTELLATION-PRIME (s.tag::constellation.prime)
 
 **Published Events**:
 - `qgia.knowledge.updated` - Triggered on document commits to main branch
-- `qgia.forecast.generated` - New forecast package created
+- `qgia.forecast.generated` - New `Forecast Artifact` created
 - `qgia.validation.completed` - Accuracy metrics updated
 
 **Consumed Events**:
@@ -325,11 +335,11 @@ This manifest provides the foundation for native QGIA/Aurora/Orion Station opera
 **Next Steps**:
 1. Deploy constellation configuration files
 2. Sync knowledge indices from GitHub
-3. Implement forecasting workflow in Space
+3. Implement `Generate Forecast` workflow in Space
 4. Integrate with existing intelligence assessments
 5. Begin continuous accuracy validation
 
 ---
 
 **QGIA Operational Environment v4.0.0 | OSIQP v4.2.1 | Aurora Constellation 1.0.0-alpha**  
-*Probabilistic forecasts with quantified confidence - 127-day early warning capability*
+*Probabilistic forecast architecture with quantified confidence and 127-day early warning capability*

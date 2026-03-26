@@ -1,0 +1,48 @@
+{
+  "exact_duplicate_groups": [
+    {
+      "group_id": "exact-001",
+      "members": [
+        "text_1.txt",
+        "text_3.txt"
+      ]
+    },
+    {
+      "group_id": "exact-002",
+      "members": [
+        "text_13.txt",
+        "text_threadcore_3_6.txt"
+      ]
+    },
+    {
+      "group_id": "exact-003",
+      "members": [
+        "text_152.txt",
+        "text_158.txt"
+      ]
+    },
+    {
+      "group_id": "exact-004",
+      "members": [
+        "text_49.txt",
+        "text_50.txt"
+      ]
+    },
+    {
+      "group_id": "exact-005",
+      "members": [
+        "text_58.txt",
+        "text_59.txt",
+        "text_threadcore_summon.txt"
+      ]
+    },
+    {
+      "group_id": "exact-006",
+      "members": [
+        "text_72.txt",
+        "text_73.txt"
+      ]
+    }
+  ],
+  "normalized_duplicate_groups": []
+}

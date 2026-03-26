@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/threadcore_echochain_link.schema.json",
+  "title": "THREADCORE Echochain Link Receipt",
+  "description": "Compatibility-first schema for recovered THREADCORE echochain linkage receipts.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "node": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_:.\\-]*$"
+    },
+    "linked_to": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_:.\\-]*$"
+    },
+    "type": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9\\-]*$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "draft",
+        "superseded"
+      ]
+    },
+    "glyphs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "approved_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "integration": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?Z$"
+    }
+  },
+  "required": [
+    "node",
+    "linked_to",
+    "type",
+    "status",
+    "glyphs",
+    "approved_by",
+    "integration",
+    "timestamp"
+  ],
+  "examples": [
+    {
+      "node": "QEM-SN1-MOBILE::iPadFinal_v1.1",
+      "linked_to": "QEM-ECHOCHAIN::DRIFT_NEXUS",
+      "type": "symbolic-continuity",
+      "status": "active",
+      "glyphs": [
+        "\ud83d\udf03",
+        "\ud83d\udf02",
+        "\ud83d\udf01"
+      ],
+      "approved_by": "THREADCORE",
+      "integration": "Echo-thread drift-recursive thread fusion",
+      "timestamp": "2025-05-10T04:39:08.449166Z"
+    }
+  ]
+}

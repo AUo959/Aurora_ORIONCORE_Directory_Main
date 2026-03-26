@@ -1,0 +1,62 @@
+[
+  {
+    "source_file": "text_Au_lite_agent.txt",
+    "extracted_to": "extracted_logic/blueprints/auroralite_bridge_agent.md",
+    "transform": "identity"
+  },
+  {
+    "source_file": "text_Au_mod_core.txt",
+    "extracted_to": "extracted_logic/blueprints/aurora_modular_core_v2_3.md",
+    "transform": "identity"
+  },
+  {
+    "source_file": "text_Au_mod_core_first.txt",
+    "extracted_to": "extracted_logic/blueprints/aurora_modular_core_v2_1.md",
+    "transform": "identity"
+  },
+  {
+    "source_file": "text_GitDeploy_root.txt",
+    "extracted_to": "extracted_logic/config/root_deploy_inventory_draft.json",
+    "transform": "identity"
+  },
+  {
+    "source_file": "text_GitIngestion.txt",
+    "extracted_to": "extracted_logic/blueprints/aurora_system_ingestion_pipeline_capsule_v1.md",
+    "transform": "identity"
+  },
+  {
+    "source_file": "text_early_logic.txt",
+    "extracted_to": "extracted_logic/logic/galactic_union_state_variables.md",
+    "transform": "wrap_text_block"
+  },
+  {
+    "source_file": "text_early_sim_logic.txt",
+    "extracted_to": "extracted_logic/logic/early_simulation_formulas.md",
+    "transform": "wrap_text_block"
+  },
+  {
+    "source_file": "text_factions_reg.txt",
+    "extracted_to": "extracted_logic/config/factions_registry_draft.yaml",
+    "transform": "identity"
+  },
+  {
+    "source_file": "text_mem_system_py.txt",
+    "extracted_to": "extracted_logic/python/memory_system_prototype.py",
+    "transform": "identity"
+  },
+  {
+    "source_file": "text_node_js_webpack.txt",
+    "extracted_to": "extracted_logic/config/github_actions_nodejs_webpack.yml",
+    "transform": "identity"
+  },
+  {
+    "source_file": "text_tagging_agent.txt",
+    "extracted_to": "extracted_logic/python/thread_context_tagging_agent.py",
+    "transform": "identity"
+  },
+  {
+    "source_file": "text_threadcore_3_6.txt",
+    "extracted_to": "extracted_logic/javascript/threadcore_v3_6_macrodrift.js",
+    "transform": "identity"
+  }
+]

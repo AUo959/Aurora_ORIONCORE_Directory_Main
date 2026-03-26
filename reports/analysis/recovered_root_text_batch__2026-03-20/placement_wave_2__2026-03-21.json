@@ -1,0 +1,242 @@
+{
+  "generated_on": "2026-03-21",
+  "scope": "Wave 2 routing for P2 worldbuilding/canon and selected P3 manifest-continuity artifacts",
+  "root_originals_preserved": true,
+  "source_artifacts_routed": 34,
+  "named_copies_created": 33,
+  "duplicate_collapses": [
+    {
+      "source_files": [
+        "text_152.txt",
+        "text_158.txt"
+      ],
+      "destination": "GUMAS_SIM_2.5/draft_logic/recovered/galactic_union_memory_optimization_plan.md"
+    }
+  ],
+  "groups": [
+    {
+      "destination_dir": "GUMAS_SIM_2.5/draft_logic/recovered",
+      "items": [
+        {
+          "source_files": [
+            "text_155.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_logic/recovered/simulation_mechanics_export_implementation_plan.md"
+        },
+        {
+          "source_files": [
+            "text_157.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_logic/recovered/simulation_expansion_systems_outline.md"
+        },
+        {
+          "source_files": [
+            "text_159.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_logic/recovered/simulation_memory_storage_update.md"
+        },
+        {
+          "source_files": [
+            "text_160.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_logic/recovered/non_war_progression_mechanics.md"
+        },
+        {
+          "source_files": [
+            "text_161.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_logic/recovered/immersive_directive_protocol_spec.md"
+        },
+        {
+          "source_files": [
+            "text_162.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_logic/recovered/galactic_union_simulation_math_framework.md"
+        },
+        {
+          "source_files": [
+            "text_152.txt",
+            "text_158.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_logic/recovered/galactic_union_memory_optimization_plan.md"
+        },
+        {
+          "source_files": [
+            "text_early_logic.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_logic/recovered/galactic_union_state_variables.md"
+        },
+        {
+          "source_files": [
+            "text_early_sim_logic.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_logic/recovered/early_simulation_formulas.md"
+        }
+      ]
+    },
+    {
+      "destination_dir": "GUMAS_SIM_2.5/draft_worldbuilding/recovered",
+      "items": [
+        {
+          "source_files": [
+            "text_L2_characters .txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_worldbuilding/recovered/galactic_union_character_registry.md"
+        },
+        {
+          "source_files": [
+            "text_characters_zylox.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_worldbuilding/recovered/zylox_and_union_command_character_profiles.md"
+        },
+        {
+          "source_files": [
+            "text_27.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_worldbuilding/recovered/aurora_framework_capsule_grafts.yaml"
+        },
+        {
+          "source_files": [
+            "text_GitThreadcore.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_worldbuilding/recovered/threadcore_symbolic_deployment_snapshot.yaml"
+        },
+        {
+          "source_files": [
+            "text_factions_reg.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_worldbuilding/recovered/factions_registry_draft.yaml"
+        },
+        {
+          "source_files": [
+            "text_Au_Shuttlecraft.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_worldbuilding/recovered/aurora_shuttlecraft_registry.md"
+        },
+        {
+          "source_files": [
+            "text_42.txt"
+          ],
+          "destination": "GUMAS_SIM_2.5/draft_worldbuilding/recovered/halo_continuity_graft_005.yaml"
+        }
+      ]
+    },
+    {
+      "destination_dir": "reports/analysis/canon_support/recovered_root_sources__2026-03-21",
+      "items": [
+        {
+          "source_files": [
+            "text_Orion_Crew.txt"
+          ],
+          "destination": "reports/analysis/canon_support/recovered_root_sources__2026-03-21/orion_core_crew_registry__recovered.md"
+        }
+      ]
+    },
+    {
+      "destination_dir": "docs/draft_protocols/recovered",
+      "items": [
+        {
+          "source_files": [
+            "text_recovery_README.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/zipwizard_recovery_readme_v2_3_1.md"
+        },
+        {
+          "source_files": [
+            "text_oppy_integration.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/oppy_symbolic_capsule_integration_protocol.md"
+        },
+        {
+          "source_files": [
+            "text_103.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/injectable_patch_capsule_format_template.md"
+        },
+        {
+          "source_files": [
+            "text_46.txt"
+          ],
+          "destination": "docs/draft_protocols/recovered/aurora_system_ingestion_pipeline_capsule_v1_1.yaml"
+        }
+      ]
+    },
+    {
+      "destination_dir": "catalog/draft_manifests/recovered",
+      "items": [
+        {
+          "source_files": [
+            "text_47.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/sigma_ingestion_operations_controller.yaml"
+        },
+        {
+          "source_files": [
+            "text_stellar_sync_patch.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/aurora_patch_manifest_v2_3_0.md"
+        },
+        {
+          "source_files": [
+            "text_Orion_deploy_prototype.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/orion_deploy_prototype_snapshot.yaml"
+        },
+        {
+          "source_files": [
+            "text_GitDeploy_Prototype.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/git_deploy_prototype_snapshot.md"
+        },
+        {
+          "source_files": [
+            "text_relay_deploy_prototype.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/relay_deploy_prototype_snapshot.md"
+        },
+        {
+          "source_files": [
+            "text_GitChain.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/vector_chain_seed.yaml"
+        },
+        {
+          "source_files": [
+            "text_GitBridge.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/threadcore_output_block.yaml"
+        },
+        {
+          "source_files": [
+            "text_45.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/threadcore_orientation_block.yaml"
+        },
+        {
+          "source_files": [
+            "text_Loom.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/threadcore_v3_5_output_block.txt"
+        },
+        {
+          "source_files": [
+            "text_GitBridge_Capsule.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/constellation_registration_capsule.yaml"
+        },
+        {
+          "source_files": [
+            "text_vector_chain_transfer.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/vector_chain_context_transfer.yaml"
+        },
+        {
+          "source_files": [
+            "text_deploy_a1.txt"
+          ],
+          "destination": "catalog/draft_manifests/recovered/gumas_constellation_deploy_a1.yaml"
+        }
+      ]
+    }
+  ]
+}

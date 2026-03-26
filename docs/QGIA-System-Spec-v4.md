@@ -5,9 +5,19 @@
 
 ---
 
+## TERMINOLOGY ALIGNMENT
+
+This specification is aligned with the root
+[`Generative Forecast Architecture (GFA) posture`](./GFA_POSTURE.md).
+QGIA is described here as forecast architecture. `Generate Forecast` is the
+primary governed action. `simulation` is retained only for bounded technical
+subsystems such as the `L2` scenario engine.
+
+---
+
 ## EXECUTIVE SUMMARY
 
-The Quantum Geopolitical Intelligence Agency (QGIA) operates a quantum-inspired probabilistic forecasting architecture processing 500TB daily multi-source intelligence with 94.7% sentiment accuracy, 84.7% 12-month forecast accuracy, and 127-day average warning lead time. This document provides complete operational specifications for native deployment.
+The Quantum Geopolitical Intelligence Agency (QGIA) operates a GFA-aligned, quantum-inspired probabilistic forecasting architecture processing 500TB daily multi-source intelligence with 94.7% sentiment accuracy, 84.7% 12-month forecast accuracy, and 127-day average warning lead time. This document provides complete operational specifications for native deployment.
 
 ---
 
@@ -424,7 +434,7 @@ C_composite = (DQ × SR × MR × TS)^(1/4) × Coherence
 - CYBERCOM: Offensive/defensive cyber operations synchronization
 
 **Monthly Coordination:**
-- National Security Council: Strategic forecast presentation
+- National Security Council: Strategic `Forecast Brief` presentation
 - Joint Chiefs: Military planning assumptions
 - Allied partners: Five Eyes intelligence sharing
 
@@ -535,7 +545,7 @@ Mandatory application for all major assessments:
 - Key Assumptions Check (KAC)
 - Devil's Advocacy / Team A-B
 - Pre-Mortem Analysis
-- Red Team simulation
+- Red Team exercise
 
 ---
 
@@ -548,13 +558,13 @@ Mandatory application for all major assessments:
 - NSC Principals Committee (on request)
 
 **Derivative Classification:**
-- Forecasts: TS/SCI (source protection)
+- Forecast Artifacts: TS/SCI (source protection)
 - Methodologies: SECRET (sufficient for most users)
 - System architecture: CONFIDENTIAL (technical details)
 - OSINT products: UNCLASSIFIED (public release authorized)
 
 **Retention:**
-- Active forecasts: Indefinite (operational necessity)
+- Active Forecast Artifacts: Indefinite (operational necessity)
 - Historical assessments: 75 years (historical research)
 - Technical documentation: 25 years (technology evolution)
 

@@ -902,9 +902,35 @@ def _parse_world_bible(builder: _RegistryBuilder, source_id: str, rel_path: str,
     current_start: Optional[int] = None
     current_block: List[Tuple[int, str]] = []
 
+    # Phase-2 ship names handled by l2_phase2._parse_runtime_assets; skip them
+    # in the character parser to avoid double-registration as entity_kind=character.
+    # Pattern: GU ships use "G.U.S. " prefix; non-GU ships use known class-suffix tokens.
+    _SHIP_NAME_PREFIXES = ("G.U.S. ",)
+    _SHIP_NAME_CLASS_TOKENS = (
+        "supercarrier", "dreadnought", "leviathan", "flagship",
+        "carrier-class", "class flagship", "class warship",
+    )
+
+    def _is_ship_heading(name: str) -> bool:
+        n = name.lower()
+        for prefix in _SHIP_NAME_PREFIXES:
+            if name.startswith(prefix):
+                return True
+        for token in _SHIP_NAME_CLASS_TOKENS:
+            if token in n:
+                return True
+        return False
+
     def flush_character() -> None:
         nonlocal current_name, current_start, current_block
         if not current_name or current_start is None:
+            current_name = None
+            current_start = None
+            current_block = []
+            return
+
+        # Skip ship headings — Phase-2 registers them as mobile_assets
+        if _is_ship_heading(current_name):
             current_name = None
             current_start = None
             current_block = []

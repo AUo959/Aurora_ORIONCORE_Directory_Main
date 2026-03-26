@@ -1,0 +1,71 @@
+{
+  "generated_on": "2026-03-21",
+  "scope": "Residual sweep of unplaced recovered root text artifacts after Placement Wave 1",
+  "root_originals_preserved": true,
+  "newly_routed": [
+    {
+      "source_file": "text_symbiosis_graft.txt",
+      "triage_tier": "P1",
+      "destination": "tools/prototypes/python/recovered/symbiosis_threadcore_injection.py",
+      "reason": "Executable patch-graft script with concrete file mutations and anchor binding."
+    }
+  ],
+  "newly_elevated": [
+    {
+      "source_file": "text_42.txt",
+      "triage_tier": "P2",
+      "destination": "GUMAS_SIM_2.5/draft_worldbuilding or docs/draft_protocols"
+    },
+    {
+      "source_file": "text_GitChain.txt",
+      "triage_tier": "P3",
+      "destination": "catalog/draft_manifests or ops archive"
+    },
+    {
+      "source_file": "text_GitBridge.txt",
+      "triage_tier": "P3",
+      "destination": "catalog/draft_manifests or ops archive"
+    },
+    {
+      "source_file": "text_46.txt",
+      "triage_tier": "P3",
+      "destination": "catalog/draft_manifests or docs/draft_protocols"
+    },
+    {
+      "source_file": "text_45.txt",
+      "triage_tier": "P3",
+      "destination": "catalog/draft_manifests or ops archive"
+    },
+    {
+      "source_file": "text_Loom.txt",
+      "triage_tier": "P3",
+      "destination": "catalog/draft_manifests or ops archive"
+    },
+    {
+      "source_file": "text_GitBridge_Capsule.txt",
+      "triage_tier": "P3",
+      "destination": "catalog/draft_manifests or ops archive"
+    },
+    {
+      "source_file": "text_103.txt",
+      "triage_tier": "P3",
+      "destination": "docs/draft_protocols or catalog/draft_manifests"
+    },
+    {
+      "source_file": "text_vector_chain_transfer.txt",
+      "triage_tier": "P3",
+      "destination": "catalog/draft_manifests or ops archive"
+    },
+    {
+      "source_file": "text_deploy_a1.txt",
+      "triage_tier": "P3",
+      "destination": "catalog/draft_manifests or ops archive"
+    }
+  ],
+  "remaining_counts_after_routing": {
+    "P0": 14,
+    "P1": 0,
+    "P2": 18,
+    "P3": 75
+  }
+}

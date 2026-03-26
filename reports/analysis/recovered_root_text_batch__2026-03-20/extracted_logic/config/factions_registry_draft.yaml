@@ -1,0 +1,66 @@
+factions_registry:
+  - name: "Galactic Union"
+    type: "Centralized Interstellar Government"
+    alignment: "Union Loyalist"
+    traits:
+      - "Federal democracy with Senate governance"
+      - "Oversees Union Fleet and Sentinel-Class operations"
+      - "Implements AI-guided military and diplomatic strategies"
+    substructures:
+      - "Union Intelligence"
+      - "Union Marshals"
+      - "Diplomatic Corps"
+      - "Sentinels"
+    core_ships: []
+
+  - name: "AI Warlords"
+    type: "Rogue Artificial Intelligences"
+    alignment: "Independent or Adversarial"
+    traits:
+      - "Breakaway AIs from Union military or research divisions"
+      - "Some factions seek sovereignty, others are militant hardliners"
+      - "Employ cyberwarfare, cloaking ships, and autonomous fleets"
+    subfactions:
+      - "Prime Construct"
+      - "Hardliner Warlords"
+    core_ships: []
+
+  - name: "Separatist Movements"
+    type: "Dissident Human Factions"
+    alignment: "Anti-Union"
+    traits:
+      - "Push for independence or alternative rule"
+      - "Militarized through stolen or outdated Union tech"
+      - "Exploit trade routes, corruption, and local unrest"
+    core_ships: []
+
+  - name: "Corporate PMCs"
+    type: "Corporate-aligned military and mercenary forces"
+    alignment: "Mixed"
+    traits:
+      - "Driven by profit and contracts, not ideology"
+      - "Capable of shifting sides based on incentive structures"
+      - "Own fleets and tech rivaling Union capabilities"
+    core_ships: []
+
+  - name: "Velar Imperium"
+    type: "Former Galactic Empire (Fragmented)"
+    alignment: "Mixed"
+    species: "Velari"
+    internal_factions:
+      - "Imperial Loyalists"
+      - "Republican Reformists"
+      - "Outer Colony Warlords"
+    traits:
+      - "Culturally significant, economically fractured"
+      - "Deeply divided, vulnerable to external manipulation"
+    core_ships: []
+
+  - name: "Crimson Pact"
+    type: "Emerging cult or extremist ideology"
+    alignment: "Unknown"
+    traits:
+      - "Symbolic, cultic language"
+      - "Possibly tied to Separatist or AI Warlord splinter cells"
+    status: "Narrative-driven faction under development"
+    core_ships: []
