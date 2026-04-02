@@ -180,6 +180,14 @@ def _is_yaml_list_item(content: str) -> bool:
     return content == "-" or content.startswith("- ")
 
 
+def _looks_like_yaml_mapping_entry(text: str) -> bool:
+    if ":" not in text:
+        return False
+    key, remainder = text.split(":", 1)
+    key = key.strip()
+    return bool(key) and bool(_YAML_KEY_PATTERN.fullmatch(key)) and (remainder == "" or remainder.startswith(" "))
+
+
 def _load_yaml_subset(text: str) -> Any:
     lines: list[tuple[int, str]] = []
     for raw_line in text.splitlines():
@@ -256,7 +264,7 @@ def _load_yaml_subset(text: str) -> Any:
                     value, index = parse_block(source_lines, index, source_lines[index][0])
                 else:
                     value = None
-            elif ":" in item_content:
+            elif _looks_like_yaml_mapping_entry(item_content):
                 synthetic_indent = indent + 2
                 synthetic_lines = [(synthetic_indent, item_content), *source_lines[index:]]
                 value, consumed = parse_dict(synthetic_lines, 0, synthetic_indent)

@@ -24,11 +24,11 @@ REQUIRED_FIELDS = [
     "timestamp",
 ]
 PATTERNS = {
-    "symbolic_key": re.compile(r"^THREADCORE_DEPLOY::[A-Z0-9][A-Z0-9_:.\-]*$"),
+    "symbolic_key": re.compile(r"^THREADCORE_DEPLOY::[A-Z0-9][A-Z0-9_.:-]*$"),
     "associated_bundle": re.compile(r"^.+\.zip$"),
-    "vector": re.compile(r"^[A-Za-z0-9][A-Za-z0-9_:.\-]*$"),
+    "vector": re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]*$"),
     "registered_node": re.compile(r"^(VISIBLE_NODE\[[0-9]+\]|THREADCORE::VISIBLE_NODE\.[A-Z0-9][A-Z0-9_.\-]*)$"),
-    "linked_echochain": re.compile(r"^[A-Za-z0-9][A-Za-z0-9_:.\-]*$"),
+    "linked_echochain": re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]*$"),
     "threadcore_manifest": re.compile(r"^.+\.md$"),
     "ethics_protocol": re.compile(r"^[A-Za-z0-9_.:\-]+$"),
     "timestamp": re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?Z$"),
@@ -127,6 +127,12 @@ def run_validate(args: argparse.Namespace) -> int:
     artifact = Path(args.artifact).resolve()
     payload = load_json(artifact)
     errors, warnings = validate_payload(payload)
+    normalized_payload = None
+    if isinstance(payload, dict):
+        try:
+            normalized_payload = canonicalize(payload)
+        except KeyError:
+            normalized_payload = None
     report = {
         "ok": not errors,
         "family": "threadcore_deploy_accesskey",
@@ -134,7 +140,7 @@ def run_validate(args: argparse.Namespace) -> int:
         "schema_path": str(SCHEMA_PATH),
         "errors": errors,
         "warnings": warnings,
-        "normalized_payload": canonicalize(payload) if isinstance(payload, dict) else None,
+        "normalized_payload": normalized_payload,
     }
     if args.report_out:
         write_json(Path(args.report_out).resolve(), report)

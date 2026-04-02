@@ -13,10 +13,10 @@ from typing import Any, Dict, List, Tuple
 ROOT = Path(__file__).resolve().parent.parent
 
 CONTRACT_PATH = ROOT / "catalog/contracts/threadcore_deploy_seal_contract.json"
-VECTOR_PATTERN = re.compile(r"QEM-[A-Za-z0-9_:.\\-]+")
-ETHICS_PATTERN = re.compile(r"Picard_Delta_3|[A-Za-z0-9_.:\\-]+")
+VECTOR_PATTERN = re.compile(r"QEM-[A-Za-z0-9_.:-]+")
+ETHICS_PATTERN = re.compile(r"^(?:Picard_Delta_3|[A-Za-z0-9_.:-]+)$")
 NODE_PATTERN = re.compile(r"^(VISIBLE_NODE\[[0-9]+\]|THREADCORE::VISIBLE_NODE\.[A-Z0-9][A-Z0-9_.\-]*)$")
-CODE_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_:.\\-]*$")
+CODE_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]*$")
 TIMESTAMP_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?Z$")
 
 
@@ -71,7 +71,7 @@ def validate_visible_node_payload(payload: Any) -> Tuple[List[str], List[str]]:
         errors.append("field does not match expected format: registered")
     if not isinstance(payload["alias"], str) or not payload["alias"].strip():
         errors.append("field must be a non-empty string: alias")
-    if not isinstance(payload["ethics"], str) or not ETHICS_PATTERN.match(payload["ethics"]):
+    if not isinstance(payload["ethics"], str) or not ETHICS_PATTERN.fullmatch(payload["ethics"]):
         errors.append("field does not match expected format: ethics")
     if isinstance(payload["node_id"], str) and payload["node_id"].startswith("VISIBLE_NODE["):
         warnings.append("node_id uses legacy shortform; fully qualified registry tags are also supported")
@@ -176,7 +176,7 @@ def validate_mygpt_payload(payload: Any, bundle_entries: set[str]) -> Tuple[List
         errors.append("Aurora_Toolset_MyGPT_v1.json field must be a non-empty string: description")
     if not isinstance(payload["includes_vector_index"], bool):
         errors.append("Aurora_Toolset_MyGPT_v1.json includes_vector_index must be boolean")
-    if not isinstance(payload["ethics_protocol"], str) or not ETHICS_PATTERN.match(payload["ethics_protocol"]):
+    if not isinstance(payload["ethics_protocol"], str) or not ETHICS_PATTERN.fullmatch(payload["ethics_protocol"]):
         errors.append("Aurora_Toolset_MyGPT_v1.json ethics_protocol does not match expected format")
     if not isinstance(payload["compatible_with"], list) or not payload["compatible_with"]:
         errors.append("Aurora_Toolset_MyGPT_v1.json compatible_with must be a non-empty array")
