@@ -230,7 +230,17 @@ def test_workspace_verify_passes_with_current_root_surface(workspace_root: Path)
     assert report["summary"]["finding_count"] == 0
 
 
-def test_load_yaml_like_parses_generated_yaml_without_pyyaml(tmp_path: Path) -> None:
+def test_load_yaml_like_parses_generated_yaml_without_pyyaml(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    import builtins
+
+    real_import = builtins.__import__
+
+    def _no_yaml(name: str, *args: object, **kwargs: object) -> object:
+        if name == "yaml":
+            raise ModuleNotFoundError(f"No module named '{name}'")
+        return real_import(name, *args, **kwargs)  # type: ignore[arg-type]
+
+    monkeypatch.setattr(builtins, "__import__", _no_yaml)
     payload = tmp_path / "sample.yaml"
     write_file(
         payload,
@@ -262,7 +272,17 @@ def test_load_yaml_like_parses_generated_yaml_without_pyyaml(tmp_path: Path) -> 
     )
 
 
-def test_dump_yaml_like_preserves_yaml_like_shape(tmp_path: Path) -> None:
+def test_dump_yaml_like_preserves_yaml_like_shape(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    import builtins
+
+    real_import = builtins.__import__
+
+    def _no_yaml(name: str, *args: object, **kwargs: object) -> object:
+        if name == "yaml":
+            raise ModuleNotFoundError(f"No module named '{name}'")
+        return real_import(name, *args, **kwargs)  # type: ignore[arg-type]
+
+    monkeypatch.setattr(builtins, "__import__", _no_yaml)
     payload = tmp_path / "roundtrip.yaml"
     data = {
         "generated_at": "2026-03-26T00:00:00Z",

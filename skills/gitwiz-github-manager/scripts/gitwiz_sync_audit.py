@@ -79,11 +79,16 @@ def load_structured_file(path: Path) -> dict[str, Any]:
         pass
     try:
         import yaml  # type: ignore
-
+    except ModuleNotFoundError:
+        # YAML support not available; treat as no structured content.
+        return {}
+    try:
         loaded = yaml.safe_load(raw) or {}
         return loaded if isinstance(loaded, dict) else {}
-    except Exception:
-        return {}
+    except Exception as exc:
+        # The file exists and contains non-empty data but could not be parsed as YAML.
+        print(f"Failed to parse structured file '{path}': {exc}", file=sys.stderr)
+        raise SystemExit(1) from exc
 
 
 def load_repo_registry(workspace_root: Path) -> list[dict[str, Any]]:

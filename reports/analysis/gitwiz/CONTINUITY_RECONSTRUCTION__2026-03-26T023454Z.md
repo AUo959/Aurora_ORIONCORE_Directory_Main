@@ -1,7 +1,7 @@
 # Continuity Reconstruction Receipt
 
 Generated: 2026-03-26 02:34:54 UTC
-Workspace root: `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
+Workspace root: `<canonical-workspace-root>`
 
 ## Verdict
 

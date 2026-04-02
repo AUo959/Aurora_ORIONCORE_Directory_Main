@@ -197,9 +197,20 @@ def _parse_yaml_block(rows: list[tuple[int, str]], index: int) -> tuple[Any, int
     if index >= len(rows):
         raise ValueError("Unexpected end of YAML content.")
     indent, content = rows[index]
+    # Sequence item
     if content == "-" or content.startswith("- "):
         return _parse_yaml_sequence(rows, index, indent)
-    return _parse_yaml_mapping(rows, index, indent)
+    # Mapping entry (either "key: value" or "key:" with nested block)
+    if _split_yaml_mapping_entry(content) is not None or content.endswith(":"):
+        return _parse_yaml_mapping(rows, index, indent)
+    # Fallback: treat as scalar (supports top-level scalars like "[]", "{}", "null", numbers, strings)
+    scalar_text, next_index = _consume_yaml_scalar_text(
+        rows=rows,
+        index=index + 1,
+        parent_indent=indent,
+        initial_text=content,
+    )
+    return _parse_yaml_scalar(scalar_text), next_index
 
 
 def _parse_yaml_sequence(

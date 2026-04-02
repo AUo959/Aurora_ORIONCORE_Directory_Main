@@ -1,7 +1,7 @@
 {
   "generated_at_utc": "2026-03-26 02:34:54 UTC",
   "generated_at_compact": "2026-03-26T023454Z",
-  "workspace_root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "workspace_root": "./Aurora_ORIONCORE_Directory_Main",
   "status": "review_required",
   "root": {
     "live_branch": "codex/root-control-plane-local-2026-03-25",
