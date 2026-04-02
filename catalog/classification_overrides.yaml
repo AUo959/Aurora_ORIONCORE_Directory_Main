@@ -11,6 +11,32 @@
       "owner": "workspace-admin",
       "status": "protected",
       "notes": "Verified-duplicate archive quarantine. Files are byte-for-byte identical to their canonical copies. Safe to delete once reviewed. See _entropy_quarantine/RESTORE_MANIFEST.json to restore any file."
+    },
+    {
+      "current_path": ".agents",
+      "kind": "control_surface",
+      "logical_zone": "tools",
+      "planned_path": ".agents",
+      "git_boundary": "root",
+      "storage_tier": "workspace-control",
+      "retention_policy": "versioned",
+      "owner": "workspace-admin",
+      "batch_id": "",
+      "status": "managed",
+      "notes": "Codex plugin marketplace metadata for repo-local plugin scaffolds."
+    },
+    {
+      "current_path": "plugins",
+      "kind": "control_surface",
+      "logical_zone": "tools",
+      "planned_path": "plugins",
+      "git_boundary": "root",
+      "storage_tier": "workspace-control",
+      "retention_policy": "versioned",
+      "owner": "workspace-admin",
+      "batch_id": "",
+      "status": "managed",
+      "notes": "Repo-local Codex plugin bundles for workspace tooling."
     }
   ]
 }

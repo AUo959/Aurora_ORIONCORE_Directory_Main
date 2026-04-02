@@ -1,9 +1,10 @@
 # Repository Boundary Notice
 
-This folder is an archive root and is no longer an active Git repository.
+This notice refers to the legacy `Aurora_Sim_Architecture/` archive root, not
+the current root control-plane repository.
 
 Active repository path:
-`Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
+`GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
 
 Use Git commands from that project path.
 

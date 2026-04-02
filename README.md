@@ -53,6 +53,22 @@ write the report to an explicit path. The pre-commit hook continues to call
 `python3 tools/workspace_verify.py --git-pre-commit` and only blocks commits on
 blocking findings.
 
+Specialized deploy / THREADCORE receipt utilities:
+
+```bash
+python3 tools/threadcore_deploy_accesskey.py validate /path/to/THREADCORE_DEPLOY_ACCESSKEY.json
+python3 tools/threadcore_deploy_accesskey.py generate --symbolic-key THREADCORE_DEPLOY::EXAMPLE --associated-bundle THREADCORE_DEPLOY_SEAL_v1.zip --vector EXAMPLE::VECTOR --registered-node VISIBLE_NODE[01] --linked-echochain EXAMPLE::ECHOCHAIN
+python3 tools/threadcore_visible_node.py validate /path/to/THREADCORE_VISIBLE_NODE_01.json
+python3 tools/threadcore_visible_node.py generate --node-id VISIBLE_NODE[01] --vector EXAMPLE::VECTOR --linked-manifest EXAMPLE_manifest.json --patch-id EXAMPLE_patch.json --bundle EXAMPLE.zip --alias "Example Node"
+python3 tools/threadcore_echochain_link.py validate /path/to/QEM_ECHOCHAIN_LINK_DRIFTNEXUS.json
+python3 tools/threadcore_echochain_link.py generate --node EXAMPLE::VECTOR --linked-to EXAMPLE::ECHOCHAIN --glyph 🜃 --integration "Example linkage"
+python3 tools/aurora_qem_patch_release.py validate /path/to/AURORA_QEM_SN1_PATCH_FULLTHREAD_v1.1.json
+python3 tools/aurora_qem_patch_release.py generate --patch-code AURORA-QEM-SN1-PATCH-V1-FULLTHREAD --version v1.1 --vector-origin EXAMPLE::BASELINE --include "Example component" --glyph 🜃 --sealed-in EXAMPLE.zip --vector-released-as EXAMPLE::RELEASE
+python3 tools/aurora_vector_index.py validate /path/to/vector_index.json
+python3 tools/aurora_vector_index.py generate --vectors-json /path/to/vector_index.json
+python3 tools/threadcore_deploy_seal.py /path/to/THREADCORE_DEPLOY_SEAL_v1.zip
+```
+
 ## Operating Rules
 
 - Do not restore `.git_decommissioned_*`; it remains a rollback artifact only.

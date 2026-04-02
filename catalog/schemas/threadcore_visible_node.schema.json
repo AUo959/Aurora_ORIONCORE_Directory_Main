@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/threadcore_visible_node.schema.json",
+  "title": "THREADCORE Visible Node Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "node_id": {
+      "type": "string",
+      "pattern": "^(VISIBLE_NODE\\[[0-9]+\\]|THREADCORE::VISIBLE_NODE\\.[A-Z0-9][A-Z0-9_.\\-]*)$"
+    },
+    "vector": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_:.\\-]*$"
+    },
+    "type": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9\\-]*$"
+    },
+    "linked_manifest": {
+      "type": "string",
+      "pattern": "^.+\\.json$"
+    },
+    "patch_id": {
+      "type": "string",
+      "pattern": "^.+\\.json$"
+    },
+    "bundle": {
+      "type": "string",
+      "pattern": "^.+\\.zip$"
+    },
+    "registered": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?Z$"
+    },
+    "alias": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ethics": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.:\\-]+$"
+    }
+  },
+  "required": [
+    "node_id",
+    "vector",
+    "type",
+    "linked_manifest",
+    "patch_id",
+    "bundle",
+    "registered",
+    "alias",
+    "ethics"
+  ]
+}

@@ -118,6 +118,222 @@ def ensure_parent(path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
 
 
+def _parse_yaml_scalar(value: str) -> Any:
+    if value == "":
+        return ""
+    if value == "[]":
+        return []
+    if value == "{}":
+        return {}
+
+    lowered = value.lower()
+    if lowered in {"null", "~"}:
+        return None
+    if lowered == "true":
+        return True
+    if lowered == "false":
+        return False
+
+    if value.startswith("'") and value.endswith("'") and len(value) >= 2:
+        return value[1:-1].replace("''", "'")
+    if value.startswith('"') and value.endswith('"') and len(value) >= 2:
+        try:
+            return json.loads(value)
+        except json.JSONDecodeError:
+            return value[1:-1]
+
+    if re.fullmatch(r"-?(0|[1-9]\d*)", value):
+        return int(value)
+    if re.fullmatch(r"-?(0|[1-9]\d*)\.\d+", value):
+        return float(value)
+
+    return value
+
+
+def _yaml_key_value(text: str) -> tuple[str, str]:
+    if ":" not in text:
+        raise ValueError(f"Unsupported YAML line without key/value separator: {text!r}")
+    key, value = text.split(":", 1)
+    key = key.strip()
+    if not key:
+        raise ValueError(f"Unsupported YAML line with empty key: {text!r}")
+    return key, value.lstrip()
+
+
+def _yaml_folded_scalar(
+    lines: list[tuple[int, str]],
+    index: int,
+    parent_indent: int,
+    initial: str,
+) -> tuple[Any, int]:
+    parts = [initial.strip()]
+    while index < len(lines):
+        next_indent, next_content = lines[index]
+        if next_indent <= parent_indent:
+            break
+        parts.append(next_content.strip())
+        index += 1
+    return _parse_yaml_scalar(" ".join(part for part in parts if part)), index
+
+
+def _is_yaml_list_item(content: str) -> bool:
+    return content == "-" or content.startswith("- ")
+
+
+def _load_yaml_subset(text: str) -> Any:
+    lines: list[tuple[int, str]] = []
+    for raw_line in text.splitlines():
+        stripped = raw_line.lstrip(" ")
+        if not stripped or stripped.startswith("#"):
+            continue
+        indent = len(raw_line) - len(stripped)
+        lines.append((indent, stripped.rstrip()))
+
+    def parse_block(source_lines: list[tuple[int, str]], index: int, indent: int) -> tuple[Any, int]:
+        if index >= len(source_lines):
+            return None, index
+        current_indent, current_content = source_lines[index]
+        if current_indent < indent:
+            return None, index
+        if current_indent != indent:
+            raise ValueError(f"Unsupported YAML indentation at line {index + 1}: expected {indent}, got {current_indent}")
+        if _is_yaml_list_item(current_content):
+            return parse_list(source_lines, index, indent)
+        return parse_dict(source_lines, index, indent)
+
+    def parse_dict(
+        source_lines: list[tuple[int, str]],
+        index: int,
+        indent: int,
+    ) -> tuple[dict[str, Any], int]:
+        result: dict[str, Any] = {}
+        while index < len(source_lines):
+            current_indent, content = source_lines[index]
+            if current_indent < indent:
+                break
+            if current_indent != indent:
+                raise ValueError(f"Unsupported YAML indentation at line {index + 1}: expected {indent}, got {current_indent}")
+            if _is_yaml_list_item(content):
+                raise ValueError(f"Unexpected YAML sequence item in mapping at line {index + 1}")
+
+            key, raw_value = _yaml_key_value(content)
+            index += 1
+            if raw_value == "":
+                if index < len(source_lines):
+                    next_indent, next_content = source_lines[index]
+                    if next_indent > indent:
+                        value, index = parse_block(source_lines, index, next_indent)
+                    elif next_indent == indent and _is_yaml_list_item(next_content):
+                        value, index = parse_list(source_lines, index, indent)
+                    else:
+                        value = None
+                else:
+                    value = None
+            else:
+                value, index = _yaml_folded_scalar(source_lines, index, indent, raw_value)
+            result[key] = value
+        return result, index
+
+    def parse_list(
+        source_lines: list[tuple[int, str]],
+        index: int,
+        indent: int,
+    ) -> tuple[list[Any], int]:
+        result: list[Any] = []
+        while index < len(source_lines):
+            current_indent, content = source_lines[index]
+            if current_indent < indent:
+                break
+            if current_indent != indent:
+                raise ValueError(f"Unsupported YAML indentation at line {index + 1}: expected {indent}, got {current_indent}")
+            if not _is_yaml_list_item(content):
+                break
+
+            item_content = content[1:].strip()
+            index += 1
+            if item_content == "":
+                if index < len(source_lines) and source_lines[index][0] > indent:
+                    value, index = parse_block(source_lines, index, source_lines[index][0])
+                else:
+                    value = None
+            elif ":" in item_content:
+                synthetic_indent = indent + 2
+                synthetic_lines = [(synthetic_indent, item_content), *source_lines[index:]]
+                value, consumed = parse_dict(synthetic_lines, 0, synthetic_indent)
+                index += consumed - 1
+            else:
+                value, index = _yaml_folded_scalar(source_lines, index, indent, item_content)
+            result.append(value)
+        return result, index
+
+    if not lines:
+        return None
+    parsed, next_index = parse_block(lines, 0, lines[0][0])
+    if next_index != len(lines):
+        raise ValueError("Unsupported trailing YAML content")
+    return parsed
+
+
+_YAML_KEY_PATTERN = re.compile(r"^[A-Za-z0-9_.-]+$")
+
+
+def _yaml_key(key: str) -> str:
+    if not _YAML_KEY_PATTERN.fullmatch(key):
+        raise TypeError(f"Unsupported YAML key for fallback serializer: {key!r}")
+    return key
+
+
+def _dump_yaml_scalar(value: Any) -> str:
+    if value is None:
+        return "null"
+    if value is True:
+        return "true"
+    if value is False:
+        return "false"
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        return json.dumps(value)
+    if isinstance(value, str):
+        return json.dumps(value, ensure_ascii=True)
+    if isinstance(value, list) and not value:
+        return "[]"
+    if isinstance(value, dict) and not value:
+        return "{}"
+    raise TypeError(f"Unsupported YAML scalar for fallback serializer: {type(value).__name__}")
+
+
+def _dump_yaml_subset(value: Any, indent: int = 0) -> list[str]:
+    prefix = " " * indent
+
+    if isinstance(value, dict):
+        if not value:
+            return [prefix + "{}"]
+
+        lines: list[str] = []
+        for key, item in value.items():
+            rendered_key = _yaml_key(str(key))
+            if isinstance(item, (dict, list)) and item:
+                lines.append(f"{prefix}{rendered_key}:")
+                lines.extend(_dump_yaml_subset(item, indent + 2))
+            else:
+                lines.append(f"{prefix}{rendered_key}: {_dump_yaml_scalar(item)}")
+        return lines
+
+    if isinstance(value, list):
+        if not value:
+            return [prefix + "[]"]
+
+        lines = []
+        for item in value:
+            if isinstance(item, (dict, list)) and item:
+                lines.append(f"{prefix}-")
+                lines.extend(_dump_yaml_subset(item, indent + 2))
+            else:
+                lines.append(f"{prefix}- {_dump_yaml_scalar(item)}")
+        return lines
+
+    return [prefix + _dump_yaml_scalar(value)]
+
+
 def load_yaml_like(path: Path) -> Any:
     text = path.read_text(encoding="utf-8")
     try:
@@ -125,7 +341,10 @@ def load_yaml_like(path: Path) -> Any:
 
         return yaml.safe_load(text)
     except Exception:
-        return json.loads(text)
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError:
+            return _load_yaml_subset(text)
 
 
 def dump_yaml_like(data: Any, path: Path) -> None:
@@ -140,7 +359,8 @@ def dump_yaml_like(data: Any, path: Path) -> None:
             default_flow_style=False,
         )
     except Exception:
-        rendered = json.dumps(data, indent=2) + "\n"
+        # Keep generated control surfaces in a stable YAML subset even when PyYAML is unavailable.
+        rendered = "\n".join(_dump_yaml_subset(data)) + "\n"
     path.write_text(rendered, encoding="utf-8")
 
 

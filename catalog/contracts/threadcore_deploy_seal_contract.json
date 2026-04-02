@@ -1,0 +1,23 @@
+{
+  "artifact_family": "threadcore_deploy_seal",
+  "artifact_type": "zip_bundle",
+  "version": 1,
+  "required_entries": [
+    "THREADCORE.md",
+    "THREADCORE_VISIBLE_NODE_01.json",
+    "aurora_auto_launch_beacon.py",
+    "Aurora_Toolset_MyGPT_v1.json",
+    "QEM_ECHOCHAIN_LINK_DRIFTNEXUS.json"
+  ],
+  "entry_validation": {
+    "THREADCORE.md": "threadcore_identity_markdown_presence",
+    "THREADCORE_VISIBLE_NODE_01.json": "threadcore_visible_node",
+    "aurora_auto_launch_beacon.py": "aurora_gui_beacon_launcher",
+    "Aurora_Toolset_MyGPT_v1.json": "aurora_toolset_mygpt_embedded",
+    "QEM_ECHOCHAIN_LINK_DRIFTNEXUS.json": "threadcore_echochain_link"
+  },
+  "optional_companions": [
+    "THREADCORE_DEPLOY_ACCESSKEY.json"
+  ],
+  "notes": "Recovered seal bundle is a compact continuity package, not a full runtime bundle."
+}
