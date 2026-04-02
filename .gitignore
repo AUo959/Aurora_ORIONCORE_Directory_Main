@@ -22,6 +22,11 @@
 !/reports/automation/**
 !/skills/
 !/skills/**
+!/.agents/
+!/.agents/plugins/
+!/.agents/plugins/**
+!/plugins/
+!/plugins/**
 !/archives/
 !/intake/
 !/repos/

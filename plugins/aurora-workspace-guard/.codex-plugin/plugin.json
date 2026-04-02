@@ -1,0 +1,36 @@
+{
+  "name": "aurora-workspace-guard",
+  "version": "0.1.0",
+  "description": "Guard Aurora root workspace operations by enforcing repo boundaries, control-plane reading order, regeneration rules, and validation flow.",
+  "author": {
+    "name": "Travis Streets",
+    "email": "AUo959@users.noreply.github.com"
+  },
+  "repository": "git@github-aurora:AUo959/Aurora_ORIONCORE_Directory_Main.git",
+  "license": "MIT",
+  "keywords": [
+    "aurora",
+    "workspace",
+    "control-plane",
+    "validation",
+    "repo-boundaries"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Aurora Workspace Guard",
+    "shortDescription": "Guard Aurora root control-plane work",
+    "longDescription": "Use Aurora Workspace Guard to keep root workspace changes aligned with Aurora repo boundaries, generated-surface rules, and the supported validation flow before staging or commit.",
+    "developerName": "Travis Streets",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Check whether this root workspace change respects repo boundaries, regenerate any control surfaces, and run the supported Aurora validation commands."
+    ],
+    "screenshots": [],
+    "brandColor": "#1D4ED8"
+  }
+}

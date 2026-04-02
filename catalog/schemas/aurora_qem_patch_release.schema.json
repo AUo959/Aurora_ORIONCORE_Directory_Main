@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/aurora_qem_patch_release.schema.json",
+  "title": "Aurora QEM Patch Release Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "patch_code": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9_:.\\-]*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v[0-9]+(?:\\.[0-9]+)*(?:[A-Za-z0-9_.\\-]*)?$"
+    },
+    "vector_origin": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_:.\\-]*$"
+    },
+    "includes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "symbolic_glyphs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "ethics_protocol": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.:\\-]+$"
+    },
+    "sealed_in": {
+      "type": "string",
+      "pattern": "^.+\\.zip$"
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?Z$"
+    },
+    "vector_released_as": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_:.\\-]*$"
+    }
+  },
+  "required": [
+    "patch_code",
+    "version",
+    "vector_origin",
+    "includes",
+    "symbolic_glyphs",
+    "ethics_protocol",
+    "sealed_in",
+    "timestamp",
+    "vector_released_as"
+  ]
+}

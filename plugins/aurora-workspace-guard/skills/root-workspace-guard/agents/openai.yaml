@@ -1,0 +1,5 @@
+interface:
+  display_name: "Root Workspace Guard"
+  short_description: "Guard root control-plane edits"
+  brand_color: "#1D4ED8"
+  default_prompt: "Use $root-workspace-guard to validate a root workspace change and enforce Aurora repo boundaries."
