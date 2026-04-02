@@ -13,7 +13,8 @@ from typing import Any, Dict, List, Tuple
 
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMA_PATH = ROOT / "catalog/schemas/threadcore_echochain_link.schema.json"
-CODE_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_:.\\-]*$")
+REQUIRED_FIELDS = ("node", "linked_to", "type", "status", "glyphs", "approved_by", "integration", "timestamp")
+CODE_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]*$")
 TIME_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?Z$")
 
 
@@ -33,14 +34,13 @@ def canonicalize(payload: Dict[str, Any]) -> Dict[str, Any]:
 def validate_payload(payload: Any) -> Tuple[List[str], List[str]]:
     errors: List[str] = []
     warnings: List[str] = []
-    required = ["node", "linked_to", "type", "status", "glyphs", "approved_by", "integration", "timestamp"]
     if not isinstance(payload, dict):
         return ["payload must be a JSON object"], warnings
-    allowed = set(required) | {"schema_version"}
+    allowed = set(REQUIRED_FIELDS) | {"schema_version"}
     unknown = sorted(set(payload.keys()) - allowed)
     if unknown:
         errors.append(f"unknown fields: {', '.join(unknown)}")
-    for field in required:
+    for field in REQUIRED_FIELDS:
         if field not in payload:
             errors.append(f"missing required field: {field}")
     if errors:
@@ -127,6 +127,12 @@ def run_validate(args: argparse.Namespace) -> int:
     artifact = Path(args.artifact).resolve()
     payload = load_json(artifact)
     errors, warnings = validate_payload(payload)
+    normalized_payload = None
+    if isinstance(payload, dict):
+        try:
+            normalized_payload = canonicalize(payload)
+        except KeyError:
+            normalized_payload = None
     report = {
         "ok": not errors,
         "family": "threadcore_echochain_link",
@@ -134,7 +140,7 @@ def run_validate(args: argparse.Namespace) -> int:
         "schema_path": str(SCHEMA_PATH),
         "errors": errors,
         "warnings": warnings,
-        "normalized_payload": canonicalize(payload) if isinstance(payload, dict) else None,
+        "normalized_payload": normalized_payload,
     }
     if args.report_out:
         write_json(Path(args.report_out).resolve(), report)

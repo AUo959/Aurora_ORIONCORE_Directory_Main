@@ -13,8 +13,9 @@ from typing import Any, Dict, List, Tuple
 
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMA_PATH = ROOT / "catalog/schemas/aurora_qem_patch_release.schema.json"
-CODE_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_:.\\-]*$")
-PATCH_PATTERN = re.compile(r"^[A-Z0-9][A-Z0-9_:.\\-]*$")
+REQUIRED_FIELDS = ("patch_code", "version", "vector_origin", "includes", "symbolic_glyphs", "ethics_protocol", "sealed_in", "timestamp", "vector_released_as")
+CODE_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]*$")
+PATCH_PATTERN = re.compile(r"^[A-Z0-9][A-Z0-9_.:-]*$")
 VERSION_PATTERN = re.compile(r"^v[0-9]+(?:\.[0-9]+)*(?:[A-Za-z0-9_.\-]*)?$")
 TIME_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?Z$")
 
@@ -44,14 +45,13 @@ def _validate_string_array(payload: Dict[str, Any], field: str, errors: List[str
 def validate_payload(payload: Any) -> Tuple[List[str], List[str]]:
     errors: List[str] = []
     warnings: List[str] = []
-    required = ["patch_code", "version", "vector_origin", "includes", "symbolic_glyphs", "ethics_protocol", "sealed_in", "timestamp", "vector_released_as"]
     if not isinstance(payload, dict):
         return ["payload must be a JSON object"], warnings
-    allowed = set(required) | {"schema_version"}
+    allowed = set(REQUIRED_FIELDS) | {"schema_version"}
     unknown = sorted(set(payload.keys()) - allowed)
     if unknown:
         errors.append(f"unknown fields: {', '.join(unknown)}")
-    for field in required:
+    for field in REQUIRED_FIELDS:
         if field not in payload:
             errors.append(f"missing required field: {field}")
     if errors:
@@ -137,6 +137,12 @@ def run_validate(args: argparse.Namespace) -> int:
     artifact = Path(args.artifact).resolve()
     payload = load_json(artifact)
     errors, warnings = validate_payload(payload)
+    normalized_payload = None
+    if isinstance(payload, dict):
+        try:
+            normalized_payload = canonicalize(payload)
+        except KeyError:
+            normalized_payload = None
     report = {
         "ok": not errors,
         "family": "aurora_qem_patch_release",
@@ -144,7 +150,7 @@ def run_validate(args: argparse.Namespace) -> int:
         "schema_path": str(SCHEMA_PATH),
         "errors": errors,
         "warnings": warnings,
-        "normalized_payload": canonicalize(payload) if isinstance(payload, dict) else None,
+        "normalized_payload": normalized_payload,
     }
     if args.report_out:
         write_json(Path(args.report_out).resolve(), report)
