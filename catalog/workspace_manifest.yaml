@@ -1,4 +1,4 @@
-generated_at: "2026-04-08T19:25:22Z"
+generated_at: "2026-04-08T20:29:49Z"
 root: "."
 logical_taxonomy:
   - "repos"
@@ -23,7 +23,7 @@ entries:
     owner: "local-user"
     status: "ignored"
   -
-    id: "agents"
+    id: "dot-agents"
     kind: "control_surface"
     current_path: ".agents"
     logical_zone: "tools"
@@ -325,7 +325,7 @@ entries:
     owner: "archive-admin"
     status: "deferred"
   -
-    id: "text-109"
+    id: "text-109-txt"
     kind: "intake_file"
     current_path: "Text_109.txt"
     logical_zone: "intake"
@@ -628,7 +628,7 @@ entries:
     status: "planned_move"
     batch_id: "wave4_root_intake_cleanup_initial"
   -
-    id: "text-109"
+    id: "text-109-2-txt"
     kind: "intake_file"
     current_path: "text_109 2.txt"
     logical_zone: "intake"
@@ -1804,7 +1804,7 @@ entries:
     status: "planned_move"
     batch_id: "wave4_root_intake_cleanup_initial"
   -
-    id: "text-58"
+    id: "text-58-2-txt"
     kind: "intake_file"
     current_path: "text_58 2.txt"
     logical_zone: "intake"
@@ -1816,7 +1816,7 @@ entries:
     status: "planned_move"
     batch_id: "wave4_root_intake_cleanup_initial"
   -
-    id: "text-58"
+    id: "text-58-txt"
     kind: "intake_file"
     current_path: "text_58.txt"
     logical_zone: "intake"

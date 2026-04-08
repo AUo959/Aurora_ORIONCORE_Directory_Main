@@ -1,6 +1,6 @@
 # Workspace Map
 
-- Generated: `2026-04-08T19:25:22Z`
+- Generated: `2026-04-08T20:29:49Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
 - Top-level entries cataloged: `291`
 - Nested repos registered: `3`
