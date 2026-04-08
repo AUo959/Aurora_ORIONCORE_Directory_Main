@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import builtins
 import json
 import shutil
 import subprocess
@@ -127,6 +128,48 @@ def test_root_policy_records_manage_expected_top_level_entries(workspace_root: P
     assert records["aurora_cloudbank_symbolic_architecture_discovery_report.md"]["status"] == "managed"
 
 
+def test_top_level_policy_records_keep_unique_ids_with_control_surface_overrides(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    (root / ".agents" / "plugins").mkdir(parents=True)
+    write_file(root / "AGENTS.md", "# Test Agents\n")
+    write_file(root / "Text_109.txt", "one\n")
+    write_file(root / "text_109 2.txt", "two\n")
+    write_file(
+        root / "catalog" / "classification_overrides.yaml",
+        json.dumps(
+            {
+                "overrides": [
+                    {
+                        "current_path": ".agents",
+                        "id": "dot-agents",
+                        "kind": "control_surface",
+                        "logical_zone": "tools",
+                        "planned_path": ".agents",
+                        "git_boundary": "root",
+                        "storage_tier": "workspace-control",
+                        "retention_policy": "versioned",
+                        "owner": "workspace-admin",
+                        "status": "managed",
+                    }
+                ]
+            },
+            indent=2,
+        )
+        + "\n",
+    )
+
+    overrides = workspace_common.load_classification_overrides(root / "catalog" / "classification_overrides.yaml")
+    records = workspace_common.top_level_policy_records(root, overrides=overrides)
+    ids = [record["id"] for record in records]
+
+    assert len(ids) == len(set(ids))
+    assert any(record["current_path"] == ".agents" and record["id"] == "dot-agents" for record in records)
+    assert any(record["current_path"] == "AGENTS.md" and record["id"] == "agents" for record in records)
+    assert any(record["current_path"] == "Text_109.txt" and record["id"] == "text-109-txt" for record in records)
+    assert any(record["current_path"] == "text_109 2.txt" and record["id"] == "text-109-2-txt" for record in records)
+
+
 def test_archive_inventory_skips_nested_repo_internals(tmp_path: Path) -> None:
     root = tmp_path / "workspace"
     (root / "outer").mkdir(parents=True)
@@ -210,6 +253,84 @@ def test_manual_verify_warns_for_missing_nested_repo_context(workspace_root: Pat
         finding["check"] == "repo_registry_coverage" and not finding["blocking"]
         for finding in report["findings"]
     )
+
+
+def test_load_yaml_like_supports_generated_yaml_without_pyyaml(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    repo_registry_yaml = """generated_at: '2026-03-10T00:00:00Z'
+root: .
+repos:
+- name: aurora-cloudbank-symbolic-main
+  path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
+  branch: main
+  head_sha: 42e0b9fb9f1e0e10a9091d595cf2811f2c14eacf
+  remote_status: configured
+  validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
+    git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse
+    HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C
+    GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main status --short
+    --branch
+  move_policy: frozen_until_registry_adoption
+"""
+    yaml_path = tmp_path / "repo_registry.yaml"
+    write_file(yaml_path, repo_registry_yaml)
+
+    original_import = builtins.__import__
+
+    def blocked_import(name: str, *args: object, **kwargs: object) -> object:
+        if name == "yaml":
+            raise ImportError("yaml disabled for test")
+        return original_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", blocked_import)
+
+    payload = workspace_common.load_yaml_like(yaml_path)
+
+    assert payload["root"] == "."
+    assert payload["repos"][0]["name"] == "aurora-cloudbank-symbolic-main"
+    assert payload["repos"][0]["remote_status"] == "configured"
+    assert payload["repos"][0]["validation_command"] == (
+        "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX "
+        "git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse "
+        "HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C "
+        "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main status --short "
+        "--branch"
+    )
+
+
+def test_dump_yaml_like_preserves_yaml_syntax_without_pyyaml(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    payload = {
+        "generated_at": "2026-03-10T00:00:00Z",
+        "root": ".",
+        "repos": [
+            {
+                "name": "aurora-cloudbank-symbolic-main",
+                "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+                "branch": "main",
+                "head_sha": "42e0b9fb9f1e0e10a9091d595cf2811f2c14eacf",
+                "remote_status": "configured",
+                "validation_command": "git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main status --short --branch",
+                "move_policy": "frozen_until_registry_adoption",
+            }
+        ],
+    }
+    yaml_path = tmp_path / "repo_registry.yaml"
+
+    original_import = builtins.__import__
+
+    def blocked_import(name: str, *args: object, **kwargs: object) -> object:
+        if name == "yaml":
+            raise ImportError("yaml disabled for test")
+        return original_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", blocked_import)
+
+    workspace_common.dump_yaml_like(payload, yaml_path)
+    rendered = yaml_path.read_text(encoding="utf-8")
+
+    assert rendered.startswith('generated_at: "2026-03-10T00:00:00Z"\n')
+    assert "{\n" not in rendered
+    assert "\nrepos:\n  -\n" in rendered
+    assert workspace_common.load_yaml_like(yaml_path) == payload
 
 
 def test_explicit_determinism_and_relocation_checks_pass(workspace_root: Path) -> None:
