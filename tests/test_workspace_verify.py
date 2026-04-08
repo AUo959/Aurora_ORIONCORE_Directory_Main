@@ -128,6 +128,44 @@ def test_root_policy_records_manage_expected_top_level_entries(workspace_root: P
     assert records["aurora_cloudbank_symbolic_architecture_discovery_report.md"]["status"] == "managed"
 
 
+def test_top_level_policy_records_keep_unique_ids_with_control_surface_overrides(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    (root / ".agents" / "plugins").mkdir(parents=True)
+    write_file(root / "AGENTS.md", "# Test Agents\n")
+    write_file(
+        root / "catalog" / "classification_overrides.yaml",
+        json.dumps(
+            {
+                "overrides": [
+                    {
+                        "current_path": ".agents",
+                        "id": "dot-agents",
+                        "kind": "control_surface",
+                        "logical_zone": "tools",
+                        "planned_path": ".agents",
+                        "git_boundary": "root",
+                        "storage_tier": "workspace-control",
+                        "retention_policy": "versioned",
+                        "owner": "workspace-admin",
+                        "status": "managed",
+                    }
+                ]
+            },
+            indent=2,
+        )
+        + "\n",
+    )
+
+    overrides = workspace_common.load_classification_overrides(root / "catalog" / "classification_overrides.yaml")
+    records = workspace_common.top_level_policy_records(root, overrides=overrides)
+    ids = [record["id"] for record in records]
+
+    assert len(ids) == len(set(ids))
+    assert any(record["current_path"] == ".agents" and record["id"] == "dot-agents" for record in records)
+    assert any(record["current_path"] == "AGENTS.md" and record["id"] == "agents" for record in records)
+
+
 def test_archive_inventory_skips_nested_repo_internals(tmp_path: Path) -> None:
     root = tmp_path / "workspace"
     (root / "outer").mkdir(parents=True)
