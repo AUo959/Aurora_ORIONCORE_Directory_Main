@@ -5,6 +5,7 @@
 !/.githooks/pre-commit
 !/AGENTS.md
 !/README.md
+!/GITWIZ.md
 !/docs/
 !/docs/**
 # iCloud-backed; not locally downloaded — exclude from git tracking

@@ -38,6 +38,19 @@
       "batch_id": "",
       "status": "managed",
       "notes": "Repo-local Codex plugin bundles for workspace tooling."
+    },
+    {
+      "current_path": "GITWIZ.md",
+      "kind": "workspace_doc",
+      "logical_zone": "docs",
+      "planned_path": "GITWIZ.md",
+      "git_boundary": "root",
+      "storage_tier": "workspace-control",
+      "retention_policy": "versioned",
+      "owner": "workspace-admin",
+      "batch_id": "",
+      "status": "managed",
+      "notes": "Dedicated root agent contract for Aurora / ORIONCORE Git and GitHub operations."
     }
   ]
 }

@@ -1,4 +1,4 @@
 interface:
   display_name: "GITWIZ GitHub Manager"
-  short_description: "Project-aware GitHub remotes, sync audits, and PR drafting"
-  default_prompt: "Use GITWIZ to inspect this Aurora / ORIONCORE repo or named nested repo, run a local-vs-remote sync audit, and create or verify the GitHub remote and PR path without disturbing unrelated repos."
+  short_description: "Repo-aware Aurora Git/GitHub operator for sync truth, remote safety, and PR handoff"
+  default_prompt: "Use GITWIZ as the dedicated Aurora / ORIONCORE Git and GitHub operator. Read AGENTS.md, GITWIZ.md, and the gitwiz-github-manager skill, then inspect the named repo, preserve root-vs-nested boundaries, prefer SSH and origin, run sync audits before mutation, and produce receipts before any remote change."
