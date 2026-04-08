@@ -533,6 +533,14 @@ def normalize_family(name: str) -> str:
     return stem.strip("-") or "unclassified"
 
 
+def stable_entry_id(name: str) -> str:
+    lowered = name.lower()
+    if lowered.startswith("."):
+        lowered = f"dot-{lowered[1:]}"
+    lowered = re.sub(r"[^a-z0-9]+", "-", lowered)
+    return lowered.strip("-") or "unclassified"
+
+
 def canonical_candidate(paths: list[str]) -> str:
     def score(path: str) -> tuple[int, int, str]:
         lowered = path.lower()
@@ -577,13 +585,38 @@ def top_level_policy_records(
     effective_nested_repo_roots = (
         nested_repo_roots if nested_repo_roots is not None else set(discover_nested_repos(root))
     )
-    return [
+    entries = [
         apply_classification_override(
             classify_top_level(entry, root=root, nested_repo_roots=effective_nested_repo_roots),
             effective_overrides,
         )
         for entry in top_level_entries(root)
     ]
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for entry in entries:
+        grouped.setdefault(str(entry["id"]), []).append(entry)
+
+    updated_entries: list[dict[str, Any]] = []
+    for entry in entries:
+        duplicates = grouped[str(entry["id"])]
+        if len(duplicates) == 1:
+            updated_entries.append(entry)
+            continue
+        updated = dict(entry)
+        updated["id"] = stable_entry_id(str(entry["current_path"]))
+        updated_entries.append(updated)
+
+    deduped: list[dict[str, Any]] = []
+    reassigned_counts: dict[str, int] = {}
+    for entry in updated_entries:
+        updated = dict(entry)
+        key = str(updated["id"])
+        count = reassigned_counts.get(key, 0) + 1
+        reassigned_counts[key] = count
+        if count > 1:
+            updated["id"] = f"{key}-{count}"
+        deduped.append(updated)
+    return deduped
 
 
 def manifest_enforced_current_paths(entries: list[dict[str, Any]]) -> set[str]:

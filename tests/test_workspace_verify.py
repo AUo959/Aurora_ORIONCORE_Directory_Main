@@ -133,6 +133,8 @@ def test_top_level_policy_records_keep_unique_ids_with_control_surface_overrides
     root.mkdir()
     (root / ".agents" / "plugins").mkdir(parents=True)
     write_file(root / "AGENTS.md", "# Test Agents\n")
+    write_file(root / "Text_109.txt", "one\n")
+    write_file(root / "text_109 2.txt", "two\n")
     write_file(
         root / "catalog" / "classification_overrides.yaml",
         json.dumps(
@@ -164,6 +166,8 @@ def test_top_level_policy_records_keep_unique_ids_with_control_surface_overrides
     assert len(ids) == len(set(ids))
     assert any(record["current_path"] == ".agents" and record["id"] == "dot-agents" for record in records)
     assert any(record["current_path"] == "AGENTS.md" and record["id"] == "agents" for record in records)
+    assert any(record["current_path"] == "Text_109.txt" and record["id"] == "text-109-txt" for record in records)
+    assert any(record["current_path"] == "text_109 2.txt" and record["id"] == "text-109-2-txt" for record in records)
 
 
 def test_archive_inventory_skips_nested_repo_internals(tmp_path: Path) -> None:
