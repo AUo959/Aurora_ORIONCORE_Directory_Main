@@ -99,6 +99,7 @@ Important distinction:
 - `.gitwiz` in the workspace manifest is an ignored local artifact slot
 - it is not the source of truth for the skill
 - the versioned skill source is `skills/gitwiz-github-manager/`
+- the dedicated root agent contract is `GITWIZ.md`
 
 Primary commands:
 

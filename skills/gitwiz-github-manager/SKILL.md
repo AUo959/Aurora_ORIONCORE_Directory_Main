@@ -71,6 +71,8 @@ Choose the working directory that actually contains the target repo:
 - Read `AGENTS.md` first when operating in the root repo. It is the fast operational reference for persistence, sync boundaries, repo scope, and current GitHub expectations.
 - `.gitwiz` in the workspace manifest is an ignored local artifact slot, not the source of truth for this skill.
 - This skill should live in versioned repo content and may also be copied into `~/.codex/skills/` for local availability.
+- The dedicated root agent contract for this capability is `GITWIZ.md`.
+- The selectable compact agent manifest is `skills/gitwiz-github-manager/agents/openai.yaml`.
 - Prefer SSH remotes for ongoing use.
 - Prefer preserving remote history by branching it before replacing it.
 
