@@ -1,19 +1,19 @@
 # Workspace Map
 
-- Generated: `2026-04-08T20:29:49Z`
+- Generated: `2026-04-08T22:03:42Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `291`
+- Top-level entries cataloged: `293`
 - Nested repos registered: `3`
 - Archive or binary artifacts inventoried: `594`
-- Classification overrides loaded: `3` from `catalog/classification_overrides.yaml`
+- Classification overrides loaded: `4` from `catalog/classification_overrides.yaml`
 
 ## Zones
 
 - `_staging`: `7` top-level entries
 - `archives`: `2` top-level entries
 - `catalog`: `1` top-level entries
-- `docs`: `5` top-level entries
-- `intake`: `265` top-level entries
+- `docs`: `6` top-level entries
+- `intake`: `266` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `2` top-level entries
 - `repos`: `2` top-level entries
@@ -40,6 +40,7 @@
 - `Perplexity_repo_report_04_26.pdf` -> `intake/Perplexity_repo_report_04_26.pdf` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Perplexity_report_repo_04_26` -> `intake/Perplexity_report_repo_04_26` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Perplexity_system_exam_04_26` -> `intake/Perplexity_system_exam_04_26` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `R-2.md` -> `intake/R-2.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `THREAD.MEMORY.COMPRESSION.SYMBOLIC.0424.beacon.json.pdf.pdf` -> `intake/THREAD.MEMORY.COMPRESSION.SYMBOLIC.0424.beacon.json.pdf.pdf` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Text_109.txt` -> `intake/Text_109.txt` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `aurora-viz.pdf` -> `intake/aurora-viz.pdf` (intake_file, batch `wave4_root_intake_cleanup_initial`)
