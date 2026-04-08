@@ -1,8 +1,8 @@
 # Workspace Map
 
-- Generated: `2026-04-02T00:35:52Z`
+- Generated: `2026-04-08T19:25:22Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `283`
+- Top-level entries cataloged: `291`
 - Nested repos registered: `3`
 - Archive or binary artifacts inventoried: `594`
 - Classification overrides loaded: `3` from `catalog/classification_overrides.yaml`
@@ -13,7 +13,7 @@
 - `archives`: `2` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `5` top-level entries
-- `intake`: `257` top-level entries
+- `intake`: `265` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `2` top-level entries
 - `repos`: `2` top-level entries
@@ -30,8 +30,16 @@
 - `4.txt` -> `intake/4.txt` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Aurora Framework_ Adaptive Symbolic Architecture R.pdf.pdf` -> `intake/Aurora Framework_ Adaptive Symbolic Architecture R.pdf.pdf` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Aurora Framework_ Integrating Quantum-Aware Symbol.pdf.pdf` -> `intake/Aurora Framework_ Integrating Quantum-Aware Symbol.pdf.pdf` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `Aurora_CloudBank_Review_R1_R10.md` -> `intake/Aurora_CloudBank_Review_R1_R10.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Aurora_Project_Context_Onboarding_Brief.pdf` -> `intake/Aurora_Project_Context_Onboarding_Brief.pdf` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Aurora_Sim_Architecture` -> `intake/Aurora_Sim_Architecture` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
+- `ORION__CANON__L1_ENTITY_REGISTRY__v2.0__2026-04-08.md` -> `intake/ORION__CANON__L1_ENTITY_REGISTRY__v2.0__2026-04-08.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `ORION__CANON__ORION_STATION_ENVIRONMENT__v2.0__2026-04-08.md` -> `intake/ORION__CANON__ORION_STATION_ENVIRONMENT__v2.0__2026-04-08.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `ORION__NAV__PERPLEXITY_SPACE_FRONT_DOOR__v2.0__2026-04-08.md` -> `intake/ORION__NAV__PERPLEXITY_SPACE_FRONT_DOOR__v2.0__2026-04-08.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `ORION__POLICY__CANON_PROTOCOL__v2.0__2026-04-08.md` -> `intake/ORION__POLICY__CANON_PROTOCOL__v2.0__2026-04-08.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `Perplexity_repo_report_04_26.pdf` -> `intake/Perplexity_repo_report_04_26.pdf` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `Perplexity_report_repo_04_26` -> `intake/Perplexity_report_repo_04_26` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `Perplexity_system_exam_04_26` -> `intake/Perplexity_system_exam_04_26` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `THREAD.MEMORY.COMPRESSION.SYMBOLIC.0424.beacon.json.pdf.pdf` -> `intake/THREAD.MEMORY.COMPRESSION.SYMBOLIC.0424.beacon.json.pdf.pdf` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Text_109.txt` -> `intake/Text_109.txt` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `aurora-viz.pdf` -> `intake/aurora-viz.pdf` (intake_file, batch `wave4_root_intake_cleanup_initial`)
