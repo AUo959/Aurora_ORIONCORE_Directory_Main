@@ -1,46 +1,16 @@
 {
-  "generated_at": "2026-03-11T00:25:06Z",
+  "generated_at": "2026-04-09T02:44:39Z",
   "root": ".",
   "dry_run": false,
   "moved": [
     {
-      "source": "Image.png",
-      "destination": "intake/Image.png",
-      "path_kind": "file"
-    },
-    {
-      "source": "Threadcore Library",
-      "destination": "intake/Threadcore Library",
-      "path_kind": "tree"
-    },
-    {
-      "source": "text.txt",
-      "destination": "intake/text.txt",
-      "path_kind": "file"
-    },
-    {
-      "source": "textAu.txt",
-      "destination": "intake/textAu.txt",
-      "path_kind": "file"
-    },
-    {
-      "source": "textAu2.txt",
-      "destination": "intake/textAu2.txt",
-      "path_kind": "file"
-    },
-    {
-      "source": "textAu3.txt",
-      "destination": "intake/textAu3.txt",
-      "path_kind": "file"
-    },
-    {
-      "source": "textAu4.txt",
-      "destination": "intake/textAu4.txt",
+      "source": "THREAD_MEMORY_COMPRESSION_BEACON_V2.zip",
+      "destination": "intake/THREAD_MEMORY_COMPRESSION_BEACON_V2.zip",
       "path_kind": "file"
     }
   ],
   "skipped": [],
   "errors": [],
   "mode": "forward",
-  "batch_id": "wave4_root_intake_cleanup_initial"
+  "batch_id": "wave5_root_archive_followup"
 }

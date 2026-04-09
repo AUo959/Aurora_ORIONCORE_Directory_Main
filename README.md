@@ -34,6 +34,24 @@ nested repo internals stay out of root Git history.
 - `intake/`: ambiguous loose items pending review
 - `_staging/`: rehearsals and rollback-safe staging
 
+## Root Intake Service
+
+One of the primary services of this root repo is intake triage for newly saved
+work at the workspace root.
+
+- Default assumption: if new material is dropped at root and is not a managed
+  control-plane file, it should be classified and routed rather than left at
+  root.
+- Default destination: `intake/`, unless repo evidence shows the item belongs in
+  `docs/`, `reports/`, `_staging/`, or a deferred runtime bucket.
+- Expected handling: tag the item, standardize naming, update the manifest and
+  relocation plan, execute safe moves, and leave verification receipts.
+- Promotion rule: routing into `intake/` is not canonical promotion.
+- Boundary rule: if an item appears to belong in a nested repo, confirm that
+  repo boundary before moving it there.
+- Runtime rule: if a root directory is live runtime or log output, prefer
+  deferred classification over moving it while it is changing.
+
 ## Supported Commands
 
 ```bash

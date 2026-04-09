@@ -23,6 +23,7 @@ BATCH_SUMMARIES = {
     "wave3_small_structured_dirs_initial": "Small structured root directories into canonical reports/projects zones.",
     "wave3_staging_isolation_initial": "Sensitive or legacy root directories into _staging isolation.",
     "wave4_root_intake_cleanup_initial": "Late-discovered loose root files and collections into intake.",
+    "wave5_root_archive_followup": "Follow-up relocation for residual root archive artifacts into intake.",
 }
 
 
@@ -54,7 +55,11 @@ def merge_batch(existing: dict[str, object], generated: dict[str, object]) -> di
                 candidate["path_kind"] = prior["path_kind"]
         operations.append(candidate)
     merged["operations"] = operations
-    merged["status"] = existing.get("status", generated.get("status", "planned"))
+    existing_status = existing.get("status", generated.get("status", "planned"))
+    if existing_status == "applied" and operations:
+        merged["status"] = "planned"
+    else:
+        merged["status"] = existing_status
     return merged
 
 
@@ -97,13 +102,18 @@ def load_existing_aliases(path: Path) -> dict[tuple[str, str], dict[str, str]]:
 def merge_alias_rows(
     existing_rows: dict[tuple[str, str], dict[str, str]],
     generated_rows: list[dict[str, str]],
+    current_top_level_paths: set[str] | None = None,
 ) -> list[dict[str, str]]:
     row_map = dict(existing_rows)
+    generated_legacy_paths = {row["legacy_path"] for row in generated_rows}
+    for key in list(row_map):
+        legacy_path, _canonical_path = key
+        if legacy_path in generated_legacy_paths:
+            row_map.pop(key)
+        elif current_top_level_paths and legacy_path in current_top_level_paths:
+            row_map.pop(key)
     for row in generated_rows:
         key = (row["legacy_path"], row["canonical_path"])
-        prior = row_map.get(key)
-        if prior:
-            row["status"] = prior.get("status", row["status"])
         row_map[key] = row
     return sorted(row_map.values(), key=lambda item: (item["legacy_path"], item["canonical_path"]))
 
@@ -225,9 +235,10 @@ def main() -> int:
         write_json(root / batch["rollback_manifest"], rollback)
 
     existing_aliases = load_existing_aliases(aliases_out)
+    current_top_level_paths = {str(entry["current_path"]) for entry in manifest["entries"]}
     write_csv(
         aliases_out,
-        merge_alias_rows(existing_aliases, alias_rows),
+        merge_alias_rows(existing_aliases, alias_rows, current_top_level_paths=current_top_level_paths),
         fieldnames=["legacy_path", "canonical_path", "status"],
     )
     return 0

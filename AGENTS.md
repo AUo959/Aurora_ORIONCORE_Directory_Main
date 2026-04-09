@@ -115,6 +115,20 @@ Primary commands:
 For root repo work:
 
 - use the current repo/worktree
+- treat the root as the default intake inbox for newly saved work unless repo
+  evidence shows the item is a root control-plane file that should remain in
+  place
+- when the user drops new files at root and asks to sort or organize them,
+  treat that as a first-order service of this repo: classify, rename,
+  standardize, route, and leave updated manifests and receipts
+- default loose root items to `intake/` unless there is concrete evidence they
+  belong in `docs/`, `reports/`, `_staging/`, or a deferred bucket
+- do not silently promote root intake material into canon; canonical promotion
+  remains a separate explicit step
+- if a root item actually belongs in a nested repo, confirm the target repo
+  boundary before moving it there
+- if a root directory is live runtime output or log-bearing, prefer tagging it
+  as deferred over racing a move while it is changing
 
 For nested repo work:
 

@@ -51,6 +51,19 @@
       "batch_id": "",
       "status": "managed",
       "notes": "Dedicated root agent contract for Aurora / ORIONCORE Git and GitHub operations."
+    },
+    {
+      "current_path": "Aurora_Sim_Architecture",
+      "kind": "runtime_artifact_collection",
+      "logical_zone": "_staging",
+      "planned_path": "_staging/Aurora_Sim_Architecture",
+      "git_boundary": "none",
+      "storage_tier": "operational-report",
+      "retention_policy": "review",
+      "owner": "operations",
+      "batch_id": "",
+      "status": "deferred",
+      "notes": "Root-level non-canonical runtime log surface. Move is deferred because runtime/mesh logs are changing during relocation planning and should not be raced into place without explicit downtime."
     }
   ]
 }

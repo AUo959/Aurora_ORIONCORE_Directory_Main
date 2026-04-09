@@ -1,0 +1,20 @@
+{
+  "batch_id": "wave5_root_archive_followup_rollback",
+  "for_batch": "wave5_root_archive_followup",
+  "generated_at": "2026-04-09T03:06:31Z",
+  "operations": [
+    {
+      "batch_id": "wave5_root_archive_followup_rollback",
+      "source": "intake/THREAD_MEMORY_COMPRESSION_BEACON_V2.zip",
+      "destination": "THREAD_MEMORY_COMPRESSION_BEACON_V2.zip",
+      "operation": "move",
+      "pre_hash": "2ff7b899ba6879caf5cdd21845de29e5948f5950d4ed6c462b7ace836751e84a",
+      "post_hash": "2ff7b899ba6879caf5cdd21845de29e5948f5950d4ed6c462b7ace836751e84a",
+      "rollback_source": "intake/THREAD_MEMORY_COMPRESSION_BEACON_V2.zip",
+      "reason": "Rollback for wave5_root_archive_followup",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    }
+  ]
+}

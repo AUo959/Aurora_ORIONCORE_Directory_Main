@@ -15,6 +15,7 @@ TOOLS_DIR = REPO_ROOT / "tools"
 sys.path.insert(0, str(TOOLS_DIR))
 
 import _workspace_common as workspace_common  # noqa: E402
+import workspace_plan_moves  # noqa: E402
 
 
 def run_command(args: list[str], cwd: Path, check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -168,6 +169,134 @@ def test_top_level_policy_records_keep_unique_ids_with_control_surface_overrides
     assert any(record["current_path"] == "AGENTS.md" and record["id"] == "agents" for record in records)
     assert any(record["current_path"] == "Text_109.txt" and record["id"] == "text-109-txt" for record in records)
     assert any(record["current_path"] == "text_109 2.txt" and record["id"] == "text-109-2-txt" for record in records)
+
+
+def test_report_named_markdown_with_existing_canonical_copy_routes_to_intake(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    (root / "reports" / "analysis").mkdir(parents=True)
+    write_file(root / "AGENTS.md", "# Test Agents\n")
+    write_file(root / "README.md", "# Test Workspace\n")
+    write_file(root / "deep-research-report.md", "# Fresh Loose Report\n")
+    write_file(root / "reports" / "analysis" / "deep-research-report.md", "# Canonical Report\n")
+
+    records = {
+        record["current_path"]: record
+        for record in workspace_common.top_level_policy_records(root)
+    }
+
+    assert records["deep-research-report.md"]["kind"] == "intake_file"
+    assert records["deep-research-report.md"]["planned_path"] == "intake/deep-research-report.md"
+    assert records["deep-research-report.md"]["status"] == "planned_move"
+
+
+def test_merge_batch_reopens_applied_status_when_sources_still_exist() -> None:
+    existing = {
+        "batch_id": "wave4_root_intake_cleanup_initial",
+        "status": "applied",
+        "operations": [
+            {
+                "batch_id": "wave4_root_intake_cleanup_initial",
+                "source": "deep-research-report.md",
+                "destination": "intake/deep-research-report.md",
+                "operation": "move",
+                "pre_hash": "old",
+                "post_hash": "old",
+                "rollback_source": "deep-research-report.md",
+                "reason": "Old plan",
+                "approved": True,
+                "applied_at": "2026-04-08T20:00:00Z",
+                "path_kind": "file",
+            }
+        ],
+    }
+    generated = {
+        "batch_id": "wave4_root_intake_cleanup_initial",
+        "status": "planned",
+        "summary": "Late-discovered loose root files and collections into intake.",
+        "rollback_manifest": "catalog/rollback_wave4_root_intake_cleanup_initial.json",
+        "operations": [
+            {
+                "batch_id": "wave4_root_intake_cleanup_initial",
+                "source": "deep-research-report.md",
+                "destination": "intake/deep-research-report.md",
+                "operation": "move",
+                "pre_hash": "new",
+                "post_hash": "new",
+                "rollback_source": "deep-research-report.md",
+                "reason": "Regenerated plan",
+                "approved": False,
+                "applied_at": None,
+                "path_kind": "file",
+            }
+        ],
+    }
+
+    merged = workspace_plan_moves.merge_batch(existing, generated)
+
+    assert merged["status"] == "planned"
+    assert merged["operations"][0]["pre_hash"] == "new"
+    assert merged["operations"][0]["approved"] is True
+    assert merged["operations"][0]["applied_at"] == "2026-04-08T20:00:00Z"
+
+
+def test_merge_alias_rows_resets_active_aliases_for_present_sources() -> None:
+    existing = {
+        ("deep-research-report.md", "reports/analysis/deep-research-report.md"): {
+            "legacy_path": "deep-research-report.md",
+            "canonical_path": "reports/analysis/deep-research-report.md",
+            "status": "active",
+        }
+    }
+    generated = [
+        {
+            "legacy_path": "deep-research-report.md",
+            "canonical_path": "reports/analysis/deep-research-report.md",
+            "status": "pending",
+        }
+    ]
+
+    merged = workspace_plan_moves.merge_alias_rows(existing, generated)
+
+    assert merged == generated
+
+
+def test_merge_alias_rows_removes_stale_alias_targets_when_canonical_path_changes() -> None:
+    existing = {
+        ("deep-research-report.md", "reports/analysis/deep-research-report.md"): {
+            "legacy_path": "deep-research-report.md",
+            "canonical_path": "reports/analysis/deep-research-report.md",
+            "status": "active",
+        }
+    }
+    generated = [
+        {
+            "legacy_path": "deep-research-report.md",
+            "canonical_path": "intake/deep-research-report.md",
+            "status": "pending",
+        }
+    ]
+
+    merged = workspace_plan_moves.merge_alias_rows(existing, generated)
+
+    assert merged == generated
+
+
+def test_merge_alias_rows_prunes_stale_pending_alias_when_source_stays_at_root() -> None:
+    existing = {
+        ("Aurora_Sim_Architecture", "intake/Aurora_Sim_Architecture"): {
+            "legacy_path": "Aurora_Sim_Architecture",
+            "canonical_path": "intake/Aurora_Sim_Architecture",
+            "status": "pending",
+        }
+    }
+
+    merged = workspace_plan_moves.merge_alias_rows(
+        existing,
+        [],
+        current_top_level_paths={"Aurora_Sim_Architecture", "AGENTS.md"},
+    )
+
+    assert merged == []
 
 
 def test_archive_inventory_skips_nested_repo_internals(tmp_path: Path) -> None:
