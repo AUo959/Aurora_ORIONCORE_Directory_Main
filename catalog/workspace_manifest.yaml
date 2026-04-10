@@ -1,4 +1,4 @@
-generated_at: "2026-04-09T03:06:27Z"
+generated_at: "2026-04-10T00:00:23Z"
 root: "."
 logical_taxonomy:
   - "repos"
@@ -171,18 +171,6 @@ entries:
     retention_policy: "versioned"
     owner: "workspace-admin"
     status: "managed"
-  -
-    id: "thread-the-station-is-well"
-    kind: "intake_file"
-    current_path: "Thread_The_Station_is_Well.md"
-    logical_zone: "intake"
-    planned_path: "intake/Thread_The_Station_is_Well.md"
-    git_boundary: "none"
-    storage_tier: "review"
-    retention_policy: "review"
-    owner: "intake-review"
-    status: "planned_move"
-    batch_id: "wave4_root_intake_cleanup_initial"
   -
     id: "entropy-quarantine"
     kind: "quarantine_zone"

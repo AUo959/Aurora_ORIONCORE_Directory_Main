@@ -1,16 +1,31 @@
 {
-  "generated_at": "2026-04-09T02:44:39Z",
+  "generated_at": "2026-04-10T00:00:12Z",
   "root": ".",
   "dry_run": false,
   "moved": [
     {
-      "source": "THREAD_MEMORY_COMPRESSION_BEACON_V2.zip",
-      "destination": "intake/THREAD_MEMORY_COMPRESSION_BEACON_V2.zip",
+      "source": "Orion_Station_Orientation.pdf",
+      "destination": "intake/Orion_Station_Orientation.pdf",
+      "path_kind": "file"
+    },
+    {
+      "source": "Senior_Staff_R&D_session.md",
+      "destination": "intake/Senior_Staff_R&D_session.md",
+      "path_kind": "file"
+    },
+    {
+      "source": "The_Architecture_of_Presence.pdf",
+      "destination": "intake/The_Architecture_of_Presence.pdf",
+      "path_kind": "file"
+    },
+    {
+      "source": "Thread_The_Station_is_Well.md",
+      "destination": "intake/Thread_The_Station_is_Well.md",
       "path_kind": "file"
     }
   ],
   "skipped": [],
   "errors": [],
   "mode": "forward",
-  "batch_id": "wave5_root_archive_followup"
+  "batch_id": "wave4_root_intake_cleanup_initial"
 }

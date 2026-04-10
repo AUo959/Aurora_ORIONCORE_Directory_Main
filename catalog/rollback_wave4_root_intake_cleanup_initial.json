@@ -1,8 +1,47 @@
 {
   "batch_id": "wave4_root_intake_cleanup_initial_rollback",
   "for_batch": "wave4_root_intake_cleanup_initial",
-  "generated_at": "2026-04-09T03:06:31Z",
+  "generated_at": "2026-04-09T23:59:59Z",
   "operations": [
+    {
+      "batch_id": "wave4_root_intake_cleanup_initial_rollback",
+      "source": "intake/Orion_Station_Orientation.pdf",
+      "destination": "Orion_Station_Orientation.pdf",
+      "operation": "move",
+      "pre_hash": "c40a3402c32bbdc4cfab70df5c31d0f2464311ebfa2fc83df4c50caabc87b403",
+      "post_hash": "c40a3402c32bbdc4cfab70df5c31d0f2464311ebfa2fc83df4c50caabc87b403",
+      "rollback_source": "intake/Orion_Station_Orientation.pdf",
+      "reason": "Rollback for wave4_root_intake_cleanup_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    },
+    {
+      "batch_id": "wave4_root_intake_cleanup_initial_rollback",
+      "source": "intake/Senior_Staff_R&D_session.md",
+      "destination": "Senior_Staff_R&D_session.md",
+      "operation": "move",
+      "pre_hash": "bc6838659d1ecd4b68b0b2f07a77920e3deccb5c1d49f867dbad30bc31581d44",
+      "post_hash": "bc6838659d1ecd4b68b0b2f07a77920e3deccb5c1d49f867dbad30bc31581d44",
+      "rollback_source": "intake/Senior_Staff_R&D_session.md",
+      "reason": "Rollback for wave4_root_intake_cleanup_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    },
+    {
+      "batch_id": "wave4_root_intake_cleanup_initial_rollback",
+      "source": "intake/The_Architecture_of_Presence.pdf",
+      "destination": "The_Architecture_of_Presence.pdf",
+      "operation": "move",
+      "pre_hash": "9010f9f87373916d65cf1360c1d6e697a6f44a7dee2e1d8f45d0f1c08f3ea837",
+      "post_hash": "9010f9f87373916d65cf1360c1d6e697a6f44a7dee2e1d8f45d0f1c08f3ea837",
+      "rollback_source": "intake/The_Architecture_of_Presence.pdf",
+      "reason": "Rollback for wave4_root_intake_cleanup_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    },
     {
       "batch_id": "wave4_root_intake_cleanup_initial_rollback",
       "source": "intake/Thread_The_Station_is_Well.md",

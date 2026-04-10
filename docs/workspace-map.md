@@ -1,8 +1,8 @@
 # Workspace Map
 
-- Generated: `2026-04-09T03:06:27Z`
+- Generated: `2026-04-10T00:00:23Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `28`
+- Top-level entries cataloged: `27`
 - Nested repos registered: `3`
 - Archive or binary artifacts inventoried: `594`
 - Classification overrides loaded: `5` from `catalog/classification_overrides.yaml`
@@ -13,7 +13,7 @@
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `6` top-level entries
-- `intake`: `2` top-level entries
+- `intake`: `1` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `2` top-level entries
@@ -27,7 +27,7 @@
 
 ## Planned Move Candidates
 
-- `Thread_The_Station_is_Well.md` -> `intake/Thread_The_Station_is_Well.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- None
 
 ## Largest Archive/Binary Artifacts
 
