@@ -1,4 +1,4 @@
-generated_at: "2026-04-12T02:50:16Z"
+generated_at: "2026-04-12T03:08:01Z"
 root: "."
 logical_taxonomy:
   - "repos"
@@ -135,7 +135,7 @@ entries:
     owner: "operations"
     status: "deferred"
     batch_id: ""
-    notes: "Root-level non-canonical runtime log surface. Move is deferred because runtime/mesh logs are changing during relocation planning and should not be raced into place without explicit downtime."
+    notes: "Root-level non-canonical runtime log surface. Defer move while Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/runtime/mesh/mesh_runtime.stderr.log is still receiving writes. Latest review observed active append behavior and repeated launcher failures for a missing .venv path under the root-level runtime surface, so this remains an operational exception until the writer is quiesced or redirected with explicit downtime."
   -
     id: "gitwiz-md"
     kind: "workspace_doc"
