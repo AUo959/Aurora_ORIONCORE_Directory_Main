@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-04-09T23:59:59Z",
+  "generated_at": "2026-04-12T02:50:02Z",
   "root": ".",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-04-09T23:59:49Z",
+  "manifest_generated_at": "2026-04-12T02:49:55Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
@@ -363,54 +363,15 @@
       "operations": [
         {
           "batch_id": "wave4_root_intake_cleanup_initial",
-          "source": "Orion_Station_Orientation.pdf",
-          "destination": "intake/Orion_Station_Orientation.pdf",
+          "source": "The Neutrality-Fluff Axiom.md",
+          "destination": "intake/The Neutrality-Fluff Axiom.md",
           "operation": "move",
-          "pre_hash": "c40a3402c32bbdc4cfab70df5c31d0f2464311ebfa2fc83df4c50caabc87b403",
-          "post_hash": "c40a3402c32bbdc4cfab70df5c31d0f2464311ebfa2fc83df4c50caabc87b403",
-          "rollback_source": "Orion_Station_Orientation.pdf",
-          "reason": "Relocate Orion_Station_Orientation.pdf into intake/Orion_Station_Orientation.pdf.",
+          "pre_hash": "3addffe47cd4f676d2114a43fddf1ad87fb494389859f2037e8ceebaf4d3b42d",
+          "post_hash": "3addffe47cd4f676d2114a43fddf1ad87fb494389859f2037e8ceebaf4d3b42d",
+          "rollback_source": "The Neutrality-Fluff Axiom.md",
+          "reason": "Relocate The Neutrality-Fluff Axiom.md into intake/The Neutrality-Fluff Axiom.md.",
           "approved": false,
-          "applied_at": "2026-04-10T00:00:12Z",
-          "path_kind": "file"
-        },
-        {
-          "batch_id": "wave4_root_intake_cleanup_initial",
-          "source": "Senior_Staff_R&D_session.md",
-          "destination": "intake/Senior_Staff_R&D_session.md",
-          "operation": "move",
-          "pre_hash": "bc6838659d1ecd4b68b0b2f07a77920e3deccb5c1d49f867dbad30bc31581d44",
-          "post_hash": "bc6838659d1ecd4b68b0b2f07a77920e3deccb5c1d49f867dbad30bc31581d44",
-          "rollback_source": "Senior_Staff_R&D_session.md",
-          "reason": "Relocate Senior_Staff_R&D_session.md into intake/Senior_Staff_R&D_session.md.",
-          "approved": false,
-          "applied_at": "2026-04-10T00:00:12Z",
-          "path_kind": "file"
-        },
-        {
-          "batch_id": "wave4_root_intake_cleanup_initial",
-          "source": "The_Architecture_of_Presence.pdf",
-          "destination": "intake/The_Architecture_of_Presence.pdf",
-          "operation": "move",
-          "pre_hash": "9010f9f87373916d65cf1360c1d6e697a6f44a7dee2e1d8f45d0f1c08f3ea837",
-          "post_hash": "9010f9f87373916d65cf1360c1d6e697a6f44a7dee2e1d8f45d0f1c08f3ea837",
-          "rollback_source": "The_Architecture_of_Presence.pdf",
-          "reason": "Relocate The_Architecture_of_Presence.pdf into intake/The_Architecture_of_Presence.pdf.",
-          "approved": false,
-          "applied_at": "2026-04-10T00:00:12Z",
-          "path_kind": "file"
-        },
-        {
-          "batch_id": "wave4_root_intake_cleanup_initial",
-          "source": "Thread_The_Station_is_Well.md",
-          "destination": "intake/Thread_The_Station_is_Well.md",
-          "operation": "move",
-          "pre_hash": "7380f6ce416dea395c90c1303469a15394805d91db5aad0747e25c2a78b01ce7",
-          "post_hash": "7380f6ce416dea395c90c1303469a15394805d91db5aad0747e25c2a78b01ce7",
-          "rollback_source": "Thread_The_Station_is_Well.md",
-          "reason": "Relocate Thread_The_Station_is_Well.md into intake/Thread_The_Station_is_Well.md.",
-          "approved": false,
-          "applied_at": "2026-04-10T00:00:12Z",
+          "applied_at": "2026-04-12T02:50:13Z",
           "path_kind": "file"
         }
       ]

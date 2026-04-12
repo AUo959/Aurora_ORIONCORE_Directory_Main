@@ -50,6 +50,15 @@ GITWIZ keeps Aurora / ORIONCORE Git history, GitHub state, and publication workf
 - Start with `git remote -v`, `git branch -vv`, `git status --short --branch`, and `git rev-parse HEAD`
 - Inspect `main` and the current upstream before making any publication recommendation
 - Use `git ls-remote` or `git fetch` when current GitHub truth matters
+- If `gh auth status` reports an auth failure inside Codex, compare it against
+  SSH Git behavior and any available GitHub connector result before calling it a
+  credential problem
+- In this workspace, a sandboxed `gh` auth failure can be a false negative caused
+  by keyring or session isolation; rerun `gh` with escalated execution before
+  treating the token as invalid
+- If SSH Git works and the connector can mutate GitHub state, prefer connector
+  PR creation and report the CLI issue as environment-sensitive rather than as a
+  real access outage
 
 ### Choose the Lane
 - Remote setup

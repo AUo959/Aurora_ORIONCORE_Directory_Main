@@ -158,6 +158,12 @@ Use `--no-verify` only when:
 - back up remote bootstrap history before replacing it
 - never push nested repos by implication
 - never assume "everything is synced" just because the root repo has a remote
+- when `gh auth status` fails inside Codex but SSH `git` and the GitHub connector
+  still work, treat it as an execution-context or sandbox-isolation issue first,
+  not as proof of broken GitHub credentials
+- in that situation, rerun `gh` commands with escalated execution before
+  diagnosing auth, and prefer the GitHub connector for PR creation if the CLI
+  remains environment-sensitive
 
 ## Practical Continuity Rule
 

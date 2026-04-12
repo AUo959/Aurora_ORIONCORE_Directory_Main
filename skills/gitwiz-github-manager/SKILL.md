@@ -112,6 +112,17 @@ For remote work:
 
 If `gh` exists, check `gh auth status`. If not, use plain Git and SSH.
 
+Important interpretation rule:
+
+- in Codex, `gh auth status` can fail inside the normal sandbox even when the
+  machine's real GitHub auth is healthy
+- if SSH `git push` works or the GitHub connector can view or create PRs, do not
+  treat the first sandboxed `gh` failure as proof of broken credentials
+- rerun the `gh` command with escalated execution before diagnosing auth
+- if the escalated `gh` command succeeds, record it as a sandbox or
+  execution-context issue and continue using SSH Git plus the GitHub connector
+  when appropriate
+
 ### 2. Distinguish the Operation
 
 Choose the right lane:
@@ -180,6 +191,14 @@ When a local branch should become a reviewable GitHub update:
 3. Run `gitwiz_pr_packet.py` against the correct base ref.
 4. If `gh` is available, use the generated packet as the PR title/body input.
 5. If `gh` is unavailable, return the packet path and summarize the proposed PR in the response.
+
+If `gh` appears unavailable only because sandboxed auth fails but escalated `gh`
+or the GitHub connector still works:
+
+- do not stop with a credentials diagnosis
+- prefer the GitHub connector for PR creation
+- state clearly that the CLI result is environment-sensitive in the current
+  Codex session
 
 Recommended pattern:
 

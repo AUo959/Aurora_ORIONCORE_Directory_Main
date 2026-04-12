@@ -1,11 +1,11 @@
-generated_at: "2026-04-10T00:00:23Z"
+generated_at: "2026-04-12T02:50:16Z"
 root: "."
 repos:
   -
     name: "aurora-cloudbank-symbolic-main"
     path: "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main"
-    branch: "main"
-    head_sha: "accab1ad01de382ec7fcd0a68b83f56e61fc5cb6"
+    branch: "codex/cloudbank-command-chain-workflow-repair-2026-04-10"
+    head_sha: "fc3d3f229e4e08509d3c6ee912f301a523d039a2"
     remote_status: "configured"
     validation_command: "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main status --short --branch"
     move_policy: "frozen_until_registry_adoption"
