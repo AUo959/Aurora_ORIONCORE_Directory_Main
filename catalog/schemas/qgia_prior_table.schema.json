@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/qgia_prior_table.schema.json",
+  "title": "QGIA Prior Table",
+  "description": "Versioned prior and base-rate table used by QGIA forecasting workflows.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "artifact_type": {
+      "const": "prior_table"
+    },
+    "prior_table_id": {
+      "type": "string",
+      "pattern": "^qgia\\.prior_table\\.[A-Za-z0-9_.:-]+$"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "producer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "effective_from": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "supersedes": {
+      "type": "string",
+      "pattern": "^qgia\\.prior_table\\.[A-Za-z0-9_.:-]+$"
+    },
+    "priors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "prior_id": {
+            "type": "string",
+            "pattern": "^qgia\\.prior\\.[A-Za-z0-9_.:-]+$"
+          },
+          "hypothesis_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:-]+$"
+          },
+          "domain": {
+            "type": "string",
+            "minLength": 1
+          },
+          "base_rate": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "calibrated_rate": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "update_reason": {
+            "type": "string",
+            "enum": [
+              "initialization",
+              "outcome_rebase",
+              "calibration_rebase",
+              "policy_override"
+            ]
+          },
+          "evidence_window": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "start": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "end": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "start",
+              "end"
+            ]
+          },
+          "outcome_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^qgia\\.outcome\\.[A-Za-z0-9_.:-]+$"
+            }
+          },
+          "notes": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "prior_id",
+          "hypothesis_id",
+          "domain",
+          "base_rate",
+          "calibrated_rate",
+          "update_reason",
+          "evidence_window"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "prior_table_id",
+    "generated_at",
+    "producer",
+    "effective_from",
+    "priors"
+  ]
+}

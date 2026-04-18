@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/qgia_calibration_report.schema.json",
+  "title": "QGIA Calibration Report",
+  "description": "Machine-readable calibration and scoring report for QGIA forecasting performance.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "artifact_type": {
+      "const": "calibration_report"
+    },
+    "report_id": {
+      "type": "string",
+      "pattern": "^qgia\\.calibration\\.[A-Za-z0-9_.:-]+$"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "producer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sample_window": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ]
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resolved_forecast_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "team_brier_score": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "team_brier_skill_score": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": -1,
+          "maximum": 1
+        },
+        "expected_calibration_error": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "resolved_forecast_count",
+        "team_brier_score",
+        "team_brier_skill_score",
+        "expected_calibration_error"
+      ]
+    },
+    "slices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "slice_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:-]+$"
+          },
+          "domain": {
+            "type": "string",
+            "minLength": 1
+          },
+          "horizon_bucket": {
+            "type": "string",
+            "minLength": 1
+          },
+          "resolved_forecast_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "brier_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "expected_calibration_error": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "overconfidence_index": {
+            "type": "number",
+            "minimum": -1,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "slice_id",
+          "resolved_forecast_count",
+          "brier_score",
+          "expected_calibration_error"
+        ]
+      }
+    },
+    "adjustments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "domain": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bin_low": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "bin_high": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "observed_frequency": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "corrected_probability": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "bin_low",
+          "bin_high",
+          "observed_frequency",
+          "corrected_probability"
+        ]
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "report_id",
+    "generated_at",
+    "producer",
+    "sample_window",
+    "summary"
+  ]
+}
