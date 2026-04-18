@@ -47,6 +47,20 @@ def detect_workspace_root(explicit_root: str | None) -> Path:
         ) from exc
 
 
+def repo_rows_from_payload(payload: Any) -> list[dict[str, Any]]:
+    if not isinstance(payload, dict):
+        raise ValueError("top-level payload must be a mapping")
+    repos = payload.get("repos")
+    if repos is None:
+        return []
+    if not isinstance(repos, list):
+        raise ValueError("'repos' must be a list")
+    invalid_indices = [str(index) for index, repo in enumerate(repos) if not isinstance(repo, dict)]
+    if invalid_indices:
+        raise ValueError(f"'repos' contains non-mapping entries at index(es): {', '.join(invalid_indices)}")
+    return repos
+
+
 def load_repo_registry(workspace_root: Path) -> list[dict[str, Any]]:
     registry_path = workspace_root / "catalog" / "repo_registry.yaml"
     if not registry_path.exists():
@@ -58,14 +72,20 @@ def load_repo_registry(workspace_root: Path) -> list[dict[str, Any]]:
     # which produces JSON-compatible output. However it may be true YAML on disk,
     # so try JSON first and fall back to yaml.safe_load.
     try:
-        return json.loads(raw).get("repos", [])
+        payload = json.loads(raw)
     except json.JSONDecodeError:
-        pass
+        try:
+            import yaml  # type: ignore
+        except ImportError:
+            return []
+        try:
+            payload = yaml.safe_load(raw) or {}
+        except Exception:
+            return []
     try:
-        import yaml  # type: ignore
-        return (yaml.safe_load(raw) or {}).get("repos", [])
-    except Exception:
-        return []
+        return repo_rows_from_payload(payload)
+    except ValueError as exc:
+        raise SystemExit(f"Malformed repo registry at {registry_path}: {exc}") from exc
 
 
 def parse_remote_map(remote_output: str) -> dict[str, dict[str, str]]:
@@ -150,11 +170,7 @@ def resolve_target_paths(
     if selection == "all":
         return targets
     for target in targets:
-        if selection in {target["name"], target["relative_path"], "root"} and target["name"] == selection:
-            return [target]
-        if selection == "root" and target["name"] == "root":
-            return [target]
-        if selection == target["relative_path"]:
+        if selection in {target["name"], target["relative_path"]}:
             return [target]
     available = ", ".join(target["name"] for target in targets)
     raise SystemExit(f"Unknown repo selection '{selection}'. Available: {available}")
@@ -162,7 +178,7 @@ def resolve_target_paths(
 
 def choose_existing_path(candidate_paths: list[Path]) -> Path | None:
     for path in candidate_paths:
-        if (path / ".git").exists() or path == path.resolve() and (path / ".git").exists():
+        if (path / ".git").exists():
             return path.resolve()
     for path in candidate_paths:
         if path.exists():
