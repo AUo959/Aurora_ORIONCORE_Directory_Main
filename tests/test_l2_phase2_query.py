@@ -6,9 +6,18 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+import pytest
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SIM_DIR = REPO_ROOT / "GUMAS_SIM_2.5" / "SIM_ENGINE_OUTPUTS"
+L2_SOURCES_DIR = REPO_ROOT / "GUMAS_SIM_2.0"
+
+_l2_sources_available = L2_SOURCES_DIR.is_dir()
+requires_l2_sources = pytest.mark.skipif(
+    not _l2_sources_available,
+    reason="GUMAS_SIM_2.0 L2 source data not present in this environment",
+)
 
 if str(SIM_DIR) not in sys.path:
     sys.path.insert(0, str(SIM_DIR))
@@ -16,6 +25,7 @@ if str(SIM_DIR) not in sys.path:
 import hourly_retrospective as retro  # noqa: E402
 
 
+@requires_l2_sources
 def test_query_tool_returns_mobile_asset_and_hotspots() -> None:
     result = subprocess.run(
         [
@@ -41,6 +51,7 @@ def test_query_tool_returns_mobile_asset_and_hotspots() -> None:
     assert payload["hotspots"]["logistics"]
 
 
+@requires_l2_sources
 def test_hourly_retrospective_evidence_and_report_include_named_operational_context(tmp_path: Path) -> None:
     snapshot_path = tmp_path / "advanced_state.json"
     metrics = retro._run_simulation(SIM_DIR, seed=42, turns=3, snapshot_path=snapshot_path)

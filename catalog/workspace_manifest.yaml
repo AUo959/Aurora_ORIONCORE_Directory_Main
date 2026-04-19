@@ -33,6 +33,16 @@ entries:
   status: managed
   batch_id: ''
   notes: Codex plugin marketplace metadata for repo-local plugin scaffolds.
+- id: codacy-local
+  kind: cache_or_local_artifact
+  current_path: .codacy
+  logical_zone: _staging
+  planned_path: .codacy
+  git_boundary: none
+  storage_tier: ephemeral
+  retention_policy: regenerate
+  owner: local-user
+  status: ignored
 - id: codex-skill-edits
   kind: cache_or_local_artifact
   current_path: .codex_skill_edits
@@ -43,6 +53,16 @@ entries:
   retention_policy: regenerate
   owner: local-user
   status: ignored
+- id: devcontainer
+  kind: control_surface
+  current_path: .devcontainer
+  logical_zone: tools
+  planned_path: .devcontainer
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
 - id: git-decommissioned-20260304-233325
   kind: rollback_artifact
   current_path: .git_decommissioned_20260304_233325
@@ -52,7 +72,17 @@ entries:
   storage_tier: workspace-meta
   retention_policy: preserve
   owner: workspace-admin
-  status: protected
+  status: ignored
+- id: github
+  kind: control_surface
+  current_path: .github
+  logical_zone: tools
+  planned_path: .github
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
 - id: gitattributes
   kind: policy_file
   current_path: .gitattributes
@@ -78,6 +108,16 @@ entries:
   current_path: .gitignore
   logical_zone: docs
   planned_path: .gitignore
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: pre-commit-config
+  kind: policy_file
+  current_path: .pre-commit-config.yaml
+  logical_zone: tools
+  planned_path: .pre-commit-config.yaml
   git_boundary: root
   storage_tier: workspace-control
   retention_policy: versioned
@@ -113,6 +153,16 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
+- id: makefile
+  kind: control_surface
+  current_path: Makefile
+  logical_zone: tools
+  planned_path: Makefile
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
 - id: aurora-sim-architecture
   kind: intake_collection
   current_path: Aurora_Sim_Architecture
@@ -122,7 +172,7 @@ entries:
   storage_tier: review
   retention_policy: review
   owner: intake-review
-  status: planned_move
+  status: ignored
   batch_id: wave4_root_intake_cleanup_initial
 - id: gumas-sim-2
   kind: repo_hub
@@ -153,7 +203,7 @@ entries:
   storage_tier: quarantine
   retention_policy: review-before-delete
   owner: workspace-admin
-  status: protected
+  status: ignored
   batch_id: wave4_root_intake_cleanup_initial
   notes: Verified-duplicate archive quarantine. Files are byte-for-byte identical
     to their canonical copies. Safe to delete once reviewed. See _entropy_quarantine/RESTORE_MANIFEST.json
@@ -217,7 +267,7 @@ entries:
   storage_tier: review
   retention_policy: review
   owner: intake-review
-  status: planned_move
+  status: ignored
   batch_id: wave4_root_intake_cleanup_initial
 - id: plugins
   kind: control_surface
@@ -250,7 +300,7 @@ entries:
   storage_tier: source
   retention_policy: preserve
   owner: repository-owner
-  status: protected
+  status: ignored
 - id: qgia-knowledge-spine-main
   kind: repo_hub
   current_path: qgia-knowledge-spine-main
@@ -260,7 +310,7 @@ entries:
   storage_tier: source
   retention_policy: preserve
   owner: repository-owner
-  status: protected
+  status: ignored
 - id: reports
   kind: report_zone
   current_path: reports

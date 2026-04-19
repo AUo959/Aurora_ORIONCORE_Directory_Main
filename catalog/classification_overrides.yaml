@@ -1,6 +1,18 @@
 {
   "overrides": [
     {
+      "current_path": ".codacy",
+      "id": "codacy-local",
+      "kind": "cache_or_local_artifact",
+      "logical_zone": "_staging",
+      "planned_path": ".codacy",
+      "git_boundary": "none",
+      "storage_tier": "ephemeral",
+      "retention_policy": "regenerate",
+      "owner": "local-user",
+      "status": "ignored"
+    },
+    {
       "current_path": "_entropy_quarantine",
       "kind": "quarantine_zone",
       "logical_zone": "_staging",
