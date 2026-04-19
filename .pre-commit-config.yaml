@@ -1,0 +1,23 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^(archives/|GUMAS_SIM_2.5/)
+      - id: end-of-file-fixer
+        exclude: ^(archives/|GUMAS_SIM_2.5/)
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=1000]
+
+  - repo: local
+    hooks:
+      - id: workspace-verify
+        name: workspace-verify
+        entry: python3 tools/workspace_verify.py --git-pre-commit
+        language: system
+        pass_filenames: false
+        always_run: true

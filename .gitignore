@@ -3,6 +3,12 @@
 !/.gitattributes
 !/.githooks/
 !/.githooks/pre-commit
+!/.devcontainer/
+!/.devcontainer/**
+!/.github/
+!/.github/**
+!/.pre-commit-config.yaml
+!/Makefile
 !/AGENTS.md
 !/README.md
 !/docs/
@@ -86,3 +92,7 @@ __pycache__/
 _entropy_quarantine/
 /reports/analysis/gitwiz/GITWIZ_*.json
 /reports/analysis/gitwiz/GITWIZ_*.md
+
+
+#Ignore vscode AI rules
+.github/instructions/codacy.instructions.md

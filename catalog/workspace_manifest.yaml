@@ -1,4 +1,4 @@
-generated_at: '2026-04-19T01:39:44Z'
+generated_at: '2026-04-19T04:33:22Z'
 root: .
 logical_taxonomy:
 - repos
@@ -43,6 +43,16 @@ entries:
   retention_policy: regenerate
   owner: local-user
   status: ignored
+- id: devcontainer
+  kind: control_surface
+  current_path: .devcontainer
+  logical_zone: tools
+  planned_path: .devcontainer
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
 - id: git-decommissioned-20260304-233325
   kind: rollback_artifact
   current_path: .git_decommissioned_20260304_233325
@@ -73,6 +83,16 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
+- id: github
+  kind: control_surface
+  current_path: .github
+  logical_zone: tools
+  planned_path: .github
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
 - id: gitignore
   kind: policy_file
   current_path: .gitignore
@@ -93,6 +113,16 @@ entries:
   retention_policy: regenerate
   owner: local-user
   status: ignored
+- id: pre-commit-config
+  kind: policy_file
+  current_path: .pre-commit-config.yaml
+  logical_zone: tools
+  planned_path: .pre-commit-config.yaml
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
 - id: pytest-cache
   kind: cache_or_local_artifact
   current_path: .pytest_cache
@@ -134,6 +164,27 @@ entries:
   retention_policy: preserve
   owner: repository-owner
   status: protected
+- id: makefile
+  kind: control_surface
+  current_path: Makefile
+  logical_zone: tools
+  planned_path: Makefile
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+- id: qgia-space-navagation-guide
+  kind: intake_file
+  current_path: QGIA_SPACE_NAVAGATION_GUIDE.md
+  logical_zone: intake
+  planned_path: intake/QGIA_SPACE_NAVAGATION_GUIDE.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: readme
   kind: workspace_doc
   current_path: README.md

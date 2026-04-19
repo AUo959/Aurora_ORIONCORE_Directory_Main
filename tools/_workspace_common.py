@@ -812,6 +812,12 @@ def privacy_decision_for_entry(
             "policy": policy,
             "reason": f"override_{policy}",
         }
+    candidate_status = str(candidate_record.get("status", "")).strip()
+    if candidate_status in {"managed", "protected"}:
+        return {
+            "policy": "",
+            "reason": "",
+        }
     signal = detect_private_signal(entry)
     if signal:
         return {
@@ -971,6 +977,17 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             owner="workspace-admin",
             status="managed",
         )
+    if name in {".devcontainer", ".github", "Makefile"}:
+        return base_record(
+            kind="control_surface",
+            logical_zone="tools",
+            planned_path=relative,
+            git_boundary="root",
+            storage_tier="workspace-control",
+            retention_policy="versioned",
+            owner="workspace-admin",
+            status="managed",
+        )
     if name in {"tests", "skills"}:
         return base_record(
             kind="control_surface",
@@ -1008,6 +1025,17 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
         return base_record(
             kind="policy_file",
             logical_zone="docs",
+            planned_path=relative,
+            git_boundary="root",
+            storage_tier="workspace-control",
+            retention_policy="versioned",
+            owner="workspace-admin",
+            status="managed",
+        )
+    if name == ".pre-commit-config.yaml":
+        return base_record(
+            kind="policy_file",
+            logical_zone="tools",
             planned_path=relative,
             git_boundary="root",
             storage_tier="workspace-control",

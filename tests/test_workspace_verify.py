@@ -248,6 +248,39 @@ def test_scan_policy_for_entry_keeps_approved_scope_content(tmp_path: Path) -> N
     assert policy == ""
 
 
+def test_scan_policy_for_entry_keeps_managed_control_surface_despite_private_signal(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    path = root / "tools"
+    path.mkdir()
+    write_file(path / "medical_notes.txt", "Patient Name: Jane Example\nDate of Birth: 1990-01-01\n")
+
+    policy = workspace_common.scan_policy_for_entry(path, root, overrides={})
+    record = workspace_common.classify_top_level(path, root, nested_repo_roots=set())
+
+    assert record["status"] == "managed"
+    assert policy == ""
+
+
+def test_classify_top_level_recognizes_root_infra_control_surfaces(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+
+    devcontainer = workspace_common.classify_top_level(root / ".devcontainer", root, nested_repo_roots=set())
+    github = workspace_common.classify_top_level(root / ".github", root, nested_repo_roots=set())
+    makefile = workspace_common.classify_top_level(root / "Makefile", root, nested_repo_roots=set())
+    pre_commit = workspace_common.classify_top_level(root / ".pre-commit-config.yaml", root, nested_repo_roots=set())
+
+    assert devcontainer["status"] == "managed"
+    assert devcontainer["logical_zone"] == "tools"
+    assert github["status"] == "managed"
+    assert github["logical_zone"] == "tools"
+    assert makefile["status"] == "managed"
+    assert makefile["logical_zone"] == "tools"
+    assert pre_commit["status"] == "managed"
+    assert pre_commit["logical_zone"] == "tools"
+
+
 def test_scan_policy_for_entry_auto_omits_private_office_zip_magic_with_generic_extension(tmp_path: Path) -> None:
     root = tmp_path / "workspace"
     root.mkdir()
