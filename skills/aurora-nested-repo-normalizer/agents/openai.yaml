@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aurora Nested Repo Normalizer"
+  short_description: "Normalize ZIP mirrors into nested repos"
+  default_prompt: "Use $aurora-nested-repo-normalizer to turn an extracted Aurora repo mirror into a real nested Git repo with verified remote history and workspace follow-up."
