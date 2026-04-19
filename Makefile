@@ -70,6 +70,9 @@ lint: ## Validate YAML and JSON catalog files
 gumas-validate: ## Run GUMAS v3.0 validation suite
 	$(PYTHON) GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19/validate_v3.py
 
+gumas-api: ## Start GUMAS simulation API server (port 8000)
+	$(PYTHON) tools/gumas_api.py --host 0.0.0.0 --port 8000
+
 # ── Cleanup ──────────────────────────────────────────────────────────────
 
 clean: ## Remove Python caches and temp files
