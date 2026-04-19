@@ -148,6 +148,23 @@ def verify_manifest(root: Path) -> list[Finding]:
     cataloged_paths = manifest_enforced_current_paths(manifest_entries)
     missing_from_manifest = sorted(actual_paths - cataloged_paths)
     stale_manifest_entries = sorted(cataloged_paths - actual_paths)
+    tracked_top_level_paths: set[str] = set()
+    tracked_files = git(["ls-files", "-z"], cwd=root, check=False)
+    if tracked_files.returncode == 0:
+        for raw_path in tracked_files.stdout.split("\0"):
+            if not raw_path:
+                continue
+            tracked_top_level_paths.add(raw_path.split("/", 1)[0])
+    blocking_stale_entries = sorted(
+        entry
+        for entry in stale_manifest_entries
+        if entry in tracked_top_level_paths
+    )
+    execution_context_stale_entries = sorted(
+        entry
+        for entry in stale_manifest_entries
+        if entry not in tracked_top_level_paths
+    )
 
     if not missing_from_manifest and not stale_manifest_entries:
         return []
@@ -155,15 +172,27 @@ def verify_manifest(root: Path) -> list[Finding]:
     details_parts = []
     if missing_from_manifest:
         details_parts.append(f"missing_from_manifest={missing_from_manifest}")
-    if stale_manifest_entries:
-        details_parts.append(f"stale_manifest_entries={stale_manifest_entries}")
-    return [
-        error(
-            "manifest_top_level_coverage",
-            "; ".join(details_parts),
-            "Run `python3 tools/workspace_scan.py` to regenerate the manifest and workspace map.",
+    if blocking_stale_entries:
+        details_parts.append(f"stale_manifest_entries={blocking_stale_entries}")
+
+    findings = []
+    if details_parts:
+        findings.append(
+            error(
+                "manifest_top_level_coverage",
+                "; ".join(details_parts),
+                "Run `python3 tools/workspace_scan.py` to regenerate the manifest and workspace map.",
+            )
         )
-    ]
+    if execution_context_stale_entries:
+        findings.append(
+            warning(
+                "manifest_execution_context",
+                f"Manifest includes local-only top-level entries unavailable here: {execution_context_stale_entries}",
+                "Run from the canonical workspace path before treating local-only workspace inventory drift as a blocking failure.",
+            )
+        )
+    return findings
 
 
 def verify_privacy_redaction(root: Path) -> list[Finding]:

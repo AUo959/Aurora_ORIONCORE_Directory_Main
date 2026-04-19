@@ -476,6 +476,45 @@ def test_workspace_verify_auto_excludes_private_generic_file(workspace_root: Pat
     assert report["status"] == "pass"
 
 
+def test_workspace_verify_warns_for_local_only_manifest_entries_missing_in_clean_clone(workspace_root: Path) -> None:
+    aurora_local_only = workspace_root / "Aurora_Sim_Architecture"
+    write_file(aurora_local_only / "scope_note.md", "Aurora forecast working note.\n")
+
+    run_command(
+        [
+            sys.executable,
+            str(workspace_root / "tools" / "workspace_scan.py"),
+            "--root",
+            str(workspace_root),
+        ],
+        cwd=workspace_root,
+    )
+
+    manifest = workspace_common.load_yaml_like(workspace_root / "catalog" / "workspace_manifest.yaml")
+    manifest_paths = {entry["current_path"] for entry in manifest["entries"]}
+    assert "Aurora_Sim_Architecture" in manifest_paths
+
+    shutil.rmtree(aurora_local_only)
+
+    result = run_verify(workspace_root)
+    report = json.loads(result.stdout)
+
+    assert result.returncode == 0
+    assert report["status"] == "warn"
+    assert any(
+        finding["check"] == "manifest_execution_context"
+        and not finding["blocking"]
+        and "Aurora_Sim_Architecture" in finding["details"]
+        for finding in report["findings"]
+    )
+    assert not any(
+        finding["check"] == "manifest_top_level_coverage"
+        and finding["blocking"]
+        and "Aurora_Sim_Architecture" in finding["details"]
+        for finding in report["findings"]
+    )
+
+
 def test_workspace_scan_summary_redacts_privacy_exclusions(workspace_root: Path) -> None:
     write_file(
         workspace_root / "notes.txt",
