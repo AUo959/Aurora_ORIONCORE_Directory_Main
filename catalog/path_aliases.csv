@@ -1,4 +1,7 @@
 legacy_path,canonical_path,status
+.devcontainer,intake/.devcontainer,pending
+.github,intake/.github,pending
+.pre-commit-config.yaml,intake/.pre-commit-config.yaml,pending
 4.txt,intake/4.txt,pending
 AURIC_AGENT_CORE_v1.0.yaml,intake/AURIC_AGENT_CORE_v1.0.yaml,active
 AU_CORE_MASTER_TREE_CORRECTED (3).yaml,intake/AU_CORE_MASTER_TREE_CORRECTED (3).yaml,active
@@ -27,6 +30,7 @@ PROJECT_SPACE_BANNER.md,intake/PROJECT_SPACE_BANNER.md,active
 Perplexity_repo_report_04_26.pdf,intake/Perplexity_repo_report_04_26.pdf,pending
 Perplexity_report_repo_04_26,intake/Perplexity_report_repo_04_26,pending
 Perplexity_system_exam_04_26,intake/Perplexity_system_exam_04_26,pending
+QGIA_SPACE_NAVAGATION_GUIDE.md,intake/QGIA_SPACE_NAVAGATION_GUIDE.md,pending
 Quantum_Forge_Index,projects/Quantum_Forge_Index,active
 REPO_BOUNDARY_NOTICE.md,docs/repo-boundary-notice.md,active
 Recovery Codes,_staging/Recovery Codes,active

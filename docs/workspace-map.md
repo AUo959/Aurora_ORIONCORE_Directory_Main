@@ -1,11 +1,12 @@
 # Workspace Map
 
-- Generated: `2026-04-18T23:41:21Z`
+- Generated: `2026-04-19T04:33:22Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `29`
+- Top-level entries cataloged: `33`
 - Nested repos registered: `5`
 - Archive or binary artifacts inventoried: `594`
-- Classification overrides loaded: `3` from `catalog/classification_overrides.yaml`
+- Classification overrides loaded: `4` from `catalog/classification_overrides.yaml`
+- Top-level paths excluded by privacy screen: `1`
 
 ## Zones
 
@@ -17,7 +18,7 @@
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
-- `tools`: `6` top-level entries
+- `tools`: `10` top-level entries
 
 ## Active Nested Repos
 
@@ -30,7 +31,11 @@
 ## Planned Move Candidates
 
 - `Aurora_Sim_Architecture` -> `intake/Aurora_Sim_Architecture` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
-- `narrative_engine_spec_parameters_to_narrative_core_v_0.md` -> `intake/narrative_engine_spec_parameters_to_narrative_core_v_0.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `QGIA_SPACE_NAVAGATION_GUIDE.md` -> `intake/QGIA_SPACE_NAVAGATION_GUIDE.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+
+## Privacy Screen
+
+- `auto_scope_unknown`: `1` top-level paths excluded
 
 ## Largest Archive/Binary Artifacts
 

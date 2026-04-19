@@ -5,6 +5,7 @@ import json
 import shutil
 import subprocess
 import sys
+import zipfile
 from pathlib import Path
 
 import pytest
@@ -133,8 +134,8 @@ def test_top_level_policy_records_keep_unique_ids_with_control_surface_overrides
     root.mkdir()
     (root / ".agents" / "plugins").mkdir(parents=True)
     write_file(root / "AGENTS.md", "# Test Agents\n")
-    write_file(root / "Text_109.txt", "one\n")
-    write_file(root / "text_109 2.txt", "two\n")
+    write_file(root / "Aurora_Text_109.txt", "one\n")
+    write_file(root / "aurora_text_109 2.txt", "two\n")
     write_file(
         root / "catalog" / "classification_overrides.yaml",
         json.dumps(
@@ -166,8 +167,163 @@ def test_top_level_policy_records_keep_unique_ids_with_control_surface_overrides
     assert len(ids) == len(set(ids))
     assert any(record["current_path"] == ".agents" and record["id"] == "dot-agents" for record in records)
     assert any(record["current_path"] == "AGENTS.md" and record["id"] == "agents" for record in records)
-    assert any(record["current_path"] == "Text_109.txt" and record["id"] == "text-109-txt" for record in records)
-    assert any(record["current_path"] == "text_109 2.txt" and record["id"] == "text-109-2-txt" for record in records)
+    assert any(record["current_path"] == "Aurora_Text_109.txt" and record["id"] == "aurora-text-109-txt" for record in records)
+    assert any(record["current_path"] == "aurora_text_109 2.txt" and record["id"] == "aurora-text-109-2-txt" for record in records)
+
+
+def test_top_level_policy_records_omit_paths_with_scan_policy_override(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    (root / "catalog").mkdir()
+    (root / "Personal").mkdir()
+    write_file(root / "aurora_note.txt", "aurora\n")
+    write_file(
+        root / "catalog" / "classification_overrides.yaml",
+        json.dumps(
+            {
+                "overrides": [
+                    {
+                        "current_path": "Personal",
+                        "scan_policy": "omit",
+                    }
+                ]
+            },
+            indent=2,
+        )
+        + "\n",
+    )
+
+    overrides = workspace_common.load_classification_overrides(root / "catalog" / "classification_overrides.yaml")
+    records = workspace_common.top_level_policy_records(root, overrides=overrides)
+    current_paths = {record["current_path"] for record in records}
+
+    assert "Personal" not in current_paths
+    assert "aurora_note.txt" in current_paths
+
+
+def test_scan_policy_for_entry_auto_omits_private_content_with_generic_filename(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    path = root / "notes.txt"
+    write_file(
+        path,
+        "Patient Name: Jane Example\nDate of Birth: 1990-01-01\nTherapy options attached.\n",
+    )
+
+    policy = workspace_common.scan_policy_for_entry(path, root, overrides={})
+
+    assert policy == "omit"
+
+
+def test_scan_policy_for_entry_auto_omits_unknown_nonproject_content(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    path = root / "notes.txt"
+    write_file(path, "General project notes for a school fundraiser.\n")
+
+    policy = workspace_common.scan_policy_for_entry(path, root, overrides={})
+
+    assert policy == "omit"
+
+
+def test_scan_policy_for_entry_auto_omits_private_pdf_magic_with_generic_extension(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    path = root / "document.bin"
+    path.write_bytes(b"%PDF-1.4\nPatient Name Jane Example\nDate of Birth 1990-01-01\n")
+
+    policy = workspace_common.scan_policy_for_entry(path, root, overrides={})
+
+    assert policy == "omit"
+
+
+def test_scan_policy_for_entry_keeps_approved_scope_content(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    path = root / "notes.txt"
+    write_file(path, "Aurora forecast notes for ORION control plane.\n")
+
+    policy = workspace_common.scan_policy_for_entry(path, root, overrides={})
+
+    assert policy == ""
+
+
+def test_scan_policy_for_entry_keeps_managed_control_surface_despite_private_signal(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    path = root / "tools"
+    path.mkdir()
+    write_file(path / "medical_notes.txt", "Patient Name: Jane Example\nDate of Birth: 1990-01-01\n")
+
+    policy = workspace_common.scan_policy_for_entry(path, root, overrides={})
+    record = workspace_common.classify_top_level(path, root, nested_repo_roots=set())
+
+    assert record["status"] == "managed"
+    assert policy == ""
+
+
+def test_classify_top_level_recognizes_root_infra_control_surfaces(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+
+    devcontainer = workspace_common.classify_top_level(root / ".devcontainer", root, nested_repo_roots=set())
+    github = workspace_common.classify_top_level(root / ".github", root, nested_repo_roots=set())
+    makefile = workspace_common.classify_top_level(root / "Makefile", root, nested_repo_roots=set())
+    pre_commit = workspace_common.classify_top_level(root / ".pre-commit-config.yaml", root, nested_repo_roots=set())
+
+    assert devcontainer["status"] == "managed"
+    assert devcontainer["logical_zone"] == "tools"
+    assert github["status"] == "managed"
+    assert github["logical_zone"] == "tools"
+    assert makefile["status"] == "managed"
+    assert makefile["logical_zone"] == "tools"
+    assert pre_commit["status"] == "managed"
+    assert pre_commit["logical_zone"] == "tools"
+
+
+def test_scan_policy_for_entry_auto_omits_private_office_zip_magic_with_generic_extension(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    path = root / "document.data"
+    with zipfile.ZipFile(path, "w") as archive:
+        archive.writestr(
+            "word/document.xml",
+            "<w:document><w:body>Patient Name Jane Example Date of Birth 1990-01-01</w:body></w:document>",
+        )
+
+    policy = workspace_common.scan_policy_for_entry(path, root, overrides={})
+
+    assert policy == "omit"
+
+
+def test_scan_policy_for_entry_include_override_can_keep_false_positive(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    path = root / "Personal"
+    path.mkdir()
+    write_file(
+        root / "catalog" / "classification_overrides.yaml",
+        json.dumps(
+            {
+                "overrides": [
+                    {
+                        "current_path": "Personal",
+                        "scan_policy": "include",
+                    }
+                ]
+            },
+            indent=2,
+        )
+        + "\n",
+    )
+
+    overrides = workspace_common.load_classification_overrides(root / "catalog" / "classification_overrides.yaml")
+    policy = workspace_common.scan_policy_for_entry(path, root, overrides=overrides)
+    records = workspace_common.top_level_policy_records(root, overrides=overrides)
+    current_paths = {record["current_path"] for record in records}
+
+    assert policy == "include"
+    assert "Personal" in current_paths
 
 
 def test_archive_inventory_skips_nested_repo_internals(tmp_path: Path) -> None:
@@ -253,6 +409,165 @@ def test_manual_verify_warns_for_missing_nested_repo_context(workspace_root: Pat
         finding["check"] == "repo_registry_coverage" and not finding["blocking"]
         for finding in report["findings"]
     )
+
+
+def test_workspace_verify_respects_scan_policy_omit_overrides(workspace_root: Path) -> None:
+    (workspace_root / "Personal").mkdir()
+    write_file(workspace_root / "Personal" / "note.txt", "private\n")
+    write_file(
+        workspace_root / "catalog" / "classification_overrides.yaml",
+        json.dumps(
+            {
+                "overrides": [
+                    {
+                        "current_path": "Personal",
+                        "scan_policy": "omit",
+                    }
+                ]
+            },
+            indent=2,
+        )
+        + "\n",
+    )
+
+    run_command(
+        [
+            sys.executable,
+            str(workspace_root / "tools" / "workspace_scan.py"),
+            "--root",
+            str(workspace_root),
+        ],
+        cwd=workspace_root,
+    )
+
+    manifest = workspace_common.load_yaml_like(workspace_root / "catalog" / "workspace_manifest.yaml")
+    manifest_paths = {entry["current_path"] for entry in manifest["entries"]}
+    assert "Personal" not in manifest_paths
+
+    result = run_verify(workspace_root)
+    report = json.loads(result.stdout)
+    assert result.returncode == 0
+    assert report["status"] == "pass"
+
+
+def test_workspace_verify_auto_excludes_private_generic_file(workspace_root: Path) -> None:
+    write_file(
+        workspace_root / "notes.txt",
+        "Patient Name: Jane Example\nDate of Birth: 1990-01-01\nTherapy options attached.\n",
+    )
+
+    run_command(
+        [
+            sys.executable,
+            str(workspace_root / "tools" / "workspace_scan.py"),
+            "--root",
+            str(workspace_root),
+        ],
+        cwd=workspace_root,
+    )
+
+    manifest = workspace_common.load_yaml_like(workspace_root / "catalog" / "workspace_manifest.yaml")
+    manifest_paths = {entry["current_path"] for entry in manifest["entries"]}
+    assert "notes.txt" not in manifest_paths
+
+    result = run_verify(workspace_root)
+    report = json.loads(result.stdout)
+    assert result.returncode == 0
+    assert report["status"] == "pass"
+
+
+def test_workspace_verify_warns_for_local_only_manifest_entries_missing_in_clean_clone(workspace_root: Path) -> None:
+    aurora_local_only = workspace_root / "Aurora_Sim_Architecture"
+    write_file(aurora_local_only / "scope_note.md", "Aurora forecast working note.\n")
+
+    run_command(
+        [
+            sys.executable,
+            str(workspace_root / "tools" / "workspace_scan.py"),
+            "--root",
+            str(workspace_root),
+        ],
+        cwd=workspace_root,
+    )
+
+    manifest = workspace_common.load_yaml_like(workspace_root / "catalog" / "workspace_manifest.yaml")
+    manifest_paths = {entry["current_path"] for entry in manifest["entries"]}
+    assert "Aurora_Sim_Architecture" in manifest_paths
+
+    shutil.rmtree(aurora_local_only)
+
+    result = run_verify(workspace_root)
+    report = json.loads(result.stdout)
+
+    assert result.returncode == 0
+    assert report["status"] == "warn"
+    assert any(
+        finding["check"] == "manifest_execution_context"
+        and not finding["blocking"]
+        and "Aurora_Sim_Architecture" in finding["details"]
+        for finding in report["findings"]
+    )
+    assert not any(
+        finding["check"] == "manifest_top_level_coverage"
+        and finding["blocking"]
+        and "Aurora_Sim_Architecture" in finding["details"]
+        for finding in report["findings"]
+    )
+
+
+def test_workspace_scan_summary_redacts_privacy_exclusions(workspace_root: Path) -> None:
+    write_file(
+        workspace_root / "notes.txt",
+        "Patient Name: Jane Example\nDate of Birth: 1990-01-01\nTherapy options attached.\n",
+    )
+    (workspace_root / "document.bin").write_bytes(b"%PDF-1.4\nPatient Name Jane Example\nDate of Birth 1990-01-01\n")
+
+    run_command(
+        [
+            sys.executable,
+            str(workspace_root / "tools" / "workspace_scan.py"),
+            "--root",
+            str(workspace_root),
+        ],
+        cwd=workspace_root,
+    )
+
+    summary = json.loads((workspace_root / "reports" / "analysis" / "workspace_scan_summary.json").read_text(encoding="utf-8"))
+    workspace_map = (workspace_root / "docs" / "workspace-map.md").read_text(encoding="utf-8")
+
+    assert summary["privacy_exclusion_count"] == 2
+    assert summary["privacy_exclusion_reasons"]["auto_private_content"] == 2
+    assert "Top-level paths excluded by privacy screen: `2`" in workspace_map
+    assert "notes.txt" not in workspace_map
+    assert "document.bin" not in workspace_map
+
+
+def test_workspace_verify_blocks_redacted_path_leaks_in_generated_artifacts(workspace_root: Path) -> None:
+    write_file(
+        workspace_root / "notes.txt",
+        "Patient Name: Jane Example\nDate of Birth: 1990-01-01\nTherapy options attached.\n",
+    )
+
+    run_command(
+        [
+            sys.executable,
+            str(workspace_root / "tools" / "workspace_scan.py"),
+            "--root",
+            str(workspace_root),
+        ],
+        cwd=workspace_root,
+    )
+
+    workspace_map_path = workspace_root / "docs" / "workspace-map.md"
+    leaked_map = workspace_map_path.read_text(encoding="utf-8") + "\n- `notes.txt`\n"
+    workspace_map_path.write_text(leaked_map, encoding="utf-8")
+
+    result = run_verify(workspace_root)
+    report = json.loads(result.stdout)
+
+    assert result.returncode == 1
+    assert report["status"] == "fail"
+    assert any(finding["check"] == "privacy_redaction_coverage" for finding in report["findings"])
 
 
 def test_load_yaml_like_supports_generated_yaml_without_pyyaml(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:

@@ -18,6 +18,10 @@ Named repos:
   - `GUMAS_SIM_2.5/CanonRec`
 - `DuelSim_v2.0`
   - `GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0`
+- `qgia-knowledge-library-main`
+  - `qgia-knowledge-library-main`
+- `qgia-knowledge-spine-main`
+  - `qgia-knowledge-spine-main`
 
 Never assume a root-repo request applies to nested repos.
 
@@ -123,6 +127,17 @@ For nested repo work:
 If a request says only "the repo" and multiple repos are plausible:
 
 - ask one short clarification question
+
+## Privacy and Scope Defaults
+
+- default to Aurora / ORIONCORE repo- and path-scoped work only
+- prefer exact repo or path targeting over broad filesystem scans
+- do not inspect, summarize, classify, or route non-Aurora material unless the user explicitly asks
+- avoid desktop-wide probes such as Finder Recents, recent-app enumeration, or unrelated browser tabs when Computer Use is not required for the scoped Aurora task
+- do not upload, share, or transmit workspace material to third-party services unless the user explicitly directs and confirms the destination
+- root workspace scans should auto-exclude likely private personal material in real time using bounded path plus text/document probes instead of relying only on pre-listed paths
+- root workspace scans should default-deny unknown top-level material that lacks Aurora / approved-project scope signals, even when it is not obviously private
+- use `scan_policy: include` or `scan_policy: omit` in `catalog/classification_overrides.yaml` only as an escape hatch for false positives or persistent known exclusions
 
 ## Commit / Hook Caveat
 
