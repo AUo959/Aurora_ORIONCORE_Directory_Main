@@ -22,6 +22,7 @@ from _workspace_common import (
     serialized_root,
     sha256_path,
     top_level_policy_records,
+    top_level_policy_records_with_redaction,
     write_json,
 )
 
@@ -163,6 +164,48 @@ def verify_manifest(root: Path) -> list[Finding]:
             "Run `python3 tools/workspace_scan.py` to regenerate the manifest and workspace map.",
         )
     ]
+
+
+def verify_privacy_redaction(root: Path) -> list[Finding]:
+    findings: list[Finding] = []
+    _, _, redacted_paths = top_level_policy_records_with_redaction(root)
+    if not redacted_paths:
+        return findings
+
+    checked_artifacts = [
+        ("docs/workspace-map.md", root / "docs" / "workspace-map.md"),
+        ("catalog/archive_inventory.jsonl", root / "catalog" / "archive_inventory.jsonl"),
+    ]
+    leaking_artifacts: set[str] = set()
+    leaked_path_count = 0
+
+    for redacted_path in redacted_paths:
+        redacted_path_patterns = (
+            f"`{redacted_path}`",
+            f"`{redacted_path}/",
+            f"\"path\": \"{redacted_path}",
+            f"\"canonical_candidate\": \"{redacted_path}",
+        )
+        path_leaked = False
+        for artifact_name, artifact_path in checked_artifacts:
+            if not artifact_path.exists():
+                continue
+            text = artifact_path.read_text(encoding="utf-8", errors="ignore")
+            if any(pattern in text for pattern in redacted_path_patterns):
+                leaking_artifacts.add(artifact_name)
+                path_leaked = True
+        if path_leaked:
+            leaked_path_count += 1
+
+    if leaked_path_count:
+        findings.append(
+            error(
+                "privacy_redaction_coverage",
+                f"{leaked_path_count} excluded top-level paths still appear in generated artifacts: {sorted(leaking_artifacts)}",
+                "Run `python3 tools/workspace_scan.py` to regenerate redacted artifacts and remove excluded paths from generated outputs.",
+            )
+        )
+    return findings
 
 
 def verify_repo_registry(root: Path) -> list[Finding]:
@@ -748,6 +791,7 @@ def run_checks(root: Path, include_determinism: bool, include_relocation_rehears
     findings: list[Finding] = []
     findings.extend(verify_root_git_repo(root))
     findings.extend(verify_manifest(root))
+    findings.extend(verify_privacy_redaction(root))
     findings.extend(verify_repo_registry(root))
     findings.extend(verify_gitignore(root))
     findings.extend(verify_relocation_plan(root))
