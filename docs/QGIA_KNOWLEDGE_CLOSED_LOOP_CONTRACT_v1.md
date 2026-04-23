@@ -25,6 +25,21 @@ The contract defined here separates:
 This prevents silent prior drift, unverifiable accuracy claims, and corpus/spine
 boundary collapse.
 
+## Declared Runtime Center
+
+The QGIA material is centered on the following declared live runtime surface:
+
+- Perplexity Space: <https://www.perplexity.ai/spaces/foreign-policy-and-global-poli-_IZgsdmvSo2Yxe7LAZ5HSQ>
+
+Status:
+
+- runtime designation: `declared-live-runtime`
+- verification status: `user-declared`
+
+This means the runtime target is intentionally recorded as an authoritative
+integration surface in repo metadata, but the external page contents were not
+independently fetched during this contract-writing slice.
+
 ## Authority Model
 
 ### `qgia-knowledge-library`
@@ -239,4 +254,3 @@ Consume:
 - storage backend decisions outside repo-tracked artifacts
 - model selection policy
 - UI/reporting surfaces beyond the machine-readable schemas
-

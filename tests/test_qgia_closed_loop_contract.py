@@ -30,6 +30,15 @@ class QGIAClosedLoopContractTests(unittest.TestCase):
             schema_path = ROOT / artifact["schema_path"]
             self.assertTrue(schema_path.exists(), str(schema_path))
 
+    def test_contract_declares_perplexity_runtime_target(self) -> None:
+        contract = load_json(CONTRACT_PATH)
+        runtime_targets = contract["runtime_targets"]
+        self.assertEqual(len(runtime_targets), 1)
+        self.assertEqual(runtime_targets[0]["platform"], "perplexity")
+        self.assertEqual(runtime_targets[0]["designation"], "declared-live-runtime")
+        self.assertEqual(runtime_targets[0]["verification"], "user-declared")
+        self.assertIn("perplexity.ai/spaces/", runtime_targets[0]["url"])
+
     def test_event_names_are_unique_and_canonical(self) -> None:
         contract = load_json(CONTRACT_PATH)
         event_names = [event["name"] for event in contract["events"]]
@@ -55,4 +64,3 @@ class QGIAClosedLoopContractTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

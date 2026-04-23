@@ -7,6 +7,14 @@
     "qgia-knowledge-spine"
   ],
   "purpose": "Define the closed learning loop for QGIA evidence intake, forecast issuance, outcome resolution, calibration, prior rebasing, and downstream consumption.",
+  "runtime_targets": [
+    {
+      "platform": "perplexity",
+      "designation": "declared-live-runtime",
+      "verification": "user-declared",
+      "url": "https://www.perplexity.ai/spaces/foreign-policy-and-global-poli-_IZgsdmvSo2Yxe7LAZ5HSQ"
+    }
+  ],
   "authority_model": {
     "qgia-knowledge-library": {
       "authoritative_for": [
@@ -210,4 +218,3 @@
     "promote_downstream_consumers"
   ]
 }
-
