@@ -22,6 +22,7 @@ from _workspace_common import (
     serialized_root,
     sha256_path,
     top_level_policy_records,
+    top_level_policy_records_with_redaction,
     write_json,
 )
 
@@ -147,6 +148,23 @@ def verify_manifest(root: Path) -> list[Finding]:
     cataloged_paths = manifest_enforced_current_paths(manifest_entries)
     missing_from_manifest = sorted(actual_paths - cataloged_paths)
     stale_manifest_entries = sorted(cataloged_paths - actual_paths)
+    tracked_top_level_paths: set[str] = set()
+    tracked_files = git(["ls-files", "-z"], cwd=root, check=False)
+    if tracked_files.returncode == 0:
+        for raw_path in tracked_files.stdout.split("\0"):
+            if not raw_path:
+                continue
+            tracked_top_level_paths.add(raw_path.split("/", 1)[0])
+    blocking_stale_entries = sorted(
+        entry
+        for entry in stale_manifest_entries
+        if entry in tracked_top_level_paths
+    )
+    execution_context_stale_entries = sorted(
+        entry
+        for entry in stale_manifest_entries
+        if entry not in tracked_top_level_paths
+    )
 
     if not missing_from_manifest and not stale_manifest_entries:
         return []
@@ -154,15 +172,69 @@ def verify_manifest(root: Path) -> list[Finding]:
     details_parts = []
     if missing_from_manifest:
         details_parts.append(f"missing_from_manifest={missing_from_manifest}")
-    if stale_manifest_entries:
-        details_parts.append(f"stale_manifest_entries={stale_manifest_entries}")
-    return [
-        error(
-            "manifest_top_level_coverage",
-            "; ".join(details_parts),
-            "Run `python3 tools/workspace_scan.py` to regenerate the manifest and workspace map.",
+    if blocking_stale_entries:
+        details_parts.append(f"stale_manifest_entries={blocking_stale_entries}")
+
+    findings = []
+    if details_parts:
+        findings.append(
+            error(
+                "manifest_top_level_coverage",
+                "; ".join(details_parts),
+                "Run `python3 tools/workspace_scan.py` to regenerate the manifest and workspace map.",
+            )
         )
+    if execution_context_stale_entries:
+        findings.append(
+            warning(
+                "manifest_execution_context",
+                f"Manifest includes local-only top-level entries unavailable here: {execution_context_stale_entries}",
+                "Run from the canonical workspace path before treating local-only workspace inventory drift as a blocking failure.",
+            )
+        )
+    return findings
+
+
+def verify_privacy_redaction(root: Path) -> list[Finding]:
+    findings: list[Finding] = []
+    _, _, redacted_paths = top_level_policy_records_with_redaction(root)
+    if not redacted_paths:
+        return findings
+
+    checked_artifacts = [
+        ("docs/workspace-map.md", root / "docs" / "workspace-map.md"),
+        ("catalog/archive_inventory.jsonl", root / "catalog" / "archive_inventory.jsonl"),
     ]
+    leaking_artifacts: set[str] = set()
+    leaked_path_count = 0
+
+    for redacted_path in redacted_paths:
+        redacted_path_patterns = (
+            f"`{redacted_path}`",
+            f"`{redacted_path}/",
+            f"\"path\": \"{redacted_path}",
+            f"\"canonical_candidate\": \"{redacted_path}",
+        )
+        path_leaked = False
+        for artifact_name, artifact_path in checked_artifacts:
+            if not artifact_path.exists():
+                continue
+            text = artifact_path.read_text(encoding="utf-8", errors="ignore")
+            if any(pattern in text for pattern in redacted_path_patterns):
+                leaking_artifacts.add(artifact_name)
+                path_leaked = True
+        if path_leaked:
+            leaked_path_count += 1
+
+    if leaked_path_count:
+        findings.append(
+            error(
+                "privacy_redaction_coverage",
+                f"{leaked_path_count} excluded top-level paths still appear in generated artifacts: {sorted(leaking_artifacts)}",
+                "Run `python3 tools/workspace_scan.py` to regenerate redacted artifacts and remove excluded paths from generated outputs.",
+            )
+        )
+    return findings
 
 
 def verify_repo_registry(root: Path) -> list[Finding]:
@@ -748,6 +820,7 @@ def run_checks(root: Path, include_determinism: bool, include_relocation_rehears
     findings: list[Finding] = []
     findings.extend(verify_root_git_repo(root))
     findings.extend(verify_manifest(root))
+    findings.extend(verify_privacy_redaction(root))
     findings.extend(verify_repo_registry(root))
     findings.extend(verify_gitignore(root))
     findings.extend(verify_relocation_plan(root))

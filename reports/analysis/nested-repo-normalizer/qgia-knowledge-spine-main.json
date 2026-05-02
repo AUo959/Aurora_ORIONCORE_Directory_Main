@@ -1,0 +1,56 @@
+{
+  "generated_at": "2026-04-18T17:22:55Z",
+  "target": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/qgia-knowledge-spine-main",
+  "remote": "git@github-aurora:AUo959/qgia-knowledge-spine.git",
+  "remote_head": "1de06b6829ad48acfa89f5006b6580d2e921d7a4",
+  "dry_run": false,
+  "workspace_root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "clone_if_missing": true,
+  "status": "cloned_missing_target_with_root_followup",
+  "tree_compare": null,
+  "workspace_followup": [
+    {
+      "command": [
+        "python3",
+        "tools/workspace_scan.py"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/workspace_plan_moves.py"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/workspace_verify.py"
+      ],
+      "returncode": 0,
+      "stdout": "{\n  \"generated_at\": \"2026-04-18T17:23:02Z\",\n  \"root\": \".\",\n  \"mode\": \"manual\",\n  \"status\": \"pass\",\n  \"summary\": {\n    \"finding_count\": 0,\n    \"blocking_count\": 0,\n    \"warning_count\": 0\n  },\n  \"findings\": []\n}",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/workspace_verify.py",
+        "--persist-report"
+      ],
+      "returncode": 0,
+      "stdout": "{\n  \"generated_at\": \"2026-04-18T17:23:03Z\",\n  \"root\": \".\",\n  \"mode\": \"manual\",\n  \"status\": \"pass\",\n  \"summary\": {\n    \"finding_count\": 0,\n    \"blocking_count\": 0,\n    \"warning_count\": 0\n  },\n  \"findings\": []\n}",
+      "stderr": ""
+    }
+  ],
+  "attached_repo": {
+    "origin_url": "git@github-aurora:AUo959/qgia-knowledge-spine.git",
+    "status": "## main...origin/main",
+    "head_sha": "1de06b6829ad48acfa89f5006b6580d2e921d7a4"
+  },
+  "receipt_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/reports/analysis/nested-repo-normalizer/qgia-knowledge-spine-main.json"
+}

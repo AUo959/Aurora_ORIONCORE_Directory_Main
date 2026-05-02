@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/qgia_outcome_record.schema.json",
+  "title": "QGIA Outcome Record",
+  "description": "Explicit outcome adjudication record for resolved QGIA forecasts.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "record_type": {
+      "const": "outcome"
+    },
+    "outcome_id": {
+      "type": "string",
+      "pattern": "^qgia\\.outcome\\.[A-Za-z0-9_.:-]+$"
+    },
+    "forecast_id": {
+      "type": "string",
+      "pattern": "^qgia\\.forecast\\.[A-Za-z0-9_.:-]+$"
+    },
+    "resolved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "resolution_state": {
+      "type": "string",
+      "enum": [
+        "resolved",
+        "ambiguous",
+        "cancelled"
+      ]
+    },
+    "observed_outcome": {
+      "type": "string",
+      "enum": [
+        "occurred",
+        "did_not_occur",
+        "ambiguous",
+        "partial"
+      ]
+    },
+    "adjudication": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "basis_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^qgia\\.evidence\\.[A-Za-z0-9_.:-]+$"
+          }
+        },
+        "resolver": {
+          "type": "string",
+          "minLength": 1
+        },
+        "policy_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "basis_summary",
+        "evidence_refs",
+        "resolver",
+        "policy_ref"
+      ]
+    },
+    "scoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "binary_outcome": {
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "excluded_from_brier": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "excluded_from_brier"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_type",
+    "outcome_id",
+    "forecast_id",
+    "resolved_at",
+    "resolution_state",
+    "observed_outcome",
+    "adjudication",
+    "scoring"
+  ]
+}

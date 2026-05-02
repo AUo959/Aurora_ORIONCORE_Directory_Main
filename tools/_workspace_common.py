@@ -7,6 +7,7 @@ import os
 import re
 import shlex
 import subprocess
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -91,6 +92,97 @@ SANCTIONED_ROOT_ANALYSIS_DOCS = {
     "aurora_cloudbank_symbolic_architecture_discovery_report.md",
 }
 ROOT_INTAKE_CLEANUP_BATCH_ID = "wave4_root_intake_cleanup_initial"
+MAX_PRIVACY_PROBE_BYTES = 4096
+MAX_PRIVACY_PROBE_PATHS = 24
+
+PRIVACY_PROBE_EXTENSIONS = {
+    ".md",
+    ".markdown",
+    ".txt",
+    ".csv",
+    ".json",
+    ".jsonl",
+    ".yaml",
+    ".yml",
+    ".toml",
+}
+
+PRIVATE_PATH_TOKENS = {
+    "bank",
+    "billing",
+    "consent",
+    "credit",
+    "cv",
+    "family",
+    "finance",
+    "financial",
+    "health",
+    "insurance",
+    "job",
+    "jobs",
+    "legal",
+    "medical",
+    "passport",
+    "password",
+    "patient",
+    "payroll",
+    "personal",
+    "private",
+    "resume",
+    "school",
+    "schoolspring",
+    "ssn",
+    "tax",
+    "taxes",
+    "therapy",
+}
+
+PRIVATE_CONTENT_TERMS = (
+    "bank account",
+    "consent form",
+    "cover letter",
+    "credit card",
+    "curriculum vitae",
+    "date of birth",
+    "driver license",
+    "medical record",
+    "patient name",
+    "policy number",
+    "social security",
+    "therapy options",
+)
+
+PRIVATE_CONTENT_REGEXES = (
+    re.compile(r"\b\d{3}-\d{2}-\d{4}\b"),
+    re.compile(r"\b(?:ssn|social security number)\b"),
+    re.compile(r"\b(?:dob|date of birth)\b"),
+    re.compile(r"\bpatient name\b"),
+)
+
+APPROVED_SCOPE_TOKENS = {
+    "aurora",
+    "orion",
+    "gumas",
+    "qgia",
+    "cloudbank",
+    "canonrec",
+    "duelsim",
+    "threadcore",
+    "zipwiz",
+    "qem",
+    "charforge",
+    "forecast",
+}
+
+OFFICE_PROBE_MEMBER_NAMES = (
+    "word/document.xml",
+    "docProps/core.xml",
+    "docProps/app.xml",
+    "xl/sharedStrings.xml",
+    "xl/workbook.xml",
+    "ppt/slides/slide1.xml",
+    "ppt/presentation.xml",
+)
 
 
 def now_iso_utc() -> str:
@@ -481,7 +573,7 @@ def discover_nested_repos(root: Path) -> list[str]:
             repos.add(relpath(current, root))
             dirnames[:] = []
             continue
-        if ".git" in filenames:
+        if current != root and ".git" in filenames:
             repos.add(relpath(current, root))
             dirnames[:] = []
     return sorted(repos)
@@ -554,6 +646,122 @@ def canonical_candidate(paths: list[str]) -> str:
     return sorted(paths, key=score)[0]
 
 
+def normalized_tokens(text: str) -> set[str]:
+    return {token for token in re.split(r"[^a-z0-9]+", text.lower()) if token}
+
+
+def iter_privacy_probe_paths(entry: Path) -> list[Path]:
+    if not entry.exists():
+        return []
+    if entry.is_file():
+        return [entry]
+
+    samples = [entry]
+    for current_root, dirnames, filenames in os.walk(entry):
+        current = Path(current_root)
+        dirnames[:] = [
+            name
+            for name in sorted(dirnames)
+            if name != ".git"
+            and not name.startswith(".git_decommissioned")
+            and name != "__pycache__"
+        ]
+        if current != entry and (current / ".git").exists():
+            dirnames[:] = []
+            continue
+
+        for name in sorted(dirnames):
+            samples.append(current / name)
+            if len(samples) >= MAX_PRIVACY_PROBE_PATHS:
+                return samples
+        for name in sorted(filenames):
+            samples.append(current / name)
+            if len(samples) >= MAX_PRIVACY_PROBE_PATHS:
+                return samples
+    return samples
+
+
+def read_privacy_probe_text(path: Path) -> str:
+    if not path.is_file():
+        return ""
+    suffix = path.suffix.lower()
+    if suffix in {".docx", ".xlsx", ".pptx"}:
+        return read_zip_privacy_probe_text(path)
+
+    try:
+        with path.open("rb") as handle:
+            payload = handle.read(MAX_PRIVACY_PROBE_BYTES)
+    except OSError:
+        return ""
+    if suffix in PRIVACY_PROBE_EXTENSIONS:
+        return payload.decode("utf-8", errors="ignore").lower()
+    if suffix == ".pdf" or payload.startswith(b"%PDF"):
+        return extract_ascii_probe_text(payload)
+    if payload.startswith(b"PK\x03\x04"):
+        return read_zip_privacy_probe_text(path)
+    return ""
+
+
+def extract_ascii_probe_text(payload: bytes) -> str:
+    decoded = payload.decode("utf-8", errors="ignore").lower()
+    fragments = re.findall(r"[a-z][a-z0-9:/ _.\-]{3,}", decoded)
+    return " ".join(fragments)
+
+
+def read_zip_privacy_probe_text(path: Path) -> str:
+    snippets: list[str] = []
+    try:
+        with zipfile.ZipFile(path) as archive:
+            members = set(archive.namelist())
+            for member in OFFICE_PROBE_MEMBER_NAMES:
+                if member not in members:
+                    continue
+                with archive.open(member) as handle:
+                    payload = handle.read(MAX_PRIVACY_PROBE_BYTES)
+                text = extract_ascii_probe_text(payload)
+                if text:
+                    snippets.append(text)
+    except (OSError, KeyError, zipfile.BadZipFile, RuntimeError):
+        return ""
+    return " ".join(snippets)
+
+
+def detect_private_signal(entry: Path) -> str:
+    saw_private_content = False
+    for probe in iter_privacy_probe_paths(entry):
+        relative_name = probe.name if probe == entry else probe.relative_to(entry).as_posix()
+        if normalized_tokens(relative_name) & PRIVATE_PATH_TOKENS:
+            return "auto_private_path"
+
+        text = read_privacy_probe_text(probe)
+        if not text:
+            continue
+        if any(pattern.search(text) for pattern in PRIVATE_CONTENT_REGEXES):
+            saw_private_content = True
+            break
+        term_hits = sum(1 for term in PRIVATE_CONTENT_TERMS if term in text)
+        if term_hits >= 2:
+            saw_private_content = True
+            break
+    return "auto_private_content" if saw_private_content else ""
+
+
+def detect_scope_signal(entry: Path) -> str:
+    for probe in iter_privacy_probe_paths(entry):
+        relative_name = probe.name if probe == entry else probe.relative_to(entry).as_posix()
+        if normalized_tokens(relative_name) & APPROVED_SCOPE_TOKENS:
+            return "approved_scope_path"
+
+        text = read_privacy_probe_text(probe)
+        if text and normalized_tokens(text) & APPROVED_SCOPE_TOKENS:
+            return "approved_scope_content"
+    return ""
+
+
+def is_probably_private_path(entry: Path) -> bool:
+    return bool(detect_private_signal(entry))
+
+
 def load_classification_overrides(path: Path) -> dict[str, dict[str, Any]]:
     if not path.exists():
         return {}
@@ -572,26 +780,62 @@ def load_classification_overrides(path: Path) -> dict[str, dict[str, Any]]:
     return overrides
 
 
-def top_level_policy_records(
+def scan_policy_for_entry(
+    entry: Path,
     root: Path,
-    overrides: dict[str, dict[str, Any]] | None = None,
-    nested_repo_roots: set[str] | None = None,
-) -> list[dict[str, Any]]:
-    effective_overrides = (
-        overrides
-        if overrides is not None
-        else load_classification_overrides(root / "catalog" / "classification_overrides.yaml")
+    overrides: dict[str, dict[str, Any]],
+) -> str:
+    candidate_record = apply_classification_override(
+        classify_top_level(entry, root=root, nested_repo_roots=set()),
+        overrides,
     )
-    effective_nested_repo_roots = (
-        nested_repo_roots if nested_repo_roots is not None else set(discover_nested_repos(root))
-    )
-    entries = [
-        apply_classification_override(
-            classify_top_level(entry, root=root, nested_repo_roots=effective_nested_repo_roots),
-            effective_overrides,
-        )
-        for entry in top_level_entries(root)
-    ]
+    return privacy_decision_for_entry(
+        entry,
+        root,
+        candidate_record,
+        overrides,
+    )["policy"]
+
+
+def privacy_decision_for_entry(
+    entry: Path,
+    root: Path,
+    candidate_record: dict[str, Any],
+    overrides: dict[str, dict[str, Any]],
+) -> dict[str, str]:
+    current_path = relpath(entry, root)
+    override = overrides.get(current_path)
+    value = override.get("scan_policy") if override else None
+    policy = str(value).strip().lower() if value is not None else ""
+    if policy in {"include", "omit"}:
+        return {
+            "policy": policy,
+            "reason": f"override_{policy}",
+        }
+    candidate_status = str(candidate_record.get("status", "")).strip()
+    if candidate_status in {"managed", "protected"}:
+        return {
+            "policy": "",
+            "reason": "",
+        }
+    signal = detect_private_signal(entry)
+    if signal:
+        return {
+            "policy": "omit",
+            "reason": signal,
+        }
+    if str(candidate_record.get("status", "")).strip() == "planned_move" and not detect_scope_signal(entry):
+        return {
+            "policy": "omit",
+            "reason": "auto_scope_unknown",
+        }
+    return {
+        "policy": "",
+        "reason": "",
+    }
+
+
+def dedupe_policy_record_ids(entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
     grouped: dict[str, list[dict[str, Any]]] = {}
     for entry in entries:
         grouped.setdefault(str(entry["id"]), []).append(entry)
@@ -617,6 +861,54 @@ def top_level_policy_records(
             updated["id"] = f"{key}-{count}"
         deduped.append(updated)
     return deduped
+
+
+def top_level_policy_records_with_redaction(
+    root: Path,
+    overrides: dict[str, dict[str, Any]] | None = None,
+    nested_repo_roots: set[str] | None = None,
+) -> tuple[list[dict[str, Any]], dict[str, int], set[str]]:
+    effective_overrides = (
+        overrides
+        if overrides is not None
+        else load_classification_overrides(root / "catalog" / "classification_overrides.yaml")
+    )
+    effective_nested_repo_roots = (
+        nested_repo_roots if nested_repo_roots is not None else set(discover_nested_repos(root))
+    )
+    redacted_counts: dict[str, int] = {}
+    redacted_paths: set[str] = set()
+    entries: list[dict[str, Any]] = []
+    for entry in top_level_entries(root):
+        candidate_record = apply_classification_override(
+            classify_top_level(
+                entry,
+                root=root,
+                nested_repo_roots=effective_nested_repo_roots,
+            ),
+            effective_overrides,
+        )
+        decision = privacy_decision_for_entry(entry, root, candidate_record, effective_overrides)
+        if decision["policy"] == "omit":
+            reason = decision["reason"] or "omit"
+            redacted_counts[reason] = redacted_counts.get(reason, 0) + 1
+            redacted_paths.add(relpath(entry, root))
+            continue
+        entries.append(candidate_record)
+    return dedupe_policy_record_ids(entries), redacted_counts, redacted_paths
+
+
+def top_level_policy_records(
+    root: Path,
+    overrides: dict[str, dict[str, Any]] | None = None,
+    nested_repo_roots: set[str] | None = None,
+) -> list[dict[str, Any]]:
+    entries, _, _ = top_level_policy_records_with_redaction(
+        root,
+        overrides=overrides,
+        nested_repo_roots=nested_repo_roots,
+    )
+    return entries
 
 
 def manifest_enforced_current_paths(entries: list[dict[str, Any]]) -> set[str]:
@@ -685,6 +977,17 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             owner="workspace-admin",
             status="managed",
         )
+    if name in {".devcontainer", ".github", "Makefile"}:
+        return base_record(
+            kind="control_surface",
+            logical_zone="tools",
+            planned_path=relative,
+            git_boundary="root",
+            storage_tier="workspace-control",
+            retention_policy="versioned",
+            owner="workspace-admin",
+            status="managed",
+        )
     if name in {"tests", "skills"}:
         return base_record(
             kind="control_surface",
@@ -722,6 +1025,17 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
         return base_record(
             kind="policy_file",
             logical_zone="docs",
+            planned_path=relative,
+            git_boundary="root",
+            storage_tier="workspace-control",
+            retention_policy="versioned",
+            owner="workspace-admin",
+            status="managed",
+        )
+    if name == ".pre-commit-config.yaml":
+        return base_record(
+            kind="policy_file",
+            logical_zone="tools",
             planned_path=relative,
             git_boundary="root",
             storage_tier="workspace-control",

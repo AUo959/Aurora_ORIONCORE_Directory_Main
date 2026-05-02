@@ -10,6 +10,13 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SIM_DIR = REPO_ROOT / "GUMAS_SIM_2.5" / "SIM_ENGINE_OUTPUTS"
 FORGE_DIR = REPO_ROOT / "GUMAS_SIM_2.5" / "FORGE__GUMAS_v3.0__2026-02-19"
+L2_SOURCES_DIR = REPO_ROOT / "GUMAS_SIM_2.0"
+
+_l2_sources_available = L2_SOURCES_DIR.is_dir()
+requires_l2_sources = pytest.mark.skipif(
+    not _l2_sources_available,
+    reason="GUMAS_SIM_2.0 L2 source data not present in this environment",
+)
 
 for path in (str(SIM_DIR), str(FORGE_DIR)):
     if path not in sys.path:
@@ -38,6 +45,7 @@ def bundle(runtime: tuple[GUMASAdvancedEngine, object]):
     return build_l2_state_bundle(REPO_ROOT, state)
 
 
+@requires_l2_sources
 def test_l2_manifest_source_files_exist() -> None:
     manifest = json.loads((FORGE_DIR / "l2_source_manifest.json").read_text(encoding="utf-8"))
     missing = [
@@ -56,6 +64,7 @@ def test_engine_initializes_additive_l2_state(runtime: tuple[GUMASAdvancedEngine
     assert set(state.factions) == set(v3_state.l2_state.indexes["by_faction_id"])
 
 
+@requires_l2_sources
 @pytest.mark.parametrize(
     ("query", "entity_kind"),
     [
@@ -68,6 +77,7 @@ def test_registry_exposes_acceptance_entities(registry, query: str, entity_kind:
     assert registry.find_entities(query, entity_kind=entity_kind)
 
 
+@requires_l2_sources
 @pytest.mark.parametrize("query", ["Cross", "Vorn", "Roake", "Kade"])
 def test_sim_capture_characters_exist_with_provenance(registry, query: str) -> None:
     matches = registry.find_entities(query, entity_kind="character")
@@ -75,6 +85,7 @@ def test_sim_capture_characters_exist_with_provenance(registry, query: str) -> N
     assert any(ref.source_id == "marshals_sim_capture" for match in matches for ref in match.source_refs)
 
 
+@requires_l2_sources
 @pytest.mark.parametrize(
     "query",
     ["Kaelor's Rift", "Vel-Surak", "Xyphos Prime ruins", "Xyphos Ruins"],
@@ -83,6 +94,7 @@ def test_alias_resolution_for_locations(registry, query: str) -> None:
     assert registry.find_entities(query, entity_kind="location")
 
 
+@requires_l2_sources
 def test_prime_construct_claims_remain_separate_and_flagged(registry, bundle) -> None:
     matches = registry.find_entities("Prime Construct")
     assert len(matches) >= 2
@@ -120,6 +132,7 @@ def test_export_contains_top_level_l2_state(tmp_path: Path) -> None:
     assert payload["l2_state"]["schema_version"] == "l2-state-bundle-v1"
 
 
+@requires_l2_sources
 def test_phase2_layers_are_present(bundle) -> None:
     assert bundle.mobile_assets
     assert bundle.logistics_nodes
@@ -127,12 +140,14 @@ def test_phase2_layers_are_present(bundle) -> None:
     assert bundle.operational_views
 
 
+@requires_l2_sources
 def test_mobile_assets_include_named_union_and_non_union_ships(bundle) -> None:
     asset_names = {asset["name"] for asset in bundle.mobile_assets.values()}
     assert "G.U.S. Judicator Prime" in asset_names
     assert "Nemesis Prime" in asset_names
 
 
+@requires_l2_sources
 def test_phase2_hotspots_include_logistics_and_pressure_locations(bundle) -> None:
     logistics_names = {node["name"] for node in bundle.logistics_nodes.values()}
     pressure_names = {pressure["name"] for pressure in bundle.location_pressures.values()}
@@ -156,6 +171,7 @@ def test_ledger_noise_does_not_become_character_entities(registry, query: str) -
     assert registry.find_entities(query, entity_kind="character") == []
 
 
+@requires_l2_sources
 @pytest.mark.parametrize("query", ["Commander Aric Thal", "Lior Serath", "Veyna Koris", "Kael Voss", "Darek Voss"])
 def test_ledger_named_sentinels_survive_cleanup(registry, query: str) -> None:
     matches = registry.find_entities(query, entity_kind="character")

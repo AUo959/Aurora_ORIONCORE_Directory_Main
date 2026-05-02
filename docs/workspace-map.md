@@ -1,11 +1,12 @@
 # Workspace Map
 
-- Generated: `2026-04-12T03:08:01Z`
+- Generated: `2026-04-23T14:05:39Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `27`
-- Nested repos registered: `3`
+- Top-level entries cataloged: `34`
+- Nested repos registered: `5`
 - Archive or binary artifacts inventoried: `594`
-- Classification overrides loaded: `5` from `catalog/classification_overrides.yaml`
+- Classification overrides loaded: `6` from `catalog/classification_overrides.yaml`
+- Top-level paths excluded by privacy screen: `1`
 
 ## Zones
 
@@ -13,21 +14,27 @@
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `6` top-level entries
-- `intake`: `1` top-level entries
+- `intake`: `2` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
-- `repos`: `2` top-level entries
-- `tools`: `6` top-level entries
+- `repos`: `4` top-level entries
+- `tools`: `10` top-level entries
 
 ## Active Nested Repos
 
 - `aurora-cloudbank-symbolic-main` at `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `codex/cloudbank-command-chain-workflow-repair-2026-04-10`, remote `configured`)
 - `CanonRec` at `GUMAS_SIM_2.5/CanonRec` (branch `main`, remote `configured`)
 - `DuelSim_v2.0` at `GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0` (branch `main`, remote `configured`)
+- `qgia-knowledge-library-main` at `qgia-knowledge-library-main` (branch `main`, remote `configured`)
+- `qgia-knowledge-spine-main` at `qgia-knowledge-spine-main` (branch `main`, remote `configured`)
 
 ## Planned Move Candidates
 
-- None
+- `QGIA_SPACE_NAVAGATION_GUIDE.md` -> `intake/QGIA_SPACE_NAVAGATION_GUIDE.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+
+## Privacy Screen
+
+- `auto_scope_unknown`: `1` top-level paths excluded
 
 ## Largest Archive/Binary Artifacts
 

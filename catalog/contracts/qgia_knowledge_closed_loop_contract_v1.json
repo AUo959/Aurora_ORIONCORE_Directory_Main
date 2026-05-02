@@ -1,0 +1,220 @@
+{
+  "contract_id": "qgia_knowledge_closed_loop_contract",
+  "version": 1,
+  "status": "draft_adoption_ready",
+  "scope": [
+    "qgia-knowledge-library",
+    "qgia-knowledge-spine"
+  ],
+  "purpose": "Define the closed learning loop for QGIA evidence intake, forecast issuance, outcome resolution, calibration, prior rebasing, and downstream consumption.",
+  "runtime_targets": [
+    {
+      "platform": "perplexity",
+      "designation": "declared-live-runtime",
+      "verification": "user-declared",
+      "url": "https://www.perplexity.ai/spaces/foreign-policy-and-global-poli-_IZgsdmvSo2Yxe7LAZ5HSQ"
+    }
+  ],
+  "authority_model": {
+    "qgia-knowledge-library": {
+      "authoritative_for": [
+        "evidence_record",
+        "outcome_record",
+        "curated_case_promotion",
+        "domain_corpus"
+      ],
+      "not_authoritative_for": [
+        "forecast_method_definition",
+        "prior_rebasing_rules",
+        "calibration_transform",
+        "resolution_policy_semantics"
+      ]
+    },
+    "qgia-knowledge-spine": {
+      "authoritative_for": [
+        "forecast_record",
+        "resolution_policy",
+        "prior_table",
+        "calibration_report",
+        "methodology_taxonomy"
+      ],
+      "not_authoritative_for": [
+        "raw_evidence_intake",
+        "unlinked_truth_claims",
+        "curated_domain_case_promotion"
+      ]
+    }
+  },
+  "recommended_layout": {
+    "qgia-knowledge-library": {
+      "evidence_ledger": "data/intake/evidence-ledger.jsonl",
+      "outcome_ledger": "data/truth/outcome-ledger.jsonl"
+    },
+    "qgia-knowledge-spine": {
+      "forecast_ledger": "data/forecasts/forecast-ledger.jsonl",
+      "prior_table": "data/priors/prior-table.json",
+      "calibration_report": "data/calibration/calibration-report.json",
+      "resolution_policy": "policies/resolution-policy.md"
+    }
+  },
+  "artifacts": [
+    {
+      "artifact_id": "evidence_record",
+      "owner": "qgia-knowledge-library",
+      "format": "jsonl",
+      "path": "data/intake/evidence-ledger.jsonl",
+      "schema_path": "catalog/schemas/qgia_evidence_record.schema.json"
+    },
+    {
+      "artifact_id": "forecast_record",
+      "owner": "qgia-knowledge-spine",
+      "format": "jsonl",
+      "path": "data/forecasts/forecast-ledger.jsonl",
+      "schema_path": "catalog/schemas/qgia_forecast_record.schema.json"
+    },
+    {
+      "artifact_id": "outcome_record",
+      "owner": "qgia-knowledge-library",
+      "format": "jsonl",
+      "path": "data/truth/outcome-ledger.jsonl",
+      "schema_path": "catalog/schemas/qgia_outcome_record.schema.json"
+    },
+    {
+      "artifact_id": "prior_table",
+      "owner": "qgia-knowledge-spine",
+      "format": "json",
+      "path": "data/priors/prior-table.json",
+      "schema_path": "catalog/schemas/qgia_prior_table.schema.json"
+    },
+    {
+      "artifact_id": "calibration_report",
+      "owner": "qgia-knowledge-spine",
+      "format": "json",
+      "path": "data/calibration/calibration-report.json",
+      "schema_path": "catalog/schemas/qgia_calibration_report.schema.json"
+    }
+  ],
+  "events": [
+    {
+      "name": "qgia.evidence.ingested",
+      "producer": "qgia-knowledge-library",
+      "consumers": [
+        "qgia-knowledge-spine",
+        "aurora-runtime"
+      ],
+      "minimum_payload_keys": [
+        "evidence_id",
+        "topic_refs",
+        "observed_at",
+        "ingested_at"
+      ]
+    },
+    {
+      "name": "qgia.forecast.issued",
+      "producer": "qgia-knowledge-spine",
+      "consumers": [
+        "qgia-knowledge-library",
+        "aurora-runtime"
+      ],
+      "minimum_payload_keys": [
+        "forecast_id",
+        "domain",
+        "question_type",
+        "target_resolves_by"
+      ]
+    },
+    {
+      "name": "qgia.forecast.updated",
+      "producer": "qgia-knowledge-spine",
+      "consumers": [
+        "qgia-knowledge-library",
+        "aurora-runtime"
+      ],
+      "minimum_payload_keys": [
+        "forecast_id",
+        "revision_id",
+        "evidence_refs",
+        "probability"
+      ]
+    },
+    {
+      "name": "qgia.outcome.resolved",
+      "producer": "qgia-knowledge-library",
+      "consumers": [
+        "qgia-knowledge-spine",
+        "aurora-runtime"
+      ],
+      "minimum_payload_keys": [
+        "outcome_id",
+        "forecast_id",
+        "resolved_at",
+        "observed_outcome"
+      ]
+    },
+    {
+      "name": "qgia.priors.rebased",
+      "producer": "qgia-knowledge-spine",
+      "consumers": [
+        "qgia-knowledge-library",
+        "aurora-runtime"
+      ],
+      "minimum_payload_keys": [
+        "prior_table_id",
+        "effective_from",
+        "supersedes",
+        "outcome_refs"
+      ]
+    },
+    {
+      "name": "qgia.calibration.updated",
+      "producer": "qgia-knowledge-spine",
+      "consumers": [
+        "qgia-knowledge-library",
+        "aurora-runtime"
+      ],
+      "minimum_payload_keys": [
+        "report_id",
+        "sample_window",
+        "resolved_forecast_count"
+      ]
+    },
+    {
+      "name": "qgia.case.promoted",
+      "producer": "qgia-knowledge-library",
+      "consumers": [
+        "qgia-knowledge-spine",
+        "aurora-runtime"
+      ],
+      "minimum_payload_keys": [
+        "source_outcome_ids",
+        "target_paths"
+      ]
+    }
+  ],
+  "downstream_consumption": {
+    "retrieval": [
+      "evidence_record",
+      "outcome_record",
+      "curated_domain_corpus"
+    ],
+    "forecast_generation": [
+      "forecast_record",
+      "prior_table",
+      "calibration_report",
+      "resolution_policy"
+    ],
+    "governance_audit": [
+      "outcome_record",
+      "prior_table",
+      "calibration_report"
+    ]
+  },
+  "adoption_order": [
+    "add_resolution_policy_to_spine",
+    "add_spine_forecast_prior_calibration_artifacts",
+    "add_library_evidence_outcome_artifacts",
+    "extend_repo_local_constellation_contracts",
+    "wire_canonical_event_names",
+    "promote_downstream_consumers"
+  ]
+}

@@ -3,11 +3,13 @@
 This root repository is the workspace control plane for
 `Aurora_ORIONCORE_Directory_Main`.
 
-It does **not** replace the three active nested Git repositories:
+It does **not** replace the active nested Git repositories:
 
 - `Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
 - `GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0`
 - `GUMAS_SIM_2.5/CanonRec`
+- `qgia-knowledge-library-main`
+- `qgia-knowledge-spine-main`
 
 Phase 1 is metadata-first. The root repo tracks only workspace docs, manifests,
 policies, reports, and tooling. Large archives, binary dumps, caches, and
@@ -90,7 +92,7 @@ python3 tools/threadcore_deploy_seal.py /path/to/THREADCORE_DEPLOY_SEAL_v1.zip
 ## Operating Rules
 
 - Do not restore `.git_decommissioned_*`; it remains a rollback artifact only.
-- Keep non-control content routed through `catalog/classification_overrides.yaml`; do not hand-edit the generated manifest.
+- Keep non-control or explicitly out-of-scope content routed through `catalog/classification_overrides.yaml`. Root scans now default-deny unknown top-level material unless it shows Aurora / approved-project scope signals, and they auto-exclude likely private personal material using bounded path and text/document probes, including generic PDF and Office-style payloads when detectable; use `scan_policy: include` or `scan_policy: omit` only to override that decision for a specific top-level path. Do not hand-edit the generated manifest.
 - Do not move nested repos until their surrounding automation and scripts resolve
   through `catalog/repo_registry.yaml`.
 - Do not delete duplicates directly. Plan quarantine moves first, verify hashes,

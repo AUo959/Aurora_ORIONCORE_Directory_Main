@@ -47,6 +47,20 @@ def detect_workspace_root(explicit_root: str | None) -> Path:
         ) from exc
 
 
+def repo_rows_from_payload(payload: Any) -> list[dict[str, Any]]:
+    if not isinstance(payload, dict):
+        raise ValueError("top-level payload must be a mapping")
+    repos = payload.get("repos")
+    if repos is None:
+        return []
+    if not isinstance(repos, list):
+        raise ValueError("'repos' must be a list")
+    invalid_indices = [str(index) for index, repo in enumerate(repos) if not isinstance(repo, dict)]
+    if invalid_indices:
+        raise ValueError(f"'repos' contains non-mapping entries at index(es): {', '.join(invalid_indices)}")
+    return repos
+
+
 def load_workspace_yaml_like(workspace_root: Path):
     helper_path = workspace_root / "tools" / "_workspace_common.py"
     if not helper_path.exists():
@@ -65,18 +79,41 @@ def load_workspace_yaml_like(workspace_root: Path):
     return None
 
 
+def load_registry_payload_direct(registry_path: Path, raw: str) -> Any:
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        try:
+            import yaml  # type: ignore
+        except ImportError as exc:
+            raise SystemExit(
+                f"Could not parse {registry_path}: workspace YAML helper is unavailable and PyYAML is not installed."
+            ) from exc
+        try:
+            return yaml.safe_load(raw) or {}
+        except Exception as exc:
+            raise SystemExit(f"Could not parse repo registry at {registry_path}: {exc}") from exc
+
+
 def load_repo_registry(workspace_root: Path) -> list[dict[str, Any]]:
     registry_path = workspace_root / "catalog" / "repo_registry.yaml"
     if not registry_path.exists():
         return []
+    raw = registry_path.read_text(encoding="utf-8").strip()
+    if not raw:
+        return []
     load_yaml_like = load_workspace_yaml_like(workspace_root)
-    if load_yaml_like is None:
-        return []
-    payload = load_yaml_like(registry_path) or {}
-    if not isinstance(payload, dict):
-        return []
-    repos = payload.get("repos", [])
-    return repos if isinstance(repos, list) else []
+    if load_yaml_like is not None:
+        try:
+            payload = load_yaml_like(registry_path) or {}
+        except Exception:
+            payload = load_registry_payload_direct(registry_path, raw)
+    else:
+        payload = load_registry_payload_direct(registry_path, raw)
+    try:
+        return repo_rows_from_payload(payload)
+    except ValueError as exc:
+        raise SystemExit(f"Malformed repo registry at {registry_path}: {exc}") from exc
 
 
 def parse_remote_map(remote_output: str) -> dict[str, dict[str, str]]:
@@ -147,10 +184,10 @@ def collect_local_dirty_paths(repo_path: Path) -> list[str]:
     return unique_paths(unstaged, staged, untracked)
 
 
-def collect_incoming_remote_paths(repo_path: Path, upstream: str, behind: int) -> list[str]:
-    if not upstream or behind <= 0:
+def collect_incoming_remote_paths(repo_path: Path, comparison_ref: str, behind: int) -> list[str]:
+    if not comparison_ref or behind <= 0:
         return []
-    return collect_repo_paths(repo_path, ["diff", "--name-only", f"HEAD..{upstream}"])
+    return collect_repo_paths(repo_path, ["diff", "--name-only", f"HEAD..{comparison_ref}"])
 
 
 def resolve_target_paths(
@@ -183,11 +220,7 @@ def resolve_target_paths(
     if selection == "all":
         return targets
     for target in targets:
-        if selection in {target["name"], target["relative_path"], "root"} and target["name"] == selection:
-            return [target]
-        if selection == "root" and target["name"] == "root":
-            return [target]
-        if selection == target["relative_path"]:
+        if selection in {target["name"], target["relative_path"]}:
             return [target]
     available = ", ".join(target["name"] for target in targets)
     raise SystemExit(f"Unknown repo selection '{selection}'. Available: {available}")
@@ -195,7 +228,7 @@ def resolve_target_paths(
 
 def choose_existing_path(candidate_paths: list[Path]) -> Path | None:
     for path in candidate_paths:
-        if (path / ".git").exists() or path == path.resolve() and (path / ".git").exists():
+        if (path / ".git").exists():
             return path.resolve()
     for path in candidate_paths:
         if path.exists():
@@ -211,17 +244,33 @@ def git_ref_exists(repo_path: Path, ref: str) -> bool:
 def comparison_status(repo_path: Path, branch: str) -> dict[str, Any]:
     try:
         upstream = run_git(repo_path, ["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"]).stdout.strip()
+        comparison_ref = upstream
         mode = "configured_upstream"
     except subprocess.CalledProcessError:
         if branch not in {"", "HEAD", "main"} and git_ref_exists(repo_path, "refs/remotes/origin/main"):
-            upstream = "origin/main"
+            upstream = ""
+            comparison_ref = "origin/main"
             mode = "fallback_origin_main"
         else:
-            return {"upstream": "", "ahead": 0, "behind": 0, "comparison_mode": "none"}
-    counts = run_git(repo_path, ["rev-list", "--left-right", "--count", f"{upstream}...HEAD"]).stdout.strip().split()
+            return {"upstream": "", "comparison_ref": "", "ahead": 0, "behind": 0, "comparison_mode": "none"}
+    counts = run_git(repo_path, ["rev-list", "--left-right", "--count", f"{comparison_ref}...HEAD"]).stdout.strip().split()
     behind = int(counts[0]) if counts else 0
     ahead = int(counts[1]) if len(counts) > 1 else 0
-    return {"upstream": upstream, "ahead": ahead, "behind": behind, "comparison_mode": mode}
+    return {
+        "upstream": upstream,
+        "comparison_ref": comparison_ref,
+        "ahead": ahead,
+        "behind": behind,
+        "comparison_mode": mode,
+    }
+
+
+def push_target(summary: dict[str, Any]) -> str:
+    if summary["upstream"]:
+        return summary["upstream"]
+    if summary["branch"] not in {"", "HEAD"}:
+        return f"origin/{summary['branch']}"
+    return "origin"
 
 
 def suggest_actions(summary: dict[str, Any]) -> list[str]:
@@ -236,9 +285,9 @@ def suggest_actions(summary: dict[str, Any]) -> list[str]:
     if summary["status_counts"]["untracked"]:
         actions.append("Review untracked files; commit them if they belong in Git or add ignore rules if they do not.")
     if summary["ahead"] > 0:
-        actions.append(f"Push {summary['branch']} to {summary['upstream'] or 'origin'} so the remote matches local history.")
+        actions.append(f"Push {summary['branch']} to {push_target(summary)} so the remote matches local history.")
     if summary["behind"] > 0:
-        actions.append(f"Fetch and integrate {summary['upstream']} before pushing to avoid overwriting remote history.")
+        actions.append(f"Fetch and integrate {summary['comparison_ref']} before pushing to avoid overwriting remote history.")
     if summary["dirty"] and summary["behind"] > 0:
         stash_name = f"gitwiz-pre-{summary['branch'] or 'repo'}-sync"
         if summary["overlap_paths"]:
@@ -270,6 +319,7 @@ def build_repo_summary(target: dict[str, Any], fetch: bool) -> dict[str, Any]:
         "head_sha": "",
         "remotes": {},
         "upstream": "",
+        "comparison_ref": "",
         "comparison_mode": "none",
         "ahead": 0,
         "behind": 0,
@@ -309,12 +359,14 @@ def build_repo_summary(target: dict[str, Any], fetch: bool) -> dict[str, Any]:
     summary["dirty"] = bool(status["files"])
     upstream = comparison_status(repo_path, summary["branch"])
     summary["upstream"] = upstream["upstream"]
+    summary["comparison_ref"] = upstream["comparison_ref"]
     summary["comparison_mode"] = upstream["comparison_mode"]
     summary["ahead"] = upstream["ahead"]
     summary["behind"] = upstream["behind"]
-    summary["local_dirty_paths"] = collect_local_dirty_paths(repo_path)
-    summary["incoming_remote_paths"] = collect_incoming_remote_paths(repo_path, summary["upstream"], summary["behind"])
-    summary["overlap_paths"] = [path for path in summary["local_dirty_paths"] if path in set(summary["incoming_remote_paths"])]
+    summary["local_dirty_paths"] = collect_local_dirty_paths(repo_path) if summary["dirty"] else []
+    summary["incoming_remote_paths"] = collect_incoming_remote_paths(repo_path, summary["comparison_ref"], summary["behind"])
+    incoming_remote_path_set = set(summary["incoming_remote_paths"])
+    summary["overlap_paths"] = [path for path in summary["local_dirty_paths"] if path in incoming_remote_path_set]
 
     if not summary["remotes"]:
         summary["sync_state"] = "no_remote"
@@ -363,6 +415,8 @@ def markdown_report(report: dict[str, Any]) -> str:
             lines.append(f"- Upstream: `{repo['upstream'] or 'none'}`")
             if repo["comparison_mode"] != "none":
                 lines.append(f"- Comparison mode: `{repo['comparison_mode']}`")
+            if repo["comparison_ref"] and repo["comparison_ref"] != repo["upstream"]:
+                lines.append(f"- Comparison ref: `{repo['comparison_ref']}`")
             lines.append(f"- Ahead / behind: `{repo['ahead']}` / `{repo['behind']}`")
             lines.append(f"- Dirty: `{repo['dirty']}`")
             counts = repo["status_counts"]
@@ -382,7 +436,7 @@ def markdown_report(report: dict[str, Any]) -> str:
                     lines.append(f"  - `{line}`")
             if repo["overlap_paths"]:
                 lines.append(
-                    f"- Overlap risk: `{len(repo['overlap_paths'])}` dirty path(s) also change in `{repo['upstream'] or 'the upstream branch'}`."
+                    f"- Overlap risk: `{len(repo['overlap_paths'])}` dirty path(s) also change in `{repo['comparison_ref'] or 'the comparison branch'}`."
                 )
                 for path in repo["overlap_paths"][:10]:
                     lines.append(f"  - `{path}`")

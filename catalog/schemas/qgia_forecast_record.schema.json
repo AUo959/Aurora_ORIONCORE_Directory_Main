@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/qgia_forecast_record.schema.json",
+  "title": "QGIA Forecast Record",
+  "description": "Append-only forecast issuance and revision record for the QGIA methodology spine.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "record_type": {
+      "const": "forecast"
+    },
+    "forecast_id": {
+      "type": "string",
+      "pattern": "^qgia\\.forecast\\.[A-Za-z0-9_.:-]+$"
+    },
+    "revision_id": {
+      "type": "string",
+      "pattern": "^qgia\\.forecast\\.rev\\.[A-Za-z0-9_.:-]+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "resolved",
+        "cancelled",
+        "superseded"
+      ]
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "question_type": {
+      "type": "string",
+      "enum": [
+        "binary",
+        "categorical",
+        "numeric"
+      ]
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "opened_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "target_resolves_by": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "resolution_policy_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "prior": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "prior_id": {
+          "type": "string",
+          "pattern": "^qgia\\.prior\\.[A-Za-z0-9_.:-]+$"
+        },
+        "prior_probability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "prior_basis": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "prior_id",
+        "prior_probability",
+        "prior_basis"
+      ]
+    },
+    "forecast": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "probability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "method_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "probability",
+        "confidence",
+        "method_refs"
+      ]
+    },
+    "evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^qgia\\.evidence\\.[A-Za-z0-9_.:-]+$"
+      }
+    },
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "producer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "analyst": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "producer"
+      ]
+    },
+    "supersedes_revision_id": {
+      "type": "string",
+      "pattern": "^qgia\\.forecast\\.rev\\.[A-Za-z0-9_.:-]+$"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_type",
+    "forecast_id",
+    "revision_id",
+    "status",
+    "domain",
+    "question_type",
+    "question",
+    "opened_at",
+    "target_resolves_by",
+    "resolution_policy_ref",
+    "subject_refs",
+    "prior",
+    "forecast",
+    "evidence_refs",
+    "owner"
+  ]
+}

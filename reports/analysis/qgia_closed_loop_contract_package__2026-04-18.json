@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-04-18T17:50:00Z",
+  "artifact": "qgia_closed_loop_contract_package",
+  "status": "draft_adoption_ready",
+  "scope": [
+    "qgia-knowledge-library-main",
+    "qgia-knowledge-spine-main"
+  ],
+  "files_created": [
+    "docs/QGIA_KNOWLEDGE_CLOSED_LOOP_CONTRACT_v1.md",
+    "catalog/contracts/qgia_knowledge_closed_loop_contract_v1.json",
+    "catalog/schemas/qgia_evidence_record.schema.json",
+    "catalog/schemas/qgia_forecast_record.schema.json",
+    "catalog/schemas/qgia_outcome_record.schema.json",
+    "catalog/schemas/qgia_prior_table.schema.json",
+    "catalog/schemas/qgia_calibration_report.schema.json",
+    "tests/test_qgia_closed_loop_contract.py"
+  ],
+  "notes": [
+    "Root control-plane package only; nested repo-local manifests and workflows have not yet adopted these artifacts.",
+    "The contract introduces a closed-loop authority split: evidence and outcomes in the library; forecasts, priors, calibration, and resolution policy in the spine."
+  ]
+}

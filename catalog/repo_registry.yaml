@@ -1,27 +1,53 @@
-generated_at: "2026-04-12T03:08:01Z"
-root: "."
+generated_at: '2026-04-23T14:05:39Z'
+root: .
 repos:
-  -
-    name: "aurora-cloudbank-symbolic-main"
-    path: "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main"
-    branch: "codex/cloudbank-command-chain-workflow-repair-2026-04-10"
-    head_sha: "fc3d3f229e4e08509d3c6ee912f301a523d039a2"
-    remote_status: "configured"
-    validation_command: "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main status --short --branch"
-    move_policy: "frozen_until_registry_adoption"
-  -
-    name: "CanonRec"
-    path: "GUMAS_SIM_2.5/CanonRec"
-    branch: "main"
-    head_sha: "259bdc1b36f78237aac6cd6044ab1767dc84f844"
-    remote_status: "configured"
-    validation_command: "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/CanonRec rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/CanonRec status --short --branch"
-    move_policy: "frozen_until_registry_adoption"
-  -
-    name: "DuelSim_v2.0"
-    path: "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0"
-    branch: "main"
-    head_sha: "db13ac7c97fdcab65a9ba051e23defc19ff4922f"
-    remote_status: "configured"
-    validation_command: "env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0 rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0 status --short --branch"
-    move_policy: "frozen_until_registry_adoption"
+- name: aurora-cloudbank-symbolic-main
+  path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
+  branch: codex/cloudbank-command-chain-workflow-repair-2026-04-10
+  head_sha: 1b7c5592349f944b208568597d92e135121f235e
+  remote_status: configured
+  validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
+    git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse
+    HEAD && env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C
+    GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main status --short
+    --branch
+  move_policy: frozen_until_registry_adoption
+- name: CanonRec
+  path: GUMAS_SIM_2.5/CanonRec
+  branch: main
+  head_sha: 259bdc1b36f78237aac6cd6044ab1767dc84f844
+  remote_status: configured
+  validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
+    git -C GUMAS_SIM_2.5/CanonRec rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE
+    -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/CanonRec status --short --branch
+  move_policy: frozen_until_registry_adoption
+- name: DuelSim_v2.0
+  path: GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0
+  branch: main
+  head_sha: db13ac7c97fdcab65a9ba051e23defc19ff4922f
+  remote_status: configured
+  validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
+    git -C GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0 rev-parse HEAD && env -u GIT_DIR -u
+    GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX git -C GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0
+    status --short --branch
+  move_policy: frozen_until_registry_adoption
+- name: qgia-knowledge-library-main
+  path: qgia-knowledge-library-main
+  branch: main
+  head_sha: 4d0c97576cbf6878ebb68950a5d01d40537322f7
+  remote_status: configured
+  validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
+    git -C qgia-knowledge-library-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE
+    -u GIT_INDEX_FILE -u GIT_PREFIX git -C qgia-knowledge-library-main status --short
+    --branch
+  move_policy: frozen_until_registry_adoption
+- name: qgia-knowledge-spine-main
+  path: qgia-knowledge-spine-main
+  branch: main
+  head_sha: 2491371bb9a8272667485b7952cd3b114cbb75ce
+  remote_status: configured
+  validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
+    git -C qgia-knowledge-spine-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE
+    -u GIT_INDEX_FILE -u GIT_PREFIX git -C qgia-knowledge-spine-main status --short
+    --branch
+  move_policy: frozen_until_registry_adoption

@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-04-19T00:44:19Z",
+  "target": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/qgia-knowledge-library-main",
+  "remote": "git@github-aurora:AUo959/qgia-knowledge-library.git",
+  "remote_head": "fb4f9bfaacb549b839456b860358e621a01f3c85",
+  "dry_run": true,
+  "workspace_root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "clone_if_missing": false,
+  "status": "already_normalized",
+  "tree_compare": null,
+  "workspace_followup": [],
+  "existing_repo": {
+    "origin_url": "git@github-aurora:AUo959/qgia-knowledge-library.git",
+    "status": "## main...origin/main\n M .aurora/constellation.json\n M .aurora/knowledge-index.json\n M .github/workflows/constellation-knowledge-index.yml\n M README.md\n M references/missing-documents.md\n M scripts/generate-knowledge-index.py\n?? .aurora/closed-loop-bootstrap.json\n?? .aurora/knowledge-index-local-run-receipt.json\n?? .gitignore\n?? data/\n?? scripts/knowledge_contract.py\n?? scripts/validate-knowledge-contract.py\n?? tests/",
+    "head_sha": "fb4f9bfaacb549b839456b860358e621a01f3c85"
+  },
+  "receipt_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/reports/analysis/nested-repo-normalizer/qgia-knowledge-library-main.json"
+}

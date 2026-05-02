@@ -108,5 +108,68 @@
     ],
     "sync_protocol": "GitHub Actions webhook → CONSTELLATION-PRIME → Space notification",
     "update_frequency": "continuous (500TB daily intelligence stream)"
-  }
+  },
+  "runtime_surfaces": [
+    {
+      "designation": "QGIA-SPACE-NODE",
+      "symbolic_tag": "s.tag::qgia.space.perplexity",
+      "surface_type": "analyst_environment",
+      "url": "https://www.perplexity.ai/spaces/foreign-policy-and-global-poli-_IZgsdmvSo2Yxe7LAZ5HSQ",
+      "description": "Primary QGIA analyst-facing environment — operational intelligence analysis, forecasting, and crisis assessment surface within Perplexity Space.",
+      "capabilities": [
+        "operational-forecasts",
+        "intelligence-assessments",
+        "crisis-analyses",
+        "knowledge-retrieval",
+        "real-time-headline-monitoring"
+      ],
+      "status": "active",
+      "registered_at": "2026-03-14T01:31:00-04:00"
+    },
+    {
+      "designation": "ORIONCORE-CODESPACE",
+      "symbolic_tag": "s.tag::orioncore.codespace.runtime",
+      "surface_type": "simulation_and_tooling_runtime",
+      "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main",
+      "description": "Control-plane Codespace runtime — GUMAS v3.0 simulation engine, workspace tooling, CI/CD, and API surface backing the QGIA Perplexity Space.",
+      "capabilities": [
+        "gumas-simulation-api",
+        "workspace-verification",
+        "sync-audit",
+        "l2-state-queries",
+        "schema-validation",
+        "nested-repo-management",
+        "ci-cd-pipeline"
+      ],
+      "api_endpoint": "tools/gumas_api.py",
+      "api_docs": "/docs (when running: make gumas-api)",
+      "status": "active",
+      "registered_at": "2026-04-19T00:00:00Z"
+    }
+  ],
+  "surface_links": [
+    {
+      "from": "s.tag::orioncore.codespace.runtime",
+      "to": "s.tag::qgia.space.perplexity",
+      "relation": "feeds",
+      "protocol": "GitHub → constellation-event → Space consumption",
+      "artifacts": [
+        "operational-forecasts",
+        "simulation-scenario-exports",
+        "l2-state-bundles",
+        "calibration-reports"
+      ]
+    },
+    {
+      "from": "s.tag::qgia.space.perplexity",
+      "to": "s.tag::orioncore.codespace.runtime",
+      "relation": "drives",
+      "protocol": "Analyst assessment → evidence intake → closed-loop feedback",
+      "artifacts": [
+        "intelligence-assessments",
+        "crisis-analyses",
+        "headline-evidence"
+      ]
+    }
+  ]
 }

@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-04-12T02:50:02Z",
+  "generated_at": "2026-04-23T14:05:48Z",
   "root": ".",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-04-12T02:49:55Z",
+  "manifest_generated_at": "2026-04-23T14:05:39Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
@@ -363,36 +363,28 @@
       "operations": [
         {
           "batch_id": "wave4_root_intake_cleanup_initial",
-          "source": "The Neutrality-Fluff Axiom.md",
-          "destination": "intake/The Neutrality-Fluff Axiom.md",
+          "source": "Aurora_Sim_Architecture",
+          "destination": "intake/Aurora_Sim_Architecture",
           "operation": "move",
-          "pre_hash": "3addffe47cd4f676d2114a43fddf1ad87fb494389859f2037e8ceebaf4d3b42d",
-          "post_hash": "3addffe47cd4f676d2114a43fddf1ad87fb494389859f2037e8ceebaf4d3b42d",
-          "rollback_source": "The Neutrality-Fluff Axiom.md",
-          "reason": "Relocate The Neutrality-Fluff Axiom.md into intake/The Neutrality-Fluff Axiom.md.",
+          "pre_hash": "a3f9909e487929affe1b522a058da7eb6e8b624d8a58d8f0e70b4c17a1af445e",
+          "post_hash": "a3f9909e487929affe1b522a058da7eb6e8b624d8a58d8f0e70b4c17a1af445e",
+          "rollback_source": "Aurora_Sim_Architecture",
+          "reason": "Relocate Aurora_Sim_Architecture into intake/Aurora_Sim_Architecture.",
           "approved": false,
-          "applied_at": "2026-04-12T02:50:13Z",
-          "path_kind": "file"
-        }
-      ]
-    },
-    {
-      "batch_id": "wave5_root_archive_followup",
-      "status": "applied",
-      "summary": "Follow-up relocation for residual root archive artifacts into intake.",
-      "rollback_manifest": "catalog/rollback_wave5_root_archive_followup.json",
-      "operations": [
+          "applied_at": null,
+          "path_kind": "tree"
+        },
         {
-          "batch_id": "wave5_root_archive_followup",
-          "source": "THREAD_MEMORY_COMPRESSION_BEACON_V2.zip",
-          "destination": "intake/THREAD_MEMORY_COMPRESSION_BEACON_V2.zip",
+          "batch_id": "wave4_root_intake_cleanup_initial",
+          "source": "QGIA_SPACE_NAVAGATION_GUIDE.md",
+          "destination": "intake/QGIA_SPACE_NAVAGATION_GUIDE.md",
           "operation": "move",
-          "pre_hash": "2ff7b899ba6879caf5cdd21845de29e5948f5950d4ed6c462b7ace836751e84a",
-          "post_hash": "2ff7b899ba6879caf5cdd21845de29e5948f5950d4ed6c462b7ace836751e84a",
-          "rollback_source": "THREAD_MEMORY_COMPRESSION_BEACON_V2.zip",
-          "reason": "Root-level ZIP capsule routed into intake pending review and canonical promotion decisions.",
+          "pre_hash": "99db01d191146f6b246e3265a432355199e4384c9dd0e4c8f823f2d53de2471d",
+          "post_hash": "99db01d191146f6b246e3265a432355199e4384c9dd0e4c8f823f2d53de2471d",
+          "rollback_source": "QGIA_SPACE_NAVAGATION_GUIDE.md",
+          "reason": "Relocate QGIA_SPACE_NAVAGATION_GUIDE.md into intake/QGIA_SPACE_NAVAGATION_GUIDE.md.",
           "approved": false,
-          "applied_at": "2026-04-09T02:44:39Z",
+          "applied_at": null,
           "path_kind": "file"
         }
       ]

@@ -1,0 +1,163 @@
+name: Aurora CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests & Workspace Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pyyaml
+
+      - name: Run test suite
+        run: pytest tests/ -v --tb=short
+
+      - name: Run workspace verification
+        run: python tools/workspace_verify.py
+        continue-on-error: false
+
+      - name: Upload verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: workspace-verify-report
+          path: reports/analysis/workspace_verify_latest.json
+          retention-days: 30
+
+  sync-audit:
+    name: Repo Sync Audit
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Run root sync audit
+        run: python skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo root
+        continue-on-error: true
+
+  lint:
+    name: Lint & Schema Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml jsonschema
+
+      - name: Validate YAML manifests
+        run: |
+          python -c "
+          import yaml, sys, pathlib
+          errors = []
+          for f in pathlib.Path('catalog').glob('*.yaml'):
+              try:
+                  yaml.safe_load(f.read_text())
+              except yaml.YAMLError as e:
+                  errors.append(f'{f}: {e}')
+          for f in pathlib.Path('catalog').glob('*.yml'):
+              try:
+                  yaml.safe_load(f.read_text())
+              except yaml.YAMLError as e:
+                  errors.append(f'{f}: {e}')
+          if errors:
+              print('\n'.join(errors), file=sys.stderr)
+              sys.exit(1)
+          print('All YAML manifests valid.')
+          "
+
+      - name: Validate JSON catalog files
+        run: |
+          python -c "
+          import json, sys, pathlib
+          errors = []
+          for f in pathlib.Path('catalog').glob('*.json'):
+              try:
+                  json.loads(f.read_text())
+              except json.JSONDecodeError as e:
+                  errors.append(f'{f}: {e}')
+          for f in pathlib.Path('catalog/schemas').glob('*.json'):
+              try:
+                  json.loads(f.read_text())
+              except json.JSONDecodeError as e:
+                  errors.append(f'{f}: {e}')
+          for f in pathlib.Path('catalog/contracts').glob('*.json'):
+              try:
+                  json.loads(f.read_text())
+              except json.JSONDecodeError as e:
+                  errors.append(f'{f}: {e}')
+          if errors:
+              print('\n'.join(errors), file=sys.stderr)
+              sys.exit(1)
+          print('All JSON files valid.')
+          "
+
+      - name: Check for tracked files exceeding size limit
+        run: |
+          python -c "
+          import subprocess, sys
+          LIMIT = 1_000_000
+          result = subprocess.run(
+              ['git', 'ls-files', '-z'],
+              capture_output=True, text=True
+          )
+          oversized = []
+          for path in result.stdout.split('\0'):
+              if not path:
+                  continue
+              try:
+                  import os
+                  size = os.path.getsize(path)
+                  if size > LIMIT:
+                      oversized.append(f'{path} ({size:,} bytes)')
+              except FileNotFoundError:
+                  pass
+          if oversized:
+              print('Tracked files exceeding 1 MB:', file=sys.stderr)
+              print('\n'.join(oversized), file=sys.stderr)
+              sys.exit(1)
+          print('All tracked files within size limit.')
+          "

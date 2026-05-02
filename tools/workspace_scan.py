@@ -18,7 +18,7 @@ from _workspace_common import (
     git,
     iter_archive_artifacts,
     load_classification_overrides,
-    top_level_policy_records,
+    top_level_policy_records_with_redaction,
     normalize_family,
     now_iso_utc,
     repo_validation_command,
@@ -48,15 +48,22 @@ def repo_registry_entry(root: Path, repo_rel: str) -> dict[str, str]:
     }
 
 
-def build_archive_inventory(root: Path) -> tuple[list[dict[str, object]], dict[str, int]]:
+def build_archive_inventory(
+    root: Path,
+    redacted_top_level_paths: set[str] | None = None,
+) -> tuple[list[dict[str, object]], dict[str, int]]:
     records: list[dict[str, object]] = []
     by_hash: defaultdict[str, list[str]] = defaultdict(list)
     by_family: defaultdict[str, list[str]] = defaultdict(list)
     stat_counter: Counter[str] = Counter()
+    excluded_roots = redacted_top_level_paths or set()
 
     candidates = iter_archive_artifacts(root)
     for path in candidates:
         relative = relpath(path, root)
+        top_level_name = Path(relative).parts[0]
+        if top_level_name in excluded_roots:
+            continue
         stat = path.stat()
         family = normalize_family(path.name)
         digest = sha256_file(path)
@@ -101,11 +108,13 @@ def write_workspace_map(
     archive_inventory: list[dict[str, object]],
     overrides_path: Path,
     overrides_count: int,
+    privacy_exclusion_counts: dict[str, int],
 ) -> None:
     entries = list(manifest["entries"])
     repos = list(repo_registry["repos"])
     zone_counts = Counter(entry["logical_zone"] for entry in entries)
     planned_moves = [entry for entry in entries if entry["status"] == "planned_move"]
+    privacy_exclusion_total = sum(privacy_exclusion_counts.values())
     largest_archives = sorted(
         archive_inventory,
         key=lambda item: (-int(item["size_bytes"]), str(item["path"])),
@@ -120,6 +129,7 @@ def write_workspace_map(
         f"- Nested repos registered: `{len(repos)}`",
         f"- Archive or binary artifacts inventoried: `{len(archive_inventory)}`",
         f"- Classification overrides loaded: `{overrides_count}` from `{overrides_path.relative_to(root)}`",
+        f"- Top-level paths excluded by privacy screen: `{privacy_exclusion_total}`",
         "",
         "## Zones",
         "",
@@ -149,6 +159,13 @@ def write_workspace_map(
             )
     else:
         lines.append("- None")
+
+    lines.extend(["", "## Privacy Screen", ""])
+    if privacy_exclusion_counts:
+        for reason, count in sorted(privacy_exclusion_counts.items()):
+            lines.append(f"- `{reason}`: `{count}` top-level paths excluded")
+    else:
+        lines.append("- No top-level paths excluded")
 
     lines.extend(["", "## Largest Archive/Binary Artifacts", ""])
     for record in largest_archives:
@@ -200,7 +217,7 @@ def main() -> int:
     overrides_path = root / "catalog" / "classification_overrides.yaml"
     overrides = load_classification_overrides(overrides_path)
 
-    entries = top_level_policy_records(
+    entries, privacy_exclusion_counts, redacted_top_level_paths = top_level_policy_records_with_redaction(
         root,
         overrides=overrides,
         nested_repo_roots=set(nested_repo_roots),
@@ -230,7 +247,10 @@ def main() -> int:
         "repos": [repo_registry_entry(root, repo_rel) for repo_rel in nested_repo_roots],
     }
 
-    archive_inventory, archive_stats = build_archive_inventory(root)
+    archive_inventory, archive_stats = build_archive_inventory(
+        root,
+        redacted_top_level_paths=redacted_top_level_paths,
+    )
 
     summary = {
         "generated_at": now_iso_utc(),
@@ -242,6 +262,8 @@ def main() -> int:
         "archive_artifact_bytes": archive_stats.get("bytes", 0),
         "planned_move_count": sum(1 for entry in entries if entry["status"] == "planned_move"),
         "override_count": len(overrides),
+        "privacy_exclusion_count": sum(privacy_exclusion_counts.values()),
+        "privacy_exclusion_reasons": privacy_exclusion_counts,
     }
 
     manifest_out = Path(args.manifest_out) if args.manifest_out else root / "catalog" / "workspace_manifest.yaml"
@@ -262,6 +284,7 @@ def main() -> int:
         archive_inventory,
         overrides_path,
         len(overrides),
+        privacy_exclusion_counts,
     )
     return 0
 
