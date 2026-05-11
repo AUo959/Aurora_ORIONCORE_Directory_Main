@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-04-23T14:05:48Z",
+  "generated_at": "2026-05-10T14:48:15Z",
   "root": ".",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-04-23T14:05:39Z",
+  "manifest_generated_at": "2026-05-10T14:47:37Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
@@ -366,8 +366,8 @@
           "source": "Aurora_Sim_Architecture",
           "destination": "intake/Aurora_Sim_Architecture",
           "operation": "move",
-          "pre_hash": "a3f9909e487929affe1b522a058da7eb6e8b624d8a58d8f0e70b4c17a1af445e",
-          "post_hash": "a3f9909e487929affe1b522a058da7eb6e8b624d8a58d8f0e70b4c17a1af445e",
+          "pre_hash": "4a3f86d23f5de17b6a8263893ebd5daf014894b9c9d8ff71ae5de604ec20dfc6",
+          "post_hash": "4a3f86d23f5de17b6a8263893ebd5daf014894b9c9d8ff71ae5de604ec20dfc6",
           "rollback_source": "Aurora_Sim_Architecture",
           "reason": "Relocate Aurora_Sim_Architecture into intake/Aurora_Sim_Architecture.",
           "approved": false,

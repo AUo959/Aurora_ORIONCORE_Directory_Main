@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Dispatcher"
+  short_description: "Workflow intelligence for agent delegation"
+  default_prompt: "Use $agent-dispatcher to evaluate this request, extract independent workflow lanes, and explain whether material parallelism justifies an approval-gated dispatch plan, council, or swarm before starting anything."

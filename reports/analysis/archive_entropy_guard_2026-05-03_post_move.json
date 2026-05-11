@@ -1,0 +1,199 @@
+{
+  "generated_at": "2026-05-03T01:50:00Z",
+  "scan_root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "action": "post-move confirmation; no deletions",
+  "holding_path": "archives/reviewed_quarantine_delete_candidates/2026-05-03",
+  "active_quarantine_top_level_entries": 0,
+  "holding_total_files_all_extensions": 725,
+  "total_scoped_files": 2421,
+  "total_scoped_bytes": 18220384889,
+  "zone_counts": {
+    "other": 544,
+    "archives": 1202,
+    "reviewed_holding": 675
+  },
+  "zone_bytes": {
+    "other": 1145783393,
+    "archives": 7768927249,
+    "reviewed_holding": 9305674247
+  },
+  "exact_duplicate_groups": 458,
+  "exact_duplicate_files": 1499,
+  "exact_duplicate_reclaimable_bytes": 9678114954,
+  "reviewed_holding_scoped_files": 675,
+  "reviewed_holding_scoped_bytes": 9305674247,
+  "reviewed_holding_anchor_matched_files": 675,
+  "reviewed_holding_anchor_matched_bytes": 9305674247,
+  "reviewed_holding_unanchored_files": 0,
+  "reviewed_holding_unanchored_examples": [],
+  "oversized_non_holding_non_quarantine": [
+    {
+      "path": "archives/session_archives/Au_Archive_412_417/2.2.6b+Archives  2.zip",
+      "name": "2.2.6b+Archives  2.zip",
+      "ext": ".zip",
+      "size": 886188338,
+      "sha256": "0224c43544428ca5a6d9aa903cba04af19eede04c9491859a51ddfe31a0f0c25",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents.zip",
+      "name": "ZIPWIZ_Documents.zip",
+      "ext": ".zip",
+      "size": 708461869,
+      "sha256": "81b6d02664f6c143a44a01c133ab20e5215e7065aac40f48a8519f7456e562eb",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/ZIP_Archives/9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2026-02-05-19-12-28-22da4e485f0b487cae0716c77b02b379.zip",
+      "name": "9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2026-02-05-19-12-28-22da4e485f0b487cae0716c77b02b379.zip",
+      "ext": ".zip",
+      "size": 527913404,
+      "sha256": "1426e23c31210e1e18120902abadfb7d5737045d458cee99908fa2491dccc14c",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs2.zip",
+      "name": "ZIPWIZ Docs2.zip",
+      "ext": ".zip",
+      "size": 504494062,
+      "sha256": "240c9ac290190438fcc19d060d41fa2d43604ca620c28dbf89d0da040066b548",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs2 2.zip",
+      "name": "ZIPWIZ Docs2 2.zip",
+      "ext": ".zip",
+      "size": 504494062,
+      "sha256": "e1a3ca3e8ea37a7d39e060222ca880e45ee1b1d2b5c44c7eebc46e0c769eccea",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/session_archives/Au_Archive_412_417/4:11:AuDev.zip",
+      "name": "4:11:AuDev.zip",
+      "ext": ".zip",
+      "size": 404114667,
+      "sha256": "4f99e30bb892b2dfea652321c2c825da502105ed818804b087471bf53af51ccc",
+      "zone": "archives"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/openai-cookbook-main.zip",
+      "name": "openai-cookbook-main.zip",
+      "ext": ".zip",
+      "size": 349252287,
+      "sha256": "92f88d6c2a6bb69faf566a56f44327972f9b4bb5122f2699a6dd3c6595c44e2f",
+      "zone": "other"
+    },
+    {
+      "path": "archives/unzipped/Complete Archive 4_19 copy/MicrosoftTeams.pkg",
+      "name": "MicrosoftTeams.pkg",
+      "ext": ".pkg",
+      "size": 310959109,
+      "sha256": "523f175c77089beff68179b8f06429467bb0ef183c9767bd75129de5733b8e20",
+      "zone": "archives"
+    },
+    {
+      "path": "projects/Streamdeck_Glyphs/Stream_Deck_6.8.1.21263(2).msi",
+      "name": "Stream_Deck_6.8.1.21263(2).msi",
+      "ext": ".msi",
+      "size": 251813888,
+      "sha256": "4fb5bad96ca847ed618501339c51947ca63f6632d004f2b828e1156aa3b614cf",
+      "zone": "other"
+    },
+    {
+      "path": "archives/session_archives/Au_Archive_62_619/GUI_Cloudhub.zip",
+      "name": "GUI_Cloudhub.zip",
+      "ext": ".zip",
+      "size": 198563270,
+      "sha256": "279b02fdaa17931b5acf139c3e8b2400269405501a31f50fb141159164527b07",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/sp158658.exe",
+      "name": "sp158658.exe",
+      "ext": ".exe",
+      "size": 183989064,
+      "sha256": "4e30ffb745e9c84a58498247ebde05a9caca239662c02437977a3e1146b78cc4",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/sp155262.exe",
+      "name": "sp155262.exe",
+      "ext": ".exe",
+      "size": 183365808,
+      "sha256": "eb6834444b7a83237bc2f15ad7a4b7a4110533ce7f410085bd18e508288eaeca",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/session_archives/Au_Archive_62_619/GitHubDesktop-x64.zip",
+      "name": "GitHubDesktop-x64.zip",
+      "ext": ".zip",
+      "size": 176276621,
+      "sha256": "e28ec4cf79fa16256e2e1338c6ba048698df776ad2aa517973c1be486bef0574",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIP Archives/GUI Zip.zip",
+      "name": "GUI Zip.zip",
+      "ext": ".zip",
+      "size": 176255217,
+      "sha256": "35c55ce6c245be4e77478546c2a346332370a399db6421e0b1e6e319025c1b97",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/Complete Archive 4_19 copy/GitHubDesktop-x64.zip",
+      "name": "GitHubDesktop-x64.zip",
+      "ext": ".zip",
+      "size": 176238162,
+      "sha256": "e013b01d34c0023ff18f211a1155364cd5251d54aca2f001bbbc39c898d22b30",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/GitHubDesktopSetup-x64.exe",
+      "name": "GitHubDesktopSetup-x64.exe",
+      "ext": ".exe",
+      "size": 172617688,
+      "sha256": "8879ce47c6385889f1230dc163cd228a040d60346831faedc2ce9b87250f6ba2",
+      "zone": "archives"
+    },
+    {
+      "path": "projects/Aurora_Project_Cloudhub_Deploy/Orion_Links/Perplexity Setup 1.1.3.exe",
+      "name": "Perplexity Setup 1.1.3.exe",
+      "ext": ".exe",
+      "size": 170700224,
+      "sha256": "0ad69798d88dc1ca4c004adb5409c23e2f96d8df4cc4a759f7244cdcf1183045",
+      "zone": "other"
+    },
+    {
+      "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/Au_Archive_62_619/Un-Dia-de-la-Finca.zip",
+      "name": "Un-Dia-de-la-Finca.zip",
+      "ext": ".zip",
+      "size": 154484619,
+      "sha256": "335b42ebcded06bae39f18ce7c3bdfd7dc225cd59d63ae8390e31e13647fba99",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/session_archives/Au_Archive_45_49/AuroraMasterArchive.zip",
+      "name": "AuroraMasterArchive.zip",
+      "ext": ".zip",
+      "size": 147883691,
+      "sha256": "194d4c24cf22ba398d64056c4790ccf3bde3a272bd32572ad4e607d636a70525",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/session_archives/Au_Archive_45_49/GUMAS+AUR Dev File Archive  6.zip",
+      "name": "GUMAS+AUR Dev File Archive  6.zip",
+      "ext": ".zip",
+      "size": 108199716,
+      "sha256": "afa473dad7cf7d9d831ff4a66a93849d8f28041f7f18f32aaab4c1e5e85befa4",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/session_archives/Au_Archive_45_49/GUMAS+AUR Dev File Archive  5.zip",
+      "name": "GUMAS+AUR Dev File Archive  5.zip",
+      "ext": ".zip",
+      "size": 108198144,
+      "sha256": "8da63596b1ad5caaa9b2f503da0139b1919a9b36324bac4a3ee36a7d9939440d",
+      "zone": "archives"
+    }
+  ]
+}

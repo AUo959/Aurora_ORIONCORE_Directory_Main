@@ -1,10 +1,10 @@
 # Workspace Map
 
-- Generated: `2026-04-23T14:05:39Z`
+- Generated: `2026-05-10T14:47:37Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
 - Top-level entries cataloged: `33`
 - Nested repos registered: `5`
-- Archive or binary artifacts inventoried: `594`
+- Archive or binary artifacts inventoried: `1268`
 - Classification overrides loaded: `4` from `catalog/classification_overrides.yaml`
 - Top-level paths excluded by privacy screen: `1`
 
@@ -22,7 +22,7 @@
 
 ## Active Nested Repos
 
-- `aurora-cloudbank-symbolic-main` at `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `codex/cloudbank-command-chain-workflow-repair-2026-04-10`, remote `configured`)
+- `aurora-cloudbank-symbolic-main` at `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `codex/cloudbank-issue-cleanup-2026-05-07`, remote `configured`)
 - `CanonRec` at `GUMAS_SIM_2.5/CanonRec` (branch `main`, remote `configured`)
 - `DuelSim_v2.0` at `GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0` (branch `main`, remote `configured`)
 - `qgia-knowledge-library-main` at `qgia-knowledge-library-main` (branch `main`, remote `configured`)
@@ -39,16 +39,16 @@
 
 ## Largest Archive/Binary Artifacts
 
-- `archives/session_archives/Au_Archive_412_417/2.2.6b+Archives  2.zip`: `845.1 MiB` [unique]
+- `archives/reviewed_quarantine_delete_candidates/2026-05-03/Au_Archive_412_417/2.2.6b+Archives .zip`: `845.1 MiB` [hash_duplicate]
+- `archives/reviewed_quarantine_delete_candidates/2026-05-03/Complete Archive 4_19 copy/2.2.6b+Archives  2.zip`: `845.1 MiB` [hash_duplicate]
+- `archives/reviewed_quarantine_delete_candidates/2026-05-03/Complete Archive 4_19 copy/2.2.6b+Archives .zip`: `845.1 MiB` [hash_duplicate]
+- `archives/session_archives/Au_Archive_412_417/2.2.6b+Archives  2.zip`: `845.1 MiB` [hash_duplicate]
 - `archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents.zip`: `675.6 MiB` [unique]
 - `archives/unzipped/ZIP_Archives/9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2026-02-05-19-12-28-22da4e485f0b487cae0716c77b02b379.zip`: `503.5 MiB` [unique]
 - `archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs2 2.zip`: `481.1 MiB` [family_variant]
 - `archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs2.zip`: `481.1 MiB` [family_variant]
-- `archives/session_archives/Au_Archive_412_417/4:11:AuDev.zip`: `385.4 MiB` [unique]
-- `GUMAS_SIM_2.5/Aurora_Sim_Architecture/openai-cookbook-main.zip`: `333.1 MiB` [unique]
-- `archives/unzipped/Complete Archive 4_19 copy/MicrosoftTeams.pkg`: `296.6 MiB` [unique]
-- `projects/Streamdeck_Glyphs/Stream_Deck_6.8.1.21263(2).msi`: `240.1 MiB` [unique]
-- `archives/session_archives/Au_Archive_62_619/GUI_Cloudhub.zip`: `189.4 MiB` [unique]
+- `archives/reviewed_quarantine_delete_candidates/2026-05-03/Complete Archive 4_19 copy/4:11:AuDev.zip`: `385.4 MiB` [hash_duplicate]
+- `archives/session_archives/Au_Archive_412_417/4:11:AuDev.zip`: `385.4 MiB` [hash_duplicate]
 
 ## Reading Order
 
