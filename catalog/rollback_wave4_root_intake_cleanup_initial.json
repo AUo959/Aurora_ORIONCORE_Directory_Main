@@ -1,33 +1,20 @@
 {
   "batch_id": "wave4_root_intake_cleanup_initial_rollback",
   "for_batch": "wave4_root_intake_cleanup_initial",
-  "generated_at": "2026-05-10T14:48:15Z",
+  "generated_at": "2026-05-13T03:45:16Z",
   "operations": [
     {
       "batch_id": "wave4_root_intake_cleanup_initial_rollback",
       "source": "intake/Aurora_Sim_Architecture",
       "destination": "Aurora_Sim_Architecture",
       "operation": "move",
-      "pre_hash": "4a3f86d23f5de17b6a8263893ebd5daf014894b9c9d8ff71ae5de604ec20dfc6",
-      "post_hash": "4a3f86d23f5de17b6a8263893ebd5daf014894b9c9d8ff71ae5de604ec20dfc6",
+      "pre_hash": "c80897a3bab7736dc6971c6ee4017955a6eebd4d7903d14dc197f17abfe97376",
+      "post_hash": "c80897a3bab7736dc6971c6ee4017955a6eebd4d7903d14dc197f17abfe97376",
       "rollback_source": "intake/Aurora_Sim_Architecture",
       "reason": "Rollback for wave4_root_intake_cleanup_initial",
       "approved": false,
       "applied_at": null,
       "path_kind": "tree"
-    },
-    {
-      "batch_id": "wave4_root_intake_cleanup_initial_rollback",
-      "source": "intake/QGIA_SPACE_NAVAGATION_GUIDE.md",
-      "destination": "QGIA_SPACE_NAVAGATION_GUIDE.md",
-      "operation": "move",
-      "pre_hash": "99db01d191146f6b246e3265a432355199e4384c9dd0e4c8f823f2d53de2471d",
-      "post_hash": "99db01d191146f6b246e3265a432355199e4384c9dd0e4c8f823f2d53de2471d",
-      "rollback_source": "intake/QGIA_SPACE_NAVAGATION_GUIDE.md",
-      "reason": "Rollback for wave4_root_intake_cleanup_initial",
-      "approved": false,
-      "applied_at": null,
-      "path_kind": "file"
     }
   ]
 }

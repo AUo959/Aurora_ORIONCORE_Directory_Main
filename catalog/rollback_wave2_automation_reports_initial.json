@@ -1,7 +1,7 @@
 {
   "batch_id": "wave2_automation_reports_initial_rollback",
   "for_batch": "wave2_automation_reports_initial",
-  "generated_at": "2026-05-10T14:48:15Z",
+  "generated_at": "2026-05-13T03:45:16Z",
   "operations": [
     {
       "batch_id": "wave2_automation_reports_initial_rollback",

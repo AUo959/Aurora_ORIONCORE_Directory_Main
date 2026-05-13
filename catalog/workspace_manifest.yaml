@@ -1,4 +1,4 @@
-generated_at: '2026-05-10T14:47:37Z'
+generated_at: '2026-05-13T03:45:03Z'
 root: .
 logical_taxonomy:
 - repos
@@ -174,17 +174,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: qgia-space-navagation-guide
-  kind: intake_file
-  current_path: QGIA_SPACE_NAVAGATION_GUIDE.md
-  logical_zone: intake
-  planned_path: intake/QGIA_SPACE_NAVAGATION_GUIDE.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: readme
   kind: workspace_doc
   current_path: README.md
