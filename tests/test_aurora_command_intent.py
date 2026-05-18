@@ -5,6 +5,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 TOOLS_ROOT = REPO_ROOT / "tools"
@@ -38,7 +40,14 @@ SCHEMA_KEYS = {
 }
 
 
+def require_cloudbank_parser() -> None:
+    if not gateway.COMMAND_GRAMMAR_PATH.exists():
+        pytest.skip("CloudBank command grammar is not present in this root checkout")
+
+
 def test_parse_uses_cloudbank_parser_for_symbolic_command() -> None:
+    require_cloudbank_parser()
+
     record = gateway.parse_command_intent("#025//.deep")
 
     assert set(record) == SCHEMA_KEYS
@@ -55,6 +64,8 @@ def test_parse_uses_cloudbank_parser_for_symbolic_command() -> None:
 
 
 def test_envelope_is_schema_shaped_and_keeps_execution_blocked() -> None:
+    require_cloudbank_parser()
+
     envelope = gateway.envelope_for(
         "THREADWAKE",
         intent_type="execute_request",
@@ -86,6 +97,8 @@ def test_mesh_text_maps_to_mesh_family_without_runtime_execution() -> None:
 
 
 def test_simulate_range_executes_only_in_process_range_chain() -> None:
+    require_cloudbank_parser()
+
     status, payload = gateway.simulate_range("001//005//", max_steps=10)
 
     assert status == 0
@@ -103,6 +116,8 @@ def test_simulate_range_executes_only_in_process_range_chain() -> None:
 
 
 def test_simulate_range_rejects_non_range_command() -> None:
+    require_cloudbank_parser()
+
     status, payload = gateway.simulate_range("THREADWAKE//.", max_steps=10)
 
     assert status == 2
@@ -130,6 +145,22 @@ def test_cli_envelope_outputs_schema_shaped_json() -> None:
     assert result.returncode == 0
     payload = json.loads(result.stdout)
     assert set(payload) == SCHEMA_KEYS
+    if not gateway.COMMAND_GRAMMAR_PATH.exists():
+        assert payload["ast_shape"] == "unknown"
+        assert payload["validation_issues"][0]["code"] == "cloudbank_parser_unavailable"
+        return
     assert payload["ast_shape"] == "range_chain"
     assert payload["range_edges"] == {"start": "001", "end": "005"}
     assert payload["execution_status"] == "not_requested"
+
+
+def test_parse_reports_missing_cloudbank_parser(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    monkeypatch.setattr(gateway, "COMMAND_GRAMMAR_PATH", tmp_path / "missing-command-grammar")
+
+    record = gateway.parse_command_intent("THREADWAKE")
+
+    assert set(record) == SCHEMA_KEYS
+    assert record["validation_status"] == "not_validated"
+    assert record["validation_issues"][0]["code"] == "cloudbank_parser_unavailable"
+    assert record["runtime_handler_verified"] is False
+    assert "Restore the CloudBank parser path" in record["recommended_next_action"]
