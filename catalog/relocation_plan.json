@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-05-13T03:45:16Z",
+  "generated_at": "2026-05-18T19:56:48Z",
   "root": ".",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-05-13T03:45:03Z",
+  "manifest_generated_at": "2026-05-18T19:56:34Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
@@ -366,13 +366,26 @@
           "source": "Aurora_Sim_Architecture",
           "destination": "intake/Aurora_Sim_Architecture",
           "operation": "move",
-          "pre_hash": "c80897a3bab7736dc6971c6ee4017955a6eebd4d7903d14dc197f17abfe97376",
-          "post_hash": "c80897a3bab7736dc6971c6ee4017955a6eebd4d7903d14dc197f17abfe97376",
+          "pre_hash": "21be842bd89e3834d12fbe3b337e7fe93f2d5eff4178f1607c15b7a9702a1a54",
+          "post_hash": "21be842bd89e3834d12fbe3b337e7fe93f2d5eff4178f1607c15b7a9702a1a54",
           "rollback_source": "Aurora_Sim_Architecture",
           "reason": "Relocate Aurora_Sim_Architecture into intake/Aurora_Sim_Architecture.",
           "approved": true,
           "applied_at": null,
           "path_kind": "tree"
+        },
+        {
+          "batch_id": "wave4_root_intake_cleanup_initial",
+          "source": "narrative_engine_spec_parameters_to_narrative_core_v_0.md",
+          "destination": "intake/narrative_engine_spec_parameters_to_narrative_core_v_0.md",
+          "operation": "move",
+          "pre_hash": "a4aedede0cdd2423eab718025504f5823924e67c96283d781db5d7519044de46",
+          "post_hash": "a4aedede0cdd2423eab718025504f5823924e67c96283d781db5d7519044de46",
+          "rollback_source": "narrative_engine_spec_parameters_to_narrative_core_v_0.md",
+          "reason": "Local early project specification for a narrative engine; include in root intake routing metadata without promoting the source text into canon or a nested repo.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
         }
       ]
     }

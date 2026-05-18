@@ -113,6 +113,57 @@ Primary commands:
 - PR packet draft:
   - `python3 skills/gitwiz-github-manager/scripts/gitwiz_pr_packet.py --repo-name root --base origin/main`
 
+## Aurora Dev Toolkit
+
+Root-control-plane toolkit:
+
+- Source manifest: `catalog/dev_toolkit_manifest.json`
+- Workflow: `docs/AURORA_DEV_TOOLKIT_WORKFLOW_v1.md`
+- Current report: `reports/analysis/aurora_devkit_latest.json`
+- Current install plan: `reports/analysis/aurora_devkit_install_plan_latest.json`
+
+Primary commands:
+
+- `python3 tools/aurora_devkit.py`
+- `python3 tools/aurora_devkit.py --persist-report`
+- `python3 tools/aurora_devkit.py --install-plan --persist-install-plan`
+- `make devkit-check`
+- `make devkit-report`
+- `make devkit-install-plan`
+
+Machine-local automations:
+
+- `aurora-dev-toolkit-watch`: read-only weekly drift report
+- `aurora-dev-toolkit-user-space-update`: updates only approved user-space tools
+
+System-level gates remain explicit approval work: Homebrew, Docker, full Xcode,
+Rust, and Go.
+
+## Aurora Command Grammar
+
+Repo-local Codex plugin:
+
+- `plugins/aurora-command-grammar/`
+
+Purpose:
+
+- user-accessible parsing, normalization, validation, and mesh-route mapping
+- shared agent protocol for command-language ambiguity
+- background command intent envelopes for GitHub issues, PRs, receipts,
+  automations, and agent handoffs
+
+Core rule:
+
+- grammar-valid command text is not execution approval
+- CloudBank remains the parser/runtime authority for command grammar code
+- execution requires explicit target repo and live runtime verification
+
+Primary references:
+
+- `plugins/aurora-command-grammar/skills/aurora-command-grammar/SKILL.md`
+- `plugins/aurora-command-grammar/skills/aurora-command-grammar/references/background-communication.md`
+- `plugins/aurora-command-grammar/skills/aurora-command-grammar/references/command-intent-envelope.schema.json`
+
 ## Execution Rules
 
 For root repo work:

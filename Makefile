@@ -1,4 +1,4 @@
-.PHONY: help setup test verify scan sync-audit pr-packet lint health clean
+.PHONY: help setup test verify scan sync-audit pr-packet lint health devkit-check devkit-report devkit-install-plan clean
 
 PYTHON ?= python3
 PYTEST ?= pytest
@@ -46,6 +46,15 @@ health: ## Run full health check (tests + verify + lint + sync audit)
 	@echo "\n══════════════════════════════════════════"
 	@echo "  Health check complete."
 	@echo "══════════════════════════════════════════"
+
+devkit-check: ## Audit the local Aurora developer toolkit surface
+	$(PYTHON) tools/aurora_devkit.py
+
+devkit-report: ## Persist the local Aurora developer toolkit report
+	$(PYTHON) tools/aurora_devkit.py --persist-report
+
+devkit-install-plan: ## Show the approval-gated Aurora developer toolkit install plan
+	$(PYTHON) tools/aurora_devkit.py --install-plan --persist-install-plan
 
 # ── Git / Sync ───────────────────────────────────────────────────────────
 

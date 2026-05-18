@@ -22,6 +22,9 @@ nested repo internals stay out of root Git history.
 - Persistent overrides: [catalog/classification_overrides.yaml](catalog/classification_overrides.yaml)
 - Nested repos: [catalog/repo_registry.yaml](catalog/repo_registry.yaml)
 - Planned moves only: [catalog/relocation_plan.json](catalog/relocation_plan.json)
+- Dev toolkit workflow: [docs/AURORA_DEV_TOOLKIT_WORKFLOW_v1.md](docs/AURORA_DEV_TOOLKIT_WORKFLOW_v1.md)
+- Current dev toolkit report: [reports/analysis/aurora_devkit_latest.json](reports/analysis/aurora_devkit_latest.json)
+- Aurora command grammar plugin: [plugins/aurora-command-grammar/skills/aurora-command-grammar/SKILL.md](plugins/aurora-command-grammar/skills/aurora-command-grammar/SKILL.md)
 
 ## Logical Zones
 
@@ -36,6 +39,35 @@ nested repo internals stay out of root Git history.
 - `intake/`: ambiguous loose items pending review
 - `_staging/`: rehearsals and rollback-safe staging
 
+## Repo-Local Codex Plugins
+
+The root repo carries versioned Codex plugin surfaces under `plugins/` and
+marketplace metadata under `.agents/plugins/marketplace.json`.
+
+- `aurora-workspace-guard`: guards root control-plane edits, repo boundaries,
+  generated-surface handling, and validation flow.
+- `aurora-command-grammar`: gives users and agents a shared way to parse,
+  normalize, validate, and route Aurora command grammar without treating
+  grammar-valid text as execution approval. Its root Command Intent Gateway is
+  `tools/aurora_command_intent.py`.
+
+For background communication, `aurora-command-grammar` defines a command intent
+envelope in
+`plugins/aurora-command-grammar/skills/aurora-command-grammar/references/command-intent-envelope.schema.json`.
+Use it in PRs, issues, receipts, automation memory, or agent handoffs when
+command meaning affects a decision.
+
+Command Intent Gateway examples:
+
+```bash
+python3 tools/aurora_command_intent.py parse "THREADWAKE"
+python3 tools/aurora_command_intent.py envelope --text "001//005//"
+python3 tools/aurora_command_intent.py simulate-range "001//005//"
+```
+
+`simulate-range` is an in-process CloudBank `SymbolicEngine` simulation for
+valid numeric `RangeChain` inputs only. It is not live runtime execution.
+
 ## Supported Commands
 
 ```bash
@@ -46,6 +78,15 @@ python3 tools/workspace_verify.py
 python3 tools/workspace_verify.py --persist-report
 python3 tools/workspace_verify.py --report-out /tmp/workspace_verify.json
 python3 tools/workspace_verify.py --check-determinism --exercise-relocation
+python3 tools/aurora_command_intent.py parse "THREADWAKE"
+python3 tools/aurora_command_intent.py envelope --text "001//005//"
+python3 tools/aurora_command_intent.py simulate-range "001//005//"
+python3 tools/aurora_devkit.py
+python3 tools/aurora_devkit.py --persist-report
+python3 tools/aurora_devkit.py --install-plan --persist-install-plan
+make devkit-check
+make devkit-report
+make devkit-install-plan
 ```
 
 `python3 tools/workspace_verify.py` is side-effect free by default and prints a

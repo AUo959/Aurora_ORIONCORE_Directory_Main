@@ -8,7 +8,7 @@
   ],
   "tests": {
     "returncode": 0,
-    "summary": "88 passed, 23 skipped in 18.64s"
+    "summary": "103 passed, 24 skipped in 5.07s"
   },
   "verify": {
     "returncode": 0,
@@ -19,6 +19,6 @@
     "returncode": 0,
     "output_lines": 4
   },
-  "elapsed_seconds": 21.77,
+  "elapsed_seconds": 6.03,
   "status": "DEGRADED (1 issue(s))"
 }

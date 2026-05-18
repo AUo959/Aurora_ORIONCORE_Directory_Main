@@ -1,0 +1,102 @@
+[
+  {
+    "tool_id": "docker",
+    "lane": "macos-system",
+    "manager": "manual",
+    "status": "blocked",
+    "approval_required": true,
+    "blocked_by": [
+      "brew"
+    ],
+    "install_command": [
+      "brew",
+      "install",
+      "--cask",
+      "docker"
+    ],
+    "install_command_text": "brew install --cask docker",
+    "update_command": [
+      "brew",
+      "upgrade",
+      "--cask",
+      "docker"
+    ],
+    "update_command_text": "brew upgrade --cask docker",
+    "notes": "Docker Desktop requires a system package manager or manual app install."
+  },
+  {
+    "tool_id": "brew",
+    "lane": "macos-system",
+    "manager": "manual",
+    "status": "manual",
+    "approval_required": true,
+    "blocked_by": [],
+    "install_command": [],
+    "install_command_text": "",
+    "update_command": [
+      "brew",
+      "update"
+    ],
+    "update_command_text": "brew update",
+    "notes": "Homebrew install is a system-level operation and should be approved separately before running the official installer."
+  },
+  {
+    "tool_id": "xcodebuild",
+    "lane": "apple-platforms",
+    "manager": "manual",
+    "status": "manual",
+    "approval_required": true,
+    "blocked_by": [],
+    "install_command": [],
+    "install_command_text": "",
+    "update_command": [],
+    "update_command_text": "",
+    "notes": "Full Xcode must be installed and selected with xcode-select before iOS or full macOS build automation is complete."
+  },
+  {
+    "tool_id": "rust",
+    "lane": "systems",
+    "manager": "brew",
+    "status": "blocked",
+    "approval_required": true,
+    "blocked_by": [
+      "brew"
+    ],
+    "install_command": [
+      "brew",
+      "install",
+      "rust"
+    ],
+    "install_command_text": "brew install rust",
+    "update_command": [
+      "brew",
+      "upgrade",
+      "rust"
+    ],
+    "update_command_text": "brew upgrade rust",
+    "notes": "Installs Rust through Homebrew once Homebrew exists."
+  },
+  {
+    "tool_id": "go",
+    "lane": "systems",
+    "manager": "brew",
+    "status": "blocked",
+    "approval_required": true,
+    "blocked_by": [
+      "brew"
+    ],
+    "install_command": [
+      "brew",
+      "install",
+      "go"
+    ],
+    "install_command_text": "brew install go",
+    "update_command": [
+      "brew",
+      "upgrade",
+      "go"
+    ],
+    "update_command_text": "brew upgrade go",
+    "notes": "Installs Go through Homebrew once Homebrew exists."
+  }
+]

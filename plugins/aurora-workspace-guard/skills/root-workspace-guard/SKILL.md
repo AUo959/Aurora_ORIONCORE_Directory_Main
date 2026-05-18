@@ -31,6 +31,7 @@ Use this skill when the task touches the Aurora root workspace repo rather than 
    - Keep layer boundaries explicit: control plane, runtime, simulation, knowledge, archive/staging/intake.
    - For persistent top-level routing changes, edit `catalog/classification_overrides.yaml` and regenerate generated surfaces instead of hand-editing generated outputs.
    - Treat `catalog/workspace_manifest.yaml`, `catalog/repo_registry.yaml`, `docs/workspace-map.md`, `catalog/relocation_plan.json`, and `reports/analysis/workspace_verify_latest.json` as generated control surfaces unless the task explicitly requires direct regeneration logic changes.
+   - When a request contains Aurora command notation, `aurora_command_grammar`, `Aurora Command Router`, or `@mesh` routing language, delegate interpretation to the `aurora-command-grammar` skill before acting.
 5. Use the supported root validation flow.
    - `python3 tools/workspace_scan.py`
    - `python3 tools/workspace_plan_moves.py`
@@ -43,6 +44,7 @@ Use this skill when the task touches the Aurora root workspace repo rather than 
 - Evidence over assumption. Do not describe something as canonical, validated, active, or complete without concrete repo evidence.
 - Do not operate on nested repos by implication from a root-repo request.
 - Do not treat bulk replay, scan, or diagnostic outputs as live runtime state.
+- Do not treat grammar-valid command text as authorization to execute it. Grammar interpretation belongs to `aurora-command-grammar`; execution still requires target repo and runtime verification.
 - Do not delete ambiguity. Label it as `draft`, `staged`, `generated`, `planned_move`, or `canonical` as appropriate.
 - For root plugin work, keep `.agents` and `plugins` classified as root control-plane tooling rather than intake.
 
