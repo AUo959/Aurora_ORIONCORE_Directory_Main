@@ -281,11 +281,18 @@ def test_command_grammar_context_is_attached_to_agent_briefs_without_limiting_di
     assert report["command_context"]["present"] is True
     assert report["command_context"]["dispatch_effect"] == "informational_only"
     assert "helpful context clue" in report["command_context"]["human_use_guidance"]
-    assert report["command_context"]["snippets"][0]["raw_text"] == "THREADWAKE"
-    assert report["command_context"]["snippets"][0]["normalized_text"] == "THREADWAKE//."
-    assert report["command_context"]["snippets"][0]["runtime_handler_verified"] is False
+    snippet = report["command_context"]["snippets"][0]
+    assert snippet["raw_text"] == "THREADWAKE"
+    assert snippet["runtime_handler_verified"] is False
+    if snippet["normalized_text"] is None:
+        assert snippet["validation_status"] == "not_validated"
+        assert snippet["validation_issues"][0]["code"] == "cloudbank_parser_unavailable"
+        expected_intent = "THREADWAKE"
+    else:
+        assert snippet["normalized_text"] == "THREADWAKE//."
+        expected_intent = "THREADWAKE//."
     assert all(role["command_intent"].startswith("context_only:") for role in report["agent_roles"])
-    assert any("THREADWAKE//." in role["command_intent"] for role in report["agent_roles"])
+    assert any(expected_intent in role["command_intent"] for role in report["agent_roles"])
 
 
 def test_command_grammar_context_does_not_force_dispatch_for_linear_work() -> None:

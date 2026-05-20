@@ -22,6 +22,9 @@ No nested repo files were mutated.
 The dispatcher now emits `command_context` in its JSON contract. When command-like
 text appears, it calls the root `tools/aurora_command_intent.py` gateway and
 attaches normalized command intent to proposed agent roles as `command_intent`.
+In clean root-only checkouts where the nested CloudBank parser is absent, the
+same field remains present but reports `cloudbank_parser_unavailable` and uses
+the raw command text as context.
 
 The field is explicitly `informational_only`. It must not:
 
@@ -48,7 +51,8 @@ Observed:
 - `approval_gate`: `true`
 - `command_context.present`: `true`
 - `command_context.dispatch_effect`: `informational_only`
-- first normalized command: `THREADWAKE//.`
+- first normalized command in a canonical local checkout: `THREADWAKE//.`
+- clean root-only fallback: `cloudbank_parser_unavailable`, raw context retained
 - proposed roles include `command_intent: context_only: THREADWAKE//.; do not execute or constrain the task from grammar alone`
 
 Natural-language linear prompt:
