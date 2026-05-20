@@ -25,6 +25,9 @@ nested repo internals stay out of root Git history.
 - Dev toolkit workflow: [docs/AURORA_DEV_TOOLKIT_WORKFLOW_v1.md](docs/AURORA_DEV_TOOLKIT_WORKFLOW_v1.md)
 - Current dev toolkit report: [reports/analysis/aurora_devkit_latest.json](reports/analysis/aurora_devkit_latest.json)
 - Aurora command grammar plugin: [plugins/aurora-command-grammar/skills/aurora-command-grammar/SKILL.md](plugins/aurora-command-grammar/skills/aurora-command-grammar/SKILL.md)
+- Control-plane provenance and recovery role: [docs/CONTROL_PLANE_PROVENANCE.md](docs/CONTROL_PLANE_PROVENANCE.md)
+- Recovery index workflow: [docs/RECOVERY_INDEX_WORKFLOW_v1.md](docs/RECOVERY_INDEX_WORKFLOW_v1.md)
+- Current recovery index report: [reports/analysis/workspace_recovery_index_latest.json](reports/analysis/workspace_recovery_index_latest.json)
 
 ## Logical Zones
 
@@ -84,9 +87,13 @@ python3 tools/aurora_command_intent.py simulate-range "001//005//"
 python3 tools/aurora_devkit.py
 python3 tools/aurora_devkit.py --persist-report
 python3 tools/aurora_devkit.py --install-plan --persist-install-plan
+python3 tools/workspace_recovery_index.py
+python3 tools/workspace_recovery_index.py --persist-report
 make devkit-check
 make devkit-report
 make devkit-install-plan
+make recovery-index
+make recovery-report
 ```
 
 `python3 tools/workspace_verify.py` is side-effect free by default and prints a
@@ -120,6 +127,9 @@ python3 tools/threadcore_deploy_seal.py /path/to/THREADCORE_DEPLOY_SEAL_v1.zip
   through `catalog/repo_registry.yaml`.
 - Do not delete duplicates directly. Plan quarantine moves first, verify hashes,
   then review before any hard delete.
+- Do not treat recovery index candidates as canonical. The recovery index is a
+  review surface for early local work; extraction still requires owner-surface
+  review, validation, and a receipt or PR.
 - Keep tracked files below the workspace control-plane size ceiling enforced by
   `tools/workspace_verify.py`.
 - `intake/`, `projects/`, `archives/`, `repos/`, and `_staging/` are organization

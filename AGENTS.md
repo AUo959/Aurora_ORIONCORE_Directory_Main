@@ -25,6 +25,44 @@ Named repos:
 
 Never assume a root-repo request applies to nested repos.
 
+## Historical Provenance
+
+The root control-plane repo began as a local file archive on the owner's
+machine. Before the root control plane and GitHub workflows were connected,
+Aurora CloudBank existed separately on GitHub, and the local archive was not
+fully connected to that repo history.
+
+Implication:
+
+- early local work may be valuable even when it is absent from GitHub
+- root archive, intake, staging, or recovered material is not canonical by
+  default
+- one control-plane mission is to recover and index early local work so
+  high-value logic, code, contracts, and design decisions can be identified and
+  extracted through explicit promotion paths
+
+See `docs/CONTROL_PLANE_PROVENANCE.md` for the durable provenance and recovery
+rule.
+
+## Recovery Indexing
+
+Root recovery tooling:
+
+- Config: `catalog/recovery_index_manifest.json`
+- Workflow: `docs/RECOVERY_INDEX_WORKFLOW_v1.md`
+- Current report: `reports/analysis/workspace_recovery_index_latest.json`
+
+Primary commands:
+
+- `python3 tools/workspace_recovery_index.py`
+- `python3 tools/workspace_recovery_index.py --persist-report`
+- `make recovery-index`
+- `make recovery-report`
+
+The recovery index is read-only. Its candidates are routing evidence for early
+local work and remain `pending_review` / `not_promoted` until a separate
+promotion gate validates and extracts them into the correct owner surface.
+
 ## Current GitHub State
 
 Root repo:

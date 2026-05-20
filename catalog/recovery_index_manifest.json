@@ -1,0 +1,344 @@
+{
+  "schema_version": 1,
+  "id": "aurora-root-recovery-index",
+  "description": "Read-only root control-plane recovery index for early local Aurora / CloudBank work.",
+  "default_report_path": "reports/analysis/workspace_recovery_index_latest.json",
+  "max_candidates": 100,
+  "min_value_score": 2,
+  "max_file_bytes": 2000000,
+  "max_hash_bytes": 5000000,
+  "max_probe_bytes": 65536,
+  "max_files_per_root": 10000,
+  "include_extensions": [
+    ".cfg",
+    ".csv",
+    ".ini",
+    ".js",
+    ".json",
+    ".jsonl",
+    ".md",
+    ".mjs",
+    ".py",
+    ".sh",
+    ".toml",
+    ".ts",
+    ".tsx",
+    ".txt",
+    ".yaml",
+    ".yml"
+  ],
+  "include_filenames": [
+    "Dockerfile",
+    "Makefile"
+  ],
+  "exclude_directory_names": [
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "exclude_subpaths": [
+    "archives/reviewed_quarantine_delete_candidates",
+    "archives/session_archives",
+    "_entropy_quarantine"
+  ],
+  "scan_roots": [
+    {
+      "path": ".",
+      "mode": "top_level_files",
+      "source_status": "loose_root_intake",
+      "priority": "high",
+      "reason": "loose root files may be early local work that needs explicit routing"
+    },
+    {
+      "path": "Aurora_Sim_Architecture",
+      "mode": "tree",
+      "source_status": "legacy_archive_intake",
+      "priority": "high",
+      "reason": "legacy local archive surface predating current root control-plane publication"
+    },
+    {
+      "path": "intake",
+      "mode": "tree",
+      "source_status": "intake",
+      "priority": "high",
+      "reason": "explicit review lane for ambiguous local material"
+    },
+    {
+      "path": "archives/unzipped",
+      "mode": "tree",
+      "source_status": "archive",
+      "priority": "medium",
+      "reason": "expanded archive material that can expose recoverable logic without unpacking binaries"
+    },
+    {
+      "path": "_staging",
+      "mode": "tree",
+      "source_status": "staged",
+      "priority": "medium",
+      "reason": "rollback-safe staging lane for recoverable work bundles"
+    }
+  ],
+  "value_signals": [
+    {
+      "id": "code_logic",
+      "weight": 5,
+      "extensions": [
+        ".js",
+        ".mjs",
+        ".py",
+        ".sh",
+        ".ts",
+        ".tsx"
+      ],
+      "content_terms": [
+        "def ",
+        "class ",
+        "function ",
+        "export ",
+        "import ",
+        "module.exports",
+        "async "
+      ]
+    },
+    {
+      "id": "contract_or_schema",
+      "weight": 4,
+      "path_terms": [
+        "contract",
+        "schema",
+        "manifest",
+        "validator",
+        "validation"
+      ],
+      "content_terms": [
+        "schema_version",
+        "contract",
+        "validator",
+        "validation",
+        "required"
+      ]
+    },
+    {
+      "id": "cloudbank_runtime",
+      "weight": 4,
+      "path_terms": [
+        "cloudbank",
+        "symbolic",
+        "runtime",
+        "engine",
+        "grammar",
+        "command"
+      ],
+      "content_terms": [
+        "cloudbank",
+        "symbolicengine",
+        "symbolic engine",
+        "command grammar",
+        "runtime",
+        "orchestration"
+      ]
+    },
+    {
+      "id": "narrative_or_agent_logic",
+      "weight": 3,
+      "path_terms": [
+        "agent",
+        "narrative",
+        "intent",
+        "dispatch",
+        "workflow"
+      ],
+      "content_terms": [
+        "agent",
+        "narrative",
+        "intent",
+        "dispatch",
+        "workflow"
+      ]
+    },
+    {
+      "id": "governance_or_control_plane",
+      "weight": 3,
+      "path_terms": [
+        "governance",
+        "control",
+        "catalog",
+        "routing",
+        "receipt",
+        "provenance",
+        "recovery"
+      ],
+      "content_terms": [
+        "control plane",
+        "catalog",
+        "routing",
+        "receipt",
+        "provenance",
+        "recovery",
+        "promotion"
+      ]
+    },
+    {
+      "id": "qgia_or_forecast",
+      "weight": 3,
+      "path_terms": [
+        "qgia",
+        "forecast",
+        "evidence",
+        "outcome",
+        "calibration"
+      ],
+      "content_terms": [
+        "qgia",
+        "forecast",
+        "evidence ledger",
+        "outcome ledger",
+        "calibration"
+      ]
+    },
+    {
+      "id": "test_or_fixture",
+      "weight": 2,
+      "path_terms": [
+        "test",
+        "fixture",
+        "sample"
+      ],
+      "content_terms": [
+        "pytest",
+        "unittest",
+        "fixture",
+        "expected"
+      ]
+    },
+    {
+      "id": "secret_or_key_material",
+      "weight": 1,
+      "path_terms": [
+        "accesskey",
+        "credential",
+        "key",
+        "secret",
+        "token"
+      ],
+      "content_terms": [
+        "api_key",
+        "credential",
+        "private key",
+        "secret",
+        "token"
+      ],
+      "restricted": true
+    }
+  ],
+  "route_hints": [
+    {
+      "target": "aurora-cloudbank-symbolic-main",
+      "owner_surface": "canonical nested repo",
+      "path_terms": [
+        "cloudbank",
+        "symbolic",
+        "command",
+        "grammar",
+        "engine",
+        "runtime",
+        "api",
+        "agent"
+      ],
+      "content_terms": [
+        "cloudbank",
+        "symbolicengine",
+        "symbolic engine",
+        "command grammar",
+        "fastapi"
+      ]
+    },
+    {
+      "target": "root",
+      "owner_surface": "root control-plane repo",
+      "path_terms": [
+        "catalog",
+        "control",
+        "governance",
+        "manifest",
+        "receipt",
+        "recovery",
+        "routing"
+      ],
+      "content_terms": [
+        "control plane",
+        "workspace",
+        "manifest",
+        "receipt",
+        "routing",
+        "promotion"
+      ]
+    },
+    {
+      "target": "qgia-knowledge-library-main",
+      "owner_surface": "canonical nested repo",
+      "path_terms": [
+        "qgia",
+        "evidence",
+        "outcome",
+        "knowledge"
+      ],
+      "content_terms": [
+        "qgia",
+        "evidence ledger",
+        "outcome ledger",
+        "knowledge library"
+      ]
+    },
+    {
+      "target": "qgia-knowledge-spine-main",
+      "owner_surface": "canonical nested repo",
+      "path_terms": [
+        "forecast",
+        "prior",
+        "calibration",
+        "spine"
+      ],
+      "content_terms": [
+        "forecast",
+        "prior",
+        "calibration",
+        "knowledge spine"
+      ]
+    },
+    {
+      "target": "CanonRec",
+      "owner_surface": "canonical nested repo",
+      "path_terms": [
+        "canon",
+        "canonrec"
+      ],
+      "content_terms": [
+        "canonrec",
+        "canonical"
+      ]
+    },
+    {
+      "target": "DuelSim_v2.0",
+      "owner_surface": "canonical nested repo",
+      "path_terms": [
+        "duel",
+        "duelsim"
+      ],
+      "content_terms": [
+        "duelsim",
+        "duel simulation"
+      ]
+    }
+  ],
+  "validation_commands": [
+    "python3 tools/workspace_recovery_index.py",
+    "python3 tools/workspace_recovery_index.py --persist-report",
+    "python3 -m pytest -q tests/test_workspace_recovery_index.py",
+    "python3 tools/workspace_verify.py"
+  ]
+}

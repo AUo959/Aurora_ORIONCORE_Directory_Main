@@ -1,4 +1,4 @@
-.PHONY: help setup test verify scan sync-audit pr-packet lint health devkit-check devkit-report devkit-install-plan clean
+.PHONY: help setup test verify scan sync-audit pr-packet lint health devkit-check devkit-report devkit-install-plan recovery-index recovery-report clean
 
 PYTHON ?= python3
 PYTEST ?= pytest
@@ -55,6 +55,12 @@ devkit-report: ## Persist the local Aurora developer toolkit report
 
 devkit-install-plan: ## Show the approval-gated Aurora developer toolkit install plan
 	$(PYTHON) tools/aurora_devkit.py --install-plan --persist-install-plan
+
+recovery-index: ## Build the read-only recovery index summary
+	$(PYTHON) tools/workspace_recovery_index.py --summary
+
+recovery-report: ## Persist the read-only recovery index report
+	$(PYTHON) tools/workspace_recovery_index.py --persist-report
 
 # ── Git / Sync ───────────────────────────────────────────────────────────
 
