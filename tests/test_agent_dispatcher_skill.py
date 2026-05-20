@@ -141,6 +141,7 @@ def test_skill_docs_define_portable_decision_contract() -> None:
     for field_name in (
         "request_summary",
         "workflow_graph",
+        "command_context",
         "dispatch_verdict",
         "reasoning_factors",
         "recommended_pattern",
@@ -160,6 +161,8 @@ def test_skill_docs_define_user_facing_behavior() -> None:
         "teach through concrete role and workflow tradeoffs",
         "do not spawn, initialize, or message agents until the user explicitly approves",
         "if it returns `silent_local`, do not mention agents unless the user explicitly asked about them",
+        "treat command grammar like a human context clue",
+        "command intent is context-only",
     ):
         assert phrase in text
 
@@ -170,6 +173,7 @@ def test_openai_yaml_default_prompt_describes_workflow_intelligence() -> None:
     assert "Workflow intelligence" in text
     assert "$agent-dispatcher" in text
     assert "workflow" in text
+    assert "helpful context rather than a limiter" in text
     assert "council" in text
     assert "swarm" in text
 
@@ -191,6 +195,7 @@ def test_evaluator_contract_contains_required_fields() -> None:
     assert set(report) == {
         "request_summary",
         "workflow_graph",
+        "command_context",
         "dispatch_verdict",
         "reasoning_factors",
         "recommended_pattern",
@@ -202,6 +207,7 @@ def test_evaluator_contract_contains_required_fields() -> None:
     assert report["reasoning_factors"]["material_dispatch_justified"] is True
     assert report["reasoning_factors"]["material_dispatch_score"] >= 2
     assert report["reasoning_factors"]["material_dispatch_criteria"]
+    assert report["command_context"]["dispatch_effect"] == "informational_only"
 
 
 @pytest.mark.parametrize(
@@ -262,6 +268,38 @@ def test_workflow_graph_extracts_multiple_lanes_without_explicit_agent_words() -
     assert {"docs", "code", "validation", "risk"}.issubset(set(graph["artifact_lanes"]))
     assert graph["parallel_lane_count"] >= 4
     assert report["reasoning_factors"]["independent_lane_count"] >= 4
+
+
+def test_command_grammar_context_is_attached_to_agent_briefs_without_limiting_dispatch() -> None:
+    report = evaluate_dispatch.evaluate_request(
+        "Please use two agents to look at the THREADWAKE path the way human reviewers would: "
+        "one reviews architecture notes, the other checks tests and risk, and neither executes it."
+    )
+
+    assert report["dispatch_verdict"] == "propose_council"
+    assert report["approval_gate"] is True
+    assert report["command_context"]["present"] is True
+    assert report["command_context"]["dispatch_effect"] == "informational_only"
+    assert "helpful context clue" in report["command_context"]["human_use_guidance"]
+    assert report["command_context"]["snippets"][0]["raw_text"] == "THREADWAKE"
+    assert report["command_context"]["snippets"][0]["normalized_text"] == "THREADWAKE//."
+    assert report["command_context"]["snippets"][0]["runtime_handler_verified"] is False
+    assert all(role["command_intent"].startswith("context_only:") for role in report["agent_roles"])
+    assert any("THREADWAKE//." in role["command_intent"] for role in report["agent_roles"])
+
+
+def test_command_grammar_context_does_not_force_dispatch_for_linear_work() -> None:
+    report = evaluate_dispatch.evaluate_request(
+        "Can you have agents fix the single failing THREADWAKE test?"
+    )
+
+    assert report["dispatch_verdict"] == "explain_no_dispatch"
+    assert report["approval_gate"] is False
+    assert report["agent_roles"] == []
+    assert report["command_context"]["present"] is True
+    assert report["reasoning_factors"]["command_context_present"] is True
+    assert report["reasoning_factors"]["command_context_dispatch_effect"] == "informational_only"
+    assert report["reasoning_factors"]["material_dispatch_justified"] is False
 
 
 def test_sensitive_or_destructive_requests_do_not_become_agent_tasks() -> None:

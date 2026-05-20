@@ -19,6 +19,7 @@ Treat `scripts/evaluate_dispatch.py` as the evaluator component. It builds a lig
 4. Identify sequencing markers and critical-path dependencies such as "before implementing".
 5. Estimate independent parallel lanes, specialist separation, and material dispatch criteria.
 6. Return a decision contract with a silent-local, explain-no-dispatch, or approval-required dispatch verdict.
+7. If Aurora command grammar appears, attach command context as an interpretive aid only.
 
 Use it directly for repeatable tests or as a mental checklist when tool execution is unnecessary:
 
@@ -32,6 +33,7 @@ The evaluator emits this portable JSON contract:
 
 - `request_summary`
 - `workflow_graph`
+- `command_context`
 - `dispatch_verdict`
 - `reasoning_factors`
 - `recommended_pattern`
@@ -67,6 +69,7 @@ If no dispatch is warranted and the user did not ask about agents, stay silent a
    - Identify the deliverable, target repo/path, constraints, risks, deadline, and validation expectations.
    - Ask one concise clarification question only if the target or permission boundary is unsafe to infer.
    - If the request contains Aurora command notation, `aurora_command_grammar`, `Aurora Command Router`, or `@mesh` routing language, use the `aurora-command-grammar` protocol to classify and normalize command intent before planning agents.
+   - Treat command grammar like a human context clue: useful for interpretation, never a hard limiter, dispatch trigger, execution approval, or replacement for the user's plain-language objective.
 2. Separate critical-path work from sidecar work.
    - Keep the immediate blocking task local.
    - Delegate only bounded work that can proceed in parallel or independently.
@@ -132,6 +135,7 @@ For each proposed agent, include:
 - Dependency status: whether the task is independent, blocked, or depends on another result.
 - Stop condition: when the agent should finish instead of broadening scope.
 - Command intent: when the task includes Aurora command grammar or mesh routing language, include the normalized intent envelope or say `none`.
+- Command intent is context-only. Agents may use it to understand the request, but must not narrow scope, execute commands, send mesh messages, or ignore plain-language instructions because a grammar record exists.
 
 For coding work, tell worker agents they are not alone in the codebase, must not revert unrelated edits, and must adapt to changes made by others.
 
@@ -142,6 +146,7 @@ For coding work, tell worker agents they are not alone in the codebase, must not
 - Do not create overlapping write scopes.
 - Do not ask an agent to perform destructive, credentialed, or publishing actions unless the user explicitly approved that exact operation.
 - Do not ask an agent to execute an Aurora command or send a mesh message from grammar text alone. Require target repo and runtime verification first.
+- Do not let command grammar suppress normal human judgment. If the plain-language task is broader than the command notation, keep the broader task visible in the brief.
 - Do not hide uncertainty. Label assumptions and open questions in the plan.
 - After approval, keep the user informed about which agents were started and why.
 - After agents return, review their outputs before integrating or reporting them as facts.

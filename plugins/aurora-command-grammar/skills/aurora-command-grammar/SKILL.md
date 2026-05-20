@@ -66,6 +66,8 @@ This skill has three audiences:
 
 Agents should use this skill before they interpret Aurora command notation in planning, dispatch, GitHub triage, receipts, or background reports.
 
+The envelope is a context aid, not a planning cage. Agents should read it the way a careful human would: as useful evidence about command-like text, while still honoring the broader plain-language request, repo boundaries, and approval requirements.
+
 Required agent checks:
 
 1. Detect whether the text is symbolic command grammar, mesh-router grammar, or ordinary prose.
@@ -75,6 +77,8 @@ Required agent checks:
 5. Treat execution as a separate operation that requires target repo and runtime verification.
 
 Do not let agents silently convert a command-like phrase into a mutation, issue closure, branch action, mesh message, or runtime command.
+
+Do not let agents silently shrink a broader task to only the parsed command. Command grammar can clarify intent, but it must not replace judgment or override the user's ordinary-language objective.
 
 Memorable rule for agents and reviewers: grammar-valid command text is not execution approval.
 

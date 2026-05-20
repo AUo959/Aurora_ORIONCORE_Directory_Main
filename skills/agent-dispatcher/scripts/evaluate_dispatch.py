@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import re
 import sys
@@ -185,6 +186,22 @@ NON_DISPATCH_COLLISION_PATTERNS = (
 
 PARALLEL_MARKERS = ("while", "while also", "parallel", "simultaneously", "at the same time", "split")
 DEPENDENCY_MARKERS = ("before", "after", "then", "once", "afterwards")
+COMMAND_SNIPPET_PATTERNS = (
+    re.compile(r"@mesh[^\n.;]*", re.IGNORECASE),
+    re.compile(r"[+#]?\d{3}//[+#]?\d{3}//\.?(?:[A-Za-z0-9_-]+)?"),
+    re.compile(r"[+#]?[A-Z][A-Z0-9_.:-]*::[A-Za-z0-9_.:-]+(?://\.(?:[A-Za-z0-9_-]+)?|//)?"),
+    re.compile(r"[+#]?[A-Z][A-Z0-9_.:-]*(?:\([^)]*\))(?://\.(?:[A-Za-z0-9_-]+)?|//)?"),
+    re.compile(r"[+#]?(?:THREADWAKE|THREADSYNC|LOCKMEM|QUEUEANCHOR|COMMANDCHAIN::SPIRALREJOIN\.v1|REM|BUP|QSYNC|RESETCORE|EXPORTTHREAD)(?://\.(?:[A-Za-z0-9_-]+)?|//)?"),
+    re.compile(r"#[0-9]{3}//\.(?:[A-Za-z0-9_-]+)?"),
+)
+COMMAND_CONTEXT_TERMS = (
+    "aurora_command_grammar",
+    "aurora command grammar",
+    "aurora command router",
+    "command grammar",
+    "mesh route",
+    "mesh routing",
+)
 
 
 @dataclass(frozen=True)
@@ -214,6 +231,128 @@ def contains_term(text: str, term: str) -> bool:
 
 def hits_for(text: str, terms: tuple[str, ...]) -> list[str]:
     return [term for term in terms if contains_term(text, term)]
+
+
+def repo_root() -> Path | None:
+    current = Path(__file__).resolve()
+    for parent in current.parents:
+        if (parent / "tools" / "aurora_command_intent.py").exists():
+            return parent
+    return None
+
+
+def load_command_intent_gateway() -> Any | None:
+    root = repo_root()
+    if root is None:
+        return None
+    gateway_path = root / "tools" / "aurora_command_intent.py"
+    spec = importlib.util.spec_from_file_location("aurora_command_intent", gateway_path)
+    if spec is None or spec.loader is None:
+        return None
+    module = importlib.util.module_from_spec(spec)
+    previous = sys.dont_write_bytecode
+    sys.dont_write_bytecode = True
+    try:
+        spec.loader.exec_module(module)
+    except Exception:
+        return None
+    finally:
+        sys.dont_write_bytecode = previous
+    return module
+
+
+def extract_command_snippets(request: str) -> list[str]:
+    snippets: list[str] = []
+    for pattern in COMMAND_SNIPPET_PATTERNS:
+        for match in pattern.finditer(request):
+            snippet = match.group(0).strip(" ,")
+            if snippet and snippet not in snippets:
+                snippets.append(snippet)
+    return snippets[:5]
+
+
+def command_context_for(request: str) -> dict[str, Any]:
+    normalized = normalize(request)
+    snippets = extract_command_snippets(request)
+    mentioned = bool(snippets) or any(contains_term(normalized, term) for term in COMMAND_CONTEXT_TERMS)
+
+    context: dict[str, Any] = {
+        "present": mentioned,
+        "dispatch_effect": "informational_only",
+        "human_use_guidance": (
+            "Treat command grammar as a helpful context clue, like a human would; "
+            "it can clarify meaning but must not limit the task, force dispatch, or authorize execution."
+        ),
+        "snippets": [],
+    }
+    if not mentioned:
+        return context
+
+    gateway = load_command_intent_gateway()
+    if gateway is None:
+        context["gateway_status"] = "unavailable"
+        context["notes"] = [
+            "Command-like text was detected, but the root command-intent gateway was not available."
+        ]
+        return context
+
+    context["gateway_status"] = "available"
+    for snippet in snippets:
+        try:
+            envelope = gateway.envelope_for(snippet, intent_type="background_handoff")
+        except Exception as exc:
+            context["snippets"].append(
+                {
+                    "raw_text": snippet,
+                    "error": str(exc),
+                    "validation_status": "not_validated",
+                    "runtime_handler_verified": False,
+                    "execution_status": "not_requested",
+                }
+            )
+            continue
+
+        context["snippets"].append(
+            {
+                "raw_text": envelope.get("raw_text"),
+                "normalized_text": envelope.get("normalized_text"),
+                "intent_type": envelope.get("intent_type"),
+                "grammar_family": envelope.get("grammar_family"),
+                "ast_shape": envelope.get("ast_shape"),
+                "command_heads": envelope.get("command_heads", []),
+                "range_edges": envelope.get("range_edges"),
+                "validation_status": envelope.get("validation_status"),
+                "validation_issues": envelope.get("validation_issues", []),
+                "warnings": envelope.get("warnings", []),
+                "runtime_handler_verified": envelope.get("runtime_handler_verified", False),
+                "execution_status": envelope.get("execution_status", "not_requested"),
+                "recommended_next_action": envelope.get("recommended_next_action", ""),
+            }
+        )
+
+    if mentioned and not snippets:
+        context["notes"] = [
+            "Command grammar was mentioned, but no standalone command notation was isolated."
+        ]
+    return context
+
+
+def command_intent_for_role(command_context: dict[str, Any]) -> str:
+    if not command_context.get("present"):
+        return "none"
+    snippets = command_context.get("snippets", [])
+    normalized = [
+        snippet.get("normalized_text") or snippet.get("raw_text")
+        for snippet in snippets
+        if snippet.get("normalized_text") or snippet.get("raw_text")
+    ]
+    if normalized:
+        return (
+            "context_only: "
+            + ", ".join(str(value) for value in normalized)
+            + "; do not execute or constrain the task from grammar alone"
+        )
+    return "context_only: command grammar mentioned; use as a clue, not a limiter or execution approval"
 
 
 def split_clauses(text: str) -> list[str]:
@@ -386,7 +525,7 @@ def build_workflow_graph(request: str, units: list[WorkUnit]) -> dict[str, Any]:
     }
 
 
-def reasoning_factors(request: str, graph: dict[str, Any]) -> dict[str, Any]:
+def reasoning_factors(request: str, graph: dict[str, Any], command_context: dict[str, Any]) -> dict[str, Any]:
     normalized = normalize(request)
     simple_hits = hits_for(normalized, SIMPLE_PATTERNS)
     sensitive_hits = hits_for(normalized, SENSITIVE_PATTERNS)
@@ -415,6 +554,8 @@ def reasoning_factors(request: str, graph: dict[str, Any]) -> dict[str, Any]:
         "material_dispatch_criteria": material_criteria,
         "material_dispatch_score": len(material_criteria),
         "material_dispatch_justified": len(material_criteria) >= 2,
+        "command_context_present": bool(command_context.get("present")),
+        "command_context_dispatch_effect": command_context.get("dispatch_effect", "informational_only"),
         "has_dependencies": bool(graph["dependencies"]),
         "signals": {
             "simple_hits": simple_hits,
@@ -464,7 +605,7 @@ def material_dispatch_criteria(normalized: str, graph: dict[str, Any]) -> list[s
     return list(dict.fromkeys(criteria))
 
 
-def synthesize_roles(graph: dict[str, Any], pattern: str) -> list[dict[str, Any]]:
+def synthesize_roles(graph: dict[str, Any], pattern: str, command_context: dict[str, Any]) -> list[dict[str, Any]]:
     roles: list[str] = []
     for unit in graph["work_units"]:
         role = unit["role_hint"]
@@ -488,6 +629,7 @@ def synthesize_roles(graph: dict[str, Any], pattern: str) -> list[dict[str, Any]
             ],
             "scope": "read_only" if role in {"explorer", "reviewer", "verifier"} else "owned_write_scope_required",
             "output_contract": ROLE_OUTPUTS[role],
+            "command_intent": command_intent_for_role(command_context),
         }
         for role in roles
     ]
@@ -588,15 +730,17 @@ def evaluate_request(request: str) -> dict[str, Any]:
     units = synthesize_work_units(request)
     request_summary = summarize_request(request, units)
     workflow_graph = build_workflow_graph(request, units)
-    factors = reasoning_factors(request, workflow_graph)
+    command_context = command_context_for(request)
+    factors = reasoning_factors(request, workflow_graph, command_context)
     verdict, pattern = decide_dispatch(request, workflow_graph, factors)
-    roles = synthesize_roles(workflow_graph, pattern) if verdict.startswith("propose") else []
+    roles = synthesize_roles(workflow_graph, pattern, command_context) if verdict.startswith("propose") else []
     critical_path = local_critical_path(workflow_graph, pattern)
     explanation = compose_tutorial(verdict, pattern, workflow_graph, factors, roles)
 
     return {
         "request_summary": request_summary,
         "workflow_graph": workflow_graph,
+        "command_context": command_context,
         "dispatch_verdict": verdict,
         "reasoning_factors": factors,
         "recommended_pattern": pattern,
