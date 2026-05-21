@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/audit-handoff-record.schema.json",
+  "title": "Aurora Audit Handoff Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "handoff_id",
+    "producer",
+    "scope",
+    "run_mode",
+    "source_epistemic_status",
+    "command_intent",
+    "claims",
+    "execution_boundary",
+    "artifact_refs",
+    "recommended_next_action",
+    "no_mutation_attestation"
+  ],
+  "properties": {
+    "contract": {
+      "type": "string",
+      "const": "aurora.audit_handoff.v0"
+    },
+    "handoff_id": {
+      "type": "string",
+      "pattern": "^audit-[0-9]{8}-[a-z0-9-]+-[a-z0-9]+$"
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agent", "role"],
+      "properties": {
+        "agent": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repo", "paths", "nested_repo_mutation"],
+      "properties": {
+        "repo": {
+          "type": "string"
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nested_repo_mutation": {
+          "type": "boolean"
+        }
+      }
+    },
+    "run_mode": {
+      "type": "string",
+      "enum": [
+        "read_only",
+        "parse_only",
+        "background_handoff",
+        "in_process_simulation",
+        "root_write",
+        "nested_write_requires_approval"
+      ]
+    },
+    "source_epistemic_status": {
+      "type": "string",
+      "enum": [
+        "owner_supplied",
+        "repo_verified",
+        "runtime_declared",
+        "runtime_verified",
+        "bootstrap_no_data",
+        "canonical_promoted",
+        "not_applicable"
+      ]
+    },
+    "command_intent": {
+      "type": ["object", "null"]
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "status", "evidence_refs"],
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["confirmed", "inferred", "unverified", "blocked"]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "execution_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "execution_status",
+        "execution_scope",
+        "runtime_handler_verified",
+        "live_execution_claim"
+      ],
+      "properties": {
+        "execution_status": {
+          "type": "string"
+        },
+        "execution_scope": {
+          "type": "string"
+        },
+        "runtime_handler_verified": {
+          "type": "boolean"
+        },
+        "live_execution_claim": {
+          "type": "boolean"
+        }
+      }
+    },
+    "artifact_refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["github", "receipts", "workspace_reports", "automation_memory"],
+      "properties": {
+        "github": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "receipts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "workspace_reports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "automation_memory": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "recommended_next_action": {
+      "type": "string"
+    },
+    "no_mutation_attestation": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,15 +1,15 @@
 {
   "batch_id": "wave4_root_intake_cleanup_initial_rollback",
   "for_batch": "wave4_root_intake_cleanup_initial",
-  "generated_at": "2026-05-18T19:56:48Z",
+  "generated_at": "2026-05-21T16:24:55Z",
   "operations": [
     {
       "batch_id": "wave4_root_intake_cleanup_initial_rollback",
       "source": "intake/Aurora_Sim_Architecture",
       "destination": "Aurora_Sim_Architecture",
       "operation": "move",
-      "pre_hash": "21be842bd89e3834d12fbe3b337e7fe93f2d5eff4178f1607c15b7a9702a1a54",
-      "post_hash": "21be842bd89e3834d12fbe3b337e7fe93f2d5eff4178f1607c15b7a9702a1a54",
+      "pre_hash": "c9439990cae1952e6c52403be5859fbdc77f89d38d5f8760580a2fef61154835",
+      "post_hash": "c9439990cae1952e6c52403be5859fbdc77f89d38d5f8760580a2fef61154835",
       "rollback_source": "intake/Aurora_Sim_Architecture",
       "reason": "Rollback for wave4_root_intake_cleanup_initial",
       "approved": false,

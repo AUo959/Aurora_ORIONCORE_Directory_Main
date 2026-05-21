@@ -94,10 +94,19 @@ The portable command intent schema is `references/command-intent-envelope.schema
 - `grammar_family`
 - `ast_shape`
 - `validation_status`
+- `run_mode`
+- `execution_scope`
+- `live_runtime_execution`
+- `simulation_status`
 - `runtime_handler_verified`
 - `target_repo`
 - `recommended_next_action`
 - `receipt_refs`
+
+For cross-artifact audit trails, wrap command intent with
+`references/audit-handoff-record.schema.json`. The wrapper adds `handoff_id`,
+claim evidence, source epistemic status, execution boundary, artifact refs, and
+`no_mutation_attestation` without replacing the command intent envelope.
 
 ## Command Intent Gateway
 
@@ -111,6 +120,10 @@ Supported subcommands:
 - `simulate-range`: run only valid numeric `RangeChain` input through CloudBank `SymbolicEngine` in memory.
 
 `simulate-range` must be described as in-process simulation, not live runtime execution. It does not send mesh messages, mutate CloudBank repository files, or prove that a live runtime handler is active.
+
+In `simulate-range` output, treat `simulation_status` as the in-process result.
+Do not describe it as live execution unless `live_runtime_execution` is `true`
+and runtime verification evidence is present.
 
 ## Workflow
 

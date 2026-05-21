@@ -30,6 +30,10 @@ SCHEMA_KEYS = {
     "warnings",
     "validation_status",
     "validation_issues",
+    "run_mode",
+    "execution_scope",
+    "live_runtime_execution",
+    "simulation_status",
     "runtime_handler_verified",
     "runtime_refs",
     "execution_status",
@@ -57,6 +61,10 @@ def test_parse_uses_cloudbank_parser_for_symbolic_command() -> None:
     assert record["command_heads"] == ["025"]
     assert record["modifier"] == "deep"
     assert record["validation_status"] == "valid_with_warnings"
+    assert record["run_mode"] == "parse_only"
+    assert record["execution_scope"] == "none"
+    assert record["live_runtime_execution"] is False
+    assert record["simulation_status"] == "not_applicable"
     assert record["runtime_handler_verified"] is False
     assert record["execution_status"] == "not_requested"
     assert any(warning["code"] == "legacy_hash_prefix" for warning in record["warnings"])
@@ -78,6 +86,9 @@ def test_envelope_is_schema_shaped_and_keeps_execution_blocked() -> None:
     assert envelope["normalized_text"] == "THREADWAKE//."
     assert envelope["intent_type"] == "execute_request"
     assert envelope["validation_status"] == "valid_with_warnings"
+    assert envelope["run_mode"] == "blocked_execution_request"
+    assert envelope["execution_scope"] == "blocked_pending_runtime_verification"
+    assert envelope["live_runtime_execution"] is False
     assert envelope["execution_status"] == "blocked_pending_verification"
     assert envelope["runtime_handler_verified"] is False
     assert envelope["target_repo"] == gateway.CLOUDBANK_REPO_REF
@@ -92,6 +103,8 @@ def test_mesh_text_maps_to_mesh_family_without_runtime_execution() -> None:
     assert envelope["grammar_family"] == "mesh_router"
     assert envelope["ast_shape"] == "mesh_route"
     assert envelope["validation_status"] == "not_validated"
+    assert envelope["run_mode"] == "mesh_route_map"
+    assert envelope["live_runtime_execution"] is False
     assert envelope["runtime_handler_verified"] is False
     assert envelope["execution_status"] == "not_requested"
 
@@ -104,14 +117,20 @@ def test_simulate_range_executes_only_in_process_range_chain() -> None:
     assert status == 0
     assert payload["ok"] is True
     assert payload["mode"] == "in_process_simulation"
+    assert payload["run_mode"] == "in_process_simulation"
+    assert payload["execution_scope"] == "in_process_simulation"
     assert payload["live_runtime_execution"] is False
+    assert payload["simulation_status"] == "completed"
     assert payload["simulation_label"] == "in-process SymbolicEngine simulation only; not live runtime execution"
     assert payload["chain_id"] == "001//005//"
     assert payload["step_count"] == 5
     assert len(payload["results"]) == 5
     assert payload["intent"]["ast_shape"] == "range_chain"
-    assert payload["intent"]["runtime_handler_verified"] is True
-    assert payload["intent"]["execution_status"] == "executed"
+    assert payload["intent"]["execution_scope"] == "in_process_simulation"
+    assert payload["intent"]["live_runtime_execution"] is False
+    assert payload["intent"]["simulation_status"] == "completed"
+    assert payload["intent"]["runtime_handler_verified"] is False
+    assert payload["intent"]["execution_status"] == "not_applicable"
     assert gateway.SYMBOLIC_ENGINE_REF + "::SymbolicEngine.execute_chain_notation" in payload["intent"]["runtime_refs"]
 
 
@@ -123,6 +142,7 @@ def test_simulate_range_rejects_non_range_command() -> None:
     assert status == 2
     assert payload["ok"] is False
     assert payload["live_runtime_execution"] is False
+    assert payload["simulation_status"] == "blocked"
     assert payload["error"] == "simulate-range only accepts valid numeric RangeChain input."
     assert payload["intent"]["ast_shape"] == "command_invocation"
     assert payload["intent"]["execution_status"] == "blocked_pending_verification"
@@ -151,6 +171,7 @@ def test_cli_envelope_outputs_schema_shaped_json() -> None:
         return
     assert payload["ast_shape"] == "range_chain"
     assert payload["range_edges"] == {"start": "001", "end": "005"}
+    assert payload["live_runtime_execution"] is False
     assert payload["execution_status"] == "not_requested"
 
 
@@ -162,5 +183,6 @@ def test_parse_reports_missing_cloudbank_parser(monkeypatch: pytest.MonkeyPatch,
     assert set(record) == SCHEMA_KEYS
     assert record["validation_status"] == "not_validated"
     assert record["validation_issues"][0]["code"] == "cloudbank_parser_unavailable"
+    assert record["live_runtime_execution"] is False
     assert record["runtime_handler_verified"] is False
     assert "Restore the CloudBank parser path" in record["recommended_next_action"]

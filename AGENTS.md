@@ -13,7 +13,7 @@ Named repos:
 - `root`
   - this repo
 - `aurora-cloudbank-symbolic-main`
-  - `Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
+  - `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
 - `CanonRec`
   - `GUMAS_SIM_2.5/CanonRec`
 - `DuelSim_v2.0`
@@ -62,6 +62,49 @@ Primary commands:
 The recovery index is read-only. Its candidates are routing evidence for early
 local work and remain `pending_review` / `not_promoted` until a separate
 promotion gate validates and extracts them into the correct owner surface.
+
+## Root Recommendations
+
+Advisory-only recommendation engine:
+
+- Config: `catalog/recommendation_engine_manifest.json`
+- Tool: `tools/aurora_recommendation_engine.py`
+- Current report: `reports/analysis/aurora_recommendations_latest.json`
+- Make targets: `make recommendations`, `make recommendations-report`
+
+The recommendation engine normalizes existing root signals into ranked next
+actions. It is read-only by default and must not promote canon, execute
+runtime commands, send mesh messages, or mutate nested repos.
+
+## Confidence Audit
+
+Audit-layer confidence scoring:
+
+- Contract: `catalog/contracts/aurora_confidence_audit_contract_v1.json`
+- Schema: `catalog/schemas/aurora_confidence_record.schema.json`
+- Workflow: `docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md`
+- Tool: `tools/aurora_confidence_audit.py`
+- Current report: `reports/analysis/aurora_confidence_audit_latest.json`
+- Make targets: `make confidence-audit`, `make confidence-audit-report`
+
+Use confidence records for concrete conclusions, analyses, predictions, and
+recommendations when an output affects a decision, receipt, handoff, or
+automation memory. Scores may remain internal, but records below the configured
+threshold must set `requires_user_alert: true`. The tool is read-only audit
+tooling; it does not prove truth, execute runtime actions, promote canon, or
+mutate nested repos.
+
+## Integration Quality Gate
+
+Root integration gate:
+
+- Tool: `tools/aurora_integration_gate.py`
+- Make target: `make integration-gate`
+
+Use it after changes that touch command intent, agent-dispatcher behavior,
+background handoffs, recovery/provenance claims, or root validation wiring. The
+gate is read-only and should classify command grammar as context-only unless a
+separate runtime verification and explicit approval path exists.
 
 ## Current GitHub State
 

@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "confidence_audit_batch",
+  "generated_at": "2026-05-21T16:25:08Z",
+  "tool": "aurora_confidence_audit",
+  "run_mode": "audit_scoring_only",
+  "live_runtime_execution": false,
+  "nested_repo_mutation": false,
+  "default_threshold": 0.7,
+  "schema_ref": "catalog/schemas/aurora_confidence_record.schema.json",
+  "contract_ref": "catalog/contracts/aurora_confidence_audit_contract_v1.json",
+  "summary": {
+    "record_count": 1,
+    "user_alert_count": 0,
+    "below_threshold_count": 0,
+    "claim_type_counts": {
+      "analysis": 1
+    },
+    "minimum_score": 0.93,
+    "maximum_score": 0.93,
+    "thresholds": [
+      0.7
+    ],
+    "verdict": "pass"
+  },
+  "records": [
+    {
+      "schema_version": "1.0.0",
+      "record_type": "confidence_assessment",
+      "assessment_id": "aurora.confidence.908b8234839a55fd",
+      "created_at": "2026-05-21T16:25:08Z",
+      "tool": "aurora_confidence_audit",
+      "authority_refs": [
+        "catalog/schemas/aurora_confidence_record.schema.json",
+        "catalog/contracts/aurora_confidence_audit_contract_v1.json"
+      ],
+      "claim": {
+        "claim_id": "aurora.claim.7b9b1e1f7877329d",
+        "claim_type": "analysis",
+        "text": "Confidence audit tooling is available in the root control plane.",
+        "producer": "aurora-system",
+        "visibility": "internal",
+        "source_ref": null,
+        "subject_refs": [],
+        "authority_refs": [
+          "docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md"
+        ],
+        "evidence_refs": [
+          "tools/aurora_confidence_audit.py"
+        ],
+        "receipt_refs": [],
+        "assumptions": [],
+        "uncertainty_factors": [],
+        "contradiction_refs": [],
+        "resolution_policy_ref": null
+      },
+      "confidence": {
+        "score": 0.93,
+        "threshold": 0.7,
+        "band": "high",
+        "evidence_level": "verified_artifact",
+        "score_source": "rubric_default",
+        "scoring_method": "aurora_confidence_audit_v1",
+        "calibration_profile": "bootstrap_default_v1",
+        "calibration_adjustment": 0.0,
+        "adjustments": [
+          {
+            "code": "evidence_refs",
+            "delta": 0.03,
+            "reason": "linked evidence references strengthen audit confidence"
+          },
+          {
+            "code": "authority_refs",
+            "delta": 0.02,
+            "reason": "authority references make the basis easier to inspect"
+          }
+        ]
+      },
+      "audit": {
+        "requires_user_alert": false,
+        "alert_level": "none",
+        "alert_reason": "meets_threshold",
+        "user_facing_message": null,
+        "recommended_next_action": "Keep confidence metadata in the audit trail; no user-facing alert is required by the current threshold.",
+        "run_mode": "audit_scoring_only",
+        "live_runtime_execution": false,
+        "nested_repo_mutation": false
+      }
+    }
+  ]
+}

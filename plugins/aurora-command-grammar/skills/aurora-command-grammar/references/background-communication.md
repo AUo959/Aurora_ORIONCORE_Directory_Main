@@ -26,6 +26,13 @@ Use a command intent envelope when command meaning affects:
 - Agent dispatcher plans or handoff notes.
 - Any report that says a command was parsed, validated, queued, blocked, or executed.
 
+Use `audit-handoff-record.schema.json` as the wrapper when the same decision
+needs to link multiple artifacts, such as a GitHub thread, a Markdown receipt,
+automation memory, and an agent output. The audit handoff record does not
+replace the command intent envelope. It adds a stable `handoff_id`, evidence
+refs, run mode, source epistemic status, and a no-mutation attestation around
+one or more claims.
+
 ## Minimal Envelope
 
 ```json
@@ -48,6 +55,10 @@ Use a command intent envelope when command meaning affects:
   "warnings": [],
   "validation_status": "valid",
   "validation_issues": [],
+  "run_mode": "parse_only",
+  "execution_scope": "none",
+  "live_runtime_execution": false,
+  "simulation_status": "not_applicable",
   "runtime_handler_verified": false,
   "execution_status": "not_requested",
   "target_repo": "AUo959/aurora-cloudbank-symbolic",
@@ -69,6 +80,10 @@ Use these values consistently:
 - `grammar_family`: `aurora_symbolic_command`, `mesh_router`, `command_router`, `ordinary_prose`, `unknown`
 - `ast_shape`: `command_invocation`, `command_sequence`, `range_chain`, `mesh_route`, `unknown`, `none`
 - `validation_status`: `valid`, `valid_with_warnings`, `invalid`, `not_validated`, `not_applicable`
+- `run_mode`: `parse_only`, `mesh_route_map`, `background_handoff`, `blocked_execution_request`, `in_process_simulation`, `not_applicable`
+- `execution_scope`: `none`, `blocked_pending_runtime_verification`, `in_process_simulation`, `live_runtime`, `not_applicable`
+- `live_runtime_execution`: boolean; `true` only when live runtime execution was actually performed
+- `simulation_status`: `not_applicable`, `blocked`, `completed`, `failed`
 - `execution_status`: `not_requested`, `blocked_pending_verification`, `ready_for_explicit_approval`, `executed`, `failed`, `not_applicable`
 
 ## Handoff Language

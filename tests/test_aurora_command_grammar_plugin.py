@@ -71,6 +71,26 @@ def test_background_schema_has_required_cross_thread_fields() -> None:
     }.issubset(required)
     assert "mesh_router" in schema["properties"]["grammar_family"]["enum"]
     assert "blocked_pending_verification" in schema["properties"]["execution_status"]["enum"]
+    assert "run_mode" in schema["properties"]
+    assert "execution_scope" in schema["properties"]
+    assert "live_runtime_execution" in schema["properties"]
+    assert "simulation_status" in schema["properties"]
+
+
+def test_audit_handoff_schema_wraps_command_intent_without_replacing_it() -> None:
+    schema = json.loads(read_text(SKILL_ROOT / "references" / "audit-handoff-record.schema.json"))
+
+    assert schema["title"] == "Aurora Audit Handoff Record"
+    required = set(schema["required"])
+    assert {
+        "handoff_id",
+        "source_epistemic_status",
+        "command_intent",
+        "execution_boundary",
+        "no_mutation_attestation",
+    }.issubset(required)
+    assert "runtime_verified" in schema["properties"]["source_epistemic_status"]["enum"]
+    assert "live_execution_claim" in schema["properties"]["execution_boundary"]["required"]
 
 
 def test_github_templates_include_envelope_and_execution_boundary() -> None:

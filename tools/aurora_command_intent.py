@@ -201,6 +201,10 @@ def empty_envelope(raw_text: str, grammar_family: str, ast_shape: Optional[str])
         "warnings": [],
         "validation_status": "not_validated",
         "validation_issues": [],
+        "run_mode": "parse_only",
+        "execution_scope": "none",
+        "live_runtime_execution": False,
+        "simulation_status": "not_applicable",
         "runtime_handler_verified": False,
         "runtime_refs": [],
         "execution_status": "not_requested",
@@ -231,6 +235,7 @@ def parse_command_intent(raw_text: str) -> Dict[str, Any]:
         record = empty_envelope(raw_text, "mesh_router", "mesh_route")
         record["normalized_text"] = text
         record["validation_status"] = "not_validated"
+        record["run_mode"] = "mesh_route_map"
         record["recommended_next_action"] = (
             "Map through the mesh-router runtime contract before routing; no mesh message was sent."
         )
@@ -289,6 +294,10 @@ def parse_command_intent(raw_text: str) -> Dict[str, Any]:
         "warnings": warnings,
         "validation_status": validation_status(warnings, issues),
         "validation_issues": issues,
+        "run_mode": "parse_only",
+        "execution_scope": "none",
+        "live_runtime_execution": False,
+        "simulation_status": "not_applicable",
         "runtime_handler_verified": False,
         "runtime_refs": [],
         "execution_status": "not_requested",
@@ -312,7 +321,12 @@ def envelope_for(
     envelope["intent_type"] = intent_type
     envelope["target_repo"] = target_repo
     envelope["receipt_refs"] = receipt_refs or []
+    if intent_type == "background_handoff":
+        envelope["run_mode"] = "background_handoff"
     if intent_type == "execute_request":
+        envelope["run_mode"] = "blocked_execution_request"
+        envelope["execution_scope"] = "blocked_pending_runtime_verification"
+        envelope["live_runtime_execution"] = False
         envelope["execution_status"] = "blocked_pending_verification"
         envelope["recommended_next_action"] = (
             "Verify target repo and runtime, then request explicit approval before execution."
@@ -323,11 +337,18 @@ def envelope_for(
 def simulate_range(raw_text: str, max_steps: int) -> Tuple[int, Dict[str, Any]]:
     envelope = envelope_for(raw_text, intent_type="execute_request", target_repo=CLOUDBANK_REPO_REF)
     envelope["execution_status"] = "blocked_pending_verification"
+    envelope["run_mode"] = "in_process_simulation"
+    envelope["execution_scope"] = "in_process_simulation"
+    envelope["live_runtime_execution"] = False
+    envelope["simulation_status"] = "blocked"
 
     base = {
         "ok": False,
         "mode": "in_process_simulation",
+        "run_mode": "in_process_simulation",
+        "execution_scope": "in_process_simulation",
         "live_runtime_execution": False,
+        "simulation_status": "blocked",
         "parser_authority": COMMAND_GRAMMAR_REF,
         "runtime_authority": SYMBOLIC_ENGINE_REF,
         "intent": envelope,
@@ -353,6 +374,8 @@ def simulate_range(raw_text: str, max_steps: int) -> Tuple[int, Dict[str, Any]]:
         results = engine.execute_chain_notation(envelope["normalized_text"] or raw_text)
     except CloudBankLoadError as exc:
         base["error"] = str(exc)
+        base["simulation_status"] = "failed"
+        envelope["simulation_status"] = "failed"
         envelope["validation_issues"].append(
             {
                 "code": "symbolic_engine_unavailable",
@@ -365,7 +388,9 @@ def simulate_range(raw_text: str, max_steps: int) -> Tuple[int, Dict[str, Any]]:
         return 2, base
     except Exception as exc:
         base["error"] = str(exc)
-        envelope["execution_status"] = "failed"
+        base["simulation_status"] = "failed"
+        envelope["simulation_status"] = "failed"
+        envelope["execution_status"] = "not_applicable"
         envelope["validation_issues"].append(
             {
                 "code": "simulation_failed",
@@ -377,15 +402,17 @@ def simulate_range(raw_text: str, max_steps: int) -> Tuple[int, Dict[str, Any]]:
         return 1, base
 
     chain_id = f"{start:03d}//{end:03d}//"
-    envelope["runtime_handler_verified"] = True
+    envelope["runtime_handler_verified"] = False
     envelope["runtime_refs"] = [SYMBOLIC_ENGINE_REF + "::SymbolicEngine.execute_chain_notation"]
-    envelope["execution_status"] = "executed"
+    envelope["execution_status"] = "not_applicable"
+    envelope["simulation_status"] = "completed"
     envelope["recommended_next_action"] = (
         "Review the in-process simulation output; no live runtime state was changed."
     )
     base.update(
         {
             "ok": True,
+            "simulation_status": "completed",
             "simulation_label": "in-process SymbolicEngine simulation only; not live runtime execution",
             "chain_id": chain_id,
             "step_count": len(results),
@@ -465,6 +492,9 @@ def main(argv: Optional[List[str]] = None) -> int:
             {
                 "ok": record["validation_status"] not in {"invalid", "not_validated"},
                 "mode": "parse",
+                "run_mode": record["run_mode"],
+                "execution_scope": record["execution_scope"],
+                "live_runtime_execution": record["live_runtime_execution"],
                 "parser_authority": COMMAND_GRAMMAR_REF,
                 "schema_path": SCHEMA_REF,
                 "intent": record,

@@ -158,6 +158,43 @@
       },
       "default": []
     },
+    "run_mode": {
+      "type": "string",
+      "enum": [
+        "parse_only",
+        "mesh_route_map",
+        "background_handoff",
+        "blocked_execution_request",
+        "in_process_simulation",
+        "not_applicable"
+      ],
+      "default": "parse_only"
+    },
+    "execution_scope": {
+      "type": "string",
+      "enum": [
+        "none",
+        "blocked_pending_runtime_verification",
+        "in_process_simulation",
+        "live_runtime",
+        "not_applicable"
+      ],
+      "default": "none"
+    },
+    "live_runtime_execution": {
+      "type": "boolean",
+      "default": false
+    },
+    "simulation_status": {
+      "type": "string",
+      "enum": [
+        "not_applicable",
+        "blocked",
+        "completed",
+        "failed"
+      ],
+      "default": "not_applicable"
+    },
     "runtime_handler_verified": {
       "type": "boolean"
     },

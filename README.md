@@ -5,7 +5,7 @@ This root repository is the workspace control plane for
 
 It does **not** replace the active nested Git repositories:
 
-- `Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
+- `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
 - `GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0`
 - `GUMAS_SIM_2.5/CanonRec`
 - `qgia-knowledge-library-main`
@@ -24,6 +24,9 @@ nested repo internals stay out of root Git history.
 - Planned moves only: [catalog/relocation_plan.json](catalog/relocation_plan.json)
 - Dev toolkit workflow: [docs/AURORA_DEV_TOOLKIT_WORKFLOW_v1.md](docs/AURORA_DEV_TOOLKIT_WORKFLOW_v1.md)
 - Current dev toolkit report: [reports/analysis/aurora_devkit_latest.json](reports/analysis/aurora_devkit_latest.json)
+- Current advisory recommendations: [reports/analysis/aurora_recommendations_latest.json](reports/analysis/aurora_recommendations_latest.json)
+- Confidence audit workflow: [docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md](docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md)
+- Current confidence audit report: [reports/analysis/aurora_confidence_audit_latest.json](reports/analysis/aurora_confidence_audit_latest.json)
 - Aurora command grammar plugin: [plugins/aurora-command-grammar/skills/aurora-command-grammar/SKILL.md](plugins/aurora-command-grammar/skills/aurora-command-grammar/SKILL.md)
 - Control-plane provenance and recovery role: [docs/CONTROL_PLANE_PROVENANCE.md](docs/CONTROL_PLANE_PROVENANCE.md)
 - Recovery index workflow: [docs/RECOVERY_INDEX_WORKFLOW_v1.md](docs/RECOVERY_INDEX_WORKFLOW_v1.md)
@@ -71,6 +74,53 @@ python3 tools/aurora_command_intent.py simulate-range "001//005//"
 `simulate-range` is an in-process CloudBank `SymbolicEngine` simulation for
 valid numeric `RangeChain` inputs only. It is not live runtime execution.
 
+Integration safety gate:
+
+```bash
+python3 tools/aurora_integration_gate.py --summary
+make integration-gate
+```
+
+Safe examples:
+
+- `python3 tools/aurora_command_intent.py parse "THREADWAKE"` parses and normalizes only.
+- `python3 tools/aurora_command_intent.py envelope --text "THREADWAKE"` emits a context record only.
+- `python3 tools/aurora_command_intent.py simulate-range "001//005//"` runs in-process simulation only.
+
+Blocked without separate verification and approval:
+
+- live command execution
+- mesh message sending
+- nested repo mutation
+- publication or issue/PR mutation
+
+Advisory recommendation engine:
+
+```bash
+python3 tools/aurora_recommendation_engine.py --summary
+python3 tools/aurora_recommendation_engine.py --persist-report
+make recommendations
+make recommendations-report
+```
+
+The recommendation engine ranks existing root-control-plane evidence only. It
+does not promote recovery candidates, execute Aurora command grammar, send mesh
+messages, mutate nested repos, or apply developer-tooling installs.
+
+Confidence audit gateway:
+
+```bash
+python3 tools/aurora_confidence_audit.py score --claim-type analysis --text "Example claim"
+python3 tools/aurora_confidence_audit.py audit --input claims.jsonl --jsonl --threshold 0.70
+make confidence-audit
+make confidence-audit-report
+```
+
+The confidence audit gateway attaches score, threshold, evidence, and alert
+metadata to concrete conclusions, analyses, predictions, and recommendations. It
+is audit-layer tooling only: it does not prove truth, execute runtime actions,
+or mutate nested repos. Low-confidence records set `requires_user_alert`.
+
 ## Supported Commands
 
 ```bash
@@ -84,6 +134,11 @@ python3 tools/workspace_verify.py --check-determinism --exercise-relocation
 python3 tools/aurora_command_intent.py parse "THREADWAKE"
 python3 tools/aurora_command_intent.py envelope --text "001//005//"
 python3 tools/aurora_command_intent.py simulate-range "001//005//"
+python3 tools/aurora_integration_gate.py --summary
+python3 tools/aurora_recommendation_engine.py --summary
+python3 tools/aurora_recommendation_engine.py --persist-report
+python3 tools/aurora_confidence_audit.py score --claim-type analysis --text "Example claim"
+python3 tools/aurora_confidence_audit.py audit --input claims.jsonl --jsonl --threshold 0.70
 python3 tools/aurora_devkit.py
 python3 tools/aurora_devkit.py --persist-report
 python3 tools/aurora_devkit.py --install-plan --persist-install-plan
@@ -94,6 +149,11 @@ make devkit-report
 make devkit-install-plan
 make recovery-index
 make recovery-report
+make recommendations
+make recommendations-report
+make confidence-audit
+make confidence-audit-report
+make integration-gate
 ```
 
 `python3 tools/workspace_verify.py` is side-effect free by default and prints a
