@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-21T17:20:17Z",
+  "generated_at": "2026-05-21T17:30:02Z",
   "root": ".",
   "tool": "aurora_recommendation_engine",
   "run_mode": "read_only",
@@ -39,7 +39,7 @@
     "recovery_index": {
       "status": "READY",
       "candidate_count": 100,
-      "discovered_candidate_count": 1168
+      "discovered_candidate_count": 1011
     },
     "devkit": {
       "status": "WARN",
@@ -49,13 +49,13 @@
     "git_status": {
       "status": "clean",
       "changed_path_count": 0,
-      "branch": "codex/root-cleanup-before-cloudbank-issues-2026-05-11...origin/codex/root-cleanup-before-cloudbank-issues-2026-05-11 [ahead 1]"
+      "branch": "codex/root-cleanup-before-cloudbank-issues-2026-05-11...origin/codex/root-cleanup-before-cloudbank-issues-2026-05-11 [ahead 2]"
     }
   },
   "recommendations": [
     {
-      "recommendation_id": "aurora-rec-p1-recovery_index-recovery_review-review-30-restricted-recovery-candidates-carefully",
-      "title": "Review 30 restricted recovery candidates carefully",
+      "recommendation_id": "aurora-rec-p1-recovery_index-recovery_review-review-36-restricted-recovery-candidates-carefully",
+      "title": "Review 36 restricted recovery candidates carefully",
       "category": "recovery_review",
       "priority": "P1",
       "confidence": "medium",
@@ -216,8 +216,41 @@
       "status": "open"
     },
     {
-      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-36-recovery-candidates-routed-to-root",
-      "title": "Review 36 recovery candidates routed to root",
+      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-12-recovery-candidates-routed-to-qgia-knowledge-spine-main",
+      "title": "Review 12 recovery candidates routed to qgia-knowledge-spine-main",
+      "category": "recovery_review",
+      "priority": "P2",
+      "confidence": "medium",
+      "target_repo": "qgia-knowledge-spine-main",
+      "owner_surface": "canonical nested repo",
+      "evidence_refs": [
+        "intake/text_43.txt",
+        "intake/text_Au_Steward.txt",
+        "intake/deep-research-report.md",
+        "_staging/recovered_textAu__2026-03-13/L2/dossiers/l2_mechanic_registry__recovered_textAu.md",
+        "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index (1).json",
+        "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index 2 (1).json",
+        "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index 2.json",
+        "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index.json",
+        "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index (1).json",
+        "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index 2 (1).json",
+        "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index 2.json",
+        "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index.json"
+      ],
+      "source": "recovery_index",
+      "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
+      "suggested_commands": [
+        "python3 tools/workspace_recovery_index.py --summary",
+        "python3 tools/workspace_recovery_index.py --persist-report"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-32-recovery-candidates-routed-to-root",
+      "title": "Review 32 recovery candidates routed to root",
       "category": "recovery_review",
       "priority": "P2",
       "confidence": "medium",
@@ -233,9 +266,9 @@
         "intake/threadcore_symbiosis_delta_manifest.md",
         "archives/unzipped/ZipWiz_Chamber_6_28/aurora_bridge_output/relay_handshake.py",
         "intake/ORION__POLICY__CANON_PROTOCOL__v2.0__2026-04-08.md",
-        "archives/unzipped/Complete Archive 4_19 copy/GitHub Desktop.app/Contents/Resources/app/static/available-licenses.json",
-        "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/site-packages/yfinance/const.py",
-        "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/site-packages/yfinance/const.py"
+        "_staging/apple_notes_recovery__2026-03-16/L2/MULTILINGUAL_BEAMFORMING_ARRAY_SEED.md",
+        "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUI/generate_manifest.py",
+        "intake/text_CN_v4.txt"
       ],
       "source": "recovery_index",
       "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
@@ -282,36 +315,8 @@
       "status": "open"
     },
     {
-      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-7-recovery-candidates-routed-to-qgia-knowledge-spine-main",
-      "title": "Review 7 recovery candidates routed to qgia-knowledge-spine-main",
-      "category": "recovery_review",
-      "priority": "P2",
-      "confidence": "medium",
-      "target_repo": "qgia-knowledge-spine-main",
-      "owner_surface": "canonical nested repo",
-      "evidence_refs": [
-        "intake/text_43.txt",
-        "intake/text_Au_Steward.txt",
-        "intake/deep-research-report.md",
-        "archives/unzipped/Complete Archive 4_19 copy/GitHub Desktop.app/Contents/Resources/app/highlighter/mode/sql.js",
-        "_staging/recovered_textAu__2026-03-13/L2/dossiers/l2_mechanic_registry__recovered_textAu.md",
-        "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index (1).json",
-        "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index 2 (1).json"
-      ],
-      "source": "recovery_index",
-      "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
-      "suggested_commands": [
-        "python3 tools/workspace_recovery_index.py --summary",
-        "python3 tools/workspace_recovery_index.py --persist-report"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-9-recovery-candidates-routed-to-review-required",
-      "title": "Review 9 recovery candidates routed to review-required",
+      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-8-recovery-candidates-routed-to-review-required",
+      "title": "Review 8 recovery candidates routed to review-required",
       "category": "recovery_review",
       "priority": "P2",
       "confidence": "medium",
@@ -320,13 +325,12 @@
       "evidence_refs": [
         "_staging/recovered_textAu__2026-03-13/L1/04_aurora_simulation_steward_report.md",
         "_staging/recovered_textAu__2026-03-13/L2/03_galactic_union_mechanics_and_models.md",
-        "archives/unzipped/Complete Archive 4_19 copy/GitHub Desktop.app/Contents/Resources/app/crash.js",
         "_staging/orion_ord_review_fix/package/tests/test_ord_threshold_registry.py",
-        "archives/unzipped/Complete Archive 4_19 copy/GitHub Desktop.app/Contents/Resources/app/highlighter/mode/clike.js",
-        "archives/unzipped/Complete Archive 4_19 copy/GitHub Desktop.app/Contents/Resources/app/main.js",
-        "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/site-packages/yfinance/utils.py",
-        "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/site-packages/yfinance/utils.py",
-        "intake/text_44.txt"
+        "intake/text_44.txt",
+        "intake/text_39.txt",
+        "intake/text_CN_v2.txt",
+        "intake/text_CN_v3.txt",
+        "intake/text_au_ML_research.txt"
       ],
       "source": "recovery_index",
       "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",

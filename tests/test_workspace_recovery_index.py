@@ -135,6 +135,35 @@ def test_build_report_skips_private_and_nested_git_content(tmp_path: Path) -> No
     assert report["summary"]["skip_counts"]["auto_private_content"] == 1
 
 
+def test_build_report_skips_configured_vendor_directories(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    manifest_path = root / "catalog" / "recovery_index_manifest.json"
+    write_manifest(manifest_path)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["exclude_directory_names"].extend(["GitHub Desktop.app", "site-packages"])
+    write_file(manifest_path, json.dumps(manifest, indent=2) + "\n")
+    write_file(
+        root / "legacy" / "GitHub Desktop.app" / "Contents" / "Resources" / "app" / "main.js",
+        "function boot() { return 'not Aurora recovery material'; }\n",
+    )
+    write_file(
+        root / "legacy" / "site-packages" / "yfinance" / "const.py",
+        "def constants():\n    return 'not local Aurora logic'\n",
+    )
+    write_file(root / "legacy" / "cloudbank_logic.py", "def route():\n    return 'CloudBank'\n")
+
+    report = workspace_recovery_index.build_report(
+        root,
+        manifest_path,
+        generated_at="2026-05-20T00:00:00Z",
+    )
+
+    paths = {candidate["path"] for candidate in report["candidates"]}
+    assert "legacy/cloudbank_logic.py" in paths
+    assert not any("GitHub Desktop.app" in path for path in paths)
+    assert not any("site-packages" in path for path in paths)
+
+
 def test_main_persist_report_writes_configured_report_path(tmp_path: Path) -> None:
     root = tmp_path / "workspace"
     manifest_path = root / "catalog" / "recovery_index_manifest.json"

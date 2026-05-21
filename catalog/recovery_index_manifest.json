@@ -38,7 +38,9 @@
     ".ruff_cache",
     ".venv",
     "__pycache__",
-    "node_modules"
+    "GitHub Desktop.app",
+    "node_modules",
+    "site-packages"
   ],
   "exclude_subpaths": [
     "archives/reviewed_quarantine_delete_candidates",
