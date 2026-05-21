@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-21T21:26:23Z",
+  "generated_at": "2026-05-21T23:36:03Z",
   "root": ".",
   "tool": "aurora_recommendation_engine",
   "run_mode": "read_only",
@@ -9,20 +9,20 @@
   "manifest_path": "catalog/recommendation_engine_manifest.json",
   "status": "open",
   "summary": {
-    "recommendation_count": 9,
+    "recommendation_count": 8,
     "blocking_count": 0,
-    "approval_required_count": 9,
+    "approval_required_count": 8,
     "by_priority": {
       "P1": 1,
-      "P2": 8
+      "P2": 7
     },
     "by_category": {
-      "developer_tooling": 3,
+      "developer_tooling": 2,
       "recovery_review": 6
     },
     "by_status": {
       "blocked": 1,
-      "open": 8
+      "open": 7
     }
   },
   "source_reports": {
@@ -43,13 +43,13 @@
     },
     "devkit": {
       "status": "WARN",
-      "finding_count": 3,
-      "install_plan_items": 3
+      "finding_count": 2,
+      "install_plan_items": 2
     },
     "git_status": {
       "status": "clean",
       "changed_path_count": 0,
-      "branch": "codex/root-cleanup-before-cloudbank-issues-2026-05-11...origin/codex/root-cleanup-before-cloudbank-issues-2026-05-11 [ahead 3]"
+      "branch": "codex/root-cleanup-before-cloudbank-issues-2026-05-11...origin/codex/root-cleanup-before-cloudbank-issues-2026-05-11 [ahead 4]"
     }
   },
   "recommendations": [
@@ -122,27 +122,6 @@
       "recommended_next_action": "Recommended Mac system package manager if machine-level automatic updates are desired.",
       "suggested_commands": [
         "brew update"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-xcodebuild-is-error",
-      "title": "xcodebuild is error.",
-      "category": "developer_tooling",
-      "priority": "P2",
-      "confidence": "high",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::tool_xcodebuild_error"
-      ],
-      "source": "devkit",
-      "recommended_next_action": "Recommended for iOS and full macOS app build automation.",
-      "suggested_commands": [
-        "python3 tools/aurora_devkit.py --install-plan"
       ],
       "approval_required": true,
       "mutation_posture": "advisory_only",

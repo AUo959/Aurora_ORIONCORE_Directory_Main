@@ -39,18 +39,5 @@
     ],
     "update_command_text": "brew update",
     "notes": "Homebrew install is a system-level operation and should be approved separately before running the official installer."
-  },
-  {
-    "tool_id": "xcodebuild",
-    "lane": "apple-platforms",
-    "manager": "manual",
-    "status": "manual",
-    "approval_required": true,
-    "blocked_by": [],
-    "install_command": [],
-    "install_command_text": "",
-    "update_command": [],
-    "update_command_text": "",
-    "notes": "Full Xcode must be installed and selected with xcode-select before iOS or full macOS build automation is complete."
   }
 ]

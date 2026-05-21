@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-21T21:23:49Z",
+  "generated_at": "2026-05-21T23:33:01Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "manifest_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
   "toolkit_id": "aurora-dev-toolkit",
@@ -62,7 +62,7 @@
       ],
       "path": "/usr/bin/python3",
       "returncode": 0,
-      "output": "pip 21.2.4 from /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)"
+      "output": "pip 21.2.4 from /Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)"
     },
     {
       "id": "uv",
@@ -237,14 +237,14 @@
       "category": "apple-platforms",
       "required": false,
       "impact": "Recommended for iOS and full macOS app build automation.",
-      "status": "error",
+      "status": "ok",
       "command": [
         "xcodebuild",
         "-version"
       ],
       "path": "/usr/bin/xcodebuild",
-      "returncode": 1,
-      "output": "xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance"
+      "returncode": 0,
+      "output": "Xcode 26.5\nBuild version 17F42"
     },
     {
       "id": "rust",
@@ -645,13 +645,6 @@
       "message": "brew is missing.",
       "evidence": "command not found",
       "next_step": "Recommended Mac system package manager if machine-level automatic updates are desired."
-    },
-    {
-      "severity": "warning",
-      "id": "tool_xcodebuild_error",
-      "message": "xcodebuild is error.",
-      "evidence": "xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance",
-      "next_step": "Recommended for iOS and full macOS app build automation."
     }
   ],
   "install_plan": [
@@ -695,19 +688,6 @@
       ],
       "update_command_text": "brew update",
       "notes": "Homebrew install is a system-level operation and should be approved separately before running the official installer."
-    },
-    {
-      "tool_id": "xcodebuild",
-      "lane": "apple-platforms",
-      "manager": "manual",
-      "status": "manual",
-      "approval_required": true,
-      "blocked_by": [],
-      "install_command": [],
-      "install_command_text": "",
-      "update_command": [],
-      "update_command_text": "",
-      "notes": "Full Xcode must be installed and selected with xcode-select before iOS or full macOS build automation is complete."
     }
   ],
   "validation_commands": [
