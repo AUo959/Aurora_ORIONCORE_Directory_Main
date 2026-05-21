@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-18T19:52:34Z",
+  "generated_at": "2026-05-21T21:23:49Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "manifest_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
   "toolkit_id": "aurora-dev-toolkit",
@@ -251,28 +251,28 @@
       "category": "systems",
       "required": false,
       "impact": "Optional for high-performance local tools and native extensions.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "rustc",
         "--version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/Users/travisstreets/.local/bin/rustc",
+      "returncode": 0,
+      "output": "rustc 1.95.0 (59807616e 2026-04-14)"
     },
     {
       "id": "go",
       "category": "systems",
       "required": false,
       "impact": "Optional for portable developer services and CLIs.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "go",
         "version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/Users/travisstreets/.local/bin/go",
+      "returncode": 0,
+      "output": "go version go1.26.3 darwin/arm64"
     }
   ],
   "package_manifests": [
@@ -652,20 +652,6 @@
       "message": "xcodebuild is error.",
       "evidence": "xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance",
       "next_step": "Recommended for iOS and full macOS app build automation."
-    },
-    {
-      "severity": "warning",
-      "id": "tool_rust_missing",
-      "message": "rust is missing.",
-      "evidence": "command not found",
-      "next_step": "Optional for high-performance local tools and native extensions."
-    },
-    {
-      "severity": "warning",
-      "id": "tool_go_missing",
-      "message": "go is missing.",
-      "evidence": "command not found",
-      "next_step": "Optional for portable developer services and CLIs."
     }
   ],
   "install_plan": [
@@ -722,52 +708,6 @@
       "update_command": [],
       "update_command_text": "",
       "notes": "Full Xcode must be installed and selected with xcode-select before iOS or full macOS build automation is complete."
-    },
-    {
-      "tool_id": "rust",
-      "lane": "systems",
-      "manager": "brew",
-      "status": "blocked",
-      "approval_required": true,
-      "blocked_by": [
-        "brew"
-      ],
-      "install_command": [
-        "brew",
-        "install",
-        "rust"
-      ],
-      "install_command_text": "brew install rust",
-      "update_command": [
-        "brew",
-        "upgrade",
-        "rust"
-      ],
-      "update_command_text": "brew upgrade rust",
-      "notes": "Installs Rust through Homebrew once Homebrew exists."
-    },
-    {
-      "tool_id": "go",
-      "lane": "systems",
-      "manager": "brew",
-      "status": "blocked",
-      "approval_required": true,
-      "blocked_by": [
-        "brew"
-      ],
-      "install_command": [
-        "brew",
-        "install",
-        "go"
-      ],
-      "install_command_text": "brew install go",
-      "update_command": [
-        "brew",
-        "upgrade",
-        "go"
-      ],
-      "update_command_text": "brew upgrade go",
-      "notes": "Installs Go through Homebrew once Homebrew exists."
     }
   ],
   "validation_commands": [

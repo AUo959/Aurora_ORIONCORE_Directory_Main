@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-21T17:30:02Z",
+  "generated_at": "2026-05-21T21:26:23Z",
   "root": ".",
   "tool": "aurora_recommendation_engine",
   "run_mode": "read_only",
@@ -9,19 +9,19 @@
   "manifest_path": "catalog/recommendation_engine_manifest.json",
   "status": "open",
   "summary": {
-    "recommendation_count": 11,
+    "recommendation_count": 9,
     "blocking_count": 0,
-    "approval_required_count": 11,
+    "approval_required_count": 9,
     "by_priority": {
       "P1": 1,
-      "P2": 10
+      "P2": 8
     },
     "by_category": {
-      "developer_tooling": 5,
+      "developer_tooling": 3,
       "recovery_review": 6
     },
     "by_status": {
-      "blocked": 3,
+      "blocked": 1,
       "open": 8
     }
   },
@@ -43,13 +43,13 @@
     },
     "devkit": {
       "status": "WARN",
-      "finding_count": 5,
-      "install_plan_items": 5
+      "finding_count": 3,
+      "install_plan_items": 3
     },
     "git_status": {
       "status": "clean",
       "changed_path_count": 0,
-      "branch": "codex/root-cleanup-before-cloudbank-issues-2026-05-11...origin/codex/root-cleanup-before-cloudbank-issues-2026-05-11 [ahead 2]"
+      "branch": "codex/root-cleanup-before-cloudbank-issues-2026-05-11...origin/codex/root-cleanup-before-cloudbank-issues-2026-05-11 [ahead 3]"
     }
   },
   "recommendations": [
@@ -101,50 +101,6 @@
       "suggested_commands": [
         "brew install --cask docker",
         "brew upgrade --cask docker"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "blocked"
-    },
-    {
-      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-go-is-missing",
-      "title": "go is missing.",
-      "category": "developer_tooling",
-      "priority": "P2",
-      "confidence": "high",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::tool_go_missing"
-      ],
-      "source": "devkit",
-      "recommended_next_action": "Optional for portable developer services and CLIs.",
-      "suggested_commands": [
-        "brew install go",
-        "brew upgrade go"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "blocked"
-    },
-    {
-      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-rust-is-missing",
-      "title": "rust is missing.",
-      "category": "developer_tooling",
-      "priority": "P2",
-      "confidence": "high",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::tool_rust_missing"
-      ],
-      "source": "devkit",
-      "recommended_next_action": "Optional for high-performance local tools and native extensions.",
-      "suggested_commands": [
-        "brew install rust",
-        "brew upgrade rust"
       ],
       "approval_required": true,
       "mutation_posture": "advisory_only",

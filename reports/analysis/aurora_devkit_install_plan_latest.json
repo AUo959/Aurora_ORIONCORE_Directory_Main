@@ -52,51 +52,5 @@
     "update_command": [],
     "update_command_text": "",
     "notes": "Full Xcode must be installed and selected with xcode-select before iOS or full macOS build automation is complete."
-  },
-  {
-    "tool_id": "rust",
-    "lane": "systems",
-    "manager": "brew",
-    "status": "blocked",
-    "approval_required": true,
-    "blocked_by": [
-      "brew"
-    ],
-    "install_command": [
-      "brew",
-      "install",
-      "rust"
-    ],
-    "install_command_text": "brew install rust",
-    "update_command": [
-      "brew",
-      "upgrade",
-      "rust"
-    ],
-    "update_command_text": "brew upgrade rust",
-    "notes": "Installs Rust through Homebrew once Homebrew exists."
-  },
-  {
-    "tool_id": "go",
-    "lane": "systems",
-    "manager": "brew",
-    "status": "blocked",
-    "approval_required": true,
-    "blocked_by": [
-      "brew"
-    ],
-    "install_command": [
-      "brew",
-      "install",
-      "go"
-    ],
-    "install_command_text": "brew install go",
-    "update_command": [
-      "brew",
-      "upgrade",
-      "go"
-    ],
-    "update_command_text": "brew upgrade go",
-    "notes": "Installs Go through Homebrew once Homebrew exists."
   }
 ]
