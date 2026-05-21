@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-21T23:33:01Z",
+  "generated_at": "2026-05-21T23:52:09Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "manifest_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
   "toolkit_id": "aurora-dev-toolkit",
-  "status": "WARN",
+  "status": "READY",
   "toolchain": [
     {
       "id": "git",
@@ -209,28 +209,28 @@
       "category": "container",
       "required": false,
       "impact": "Recommended for devcontainers, service stacks, and reproducible app builds.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "docker",
         "--version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/usr/local/bin/docker",
+      "returncode": 0,
+      "output": "Docker version 29.4.3, build 055a478"
     },
     {
       "id": "brew",
       "category": "macos-package-manager",
       "required": false,
       "impact": "Recommended Mac system package manager if machine-level automatic updates are desired.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "brew",
         "--version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/opt/homebrew/bin/brew",
+      "returncode": 0,
+      "output": "Homebrew 5.1.13"
     },
     {
       "id": "xcodebuild",
@@ -631,65 +631,8 @@
       "path": "/Users/travisstreets/.codex/automations/weekly-skill-audit/automation.toml"
     }
   ],
-  "findings": [
-    {
-      "severity": "warning",
-      "id": "tool_docker_missing",
-      "message": "docker is missing.",
-      "evidence": "command not found",
-      "next_step": "Recommended for devcontainers, service stacks, and reproducible app builds."
-    },
-    {
-      "severity": "warning",
-      "id": "tool_brew_missing",
-      "message": "brew is missing.",
-      "evidence": "command not found",
-      "next_step": "Recommended Mac system package manager if machine-level automatic updates are desired."
-    }
-  ],
-  "install_plan": [
-    {
-      "tool_id": "docker",
-      "lane": "macos-system",
-      "manager": "manual",
-      "status": "blocked",
-      "approval_required": true,
-      "blocked_by": [
-        "brew"
-      ],
-      "install_command": [
-        "brew",
-        "install",
-        "--cask",
-        "docker"
-      ],
-      "install_command_text": "brew install --cask docker",
-      "update_command": [
-        "brew",
-        "upgrade",
-        "--cask",
-        "docker"
-      ],
-      "update_command_text": "brew upgrade --cask docker",
-      "notes": "Docker Desktop requires a system package manager or manual app install."
-    },
-    {
-      "tool_id": "brew",
-      "lane": "macos-system",
-      "manager": "manual",
-      "status": "manual",
-      "approval_required": true,
-      "blocked_by": [],
-      "install_command": [],
-      "install_command_text": "",
-      "update_command": [
-        "brew",
-        "update"
-      ],
-      "update_command_text": "brew update",
-      "notes": "Homebrew install is a system-level operation and should be approved separately before running the official installer."
-    }
-  ],
+  "findings": [],
+  "install_plan": [],
   "validation_commands": [
     "python3 tools/aurora_devkit.py --persist-report",
     "python3 tools/aurora_devkit.py --install-plan --persist-install-plan",

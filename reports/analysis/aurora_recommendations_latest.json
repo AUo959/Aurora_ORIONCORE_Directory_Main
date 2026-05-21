@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-21T23:36:03Z",
+  "generated_at": "2026-05-21T23:53:53Z",
   "root": ".",
   "tool": "aurora_recommendation_engine",
   "run_mode": "read_only",
@@ -9,20 +9,18 @@
   "manifest_path": "catalog/recommendation_engine_manifest.json",
   "status": "open",
   "summary": {
-    "recommendation_count": 8,
+    "recommendation_count": 6,
     "blocking_count": 0,
-    "approval_required_count": 8,
+    "approval_required_count": 6,
     "by_priority": {
       "P1": 1,
-      "P2": 7
+      "P2": 5
     },
     "by_category": {
-      "developer_tooling": 2,
       "recovery_review": 6
     },
     "by_status": {
-      "blocked": 1,
-      "open": 7
+      "open": 6
     }
   },
   "source_reports": {
@@ -42,14 +40,14 @@
       "discovered_candidate_count": 1011
     },
     "devkit": {
-      "status": "WARN",
-      "finding_count": 2,
-      "install_plan_items": 2
+      "status": "READY",
+      "finding_count": 0,
+      "install_plan_items": 0
     },
     "git_status": {
       "status": "clean",
       "changed_path_count": 0,
-      "branch": "codex/root-cleanup-before-cloudbank-issues-2026-05-11...origin/codex/root-cleanup-before-cloudbank-issues-2026-05-11 [ahead 4]"
+      "branch": "codex/root-cleanup-before-cloudbank-issues-2026-05-11...origin/codex/root-cleanup-before-cloudbank-issues-2026-05-11 [ahead 5]"
     }
   },
   "recommendations": [
@@ -79,49 +77,6 @@
       "recommended_next_action": "Handle restricted candidates through a separate review decision; do not copy them into issues, PRs, or canon surfaces by default.",
       "suggested_commands": [
         "python3 tools/workspace_recovery_index.py --summary"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-docker-is-missing",
-      "title": "docker is missing.",
-      "category": "developer_tooling",
-      "priority": "P2",
-      "confidence": "high",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::tool_docker_missing"
-      ],
-      "source": "devkit",
-      "recommended_next_action": "Recommended for devcontainers, service stacks, and reproducible app builds.",
-      "suggested_commands": [
-        "brew install --cask docker",
-        "brew upgrade --cask docker"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "blocked"
-    },
-    {
-      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-brew-is-missing",
-      "title": "brew is missing.",
-      "category": "developer_tooling",
-      "priority": "P2",
-      "confidence": "high",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::tool_brew_missing"
-      ],
-      "source": "devkit",
-      "recommended_next_action": "Recommended Mac system package manager if machine-level automatic updates are desired.",
-      "suggested_commands": [
-        "brew update"
       ],
       "approval_required": true,
       "mutation_posture": "advisory_only",
