@@ -15,10 +15,12 @@ through `catalog/repo_registry.yaml`.
 
 Initial scan date: 2026-05-16.
 
+Current validation date: 2026-05-21.
+
 Confirmed available:
 
-- macOS 26.1 on arm64.
-- `git` 2.50.1, `gh` 2.88.0, OpenSSH 10.0p2.
+- macOS 26.5 on arm64.
+- `git` 2.50.1, `gh` 2.88.0, OpenSSH 10.2p1.
 - `python3` 3.9.6 with root verifier-compatible packages already present.
 - `uv` 0.10.9 at `/Users/travisstreets/.local/bin/uv`.
 - `node` 24.14.0 and `npm` 11.9.0 through nvm.
@@ -27,18 +29,23 @@ Confirmed available:
 - User-space Python CLIs installed through `uv tool`: `pre-commit` 4.6.0,
   `ruff` 0.15.13, `mypy` 2.1.0, and `pipx` 1.12.0.
 - `sqlite3` is present.
+- Homebrew 5.1.13 is present at `/opt/homebrew/bin/brew`.
+- Docker Desktop is present; the CLI reports Docker 29.4.3 and Compose v5.1.4.
+- Full Xcode is installed, selected, and reports Xcode 26.5 build 17F42.
+- Rust is present through the user-space `rustup` lane as `rustc` 1.95.0.
+- Go is present through the user-space install lane as `go1.26.3`.
 - Root control surfaces already include `Makefile`, `.devcontainer`,
   `.pre-commit-config.yaml`, GitHub CI, GitWIZ helpers, and
   `tools/sync_codex_skill.py`.
-- Installed Aurora skill package currently has 26 skills by the latest
-  weekly-skill-audit memory baseline.
+- Installed Aurora skill package currently has 26 skills by the latest devkit
+  report.
 
-Confirmed gaps:
+Current devkit verdict:
 
-- Full Xcode is not selected; `xcodebuild` reports Command Line Tools only.
-- `brew`, `docker`, `rustc`, `cargo`, and `go` were not found on PATH during
-  the latest scan.
-- `aurora-package-watch` exists but is paused.
+- `reports/analysis/aurora_devkit_latest.json` reports `READY`.
+- All 19 declared tools are `ok`.
+- The install plan is empty.
+- Findings are empty.
 - Package manifests exist in multiple zones, including root, projects,
   CloudBank, and DuelSim. Installed dependency trees must be pruned from scans
   because CloudBank currently contains local `node_modules` and `.venv`.
@@ -71,6 +78,7 @@ Makefile aliases:
 ```bash
 make devkit-check
 make devkit-report
+make devkit-install-plan
 ```
 
 ## Workflow
@@ -115,11 +123,15 @@ JavaScript:
 
 macOS/system:
 
-- Homebrew is the practical package manager for automatic Mac tool updates, but
-  it is not currently installed.
-- Full Xcode is needed before treating iOS/macOS build automation as complete.
-- Docker is needed before devcontainer and service-stack work can be considered
-  frictionless on this machine.
+- Homebrew is installed and is the practical package manager for approved Mac
+  system tool updates.
+- Docker Desktop is installed; service-stack and devcontainer work can start
+  from a verified Docker baseline.
+- Full Xcode is installed and selected, so iOS/macOS build automation can be
+  evaluated against real Xcode behavior instead of Command Line Tools only.
+- Rust and Go are currently satisfied through user-space installs. Fresh-machine
+  installs or upgrades still require explicit approval and should follow the
+  current install plan rather than assumptions from older receipts.
 
 ## Update Automation
 

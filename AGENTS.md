@@ -217,8 +217,9 @@ Machine-local automations:
 - `aurora-dev-toolkit-watch`: read-only weekly drift report
 - `aurora-dev-toolkit-user-space-update`: updates only approved user-space tools
 
-System-level gates remain explicit approval work: Homebrew, Docker, full Xcode,
-Rust, and Go.
+System-level installs and upgrades remain explicit approval work, even when the
+current machine already satisfies the devkit. Rerun the generated devkit report
+before treating Homebrew, Docker, full Xcode, Rust, or Go as missing or broken.
 
 ## Aurora Command Grammar
 
