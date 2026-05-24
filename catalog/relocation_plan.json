@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-05-24T02:37:20Z",
+  "generated_at": "2026-05-24T03:27:01Z",
   "root": ".",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-05-23T19:59:13Z",
+  "manifest_generated_at": "2026-05-24T03:26:48Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
