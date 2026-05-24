@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aurora_mission_control_report.schema.json",
+  "title": "Aurora Mission Control Report",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "root",
+    "tool",
+    "run_mode",
+    "mutation_posture",
+    "nested_repo_mutation",
+    "manifest_path",
+    "status",
+    "summary",
+    "source_reports",
+    "build_lanes",
+    "operator_inbox",
+    "validation_commands"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "root": {
+      "type": "string"
+    },
+    "tool": {
+      "const": "aurora_mission_control"
+    },
+    "run_mode": {
+      "const": "read_only"
+    },
+    "mutation_posture": {
+      "const": "advisory_only"
+    },
+    "nested_repo_mutation": {
+      "const": false
+    },
+    "manifest_path": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "ready",
+        "attention",
+        "blocked"
+      ]
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "source_count",
+        "source_error_count",
+        "operator_inbox_count",
+        "blocking_count",
+        "approval_required_count",
+        "build_lanes"
+      ],
+      "properties": {
+        "source_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_error_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "operator_inbox_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "blocking_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "approval_required_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "build_lanes": {
+          "type": "object",
+          "required": [
+            "ready",
+            "attention",
+            "blocked"
+          ]
+        }
+      }
+    },
+    "source_reports": {
+      "type": "object"
+    },
+    "build_lanes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "lane_id",
+          "title",
+          "status",
+          "required_tools",
+          "recommended_tools",
+          "missing_required_tools",
+          "missing_recommended_tools",
+          "next_action",
+          "evidence_refs",
+          "mutation_posture"
+        ],
+        "properties": {
+          "status": {
+            "enum": [
+              "ready",
+              "attention",
+              "blocked"
+            ]
+          },
+          "mutation_posture": {
+            "const": "readiness_only"
+          }
+        }
+      }
+    },
+    "operator_inbox": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "item_id",
+          "title",
+          "category",
+          "priority",
+          "source",
+          "target_repo",
+          "owner_surface",
+          "evidence_refs",
+          "recommended_next_action",
+          "suggested_commands",
+          "approval_required",
+          "mutation_posture",
+          "blocking",
+          "status"
+        ],
+        "properties": {
+          "priority": {
+            "enum": [
+              "P0",
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "mutation_posture": {
+            "const": "advisory_only"
+          }
+        }
+      }
+    },
+    "validation_commands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

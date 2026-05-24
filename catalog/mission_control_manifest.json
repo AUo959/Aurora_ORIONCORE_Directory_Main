@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "id": "aurora-mission-control",
+  "default_report_path": "reports/analysis/aurora_mission_control_latest.json",
+  "run_mode": "read_only",
+  "mutation_posture": "advisory_only",
+  "max_inbox_items": 12,
+  "max_evidence_refs": 12,
+  "sources": [
+    {
+      "id": "workspace_verify",
+      "enabled": true
+    },
+    {
+      "id": "integration_gate",
+      "enabled": true
+    },
+    {
+      "id": "recovery_index",
+      "enabled": true
+    },
+    {
+      "id": "devkit",
+      "enabled": true
+    },
+    {
+      "id": "recommendations",
+      "enabled": true
+    },
+    {
+      "id": "git_status",
+      "enabled": true
+    }
+  ],
+  "build_lanes": [
+    {
+      "lane_id": "root-python-control-tools",
+      "title": "Root Python control-plane tooling",
+      "required_tools": [
+        "python3",
+        "uv",
+        "sqlite3"
+      ],
+      "recommended_tools": [
+        "pre-commit",
+        "ruff",
+        "mypy"
+      ],
+      "next_action": "Use this lane for root CLIs, report generators, validators, and receipt tooling."
+    },
+    {
+      "lane_id": "frontend-dashboard",
+      "title": "Local frontend dashboard",
+      "required_tools": [
+        "node",
+        "npm",
+        "corepack",
+        "pnpm"
+      ],
+      "recommended_tools": [],
+      "next_action": "Use this lane for a localhost-only Vite dashboard after a CLI/report contract is stable."
+    },
+    {
+      "lane_id": "containerized-services",
+      "title": "Containerized local services",
+      "required_tools": [
+        "docker"
+      ],
+      "recommended_tools": [],
+      "next_action": "Use this lane for devcontainers and reproducible local service stacks."
+    },
+    {
+      "lane_id": "apple-platforms",
+      "title": "Apple platform build checks",
+      "required_tools": [
+        "xcodebuild"
+      ],
+      "recommended_tools": [],
+      "next_action": "Use this lane for macOS/iOS feasibility checks and simulator-backed validation."
+    },
+    {
+      "lane_id": "systems-tools",
+      "title": "Systems helper tooling",
+      "required_tools": [
+        "rust",
+        "go"
+      ],
+      "recommended_tools": [],
+      "next_action": "Use this lane for high-performance local helpers only after a root contract exists."
+    },
+    {
+      "lane_id": "github-maintenance",
+      "title": "GitHub maintenance and CI triage",
+      "required_tools": [
+        "git",
+        "gh"
+      ],
+      "recommended_tools": [],
+      "next_action": "Use this lane for root or explicitly named nested-repo PR/issue/CI workflows."
+    }
+  ],
+  "validation_commands": [
+    "python3 tools/aurora_mission_control.py --summary",
+    "python3 tools/aurora_mission_control.py --persist-report",
+    "python3 -m pytest -q tests/test_aurora_mission_control.py",
+    "python3 tools/workspace_verify.py"
+  ]
+}

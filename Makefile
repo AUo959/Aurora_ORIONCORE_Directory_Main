@@ -1,4 +1,4 @@
-.PHONY: help setup test verify scan sync-audit pr-packet lint health devkit-check devkit-report devkit-install-plan recovery-index recovery-report recommendations recommendations-report confidence-audit confidence-audit-report integration-gate clean
+.PHONY: help setup test verify scan sync-audit pr-packet lint health devkit-check devkit-report devkit-install-plan recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report confidence-audit confidence-audit-report integration-gate clean
 
 PYTHON ?= python3
 PYTEST ?= pytest
@@ -67,6 +67,12 @@ recommendations: ## Build the advisory Aurora root recommendation summary
 
 recommendations-report: ## Persist the advisory Aurora root recommendation report
 	$(PYTHON) tools/aurora_recommendation_engine.py --persist-report
+
+mission-control: ## Build the read-only Aurora Mission Control summary
+	$(PYTHON) tools/aurora_mission_control.py --summary
+
+mission-control-report: ## Persist the read-only Aurora Mission Control report
+	$(PYTHON) tools/aurora_mission_control.py --persist-report
 
 confidence-audit: ## Run the bootstrap confidence audit example summary
 	$(PYTHON) tools/aurora_confidence_audit.py score \

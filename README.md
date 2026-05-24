@@ -25,6 +25,8 @@ nested repo internals stay out of root Git history.
 - Dev toolkit workflow: [docs/AURORA_DEV_TOOLKIT_WORKFLOW_v1.md](docs/AURORA_DEV_TOOLKIT_WORKFLOW_v1.md)
 - Current dev toolkit report: [reports/analysis/aurora_devkit_latest.json](reports/analysis/aurora_devkit_latest.json)
 - Current advisory recommendations: [reports/analysis/aurora_recommendations_latest.json](reports/analysis/aurora_recommendations_latest.json)
+- Mission Control workflow: [docs/AURORA_MISSION_CONTROL_WORKFLOW_v1.md](docs/AURORA_MISSION_CONTROL_WORKFLOW_v1.md)
+- Current Mission Control report: [reports/analysis/aurora_mission_control_latest.json](reports/analysis/aurora_mission_control_latest.json)
 - Confidence audit workflow: [docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md](docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md)
 - Current confidence audit report: [reports/analysis/aurora_confidence_audit_latest.json](reports/analysis/aurora_confidence_audit_latest.json)
 - Aurora command grammar plugin: [plugins/aurora-command-grammar/skills/aurora-command-grammar/SKILL.md](plugins/aurora-command-grammar/skills/aurora-command-grammar/SKILL.md)
@@ -107,6 +109,21 @@ The recommendation engine ranks existing root-control-plane evidence only. It
 does not promote recovery candidates, execute Aurora command grammar, send mesh
 messages, mutate nested repos, or apply developer-tooling installs.
 
+Mission Control operator inbox:
+
+```bash
+python3 tools/aurora_mission_control.py --summary
+python3 tools/aurora_mission_control.py --persist-report
+make mission-control
+make mission-control-report
+```
+
+Mission Control aggregates the verifier, integration gate, recovery index,
+devkit, recommendations, and root Git status into a read-only operator inbox
+plus build-readiness lanes. It does not promote recovery candidates, execute
+Aurora command grammar, send mesh messages, mutate nested repos, install
+packages, or publish GitHub changes.
+
 Confidence audit gateway:
 
 ```bash
@@ -137,6 +154,8 @@ python3 tools/aurora_command_intent.py simulate-range "001//005//"
 python3 tools/aurora_integration_gate.py --summary
 python3 tools/aurora_recommendation_engine.py --summary
 python3 tools/aurora_recommendation_engine.py --persist-report
+python3 tools/aurora_mission_control.py --summary
+python3 tools/aurora_mission_control.py --persist-report
 python3 tools/aurora_confidence_audit.py score --claim-type analysis --text "Example claim"
 python3 tools/aurora_confidence_audit.py audit --input claims.jsonl --jsonl --threshold 0.70
 python3 tools/aurora_devkit.py
@@ -151,6 +170,8 @@ make recovery-index
 make recovery-report
 make recommendations
 make recommendations-report
+make mission-control
+make mission-control-report
 make confidence-audit
 make confidence-audit-report
 make integration-gate

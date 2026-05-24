@@ -76,6 +76,22 @@ The recommendation engine normalizes existing root signals into ranked next
 actions. It is read-only by default and must not promote canon, execute
 runtime commands, send mesh messages, or mutate nested repos.
 
+## Aurora Mission Control
+
+Root operator inbox:
+
+- Config: `catalog/mission_control_manifest.json`
+- Schema: `catalog/schemas/aurora_mission_control_report.schema.json`
+- Workflow: `docs/AURORA_MISSION_CONTROL_WORKFLOW_v1.md`
+- Tool: `tools/aurora_mission_control.py`
+- Current report: `reports/analysis/aurora_mission_control_latest.json`
+- Make targets: `make mission-control`, `make mission-control-report`
+
+Mission Control aggregates existing deterministic root signals into read-only
+operator inbox items and build-readiness lanes. It does not promote recovery
+candidates, execute Aurora command grammar, send mesh messages, mutate nested
+repos, install packages, or publish GitHub changes.
+
 ## Confidence Audit
 
 Audit-layer confidence scoring:
