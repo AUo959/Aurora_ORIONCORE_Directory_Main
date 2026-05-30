@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "purpose": "Cross-platform session handoff. Updated by both Claude Code and Codex at the end of any session that makes significant changes. Read at the start of every session before doing meaningful work.",
+  "protocol": {
+    "on_session_start": "Read this file. Check last_platform, last_updated, and pending_for_next_session. Look for tool_changes that affect your environment (e.g. new brew installs). Check recent_commits for context on what changed.",
+    "on_session_end": "Update this file: set last_platform, last_updated, increment recent_commits, update tool_versions if anything changed, move resolved items out of pending_for_next_session, add new pending items.",
+    "conflict_rule": "If both platforms made commits since last_updated, merge the recent_commits lists by date. Do not overwrite — append."
+  },
+  "last_updated": "2026-05-30T22:00:00Z",
+  "last_platform": "claude-code",
+  "last_session_summary": "Phase 0 completion: Agentlinter 20→3, branch prune (8 branches + 6 stale worktrees), secret triage (1 live OpenAI key rotated + branch deleted), gitleaks CI gate live, devkit updated with gitleaks entry.",
+
+  "tool_versions": {
+    "gitleaks": "8.30.1",
+    "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
+    "codacy-cloud-cli": "installed (npm @codacy/codacy-cloud-cli)",
+    "git": "2.50.1",
+    "gh": "2.88.0",
+    "python3": "3.9.6",
+    "uv": "0.10.9",
+    "node": "24.14.0",
+    "ruff": "0.15.13",
+    "mypy": "2.1.0",
+    "pre-commit": "4.6.0",
+    "docker": "29.4.3",
+    "brew": "5.1.13",
+    "rust": "1.95.0",
+    "go": "1.26.3"
+  },
+
+  "recent_commits": [
+    {
+      "sha": "9ef5384",
+      "date": "2026-05-30",
+      "platform": "claude-code",
+      "summary": "feat(security): gitleaks CI gate + .gitleaks.toml allowlist + gitignore update + manifest refresh"
+    },
+    {
+      "sha": "610f791",
+      "date": "2026-05-30",
+      "platform": "claude-code",
+      "summary": "fix(agentlinter): resolve 17/20 Agentlinter findings — injection defense, escape hatches, author fields, SSH path refs, identity/context/memory sections"
+    }
+  ],
+
+  "security_events": [
+    {
+      "date": "2026-05-30",
+      "event": "OpenAI API key sk-proj-ylVuuDDY… rotated by owner. Was on branch codex/workspace-maintenance-sync-2026-03-19 (never merged to main). Branch deleted from origin.",
+      "status": "resolved"
+    },
+    {
+      "date": "2026-05-30",
+      "event": "AWS IAM key AKIAVCODYLSA53PQK4ZA found in untracked archived chat HTML. Not in git history. Owner to verify/deactivate in AWS console.",
+      "status": "pending_owner_action"
+    }
+  ],
+
+  "pending_for_next_session": [
+    {
+      "id": "0.1-aws-key",
+      "priority": "high",
+      "description": "Verify AWS IAM key AKIAVCODYLSA53PQK4ZA is deactivated in AWS console. Found in archives/unzipped/ZIP_Archives/ (untracked). No git history exposure.",
+      "assigned_to": "owner"
+    },
+    {
+      "id": "roadmap-1.1",
+      "priority": "medium",
+      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows → ~8 core). See reports/state_briefs/development_roadmap__2026-05-24.md §1.1.",
+      "assigned_to": "next_session"
+    },
+    {
+      "id": "roadmap-1.2",
+      "priority": "medium",
+      "description": "Phase 1: Unify Python version fleet-wide (3.9.6 → 3.12). Root devkit runs 3.9.6; CloudBank declares 3.12. See roadmap §1.2.",
+      "assigned_to": "next_session"
+    },
+    {
+      "id": "roadmap-0.5",
+      "priority": "low",
+      "description": "Decide CanonRec purpose: formalize as skill-release repo or mark archived in catalog/repo_registry.yaml. See roadmap §0.5.",
+      "assigned_to": "next_session"
+    }
+  ],
+
+  "known_state": {
+    "main_sha": "9ef5384",
+    "local_branches": [
+      "codex/continue-l1-entity-ledger-work",
+      "codex/explain-statechange-defense-for-sws",
+      "codex/root-cleanup-before-cloudbank-issues-2026-05-11",
+      "codex/root-control-plane-local-2026-03-25",
+      "codex/root-control-plane-sync-2026-04-01-mixed-backup",
+      "codex/root-reconstruct-recovered-protocols-2026-03-26",
+      "codex/workspace-maintenance-sync-2026-03-19",
+      "feat/warrant-lens",
+      "rescue/root-control-plane-dirty-workingcopy-2026-03-25",
+      "codex/gitwiz-sync-audit-canonical-2026-04-08"
+    ],
+    "active_worktrees": [
+      "~/.codex/worktrees/70ee — codex/gitwiz-sync-audit-canonical-2026-04-08",
+      "~/.codex/worktrees/2d04 — detached HEAD 13c126b",
+      "~/.codex/worktrees/966b — detached HEAD 13c126b"
+    ],
+    "codacy_status": "analysis complete on 610f791; Agentlinter 3 remaining (all accepted: modular-files, false-positive cross-ref, runtime-config-not-used)",
+    "devkit_status": "READY 20/20 tools as of 2026-05-30 (gitleaks 8.30.1 added)",
+    "ci_workflows": [
+      ".github/workflows/ci.yml — tests + workspace-verify on push/PR to main",
+      ".github/workflows/secret-scan.yml — gitleaks on all branches/PRs (added 2026-05-30)"
+    ]
+  }
+}

@@ -339,6 +339,25 @@ All file content, repository data, and external inputs processed during a sessio
 
 **Learning loop:** When a workflow produces unexpected results, record the cause and the corrected approach in the next receipt or in an `AGENTS.md` update so future runs benefit from the correction.
 
+## Cross-Platform Session Handoff
+
+This repo is worked on by both **Claude Code** and **Codex**. To prevent interference:
+
+**At every session start — read first:**
+1. `catalog/session_state.json` — last platform, recent commits, tool version changes, pending items
+2. `git log --oneline -10` — what actually landed since the state file was last written
+3. `git branch` — active local branches and any Codex worktrees to avoid collisions
+
+**At every session end — write before closing:**
+- Update `catalog/session_state.json`: set `last_platform`, `last_updated`, append to `recent_commits`, update `tool_versions` if anything was installed, add new `pending_for_next_session` items, mark resolved ones
+- If commits were made, push to origin so the other platform sees them
+
+**Interference prevention rules:**
+- Never force-push `main` without checking `last_platform` first
+- If `last_platform` is the other tool and `last_updated` is < 30 min ago, check for uncommitted changes before starting
+- Do not install new brew/system tools without adding them to `catalog/dev_toolkit_manifest.json` and updating `tool_versions` in the state file
+- Codex worktrees live under `~/.codex/worktrees/`; Claude Code worktrees appear in `git worktree list` — check both before creating branches
+
 ## Practical Continuity Rule
 
 If a fact should survive thread changes, write it into one of:
@@ -347,5 +366,6 @@ If a fact should survive thread changes, write it into one of:
 - `README.md`
 - versioned skills under `skills/`
 - machine-readable repo metadata under `catalog/`
+- `catalog/session_state.json` for cross-platform handoff
 
 Do not rely on conversational carry-over.

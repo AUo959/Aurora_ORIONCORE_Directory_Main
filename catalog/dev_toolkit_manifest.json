@@ -136,6 +136,14 @@
       "impact": "Recommended static type check lane for larger Python modules."
     },
     {
+      "id": "gitleaks",
+      "category": "quality",
+      "required": false,
+      "command": ["gitleaks", "version"],
+      "install_recipe": "brew install gitleaks",
+      "impact": "Secret-scanning gate for all pushes and PRs. Config: .gitleaks.toml. CI: .github/workflows/secret-scan.yml. Added 2026-05-30."
+    },
+    {
       "id": "pipx",
       "category": "python",
       "required": false,

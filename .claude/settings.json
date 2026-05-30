@@ -1,0 +1,18 @@
+{
+  "enabledPlugins": {
+    "codacy-skills@codacy": true
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"\nimport json, subprocess, sys\nfrom pathlib import Path\nstate_path = Path('catalog/session_state.json')\nif not state_path.exists():\n    sys.exit(0)\nwith open(state_path) as f:\n    state = json.load(f)\nlast = state.get('last_updated', '')\nhead = subprocess.run(['git', 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True).stdout.strip()\nknown_sha = state.get('known_state', {}).get('main_sha', '')\nif head != known_sha:\n    print(f'\\n[session-handoff] HEAD is {head}, session_state.json still shows {known_sha}.')\n    print('[session-handoff] Consider updating catalog/session_state.json before closing so Codex has current context.')\n    print('[session-handoff] Key fields to refresh: last_updated, last_platform, recent_commits, known_state.main_sha')\n\""
+          }
+        ]
+      }
+    ]
+  }
+}

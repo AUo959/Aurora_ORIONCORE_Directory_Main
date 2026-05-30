@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-25T13:50:23Z",
+  "generated_at": "2026-05-30T21:56:05Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "manifest_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
   "toolkit_id": "aurora-dev-toolkit",
@@ -177,6 +177,20 @@
       "output": "mypy 2.1.0 (compiled: yes)"
     },
     {
+      "id": "gitleaks",
+      "category": "quality",
+      "required": false,
+      "impact": "Secret-scanning gate for all pushes and PRs. Config: .gitleaks.toml. CI: .github/workflows/secret-scan.yml. Added 2026-05-30.",
+      "status": "ok",
+      "command": [
+        "gitleaks",
+        "version"
+      ],
+      "path": "/opt/homebrew/bin/gitleaks",
+      "returncode": 0,
+      "output": "8.30.1"
+    },
+    {
       "id": "pipx",
       "category": "python",
       "required": false,
@@ -230,7 +244,7 @@
       ],
       "path": "/opt/homebrew/bin/brew",
       "returncode": 0,
-      "output": "Homebrew 5.1.13"
+      "output": "Homebrew 5.1.14"
     },
     {
       "id": "xcodebuild",
@@ -465,13 +479,23 @@
       "path": "projects/GUI_Cloudhub/requirements.txt",
       "name": "requirements.txt",
       "kind": "python"
+    },
+    {
+      "path": "warrant-lens/Makefile",
+      "name": "Makefile",
+      "kind": "workflow"
+    },
+    {
+      "path": "warrant-lens/pyproject.toml",
+      "name": "pyproject.toml",
+      "kind": "python"
     }
   ],
   "registered_repos": [
     {
       "name": "aurora-cloudbank-symbolic-main",
       "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
-      "branch": "main",
+      "branch": "codex/cloudbank-gumas-mutation-auth-2026-05-25",
       "remote_status": "configured"
     },
     {

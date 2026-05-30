@@ -2,6 +2,8 @@
 !/.gitignore
 !/.gitattributes
 !/.gitleaks.toml
+!/.claude/
+!/.claude/settings.json
 !/.githooks/
 !/.githooks/pre-commit
 !/.githooks/pre-push
