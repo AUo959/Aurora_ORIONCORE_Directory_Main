@@ -1,9 +1,21 @@
 {
   "summary": {
-    "enabledPatterns": { "before": 0, "after": 2549 },
-    "enabledTools": { "before": 0, "after": 13 },
-    "issues": { "before": 0, "after": 1343 },
-    "analysisRuntime": { "before": null, "after": 88753 }
+    "enabledPatterns": {
+      "before": 0,
+      "after": 2549
+    },
+    "enabledTools": {
+      "before": 0,
+      "after": 13
+    },
+    "issues": {
+      "before": 0,
+      "after": 1343
+    },
+    "analysisRuntime": {
+      "before": null,
+      "after": 88753
+    }
   },
   "toolChanges": [
     {
@@ -21,7 +33,7 @@
     {
       "toolId": "Ruff",
       "action": "enabled",
-      "reason": "Primary Python linter — fast, comprehensive; 4 Minor CodeStyle patterns disabled per noise floor",
+      "reason": "Primary Python linter \u2014 fast, comprehensive; 4 Minor CodeStyle patterns disabled per noise floor",
       "patternsAffected": 134
     },
     {
@@ -33,7 +45,7 @@
     {
       "toolId": "Semgrep",
       "action": "enabled",
-      "reason": "Static analysis with 535 patterns; currently unavailable (opengrep binary not in PATH — install manually to activate)",
+      "reason": "Static analysis with 535 patterns; currently unavailable (opengrep binary not in PATH \u2014 install manually to activate)",
       "patternsAffected": 535
     },
     {
@@ -63,7 +75,7 @@
     {
       "toolId": "Lizard",
       "action": "enabled",
-      "reason": "Complexity analysis for Python/Swift — CCN, NLOC, parameter count at critical and medium thresholds",
+      "reason": "Complexity analysis for Python/Swift \u2014 CCN, NLOC, parameter count at critical and medium thresholds",
       "patternsAffected": 8
     },
     {
@@ -81,7 +93,7 @@
     {
       "toolId": "Prospector",
       "action": "enabled",
-      "reason": "Python meta-linter; running with partial status (2 non-blocking errors) — 0 issues found",
+      "reason": "Python meta-linter; running with partial status (2 non-blocking errors) \u2014 0 issues found",
       "patternsAffected": 7
     }
   ],
@@ -241,16 +253,16 @@
   ],
   "securityCoverage": {
     "deduplication": [
-      "Bandit_B101 (assert) disabled — same 664 instances covered by Ruff_S101 at Critical severity",
-      "Bandit_B607 (partial path) disabled — same concern covered by Ruff_S607 at High severity",
-      "Bandit_B311 (weak random) disabled — exact same 4 instances covered by Ruff_S311 at High severity",
-      "Bandit_B110 (try-except-pass) disabled — same 4 instances covered by Ruff_S110 at High severity",
-      "Bandit_B112 (try-except-continue) disabled — same 2 instances covered by Ruff_S112 at High severity",
-      "Bandit_B105 (hardcoded password) disabled — same 1 instance covered by Ruff_S105 at Critical severity",
-      "Bandit_B602 (subprocess shell=True) disabled — same 1 instance covered by Ruff_S602 at High severity"
+      "Bandit_B101 (assert) disabled \u2014 same 664 instances covered by Ruff_S101 at Critical severity",
+      "Bandit_B607 (partial path) disabled \u2014 same concern covered by Ruff_S607 at High severity",
+      "Bandit_B311 (weak random) disabled \u2014 exact same 4 instances covered by Ruff_S311 at High severity",
+      "Bandit_B110 (try-except-pass) disabled \u2014 same 4 instances covered by Ruff_S110 at High severity",
+      "Bandit_B112 (try-except-continue) disabled \u2014 same 2 instances covered by Ruff_S112 at High severity",
+      "Bandit_B105 (hardcoded password) disabled \u2014 same 1 instance covered by Ruff_S105 at Critical severity",
+      "Bandit_B602 (subprocess shell=True) disabled \u2014 same 1 instance covered by Ruff_S602 at High severity"
     ],
     "newCoverage": [
-      "Ruff_S101_assert (Critical, 664 issues) — assert used in production code; most in test files (expected pytest usage), ~5 in production tools",
+      "Ruff_S101_assert (Critical, 664 issues) \u2014 assert used in production code; most in test files (expected pytest usage), ~5 in production tools",
       "Ruff_S603_subprocess-without-shell-equals-true (High, 23 issues)",
       "Ruff_S607_start-process-with-partial-path (High, 12 issues)",
       "Ruff_RUF001_ambiguous-unicode-character-string (High, 4 issues)",
@@ -261,20 +273,48 @@
       "Agentlinter_security_has-injection-defense (High, 1 issue)",
       "Ruff_S105_hardcoded-password-string (Critical, 1 issue)",
       "Ruff_S602_subprocess-popen-with-shell-equals-true (High, 1 issue)",
-      "Checkov IaC security (1358 patterns, 0 issues — confirming clean IaC config)"
+      "Checkov IaC security (1358 patterns, 0 issues \u2014 confirming clean IaC config)"
     ],
     "noisyButKept": [
-      "Ruff_S101_assert (664 issues) — kept per security guardrail; majority are in test files using pytest assert (expected). ~5 production-code instances warrant review.",
-      "Bandit_B603 (29 issues) — kept alongside Ruff_S603 (23 issues) because counts differ, indicating different detection scope."
+      "Ruff_S101_assert (664 issues) \u2014 kept per security guardrail; majority are in test files using pytest assert (expected). ~5 production-code instances warrant review.",
+      "Bandit_B603 (29 issues) \u2014 kept alongside Ruff_S603 (23 issues) because counts differ, indicating different detection scope."
     ]
   },
   "keyImprovements": [
-    "Eliminated 3389 noise issues (71.6% reduction from 4732 → 1343) by disabling 19 Minor/Info CodeStyle and Documentation patterns per the 31% Critical+High noise floor.",
-    "Deduplicated 7 Bandit security patterns that were exact duplicates of Ruff patterns — same files and lines — keeping the higher-severity Ruff variant in each case.",
+    "Eliminated 3389 noise issues (71.6% reduction from 4732 \u2192 1343) by disabling 19 Minor/Info CodeStyle and Documentation patterns per the 31% Critical+High noise floor.",
+    "Deduplicated 7 Bandit security patterns that were exact duplicates of Ruff patterns \u2014 same files and lines \u2014 keeping the higher-severity Ruff variant in each case.",
     "Bandit retained for unique coverage: B603 (29 subprocess calls not caught by Ruff), B404 (16 subprocess import notices), and B108 (1 hardcoded temp dir).",
-    "Checkov brings 1358 IaC security patterns covering GitHub Actions workflows, YAML configs, and Python config files — confirmed clean with 0 issues.",
+    "Checkov brings 1358 IaC security patterns covering GitHub Actions workflows, YAML configs, and Python config files \u2014 confirmed clean with 0 issues.",
     "Agentlinter (new to this repo) found 20 real agent-quality issues across 8 skill/agent spec files: missing escape hatches, metadata gaps, and security concerns.",
-    "Semgrep configured with 535 patterns but unavailable — install opengrep manually (brew or GitHub releases) to activate the largest security scanner in the suite."
+    "Semgrep configured with 535 patterns but unavailable \u2014 install opengrep manually (brew or GitHub releases) to activate the largest security scanner in the suite."
   ],
-  "importResults": null
+  "importResults": {
+    "status": "completed_with_errors",
+    "toolsConfigured": 11,
+    "toolsEnabled": [
+      "Ruff",
+      "Spectral",
+      "Checkov"
+    ],
+    "toolsDisabled": [],
+    "errors": [
+      {
+        "toolId": "Ruff",
+        "error": "Conflict (409)",
+        "detail": "Unable to update Project Tool Patterns, repository is using a Configuration File"
+      },
+      {
+        "toolId": "Bandit",
+        "error": "Conflict (409)",
+        "detail": "Unable to update Project Tool Patterns, repository is using a Configuration File"
+      }
+    ],
+    "warnings": [
+      "Semgrep (Opengrep) not installed locally \u2014 535 patterns configured in Cloud only"
+    ],
+    "codingStandards": [
+      "Default coding standard"
+    ],
+    "forceUsed": false
+  }
 }
