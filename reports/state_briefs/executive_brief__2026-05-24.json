@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "artifact_type": "executive_decision_brief",
+  "tool": "aurora-exec-brief-pipeline",
+  "pipeline_note": "Bundled build_exec_brief.py CLI not present in this environment; brief authored against the skill's documented stable markdown contract.",
+  "generated_at": "2026-05-24T03:38:14Z",
+  "run_mode": "read_only",
+  "scope": "root_control_plane_plus_5_nested_repos",
+  "nested_repo_mutation": false,
+  "command_execution": false,
+  "decision_snapshot": {
+    "overall_status": "green_health_amber_backlog",
+    "blocking_findings": 0,
+    "one_line": "Nothing is broken; critical path is triaging 36 secret-flagged recovery candidates and landing the 18-commit root branch into main.",
+    "dimensions": [
+      {"dimension": "root_workspace_integrity", "state": "pass", "read": "healthy", "source": "workspace_verify"},
+      {"dimension": "root_git_working_tree", "state": "clean_in_sync", "read": "healthy"},
+      {"dimension": "root_branch_vs_origin_main", "state": "ahead_18_behind_0", "read": "integration_gap"},
+      {"dimension": "nested_repos", "state": "all_clean_all_in_sync", "count": 5, "read": "healthy"},
+      {"dimension": "mission_control", "state": "attention", "inbox_items": 7, "blocking": 0, "approval_required": 6, "read": "backlog_only"},
+      {"dimension": "recovery_backlog", "discovered": 1011, "surfaced": 100, "restricted": 36, "read": "needs_p1_triage"},
+      {"dimension": "dev_toolchain", "state": "ready", "tools_ok": 19, "tools_total": 19, "read": "healthy"},
+      {"dimension": "build_readiness_lanes", "ready": 6, "attention": 0, "blocked": 0, "read": "healthy"}
+    ]
+  },
+  "top_risks": [
+    {"id": "R1", "severity": "P1_high", "title": "36 restricted recovery candidates flagged as secret/key material", "detail": "Located in intake/, _staging/, archives/. Potential live credentials in early local work.", "evidence_ref": "reports/analysis/workspace_recovery_index_latest.json"},
+    {"id": "R2", "severity": "medium", "title": "Root feature branch diverged from origin/main by 18 commits with no landed PR", "detail": "CloudBank PR sweep mid-flight; divergence raises merge-conflict and review-scope risk.", "evidence_ref": "git rev-list origin/main...HEAD = 0 18"},
+    {"id": "R3", "severity": "medium", "title": "Branch sprawl - 17 local feature branches besides main", "detail": "Includes near-duplicates: 3x root-control-plane-sync-2026-04-01*, 3x gitwiz-sync-audit-*-2026-04-08, 1x rescue/*.", "evidence_ref": "git branch enumeration"},
+    {"id": "R4", "severity": "low_medium", "title": "CanonRec nested repo stale ~85 days", "detail": "Last commit 2026-02-28; intentional freeze vs drift is unconfirmed.", "evidence_ref": "git -C GUMAS_SIM_2.5/CanonRec log -1"},
+    {"id": "R5", "severity": "low", "title": "Long-tail recovery backlog", "detail": "1011 candidates discovered, 100 surfaced under cap, routed across 4 repos. Review cadence, not a defect.", "evidence_ref": "reports/analysis/workspace_recovery_index_latest.json"},
+    {"id": "R6", "severity": "low_cosmetic", "title": "Mission Control report mildly stale", "detail": "Generated before HEAD 42faeba; its '9 in-progress paths' git_state item is already resolved.", "evidence_ref": "reports/analysis/aurora_mission_control_latest.json"},
+    {"id": "R7", "severity": "low", "title": "Runtime on Python 3.9.6", "detail": "Past upstream EOL; devkit still reports OK. Forward maintenance item.", "evidence_ref": "reports/analysis/aurora_devkit_latest.json"}
+  ],
+  "operational_signals": {
+    "root_repo": {
+      "branch": "codex/root-cleanup-before-cloudbank-issues-2026-05-11",
+      "head": "42faeba",
+      "head_subject": "chore(root): refresh CloudBank PR sweep state",
+      "working_tree": "clean",
+      "vs_own_upstream": {"ahead": 0, "behind": 0, "sync_state": "in_sync"},
+      "vs_origin_main": {"ahead": 18, "behind": 0},
+      "remote": "git@github-aurora:AUo959/Aurora_ORIONCORE_Directory_Main.git",
+      "transport": "ssh",
+      "ci_workflow": ".github/workflows/ci.yml",
+      "root_test_files": 18,
+      "local_branch_count_excl_main": 17
+    },
+    "nested_repos": [
+      {"name": "aurora-cloudbank-symbolic-main", "branch": "main", "sync": "in_sync", "dirty": 0, "last_commit_date": "2026-05-24", "last_commit": "Auto-update: Synergy Dashboard Module (Issue #260)", "age_days": 0},
+      {"name": "DuelSim_v2.0", "branch": "main", "sync": "in_sync", "dirty": 0, "last_commit_date": "2026-05-19", "last_commit": "feat: add DuelSim standalone app", "age_days": 5},
+      {"name": "qgia-knowledge-spine-main", "branch": "main", "sync": "in_sync", "dirty": 0, "last_commit_date": "2026-04-23", "last_commit": "feat: bootstrap QGIA spine closed-loop artifacts", "age_days": 31},
+      {"name": "qgia-knowledge-library-main", "branch": "main", "sync": "in_sync", "dirty": 0, "last_commit_date": "2026-04-22", "last_commit": "feat: bootstrap QGIA library closed-loop artifacts", "age_days": 32},
+      {"name": "CanonRec", "branch": "main", "sync": "in_sync", "dirty": 0, "last_commit_date": "2026-02-28", "last_commit": "Survey main directory for context", "age_days": 85}
+    ],
+    "governance_artifacts": {
+      "workspace_verify": {"status": "pass", "findings": 0, "blocking": 0, "warnings": 0, "generated_at": "2026-05-24T03:27:13Z"},
+      "integration_gate": {"status": "pass", "checks": 5, "commands": 0},
+      "recovery_index": {"status": "READY", "scanned_files": 2371, "discovered_candidates": 1011, "surfaced_candidates": 100, "restricted_candidates": 36, "routing": {"aurora-cloudbank-symbolic-main": 47, "root": 32, "qgia-knowledge-spine-main": 12, "review-required": 8, "qgia-knowledge-library-main": 1}, "generated_at": "2026-05-21T17:26:45Z"},
+      "recommendations": {"status": "open", "count": 6, "blocking": 0, "approval_required": 6, "by_priority": {"P1": 1, "P2": 5}, "generated_at": "2026-05-22T00:03:54Z"},
+      "devkit": {"status": "READY", "tools_ok": 19, "tools_total": 19, "install_plan_items": 0, "generated_at": "2026-05-22T00:01:11Z"},
+      "confidence_audit": {"verdict": "pass", "min_score": 0.93, "max_score": 0.93, "user_alerts": 0, "generated_at": "2026-05-21T16:25:08Z"},
+      "mission_control": {"status": "attention", "inbox_items": 7, "blocking": 0, "approval_required": 6, "by_priority": {"P1": 1, "P2": 6}, "build_lanes": {"ready": 6, "attention": 0, "blocked": 0}, "generated_at": "2026-05-23T19:59:05Z", "staleness_note": "predates HEAD 42faeba; git_state inbox item resolved"}
+    },
+    "pending_relocations": {
+      "batch": "wave4_root_intake_cleanup_initial",
+      "status": "planned_only",
+      "items": ["Aurora_Sim_Architecture/ -> intake/", "narrative_engine_spec_parameters_to_narrative_core_v_0.md -> intake/"]
+    }
+  },
+  "recommended_actions": [
+    {"priority": "P1", "action": "Triage the 36 restricted (secret/key) recovery candidates as a credential-exposure review; rotate any live keys; do not promote to canon.", "automation": "make recovery-report"},
+    {"priority": "P2", "action": "Open or refresh the PR for codex/root-cleanup-before-cloudbank-issues-2026-05-11 -> origin/main (18 commits).", "automation": "python3 skills/gitwiz-github-manager/scripts/gitwiz_pr_packet.py --repo-name root --base origin/main"},
+    {"priority": "P2", "action": "Prune branch sprawl: delete 8 branches fully contained in main; decide keep/merge/drop on 7 branches with unmerged commits.", "safe_delete": ["clean-diff-panel-2026-04-14", "gitwiz-sync-audit-mainline-2026-04-08", "gitwiz-sync-audit-overlap-2026-04-08", "privacy-scope-hardening", "privacy-scope-hardening-mergefix", "root-control-plane-sync-2026-04-01", "root-control-plane-sync-2026-04-01-split-prep", "root-workspace-inventory-surfaces-2026-04-01"], "needs_decision": ["explain-statechange-defense-for-sws", "gitwiz-sync-audit-canonical-2026-04-08", "root-control-plane-local-2026-03-25", "root-control-plane-sync-2026-04-01-mixed-backup", "root-reconstruct-recovered-protocols-2026-03-26", "rescue/root-control-plane-dirty-workingcopy-2026-03-25", "workspace-maintenance-sync-2026-03-19"]},
+    {"priority": "P3", "action": "Refresh Mission Control so the operator inbox reflects HEAD and drops the resolved git_state item.", "automation": "make mission-control-report"},
+    {"priority": "P3", "action": "Confirm whether CanonRec's ~85-day freeze is intentional; record decision in catalog/repo_registry.yaml."},
+    {"priority": "P3", "action": "Work the 100 surfaced recovery candidates by target repo; each promotion requires owner-surface review plus receipt/PR."}
+  ],
+  "automation_opportunities": [
+    "Wire exec-brief --strict mode into .github/workflows/ci.yml as a briefing-quality gate.",
+    "Schedule weekly regeneration of this state brief to catch drift early.",
+    "Schedule the GITWIZ all-repo sync audit to keep the 6-repo fleet continuously reconciled."
+  ],
+  "evidence": [
+    {"signal": "workspace_integrity", "artifact": "reports/analysis/workspace_verify_latest.json", "timestamp": "2026-05-24T03:27:13Z"},
+    {"signal": "operator_inbox", "artifact": "reports/analysis/aurora_mission_control_latest.json", "timestamp": "2026-05-23T19:59:05Z"},
+    {"signal": "recovery_candidates", "artifact": "reports/analysis/workspace_recovery_index_latest.json", "timestamp": "2026-05-21T17:26:45Z"},
+    {"signal": "recommendations", "artifact": "reports/analysis/aurora_recommendations_latest.json", "timestamp": "2026-05-22T00:03:54Z"},
+    {"signal": "dev_toolchain", "artifact": "reports/analysis/aurora_devkit_latest.json", "timestamp": "2026-05-22T00:01:11Z"},
+    {"signal": "confidence_audit", "artifact": "reports/analysis/aurora_confidence_audit_latest.json", "timestamp": "2026-05-21T16:25:08Z"},
+    {"signal": "root_git_sync", "artifact": "reports/analysis/gitwiz/GITWIZ_SYNC_AUDIT__2026-05-24T013954Z.json", "timestamp": "2026-05-24T01:39:54Z"},
+    {"signal": "workspace_map", "artifact": "docs/workspace-map.md", "timestamp": "2026-05-24T03:26:48Z"}
+  ]
+}

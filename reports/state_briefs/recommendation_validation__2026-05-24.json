@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "artifact_type": "recommendation_validation_audit",
+  "generated_at": "2026-05-24T03:55:00Z",
+  "producer": "opus-analyst-review",
+  "framework_ref": "catalog/contracts/aurora_confidence_audit_contract_v1.json",
+  "schema_informed_by": "catalog/schemas/aurora_confidence_record.schema.json",
+  "scoring_note": "Analyst-assigned confidence scores expressed in the project rubric (bands, 0.70 threshold). Not produced by tools/aurora_confidence_audit.py; the contract sanctions reviewer adjudication as a calibration input.",
+  "run_mode": "read_only",
+  "nested_repo_mutation": false,
+  "confidence_bands": {"high": 0.85, "substantial": 0.70, "limited": 0.50, "low": 0.30, "unsupported": 0.0},
+  "alert_threshold": 0.70,
+  "summary": {
+    "recommendations_validated": 19,
+    "confirmed_as_stated": 17,
+    "confirmed_with_correction": 2,
+    "refuted": 0,
+    "mean_confidence": 0.83,
+    "min_confidence": 0.62,
+    "max_confidence": 0.96,
+    "band_counts": {"high": 10, "substantial": 7, "limited": 2, "low": 0, "unsupported": 0},
+    "requires_user_alert_count": 2,
+    "alerted_ids": ["R3.4", "R3.3"]
+  },
+  "records": [
+    {"id": "R0.1", "claim_type": "recommendation", "recommendation": "Triage 36 secret/key recovery candidates", "premise_verdict": "confirmed", "evidence_level": "verified_artifact", "evidence_refs": ["reports/analysis/aurora_mission_control_latest.json", "reports/analysis/workspace_recovery_index_latest.json"], "confidence": 0.96, "band": "high", "requires_user_alert": false},
+    {"id": "R0.2", "claim_type": "recommendation", "recommendation": "Add secret-scanning CI gate to all 6 repos", "premise_verdict": "confirmed", "evidence_level": "deterministic_check", "evidence_refs": ["grep of .github/workflows across 6 repos = 0 secret-scan workflows"], "confidence": 0.87, "band": "high", "requires_user_alert": false, "caveat": "GitHub native secret scanning is a repo setting not visible in tracked files"},
+    {"id": "R0.3", "claim_type": "recommendation", "recommendation": "Land root branch into main via PR", "premise_verdict": "confirmed", "evidence_level": "deterministic_check", "evidence_refs": ["git rev-list --left-right --count origin/main...HEAD = 0 18"], "confidence": 0.90, "band": "high", "requires_user_alert": false},
+    {"id": "R0.4", "claim_type": "recommendation", "recommendation": "Prune 8 fully-merged local branches", "premise_verdict": "confirmed", "evidence_level": "deterministic_check", "evidence_refs": ["git rev-list main...<branch> = 0 unique commits for each of 8 branches"], "confidence": 0.93, "band": "high", "requires_user_alert": false},
+    {"id": "R0.5", "claim_type": "recommendation", "recommendation": "Decide CanonRec's purpose", "premise_verdict": "confirmed", "evidence_level": "direct_observation", "evidence_refs": ["CanonRec dir listing: CanonRec_v1.3..v1.3.7 zips + .skill"], "confidence": 0.82, "band": "substantial", "requires_user_alert": false},
+    {"id": "R1.1", "claim_type": "recommendation", "recommendation": "Collapse CloudBank CI from 33 to ~8 workflows", "premise_verdict": "confirmed", "evidence_level": "deterministic_check", "evidence_refs": ["ls .github/workflows | wc -l = 33", "pr_evaluation.yml.backup git-tracked"], "confidence": 0.84, "band": "substantial", "requires_user_alert": false, "note": "~8 target is an estimate pending workflow inventory"},
+    {"id": "R1.2", "claim_type": "recommendation", "recommendation": "Unify the Python version across the fleet", "premise_verdict": "confirmed_strengthened", "evidence_level": "deterministic_check", "evidence_refs": ["CloudBank setup.py python_requires>=3.8", "CloudBank runtime.txt python-3.12.0", "README badge 3.11+", "devkit machine python3 3.9.6"], "confidence": 0.89, "band": "high", "requires_user_alert": false},
+    {"id": "R1.3", "claim_type": "recommendation", "recommendation": "Cut repo bloat (20 tracked zips; duplicate archives)", "premise_verdict": "confirmed", "evidence_level": "deterministic_check", "evidence_refs": ["git ls-files CloudBank = 20 .zip", "docs/workspace-map.md 845.1 MiB hash_duplicate archives"], "confidence": 0.88, "band": "high", "requires_user_alert": false},
+    {"id": "R1.4", "claim_type": "recommendation", "recommendation": "Govern the GUMAS_SIM_2.5 container", "premise_verdict": "confirmed", "evidence_level": "direct_observation", "evidence_refs": ["du -sh GUMAS_SIM_2.5 = 1.3G", "no .git directory", "46 loose top-level files"], "confidence": 0.87, "band": "high", "requires_user_alert": false},
+    {"id": "R2.1", "claim_type": "recommendation", "recommendation": "Recovery pipeline v2 - build the promotion gate", "premise_verdict": "confirmed", "evidence_level": "deterministic_check", "evidence_refs": ["workspace_recovery_index_latest.json 1011 discovered/100 surfaced", "no promotion/extraction tool in tools/", "README names a required separate promotion gate"], "confidence": 0.86, "band": "high", "requires_user_alert": false},
+    {"id": "R2.2", "claim_type": "recommendation", "recommendation": "Establish a fleet-wide test floor", "premise_verdict": "confirmed", "evidence_level": "deterministic_check", "evidence_refs": ["DuelSim 0 pytest", "CanonRec 0", "QGIA library/spine 1 each", "root 18"], "confidence": 0.88, "band": "high", "requires_user_alert": false, "note": "CloudBank ~109 test figure is self-reported (corroborated_inference)"},
+    {"id": "R2.3", "claim_type": "recommendation", "recommendation": "Mission Control as a live dashboard", "premise_verdict": "confirmed", "evidence_level": "verified_artifact", "evidence_refs": ["aurora_mission_control_latest.json source_count = 6"], "confidence": 0.78, "band": "substantial", "requires_user_alert": false, "note": "enhancement, not defect fix - discretionary value"},
+    {"id": "R2.4", "claim_type": "recommendation", "recommendation": "Formalize CanonRec release flow", "premise_verdict": "confirmed_conditional", "evidence_level": "direct_observation", "evidence_refs": ["CanonRec committed version zips v1.3..v1.3.7"], "confidence": 0.80, "band": "substantial", "requires_user_alert": false, "note": "conditional on R0.5 deciding CanonRec stays active"},
+    {"id": "R2.5", "claim_type": "recommendation", "recommendation": "Thicken QGIA automation", "premise_verdict": "confirmed", "evidence_level": "deterministic_check", "evidence_refs": ["QGIA library/spine: 4 scripts, 1 test each", "constellation-knowledge-index.yml present"], "confidence": 0.76, "band": "substantial", "requires_user_alert": false},
+    {"id": "R3.1", "claim_type": "recommendation", "recommendation": "Make the inter-repo contract explicit", "premise_verdict": "confirmed", "evidence_level": "corroborated_inference", "evidence_refs": ["README.md and AGENTS.md prose describing repo roles"], "confidence": 0.74, "band": "substantial", "requires_user_alert": false, "note": "premise is a reading of prose, not a hard artifact; strategic/judgment-heavy"},
+    {"id": "R3.2", "claim_type": "recommendation", "recommendation": "Settle the monorepo-vs-polyrepo question", "premise_verdict": "confirmed", "evidence_level": "verified_artifact", "evidence_refs": ["AGENTS.md 'Commit / Hook Caveat' section documents worktree/pre-commit path mismatch"], "confidence": 0.76, "band": "substantial", "requires_user_alert": false},
+    {"id": "R3.3", "claim_type": "recommendation", "recommendation": "Governance trend observability for the core scanners", "premise_verdict": "confirmed_with_correction", "evidence_level": "deterministic_check", "evidence_refs": ["9 single-snapshot *_latest.json files", "reports/analysis/gitwiz/ and reports/automation/archive-entropy-guard/ DO retain dated history"], "confidence": 0.66, "band": "limited", "requires_user_alert": true, "correction": "Roadmap said scanners emit 'no history'; partial dated history does exist. Re-scope the recommendation to the 4 core snapshot-only scanners: workspace_verify, recovery_index, confidence_audit, mission_control."},
+    {"id": "R3.4", "claim_type": "recommendation", "recommendation": "Dependency & supply-chain policy across the fleet", "premise_verdict": "confirmed_with_correction", "evidence_level": "deterministic_check", "evidence_refs": ["aurora-cloudbank-symbolic-main HAS .github/dependabot.yml", "root, DuelSim, CanonRec, qgia-library, qgia-spine have none", "no renovate.json anywhere"], "confidence": 0.62, "band": "limited", "requires_user_alert": true, "correction": "Roadmap said to 'add Dependabot/Renovate' and 'no unified policy exists'; CloudBank already has Dependabot. Corrected: extend Dependabot to the 5 uncovered repos and standardize on CloudBank's config."},
+    {"id": "RB.1", "claim_type": "recommendation", "recommendation": "Refresh the Mission Control report", "premise_verdict": "confirmed", "evidence_level": "verified_artifact", "evidence_refs": ["aurora_mission_control_latest.json generated_at 2026-05-23T19:59Z predates HEAD 42faeba"], "confidence": 0.92, "band": "high", "requires_user_alert": false}
+  ],
+  "limitations": [
+    "Confidence scores are analyst-assigned, not tool-generated; they rank relative soundness, not calibrated probability.",
+    "A confidence score does not prove the underlying claim true (per contract non-goals).",
+    "Self-review: recommendations were authored in the same session; R3.1-R3.2 strategic items would benefit from outside review.",
+    "Calibration state is bootstrap_default_v1 / rubric_seed_only - no resolved-outcome history exists yet."
+  ]
+}
