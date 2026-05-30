@@ -97,6 +97,8 @@
 .DS_Store
 .pytest_cache/
 __pycache__/
+# iCloud Drive conflict duplicates ("file 2.ext")
+* 2.*
 *.pyc
 *.pyo
 *.swp
