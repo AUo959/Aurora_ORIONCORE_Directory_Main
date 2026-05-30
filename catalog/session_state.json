@@ -15,9 +15,8 @@
       "2. Update last_platform, last_updated, last_session_summary.",
       "3. Append new commits to recent_commits (keep last 10).",
       "4. Update tool_versions if anything was installed.",
-      "5. Move completed pending items out; add new ones.",
-      "6. Update known_state.main_sha.",
-      "7. Push to origin so the other platform sees it."
+      "5. Update known_state.main_sha and local_branches.",
+      "6. Push to origin so the other platform sees it."
     ],
     "suspend_rule": "A suspend point must be self-contained: the resuming platform should need to read only this file + context_files to continue. Never rely on conversational memory surviving the handoff.",
     "conflict_rule": "If both platforms made commits since last_updated, merge recent_commits by date. Do not overwrite — append."
@@ -75,11 +74,17 @@
 
   "task_queue": [],
 
-  "completed_tasks": [],
+  "completed_tasks": [
+    {
+      "id": "phase-0-complete",
+      "date": "2026-05-30",
+      "summary": "Phase 0: Agentlinter 20→5 accepted, branch prune (8 branches), secret triage (1 OpenAI key rotated), gitleaks CI gate, devkit 20/20, skills consolidated, cross-platform handoff layer built, 5 Dependabot PRs merged, 2 stale PRs closed"
+    }
+  ],
 
-  "last_updated": "2026-05-30T23:00:00Z",
+  "last_updated": "2026-05-30T23:59:00Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Phase 0 complete. Cross-platform workflow layer built: session_state.json v2 with suspend/resume protocol, platform capability map, task queue, workflow specs (pr-lifecycle, governance-fix-loop). Devkit 20/20. gitleaks CI gate live.",
+  "last_session_summary": "Full Phase 0 + workspace improvement session. Skills consolidated (16 in skills/), session_state v2, workflow specs, make skills-install, ~/.codex/AGENTS.md updated, 5 Dependabot PRs merged (#11-15), stale PRs #7 and #4 closed.",
 
   "tool_versions": {
     "gitleaks": "8.30.1",
@@ -101,16 +106,52 @@
 
   "recent_commits": [
     {
-      "sha": "497e2b6",
+      "sha": "3bb4cf8",
+      "date": "2026-05-30",
+      "platform": "dependabot",
+      "summary": "deps: bump pre-commit-hooks (#15)"
+    },
+    {
+      "sha": "0e67094",
+      "date": "2026-05-30",
+      "platform": "dependabot",
+      "summary": "deps: bump docker-in-docker devcontainer feature (#14)"
+    },
+    {
+      "sha": "63f781c",
+      "date": "2026-05-30",
+      "platform": "dependabot",
+      "summary": "deps: bump actions/checkout from 4 to 6 (#13)"
+    },
+    {
+      "sha": "ff54454",
+      "date": "2026-05-30",
+      "platform": "dependabot",
+      "summary": "deps: bump actions/upload-artifact from 4 to 7 (#12)"
+    },
+    {
+      "sha": "7fb2eea",
+      "date": "2026-05-30",
+      "platform": "dependabot",
+      "summary": "deps: bump actions/setup-python from 5 to 6 (#11)"
+    },
+    {
+      "sha": "906311f",
       "date": "2026-05-30",
       "platform": "claude-code",
-      "summary": "chore(scan): refresh workspace manifest and repo registry timestamps"
+      "summary": "feat(skills): consolidate all 16 project-owned skills into skills/ with full structure + sync tooling"
+    },
+    {
+      "sha": "bb0908f",
+      "date": "2026-05-30",
+      "platform": "claude-code",
+      "summary": "feat(handoff): bidirectional Claude Code ↔ Codex workflow layer (session_state v2, workflow specs, Stop hook)"
     },
     {
       "sha": "239bd9c",
       "date": "2026-05-30",
       "platform": "claude-code",
-      "summary": "feat(devkit+handoff): gitleaks in devkit, session_state.json v1, AGENTS.md handoff protocol, Stop hook"
+      "summary": "feat(devkit+handoff): gitleaks in devkit, session_state v1, AGENTS.md handoff protocol"
     },
     {
       "sha": "9ef5384",
@@ -147,16 +188,34 @@
       "assigned_to": "owner"
     },
     {
-      "id": "roadmap-1.1",
+      "id": "improve-E-skill-routing",
       "priority": "medium",
-      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows → ~8). See reports/state_briefs/development_roadmap__2026-05-24.md §1.1. Prefer Codex (has browser + github plugin for PR review).",
+      "description": "Fix persistent aurora-canon-reconciler/aurora-repo-stabilizer routing overlap (validate_entity.py scored 0.48/0.47 for 5 weeks). Narrow aurora-repo-stabilizer scripts/ scoring or add canon-specific path penalty in skills/aurora-repo-stabilizer/.",
+      "assigned_to": "either"
+    },
+    {
+      "id": "improve-F-codacy-s101",
+      "priority": "medium",
+      "description": "Suppress Codacy Ruff_S101_assert in test files via .codacy/codacy.config.json scope rule. ~5 production instances should remain visible. Cuts ~1200 noise issues.",
+      "assigned_to": "claude-code"
+    },
+    {
+      "id": "improve-G-plugin-alignment",
+      "priority": "medium",
+      "description": "Update plugins/aurora-workspace-guard and plugins/aurora-command-grammar SKILL.md files to reference catalog/session_state.json and the handoff protocol.",
       "assigned_to": "either"
     },
     {
       "id": "roadmap-1.2",
       "priority": "medium",
-      "description": "Phase 1: Unify Python floor fleet-wide (3.9.6 → 3.12). Prefer Claude Code (CI workflow edits, devkit manifest update).",
+      "description": "Phase 1: Unify Python floor fleet-wide (3.9.6 → 3.12). Root devkit runs 3.9.6; CloudBank declares 3.12. CI matrix + devkit manifest update. Prefer Claude Code.",
       "assigned_to": "claude-code"
+    },
+    {
+      "id": "roadmap-1.1",
+      "priority": "medium",
+      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows → ~8). Prefer Codex (browser + github plugin). See reports/state_briefs/development_roadmap__2026-05-24.md §1.1.",
+      "assigned_to": "codex"
     },
     {
       "id": "roadmap-0.5",
@@ -167,7 +226,7 @@
   ],
 
   "known_state": {
-    "main_sha": "497e2b6",
+    "main_sha": "3bb4cf8",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -180,11 +239,12 @@
       "codex/gitwiz-sync-audit-canonical-2026-04-08"
     ],
     "active_worktrees": [
-      "~/.codex/worktrees/70ee — codex/gitwiz-sync-audit-canonical-2026-04-08",
+      "~/.codex/worktrees/70ee — codex/gitwiz-sync-audit-canonical-2026-04-08 (branch closed in #7, worktree still on disk)",
       "~/.codex/worktrees/2d04 — detached HEAD 13c126b",
       "~/.codex/worktrees/966b — detached HEAD 13c126b"
     ],
-    "codacy_status": "analysis complete on 610f791; Agentlinter 3 remaining (all accepted)",
+    "open_prs": [],
+    "codacy_status": "2338 issues total; Agentlinter 5 remaining (all accepted); top noise source: Ruff_S101 assert in tests (pending improve-F)",
     "devkit_status": "READY 20/20 tools as of 2026-05-30",
     "ci_workflows": [
       ".github/workflows/ci.yml — tests + workspace-verify on push/PR to main",
@@ -193,6 +253,7 @@
     "workflow_specs": [
       "catalog/workflows/pr-lifecycle.md",
       "catalog/workflows/governance-fix-loop.md"
-    ]
+    ],
+    "skills_canonical": "skills/ (16 project-owned skills). make skills-check / make skills-install to sync to ~/.codex/skills/"
   }
 }
