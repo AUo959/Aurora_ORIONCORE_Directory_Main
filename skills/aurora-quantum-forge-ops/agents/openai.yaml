@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aurora Quantum Forge Ops"
+  short_description: "Run Quantum Forge ops, then hand outputs to tone or briefing workflows."
+  default_prompt: "Use $aurora-quantum-forge-ops to run GUMAS Quantum Forge operations, then hand prose-bearing outputs to $aurora-narrative-tone-governor or leadership summaries to $aurora-exec-brief-pipeline as needed."

@@ -1,0 +1,67 @@
+{
+  "gate": "EVIDENCE",
+  "kind": "EG_LITE_PROTO_RECEIPT",
+  "verdict": "PASS",
+  "timestamp": "2026-02-28T00:00:00Z",
+  "timestamp_source": "WALL_CLOCK_UTC",
+  "hash_canon_version": "CANONREC_EVIDENCE_HASH_CANON_V1",
+  "hash_canon_rules_ref": "emit_evidence_receipt.py::_canonicalize_for_hash",
+  "source_validation_run": {
+    "receipt_id": "<validation_run_receipt_id>",
+    "output_hash": "<validation_run_output_hash>",
+    "content_hash": "<validation_run_content_hash>",
+    "hash_canon_version": "CANONREC_HASH_CANON_V1",
+    "hash_canon_rules_ref": "validate_entity.py::_canonicalize_for_hash"
+  },
+  "inputs": {
+    "validation_run_file": "out/validation_run.json",
+    "canon_targets_file": "out/canon_targets.json",
+    "canon_targets": [
+      "<canon_ref_1>",
+      "<canon_ref_2>"
+    ]
+  },
+  "claims": [
+    {
+      "claim_id": "CLM-<stableid>",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "entity_name": "<entity>",
+      "layer": "L2",
+      "entity_type": "domain",
+      "claim_text": "Validation observed entity '<entity>' as L2/domain with passed=True.",
+      "provenance": [
+        {
+          "ref_type": "validation_run_receipt_id",
+          "ref": "<validation_run_receipt_id>"
+        },
+        {
+          "ref_type": "entity_report_fingerprint",
+          "ref": "<per_report_fingerprint>"
+        }
+      ],
+      "status": "SUPPORTED"
+    }
+  ],
+  "summary": {
+    "total_claims": 1,
+    "supported": 1,
+    "assumptions": 0,
+    "unknown": 0
+  },
+  "output_hash_alg": "SHA256",
+  "output_hash_scope": "EVIDENCE_RECEIPT_RUN_ARTIFACT_INCLUDING_TIMESTAMPS",
+  "output_hash": "<sha256>",
+  "content_hash_alg": "SHA256",
+  "content_hash_scope": "EVIDENCE_RECEIPT_SEMANTIC_OUTPUT_EXCLUDING_VOLATILE_FIELDS",
+  "content_hash_excluded_fields": [
+    "timestamp",
+    "timestamp_source",
+    "inputs.validation_run_file",
+    "inputs.canon_targets_file",
+    "output_hash",
+    "content_hash"
+  ],
+  "content_hash": "<sha256>",
+  "receipt_id_policy": "receipt_id = content_hash",
+  "receipt_id": "<content_hash>"
+}

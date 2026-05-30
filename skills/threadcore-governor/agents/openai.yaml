@@ -1,0 +1,4 @@
+interface:
+  display_name: "Threadcore Governor"
+  short_description: "Govern THREADCORE artifacts with shared-schema findings and remediation."
+  default_prompt: "Use $threadcore-governor to validate these THREADCORE artifacts, emit shared-schema findings, and hand the result to $aurora-governance-orchestrator when the request becomes multi-domain."

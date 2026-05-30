@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aurora Skill Finder"
+  short_description: "Map repos to the right Aurora skills and route overlap to orchestrators."
+  default_prompt: "Use $aurora-skill-finder to scan this project, prefer $aurora-governance-orchestrator when multiple governor domains are implicated, and use aurora-core catalog routing when utility skills should be suppressed."

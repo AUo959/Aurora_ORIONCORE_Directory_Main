@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aurora Selective Integration"
+  short_description: "Curate external modules into selective integration capsules and hand off for gating."
+  default_prompt: "Use $aurora-selective-integration to triage an external kit, generate include/backup/reject decisions, then hand the affected domains to specialist governors and $aurora-governance-orchestrator."

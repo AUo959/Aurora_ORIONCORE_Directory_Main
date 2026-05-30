@@ -1,0 +1,11 @@
+{
+  "receipt_type": "zipwiz_remediation_receipt",
+  "generated_at": "",
+  "scan_context": {
+    "repo": "",
+    "strictness": "balanced"
+  },
+  "applied_actions": [],
+  "deferred_actions": [],
+  "residual_risk": []
+}

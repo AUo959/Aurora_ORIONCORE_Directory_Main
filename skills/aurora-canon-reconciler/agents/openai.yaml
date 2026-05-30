@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aurora Canon Reconciler"
+  short_description: "Reconcile Aurora drafts against canon"
+  default_prompt: "Use $aurora-canon-reconciler to reconcile this draft against canon and produce promotion-ready outputs."

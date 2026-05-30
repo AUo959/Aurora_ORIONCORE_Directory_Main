@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aurora Repo Stabilizer"
+  short_description: "Stabilize Aurora repo ops, then hand off script-specific hazards cleanly."
+  default_prompt: "Use $aurora-repo-stabilizer to map repo-ops risk, then hand focused setup/wrapper/hazard work to $aurora-script-governor and merged governance to $aurora-governance-orchestrator when needed."

@@ -1,0 +1,13 @@
+{
+  "Designation": "aurora://reliquary/THREADNODE/ZIPWizardBeacon::THREAD.GENERAL.UTILITY.20250425",
+  "Action_Request": "EXPORT_THREAD_PACKAGE",
+  "Thread_Metadata": {
+    "Thread_Name": "THREAD.GENERAL.UTILITY.20250425"
+  },
+  "Thread_Identity_Affirmation": {
+    "ethics_protocol": "Picard_Delta_3",
+    "Ethics_Lock": "SN1-AS3",
+    "Trust_Anchor": "BeaconSeal::Auto-Named"
+  },
+  "Output_Format": ".beacon.json"
+}

@@ -1,4 +1,4 @@
-.PHONY: help setup test verify scan sync-audit pr-packet lint health devkit-check devkit-report devkit-install-plan recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report confidence-audit confidence-audit-report integration-gate clean
+.PHONY: help setup test verify scan sync-audit pr-packet lint health devkit-check devkit-report devkit-install-plan skills-check skills-install recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report confidence-audit confidence-audit-report integration-gate clean
 
 PYTHON ?= python3
 PYTEST ?= pytest
@@ -55,6 +55,12 @@ devkit-report: ## Persist the local Aurora developer toolkit report
 
 devkit-install-plan: ## Show the approval-gated Aurora developer toolkit install plan
 	$(PYTHON) tools/aurora_devkit.py --install-plan --persist-install-plan
+
+skills-check: ## Dry-run: show what skills/ changes would be pushed to ~/.codex/skills/
+	$(PYTHON) tools/sync_skills.py
+
+skills-install: ## Push all project-owned skills from skills/ → ~/.codex/skills/
+	$(PYTHON) tools/sync_skills.py --apply
 
 recovery-index: ## Build the read-only recovery index summary
 	$(PYTHON) tools/workspace_recovery_index.py --summary

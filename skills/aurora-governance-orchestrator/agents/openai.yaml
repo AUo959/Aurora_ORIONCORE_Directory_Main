@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aurora Governance Orchestrator"
+  short_description: "Run unified Aurora governance preflight, workflow presets, and one merged verdict."
+  default_prompt: "Use $aurora-governance-orchestrator for promotion_preflight or other Aurora governance workflows to merge specialist findings into one verdict with prioritized remediation."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aurora Narrative Tone Governor"
+  short_description: "Canonical narrative tone governance scan with shared-schema findings."
+  default_prompt: "Use $aurora-narrative-tone-governor to run a canonical-source-first narrative/tone governance scan, emit shared-schema findings, and hand multi-domain gating to $aurora-governance-orchestrator."

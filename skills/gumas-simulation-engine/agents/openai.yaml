@@ -1,0 +1,4 @@
+interface:
+  display_name: "GUMAS Simulation"
+  short_description: "Run the advanced GUMAS engine, then hand outputs to briefing or tone governance."
+  default_prompt: "Use $gumas-simulation-engine to run the integrated GUMAS simulation engine, then hand prose-bearing outputs to $aurora-narrative-tone-governor or summary work to $aurora-exec-brief-pipeline."

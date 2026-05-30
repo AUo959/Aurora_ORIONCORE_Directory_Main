@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aurora Executive Brief Pipeline"
+  short_description: "Build executive briefs from Aurora data and accept governed upstream outputs."
+  default_prompt: "Use $aurora-exec-brief-pipeline to turn simulation, forge, or mixed Aurora exports into a decision brief, and route governance gating back to $aurora-governance-orchestrator rather than this skill."

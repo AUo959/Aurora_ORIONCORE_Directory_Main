@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aurora Script Governor"
+  short_description: "Audit script governance, canonicalize entrypoints, and emit shared-schema findings."
+  default_prompt: "Use $aurora-script-governor to scan script surfaces, emit shared-schema findings for setup stubs and branch-cleanup drift, and hand multi-domain gating to $aurora-governance-orchestrator."

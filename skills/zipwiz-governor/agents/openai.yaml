@@ -1,0 +1,4 @@
+interface:
+  display_name: "ZipWiz Governor"
+  short_description: "Deterministic ZIPWIZ governance validator with shared-schema findings."
+  default_prompt: "Use $zipwiz-governor to validate ZIPWIZ packaging artifacts, emit shared-schema findings, and hand the result to $aurora-governance-orchestrator when the request spans multiple governance domains."

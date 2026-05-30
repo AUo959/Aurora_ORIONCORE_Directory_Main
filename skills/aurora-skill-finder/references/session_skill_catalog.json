@@ -1,0 +1,938 @@
+{
+  "catalog_version": "2026-03-06",
+  "catalog_scope": "session_skills_only",
+  "skills": [
+    {
+      "name": "agent-dispatcher",
+      "description": "Evaluate requests in the background and propose approval-gated agent dispatch only when delegation is warranted.",
+      "include_keywords": [
+        "agent dispatcher",
+        "subagents",
+        "subagent",
+        "bespoke agents",
+        "dispatch plan",
+        "delegation plan",
+        "parallel agents",
+        "parallel work",
+        "spawn agents",
+        "worker role",
+        "explorer role",
+        "approval gate",
+        "agent plan",
+        "agent council",
+        "swarm",
+        "multiple workstreams",
+        "independent workstreams",
+        "broad repo audit",
+        "split the work",
+        "split work intelligently",
+        "coordinated plan",
+        "parallel investigation",
+        "migration",
+        "architecture mapping",
+        "investigate the architecture",
+        "checking tests and risks",
+        "investigation plus implementation",
+        "implementation plus verification",
+        "separate specialist review",
+        "validation",
+        "risk review"
+      ],
+      "exclude_keywords": [
+        "browser user agent",
+        "http user-agent",
+        "software agent string",
+        "single sentence",
+        "one sentence",
+        "current date",
+        "what time",
+        "single failing unit test",
+        "canon promotion"
+      ],
+      "path_hints": [
+        "agent-dispatcher",
+        "evaluate_dispatch.py",
+        "agents/openai.yaml",
+        "spawn_agent",
+        "dispatch plan",
+        "subagent",
+        "worker",
+        "explorer",
+        "agent council",
+        "swarm"
+      ],
+      "filetype_bias": {
+        ".md": 0.08,
+        ".json": 0.03,
+        ".py": 0.05
+      },
+      "min_confidence_override": 0.45
+    },
+    {
+      "name": "aurora-canon-reconciler",
+      "description": "Reconcile draft Aurora canon content and promotion readiness.",
+      "include_keywords": [
+        "canon",
+        "canonize",
+        "canon_promote",
+        "promotion_queue",
+        "drift_log",
+        "conflict_matrix",
+        "continuity",
+        "entity schema",
+        "staging to canon"
+      ],
+      "exclude_keywords": [
+        "github actions",
+        "ci failure",
+        "pre-commit hook",
+        "web game"
+      ],
+      "path_hints": [
+        "canonrec",
+        "aurora-canon-reconciler",
+        "promotion_queue",
+        "drift_log",
+        "conflict_matrix"
+      ],
+      "filetype_bias": {
+        ".md": 0.06,
+        ".json": 0.08,
+        ".py": 0.03
+      }
+    },
+    {
+      "name": "aurora-exec-brief-pipeline",
+      "description": "Build executive decision briefs from mixed Aurora data exports.",
+      "include_keywords": [
+        "executive brief",
+        "leadership summary",
+        "risk summary",
+        "snapshot",
+        "mixed data",
+        "mixed files",
+        "manifest",
+        "checkpoint",
+        "status brief",
+        "decision snapshot",
+        "operational signals",
+        "recommended actions",
+        "evidence appendix",
+        "run manifest"
+      ],
+      "exclude_keywords": [
+        "canon_promote",
+        "threadcore validation",
+        "zipwiz governance",
+        "script hardening",
+        "selective integration",
+        "backup_only",
+        "reject"
+      ],
+      "path_hints": [
+        "aurora-exec-brief-pipeline",
+        "workflow_output",
+        "reports",
+        "manifest",
+        "checkpoint",
+        "executive_brief",
+        "decision snapshot",
+        "build_exec_brief.py",
+        "brief_schema.md",
+        "signal_keywords.md",
+        "run_manifest.json"
+      ],
+      "filetype_bias": {
+        ".py": 0.08,
+        ".json": 0.09,
+        ".csv": 0.1,
+        ".md": 0.06
+      }
+    },
+    {
+      "name": "aurora-governance-orchestrator",
+      "description": "Run unified governance preflight and merged go/no-go verdicts.",
+      "include_keywords": [
+        "governance preflight",
+        "go/no-go",
+        "orchestrate",
+        "merged findings",
+        "cross-domain drift",
+        "promotion verdict",
+        "orchestrator",
+        "promotion_preflight",
+        "unified governance",
+        "workflow preset"
+      ],
+      "exclude_keywords": [
+        "single skill",
+        "web game",
+        "docx",
+        "image generation"
+      ],
+      "path_hints": [
+        "orchestrate_governance.py",
+        "governance",
+        "preflight",
+        "workflow_presets.md",
+        "finding_schema.md"
+      ],
+      "filetype_bias": {
+        ".py": 0.08,
+        ".md": 0.04,
+        ".json": 0.06
+      }
+    },
+    {
+      "name": "aurora-narrative-tone-governor",
+      "description": "Run canonical narrative/tone governance scans over Aurora narrative outputs.",
+      "include_keywords": [
+        "narrative linter",
+        "anti-flourish",
+        "tone governance",
+        "cadence linter",
+        "llm writing",
+        "audience clarity",
+        "lint-narr",
+        "orion_projnarrlint",
+        "tone cadence governance",
+        "style drift",
+        "canonical-source-first",
+        "findings-only",
+        "rule crosswalk",
+        "mode_recap",
+        "ctl"
+      ],
+      "exclude_keywords": [
+        "threadcore beacon",
+        "zipwiz packaging",
+        "script hazard"
+      ],
+      "path_hints": [
+        "aurora-narrative-tone-governor",
+        "narrlint",
+        "cadencetonelinter",
+        "anti-flourish",
+        "thread 3 run",
+        "narrative_tone_scan.py",
+        "report_template.md",
+        "rule_crosswalk.md",
+        "source_map.md",
+        "query_recipes.md"
+      ],
+      "filetype_bias": {
+        ".md": 0.1,
+        ".txt": 0.08,
+        ".json": 0.03
+      }
+    },
+    {
+      "name": "aurora-nested-repo-normalizer",
+      "description": "Normalize extracted Aurora repo mirrors into real nested Git repositories with verified remote history.",
+      "include_keywords": [
+        "nested repo",
+        "normalize repo",
+        "normalize nested repo",
+        "extracted repo",
+        "repo mirror",
+        "zip mirror",
+        "git boundary",
+        "remote history",
+        "clone-if-missing",
+        "refresh-root-control-plane"
+      ],
+      "exclude_keywords": [
+        "publish branch",
+        "create pull request",
+        "github actions",
+        "ci failure",
+        "review comment"
+      ],
+      "path_hints": [
+        "aurora-nested-repo-normalizer",
+        "nested-repo-normalizer",
+        "normalize_nested_repo.py",
+        "repo_registry.yaml",
+        "workspace_scan.py",
+        "workspace_verify.py"
+      ],
+      "filetype_bias": {
+        ".py": 0.12,
+        ".md": 0.05,
+        ".yaml": 0.04
+      }
+    },
+    {
+      "name": "aurora-python-ingest-autowire",
+      "description": "Auto-ingest Python modules and reconcile package exports/contracts.",
+      "include_keywords": [
+        "__init__.py",
+        "__all__",
+        "auto-ingest",
+        "autowire",
+        "python module",
+        "entrypoint",
+        "pneumatic_engine",
+        "pdp_v2_mvp",
+        "fallback adapter"
+      ],
+      "exclude_keywords": [
+        "threadcore artifact",
+        "zipwiz manifest",
+        "canon promotion"
+      ],
+      "path_hints": [
+        "pdp_v2_mvp",
+        "python_modules",
+        "pneumatic_engine.py",
+        "__init__.py"
+      ],
+      "filetype_bias": {
+        ".py": 0.16,
+        ".md": 0.03,
+        ".json": 0.02
+      }
+    },
+    {
+      "name": "aurora-quantum-forge-ops",
+      "description": "Run Quantum Forge module validation, engine turns, and capsule/report workflows.",
+      "include_keywords": [
+        "quantum forge",
+        "forge manifest",
+        "charforge",
+        "capsule",
+        "orion capsule",
+        "forge execution",
+        "forge report",
+        "qforge",
+        "gumas v3.0",
+        "engine signals",
+        "artifact index",
+        "validation status"
+      ],
+      "exclude_keywords": [
+        "canon promotion",
+        "threadcore beacon",
+        "script hardening"
+      ],
+      "path_hints": [
+        "aurora-quantum-forge-ops",
+        "forge__gumas_v3.0",
+        "charforge.py",
+        "forge_manifest.md",
+        "validate_v3.py",
+        "build_qforge_ops_report.py",
+        "qforge_output_schema.md",
+        "forge_api_contract.md",
+        "quantum_forge_ops"
+      ],
+      "filetype_bias": {
+        ".py": 0.12,
+        ".md": 0.06,
+        ".json": 0.05
+      }
+    },
+    {
+      "name": "aurora-repo-stabilizer",
+      "description": "Stabilize repo scripts/hooks/CI reliability and validation pathways.",
+      "include_keywords": [
+        "stabilize repo",
+        "script audit",
+        "trust matrix",
+        "pre-commit",
+        "pre-push",
+        "ci",
+        "maintenance",
+        "repo ops",
+        "validation loop",
+        "repo stabilization",
+        "script-surface",
+        "trusted",
+        "risky",
+        "candidate"
+      ],
+      "exclude_keywords": [
+        "canon entity",
+        "threadcore beacon lint",
+        "zipwiz packaging",
+        "setup script",
+        "branch cleanup",
+        "script governance"
+      ],
+      "path_hints": [
+        "aurora-repo-stabilizer",
+        "scripts/",
+        "hooks",
+        "repo_health",
+        "maintenance",
+        "workflow",
+        "repo_stabilizer_scan.py",
+        ".github/workflows",
+        "stabilization-playbook.md"
+      ],
+      "filetype_bias": {
+        ".py": 0.1,
+        ".sh": 0.1,
+        ".md": 0.04,
+        ".yml": 0.05,
+        ".yaml": 0.05
+      }
+    },
+    {
+      "name": "aurora-script-governor",
+      "description": "Govern script surfaces, hazards, and canonical script entrypoints.",
+      "include_keywords": [
+        "script governance",
+        "setup script",
+        "branch cleanup",
+        "hazard sweep",
+        "script canonization",
+        "wrapper",
+        "stub",
+        "pre-commit script safety"
+      ],
+      "exclude_keywords": [
+        "worldbuilding",
+        "canon story",
+        "threadcore artifact governance",
+        "repo ops",
+        "validation loop",
+        "ci pipeline"
+      ],
+      "path_hints": [
+        "scripts/",
+        "branch_manager.py",
+        "setup",
+        "cleanup",
+        "script_governance_scan.py",
+        "wrapper",
+        "stub"
+      ],
+      "filetype_bias": {
+        ".py": 0.11,
+        ".sh": 0.11,
+        ".md": 0.03
+      }
+    },
+    {
+      "name": "aurora-selective-integration",
+      "description": "Build selective integration capsules for archive/module triage.",
+      "include_keywords": [
+        "selective integration",
+        "capsule",
+        "triage",
+        "include",
+        "backup_only",
+        "reject",
+        "modules_manifest",
+        "source metadata",
+        "rollback"
+      ],
+      "exclude_keywords": [
+        "threadcore audit",
+        "zipwiz governance",
+        "canon reconciliation",
+        "executive brief",
+        "leadership summary",
+        "decision snapshot"
+      ],
+      "path_hints": [
+        "selective_integration",
+        "auto_selective_ingest_gate.py",
+        "modules_manifest.json",
+        "triage_overrides.json",
+        "rollback_capsule_id",
+        "build_selective_integration_capsule.py"
+      ],
+      "filetype_bias": {
+        ".json": 0.14,
+        ".py": 0.07,
+        ".md": 0.04
+      }
+    },
+    {
+      "name": "aurora-skill-finder",
+      "description": "Build deterministic skill coverage maps and path-to-skill routing reports.",
+      "include_keywords": [
+        "skill coverage",
+        "skill map",
+        "which skill",
+        "routing audit",
+        "scan skill fit",
+        "ambiguity queue",
+        "deterministic skill-map",
+        "precision-first",
+        "skills_view",
+        "modules_view",
+        "catalog profile"
+      ],
+      "exclude_keywords": [
+        "create skill",
+        "install skill",
+        "canon promotion"
+      ],
+      "path_hints": [
+        "aurora-skill-finder",
+        "scan_skill_fit.py",
+        "skill_finder",
+        "session_skill_catalog.json",
+        "aurora_core_skill_catalog.json",
+        "general_utility_skill_catalog.json",
+        "scoring_rules.md",
+        "validate_skill_package.py"
+      ],
+      "filetype_bias": {
+        ".py": 0.1,
+        ".json": 0.08,
+        ".md": 0.05
+      }
+    },
+    {
+      "name": "chatgpt-apps",
+      "description": "Build and troubleshoot ChatGPT Apps SDK MCP + widget applications.",
+      "include_keywords": [
+        "apps sdk",
+        "mcp server",
+        "widget ui",
+        "register ui resources",
+        "chatgpt compatibility",
+        "csp",
+        "domain settings",
+        "tool metadata"
+      ],
+      "exclude_keywords": [
+        "plain fastapi endpoint",
+        "zipwiz packaging",
+        "threadcore governance"
+      ],
+      "path_hints": [
+        "chatgpt-apps",
+        "chatgpt_agent_mode",
+        "scaffold_node_ext_apps.mjs",
+        "apps-sdk-docs-workflow.md",
+        "mcp",
+        "widget",
+        "tool",
+        "apps"
+      ],
+      "filetype_bias": {
+        ".js": 0.11,
+        ".mjs": 0.11,
+        ".ts": 0.11,
+        ".py": 0.05,
+        ".md": 0.04
+      },
+      "min_confidence_override": 0.45
+    },
+    {
+      "name": "develop-web-game",
+      "description": "Iterate web games with Playwright action bursts and screenshot/state validation.",
+      "include_keywords": [
+        "web game",
+        "playwright",
+        "render_game_to_text",
+        "advanceTime",
+        "single canvas",
+        "game loop",
+        "fullscreen",
+        "duelsim_arena_game"
+      ],
+      "exclude_keywords": [
+        "governance preflight",
+        "canon promotion",
+        "ci hook hardening"
+      ],
+      "path_hints": [
+        "duelsim_arena_game.html",
+        "progress.md",
+        "dashboard.html",
+        "game",
+        "playwright"
+      ],
+      "filetype_bias": {
+        ".html": 0.18,
+        ".js": 0.12,
+        ".md": 0.05,
+        ".py": 0.02
+      }
+    },
+    {
+      "name": "doc",
+      "description": "Work with .docx documents and formatting-safe edits.",
+      "include_keywords": [
+        "docx",
+        "python-docx",
+        "tracked changes",
+        "render_docx",
+        "document formatting"
+      ],
+      "exclude_keywords": [
+        "pdf",
+        "image generation",
+        "web game"
+      ],
+      "path_hints": [
+        "doc/scripts",
+        "docx",
+        "render_docx.py"
+      ],
+      "filetype_bias": {
+        ".docx": 0.24,
+        ".py": 0.1,
+        ".md": 0.01
+      },
+      "min_confidence_override": 0.5
+    },
+    {
+      "name": "gh-address-comments",
+      "description": "Address PR review comments via gh CLI.",
+      "include_keywords": [
+        "github review",
+        "pr comments",
+        "gh pr",
+        "review thread",
+        "address comments",
+        "fetch_comments.py",
+        "pull request comments"
+      ],
+      "exclude_keywords": [
+        "github actions failed checks",
+        "buildkite",
+        "threat model"
+      ],
+      "path_hints": [
+        "gh-address-comments",
+        "fetch_comments.py",
+        ".github",
+        "pull request",
+        "review"
+      ],
+      "filetype_bias": {
+        ".md": 0.04,
+        ".py": 0.08,
+        ".yml": 0.05,
+        ".yaml": 0.05
+      },
+      "min_confidence_override": 0.5
+    },
+    {
+      "name": "gh-fix-ci",
+      "description": "Inspect and fix failing GitHub Actions checks.",
+      "include_keywords": [
+        "github actions",
+        "failing checks",
+        "ci logs",
+        "workflow run",
+        "check suite",
+        "gh pr checks"
+      ],
+      "exclude_keywords": [
+        "buildkite only",
+        "code comment response",
+        "canon reconciliation"
+      ],
+      "path_hints": [
+        ".github/workflows",
+        "ci",
+        "check",
+        "workflow"
+      ],
+      "filetype_bias": {
+        ".yml": 0.12,
+        ".yaml": 0.12,
+        ".md": 0.03,
+        ".py": 0.04
+      },
+      "min_confidence_override": 0.5
+    },
+    {
+      "name": "gitwiz-github-manager",
+      "description": "Manage Aurora/ORIONCORE git remotes, publishing, and GitHub setup/auth workflows.",
+      "include_keywords": [
+        "gitwiz",
+        "github manager",
+        "git remote",
+        "publish branch",
+        "create repo",
+        "ssh auth",
+        "github setup"
+      ],
+      "exclude_keywords": [
+        "feature implementation",
+        "ci failure debugging",
+        "pr comment response"
+      ],
+      "path_hints": [
+        "gitwiz-github-manager",
+        "gitwiz_sync_audit.py",
+        "gitwiz_pr_packet.py",
+        ".git",
+        "github",
+        "remote",
+        "origin",
+        "publish"
+      ],
+      "filetype_bias": {
+        ".md": 0.04,
+        ".py": 0.08,
+        ".sh": 0.05,
+        ".yml": 0.03,
+        ".yaml": 0.03
+      },
+      "min_confidence_override": 0.5
+    },
+    {
+      "name": "gumas-simulation-engine",
+      "description": "Run and benchmark the integrated GUMAS simulation engine and exports.",
+      "include_keywords": [
+        "simulation engine",
+        "compare seeds",
+        "stability trend",
+        "risk trend",
+        "sim_engine_outputs",
+        "engine state export",
+        "run multi-turn simulations",
+        "advanced default",
+        "legacy fallback",
+        "last-turn summary",
+        "gumasadvancedengine"
+      ],
+      "exclude_keywords": [
+        "quantum forge capsule",
+        "threadcore validation",
+        "docx"
+      ],
+      "path_hints": [
+        "gumas-simulation-engine",
+        "sim_engine_outputs",
+        "models.py",
+        "engine_base.py",
+        "gumas_sim_2.5",
+        "run_gumas_advanced.py",
+        "runtime_notes.md"
+      ],
+      "filetype_bias": {
+        ".py": 0.12,
+        ".json": 0.06,
+        ".md": 0.04
+      }
+    },
+    {
+      "name": "imagegen",
+      "description": "Generate/edit images using OpenAI Image API tooling.",
+      "include_keywords": [
+        "image generation",
+        "inpaint",
+        "mask",
+        "transparent background",
+        "openai image api",
+        "product shot"
+      ],
+      "exclude_keywords": [
+        "web game loop",
+        "pdf extraction",
+        "docx formatting"
+      ],
+      "path_hints": [
+        "imagegen",
+        "image",
+        "image_gen.py"
+      ],
+      "filetype_bias": {
+        ".png": 0.12,
+        ".jpg": 0.12,
+        ".jpeg": 0.12,
+        ".webp": 0.12,
+        ".svg": 0.08,
+        ".py": 0.08
+      },
+      "min_confidence_override": 0.5
+    },
+    {
+      "name": "jupyter-notebook",
+      "description": "Create or edit Jupyter notebooks for exploration/tutorial tasks.",
+      "include_keywords": [
+        "jupyter",
+        "notebook",
+        ".ipynb",
+        "new_notebook.py",
+        "experiment"
+      ],
+      "exclude_keywords": [
+        "docx",
+        "pdf",
+        "playwright web game"
+      ],
+      "path_hints": [
+        "notebook",
+        "ipynb",
+        "new_notebook.py"
+      ],
+      "filetype_bias": {
+        ".ipynb": 0.24,
+        ".py": 0.03,
+        ".md": 0.02
+      }
+    },
+    {
+      "name": "pdf",
+      "description": "Read/create/review PDF content with layout-aware tooling.",
+      "include_keywords": [
+        "pdf",
+        "reportlab",
+        "pdfplumber",
+        "pypdf",
+        "render pages",
+        "poppler"
+      ],
+      "exclude_keywords": [
+        "docx",
+        "notebook",
+        "web game"
+      ],
+      "path_hints": [
+        ".pdf",
+        "pdf"
+      ],
+      "filetype_bias": {
+        ".pdf": 0.22,
+        ".py": 0.03,
+        ".md": 0.02
+      },
+      "min_confidence_override": 0.5
+    },
+    {
+      "name": "security-best-practices",
+      "description": "Security best-practices review for supported languages/frameworks.",
+      "include_keywords": [
+        "security review",
+        "secure by default",
+        "best practices",
+        "owasp",
+        "vulnerability",
+        "hardening",
+        "security best practices",
+        "web server security",
+        "web frontend security",
+        "secure coding"
+      ],
+      "exclude_keywords": [
+        "threat model assets trust boundary",
+        "canon continuity",
+        "web game controls"
+      ],
+      "path_hints": [
+        "security-best-practices",
+        "web-server-security",
+        "web-frontend-security",
+        "security",
+        "auth",
+        "mcp_security",
+        "security_report"
+      ],
+      "filetype_bias": {
+        ".py": 0.06,
+        ".js": 0.06,
+        ".ts": 0.06,
+        ".md": 0.04,
+        ".json": 0.03
+      },
+      "min_confidence_override": 0.45
+    },
+    {
+      "name": "security-threat-model",
+      "description": "Repository-grounded threat modeling and abuse path analysis.",
+      "include_keywords": [
+        "threat model",
+        "trust boundary",
+        "abuse path",
+        "attacker",
+        "assets",
+        "mitigations",
+        "appsec"
+      ],
+      "exclude_keywords": [
+        "general code review",
+        "ci fix",
+        "canon promotion",
+        "security review",
+        "best practices",
+        "owasp",
+        "secure by default"
+      ],
+      "path_hints": [
+        "architecture",
+        "security",
+        "threat",
+        "boundary"
+      ],
+      "filetype_bias": {
+        ".md": 0.06,
+        ".py": 0.02,
+        ".json": 0.02
+      },
+      "min_confidence_override": 0.55
+    },
+    {
+      "name": "threadcore-governor",
+      "description": "Validate THREADCORE artifacts, beacon integrity, and L3 bridge outputs.",
+      "include_keywords": [
+        "threadcore",
+        "threadreflect",
+        "beacon",
+        "anchor integrity",
+        "delta-chain",
+        "continuity log",
+        "payload capsule",
+        "l3 bridge"
+      ],
+      "exclude_keywords": [
+        "zipwiz packaging",
+        "branch cleanup",
+        "web game"
+      ],
+      "path_hints": [
+        "threadcore",
+        "beacon",
+        "threadreflect",
+        "delta",
+        "capsule"
+      ],
+      "filetype_bias": {
+        ".json": 0.12,
+        ".md": 0.08,
+        ".py": 0.05
+      }
+    },
+    {
+      "name": "zipwiz-governor",
+      "description": "Validate ZIPWIZ packaging/export artifacts and evolution evidence.",
+      "include_keywords": [
+        "zipwiz",
+        "zipwizard",
+        "bundle manifest",
+        "staging manifest",
+        "packaging protocol",
+        "runtime alignment",
+        "evolution timeline"
+      ],
+      "exclude_keywords": [
+        "threadcore beacon lint",
+        "script hazard sweep",
+        "canon entity profile"
+      ],
+      "path_hints": [
+        "zipwiz",
+        "bundle.manifest",
+        "staging_manifest",
+        "packaging",
+        "zipwiz_chamber"
+      ],
+      "filetype_bias": {
+        ".json": 0.12,
+        ".md": 0.08,
+        ".py": 0.04
+      }
+    }
+  ]
+}

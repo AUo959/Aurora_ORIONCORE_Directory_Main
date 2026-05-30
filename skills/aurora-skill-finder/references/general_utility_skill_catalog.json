@@ -1,0 +1,422 @@
+{
+  "catalog_version": "2026-03-06",
+  "catalog_scope": "general_utility",
+  "skills": [
+    {
+      "name": "agent-dispatcher",
+      "description": "Evaluate requests in the background and propose approval-gated agent dispatch only when delegation is warranted.",
+      "include_keywords": [
+        "agent dispatcher",
+        "subagents",
+        "subagent",
+        "bespoke agents",
+        "dispatch plan",
+        "delegation plan",
+        "parallel agents",
+        "parallel work",
+        "spawn agents",
+        "worker role",
+        "explorer role",
+        "approval gate",
+        "agent plan",
+        "agent council",
+        "swarm",
+        "multiple workstreams",
+        "independent workstreams",
+        "broad repo audit",
+        "split the work",
+        "split work intelligently",
+        "coordinated plan",
+        "parallel investigation",
+        "migration",
+        "architecture mapping",
+        "investigate the architecture",
+        "checking tests and risks",
+        "investigation plus implementation",
+        "implementation plus verification",
+        "separate specialist review",
+        "validation",
+        "risk review"
+      ],
+      "exclude_keywords": [
+        "browser user agent",
+        "http user-agent",
+        "software agent string",
+        "single sentence",
+        "one sentence",
+        "current date",
+        "what time",
+        "single failing unit test",
+        "canon promotion"
+      ],
+      "path_hints": [
+        "agent-dispatcher",
+        "evaluate_dispatch.py",
+        "agents/openai.yaml",
+        "spawn_agent",
+        "dispatch plan",
+        "subagent",
+        "worker",
+        "explorer",
+        "agent council",
+        "swarm"
+      ],
+      "filetype_bias": {
+        ".md": 0.08,
+        ".json": 0.03,
+        ".py": 0.05
+      },
+      "min_confidence_override": 0.45
+    },
+    {
+      "name": "chatgpt-apps",
+      "description": "Build and troubleshoot ChatGPT Apps SDK MCP + widget applications.",
+      "include_keywords": [
+        "apps sdk",
+        "mcp server",
+        "widget ui",
+        "register ui resources",
+        "chatgpt compatibility",
+        "csp",
+        "domain settings",
+        "tool metadata"
+      ],
+      "exclude_keywords": [
+        "plain fastapi endpoint",
+        "zipwiz packaging",
+        "threadcore governance"
+      ],
+      "path_hints": [
+        "chatgpt-apps",
+        "chatgpt_agent_mode",
+        "scaffold_node_ext_apps.mjs",
+        "apps-sdk-docs-workflow.md",
+        "mcp",
+        "widget",
+        "tool",
+        "apps"
+      ],
+      "filetype_bias": {
+        ".js": 0.11,
+        ".mjs": 0.11,
+        ".ts": 0.11,
+        ".py": 0.05,
+        ".md": 0.04
+      },
+      "min_confidence_override": 0.45
+    },
+    {
+      "name": "develop-web-game",
+      "description": "Iterate web games with Playwright action bursts and screenshot/state validation.",
+      "include_keywords": [
+        "web game",
+        "playwright",
+        "render_game_to_text",
+        "advanceTime",
+        "single canvas",
+        "game loop",
+        "fullscreen",
+        "duelsim_arena_game"
+      ],
+      "exclude_keywords": [
+        "governance preflight",
+        "canon promotion",
+        "ci hook hardening"
+      ],
+      "path_hints": [
+        "duelsim_arena_game.html",
+        "progress.md",
+        "dashboard.html",
+        "game",
+        "playwright"
+      ],
+      "filetype_bias": {
+        ".html": 0.18,
+        ".js": 0.12,
+        ".md": 0.05,
+        ".py": 0.02
+      }
+    },
+    {
+      "name": "doc",
+      "description": "Work with .docx documents and formatting-safe edits.",
+      "include_keywords": [
+        "docx",
+        "python-docx",
+        "tracked changes",
+        "render_docx",
+        "document formatting"
+      ],
+      "exclude_keywords": [
+        "pdf",
+        "image generation",
+        "web game"
+      ],
+      "path_hints": [
+        "doc/scripts",
+        "docx",
+        "render_docx.py"
+      ],
+      "filetype_bias": {
+        ".docx": 0.24,
+        ".py": 0.1,
+        ".md": 0.01
+      },
+      "min_confidence_override": 0.5
+    },
+    {
+      "name": "gh-address-comments",
+      "description": "Address PR review comments via gh CLI.",
+      "include_keywords": [
+        "github review",
+        "pr comments",
+        "gh pr",
+        "review thread",
+        "address comments",
+        "fetch_comments.py",
+        "pull request comments"
+      ],
+      "exclude_keywords": [
+        "github actions failed checks",
+        "buildkite",
+        "threat model"
+      ],
+      "path_hints": [
+        "gh-address-comments",
+        "fetch_comments.py",
+        ".github",
+        "pull request",
+        "review"
+      ],
+      "filetype_bias": {
+        ".md": 0.04,
+        ".py": 0.08,
+        ".yml": 0.05,
+        ".yaml": 0.05
+      },
+      "min_confidence_override": 0.5
+    },
+    {
+      "name": "gh-fix-ci",
+      "description": "Inspect and fix failing GitHub Actions checks.",
+      "include_keywords": [
+        "github actions",
+        "failing checks",
+        "ci logs",
+        "workflow run",
+        "check suite",
+        "gh pr checks"
+      ],
+      "exclude_keywords": [
+        "buildkite only",
+        "code comment response",
+        "canon reconciliation"
+      ],
+      "path_hints": [
+        ".github/workflows",
+        "ci",
+        "check",
+        "workflow"
+      ],
+      "filetype_bias": {
+        ".yml": 0.12,
+        ".yaml": 0.12,
+        ".md": 0.03,
+        ".py": 0.04
+      },
+      "min_confidence_override": 0.5
+    },
+    {
+      "name": "gitwiz-github-manager",
+      "description": "Manage Aurora/ORIONCORE git remotes, repo publishing, and GitHub setup/auth operations.",
+      "include_keywords": [
+        "gitwiz",
+        "github manager",
+        "git remote",
+        "publish branch",
+        "create repo",
+        "ssh auth",
+        "github setup"
+      ],
+      "exclude_keywords": [
+        "feature implementation",
+        "ci failure debugging",
+        "pr comment response"
+      ],
+      "path_hints": [
+        "gitwiz-github-manager",
+        "gitwiz_sync_audit.py",
+        "gitwiz_pr_packet.py",
+        ".git",
+        "github",
+        "remote",
+        "origin",
+        "publish"
+      ],
+      "filetype_bias": {
+        ".md": 0.04,
+        ".py": 0.08,
+        ".sh": 0.05,
+        ".yml": 0.03,
+        ".yaml": 0.03
+      },
+      "min_confidence_override": 0.5
+    },
+    {
+      "name": "imagegen",
+      "description": "Generate/edit images using OpenAI Image API tooling.",
+      "include_keywords": [
+        "image generation",
+        "inpaint",
+        "mask",
+        "transparent background",
+        "openai image api",
+        "product shot"
+      ],
+      "exclude_keywords": [
+        "web game loop",
+        "pdf extraction",
+        "docx formatting"
+      ],
+      "path_hints": [
+        "imagegen",
+        "image",
+        "image_gen.py"
+      ],
+      "filetype_bias": {
+        ".png": 0.12,
+        ".jpg": 0.12,
+        ".jpeg": 0.12,
+        ".webp": 0.12,
+        ".svg": 0.08,
+        ".py": 0.08
+      },
+      "min_confidence_override": 0.5
+    },
+    {
+      "name": "jupyter-notebook",
+      "description": "Create or edit Jupyter notebooks for exploration/tutorial tasks.",
+      "include_keywords": [
+        "jupyter",
+        "notebook",
+        ".ipynb",
+        "new_notebook.py",
+        "experiment"
+      ],
+      "exclude_keywords": [
+        "docx",
+        "pdf",
+        "playwright web game"
+      ],
+      "path_hints": [
+        "notebook",
+        "ipynb",
+        "new_notebook.py"
+      ],
+      "filetype_bias": {
+        ".ipynb": 0.24,
+        ".py": 0.03,
+        ".md": 0.02
+      }
+    },
+    {
+      "name": "pdf",
+      "description": "Read/create/review PDF content with layout-aware tooling.",
+      "include_keywords": [
+        "pdf",
+        "reportlab",
+        "pdfplumber",
+        "pypdf",
+        "render pages",
+        "poppler"
+      ],
+      "exclude_keywords": [
+        "docx",
+        "notebook",
+        "web game"
+      ],
+      "path_hints": [
+        ".pdf",
+        "pdf"
+      ],
+      "filetype_bias": {
+        ".pdf": 0.22,
+        ".py": 0.03,
+        ".md": 0.02
+      },
+      "min_confidence_override": 0.5
+    },
+    {
+      "name": "security-best-practices",
+      "description": "Security best-practices review for supported languages/frameworks.",
+      "include_keywords": [
+        "security review",
+        "secure by default",
+        "best practices",
+        "owasp",
+        "vulnerability",
+        "hardening",
+        "security best practices",
+        "web server security",
+        "web frontend security",
+        "secure coding"
+      ],
+      "exclude_keywords": [
+        "threat model assets trust boundary",
+        "canon continuity",
+        "web game controls"
+      ],
+      "path_hints": [
+        "security-best-practices",
+        "web-server-security",
+        "web-frontend-security",
+        "security",
+        "auth",
+        "mcp_security",
+        "security_report"
+      ],
+      "filetype_bias": {
+        ".py": 0.06,
+        ".js": 0.06,
+        ".ts": 0.06,
+        ".md": 0.04,
+        ".json": 0.03
+      },
+      "min_confidence_override": 0.45
+    },
+    {
+      "name": "security-threat-model",
+      "description": "Repository-grounded threat modeling and abuse path analysis.",
+      "include_keywords": [
+        "threat model",
+        "trust boundary",
+        "abuse path",
+        "attacker",
+        "assets",
+        "mitigations",
+        "appsec"
+      ],
+      "exclude_keywords": [
+        "general code review",
+        "ci fix",
+        "canon promotion",
+        "security review",
+        "best practices",
+        "owasp",
+        "secure by default"
+      ],
+      "path_hints": [
+        "architecture",
+        "security",
+        "threat",
+        "boundary"
+      ],
+      "filetype_bias": {
+        ".md": 0.06,
+        ".py": 0.02,
+        ".json": 0.02
+      },
+      "min_confidence_override": 0.55
+    }
+  ]
+}

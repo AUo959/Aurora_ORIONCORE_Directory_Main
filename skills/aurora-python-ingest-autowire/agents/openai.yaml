@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aurora Python Ingest Autowire"
+  short_description: "Auto-ingest Python modules with export/adapter checks"
+  default_prompt: "Use $aurora-python-ingest-autowire to ingest new Aurora Python code, validate adapter fallback contracts, and auto-wire package exports."

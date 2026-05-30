@@ -1,0 +1,13 @@
+{
+  "claim_entry": {
+    "entity_id": "{{canonical_id}}",
+    "claim_type": "{{claim_type}}",
+    "value": "{{claimed_fact}}",
+    "certainty": "{{certainty_tag}}",
+    "doc_source": "{{source_file}}",
+    "conflicts_with": "{{conflicting_canon_entry_or_null}}",
+    "notes": "{{resolution_or_open_question}}",
+    "reconciler_run": "{{run_id}}",
+    "timestamp": "{{timestamp}}"
+  }
+}
