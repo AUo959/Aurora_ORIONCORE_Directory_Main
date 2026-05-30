@@ -1,0 +1,102 @@
+{
+  "contract_id": "aurora_confidence_audit_contract",
+  "version": 1,
+  "status": "draft_adoption_ready",
+  "scope": [
+    "root-control-plane",
+    "agent-handoffs",
+    "automation-memory",
+    "reports",
+    "downstream-runtime-adoption"
+  ],
+  "purpose": "Attach machine-readable confidence scores and alert flags to every concrete Aurora conclusion, analysis, prediction, and recommendation without treating the score as truth validation.",
+  "schema_path": "catalog/schemas/aurora_confidence_record.schema.json",
+  "tool_path": "tools/aurora_confidence_audit.py",
+  "default_threshold": 0.7,
+  "covered_claim_types": [
+    "conclusion",
+    "analysis",
+    "prediction",
+    "recommendation"
+  ],
+  "evidence_levels": [
+    "verified_artifact",
+    "direct_observation",
+    "deterministic_check",
+    "corroborated_inference",
+    "inference",
+    "projection",
+    "speculation",
+    "unsupported"
+  ],
+  "confidence_bands": {
+    "high": {
+      "minimum": 0.85
+    },
+    "substantial": {
+      "minimum": 0.7
+    },
+    "limited": {
+      "minimum": 0.5
+    },
+    "low": {
+      "minimum": 0.3
+    },
+    "unsupported": {
+      "minimum": 0
+    }
+  },
+  "alert_rule": {
+    "requires_user_alert_when": "confidence.score < confidence.threshold",
+    "default_user_visibility": "internal",
+    "user_facing_requirement": "Low-confidence user-facing recommendations, conclusions, analyses, and predictions must surface an alert or uncertainty note before being relied on."
+  },
+  "calibration": {
+    "initial_profile": "bootstrap_default_v1",
+    "current_state": "rubric_seed_only",
+    "future_inputs": [
+      "resolved prediction outcomes",
+      "reviewer adjudication",
+      "domain-specific calibration reports",
+      "false-positive and false-negative alert history"
+    ]
+  },
+  "events": [
+    {
+      "name": "aurora.confidence.assessed",
+      "producer": "root-control-plane",
+      "minimum_payload_keys": [
+        "assessment_id",
+        "claim_id",
+        "claim_type",
+        "score",
+        "threshold"
+      ]
+    },
+    {
+      "name": "aurora.confidence.alert_required",
+      "producer": "root-control-plane",
+      "minimum_payload_keys": [
+        "assessment_id",
+        "score",
+        "threshold",
+        "alert_level"
+      ]
+    },
+    {
+      "name": "aurora.confidence.calibrated",
+      "producer": "future-calibration-surface",
+      "minimum_payload_keys": [
+        "calibration_profile",
+        "sample_window",
+        "adjustment_rule"
+      ]
+    }
+  ],
+  "non_goals": [
+    "Does not prove the underlying claim true.",
+    "Does not execute live runtime actions.",
+    "Does not mutate nested repositories.",
+    "Does not promote draft or recovered material into canon."
+  ]
+}

@@ -13,7 +13,7 @@ Named repos:
 - `root`
   - this repo
 - `aurora-cloudbank-symbolic-main`
-  - `Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
+  - `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
 - `CanonRec`
   - `GUMAS_SIM_2.5/CanonRec`
 - `DuelSim_v2.0`
@@ -24,6 +24,103 @@ Named repos:
   - `qgia-knowledge-spine-main`
 
 Never assume a root-repo request applies to nested repos.
+
+## Historical Provenance
+
+The root control-plane repo began as a local file archive on the owner's
+machine. Before the root control plane and GitHub workflows were connected,
+Aurora CloudBank existed separately on GitHub, and the local archive was not
+fully connected to that repo history.
+
+Implication:
+
+- early local work may be valuable even when it is absent from GitHub
+- root archive, intake, staging, or recovered material is not canonical by
+  default
+- one control-plane mission is to recover and index early local work so
+  high-value logic, code, contracts, and design decisions can be identified and
+  extracted through explicit promotion paths
+
+See `docs/CONTROL_PLANE_PROVENANCE.md` for the durable provenance and recovery
+rule.
+
+## Recovery Indexing
+
+Root recovery tooling:
+
+- Config: `catalog/recovery_index_manifest.json`
+- Workflow: `docs/RECOVERY_INDEX_WORKFLOW_v1.md`
+- Current report: `reports/analysis/workspace_recovery_index_latest.json`
+
+Primary commands:
+
+- `python3 tools/workspace_recovery_index.py`
+- `python3 tools/workspace_recovery_index.py --persist-report`
+- `make recovery-index`
+- `make recovery-report`
+
+The recovery index is read-only. Its candidates are routing evidence for early
+local work and remain `pending_review` / `not_promoted` until a separate
+promotion gate validates and extracts them into the correct owner surface.
+
+## Root Recommendations
+
+Advisory-only recommendation engine:
+
+- Config: `catalog/recommendation_engine_manifest.json`
+- Tool: `tools/aurora_recommendation_engine.py`
+- Current report: `reports/analysis/aurora_recommendations_latest.json`
+- Make targets: `make recommendations`, `make recommendations-report`
+
+The recommendation engine normalizes existing root signals into ranked next
+actions. It is read-only by default and must not promote canon, execute
+runtime commands, send mesh messages, or mutate nested repos.
+
+## Aurora Mission Control
+
+Root operator inbox:
+
+- Config: `catalog/mission_control_manifest.json`
+- Schema: `catalog/schemas/aurora_mission_control_report.schema.json`
+- Workflow: `docs/AURORA_MISSION_CONTROL_WORKFLOW_v1.md`
+- Tool: `tools/aurora_mission_control.py`
+- Current report: `reports/analysis/aurora_mission_control_latest.json`
+- Make targets: `make mission-control`, `make mission-control-report`
+
+Mission Control aggregates existing deterministic root signals into read-only
+operator inbox items and build-readiness lanes. It does not promote recovery
+candidates, execute Aurora command grammar, send mesh messages, mutate nested
+repos, install packages, or publish GitHub changes.
+
+## Confidence Audit
+
+Audit-layer confidence scoring:
+
+- Contract: `catalog/contracts/aurora_confidence_audit_contract_v1.json`
+- Schema: `catalog/schemas/aurora_confidence_record.schema.json`
+- Workflow: `docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md`
+- Tool: `tools/aurora_confidence_audit.py`
+- Current report: `reports/analysis/aurora_confidence_audit_latest.json`
+- Make targets: `make confidence-audit`, `make confidence-audit-report`
+
+Use confidence records for concrete conclusions, analyses, predictions, and
+recommendations when an output affects a decision, receipt, handoff, or
+automation memory. Scores may remain internal, but records below the configured
+threshold must set `requires_user_alert: true`. The tool is read-only audit
+tooling; it does not prove truth, execute runtime actions, promote canon, or
+mutate nested repos.
+
+## Integration Quality Gate
+
+Root integration gate:
+
+- Tool: `tools/aurora_integration_gate.py`
+- Make target: `make integration-gate`
+
+Use it after changes that touch command intent, agent-dispatcher behavior,
+background handoffs, recovery/provenance claims, or root validation wiring. The
+gate is read-only and should classify command grammar as context-only unless a
+separate runtime verification and explicit approval path exists.
 
 ## Current GitHub State
 
@@ -112,6 +209,58 @@ Primary commands:
   - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo all --canonical-root "<canonical-workspace-root>"`
 - PR packet draft:
   - `python3 skills/gitwiz-github-manager/scripts/gitwiz_pr_packet.py --repo-name root --base origin/main`
+
+## Aurora Dev Toolkit
+
+Root-control-plane toolkit:
+
+- Source manifest: `catalog/dev_toolkit_manifest.json`
+- Workflow: `docs/AURORA_DEV_TOOLKIT_WORKFLOW_v1.md`
+- Current report: `reports/analysis/aurora_devkit_latest.json`
+- Current install plan: `reports/analysis/aurora_devkit_install_plan_latest.json`
+
+Primary commands:
+
+- `python3 tools/aurora_devkit.py`
+- `python3 tools/aurora_devkit.py --persist-report`
+- `python3 tools/aurora_devkit.py --install-plan --persist-install-plan`
+- `make devkit-check`
+- `make devkit-report`
+- `make devkit-install-plan`
+
+Machine-local automations:
+
+- `aurora-dev-toolkit-watch`: read-only weekly drift report
+- `aurora-dev-toolkit-user-space-update`: updates only approved user-space tools
+
+System-level installs and upgrades remain explicit approval work, even when the
+current machine already satisfies the devkit. Rerun the generated devkit report
+before treating Homebrew, Docker, full Xcode, Rust, or Go as missing or broken.
+
+## Aurora Command Grammar
+
+Repo-local Codex plugin:
+
+- `plugins/aurora-command-grammar/`
+
+Purpose:
+
+- user-accessible parsing, normalization, validation, and mesh-route mapping
+- shared agent protocol for command-language ambiguity
+- background command intent envelopes for GitHub issues, PRs, receipts,
+  automations, and agent handoffs
+
+Core rule:
+
+- grammar-valid command text is not execution approval
+- CloudBank remains the parser/runtime authority for command grammar code
+- execution requires explicit target repo and live runtime verification
+
+Primary references:
+
+- `plugins/aurora-command-grammar/skills/aurora-command-grammar/SKILL.md`
+- `plugins/aurora-command-grammar/skills/aurora-command-grammar/references/background-communication.md`
+- `plugins/aurora-command-grammar/skills/aurora-command-grammar/references/command-intent-envelope.schema.json`
 
 ## Execution Rules
 

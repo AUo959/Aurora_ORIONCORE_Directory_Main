@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-05-13T03:44:33Z",
+  "root": ".",
+  "dry_run": false,
+  "moved": [
+    {
+      "source": "QGIA_SPACE_NAVAGATION_GUIDE.md",
+      "destination": "intake/QGIA_SPACE_NAVAGATION_GUIDE.md",
+      "path_kind": "file"
+    }
+  ],
+  "skipped": [],
+  "errors": [
+    {
+      "source": "Aurora_Sim_Architecture",
+      "error": "pre_hash_mismatch",
+      "expected": "121ce1d8a819eb3ef31165ea384a44b066aea0103b42c62bc96de8c151ababed",
+      "actual": "697390bbcc9f90c0ee8ad8311cd324c9007b4176d77ba4b29f36e09cba1b9116"
+    }
+  ],
+  "mode": "forward",
+  "batch_id": "wave4_root_intake_cleanup_initial"
+}

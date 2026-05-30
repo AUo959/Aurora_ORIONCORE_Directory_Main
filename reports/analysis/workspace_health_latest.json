@@ -1,0 +1,24 @@
+{
+  "yaml_errors": [],
+  "json_errors": [],
+  "schema_errors": [
+    {
+      "note": "jsonschema not installed \u2014 skipping schema validation"
+    }
+  ],
+  "tests": {
+    "returncode": 0,
+    "summary": "104 passed, 24 skipped in 5.12s"
+  },
+  "verify": {
+    "returncode": 0,
+    "report_exists": true,
+    "finding_count": 0
+  },
+  "sync_audit": {
+    "returncode": 0,
+    "output_lines": 4
+  },
+  "elapsed_seconds": 6.07,
+  "status": "DEGRADED (1 issue(s))"
+}

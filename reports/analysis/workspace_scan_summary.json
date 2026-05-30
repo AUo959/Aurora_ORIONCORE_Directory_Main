@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-23T14:05:43Z",
+  "generated_at": "2026-05-24T03:26:56Z",
   "root": ".",
   "top_level_entry_count": 33,
   "logical_zone_counts": {
@@ -14,12 +14,10 @@
     "reports": 1
   },
   "nested_repo_count": 5,
-  "archive_artifact_count": 594,
-  "archive_artifact_bytes": 7801024425,
+  "archive_artifact_count": 1268,
+  "archive_artifact_bytes": 17106696658,
   "planned_move_count": 2,
-  "override_count": 4,
-  "privacy_exclusion_count": 1,
-  "privacy_exclusion_reasons": {
-    "auto_scope_unknown": 1
-  }
+  "override_count": 5,
+  "privacy_exclusion_count": 0,
+  "privacy_exclusion_reasons": {}
 }

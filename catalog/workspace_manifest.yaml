@@ -1,4 +1,4 @@
-generated_at: '2026-04-23T14:05:39Z'
+generated_at: '2026-05-30T03:48:39Z'
 root: .
 logical_taxonomy:
 - repos
@@ -33,6 +33,17 @@ entries:
   status: managed
   batch_id: ''
   notes: Codex plugin marketplace metadata for repo-local plugin scaffolds.
+- id: codacy-local
+  kind: cache_or_local_artifact
+  current_path: .codacy
+  logical_zone: _staging
+  planned_path: .codacy
+  git_boundary: none
+  storage_tier: ephemeral
+  retention_policy: regenerate
+  owner: local-user
+  status: ignored
+  batch_id: wave4_root_intake_cleanup_initial
 - id: codex-skill-edits
   kind: cache_or_local_artifact
   current_path: .codex_skill_edits
@@ -174,17 +185,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: qgia-space-navagation-guide
-  kind: intake_file
-  current_path: QGIA_SPACE_NAVAGATION_GUIDE.md
-  logical_zone: intake
-  planned_path: intake/QGIA_SPACE_NAVAGATION_GUIDE.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: readme
   kind: workspace_doc
   current_path: README.md
@@ -229,6 +229,39 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
+- id: aurora-cloudbank-symbolic-readme-draft
+  kind: intake_file
+  current_path: aurora-cloudbank-symbolic_README_DRAFT.md
+  logical_zone: intake
+  planned_path: intake/aurora-cloudbank-symbolic_README_DRAFT.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-cloudbank-symbolic-outside-review
+  kind: intake_file
+  current_path: aurora-cloudbank-symbolic_outside_review.md
+  logical_zone: intake
+  planned_path: intake/aurora-cloudbank-symbolic_outside_review.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: aurora-cloudbank-symbolic-review-v2
+  kind: intake_file
+  current_path: aurora-cloudbank-symbolic_review_v2.md
+  logical_zone: intake
+  planned_path: intake/aurora-cloudbank-symbolic_review_v2.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: catalog
   kind: control_surface
   current_path: catalog
@@ -259,6 +292,21 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
+- id: narrative-engine-spec-parameters-to-narrative-core-v-0
+  kind: intake_file
+  current_path: narrative_engine_spec_parameters_to_narrative_core_v_0.md
+  logical_zone: intake
+  planned_path: intake/narrative_engine_spec_parameters_to_narrative_core_v_0.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+  scan_policy: include
+  notes: Local early project specification for a narrative engine; include in root
+    intake routing metadata without promoting the source text into canon or a nested
+    repo.
 - id: plugins
   kind: control_surface
   current_path: plugins
@@ -351,3 +399,14 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
+- id: warrant-lens
+  kind: intake_collection
+  current_path: warrant-lens
+  logical_zone: intake
+  planned_path: intake/warrant-lens
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial

@@ -54,7 +54,10 @@ def merge_batch(existing: dict[str, object], generated: dict[str, object]) -> di
                 candidate["path_kind"] = prior["path_kind"]
         operations.append(candidate)
     merged["operations"] = operations
-    merged["status"] = existing.get("status", generated.get("status", "planned"))
+    prior_status = existing.get("status", generated.get("status", "planned"))
+    if prior_status == "applied" and not all(op.get("applied_at") for op in operations):
+        prior_status = generated.get("status", "planned")
+    merged["status"] = prior_status
     return merged
 
 

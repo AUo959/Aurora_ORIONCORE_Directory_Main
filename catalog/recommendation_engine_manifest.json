@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "id": "aurora-root-recommendation-engine",
+  "description": "Advisory-only root control-plane recommendation engine for normalized next actions.",
+  "default_report_path": "reports/analysis/aurora_recommendations_latest.json",
+  "run_mode": "read_only",
+  "mutation_posture": "advisory_only",
+  "max_recommendations": 50,
+  "max_recovery_groups": 8,
+  "max_evidence_refs": 12,
+  "sources": [
+    {
+      "id": "workspace_verify",
+      "weight": 100,
+      "description": "Root workspace validation findings."
+    },
+    {
+      "id": "integration_gate",
+      "weight": 90,
+      "description": "Command intent, handoff, provenance, and docs safety checks."
+    },
+    {
+      "id": "recovery_index",
+      "weight": 60,
+      "description": "Read-only recovery candidates and promotion/provenance labels."
+    },
+    {
+      "id": "devkit",
+      "weight": 50,
+      "description": "Local developer toolkit findings and approval-gated install plan."
+    },
+    {
+      "id": "git_status",
+      "weight": 40,
+      "description": "Root worktree in-progress state."
+    }
+  ],
+  "categories": [
+    "validation",
+    "provenance",
+    "recovery_review",
+    "developer_tooling",
+    "integration_gate",
+    "git_state",
+    "boundary"
+  ],
+  "priority_order": ["P0", "P1", "P2", "P3"],
+  "priority_rules": {
+    "P0": "Blocking verifier failures, integration gate failures, or provenance violations.",
+    "P1": "Warnings that may block safe follow-up or require careful handling.",
+    "P2": "Open review, tooling, or in-progress worktree recommendations.",
+    "P3": "Informational recommendations and low-risk hygiene."
+  },
+  "validation_commands": [
+    "python3 -m pytest -q tests/test_aurora_recommendation_engine.py tests/test_aurora_integration_gate.py",
+    "python3 tools/aurora_recommendation_engine.py --summary",
+    "python3 tools/aurora_recommendation_engine.py --persist-report --summary",
+    "python3 tools/aurora_integration_gate.py --summary",
+    "python3 tools/workspace_verify.py"
+  ]
+}

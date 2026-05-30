@@ -1,0 +1,5 @@
+interface:
+  display_name: "Aurora Command Grammar"
+  short_description: "Parse and route Aurora command notation"
+  brand_color: "#2563EB"
+  default_prompt: "Use $aurora-command-grammar to parse, normalize, or validate this Aurora command without executing it."

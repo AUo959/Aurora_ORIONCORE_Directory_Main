@@ -1,4 +1,4 @@
-.PHONY: help setup test verify scan sync-audit pr-packet lint health clean
+.PHONY: help setup test verify scan sync-audit pr-packet lint health devkit-check devkit-report devkit-install-plan recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report confidence-audit confidence-audit-report integration-gate clean
 
 PYTHON ?= python3
 PYTEST ?= pytest
@@ -46,6 +46,55 @@ health: ## Run full health check (tests + verify + lint + sync audit)
 	@echo "\n══════════════════════════════════════════"
 	@echo "  Health check complete."
 	@echo "══════════════════════════════════════════"
+
+devkit-check: ## Audit the local Aurora developer toolkit surface
+	$(PYTHON) tools/aurora_devkit.py
+
+devkit-report: ## Persist the local Aurora developer toolkit report
+	$(PYTHON) tools/aurora_devkit.py --persist-report
+
+devkit-install-plan: ## Show the approval-gated Aurora developer toolkit install plan
+	$(PYTHON) tools/aurora_devkit.py --install-plan --persist-install-plan
+
+recovery-index: ## Build the read-only recovery index summary
+	$(PYTHON) tools/workspace_recovery_index.py --summary
+
+recovery-report: ## Persist the read-only recovery index report
+	$(PYTHON) tools/workspace_recovery_index.py --persist-report
+
+recommendations: ## Build the advisory Aurora root recommendation summary
+	$(PYTHON) tools/aurora_recommendation_engine.py --summary
+
+recommendations-report: ## Persist the advisory Aurora root recommendation report
+	$(PYTHON) tools/aurora_recommendation_engine.py --persist-report
+
+mission-control: ## Build the read-only Aurora Mission Control summary
+	$(PYTHON) tools/aurora_mission_control.py --summary
+
+mission-control-report: ## Persist the read-only Aurora Mission Control report
+	$(PYTHON) tools/aurora_mission_control.py --persist-report
+
+confidence-audit: ## Run the bootstrap confidence audit example summary
+	$(PYTHON) tools/aurora_confidence_audit.py score \
+		--claim-type analysis \
+		--text "Confidence audit tooling is available in the root control plane." \
+		--evidence-level verified_artifact \
+		--authority-ref docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md \
+		--evidence-ref tools/aurora_confidence_audit.py \
+		--summary
+
+confidence-audit-report: ## Persist the bootstrap confidence audit example report
+	$(PYTHON) tools/aurora_confidence_audit.py score \
+		--claim-type analysis \
+		--text "Confidence audit tooling is available in the root control plane." \
+		--evidence-level verified_artifact \
+		--authority-ref docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md \
+		--evidence-ref tools/aurora_confidence_audit.py \
+		--persist-report \
+		--summary
+
+integration-gate: ## Run the root command/agent/provenance integration gate
+	$(PYTHON) tools/aurora_integration_gate.py --summary
 
 # ── Git / Sync ───────────────────────────────────────────────────────────
 

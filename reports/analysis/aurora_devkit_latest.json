@@ -1,0 +1,657 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-22T00:01:11Z",
+  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "manifest_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
+  "toolkit_id": "aurora-dev-toolkit",
+  "status": "READY",
+  "toolchain": [
+    {
+      "id": "git",
+      "category": "source-control",
+      "required": true,
+      "impact": "Required for root and nested repo boundary work.",
+      "status": "ok",
+      "command": [
+        "git",
+        "--version"
+      ],
+      "path": "/usr/bin/git",
+      "returncode": 0,
+      "output": "git version 2.50.1 (Apple Git-155)"
+    },
+    {
+      "id": "gh",
+      "category": "source-control",
+      "required": true,
+      "impact": "Required for GitHub PR, issue, and CI maintenance.",
+      "status": "ok",
+      "command": [
+        "gh",
+        "--version"
+      ],
+      "path": "/Users/travisstreets/.local/bin/gh",
+      "returncode": 0,
+      "output": "gh version 2.88.0 (2026-03-10)\nhttps://github.com/cli/cli/releases/tag/v2.88.0"
+    },
+    {
+      "id": "python3",
+      "category": "python",
+      "required": true,
+      "impact": "Required for root verifier, workspace scanners, Codex skill scripts, and most automation.",
+      "status": "ok",
+      "command": [
+        "python3",
+        "--version"
+      ],
+      "path": "/usr/bin/python3",
+      "returncode": 0,
+      "output": "Python 3.9.6"
+    },
+    {
+      "id": "pip",
+      "category": "python",
+      "required": true,
+      "impact": "Required for minimal bootstrap installs when uv is unavailable.",
+      "status": "ok",
+      "command": [
+        "python3",
+        "-m",
+        "pip",
+        "--version"
+      ],
+      "path": "/usr/bin/python3",
+      "returncode": 0,
+      "output": "pip 21.2.4 from /Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)"
+    },
+    {
+      "id": "uv",
+      "category": "python",
+      "required": true,
+      "impact": "Preferred fast Python environment and package workflow.",
+      "status": "ok",
+      "command": [
+        "uv",
+        "--version"
+      ],
+      "path": "/Users/travisstreets/.local/bin/uv",
+      "returncode": 0,
+      "output": "uv 0.10.9 (f675560f3 2026-03-06)"
+    },
+    {
+      "id": "node",
+      "category": "javascript",
+      "required": true,
+      "impact": "Required for web apps, ChatGPT apps, dashboards, and frontend tooling.",
+      "status": "ok",
+      "command": [
+        "node",
+        "--version"
+      ],
+      "path": "/Users/travisstreets/.nvm/versions/node/v24.14.0/bin/node",
+      "returncode": 0,
+      "output": "v24.14.0"
+    },
+    {
+      "id": "npm",
+      "category": "javascript",
+      "required": true,
+      "impact": "Required for existing package-lock based repos and npm scripts.",
+      "status": "ok",
+      "command": [
+        "npm",
+        "--version"
+      ],
+      "path": "/Users/travisstreets/.nvm/versions/node/v24.14.0/bin/npm",
+      "returncode": 0,
+      "output": "11.9.0"
+    },
+    {
+      "id": "corepack",
+      "category": "javascript",
+      "required": true,
+      "impact": "Required to activate pinned pnpm or yarn versions without global drift.",
+      "status": "ok",
+      "command": [
+        "corepack",
+        "--version"
+      ],
+      "path": "/Users/travisstreets/.nvm/versions/node/v24.14.0/bin/corepack",
+      "returncode": 0,
+      "output": "0.34.6"
+    },
+    {
+      "id": "sqlite3",
+      "category": "local-data",
+      "required": true,
+      "impact": "Useful for local indexes, receipts, and lightweight metadata stores.",
+      "status": "ok",
+      "command": [
+        "sqlite3",
+        "--version"
+      ],
+      "path": "/usr/bin/sqlite3",
+      "returncode": 0,
+      "output": "3.51.0 2025-06-12 13:14:41 f0ca7bba1c5e232e5d279fad6338121ab55af0c8c68c84cdfb18ba5114dcaapl (64-bit)"
+    },
+    {
+      "id": "pre-commit",
+      "category": "quality",
+      "required": false,
+      "impact": "Recommended for running root hook checks outside Git commit flow.",
+      "status": "ok",
+      "command": [
+        "pre-commit",
+        "--version"
+      ],
+      "path": "/Users/travisstreets/.local/bin/pre-commit",
+      "returncode": 0,
+      "output": "pre-commit 4.6.0"
+    },
+    {
+      "id": "ruff",
+      "category": "quality",
+      "required": false,
+      "impact": "Recommended Python lint and formatting baseline for future code-heavy packages.",
+      "status": "ok",
+      "command": [
+        "ruff",
+        "--version"
+      ],
+      "path": "/Users/travisstreets/.local/bin/ruff",
+      "returncode": 0,
+      "output": "ruff 0.15.13"
+    },
+    {
+      "id": "mypy",
+      "category": "quality",
+      "required": false,
+      "impact": "Recommended static type check lane for larger Python modules.",
+      "status": "ok",
+      "command": [
+        "mypy",
+        "--version"
+      ],
+      "path": "/Users/travisstreets/.local/bin/mypy",
+      "returncode": 0,
+      "output": "mypy 2.1.0 (compiled: yes)"
+    },
+    {
+      "id": "pipx",
+      "category": "python",
+      "required": false,
+      "impact": "Recommended isolated installer for Python CLI tools.",
+      "status": "ok",
+      "command": [
+        "pipx",
+        "--version"
+      ],
+      "path": "/Users/travisstreets/.local/bin/pipx",
+      "returncode": 0,
+      "output": "1.12.0"
+    },
+    {
+      "id": "pnpm",
+      "category": "javascript",
+      "required": false,
+      "impact": "Recommended package manager for large JS workspaces when activated through corepack.",
+      "status": "ok",
+      "command": [
+        "pnpm",
+        "--version"
+      ],
+      "path": "/Users/travisstreets/.nvm/versions/node/v24.14.0/bin/pnpm",
+      "returncode": 0,
+      "output": "11.1.2"
+    },
+    {
+      "id": "docker",
+      "category": "container",
+      "required": false,
+      "impact": "Recommended for devcontainers, service stacks, and reproducible app builds.",
+      "status": "ok",
+      "command": [
+        "docker",
+        "--version"
+      ],
+      "path": "/usr/local/bin/docker",
+      "returncode": 0,
+      "output": "Docker version 29.4.3, build 055a478"
+    },
+    {
+      "id": "brew",
+      "category": "macos-package-manager",
+      "required": false,
+      "impact": "Recommended Mac system package manager if machine-level automatic updates are desired.",
+      "status": "ok",
+      "command": [
+        "brew",
+        "--version"
+      ],
+      "path": "/opt/homebrew/bin/brew",
+      "returncode": 0,
+      "output": "Homebrew 5.1.13"
+    },
+    {
+      "id": "xcodebuild",
+      "category": "apple-platforms",
+      "required": false,
+      "impact": "Recommended for iOS and full macOS app build automation.",
+      "status": "ok",
+      "command": [
+        "xcodebuild",
+        "-version"
+      ],
+      "path": "/usr/bin/xcodebuild",
+      "returncode": 0,
+      "output": "Xcode 26.5\nBuild version 17F42"
+    },
+    {
+      "id": "rust",
+      "category": "systems",
+      "required": false,
+      "impact": "Optional for high-performance local tools and native extensions.",
+      "status": "ok",
+      "command": [
+        "rustc",
+        "--version"
+      ],
+      "path": "/Users/travisstreets/.local/bin/rustc",
+      "returncode": 0,
+      "output": "rustc 1.95.0 (59807616e 2026-04-14)"
+    },
+    {
+      "id": "go",
+      "category": "systems",
+      "required": false,
+      "impact": "Optional for portable developer services and CLIs.",
+      "status": "ok",
+      "command": [
+        "go",
+        "version"
+      ],
+      "path": "/Users/travisstreets/.local/bin/go",
+      "returncode": 0,
+      "output": "go version go1.26.3 darwin/arm64"
+    }
+  ],
+  "package_manifests": [
+    {
+      "path": ".pre-commit-config.yaml",
+      "name": ".pre-commit-config.yaml",
+      "kind": "workflow"
+    },
+    {
+      "path": "Makefile",
+      "name": "Makefile",
+      "kind": "workflow"
+    },
+    {
+      "path": ".devcontainer/devcontainer.json",
+      "name": "devcontainer.json",
+      "kind": "container"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.pre-commit-config.yaml",
+      "name": ".pre-commit-config.yaml",
+      "kind": "workflow"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/Dockerfile",
+      "name": "Dockerfile",
+      "kind": "container"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/Makefile",
+      "name": "Makefile",
+      "kind": "workflow"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docker-compose.yml",
+      "name": "docker-compose.yml",
+      "kind": "container"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/package-lock.json",
+      "name": "package-lock.json",
+      "kind": "javascript"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/package.json",
+      "name": "package.json",
+      "kind": "javascript"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/pyproject.toml",
+      "name": "pyproject.toml",
+      "kind": "python"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/requirements-dev.txt",
+      "name": "requirements-dev.txt",
+      "kind": "python"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/requirements.txt",
+      "name": "requirements.txt",
+      "kind": "python"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/setup.py",
+      "name": "setup.py",
+      "kind": "python"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.devcontainer/Dockerfile",
+      "name": "Dockerfile",
+      "kind": "container"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.devcontainer/devcontainer.json",
+      "name": "devcontainer.json",
+      "kind": "container"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/cli/pyproject.toml",
+      "name": "pyproject.toml",
+      "kind": "python"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/archived/requirements.txt",
+      "name": "requirements.txt",
+      "kind": "python"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/reports/package-lock.json",
+      "name": "package-lock.json",
+      "kind": "javascript"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/reports/package.json",
+      "name": "package.json",
+      "kind": "javascript"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/frontend/package-lock.json",
+      "name": "package-lock.json",
+      "kind": "javascript"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/frontend/package.json",
+      "name": "package.json",
+      "kind": "javascript"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/Dockerfile",
+      "name": "Dockerfile",
+      "kind": "container"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/sdk/python/pyproject.toml",
+      "name": "pyproject.toml",
+      "kind": "python"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/services/command_node/Dockerfile",
+      "name": "Dockerfile",
+      "kind": "container"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/services/command_node/package.json",
+      "name": "package.json",
+      "kind": "javascript"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/services/nemo_service/Dockerfile",
+      "name": "Dockerfile",
+      "kind": "container"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/services/nemo_service/requirements.txt",
+      "name": "requirements.txt",
+      "kind": "python"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0/Makefile",
+      "name": "Makefile",
+      "kind": "workflow"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0/package-lock.json",
+      "name": "package-lock.json",
+      "kind": "javascript"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0/package.json",
+      "name": "package.json",
+      "kind": "javascript"
+    },
+    {
+      "path": "projects/Aurora_New_11_9/04_DEVELOPMENT/Python_Modules/pdp_v2_mvp/requirements.txt",
+      "name": "requirements.txt",
+      "kind": "python"
+    },
+    {
+      "path": "projects/Aurora_Project_Cloudhub_Deploy/aurora_agent_mode_005_safe_path_bundle/mcp_http_facade/Dockerfile",
+      "name": "Dockerfile",
+      "kind": "container"
+    },
+    {
+      "path": "projects/Aurora_Project_Cloudhub_Deploy/aurora_agent_mode_005_safe_path_bundle/mcp_http_facade/requirements.txt",
+      "name": "requirements.txt",
+      "kind": "python"
+    },
+    {
+      "path": "projects/Aurora_Project_Cloudhub_Deploy/aurora_agent_mode_005_safe_path_bundle/webhook_gateway/Dockerfile",
+      "name": "Dockerfile",
+      "kind": "container"
+    },
+    {
+      "path": "projects/Aurora_Project_Cloudhub_Deploy/aurora_agent_mode_005_safe_path_bundle/webhook_gateway/requirements.txt",
+      "name": "requirements.txt",
+      "kind": "python"
+    },
+    {
+      "path": "projects/Aurora_Project_Cloudhub_Deploy/aurora_agent_mode_ideal_bundle/mcp_http_facade/Dockerfile",
+      "name": "Dockerfile",
+      "kind": "container"
+    },
+    {
+      "path": "projects/Aurora_Project_Cloudhub_Deploy/aurora_agent_mode_ideal_bundle/mcp_http_facade/requirements.txt",
+      "name": "requirements.txt",
+      "kind": "python"
+    },
+    {
+      "path": "projects/GUI_Cloudhub/requirements.txt",
+      "name": "requirements.txt",
+      "kind": "python"
+    }
+  ],
+  "registered_repos": [
+    {
+      "name": "aurora-cloudbank-symbolic-main",
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "branch": "codex/fix-synergy-mutation-auth-648",
+      "remote_status": "configured"
+    },
+    {
+      "name": "CanonRec",
+      "path": "GUMAS_SIM_2.5/CanonRec",
+      "branch": "main",
+      "remote_status": "configured"
+    },
+    {
+      "name": "DuelSim_v2.0",
+      "path": "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0",
+      "branch": "main",
+      "remote_status": "configured"
+    },
+    {
+      "name": "qgia-knowledge-library-main",
+      "path": "qgia-knowledge-library-main",
+      "branch": "main",
+      "remote_status": "configured"
+    },
+    {
+      "name": "qgia-knowledge-spine-main",
+      "path": "qgia-knowledge-spine-main",
+      "branch": "main",
+      "remote_status": "configured"
+    }
+  ],
+  "codex_skills": {
+    "repo_local_skills": [
+      "agent-dispatcher",
+      "aurora-nested-repo-normalizer",
+      "gitwiz-github-manager"
+    ],
+    "installed_skills": [
+      "agent-dispatcher",
+      "aurora-canon-reconciler",
+      "aurora-exec-brief-pipeline",
+      "aurora-governance-orchestrator",
+      "aurora-narrative-tone-governor",
+      "aurora-nested-repo-normalizer",
+      "aurora-python-ingest-autowire",
+      "aurora-quantum-forge-ops",
+      "aurora-repo-stabilizer",
+      "aurora-script-governor",
+      "aurora-selective-integration",
+      "aurora-skill-finder",
+      "chatgpt-apps",
+      "develop-web-game",
+      "doc",
+      "gh-address-comments",
+      "gh-fix-ci",
+      "gitwiz-github-manager",
+      "gumas-simulation-engine",
+      "imagegen",
+      "jupyter-notebook",
+      "pdf",
+      "security-best-practices",
+      "security-threat-model",
+      "threadcore-governor",
+      "zipwiz-governor"
+    ],
+    "repo_local_count": 3,
+    "installed_count": 26,
+    "missing_installed_for_repo_source": [],
+    "skills_root": "/Users/travisstreets/.codex/skills"
+  },
+  "automations": [
+    {
+      "id": "archive-entropy-guard",
+      "name": "Archive Entropy Guard",
+      "status": "ACTIVE",
+      "rrule": "FREQ=WEEKLY;BYDAY=SA;BYHOUR=12;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/archive-entropy-guard/automation.toml"
+    },
+    {
+      "id": "archive-entropy-guard-2",
+      "name": "Archive Entropy Guard",
+      "status": "PAUSED",
+      "rrule": "FREQ=WEEKLY;BYDAY=SA;BYHOUR=12;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/archive-entropy-guard-2/automation.toml"
+    },
+    {
+      "id": "aurora-dev-toolkit-user-space-update",
+      "name": "Aurora Dev Toolkit User-Space Update",
+      "status": "ACTIVE",
+      "rrule": "FREQ=WEEKLY;BYDAY=SU;BYHOUR=9;BYMINUTE=15",
+      "path": "/Users/travisstreets/.codex/automations/aurora-dev-toolkit-user-space-update/automation.toml"
+    },
+    {
+      "id": "aurora-dev-toolkit-watch",
+      "name": "Aurora Dev Toolkit Watch",
+      "status": "ACTIVE",
+      "rrule": "FREQ=WEEKLY;BYDAY=SU;BYHOUR=9;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/aurora-dev-toolkit-watch/automation.toml"
+    },
+    {
+      "id": "aurora-multi-repo-git-health",
+      "name": "Aurora Multi-Repo Git Health",
+      "status": "ACTIVE",
+      "rrule": "FREQ=WEEKLY;BYDAY=TU,FR;BYHOUR=9;BYMINUTE=30",
+      "path": "/Users/travisstreets/.codex/automations/aurora-multi-repo-git-health/automation.toml"
+    },
+    {
+      "id": "aurora-package-watch",
+      "name": "Aurora Package Watch",
+      "status": "PAUSED",
+      "rrule": "FREQ=HOURLY;INTERVAL=4",
+      "path": "/Users/travisstreets/.codex/automations/aurora-package-watch/automation.toml"
+    },
+    {
+      "id": "aurora-root-workspace-health",
+      "name": "Aurora Root Workspace Health",
+      "status": "ACTIVE",
+      "rrule": "FREQ=WEEKLY;BYDAY=WE;BYHOUR=9;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/aurora-root-workspace-health/automation.toml"
+    },
+    {
+      "id": "cloudbank-pr-sentinel",
+      "name": "CloudBank PR Sentinel",
+      "status": "ACTIVE",
+      "rrule": "FREQ=HOURLY;INTERVAL=4",
+      "path": "/Users/travisstreets/.codex/automations/cloudbank-pr-sentinel/automation.toml"
+    },
+    {
+      "id": "cloudbank-script-drift-audit",
+      "name": "CloudBank Script Drift Audit",
+      "status": "PAUSED",
+      "rrule": "FREQ=WEEKLY;BYDAY=MO,TH;BYHOUR=9;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/cloudbank-script-drift-audit/automation.toml"
+    },
+    {
+      "id": "cloudbank-script-drift-audit-2",
+      "name": "CloudBank Script Drift Audit",
+      "status": "PAUSED",
+      "rrule": "FREQ=WEEKLY;BYDAY=MO,TH;BYHOUR=9;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/cloudbank-script-drift-audit-2/automation.toml"
+    },
+    {
+      "id": "hourly-sim-retro",
+      "name": "Hourly Sim Retro",
+      "status": "PAUSED",
+      "rrule": "FREQ=HOURLY;INTERVAL=1",
+      "path": "/Users/travisstreets/.codex/automations/hourly-sim-retro/automation.toml"
+    },
+    {
+      "id": "qgia-closed-loop-validation",
+      "name": "QGIA Closed-Loop Validation",
+      "status": "ACTIVE",
+      "rrule": "FREQ=WEEKLY;BYDAY=TH;BYHOUR=9;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/qgia-closed-loop-validation/automation.toml"
+    },
+    {
+      "id": "weekly-skill-audit",
+      "name": "Weekly Skill Audit",
+      "status": "ACTIVE",
+      "rrule": "FREQ=WEEKLY;BYDAY=MO;BYHOUR=9;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/weekly-skill-audit/automation.toml"
+    }
+  ],
+  "findings": [],
+  "install_plan": [],
+  "validation_commands": [
+    "python3 tools/aurora_devkit.py --persist-report",
+    "python3 tools/aurora_devkit.py --install-plan --persist-install-plan",
+    "python3 tools/workspace_verify.py",
+    "python3 -m pytest tests/test_aurora_devkit.py -q"
+  ],
+  "update_lanes": [
+    {
+      "id": "devkit-watch",
+      "automation_id": "aurora-dev-toolkit-watch",
+      "mode": "read-only",
+      "cadence": "weekly",
+      "purpose": "Report missing tools, stale package manifests, paused automations, and package manager drift."
+    },
+    {
+      "id": "devkit-apply",
+      "automation_id": "aurora-dev-toolkit-user-space-update",
+      "mode": "approval-gated mutation",
+      "purpose": "Automatically upgrade only approved user-space tools; system-level packages remain explicit-approval work."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "aurora-command-grammar",
+  "version": "0.1.0",
+  "description": "Parse, validate, route, and communicate Aurora command grammar intent across users, agents, GitHub, and background workflows without creating a competing parser.",
+  "author": {
+    "name": "Travis Streets",
+    "email": "AUo959@users.noreply.github.com"
+  },
+  "repository": "git@github-aurora:AUo959/Aurora_ORIONCORE_Directory_Main.git",
+  "license": "MIT",
+  "keywords": [
+    "aurora",
+    "command-grammar",
+    "mesh-router",
+    "validation",
+    "codex-skill"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Aurora Command Grammar",
+    "shortDescription": "Parse and route Aurora commands safely",
+    "longDescription": "Use Aurora Command Grammar to normalize command notation, identify validation issues, map mesh-style requests to the runtime contract, and emit background command intent envelopes while keeping command execution separated from grammar inspection.",
+    "developerName": "Travis Streets",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "defaultPrompt": [
+      "Parse this Aurora command safely.",
+      "Validate this Aurora command chain.",
+      "Create a command intent envelope."
+    ],
+    "screenshots": [],
+    "brandColor": "#2563EB"
+  }
+}

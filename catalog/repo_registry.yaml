@@ -1,10 +1,10 @@
-generated_at: '2026-04-23T14:05:39Z'
+generated_at: '2026-05-30T03:48:39Z'
 root: .
 repos:
 - name: aurora-cloudbank-symbolic-main
   path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
-  branch: codex/cloudbank-command-chain-workflow-repair-2026-04-10
-  head_sha: 1b7c5592349f944b208568597d92e135121f235e
+  branch: codex/cloudbank-gumas-mutation-auth-2026-05-25
+  head_sha: 152634b2ed571c8477b5261e126fe3cc0c927eaf
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse
@@ -24,7 +24,7 @@ repos:
 - name: DuelSim_v2.0
   path: GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0
   branch: main
-  head_sha: db13ac7c97fdcab65a9ba051e23defc19ff4922f
+  head_sha: 0716f36ea5cf84707eba8c6ec16bead04809cf8c
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0 rev-parse HEAD && env -u GIT_DIR -u

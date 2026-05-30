@@ -135,6 +135,25 @@ jobs:
           print('All JSON files valid.')
           "
 
+      - name: Validate Codex plugin JSON files
+        run: |
+          python -c "
+          import json, sys, pathlib
+          errors = []
+          paths = [pathlib.Path('.agents/plugins/marketplace.json')]
+          paths.extend(pathlib.Path('plugins').glob('*/.codex-plugin/plugin.json'))
+          paths.extend(pathlib.Path('plugins').glob('*/skills/*/references/*.schema.json'))
+          for f in paths:
+              try:
+                  json.loads(f.read_text())
+              except (json.JSONDecodeError, FileNotFoundError) as e:
+                  errors.append(f'{f}: {e}')
+          if errors:
+              print('\n'.join(errors), file=sys.stderr)
+              sys.exit(1)
+          print('All Codex plugin JSON files valid.')
+          "
+
       - name: Check for tracked files exceeding size limit
         run: |
           python -c "

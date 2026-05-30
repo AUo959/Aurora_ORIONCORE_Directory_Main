@@ -1,0 +1,280 @@
+{
+  "summary": {
+    "enabledPatterns": { "before": 0, "after": 2549 },
+    "enabledTools": { "before": 0, "after": 13 },
+    "issues": { "before": 0, "after": 1343 },
+    "analysisRuntime": { "before": null, "after": 88753 }
+  },
+  "toolChanges": [
+    {
+      "toolId": "jackson",
+      "action": "enabled",
+      "reason": "JSON validation for 73 JSON files in repo",
+      "patternsAffected": 2
+    },
+    {
+      "toolId": "markdownlint",
+      "action": "enabled",
+      "reason": "Markdown quality for 91 docs/reports files; 6 noisy CodeStyle patterns disabled per noise floor",
+      "patternsAffected": 37
+    },
+    {
+      "toolId": "Ruff",
+      "action": "enabled",
+      "reason": "Primary Python linter — fast, comprehensive; 4 Minor CodeStyle patterns disabled per noise floor",
+      "patternsAffected": 134
+    },
+    {
+      "toolId": "Trivy",
+      "action": "enabled",
+      "reason": "Vulnerability scanning for 288 files including YAML configs and Python dependencies",
+      "patternsAffected": 6
+    },
+    {
+      "toolId": "Semgrep",
+      "action": "enabled",
+      "reason": "Static analysis with 535 patterns; currently unavailable (opengrep binary not in PATH — install manually to activate)",
+      "patternsAffected": 535
+    },
+    {
+      "toolId": "spectral",
+      "action": "enabled",
+      "reason": "OpenAPI/YAML linting for 88 YAML/JSON files",
+      "patternsAffected": 92
+    },
+    {
+      "toolId": "Bandit",
+      "action": "enabled",
+      "reason": "Python security scanner; 7 patterns disabled as exact duplicates of Ruff patterns (higher severity kept in Ruff)",
+      "patternsAffected": 71
+    },
+    {
+      "toolId": "PyLintPython3",
+      "action": "enabled",
+      "reason": "Python static analysis; 1 Minor CodeStyle pattern disabled per noise floor",
+      "patternsAffected": 98
+    },
+    {
+      "toolId": "Checkov",
+      "action": "enabled",
+      "reason": "IaC security scanning with 1358 patterns for YAML/JSON configs and GitHub Actions workflows",
+      "patternsAffected": 1358
+    },
+    {
+      "toolId": "Lizard",
+      "action": "enabled",
+      "reason": "Complexity analysis for Python/Swift — CCN, NLOC, parameter count at critical and medium thresholds",
+      "patternsAffected": 8
+    },
+    {
+      "toolId": "SwiftLint",
+      "action": "enabled",
+      "reason": "Swift linting for 3 Swift files (aurora_macos_starter package)",
+      "patternsAffected": 100
+    },
+    {
+      "toolId": "Agentlinter",
+      "action": "enabled",
+      "reason": "AI agent/skill quality linting for 8 agent spec files; 1 Documentation pattern disabled per noise floor",
+      "patternsAffected": 101
+    },
+    {
+      "toolId": "Prospector",
+      "action": "enabled",
+      "reason": "Python meta-linter; running with partial status (2 non-blocking errors) — 0 issues found",
+      "patternsAffected": 7
+    }
+  ],
+  "patternChanges": [
+    {
+      "patternId": "Ruff_E501_line-too-long",
+      "toolId": "Ruff",
+      "action": "disabled",
+      "reason": "Noise floor: Info/CodeStyle with 1228 hits across 75 files (31% Critical+High triggers Minor CodeStyle disable). Line length is deeply embedded in this codebase's style.",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "markdownlint_MD032",
+      "toolId": "markdownlint",
+      "action": "disabled",
+      "reason": "Noise floor: Info/CodeStyle with 757 hits across 34 files. Lists-surrounded-by-blank-lines is a pervasive style in docs/reports.",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "markdownlint_MD022",
+      "toolId": "markdownlint",
+      "action": "disabled",
+      "reason": "Noise floor: Info/CodeStyle with 538 hits across 24 files. Headings-surrounded-by-blank-lines is a pervasive style in the docs.",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "markdownlint_MD026",
+      "toolId": "markdownlint",
+      "action": "disabled",
+      "reason": "Noise floor: Info/CodeStyle with 129 hits across 3 files. Trailing punctuation in headings is a consistent doc style here.",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "markdownlint_MD007",
+      "toolId": "markdownlint",
+      "action": "disabled",
+      "reason": "Noise floor: Info/CodeStyle with 24 hits in 1 file.",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "markdownlint_MD012",
+      "toolId": "markdownlint",
+      "action": "disabled",
+      "reason": "Noise floor: Info/CodeStyle with 11 hits across 2 files.",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "markdownlint_MD029",
+      "toolId": "markdownlint",
+      "action": "disabled",
+      "reason": "Noise floor: Info/CodeStyle with 6 hits in 1 file.",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "Ruff_E741_ambiguous-variable-name",
+      "toolId": "Ruff",
+      "action": "disabled",
+      "reason": "Noise floor: Info/CodeStyle with 2 hits.",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "Ruff_E401_multiple-imports-on-one-line",
+      "toolId": "Ruff",
+      "action": "disabled",
+      "reason": "Noise floor: Info/CodeStyle with 1 hit.",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "Ruff_W293_blank-line-with-whitespace",
+      "toolId": "Ruff",
+      "action": "disabled",
+      "reason": "Noise floor: Info/CodeStyle with 1 hit.",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "PyLintPython3_W0404",
+      "toolId": "PyLintPython3",
+      "action": "disabled",
+      "reason": "Noise floor: Info/CodeStyle (reimport modules) with 3 hits.",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "Agentlinter_completeness_has-tools",
+      "toolId": "Agentlinter",
+      "action": "disabled",
+      "reason": "Noise floor: Info/Documentation with 1 hit.",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "Bandit_B101",
+      "toolId": "Bandit",
+      "action": "disabled",
+      "reason": "Cross-tool deduplication: exact same 664 files/lines as Ruff_S101_assert. Ruff_S101 kept at Critical/Error severity (vs Bandit's High). Concern remains fully covered.",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "Bandit_B607",
+      "toolId": "Bandit",
+      "action": "disabled",
+      "reason": "Cross-tool deduplication: same semantic concern as Ruff_S607 (partial executable path), same files/counts. Ruff_S607 kept at High severity (vs Bandit's Warning).",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "Bandit_B311",
+      "toolId": "Bandit",
+      "action": "disabled",
+      "reason": "Cross-tool deduplication: exact same 4 files and lines as Ruff_S311. Ruff_S311 kept at High severity (vs Bandit's Warning).",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "Bandit_B110",
+      "toolId": "Bandit",
+      "action": "disabled",
+      "reason": "Cross-tool deduplication: same 4 try-except-pass instances as Ruff_S110. Ruff_S110 kept at High severity (vs Bandit's Warning).",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "Bandit_B112",
+      "toolId": "Bandit",
+      "action": "disabled",
+      "reason": "Cross-tool deduplication: same 2 try-except-continue instances as Ruff_S112. Ruff_S112 kept (same High severity, Ruff is primary linter).",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "Bandit_B105",
+      "toolId": "Bandit",
+      "action": "disabled",
+      "reason": "Cross-tool deduplication: same 1 hardcoded-password instance as Ruff_S105. Ruff_S105 kept at Critical/Error severity (vs Bandit's High).",
+      "delta": 0,
+      "parameters": []
+    },
+    {
+      "patternId": "Bandit_B602",
+      "toolId": "Bandit",
+      "action": "disabled",
+      "reason": "Cross-tool deduplication: same 1 subprocess-popen-shell=True instance as Ruff_S602. Ruff_S602 kept (same High severity, Ruff is primary linter).",
+      "delta": 0,
+      "parameters": []
+    }
+  ],
+  "securityCoverage": {
+    "deduplication": [
+      "Bandit_B101 (assert) disabled — same 664 instances covered by Ruff_S101 at Critical severity",
+      "Bandit_B607 (partial path) disabled — same concern covered by Ruff_S607 at High severity",
+      "Bandit_B311 (weak random) disabled — exact same 4 instances covered by Ruff_S311 at High severity",
+      "Bandit_B110 (try-except-pass) disabled — same 4 instances covered by Ruff_S110 at High severity",
+      "Bandit_B112 (try-except-continue) disabled — same 2 instances covered by Ruff_S112 at High severity",
+      "Bandit_B105 (hardcoded password) disabled — same 1 instance covered by Ruff_S105 at Critical severity",
+      "Bandit_B602 (subprocess shell=True) disabled — same 1 instance covered by Ruff_S602 at High severity"
+    ],
+    "newCoverage": [
+      "Ruff_S101_assert (Critical, 664 issues) — assert used in production code; most in test files (expected pytest usage), ~5 in production tools",
+      "Ruff_S603_subprocess-without-shell-equals-true (High, 23 issues)",
+      "Ruff_S607_start-process-with-partial-path (High, 12 issues)",
+      "Ruff_RUF001_ambiguous-unicode-character-string (High, 4 issues)",
+      "Ruff_S110_try-except-pass (High, 4 issues)",
+      "Ruff_S311_suspicious-non-cryptographic-random-usage (High, 4 issues)",
+      "Agentlinter_skill-safety_sensitive-paths (High, 2 issues)",
+      "Ruff_S112_try-except-continue (High, 2 issues)",
+      "Agentlinter_security_has-injection-defense (High, 1 issue)",
+      "Ruff_S105_hardcoded-password-string (Critical, 1 issue)",
+      "Ruff_S602_subprocess-popen-with-shell-equals-true (High, 1 issue)",
+      "Checkov IaC security (1358 patterns, 0 issues — confirming clean IaC config)"
+    ],
+    "noisyButKept": [
+      "Ruff_S101_assert (664 issues) — kept per security guardrail; majority are in test files using pytest assert (expected). ~5 production-code instances warrant review.",
+      "Bandit_B603 (29 issues) — kept alongside Ruff_S603 (23 issues) because counts differ, indicating different detection scope."
+    ]
+  },
+  "keyImprovements": [
+    "Eliminated 3389 noise issues (71.6% reduction from 4732 → 1343) by disabling 19 Minor/Info CodeStyle and Documentation patterns per the 31% Critical+High noise floor.",
+    "Deduplicated 7 Bandit security patterns that were exact duplicates of Ruff patterns — same files and lines — keeping the higher-severity Ruff variant in each case.",
+    "Bandit retained for unique coverage: B603 (29 subprocess calls not caught by Ruff), B404 (16 subprocess import notices), and B108 (1 hardcoded temp dir).",
+    "Checkov brings 1358 IaC security patterns covering GitHub Actions workflows, YAML configs, and Python config files — confirmed clean with 0 issues.",
+    "Agentlinter (new to this repo) found 20 real agent-quality issues across 8 skill/agent spec files: missing escape hatches, metadata gaps, and security concerns.",
+    "Semgrep configured with 535 patterns but unavailable — install opengrep manually (brew or GitHub releases) to activate the largest security scanner in the suite."
+  ],
+  "importResults": null
+}

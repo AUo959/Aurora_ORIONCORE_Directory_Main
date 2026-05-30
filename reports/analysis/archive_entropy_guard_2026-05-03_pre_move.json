@@ -1,0 +1,1396 @@
+{
+  "generated_at": "2026-05-03T01:40:00Z",
+  "scan_root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "scope": "archive and binary/document artifacts; dependency/vendor/build caches excluded",
+  "action": "pre-move receipt; no deletions",
+  "total_files": 2421,
+  "total_bytes": 18220384889,
+  "zone_counts": {
+    "other": 544,
+    "archives": 1202,
+    "_entropy_quarantine": 675
+  },
+  "zone_bytes": {
+    "other": 1145783393,
+    "archives": 7768927249,
+    "_entropy_quarantine": 9305674247
+  },
+  "exact_duplicate_groups": 458,
+  "exact_duplicate_files": 1499,
+  "exact_duplicate_reclaimable_bytes": 9678114954,
+  "safe_quarantine_files": 675,
+  "safe_quarantine_bytes": 9305674247,
+  "mixed_quarantine_anchor_groups": 269,
+  "quarantine_only_duplicate_files": 0,
+  "quarantine_only_duplicate_bytes": 0,
+  "top_safe_quarantine_groups": [
+    {
+      "sha256": "0224c43544428ca5a6d9aa903cba04af19eede04c9491859a51ddfe31a0f0c25",
+      "size": 886188338,
+      "quarantine_count": 3,
+      "anchor_count": 1,
+      "quarantine_bytes": 2658565014,
+      "anchor_paths": [
+        "archives/session_archives/Au_Archive_412_417/2.2.6b+Archives  2.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Au_Archive_412_417/2.2.6b+Archives .zip",
+        "_entropy_quarantine/Complete Archive 4_19 copy/2.2.6b+Archives .zip",
+        "_entropy_quarantine/Complete Archive 4_19 copy/2.2.6b+Archives  2.zip"
+      ]
+    },
+    {
+      "sha256": "4fb5bad96ca847ed618501339c51947ca63f6632d004f2b828e1156aa3b614cf",
+      "size": 251813888,
+      "quarantine_count": 5,
+      "anchor_count": 1,
+      "quarantine_bytes": 1259069440,
+      "anchor_paths": [
+        "projects/Streamdeck_Glyphs/Stream_Deck_6.8.1.21263(2).msi"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs2/Stream_Deck_6.8.1.21263(1).msi",
+        "_entropy_quarantine/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs2/Stream_Deck_6.8.1.21263.msi",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Stream_Deck_6.8.1.21263(2).msi",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Stream_Deck_6.8.1.21263(1).msi",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Stream_Deck_6.8.1.21263.msi"
+      ]
+    },
+    {
+      "sha256": "e013b01d34c0023ff18f211a1155364cd5251d54aca2f001bbbc39c898d22b30",
+      "size": 176238162,
+      "quarantine_count": 6,
+      "anchor_count": 1,
+      "quarantine_bytes": 1057428972,
+      "anchor_paths": [
+        "archives/unzipped/Complete Archive 4_19 copy/GitHubDesktop-x64.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/GUI_Cloudhub/GitHubDesktop-x64.zip",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/GUI/GitHubDesktop-x64.zip",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/GUI_Cloudhub/GUI_Cloudhub/GitHubDesktop-x64.zip",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUI/GitHubDesktop-x64.zip",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUI_Cloudhub/GUI_Cloudhub/GitHubDesktop-x64.zip",
+        "_entropy_quarantine/GUI_Cloudhub/GitHubDesktop-x64.zip"
+      ]
+    },
+    {
+      "sha256": "279b02fdaa17931b5acf139c3e8b2400269405501a31f50fb141159164527b07",
+      "size": 198563270,
+      "quarantine_count": 3,
+      "anchor_count": 1,
+      "quarantine_bytes": 595689810,
+      "anchor_paths": [
+        "archives/session_archives/Au_Archive_62_619/GUI_Cloudhub.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/Au_Archive_62_619/GUI_Cloudhub.zip",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/GUI_Cloudhub.zip",
+        "_entropy_quarantine/Aurora_Project_Cloudhub_Deploy/GUI_Cloudhub.zip"
+      ]
+    },
+    {
+      "sha256": "4f99e30bb892b2dfea652321c2c825da502105ed818804b087471bf53af51ccc",
+      "size": 404114667,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 404114667,
+      "anchor_paths": [
+        "archives/session_archives/Au_Archive_412_417/4:11:AuDev.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Complete Archive 4_19 copy/4:11:AuDev.zip"
+      ]
+    },
+    {
+      "sha256": "8b8404fd2b3fcefcb7acd4ccf63f9be6caa896e46e86ef1e1bd838a6ddfd731b",
+      "size": 95105642,
+      "quarantine_count": 4,
+      "anchor_count": 1,
+      "quarantine_bytes": 380422568,
+      "anchor_paths": [
+        "archives/unzipped/Complete Archive 4_19 copy/Comprehensive_Chat_Archive_20250410_032233.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/ZIP_Archives/comprehensive_chat_archive.zip",
+        "_entropy_quarantine/ZIP_Archives/Comprehensive_Chat_Archive_20250410_032233.zip",
+        "_entropy_quarantine/Complete Archive 4_19 copy/comprehensive_chat_archive.zip",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/ZIP_Archives/comprehensive_chat_archive.zip"
+      ]
+    },
+    {
+      "sha256": "523f175c77089beff68179b8f06429467bb0ef183c9767bd75129de5733b8e20",
+      "size": 310959109,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 310959109,
+      "anchor_paths": [
+        "archives/unzipped/Complete Archive 4_19 copy/MicrosoftTeams.pkg"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/TMMS and +/MicrosoftTeams.pkg"
+      ]
+    },
+    {
+      "sha256": "194d4c24cf22ba398d64056c4790ccf3bde3a272bd32572ad4e607d636a70525",
+      "size": 147883691,
+      "quarantine_count": 2,
+      "anchor_count": 1,
+      "quarantine_bytes": 295767382,
+      "anchor_paths": [
+        "archives/session_archives/Au_Archive_45_49/AuroraMasterArchive.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Complete Archive 4_19 copy/AuroraMasterArchive.zip",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/Au_Archive_45_49/AuroraMasterArchive.zip"
+      ]
+    },
+    {
+      "sha256": "eb6834444b7a83237bc2f15ad7a4b7a4110533ce7f410085bd18e508288eaeca",
+      "size": 183365808,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 183365808,
+      "anchor_paths": [
+        "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/sp155262.exe"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/sp155262.exe"
+      ]
+    },
+    {
+      "sha256": "e28ec4cf79fa16256e2e1338c6ba048698df776ad2aa517973c1be486bef0574",
+      "size": 176276621,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 176276621,
+      "anchor_paths": [
+        "archives/session_archives/Au_Archive_62_619/GitHubDesktop-x64.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/Au_Archive_62_619/GitHubDesktop-x64.zip"
+      ]
+    },
+    {
+      "sha256": "35c55ce6c245be4e77478546c2a346332370a399db6421e0b1e6e319025c1b97",
+      "size": 176255217,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 176255217,
+      "anchor_paths": [
+        "archives/unzipped/ZipWiz_Chamber_6_28/ZIP Archives/GUI Zip.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/GUI Zip.zip"
+      ]
+    },
+    {
+      "sha256": "0ad69798d88dc1ca4c004adb5409c23e2f96d8df4cc4a759f7244cdcf1183045",
+      "size": 170700224,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 170700224,
+      "anchor_paths": [
+        "projects/Aurora_Project_Cloudhub_Deploy/Orion_Links/Perplexity Setup 1.1.3.exe"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Perplexity Setup 1.1.3.exe"
+      ]
+    },
+    {
+      "sha256": "2524ae246c7d8660248d64c4567a9407b962cc9e5ec74beb29f14bcee011c63f",
+      "size": 73765203,
+      "quarantine_count": 2,
+      "anchor_count": 1,
+      "quarantine_bytes": 147530406,
+      "anchor_paths": [
+        "archives/unzipped/Complete Archive 4_19 copy/9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2025-04-01-20-31-33-63c9a7b564d0419394481511d95503c9 2.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/ZIP_Archives/4_2_ChatGPT_Export2.zip",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/ZIP_Archives/4_2_ChatGPT_Export2.zip"
+      ]
+    },
+    {
+      "sha256": "afa473dad7cf7d9d831ff4a66a93849d8f28041f7f18f32aaab4c1e5e85befa4",
+      "size": 108199716,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 108199716,
+      "anchor_paths": [
+        "archives/session_archives/Au_Archive_45_49/GUMAS+AUR Dev File Archive  6.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Complete Archive 4_19 copy/GUMAS+AUR Dev File Archive  6.zip"
+      ]
+    },
+    {
+      "sha256": "8da63596b1ad5caaa9b2f503da0139b1919a9b36324bac4a3ee36a7d9939440d",
+      "size": 108198144,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 108198144,
+      "anchor_paths": [
+        "archives/session_archives/Au_Archive_45_49/GUMAS+AUR Dev File Archive  5.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Complete Archive 4_19 copy/GUMAS+AUR Dev File Archive  5.zip"
+      ]
+    },
+    {
+      "sha256": "d3541c7517f81fb56ba764c6765c0895f1df4eeceddadd80a44c738a8cebb948",
+      "size": 51623079,
+      "quarantine_count": 2,
+      "anchor_count": 1,
+      "quarantine_bytes": 103246158,
+      "anchor_paths": [
+        "archives/unzipped/Complete Archive 4_19 copy/9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2025-03-26-22-39-02-7771e670411c40b98bec9643a4f72dbb 2.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/ZIP_Archives/4_2_ChaGPT_Export1.zip",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/ZIP_Archives/4_2_ChaGPT_Export1.zip"
+      ]
+    },
+    {
+      "sha256": "af1a97e475482b317ba38fb579c95dcbde2f642f29209bc0f115404078a6edcd",
+      "size": 51570740,
+      "quarantine_count": 2,
+      "anchor_count": 1,
+      "quarantine_bytes": 103141480,
+      "anchor_paths": [
+        "archives/unzipped/Complete Archive 4_19 copy/9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2025-03-26-22-39-02-7771e670411c40b98bec9643a4f72dbb.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/ZIP_Archives/3_26_ChatGPTExport.zip",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/ZIP_Archives/3_26_ChatGPTExport.zip"
+      ]
+    },
+    {
+      "sha256": "d276e229542fb584c797e60da007db841368a63379fbf77c6a87dfb6ae506d6d",
+      "size": 103070296,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 103070296,
+      "anchor_paths": [
+        "archives/session_archives/Au_Archive_45_49/GUMAS+AUR Dev File Archive  4.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Complete Archive 4_19 copy/GUMAS+AUR Dev File Archive  4.zip"
+      ]
+    },
+    {
+      "sha256": "c38aca581650227a827fe8566c6bb05712e23be335caef72e7b6ef0aeccb1d92",
+      "size": 79471038,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 79471038,
+      "anchor_paths": [
+        "archives/unzipped/Complete Archive 4_19 copy/GoogleEarthProMac-Intel.dmg"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/TMMS and +/GoogleEarthProMac-Intel.dmg"
+      ]
+    },
+    {
+      "sha256": "336f6146d92e4ca2d2a1c6868228a88a01738514d8dd6e0f02e4abccf4301ea1",
+      "size": 75813744,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 75813744,
+      "anchor_paths": [
+        "archives/session_archives/Au_Archive_62_619/Git_Backup.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/Au_Archive_62_619/Git_Backup.zip"
+      ]
+    },
+    {
+      "sha256": "ac6ddca9f9ea3fc5fdc037e8ab2a9f0371cdf65b204d07cb44ab12a3109d3818",
+      "size": 74334270,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 74334270,
+      "anchor_paths": [
+        "archives/session_archives/Au_Archive_412_417/4:10:AuDev.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Complete Archive 4_19 copy/4:10:AuDev.zip"
+      ]
+    },
+    {
+      "sha256": "6598495c118965dba7a6859fcfcdd43d4aa96cf738929e0f0f8a0df5c71c6d98",
+      "size": 73765203,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 73765203,
+      "anchor_paths": [
+        "archives/session_archives/Au_Archive_42_45/9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2025-04-01-20-31-33-63c9a7b564d0419394481511d95503c9 3.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Complete Archive 4_19 copy/9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2025-04-01-20-31-33-63c9a7b564d0419394481511d95503c9 3.zip"
+      ]
+    },
+    {
+      "sha256": "726056328967f242fe6e9afbfe7823903a928aff577dcf6f517f2fb6da6ce83c",
+      "size": 70287136,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 70287136,
+      "anchor_paths": [
+        "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/Git-2.49.0-64-bit(1).exe"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Git-2.49.0-64-bit.exe"
+      ]
+    },
+    {
+      "sha256": "60d5d0915f6c53bae23ee2007cfef763b5b047e80a37433d75c4b22fad2d6a53",
+      "size": 66536558,
+      "quarantine_count": 1,
+      "anchor_count": 1,
+      "quarantine_bytes": 66536558,
+      "anchor_paths": [
+        "archives/session_archives/Au_Archive_323_41/9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2025-04-01-20-31-33-63c9a7b564d0419394481511d95503c9.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Complete Archive 4_19 copy/9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2025-04-01-20-31-33-63c9a7b564d0419394481511d95503c9.zip"
+      ]
+    },
+    {
+      "sha256": "d248ec43774e6c40058991c5abb04ed4209eaec87e6a368e7bf2922d342216df",
+      "size": 17983773,
+      "quarantine_count": 3,
+      "anchor_count": 1,
+      "quarantine_bytes": 53951319,
+      "anchor_paths": [
+        "archives/unzipped/Complete Archive 4_19 copy/CLOUDSYNC_EXPORT_BUNDLE_FINAL.zip"
+      ],
+      "quarantine_paths": [
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/GUI_Cloudhub/GUI_Cloudhub/CLOUDSYNC_EXPORT_BUNDLE_FINAL.zip",
+        "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUI_Cloudhub/GUI_Cloudhub/CLOUDSYNC_EXPORT_BUNDLE_FINAL.zip",
+        "_entropy_quarantine/GUI_Cloudhub/CLOUDSYNC_EXPORT_BUNDLE_FINAL.zip"
+      ]
+    }
+  ],
+  "oversized_non_quarantine": [
+    {
+      "path": "archives/session_archives/Au_Archive_412_417/2.2.6b+Archives  2.zip",
+      "name": "2.2.6b+Archives  2.zip",
+      "ext": ".zip",
+      "size": 886188338,
+      "sha256": "0224c43544428ca5a6d9aa903cba04af19eede04c9491859a51ddfe31a0f0c25",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents.zip",
+      "name": "ZIPWIZ_Documents.zip",
+      "ext": ".zip",
+      "size": 708461869,
+      "sha256": "81b6d02664f6c143a44a01c133ab20e5215e7065aac40f48a8519f7456e562eb",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/ZIP_Archives/9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2026-02-05-19-12-28-22da4e485f0b487cae0716c77b02b379.zip",
+      "name": "9c9ce296c28a97c4989049becd7bc7f9b5cc9aedf8fa86e51a9f7f82e35342be-2026-02-05-19-12-28-22da4e485f0b487cae0716c77b02b379.zip",
+      "ext": ".zip",
+      "size": 527913404,
+      "sha256": "1426e23c31210e1e18120902abadfb7d5737045d458cee99908fa2491dccc14c",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs2.zip",
+      "name": "ZIPWIZ Docs2.zip",
+      "ext": ".zip",
+      "size": 504494062,
+      "sha256": "240c9ac290190438fcc19d060d41fa2d43604ca620c28dbf89d0da040066b548",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs2 2.zip",
+      "name": "ZIPWIZ Docs2 2.zip",
+      "ext": ".zip",
+      "size": 504494062,
+      "sha256": "e1a3ca3e8ea37a7d39e060222ca880e45ee1b1d2b5c44c7eebc46e0c769eccea",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/session_archives/Au_Archive_412_417/4:11:AuDev.zip",
+      "name": "4:11:AuDev.zip",
+      "ext": ".zip",
+      "size": 404114667,
+      "sha256": "4f99e30bb892b2dfea652321c2c825da502105ed818804b087471bf53af51ccc",
+      "zone": "archives"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/openai-cookbook-main.zip",
+      "name": "openai-cookbook-main.zip",
+      "ext": ".zip",
+      "size": 349252287,
+      "sha256": "92f88d6c2a6bb69faf566a56f44327972f9b4bb5122f2699a6dd3c6595c44e2f",
+      "zone": "other"
+    },
+    {
+      "path": "archives/unzipped/Complete Archive 4_19 copy/MicrosoftTeams.pkg",
+      "name": "MicrosoftTeams.pkg",
+      "ext": ".pkg",
+      "size": 310959109,
+      "sha256": "523f175c77089beff68179b8f06429467bb0ef183c9767bd75129de5733b8e20",
+      "zone": "archives"
+    },
+    {
+      "path": "projects/Streamdeck_Glyphs/Stream_Deck_6.8.1.21263(2).msi",
+      "name": "Stream_Deck_6.8.1.21263(2).msi",
+      "ext": ".msi",
+      "size": 251813888,
+      "sha256": "4fb5bad96ca847ed618501339c51947ca63f6632d004f2b828e1156aa3b614cf",
+      "zone": "other"
+    },
+    {
+      "path": "archives/session_archives/Au_Archive_62_619/GUI_Cloudhub.zip",
+      "name": "GUI_Cloudhub.zip",
+      "ext": ".zip",
+      "size": 198563270,
+      "sha256": "279b02fdaa17931b5acf139c3e8b2400269405501a31f50fb141159164527b07",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/sp158658.exe",
+      "name": "sp158658.exe",
+      "ext": ".exe",
+      "size": 183989064,
+      "sha256": "4e30ffb745e9c84a58498247ebde05a9caca239662c02437977a3e1146b78cc4",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/sp155262.exe",
+      "name": "sp155262.exe",
+      "ext": ".exe",
+      "size": 183365808,
+      "sha256": "eb6834444b7a83237bc2f15ad7a4b7a4110533ce7f410085bd18e508288eaeca",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/session_archives/Au_Archive_62_619/GitHubDesktop-x64.zip",
+      "name": "GitHubDesktop-x64.zip",
+      "ext": ".zip",
+      "size": 176276621,
+      "sha256": "e28ec4cf79fa16256e2e1338c6ba048698df776ad2aa517973c1be486bef0574",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIP Archives/GUI Zip.zip",
+      "name": "GUI Zip.zip",
+      "ext": ".zip",
+      "size": 176255217,
+      "sha256": "35c55ce6c245be4e77478546c2a346332370a399db6421e0b1e6e319025c1b97",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/Complete Archive 4_19 copy/GitHubDesktop-x64.zip",
+      "name": "GitHubDesktop-x64.zip",
+      "ext": ".zip",
+      "size": 176238162,
+      "sha256": "e013b01d34c0023ff18f211a1155364cd5251d54aca2f001bbbc39c898d22b30",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/GitHubDesktopSetup-x64.exe",
+      "name": "GitHubDesktopSetup-x64.exe",
+      "ext": ".exe",
+      "size": 172617688,
+      "sha256": "8879ce47c6385889f1230dc163cd228a040d60346831faedc2ce9b87250f6ba2",
+      "zone": "archives"
+    },
+    {
+      "path": "projects/Aurora_Project_Cloudhub_Deploy/Orion_Links/Perplexity Setup 1.1.3.exe",
+      "name": "Perplexity Setup 1.1.3.exe",
+      "ext": ".exe",
+      "size": 170700224,
+      "sha256": "0ad69798d88dc1ca4c004adb5409c23e2f96d8df4cc4a759f7244cdcf1183045",
+      "zone": "other"
+    },
+    {
+      "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/Au_Archive_62_619/Un-Dia-de-la-Finca.zip",
+      "name": "Un-Dia-de-la-Finca.zip",
+      "ext": ".zip",
+      "size": 154484619,
+      "sha256": "335b42ebcded06bae39f18ce7c3bdfd7dc225cd59d63ae8390e31e13647fba99",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/session_archives/Au_Archive_45_49/AuroraMasterArchive.zip",
+      "name": "AuroraMasterArchive.zip",
+      "ext": ".zip",
+      "size": 147883691,
+      "sha256": "194d4c24cf22ba398d64056c4790ccf3bde3a272bd32572ad4e607d636a70525",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/session_archives/Au_Archive_45_49/GUMAS+AUR Dev File Archive  6.zip",
+      "name": "GUMAS+AUR Dev File Archive  6.zip",
+      "ext": ".zip",
+      "size": 108199716,
+      "sha256": "afa473dad7cf7d9d831ff4a66a93849d8f28041f7f18f32aaab4c1e5e85befa4",
+      "zone": "archives"
+    },
+    {
+      "path": "archives/session_archives/Au_Archive_45_49/GUMAS+AUR Dev File Archive  5.zip",
+      "name": "GUMAS+AUR Dev File Archive  5.zip",
+      "ext": ".zip",
+      "size": 108198144,
+      "sha256": "8da63596b1ad5caaa9b2f503da0139b1919a9b36324bac4a3ee36a7d9939440d",
+      "zone": "archives"
+    }
+  ],
+  "top_filename_only_nonidentical_clusters": [
+    {
+      "name": "state.bin",
+      "count": 30,
+      "distinct_hash_size_count": 15,
+      "examples": [
+        {
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/adrienne_kovas/capsule/state.bin",
+          "name": "state.bin",
+          "ext": ".bin",
+          "size": 84,
+          "sha256": "d6446d907c5e5520f4b2151f2dc9cb7442c5d6e7ec1ec138d64bec4271db4534",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/qellan_vyss/capsule/state.bin",
+          "name": "state.bin",
+          "ext": ".bin",
+          "size": 84,
+          "sha256": "77d2b3efa5bc059661c471ee3d78e4035e7cf675c03222f0b54c1adfb6c4d379",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/alric_tann/capsule/state.bin",
+          "name": "state.bin",
+          "ext": ".bin",
+          "size": 84,
+          "sha256": "d6446d907c5e5520f4b2151f2dc9cb7442c5d6e7ec1ec138d64bec4271db4534",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/malrik_voska/capsule/state.bin",
+          "name": "state.bin",
+          "ext": ".bin",
+          "size": 84,
+          "sha256": "f7c9bb0fafc64760df9331d20515349b99f4f4ea2b7ad6370a7aeeae78745957",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/rhaegon_torr_kai/capsule/state.bin",
+          "name": "state.bin",
+          "ext": ".bin",
+          "size": 84,
+          "sha256": "a09d75b4bd8f823d5205ab9a56c9a8a965d81607235dfa582686ed95062b0ef6",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/vailen_rix/capsule/state.bin",
+          "name": "state.bin",
+          "ext": ".bin",
+          "size": 84,
+          "sha256": "82c9f79c082dd58d34c000636112090bcb2f26fabdf6f8cb5cc133cfc056f568",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/thessa_nai_oruun/capsule/state.bin",
+          "name": "state.bin",
+          "ext": ".bin",
+          "size": 84,
+          "sha256": "d11fb0007da606bf64865807ad8e8837ffa41da9eceba606962cdfc7eea0dacb",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/L2_CANON__2026-03-19/prime_construct_leader/capsule/state.bin",
+          "name": "state.bin",
+          "ext": ".bin",
+          "size": 84,
+          "sha256": "f4cdd47b1e1ee02f9fe70135aa31914e9595c527550142f9bb1f38bd1ca64aea",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "system.commandline.resources.dll",
+      "count": 13,
+      "distinct_hash_size_count": 13,
+      "examples": [
+        {
+          "path": "archives/unzipped/Complete Archive 4_19 copy/GitHub Desktop.app/Contents/Resources/app/git/libexec/git-core/zh-Hans/System.CommandLine.resources.dll",
+          "name": "System.CommandLine.resources.dll",
+          "ext": ".dll",
+          "size": 19360,
+          "sha256": "b964e741986ad049f2a66daffdfb4a44a1d2a63852245ee95ffc429ee6887891",
+          "zone": "archives"
+        },
+        {
+          "path": "archives/unzipped/Complete Archive 4_19 copy/GitHub Desktop.app/Contents/Resources/app/git/libexec/git-core/pl/System.CommandLine.resources.dll",
+          "name": "System.CommandLine.resources.dll",
+          "ext": ".dll",
+          "size": 19360,
+          "sha256": "5a51caed53a75d8339df176c8f5118cf609f38e73e39097c6d7edf73721678a0",
+          "zone": "archives"
+        },
+        {
+          "path": "archives/unzipped/Complete Archive 4_19 copy/GitHub Desktop.app/Contents/Resources/app/git/libexec/git-core/ja/System.CommandLine.resources.dll",
+          "name": "System.CommandLine.resources.dll",
+          "ext": ".dll",
+          "size": 19360,
+          "sha256": "8b03127957ea51ca2c4e17512d9b84fb545b6c6995047e96c7c1b674d2a3fc83",
+          "zone": "archives"
+        },
+        {
+          "path": "archives/unzipped/Complete Archive 4_19 copy/GitHub Desktop.app/Contents/Resources/app/git/libexec/git-core/it/System.CommandLine.resources.dll",
+          "name": "System.CommandLine.resources.dll",
+          "ext": ".dll",
+          "size": 19360,
+          "sha256": "291da56b4c02bded6ad0e707999370b1e6ad592b74c4691e299c8097fbe44f97",
+          "zone": "archives"
+        },
+        {
+          "path": "archives/unzipped/Complete Archive 4_19 copy/GitHub Desktop.app/Contents/Resources/app/git/libexec/git-core/cs/System.CommandLine.resources.dll",
+          "name": "System.CommandLine.resources.dll",
+          "ext": ".dll",
+          "size": 19360,
+          "sha256": "80a66497a01e9ea5be7d68ce19069719751c4b720f9774660c09ab33ac8f8e6e",
+          "zone": "archives"
+        },
+        {
+          "path": "archives/unzipped/Complete Archive 4_19 copy/GitHub Desktop.app/Contents/Resources/app/git/libexec/git-core/pt-BR/System.CommandLine.resources.dll",
+          "name": "System.CommandLine.resources.dll",
+          "ext": ".dll",
+          "size": 19360,
+          "sha256": "8fd9272f780e6d46d69ff25bf320e7a5caf5d61fbfb0c89781fbc8f64dab6596",
+          "zone": "archives"
+        },
+        {
+          "path": "archives/unzipped/Complete Archive 4_19 copy/GitHub Desktop.app/Contents/Resources/app/git/libexec/git-core/de/System.CommandLine.resources.dll",
+          "name": "System.CommandLine.resources.dll",
+          "ext": ".dll",
+          "size": 19360,
+          "sha256": "3dfa07de8267c771be47a10217e2eafd0e57e68933c536a239b65284dc6f09da",
+          "zone": "archives"
+        },
+        {
+          "path": "archives/unzipped/Complete Archive 4_19 copy/GitHub Desktop.app/Contents/Resources/app/git/libexec/git-core/fr/System.CommandLine.resources.dll",
+          "name": "System.CommandLine.resources.dll",
+          "ext": ".dll",
+          "size": 19360,
+          "sha256": "e52478e38b6ac9ecd85999aa5ad181097c41833c9adba62b87bd9fa443b2a8ea",
+          "zone": "archives"
+        }
+      ]
+    },
+    {
+      "name": "githubdesktop-x64.zip",
+      "count": 9,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "archives/session_archives/Au_Archive_62_619/GitHubDesktop-x64.zip",
+          "name": "GitHubDesktop-x64.zip",
+          "ext": ".zip",
+          "size": 176276621,
+          "sha256": "e28ec4cf79fa16256e2e1338c6ba048698df776ad2aa517973c1be486bef0574",
+          "zone": "archives"
+        },
+        {
+          "path": "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/Au_Archive_62_619/GitHubDesktop-x64.zip",
+          "name": "GitHubDesktop-x64.zip",
+          "ext": ".zip",
+          "size": 176276621,
+          "sha256": "e28ec4cf79fa16256e2e1338c6ba048698df776ad2aa517973c1be486bef0574",
+          "zone": "_entropy_quarantine"
+        },
+        {
+          "path": "archives/unzipped/Complete Archive 4_19 copy/GitHubDesktop-x64.zip",
+          "name": "GitHubDesktop-x64.zip",
+          "ext": ".zip",
+          "size": 176238162,
+          "sha256": "e013b01d34c0023ff18f211a1155364cd5251d54aca2f001bbbc39c898d22b30",
+          "zone": "archives"
+        },
+        {
+          "path": "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/GUI_Cloudhub/GitHubDesktop-x64.zip",
+          "name": "GitHubDesktop-x64.zip",
+          "ext": ".zip",
+          "size": 176238162,
+          "sha256": "e013b01d34c0023ff18f211a1155364cd5251d54aca2f001bbbc39c898d22b30",
+          "zone": "_entropy_quarantine"
+        },
+        {
+          "path": "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/GUI/GitHubDesktop-x64.zip",
+          "name": "GitHubDesktop-x64.zip",
+          "ext": ".zip",
+          "size": 176238162,
+          "sha256": "e013b01d34c0023ff18f211a1155364cd5251d54aca2f001bbbc39c898d22b30",
+          "zone": "_entropy_quarantine"
+        },
+        {
+          "path": "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/GUI_Cloudhub/GUI_Cloudhub/GitHubDesktop-x64.zip",
+          "name": "GitHubDesktop-x64.zip",
+          "ext": ".zip",
+          "size": 176238162,
+          "sha256": "e013b01d34c0023ff18f211a1155364cd5251d54aca2f001bbbc39c898d22b30",
+          "zone": "_entropy_quarantine"
+        },
+        {
+          "path": "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUI/GitHubDesktop-x64.zip",
+          "name": "GitHubDesktop-x64.zip",
+          "ext": ".zip",
+          "size": 176238162,
+          "sha256": "e013b01d34c0023ff18f211a1155364cd5251d54aca2f001bbbc39c898d22b30",
+          "zone": "_entropy_quarantine"
+        },
+        {
+          "path": "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUI_Cloudhub/GUI_Cloudhub/GitHubDesktop-x64.zip",
+          "name": "GitHubDesktop-x64.zip",
+          "ext": ".zip",
+          "size": 176238162,
+          "sha256": "e013b01d34c0023ff18f211a1155364cd5251d54aca2f001bbbc39c898d22b30",
+          "zone": "_entropy_quarantine"
+        }
+      ]
+    },
+    {
+      "name": "shot-0.png",
+      "count": 7,
+      "distinct_hash_size_count": 7,
+      "examples": [
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-combat/shot-0.png",
+          "name": "shot-0.png",
+          "ext": ".png",
+          "size": 167061,
+          "sha256": "ee0f825a3cc569517c28e83b1f0599992ff1ec1af9289c53bbc2a7cb91f5d2a6",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-match-v1/shot-0.png",
+          "name": "shot-0.png",
+          "ext": ".png",
+          "size": 161819,
+          "sha256": "02627cdef7c28a347759c56da2f775803702c7cf1685d9f8bb5efca5c279d242",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-controls/shot-0.png",
+          "name": "shot-0.png",
+          "ext": ".png",
+          "size": 158610,
+          "sha256": "c16cb05f876f2c2d6a65390326af3af50f9af145b589b33aee751af3eac7881f",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-guard-v2/shot-0.png",
+          "name": "shot-0.png",
+          "ext": ".png",
+          "size": 158155,
+          "sha256": "06943748d4dadd909cb8d229058fba1326d1ba062ae9b9b4df22a300de3e6dbf",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-guard/shot-0.png",
+          "name": "shot-0.png",
+          "ext": ".png",
+          "size": 158139,
+          "sha256": "822a7fbc680567d4f0a0896b72c259ef10c8916a0bf388985a013687759ce84d",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game/shot-0.png",
+          "name": "shot-0.png",
+          "ext": ".png",
+          "size": 155546,
+          "sha256": "70b20faf1fa97808a869680f7e78c8a1c23ef34d71cbde2bafb11f3a1d1d1535",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-dash/shot-0.png",
+          "name": "shot-0.png",
+          "ext": ".png",
+          "size": 151955,
+          "sha256": "ee6e6ae5e5f4f0c9073accb0e2411d2dc0a689f7a83b2bf217038e7824ab1b12",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "project_echoes_face_deepquery.zip",
+      "count": 6,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIP Archives/PROJECT_ECHOES_FACE_DEEPQUERY.zip",
+          "name": "PROJECT_ECHOES_FACE_DEEPQUERY.zip",
+          "ext": ".zip",
+          "size": 2789,
+          "sha256": "a458afeead3fe80caba6b4b5723905655c43f80928c0680a060af028fa8b48c0",
+          "zone": "archives"
+        },
+        {
+          "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUI/PROJECT_ECHOES_FACE_DEEPQUERY.zip",
+          "name": "PROJECT_ECHOES_FACE_DEEPQUERY.zip",
+          "ext": ".zip",
+          "size": 2789,
+          "sha256": "621457345d7738439015f16fad8bc88d80b9d93a786a8830be8b883568896b2d",
+          "zone": "archives"
+        },
+        {
+          "path": "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/PROJECT_ECHOES_FACE_DEEPQUERY.zip",
+          "name": "PROJECT_ECHOES_FACE_DEEPQUERY.zip",
+          "ext": ".zip",
+          "size": 2789,
+          "sha256": "a458afeead3fe80caba6b4b5723905655c43f80928c0680a060af028fa8b48c0",
+          "zone": "_entropy_quarantine"
+        },
+        {
+          "path": "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/LUMENNODE_PUBLIC_AGENT_DEPLOY_v1.0/PROJECT_ECHOES_FACE_DEEPQUERY.zip",
+          "name": "PROJECT_ECHOES_FACE_DEEPQUERY.zip",
+          "ext": ".zip",
+          "size": 2789,
+          "sha256": "621457345d7738439015f16fad8bc88d80b9d93a786a8830be8b883568896b2d",
+          "zone": "_entropy_quarantine"
+        },
+        {
+          "path": "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/GUI/PROJECT_ECHOES_FACE_DEEPQUERY.zip",
+          "name": "PROJECT_ECHOES_FACE_DEEPQUERY.zip",
+          "ext": ".zip",
+          "size": 2789,
+          "sha256": "621457345d7738439015f16fad8bc88d80b9d93a786a8830be8b883568896b2d",
+          "zone": "_entropy_quarantine"
+        },
+        {
+          "path": "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/LUMENNODE_PUBLIC_AGENT_DEPLOY_v1.0/PROJECT_ECHOES_FACE_DEEPQUERY.zip",
+          "name": "PROJECT_ECHOES_FACE_DEEPQUERY.zip",
+          "ext": ".zip",
+          "size": 2789,
+          "sha256": "621457345d7738439015f16fad8bc88d80b9d93a786a8830be8b883568896b2d",
+          "zone": "_entropy_quarantine"
+        }
+      ]
+    },
+    {
+      "name": "exported-assets.zip",
+      "count": 4,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "projects/Perplexity_Research/Perplexity_Exported_Assets/exported-assets.zip",
+          "name": "exported-assets.zip",
+          "ext": ".zip",
+          "size": 568297,
+          "sha256": "1e735c9c9269fb27cf933738d9c787d65d71d3395ede31046c53944648f59da3",
+          "zone": "other"
+        },
+        {
+          "path": "archives/session_archives/Au_Archive_62_619/exported-assets.zip",
+          "name": "exported-assets.zip",
+          "ext": ".zip",
+          "size": 45954,
+          "sha256": "2d5ca0427360cef12cf93b7f89fc06a6a57ea6c36fad56ec3faa5678293711f1",
+          "zone": "archives"
+        },
+        {
+          "path": "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/exported-assets.zip",
+          "name": "exported-assets.zip",
+          "ext": ".zip",
+          "size": 45954,
+          "sha256": "2d5ca0427360cef12cf93b7f89fc06a6a57ea6c36fad56ec3faa5678293711f1",
+          "zone": "_entropy_quarantine"
+        },
+        {
+          "path": "_entropy_quarantine/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/Au_Archive_62_619/exported-assets.zip",
+          "name": "exported-assets.zip",
+          "ext": ".zip",
+          "size": 45954,
+          "sha256": "2d5ca0427360cef12cf93b7f89fc06a6a57ea6c36fad56ec3faa5678293711f1",
+          "zone": "_entropy_quarantine"
+        }
+      ]
+    },
+    {
+      "name": "shot-2.png",
+      "count": 4,
+      "distinct_hash_size_count": 4,
+      "examples": [
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-match-v1/shot-2.png",
+          "name": "shot-2.png",
+          "ext": ".png",
+          "size": 166235,
+          "sha256": "a2af64dbc102b8f4d3edd4dae389ecc3b429bce2c3ec838cbe093327214235e4",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game/shot-2.png",
+          "name": "shot-2.png",
+          "ext": ".png",
+          "size": 155460,
+          "sha256": "11e94984605a999bada5ae9d747b887d7789b98e7619c32f3d6ea547030e02c4",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-combat/shot-2.png",
+          "name": "shot-2.png",
+          "ext": ".png",
+          "size": 154777,
+          "sha256": "0599d139675982df0a107e37c4959aeebb7b44783b8ac4d8127f981b0d6a7761",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-controls/shot-2.png",
+          "name": "shot-2.png",
+          "ext": ".png",
+          "size": 137151,
+          "sha256": "b6df4635e298634c9bb8950472b3d0e0e702548163193f5ec3141749cce4b0a9",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "shot-1.png",
+      "count": 4,
+      "distinct_hash_size_count": 4,
+      "examples": [
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-combat/shot-1.png",
+          "name": "shot-1.png",
+          "ext": ".png",
+          "size": 165522,
+          "sha256": "9e31cbad6b77b095bdb69b0dcac2cec007002a377259102ceef9b2dc7c2104f1",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game/shot-1.png",
+          "name": "shot-1.png",
+          "ext": ".png",
+          "size": 159081,
+          "sha256": "2afac975632493224ce36f47bf11c26e71882b18bc8fc1864aeb96016d76601b",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-controls/shot-1.png",
+          "name": "shot-1.png",
+          "ext": ".png",
+          "size": 156818,
+          "sha256": "4eeadd847a313bdb3e146684fcc1ce97c110fd0496e5f0abccc1759ef4e60101",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-match-v1/shot-1.png",
+          "name": "shot-1.png",
+          "ext": ".png",
+          "size": 154998,
+          "sha256": "cd1fb5219772966c3d04d2d00c91f04527ed5be9ede5236a159aec2e96c7f4b1",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "comprehensive guide to integrating chatgpt workflo.pdf",
+      "count": 3,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/Comprehensive Guide to Integrating ChatGPT Workflo.pdf",
+          "name": "Comprehensive Guide to Integrating ChatGPT Workflo.pdf",
+          "ext": ".pdf",
+          "size": 15120322,
+          "sha256": "20e19103d37bb93abddd0ada359bb2048a22024fd90ae486689fb1e5fad12e5e",
+          "zone": "archives"
+        },
+        {
+          "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/Research (GUMAS)/Comprehensive Guide to Integrating ChatGPT Workflo.pdf",
+          "name": "Comprehensive Guide to Integrating ChatGPT Workflo.pdf",
+          "ext": ".pdf",
+          "size": 4504132,
+          "sha256": "38c2b28eb2b03d37b02938f6f30b8e0590f12469a250b8bd1d406bccee5b3a48",
+          "zone": "archives"
+        },
+        {
+          "path": "archives/session_archives/Au_Archive_62_619/Comprehensive Guide to Integrating ChatGPT Workflo.pdf",
+          "name": "Comprehensive Guide to Integrating ChatGPT Workflo.pdf",
+          "ext": ".pdf",
+          "size": 4504132,
+          "sha256": "38c2b28eb2b03d37b02938f6f30b8e0590f12469a250b8bd1d406bccee5b3a48",
+          "zone": "archives"
+        }
+      ]
+    },
+    {
+      "name": "aurora-cloudbank-symbolic-main.zip",
+      "count": 3,
+      "distinct_hash_size_count": 3,
+      "examples": [
+        {
+          "path": "archives/session_archives/Au_Archive_620_623/aurora-cloudbank-symbolic-main.zip",
+          "name": "aurora-cloudbank-symbolic-main.zip",
+          "ext": ".zip",
+          "size": 11370643,
+          "sha256": "1e36545041a14b8423c6b426a37e0233973c315df594462b509165e90f84ec15",
+          "zone": "archives"
+        },
+        {
+          "path": "archives/bundles/aurora-cloudbank-symbolic-main.zip",
+          "name": "aurora-cloudbank-symbolic-main.zip",
+          "ext": ".zip",
+          "size": 7748579,
+          "sha256": "540849c077439ac0c752a8adf2ddaf6192197c384bf227811773b45b80e52bda",
+          "zone": "archives"
+        },
+        {
+          "path": "projects/Aurora_New_11_9/06_ARCHIVES/Cloudbank_Implementations/aurora-cloudbank-symbolic-main.zip",
+          "name": "aurora-cloudbank-symbolic-main.zip",
+          "ext": ".zip",
+          "size": 7435376,
+          "sha256": "78def092060a090550fda5b408cdde47a7317ce4cb32d1c9a8244787303def06",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "shot-3.png",
+      "count": 3,
+      "distinct_hash_size_count": 3,
+      "examples": [
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-match-v1/shot-3.png",
+          "name": "shot-3.png",
+          "ext": ".png",
+          "size": 164627,
+          "sha256": "64a780a9ef1ad5ff440df661aeb6211b07b59a93f620269f1e982e76b2346d49",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-controls/shot-3.png",
+          "name": "shot-3.png",
+          "ext": ".png",
+          "size": 164281,
+          "sha256": "85a37aa3cf63a605e3e3a3c67af2c8d5f0ad15cf9a663f6b0d76858fd4d47ac9",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-combat/shot-3.png",
+          "name": "shot-3.png",
+          "ext": ".png",
+          "size": 155801,
+          "sha256": "b0a7da0d9d8c44b073b6f06ba70d6dafd9e49bee0a1c0e21d3aa0966d2c2d20e",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "gumas_unified_registry.zip",
+      "count": 3,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "_entropy_quarantine/Au_Archive_323_41/GUMAS_Unified_Registry.zip",
+          "name": "GUMAS_Unified_Registry.zip",
+          "ext": ".zip",
+          "size": 11872,
+          "sha256": "a6f23901a84f3eaed975e66ded9eba1ae31e41425caf82226ae6d9d4416a051d",
+          "zone": "_entropy_quarantine"
+        },
+        {
+          "path": "_entropy_quarantine/Complete Archive 4_19 copy/GUMAS_Unified_Registry.zip",
+          "name": "GUMAS_Unified_Registry.zip",
+          "ext": ".zip",
+          "size": 11872,
+          "sha256": "a6f23901a84f3eaed975e66ded9eba1ae31e41425caf82226ae6d9d4416a051d",
+          "zone": "_entropy_quarantine"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/GUMAS_Unified_Registry.zip",
+          "name": "GUMAS_Unified_Registry.zip",
+          "ext": ".zip",
+          "size": 6556,
+          "sha256": "dc93efd982ac841ad3de055607d4d1dd41b748a6e3719de0e4fbfed40d5962b3",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "gumas_sim_2.0.zip",
+      "count": 2,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "archives/sim_archives/GUMAS_SIM_2.0.zip",
+          "name": "GUMAS_SIM_2.0.zip",
+          "ext": ".zip",
+          "size": 13980784,
+          "sha256": "1f9dae31d916e8d3815ca465177007f5359544bf9ade6e23a5bd8a123ff7ed23",
+          "zone": "archives"
+        },
+        {
+          "path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/GUMAS_SIM_2.0.zip",
+          "name": "GUMAS_SIM_2.0.zip",
+          "ext": ".zip",
+          "size": 102105,
+          "sha256": "c6a1b4bc23507431b2cc20de91e7afe5934b7b57218e2bec15a5b299f0c8c537",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "zipwiz archive.zip",
+      "count": 2,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/ZIPWIZ Archive/ZipWiz Archive.zip",
+          "name": "ZipWiz Archive.zip",
+          "ext": ".zip",
+          "size": 3584849,
+          "sha256": "277a4b201c3db220d1e9e22090d14e13bdaa119e35f7baa872928776ba250b10",
+          "zone": "archives"
+        },
+        {
+          "path": "projects/Aurora_Project_Cloudhub_Deploy/ZipWiz Archive.zip",
+          "name": "ZipWiz Archive.zip",
+          "ext": ".zip",
+          "size": 3524363,
+          "sha256": "ee74d535bc30a8228733513f649de6d93e3394dbfea036096d8a6153e497463b",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "canonrec.zip",
+      "count": 2,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "GUMAS_SIM_2.5/CanonRec.zip",
+          "name": "CanonRec.zip",
+          "ext": ".zip",
+          "size": 696407,
+          "sha256": "16fd6115c714d15982fbb67ade93a10e8dfe713621f4a194b20ff68daef68898",
+          "zone": "other"
+        },
+        {
+          "path": "archives/bundles/CanonRec.zip",
+          "name": "CanonRec.zip",
+          "ext": ".zip",
+          "size": 33222,
+          "sha256": "587974c1d29621af731bc90bb016c76fd4ce3afe7367244e642e87107ad93fd4",
+          "zone": "archives"
+        }
+      ]
+    },
+    {
+      "name": "firefox.pdf",
+      "count": 2,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "projects/Aurora_Project_Cloudhub_Deploy/Orion_Links/Firefox.pdf",
+          "name": "Firefox.pdf",
+          "ext": ".pdf",
+          "size": 644675,
+          "sha256": "218e3ac040f2bfc02dd74acdf87b32311144946c950e6ca5223e16d15787d7c0",
+          "zone": "other"
+        },
+        {
+          "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/TMMS and +/Firefox.pdf",
+          "name": "Firefox.pdf",
+          "ext": ".pdf",
+          "size": 68299,
+          "sha256": "646ad86d45da483d7418d5d0c4e199c571cb49aa2bd86a08681131fa4a26a49f",
+          "zone": "archives"
+        }
+      ]
+    },
+    {
+      "name": "shot-6.png",
+      "count": 2,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-controls/shot-6.png",
+          "name": "shot-6.png",
+          "ext": ".png",
+          "size": 168647,
+          "sha256": "90a73b2e73a4db57c37ea56e8e98d3905583e04480cd8fda1246eaf4f51a8fae",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-match-v1/shot-6.png",
+          "name": "shot-6.png",
+          "ext": ".png",
+          "size": 160369,
+          "sha256": "23a28ac96c33bacca4623810a204d762d613925484b4ddfbca98c67632d0224d",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "shot-7.png",
+      "count": 2,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-controls/shot-7.png",
+          "name": "shot-7.png",
+          "ext": ".png",
+          "size": 159795,
+          "sha256": "818a7e7e85fb845806b68c0e35ab54f32064b7717a20639e006ae6ea00669af6",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-match-v1/shot-7.png",
+          "name": "shot-7.png",
+          "ext": ".png",
+          "size": 159283,
+          "sha256": "844015b0d8002675e53dbacd9324a1cdba67fcf5e96b8e9a7b22ad06e27e958e",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "shot-4.png",
+      "count": 2,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-match-v1/shot-4.png",
+          "name": "shot-4.png",
+          "ext": ".png",
+          "size": 158404,
+          "sha256": "e0de8499e7f22e4471b92475feb6109b7376b5ca0b46dce58069f00b8de3ded2",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-controls/shot-4.png",
+          "name": "shot-4.png",
+          "ext": ".png",
+          "size": 156981,
+          "sha256": "c9cb39852851b8f0cf32805a23ac42190de0e3d8734b7f15c4fb0b5d627ffcaf",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "shot-5.png",
+      "count": 2,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-controls/shot-5.png",
+          "name": "shot-5.png",
+          "ext": ".png",
+          "size": 158303,
+          "sha256": "212f6199a48d73b9b71410096b4af436d803dd448fd8810a42bf237925f8840a",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/DuelSim/archive/data_exports/output_snapshot__2026-03-04/web-game-match-v1/shot-5.png",
+          "name": "shot-5.png",
+          "ext": ".png",
+          "size": 153063,
+          "sha256": "bf64a2977cdee1758c2a02f60f788f8f3ff3a90b6395b07e11d2da754150753c",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "marshals_sentinels.zip",
+      "count": 2,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "projects/GUMAS_SIM_2.0/06_ARCHIVES/_REDUNDANT_FILES_ARCHIVED/02_FORMAT_DUPLICATES/Project_Files_GUMAS2_0/Marshals_Sentinels.zip",
+          "name": "Marshals_Sentinels.zip",
+          "ext": ".zip",
+          "size": 31085,
+          "sha256": "f6599175c67fdf1e98508cbd4f155df650fa86d82a77e52ed354eb3d1d2a0480",
+          "zone": "other"
+        },
+        {
+          "path": "projects/GUMAS_SIM_2.0/03_SIMULATION/Entity_Profiles/Marshals_Sentinels/Marshals_Sentinels.zip",
+          "name": "Marshals_Sentinels.zip",
+          "ext": ".zip",
+          "size": 11049,
+          "sha256": "6c6dfe30aca32ab4fbe0c78222f89377fb19eb51a181039c070305733eae7a67",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "memory.db",
+      "count": 2,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.gitwiz/memory.db",
+          "name": "memory.db",
+          "ext": ".db",
+          "size": 28672,
+          "sha256": "74503aaff20d0f6a9d0947cdc849669ac7ed51305e16300d99d99de2194a19ab",
+          "zone": "other"
+        },
+        {
+          "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/scripts/.gitwiz/memory.db",
+          "name": "memory.db",
+          "ext": ".db",
+          "size": 28672,
+          "sha256": "038d2b1098ee8970ed459baeae07fbc9e8bc5b50096604208497025e860a82cc",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "un-dia-en-la-finca.zip",
+      "count": 2,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "projects/exported-assets \u2014 LaFinca/exported-assets (5)/un-dia-en-la-finca.zip",
+          "name": "un-dia-en-la-finca.zip",
+          "ext": ".zip",
+          "size": 16472,
+          "sha256": "810ccdbe6b596431842a9199130cecd3c80b1be93115a88f2c1e892147848817",
+          "zone": "other"
+        },
+        {
+          "path": "projects/exported-assets \u2014 LaFinca/LaFinca1/un-dia-en-la-finca.zip",
+          "name": "un-dia-en-la-finca.zip",
+          "ext": ".zip",
+          "size": 14964,
+          "sha256": "098fbbbb63217dfc2c7b3f14917bc448000b8ed59885e20254cafa979c5ace7b",
+          "zone": "other"
+        }
+      ]
+    },
+    {
+      "name": "t1_replay_bundle_001.zip",
+      "count": 2,
+      "distinct_hash_size_count": 2,
+      "examples": [
+        {
+          "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/exports/T1_replay_bundle_001.zip",
+          "name": "T1_replay_bundle_001.zip",
+          "ext": ".zip",
+          "size": 127,
+          "sha256": "4e5d278d55c13f60c2a7cb309b29224f6199568b81fb4b3b1f6bc8ebb3476c52",
+          "zone": "other"
+        },
+        {
+          "path": "archives/unzipped/Complete Archive 4_19 copy/exports/T1_replay_bundle_001.zip",
+          "name": "T1_replay_bundle_001.zip",
+          "ext": ".zip",
+          "size": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zone": "archives"
+        }
+      ]
+    }
+  ],
+  "recommendation": "Move reviewed _entropy_quarantine contents to archives/reviewed_quarantine_delete_candidates/2026-05-03/ only; do not delete."
+}

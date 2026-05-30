@@ -1,0 +1,351 @@
+{
+  "schema_version": 1,
+  "id": "aurora-dev-toolkit",
+  "name": "Aurora Dev Toolkit",
+  "scope": "Aurora root control plane plus registered nested repositories",
+  "authority_order": [
+    "Committed canonical files in the target repo",
+    "Machine-readable manifests, registries, schemas, trust anchors, and validation artifacts",
+    "Deterministic reports and receipts",
+    "Human-facing docs",
+    "Conversational context"
+  ],
+  "package_manifest_names": [
+    ".node-version",
+    ".pre-commit-config.yaml",
+    ".python-version",
+    ".tool-versions",
+    "Brewfile",
+    "Cargo.toml",
+    "Dockerfile",
+    "Makefile",
+    "Pipfile",
+    "Taskfile.yml",
+    "devcontainer.json",
+    "docker-compose.yml",
+    "go.mod",
+    "mise.toml",
+    "package-lock.json",
+    "package.json",
+    "pnpm-lock.yaml",
+    "poetry.lock",
+    "pyproject.toml",
+    "requirements-dev.txt",
+    "requirements.txt",
+    "setup.cfg",
+    "setup.py",
+    "uv.lock",
+    "yarn.lock"
+  ],
+  "prune_directory_names": [
+    ".codex_skill_edits",
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".venv",
+    "__pycache__",
+    "_entropy_quarantine",
+    "_staging",
+    "archives",
+    "node_modules"
+  ],
+  "toolchain": [
+    {
+      "id": "git",
+      "category": "source-control",
+      "required": true,
+      "command": ["git", "--version"],
+      "impact": "Required for root and nested repo boundary work."
+    },
+    {
+      "id": "gh",
+      "category": "source-control",
+      "required": true,
+      "command": ["gh", "--version"],
+      "impact": "Required for GitHub PR, issue, and CI maintenance."
+    },
+    {
+      "id": "python3",
+      "category": "python",
+      "required": true,
+      "command": ["python3", "--version"],
+      "impact": "Required for root verifier, workspace scanners, Codex skill scripts, and most automation."
+    },
+    {
+      "id": "pip",
+      "category": "python",
+      "required": true,
+      "command": ["python3", "-m", "pip", "--version"],
+      "impact": "Required for minimal bootstrap installs when uv is unavailable."
+    },
+    {
+      "id": "uv",
+      "category": "python",
+      "required": true,
+      "command": ["uv", "--version"],
+      "impact": "Preferred fast Python environment and package workflow."
+    },
+    {
+      "id": "node",
+      "category": "javascript",
+      "required": true,
+      "command": ["node", "--version"],
+      "impact": "Required for web apps, ChatGPT apps, dashboards, and frontend tooling."
+    },
+    {
+      "id": "npm",
+      "category": "javascript",
+      "required": true,
+      "command": ["npm", "--version"],
+      "impact": "Required for existing package-lock based repos and npm scripts."
+    },
+    {
+      "id": "corepack",
+      "category": "javascript",
+      "required": true,
+      "command": ["corepack", "--version"],
+      "impact": "Required to activate pinned pnpm or yarn versions without global drift."
+    },
+    {
+      "id": "sqlite3",
+      "category": "local-data",
+      "required": true,
+      "command": ["sqlite3", "--version"],
+      "impact": "Useful for local indexes, receipts, and lightweight metadata stores."
+    },
+    {
+      "id": "pre-commit",
+      "category": "quality",
+      "required": false,
+      "command": ["pre-commit", "--version"],
+      "impact": "Recommended for running root hook checks outside Git commit flow."
+    },
+    {
+      "id": "ruff",
+      "category": "quality",
+      "required": false,
+      "command": ["ruff", "--version"],
+      "impact": "Recommended Python lint and formatting baseline for future code-heavy packages."
+    },
+    {
+      "id": "mypy",
+      "category": "quality",
+      "required": false,
+      "command": ["mypy", "--version"],
+      "impact": "Recommended static type check lane for larger Python modules."
+    },
+    {
+      "id": "pipx",
+      "category": "python",
+      "required": false,
+      "command": ["pipx", "--version"],
+      "impact": "Recommended isolated installer for Python CLI tools."
+    },
+    {
+      "id": "pnpm",
+      "category": "javascript",
+      "required": false,
+      "command": ["pnpm", "--version"],
+      "impact": "Recommended package manager for large JS workspaces when activated through corepack."
+    },
+    {
+      "id": "docker",
+      "category": "container",
+      "required": false,
+      "command": ["docker", "--version"],
+      "impact": "Recommended for devcontainers, service stacks, and reproducible app builds."
+    },
+    {
+      "id": "brew",
+      "category": "macos-package-manager",
+      "required": false,
+      "command": ["brew", "--version"],
+      "impact": "Recommended Mac system package manager if machine-level automatic updates are desired."
+    },
+    {
+      "id": "xcodebuild",
+      "category": "apple-platforms",
+      "required": false,
+      "command": ["xcodebuild", "-version"],
+      "impact": "Recommended for iOS and full macOS app build automation."
+    },
+    {
+      "id": "rust",
+      "category": "systems",
+      "required": false,
+      "command": ["rustc", "--version"],
+      "impact": "Optional for high-performance local tools and native extensions."
+    },
+    {
+      "id": "go",
+      "category": "systems",
+      "required": false,
+      "command": ["go", "version"],
+      "impact": "Optional for portable developer services and CLIs."
+    }
+  ],
+  "package_policy": {
+    "default_install_mode": "approval-gated",
+    "default_update_mode": "read-only drift detection with explicit apply step",
+    "python": {
+      "preferred_manager": "uv",
+      "global_cli_manager": "pipx",
+      "recommended_dev_packages": [
+        "pytest",
+        "pyyaml",
+        "jsonschema",
+        "pre-commit",
+        "ruff",
+        "mypy"
+      ]
+    },
+    "javascript": {
+      "preferred_manager": "npm for existing package-lock repos; corepack-pinned pnpm for new multi-package workspaces",
+      "recommended_dev_packages": [
+        "typescript",
+        "vite",
+        "tsx",
+        "eslint",
+        "prettier",
+        "@playwright/test"
+      ]
+    },
+    "macos": {
+      "preferred_manager": "Homebrew when approved and installed",
+      "recommended_packages": [
+        "git",
+        "gh",
+        "uv",
+        "node",
+        "python@3.12",
+        "pre-commit",
+        "ruff",
+        "pipx"
+      ]
+    }
+  },
+  "install_recipes": [
+    {
+      "tool_id": "pre-commit",
+      "lane": "python-user",
+      "manager": "uv-tool",
+      "requires_tools": ["uv"],
+      "approval_required": true,
+      "install_command": ["uv", "tool", "install", "pre-commit"],
+      "update_command": ["uv", "tool", "upgrade", "pre-commit"],
+      "notes": "Installs pre-commit as an isolated user-space CLI."
+    },
+    {
+      "tool_id": "ruff",
+      "lane": "python-user",
+      "manager": "uv-tool",
+      "requires_tools": ["uv"],
+      "approval_required": true,
+      "install_command": ["uv", "tool", "install", "ruff"],
+      "update_command": ["uv", "tool", "upgrade", "ruff"],
+      "notes": "Installs Ruff as an isolated user-space CLI."
+    },
+    {
+      "tool_id": "mypy",
+      "lane": "python-user",
+      "manager": "uv-tool",
+      "requires_tools": ["uv"],
+      "approval_required": true,
+      "install_command": ["uv", "tool", "install", "mypy"],
+      "update_command": ["uv", "tool", "upgrade", "mypy"],
+      "notes": "Installs mypy as an isolated user-space CLI."
+    },
+    {
+      "tool_id": "pipx",
+      "lane": "python-user",
+      "manager": "uv-tool",
+      "requires_tools": ["uv"],
+      "approval_required": true,
+      "install_command": ["uv", "tool", "install", "pipx"],
+      "update_command": ["uv", "tool", "upgrade", "pipx"],
+      "notes": "Installs pipx through uv so Python CLI tools can later be managed independently if desired."
+    },
+    {
+      "tool_id": "pnpm",
+      "lane": "javascript-user",
+      "manager": "corepack",
+      "requires_tools": ["corepack", "node"],
+      "approval_required": true,
+      "install_command": ["corepack", "enable", "pnpm"],
+      "update_command": ["corepack", "prepare", "pnpm@latest", "--activate"],
+      "notes": "Enables the pnpm shim through Corepack; update uses corepack prepare pnpm@latest --activate."
+    },
+    {
+      "tool_id": "brew",
+      "lane": "macos-system",
+      "manager": "manual",
+      "requires_tools": [],
+      "approval_required": true,
+      "install_command": [],
+      "update_command": ["brew", "update"],
+      "notes": "Homebrew install is a system-level operation and should be approved separately before running the official installer."
+    },
+    {
+      "tool_id": "docker",
+      "lane": "macos-system",
+      "manager": "manual",
+      "requires_tools": ["brew"],
+      "approval_required": true,
+      "install_command": ["brew", "install", "--cask", "docker"],
+      "update_command": ["brew", "upgrade", "--cask", "docker"],
+      "notes": "Docker Desktop requires a system package manager or manual app install."
+    },
+    {
+      "tool_id": "xcodebuild",
+      "lane": "apple-platforms",
+      "manager": "manual",
+      "requires_tools": [],
+      "approval_required": true,
+      "install_command": [],
+      "update_command": [],
+      "notes": "Full Xcode must be installed and selected with xcode-select before iOS or full macOS build automation is complete."
+    },
+    {
+      "tool_id": "rust",
+      "lane": "systems",
+      "manager": "brew",
+      "requires_tools": ["brew"],
+      "approval_required": true,
+      "install_command": ["brew", "install", "rust"],
+      "update_command": ["brew", "upgrade", "rust"],
+      "notes": "Installs Rust through Homebrew once Homebrew exists."
+    },
+    {
+      "tool_id": "go",
+      "lane": "systems",
+      "manager": "brew",
+      "requires_tools": ["brew"],
+      "approval_required": true,
+      "install_command": ["brew", "install", "go"],
+      "update_command": ["brew", "upgrade", "go"],
+      "notes": "Installs Go through Homebrew once Homebrew exists."
+    }
+  ],
+  "update_lanes": [
+    {
+      "id": "devkit-watch",
+      "automation_id": "aurora-dev-toolkit-watch",
+      "mode": "read-only",
+      "cadence": "weekly",
+      "purpose": "Report missing tools, stale package manifests, paused automations, and package manager drift."
+    },
+    {
+      "id": "devkit-apply",
+      "automation_id": "aurora-dev-toolkit-user-space-update",
+      "mode": "approval-gated mutation",
+      "purpose": "Automatically upgrade only approved user-space tools; system-level packages remain explicit-approval work."
+    }
+  ],
+  "validation_commands": [
+    "python3 tools/aurora_devkit.py --persist-report",
+    "python3 tools/aurora_devkit.py --install-plan --persist-install-plan",
+    "python3 tools/workspace_verify.py",
+    "python3 -m pytest tests/test_aurora_devkit.py -q"
+  ]
+}
