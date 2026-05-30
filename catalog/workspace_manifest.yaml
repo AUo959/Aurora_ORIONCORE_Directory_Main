@@ -1,4 +1,4 @@
-generated_at: '2026-05-30T03:48:39Z'
+generated_at: '2026-05-30T21:27:44Z'
 root: .
 logical_taxonomy:
 - repos
@@ -114,6 +114,17 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
+- id: gitleaks
+  kind: intake_file
+  current_path: .gitleaks.toml
+  logical_zone: intake
+  planned_path: intake/.gitleaks.toml
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: gitwiz
   kind: cache_or_local_artifact
   current_path: .gitwiz

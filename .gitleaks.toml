@@ -1,0 +1,59 @@
+# gitleaks configuration for Aurora / ORIONCORE root repo
+# Suppresses known false positives confirmed during the 2026-05-30 triage.
+# Add new allowlist entries here when a finding is verified as non-live.
+# Do NOT add entries to suppress unreviewed findings — triage first.
+
+title = "Aurora ORIONCORE gitleaks config"
+
+[extend]
+# Use the upstream default ruleset as the base
+useDefault = true
+
+[allowlist]
+description = "Confirmed false positives from 2026-05-30 triage"
+
+regexes = [
+  # Example/placeholder AES key (sequential hex digits — not a real key)
+  "0123456789abcdef0123456789abcdef",
+
+  # k8s configmap placeholder values (decode to "placeholder-*-key")
+  "cGxhY2Vob2xkZXItYW50aHJvcGljLWtleQ==",
+  "cGxhY2Vob2xkZXItb3BlbmFpLWtleQ==",
+  "Y3NyZi1zZWNyZXQta2V5LXBsYWNlaG9sZGVy",
+  "and0LXNlY3JldC1rZXktcGxhY2Vob2xkZXI=",
+
+  # Stripe test key fixture (sk_test_ prefix, not sk_live_)
+  "sk_test_1234567890abcdef",
+
+  # Short hex test keys used in test_secure_storage.py fixtures
+  "abcdef1234567890",
+  "1234567890abcdef",
+  "fedcba0987654321",
+
+  # Aurora narrative fiction tokens (not real credentials)
+  "GC_TMMS_2025_ACTIVATED",
+  "ECHO_TREK_002-IV_TRANSIT_ANCHOR",
+  "D3_OPTIMIZED_20250417T2059Z",
+
+  # Aurora "Picard_Delta_3" fictional digital-lock key (AURORA-PDK-001 narrative mechanic)
+  # Confirmed non-live in 2026-05-30 triage: catalog/riverthread_808_recovery_capsule__2026-03-10.json
+  # and reports/analysis/BLANK_FILE_RECOVERY_AUDIT__2026-03-10.md
+  "uzOtxx5SjlmKzBmgdJou9cq",
+  "bb33adc71e528e598acc19a0749a2ef5cabed43c",
+  "068a094ddbfe21cc97b7658f7fd7305aad29dd59",
+
+  # JWT tokens embedded in archived ChatGPT HTML exports (expired web sessions)
+  "eyJhbGciOiJSUzI1NiIsImtpZCI6IjE5MzQ0ZTY1LWJiYzktNDRkMS1hOWQwLWY5NTdiMDc5YmQwZSIs",
+]
+
+paths = [
+  # Archived ChatGPT HTML exports — historical browser sessions, no live creds
+  "archives/unzipped/ZIP_Archives/",
+  "archives/unzipped/Unzipped Archives/",
+
+  # Python venv inside nested CloudBank repo — not our code, third-party JS
+  "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/",
+
+  # Compiled Python bytecode
+  "/__pycache__/",
+]
