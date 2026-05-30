@@ -15,7 +15,7 @@ through `catalog/repo_registry.yaml`.
 
 Initial scan date: 2026-05-16.
 
-Current validation date: 2026-05-21.
+Current validation date: 2026-05-25.
 
 Confirmed available:
 
@@ -46,6 +46,12 @@ Current devkit verdict:
 - All 19 declared tools are `ok`.
 - The install plan is empty.
 - Findings are empty.
+- The registered CloudBank `.venv` check passes with Python 3.11.11,
+  FastAPI 0.135.1, httpx 0.28.1, slowapi importable, and `pip check` clean.
+- Dependency update surfaces are declared in the devkit manifest and verified
+  by `tools/aurora_devkit.py`. Root Dependabot covers GitHub Actions,
+  pre-commit hooks, and devcontainer features; CloudBank Dependabot covers
+  active Python, JavaScript, GitHub Actions, and pre-commit manifests.
 - Package manifests exist in multiple zones, including root, projects,
   CloudBank, and DuelSim. Installed dependency trees must be pruned from scans
   because CloudBank currently contains local `node_modules` and `.venv`.
@@ -59,7 +65,60 @@ Current devkit verdict:
 - `reports/analysis/aurora_devkit_latest.json`: generated report when
   `--persist-report` is used.
 - `tests/test_aurora_devkit.py`: focused regression coverage for manifest
-  discovery, automation parsing, and finding generation.
+  discovery, automation parsing, dependency update surface checks, and finding
+  generation.
+
+## Registered Repo Python Environments
+
+The devkit treats selected nested repo virtual environments as explicit
+registered-repo environment checks. This keeps the root control-plane Python
+from being confused with a nested repo runtime.
+
+Current registered environment:
+
+- `aurora-cloudbank-symbolic-main`
+  - repo path:
+    `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
+  - Python command: `.venv/bin/python`
+  - status file: `.env_status.json`
+  - required imports: `fastapi`, `httpx`, and `slowapi`
+
+CloudBank tests and runtime validation should use the repo-local interpreter:
+
+```bash
+GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python -m pytest -q GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/tests/test_security_middleware.py
+```
+
+Plain root `python3` remains the control-plane interpreter for root scanners,
+verifiers, and the devkit itself. It is not evidence that CloudBank runtime
+dependencies are missing when CloudBank's `.venv` satisfies its own checks.
+
+## Automatic Dependency Updates
+
+Dependency updates use two lanes:
+
+- GitHub Dependabot opens update PRs against versioned dependency manifests.
+  These PRs still need validation before merge.
+- The local `aurora-dev-toolkit-user-space-update` automation refreshes
+  approved user-space tools and the registered CloudBank `.venv` from existing
+  canonical requirements files.
+
+Root Dependabot coverage:
+
+- `github-actions` at `/`
+- `pre-commit` at `/`
+- `devcontainers` at `/`
+
+CloudBank Dependabot coverage:
+
+- `github-actions` at `/`
+- `pre-commit` at `/`
+- `pip` at `/`, `/cli`, `/sdk/python`, and `/services/nemo_service`
+- `npm` at `/`, `/frontend`, and `/services/command_node`
+
+Archived dependency manifests, dependency caches, and optional CloudBank
+requirements are not auto-updated. Optional dependencies remain explicit
+operator work because they are heavier and feature-specific.
 
 ## Standard Commands
 
@@ -69,6 +128,7 @@ python3 tools/aurora_devkit.py --persist-report
 python3 tools/aurora_devkit.py --install-plan
 python3 tools/aurora_devkit.py --install-plan --persist-install-plan
 python3 tools/aurora_devkit.py --json
+GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python -m pytest -q GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/tests/test_security_middleware.py
 python3 -m pytest tests/test_aurora_devkit.py -q
 python3 tools/workspace_verify.py
 ```
@@ -97,8 +157,9 @@ make devkit-install-plan
 
 ## Package Policy
 
-Default install mode is approval-gated. Default update mode is read-only drift
-detection followed by an explicit apply step.
+Default install mode is approval-gated. Default update mode is automatic
+Dependabot PR creation for versioned manifests, weekly approved user-space
+tool updates, and local `.venv` refresh from canonical manifests only.
 
 Python:
 
@@ -144,7 +205,11 @@ Active toolkit automation:
 
 - `aurora-dev-toolkit-watch`: active, Sunday 09:00, read-only drift report.
 - `aurora-dev-toolkit-user-space-update`: active, Sunday 09:15, updates only
-  approved user-space tools (`uv tool` CLIs and Corepack `pnpm`).
+  approved user-space tools (`uv tool` CLIs and Corepack `pnpm`) plus the
+  registered CloudBank `.venv` from `requirements.txt` and
+  `requirements-dev.txt`.
+- Dependabot: GitHub-managed weekly dependency PRs for root and CloudBank
+  manifest surfaces declared in `catalog/dev_toolkit_manifest.json`.
 
 Existing related automations:
 

@@ -114,6 +114,143 @@ def test_build_report_flags_missing_tools_and_missing_devkit_watch(tmp_path: Pat
     assert report["install_plan"][0]["tool_id"] == "ruff"
     assert report["install_plan"][0]["status"] == "unplanned"
     assert report["registered_repos"] == [{"name": "example", "path": "repos/example", "branch": "main", "remote_status": "configured"}]
+    assert report["registered_python_environments"] == []
+
+
+def test_collect_registered_python_envs_detects_stale_status_file(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    repo = root / "repos" / "cloudbank"
+    repo.mkdir(parents=True)
+    write_file(
+        repo / ".env_status.json",
+        json.dumps(
+            {
+                "python_version": "Python 3.12.13",
+                "pip_version": "pip old",
+                "venv_path": ".venv",
+                "status": "ready",
+            }
+        )
+        + "\n",
+    )
+    manifest = {
+        "registered_repo_python_environments": [
+            {
+                "repo_name": "cloudbank",
+                "venv_path": ".venv",
+                "python_command": [".venv/bin/python"],
+                "status_file": ".env_status.json",
+                "required": True,
+                "required_imports": ["fastapi", "httpx"],
+                "notes": "Use the repo-local venv.",
+            }
+        ]
+    }
+    registered_repos = [{"name": "cloudbank", "path": "repos/cloudbank", "branch": "main", "remote_status": "configured"}]
+
+    def fake_repo_runner(repo_path: Path, args: list[str]) -> dict[str, Any]:
+        assert repo_path == repo
+        if args[-1] == "--version":
+            return {"status": "ok", "command": args, "path": str(repo / args[0]), "returncode": 0, "output": "Python 3.11.11"}
+        if args[-3:] == ["pip", "--version"]:
+            return {
+                "status": "ok",
+                "command": args,
+                "path": str(repo / args[0]),
+                "returncode": 0,
+                "output": "pip 24.0 from .venv/lib/python3.11/site-packages/pip (python 3.11)",
+            }
+        if args[-2:] == ["pip", "check"]:
+            return {"status": "ok", "command": args, "path": str(repo / args[0]), "returncode": 0, "output": "No broken requirements found."}
+        if "-c" in args:
+            return {
+                "status": "ok",
+                "command": args,
+                "path": str(repo / args[0]),
+                "returncode": 0,
+                "output": json.dumps({"versions": {"fastapi": "0.135.1", "httpx": "0.28.1"}, "missing": []}),
+            }
+        raise AssertionError(args)
+
+    envs = aurora_devkit.collect_registered_python_envs(root, manifest, registered_repos, runner=fake_repo_runner)
+
+    assert len(envs) == 1
+    assert envs[0]["status"] == "warn"
+    assert envs[0]["status_file_state"] == "stale"
+    assert envs[0]["status_file_stale_fields"] == ["python_version", "pip_version"]
+    assert envs[0]["import_versions"] == {"fastapi": "0.135.1", "httpx": "0.28.1"}
+
+
+def test_collect_dependency_update_surfaces_detects_dependabot_coverage(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    cloudbank = root / "repos" / "cloudbank"
+    root.mkdir()
+    cloudbank.mkdir(parents=True)
+    write_file(
+        root / ".github" / "dependabot.yml",
+        'version: 2\n'
+        'updates:\n'
+        '  - package-ecosystem: "github-actions"\n'
+        '    directory: "/"\n'
+        '    schedule:\n'
+        '      interval: "weekly"\n',
+    )
+    write_file(
+        cloudbank / ".github" / "dependabot.yml",
+        'version: 2\n'
+        'updates:\n'
+        '  - package-ecosystem: "pip"\n'
+        '    directory: "/"\n'
+        '    schedule:\n'
+        '      interval: "weekly"\n',
+    )
+    manifest = {
+        "dependency_update_surfaces": [
+            {
+                "id": "root-dependabot",
+                "repo_name": "root",
+                "path": ".github/dependabot.yml",
+                "required": True,
+                "expected_updates": [
+                    {"package_ecosystem": "github-actions", "directory": "/"},
+                    {"package_ecosystem": "pre-commit", "directory": "/"},
+                ],
+                "notes": "Root Dependabot coverage.",
+            },
+            {
+                "id": "cloudbank-dependabot",
+                "repo_name": "cloudbank",
+                "path": ".github/dependabot.yml",
+                "required": True,
+                "expected_updates": [{"package_ecosystem": "pip", "directory": "/"}],
+                "notes": "CloudBank Dependabot coverage.",
+            },
+        ]
+    }
+    registered_repos = [{"name": "cloudbank", "path": "repos/cloudbank", "branch": "main", "remote_status": "configured"}]
+
+    surfaces = aurora_devkit.collect_dependency_update_surfaces(root, manifest, registered_repos)
+
+    assert surfaces[0]["status"] == "warn"
+    assert surfaces[0]["missing_updates"] == [{"package_ecosystem": "pre-commit", "directory": "/"}]
+    assert surfaces[1]["status"] == "ok"
+
+    findings = aurora_devkit.build_findings(
+        [],
+        [{"id": "aurora-dev-toolkit-watch", "status": "ACTIVE"}],
+        {"missing_installed_for_repo_source": []},
+        [],
+        surfaces,
+    )
+    assert findings == [
+        {
+            "severity": "warning",
+            "id": "dependency_update_surface_root-dependabot_warn",
+            "message": "root dependency update surface is warn.",
+            "evidence": "pre-commit:/",
+            "next_step": "Root Dependabot coverage.",
+        }
+    ]
 
 
 def test_build_install_plan_marks_user_space_recipe_ready_when_manager_exists() -> None:

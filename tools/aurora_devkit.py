@@ -22,6 +22,7 @@ DEFAULT_AUTOMATIONS_ROOT = Path("~/.codex/automations").expanduser()
 
 
 CommandRunner = Callable[[list[str]], dict[str, Any]]
+RepoCommandRunner = Callable[[Path, list[str]], dict[str, Any]]
 
 
 def utc_now() -> str:
@@ -82,6 +83,71 @@ def run_command(args: list[str], timeout: int = 8) -> dict[str, Any]:
         "path": executable,
         "returncode": result.returncode,
         "output": "\n".join(output.splitlines()[:4]),
+    }
+
+
+def run_repo_command(repo_path: Path, args: list[str], timeout: int = 15) -> dict[str, Any]:
+    command = list(args)
+    executable = command[0]
+    executable_path: str | None
+    if os.sep in executable or (os.altsep and os.altsep in executable):
+        candidate = Path(executable)
+        if not candidate.is_absolute():
+            candidate = repo_path / candidate
+        if not candidate.exists():
+            return {
+                "status": "missing",
+                "command": args,
+                "path": str(candidate),
+                "returncode": None,
+                "output": "command not found",
+            }
+        executable_path = str(candidate)
+        command[0] = executable_path
+    else:
+        executable_path = shutil.which(executable)
+        if executable_path is None:
+            return {
+                "status": "missing",
+                "command": args,
+                "path": None,
+                "returncode": None,
+                "output": "command not found",
+            }
+
+    try:
+        result = subprocess.run(
+            command,
+            cwd=repo_path,
+            text=True,
+            capture_output=True,
+            timeout=timeout,
+            check=False,
+        )
+    except subprocess.TimeoutExpired:
+        return {
+            "status": "timeout",
+            "command": args,
+            "path": executable_path,
+            "returncode": None,
+            "output": "",
+        }
+    except OSError as exc:
+        return {
+            "status": "error",
+            "command": args,
+            "path": executable_path,
+            "returncode": None,
+            "output": str(exc),
+        }
+
+    output = result.stdout.strip() or result.stderr.strip()
+    return {
+        "status": "ok" if result.returncode == 0 else "error",
+        "command": args,
+        "path": executable_path,
+        "returncode": result.returncode,
+        "output": "\n".join(output.splitlines()[:8]),
     }
 
 
@@ -217,10 +283,270 @@ def collect_registered_repos(root: Path) -> list[dict[str, str]]:
     return repos
 
 
+def _import_probe(required_imports: list[str]) -> str:
+    return (
+        "import importlib, json; "
+        f"names={required_imports!r}; "
+        "versions={}; missing=[]; "
+        "\nfor name in names:\n"
+        "    try:\n"
+        "        module = importlib.import_module(name)\n"
+        "        versions[name] = getattr(module, '__version__', 'unknown')\n"
+        "    except Exception as exc:\n"
+        "        missing.append({'name': name, 'error': f'{type(exc).__name__}: {exc}'})\n"
+        "print(json.dumps({'versions': versions, 'missing': missing}, sort_keys=True))"
+    )
+
+
+def collect_registered_python_envs(
+    root: Path,
+    manifest: dict[str, Any],
+    registered_repos: list[dict[str, str]],
+    runner: RepoCommandRunner = run_repo_command,
+) -> list[dict[str, Any]]:
+    repo_by_name = {repo["name"]: repo for repo in registered_repos}
+    environments: list[dict[str, Any]] = []
+
+    for check in manifest.get("registered_repo_python_environments", []):
+        repo_name = check["repo_name"]
+        repo = repo_by_name.get(repo_name)
+        repo_relpath = check.get("repo_path") or (repo or {}).get("path", "")
+        repo_path = root / repo_relpath if repo_relpath else root
+        venv_path = check.get("venv_path", ".venv")
+        python_command = check.get("python_command", [f"{venv_path}/bin/python"])
+        required = bool(check.get("required", False))
+        required_imports = list(check.get("required_imports", []))
+        status_file = check.get("status_file")
+
+        env: dict[str, Any] = {
+            "repo_name": repo_name,
+            "path": repo_relpath,
+            "required": required,
+            "venv_path": venv_path,
+            "python_command": python_command,
+            "required_imports": required_imports,
+            "update_command": check.get("update_command", []),
+            "post_update_commands": check.get("post_update_commands", []),
+            "auto_update_lane": check.get("auto_update_lane", ""),
+            "status_file": status_file,
+            "status": "ok",
+            "checks": {},
+            "notes": check.get("notes", ""),
+        }
+
+        if repo is None:
+            env["status"] = "missing"
+            env["evidence"] = "repo not present in catalog/repo_registry.yaml"
+            environments.append(env)
+            continue
+        if not repo_path.exists():
+            env["status"] = "missing"
+            env["evidence"] = "registered repo path does not exist"
+            environments.append(env)
+            continue
+
+        version_check = runner(repo_path, [*python_command, "--version"])
+        pip_check = runner(repo_path, [*python_command, "-m", "pip", "--version"])
+        import_check = runner(repo_path, [*python_command, "-c", _import_probe(required_imports)]) if required_imports else {
+            "status": "ok",
+            "command": [],
+            "path": None,
+            "returncode": 0,
+            "output": json.dumps({"versions": {}, "missing": []}),
+        }
+        dependency_check = runner(repo_path, [*python_command, "-m", "pip", "check"])
+
+        env["checks"] = {
+            "python_version": version_check,
+            "pip_version": pip_check,
+            "required_imports": import_check,
+            "pip_check": dependency_check,
+        }
+
+        failing = [
+            name
+            for name, result in env["checks"].items()
+            if result.get("status") != "ok"
+        ]
+        try:
+            import_result = json.loads(import_check.get("output", "{}"))
+        except json.JSONDecodeError:
+            import_result = {"versions": {}, "missing": [{"name": "parse", "error": "invalid import probe output"}]}
+        env["import_versions"] = import_result.get("versions", {})
+        env["missing_imports"] = import_result.get("missing", [])
+        if env["missing_imports"]:
+            failing.append("required_imports")
+
+        if status_file:
+            status_path = repo_path / status_file
+            if not status_path.exists():
+                env["status_file_state"] = "missing"
+            else:
+                try:
+                    status_payload = json.loads(status_path.read_text(encoding="utf-8"))
+                except json.JSONDecodeError:
+                    status_payload = {}
+                    env["status_file_state"] = "invalid"
+                else:
+                    actual_python = version_check.get("output", "")
+                    actual_pip = pip_check.get("output", "")
+                    expected_venv_path = status_payload.get("venv_path")
+                    stale_reasons = []
+                    if status_payload.get("python_version") != actual_python:
+                        stale_reasons.append("python_version")
+                    if status_payload.get("pip_version") != actual_pip:
+                        stale_reasons.append("pip_version")
+                    if expected_venv_path != venv_path:
+                        stale_reasons.append("venv_path")
+                    env["status_file_state"] = "stale" if stale_reasons else "ok"
+                    env["status_file_stale_fields"] = stale_reasons
+
+        if failing:
+            env["status"] = "blocked" if required else "warn"
+            env["evidence"] = ", ".join(sorted(set(failing)))
+        elif env.get("status_file_state") in {"missing", "invalid", "stale"}:
+            env["status"] = "warn"
+            env["evidence"] = f"{status_file} is {env['status_file_state']}"
+
+        environments.append(env)
+
+    return environments
+
+
+def _clean_yaml_scalar(value: str) -> str:
+    value = value.split("#", 1)[0].strip()
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+        return value[1:-1]
+    return value
+
+
+def parse_dependabot_updates(path: Path) -> list[dict[str, str]]:
+    updates: list[dict[str, str]] = []
+    current: dict[str, str] | None = None
+    in_directories = False
+
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        stripped = raw_line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        if stripped.startswith("- package-ecosystem:"):
+            if current:
+                updates.append(current)
+            current = {
+                "package_ecosystem": _clean_yaml_scalar(stripped.split(":", 1)[1]),
+                "directory": "",
+            }
+            in_directories = False
+            continue
+        if current is None:
+            continue
+        if stripped.startswith("directory:"):
+            current["directory"] = _clean_yaml_scalar(stripped.split(":", 1)[1])
+            in_directories = False
+            continue
+        if stripped.startswith("directories:"):
+            in_directories = True
+            continue
+        if in_directories and stripped.startswith("- "):
+            updates.append(
+                {
+                    "package_ecosystem": current["package_ecosystem"],
+                    "directory": _clean_yaml_scalar(stripped[2:]),
+                }
+            )
+            continue
+        if in_directories and not stripped.startswith("- "):
+            in_directories = False
+
+    if current:
+        updates.append(current)
+    return updates
+
+
+def _repo_context(root: Path, repo_name: str, registered_repos: list[dict[str, str]]) -> tuple[str, Path, str] | None:
+    if repo_name == "root":
+        return ".", root, "root control plane"
+    repo_by_name = {repo["name"]: repo for repo in registered_repos}
+    repo = repo_by_name.get(repo_name)
+    if not repo:
+        return None
+    repo_relpath = repo.get("path", "")
+    return repo_relpath, root / repo_relpath, repo.get("branch", "")
+
+
+def collect_dependency_update_surfaces(
+    root: Path,
+    manifest: dict[str, Any],
+    registered_repos: list[dict[str, str]],
+) -> list[dict[str, Any]]:
+    surfaces: list[dict[str, Any]] = []
+
+    for surface in manifest.get("dependency_update_surfaces", []):
+        repo_name = surface["repo_name"]
+        context = _repo_context(root, repo_name, registered_repos)
+        required = bool(surface.get("required", False))
+        config_path = surface.get("path", ".github/dependabot.yml")
+        expected_updates = [
+            {
+                "package_ecosystem": item["package_ecosystem"],
+                "directory": item["directory"],
+            }
+            for item in surface.get("expected_updates", [])
+        ]
+
+        record: dict[str, Any] = {
+            "id": surface["id"],
+            "repo_name": repo_name,
+            "repo_path": "",
+            "path": config_path,
+            "required": required,
+            "status": "ok",
+            "expected_updates": expected_updates,
+            "actual_updates": [],
+            "missing_updates": [],
+            "notes": surface.get("notes", ""),
+        }
+
+        if context is None:
+            record["status"] = "missing"
+            record["evidence"] = "repo not present in catalog/repo_registry.yaml"
+            surfaces.append(record)
+            continue
+
+        repo_relpath, repo_path, _branch = context
+        record["repo_path"] = repo_relpath
+        dependabot_path = repo_path / config_path
+        if not dependabot_path.exists():
+            record["status"] = "missing"
+            record["evidence"] = f"{config_path} does not exist"
+            surfaces.append(record)
+            continue
+
+        actual_updates = parse_dependabot_updates(dependabot_path)
+        actual_pairs = {(item["package_ecosystem"], item["directory"]) for item in actual_updates}
+        missing_updates = [
+            item
+            for item in expected_updates
+            if (item["package_ecosystem"], item["directory"]) not in actual_pairs
+        ]
+        record["actual_updates"] = sorted(actual_updates, key=lambda item: (item["package_ecosystem"], item["directory"]))
+        record["missing_updates"] = missing_updates
+        if missing_updates:
+            record["status"] = "warn"
+            record["evidence"] = ", ".join(
+                f"{item['package_ecosystem']}:{item['directory']}" for item in missing_updates
+            )
+        surfaces.append(record)
+
+    return surfaces
+
+
 def build_findings(
     toolchain: list[dict[str, Any]],
     automations: list[dict[str, Any]],
     skill_state: dict[str, Any],
+    python_envs: list[dict[str, Any]] | None = None,
+    dependency_update_surfaces: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, str]]:
     findings: list[dict[str, str]] = []
 
@@ -272,6 +598,33 @@ def build_findings(
             }
         )
 
+    for env in python_envs or []:
+        if env.get("status") == "ok":
+            continue
+        severity = "blocker" if env.get("required") and env.get("status") == "blocked" else "warning"
+        findings.append(
+            {
+                "severity": severity,
+                "id": f"repo_python_env_{env['repo_name']}_{env.get('status', 'unknown')}",
+                "message": f"{env['repo_name']} Python environment is {env.get('status', 'unknown')}.",
+                "evidence": env.get("evidence", ""),
+                "next_step": env.get("notes") or "Use the repo-local virtual environment for validation.",
+            }
+        )
+
+    for surface in dependency_update_surfaces or []:
+        if surface.get("status") == "ok":
+            continue
+        findings.append(
+            {
+                "severity": "warning",
+                "id": f"dependency_update_surface_{surface['id']}_{surface.get('status', 'unknown')}",
+                "message": f"{surface['repo_name']} dependency update surface is {surface.get('status', 'unknown')}.",
+                "evidence": surface.get("evidence", ""),
+                "next_step": surface.get("notes") or "Update .github/dependabot.yml coverage for this repo.",
+            }
+        )
+
     return findings
 
 
@@ -281,6 +634,7 @@ def build_report(
     skills_root: Path,
     automations_root: Path,
     runner: CommandRunner = run_command,
+    repo_runner: RepoCommandRunner = run_repo_command,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
     manifest = load_manifest(manifest_path)
@@ -289,7 +643,9 @@ def build_report(
     skill_state = collect_skill_state(root, skills_root)
     package_manifests = discover_package_manifests(root, manifest)
     repos = collect_registered_repos(root)
-    findings = build_findings(toolchain, automations, skill_state)
+    python_envs = collect_registered_python_envs(root, manifest, repos, runner=repo_runner)
+    dependency_update_surfaces = collect_dependency_update_surfaces(root, manifest, repos)
+    findings = build_findings(toolchain, automations, skill_state, python_envs, dependency_update_surfaces)
     install_plan = build_install_plan(manifest, toolchain)
 
     return {
@@ -302,6 +658,8 @@ def build_report(
         "toolchain": toolchain,
         "package_manifests": package_manifests,
         "registered_repos": repos,
+        "registered_python_environments": python_envs,
+        "dependency_update_surfaces": dependency_update_surfaces,
         "codex_skills": skill_state,
         "automations": automations,
         "findings": findings,
@@ -408,6 +766,7 @@ def format_text_report(report: dict[str, Any]) -> str:
         "tools_total": len(report["toolchain"]),
         "package_manifests": len(report["package_manifests"]),
         "registered_repos": len(report["registered_repos"]),
+        "dependency_update_surfaces": len(report.get("dependency_update_surfaces", [])),
         "installed_skills": report["codex_skills"]["installed_count"],
         "automations": len(report["automations"]),
         "install_plan_items": len(report.get("install_plan", [])),
@@ -417,6 +776,7 @@ def format_text_report(report: dict[str, Any]) -> str:
         f"- Tools: {counts['tools_ok']}/{counts['tools_total']} ok",
         f"- Package manifests: {counts['package_manifests']}",
         f"- Registered repos: {counts['registered_repos']}",
+        f"- Dependency update surfaces: {counts['dependency_update_surfaces']}",
         f"- Installed skills: {counts['installed_skills']}",
         f"- Automations: {counts['automations']}",
         f"- Install plan items: {counts['install_plan_items']}",

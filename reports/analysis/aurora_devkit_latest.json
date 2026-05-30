@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-22T00:01:11Z",
+  "generated_at": "2026-05-25T13:50:23Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "manifest_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
   "toolkit_id": "aurora-dev-toolkit",
@@ -471,7 +471,7 @@
     {
       "name": "aurora-cloudbank-symbolic-main",
       "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
-      "branch": "codex/fix-synergy-mutation-auth-648",
+      "branch": "main",
       "remote_status": "configured"
     },
     {
@@ -497,6 +497,233 @@
       "path": "qgia-knowledge-spine-main",
       "branch": "main",
       "remote_status": "configured"
+    }
+  ],
+  "registered_python_environments": [
+    {
+      "repo_name": "aurora-cloudbank-symbolic-main",
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "required": true,
+      "venv_path": ".venv",
+      "python_command": [
+        ".venv/bin/python"
+      ],
+      "required_imports": [
+        "fastapi",
+        "httpx",
+        "slowapi"
+      ],
+      "update_command": [
+        ".venv/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "--upgrade",
+        "-r",
+        "requirements.txt",
+        "-r",
+        "requirements-dev.txt"
+      ],
+      "post_update_commands": [
+        [
+          ".venv/bin/python",
+          "-m",
+          "pip",
+          "check"
+        ],
+        [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_security_middleware.py"
+        ]
+      ],
+      "auto_update_lane": "aurora-dev-toolkit-user-space-update",
+      "status_file": ".env_status.json",
+      "status": "ok",
+      "checks": {
+        "python_version": {
+          "status": "ok",
+          "command": [
+            ".venv/bin/python",
+            "--version"
+          ],
+          "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "returncode": 0,
+          "output": "Python 3.11.11"
+        },
+        "pip_version": {
+          "status": "ok",
+          "command": [
+            ".venv/bin/python",
+            "-m",
+            "pip",
+            "--version"
+          ],
+          "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "returncode": 0,
+          "output": "pip 24.0 from /Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/lib/python3.11/site-packages/pip (python 3.11)"
+        },
+        "required_imports": {
+          "status": "ok",
+          "command": [
+            ".venv/bin/python",
+            "-c",
+            "import importlib, json; names=['fastapi', 'httpx', 'slowapi']; versions={}; missing=[]; \nfor name in names:\n    try:\n        module = importlib.import_module(name)\n        versions[name] = getattr(module, '__version__', 'unknown')\n    except Exception as exc:\n        missing.append({'name': name, 'error': f'{type(exc).__name__}: {exc}'})\nprint(json.dumps({'versions': versions, 'missing': missing}, sort_keys=True))"
+          ],
+          "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "returncode": 0,
+          "output": "{\"missing\": [], \"versions\": {\"fastapi\": \"0.135.1\", \"httpx\": \"0.28.1\", \"slowapi\": \"unknown\"}}"
+        },
+        "pip_check": {
+          "status": "ok",
+          "command": [
+            ".venv/bin/python",
+            "-m",
+            "pip",
+            "check"
+          ],
+          "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "returncode": 0,
+          "output": "No broken requirements found."
+        }
+      },
+      "notes": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
+      "import_versions": {
+        "fastapi": "0.135.1",
+        "httpx": "0.28.1",
+        "slowapi": "unknown"
+      },
+      "missing_imports": [],
+      "status_file_state": "ok",
+      "status_file_stale_fields": []
+    }
+  ],
+  "dependency_update_surfaces": [
+    {
+      "id": "root-dependabot",
+      "repo_name": "root",
+      "repo_path": ".",
+      "path": ".github/dependabot.yml",
+      "required": true,
+      "status": "ok",
+      "expected_updates": [
+        {
+          "package_ecosystem": "github-actions",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "pre-commit",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "devcontainers",
+          "directory": "/"
+        }
+      ],
+      "actual_updates": [
+        {
+          "package_ecosystem": "devcontainers",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "github-actions",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "pre-commit",
+          "directory": "/"
+        }
+      ],
+      "missing_updates": [],
+      "notes": "Root dependency automation should open PRs for GitHub Actions, pre-commit hook revisions, and devcontainer features."
+    },
+    {
+      "id": "cloudbank-dependabot",
+      "repo_name": "aurora-cloudbank-symbolic-main",
+      "repo_path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "path": ".github/dependabot.yml",
+      "required": true,
+      "status": "ok",
+      "expected_updates": [
+        {
+          "package_ecosystem": "github-actions",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "pre-commit",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "pip",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "pip",
+          "directory": "/cli"
+        },
+        {
+          "package_ecosystem": "pip",
+          "directory": "/sdk/python"
+        },
+        {
+          "package_ecosystem": "pip",
+          "directory": "/services/nemo_service"
+        },
+        {
+          "package_ecosystem": "npm",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "npm",
+          "directory": "/frontend"
+        },
+        {
+          "package_ecosystem": "npm",
+          "directory": "/services/command_node"
+        }
+      ],
+      "actual_updates": [
+        {
+          "package_ecosystem": "github-actions",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "npm",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "npm",
+          "directory": "/frontend"
+        },
+        {
+          "package_ecosystem": "npm",
+          "directory": "/services/command_node"
+        },
+        {
+          "package_ecosystem": "pip",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "pip",
+          "directory": "/cli"
+        },
+        {
+          "package_ecosystem": "pip",
+          "directory": "/sdk/python"
+        },
+        {
+          "package_ecosystem": "pip",
+          "directory": "/services/nemo_service"
+        },
+        {
+          "package_ecosystem": "pre-commit",
+          "directory": "/"
+        }
+      ],
+      "missing_updates": [],
+      "notes": "CloudBank dependency automation should open PRs for active Python, JavaScript, GitHub Actions, and pre-commit manifests. Archived docs and dependency caches remain excluded."
     }
   ],
   "codex_skills": {
@@ -636,6 +863,7 @@
   "validation_commands": [
     "python3 tools/aurora_devkit.py --persist-report",
     "python3 tools/aurora_devkit.py --install-plan --persist-install-plan",
+    "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python -m pytest -q GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/tests/test_security_middleware.py",
     "python3 tools/workspace_verify.py",
     "python3 -m pytest tests/test_aurora_devkit.py -q"
   ],
@@ -652,6 +880,12 @@
       "automation_id": "aurora-dev-toolkit-user-space-update",
       "mode": "approval-gated mutation",
       "purpose": "Automatically upgrade only approved user-space tools; system-level packages remain explicit-approval work."
+    },
+    {
+      "id": "dependency-prs",
+      "automation_id": "dependabot",
+      "mode": "automatic pull requests",
+      "purpose": "GitHub Dependabot opens dependency update PRs for versioned root and CloudBank manifests; merges remain validation-gated."
     }
   ]
 }

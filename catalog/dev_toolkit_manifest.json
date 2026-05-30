@@ -187,7 +187,7 @@
   ],
   "package_policy": {
     "default_install_mode": "approval-gated",
-    "default_update_mode": "read-only drift detection with explicit apply step",
+    "default_update_mode": "automatic Dependabot PRs for versioned dependency manifests; weekly approved user-space tool updates; local .venv refresh from canonical manifests only",
     "python": {
       "preferred_manager": "uv",
       "global_cli_manager": "pipx",
@@ -225,7 +225,137 @@
       ]
     }
   },
+  "registered_repo_python_environments": [
+    {
+      "repo_name": "aurora-cloudbank-symbolic-main",
+      "venv_path": ".venv",
+      "python_command": [".venv/bin/python"],
+      "status_file": ".env_status.json",
+      "required": true,
+      "required_imports": [
+        "fastapi",
+        "httpx",
+        "slowapi"
+      ],
+      "update_command": [
+        ".venv/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "--upgrade",
+        "-r",
+        "requirements.txt",
+        "-r",
+        "requirements-dev.txt"
+      ],
+      "post_update_commands": [
+        [
+          ".venv/bin/python",
+          "-m",
+          "pip",
+          "check"
+        ],
+        [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_security_middleware.py"
+        ]
+      ],
+      "auto_update_lane": "aurora-dev-toolkit-user-space-update",
+      "notes": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment."
+    }
+  ],
+  "dependency_update_surfaces": [
+    {
+      "id": "root-dependabot",
+      "repo_name": "root",
+      "path": ".github/dependabot.yml",
+      "required": true,
+      "expected_updates": [
+        {
+          "package_ecosystem": "github-actions",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "pre-commit",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "devcontainers",
+          "directory": "/"
+        }
+      ],
+      "notes": "Root dependency automation should open PRs for GitHub Actions, pre-commit hook revisions, and devcontainer features."
+    },
+    {
+      "id": "cloudbank-dependabot",
+      "repo_name": "aurora-cloudbank-symbolic-main",
+      "path": ".github/dependabot.yml",
+      "required": true,
+      "expected_updates": [
+        {
+          "package_ecosystem": "github-actions",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "pre-commit",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "pip",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "pip",
+          "directory": "/cli"
+        },
+        {
+          "package_ecosystem": "pip",
+          "directory": "/sdk/python"
+        },
+        {
+          "package_ecosystem": "pip",
+          "directory": "/services/nemo_service"
+        },
+        {
+          "package_ecosystem": "npm",
+          "directory": "/"
+        },
+        {
+          "package_ecosystem": "npm",
+          "directory": "/frontend"
+        },
+        {
+          "package_ecosystem": "npm",
+          "directory": "/services/command_node"
+        }
+      ],
+      "notes": "CloudBank dependency automation should open PRs for active Python, JavaScript, GitHub Actions, and pre-commit manifests. Archived docs and dependency caches remain excluded."
+    }
+  ],
   "install_recipes": [
+    {
+      "tool_id": "gh",
+      "lane": "macos-system",
+      "manager": "brew",
+      "requires_tools": ["brew"],
+      "approval_required": true,
+      "install_command": ["brew", "install", "gh"],
+      "update_command": ["brew", "upgrade", "gh"],
+      "notes": "Installs the GitHub CLI through Homebrew. gh is a required tool for PR, issue, and CI maintenance, so it must have an install recipe."
+    },
+    {
+      "tool_id": "sqlite3",
+      "lane": "macos-system",
+      "manager": "brew",
+      "requires_tools": ["brew"],
+      "approval_required": true,
+      "install_command": ["brew", "install", "sqlite"],
+      "update_command": ["brew", "upgrade", "sqlite"],
+      "notes": "Installs an up-to-date SQLite through Homebrew; the brew formula name is 'sqlite' and it provides the 'sqlite3' CLI. macOS ships a system sqlite3, so this recipe is the managed fallback."
+    },
     {
       "tool_id": "pre-commit",
       "lane": "python-user",
@@ -340,11 +470,18 @@
       "automation_id": "aurora-dev-toolkit-user-space-update",
       "mode": "approval-gated mutation",
       "purpose": "Automatically upgrade only approved user-space tools; system-level packages remain explicit-approval work."
+    },
+    {
+      "id": "dependency-prs",
+      "automation_id": "dependabot",
+      "mode": "automatic pull requests",
+      "purpose": "GitHub Dependabot opens dependency update PRs for versioned root and CloudBank manifests; merges remain validation-gated."
     }
   ],
   "validation_commands": [
     "python3 tools/aurora_devkit.py --persist-report",
     "python3 tools/aurora_devkit.py --install-plan --persist-install-plan",
+    "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python -m pytest -q GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/tests/test_security_middleware.py",
     "python3 tools/workspace_verify.py",
     "python3 -m pytest tests/test_aurora_devkit.py -q"
   ]
