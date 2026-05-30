@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "warrant-lens"
+version = "1.0.0"
+description = "Source-agnostic text analysis layer that checks the structural quality of claim warrants. Classification != verification."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Aurora / ORIONCORE" }]
+license = { text = "Proprietary" }
+keywords = ["warrant", "claim-analysis", "evidence", "provenance"]
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+]
+anthropic = [
+    "anthropic>=0.40",
+]
+
+[project.scripts]
+warrant-lens = "warrant_lens.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+warrant_lens = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra --strict-markers"
+markers = [
+    "tier1: protects against partisan / sycophant drift (T-CLIMATE, T-DELIVERY)",
+]

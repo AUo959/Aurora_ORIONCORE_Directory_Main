@@ -3,14 +3,27 @@
 !/.gitattributes
 !/.githooks/
 !/.githooks/pre-commit
+!/.githooks/pre-push
 !/.devcontainer/
 !/.devcontainer/**
 !/.github/
 !/.github/**
+!/.codacy/
+!/.codacy/**
 !/.pre-commit-config.yaml
 !/Makefile
 !/AGENTS.md
 !/README.md
+!/SPEC__WARRANT_LENS__v1.md
+!/warrant-lens/
+!/warrant-lens/**
+# Warrant Lens local artefacts: never commit user traces or build output
+/warrant-lens/traces/
+/warrant-lens/build/
+/warrant-lens/dist/
+/warrant-lens/*.egg-info/
+/warrant-lens/.pytest_cache/
+/warrant-lens/**/__pycache__/
 !/docs/
 !/docs/**
 # iCloud-backed; not locally downloaded — exclude from git tracking
