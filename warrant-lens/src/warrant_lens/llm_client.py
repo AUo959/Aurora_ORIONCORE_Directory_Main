@@ -59,25 +59,46 @@ _DEFINITION_RE = re.compile(
     re.IGNORECASE,
 )
 _CAUSAL_RE = re.compile(
-    r"\b(causes|leads to|results in|is caused by|because|due to)\b",
+    r"\b("
+    r"causes?|leads? to|results? in|is caused by|because|due to|"
+    # Scientific / mechanism vocabulary
+    r"induces?|triggers?|drives?|produces?|generates?|inhibits?|suppresses?|"
+    r"activates?|prevents?|reduces?|raises?|amplifies?|attenuates?|mediates?"
+    r")\b",
     re.IGNORECASE,
 )
 _CODE_API_RE = re.compile(
-    r"(?:\b[a-z_][a-z0-9_]*\s*\([^)]*\)|\.[a-z_][a-z0-9_]*\s*\(|`[^`]+`)",
+    # Identifier IMMEDIATELY followed by '(' — real code rarely has whitespace
+    # before the open paren. Or a method call (.name(). Or backticked code.
+    r"(?:"
+    r"\b[a-z_][a-z0-9_]*\([^)]*\)"          # foo(...)
+    r"|\.[a-z_][a-z0-9_]*\("                 # .method(
+    r"|\b[a-z_][a-z0-9_]*\.[a-z_][a-z0-9_]*" # module.method
+    r"|`[^`]+`"                              # `inline code`
+    r")",
     re.IGNORECASE,
 )
 _CITATION_HINT_RE = re.compile(
-    r"(?:\(\s*[A-Z][a-z]+(?:\s+(?:et\s+al\.?|and\s+[A-Z][a-z]+))?,?\s*\d{4}\s*\)"
-    r"|\b(?:see|cf\.|per)\s+[A-Z][a-z]+\s+\d{4}\b"
-    r"|\bdoi:\s*\S+)",
+    r"(?:"
+    # Parenthetical: (Brown et al., 2017), (Smith, 2003), (Brown and Smith 2003)
+    r"\(\s*[A-Z][A-Za-z'\-]+(?:\s+(?:et\s+al\.?|and\s+[A-Z][A-Za-z'\-]+))?\s*,?\s*\d{4}\s*\)"
+    # Author-year free: see Brown 2017, per Smith et al. 2003
+    r"|\b(?:see|cf\.|per)\s+[A-Z][A-Za-z'\-]+(?:\s+et\s+al\.?)?\s+\d{4}\b"
+    # DOI / arXiv / publisher prefix
+    r"|\b(?:doi:|arxiv:)\s*\S+"
+    r")",
 )
 _EMPIRICAL_HINT_RE = re.compile(
     r"\b("
-    # nouns
-    r"deaths?|cases|emissions?|mortality|incidence|prevalence|rate|temperature|"
-    r"warming|GDP|growth|unemployment|"
-    # past-tense empirical verbs — "the planet warmed", "mortality fell"
-    r"warmed|cooled|rose|fell|grew|declined|increased|decreased|dropped|jumped"
+    # nouns (real-world quantities and metrics)
+    r"deaths?|cases|emissions?|mortality|incidence|prevalence|rate|rates|temperature|"
+    r"warming|GDP|growth|unemployment|consumption|demand|share|cost|costs|"
+    r"production|output|revenue|spending|deployment|workload|workloads|"
+    # past-tense empirical verbs
+    r"warmed|cooled|rose|fell|grew|declined|increased|decreased|dropped|jumped|"
+    r"emitted|reached|absorbed|deployed|consumed|reduced|raised|lowered|"
+    # progressive forms — "consumption is rising", "share is growing"
+    r"rising|falling|growing|shrinking|declining|increasing|decreasing"
     r")\b",
     re.IGNORECASE,
 )
@@ -104,24 +125,37 @@ class HeuristicClient:
         if _DEFINITION_RE.search(t):
             return "definition"
 
+        # Code-api is now strict (requires no whitespace before '('), so it
+        # no longer over-triggers on "(Author, YYYY)" citation parens
+        # (v1.1 fix — dogfood issue 3, fixed by tightening _CODE_API_RE).
         if _CODE_API_RE.search(t) and not _PCT_RE.search(t):
-            # Distinguish API signatures from arithmetic / stats.
             return "code_api_signature"
 
-        if _CITATION_HINT_RE.search(t):
-            return "named_citation"
-
+        # Empirical content + a number beats pure temporal_fact. A claim like
+        # "emitted 552 metric tons in 2024" is a statistic, not a date fact
+        # (v1.1 fix — dogfood issue 5).
         if _PCT_RE.search(t) or (_NUMERIC_RE.search(t) and _EMPIRICAL_HINT_RE.search(t)):
             return "specific_statistic"
+
+        # Causal claims win over temporal_fact and named_citation. A claim
+        # "X causes Y (Doe 2024)" is a causal claim with a citation, not a
+        # meta-claim about a citation.
+        if _CAUSAL_RE.search(t):
+            return "causal_mechanism"
+
+        # Empirical content (any form) beats pure temporal — keeps "the
+        # planet warmed since 1900" out of temporal_fact (v1.1 fix — issue 1).
+        if _EMPIRICAL_HINT_RE.search(t):
+            return "consequential_empirical"
 
         if _DATE_PHRASE_RE.search(t) or _YEAR_RE.search(t):
             return "temporal_fact"
 
-        if _CAUSAL_RE.search(t):
-            return "causal_mechanism"
-
-        if _EMPIRICAL_HINT_RE.search(t):
-            return "consequential_empirical"
+        # Named-citation is now a FALLBACK: it fires only when a citation
+        # pattern is present and nothing more substantive matched. A citation
+        # is a source marker, not a claim type (v1.1 fix — see test commit).
+        if _CITATION_HINT_RE.search(t):
+            return "named_citation"
 
         return "unclassified"
 

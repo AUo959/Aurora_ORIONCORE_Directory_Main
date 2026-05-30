@@ -1,0 +1,29 @@
+Background brief: AI energy footprint and the policy debate.
+
+Training a single large language model in 2024 emitted roughly 552 metric tons of CO2 equivalent. This number gets repeated in policy circles, but most citations trace back to a 2019 paper using assumptions that have not aged well.
+
+Data center electricity consumption is rising. According to the IEA, global data center electricity demand could reach 945 terawatt-hours by 2030. The IEA's mid-case scenario is roughly double its 2023 estimate.
+
+Carbon offsets are widely used by hyperscalers. Microsoft, Google, and Amazon have all announced "net zero" or "carbon negative" commitments. Critics argue the offset market is structurally weak; recent investigations found that more than 90% of rainforest credits on the leading registry did not represent real emissions reductions.
+
+Inference is now the larger share of total AI carbon cost. This is widely cited, but the underlying decomposition depends on assumptions about query mix that few labs publish. It might be wrong by a factor of two in either direction.
+
+The European AI Act came into force on August 1, 2024. Compliance obligations for general-purpose AI models began phasing in 12 months later.
+
+A backpropagation pass requires both the forward activations and the local gradient, so memory cost scales with depth times batch size. This is a definitional consequence of the algorithm, not an empirical finding.
+
+Sam Altman has argued that the pace of AI capability growth is the dominant variable in climate planning. This is an opinion. It is not a forecast that can be falsified by next year's emissions numbers.
+
+It seems likely that on-device inference will continue to absorb a larger fraction of the workload, though estimates of how much vary widely between Apple, Qualcomm, and independent analysts.
+
+The Stargate project, announced January 21, 2025, is reportedly a $500 billion infrastructure commitment. Per the official press release, the initial $100 billion is being deployed immediately, with the remainder over four years.
+
+A recent Heritage Foundation policy brief argues that federal AI energy reporting rules will hamstring US competitiveness. The brief cites a 2024 OECD working paper, but the working paper makes a narrower claim about disclosure burden, not about competitiveness.
+
+Studies show that prompt caching reduces inference cost by up to 90% on conversational workloads.
+
+The minimum wage should be raised. This is a normative claim.
+
+In 2018, researchers at MIT demonstrated that adversarial patches could fool object detectors used in autonomous vehicles (Brown et al., 2017).
+
+The Python API openai.chat.completions.create(model=..., messages=[...]) returns a ChatCompletion object whose .choices[0].message.content holds the assistant's reply.

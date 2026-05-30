@@ -40,6 +40,20 @@ html-demo: ## Run the CLI and also emit the HTML viewer
 		--html $(TRACE_DIR)/smoke.html
 	@echo "HTML viewer: $(TRACE_DIR)/smoke.html"
 
+benchmark-anthropic: ## Compare HeuristicClient vs AnthropicClient on the mixed corpus (requires ANTHROPIC_API_KEY)
+	mkdir -p $(TRACE_DIR)
+	$(PY) -m warrant_lens benchmark examples/mixed_corpus.txt \
+		--a heuristic --b anthropic \
+		--topic mixed-corpus \
+		--out-dir $(TRACE_DIR)
+
+benchmark-self: ## Sanity check: HeuristicClient vs itself (must be 100% agreement)
+	mkdir -p $(TRACE_DIR)
+	$(PY) -m warrant_lens benchmark examples/mixed_corpus.txt \
+		--a heuristic --b heuristic \
+		--topic self-check \
+		--out-dir $(TRACE_DIR)
+
 calibrate-demo: ## Generate a trace, then label it from a sample CSV
 	mkdir -p $(TRACE_DIR)
 	$(PY) -m warrant_lens analyze examples/sample.txt \
@@ -55,4 +69,4 @@ clean: ## Remove caches and local build artefacts
 	rm -rf .pytest_cache build dist *.egg-info
 	find . -type d -name __pycache__ -prune -exec rm -rf {} +
 
-.PHONY: help install install-anthropic test test-quick test-tier1 smoke html-demo calibrate-demo clean
+.PHONY: help install install-anthropic test test-quick test-tier1 smoke html-demo benchmark-anthropic benchmark-self calibrate-demo clean

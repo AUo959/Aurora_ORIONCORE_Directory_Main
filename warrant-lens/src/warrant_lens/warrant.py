@@ -59,7 +59,11 @@ _SOURCE_VAGUE_RE = re.compile(
 )
 _SOURCE_NAMED_RE = re.compile(
     r"\((?P<src>[^)]{3,200})\)|"
-    r"\b(?:according to|per|cited in|from)\s+(?P<src2>[A-Z][^.;,]{2,120})"
+    # "according to the IEA", "per the official press release", "cited in OECD"
+    # Allow optional article (the/a/an) before the capitalised source name.
+    r"\b(?:according to|per|cited in|from)\s+"
+    r"(?P<src2>(?:the\s+|a\s+|an\s+)?[A-Za-z][^.;,]{2,120})",
+    re.IGNORECASE,
 )
 
 
@@ -190,6 +194,7 @@ def check_warrant(
         settled=ctx.settled,
         source_role=ctx.source_role,
         chain_intact=ctx.chain_intact,
+        claim_type=cs.claim_type,
     )
 
     warrant = Warrant(
@@ -212,6 +217,13 @@ def check_warrant(
     return warrant, flag
 
 
+_FRONTIER_RELEVANT_CLAIM_TYPES = frozenset({
+    "consequential_empirical",
+    "specific_statistic",
+    "causal_mechanism",
+})
+
+
 def _evaluate_fit(
     *,
     observed: Optional[str],
@@ -220,6 +232,7 @@ def _evaluate_fit(
     settled: Optional[bool],
     source_role: SourceRole,
     chain_intact: bool,
+    claim_type: str = "",
 ) -> tuple[str, Optional[ReasonCode], Optional[str]]:
     """Return (fit_verdict, reason_code_or_None, handoff_or_None)."""
 
@@ -245,10 +258,12 @@ def _evaluate_fit(
             "A synthesis-level source would be more appropriate.",
         )
 
-    # Frontier default: if settledness is unknown, emit a handoff BEFORE any
-    # category verdict. The verdict can stand alongside the handoff.
+    # Frontier default: emit a handoff if settledness is unknown — BUT ONLY for
+    # claim types where settled-vs-frontier is meaningful. Code-api signatures,
+    # named-citation meta-claims, and temporal facts have no frontier semantics
+    # (v1.1 fix — dogfood issue 4).
     frontier_handoff: Optional[str] = None
-    if settled is None:
+    if settled is None and (not claim_type or claim_type in _FRONTIER_RELEVANT_CLAIM_TYPES):
         frontier_handoff = (
             "This may be a frontier question rather than settled science; "
             "treat single sources with caution and check whether a synthesis "

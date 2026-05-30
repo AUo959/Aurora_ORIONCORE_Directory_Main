@@ -8,6 +8,7 @@ import argparse
 import sys
 from pathlib import Path
 
+from .benchmark import run_benchmark, write_benchmark
 from .calibrate import run_calibration
 from .config_loader import load_app_config, load_fit_table, load_taxonomy
 from .emit_html import render_html
@@ -52,6 +53,29 @@ def main(argv: list[str] | None = None) -> int:
         help="Write a self-contained HTML inline-annotation viewer to this path.",
     )
 
+    bench_p = sub.add_parser(
+        "benchmark",
+        help="Compare two LLMClients on the same corpus. Writes a markdown "
+        "report and a machine-readable JSON diff.",
+    )
+    bench_p.add_argument("path", type=Path, help="Input text file.")
+    bench_p.add_argument(
+        "--a", choices=("heuristic", "anthropic"), default="heuristic",
+        help="Client A (left column).",
+    )
+    bench_p.add_argument(
+        "--b", choices=("heuristic", "anthropic"), default="anthropic",
+        help="Client B (right column).",
+    )
+    bench_p.add_argument(
+        "--topic", default="benchmark",
+        help="Topic slug for the report filename.",
+    )
+    bench_p.add_argument(
+        "--out-dir", type=Path, default=Path("traces"),
+        help="Directory to write the benchmark report into.",
+    )
+
     calib_p = sub.add_parser(
         "calibrate",
         help="Score a JSONL trace against human attention labels. "
@@ -83,6 +107,8 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.cmd == "calibrate":
         return _cmd_calibrate(args)
+    if args.cmd == "benchmark":
+        return _cmd_benchmark(args)
     if args.cmd != "analyze":
         parser.error("unknown command")
         return 2
@@ -136,6 +162,35 @@ def main(argv: list[str] | None = None) -> int:
         args.html.write_text(html_out.html, encoding="utf-8")
         sys.stderr.write(f"[warrant-lens] html viewer:   {args.html}\n")
 
+    return 0
+
+
+def _cmd_benchmark(args) -> int:
+    def _make_client(name: str) -> LLMClient:
+        if name == "anthropic":
+            from .anthropic_client import AnthropicClient
+            return AnthropicClient()
+        return HeuristicClient()
+
+    text = args.path.read_text(encoding="utf-8")
+    client_a = _make_client(args.a)
+    client_b = _make_client(args.b)
+    report = run_benchmark(
+        text,
+        client_a=client_a, client_b=client_b,
+        client_a_name=args.a, client_b_name=args.b,
+    )
+    json_path, md_path = write_benchmark(report, args.out_dir, topic=args.topic)
+    sys.stderr.write(f"[warrant-lens] benchmark json: {json_path}\n")
+    sys.stderr.write(f"[warrant-lens] benchmark md:   {md_path}\n")
+    sys.stderr.write(
+        f"[warrant-lens] type-agreement: {report.n_type_agree}/{report.n_claims}"
+        f" ({report.type_agreement_rate:.1%})\n"
+    )
+    sys.stderr.write(
+        f"[warrant-lens] flag-agreement: {report.n_flag_agree}/{report.n_claims}"
+        f" ({report.flag_agreement_rate:.1%})\n"
+    )
     return 0
 
 

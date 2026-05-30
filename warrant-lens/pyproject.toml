@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "warrant-lens"
-version = "1.0.0"
+version = "1.1.0"
 description = "Source-agnostic text analysis layer that checks the structural quality of claim warrants. Classification != verification."
 readme = "README.md"
 requires-python = ">=3.10"

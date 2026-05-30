@@ -104,6 +104,55 @@ in §9 are the acceptance contract.
 
 ---
 
+## [1.1.0] — 2026-05-26
+
+Heuristic hardening release driven by dogfooding `examples/mixed_corpus.txt`
+(29 mixed real-world-style claims) against v1.0. Five mechanical bugs the
+unit tests didn't surface — all fixed with regression tests locked in.
+
+### Fixed
+
+- **Empirical-hint regex too narrow.** v1.0 left 13/29 dogfood claims
+  `unclassified`. Expanded vocab now covers progressive forms (rising,
+  falling), more nouns (consumption, demand, share, cost), and more verbs
+  (emitted, deployed, declined). Dogfood `unclassified` dropped to 9/29.
+- **Source extractor missed leading articles.** "According to the IEA" and
+  "Per the official press release" were ignored because the regex required
+  `[A-Z]` immediately after the trigger word. Now allows optional `the / a
+  / an` before the source name.
+- **Code-api regex over-triggered on citation parens.** `(Brown et al.,
+  2017)` was being read as a function call. Tightened to require no
+  whitespace between identifier and `(`.
+- **Citation pattern was a claim-type instead of a source marker.** v1.0
+  classified `"X causes Y (Doe 2024)"` as `named_citation`. Citations are
+  now a fallback that only fires when nothing more substantive matched.
+- **`FRONTIER_HANDOFF` fired on non-empirical claim types.** Code-API
+  signatures and temporal facts have no settled-vs-frontier semantics.
+  Gated to `consequential_empirical / specific_statistic / causal_mechanism`.
+- **Statistic+year claims misread as bare `temporal_fact`.** "Emitted 552
+  metric tons in 2024" is a statistic, not a date fact. Reordered checks.
+- **Scientific causation vocabulary unrecognised.** Added `induces /
+  inhibits / suppresses / activates / mediates / triggers / drives /
+  produces / generates / prevents / reduces / raises / amplifies /
+  attenuates` to `_CAUSAL_RE`.
+
+### Added
+
+- `examples/mixed_corpus.txt` — 29-claim representative corpus spanning all
+  9 claim types and all 5 §9 failure modes. Used as the dogfood fixture
+  and as a stable reference for benchmarks.
+- `tests/test_v11_regressions.py` — 16 new tests, one parametrized group
+  per fix above. Locks the v1.0 bugs out permanently.
+
+### Numbers
+
+- Tests: 33 → 49.
+- Dogfood `unclassified` rate: 45% → 31%.
+- False `FRONTIER_HANDOFF` flags on code claims: 2 → 0.
+- T-CLIMATE and T-DELIVERY (tier-1) still green.
+
+---
+
 ## [Unreleased]
 
 ### Planned for v2
@@ -115,3 +164,7 @@ in §9 are the acceptance contract.
   `null`).
 - Citation-chain crawling across documents (still no truth verification).
 - Per-domain consensus encodings (more `settled_claim_markers` entries).
+- LLM-backed attribution detection ("X has argued that Y") — the dogfood
+  shows the heuristic can't separate this from substantive empirical
+  claims. This is what `AnthropicClient` is for; benchmark module exists
+  to quantify the gain.
