@@ -1,6 +1,7 @@
 ---
 name: agent-dispatcher
 description: Evaluate natural language requests in the background, extract the optimal workflow shape, and propose approval-gated bespoke agent dispatch plans only when delegation has material parallel-work justification. Use when the user explicitly asks about subagents, agents, delegation, parallel work, worker/explorer roles, an "agent dispatcher", agent council, or swarm; when a task already shows multiple independent workstreams, broad repo audit lanes, migration surfaces, architecture mapping plus independent validation or risk review, coordinated parallel planning, or parallelizable work; or when Codex should decide whether agents are warranted before doing substantial work. The skill must stay silent for ordinary local tasks and must not spawn or initialize agents by itself; it prepares a concrete plan and waits for explicit user approval.
+author: Aurora ORIONCORE
 ---
 
 # Agent Dispatcher

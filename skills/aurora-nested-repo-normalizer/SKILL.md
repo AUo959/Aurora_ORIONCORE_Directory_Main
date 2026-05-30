@@ -1,6 +1,7 @@
 ---
 name: aurora-nested-repo-normalizer
 description: Normalize extracted Aurora repo mirrors into real nested Git repositories with verified remote history, clean repo boundaries, and optional root control-plane refresh, or bootstrap a missing target path directly from the remote when no local mirror exists yet. Use when a repo arrived via ZIP/extraction/copy instead of `git clone`, when a plain folder inside the Aurora workspace should become a true nested repo, or when Codex needs to materialize a missing Aurora nested repo at a known path before follow-up work. Do not use for ordinary publishing, PR work, or generic GitHub sync; hand those off to `gitwiz-github-manager` after normalization.
+author: Aurora ORIONCORE
 ---
 
 # Aurora Nested Repo Normalizer

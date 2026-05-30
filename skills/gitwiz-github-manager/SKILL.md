@@ -1,6 +1,7 @@
 ---
 name: gitwiz-github-manager
 description: Manage Git and GitHub operations for the Aurora / ORIONCORE workspace with project-specific safety rules. Use when users ask to configure remotes, create GitHub repos, scan local-vs-remote drift, draft PR packets, publish branches, back up or replace bootstrap GitHub history, push root or nested repos, diagnose auth/SSH issues, or perform repo-aware GitHub setup across the root control-plane repo and named nested repos. Do not use for general code changes, CI failure debugging, or PR comment handling unless the task is primarily about repo publishing and remote state.
+author: Aurora ORIONCORE
 ---
 
 # GITWIZ GitHub Manager
@@ -187,9 +188,9 @@ Recommended pattern:
 
 If HTTPS auth is missing or fragile:
 
-1. Check for an existing SSH key in `~/.ssh/`.
+1. Check whether an existing SSH key is already configured for GitHub access (inspect the user's SSH directory).
 2. If needed, generate a dedicated key.
-3. Prefer a dedicated host alias in `~/.ssh/config` instead of changing all `github.com` traffic.
+3. Prefer a dedicated host alias in the SSH client config file instead of changing all `github.com` traffic.
 4. Test with `ssh -T <alias>`.
 5. Switch the repo remote to the SSH URL that uses that alias.
 
