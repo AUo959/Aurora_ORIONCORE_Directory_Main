@@ -278,7 +278,8 @@ def inbox_from_recommendations(report: dict[str, Any], manifest: dict[str, Any])
             "blocking": bool(item.get("blocking", False)),
             "status": str(item.get("status", "open")),
         }
-        assert set(record) == set(INBOX_FIELDS)
+        if set(record) != set(INBOX_FIELDS):
+            raise ValueError(f"Inbox record field mismatch: expected {sorted(INBOX_FIELDS)}, got {sorted(record)}")
         out.append(record)
     return out
 

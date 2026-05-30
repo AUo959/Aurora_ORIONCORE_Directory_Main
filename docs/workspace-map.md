@@ -1,12 +1,12 @@
 # Workspace Map
 
-- Generated: `2026-05-30T23:33:10Z`
+- Generated: `2026-05-30T23:45:03Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
 - Top-level entries cataloged: `39`
 - Nested repos registered: `5`
 - Archive or binary artifacts inventoried: `1268`
 - Classification overrides loaded: `5` from `catalog/classification_overrides.yaml`
-- Top-level paths excluded by privacy screen: `2`
+- Top-level paths excluded by privacy screen: `4`
 
 ## Zones
 
@@ -40,7 +40,7 @@
 
 ## Privacy Screen
 
-- `auto_scope_unknown`: `2` top-level paths excluded
+- `auto_scope_unknown`: `4` top-level paths excluded
 
 ## Largest Archive/Binary Artifacts
 

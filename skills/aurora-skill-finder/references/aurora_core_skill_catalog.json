@@ -14,7 +14,10 @@
         "conflict_matrix",
         "continuity",
         "entity schema",
-        "staging to canon"
+        "staging to canon",
+        "validate_entity",
+        "reconcil",
+        "entity_schema"
       ],
       "exclude_keywords": [
         "github actions",
@@ -23,6 +26,7 @@
         "web game"
       ],
       "path_hints": [
+        "aurora-canon-reconciler/scripts",
         "canonrec",
         "aurora-canon-reconciler",
         "promotion_queue",
@@ -291,7 +295,10 @@
         "zipwiz packaging",
         "setup script",
         "branch cleanup",
-        "script governance"
+        "script governance",
+        "validate_entity",
+        "aurora-canon-reconciler",
+        "reconcil"
       ],
       "path_hints": [
         "aurora-repo-stabilizer",

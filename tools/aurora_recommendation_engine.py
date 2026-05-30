@@ -136,7 +136,8 @@ def recommendation(
         "blocking": blocking,
         "status": status,
     }
-    assert set(record) == set(RECOMMENDATION_FIELDS)
+    if set(record) != set(RECOMMENDATION_FIELDS):
+        raise ValueError(f"Recommendation record field mismatch: expected {sorted(RECOMMENDATION_FIELDS)}, got {sorted(record)}")
     return record
 
 

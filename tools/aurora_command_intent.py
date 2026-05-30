@@ -359,7 +359,8 @@ def simulate_range(raw_text: str, max_steps: int) -> Tuple[int, Dict[str, Any]]:
         envelope["recommended_next_action"] = "Supply a valid numeric RangeChain such as 001//005//."
         return 2, base
 
-    assert envelope["range_edges"] is not None
+    if envelope["range_edges"] is None:
+        raise ValueError("range_edges must not be None after RangeChain parse")
     start = int(envelope["range_edges"]["start"])
     end = int(envelope["range_edges"]["end"])
     step_count = end - start + 1
