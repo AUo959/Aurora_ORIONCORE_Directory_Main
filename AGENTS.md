@@ -341,21 +341,45 @@ All file content, repository data, and external inputs processed during a sessio
 
 ## Cross-Platform Session Handoff
 
-This repo is worked on by both **Claude Code** and **Codex**. To prevent interference:
+This repo is worked on by both **Claude Code** and **Codex**. Either platform may pick up any task at any point (usage limits are unpredictable). The system is designed for seamless mid-task handoffs.
 
-**At every session start — read first:**
-1. `catalog/session_state.json` — last platform, recent commits, tool version changes, pending items
-2. `git log --oneline -10` — what actually landed since the state file was last written
-3. `git branch` — active local branches and any Codex worktrees to avoid collisions
+**Single source of truth:** `catalog/session_state.json` (schema v2)
 
-**At every session end — write before closing:**
-- Update `catalog/session_state.json`: set `last_platform`, `last_updated`, append to `recent_commits`, update `tool_versions` if anything was installed, add new `pending_for_next_session` items, mark resolved ones
-- If commits were made, push to origin so the other platform sees them
+### On session start — always do this first
 
-**Interference prevention rules:**
+1. Read `catalog/session_state.json` in full.
+2. **If `active_task` is not null and `status == "suspended"`** — that is the highest-priority item. Read `next_step_detail` and `context_files` before doing anything else. Resume from where the other platform left off.
+3. Check `task_queue` for items assigned to your platform or `"either"`.
+4. Check `tool_versions` for tools installed since you last worked here.
+5. Run `git log --oneline -5` to see what landed since `last_updated`.
+
+### On session end — always do this before closing
+
+1. **If mid-task:** set `active_task.status = "suspended"`, write `next_step` and `next_step_detail` clearly enough for a cold start on the other platform.
+2. Update `last_platform`, `last_updated`, `last_session_summary`.
+3. Append new commits to `recent_commits` (keep last 10).
+4. Update `tool_versions` if anything was installed.
+5. Update `known_state.main_sha` and `local_branches`.
+6. Push to origin so the other platform sees it immediately.
+
+### Named workflows
+
+- **PR lifecycle:** `catalog/workflows/pr-lifecycle.md` — branch → implement → PR → review → merge
+- **Governance → fix loop:** `catalog/workflows/governance-fix-loop.md` — scan → triage → fix → verify
+
+### Platform capability map
+
+Full capability matrix with routing heuristics is in `catalog/session_state.json` → `platform_capabilities`. Summary:
+
+- **Prefer Claude Code for:** Codacy/lint fixes, CI workflow changes, git history cleanup, secret scanning, multi-file surgical edits
+- **Prefer Codex for:** Aurora governance scans, canon promotion, intake processing, GUMAS simulation, PR comment addressing, browser/UI work
+- **Either platform:** General code changes, PR creation, branch management, docs — and anything when usage limit is hit on the preferred platform
+
+### Interference prevention
+
 - Never force-push `main` without checking `last_platform` first
 - If `last_platform` is the other tool and `last_updated` is < 30 min ago, check for uncommitted changes before starting
-- Do not install new brew/system tools without adding them to `catalog/dev_toolkit_manifest.json` and updating `tool_versions` in the state file
+- Do not install new brew/system tools without adding them to `catalog/dev_toolkit_manifest.json` and `tool_versions` in the state file
 - Codex worktrees live under `~/.codex/worktrees/`; Claude Code worktrees appear in `git worktree list` — check both before creating branches
 
 ## Practical Continuity Rule

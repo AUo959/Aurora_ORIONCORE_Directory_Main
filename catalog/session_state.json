@@ -1,14 +1,85 @@
 {
-  "schema_version": 1,
-  "purpose": "Cross-platform session handoff. Updated by both Claude Code and Codex at the end of any session that makes significant changes. Read at the start of every session before doing meaningful work.",
+  "schema_version": 2,
+  "purpose": "Cross-platform session handoff and task queue. Read at the start of every session. Update at the end of every session that makes meaningful changes. Either platform can suspend any task mid-flight and the other can resume it.",
+
   "protocol": {
-    "on_session_start": "Read this file. Check last_platform, last_updated, and pending_for_next_session. Look for tool_changes that affect your environment (e.g. new brew installs). Check recent_commits for context on what changed.",
-    "on_session_end": "Update this file: set last_platform, last_updated, increment recent_commits, update tool_versions if anything changed, move resolved items out of pending_for_next_session, add new pending items.",
-    "conflict_rule": "If both platforms made commits since last_updated, merge the recent_commits lists by date. Do not overwrite — append."
+    "on_session_start": [
+      "1. Read this file in full.",
+      "2. Check active_task — if status is 'suspended', that is the highest-priority item. Read next_step_detail and context_files before doing anything else.",
+      "3. Check task_queue for any items assigned to your platform.",
+      "4. Check tool_versions for any tools installed since you last worked here.",
+      "5. Run `git log --oneline -5` to see what landed since last_updated."
+    ],
+    "on_session_end": [
+      "1. If mid-task: set active_task.status='suspended', write next_step and next_step_detail clearly enough for a cold start.",
+      "2. Update last_platform, last_updated, last_session_summary.",
+      "3. Append new commits to recent_commits (keep last 10).",
+      "4. Update tool_versions if anything was installed.",
+      "5. Move completed pending items out; add new ones.",
+      "6. Update known_state.main_sha.",
+      "7. Push to origin so the other platform sees it."
+    ],
+    "suspend_rule": "A suspend point must be self-contained: the resuming platform should need to read only this file + context_files to continue. Never rely on conversational memory surviving the handoff.",
+    "conflict_rule": "If both platforms made commits since last_updated, merge recent_commits by date. Do not overwrite — append."
   },
-  "last_updated": "2026-05-30T22:00:00Z",
+
+  "platform_capabilities": {
+    "claude-code": {
+      "strengths": [
+        "Precise multi-file editing with Read/Edit/Write tools",
+        "Static analysis: Codacy (Agentlinter, Ruff, Bandit, Semgrep), gitleaks",
+        "Git history surgery (filter-repo, rebase, worktree management)",
+        "CI/CD workflow authoring (.github/workflows/)",
+        "Pre-commit hook wiring (.claude/settings.json hooks)",
+        "Long structured rewrites and refactors",
+        "Shell scripting and Bash automation"
+      ],
+      "skills": ["codacy-skills", "gitleaks", "gitwiz-github-manager", "agent-dispatcher"],
+      "plugins": ["codacy-skills@codacy"],
+      "limitations": ["No browser/computer-use", "No Aurora governance skills", "No Figma"]
+    },
+    "codex": {
+      "strengths": [
+        "Aurora governance skills (canon-reconciler, governance-orchestrator, script-governor, narrative-tone-governor, repo-stabilizer, threadcore, zipwiz)",
+        "Intake processing: aurora-selective-integration, aurora-skill-finder",
+        "GUMAS simulation: gumas-simulation-engine, aurora-quantum-forge-ops",
+        "Browser automation and computer use",
+        "Figma (MCP), Slack, multi-agent dispatch",
+        "PR review comment addressing: gh-address-comments",
+        "ChatGPT Apps, web/game/iOS/macOS app building"
+      ],
+      "skills": [
+        "aurora-canon-reconciler", "aurora-exec-brief-pipeline", "aurora-governance-orchestrator",
+        "aurora-narrative-tone-governor", "aurora-python-ingest-autowire", "aurora-quantum-forge-ops",
+        "aurora-repo-stabilizer", "aurora-script-governor", "aurora-selective-integration",
+        "aurora-skill-finder", "gumas-simulation-engine", "threadcore-governor", "zipwiz-governor",
+        "gh-address-comments", "gh-fix-ci", "gitwiz-github-manager", "agent-dispatcher",
+        "aurora-nested-repo-normalizer", "security-best-practices", "security-threat-model"
+      ],
+      "plugins": [
+        "github@openai-curated", "browser@openai-bundled", "computer-use@openai-bundled",
+        "aurora-workspace-guard@aurora-workspace-local", "figma@openai-curated",
+        "build-web-apps@openai-curated", "slack@openai-curated", "codex-security@openai-curated"
+      ],
+      "model": "gpt-5.5 (xhigh reasoning, multi-agent enabled)",
+      "limitations": ["Less precise on multi-file surgical edits", "No Codacy integration", "No pre-commit hook wiring"]
+    },
+    "routing_heuristics": {
+      "prefer_claude_code": ["Codacy/lint fixes", "CI workflow changes", "git history cleanup", "pre-commit config", "multi-file refactors", "secret scanning"],
+      "prefer_codex": ["Aurora governance scans", "canon promotion", "intake processing", "GUMAS simulation", "PR comment addressing", "browser/UI testing", "Figma design work"],
+      "either": ["General code changes", "PR creation", "branch management", "documentation", "skill edits", "any task when usage limit hit on preferred platform"]
+    }
+  },
+
+  "active_task": null,
+
+  "task_queue": [],
+
+  "completed_tasks": [],
+
+  "last_updated": "2026-05-30T23:00:00Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Phase 0 completion: Agentlinter 20→3, branch prune (8 branches + 6 stale worktrees), secret triage (1 live OpenAI key rotated + branch deleted), gitleaks CI gate live, devkit updated with gitleaks entry.",
+  "last_session_summary": "Phase 0 complete. Cross-platform workflow layer built: session_state.json v2 with suspend/resume protocol, platform capability map, task queue, workflow specs (pr-lifecycle, governance-fix-loop). Devkit 20/20. gitleaks CI gate live.",
 
   "tool_versions": {
     "gitleaks": "8.30.1",
@@ -30,28 +101,40 @@
 
   "recent_commits": [
     {
+      "sha": "497e2b6",
+      "date": "2026-05-30",
+      "platform": "claude-code",
+      "summary": "chore(scan): refresh workspace manifest and repo registry timestamps"
+    },
+    {
+      "sha": "239bd9c",
+      "date": "2026-05-30",
+      "platform": "claude-code",
+      "summary": "feat(devkit+handoff): gitleaks in devkit, session_state.json v1, AGENTS.md handoff protocol, Stop hook"
+    },
+    {
       "sha": "9ef5384",
       "date": "2026-05-30",
       "platform": "claude-code",
-      "summary": "feat(security): gitleaks CI gate + .gitleaks.toml allowlist + gitignore update + manifest refresh"
+      "summary": "feat(security): gitleaks CI gate + .gitleaks.toml allowlist"
     },
     {
       "sha": "610f791",
       "date": "2026-05-30",
       "platform": "claude-code",
-      "summary": "fix(agentlinter): resolve 17/20 Agentlinter findings — injection defense, escape hatches, author fields, SSH path refs, identity/context/memory sections"
+      "summary": "fix(agentlinter): resolve 17/20 Agentlinter findings"
     }
   ],
 
   "security_events": [
     {
       "date": "2026-05-30",
-      "event": "OpenAI API key sk-proj-ylVuuDDY… rotated by owner. Was on branch codex/workspace-maintenance-sync-2026-03-19 (never merged to main). Branch deleted from origin.",
+      "event": "OpenAI API key sk-proj-ylVuuDDY… rotated by owner. Branch carrying it deleted from origin.",
       "status": "resolved"
     },
     {
       "date": "2026-05-30",
-      "event": "AWS IAM key AKIAVCODYLSA53PQK4ZA found in untracked archived chat HTML. Not in git history. Owner to verify/deactivate in AWS console.",
+      "event": "AWS IAM key AKIAVCODYLSA53PQK4ZA found in untracked archived chat HTML only. Owner to verify/deactivate in AWS console.",
       "status": "pending_owner_action"
     }
   ],
@@ -60,31 +143,31 @@
     {
       "id": "0.1-aws-key",
       "priority": "high",
-      "description": "Verify AWS IAM key AKIAVCODYLSA53PQK4ZA is deactivated in AWS console. Found in archives/unzipped/ZIP_Archives/ (untracked). No git history exposure.",
+      "description": "Verify AWS IAM key AKIAVCODYLSA53PQK4ZA deactivated in AWS console. Untracked disk only — no git exposure.",
       "assigned_to": "owner"
     },
     {
       "id": "roadmap-1.1",
       "priority": "medium",
-      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows → ~8 core). See reports/state_briefs/development_roadmap__2026-05-24.md §1.1.",
-      "assigned_to": "next_session"
+      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows → ~8). See reports/state_briefs/development_roadmap__2026-05-24.md §1.1. Prefer Codex (has browser + github plugin for PR review).",
+      "assigned_to": "either"
     },
     {
       "id": "roadmap-1.2",
       "priority": "medium",
-      "description": "Phase 1: Unify Python version fleet-wide (3.9.6 → 3.12). Root devkit runs 3.9.6; CloudBank declares 3.12. See roadmap §1.2.",
-      "assigned_to": "next_session"
+      "description": "Phase 1: Unify Python floor fleet-wide (3.9.6 → 3.12). Prefer Claude Code (CI workflow edits, devkit manifest update).",
+      "assigned_to": "claude-code"
     },
     {
       "id": "roadmap-0.5",
       "priority": "low",
-      "description": "Decide CanonRec purpose: formalize as skill-release repo or mark archived in catalog/repo_registry.yaml. See roadmap §0.5.",
-      "assigned_to": "next_session"
+      "description": "Decide CanonRec purpose: formalize as skill-release repo or mark archived in catalog/repo_registry.yaml.",
+      "assigned_to": "either"
     }
   ],
 
   "known_state": {
-    "main_sha": "9ef5384",
+    "main_sha": "497e2b6",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -92,7 +175,6 @@
       "codex/root-control-plane-local-2026-03-25",
       "codex/root-control-plane-sync-2026-04-01-mixed-backup",
       "codex/root-reconstruct-recovered-protocols-2026-03-26",
-      "codex/workspace-maintenance-sync-2026-03-19",
       "feat/warrant-lens",
       "rescue/root-control-plane-dirty-workingcopy-2026-03-25",
       "codex/gitwiz-sync-audit-canonical-2026-04-08"
@@ -102,11 +184,15 @@
       "~/.codex/worktrees/2d04 — detached HEAD 13c126b",
       "~/.codex/worktrees/966b — detached HEAD 13c126b"
     ],
-    "codacy_status": "analysis complete on 610f791; Agentlinter 3 remaining (all accepted: modular-files, false-positive cross-ref, runtime-config-not-used)",
-    "devkit_status": "READY 20/20 tools as of 2026-05-30 (gitleaks 8.30.1 added)",
+    "codacy_status": "analysis complete on 610f791; Agentlinter 3 remaining (all accepted)",
+    "devkit_status": "READY 20/20 tools as of 2026-05-30",
     "ci_workflows": [
       ".github/workflows/ci.yml — tests + workspace-verify on push/PR to main",
-      ".github/workflows/secret-scan.yml — gitleaks on all branches/PRs (added 2026-05-30)"
+      ".github/workflows/secret-scan.yml — gitleaks on all branches/PRs"
+    ],
+    "workflow_specs": [
+      "catalog/workflows/pr-lifecycle.md",
+      "catalog/workflows/governance-fix-loop.md"
     ]
   }
 }
