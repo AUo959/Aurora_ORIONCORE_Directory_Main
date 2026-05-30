@@ -11,8 +11,22 @@ permissions:
 
 jobs:
   test:
-    name: Tests & Workspace Verification
+    name: Tests & Workspace Verification (py${{ matrix.python-version }})
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+        include:
+          # 3.12 is CI canon and gates merges.
+          - python-version: "3.12"
+            experimental: false
+          # 3.9 mirrors the macOS system Python; surfaces version skew
+          # without blocking merges until the 3.9 leg is green.
+          - python-version: "3.9"
+            experimental: true
 
     steps:
       - name: Checkout
@@ -23,7 +37,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "${{ matrix.python-version }}"
 
       - name: Install dependencies
         run: |
@@ -41,7 +55,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: workspace-verify-report
+          name: workspace-verify-report-py${{ matrix.python-version }}
           path: reports/analysis/workspace_verify_latest.json
           retention-days: 30
 

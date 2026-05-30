@@ -2,5 +2,17 @@
 set -eu
 
 ROOT="$(git rev-parse --show-toplevel)"
-exec python3 "$ROOT/tools/workspace_verify.py" --git-pre-commit
 
+# core.hooksPath is set to .githooks (see `make setup`), which makes
+# `pre-commit install` refuse to run. So when pre-commit is available we
+# invoke its hook set directly here. The .pre-commit-config.yaml set
+# includes the workspace-verify local hook, so this branch is a superset
+# of the fallback below.
+if command -v pre-commit >/dev/null 2>&1; then
+    exec pre-commit run --config "$ROOT/.pre-commit-config.yaml" --hook-stage pre-commit
+fi
+
+# Fallback: pre-commit is an optional tool (catalog/dev_toolkit_manifest.json).
+# When it is not installed, still run the baseline workspace verification,
+# which only needs python3 (a required tool).
+exec python3 "$ROOT/tools/workspace_verify.py" --git-pre-commit
