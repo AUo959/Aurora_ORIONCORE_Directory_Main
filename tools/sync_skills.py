@@ -10,12 +10,16 @@ Usage:
 Direction: skills/ (canonical source) → ~/.codex/skills/ (installed)
 This is one-way. Edit in skills/, then run this to install.
 
+After --apply, also updates catalog/session_state.json → platform_capabilities.codex.skills
+with the current skill list so the capability map stays current automatically.
+
 Skills tracked in skills/ are project-owned (no LICENSE.txt). OpenAI-maintained
 skills (chatgpt-apps, doc, pdf, imagegen, etc.) are not managed here.
 """
 
 import argparse
 import hashlib
+import json
 import shutil
 import sys
 from pathlib import Path
@@ -127,8 +131,44 @@ def main() -> int:
             print("Run with --apply to install.")
     else:
         print(f"Synced {total_changes} file(s) across {len(skills)} skill(s).")
+        if not args.skill:  # only update map on full sync
+            _update_capability_map()
 
     return 1 if errors else 0
+
+
+def _update_capability_map() -> None:
+    """Update platform_capabilities.codex.skills in session_state.json with current skills/ list."""
+    state_path = REPO_ROOT / "catalog" / "session_state.json"
+    if not state_path.exists():
+        return
+    try:
+        state = json.loads(state_path.read_text())
+    except Exception:
+        return
+
+    current_skills = sorted(
+        p.name for p in SKILLS_SRC.iterdir()
+        if p.is_dir() and not p.name.startswith(".")
+    )
+
+    caps = state.setdefault("platform_capabilities", {})
+    codex = caps.setdefault("codex", {})
+    old_skills = codex.get("skills", [])
+
+    if old_skills == current_skills:
+        return  # nothing to update
+
+    codex["skills"] = current_skills
+    state_path.write_text(json.dumps(state, indent=2) + "\n")
+    added = [s for s in current_skills if s not in old_skills]
+    removed = [s for s in old_skills if s not in current_skills]
+    changes = []
+    if added:
+        changes.append(f"+{len(added)} added")
+    if removed:
+        changes.append(f"-{len(removed)} removed")
+    print(f"  📋 capability map updated ({', '.join(changes) or 'reordered'}): {len(current_skills)} skills")
 
 
 if __name__ == "__main__":

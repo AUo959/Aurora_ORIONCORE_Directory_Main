@@ -1,21 +1,54 @@
 #!/bin/sh
-# Aurora dev kit pre-push gate.
-# Blocks a push when a *required* tool in catalog/dev_toolkit_manifest.json is
-# missing or broken (audit status BLOCKED). Optional-tool warnings do not block.
+# Aurora pre-push gate.
+#
+# 1. Blocks push when a required dev-toolkit tool is missing (BLOCKED status).
+# 2. Auto-syncs skills/ → ~/.codex/skills/ when skills/ changed in this push.
+#
 # Emergency bypass: git push --no-verify
+
 set -eu
 
 ROOT="$(git rev-parse --show-toplevel)"
 
+# ── 1. Dev toolkit gate ───────────────────────────────────────────────────
 echo "[pre-push] Auditing dev toolkit (required tools)..."
 report="$(python3 "$ROOT/tools/aurora_devkit.py" --fail-on-blocker 2>&1)" && rc=0 || rc=$?
 
-if [ "$rc" -eq 0 ]; then
-    echo "[pre-push] Dev toolkit OK."
+if [ "$rc" -ne 0 ]; then
+    echo "[pre-push] BLOCKED — a required dev tool is missing or broken:" >&2
+    echo "$report" >&2
+    echo "[pre-push] Fix the blocker(s) above, or bypass with: git push --no-verify" >&2
+    exit 1
+fi
+
+echo "[pre-push] Dev toolkit OK."
+
+# ── 2. Auto-skill-sync ────────────────────────────────────────────────────
+# Skip in CI environments (GitHub Actions sets CI=true).
+if [ -n "${CI:-}" ]; then
     exit 0
 fi
 
-echo "[pre-push] BLOCKED — a required dev tool is missing or broken:" >&2
-echo "$report" >&2
-echo "[pre-push] Fix the blocker(s) above, or bypass with: git push --no-verify" >&2
-exit 1
+# Check if any commits being pushed touched skills/.
+# Read remote/sha pairs from stdin (format: <local_ref> <local_sha> <remote_ref> <remote_sha>)
+SKILLS_CHANGED=""
+while read -r local_ref local_sha remote_ref remote_sha; do
+    # remote_sha is 0000... for new branches — compare against HEAD
+    if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
+        base="$(git rev-parse HEAD~1 2>/dev/null || echo "$local_sha")"
+    else
+        base="$remote_sha"
+    fi
+    SKILLS_CHANGED="$(git diff --name-only "$base" "$local_sha" -- skills/ 2>/dev/null || true)"
+    if [ -n "$SKILLS_CHANGED" ]; then
+        break
+    fi
+done
+
+if [ -n "$SKILLS_CHANGED" ]; then
+    echo "[pre-push] skills/ changed — syncing to ~/.codex/skills/..."
+    python3 "$ROOT/tools/sync_skills.py" --apply
+    echo "[pre-push] Skill sync complete."
+fi
+
+exit 0
