@@ -120,7 +120,15 @@
     }
   },
   "active_task": null,
-  "task_queue": [],
+  "task_queue": [
+    {
+      "id": "review-peer-review-protocol-v1",
+      "assigned_to": "codex",
+      "priority": "high",
+      "type": "peer-review",
+      "description": "PEER-REVIEW REQUEST (dogfooding the protocol on itself). Review docs/AURORA_PEER_REVIEW_PROTOCOL_v1.md (commit 7c5db70). Apply the protocol's own reviewer contract (\u00a78): read the design against intent, warrant-ground every finding (no rubber-stamp, no nitpick). Answer the open questions Q1-Q3 (\u00a74/\u00a76/\u00a79) and the explicit asks in \u00a711 (escape-hatch abuse, routing entrenchment, over-engineering for a 2-platform/1-operator reality \u2014 what to cut from v1). Verdict: approve / approve-with-notes / changes-requested. Then clear review_debt rd-20260531-peer-review-protocol-v1. Only after approve(-with-notes) do we build the tooling (schema, peer_review.py, verify_review_debt)."
+    }
+  ],
   "completed_tasks": [
     {
       "id": "phase-0-complete",
@@ -148,9 +156,9 @@
       "summary": "Codex verified Claude Code commit 3f872f3, restored the warrant-lens default HeuristicClient import, fixed GitWiz registry loading, and confirmed root tests/health pass; installed skill runtime sync is pending."
     }
   ],
-  "last_updated": "2026-05-31T15:05:00Z",
+  "last_updated": "2026-05-31T15:30:00Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Landed Codex's orphaned (unpushed) work: Interaction Warrant Policy v1 (5d774ac) and secret-scan hardening + AWS-key redaction (f8a58ae). Re-verified gitleaks clean. Both pushed.",
+  "last_session_summary": "Landed Codex's orphaned work (warrant policy 5d774ac, secret-scan f8a58ae). Authored Peer Review Protocol v1 (7c5db70, draft) and dogfooded it: recorded the first review_debt entry against the doc itself and queued Codex as reviewer.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -169,6 +177,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "7c5db70",
+      "date": "2026-05-31",
+      "platform": "claude-code",
+      "summary": "docs(protocol): Peer Review Protocol v1 (draft, pending Codex review)"
+    },
+    {
+      "sha": "c9fb1da",
+      "date": "2026-05-31",
+      "platform": "claude-code",
+      "summary": "chore(state): record handoff \u2014 Codex work landed and pushed by Claude Code"
+    },
     {
       "sha": "f8a58ae",
       "date": "2026-05-31",
@@ -213,18 +233,6 @@
     },
     {
       "sha": "c221593",
-      "date": "2026-05-31",
-      "platform": "claude-code",
-      "summary": "chore(state): auto-update session handoff [skip ci]"
-    },
-    {
-      "sha": "d596feb",
-      "date": "2026-05-31",
-      "platform": "claude-code",
-      "summary": "chore(state): auto-update session handoff [skip ci]"
-    },
-    {
-      "sha": "72a2e0f",
       "date": "2026-05-31",
       "platform": "claude-code",
       "summary": "chore(state): auto-update session handoff [skip ci]"
@@ -275,7 +283,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "f8a58ae",
+    "main_sha": "7c5db70",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -315,5 +323,21 @@
       "docs/SESSION_CLAIMS_WORKFLOW_v1.md",
       "docs/COHERENCE_CHECKLIST.md"
     ]
-  }
+  },
+  "review_debt": [
+    {
+      "id": "rd-20260531-peer-review-protocol-v1",
+      "commits": [
+        "7c5db70"
+      ],
+      "change_class": "coordination",
+      "domain": "peer-review-protocol",
+      "author_platform": "claude-code",
+      "incurred_at": "2026-05-31T15:30:00Z",
+      "status": "pending",
+      "review_receipt": null,
+      "blocks": "adoption of the protocol + next coordination-layer change in this domain",
+      "note": "Hand-created (peer_review.py not built yet) to dogfood the mechanism. Codex is the assigned reviewer; see task_queue."
+    }
+  ]
 }
