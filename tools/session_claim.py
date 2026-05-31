@@ -1,13 +1,34 @@
 #!/usr/bin/env python3
-"""Coordinate concurrent Codex and Claude Code work with local session claims."""
+"""Coordinate concurrent Codex and Claude Code work with local session claims.
+
+## Claim scope and distributed extension
+
+Claims currently use scope="local" — they are machine-local JSON files in
+catalog/session_claims/ (gitignored, visible only on this machine).
+
+To support multi-machine / multi-user operation in the future, change the
+CLAIM_BACKEND_URL environment variable:
+
+    CLAIM_BACKEND_URL=local://           # default: file system (current)
+    CLAIM_BACKEND_URL=redis://host:6379  # future: Redis TTL keys
+    CLAIM_BACKEND_URL=github://owner/repo # future: GitHub Issues as claims
+
+The claim schema includes scope and machine_id so that remote-scope claims
+carry enough context to identify their origin without changing the format.
+Each claim backend must implement read_claims() and write_claim() over the
+same JSON payload. No backend-specific code lives here yet — the extension
+point is the CLAIM_BACKEND_URL env var and the scope field in the payload.
+"""
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import socket
 import sys
+import uuid
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -15,10 +36,24 @@ from typing import Any
 from _workspace_common import git, write_json
 
 
-CLAIM_SCHEMA_VERSION = 1
+CLAIM_SCHEMA_VERSION = 2  # v2 adds scope and machine_id
 DEFAULT_CLAIMS_RELATIVE_DIR = Path("catalog") / "session_claims"
 DEFAULT_TTL_MINUTES = 180
 NON_MUTATING_POSTURES = {"read_only", "planning", "advisory_only"}
+CLAIM_BACKEND_URL = os.environ.get("CLAIM_BACKEND_URL", "local://")
+MACHINE_ID_PATH = Path.home() / ".codex" / ".machine_id"
+
+
+def _get_machine_id() -> str:
+    """Return a stable per-machine UUID. Created on first call, persisted."""
+    if MACHINE_ID_PATH.exists():
+        mid = MACHINE_ID_PATH.read_text().strip()
+        if mid:
+            return mid
+    mid = str(uuid.uuid4())
+    MACHINE_ID_PATH.parent.mkdir(parents=True, exist_ok=True)
+    MACHINE_ID_PATH.write_text(mid + "\n")
+    return mid
 
 
 def utc_now() -> datetime:
@@ -305,15 +340,20 @@ def create_claim(
         "schema_version": CLAIM_SCHEMA_VERSION,
         "claim_id": normalized_claim_id,
         "status": "active",
+        # --- origin ---
         "platform": platform,
+        "machine_id": _get_machine_id(),   # stable UUID per machine
+        "host": socket.gethostname(),       # human-readable hostname
+        "scope": "local",                   # "local" | "remote" (see module docstring)
+        # --- task ---
         "session_label": session_label,
         "task_id": task_id,
         "repo": normalize_repo(repo),
         "branch": current_branch(root),
         "worktree": str(root.resolve()),
-        "host": socket.gethostname(),
         "mutation_posture": mutation_posture,
         "paths": normalized_paths,
+        # --- timing ---
         "started_at": format_time(created_at),
         "updated_at": format_time(created_at),
         "expires_at": format_time(expires_at),

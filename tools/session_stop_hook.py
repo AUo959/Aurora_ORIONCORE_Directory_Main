@@ -112,15 +112,39 @@ def _update_state(state: dict, head: str) -> tuple[dict, list[dict]]:
 
 # ── Commit + push ─────────────────────────────────────────────────────────
 
-def _commit_state() -> bool:
-    """Stage + commit session_state.json only. Returns True on success."""
+def _staged_non_state_files() -> list[str]:
+    """Return staged files other than session_state.json."""
+    raw = _git("diff", "--cached", "--name-only")
+    return [
+        f for f in raw.splitlines()
+        if f and "catalog/session_state.json" not in f
+    ]
+
+
+def _commit_state() -> tuple[bool, str]:
+    """Stage + commit session_state.json only.
+
+    Safety guard: if anything other than session_state.json is already staged,
+    aborts and returns (False, reason) so partial work is never auto-committed.
+    Returns (True, "") on success.
+    """
+    # Guard: check for other staged files BEFORE staging session_state
+    already_staged = _staged_non_state_files()
+    if already_staged:
+        files_str = ", ".join(already_staged[:3])
+        if len(already_staged) > 3:
+            files_str += f" (+{len(already_staged) - 3} more)"
+        return False, f"staged work present ({files_str}) — skipped auto-commit to avoid premature commit"
+
     _git("add", str(STATE_PATH.relative_to(REPO_ROOT)))
     result = subprocess.run(
         ["git", "commit", "-m",
          "chore(state): auto-update session handoff [skip ci]\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"],
         capture_output=True, text=True, cwd=REPO_ROOT,
     )
-    return result.returncode == 0
+    if result.returncode == 0:
+        return True, ""
+    return False, result.stderr.strip() or "git commit failed"
 
 
 def _push() -> bool:
@@ -218,8 +242,8 @@ def main() -> int:
     # Check for uncommitted work (before committing state)
     uncommitted = _git_uncommitted_tracked()
 
-    # Commit + push the state file
-    committed = _commit_state()
+    # Commit + push the state file (safety guard is inside _commit_state)
+    committed, commit_reason = _commit_state()
     pushed = _push() if committed else False
 
     # Write orphan marker if there's abandoned work
@@ -234,8 +258,10 @@ def main() -> int:
     print("╠══════════════════════════════════════════════════════════╣")
     print(f"║  HEAD:      {head:<44}║")
     print(f"║  Commits:   {len(new_commits)} new recorded{' ' * (32 - len(str(len(new_commits))))}║")
-    print(f"║  Committed: {'yes' if committed else 'no — check git status':<42}║")
-    print(f"║  Pushed:    {'yes — Codex can see it now' if pushed else 'no — push manually before switching':<42}║")
+    commit_str = "yes" if committed else f"skipped: {commit_reason}"
+    push_str = "yes — Codex can see it now" if pushed else ("n/a" if not committed else "failed — push manually")
+    print(f"║  Committed: {commit_str:<44}║")
+    print(f"║  Pushed:    {push_str:<44}║")
     if uncommitted:
         print("╠══════════════════════════════════════════════════════════╣")
         print(f"║  ⚠  {len(uncommitted)} uncommitted file(s) — orphan marker written:  ║")

@@ -815,6 +815,55 @@ def verify_relocation_rehearsal(root: Path) -> list[Finding]:
     return findings
 
 
+def verify_session_state(root: Path) -> list[Finding]:
+    """Non-blocking: warn when session_state.json is stale vs HEAD.
+
+    Stale state means the last session didn't update the handoff file, so
+    the other platform (Codex) may be operating on outdated information.
+    Allowed to be 1 commit behind (the auto-commit itself may not have fired
+    yet). Two or more commits behind is surfaced as a warning.
+    """
+    import subprocess as _sp
+    state_path = root / "catalog" / "session_state.json"
+    if not state_path.exists():
+        return []
+    try:
+        import json as _json
+        state = _json.loads(state_path.read_text())
+    except Exception:
+        return []
+
+    known_sha = state.get("known_state", {}).get("main_sha", "")
+    if not known_sha:
+        return []
+
+    try:
+        # Count commits between known_sha and HEAD
+        result = _sp.run(
+            ["git", "rev-list", "--count", f"{known_sha}..HEAD"],
+            capture_output=True, text=True, cwd=root, check=False,
+        )
+        if result.returncode != 0:
+            return []  # known_sha may not be in history (cross-branch)
+        ahead = int(result.stdout.strip() or 0)
+    except Exception:
+        return []
+
+    if ahead <= 1:
+        return []  # 0 = current; 1 = auto-commit pending, acceptable
+
+    return [
+        warning(
+            "session_state_freshness",
+            f"catalog/session_state.json is {ahead} commit(s) behind HEAD "
+            f"(last recorded: {known_sha}). The other platform may be operating "
+            "on stale workspace context.",
+            "Run `python3 tools/session_stop_hook.py` to auto-update, or update "
+            "catalog/session_state.json manually and commit.",
+        )
+    ]
+
+
 def run_checks(root: Path, include_determinism: bool, include_relocation_rehearsal: bool) -> list[Finding]:
     findings: list[Finding] = []
     findings.extend(verify_root_git_repo(root))
@@ -824,6 +873,7 @@ def run_checks(root: Path, include_determinism: bool, include_relocation_rehears
     findings.extend(verify_gitignore(root))
     findings.extend(verify_relocation_plan(root))
     findings.extend(verify_tracked_sizes(root))
+    findings.extend(verify_session_state(root))
     if include_determinism:
         findings.extend(verify_determinism(root))
     if include_relocation_rehearsal:

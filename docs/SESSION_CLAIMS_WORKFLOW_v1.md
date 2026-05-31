@@ -107,3 +107,39 @@ Use session claims for short-lived collision prevention:
 If a task pauses and needs to survive thread or platform changes, write the
 resume details to `catalog/session_state.json`; do not rely on an active claim
 as the only handoff record.
+
+## Claim Schema (v2)
+
+Each claim file carries:
+
+- `scope`: `"local"` (current) or `"remote"` (future multi-machine)
+- `machine_id`: stable UUID per machine, persisted at `~/.codex/.machine_id`
+- `host`: human-readable hostname
+- All other fields from v1 (platform, task_id, paths, TTL, etc.)
+
+## Scaling to Multiple Machines
+
+Claims are currently `scope: "local"` — machine-local, gitignored, visible only
+on one machine. This is the right default for a single-developer, single-machine
+workflow.
+
+To scale to multiple machines or multiple developers:
+
+1. **No code changes required to the schema** — `scope`, `machine_id`, and `host`
+   are already present in every claim.
+
+2. **Change the backend** via the `CLAIM_BACKEND_URL` environment variable:
+   ```
+   CLAIM_BACKEND_URL=local://           # default — file system
+   CLAIM_BACKEND_URL=redis://host:6379  # future — Redis TTL keys per claim_id
+   CLAIM_BACKEND_URL=github://owner/repo # future — GitHub Issues as claims
+   ```
+   The backend reads and writes the same JSON payload regardless of transport.
+
+3. **`catalog/session_state.json` remains the authoritative record** across all
+   machines — it is committed and pushed on session end. Claims are a
+   best-effort coordination optimization, not the source of truth. Multi-machine
+   operation works even without shared claims; it just has higher collision risk.
+
+4. **The `machine_id` field** lets future backends filter claims by origin machine
+   without requiring coordination to assign unique IDs.
