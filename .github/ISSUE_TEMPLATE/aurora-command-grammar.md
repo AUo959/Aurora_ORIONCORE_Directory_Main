@@ -22,7 +22,7 @@ Attach a filled envelope when command meaning affects the issue.
 
 ```json
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "raw_text": "",
   "normalized_text": null,
   "intent_type": "background_handoff",
@@ -40,6 +40,9 @@ Attach a filled envelope when command meaning affects the issue.
   "simulation_status": "not_applicable",
   "runtime_handler_verified": false,
   "runtime_refs": [],
+  "gumas_mutation_auth_required": false,
+  "gumas_mutation_auth_status": "not_applicable",
+  "gumas_mutation_auth_refs": [],
   "execution_status": "not_requested",
   "target_repo": null,
   "authority_refs": [],
@@ -52,5 +55,6 @@ Attach a filled envelope when command meaning affects the issue.
 
 - [ ] Grammar interpretation is separated from runtime execution.
 - [ ] Runtime handler status is marked verified or not verified.
+- [ ] CloudBank/GUMAS mutation authorization status is explicit.
 - [ ] Root/nested repo boundary is explicit.
 - [ ] Tests, receipts, or source links are attached.

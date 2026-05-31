@@ -50,6 +50,8 @@ def test_skill_declares_user_agent_and_background_contracts() -> None:
         "grammar-valid command text is not execution approval",
         "command intent envelope",
         "runtime_handler_verified",
+        "GUMAS mutation authorization",
+        "gumas_mutation_auth_status",
     ):
         assert phrase in text
 
@@ -64,7 +66,14 @@ def test_background_schema_has_required_cross_thread_fields() -> None:
         "intent_type",
         "grammar_family",
         "validation_status",
+        "run_mode",
+        "execution_scope",
+        "live_runtime_execution",
+        "simulation_status",
         "runtime_handler_verified",
+        "gumas_mutation_auth_required",
+        "gumas_mutation_auth_status",
+        "gumas_mutation_auth_refs",
         "execution_status",
         "target_repo",
         "recommended_next_action",
@@ -75,6 +84,10 @@ def test_background_schema_has_required_cross_thread_fields() -> None:
     assert "execution_scope" in schema["properties"]
     assert "live_runtime_execution" in schema["properties"]
     assert "simulation_status" in schema["properties"]
+    assert "gumas_mutation_auth_required" in schema["properties"]
+    assert "gumas_mutation_auth_status" in schema["properties"]
+    assert "gumas_mutation_auth_refs" in schema["properties"]
+    assert "required_not_verified" in schema["properties"]["gumas_mutation_auth_status"]["enum"]
 
 
 def test_audit_handoff_schema_wraps_command_intent_without_replacing_it() -> None:
@@ -90,7 +103,10 @@ def test_audit_handoff_schema_wraps_command_intent_without_replacing_it() -> Non
         "no_mutation_attestation",
     }.issubset(required)
     assert "runtime_verified" in schema["properties"]["source_epistemic_status"]["enum"]
-    assert "live_execution_claim" in schema["properties"]["execution_boundary"]["required"]
+    execution_required = set(schema["properties"]["execution_boundary"]["required"])
+    assert "live_execution_claim" in execution_required
+    assert "gumas_mutation_auth_required" in execution_required
+    assert "gumas_mutation_auth_status" in execution_required
 
 
 def test_github_templates_include_envelope_and_execution_boundary() -> None:
@@ -98,8 +114,9 @@ def test_github_templates_include_envelope_and_execution_boundary() -> None:
     issue_template = read_text(REPO_ROOT / ".github" / "ISSUE_TEMPLATE" / "aurora-command-grammar.md")
 
     for text in (pr_template, issue_template):
-        assert '"schema_version": "1.0.0"' in text
+        assert '"schema_version": "1.1.0"' in text
         assert '"runtime_handler_verified": false' in text
+        assert '"gumas_mutation_auth_status": "not_applicable"' in text
         assert "Grammar interpretation is separated from runtime execution" in text or (
             "grammar-valid text as execution approval" in text
         )

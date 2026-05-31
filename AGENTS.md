@@ -264,7 +264,7 @@ Core rule:
 
 - grammar-valid command text is not execution approval
 - CloudBank remains the parser/runtime authority for command grammar code
-- execution requires explicit target repo and live runtime verification
+- execution requires explicit target repo, live runtime verification, GUMAS mutation authorization, and separate user approval before any CloudBank/GUMAS mutation
 
 Primary references:
 

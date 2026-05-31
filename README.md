@@ -77,6 +77,8 @@ python3 tools/aurora_command_intent.py simulate-range "001//005//"
 
 `simulate-range` is an in-process CloudBank `SymbolicEngine` simulation for
 valid numeric `RangeChain` inputs only. It is not live runtime execution.
+Any CloudBank/GUMAS mutation also requires verified GUMAS mutation
+authorization before runtime execution can move from blocked to approval-ready.
 
 Integration safety gate:
 
@@ -96,6 +98,7 @@ Blocked without separate verification and approval:
 - live command execution
 - mesh message sending
 - nested repo mutation
+- CloudBank/GUMAS mutation without GUMAS mutation authorization evidence
 - publication or issue/PR mutation
 
 Advisory recommendation engine:

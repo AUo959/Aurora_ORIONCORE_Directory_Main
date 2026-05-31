@@ -45,6 +45,7 @@ SCHEMA_REF = (
     "plugins/aurora-command-grammar/skills/aurora-command-grammar/"
     "references/command-intent-envelope.schema.json"
 )
+COMMAND_INTENT_SCHEMA_VERSION = "1.1.0"
 
 _COMMANDISH_HEAD = re.compile(r"^[+#]?[A-Z0-9][A-Z0-9_.:#-]*(?:\(.*\))?$")
 
@@ -133,6 +134,14 @@ def validation_status(warnings: List[Dict[str, str]], issues: List[Dict[str, Opt
     return "valid"
 
 
+def gumas_mutation_auth_fields(required: bool = False) -> Dict[str, Any]:
+    return {
+        "gumas_mutation_auth_required": required,
+        "gumas_mutation_auth_status": "required_not_verified" if required else "not_applicable",
+        "gumas_mutation_auth_refs": [],
+    }
+
+
 def ast_fields(ast_node: Any) -> Dict[str, Any]:
     class_name = ast_node.__class__.__name__
 
@@ -188,7 +197,7 @@ def argument_dicts(arguments: Iterable[Any]) -> List[Dict[str, Optional[str]]]:
 
 def empty_envelope(raw_text: str, grammar_family: str, ast_shape: Optional[str]) -> Dict[str, Any]:
     return {
-        "schema_version": "1.0.0",
+        "schema_version": COMMAND_INTENT_SCHEMA_VERSION,
         "raw_text": raw_text,
         "normalized_text": None,
         "intent_type": "parse",
@@ -207,6 +216,7 @@ def empty_envelope(raw_text: str, grammar_family: str, ast_shape: Optional[str])
         "simulation_status": "not_applicable",
         "runtime_handler_verified": False,
         "runtime_refs": [],
+        **gumas_mutation_auth_fields(False),
         "execution_status": "not_requested",
         "target_repo": None,
         "authority_refs": [SCHEMA_REF],
@@ -285,7 +295,7 @@ def parse_command_intent(raw_text: str) -> Dict[str, Any]:
         return record
 
     record = {
-        "schema_version": "1.0.0",
+        "schema_version": COMMAND_INTENT_SCHEMA_VERSION,
         "raw_text": raw_text,
         "normalized_text": result.normalized_text,
         "intent_type": "parse",
@@ -300,6 +310,7 @@ def parse_command_intent(raw_text: str) -> Dict[str, Any]:
         "simulation_status": "not_applicable",
         "runtime_handler_verified": False,
         "runtime_refs": [],
+        **gumas_mutation_auth_fields(False),
         "execution_status": "not_requested",
         "target_repo": None,
         "authority_refs": authority_refs,
@@ -328,8 +339,10 @@ def envelope_for(
         envelope["execution_scope"] = "blocked_pending_runtime_verification"
         envelope["live_runtime_execution"] = False
         envelope["execution_status"] = "blocked_pending_verification"
+        envelope.update(gumas_mutation_auth_fields(True))
         envelope["recommended_next_action"] = (
-            "Verify target repo and runtime, then request explicit approval before execution."
+            "Verify target repo, live runtime, and GUMAS mutation authorization, "
+            "then request explicit approval before execution."
         )
     return envelope
 
@@ -341,6 +354,7 @@ def simulate_range(raw_text: str, max_steps: int) -> Tuple[int, Dict[str, Any]]:
     envelope["execution_scope"] = "in_process_simulation"
     envelope["live_runtime_execution"] = False
     envelope["simulation_status"] = "blocked"
+    envelope.update(gumas_mutation_auth_fields(False))
 
     base = {
         "ok": False,
@@ -349,6 +363,7 @@ def simulate_range(raw_text: str, max_steps: int) -> Tuple[int, Dict[str, Any]]:
         "execution_scope": "in_process_simulation",
         "live_runtime_execution": False,
         "simulation_status": "blocked",
+        **gumas_mutation_auth_fields(False),
         "parser_authority": COMMAND_GRAMMAR_REF,
         "runtime_authority": SYMBOLIC_ENGINE_REF,
         "intent": envelope,

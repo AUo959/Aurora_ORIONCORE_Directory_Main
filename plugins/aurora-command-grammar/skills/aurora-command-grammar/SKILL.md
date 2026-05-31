@@ -19,7 +19,7 @@ This skill has three audiences:
 ## Authority Order
 
 1. Current committed files in the target repo.
-2. CloudBank grammar code in `AUo959/aurora-cloudbank-symbolic`:
+2. CloudBank grammar code in `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`:
    - `src/aurora/core/command_grammar/ast.py`
    - `src/aurora/core/command_grammar/catalog.py`
    - `src/aurora/core/command_grammar/normalizer.py`
@@ -62,6 +62,7 @@ This skill has three audiences:
 - Show warnings and validation issues before suggesting any action.
 - Say `not verified` when no runtime handler or live runtime was checked.
 - If the user asks for execution, restate the target repo, runtime, command, and expected side effect before proceeding.
+- If execution would mutate CloudBank/GUMAS state, require verified GUMAS mutation authorization before treating the command as approval-ready.
 
 ## Agent-Facing Behavior
 
@@ -76,8 +77,11 @@ Required agent checks:
 3. Preserve root-vs-nested repo boundaries when choosing where evidence lives.
 4. Emit a command intent envelope whenever command meaning affects a decision, artifact, PR, issue, or automation memory.
 5. Treat execution as a separate operation that requires target repo and runtime verification.
+6. Treat CloudBank/GUMAS mutation as blocked until GUMAS mutation authorization is verified.
 
 Do not let agents silently convert a command-like phrase into a mutation, issue closure, branch action, mesh message, or runtime command.
+
+Do not let agents treat GUMAS mutation authorization as implied by grammar validity, runtime availability, or user approval. It is a separate gate for CloudBank/GUMAS mutation.
 
 Do not let agents silently shrink a broader task to only the parsed command. Command grammar can clarify intent, but it must not replace judgment or override the user's ordinary-language objective.
 
@@ -109,6 +113,9 @@ The portable command intent schema is `references/command-intent-envelope.schema
 - `live_runtime_execution`
 - `simulation_status`
 - `runtime_handler_verified`
+- `gumas_mutation_auth_required`
+- `gumas_mutation_auth_status`
+- `gumas_mutation_auth_refs`
 - `target_repo`
 - `recommended_next_action`
 - `receipt_refs`
@@ -150,6 +157,7 @@ and runtime verification evidence is present.
 4. For `@mesh` requests, map to the mesh-router CLI from the reference file and note the runtime endpoint family when useful.
 5. For agent or background work, attach or summarize a command intent envelope when the interpretation affects state, routing, or accountability.
 6. For execution requests, stop and verify live runtime state first. Never execute command/control actions from notation alone.
+7. For CloudBank/GUMAS mutation requests, require GUMAS mutation authorization evidence before moving an envelope to approval-ready.
 
 ## GitHub Review Receipt
 

@@ -19,7 +19,7 @@ Attach a command intent envelope or explain why none is needed.
 
 ```json
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "raw_text": "",
   "normalized_text": null,
   "intent_type": "background_handoff",
@@ -37,6 +37,9 @@ Attach a command intent envelope or explain why none is needed.
   "simulation_status": "not_applicable",
   "runtime_handler_verified": false,
   "runtime_refs": [],
+  "gumas_mutation_auth_required": false,
+  "gumas_mutation_auth_status": "not_applicable",
+  "gumas_mutation_auth_refs": [],
   "execution_status": "not_requested",
   "target_repo": null,
   "authority_refs": [],
@@ -49,6 +52,7 @@ Attach a command intent envelope or explain why none is needed.
 
 - [ ] This PR does not treat grammar-valid text as execution approval.
 - [ ] Runtime handler availability is either verified with code evidence or marked `not verified`.
+- [ ] CloudBank/GUMAS mutation stays blocked unless GUMAS mutation authorization evidence is attached.
 - [ ] If execution behavior changed, tests or receipts show the side effects.
 
 ## Validation

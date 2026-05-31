@@ -22,12 +22,19 @@ def test_command_gateway_safety_probe_does_not_claim_live_execution() -> None:
     assert envelope["execution_scope"] == "blocked_pending_runtime_verification"
     assert envelope["live_runtime_execution"] is False
     assert envelope["runtime_handler_verified"] is False
+    assert envelope["gumas_mutation_auth_required"] is True
+    assert envelope["gumas_mutation_auth_status"] == "required_not_verified"
+    assert envelope["gumas_mutation_auth_refs"] == []
 
     if report["details"]["cloudbank_parser_present"]:
         simulation = report["details"]["simulate_range"]
         assert simulation["execution_scope"] == "in_process_simulation"
         assert simulation["live_runtime_execution"] is False
         assert simulation["simulation_status"] == "completed"
+        assert simulation["gumas_mutation_auth_required"] is False
+        assert simulation["gumas_mutation_auth_status"] == "not_applicable"
+        assert simulation["intent_gumas_mutation_auth_required"] is False
+        assert simulation["intent_gumas_mutation_auth_status"] == "not_applicable"
         assert simulation["intent_execution_status"] == "not_applicable"
         assert simulation["intent_runtime_handler_verified"] is False
 
@@ -92,6 +99,13 @@ def test_schema_presence_check_covers_audit_handoff_record() -> None:
     assert result["status"] == "pass"
     assert any(path.endswith("audit-handoff-record.schema.json") for path in result["details"])
     assert any(path.endswith("aurora_confidence_record.schema.json") for path in result["details"])
+
+
+def test_docs_path_authority_declares_gumas_mutation_auth_gate() -> None:
+    result = gate.docs_path_authority_check()
+
+    assert result["status"] == "pass"
+    assert all(details["gumas_mutation_auth_present"] for details in result["details"].values())
 
 
 def test_confidence_audit_probe_requires_alert_for_low_score() -> None:

@@ -36,6 +36,9 @@ SCHEMA_KEYS = {
     "simulation_status",
     "runtime_handler_verified",
     "runtime_refs",
+    "gumas_mutation_auth_required",
+    "gumas_mutation_auth_status",
+    "gumas_mutation_auth_refs",
     "execution_status",
     "target_repo",
     "authority_refs",
@@ -82,7 +85,7 @@ def test_envelope_is_schema_shaped_and_keeps_execution_blocked() -> None:
     )
 
     assert set(envelope) == SCHEMA_KEYS
-    assert envelope["schema_version"] == "1.0.0"
+    assert envelope["schema_version"] == "1.1.0"
     assert envelope["normalized_text"] == "THREADWAKE//."
     assert envelope["intent_type"] == "execute_request"
     assert envelope["validation_status"] == "valid_with_warnings"
@@ -91,9 +94,12 @@ def test_envelope_is_schema_shaped_and_keeps_execution_blocked() -> None:
     assert envelope["live_runtime_execution"] is False
     assert envelope["execution_status"] == "blocked_pending_verification"
     assert envelope["runtime_handler_verified"] is False
+    assert envelope["gumas_mutation_auth_required"] is True
+    assert envelope["gumas_mutation_auth_status"] == "required_not_verified"
+    assert envelope["gumas_mutation_auth_refs"] == []
     assert envelope["target_repo"] == gateway.CLOUDBANK_REPO_REF
     assert envelope["receipt_refs"] == ["reports/example-receipt.md"]
-    assert "explicit approval" in envelope["recommended_next_action"]
+    assert "GUMAS mutation authorization" in envelope["recommended_next_action"]
 
 
 def test_mesh_text_maps_to_mesh_family_without_runtime_execution() -> None:
@@ -106,6 +112,8 @@ def test_mesh_text_maps_to_mesh_family_without_runtime_execution() -> None:
     assert envelope["run_mode"] == "mesh_route_map"
     assert envelope["live_runtime_execution"] is False
     assert envelope["runtime_handler_verified"] is False
+    assert envelope["gumas_mutation_auth_required"] is False
+    assert envelope["gumas_mutation_auth_status"] == "not_applicable"
     assert envelope["execution_status"] == "not_requested"
 
 
@@ -121,6 +129,8 @@ def test_simulate_range_executes_only_in_process_range_chain() -> None:
     assert payload["execution_scope"] == "in_process_simulation"
     assert payload["live_runtime_execution"] is False
     assert payload["simulation_status"] == "completed"
+    assert payload["gumas_mutation_auth_required"] is False
+    assert payload["gumas_mutation_auth_status"] == "not_applicable"
     assert payload["simulation_label"] == "in-process SymbolicEngine simulation only; not live runtime execution"
     assert payload["chain_id"] == "001//005//"
     assert payload["step_count"] == 5
@@ -131,6 +141,8 @@ def test_simulate_range_executes_only_in_process_range_chain() -> None:
     assert payload["intent"]["simulation_status"] == "completed"
     assert payload["intent"]["runtime_handler_verified"] is False
     assert payload["intent"]["execution_status"] == "not_applicable"
+    assert payload["intent"]["gumas_mutation_auth_required"] is False
+    assert payload["intent"]["gumas_mutation_auth_status"] == "not_applicable"
     assert gateway.SYMBOLIC_ENGINE_REF + "::SymbolicEngine.execute_chain_notation" in payload["intent"]["runtime_refs"]
 
 
@@ -143,6 +155,8 @@ def test_simulate_range_rejects_non_range_command() -> None:
     assert payload["ok"] is False
     assert payload["live_runtime_execution"] is False
     assert payload["simulation_status"] == "blocked"
+    assert payload["gumas_mutation_auth_required"] is False
+    assert payload["gumas_mutation_auth_status"] == "not_applicable"
     assert payload["error"] == "simulate-range only accepts valid numeric RangeChain input."
     assert payload["intent"]["ast_shape"] == "command_invocation"
     assert payload["intent"]["execution_status"] == "blocked_pending_verification"
@@ -185,4 +199,6 @@ def test_parse_reports_missing_cloudbank_parser(monkeypatch: pytest.MonkeyPatch,
     assert record["validation_issues"][0]["code"] == "cloudbank_parser_unavailable"
     assert record["live_runtime_execution"] is False
     assert record["runtime_handler_verified"] is False
+    assert record["gumas_mutation_auth_required"] is False
+    assert record["gumas_mutation_auth_status"] == "not_applicable"
     assert "Restore the CloudBank parser path" in record["recommended_next_action"]

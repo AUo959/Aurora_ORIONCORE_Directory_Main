@@ -115,7 +115,10 @@
         "execution_status",
         "execution_scope",
         "runtime_handler_verified",
-        "live_execution_claim"
+        "live_execution_claim",
+        "gumas_mutation_auth_required",
+        "gumas_mutation_auth_status",
+        "gumas_mutation_auth_refs"
       ],
       "properties": {
         "execution_status": {
@@ -129,6 +132,19 @@
         },
         "live_execution_claim": {
           "type": "boolean"
+        },
+        "gumas_mutation_auth_required": {
+          "type": "boolean"
+        },
+        "gumas_mutation_auth_status": {
+          "type": "string",
+          "enum": ["not_applicable", "required_not_verified", "verified"]
+        },
+        "gumas_mutation_auth_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

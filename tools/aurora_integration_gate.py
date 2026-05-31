@@ -142,6 +142,9 @@ def command_gateway_safety_probe() -> dict[str, Any]:
         "execution_scope": envelope.get("execution_scope"),
         "live_runtime_execution": envelope.get("live_runtime_execution"),
         "runtime_handler_verified": envelope.get("runtime_handler_verified"),
+        "gumas_mutation_auth_required": envelope.get("gumas_mutation_auth_required"),
+        "gumas_mutation_auth_status": envelope.get("gumas_mutation_auth_status"),
+        "gumas_mutation_auth_refs": envelope.get("gumas_mutation_auth_refs"),
     }
     if envelope.get("execution_status") != "blocked_pending_verification":
         failures.append("execute_request envelope is not blocked pending verification")
@@ -149,6 +152,12 @@ def command_gateway_safety_probe() -> dict[str, Any]:
         failures.append("execute_request envelope does not explicitly deny live runtime execution")
     if envelope.get("runtime_handler_verified") is not False:
         failures.append("execute_request envelope claims a runtime handler was verified")
+    if envelope.get("gumas_mutation_auth_required") is not True:
+        failures.append("execute_request envelope does not require GUMAS mutation authorization")
+    if envelope.get("gumas_mutation_auth_status") != "required_not_verified":
+        failures.append("execute_request envelope does not block on unverified GUMAS mutation authorization")
+    if envelope.get("gumas_mutation_auth_refs"):
+        failures.append("execute_request envelope claims GUMAS mutation authorization evidence")
 
     if not gateway.COMMAND_GRAMMAR_PATH.exists():
         warnings.append("CloudBank parser unavailable; simulate-range probe skipped")
@@ -168,6 +177,10 @@ def command_gateway_safety_probe() -> dict[str, Any]:
         "execution_scope": payload.get("execution_scope"),
         "live_runtime_execution": payload.get("live_runtime_execution"),
         "simulation_status": payload.get("simulation_status"),
+        "gumas_mutation_auth_required": payload.get("gumas_mutation_auth_required"),
+        "gumas_mutation_auth_status": payload.get("gumas_mutation_auth_status"),
+        "intent_gumas_mutation_auth_required": payload.get("intent", {}).get("gumas_mutation_auth_required"),
+        "intent_gumas_mutation_auth_status": payload.get("intent", {}).get("gumas_mutation_auth_status"),
         "intent_execution_status": payload.get("intent", {}).get("execution_status"),
         "intent_runtime_handler_verified": payload.get("intent", {}).get("runtime_handler_verified"),
     }
@@ -179,11 +192,19 @@ def command_gateway_safety_probe() -> dict[str, Any]:
         failures.append("simulate-range does not explicitly deny live runtime execution")
     if payload.get("simulation_status") != "completed":
         failures.append("simulate-range did not report simulation_status completed")
+    if payload.get("gumas_mutation_auth_required") is not False:
+        failures.append("simulate-range claims GUMAS mutation authorization is required")
+    if payload.get("gumas_mutation_auth_status") != "not_applicable":
+        failures.append("simulate-range does not label GUMAS mutation authorization as not_applicable")
     intent = payload.get("intent", {})
     if intent.get("execution_status") != "not_applicable":
         failures.append("simulate-range intent should not claim live execution")
     if intent.get("runtime_handler_verified") is not False:
         failures.append("simulate-range intent should not claim live runtime handler verification")
+    if intent.get("gumas_mutation_auth_required") is not False:
+        failures.append("simulate-range intent claims GUMAS mutation authorization is required")
+    if intent.get("gumas_mutation_auth_status") != "not_applicable":
+        failures.append("simulate-range intent should label GUMAS mutation authorization as not_applicable")
 
     return {
         "name": "command_gateway_safety",
@@ -213,12 +234,23 @@ def schema_presence_check() -> dict[str, Any]:
         }
 
     command_props = details.get(relpath(COMMAND_SCHEMA), {})
-    required_command_props = {"run_mode", "execution_scope", "live_runtime_execution", "simulation_status"}
+    required_command_props = {
+        "run_mode",
+        "execution_scope",
+        "live_runtime_execution",
+        "simulation_status",
+        "gumas_mutation_auth_required",
+        "gumas_mutation_auth_status",
+        "gumas_mutation_auth_refs",
+    }
     if command_props:
         payload = load_json(COMMAND_SCHEMA)
         missing = sorted(required_command_props - set(payload.get("properties", {})))
         if missing:
             failures.append(f"command intent schema missing safety properties: {missing}")
+        missing_required = sorted(required_command_props - set(payload.get("required", [])))
+        if missing_required:
+            failures.append(f"command intent schema missing required safety properties: {missing_required}")
 
     return {
         "name": "schema_presence",
@@ -344,6 +376,7 @@ def provenance_gate(report_path: Path = RECOVERY_REPORT) -> dict[str, Any]:
 def docs_path_authority_check() -> dict[str, Any]:
     canonical = "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main"
     stale = "- `Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`"
+    mutation_auth_phrase = "GUMAS mutation authorization"
     failures: list[str] = []
     details: dict[str, Any] = {}
     for path in (ROOT / "README.md", ROOT / "AGENTS.md"):
@@ -351,11 +384,14 @@ def docs_path_authority_check() -> dict[str, Any]:
         details[relpath(path)] = {
             "canonical_path_present": canonical in text,
             "stale_bullet_present": stale in text,
+            "gumas_mutation_auth_present": mutation_auth_phrase in text,
         }
         if canonical not in text:
             failures.append(f"{relpath(path)} does not expose canonical CloudBank path")
         if stale in text:
             failures.append(f"{relpath(path)} still exposes stale CloudBank bullet path")
+        if mutation_auth_phrase not in text:
+            failures.append(f"{relpath(path)} does not declare the GUMAS mutation authorization gate")
     return {
         "name": "docs_path_authority",
         "status": check_status(failures, []),

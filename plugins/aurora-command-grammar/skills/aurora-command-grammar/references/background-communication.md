@@ -11,6 +11,7 @@ Command-like text can be easy to misread as an instruction, a symbolic artifact,
 - Grammar parsing answers: `What does this text mean under the grammar?`
 - Validation answers: `Is the command known and structurally valid?`
 - Runtime verification answers: `Is there a current handler and live runtime path?`
+- Mutation authorization answers: `Was GUMAS mutation authorization verified for a CloudBank/GUMAS mutation?`
 - Execution answers: `Was a command/control action actually performed?`
 
 Never collapse these into one status.
@@ -37,7 +38,7 @@ one or more claims.
 
 ```json
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "raw_text": "THREADWAKE::SRB_0414A_PilotReliquary//.",
   "normalized_text": "THREADWAKE SRB_0414A_PilotReliquary//.",
   "intent_type": "validate",
@@ -60,12 +61,15 @@ one or more claims.
   "live_runtime_execution": false,
   "simulation_status": "not_applicable",
   "runtime_handler_verified": false,
+  "gumas_mutation_auth_required": false,
+  "gumas_mutation_auth_status": "not_applicable",
+  "gumas_mutation_auth_refs": [],
   "execution_status": "not_requested",
-  "target_repo": "AUo959/aurora-cloudbank-symbolic",
+  "target_repo": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
   "authority_refs": [
-    "src/aurora/core/command_grammar/parser.py",
-    "src/aurora/core/command_grammar/catalog.py",
-    "tests/test_aurora_command_grammar.py"
+    "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora/core/command_grammar/parser.py",
+    "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora/core/command_grammar/catalog.py",
+    "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/tests/test_aurora_command_grammar.py"
   ],
   "recommended_next_action": "Verify runtime handler before execution.",
   "receipt_refs": []
@@ -84,6 +88,8 @@ Use these values consistently:
 - `execution_scope`: `none`, `blocked_pending_runtime_verification`, `in_process_simulation`, `live_runtime`, `not_applicable`
 - `live_runtime_execution`: boolean; `true` only when live runtime execution was actually performed
 - `simulation_status`: `not_applicable`, `blocked`, `completed`, `failed`
+- `gumas_mutation_auth_required`: boolean; `true` when a CloudBank/GUMAS mutation would need the mutation authorization gate
+- `gumas_mutation_auth_status`: `not_applicable`, `required_not_verified`, `verified`
 - `execution_status`: `not_requested`, `blocked_pending_verification`, `ready_for_explicit_approval`, `executed`, `failed`, `not_applicable`
 
 ## Handoff Language
@@ -96,6 +102,7 @@ Use concrete phrases in background artifacts:
 - `cataloged but handler not verified`
 - `mesh route mapped; message not sent`
 - `execution blocked pending runtime verification`
+- `GUMAS mutation authorization required; not verified`
 
 Avoid phrases that overclaim:
 
@@ -103,3 +110,4 @@ Avoid phrases that overclaim:
 - `live` unless runtime state was checked
 - `canonical handler` unless code evidence confirms it
 - `safe to execute` unless target repo, runtime, and side effects were verified
+- `authorized mutation` unless GUMAS mutation authorization evidence is linked
