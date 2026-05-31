@@ -3,13 +3,10 @@ from __future__ import annotations
 
 import argparse
 import csv
-import json
 import shutil
 from pathlib import Path
 
 from _workspace_common import (
-    CATALOG_DIR,
-    REPORTS_ANALYSIS_DIR,
     ensure_parent,
     load_yaml_like,
     now_iso_utc,

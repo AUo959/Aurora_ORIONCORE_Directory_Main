@@ -17,7 +17,6 @@ from _workspace_common import (
     load_yaml_like,
     manifest_enforced_current_paths,
     now_iso_utc,
-    relpath,
     resolve_root,
     serialized_root,
     sha256_path,

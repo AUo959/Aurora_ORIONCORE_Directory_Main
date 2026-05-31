@@ -9,7 +9,6 @@ from _workspace_common import (
     detect_path_kind,
     load_yaml_like,
     now_iso_utc,
-    relpath,
     resolve_root,
     serialized_root,
     sha256_path,

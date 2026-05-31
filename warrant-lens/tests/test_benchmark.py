@@ -8,9 +8,7 @@ must show 100% agreement).
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
-import pytest
 
 from warrant_lens.anthropic_client import MockClient
 from warrant_lens.benchmark import run_benchmark, write_benchmark

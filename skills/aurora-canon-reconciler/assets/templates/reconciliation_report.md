@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD055 MD056 -->
 # Canon Reconciliation Report
 
 **Date:** {{timestamp}}

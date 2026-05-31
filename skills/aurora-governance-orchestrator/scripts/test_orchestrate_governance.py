@@ -4,17 +4,16 @@
 from __future__ import annotations
 
 import argparse
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-import sys
-
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
-import orchestrate_governance as og
+import orchestrate_governance as og  # noqa: E402
 
 
 class OrchestratorTests(unittest.TestCase):

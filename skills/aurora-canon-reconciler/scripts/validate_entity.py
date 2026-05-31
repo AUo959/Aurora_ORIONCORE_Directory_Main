@@ -647,7 +647,7 @@ def validate_entity(
         }
 
         all_text = ""
-        for field_name, values in text_fields_to_scan.items():
+        for _field_name, values in text_fields_to_scan.items():
             if isinstance(values, str):
                 values = [values]
             if isinstance(values, list):
@@ -923,7 +923,7 @@ def detect_batch_duplicates(entities: list[tuple[dict, str, str]]) -> list[dict]
     seen_names: dict[str, list[str]] = {}  # normalized_name -> [entity_display_names]
     seen_ids: dict[str, list[str]] = {}    # id_value -> [entity_display_names]
 
-    for data, layer, etype in entities:
+    for data, _layer, _etype in entities:
         # Get display name
         display_name = (
             data.get("name")

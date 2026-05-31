@@ -8,14 +8,12 @@ from __future__ import annotations
 
 import json
 from dataclasses import replace
-from pathlib import Path
 
 import pytest
 
 from warrant_lens.config_loader import load_app_config, load_fit_table, load_taxonomy
 from warrant_lens.emit_inline import render as render_inline
 from warrant_lens.emit_trace import records_to_jsonable, trace_filename, write_trace
-from warrant_lens.model import ClaimRecord
 from warrant_lens.pipeline import analyze, flagged_claims
 from warrant_lens.warrant import ClaimContext
 

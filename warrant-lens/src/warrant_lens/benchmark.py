@@ -33,7 +33,7 @@ from .config_loader import (
     load_fit_table,
     load_taxonomy,
 )
-from .llm_client import HeuristicClient, LLMClient
+from .llm_client import LLMClient
 from .pipeline import analyze
 from .warrant import ClaimContext
 

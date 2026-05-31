@@ -2,15 +2,10 @@
 from __future__ import annotations
 
 import argparse
-import json
-import subprocess
 from collections import Counter, defaultdict
 from pathlib import Path
 
 from _workspace_common import (
-    CATALOG_DIR,
-    DOCS_DIR,
-    REPORTS_ANALYSIS_DIR,
     canonical_candidate,
     display_root,
     discover_nested_repos,

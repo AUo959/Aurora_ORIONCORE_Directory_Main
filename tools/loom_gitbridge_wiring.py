@@ -20,9 +20,9 @@ def format_commit_message(trigger, symbolic_id):
 
 # Push logic placeholder
 def push_to_github(trigger="manual", symbolic_id="UNKNOWN"):
-    config = load_auto_config()
+    load_auto_config()
     message = format_commit_message(trigger, symbolic_id)
-    
+
     # Placeholder: here we would invoke actual git logic (e.g., GitPython or subprocess)
     print(f"[PUSH] {message}")
     log_path.parent.mkdir(parents=True, exist_ok=True)

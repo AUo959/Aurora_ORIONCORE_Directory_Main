@@ -265,7 +265,7 @@ class ReconciliationAdvisor:
             # Phase 1: Check qualification — does the entity meet all thresholds?
             deficits = []
             threshold_sum = 0.0
-            for dim, weight in self.weights.items():
+            for dim, _weight in self.weights.items():
                 entity_val = entity_profile.get(dim, 0.0)
                 threshold = tag_reqs.get(dim, 0.0)
                 threshold_sum += threshold * weight
@@ -361,7 +361,7 @@ class ReconciliationAdvisor:
         tag_reqs = self.tag_profiles[best_tag]
         strengths = []
         gaps = []
-        for dim, weight in self.weights.items():
+        for dim, _weight in self.weights.items():
             entity_val = entity_profile.get(dim, 0.0)
             threshold = tag_reqs.get(dim, 0.0)
             delta = entity_val - threshold

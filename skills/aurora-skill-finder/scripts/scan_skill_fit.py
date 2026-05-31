@@ -857,8 +857,6 @@ def resolve_catalog_path(script_dir: Path, catalog: str | None, catalog_profile:
 
 
 def parse_args() -> argparse.Namespace:
-    script_dir = Path(__file__).resolve().parent
-
     parser = argparse.ArgumentParser(description="Map repository files to best matching Codex skills.")
     parser.add_argument("--root", required=True, help="Root path to scan")
     parser.add_argument(

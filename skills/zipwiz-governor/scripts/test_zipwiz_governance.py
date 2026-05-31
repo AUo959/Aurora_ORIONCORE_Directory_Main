@@ -14,7 +14,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
-from zipwiz_rules import scan_repo
+from zipwiz_rules import scan_repo  # noqa: E402
 
 
 class ZipWizGovernanceTests(unittest.TestCase):

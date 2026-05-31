@@ -109,7 +109,7 @@ def run_tests():
 
 def run_verify():
     """Run workspace_verify.py and return summary."""
-    rc, out, err = _run([sys.executable, "tools/workspace_verify.py"])
+    rc, out, _ = _run([sys.executable, "tools/workspace_verify.py"])
     report_path = REPORTS / "workspace_verify_latest.json"
     report = None
     if report_path.exists():
@@ -131,7 +131,7 @@ def run_sync_audit():
     script = ROOT / "skills" / "gitwiz-github-manager" / "scripts" / "gitwiz_sync_audit.py"
     if not script.exists():
         return {"error": "sync audit script not found"}
-    rc, out, err = _run([sys.executable, str(script), "--repo", "root"])
+    rc, out, _ = _run([sys.executable, str(script), "--repo", "root"])
     return {"returncode": rc, "output_lines": len(out.splitlines()) if out else 0}
 
 
