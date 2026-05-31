@@ -8,17 +8,18 @@
   ],
   "tests": {
     "returncode": 0,
-    "summary": "104 passed, 24 skipped in 5.12s"
+    "summary": "148 passed, 23 skipped in 5.66s"
   },
   "verify": {
     "returncode": 0,
     "report_exists": true,
-    "finding_count": 0
+    "finding_count": 0,
+    "report_error": null
   },
   "sync_audit": {
     "returncode": 0,
     "output_lines": 4
   },
-  "elapsed_seconds": 6.07,
-  "status": "DEGRADED (1 issue(s))"
+  "elapsed_seconds": 6.76,
+  "status": "HEALTHY"
 }

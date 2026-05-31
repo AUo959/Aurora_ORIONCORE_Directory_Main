@@ -24,7 +24,7 @@ REPORTS = ROOT / "reports" / "analysis"
 
 def _run(cmd, cwd=None):
     """Run a command, return (returncode, stdout, stderr)."""
-    r = subprocess.run(
+    r = subprocess.run(  # noqa: S603 - commands are fixed local health-check command lists.
         cmd, capture_output=True, text=True,
         cwd=cwd or ROOT, timeout=120,
     )
@@ -35,7 +35,7 @@ def _run(cmd, cwd=None):
 
 def lint_yaml():
     """Validate all YAML files in catalog/."""
-    import yaml  # noqa: delayed import
+    import yaml
     errors = []
     for f in sorted(CATALOG.glob("*.yaml")) + sorted(CATALOG.glob("*.yml")):
         try:
@@ -60,7 +60,7 @@ def lint_json():
 def check_schemas():
     """Validate catalog JSON files against their schemas where available."""
     try:
-        import jsonschema  # noqa: delayed import
+        import jsonschema
     except ImportError:
         return [{"note": "jsonschema not installed — skipping schema validation"}]
 
@@ -72,7 +72,11 @@ def check_schemas():
     for schema_path in sorted(schema_dir.glob("*.json")):
         try:
             schema = json.loads(schema_path.read_text())
-        except Exception:
+        except Exception as exc:
+            errors.append({
+                "file": str(schema_path.relative_to(ROOT)),
+                "error": str(exc),
+            })
             continue
         # Attempt to find a matching data file by name convention
         stem = schema_path.stem.replace("_schema", "")
@@ -89,8 +93,12 @@ def check_schemas():
                     "schema": str(schema_path.relative_to(ROOT)),
                     "error": e.message[:200],
                 })
-            except Exception:
-                pass
+            except Exception as exc:
+                errors.append({
+                    "file": str(data_path.relative_to(ROOT)),
+                    "schema": str(schema_path.relative_to(ROOT)),
+                    "error": str(exc),
+                })
     return errors
 
 
@@ -112,15 +120,17 @@ def run_verify():
     rc, out, _ = _run([sys.executable, "tools/workspace_verify.py"])
     report_path = REPORTS / "workspace_verify_latest.json"
     report = None
+    report_error = None
     if report_path.exists():
         try:
             report = json.loads(report_path.read_text())
-        except Exception:
-            pass
+        except Exception as exc:
+            report_error = str(exc)
     return {
         "returncode": rc,
         "report_exists": report_path.exists(),
         "finding_count": len(report.get("findings", [])) if report else None,
+        "report_error": report_error,
     }
 
 
@@ -159,12 +169,14 @@ def main():
     results["elapsed_seconds"] = round(time.time() - start, 2)
 
     # Determine overall status
+    schema_problem_count = sum(1 for item in results.get("schema_errors", []) if "error" in item)
     problems = (
         len(results.get("yaml_errors", []))
         + len(results.get("json_errors", []))
-        + len(results.get("schema_errors", []))
+        + schema_problem_count
         + (1 if results.get("tests", {}).get("returncode", 0) != 0 else 0)
         + (1 if results.get("verify", {}).get("returncode", 0) != 0 else 0)
+        + (1 if results.get("sync_audit", {}).get("returncode", 0) != 0 else 0)
     )
     results["status"] = "HEALTHY" if problems == 0 else f"DEGRADED ({problems} issue(s))"
 
@@ -212,10 +224,12 @@ def main():
         print(f"\n  Elapsed: {results['elapsed_seconds']}s")
         print(f"{'═' * 50}\n")
 
-    # Write JSON report
-    REPORTS.mkdir(parents=True, exist_ok=True)
-    report_path = REPORTS / "workspace_health_latest.json"
-    report_path.write_text(json.dumps(results, indent=2) + "\n")
+    # Persist only full health reports. Lint-only runs are quick probes and
+    # should not replace the richer latest health receipt.
+    if not args.lint_only:
+        REPORTS.mkdir(parents=True, exist_ok=True)
+        report_path = REPORTS / "workspace_health_latest.json"
+        report_path.write_text(json.dumps(results, indent=2) + "\n")
 
     sys.exit(0 if problems == 0 else 1)
 

@@ -21,7 +21,7 @@ from .config_loader import (
     load_taxonomy,
 )
 from .filter import filter_demanding
-from .llm_client import LLMClient
+from .llm_client import HeuristicClient, LLMClient
 from .model import (
     AttentionFlag,
     ClaimRecord,

@@ -89,12 +89,22 @@
       "id": "coordination-session-claims",
       "date": "2026-05-31",
       "summary": "Codex added local session-claim tooling and docs for concurrent Codex/Claude Code path-claim checks."
+    },
+    {
+      "id": "coherence-checklist-audit",
+      "date": "2026-05-31",
+      "summary": "Codex added a root coherence checklist and audit receipt while Claude Code's CL-fix claim remained active; no Claude-claimed paths were edited."
+    },
+    {
+      "id": "post-claude-cl-verification",
+      "date": "2026-05-31",
+      "summary": "Codex verified Claude Code commit 3f872f3, restored the warrant-lens default HeuristicClient import, fixed GitWiz registry loading, and confirmed root tests/health pass; installed skill runtime sync is pending."
     }
   ],
 
-  "last_updated": "2026-05-31T00:31:30Z",
+  "last_updated": "2026-05-31T01:20:56Z",
   "last_platform": "codex",
-  "last_session_summary": "Implemented local session-claim coordination tooling for concurrent Codex/Claude Code operations; integration gate and workspace verification passed.",
+  "last_session_summary": "Verified Claude Code's CL cleanup, fixed warrant-lens and GitWiz follow-up regressions, and left installed GitWiz skill runtime sync pending due sandbox approval limits.",
 
   "tool_versions": {
     "gitleaks": "8.30.1",
@@ -115,6 +125,18 @@
   },
 
   "recent_commits": [
+    {
+      "sha": "3f872f3",
+      "date": "2026-05-30",
+      "platform": "claude-code",
+      "summary": "fix(cl): resolve Codacy linter issues across tools/, skills/, warrant-lens/"
+    },
+    {
+      "sha": "5a778dc",
+      "date": "2026-05-30",
+      "platform": "codex",
+      "summary": "fix(coordination): avoid false handoff reminder after state commit"
+    },
     {
       "sha": "318085e",
       "date": "2026-05-30",
@@ -162,18 +184,6 @@
       "date": "2026-05-30",
       "platform": "dependabot",
       "summary": "deps: bump actions/checkout from 4 to 6 (#13)"
-    },
-    {
-      "sha": "ff54454",
-      "date": "2026-05-30",
-      "platform": "dependabot",
-      "summary": "deps: bump actions/upload-artifact from 4 to 7 (#12)"
-    },
-    {
-      "sha": "7fb2eea",
-      "date": "2026-05-30",
-      "platform": "dependabot",
-      "summary": "deps: bump actions/setup-python from 5 to 6 (#11)"
     }
   ],
 
@@ -208,11 +218,17 @@
       "priority": "low",
       "description": "Decide CanonRec purpose: formalize as skill-release repo or mark archived in catalog/repo_registry.yaml.",
       "assigned_to": "either"
+    },
+    {
+      "id": "coordination-gitwiz-skill-runtime-sync",
+      "priority": "medium",
+      "description": "Run `make skills-install` once approval is available, then rerun `make skills-check` and `make integration-gate`. Versioned gitwiz-github-manager source is fixed; installed runtime sync was blocked by sandbox/usage approval.",
+      "assigned_to": "codex"
     }
   ],
 
   "known_state": {
-    "main_sha": "318085e",
+    "main_sha": "3f872f3",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -233,8 +249,8 @@
       "~/.codex/worktrees/acad — detached HEAD 610f791"
     ],
     "open_prs": [],
-    "codacy_status": "2338 issues total in prior snapshot; E/F/G follow-ups addressed by commits 6b853b8 and dba9507. Live Codacy not refreshed by this Codex session.",
-    "devkit_status": "READY 20/20 tools as of 2026-05-31; canonical Python floor declared in af846ac.",
+    "codacy_status": "Claude Code CL cleanup landed in 3f872f3. Codex did not refresh live Codacy; local root tests and health pass after warrant-lens and GitWiz follow-up fixes. Installed GitWiz skill runtime sync remains pending.",
+    "devkit_status": "READY 21/21 tools as of 2026-05-31; canonical Python floor declared in af846ac.",
     "ci_workflows": [
       ".github/workflows/ci.yml — tests + workspace-verify on push/PR to main",
       ".github/workflows/secret-scan.yml — gitleaks on all branches/PRs"
@@ -249,7 +265,8 @@
       "catalog/session_state.json",
       "catalog/session_claims/",
       "tools/session_claim.py",
-      "docs/SESSION_CLAIMS_WORKFLOW_v1.md"
+      "docs/SESSION_CLAIMS_WORKFLOW_v1.md",
+      "docs/COHERENCE_CHECKLIST.md"
     ]
   }
 }

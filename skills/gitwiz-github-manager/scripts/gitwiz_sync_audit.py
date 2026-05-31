@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -20,8 +21,8 @@ def utcnow_display() -> str:
 
 
 def run_git(repo_path: Path, args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(
-        ["git", *args],
+    return subprocess.run(  # noqa: S603, S607 - git command/args are repo-audit controlled.
+        ["git", *args],  # noqa: S607 - git is the required repo audit command.
         cwd=repo_path,
         check=check,
         text=True,
@@ -33,8 +34,8 @@ def detect_workspace_root(explicit_root: str | None) -> Path:
     if explicit_root:
         return Path(explicit_root).expanduser().resolve()
     try:
-        result = subprocess.run(
-            ["git", "rev-parse", "--show-toplevel"],
+        result = subprocess.run(  # noqa: S607 - git is the required repo discovery command.
+            ["git", "rev-parse", "--show-toplevel"],  # noqa: S607
             check=True,
             text=True,
             capture_output=True,
@@ -50,7 +51,35 @@ def load_repo_registry(workspace_root: Path) -> list[dict[str, Any]]:
     registry_path = workspace_root / "catalog" / "repo_registry.yaml"
     if not registry_path.exists():
         return []
-    return json.loads(registry_path.read_text(encoding="utf-8")).get("repos", [])
+    try:
+        payload = json.loads(registry_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        tools_dir = workspace_root / "tools"
+        if str(tools_dir) not in sys.path:
+            sys.path.insert(0, str(tools_dir))
+        try:
+            from _workspace_common import load_yaml_like
+
+            payload = load_yaml_like(registry_path)
+        except Exception as exc:
+            raise SystemExit(f"Malformed repo registry: {registry_path}: {exc}") from exc
+    try:
+        return repo_rows_from_payload(payload)
+    except ValueError as exc:
+        raise SystemExit(f"Malformed repo registry: {exc}") from exc
+
+
+def repo_rows_from_payload(payload: Any) -> list[dict[str, Any]]:
+    if not isinstance(payload, dict):
+        raise ValueError("payload must be an object")
+    rows = payload.get("repos", [])
+    if not isinstance(rows, list):
+        raise ValueError("repos must be a list")
+    bad_indices = [str(index) for index, row in enumerate(rows) if not isinstance(row, dict)]
+    if bad_indices:
+        joined = ", ".join(bad_indices)
+        raise ValueError(f"repo row index(es): {joined} must be objects")
+    return rows
 
 
 def parse_remote_map(remote_output: str) -> dict[str, dict[str, str]]:
