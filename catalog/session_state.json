@@ -148,7 +148,7 @@
       "summary": "Codex verified Claude Code commit 3f872f3, restored the warrant-lens default HeuristicClient import, fixed GitWiz registry loading, and confirmed root tests/health pass; installed skill runtime sync is pending."
     }
   ],
-  "last_updated": "2026-05-31T02:54:49Z",
+  "last_updated": "2026-05-31T03:07:08Z",
   "last_platform": "claude-code",
   "last_session_summary": "chore(state): auto-update session handoff [skip ci]",
   "tool_versions": {
@@ -169,6 +169,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "c221593",
+      "date": "2026-05-31",
+      "platform": "claude-code",
+      "summary": "chore(state): auto-update session handoff [skip ci]"
+    },
     {
       "sha": "d596feb",
       "date": "2026-05-31",
@@ -222,12 +228,6 @@
       "date": "2026-05-31",
       "platform": "claude-code",
       "summary": "chore(state): auto-update session handoff [skip ci]"
-    },
-    {
-      "sha": "1a3e124",
-      "date": "2026-05-31",
-      "platform": "claude-code",
-      "summary": "fix(codex): land Codex session work interrupted by usage limit"
     }
   ],
   "security_events": [
@@ -269,7 +269,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "d596feb",
+    "main_sha": "c221593",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
