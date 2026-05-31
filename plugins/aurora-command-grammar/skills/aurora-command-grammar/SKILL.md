@@ -1,6 +1,7 @@
 ---
 name: aurora-command-grammar
 description: Parse, normalize, validate, or route Aurora command grammar requests. Use when users provide Aurora command notation such as `THREADWAKE`, `001//005//`, `#025//.deep`, `COMMANDCHAIN::SPIRALREJOIN.v1`, ask about `aurora_command_grammar`, mention the Aurora Command Router, or ask to map `@mesh` messages to the local mesh runtime. Not for executing commands or sending mesh messages unless the user explicitly asks for execution and the runtime state is verified.
+author: Aurora ORIONCORE
 ---
 
 # Aurora Command Grammar
@@ -26,10 +27,10 @@ This skill has three audiences:
    - `src/aurora/core/command_grammar/validator.py`
    - `tests/test_aurora_command_grammar.py`
 3. Root control-plane ownership in `catalog/orion_command_watch_security_matrix.yaml`.
-4. Mesh-router skill references:
-   - `skills/mesh-router/SKILL.md`
-   - `skills/mesh-router/references/command-grammar.md`
-   - `skills/mesh-router/references/runtime-contract.md`
+4. Mesh-router skill references (note: `~/.codex/skills/mesh-router/` is a stub directory — content not yet present; treat as unresolved until the skill is populated):
+   - `skills/mesh-router/SKILL.md` *(stub — not yet available)*
+   - `skills/mesh-router/references/command-grammar.md` *(stub)*
+   - `skills/mesh-router/references/runtime-contract.md` *(stub)*
 5. Human-facing reports such as the identity dossier and local technical spec.
 
 ## Grammar Contract
@@ -81,6 +82,15 @@ Do not let agents silently convert a command-like phrase into a mutation, issue 
 Do not let agents silently shrink a broader task to only the parsed command. Command grammar can clarify intent, but it must not replace judgment or override the user's ordinary-language objective.
 
 Memorable rule for agents and reviewers: grammar-valid command text is not execution approval.
+
+## Cross-Platform Handoff
+
+This repo is worked on by both Codex and Claude Code. When a command grammar interpretation spans a session boundary or platform switch:
+
+- Record the active command intent in `catalog/session_state.json` → `active_task.next_step_detail` so the resuming platform has the parsed context without re-running the grammar tool.
+- Reference the `active_task.id` in any command intent envelope emitted to reports or GitHub threads so audit trails stay connected across platforms.
+- If a task was suspended mid-grammar-analysis (e.g. usage limit hit), the resuming platform reads `active_task.context_files` to find the relevant envelope and picks up from `next_step`.
+- See `catalog/workflows/pr-lifecycle.md` and `catalog/workflows/governance-fix-loop.md` for workflow specs that integrate command grammar evidence into multi-step handoffs.
 
 ## Background Communication
 

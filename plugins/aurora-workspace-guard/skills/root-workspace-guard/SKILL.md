@@ -1,6 +1,7 @@
 ---
 name: root-workspace-guard
 description: Guard Aurora root workspace control-plane changes by enforcing root-vs-nested repo boundaries, required context reads, generated-surface regeneration, and root verification commands. Use when working on top-level docs, catalog, tools, tests, reports, .agents, plugins, or other root control-plane files; when a request says "the repo" and multiple Aurora repos are plausible; or when validating root workspace changes before staging or commit. Not for implementing features inside CanonRec, DuelSim_v2.0, or aurora-cloudbank-symbolic-main.
+author: Aurora ORIONCORE
 ---
 
 # Root Workspace Guard
@@ -16,6 +17,7 @@ Use this skill when the task touches the Aurora root workspace repo rather than 
    - Treat `GUMAS_SIM_2.5/CanonRec`, `GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0`, and `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` as separate repos with separate publication decisions.
    - If a request says only "the repo" and multiple repos are plausible, ask one short clarification question.
 2. Read the required root control-plane context before substantial work.
+   - `catalog/session_state.json` — **read first**: check `active_task` (if `status == "suspended"`, resume that task before anything else), `tool_versions` (any new installs since last session?), and `pending_for_next_session`.
    - `AGENTS.md`
    - `README.md`
    - `catalog/workspace_manifest.yaml`
@@ -37,7 +39,10 @@ Use this skill when the task touches the Aurora root workspace repo rather than 
    - `python3 tools/workspace_plan_moves.py`
    - `python3 tools/workspace_verify.py`
    - `python3 tools/workspace_verify.py --persist-report`
+   - `make skills-check` — dry-run preview of any skill drift before installing
+   - `make skills-install` — push `skills/` changes to `~/.codex/skills/` (run after editing any skill in `skills/`)
    - Prefer regeneration plus validation when top-level routing or workspace metadata changes.
+6. Before closing the session, update `catalog/session_state.json`: set `last_platform`, `last_updated`, append new commits to `recent_commits`, update `known_state.main_sha`, and set `active_task.status = "suspended"` if mid-task.
 
 ## Guardrails
 
