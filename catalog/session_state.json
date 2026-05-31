@@ -92,7 +92,7 @@
     }
   ],
 
-  "last_updated": "2026-05-31T00:28:12Z",
+  "last_updated": "2026-05-31T00:31:30Z",
   "last_platform": "codex",
   "last_session_summary": "Implemented local session-claim coordination tooling for concurrent Codex/Claude Code operations; integration gate and workspace verification passed.",
 
@@ -115,6 +115,12 @@
   },
 
   "recent_commits": [
+    {
+      "sha": "318085e",
+      "date": "2026-05-30",
+      "platform": "codex",
+      "summary": "feat(coordination): add session claim checks"
+    },
     {
       "sha": "af846ac",
       "date": "2026-05-30",
@@ -168,12 +174,6 @@
       "date": "2026-05-30",
       "platform": "dependabot",
       "summary": "deps: bump actions/setup-python from 5 to 6 (#11)"
-    },
-    {
-      "sha": "906311f",
-      "date": "2026-05-30",
-      "platform": "claude-code",
-      "summary": "feat(skills): consolidate all 16 project-owned skills into skills/ with full structure + sync tooling"
     }
   ],
 
@@ -212,7 +212,7 @@
   ],
 
   "known_state": {
-    "main_sha": "af846ac",
+    "main_sha": "318085e",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
