@@ -379,6 +379,8 @@ Full capability matrix with routing heuristics is in `catalog/session_state.json
 
 ### Interference prevention
 
+- Before mutating shared root-control-plane paths while another platform may be active, run `python3 tools/session_claim.py check --repo root --paths <paths...>` and create a short-lived claim with `python3 tools/session_claim.py create --platform <codex|claude-code> --task-id <task> --repo root --paths <paths...> --mutation-posture editing`.
+- Release local claims with `python3 tools/session_claim.py release --claim-id <claim-id>` when done. Live claim JSON files live under `catalog/session_claims/` and are ignored by Git.
 - Never force-push `main` without checking `last_platform` first, unless this is an emergency rollback explicitly requested by the owner
 - If `last_platform` is the other tool and `last_updated` is < 30 min ago, check for uncommitted changes before starting
 - Do not install new brew/system tools without adding them to `catalog/dev_toolkit_manifest.json` and `tool_versions` in the state file

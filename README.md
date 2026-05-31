@@ -33,6 +33,7 @@ nested repo internals stay out of root Git history.
 - Control-plane provenance and recovery role: [docs/CONTROL_PLANE_PROVENANCE.md](docs/CONTROL_PLANE_PROVENANCE.md)
 - Recovery index workflow: [docs/RECOVERY_INDEX_WORKFLOW_v1.md](docs/RECOVERY_INDEX_WORKFLOW_v1.md)
 - Current recovery index report: [reports/analysis/workspace_recovery_index_latest.json](reports/analysis/workspace_recovery_index_latest.json)
+- Cross-platform session claims workflow: [docs/SESSION_CLAIMS_WORKFLOW_v1.md](docs/SESSION_CLAIMS_WORKFLOW_v1.md)
 
 ## Logical Zones
 
@@ -124,6 +125,20 @@ plus build-readiness lanes. It does not promote recovery candidates, execute
 Aurora command grammar, send mesh messages, mutate nested repos, install
 packages, or publish GitHub changes.
 
+Cross-platform session claims:
+
+```bash
+python3 tools/session_claim.py check --repo root --paths . --json
+python3 tools/session_claim.py create --platform codex --task-id example --repo root --paths tools/session_claim.py --mutation-posture editing
+python3 tools/session_claim.py release --claim-id <claim-id>
+make session-claims
+make session-claim-check
+```
+
+Session claims are local, short-lived path leases under
+`catalog/session_claims/`. Live claim JSON files are ignored by Git so the
+coordination mechanism does not become another shared-file conflict point.
+
 Confidence audit gateway:
 
 ```bash
@@ -158,6 +173,8 @@ python3 tools/aurora_mission_control.py --summary
 python3 tools/aurora_mission_control.py --persist-report
 python3 tools/aurora_confidence_audit.py score --claim-type analysis --text "Example claim"
 python3 tools/aurora_confidence_audit.py audit --input claims.jsonl --jsonl --threshold 0.70
+python3 tools/session_claim.py check --repo root --paths . --json
+python3 tools/session_claim.py list
 python3 tools/aurora_devkit.py
 python3 tools/aurora_devkit.py --persist-report
 python3 tools/aurora_devkit.py --install-plan --persist-install-plan
@@ -174,6 +191,8 @@ make mission-control
 make mission-control-report
 make confidence-audit
 make confidence-audit-report
+make session-claims
+make session-claim-check
 make integration-gate
 ```
 

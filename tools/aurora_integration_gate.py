@@ -381,7 +381,12 @@ def default_commands() -> list[tuple[str, list[str]]]:
                 "tests/test_aurora_command_grammar_plugin.py",
                 "tests/test_agent_dispatcher_skill.py",
                 "tests/test_sync_codex_skill.py",
+                "tests/test_session_claim.py",
             ],
+        ),
+        (
+            "session_claim_check",
+            [sys.executable, "tools/session_claim.py", "check", "--repo", "root", "--paths", ".", "--json"],
         ),
         (
             "installed_skill_sync_dry_run",

@@ -79,12 +79,22 @@
       "id": "phase-0-complete",
       "date": "2026-05-30",
       "summary": "Phase 0: Agentlinter 20→5 accepted, branch prune (8 branches), secret triage (1 OpenAI key rotated), gitleaks CI gate, devkit 20/20, skills consolidated, cross-platform handoff layer built, 5 Dependabot PRs merged, 2 stale PRs closed"
+    },
+    {
+      "id": "phase-0-followups-efg-python-floor",
+      "date": "2026-05-31",
+      "summary": "Commits 6b853b8, dba9507, and af846ac landed after the prior state snapshot and address pending E/F/G plus roadmap 1.2."
+    },
+    {
+      "id": "coordination-session-claims",
+      "date": "2026-05-31",
+      "summary": "Codex added local session-claim tooling and docs for concurrent Codex/Claude Code path-claim checks."
     }
   ],
 
-  "last_updated": "2026-05-30T23:59:00Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "Full Phase 0 + workspace improvement session. Skills consolidated (16 in skills/), session_state v2, workflow specs, make skills-install, ~/.codex/AGENTS.md updated, 5 Dependabot PRs merged (#11-15), stale PRs #7 and #4 closed.",
+  "last_updated": "2026-05-31T00:28:12Z",
+  "last_platform": "codex",
+  "last_session_summary": "Implemented local session-claim coordination tooling for concurrent Codex/Claude Code operations; integration gate and workspace verification passed.",
 
   "tool_versions": {
     "gitleaks": "8.30.1",
@@ -105,6 +115,30 @@
   },
 
   "recent_commits": [
+    {
+      "sha": "af846ac",
+      "date": "2026-05-30",
+      "platform": "claude-code",
+      "summary": "feat(python): declare 3.12 as canonical floor (roadmap 1.2)"
+    },
+    {
+      "sha": "dba9507",
+      "date": "2026-05-30",
+      "platform": "claude-code",
+      "summary": "fix(plugins): align workspace-guard and command-grammar with session handoff layer (G)"
+    },
+    {
+      "sha": "6b853b8",
+      "date": "2026-05-30",
+      "platform": "claude-code",
+      "summary": "fix(quality): skill routing overlap (E) + S101 assert noise (F)"
+    },
+    {
+      "sha": "a89d2bc",
+      "date": "2026-05-30",
+      "platform": "claude-code",
+      "summary": "chore(state): update session_state.json + workspace manifest after A-D pass"
+    },
     {
       "sha": "3bb4cf8",
       "date": "2026-05-30",
@@ -140,30 +174,6 @@
       "date": "2026-05-30",
       "platform": "claude-code",
       "summary": "feat(skills): consolidate all 16 project-owned skills into skills/ with full structure + sync tooling"
-    },
-    {
-      "sha": "bb0908f",
-      "date": "2026-05-30",
-      "platform": "claude-code",
-      "summary": "feat(handoff): bidirectional Claude Code ↔ Codex workflow layer (session_state v2, workflow specs, Stop hook)"
-    },
-    {
-      "sha": "239bd9c",
-      "date": "2026-05-30",
-      "platform": "claude-code",
-      "summary": "feat(devkit+handoff): gitleaks in devkit, session_state v1, AGENTS.md handoff protocol"
-    },
-    {
-      "sha": "9ef5384",
-      "date": "2026-05-30",
-      "platform": "claude-code",
-      "summary": "feat(security): gitleaks CI gate + .gitleaks.toml allowlist"
-    },
-    {
-      "sha": "610f791",
-      "date": "2026-05-30",
-      "platform": "claude-code",
-      "summary": "fix(agentlinter): resolve 17/20 Agentlinter findings"
     }
   ],
 
@@ -188,30 +198,6 @@
       "assigned_to": "owner"
     },
     {
-      "id": "improve-E-skill-routing",
-      "priority": "medium",
-      "description": "Fix persistent aurora-canon-reconciler/aurora-repo-stabilizer routing overlap (validate_entity.py scored 0.48/0.47 for 5 weeks). Narrow aurora-repo-stabilizer scripts/ scoring or add canon-specific path penalty in skills/aurora-repo-stabilizer/.",
-      "assigned_to": "either"
-    },
-    {
-      "id": "improve-F-codacy-s101",
-      "priority": "medium",
-      "description": "Suppress Codacy Ruff_S101_assert in test files via .codacy/codacy.config.json scope rule. ~5 production instances should remain visible. Cuts ~1200 noise issues.",
-      "assigned_to": "claude-code"
-    },
-    {
-      "id": "improve-G-plugin-alignment",
-      "priority": "medium",
-      "description": "Update plugins/aurora-workspace-guard and plugins/aurora-command-grammar SKILL.md files to reference catalog/session_state.json and the handoff protocol.",
-      "assigned_to": "either"
-    },
-    {
-      "id": "roadmap-1.2",
-      "priority": "medium",
-      "description": "Phase 1: Unify Python floor fleet-wide (3.9.6 → 3.12). Root devkit runs 3.9.6; CloudBank declares 3.12. CI matrix + devkit manifest update. Prefer Claude Code.",
-      "assigned_to": "claude-code"
-    },
-    {
       "id": "roadmap-1.1",
       "priority": "medium",
       "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows → ~8). Prefer Codex (browser + github plugin). See reports/state_briefs/development_roadmap__2026-05-24.md §1.1.",
@@ -226,34 +212,44 @@
   ],
 
   "known_state": {
-    "main_sha": "3bb4cf8",
+    "main_sha": "af846ac",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
+      "codex/gitwiz-sync-audit-canonical-2026-04-08",
       "codex/root-cleanup-before-cloudbank-issues-2026-05-11",
       "codex/root-control-plane-local-2026-03-25",
       "codex/root-control-plane-sync-2026-04-01-mixed-backup",
       "codex/root-reconstruct-recovered-protocols-2026-03-26",
       "feat/warrant-lens",
-      "rescue/root-control-plane-dirty-workingcopy-2026-03-25",
-      "codex/gitwiz-sync-audit-canonical-2026-04-08"
+      "main",
+      "rescue/root-control-plane-dirty-workingcopy-2026-03-25"
     ],
     "active_worktrees": [
       "~/.codex/worktrees/70ee — codex/gitwiz-sync-audit-canonical-2026-04-08 (branch closed in #7, worktree still on disk)",
       "~/.codex/worktrees/2d04 — detached HEAD 13c126b",
-      "~/.codex/worktrees/966b — detached HEAD 13c126b"
+      "~/.codex/worktrees/6f91 — detached HEAD 610f791",
+      "~/.codex/worktrees/966b — detached HEAD 13c126b",
+      "~/.codex/worktrees/acad — detached HEAD 610f791"
     ],
     "open_prs": [],
-    "codacy_status": "2338 issues total; Agentlinter 5 remaining (all accepted); top noise source: Ruff_S101 assert in tests (pending improve-F)",
-    "devkit_status": "READY 20/20 tools as of 2026-05-30",
+    "codacy_status": "2338 issues total in prior snapshot; E/F/G follow-ups addressed by commits 6b853b8 and dba9507. Live Codacy not refreshed by this Codex session.",
+    "devkit_status": "READY 20/20 tools as of 2026-05-31; canonical Python floor declared in af846ac.",
     "ci_workflows": [
       ".github/workflows/ci.yml — tests + workspace-verify on push/PR to main",
       ".github/workflows/secret-scan.yml — gitleaks on all branches/PRs"
     ],
     "workflow_specs": [
       "catalog/workflows/pr-lifecycle.md",
-      "catalog/workflows/governance-fix-loop.md"
+      "catalog/workflows/governance-fix-loop.md",
+      "docs/SESSION_CLAIMS_WORKFLOW_v1.md"
     ],
-    "skills_canonical": "skills/ (16 project-owned skills). make skills-check / make skills-install to sync to ~/.codex/skills/"
+    "skills_canonical": "skills/ (16 project-owned skills). make skills-check / make skills-install to sync to ~/.codex/skills/",
+    "coordination_surfaces": [
+      "catalog/session_state.json",
+      "catalog/session_claims/",
+      "tools/session_claim.py",
+      "docs/SESSION_CLAIMS_WORKFLOW_v1.md"
+    ]
   }
 }
