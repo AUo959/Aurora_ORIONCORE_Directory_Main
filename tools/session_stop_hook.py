@@ -110,51 +110,6 @@ def _update_state(state: dict, head: str) -> tuple[dict, list[dict]]:
     return state, new_commits
 
 
-# ── Commit + push ─────────────────────────────────────────────────────────
-
-def _staged_non_state_files() -> list[str]:
-    """Return staged files other than session_state.json."""
-    raw = _git("diff", "--cached", "--name-only")
-    return [
-        f for f in raw.splitlines()
-        if f and "catalog/session_state.json" not in f
-    ]
-
-
-def _commit_state() -> tuple[bool, str]:
-    """Stage + commit session_state.json only.
-
-    Safety guard: if anything other than session_state.json is already staged,
-    aborts and returns (False, reason) so partial work is never auto-committed.
-    Returns (True, "") on success.
-    """
-    # Guard: check for other staged files BEFORE staging session_state
-    already_staged = _staged_non_state_files()
-    if already_staged:
-        files_str = ", ".join(already_staged[:3])
-        if len(already_staged) > 3:
-            files_str += f" (+{len(already_staged) - 3} more)"
-        return False, f"staged work present ({files_str}) — skipped auto-commit to avoid premature commit"
-
-    _git("add", str(STATE_PATH.relative_to(REPO_ROOT)))
-    result = subprocess.run(
-        ["git", "commit", "-m",
-         "chore(state): auto-update session handoff [skip ci]\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"],
-        capture_output=True, text=True, cwd=REPO_ROOT,
-    )
-    if result.returncode == 0:
-        return True, ""
-    return False, result.stderr.strip() or "git commit failed"
-
-
-def _push() -> bool:
-    result = subprocess.run(
-        ["git", "push", "origin", "main"],
-        capture_output=True, text=True, cwd=REPO_ROOT,
-    )
-    return result.returncode == 0
-
-
 # ── Orphan marker ─────────────────────────────────────────────────────────
 
 def _write_orphan_marker(changed_files: list[str], head: str) -> Path:
@@ -229,46 +184,44 @@ def main() -> int:
         return 0
 
     known_sha = state.get("known_state", {}).get("main_sha", "")
-    parent_sha = _git("rev-parse", "--short", "HEAD^")
 
-    # Check if there's actually anything new to record
-    if head == known_sha or head == parent_sha:
+    # How many commits has HEAD advanced past what state last recorded?
+    ahead = 0
+    if known_sha:
+        out = subprocess.run(
+            ["git", "rev-list", "--count", f"{known_sha}..HEAD"],
+            capture_output=True, text=True, cwd=REPO_ROOT, check=False,
+        )
+        if out.returncode == 0:
+            ahead = int(out.stdout.strip() or 0)
+
+    # Nothing new landed → nothing to do (no churn).
+    if ahead == 0:
         return 0
 
-    # Update state
+    # ADVISORY ONLY. Update the state file's mechanical fields on disk so the
+    # change rides along with the operator's next real commit. We deliberately do
+    # NOT git-commit or git-push here: auto-committing every turn created commit
+    # churn, and auto-pushing risked the force-push hazard AGENTS.md warns about.
     state, new_commits = _update_state(state, head)
     STATE_PATH.write_text(json.dumps(state, indent=2) + "\n")
 
-    # Check for uncommitted work (before committing state)
     uncommitted = _git_uncommitted_tracked()
-
-    # Commit + push the state file (safety guard is inside _commit_state)
-    committed, commit_reason = _commit_state()
-    pushed = _push() if committed else False
-
-    # Write orphan marker if there's abandoned work
-    orphan_path = None
     if uncommitted:
-        orphan_path = _write_orphan_marker(uncommitted, head)
+        _write_orphan_marker(uncommitted, head)
 
-    # Summary output
+    # Concise reminder.
     print()
     print("╔══════════════════════════════════════════════════════════╗")
-    print("║  SESSION HANDOFF — AUTO-UPDATED                          ║")
+    print("║  SESSION HANDOFF — state updated on disk (advisory)      ║")
     print("╠══════════════════════════════════════════════════════════╣")
-    print(f"║  HEAD:      {head:<44}║")
-    print(f"║  Commits:   {len(new_commits)} new recorded{' ' * (32 - len(str(len(new_commits))))}║")
-    commit_str = "yes" if committed else f"skipped: {commit_reason}"
-    push_str = "yes — Codex can see it now" if pushed else ("n/a" if not committed else "failed — push manually")
-    print(f"║  Committed: {commit_str:<44}║")
-    print(f"║  Pushed:    {push_str:<44}║")
+    print(f"║  HEAD:   {head:<47}║")
+    print(f"║  Ahead:  {str(ahead) + ' commit(s) since last recorded':<47}║")
+    print("║  Action: include catalog/session_state.json in your next ║")
+    print("║          commit. The hook does NOT auto-commit or push.  ║")
     if uncommitted:
         print("╠══════════════════════════════════════════════════════════╣")
-        print(f"║  ⚠  {len(uncommitted)} uncommitted file(s) — orphan marker written:  ║")
-        for f in uncommitted[:4]:
-            print(f"║    · {f[:52]:<52}║")
-        if len(uncommitted) > 4:
-            print(f"║    · ... and {len(uncommitted)-4} more{' ' * (38 - len(str(len(uncommitted)-4)))}║")
+        print(f"║  ⚠  {len(uncommitted)} uncommitted tracked file(s) — orphan marker set ║")
     print("╚══════════════════════════════════════════════════════════╝")
     print()
 
