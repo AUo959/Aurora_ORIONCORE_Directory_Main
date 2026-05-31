@@ -3,6 +3,7 @@
 !/.gitattributes
 !/.gitleaks.toml
 !/ruff.toml
+!/.python-version
 !/.claude/
 !/.claude/settings.json
 # .codex_skill_edits/ retired 2026-05-30 — skills/ is now the canonical source

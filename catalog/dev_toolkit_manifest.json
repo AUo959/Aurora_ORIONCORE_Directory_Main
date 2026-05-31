@@ -70,7 +70,15 @@
       "category": "python",
       "required": true,
       "command": ["python3", "--version"],
-      "impact": "Required for root verifier, workspace scanners, Codex skill scripts, and most automation."
+      "impact": "System Python (currently 3.9.6 on this machine via Xcode). Used for root control-plane scripts. Note: 3.12 is the declared floor — see python3.12 entry."
+    },
+    {
+      "id": "python3.12",
+      "category": "python",
+      "required": true,
+      "command": ["python3.12", "--version"],
+      "install_recipe": "uv python install 3.12",
+      "impact": "Canonical Python floor (declared in .python-version). Required for CloudBank venv compatibility and CI parity. CI gates merges on 3.12. Install via: uv python install 3.12"
     },
     {
       "id": "pip",
@@ -84,7 +92,7 @@
       "category": "python",
       "required": true,
       "command": ["uv", "--version"],
-      "impact": "Preferred fast Python environment and package workflow."
+      "impact": "Preferred fast Python environment and package workflow. Use `uv python install 3.12` to install the canonical Python floor."
     },
     {
       "id": "node",

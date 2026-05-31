@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-30T21:56:05Z",
+  "generated_at": "2026-05-31T00:15:58Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "manifest_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
   "toolkit_id": "aurora-dev-toolkit",
@@ -38,7 +38,7 @@
       "id": "python3",
       "category": "python",
       "required": true,
-      "impact": "Required for root verifier, workspace scanners, Codex skill scripts, and most automation.",
+      "impact": "System Python (currently 3.9.6 on this machine via Xcode). Used for root control-plane scripts. Note: 3.12 is the declared floor \u2014 see python3.12 entry.",
       "status": "ok",
       "command": [
         "python3",
@@ -47,6 +47,20 @@
       "path": "/usr/bin/python3",
       "returncode": 0,
       "output": "Python 3.9.6"
+    },
+    {
+      "id": "python3.12",
+      "category": "python",
+      "required": true,
+      "impact": "Canonical Python floor (declared in .python-version). Required for CloudBank venv compatibility and CI parity. CI gates merges on 3.12. Install via: uv python install 3.12",
+      "status": "ok",
+      "command": [
+        "python3.12",
+        "--version"
+      ],
+      "path": "/Users/travisstreets/.local/bin/python3.12",
+      "returncode": 0,
+      "output": "Python 3.12.13"
     },
     {
       "id": "pip",
@@ -68,7 +82,7 @@
       "id": "uv",
       "category": "python",
       "required": true,
-      "impact": "Preferred fast Python environment and package workflow.",
+      "impact": "Preferred fast Python environment and package workflow. Use `uv python install 3.12` to install the canonical Python floor.",
       "status": "ok",
       "command": [
         "uv",
@@ -294,6 +308,11 @@
       "path": ".pre-commit-config.yaml",
       "name": ".pre-commit-config.yaml",
       "kind": "workflow"
+    },
+    {
+      "path": ".python-version",
+      "name": ".python-version",
+      "kind": "environment"
     },
     {
       "path": "Makefile",
@@ -753,8 +772,21 @@
   "codex_skills": {
     "repo_local_skills": [
       "agent-dispatcher",
+      "aurora-canon-reconciler",
+      "aurora-exec-brief-pipeline",
+      "aurora-governance-orchestrator",
+      "aurora-narrative-tone-governor",
       "aurora-nested-repo-normalizer",
-      "gitwiz-github-manager"
+      "aurora-python-ingest-autowire",
+      "aurora-quantum-forge-ops",
+      "aurora-repo-stabilizer",
+      "aurora-script-governor",
+      "aurora-selective-integration",
+      "aurora-skill-finder",
+      "gitwiz-github-manager",
+      "gumas-simulation-engine",
+      "threadcore-governor",
+      "zipwiz-governor"
     ],
     "installed_skills": [
       "agent-dispatcher",
@@ -784,7 +816,7 @@
       "threadcore-governor",
       "zipwiz-governor"
     ],
-    "repo_local_count": 3,
+    "repo_local_count": 16,
     "installed_count": 26,
     "missing_installed_for_repo_source": [],
     "skills_root": "/Users/travisstreets/.codex/skills"

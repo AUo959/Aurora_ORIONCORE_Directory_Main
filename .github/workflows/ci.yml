@@ -20,11 +20,13 @@ jobs:
       matrix:
         python-version: ["3.9", "3.12"]
         include:
-          # 3.12 is CI canon and gates merges.
+          # 3.12 is the declared floor (.python-version) and gates merges.
+          # Aligns with CloudBank runtime.txt and the local devkit python3.12 entry.
           - python-version: "3.12"
             experimental: false
-          # 3.9 mirrors the macOS system Python; surfaces version skew
-          # without blocking merges until the 3.9 leg is green.
+          # 3.9 mirrors the macOS Xcode system Python; kept experimental to
+          # surface version-skew regressions without blocking merges.
+          # Retire this leg once all scripts are verified 3.12-only.
           - python-version: "3.9"
             experimental: true
 
