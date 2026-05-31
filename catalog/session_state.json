@@ -148,9 +148,9 @@
       "summary": "Codex verified Claude Code commit 3f872f3, restored the warrant-lens default HeuristicClient import, fixed GitWiz registry loading, and confirmed root tests/health pass; installed skill runtime sync is pending."
     }
   ],
-  "last_updated": "2026-05-31T01:51:48Z",
+  "last_updated": "2026-05-31T01:56:54Z",
   "last_platform": "claude-code",
-  "last_session_summary": "fix(codex): land Codex session work interrupted by usage lim",
+  "last_session_summary": "feat(coordination): close four cross-platform coordination g; chore(state): auto-update session handoff [skip ci]",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -169,6 +169,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "ce49db4",
+      "date": "2026-05-31",
+      "platform": "claude-code",
+      "summary": "feat(coordination): close four cross-platform coordination gaps"
+    },
+    {
+      "sha": "5d32e63",
+      "date": "2026-05-31",
+      "platform": "claude-code",
+      "summary": "chore(state): auto-update session handoff [skip ci]"
+    },
     {
       "sha": "1a3e124",
       "date": "2026-05-31",
@@ -216,18 +228,6 @@
       "date": "2026-05-30",
       "platform": "claude-code",
       "summary": "chore(state): update session_state.json + workspace manifest after A-D pass"
-    },
-    {
-      "sha": "3bb4cf8",
-      "date": "2026-05-30",
-      "platform": "dependabot",
-      "summary": "deps: bump pre-commit-hooks (#15)"
-    },
-    {
-      "sha": "0e67094",
-      "date": "2026-05-30",
-      "platform": "dependabot",
-      "summary": "deps: bump docker-in-docker devcontainer feature (#14)"
     }
   ],
   "security_events": [
@@ -269,7 +269,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "1a3e124",
+    "main_sha": "ce49db4",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
