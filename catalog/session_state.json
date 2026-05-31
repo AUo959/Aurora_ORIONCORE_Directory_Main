@@ -148,9 +148,9 @@
       "summary": "Codex verified Claude Code commit 3f872f3, restored the warrant-lens default HeuristicClient import, fixed GitWiz registry loading, and confirmed root tests/health pass; installed skill runtime sync is pending."
     }
   ],
-  "last_updated": "2026-05-31T01:56:54Z",
+  "last_updated": "2026-05-31T01:58:27Z",
   "last_platform": "claude-code",
-  "last_session_summary": "feat(coordination): close four cross-platform coordination g; chore(state): auto-update session handoff [skip ci]",
+  "last_session_summary": "chore(state): auto-update session handoff [skip ci]",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -169,6 +169,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "e693d4c",
+      "date": "2026-05-31",
+      "platform": "claude-code",
+      "summary": "chore(state): auto-update session handoff [skip ci]"
+    },
     {
       "sha": "ce49db4",
       "date": "2026-05-31",
@@ -222,12 +228,6 @@
       "date": "2026-05-30",
       "platform": "claude-code",
       "summary": "fix(quality): skill routing overlap (E) + S101 assert noise (F)"
-    },
-    {
-      "sha": "a89d2bc",
-      "date": "2026-05-30",
-      "platform": "claude-code",
-      "summary": "chore(state): update session_state.json + workspace manifest after A-D pass"
     }
   ],
   "security_events": [
@@ -269,7 +269,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "ce49db4",
+    "main_sha": "e693d4c",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
