@@ -111,6 +111,15 @@ threshold must set `requires_user_alert: true` (unless the user explicitly disab
 tooling; it does not prove truth, execute runtime actions, promote canon, or
 mutate nested repos.
 
+## Interaction Warrant Policy
+
+Use `docs/AURORA_INTERACTION_WARRANT_POLICY_v1.md` as the interaction policy
+for balancing collaborative expansion against warrant discipline. Apply it as a
+background governor: keep ordinary conversation natural, surface assumptions or
+warrant gaps only when reliance thresholds are crossed, and reserve formal
+Warrant Lens / Confidence Audit structure for artifacts, receipts, handoffs,
+PRs, and decision records.
+
 ## Integration Quality Gate
 
 Root integration gate:

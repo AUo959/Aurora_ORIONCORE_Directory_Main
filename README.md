@@ -29,6 +29,7 @@ nested repo internals stay out of root Git history.
 - Current Mission Control report: [reports/analysis/aurora_mission_control_latest.json](reports/analysis/aurora_mission_control_latest.json)
 - Confidence audit workflow: [docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md](docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md)
 - Current confidence audit report: [reports/analysis/aurora_confidence_audit_latest.json](reports/analysis/aurora_confidence_audit_latest.json)
+- Interaction warrant policy: [docs/AURORA_INTERACTION_WARRANT_POLICY_v1.md](docs/AURORA_INTERACTION_WARRANT_POLICY_v1.md)
 - Aurora command grammar plugin: [plugins/aurora-command-grammar/skills/aurora-command-grammar/SKILL.md](plugins/aurora-command-grammar/skills/aurora-command-grammar/SKILL.md)
 - Control-plane provenance and recovery role: [docs/CONTROL_PLANE_PROVENANCE.md](docs/CONTROL_PLANE_PROVENANCE.md)
 - Recovery index workflow: [docs/RECOVERY_INDEX_WORKFLOW_v1.md](docs/RECOVERY_INDEX_WORKFLOW_v1.md)
