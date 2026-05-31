@@ -13,6 +13,20 @@
       "status": "ignored"
     },
     {
+      "current_path": ".gitleaksignore",
+      "id": "gitleaks-ignore",
+      "kind": "policy_file",
+      "logical_zone": "tools",
+      "planned_path": ".gitleaksignore",
+      "git_boundary": "root",
+      "storage_tier": "workspace-control",
+      "retention_policy": "versioned",
+      "owner": "workspace-admin",
+      "status": "managed",
+      "batch_id": "",
+      "notes": "Fingerprint-only baseline for previously triaged historical secret-scan findings; does not approve credential validity or skip owner deactivation checks."
+    },
+    {
       "current_path": "_entropy_quarantine",
       "kind": "quarantine_zone",
       "logical_zone": "_staging",

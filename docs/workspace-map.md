@@ -1,11 +1,11 @@
 # Workspace Map
 
-- Generated: `2026-05-31T02:13:15Z`
+- Generated: `2026-05-31T14:12:31Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `39`
+- Top-level entries cataloged: `40`
 - Nested repos registered: `5`
 - Archive or binary artifacts inventoried: `1268`
-- Classification overrides loaded: `5` from `catalog/classification_overrides.yaml`
+- Classification overrides loaded: `6` from `catalog/classification_overrides.yaml`
 - Top-level paths excluded by privacy screen: `7`
 
 ## Zones
@@ -18,7 +18,7 @@
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
-- `tools`: `10` top-level entries
+- `tools`: `11` top-level entries
 
 ## Active Nested Repos
 

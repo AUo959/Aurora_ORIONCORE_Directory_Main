@@ -1,4 +1,4 @@
-generated_at: '2026-05-31T02:13:15Z'
+generated_at: '2026-05-31T14:12:31Z'
 root: .
 logical_taxonomy:
 - repos
@@ -125,6 +125,19 @@ entries:
   owner: intake-review
   status: planned_move
   batch_id: wave4_root_intake_cleanup_initial
+- id: gitleaks-ignore
+  kind: policy_file
+  current_path: .gitleaksignore
+  logical_zone: tools
+  planned_path: .gitleaksignore
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+  batch_id: ''
+  notes: Fingerprint-only baseline for previously triaged historical secret-scan findings;
+    does not approve credential validity or skip owner deactivation checks.
 - id: gitwiz
   kind: cache_or_local_artifact
   current_path: .gitwiz

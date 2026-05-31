@@ -2,6 +2,7 @@
 !/.gitignore
 !/.gitattributes
 !/.gitleaks.toml
+!/.gitleaksignore
 !/ruff.toml
 !/.python-version
 !/setup.cfg
