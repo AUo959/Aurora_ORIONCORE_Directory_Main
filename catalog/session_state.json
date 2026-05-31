@@ -1,11 +1,10 @@
 {
   "schema_version": 2,
   "purpose": "Cross-platform session handoff and task queue. Read at the start of every session. Update at the end of every session that makes meaningful changes. Either platform can suspend any task mid-flight and the other can resume it.",
-
   "protocol": {
     "on_session_start": [
       "1. Read this file in full.",
-      "2. Check active_task — if status is 'suspended', that is the highest-priority item. Read next_step_detail and context_files before doing anything else.",
+      "2. Check active_task \u2014 if status is 'suspended', that is the highest-priority item. Read next_step_detail and context_files before doing anything else.",
       "3. Check task_queue for any items assigned to your platform.",
       "4. Check tool_versions for any tools installed since you last worked here.",
       "5. Run `git log --oneline -5` to see what landed since last_updated."
@@ -19,9 +18,8 @@
       "6. Push to origin so the other platform sees it."
     ],
     "suspend_rule": "A suspend point must be self-contained: the resuming platform should need to read only this file + context_files to continue. Never rely on conversational memory surviving the handoff.",
-    "conflict_rule": "If both platforms made commits since last_updated, merge recent_commits by date. Do not overwrite — append."
+    "conflict_rule": "If both platforms made commits since last_updated, merge recent_commits by date. Do not overwrite \u2014 append."
   },
-
   "platform_capabilities": {
     "claude-code": {
       "strengths": [
@@ -33,9 +31,20 @@
         "Long structured rewrites and refactors",
         "Shell scripting and Bash automation"
       ],
-      "skills": ["codacy-skills", "gitleaks", "gitwiz-github-manager", "agent-dispatcher"],
-      "plugins": ["codacy-skills@codacy"],
-      "limitations": ["No browser/computer-use", "No Aurora governance skills", "No Figma"]
+      "skills": [
+        "codacy-skills",
+        "gitleaks",
+        "gitwiz-github-manager",
+        "agent-dispatcher"
+      ],
+      "plugins": [
+        "codacy-skills@codacy"
+      ],
+      "limitations": [
+        "No browser/computer-use",
+        "No Aurora governance skills",
+        "No Figma"
+      ]
     },
     "codex": {
       "strengths": [
@@ -48,37 +57,75 @@
         "ChatGPT Apps, web/game/iOS/macOS app building"
       ],
       "skills": [
-        "aurora-canon-reconciler", "aurora-exec-brief-pipeline", "aurora-governance-orchestrator",
-        "aurora-narrative-tone-governor", "aurora-python-ingest-autowire", "aurora-quantum-forge-ops",
-        "aurora-repo-stabilizer", "aurora-script-governor", "aurora-selective-integration",
-        "aurora-skill-finder", "gumas-simulation-engine", "threadcore-governor", "zipwiz-governor",
-        "gh-address-comments", "gh-fix-ci", "gitwiz-github-manager", "agent-dispatcher",
-        "aurora-nested-repo-normalizer", "security-best-practices", "security-threat-model"
+        "agent-dispatcher",
+        "aurora-canon-reconciler",
+        "aurora-exec-brief-pipeline",
+        "aurora-governance-orchestrator",
+        "aurora-narrative-tone-governor",
+        "aurora-nested-repo-normalizer",
+        "aurora-python-ingest-autowire",
+        "aurora-quantum-forge-ops",
+        "aurora-repo-stabilizer",
+        "aurora-script-governor",
+        "aurora-selective-integration",
+        "aurora-skill-finder",
+        "gitwiz-github-manager",
+        "gumas-simulation-engine",
+        "threadcore-governor",
+        "zipwiz-governor"
       ],
       "plugins": [
-        "github@openai-curated", "browser@openai-bundled", "computer-use@openai-bundled",
-        "aurora-workspace-guard@aurora-workspace-local", "figma@openai-curated",
-        "build-web-apps@openai-curated", "slack@openai-curated", "codex-security@openai-curated"
+        "github@openai-curated",
+        "browser@openai-bundled",
+        "computer-use@openai-bundled",
+        "aurora-workspace-guard@aurora-workspace-local",
+        "figma@openai-curated",
+        "build-web-apps@openai-curated",
+        "slack@openai-curated",
+        "codex-security@openai-curated"
       ],
       "model": "gpt-5.5 (xhigh reasoning, multi-agent enabled)",
-      "limitations": ["Less precise on multi-file surgical edits", "No Codacy integration", "No pre-commit hook wiring"]
+      "limitations": [
+        "Less precise on multi-file surgical edits",
+        "No Codacy integration",
+        "No pre-commit hook wiring"
+      ]
     },
     "routing_heuristics": {
-      "prefer_claude_code": ["Codacy/lint fixes", "CI workflow changes", "git history cleanup", "pre-commit config", "multi-file refactors", "secret scanning"],
-      "prefer_codex": ["Aurora governance scans", "canon promotion", "intake processing", "GUMAS simulation", "PR comment addressing", "browser/UI testing", "Figma design work"],
-      "either": ["General code changes", "PR creation", "branch management", "documentation", "skill edits", "any task when usage limit hit on preferred platform"]
+      "prefer_claude_code": [
+        "Codacy/lint fixes",
+        "CI workflow changes",
+        "git history cleanup",
+        "pre-commit config",
+        "multi-file refactors",
+        "secret scanning"
+      ],
+      "prefer_codex": [
+        "Aurora governance scans",
+        "canon promotion",
+        "intake processing",
+        "GUMAS simulation",
+        "PR comment addressing",
+        "browser/UI testing",
+        "Figma design work"
+      ],
+      "either": [
+        "General code changes",
+        "PR creation",
+        "branch management",
+        "documentation",
+        "skill edits",
+        "any task when usage limit hit on preferred platform"
+      ]
     }
   },
-
   "active_task": null,
-
   "task_queue": [],
-
   "completed_tasks": [
     {
       "id": "phase-0-complete",
       "date": "2026-05-30",
-      "summary": "Phase 0: Agentlinter 20→5 accepted, branch prune (8 branches), secret triage (1 OpenAI key rotated), gitleaks CI gate, devkit 20/20, skills consolidated, cross-platform handoff layer built, 5 Dependabot PRs merged, 2 stale PRs closed"
+      "summary": "Phase 0: Agentlinter 20\u21925 accepted, branch prune (8 branches), secret triage (1 OpenAI key rotated), gitleaks CI gate, devkit 20/20, skills consolidated, cross-platform handoff layer built, 5 Dependabot PRs merged, 2 stale PRs closed"
     },
     {
       "id": "phase-0-followups-efg-python-floor",
@@ -101,11 +148,9 @@
       "summary": "Codex verified Claude Code commit 3f872f3, restored the warrant-lens default HeuristicClient import, fixed GitWiz registry loading, and confirmed root tests/health pass; installed skill runtime sync is pending."
     }
   ],
-
-  "last_updated": "2026-05-31T01:20:56Z",
-  "last_platform": "codex",
-  "last_session_summary": "Verified Claude Code's CL cleanup, fixed warrant-lens and GitWiz follow-up regressions, and left installed GitWiz skill runtime sync pending due sandbox approval limits.",
-
+  "last_updated": "2026-05-31T01:51:48Z",
+  "last_platform": "claude-code",
+  "last_session_summary": "fix(codex): land Codex session work interrupted by usage lim",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -123,8 +168,13 @@
     "rust": "1.95.0",
     "go": "1.26.3"
   },
-
   "recent_commits": [
+    {
+      "sha": "1a3e124",
+      "date": "2026-05-31",
+      "platform": "claude-code",
+      "summary": "fix(codex): land Codex session work interrupted by usage limit"
+    },
     {
       "sha": "3f872f3",
       "date": "2026-05-30",
@@ -178,19 +228,12 @@
       "date": "2026-05-30",
       "platform": "dependabot",
       "summary": "deps: bump docker-in-docker devcontainer feature (#14)"
-    },
-    {
-      "sha": "63f781c",
-      "date": "2026-05-30",
-      "platform": "dependabot",
-      "summary": "deps: bump actions/checkout from 4 to 6 (#13)"
     }
   ],
-
   "security_events": [
     {
       "date": "2026-05-30",
-      "event": "OpenAI API key sk-proj-ylVuuDDY… rotated by owner. Branch carrying it deleted from origin.",
+      "event": "OpenAI API key sk-proj-ylVuuDDY\u2026 rotated by owner. Branch carrying it deleted from origin.",
       "status": "resolved"
     },
     {
@@ -199,18 +242,17 @@
       "status": "pending_owner_action"
     }
   ],
-
   "pending_for_next_session": [
     {
       "id": "0.1-aws-key",
       "priority": "high",
-      "description": "Verify AWS IAM key AKIAVCODYLSA53PQK4ZA deactivated in AWS console. Untracked disk only — no git exposure.",
+      "description": "Verify AWS IAM key AKIAVCODYLSA53PQK4ZA deactivated in AWS console. Untracked disk only \u2014 no git exposure.",
       "assigned_to": "owner"
     },
     {
       "id": "roadmap-1.1",
       "priority": "medium",
-      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows → ~8). Prefer Codex (browser + github plugin). See reports/state_briefs/development_roadmap__2026-05-24.md §1.1.",
+      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows \u2192 ~8). Prefer Codex (browser + github plugin). See reports/state_briefs/development_roadmap__2026-05-24.md \u00a71.1.",
       "assigned_to": "codex"
     },
     {
@@ -226,9 +268,8 @@
       "assigned_to": "codex"
     }
   ],
-
   "known_state": {
-    "main_sha": "3f872f3",
+    "main_sha": "1a3e124",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -242,18 +283,18 @@
       "rescue/root-control-plane-dirty-workingcopy-2026-03-25"
     ],
     "active_worktrees": [
-      "~/.codex/worktrees/70ee — codex/gitwiz-sync-audit-canonical-2026-04-08 (branch closed in #7, worktree still on disk)",
-      "~/.codex/worktrees/2d04 — detached HEAD 13c126b",
-      "~/.codex/worktrees/6f91 — detached HEAD 610f791",
-      "~/.codex/worktrees/966b — detached HEAD 13c126b",
-      "~/.codex/worktrees/acad — detached HEAD 610f791"
+      "~/.codex/worktrees/70ee \u2014 codex/gitwiz-sync-audit-canonical-2026-04-08 (branch closed in #7, worktree still on disk)",
+      "~/.codex/worktrees/2d04 \u2014 detached HEAD 13c126b",
+      "~/.codex/worktrees/6f91 \u2014 detached HEAD 610f791",
+      "~/.codex/worktrees/966b \u2014 detached HEAD 13c126b",
+      "~/.codex/worktrees/acad \u2014 detached HEAD 610f791"
     ],
     "open_prs": [],
     "codacy_status": "Claude Code CL cleanup landed in 3f872f3. Codex did not refresh live Codacy; local root tests and health pass after warrant-lens and GitWiz follow-up fixes. Installed GitWiz skill runtime sync remains pending.",
     "devkit_status": "READY 21/21 tools as of 2026-05-31; canonical Python floor declared in af846ac.",
     "ci_workflows": [
-      ".github/workflows/ci.yml — tests + workspace-verify on push/PR to main",
-      ".github/workflows/secret-scan.yml — gitleaks on all branches/PRs"
+      ".github/workflows/ci.yml \u2014 tests + workspace-verify on push/PR to main",
+      ".github/workflows/secret-scan.yml \u2014 gitleaks on all branches/PRs"
     ],
     "workflow_specs": [
       "catalog/workflows/pr-lifecycle.md",
