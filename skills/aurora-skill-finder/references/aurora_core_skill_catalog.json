@@ -465,6 +465,47 @@
       }
     },
     {
+      "name": "mesh-router",
+      "description": "Route local Aurora mesh messages through the FastAPI mesh runtime.",
+      "include_keywords": [
+        "mesh-router",
+        "mesh router",
+        "mesh runtime",
+        "mesh message",
+        "@mesh",
+        "@agent",
+        "crew_lounge",
+        "private:captain:alex",
+        "mesh history",
+        "mesh status",
+        "activate agent",
+        "live event tail",
+        "local aurora mesh",
+        "send mesh message",
+        "broadcast mesh"
+      ],
+      "exclude_keywords": [
+        "symbolic command grammar only",
+        "prompt-only simulation",
+        "freeform roleplay",
+        "canon promotion"
+      ],
+      "path_hints": [
+        "mesh-router",
+        "mesh_router.py",
+        "runtime-contract.md",
+        "command-grammar.md",
+        "private:captain:alex",
+        "#crew_lounge"
+      ],
+      "filetype_bias": {
+        ".md": 0.08,
+        ".py": 0.08,
+        ".yaml": 0.04
+      },
+      "min_confidence_override": 0.45
+    },
+    {
       "name": "threadcore-governor",
       "description": "Validate THREADCORE artifacts, beacon integrity, and L3 bridge outputs.",
       "include_keywords": [
