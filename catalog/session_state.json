@@ -132,21 +132,21 @@
       "preconditions": [
         "1. Verify hub repo is on a clean tree: `git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main status --short`. If dirty (Codex branch codex/cloudbank-gumas-mutation-auth-2026-05-25 had uncommitted auth-middleware work), do NOT integrate onto that branch.",
         "2. Create a dedicated integration branch: `git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main checkout -b feat/ga-curvature-integration`.",
-        "3. Confirm clifford is available in the hub's Python environment (it is optional — the engine falls back to closed form gracefully)."
+        "3. Confirm clifford is available in the hub's Python environment (it is optional \u2014 the engine falls back to closed form gracefully)."
       ],
       "reference_files": [
-        "tools/geometric_ethics_curvature.py — the complete reference engine (root repo, already merged)",
-        "tests/test_geometric_ethics_curvature.py — 8 tests; all pass with clifford 1.5.1, all pass without (closed-form fallback). Do not re-run these — they are root-repo tests, not hub tests.",
-        "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/modules/ethics_field/field_curvature.py — the TARGET file to patch",
-        "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/modules/symbolic_core/geometric_algebra.py — existing clifford wrapper in the hub (not currently wired to field_curvature.py)"
+        "tools/geometric_ethics_curvature.py \u2014 the complete reference engine (root repo, already merged)",
+        "tests/test_geometric_ethics_curvature.py \u2014 8 tests; all pass with clifford 1.5.1, all pass without (closed-form fallback). Do not re-run these \u2014 they are root-repo tests, not hub tests.",
+        "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/modules/ethics_field/field_curvature.py \u2014 the TARGET file to patch",
+        "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/modules/symbolic_core/geometric_algebra.py \u2014 existing clifford wrapper in the hub (not currently wired to field_curvature.py)"
       ],
       "integration_contract": {
-        "design": "Additive, flag-gated. The scalar weighted mean stays authoritative and is the default. GA composite is an optional override enabled by env var AURORA_GA_CURVATURE=true. This is not a replacement — it is a gated extension.",
-        "what_the_reference_engine_does": "Computes ethical curvature in Cl(5,0): one basis vector per dimension, grade-1 weighted deficits + grade-2 pairwise interaction bivector. Alignment = scalar_composite - interaction_penalty, clamped [0,1]. Hard floor (any dimension == 0.0 → INFINITE resistance) is preserved identically. When clifford is installed, the real multivector is used and its grade-2 magnitude is proven equal to the closed form. When absent, falls back to closed form (same answer).",
+        "design": "Additive, flag-gated. The scalar weighted mean stays authoritative and is the default. GA composite is an optional override enabled by env var AURORA_GA_CURVATURE=true. This is not a replacement \u2014 it is a gated extension.",
+        "what_the_reference_engine_does": "Computes ethical curvature in Cl(5,0): one basis vector per dimension, grade-1 weighted deficits + grade-2 pairwise interaction bivector. Alignment = scalar_composite - interaction_penalty, clamped [0,1]. Hard floor (any dimension == 0.0 \u2192 INFINITE resistance) is preserved identically. When clifford is installed, the real multivector is used and its grade-2 magnitude is proven equal to the closed form. When absent, falls back to closed form (same answer).",
         "key_invariants_to_preserve": [
-          "DIMENSION_WEIGHTS in the reference engine MUST match those in field_curvature.py — verify before wiring.",
+          "DIMENSION_WEIGHTS in the reference engine MUST match those in field_curvature.py \u2014 verify before wiring.",
           "Resistance band thresholds (0.85/0.70/0.50) MUST be identical in both.",
-          "Hard floor (any dim == 0.0 → INFINITE, formation_allowed=False) is already in the reference engine. Hub must keep its own hard floor check independent of the GA path.",
+          "Hard floor (any dim == 0.0 \u2192 INFINITE, formation_allowed=False) is already in the reference engine. Hub must keep its own hard floor check independent of the GA path.",
           "With no co-deficits (all dimensions at the same score), GA alignment == scalar composite exactly. This is a regression test: confirm it passes after wiring.",
           "The flag gate must default to OFF (opt-in, not opt-out). Scalar is authoritative until the integration is reviewed."
         ],
@@ -155,7 +155,7 @@
           "step_2_gate_in_curvature_function": "In the hub's main curvature function (wherever the scalar weighted mean is computed and the resistance band is determined), add after the scalar composite is calculated:\n\nif _GA_CURVATURE_ENABLED and _ga_calculate_curvature is not None:\n    _ga_result = _ga_calculate_curvature(dimension_scores)\n    # Use GA alignment as the gate input instead of scalar composite\n    # Note: hard floor (zero-dimension veto) is checked identically inside _ga_calculate_curvature\n    composite = _ga_result.alignment\n    # Optionally surface the interaction penalty for logging/debugging:\n    # ga_interaction_penalty = _ga_result.interaction_penalty",
           "step_3_smoke_test": "After wiring, run the hub's existing test suite. Add one explicit smoke test confirming: (a) with AURORA_GA_CURVATURE unset, output matches legacy scalar; (b) with AURORA_GA_CURVATURE=true, a concentrated co-deficit yields lower alignment than an equal-scalar-composite spread deficit."
         },
-        "alternative_cleaner_import": "If the hub has a standard package structure and root repo is not on sys.path, copy tools/geometric_ethics_curvature.py into the hub's modules/ethics_field/ as a vendored submodule and adjust the import path accordingly. Do not modify the copied file — keep it identical to the root version."
+        "alternative_cleaner_import": "If the hub has a standard package structure and root repo is not on sys.path, copy tools/geometric_ethics_curvature.py into the hub's modules/ethics_field/ as a vendored submodule and adjust the import path accordingly. Do not modify the copied file \u2014 keep it identical to the root version."
       },
       "review_debt": "This integration is a floor-touching change (ethics-core class). After the branch is created and the wiring is tested, incur a review_debt entry in catalog/session_state.json and assign review to Claude Code before merging.",
       "open_questions_to_resolve_on_hub_side": [
@@ -200,9 +200,9 @@
       "summary": "Codex verified Claude Code commit 3f872f3, restored the warrant-lens default HeuristicClient import, fixed GitWiz registry loading, and confirmed root tests/health pass; installed skill runtime sync is pending."
     }
   ],
-  "last_updated": "2026-06-01T16:05:00Z",
+  "last_updated": "2026-06-01T15:45:45Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Cleared both review debts (Protocol v1 adopted, Axiom Surfacing approved). GA ethics hub integration suspended \u2014 full cold-start handoff written into active_task for Codex.",
+  "last_session_summary": "fix(tests): disable commit signing in git fixture temp repos",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -221,6 +221,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "f5aab21",
+      "date": "2026-06-01",
+      "platform": "claude-code",
+      "summary": "fix(tests): disable commit signing in git fixture temp repos"
+    },
+    {
+      "sha": "f2c6565",
+      "date": "2026-06-01",
+      "platform": "claude-code",
+      "summary": "chore(state): suspend ga-ethics-hub-integration with cold-start handoff"
+    },
     {
       "sha": "84c762f",
       "date": "2026-06-01",
@@ -268,18 +280,6 @@
       "date": "2026-05-31",
       "platform": "codex+claude-code",
       "summary": "feat(security): harden secret-scan workflow + redact AWS key (Codex-authored, Claude-landed)"
-    },
-    {
-      "sha": "5d774ac",
-      "date": "2026-05-31",
-      "platform": "codex+claude-code",
-      "summary": "docs(policy): Aurora Interaction Warrant Policy v1 (Codex-authored, Claude-landed)"
-    },
-    {
-      "sha": "723ae23",
-      "date": "2026-05-31",
-      "platform": "claude-code",
-      "summary": "feat(ethics): GA curvature engine + fix(hook): stop session-state commit churn"
     }
   ],
   "security_events": [
@@ -334,7 +334,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "84c762f",
+    "main_sha": "f5aab21",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
