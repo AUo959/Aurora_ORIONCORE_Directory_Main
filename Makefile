@@ -1,4 +1,4 @@
-.PHONY: help setup test verify scan sync-audit pr-packet lint health devkit-check devkit-report devkit-install-plan skills-check skills-install session-claims session-claim-check recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report confidence-audit confidence-audit-report integration-gate clean
+.PHONY: help setup test verify scan sync-audit pr-packet lint health devkit-check devkit-report devkit-install-plan skills-check skills-install session-claims session-claim-check cloudbank-broker cloudbank-broker-check recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report confidence-audit confidence-audit-report integration-gate clean
 
 PYTHON ?= python3
 PYTEST ?= pytest
@@ -67,6 +67,12 @@ session-claims: ## List local Codex/Claude Code session claims
 
 session-claim-check: ## Check for root-wide overlapping active session claims
 	$(PYTHON) tools/session_claim.py check --repo root --paths .
+
+cloudbank-broker: ## Show CloudBank issue broker status
+	$(PYTHON) tools/cloudbank_issue_broker.py status
+
+cloudbank-broker-check: ## Check CloudBank issue broker with ISSUE=<number> PATHS="path ..."
+	$(PYTHON) tools/cloudbank_issue_broker.py check --issue $(ISSUE) --paths $(PATHS)
 
 recovery-index: ## Build the read-only recovery index summary
 	$(PYTHON) tools/workspace_recovery_index.py --summary

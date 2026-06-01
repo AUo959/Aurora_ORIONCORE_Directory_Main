@@ -151,11 +151,16 @@
       "id": "review-peer-review-protocol-v1",
       "date": "2026-06-01",
       "summary": "Codex reviewed the Peer Review Protocol v1 plus paired Axiom Surfacing warrant-policy change, issued an approve-with-notes receipt, and cleared rd-20260531-peer-review-protocol-v1 plus rd-20260531-warrant-policy-axiom-surfacing."
+    },
+    {
+      "id": "cloudbank-issue-broker-v1",
+      "date": "2026-06-01",
+      "summary": "Codex added a root CloudBank issue broker workflow and CLI so Codex and Claude Code can claim CloudBank issues and paths before creating clean issue worktrees."
     }
   ],
-  "last_updated": "2026-06-01T17:49:00Z",
+  "last_updated": "2026-06-01T19:15:01Z",
   "last_platform": "codex",
-  "last_session_summary": "Reviewed the peer-review protocol and Axiom Surfacing warrant-policy change, left an approve-with-notes receipt, and cleared the paired review-debt entries.",
+  "last_session_summary": "Built the CloudBank issue broker root workflow, CLI, tests, docs, and receipt; validation passed except known installed skill-runtime drift in aurora-skill-finder.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -174,6 +179,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "04ffa60",
+      "date": "2026-06-01",
+      "platform": "codex",
+      "summary": "chore(review): clear peer review protocol debt"
+    },
     {
       "sha": "286d085",
       "date": "2026-06-01",
@@ -227,12 +238,6 @@
       "date": "2026-05-31",
       "platform": "codex+claude-code",
       "summary": "docs(policy): Aurora Interaction Warrant Policy v1 (Codex-authored, Claude-landed)"
-    },
-    {
-      "sha": "723ae23",
-      "date": "2026-05-31",
-      "platform": "claude-code",
-      "summary": "feat(ethics): GA curvature engine + fix(hook): stop session-state commit churn"
     }
   ],
   "security_events": [
@@ -280,7 +285,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "286d085",
+    "main_sha": "04ffa6059c5620b7600ee3e2b687848dee913c1d",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -311,14 +316,17 @@
     "workflow_specs": [
       "catalog/workflows/pr-lifecycle.md",
       "catalog/workflows/governance-fix-loop.md",
-      "docs/SESSION_CLAIMS_WORKFLOW_v1.md"
+      "docs/SESSION_CLAIMS_WORKFLOW_v1.md",
+      "docs/CLOUDBANK_ISSUE_BROKER_WORKFLOW_v1.md"
     ],
     "skills_canonical": "skills/ (16 project-owned skills). make skills-check / make skills-install to sync to ~/.codex/skills/",
     "coordination_surfaces": [
       "catalog/session_state.json",
       "catalog/session_claims/",
       "tools/session_claim.py",
+      "tools/cloudbank_issue_broker.py",
       "docs/SESSION_CLAIMS_WORKFLOW_v1.md",
+      "docs/CLOUDBANK_ISSUE_BROKER_WORKFLOW_v1.md",
       "docs/COHERENCE_CHECKLIST.md"
     ]
   },

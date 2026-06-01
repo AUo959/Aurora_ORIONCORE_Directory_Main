@@ -35,6 +35,7 @@ nested repo internals stay out of root Git history.
 - Recovery index workflow: [docs/RECOVERY_INDEX_WORKFLOW_v1.md](docs/RECOVERY_INDEX_WORKFLOW_v1.md)
 - Current recovery index report: [reports/analysis/workspace_recovery_index_latest.json](reports/analysis/workspace_recovery_index_latest.json)
 - Cross-platform session claims workflow: [docs/SESSION_CLAIMS_WORKFLOW_v1.md](docs/SESSION_CLAIMS_WORKFLOW_v1.md)
+- CloudBank issue broker workflow: [docs/CLOUDBANK_ISSUE_BROKER_WORKFLOW_v1.md](docs/CLOUDBANK_ISSUE_BROKER_WORKFLOW_v1.md)
 
 ## Logical Zones
 
@@ -143,6 +144,23 @@ Session claims are local, short-lived path leases under
 `catalog/session_claims/`. Live claim JSON files are ignored by Git so the
 coordination mechanism does not become another shared-file conflict point.
 
+CloudBank issue broker:
+
+```bash
+python3 tools/cloudbank_issue_broker.py status
+python3 tools/cloudbank_issue_broker.py plan --issue 842 --issue 843
+python3 tools/cloudbank_issue_broker.py check --issue 842 --paths src/middleware/fastapi_security.py tests/test_security_middleware.py
+python3 tools/cloudbank_issue_broker.py claim --platform codex --issue 842 --label auth --paths src/middleware/fastapi_security.py tests/test_security_middleware.py
+python3 tools/cloudbank_issue_broker.py release --issue 842
+make cloudbank-broker
+```
+
+The broker is a root-control-plane coordination layer for the nested
+`aurora-cloudbank-symbolic-main` repo. It creates local session claims before
+Codex or Claude Code edits CloudBank issue paths. It does not create CloudBank
+worktrees, mutate GitHub, or close issues; use the emitted worktree command
+only after a claim succeeds.
+
 Confidence audit gateway:
 
 ```bash
@@ -179,6 +197,9 @@ python3 tools/aurora_confidence_audit.py score --claim-type analysis --text "Exa
 python3 tools/aurora_confidence_audit.py audit --input claims.jsonl --jsonl --threshold 0.70
 python3 tools/session_claim.py check --repo root --paths . --json
 python3 tools/session_claim.py list
+python3 tools/cloudbank_issue_broker.py status
+python3 tools/cloudbank_issue_broker.py plan --issue 842
+python3 tools/cloudbank_issue_broker.py claim --platform codex --issue 842 --paths src/middleware/fastapi_security.py
 python3 tools/aurora_devkit.py
 python3 tools/aurora_devkit.py --persist-report
 python3 tools/aurora_devkit.py --install-plan --persist-install-plan
@@ -197,6 +218,7 @@ make confidence-audit
 make confidence-audit-report
 make session-claims
 make session-claim-check
+make cloudbank-broker
 make integration-gate
 ```
 

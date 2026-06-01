@@ -147,6 +147,25 @@ Nested repos:
 - treat them as separate repos with separate remotes and publish decisions
 - do not add or change their remotes unless the user names the target repo
 
+## CloudBank Issue Broker
+
+When the user asks to resolve open issues in CloudBank without naming exact
+files or branches, route through the root broker before editing anything:
+
+```bash
+python3 tools/cloudbank_issue_broker.py status
+python3 tools/cloudbank_issue_broker.py plan --issue <number>
+python3 tools/cloudbank_issue_broker.py claim --platform <codex|claude-code> --issue <number> --paths <cloudbank-paths...>
+```
+
+The broker targets the nested `aurora-cloudbank-symbolic-main` repo, records
+local session claims under `catalog/session_claims/`, and emits an issue-specific
+branch/worktree command. It does not mutate the nested repo or GitHub state by
+itself. Refresh live GitHub issue/PR state before treating issue labels,
+comments, or closure status as current. Do not use the dirty canonical
+CloudBank checkout as the work surface; create a clean issue worktree after the
+claim succeeds.
+
 ## What Persists Across Threads
 
 These things persist on this machine:
@@ -377,6 +396,7 @@ This repo is worked on by both **Claude Code** and **Codex**. Either platform ma
 
 - **PR lifecycle:** `catalog/workflows/pr-lifecycle.md` — branch → implement → PR → review → merge
 - **Governance fix loop:** `catalog/workflows/governance-fix-loop.md` — scan → triage → fix → verify
+- **CloudBank issue broker:** `docs/CLOUDBANK_ISSUE_BROKER_WORKFLOW_v1.md` — live issue state → local claim → clean worktree → PR → release
 
 ### Platform capability map
 
