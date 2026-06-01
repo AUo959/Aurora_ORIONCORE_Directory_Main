@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "review_id": "pr-20260601-peer-review-protocol-and-axiom-surfacing",
+  "reviewed_debt_ids": [
+    "rd-20260531-peer-review-protocol-v1",
+    "rd-20260531-warrant-policy-axiom-surfacing"
+  ],
+  "target": {
+    "commits": [
+      "7c5db70",
+      "977d619"
+    ],
+    "diff_base": "7c5db70^ and 977d619^",
+    "change_class": "coordination + invariant-docs",
+    "domain": "peer-review-protocol + interaction-warrant-policy",
+    "paths": [
+      "docs/AURORA_PEER_REVIEW_PROTOCOL_v1.md",
+      "docs/AURORA_INTERACTION_WARRANT_POLICY_v1.md"
+    ]
+  },
+  "author_platform": "claude-code",
+  "reviewer_platform": "codex",
+  "reviewed_at": "2026-06-01T17:49:00Z",
+  "warrant_level": "artifact",
+  "verdict": "approve-with-notes",
+  "summary": "The peer-review protocol is sound enough to adopt with implementation constraints, and the paired Axiom Surfacing policy change is approved. The notes below are adoption constraints for the next tooling pass, not blockers to clearing the review debt.",
+  "reverified_gates": [
+    {
+      "gate": "session-start-handoff",
+      "command": "read catalog/session_state.json; git log --oneline -5",
+      "result": "pass",
+      "evidence": "session_state had no active_task, queued review-peer-review-protocol-v1 for Codex, and listed both review_debt IDs pending; git log showed 286d085, 9696e40, 717e315, 977d619, 3a6c0df."
+    },
+    {
+      "gate": "protocol-commit-scope",
+      "command": "git show --stat --oneline 7c5db70 && git show --format=fuller --name-only 7c5db70",
+      "result": "pass",
+      "evidence": "7c5db70 is a single-file addition of docs/AURORA_PEER_REVIEW_PROTOCOL_v1.md and its commit message marks the protocol draft pending Codex review."
+    },
+    {
+      "gate": "axiom-surfacing-commit-scope",
+      "command": "git show --stat --oneline 977d619 && git show --unified=80 977d619 -- docs/AURORA_INTERACTION_WARRANT_POLICY_v1.md",
+      "result": "pass",
+      "evidence": "977d619 adds only the Axiom Surfacing subsection to docs/AURORA_INTERACTION_WARRANT_POLICY_v1.md."
+    },
+    {
+      "gate": "current-target-files-match-review-target",
+      "command": "git diff --stat 7c5db70..HEAD -- docs/AURORA_PEER_REVIEW_PROTOCOL_v1.md; git diff --stat 977d619..HEAD -- docs/AURORA_INTERACTION_WARRANT_POLICY_v1.md",
+      "result": "pass",
+      "evidence": "Both commands returned empty output, so the reviewed docs were unchanged from their target commits."
+    },
+    {
+      "gate": "session-claim-conflict-check",
+      "command": "python3 tools/session_claim.py check --repo root --paths catalog/session_state.json reports/analysis/peer_reviews --json",
+      "result": "pass",
+      "evidence": "status clear, with no active, stale, or invalid conflicting claims."
+    }
+  ],
+  "answers": {
+    "Q1_taxonomy": "The taxonomy is directionally correct. Author or reviewer discretion should be allowed to promote a significant change to mandatory review, with a recorded reason. Mechanical changes stay non-reviewable only when they are traceable refreshes or non-semantic edits; generated output that changes routing, registry boundaries, gate behavior, or authority labels inherits the floor-touching class of the source semantic change.",
+    "Q2_debt_scope": "Use domain as the primary blocking unit for v1, but record change_class and touched paths in the receipt/debt entry. change_class alone is too coarse for a one-operator workspace, while path-only scope is too easy to evade when related risk spans multiple files.",
+    "Q3_ledger_location": "Keep review_debt in catalog/session_state.json for v1 because visibility is more important than elegance while volume is low. Move cleared history to a dedicated catalog/review_ledger.json only after the state file becomes noisy, while keeping a pending-debt summary in session_state.",
+    "escape_hatch_abuse": "The G2 escape hatch is acceptable only if tooling records a reason, operator acknowledgement or explicit urgency, the stacked debt IDs, and a follow-up deadline. A bare --accept-debt-stack string would be too easy to normalize.",
+    "routing_entrenchment": "Routing by capability is useful as a default but must not become a permanent domain lock. Tooling should read catalog/session_state.json platform_capabilities at request time, require a short routing rationale, and allow operator override. For repeated same-domain reviews, rotate or add an explicit second-look note when feasible.",
+    "two_platform_one_operator_cuts": "Cut v1 down to manual receipt plus clear/list behavior first. Defer scaffold generation, broad backfill of old debts, heavy schema evolution, and automated routing enforcement until two or three real reviews prove the fields and commands are worth carrying."
+  },
+  "findings": [
+    {
+      "id": "f1",
+      "severity": "note",
+      "evidence": "docs/AURORA_PEER_REVIEW_PROTOCOL_v1.md lines 71-97 and 157-159",
+      "description": "Taxonomy and debt scoping are adequate for adoption, but generated/mechanical classification must follow semantic risk rather than file label alone.",
+      "disposition": "accepted-with-note"
+    },
+    {
+      "id": "f2",
+      "severity": "note",
+      "evidence": "docs/AURORA_PEER_REVIEW_PROTOCOL_v1.md lines 99-108 and catalog/session_state.json platform_capabilities",
+      "description": "Section 5's routing table should not be implemented as a hard-coded authority. The protocol already names platform_capabilities as the source of truth, so tooling should derive routing from that state and record any override rationale.",
+      "disposition": "accepted-with-note"
+    },
+    {
+      "id": "f3",
+      "severity": "note",
+      "evidence": "docs/AURORA_PEER_REVIEW_PROTOCOL_v1.md lines 136-155 and 199-210",
+      "description": "The G2 escape hatch needs structured guardrails before tooling lands. That is a tooling acceptance constraint, not a blocker to adopting the review-debt model.",
+      "disposition": "accepted-with-note"
+    },
+    {
+      "id": "f4",
+      "severity": "note",
+      "evidence": "docs/AURORA_PEER_REVIEW_PROTOCOL_v1.md lines 199-224",
+      "description": "The medium-heavy tooling plan should be trimmed for a two-platform, one-operator workflow. Manual receipts and a simple debt-clear/list path should precede scaffold generation, broad backfill, and automated routing enforcement.",
+      "disposition": "accepted-with-note"
+    },
+    {
+      "id": "f5",
+      "severity": "note",
+      "evidence": "docs/AURORA_INTERACTION_WARRANT_POLICY_v1.md lines 148-157 and 293-303",
+      "description": "Axiom Surfacing is consistent with the warrant policy because it names hidden premises while explicitly stopping at diminishing signal-to-noise and preserving the non-goal against formulaic interaction.",
+      "disposition": "accepted-with-note"
+    }
+  ],
+  "clears_review_debt": true,
+  "cleared_debt_ids": [
+    "rd-20260531-peer-review-protocol-v1",
+    "rd-20260531-warrant-policy-axiom-surfacing"
+  ],
+  "next_actions": [
+    "Build the smallest useful peer-review tooling path first: validate/clear/list pending debt; defer scaffold automation.",
+    "When implementing routing, derive reviewer defaults from catalog/session_state.json platform_capabilities rather than hard-coding the section 5 table.",
+    "Harden any G2 escape hatch with structured reason, urgency/acknowledgement, stacked debt IDs, and follow-up deadline."
+  ]
+}

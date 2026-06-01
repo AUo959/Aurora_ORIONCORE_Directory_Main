@@ -120,15 +120,7 @@
     }
   },
   "active_task": null,
-  "task_queue": [
-    {
-      "id": "review-peer-review-protocol-v1",
-      "assigned_to": "codex",
-      "priority": "high",
-      "type": "peer-review",
-      "description": "PEER-REVIEW REQUEST (dogfooding the protocol on itself). Review docs/AURORA_PEER_REVIEW_PROTOCOL_v1.md (commit 7c5db70). Apply the protocol's own reviewer contract (\u00a78): read the design against intent, warrant-ground every finding (no rubber-stamp, no nitpick). Answer the open questions Q1-Q3 (\u00a74/\u00a76/\u00a79) and the explicit asks in \u00a711 (escape-hatch abuse, routing entrenchment, over-engineering for a 2-platform/1-operator reality \u2014 what to cut from v1). Verdict: approve / approve-with-notes / changes-requested. Then clear review_debt rd-20260531-peer-review-protocol-v1. Only after approve(-with-notes) do we build the tooling (schema, peer_review.py, verify_review_debt)."
-    }
-  ],
+  "task_queue": [],
   "completed_tasks": [
     {
       "id": "phase-0-complete",
@@ -154,11 +146,16 @@
       "id": "post-claude-cl-verification",
       "date": "2026-05-31",
       "summary": "Codex verified Claude Code commit 3f872f3, restored the warrant-lens default HeuristicClient import, fixed GitWiz registry loading, and confirmed root tests/health pass; installed skill runtime sync is pending."
+    },
+    {
+      "id": "review-peer-review-protocol-v1",
+      "date": "2026-06-01",
+      "summary": "Codex reviewed the Peer Review Protocol v1 plus paired Axiom Surfacing warrant-policy change, issued an approve-with-notes receipt, and cleared rd-20260531-peer-review-protocol-v1 plus rd-20260531-warrant-policy-axiom-surfacing."
     }
   ],
-  "last_updated": "2026-06-01T02:59:59Z",
+  "last_updated": "2026-06-01T17:49:00Z",
   "last_platform": "codex",
-  "last_session_summary": "Verified and packaged the root control-plane operator-artifact refresh; no nested repo files were included.",
+  "last_session_summary": "Reviewed the peer-review protocol and Axiom Surfacing warrant-policy change, left an approve-with-notes receipt, and cleared the paired review-debt entries.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -177,6 +174,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "286d085",
+      "date": "2026-06-01",
+      "platform": "codex",
+      "summary": "chore(reports): refresh root operator artifacts"
+    },
     {
       "sha": "9696e40",
       "date": "2026-05-31",
@@ -230,18 +233,6 @@
       "date": "2026-05-31",
       "platform": "claude-code",
       "summary": "feat(ethics): GA curvature engine + fix(hook): stop session-state commit churn"
-    },
-    {
-      "sha": "7d3a234",
-      "date": "2026-05-31",
-      "platform": "claude-code",
-      "summary": "chore(state): auto-update session handoff [skip ci]"
-    },
-    {
-      "sha": "069bd49",
-      "date": "2026-05-31",
-      "platform": "claude-code",
-      "summary": "chore(state): auto-update session handoff [skip ci]"
     }
   ],
   "security_events": [
@@ -289,7 +280,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "9696e40",
+    "main_sha": "286d085",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -298,15 +289,16 @@
       "codex/root-control-plane-local-2026-03-25",
       "codex/root-control-plane-sync-2026-04-01-mixed-backup",
       "codex/root-reconstruct-recovered-protocols-2026-03-26",
+      "codex/weekly-skill-audit-mesh-router-2026-06-01",
       "feat/warrant-lens",
       "main",
       "rescue/root-control-plane-dirty-workingcopy-2026-03-25"
     ],
     "active_worktrees": [
-      "~/.codex/worktrees/70ee \u2014 codex/gitwiz-sync-audit-canonical-2026-04-08 (branch closed in #7, worktree still on disk)",
-      "~/.codex/worktrees/2d04 \u2014 detached HEAD 13c126b",
       "~/.codex/worktrees/6f91 \u2014 detached HEAD 610f791",
-      "~/.codex/worktrees/966b \u2014 detached HEAD 13c126b",
+      "~/.codex/worktrees/8a55 \u2014 detached HEAD 723ae23",
+      "~/.codex/worktrees/8ead \u2014 detached HEAD 723ae23",
+      "~/.codex/worktrees/93c5 \u2014 codex/weekly-skill-audit-mesh-router-2026-06-01",
       "~/.codex/worktrees/acad \u2014 detached HEAD 610f791"
     ],
     "open_prs": [],
@@ -340,10 +332,11 @@
       "domain": "peer-review-protocol",
       "author_platform": "claude-code",
       "incurred_at": "2026-05-31T15:30:00Z",
-      "status": "pending",
-      "review_receipt": null,
-      "blocks": "adoption of the protocol + next coordination-layer change in this domain",
-      "note": "Hand-created (peer_review.py not built yet) to dogfood the mechanism. Codex is the assigned reviewer; see task_queue."
+      "status": "cleared",
+      "review_receipt": "reports/analysis/peer_reviews/pr-20260601-peer-review-protocol-and-axiom-surfacing.json",
+      "cleared_at": "2026-06-01T17:49:00Z",
+      "blocks": "none (cleared)",
+      "note": "Cleared by Codex approve-with-notes receipt. Adoption constraints: derive routing from platform_capabilities, harden G2 escape hatch, and trim v1 tooling to manual receipt plus clear/list before scaffold automation."
     },
     {
       "id": "rd-20260531-warrant-policy-axiom-surfacing",
@@ -354,10 +347,11 @@
       "domain": "interaction-warrant-policy",
       "author_platform": "claude-code",
       "incurred_at": "2026-05-31T16:00:00Z",
-      "status": "pending",
-      "review_receipt": null,
-      "blocks": "next change to the Interaction Warrant Policy",
-      "note": "Operator-directed calibration (Axiom Surfacing). Reviewable alongside the protocol."
+      "status": "cleared",
+      "review_receipt": "reports/analysis/peer_reviews/pr-20260601-peer-review-protocol-and-axiom-surfacing.json",
+      "cleared_at": "2026-06-01T17:49:00Z",
+      "blocks": "none (cleared)",
+      "note": "Cleared by Codex approve-with-notes receipt. Axiom Surfacing is approved as a bounded premise-clarification rule consistent with the warrant policy's signal-to-noise and non-formulaic interaction constraints."
     }
   ]
 }
