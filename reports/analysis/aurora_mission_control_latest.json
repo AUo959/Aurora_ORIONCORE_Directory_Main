@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-23T19:59:05Z",
+  "generated_at": "2026-05-31T21:08:12Z",
   "root": ".",
   "tool": "aurora_mission_control",
   "run_mode": "read_only",
@@ -46,13 +46,13 @@
     "recovery_index": {
       "status": "READY",
       "candidate_count": 100,
-      "discovered_candidate_count": 1011,
+      "discovered_candidate_count": 1017,
       "restricted_candidate_count": 36
     },
     "devkit": {
       "status": "READY",
-      "tools_ok": 19,
-      "tools_total": 19,
+      "tools_ok": 21,
+      "tools_total": 21,
       "finding_count": 0,
       "install_plan_items": 0
     },
@@ -64,8 +64,8 @@
     },
     "git_status": {
       "status": "dirty",
-      "changed_path_count": 9,
-      "branch": "codex/root-cleanup-before-cloudbank-issues-2026-05-11...origin/codex/root-cleanup-before-cloudbank-issues-2026-05-11"
+      "changed_path_count": 12,
+      "branch": "main...origin/main"
     }
   },
   "build_lanes": [
@@ -220,8 +220,8 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p2-recovery_index-recovery_review-review-12-recovery-candidates-routed-to-qgia-knowledge-spine-main",
-      "title": "Review 12 recovery candidates routed to qgia-knowledge-spine-main",
+      "item_id": "mission-p2-recovery_index-recovery_review-review-13-recovery-candidates-routed-to-qgia-knowledge-spine-main",
+      "title": "Review 13 recovery candidates routed to qgia-knowledge-spine-main",
       "category": "recovery_review",
       "priority": "P2",
       "source": "recovery_index",
@@ -229,6 +229,7 @@
       "owner_surface": "canonical nested repo",
       "evidence_refs": [
         "intake/text_43.txt",
+        "SPEC__WARRANT_LENS__v1.md",
         "intake/text_Au_Steward.txt",
         "intake/deep-research-report.md",
         "_staging/recovered_textAu__2026-03-13/L2/dossiers/l2_mechanic_registry__recovered_textAu.md",
@@ -238,8 +239,7 @@
         "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index.json",
         "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index (1).json",
         "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index 2 (1).json",
-        "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index 2.json",
-        "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index.json"
+        "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index 2.json"
       ],
       "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
       "suggested_commands": [
@@ -252,8 +252,8 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p2-recovery_index-recovery_review-review-32-recovery-candidates-routed-to-root",
-      "title": "Review 32 recovery candidates routed to root",
+      "item_id": "mission-p2-recovery_index-recovery_review-review-31-recovery-candidates-routed-to-root",
+      "title": "Review 31 recovery candidates routed to root",
       "category": "recovery_review",
       "priority": "P2",
       "source": "recovery_index",
@@ -284,8 +284,32 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p2-recovery_index-recovery_review-review-47-recovery-candidates-routed-to-aurora-cloudbank-symbolic-main",
-      "title": "Review 47 recovery candidates routed to aurora-cloudbank-symbolic-main",
+      "item_id": "mission-p2-recovery_index-recovery_review-review-4-recovery-candidates-routed-to-review-required",
+      "title": "Review 4 recovery candidates routed to review-required",
+      "category": "recovery_review",
+      "priority": "P2",
+      "source": "recovery_index",
+      "target_repo": "review-required",
+      "owner_surface": "manual recovery review",
+      "evidence_refs": [
+        "_staging/recovered_textAu__2026-03-13/L1/04_aurora_simulation_steward_report.md",
+        "_staging/recovered_textAu__2026-03-13/L2/03_galactic_union_mechanics_and_models.md",
+        "_staging/orion_ord_review_fix/package/tests/test_ord_threshold_registry.py",
+        "intake/text_44.txt"
+      ],
+      "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
+      "suggested_commands": [
+        "python3 tools/workspace_recovery_index.py --summary",
+        "python3 tools/workspace_recovery_index.py --persist-report"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "item_id": "mission-p2-recovery_index-recovery_review-review-51-recovery-candidates-routed-to-aurora-cloudbank-symbolic-main",
+      "title": "Review 51 recovery candidates routed to aurora-cloudbank-symbolic-main",
       "category": "recovery_review",
       "priority": "P2",
       "source": "recovery_index",
@@ -301,9 +325,9 @@
         "intake/ORION__NAV__PERPLEXITY_SPACE_FRONT_DOOR__v2.0__2026-04-08.md",
         "intake/Thread_The_Station_is_Well.md",
         "intake/text_25.txt",
-        "narrative_engine_spec_parameters_to_narrative_core_v_0.md",
-        "_staging/apple_notes_recovery__2026-03-16/L2/QUANTUM_AGENT_FORGE_PROTOCOL_v1.0.md",
-        "_staging/orion_ord_review_fix/package/modules/ord/ord_policy_engine.py"
+        "aurora-cloudbank-symbolic_README_DRAFT.md",
+        "aurora-cloudbank-symbolic_outside_review.md",
+        "narrative_engine_spec_parameters_to_narrative_core_v_0.md"
       ],
       "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
       "suggested_commands": [
@@ -316,51 +340,26 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p2-recovery_index-recovery_review-review-8-recovery-candidates-routed-to-review-required",
-      "title": "Review 8 recovery candidates routed to review-required",
-      "category": "recovery_review",
-      "priority": "P2",
-      "source": "recovery_index",
-      "target_repo": "review-required",
-      "owner_surface": "manual recovery review",
-      "evidence_refs": [
-        "_staging/recovered_textAu__2026-03-13/L1/04_aurora_simulation_steward_report.md",
-        "_staging/recovered_textAu__2026-03-13/L2/03_galactic_union_mechanics_and_models.md",
-        "_staging/orion_ord_review_fix/package/tests/test_ord_threshold_registry.py",
-        "intake/text_44.txt",
-        "intake/text_39.txt",
-        "intake/text_CN_v2.txt",
-        "intake/text_CN_v3.txt",
-        "intake/text_au_ML_research.txt"
-      ],
-      "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
-      "suggested_commands": [
-        "python3 tools/workspace_recovery_index.py --summary",
-        "python3 tools/workspace_recovery_index.py --persist-report"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "item_id": "mission-p2-git_status-git_state-root-worktree-has-9-in-progress-paths",
-      "title": "Root worktree has 9 in-progress paths",
+      "item_id": "mission-p2-git_status-git_state-root-worktree-has-12-in-progress-paths",
+      "title": "Root worktree has 12 in-progress paths",
       "category": "git_state",
       "priority": "P2",
       "source": "git_status",
       "target_repo": "root",
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
-        "AGENTS.md",
-        "Makefile",
-        "README.md",
-        "catalog/mission_control_manifest.json",
-        "catalog/schemas/aurora_mission_control_report.schema.json",
-        "docs/AURORA_MISSION_CONTROL_WORKFLOW_v1.md",
+        "catalog/repo_registry.yaml",
+        "catalog/session_state.json",
+        "catalog/workspace_manifest.yaml",
+        "docs/workspace-map.md",
+        "reports/analysis/aurora_confidence_audit_latest.json",
+        "reports/analysis/aurora_devkit_latest.json",
         "reports/analysis/aurora_mission_control_latest.json",
-        "tests/test_aurora_mission_control.py",
-        "tools/aurora_mission_control.py"
+        "reports/analysis/aurora_recommendations_latest.json",
+        "reports/analysis/root_control_plane_artifact_refresh_receipt__2026-05-31.md",
+        "reports/analysis/workspace_recovery_index_latest.json",
+        "reports/analysis/workspace_scan_summary.json",
+        "reports/analysis/workspace_verify_latest.json"
       ],
       "recommended_next_action": "Review ownership before staging or committing. Treat existing command-grammar, integration-gate, and recommendation-engine edits as separate root-control-plane work unless intentionally combined.",
       "suggested_commands": [

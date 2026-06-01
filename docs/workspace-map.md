@@ -1,8 +1,8 @@
 # Workspace Map
 
-- Generated: `2026-05-31T14:12:31Z`
+- Generated: `2026-06-01T03:02:46Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `40`
+- Top-level entries cataloged: `41`
 - Nested repos registered: `5`
 - Archive or binary artifacts inventoried: `1268`
 - Classification overrides loaded: `6` from `catalog/classification_overrides.yaml`
@@ -14,7 +14,7 @@
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `5` top-level entries
-- `intake`: `8` top-level entries
+- `intake`: `9` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
@@ -30,6 +30,7 @@
 
 ## Planned Move Candidates
 
+- `# QGIA Operational Axiom v3.xml` -> `intake/# QGIA Operational Axiom v3.xml` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `.gitleaks.toml` -> `intake/.gitleaks.toml` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Aurora_Sim_Architecture` -> `intake/Aurora_Sim_Architecture` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 - `aurora-cloudbank-symbolic_README_DRAFT.md` -> `intake/aurora-cloudbank-symbolic_README_DRAFT.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)

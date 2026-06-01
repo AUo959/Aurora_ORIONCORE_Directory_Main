@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-31T00:15:58Z",
+  "generated_at": "2026-05-31T21:04:08Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "manifest_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
   "toolkit_id": "aurora-dev-toolkit",
@@ -318,6 +318,11 @@
       "path": "Makefile",
       "name": "Makefile",
       "kind": "workflow"
+    },
+    {
+      "path": "setup.cfg",
+      "name": "setup.cfg",
+      "kind": "python"
     },
     {
       "path": ".devcontainer/devcontainer.json",

@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-05-31T14:12:39Z",
+  "generated_at": "2026-06-01T03:02:55Z",
   "root": ".",
-  "top_level_entry_count": 40,
+  "top_level_entry_count": 41,
   "logical_zone_counts": {
+    "intake": 9,
     "_staging": 8,
     "tools": 11,
     "docs": 5,
-    "intake": 8,
     "repos": 4,
     "archives": 1,
     "catalog": 1,
@@ -16,7 +16,7 @@
   "nested_repo_count": 5,
   "archive_artifact_count": 1268,
   "archive_artifact_bytes": 17106696658,
-  "planned_move_count": 7,
+  "planned_move_count": 8,
   "override_count": 6,
   "privacy_exclusion_count": 7,
   "privacy_exclusion_reasons": {

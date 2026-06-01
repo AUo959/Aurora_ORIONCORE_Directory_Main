@@ -1,4 +1,4 @@
-generated_at: '2026-05-31T14:12:31Z'
+generated_at: '2026-06-01T03:02:46Z'
 root: .
 logical_taxonomy:
 - repos
@@ -11,6 +11,17 @@ logical_taxonomy:
 - intake
 - _staging
 entries:
+- id: qgia-operational-axiom-v3
+  kind: intake_file
+  current_path: '# QGIA Operational Axiom v3.xml'
+  logical_zone: intake
+  planned_path: intake/# QGIA Operational Axiom v3.xml
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: ds-store
   kind: cache_or_local_artifact
   current_path: .DS_Store

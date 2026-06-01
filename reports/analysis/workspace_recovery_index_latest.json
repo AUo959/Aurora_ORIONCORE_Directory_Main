@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-21T17:26:45Z",
+  "generated_at": "2026-05-31T21:04:06Z",
   "root": ".",
   "tool": "workspace_recovery_index",
   "mode": "read_only",
@@ -8,39 +8,39 @@
   "status": "READY",
   "summary": {
     "scan_root_count": 5,
-    "scanned_file_count": 2371,
+    "scanned_file_count": 2380,
     "candidate_count": 100,
-    "discovered_candidate_count": 1011,
+    "discovered_candidate_count": 1017,
     "candidate_limit_applied": true,
     "skip_counts": {
       "auto_private_content": 12,
-      "below_threshold": 261,
-      "extension": 1061,
+      "below_threshold": 262,
+      "extension": 1063,
       "size": 24,
       "unreadable_or_binary": 2
     },
     "candidates_by_target_repo_hint": {
-      "aurora-cloudbank-symbolic-main": 47,
+      "aurora-cloudbank-symbolic-main": 51,
       "qgia-knowledge-library-main": 1,
-      "qgia-knowledge-spine-main": 12,
-      "review-required": 8,
-      "root": 32
+      "qgia-knowledge-spine-main": 13,
+      "review-required": 4,
+      "root": 31
     },
     "candidates_by_source_status": {
       "archive": 39,
-      "intake": 36,
-      "loose_root_intake": 3,
+      "intake": 31,
+      "loose_root_intake": 8,
       "staged": 22
     },
     "signal_counts": {
-      "cloudbank_runtime": 74,
+      "cloudbank_runtime": 77,
       "code_logic": 81,
-      "contract_or_schema": 90,
-      "governance_or_control_plane": 60,
-      "narrative_or_agent_logic": 95,
+      "contract_or_schema": 89,
+      "governance_or_control_plane": 63,
+      "narrative_or_agent_logic": 96,
       "qgia_or_forecast": 21,
       "secret_or_key_material": 36,
-      "test_or_fixture": 20
+      "test_or_fixture": 25
     }
   },
   "scan_roots": [
@@ -52,8 +52,8 @@
       "reason": "loose root files may be early local work that needs explicit routing",
       "exists": true,
       "truncated": false,
-      "scanned_file_count": 8,
-      "candidate_count": 4
+      "scanned_file_count": 17,
+      "candidate_count": 10
     },
     {
       "path": "Aurora_Sim_Architecture",
@@ -482,6 +482,58 @@
       "notes": "restricted signal requires careful handling"
     },
     {
+      "path": "aurora-cloudbank-symbolic_README_DRAFT.md",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "aurora-cloudbank-symbolic-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 21,
+      "signals": [
+        "cloudbank_runtime",
+        "code_logic",
+        "contract_or_schema",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "test_or_fixture"
+      ],
+      "restricted_material_possible": false,
+      "size_bytes": 13503,
+      "mtime": 1779922027,
+      "sha256": "1c55eaac6121eeff43eb026ed63f4cb730179787ff05357d1cbdaf9b0bcae86d",
+      "extension": ".md",
+      "line_count": 203,
+      "notes": ""
+    },
+    {
+      "path": "aurora-cloudbank-symbolic_outside_review.md",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "aurora-cloudbank-symbolic-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 21,
+      "signals": [
+        "cloudbank_runtime",
+        "code_logic",
+        "contract_or_schema",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "test_or_fixture"
+      ],
+      "restricted_material_possible": false,
+      "size_bytes": 26488,
+      "mtime": 1779921156,
+      "sha256": "5f3394828319e13e76b9278729af71d53d5d91c537cd7f6f992dd68853386c1d",
+      "extension": ".md",
+      "line_count": 214,
+      "notes": ""
+    },
+    {
       "path": "narrative_engine_spec_parameters_to_narrative_core_v_0.md",
       "source_root": ".",
       "source_status": "loose_root_intake",
@@ -508,6 +560,33 @@
       "notes": ""
     },
     {
+      "path": "SPEC__WARRANT_LENS__v1.md",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "qgia-knowledge-spine-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 21,
+      "signals": [
+        "code_logic",
+        "contract_or_schema",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "qgia_or_forecast",
+        "secret_or_key_material",
+        "test_or_fixture"
+      ],
+      "restricted_material_possible": true,
+      "size_bytes": 17791,
+      "mtime": 1780122380,
+      "sha256": "cc8d36dbe8d3a8c1424071da0639dfc60d0d5b1d9575e1a9f0425d278f85edbc",
+      "extension": ".md",
+      "line_count": 295,
+      "notes": "restricted signal requires careful handling"
+    },
+    {
       "path": "intake/text_Au_Steward.txt",
       "source_root": "intake",
       "source_status": "intake",
@@ -532,6 +611,33 @@
       "extension": ".txt",
       "line_count": 198,
       "notes": ""
+    },
+    {
+      "path": "AGENTS.md",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "aurora-cloudbank-symbolic-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 20,
+      "signals": [
+        "cloudbank_runtime",
+        "contract_or_schema",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "qgia_or_forecast",
+        "secret_or_key_material",
+        "test_or_fixture"
+      ],
+      "restricted_material_possible": true,
+      "size_bytes": 18403,
+      "mtime": 1780237993,
+      "sha256": "bda97261bf37a5eadc9c05abf6ca718de9408f8c94a66e9361d7bf146b5016ff",
+      "extension": ".md",
+      "line_count": 419,
+      "notes": "restricted signal requires careful handling"
     },
     {
       "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Please provide a comprehensive report outlining th 1.md",
@@ -967,31 +1073,6 @@
       "notes": ""
     },
     {
-      "path": "AGENTS.md",
-      "source_root": ".",
-      "source_status": "loose_root_intake",
-      "source_priority": "high",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "aurora-cloudbank-symbolic-main",
-      "owner_surface_hint": "canonical nested repo",
-      "value_score": 17,
-      "signals": [
-        "cloudbank_runtime",
-        "contract_or_schema",
-        "governance_or_control_plane",
-        "narrative_or_agent_logic",
-        "qgia_or_forecast"
-      ],
-      "restricted_material_possible": false,
-      "size_bytes": 10463,
-      "mtime": 1779378099,
-      "sha256": "a8a112aa5c931684707918338cc201ee09e9f5012781cab4d3ea7a429bd7da16",
-      "extension": ".md",
-      "line_count": 303,
-      "notes": ""
-    },
-    {
       "path": "README.md",
       "source_root": ".",
       "source_status": "loose_root_intake",
@@ -1009,11 +1090,11 @@
         "qgia_or_forecast"
       ],
       "restricted_material_possible": false,
-      "size_bytes": 10444,
-      "mtime": 1779378099,
-      "sha256": "1c02bc6368ae80725482ca5764b5eeb252aa93a90ccb729f59fd12aff1731e50",
+      "size_bytes": 12352,
+      "mtime": 1780237611,
+      "sha256": "a696fe49c5ea34b8ff0d3cfa81e4bfe13646398b8ebde3b28fe5061562ab2d1a",
       "extension": ".md",
-      "line_count": 196,
+      "line_count": 237,
       "notes": ""
     },
     {
@@ -1353,6 +1434,30 @@
       "sha256": "d18e17ad0112b3d64a427464434e870b23841f4500e3f1196faf935f56942002",
       "extension": ".txt",
       "line_count": 20,
+      "notes": ""
+    },
+    {
+      "path": "aurora-cloudbank-symbolic_review_v2.md",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "aurora-cloudbank-symbolic-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 16,
+      "signals": [
+        "cloudbank_runtime",
+        "code_logic",
+        "contract_or_schema",
+        "narrative_or_agent_logic"
+      ],
+      "restricted_material_possible": false,
+      "size_bytes": 10668,
+      "mtime": 1779921960,
+      "sha256": "f52c8c80600c0be28158ab1e54557b47c2dc6c9b30a11ad316b1f9773521b552",
+      "extension": ".md",
+      "line_count": 103,
       "notes": ""
     },
     {
@@ -2250,6 +2355,31 @@
       "notes": ""
     },
     {
+      "path": ".gitleaks.toml",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "aurora-cloudbank-symbolic-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 13,
+      "signals": [
+        "cloudbank_runtime",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "secret_or_key_material",
+        "test_or_fixture"
+      ],
+      "restricted_material_possible": true,
+      "size_bytes": 2147,
+      "mtime": 1780175762,
+      "sha256": "210ec053f1d156dffc5380458b346a313c6aa1b68e82fc7f26a7217f14095d67",
+      "extension": ".toml",
+      "line_count": 59,
+      "notes": "restricted signal requires careful handling"
+    },
+    {
       "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/LUMENNODE_PUBLIC_AGENT_DEPLOY_v1.0/PROJECT_ECHOES_FACE_DEEPQUERY/research_payload.json",
       "source_root": "archives/unzipped",
       "source_status": "archive",
@@ -2488,125 +2618,6 @@
       "extension": ".json",
       "line_count": 7,
       "notes": "restricted signal requires careful handling"
-    },
-    {
-      "path": "intake/text_39.txt",
-      "source_root": "intake",
-      "source_status": "intake",
-      "source_priority": "high",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "review-required",
-      "owner_surface_hint": "manual recovery review",
-      "value_score": 13,
-      "signals": [
-        "code_logic",
-        "contract_or_schema",
-        "narrative_or_agent_logic",
-        "secret_or_key_material"
-      ],
-      "restricted_material_possible": true,
-      "size_bytes": 2433,
-      "mtime": 1774015480,
-      "sha256": "00d6a2e5858623e56c165f4901ec6b2dff94e43250f8544a9041496a2d1f2820",
-      "extension": ".txt",
-      "line_count": 44,
-      "notes": "restricted signal requires careful handling"
-    },
-    {
-      "path": "intake/text_CN_v2.txt",
-      "source_root": "intake",
-      "source_status": "intake",
-      "source_priority": "high",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "review-required",
-      "owner_surface_hint": "manual recovery review",
-      "value_score": 13,
-      "signals": [
-        "code_logic",
-        "contract_or_schema",
-        "narrative_or_agent_logic",
-        "secret_or_key_material"
-      ],
-      "restricted_material_possible": true,
-      "size_bytes": 1606,
-      "mtime": 1774016104,
-      "sha256": "fd91578b46f8592e8cf87ec8969fddc7b6aebf1f267ef0ef2bb0a9ed8f1f9897",
-      "extension": ".txt",
-      "line_count": 50,
-      "notes": "restricted signal requires careful handling"
-    },
-    {
-      "path": "intake/text_CN_v3.txt",
-      "source_root": "intake",
-      "source_status": "intake",
-      "source_priority": "high",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "review-required",
-      "owner_surface_hint": "manual recovery review",
-      "value_score": 13,
-      "signals": [
-        "code_logic",
-        "contract_or_schema",
-        "narrative_or_agent_logic",
-        "secret_or_key_material"
-      ],
-      "restricted_material_possible": true,
-      "size_bytes": 2048,
-      "mtime": 1774015936,
-      "sha256": "491ede873996f7890b8100d4d97ef30db860e5f16466b09757a4f7c38c2b3e1a",
-      "extension": ".txt",
-      "line_count": 71,
-      "notes": "restricted signal requires careful handling"
-    },
-    {
-      "path": "intake/text_au_ML_research.txt",
-      "source_root": "intake",
-      "source_status": "intake",
-      "source_priority": "high",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "review-required",
-      "owner_surface_hint": "manual recovery review",
-      "value_score": 13,
-      "signals": [
-        "cloudbank_runtime",
-        "code_logic",
-        "contract_or_schema"
-      ],
-      "restricted_material_possible": false,
-      "size_bytes": 3617,
-      "mtime": 1774021876,
-      "sha256": "7c6522bd7d56169a2e6eed1c185077becf33580156caf89cb509428fdb2e8733",
-      "extension": ".txt",
-      "line_count": 83,
-      "notes": ""
-    },
-    {
-      "path": "intake/threadcore_auronaut_metanarrative_2025_04_27.md",
-      "source_root": "intake",
-      "source_status": "intake",
-      "source_priority": "high",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "root",
-      "owner_surface_hint": "root control-plane repo",
-      "value_score": 13,
-      "signals": [
-        "contract_or_schema",
-        "governance_or_control_plane",
-        "narrative_or_agent_logic",
-        "qgia_or_forecast"
-      ],
-      "restricted_material_possible": false,
-      "size_bytes": 7466,
-      "mtime": 1773749022,
-      "sha256": "53748f7858dd54820b75cfe7eb17e52344134987fcc9437102915a0e9b3592a0",
-      "extension": ".md",
-      "line_count": 311,
-      "notes": ""
     }
   ],
   "validation_commands": [
