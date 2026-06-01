@@ -120,15 +120,7 @@
     }
   },
   "active_task": null,
-  "task_queue": [
-    {
-      "id": "review-peer-review-protocol-v1",
-      "assigned_to": "codex",
-      "priority": "high",
-      "type": "peer-review",
-      "description": "PEER-REVIEW REQUEST (dogfooding the protocol on itself). Review docs/AURORA_PEER_REVIEW_PROTOCOL_v1.md (commit 7c5db70). Apply the protocol's own reviewer contract (\u00a78): read the design against intent, warrant-ground every finding (no rubber-stamp, no nitpick). Answer the open questions Q1-Q3 (\u00a74/\u00a76/\u00a79) and the explicit asks in \u00a711 (escape-hatch abuse, routing entrenchment, over-engineering for a 2-platform/1-operator reality \u2014 what to cut from v1). Verdict: approve / approve-with-notes / changes-requested. Then clear review_debt rd-20260531-peer-review-protocol-v1. Only after approve(-with-notes) do we build the tooling (schema, peer_review.py, verify_review_debt)."
-    }
-  ],
+  "task_queue": [],
   "completed_tasks": [
     {
       "id": "phase-0-complete",
@@ -156,9 +148,9 @@
       "summary": "Codex verified Claude Code commit 3f872f3, restored the warrant-lens default HeuristicClient import, fixed GitWiz registry loading, and confirmed root tests/health pass; installed skill runtime sync is pending."
     }
   ],
-  "last_updated": "2026-05-31T16:00:00Z",
+  "last_updated": "2026-06-01T15:40:00Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Folded operator calibration 'Axiom Surfacing' into the Warrant Policy response contract (977d619); recorded review-debt.",
+  "last_session_summary": "Cleared both review-debt items: Peer Review Protocol v1 (approve-with-notes, 4 notes) and Warrant Policy Axiom Surfacing (approve). Protocol adopted. v1.1 follow-ups queued.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -177,6 +169,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "717e315",
+      "date": "2026-06-01",
+      "platform": "claude-code",
+      "summary": "chore(state): record Axiom Surfacing review-debt + handoff"
+    },
     {
       "sha": "977d619",
       "date": "2026-05-31",
@@ -230,12 +228,6 @@
       "date": "2026-05-31",
       "platform": "claude-code",
       "summary": "chore(state): auto-update session handoff [skip ci]"
-    },
-    {
-      "sha": "462415a",
-      "date": "2026-05-31",
-      "platform": "claude-code",
-      "summary": "chore(state): auto-update session handoff [skip ci]"
     }
   ],
   "security_events": [
@@ -256,6 +248,13 @@
       "priority": "high",
       "description": "Verify the redacted AWS IAM access-key ID has been deactivated in AWS console; historical catalog/session_state.json references require owner-approved remediation or baseline acceptance.",
       "assigned_to": "owner"
+    },
+    {
+      "id": "peer-review-protocol-v1.1-followups",
+      "priority": "medium",
+      "description": "Resolve the four notes from pr-20260601-peer-review-protocol-v1 before v1.1 tooling is built: F1 add domain registry/normalization rule; F2 add G2 escape-hatch owner-ack gate (validate with Codex); F3 add author self-escalation sentence to \u00a74; F4 build \u00a79 tooling (peer_review.py, schema, workspace_verify gate) after 2-3 validated reviews.",
+      "assigned_to": "either",
+      "receipt": "reports/analysis/peer_reviews/pr-20260601-peer-review-protocol-v1.json"
     },
     {
       "id": "roadmap-1.1",
@@ -283,7 +282,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "977d619",
+    "main_sha": "717e315",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -334,10 +333,13 @@
       "domain": "peer-review-protocol",
       "author_platform": "claude-code",
       "incurred_at": "2026-05-31T15:30:00Z",
-      "status": "pending",
-      "review_receipt": null,
-      "blocks": "adoption of the protocol + next coordination-layer change in this domain",
-      "note": "Hand-created (peer_review.py not built yet) to dogfood the mechanism. Codex is the assigned reviewer; see task_queue."
+      "status": "cleared",
+      "verdict": "approve-with-notes",
+      "review_receipt": "reports/analysis/peer_reviews/pr-20260601-peer-review-protocol-v1.json",
+      "cleared_at": "2026-06-01T15:35:00Z",
+      "cleared_by": "claude-code",
+      "blocks": null,
+      "note": "Reviewed by Claude Code at owner direction (routing deviation: preferred reviewer is Codex). 4 notes (F1-F4), none blocking. Protocol adopted. §9 tooling deferred to v1.1. F2 flagged for Codex validation."
     },
     {
       "id": "rd-20260531-warrant-policy-axiom-surfacing",
@@ -348,10 +350,13 @@
       "domain": "interaction-warrant-policy",
       "author_platform": "claude-code",
       "incurred_at": "2026-05-31T16:00:00Z",
-      "status": "pending",
-      "review_receipt": null,
-      "blocks": "next change to the Interaction Warrant Policy",
-      "note": "Operator-directed calibration (Axiom Surfacing). Reviewable alongside the protocol."
+      "status": "cleared",
+      "verdict": "approve",
+      "review_receipt": "reports/analysis/peer_reviews/pr-20260601-warrant-policy-axiom-surfacing.json",
+      "cleared_at": "2026-06-01T15:35:00Z",
+      "cleared_by": "claude-code",
+      "blocks": null,
+      "note": "Operator-directed calibration (Axiom Surfacing). Approved: well-bounded, coherent with existing policy, no blocking findings."
     }
   ]
 }

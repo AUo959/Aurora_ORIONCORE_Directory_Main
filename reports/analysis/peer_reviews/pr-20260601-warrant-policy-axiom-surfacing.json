@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "review_id": "pr-20260601-warrant-policy-axiom-surfacing",
+  "debt_id": "rd-20260531-warrant-policy-axiom-surfacing",
+  "target": {
+    "commits": ["977d619"],
+    "diff_base": "3a6c0df",
+    "change_class": "invariant-docs",
+    "domain": "interaction-warrant-policy",
+    "file": "docs/AURORA_INTERACTION_WARRANT_POLICY_v1.md",
+    "description": "Adds 'Axiom Surfacing' subsection to the Response Contract: prefer restating governing premises over operating in unstated ambiguity; bounded by signal-to-noise."
+  },
+  "author_platform": "claude-code",
+  "reviewer_platform": "claude-code",
+  "routing_deviation": {
+    "preferred_reviewer": "codex",
+    "actual_reviewer": "claude-code",
+    "reason": "Owner directed Claude Code to clear both review-debt items in this session.",
+    "mitigation": "No blocking findings; change is a bounded operator calibration. Low risk from routing deviation."
+  },
+  "reverified_gates": [
+    {
+      "gate": "workspace_verify",
+      "command": "python3 tools/workspace_verify.py",
+      "result": "pass",
+      "evidence": "blocking_count: 0, warning_count: 2 (env/path — same run as peer-review-protocol review above)"
+    },
+    {
+      "gate": "diff-scope",
+      "command": "git show 977d619 --stat",
+      "result": "pass",
+      "evidence": "1 file changed, 11 insertions. Scope confirmed: docs/AURORA_INTERACTION_WARRANT_POLICY_v1.md only. New §'Axiom Surfacing' under Response Contract."
+    },
+    {
+      "gate": "policy-coherence",
+      "command": "manual diff read against AURORA_INTERACTION_WARRANT_POLICY_v1.md §Response Contract",
+      "result": "pass",
+      "evidence": "Addition slots cleanly between 'Recommend the next action with uncertainty labeled' and 'Collaborative Expansion Rule'. No existing section contradicted. Anti-sycophancy safeguards remain intact."
+    }
+  ],
+  "findings": [
+    {
+      "id": "f1",
+      "severity": "note",
+      "evidence": "'Restate only while each clarification reduces ambiguity more than it adds overhead' — no testable rule; judgment-dependent.",
+      "description": "The signal-to-noise bound is a judgment call, which is appropriate for a policy document. The §Calibration section already accounts for this via false-positive/false-negative tracking and obstruction rate metrics. The combination is coherent — the policy sets the intent; calibration measures whether the judgment is being applied well in practice.",
+      "disposition": "waived"
+    }
+  ],
+  "verdict": "approve",
+  "verdict_rationale": "The Axiom Surfacing addition is a well-bounded operator calibration. It addresses a specific failure mode (assistant operates on premises the user has not seen) without creating a verbosity mandate — the signal-to-noise bound and the 'cut recursion once the conclusion is fixed' clause prevent misapplication. The addition is coherent with the existing Response Contract and does not contradict any anti-sycophancy or anti-contrarianism safeguard. F1 is waived: the subjectivity of the signal-to-noise judgment is by design and handled by the §Calibration feedback loop.",
+  "warrant_level": "artifact",
+  "reviewed_at": "2026-06-01T15:35:00Z"
+}

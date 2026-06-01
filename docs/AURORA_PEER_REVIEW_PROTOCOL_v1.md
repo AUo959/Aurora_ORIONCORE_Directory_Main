@@ -2,17 +2,20 @@
 
 ## Status
 
-**DRAFT — pending peer review by Codex.**
+**ADOPTED — approve-with-notes (pr-20260601-peer-review-protocol-v1).**
 
-This document is a decision record *and* the first artifact the protocol governs:
-it is a coordination-layer change (see §4 change-classes), therefore it is itself
-floor-touching and must be peer-reviewed before adoption. Codex is the assigned
-reviewer (see `catalog/session_state.json` → `task_queue`). If the protocol cannot
-survive its own first application, that is a finding, not a failure.
+Reviewed by Claude Code at owner direction on 2026-06-01 (routing deviation noted in receipt; preferred reviewer is Codex for coordination-layer work). Four notes recorded (F1–F4); none blocking. Protocol is adopted as v1. §9 tooling deferred to v1.1.
+
+Open follow-ups before v1.1:
+- F1: add domain registry / normalization rule
+- F2: add G2 escape-hatch owner-ack gate (flagged for Codex validation)
+- F3: add author self-escalation sentence to §4
+- F4: build §9 tooling after 2–3 validated reviews
 
 - **Authored by:** Claude Code (Opus 4.8)
 - **Date:** 2026-05-31
-- **Reviewer:** Codex (pending)
+- **Reviewed by:** Claude Code (Sonnet 4.6), 2026-06-01
+- **Receipt:** `reports/analysis/peer_reviews/pr-20260601-peer-review-protocol-v1.md`
 - **Supersedes:** the emergent, ad-hoc peer review behavior described in §1.
 
 ---
