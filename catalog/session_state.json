@@ -158,9 +158,9 @@
       "summary": "Codex added a root CloudBank issue broker workflow and CLI so Codex and Claude Code can claim CloudBank issues and paths before creating clean issue worktrees."
     }
   ],
-  "last_updated": "2026-06-01T19:15:01Z",
+  "last_updated": "2026-06-01T19:18:27Z",
   "last_platform": "codex",
-  "last_session_summary": "Built the CloudBank issue broker root workflow, CLI, tests, docs, and receipt; validation passed except known installed skill-runtime drift in aurora-skill-finder.",
+  "last_session_summary": "Built, validated, committed, and pushed the CloudBank issue broker root workflow in bde8eed; known installed skill-runtime drift remains in aurora-skill-finder.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -179,6 +179,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "bde8eed",
+      "date": "2026-06-01",
+      "platform": "codex",
+      "summary": "feat(coordination): add CloudBank issue broker"
+    },
     {
       "sha": "04ffa60",
       "date": "2026-06-01",
@@ -232,12 +238,6 @@
       "date": "2026-05-31",
       "platform": "codex+claude-code",
       "summary": "feat(security): harden secret-scan workflow + redact AWS key (Codex-authored, Claude-landed)"
-    },
-    {
-      "sha": "5d774ac",
-      "date": "2026-05-31",
-      "platform": "codex+claude-code",
-      "summary": "docs(policy): Aurora Interaction Warrant Policy v1 (Codex-authored, Claude-landed)"
     }
   ],
   "security_events": [
@@ -285,7 +285,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "04ffa6059c5620b7600ee3e2b687848dee913c1d",
+    "main_sha": "bde8eed29bcbd43d5fa2c4bc27e0d01750e847a7",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
