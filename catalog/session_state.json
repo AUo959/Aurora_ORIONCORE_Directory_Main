@@ -171,11 +171,16 @@
       "id": "cloudbank-pr-umbrella-cleanup-2026-06-07",
       "date": "2026-06-07",
       "summary": "Codex closed stale broad CloudBank draft PR #837 with evidence comment, kept #860 open because #840 remains open, and recorded updated live counts after new drafts #911 and #912 appeared."
+    },
+    {
+      "id": "cloudbank-pr-837-extraction-plan-2026-06-07",
+      "date": "2026-06-07",
+      "summary": "Codex corrected the #837 closure by posting and recording a concrete extraction plan for the benchmark scorecard: recover scripts/benchmark_scorecard.py only, create/designate a tracking issue, use the broker and a clean worktree, and avoid replaying the other 63 files."
     }
   ],
-  "last_updated": "2026-06-07T23:37:42Z",
+  "last_updated": "2026-06-07T23:45:52Z",
   "last_platform": "codex",
-  "last_session_summary": "Continued CloudBank PR stabilization with an updated context check, closed broad dirty draft PR #837 unmerged, left #860 open because issue #840 remains active, and recorded the live post-action PR drift.",
+  "last_session_summary": "Added a concrete extraction plan for CloudBank PR #837, posted the plan back to the closed PR, and recorded how to recover the benchmark scorecard without replaying the 64-file umbrella diff.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -194,6 +199,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "080ffab",
+      "date": "2026-06-07",
+      "platform": "codex",
+      "summary": "chore(reports): plan CloudBank PR 837 extraction"
+    },
+    {
+      "sha": "5deb703",
+      "date": "2026-06-07",
+      "platform": "codex",
+      "summary": "chore(state): record CloudBank umbrella PR cleanup"
+    },
     {
       "sha": "ec2cde9",
       "date": "2026-06-07",
@@ -241,18 +258,6 @@
       "date": "2026-06-01",
       "platform": "codex",
       "summary": "chore(state): record CloudBank issue broker handoff"
-    },
-    {
-      "sha": "bde8eed",
-      "date": "2026-06-01",
-      "platform": "codex",
-      "summary": "feat(coordination): add CloudBank issue broker"
-    },
-    {
-      "sha": "04ffa60",
-      "date": "2026-06-01",
-      "platform": "codex",
-      "summary": "chore(review): clear peer review protocol debt"
     }
   ],
   "security_events": [
@@ -300,7 +305,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "ec2cde9d2da8a2911ad3f338f9f42068721d8088",
+    "main_sha": "080ffab1608c26cbf90536eba226c2936a288314",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -315,7 +320,7 @@
       "rescue/root-control-plane-dirty-workingcopy-2026-03-25"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  ec2cde9 [main]",
+      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  080ffab [main]",
       "/Users/travisstreets/.codex/worktrees/0190/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/0dd6/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/88a7/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
@@ -324,14 +329,14 @@
       "/Users/travisstreets/.codex/worktrees/a45e/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)"
     ],
     "open_prs": [
-      "CloudBank open PR count after #837 cleanup: 40",
-      "Closed unmerged in this pass: #837",
-      "New draft PRs observed during this pass: #909, #910, #911, #912",
-      "Do-not-merge drafts remaining: #860, #883-#903, #906-#912",
-      "Non-draft stale dependency lane remaining: #848-#857, #880",
-      "Stale non-dependency draft left open intentionally: #860 because issue #840 remains open"
+      "CloudBank #837 remains closed unmerged, but now has extraction-plan comment #4644456473",
+      "Root plan receipt: reports/analysis/cloudbank_pr_837_extraction_plan__2026-06-07.md",
+      "Extraction scope: scripts/benchmark_scorecard.py, tests/test_benchmark_scorecard.py, optional docs/README usage note",
+      "Requires new/designated tracking issue before broker claim; do not let #837 close backlog issues directly",
+      "Do not replay the other 63 files from #837; use issue-specific PRs from current main",
+      "Live open PR count during extraction planning was 43; Claude added #913-#915 during stabilization window"
     ],
-    "codacy_status": "CloudBank #837 was closed unmerged after public REST and connector evidence showed an open draft with dirty mergeability, old base 52563a4, 64 changed files, Codacy 39 new issues, SonarQube quality gate failure, and PR Evaluation NEEDS WORK. GraphQL review-thread enumeration was rate-limited; root workspace_verify passed locally.",
+    "codacy_status": "CloudBank #837 now has a posted extraction plan preserving the benchmark scorecard work while keeping the unsafe 64-file dirty umbrella diff closed. Root workspace_verify passed locally.",
     "devkit_status": "READY 21/21 tools as of 2026-05-31; canonical Python floor declared in af846ac.",
     "ci_workflows": [
       ".github/workflows/ci.yml - tests + workspace-verify on push/PR to main",
