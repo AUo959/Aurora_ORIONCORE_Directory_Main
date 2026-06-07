@@ -158,9 +158,9 @@
       "summary": "Codex added a root CloudBank issue broker workflow and CLI so Codex and Claude Code can claim CloudBank issues and paths before creating clean issue worktrees."
     }
   ],
-  "last_updated": "2026-06-01T19:18:27Z",
+  "last_updated": "2026-06-07T15:37:46Z",
   "last_platform": "codex",
-  "last_session_summary": "Built, validated, committed, and pushed the CloudBank issue broker root workflow in bde8eed; known installed skill-runtime drift remains in aurora-skill-finder.",
+  "last_session_summary": "Built and committed a redact-safe restricted recovery candidate pre-triage packet; no recovery candidates were promoted and nested repos were not edited.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -179,6 +179,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "d2d24f2",
+      "date": "2026-06-07",
+      "platform": "codex",
+      "summary": "chore(reports): pretriage restricted recovery candidates"
+    },
+    {
+      "sha": "bfd3a80",
+      "date": "2026-06-01",
+      "platform": "codex",
+      "summary": "chore(state): record CloudBank issue broker handoff"
+    },
     {
       "sha": "bde8eed",
       "date": "2026-06-01",
@@ -226,18 +238,6 @@
       "date": "2026-05-31",
       "platform": "claude-code",
       "summary": "docs(protocol): Peer Review Protocol v1 (draft, pending Codex review)"
-    },
-    {
-      "sha": "c9fb1da",
-      "date": "2026-05-31",
-      "platform": "claude-code",
-      "summary": "chore(state): record handoff \u2014 Codex work landed and pushed by Claude Code"
-    },
-    {
-      "sha": "f8a58ae",
-      "date": "2026-05-31",
-      "platform": "codex+claude-code",
-      "summary": "feat(security): harden secret-scan workflow + redact AWS key (Codex-authored, Claude-landed)"
     }
   ],
   "security_events": [
@@ -285,7 +285,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "bde8eed29bcbd43d5fa2c4bc27e0d01750e847a7",
+    "main_sha": "d2d24f2b586bfb50d5bf08afba4acca1b9046594",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -300,11 +300,13 @@
       "rescue/root-control-plane-dirty-workingcopy-2026-03-25"
     ],
     "active_worktrees": [
-      "~/.codex/worktrees/6f91 \u2014 detached HEAD 610f791",
-      "~/.codex/worktrees/8a55 \u2014 detached HEAD 723ae23",
-      "~/.codex/worktrees/8ead \u2014 detached HEAD 723ae23",
-      "~/.codex/worktrees/93c5 \u2014 codex/weekly-skill-audit-mesh-router-2026-06-01",
-      "~/.codex/worktrees/acad \u2014 detached HEAD 610f791"
+      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  d2d24f2 [main]",
+      "/Users/travisstreets/.codex/worktrees/0190/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
+      "/Users/travisstreets/.codex/worktrees/0dd6/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
+      "/Users/travisstreets/.codex/worktrees/88a7/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
+      "/Users/travisstreets/.codex/worktrees/93c5/Aurora_ORIONCORE_Directory_Main                         ec939c2 [codex/weekly-skill-audit-mesh-router-2026-06-01]",
+      "/Users/travisstreets/.codex/worktrees/95e6/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
+      "/Users/travisstreets/.codex/worktrees/a45e/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)"
     ],
     "open_prs": [],
     "codacy_status": "Claude Code CL cleanup landed in 3f872f3. Codex did not refresh live Codacy; local root tests and health pass after warrant-lens and GitWiz follow-up fixes. Installed GitWiz skill runtime sync remains pending.",
