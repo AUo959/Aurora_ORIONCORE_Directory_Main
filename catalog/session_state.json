@@ -156,11 +156,16 @@
       "id": "cloudbank-issue-broker-v1",
       "date": "2026-06-01",
       "summary": "Codex added a root CloudBank issue broker workflow and CLI so Codex and Claude Code can claim CloudBank issues and paths before creating clean issue worktrees."
+    },
+    {
+      "id": "cloudbank-pr-stabilization-2026-06-07",
+      "date": "2026-06-07",
+      "summary": "Codex implemented the first CloudBank PR stabilization pass: closed stale draft PRs #843 and #864 with evidence comments, reduced open PRs to 37, and recorded a root receipt without editing the nested checkout."
     }
   ],
-  "last_updated": "2026-06-07T15:37:46Z",
+  "last_updated": "2026-06-07T16:00:04Z",
   "last_platform": "codex",
-  "last_session_summary": "Built and committed a redact-safe restricted recovery candidate pre-triage packet; no recovery candidates were promoted and nested repos were not edited.",
+  "last_session_summary": "Implemented the first CloudBank PR stabilization pass, closing stale draft PRs #843 and #864 with comments and recording the post-close inbox state.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -179,6 +184,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "d5c0e34",
+      "date": "2026-06-07",
+      "platform": "codex",
+      "summary": "chore(reports): record CloudBank PR stabilization"
+    },
+    {
+      "sha": "cf64bb0",
+      "date": "2026-06-07",
+      "platform": "codex",
+      "summary": "chore(state): record restricted recovery pretriage handoff"
+    },
     {
       "sha": "d2d24f2",
       "date": "2026-06-07",
@@ -226,18 +243,6 @@
       "date": "2026-05-31",
       "platform": "claude-code",
       "summary": "docs(policy): add Axiom Surfacing to Warrant Policy response contract"
-    },
-    {
-      "sha": "3a6c0df",
-      "date": "2026-05-31",
-      "platform": "claude-code",
-      "summary": "chore(state): dogfood peer-review \u2014 record first review_debt + queue Codex review"
-    },
-    {
-      "sha": "7c5db70",
-      "date": "2026-05-31",
-      "platform": "claude-code",
-      "summary": "docs(protocol): Peer Review Protocol v1 (draft, pending Codex review)"
     }
   ],
   "security_events": [
@@ -285,7 +290,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "d2d24f2b586bfb50d5bf08afba4acca1b9046594",
+    "main_sha": "d5c0e34f8b8c9c5833a867be16235f61f59f5d1b",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -300,7 +305,7 @@
       "rescue/root-control-plane-dirty-workingcopy-2026-03-25"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  d2d24f2 [main]",
+      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  d5c0e34 [main]",
       "/Users/travisstreets/.codex/worktrees/0190/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/0dd6/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/88a7/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
