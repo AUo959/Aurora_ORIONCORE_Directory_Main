@@ -166,11 +166,16 @@
       "id": "cloudbank-pr-duplicate-head-cleanup-2026-06-07",
       "date": "2026-06-07",
       "summary": "Codex closed duplicate/mis-targeted CloudBank draft PRs #904 and #905 with evidence comments, verified linked issues #798 and #829 remained open, and recorded a root cleanup receipt."
+    },
+    {
+      "id": "cloudbank-pr-umbrella-cleanup-2026-06-07",
+      "date": "2026-06-07",
+      "summary": "Codex closed stale broad CloudBank draft PR #837 with evidence comment, kept #860 open because #840 remains open, and recorded updated live counts after new drafts #911 and #912 appeared."
     }
   ],
-  "last_updated": "2026-06-07T23:22:57Z",
+  "last_updated": "2026-06-07T23:37:42Z",
   "last_platform": "codex",
-  "last_session_summary": "Continued CloudBank PR stabilization by closing duplicate/mis-targeted draft PRs #904 and #905 unmerged, leaving issues #798 and #829 open for fresh issue-specific PRs.",
+  "last_session_summary": "Continued CloudBank PR stabilization with an updated context check, closed broad dirty draft PR #837 unmerged, left #860 open because issue #840 remains active, and recorded the live post-action PR drift.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -189,6 +194,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "ec2cde9",
+      "date": "2026-06-07",
+      "platform": "codex",
+      "summary": "chore(reports): record CloudBank umbrella PR cleanup"
+    },
+    {
+      "sha": "935f4e7",
+      "date": "2026-06-07",
+      "platform": "codex",
+      "summary": "chore(state): record CloudBank duplicate PR cleanup"
+    },
     {
       "sha": "7c8cecb",
       "date": "2026-06-07",
@@ -236,18 +253,6 @@
       "date": "2026-06-01",
       "platform": "codex",
       "summary": "chore(review): clear peer review protocol debt"
-    },
-    {
-      "sha": "286d085",
-      "date": "2026-05-31",
-      "platform": "codex",
-      "summary": "chore(reports): refresh root operator artifacts"
-    },
-    {
-      "sha": "9696e40",
-      "date": "2026-05-31",
-      "platform": "codex",
-      "summary": "feat(command-safety): require GUMAS mutation auth in root gate"
     }
   ],
   "security_events": [
@@ -295,7 +300,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "7c8cecb68b2d003bb888cdfd71e7d75b515a6cb7",
+    "main_sha": "ec2cde9d2da8a2911ad3f338f9f42068721d8088",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -310,7 +315,7 @@
       "rescue/root-control-plane-dirty-workingcopy-2026-03-25"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  7c8cecb [main]",
+      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  ec2cde9 [main]",
       "/Users/travisstreets/.codex/worktrees/0190/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/0dd6/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/88a7/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
@@ -319,13 +324,14 @@
       "/Users/travisstreets/.codex/worktrees/a45e/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)"
     ],
     "open_prs": [
-      "CloudBank open PR count after duplicate cleanup: 37",
-      "Closed unmerged in this pass: #904, #905",
-      "Linked issues still open: #798, #829",
-      "Do-not-merge drafts remaining: #837, #860, #883-#903, #906-#908",
-      "Non-draft stale dependency lane remaining: #848-#857, #880"
+      "CloudBank open PR count after #837 cleanup: 40",
+      "Closed unmerged in this pass: #837",
+      "New draft PRs observed during this pass: #909, #910, #911, #912",
+      "Do-not-merge drafts remaining: #860, #883-#903, #906-#912",
+      "Non-draft stale dependency lane remaining: #848-#857, #880",
+      "Stale non-dependency draft left open intentionally: #860 because issue #840 remains open"
     ],
-    "codacy_status": "CloudBank #904 and #905 were closed unmerged after connector/public REST evidence showed duplicate prompt-safety diffs, metadata/content mismatch, Codacy 24 high findings, SonarQube quality gate failure, and PR Evaluation NEEDS WORK. Root workspace_verify passed locally.",
+    "codacy_status": "CloudBank #837 was closed unmerged after public REST and connector evidence showed an open draft with dirty mergeability, old base 52563a4, 64 changed files, Codacy 39 new issues, SonarQube quality gate failure, and PR Evaluation NEEDS WORK. GraphQL review-thread enumeration was rate-limited; root workspace_verify passed locally.",
     "devkit_status": "READY 21/21 tools as of 2026-05-31; canonical Python floor declared in af846ac.",
     "ci_workflows": [
       ".github/workflows/ci.yml - tests + workspace-verify on push/PR to main",
