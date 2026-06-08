@@ -44,9 +44,9 @@ repos:
 - name: qgia-knowledge-spine-main
   path: qgia-knowledge-spine-main
   branch: main
-  # Updated 2026-06-08: Phase 1 complete (requirements.txt, ledger writer,
-  # 6-entry seed, prior table populator). SHA advanced through 4 commits.
-  head_sha: 5c5ad858e85fef7804e500e1c1da48d6403a9eaf
+  # Synced 2026-06-08: Phase 2 wiring plus knowledge-index automation is live
+  # in the nested qgia-knowledge-spine-main remote.
+  head_sha: 4c53891a99b009c636c47b0701d07492509613f3
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C qgia-knowledge-spine-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE

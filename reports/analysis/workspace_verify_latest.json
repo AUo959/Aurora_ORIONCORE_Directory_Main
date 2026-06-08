@@ -1,12 +1,34 @@
 {
-  "generated_at": "2026-06-01T19:15:57Z",
+  "generated_at": "2026-06-08T18:30:31Z",
   "root": ".",
   "mode": "manual",
-  "status": "pass",
+  "status": "warn",
   "summary": {
-    "finding_count": 0,
+    "finding_count": 3,
     "blocking_count": 0,
-    "warning_count": 0
+    "warning_count": 3
   },
-  "findings": []
+  "findings": [
+    {
+      "check": "manifest_execution_context",
+      "severity": "warning",
+      "blocking": false,
+      "details": "Manifest includes local-only top-level entries unavailable here: ['~remote~']",
+      "suggested_fix": "Run from the canonical workspace path before treating local-only workspace inventory drift as a blocking failure."
+    },
+    {
+      "check": "repo_registry_coverage",
+      "severity": "warning",
+      "blocking": false,
+      "details": "Configured repos are unavailable in this execution context: ['~remote~']",
+      "suggested_fix": "Run from the canonical workspace path or update `catalog/repo_registry.yaml` if the repo locations changed."
+    },
+    {
+      "check": "session_state_freshness",
+      "severity": "warning",
+      "blocking": false,
+      "details": "catalog/session_state.json is 5 commit(s) behind HEAD (last recorded: 080ffab1608c26cbf90536eba226c2936a288314). The other platform may be operating on stale workspace context.",
+      "suggested_fix": "Run `python3 tools/session_stop_hook.py` to auto-update, or update catalog/session_state.json manually and commit."
+    }
+  ]
 }

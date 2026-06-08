@@ -384,7 +384,7 @@ entries:
   retention_policy: preserve
   owner: repository-owner
   status: protected
-  notes: Phase 1 complete 2026-06-08. Python stack live. head_sha updated in repo_registry.yaml.
+  notes: Phase 2 wiring synced 2026-06-08. Python stack and knowledge-index automation live; head_sha updated in repo_registry.yaml.
 - id: reports
   kind: report_zone
   current_path: reports
