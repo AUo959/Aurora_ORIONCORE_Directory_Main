@@ -1,4 +1,4 @@
-generated_at: '2026-06-01T19:13:47Z'
+generated_at: '2026-06-08T15:46:00Z'
 root: .
 logical_taxonomy:
 - repos
@@ -384,6 +384,7 @@ entries:
   retention_policy: preserve
   owner: repository-owner
   status: protected
+  notes: Phase 1 complete 2026-06-08. Python stack live. head_sha updated in repo_registry.yaml.
 - id: reports
   kind: report_zone
   current_path: reports
@@ -445,3 +446,34 @@ entries:
   owner: intake-review
   status: planned_move
   batch_id: wave4_root_intake_cleanup_initial
+# ---------------------------------------------------------------------------
+# EARLY-DEV REMOTE SPOKES (remote-only, not yet cloned into GUMAS_SIM_2.5)
+# ---------------------------------------------------------------------------
+- id: auroraos-spoke
+  kind: remote_spoke
+  current_path: ~remote~
+  logical_zone: repos
+  planned_path: repos/AuroraOS
+  git_boundary: remote
+  storage_tier: source
+  retention_policy: preserve
+  owner: repository-owner
+  status: early_dev
+  remote_url: https://github.com/AUo959/AuroraOS
+  language: TypeScript
+  notes: TypeScript OS spoke. Early dev. Not yet wired to constellation dispatch.
+    Register for integration gate visibility. Clone to repos/AuroraOS when ready.
+- id: cloudbank-quantum-en-spoke
+  kind: remote_spoke
+  current_path: ~remote~
+  logical_zone: repos
+  planned_path: repos/cloudbank-quantum-en
+  git_boundary: remote
+  storage_tier: source
+  retention_policy: preserve
+  owner: repository-owner
+  status: early_dev
+  remote_url: https://github.com/AUo959/cloudbank-quantum-en
+  language: TypeScript
+  notes: TypeScript quantum spoke. 9 open issues. Early dev. Not yet wired to
+    constellation dispatch. Register for integration gate visibility.

@@ -1,4 +1,4 @@
-generated_at: '2026-06-01T19:13:47Z'
+generated_at: '2026-06-08T15:46:00Z'
 root: .
 repos:
 - name: aurora-cloudbank-symbolic-main
@@ -44,10 +44,44 @@ repos:
 - name: qgia-knowledge-spine-main
   path: qgia-knowledge-spine-main
   branch: main
-  head_sha: 2491371bb9a8272667485b7952cd3b114cbb75ce
+  # Updated 2026-06-08: Phase 1 complete (requirements.txt, ledger writer,
+  # 6-entry seed, prior table populator). SHA advanced through 4 commits.
+  head_sha: 5c5ad858e85fef7804e500e1c1da48d6403a9eaf
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C qgia-knowledge-spine-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE
     -u GIT_INDEX_FILE -u GIT_PREFIX git -C qgia-knowledge-spine-main status --short
     --branch
   move_policy: frozen_until_registry_adoption
+  build_phase: phase_2_wiring
+  phase_1_completed: '2026-06-08T15:39:00Z'
+# ---------------------------------------------------------------------------
+# EARLY-DEV REMOTE SPOKES
+# No local nested path in GUMAS_SIM_2.5 — remote-only at this stage.
+# validation_command omitted until cloned locally.
+# move_policy: deferred_until_cloned
+# ---------------------------------------------------------------------------
+- name: AuroraOS
+  path: ~remote~
+  branch: main
+  head_sha: ~pending~
+  remote_status: remote_only
+  remote_url: https://github.com/AUo959/AuroraOS
+  language: TypeScript
+  role: spoke
+  status: early_dev
+  move_policy: deferred_until_cloned
+  notes: TypeScript OS spoke. 4 open issues. Last updated 2026-03-13. Not yet
+    wired to constellation dispatch. Register now for integration gate visibility.
+- name: cloudbank-quantum-en
+  path: ~remote~
+  branch: main
+  head_sha: ~pending~
+  remote_status: remote_only
+  remote_url: https://github.com/AUo959/cloudbank-quantum-en
+  language: TypeScript
+  role: spoke
+  status: early_dev
+  move_policy: deferred_until_cloned
+  notes: TypeScript quantum spoke. 9 open issues. Last updated 2026-03-13. Not yet
+    wired to constellation dispatch. Register now for integration gate visibility.
