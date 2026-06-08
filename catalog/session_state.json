@@ -176,11 +176,16 @@
       "id": "cloudbank-pr-837-extraction-plan-2026-06-07",
       "date": "2026-06-07",
       "summary": "Codex corrected the #837 closure by posting and recording a concrete extraction plan for the benchmark scorecard: recover scripts/benchmark_scorecard.py only, create/designate a tracking issue, use the broker and a clean worktree, and avoid replaying the other 63 files."
+    },
+    {
+      "id": "root-github-workflow-cleanup-2026-06-08",
+      "date": "2026-06-08",
+      "summary": "Codex confirmed latest root main workflows are green, closed superseded stale draft PR #16 with evidence comment 4654303203, and ported the safe git-fixture signing hardening into current main."
     }
   ],
-  "last_updated": "2026-06-08T18:32:17Z",
+  "last_updated": "2026-06-08T23:00:22Z",
   "last_platform": "codex",
-  "last_session_summary": "Fast-forwarded root main from GitHub, synced qgia-knowledge-spine-main to origin/main, updated root registry metadata, and refreshed validation state with no blocking findings.",
+  "last_session_summary": "Cleaned up root GitHub workflow failures by closing superseded stale PR #16, porting safe git-fixture hardening, and recording a workflow cleanup receipt.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -199,6 +204,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "d7c3506",
+      "date": "2026-06-08",
+      "platform": "codex",
+      "summary": "test(root): harden git fixture commits"
+    },
+    {
+      "sha": "27acff5",
+      "date": "2026-06-08",
+      "platform": "codex",
+      "summary": "chore(state): record root sync handoff"
+    },
     {
       "sha": "bde15d4",
       "date": "2026-06-08",
@@ -246,18 +263,6 @@
       "date": "2026-06-07",
       "platform": "codex",
       "summary": "chore(state): record CloudBank umbrella PR cleanup"
-    },
-    {
-      "sha": "ec2cde9",
-      "date": "2026-06-07",
-      "platform": "codex",
-      "summary": "chore(reports): record CloudBank umbrella PR cleanup"
-    },
-    {
-      "sha": "935f4e7",
-      "date": "2026-06-07",
-      "platform": "codex",
-      "summary": "chore(state): record CloudBank duplicate PR cleanup"
     }
   ],
   "security_events": [
@@ -305,7 +310,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "bde15d429ee573a7a275de25bffea7737bc8daa9",
+    "main_sha": "d7c35069a52d66ea2ac9e74377324334cfc0da24",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -320,7 +325,7 @@
       "rescue/root-control-plane-dirty-workingcopy-2026-03-25"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  bde15d4 [main]",
+      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  d7c3506 [main]",
       "/Users/travisstreets/.codex/worktrees/0190/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/0dd6/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/4d93/Aurora_ORIONCORE_Directory_Main                         b4b3f1f (detached HEAD)",
@@ -336,7 +341,7 @@
       "Do not replay the other 63 files from #837; use issue-specific PRs from current main",
       "Live open PR count during extraction planning was 43; Claude added #913-#915 during stabilization window"
     ],
-    "codacy_status": "Root main synced to GitHub through bde15d4; workspace_verify has no blocking findings and only remote-only spoke warnings pending generator support.",
+    "codacy_status": "Root main has local workflow cleanup commit d7c3506 pending publication; workspace_verify has no blocking findings and only remote-only spoke warnings pending generator support.",
     "devkit_status": "READY 21/21 tools as of 2026-05-31; canonical Python floor declared in af846ac.",
     "ci_workflows": [
       ".github/workflows/ci.yml - tests + workspace-verify on push/PR to main",
