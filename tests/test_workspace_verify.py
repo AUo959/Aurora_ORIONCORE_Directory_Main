@@ -87,6 +87,7 @@ def build_test_workspace(root: Path) -> None:
     run_command(["git", "init"], cwd=root)
     run_command(["git", "config", "user.email", "codex@example.com"], cwd=root)
     run_command(["git", "config", "user.name", "Codex"], cwd=root)
+    run_command(["git", "config", "commit.gpgsign", "false"], cwd=root)
     run_command(["git", "add", "."], cwd=root)
     run_command(["git", "commit", "-m", "initial fixture"], cwd=root)
 

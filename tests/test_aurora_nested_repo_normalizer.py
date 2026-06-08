@@ -30,6 +30,7 @@ class AuroraNestedRepoNormalizerTests(unittest.TestCase):
         self.run_git(["init"], remote)
         self.run_git(["config", "user.name", "Test User"], remote)
         self.run_git(["config", "user.email", "test@example.com"], remote)
+        self.run_git(["config", "commit.gpgsign", "false"], remote)
         (remote / "README.md").write_text("# Example\n", encoding="utf-8")
         (remote / "docs").mkdir()
         (remote / "docs" / "note.txt").write_text("hello\n", encoding="utf-8")
