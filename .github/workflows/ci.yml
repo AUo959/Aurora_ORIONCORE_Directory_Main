@@ -46,19 +46,36 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest pyyaml
 
+      - name: Prepare CI artifact directory
+        run: mkdir -p reports/ci
+
       - name: Run test suite
-        run: pytest tests/ -v --tb=short
+        run: |
+          set -o pipefail
+          pytest tests/ -v --tb=short --junitxml=reports/ci/pytest-py${{ matrix.python-version }}.xml \
+            2>&1 | tee reports/ci/pytest-py${{ matrix.python-version }}.log
 
-      - name: Run workspace verification
-        run: python tools/workspace_verify.py
-        continue-on-error: false
-
-      - name: Upload verification report
+      - name: Upload pytest report
         if: always()
         uses: actions/upload-artifact@v7
         with:
+          name: pytest-report-py${{ matrix.python-version }}
+          path: |
+            reports/ci/pytest-py${{ matrix.python-version }}.log
+            reports/ci/pytest-py${{ matrix.python-version }}.xml
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Run workspace verification
+        run: python tools/workspace_verify.py --report-out reports/ci/workspace-verify-py${{ matrix.python-version }}.json
+        continue-on-error: false
+
+      - name: Upload verification report
+        if: always() && hashFiles(format('reports/ci/workspace-verify-py{0}.json', matrix.python-version)) != ''
+        uses: actions/upload-artifact@v7
+        with:
           name: workspace-verify-report-py${{ matrix.python-version }}
-          path: reports/analysis/workspace_verify_latest.json
+          path: reports/ci/workspace-verify-py${{ matrix.python-version }}.json
           retention-days: 30
 
   sync-audit:
