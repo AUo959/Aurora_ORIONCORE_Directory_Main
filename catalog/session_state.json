@@ -178,9 +178,9 @@
       "summary": "Codex corrected the #837 closure by posting and recording a concrete extraction plan for the benchmark scorecard: recover scripts/benchmark_scorecard.py only, create/designate a tracking issue, use the broker and a clean worktree, and avoid replaying the other 63 files."
     }
   ],
-  "last_updated": "2026-06-07T23:45:52Z",
+  "last_updated": "2026-06-08T18:32:17Z",
   "last_platform": "codex",
-  "last_session_summary": "Added a concrete extraction plan for CloudBank PR #837, posted the plan back to the closed PR, and recorded how to recover the benchmark scorecard without replaying the 64-file umbrella diff.",
+  "last_session_summary": "Fast-forwarded root main from GitHub, synced qgia-knowledge-spine-main to origin/main, updated root registry metadata, and refreshed validation state with no blocking findings.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -199,6 +199,42 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "bde15d4",
+      "date": "2026-06-08",
+      "platform": "codex",
+      "summary": "chore(root): sync spine registry head"
+    },
+    {
+      "sha": "62baa9d",
+      "date": "2026-06-08",
+      "platform": "github",
+      "summary": "docs: add Perplexity agent coordination bridge (#21)"
+    },
+    {
+      "sha": "1998745",
+      "date": "2026-06-08",
+      "platform": "github",
+      "summary": "chore: Phase 2 Track A \u2014 update spine SHA and register early-dev spokes"
+    },
+    {
+      "sha": "8353b59",
+      "date": "2026-06-08",
+      "platform": "github",
+      "summary": "chore(reports): add CloudBank guide markers (#17)"
+    },
+    {
+      "sha": "d124257",
+      "date": "2026-06-08",
+      "platform": "github",
+      "summary": "ci: preserve pytest and verification artifacts (#19)"
+    },
+    {
+      "sha": "b4b3f1f",
+      "date": "2026-06-07",
+      "platform": "codex",
+      "summary": "chore(state): record CloudBank PR 837 extraction plan"
+    },
     {
       "sha": "080ffab",
       "date": "2026-06-07",
@@ -222,42 +258,6 @@
       "date": "2026-06-07",
       "platform": "codex",
       "summary": "chore(state): record CloudBank duplicate PR cleanup"
-    },
-    {
-      "sha": "7c8cecb",
-      "date": "2026-06-07",
-      "platform": "codex",
-      "summary": "chore(reports): record CloudBank duplicate PR cleanup"
-    },
-    {
-      "sha": "6002b8e",
-      "date": "2026-06-07",
-      "platform": "codex",
-      "summary": "chore(state): record CloudBank stabilization handoff"
-    },
-    {
-      "sha": "d5c0e34",
-      "date": "2026-06-07",
-      "platform": "codex",
-      "summary": "chore(reports): record CloudBank PR stabilization"
-    },
-    {
-      "sha": "cf64bb0",
-      "date": "2026-06-07",
-      "platform": "codex",
-      "summary": "chore(state): record restricted recovery pretriage handoff"
-    },
-    {
-      "sha": "d2d24f2",
-      "date": "2026-06-07",
-      "platform": "codex",
-      "summary": "chore(reports): pretriage restricted recovery candidates"
-    },
-    {
-      "sha": "bfd3a80",
-      "date": "2026-06-01",
-      "platform": "codex",
-      "summary": "chore(state): record CloudBank issue broker handoff"
     }
   ],
   "security_events": [
@@ -305,7 +305,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "080ffab1608c26cbf90536eba226c2936a288314",
+    "main_sha": "bde15d429ee573a7a275de25bffea7737bc8daa9",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -320,11 +320,11 @@
       "rescue/root-control-plane-dirty-workingcopy-2026-03-25"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  080ffab [main]",
+      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  bde15d4 [main]",
       "/Users/travisstreets/.codex/worktrees/0190/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/0dd6/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
+      "/Users/travisstreets/.codex/worktrees/4d93/Aurora_ORIONCORE_Directory_Main                         b4b3f1f (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/88a7/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/93c5/Aurora_ORIONCORE_Directory_Main                         ec939c2 [codex/weekly-skill-audit-mesh-router-2026-06-01]",
       "/Users/travisstreets/.codex/worktrees/95e6/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/a45e/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)"
     ],
@@ -336,7 +336,7 @@
       "Do not replay the other 63 files from #837; use issue-specific PRs from current main",
       "Live open PR count during extraction planning was 43; Claude added #913-#915 during stabilization window"
     ],
-    "codacy_status": "CloudBank #837 now has a posted extraction plan preserving the benchmark scorecard work while keeping the unsafe 64-file dirty umbrella diff closed. Root workspace_verify passed locally.",
+    "codacy_status": "Root main synced to GitHub through bde15d4; workspace_verify has no blocking findings and only remote-only spoke warnings pending generator support.",
     "devkit_status": "READY 21/21 tools as of 2026-05-31; canonical Python floor declared in af846ac.",
     "ci_workflows": [
       ".github/workflows/ci.yml - tests + workspace-verify on push/PR to main",
