@@ -115,7 +115,7 @@ Recommended:
 Blocked:
 <missing evidence, inaccessible state, unresolved conflicts>
 
-Assumptions:
+Assumption:
 <temporary assumptions that must not drive mutation without verification>
 
 Conflict check:
