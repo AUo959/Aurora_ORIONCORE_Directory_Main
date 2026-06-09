@@ -119,7 +119,21 @@
       ]
     }
   },
-  "active_task": null,
+  "active_task": {
+    "id": "cloudbank-workflow-fix-2026-06-09",
+    "status": "suspended",
+    "assigned_to": "either",
+    "repo": "aurora-cloudbank-symbolic-main",
+    "description": "Finish publication of the CloudBank Constellation Knowledge Aggregator workflow fix.",
+    "started_at": "2026-06-09T15:13:24Z",
+    "updated_at": "2026-06-09T15:20:46Z",
+    "context_files": [
+      "reports/analysis/cloudbank_workflow_fix__2026-06-09.md",
+      "catalog/repo_registry.yaml"
+    ],
+    "next_step": "create_cloudbank_pr_or_approve_direct_main_push",
+    "next_step_detail": "CloudBank branch codex/cloudbank-fix-knowledge-aggregator-2026-06-08 was pushed with commit 36f2ba71. gh pr create failed because GitHub GraphQL API rate limit was exceeded for user ID 206913296. Once the rate limit resets, create a PR from the pushed branch to main. Alternative: ask owner for explicit approval before direct fast-forward pushing this commit to CloudBank main."
+  },
   "task_queue": [],
   "completed_tasks": [
     {
@@ -183,9 +197,9 @@
       "summary": "Codex confirmed latest root main workflows are green, closed superseded stale draft PR #16 with evidence comment 4654303203, and ported the safe git-fixture signing hardening into current main."
     }
   ],
-  "last_updated": "2026-06-08T23:00:22Z",
+  "last_updated": "2026-06-09T15:20:46Z",
   "last_platform": "codex",
-  "last_session_summary": "Cleaned up root GitHub workflow failures by closing superseded stale PR #16, porting safe git-fixture hardening, and recording a workflow cleanup receipt.",
+  "last_session_summary": "Pushed CloudBank aggregator workflow fix branch 36f2ba71; PR creation is blocked by GitHub API rate limit, with handoff receipt recorded.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -204,6 +218,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "36f2ba71",
+      "date": "2026-06-09",
+      "platform": "codex",
+      "summary": "cloudbank: fix(actions): stabilize knowledge aggregator pushes"
+    },
+    {
+      "sha": "dc6f433",
+      "date": "2026-06-08",
+      "platform": "codex",
+      "summary": "chore(state): record workflow cleanup handoff"
+    },
     {
       "sha": "d7c3506",
       "date": "2026-06-08",
@@ -251,18 +277,6 @@
       "date": "2026-06-07",
       "platform": "codex",
       "summary": "chore(state): record CloudBank PR 837 extraction plan"
-    },
-    {
-      "sha": "080ffab",
-      "date": "2026-06-07",
-      "platform": "codex",
-      "summary": "chore(reports): plan CloudBank PR 837 extraction"
-    },
-    {
-      "sha": "5deb703",
-      "date": "2026-06-07",
-      "platform": "codex",
-      "summary": "chore(state): record CloudBank umbrella PR cleanup"
     }
   ],
   "security_events": [
@@ -310,7 +324,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "d7c35069a52d66ea2ac9e74377324334cfc0da24",
+    "main_sha": "dc6f43332fe75afd80e3fc2abff5a3bc3708318e",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -339,7 +353,8 @@
       "Extraction scope: scripts/benchmark_scorecard.py, tests/test_benchmark_scorecard.py, optional docs/README usage note",
       "Requires new/designated tracking issue before broker claim; do not let #837 close backlog issues directly",
       "Do not replay the other 63 files from #837; use issue-specific PRs from current main",
-      "Live open PR count during extraction planning was 43; Claude added #913-#915 during stabilization window"
+      "Live open PR count during extraction planning was 43; Claude added #913-#915 during stabilization window",
+      "CloudBank workflow fix branch codex/cloudbank-fix-knowledge-aggregator-2026-06-08 pushed at 36f2ba71; PR creation blocked by GitHub API rate limit on 2026-06-09."
     ],
     "codacy_status": "Root main has local workflow cleanup commit d7c3506 pending publication; workspace_verify has no blocking findings and only remote-only spoke warnings pending generator support.",
     "devkit_status": "READY 21/21 tools as of 2026-05-31; canonical Python floor declared in af846ac.",
