@@ -3,8 +3,12 @@ root: .
 repos:
 - name: aurora-cloudbank-symbolic-main
   path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
-  branch: codex/cloudbank-gumas-mutation-auth-2026-05-25
-  head_sha: 152634b2ed571c8477b5261e126fe3cc0c927eaf
+  branch: main
+  # Synced 2026-06-10: feature branch codex/cloudbank-gumas-mutation-auth-2026-05-25
+  # retired (its commit landed upstream as PR #743); clone fast-forwarded
+  # ~1,486 commits to origin/main; unlanded working-tree changes salvaged
+  # into CloudBank PR #944; stale .git/index.lock from 2026-06-01 removed.
+  head_sha: de12f05475fb057d22dd87456056422a946b1690
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse

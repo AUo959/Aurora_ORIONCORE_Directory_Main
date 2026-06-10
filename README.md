@@ -17,6 +17,9 @@ nested repo internals stay out of root Git history.
 
 ## Start Here
 
+- Reviewing this project? Read
+  [docs/AURORA_REVIEWER_ORIENTATION_v1.md](docs/AURORA_REVIEWER_ORIENTATION_v1.md)
+  first — it prevents the recurring category errors in cold reviews.
 - Human overview: [docs/workspace-map.md](docs/workspace-map.md)
 - Source of truth: [catalog/workspace_manifest.yaml](catalog/workspace_manifest.yaml)
 - Persistent overrides: [catalog/classification_overrides.yaml](catalog/classification_overrides.yaml)

@@ -120,6 +120,18 @@ warrant gaps only when reliance thresholds are crossed, and reserve formal
 Warrant Lens / Confidence Audit structure for artifacts, receipts, handoffs,
 PRs, and decision records.
 
+## Project-Level Review Orientation
+
+When asked to review, assess, audit, or critique this project (or any nested
+repo) as a whole, read `docs/AURORA_REVIEWER_ORIENTATION_v1.md` before forming
+findings. It covers the recurring cold-review category errors: reviewing the
+control plane as an application codebase, misreading the
+worldbuilding/engineering dual register, treating handoff commits and doc
+redundancy as noise, recommending deletion of provenance zones, and reporting
+known-and-tracked risks as new findings instead of diffing against the latest
+state briefs. Change-level peer review between platforms remains governed by
+`docs/AURORA_PEER_REVIEW_PROTOCOL_v1.md`.
+
 ## Integration Quality Gate
 
 Root integration gate:

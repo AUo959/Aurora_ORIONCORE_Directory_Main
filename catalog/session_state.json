@@ -4,7 +4,7 @@
   "protocol": {
     "on_session_start": [
       "1. Read this file in full.",
-      "2. Check active_task \u2014 if status is 'suspended', that is the highest-priority item. Read next_step_detail and context_files before doing anything else.",
+      "2. Check active_task — if status is 'suspended', that is the highest-priority item. Read next_step_detail and context_files before doing anything else.",
       "3. Check task_queue for any items assigned to your platform.",
       "4. Check tool_versions for any tools installed since you last worked here.",
       "5. Run `git log --oneline -5` to see what landed since last_updated."
@@ -18,7 +18,7 @@
       "6. Push to origin so the other platform sees it."
     ],
     "suspend_rule": "A suspend point must be self-contained: the resuming platform should need to read only this file + context_files to continue. Never rely on conversational memory surviving the handoff.",
-    "conflict_rule": "If both platforms made commits since last_updated, merge recent_commits by date. Do not overwrite \u2014 append."
+    "conflict_rule": "If both platforms made commits since last_updated, merge recent_commits by date. Do not overwrite — append."
   },
   "platform_capabilities": {
     "claude-code": {
@@ -139,7 +139,7 @@
     {
       "id": "phase-0-complete",
       "date": "2026-05-30",
-      "summary": "Phase 0: Agentlinter 20\u21925 accepted, branch prune (8 branches), secret triage (1 OpenAI key rotated), gitleaks CI gate, devkit 20/20, skills consolidated, cross-platform handoff layer built, 5 Dependabot PRs merged, 2 stale PRs closed"
+      "summary": "Phase 0: Agentlinter 20→5 accepted, branch prune (8 branches), secret triage (1 OpenAI key rotated), gitleaks CI gate, devkit 20/20, skills consolidated, cross-platform handoff layer built, 5 Dependabot PRs merged, 2 stale PRs closed"
     },
     {
       "id": "phase-0-followups-efg-python-floor",
@@ -195,11 +195,17 @@
       "id": "root-github-workflow-cleanup-2026-06-08",
       "date": "2026-06-08",
       "summary": "Codex confirmed latest root main workflows are green, closed superseded stale draft PR #16 with evidence comment 4654303203, and ported the safe git-fixture signing hardening into current main."
+    },
+    {
+      "id": "cloudbank-ci-gate-and-sync-2026-06-10",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "CloudBank CI gate restored: PR #943 (entangle_vectors slowapi param fix + GUMAS test auth + CSRF_SECRET_KEY setdefault interaction fix) makes CI Check green (121 passed); PR #944 salvages unlanded security middleware 403-contract + Dependabot github-actions coverage; PR #945 restores truncated MIT LICENSE. Local clone fast-forwarded 1,486 commits to origin/main (de12f054); feature branch retired; stale index.lock (2026-06-01) and 20+ prunable worktrees cleaned. Registry head synced."
     }
   ],
-  "last_updated": "2026-06-09T15:20:46Z",
-  "last_platform": "codex",
-  "last_session_summary": "Pushed CloudBank aggregator workflow fix branch 36f2ba71; PR creation is blocked by GitHub API rate limit, with handoff receipt recorded.",
+  "last_updated": "2026-06-10T01:49:46Z",
+  "last_platform": "claude-code",
+  "last_session_summary": "CloudBank CI gate restoration, clone sync, and salvage PRs (943/944/945)",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -218,6 +224,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "f73f246",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "chore(state): record CloudBank workflow fix handoff"
+    },
     {
       "sha": "36f2ba71",
       "date": "2026-06-09",
@@ -258,7 +270,7 @@
       "sha": "1998745",
       "date": "2026-06-08",
       "platform": "github",
-      "summary": "chore: Phase 2 Track A \u2014 update spine SHA and register early-dev spokes"
+      "summary": "chore: Phase 2 Track A — update spine SHA and register early-dev spokes"
     },
     {
       "sha": "8353b59",
@@ -271,18 +283,12 @@
       "date": "2026-06-08",
       "platform": "github",
       "summary": "ci: preserve pytest and verification artifacts (#19)"
-    },
-    {
-      "sha": "b4b3f1f",
-      "date": "2026-06-07",
-      "platform": "codex",
-      "summary": "chore(state): record CloudBank PR 837 extraction plan"
     }
   ],
   "security_events": [
     {
       "date": "2026-05-30",
-      "event": "OpenAI API key sk-proj-ylVuuDDY\u2026 rotated by owner. Branch carrying it deleted from origin.",
+      "event": "OpenAI API key sk-proj-ylVuuDDY… rotated by owner. Branch carrying it deleted from origin.",
       "status": "resolved"
     },
     {
@@ -301,7 +307,7 @@
     {
       "id": "roadmap-1.1",
       "priority": "medium",
-      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows \u2192 ~8). Prefer Codex (browser + github plugin). See reports/state_briefs/development_roadmap__2026-05-24.md \u00a71.1.",
+      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows → ~8). Prefer Codex (browser + github plugin). See reports/state_briefs/development_roadmap__2026-05-24.md §1.1.",
       "assigned_to": "codex"
     },
     {
@@ -320,11 +326,15 @@
       "id": "ga-ethics-hub-integration",
       "priority": "medium",
       "assigned_to": "either",
-      "description": "Geometric-algebra ethics curvature: reference engine + tests landed in root (tools/geometric_ethics_curvature.py, tests/test_geometric_ethics_curvature.py; 8/8 pass under clifford 1.5.1, graceful closed-form fallback). GATED hub integration: wire it into the hub's modules/ethics_field/field_curvature.py as an optional GA-backed composite (additive, flag-gated, scalar stays authoritative until reviewed). NOT done yet because the hub repo (GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main) is on Codex branch codex/cloudbank-gumas-mutation-auth-2026-05-25 with uncommitted auth-middleware work \u2014 do not commit ethics changes onto that dirty branch. Integrate on a clean tree / dedicated branch. Closes the 'geometric in model, scalar in math' gap."
+      "description": "Geometric-algebra ethics curvature: reference engine + tests landed in root (tools/geometric_ethics_curvature.py, tests/test_geometric_ethics_curvature.py; 8/8 pass under clifford 1.5.1, graceful closed-form fallback). GATED hub integration: wire it into the hub's modules/ethics_field/field_curvature.py as an optional GA-backed composite (additive, flag-gated, scalar stays authoritative until reviewed). NOT done yet because the hub repo (GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main) is on Codex branch codex/cloudbank-gumas-mutation-auth-2026-05-25 with uncommitted auth-middleware work — do not commit ethics changes onto that dirty branch. Integrate on a clean tree / dedicated branch. Closes the 'geometric in model, scalar in math' gap."
+    },
+    {
+      "item": "cloudbank-merge-and-protection-decisions",
+      "detail": "Owner decisions pending: merge CloudBank PRs #943 (CI gate, green), #944 (security salvage), #945 (LICENSE); enable branch protection on main requiring CI Check (permission classifier requires explicit owner authorization for both). Suspended task cloudbank-workflow-fix-2026-06-09 still needs its PR (branch codex/cloudbank-fix-knowledge-aggregator-2026-06-08, commit 36f2ba71)."
     }
   ],
   "known_state": {
-    "main_sha": "dc6f43332fe75afd80e3fc2abff5a3bc3708318e",
+    "main_sha": "f73f246",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
