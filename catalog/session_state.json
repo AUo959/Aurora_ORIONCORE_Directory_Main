@@ -4,7 +4,7 @@
   "protocol": {
     "on_session_start": [
       "1. Read this file in full.",
-      "2. Check active_task — if status is 'suspended', that is the highest-priority item. Read next_step_detail and context_files before doing anything else.",
+      "2. Check active_task \u2014 if status is 'suspended', that is the highest-priority item. Read next_step_detail and context_files before doing anything else.",
       "3. Check task_queue for any items assigned to your platform.",
       "4. Check tool_versions for any tools installed since you last worked here.",
       "5. Run `git log --oneline -5` to see what landed since last_updated."
@@ -18,7 +18,7 @@
       "6. Push to origin so the other platform sees it."
     ],
     "suspend_rule": "A suspend point must be self-contained: the resuming platform should need to read only this file + context_files to continue. Never rely on conversational memory surviving the handoff.",
-    "conflict_rule": "If both platforms made commits since last_updated, merge recent_commits by date. Do not overwrite — append."
+    "conflict_rule": "If both platforms made commits since last_updated, merge recent_commits by date. Do not overwrite \u2014 append."
   },
   "platform_capabilities": {
     "claude-code": {
@@ -126,22 +126,22 @@
     "repo": "root + aurora-cloudbank-symbolic-main",
     "description": "Continue the Aurora-first narrative-layer promotion per the ADR.",
     "started_at": "2026-06-10T00:00:00Z",
-    "updated_at": "2026-06-10T20:39:57Z",
+    "updated_at": "2026-06-10T20:48:31Z",
     "context_files": [
       "docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md",
       "reports/recovered_canon/README.md",
       "reports/analysis/march_2026_reset_forensics__2026-06-10.md",
       "reports/analysis/unlanded_work_audit__2026-06-10.md"
     ],
-    "next_step": "owner_reviews_then_remaining_adr_items",
-    "next_step_detail": "Remaining: (1) OWNER review/merge PR #979 (narrative validation engine, green). (2) OWNER spot-check CanonRec canon/L1/characters files + confirm the 6 STAGING-era entities (see CanonRec reports/RECONCILIATION_REPORT__2026-06-10.md action items). (3) OWNER privacy-review mesh transcripts in intake/recovered_mesh_runtime_2026-06-10/. (4) Run threadcore-governor over CanonRec canon/L3/THREADCORE payload. (5) Promote repo_authority_policy.yaml to catalog/ via peer review. (6) Port/abandon decision on codex/gitwiz-sync-audit-canonical code changes; check weekly-skill-audit-mesh-router fix. (7) Extract ORION.L1.* prose sources (station overview, systems bible, runbooks) from CanonRec_v1.3.x zips — last unresolved ledger source class. (8) Narrative engine phase 2 design (LLM state-builder front end) once #979 lands."
+    "next_step": "engine_phase_2_design_plus_remaining_owner_items",
+    "next_step_detail": "Engine phase 2 design seed: LLM front-end as state_builder (prose -> canonical state extraction), engine stays deterministic judge \u2014 follow the warrant-lens split. Candidate first pipeline: GUMAS sim turn output -> next_event_continuity_check -> verdict gates canon promotion. Remaining owner items unchanged: CanonRec character spot-check + 6 STAGING-era entities; transcript privacy review; threadcore-governor over canon/L3 capsule; repo_authority_policy.yaml promotion via peer review; gitwiz April branch port/abandon; ORION.L1.* prose extraction from CanonRec_v1.3.x zips."
   },
   "task_queue": [],
   "completed_tasks": [
     {
       "id": "phase-0-complete",
       "date": "2026-05-30",
-      "summary": "Phase 0: Agentlinter 20→5 accepted, branch prune (8 branches), secret triage (1 OpenAI key rotated), gitleaks CI gate, devkit 20/20, skills consolidated, cross-platform handoff layer built, 5 Dependabot PRs merged, 2 stale PRs closed"
+      "summary": "Phase 0: Agentlinter 20\u21925 accepted, branch prune (8 branches), secret triage (1 OpenAI key rotated), gitleaks CI gate, devkit 20/20, skills consolidated, cross-platform handoff layer built, 5 Dependabot PRs merged, 2 stale PRs closed"
     },
     {
       "id": "phase-0-followups-efg-python-floor",
@@ -208,7 +208,7 @@
       "id": "narrative-cargo-recovery-2026-06-10",
       "date": "2026-06-10",
       "platform": "claude-code",
-      "summary": "March-lineage narrative cargo extracted (owner-approved): 19 canon artifacts to reports/recovered_canon/ (incl. ORION_STATION_CANONICAL_STAFF_REGISTRY.json — resolves L1 ledger source gap — canonical_validation.yaml contract, THREADCORE v3.5.1 capsule, chamber guides); CloudBank PR #980 merged (V1 mesh contract tests, /health factory route, anti-flourish Thorne persona); private mesh transcripts + mesh.db to untracked intake/recovered_mesh_runtime_2026-06-10/ pending privacy review. Command grammar and Aurora Fusion verified already byte-identical on main. PR #979 (narrative validation engine) still awaits owner review."
+      "summary": "March-lineage narrative cargo extracted (owner-approved): 19 canon artifacts to reports/recovered_canon/ (incl. ORION_STATION_CANONICAL_STAFF_REGISTRY.json \u2014 resolves L1 ledger source gap \u2014 canonical_validation.yaml contract, THREADCORE v3.5.1 capsule, chamber guides); CloudBank PR #980 merged (V1 mesh contract tests, /health factory route, anti-flourish Thorne persona); private mesh transcripts + mesh.db to untracked intake/recovered_mesh_runtime_2026-06-10/ pending privacy review. Command grammar and Aurora Fusion verified already byte-identical on main. PR #979 (narrative validation engine) still awaits owner review."
     },
     {
       "id": "aurora-seat-restoration-2026-06-10",
@@ -220,12 +220,18 @@
       "id": "l1-canon-promotion-2026-06-10",
       "date": "2026-06-10",
       "platform": "claude-code",
-      "summary": "ADR steps 3-5 executed: CanonRec thawed (first commit in 102 days, ae86f84) — 41 L1 characters promoted as Primary Canon via aurora-canon-reconciler workflow with receipt + drift log (4 role conflicts resolved by ledger primacy); L3 contracts promoted; CanonRec pushed. Ledger v2 with fully resolvable citations. Canon consistency gate live both sides: CloudBank tests/test_canon_consistency.py (critical, 5 assertions, in CI Check) and root verify_canon_resolvability. Full L1 crew boarded: mesh roster 7→47 via PR #982 (merged, green) with canon-grounded memory files."
+      "summary": "ADR steps 3-5 executed: CanonRec thawed (first commit in 102 days, ae86f84) \u2014 41 L1 characters promoted as Primary Canon via aurora-canon-reconciler workflow with receipt + drift log (4 role conflicts resolved by ledger primacy); L3 contracts promoted; CanonRec pushed. Ledger v2 with fully resolvable citations. Canon consistency gate live both sides: CloudBank tests/test_canon_consistency.py (critical, 5 assertions, in CI Check) and root verify_canon_resolvability. Full L1 crew boarded: mesh roster 7\u219247 via PR #982 (merged, green) with canon-grounded memory files."
+    },
+    {
+      "id": "narrative-engine-landed-2026-06-10",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "PR #979 merged: narrative validation engine phase one on main (final review: no external calls, 2,103 lines, CI green against post-boarding main). First canonical assignment in PR #983: Thorne audited against Aurora arbitration charter \u2014 charter-compliant action supported (0.93), unilateral bypass possible_with_setup with discipline blocker + smallest_fix. Engine behavior empirically verified before pinning assertions."
     }
   ],
-  "last_updated": "2026-06-10T20:39:57Z",
+  "last_updated": "2026-06-10T20:49:01Z",
   "last_platform": "claude-code",
-  "last_session_summary": "L1 canon promotion complete: CanonRec thawed, ledger v2, consistency gate live, 47 aboard",
+  "last_session_summary": "chore(state): record L1 canon promotion completion; sync Clo; feat(canon): ledger v2 with resolvable citations; canon reso",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -244,6 +250,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "0cea538",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "chore(state): record L1 canon promotion completion; sync CloudBank head"
+    },
+    {
+      "sha": "60c92e5",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "feat(canon): ledger v2 with resolvable citations; canon resolvability check in verifier"
+    },
     {
       "sha": "5171b13",
       "date": "2026-06-10",
@@ -266,7 +284,7 @@
       "sha": "1c271c9",
       "date": "2026-06-10",
       "platform": "claude-code",
-      "summary": "docs(adr): narrative layer promotion — Aurora first; imagination-first review rule"
+      "summary": "docs(adr): narrative layer promotion \u2014 Aurora first; imagination-first review rule"
     },
     {
       "sha": "45bc626",
@@ -278,7 +296,7 @@
       "sha": "7b46f56",
       "date": "2026-06-10",
       "platform": "claude-code",
-      "summary": "feat(canon): second-pass salvage — symbolic exports, anchor manifests, receipts; loss-prevention bundles"
+      "summary": "feat(canon): second-pass salvage \u2014 symbolic exports, anchor manifests, receipts; loss-prevention bundles"
     },
     {
       "sha": "8c331d8",
@@ -291,24 +309,12 @@
       "date": "2026-06-10",
       "platform": "claude-code",
       "summary": "chore(state): record approved follow-through; sync CloudBank/spine registry heads"
-    },
-    {
-      "sha": "89da047",
-      "date": "2026-06-10",
-      "platform": "claude-code",
-      "summary": "chore(state): record recovery-session outcomes and remaining owner decisions"
-    },
-    {
-      "sha": "ef73872",
-      "date": "2026-06-10",
-      "platform": "claude-code",
-      "summary": "feat(verify): warn on stale .git/index.lock across root and registry repos"
     }
   ],
   "security_events": [
     {
       "date": "2026-05-30",
-      "event": "OpenAI API key sk-proj-ylVuuDDY… rotated by owner. Branch carrying it deleted from origin.",
+      "event": "OpenAI API key sk-proj-ylVuuDDY\u2026 rotated by owner. Branch carrying it deleted from origin.",
       "status": "resolved"
     },
     {
@@ -327,7 +333,7 @@
     {
       "id": "roadmap-1.1",
       "priority": "medium",
-      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows → ~8). Prefer Codex (browser + github plugin). See reports/state_briefs/development_roadmap__2026-05-24.md §1.1.",
+      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows \u2192 ~8). Prefer Codex (browser + github plugin). See reports/state_briefs/development_roadmap__2026-05-24.md \u00a71.1.",
       "assigned_to": "codex"
     },
     {
@@ -346,15 +352,15 @@
       "id": "ga-ethics-hub-integration",
       "priority": "medium",
       "assigned_to": "either",
-      "description": "Geometric-algebra ethics curvature: reference engine + tests landed in root (tools/geometric_ethics_curvature.py, tests/test_geometric_ethics_curvature.py; 8/8 pass under clifford 1.5.1, graceful closed-form fallback). GATED hub integration: wire it into the hub's modules/ethics_field/field_curvature.py as an optional GA-backed composite (additive, flag-gated, scalar stays authoritative until reviewed). NOT done yet because the hub repo (GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main) is on Codex branch codex/cloudbank-gumas-mutation-auth-2026-05-25 with uncommitted auth-middleware work — do not commit ethics changes onto that dirty branch. Integrate on a clean tree / dedicated branch. Closes the 'geometric in model, scalar in math' gap."
+      "description": "Geometric-algebra ethics curvature: reference engine + tests landed in root (tools/geometric_ethics_curvature.py, tests/test_geometric_ethics_curvature.py; 8/8 pass under clifford 1.5.1, graceful closed-form fallback). GATED hub integration: wire it into the hub's modules/ethics_field/field_curvature.py as an optional GA-backed composite (additive, flag-gated, scalar stays authoritative until reviewed). NOT done yet because the hub repo (GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main) is on Codex branch codex/cloudbank-gumas-mutation-auth-2026-05-25 with uncommitted auth-middleware work \u2014 do not commit ethics changes onto that dirty branch. Integrate on a clean tree / dedicated branch. Closes the 'geometric in model, scalar in math' gap."
     },
     {
       "item": "cloudbank-followups-2026-06-10",
-      "detail": "All four approved owner items executed: branch protection live (CI Check required on main), root pushed, recovered PRs #946/#947/#948 + spine #3 reviewed and merged, closed-PR triage done (#617/#864/#843 stay closed with rationale; #640 revived as PR #979, CI green, 14 tests pass, AWAITING OWNER REVIEW — 2,103 lines narrative validation engine phase one). Remaining backlog: March rescue lineage extraction (gitleaks-clean, see reports/analysis/unlanded_work_audit__2026-06-10.md) and root branches (gitwiz-sync-audit 9 commits, weekly-skill-audit 1)."
+      "detail": "All four approved owner items executed: branch protection live (CI Check required on main), root pushed, recovered PRs #946/#947/#948 + spine #3 reviewed and merged, closed-PR triage done (#617/#864/#843 stay closed with rationale; #640 revived as PR #979, CI green, 14 tests pass, AWAITING OWNER REVIEW \u2014 2,103 lines narrative validation engine phase one). Remaining backlog: March rescue lineage extraction (gitleaks-clean, see reports/analysis/unlanded_work_audit__2026-06-10.md) and root branches (gitwiz-sync-audit 9 commits, weekly-skill-audit 1)."
     }
   ],
   "known_state": {
-    "main_sha": "5171b13",
+    "main_sha": "0cea538",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
