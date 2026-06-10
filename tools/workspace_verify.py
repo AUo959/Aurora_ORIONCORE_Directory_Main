@@ -6,6 +6,7 @@ import json
 import os
 import subprocess
 import tempfile
+import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
@@ -864,9 +865,56 @@ def verify_session_state(root: Path) -> list[Finding]:
     ]
 
 
+GIT_LOCK_STALE_SECONDS = 30 * 60
+
+
+def verify_git_locks(root: Path) -> list[Finding]:
+    """Warn about stale .git/index.lock files that silently block commits.
+
+    A zero-byte index.lock left behind by a crashed git process blocks every
+    subsequent commit in that repo without any visible signal until the next
+    commit attempt (observed 2026-06-01 in aurora-cloudbank-symbolic-main and
+    2026-05-23 in qgia-knowledge-library-main).
+    """
+    findings: list[Finding] = []
+    candidates: list[tuple[str, Path]] = [("root", root)]
+    try:
+        payload = load_yaml_like(root / "catalog" / "repo_registry.yaml")
+        for repo in payload.get("repos", []):
+            path = str(repo.get("path", ""))
+            if not path or path.startswith("~"):
+                continue
+            candidates.append((str(repo.get("name", path)), root / path))
+    except Exception:
+        # Registry load problems are reported by verify_repo_registry.
+        pass
+
+    now = time.time()
+    for name, repo_path in candidates:
+        lock = repo_path / ".git" / "index.lock"
+        try:
+            age_seconds = now - lock.stat().st_mtime
+        except OSError:
+            continue
+        if age_seconds > GIT_LOCK_STALE_SECONDS:
+            age_minutes = int(age_seconds // 60)
+            findings.append(
+                warning(
+                    "git_index_lock",
+                    f"{name}: .git/index.lock is {age_minutes} minutes old; a"
+                    " crashed git process has likely left this repo unable to"
+                    " commit.",
+                    "Confirm no git process is using the repo, then remove"
+                    f" `{lock}`.",
+                )
+            )
+    return findings
+
+
 def run_checks(root: Path, include_determinism: bool, include_relocation_rehearsal: bool) -> list[Finding]:
     findings: list[Finding] = []
     findings.extend(verify_root_git_repo(root))
+    findings.extend(verify_git_locks(root))
     findings.extend(verify_manifest(root))
     findings.extend(verify_privacy_redaction(root))
     findings.extend(verify_repo_registry(root))
