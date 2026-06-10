@@ -494,8 +494,33 @@ def score_skill_match(
 
 def iter_candidate_files(root: Path) -> list[Path]:
     files: list[Path] = []
-    for dirpath, dirnames, filenames in os.walk(root, topdown=True):
-        dirnames[:] = [d for d in dirnames if d not in EXCLUDED_DIR_NAMES]
+    seen_dirs: set[Path] = set()
+    for dirpath, dirnames, filenames in os.walk(root, topdown=True, followlinks=True):
+        current_dir = Path(dirpath)
+        try:
+            resolved_dir = current_dir.resolve()
+        except OSError:
+            dirnames[:] = []
+            continue
+        if resolved_dir in seen_dirs:
+            dirnames[:] = []
+            continue
+        seen_dirs.add(resolved_dir)
+
+        kept_dirnames: list[str] = []
+        for dirname in dirnames:
+            if dirname in EXCLUDED_DIR_NAMES:
+                continue
+            child_dir = current_dir / dirname
+            try:
+                resolved_child = child_dir.resolve()
+            except OSError:
+                continue
+            if resolved_child in seen_dirs:
+                continue
+            kept_dirnames.append(dirname)
+        dirnames[:] = kept_dirnames
+
         for filename in filenames:
             candidate = Path(dirpath) / filename
             if candidate.suffix.lower() in CANDIDATE_EXTENSIONS:

@@ -53,9 +53,13 @@ Canon home: `GUMAS_SIM_2.5/CanonRec/canon` (CanonRec thaw commit `ae86f84`)
 - **note**: Source IDs cited by the 2026-03-08 ledger now resolve to recovered/promoted artifacts.
 - **ORION.ENT.REGISTRY.0001-class**: GUMAS_SIM_2.5/CanonRec/canon/L1/station/ORION_STATION_CANONICAL_STAFF_REGISTRY.json (v2.4.1 lineage)
 - **ORION.ARCH.CONTRACT.0001-class**: GUMAS_SIM_2.5/CanonRec/canon/L3/canonical_validation.yaml
-- **unresolved**: Remaining ORION.L1.* prose sources (station overview, systems bible, runbooks) are expected inside the CanonRec_v1.3.x archive zips — next extraction target.
+- **ORION.L1.prose-sources**: `GUMAS_SIM_2.5/CanonRec/canon/L1/station/reference_sources/` (Master Text v2.6, crew manifest, technical readout, life infrastructure, equipment addendum, fleet module — reference/legacy tier). All ledger source classes now resolve.
 
 ## Aurora
 
 Aurora is canonically `aurora_core` — CORE_SYSTEM, L1 technical node ("always-on arbitration"),
 defined in the station registry, not a character entity. Runtime seat: CloudBank `config/mesh/agents/aurora.json` (PR #981).
+
+## Certainty Note
+
+35 entities are CANON. 6 remain **STAGING pending owner confirmation** (vessel crews and cadet): ORION.ENTITY.0004, 0007, 0015, 0028, 0034, 0036.

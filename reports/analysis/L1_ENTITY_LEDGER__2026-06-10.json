@@ -1205,7 +1205,7 @@
    "role": "Commanding Officer, Guardian Sentinel (Security Corvette)",
    "division": "Operations & Security",
    "status": "STAGING (FULL BIO; DETAILS UNCONFIRMED)",
-   "certainty": "CANON",
+   "certainty": "STAGING",
    "registry_authority": "reference",
    "primary_summary": "Lt. Nakamura serves as the commanding officer of *Guardian Sentinel*, Orion Station's security corvette-the ship you call when a situation is moving too fast for the station to stay hands-off. Nakamura's reputation is built on calm under contact: rapid threat assessment, tight comms discipline, and a bias toward containment over escalation.",
    "primary_additional": {
@@ -1228,7 +1228,7 @@
    "role": "Commanding Officer, Logistics Alpha (Cargo Transport)",
    "division": "Operations",
    "status": "STAGING (FULL BIO; DETAILS UNCONFIRMED)",
-   "certainty": "CANON",
+   "certainty": "STAGING",
    "registry_authority": "reference",
    "primary_summary": "Lt. Hassan commands *Logistics Alpha*, the cargo transport that keeps Orion Station's quiet needs from becoming loud emergencies. Hassan's job is less glamorous than intercepts and more consequential than most people admit: fuel margins, life-support consumables, spares, lab materials, and the thousand 'small' items that make closed habitats stable.",
    "primary_additional": {
@@ -1251,7 +1251,7 @@
    "role": "Commanding Officer, Repair Tender Beta (Mobile Maintenance Tender)",
    "division": "Operations & Engineering",
    "status": "STAGING (FULL BIO; DETAILS UNCONFIRMED)",
-   "certainty": "CANON",
+   "certainty": "STAGING",
    "registry_authority": "reference",
    "primary_summary": "Chief Thomson commands *Repair Tender Beta*, Orion Station's mobile maintenance platform-part workshop, part tug, part problem-solving habitat. When something external breaks (paneling, comm arrays, sensor booms, micrometeor impacts), Thomson's crew is how you fix it without gambling station safety.",
    "primary_additional": {
@@ -1274,7 +1274,7 @@
    "role": "Senior Pilot, ORS-05 *Lacewing* (Training / Cultural Liaison Flight)",
    "division": "Operations",
    "status": "STAGING (FULL BIO; DETAILS UNCONFIRMED)",
-   "certainty": "CANON",
+   "certainty": "STAGING",
    "registry_authority": "reference",
    "primary_summary": "Samantha Gray is the senior pilot assigned to ORS-05 *Lacewing*, a small craft used for training evolutions, liaison flights, and the kind of 'short-hop' missions that keep the station connected to its operational neighborhood. Gray is known for precision flying and a steady presence-ideal traits when you're piloting with trainees onboard or when a mission's success depends on calm execution.",
    "primary_additional": {
@@ -1311,7 +1311,7 @@
    "role": "Psycho-Acoustic Systems Engineer, ORS-05 *Lacewing* (Sensor & Human-Factors Acoustics)",
    "division": "Systems & Infrastructure",
    "status": "STAGING (FULL BIO; DETAILS UNCONFIRMED)",
-   "certainty": "CANON",
+   "certainty": "STAGING",
    "registry_authority": "reference",
    "primary_summary": "Ren Takahashi is a psycho-acoustic systems engineer attached to ORS-05 *Lacewing*, specializing in how sound and vibration affect both instrumentation and humans in confined craft. Their work sits at an unusual intersection: sensor integrity, hardware resonance, and crew cognition under stress.",
    "primary_additional": {
@@ -1348,7 +1348,7 @@
    "role": "Cadet / Trainee (Operations Track)",
    "division": "Training",
    "status": "STAGING (FULL BIO; DETAILS UNCONFIRMED)",
-   "certainty": "CANON",
+   "certainty": "STAGING",
    "registry_authority": "reference",
    "primary_summary": "Cadet Mira Chen is a trainee in Orion Station's operations pipeline-learning the systems, procedures, and judgment calls that keep a complex habitat safe. Chen appears in records as a named milestone in training progress, suggesting a monitored development track rather than a one-off mention.",
    "primary_additional": {
@@ -1603,9 +1603,10 @@
   "l3_contracts": "GUMAS_SIM_2.5/CanonRec/canon/L3/"
  },
  "source_resolution": {
-  "note": "Source IDs cited by the 2026-03-08 ledger now resolve to recovered/promoted artifacts.",
+  "note": "All ledger source classes now resolve to promoted artifacts.",
   "ORION.ENT.REGISTRY.0001-class": "GUMAS_SIM_2.5/CanonRec/canon/L1/station/ORION_STATION_CANONICAL_STAFF_REGISTRY.json (v2.4.1 lineage)",
   "ORION.ARCH.CONTRACT.0001-class": "GUMAS_SIM_2.5/CanonRec/canon/L3/canonical_validation.yaml",
-  "unresolved": "Remaining ORION.L1.* prose sources (station overview, systems bible, runbooks) are expected inside the CanonRec_v1.3.x archive zips — next extraction target."
- }
+  "ORION.L1.prose-sources": "GUMAS_SIM_2.5/CanonRec/canon/L1/station/reference_sources/ — Master Text v2.6, crew manifest, technical readout, life infrastructure, equipment addendum, fleet module (reference/legacy tier)"
+ },
+ "staging_note": "6 entities remain STAGING pending owner confirmation (reconciliation report 2026-06-10 action item 2): vessel crews and cadet — Nakamura, Hassan, Thomson, Gray, Takahashi, Mira Chen."
 }

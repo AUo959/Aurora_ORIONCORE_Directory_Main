@@ -10,9 +10,15 @@
   `reports/analysis/unlanded_work_audit__2026-06-10.md`).
 - **Method:** file-level extraction (no history merge), per the
   control-plane recovery rule in `docs/CONTROL_PLANE_PROVENANCE.md`.
-- **Status:** recovered, NOT yet canon. Promotion to CanonRec / canonical
-  surfaces still requires owner review through the aurora-canon-reconciler
-  path. This directory is the durable review surface.
+- **Status (updated 2026-06-10, second session):** PROMOTED. The L1/L3
+  artifacts were reconciled and promoted into CanonRec (`canon/L1`,
+  `canon/L3`, thaw commit `ae86f84`) via the aurora-canon-reconciler
+  workflow with receipt and drift log. **CanonRec is now the authoritative
+  Primary Canon surface; this directory remains as the recovery receipt
+  and provenance record.** 6 entities are STAGING pending owner
+  confirmation; root-side policies (`repo_authority_policy.yaml`,
+  `gitwiz_hygiene_policy.yaml`) and review records remain
+  pending-promotion here.
 
 ## Why this matters
 

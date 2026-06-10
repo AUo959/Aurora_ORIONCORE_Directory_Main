@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "defaults": {
+    "warning": {
+      "status_entries": 20,
+      "untracked_files": 8,
+      "deleted_files": 5,
+      "behind_commits": 25
+    },
+    "critical": {
+      "status_entries": 75,
+      "untracked_files": 25,
+      "deleted_files": 25,
+      "behind_commits": 200
+    },
+    "warn_on_dirty_main": true,
+    "warn_on_diverged_main": true
+  },
+  "repos": {
+    "root": {
+      "role": "control_plane",
+      "note": "Root is metadata-first. Keep changes narrow, keep generated control surfaces deliberate, and do not use root commits to mask nested-repo drift.",
+      "warning": {
+        "status_entries": 15,
+        "untracked_files": 8,
+        "behind_commits": 10
+      },
+      "critical": {
+        "status_entries": 50,
+        "untracked_files": 20,
+        "deleted_files": 10,
+        "behind_commits": 50
+      }
+    },
+    "aurora-cloudbank-symbolic-main": {
+      "role": "nested_runtime_repo",
+      "note": "This repo mixes active source with runtime-facing paths such as .aurora/ and runtime/mesh/. Keep work on short-lived branches and resolve runtime artifact routing before they accumulate on main.",
+      "warning": {
+        "status_entries": 12,
+        "untracked_files": 5,
+        "deleted_files": 3,
+        "behind_commits": 15
+      },
+      "critical": {
+        "status_entries": 40,
+        "untracked_files": 12,
+        "deleted_files": 12,
+        "behind_commits": 75
+      }
+    },
+    "CanonRec": {
+      "role": "nested_canon_repo",
+      "note": "CanonRec is expected to stay near-clean. Large local deltas should be exceptional and reviewable as a focused branch or PR.",
+      "warning": {
+        "status_entries": 10,
+        "untracked_files": 4,
+        "behind_commits": 15
+      },
+      "critical": {
+        "status_entries": 30,
+        "untracked_files": 10,
+        "deleted_files": 10,
+        "behind_commits": 50
+      }
+    },
+    "DuelSim_v2.0": {
+      "role": "nested_sim_repo",
+      "note": "DuelSim should follow the same small-batch rule as CanonRec. Treat large local simulation-related drift as a separate sync event, not normal background accumulation.",
+      "warning": {
+        "status_entries": 10,
+        "untracked_files": 4,
+        "behind_commits": 15
+      },
+      "critical": {
+        "status_entries": 30,
+        "untracked_files": 10,
+        "deleted_files": 10,
+        "behind_commits": 50
+      }
+    }
+  }
+}

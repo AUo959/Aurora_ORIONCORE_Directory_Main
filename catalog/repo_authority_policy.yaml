@@ -1,0 +1,32 @@
+version: 1
+policy_name: repo_authority_model
+updated_at: "2026-03-25"
+workspace_root_repo:
+  name: Aurora_ORIONCORE_Directory_Main
+  role: control_plane
+  scope: all_project_repos
+  governs:
+    - repo_management_policy
+    - routing
+    - registration
+    - audit_posture
+nested_repo_defaults:
+  local_checkout_role: working_clone
+  local_only_state_status: draft
+  published_baseline_ref: origin/main
+  publication_override: explicit_publication_flow
+registration_model:
+  registry_file: catalog/repo_registry.yaml
+  registry_meaning: repos_currently_registered_for_automation_and_audit
+  missing_registration_means: control_plane_registration_gap
+rules:
+  - id: ROOT_CONTROL_PLANE_ALL_PROJECT_REPOS
+    statement: Root governs control-plane policy for all project repos, including repos not yet registered.
+  - id: NESTED_REPOS_KEEP_SOURCE_HISTORY_AUTHORITY
+    statement: Each nested repo keeps its own Git and GitHub source-history authority.
+  - id: LOCAL_CLONES_ARE_NOT_AUTHORITATIVE
+    statement: A local nested checkout is not authoritative unless its state is committed and pushed through an explicit publication flow.
+  - id: PUBLISHED_STATE_REQUIRES_COMMIT_AND_PUSH
+    statement: Meaningful local work becomes published project state only after commit and push to the repo baseline.
+  - id: REGISTRATION_REQUIRED_FOR_AUTOMATION_SCOPE
+    statement: Repos must be registered in catalog/repo_registry.yaml before automation or audit treats them as in-scope.

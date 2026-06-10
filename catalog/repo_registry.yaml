@@ -22,7 +22,7 @@ repos:
   # character entities promoted as Primary Canon with reconciliation receipt
   # and drift log; L3 contracts (canonical_validation, THREADCORE, anchors)
   # promoted as source artifacts.
-  head_sha: ae86f84809401a210d44b13843e8267a1093a092
+  head_sha: 604f119132d4a65daad7e7ce875e44be11d9b13b
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/CanonRec rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE

@@ -573,7 +573,7 @@ def discover_nested_repos(root: Path) -> list[str]:
             repos.add(relpath(current, root))
             dirnames[:] = []
             continue
-        if ".git" in filenames:
+        if current != root and ".git" in filenames:
             repos.add(relpath(current, root))
             dirnames[:] = []
     return sorted(repos)
@@ -1145,6 +1145,19 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             status="deferred",
         )
     if entry.is_file() and entry.suffix.lower() == ".md" and "report" in lowered:
+        canonical_report_path = root / "reports" / "analysis" / name
+        if canonical_report_path.exists():
+            return base_record(
+                kind="intake_file",
+                logical_zone="intake",
+                planned_path=f"intake/{name}",
+                git_boundary="none",
+                storage_tier="review",
+                retention_policy="review",
+                owner="intake-review",
+                status="planned_move",
+                batch_id=ROOT_INTAKE_CLEANUP_BATCH_ID,
+            )
         return base_record(
             kind="analysis_report",
             logical_zone="reports",
