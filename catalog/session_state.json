@@ -203,9 +203,9 @@
       "summary": "CloudBank CI gate restored: PR #943 (entangle_vectors slowapi param fix + GUMAS test auth + CSRF_SECRET_KEY setdefault interaction fix) makes CI Check green (121 passed); PR #944 salvages unlanded security middleware 403-contract + Dependabot github-actions coverage; PR #945 restores truncated MIT LICENSE. Local clone fast-forwarded 1,486 commits to origin/main (de12f054); feature branch retired; stale index.lock (2026-06-01) and 20+ prunable worktrees cleaned. Registry head synced."
     }
   ],
-  "last_updated": "2026-06-10T13:49:18Z",
+  "last_updated": "2026-06-10T14:25:45Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Unlanded-work recovery: 4 stranded PRs filed, 943/944/945 merged, 30 branches cleaned, lock-age verifier check added",
+  "last_session_summary": "Owner-approved follow-through: protection enabled, recovered PRs merged, #640 revived as #979",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -224,6 +224,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "89da047",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "chore(state): record recovery-session outcomes and remaining owner decisions"
+    },
+    {
+      "sha": "ef73872",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "feat(verify): warn on stale .git/index.lock across root and registry repos"
+    },
     {
       "sha": "4defe75",
       "date": "2026-06-10",
@@ -271,18 +283,6 @@
       "date": "2026-06-08",
       "platform": "codex",
       "summary": "chore(root): sync spine registry head"
-    },
-    {
-      "sha": "62baa9d",
-      "date": "2026-06-08",
-      "platform": "github",
-      "summary": "docs: add Perplexity agent coordination bridge (#21)"
-    },
-    {
-      "sha": "1998745",
-      "date": "2026-06-08",
-      "platform": "github",
-      "summary": "chore: Phase 2 Track A — update spine SHA and register early-dev spokes"
     }
   ],
   "security_events": [
@@ -329,12 +329,12 @@
       "description": "Geometric-algebra ethics curvature: reference engine + tests landed in root (tools/geometric_ethics_curvature.py, tests/test_geometric_ethics_curvature.py; 8/8 pass under clifford 1.5.1, graceful closed-form fallback). GATED hub integration: wire it into the hub's modules/ethics_field/field_curvature.py as an optional GA-backed composite (additive, flag-gated, scalar stays authoritative until reviewed). NOT done yet because the hub repo (GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main) is on Codex branch codex/cloudbank-gumas-mutation-auth-2026-05-25 with uncommitted auth-middleware work — do not commit ethics changes onto that dirty branch. Integrate on a clean tree / dedicated branch. Closes the 'geometric in model, scalar in math' gap."
     },
     {
-      "item": "cloudbank-owner-decisions-2026-06-10",
-      "detail": "Merged: #943 (CI gate), #944 (security salvage), #945 (LICENSE). Still owner-pending: (1) enable branch protection on CloudBank main requiring \"CI Check\" — agent-denied twice, command recorded in session transcript; (2) push root main to origin (4 commits ahead); (3) review/merge recovered-work PRs CloudBank #946 #947 #948 (946 Codacy fail, 948 SonarCloud fail need review) and spine #3; (4) decide closed-unmerged PRs #617 #640 #864 #843 — #640 holds narrative validation engine phase one; (5) extract March rescue lineage (gitleaks-clean, see reports/analysis/unlanded_work_audit__2026-06-10.md)."
+      "item": "cloudbank-followups-2026-06-10",
+      "detail": "All four approved owner items executed: branch protection live (CI Check required on main), root pushed, recovered PRs #946/#947/#948 + spine #3 reviewed and merged, closed-PR triage done (#617/#864/#843 stay closed with rationale; #640 revived as PR #979, CI green, 14 tests pass, AWAITING OWNER REVIEW — 2,103 lines narrative validation engine phase one). Remaining backlog: March rescue lineage extraction (gitleaks-clean, see reports/analysis/unlanded_work_audit__2026-06-10.md) and root branches (gitwiz-sync-audit 9 commits, weekly-skill-audit 1)."
     }
   ],
   "known_state": {
-    "main_sha": "4defe75",
+    "main_sha": "89da047",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",

@@ -4,11 +4,10 @@ repos:
 - name: aurora-cloudbank-symbolic-main
   path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
   branch: main
-  # Synced 2026-06-10: feature branch codex/cloudbank-gumas-mutation-auth-2026-05-25
-  # retired (its commit landed upstream as PR #743); clone fast-forwarded
-  # ~1,486 commits to origin/main; unlanded working-tree changes salvaged
-  # into CloudBank PR #944; stale .git/index.lock from 2026-06-01 removed.
-  head_sha: de12f05475fb057d22dd87456056422a946b1690
+  # Synced 2026-06-10 (recovery session): CI-gate fix #943, salvage #944,
+  # LICENSE #945, pin fix #942, recovered handoffs #946/#947/#948 all merged;
+  # branch protection (CI Check required) enabled on origin main.
+  head_sha: a02895524b10be97ff76832bd3695ac3c4507ea1
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse
@@ -50,9 +49,9 @@ repos:
 - name: qgia-knowledge-spine-main
   path: qgia-knowledge-spine-main
   branch: main
-  # Synced 2026-06-08: Phase 2 wiring plus knowledge-index automation is live
-  # in the nested qgia-knowledge-spine-main remote.
-  head_sha: 4c53891a99b009c636c47b0701d07492509613f3
+  # Synced 2026-06-10: stranded knowledge-index metadata refresh recovered and
+  # merged as spine PR #3.
+  head_sha: d409cb68d81601d0d2d57c01cf06b5e34e31c346
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C qgia-knowledge-spine-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE
