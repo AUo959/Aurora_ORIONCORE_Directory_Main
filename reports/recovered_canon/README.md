@@ -68,6 +68,19 @@ verbatim via PR #981, with memory and instruction profile reconstructed
 from canon under explicit provenance. The remaining 46 crew manifests
 await owner review before mesh promotion (ADR step 5).
 
+### Root-side policy and continuity salvage (fourth pass, 2026-06-10)
+
+| File | What it is |
+|---|---|
+| `repo_authority_policy.yaml` | The repo authority model written 2026-03-25 — the day of the main reset — codifying its lesson (*LOCAL_CLONES_ARE_NOT_AUTHORITATIVE*, *PUBLISHED_STATE_REQUIRES_COMMIT_AND_PUSH*). Never landed; recommended for promotion to `catalog/` via peer review. |
+| `gitwiz_hygiene_policy.yaml` | Repo-hygiene thresholds (dirty/diverged main warnings) from the same reconstruction. |
+| `CONTINUITY_RECONSTRUCTION__2026-03-26T023454Z.{json,md}` | GITWIZ continuity reconstruction records from the day after the reset. |
+| `continuity_anchor_state.json` | Live-thread continuity anchors (`memory_core`, `symbolic_flow`, `ethics_lock`) from the rescue snapshot. |
+| `feature_profiles.json` | `.aurora/` feature profiles from the rescue snapshot. |
+
+Full event reconstruction:
+`reports/analysis/march_2026_reset_forensics__2026-06-10.md`.
+
 ## Related recoveries (same session)
 
 - CloudBank PR #979 — narrative validation engine phase one (revived from
