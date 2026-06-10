@@ -868,6 +868,41 @@ def verify_session_state(root: Path) -> list[Finding]:
 GIT_LOCK_STALE_SECONDS = 30 * 60
 
 
+def verify_canon_resolvability(root: Path) -> list[Finding]:
+    """Warn when the newest L1 Entity Ledger cites canon files that don't resolve.
+
+    The narrative-layer promotion (ADR 2026-06-10) makes canon a dependency:
+    every ledger entity carries a `canon_file` path into CanonRec. A citation
+    that stops resolving means canon drift between the ledger and CanonRec.
+    """
+    findings: list[Finding] = []
+    ledger_dir = root / "reports" / "analysis"
+    ledgers = sorted(ledger_dir.glob("L1_ENTITY_LEDGER__*.json"))
+    if not ledgers:
+        return findings
+    newest = ledgers[-1]
+    try:
+        payload = json.loads(newest.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return [warning("canon_resolvability", f"Could not parse {newest.name}: {exc}",
+                        "Regenerate the L1 Entity Ledger.")]
+    missing = []
+    for human in payload.get("humans", []):
+        canon_file = human.get("canon_file")
+        if canon_file and not (root / canon_file).exists():
+            missing.append(f"{human.get('entity_id', '?')} -> {canon_file}")
+    if missing:
+        sample = "; ".join(missing[:3])
+        findings.append(
+            warning(
+                "canon_resolvability",
+                f"{newest.name}: {len(missing)} canon citation(s) do not resolve (e.g. {sample}).",
+                "Restore the cited CanonRec files or regenerate the ledger against current canon.",
+            )
+        )
+    return findings
+
+
 def verify_git_locks(root: Path) -> list[Finding]:
     """Warn about stale .git/index.lock files that silently block commits.
 
@@ -915,6 +950,7 @@ def run_checks(root: Path, include_determinism: bool, include_relocation_rehears
     findings: list[Finding] = []
     findings.extend(verify_root_git_repo(root))
     findings.extend(verify_git_locks(root))
+    findings.extend(verify_canon_resolvability(root))
     findings.extend(verify_manifest(root))
     findings.extend(verify_privacy_redaction(root))
     findings.extend(verify_repo_registry(root))
