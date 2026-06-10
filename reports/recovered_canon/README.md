@@ -66,6 +66,31 @@ gap identified in the 2026-06 narrative-layer review.
   (`rescue/cloudbank-dirty-workingcopy-2026-03-25`). Kept out of Git
   pending owner privacy review; includes `private_captain_alex.jsonl`.
 
+### Symbolic state & anchor lineage (second-pass salvage, 2026-06-10)
+
+| File | What it is |
+|---|---|
+| `aurora_symbolic_export_1752415456.json` | Comprehensive symbolic export (2025-07-13): 43 DLP-tagged symbolic state entries, Aurora v3.5.2. |
+| `T70_EXPORT_MANIFEST.json` / `T71_FINAL_EXPORT_MANIFEST.json` / `T71_MANIFEST_20250720T204244Z.json` | Repository anchor exports — 30 anchors, SRB + T_SERIES lineages, `Picard_Delta_3` ethics protocol, memory seals. |
+| `AURORA_VALIDATION_REPORT.json` | Validation snapshot from the lineage era. |
+| `LOCAL_SYNC_DIAGNOSIS__2026-03-23.md` / `PHASE1_STABILIZATION_RECEIPT__2026-03-21.md` | `.aurora/` provenance receipts from the stabilization that preceded the reset. |
+
+## Loss-prevention guarantees (2026-06-10 second pass)
+
+Nothing from the lineage can now be lost even if local branches are deleted:
+
+- `archives/salvage_bundles/cloudbank_salvage_2026-06-10.bundle` (3.7 MB,
+  verified) — every non-main CloudBank branch incl. the full March lineage
+  and both stashes materialized as `salvage/stash-*` branches.
+- `archives/salvage_bundles/root_salvage_2026-06-10.bundle` (357 KB,
+  verified) — all non-main root branches incl. the gitwiz sync-audit branch
+  (9 commits) and 3 root stashes as `salvage/stash-*` branches.
+- Bundles are range bundles against `origin/main`; restore with
+  `git fetch <bundle> <branch>` from any clone containing current main.
+- Rescue-vs-reconstruct cross-check: the rescue snapshot's only unique
+  content is the 5 mesh runtime files (already in `intake/`); no file
+  exists in both lineages with conflicting content.
+
 ## Not extracted (verified already landed or superseded)
 
 - Aurora command grammar module — byte-identical on CloudBank main.
