@@ -201,11 +201,17 @@
       "date": "2026-06-10",
       "platform": "claude-code",
       "summary": "CloudBank CI gate restored: PR #943 (entangle_vectors slowapi param fix + GUMAS test auth + CSRF_SECRET_KEY setdefault interaction fix) makes CI Check green (121 passed); PR #944 salvages unlanded security middleware 403-contract + Dependabot github-actions coverage; PR #945 restores truncated MIT LICENSE. Local clone fast-forwarded 1,486 commits to origin/main (de12f054); feature branch retired; stale index.lock (2026-06-01) and 20+ prunable worktrees cleaned. Registry head synced."
+    },
+    {
+      "id": "narrative-cargo-recovery-2026-06-10",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "March-lineage narrative cargo extracted (owner-approved): 19 canon artifacts to reports/recovered_canon/ (incl. ORION_STATION_CANONICAL_STAFF_REGISTRY.json — resolves L1 ledger source gap — canonical_validation.yaml contract, THREADCORE v3.5.1 capsule, chamber guides); CloudBank PR #980 merged (V1 mesh contract tests, /health factory route, anti-flourish Thorne persona); private mesh transcripts + mesh.db to untracked intake/recovered_mesh_runtime_2026-06-10/ pending privacy review. Command grammar and Aurora Fusion verified already byte-identical on main. PR #979 (narrative validation engine) still awaits owner review."
     }
   ],
-  "last_updated": "2026-06-10T14:25:45Z",
+  "last_updated": "2026-06-10T14:54:43Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Owner-approved follow-through: protection enabled, recovered PRs merged, #640 revived as #979",
+  "last_session_summary": "Narrative cargo recovery: canon repatriated to control plane, mesh contract restored (#980)",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -224,6 +230,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "4c45fb7",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "chore(state): record approved follow-through; sync CloudBank/spine registry heads"
+    },
     {
       "sha": "89da047",
       "date": "2026-06-10",
@@ -277,12 +289,6 @@
       "date": "2026-06-08",
       "platform": "codex",
       "summary": "chore(state): record root sync handoff"
-    },
-    {
-      "sha": "bde15d4",
-      "date": "2026-06-08",
-      "platform": "codex",
-      "summary": "chore(root): sync spine registry head"
     }
   ],
   "security_events": [
@@ -334,7 +340,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "89da047",
+    "main_sha": "4c45fb7",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
