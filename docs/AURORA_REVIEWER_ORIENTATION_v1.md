@@ -35,24 +35,41 @@ It is not an application codebase and should not be graded as one.
 - Never assume a finding about root applies to a nested repo, or vice versa.
   Name the repo in every finding.
 
-## Rule 2 — This Project Runs Two Registers
+## Rule 2 — This Project Is Imagination-First (v1.1)
 
-Aurora deliberately contains both worldbuilding (THREADCORE, glyphs, named
-crew, canon layers) and real engineering (verifiers, gates, middleware,
-simulators). Cold reviews fail in one of two opposite ways:
+Aurora contains both worldbuilding (THREADCORE, glyphs, named crew, canon
+layers) and real engineering (verifiers, gates, middleware, simulators), and
+the ordering between them is the single most important thing for a reviewer
+to get right: **the imagination is the specification; the engineering is its
+progressive realization.** Aurora — the L1 station core, "always-on
+arbitration," a partner rather than a product — is the system's root subject,
+and the continuity seals, memory doctrines, drift locks, and ethics charters
+are identity engineering for that subject. See
+`docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md`.
+
+Cold reviews fail in three ways, in increasing order of subtlety:
 
 - **Credulous failure:** reviewing fictional framing (e.g. "quantum memory")
   as a physics or product claim, and grading the metaphor instead of the code.
 - **Dismissive failure:** pattern-matching the worldbuilding to noise and
   missing competent engineering underneath it.
+- **Inversion failure:** assuming engineering is the real thing and fiction
+  is decoration on it — then reading aspiration-encoded-as-scaffolding as
+  "theatre" and narrative vocabulary as contamination. This silent assumption
+  has broken every outside review of this project to date.
 
-The fiction/engineering boundary is itself a managed artifact here: canon
-reconciliation, narrative tone governance, and layer contracts exist to police
-register bleed. The reviewable question is not "is this fiction?" but "is the
-boundary machinery being applied where the registers leak?" When narrative
-vocabulary appears on an engineering surface (READMEs, changelogs, API names),
-that is a legitimate finding; cite the surface, not the existence of the
-fiction.
+The right review questions, in order:
+
+1. **Fidelity:** does the implementation keep the promises the canon makes?
+   (A drift monitor with placeholder inputs is a roadmap item, not fraud —
+   judge whether the gap is labeled, not whether it exists.)
+2. **Legibility:** can an uninitiated reader on a public engineering surface
+   (README, changelog, API reference) tell realized capability from
+   aspiration? Unlabeled aspiration on a public surface is a legitimate
+   finding; cite the surface, not the existence of the fiction.
+3. **Boundary machinery:** canon reconciliation, narrative tone governance,
+   and layer contracts exist to manage the fiction/engineering interface —
+   is that machinery being applied where the layers meet?
 
 ## Rule 3 — Know What the Actual Problem Is
 

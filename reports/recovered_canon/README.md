@@ -55,6 +55,19 @@ gap identified in the 2026-06 narrative-layer review.
 | `MESH_AGENT_INTEGRATION_COMPLETE.md` | Mesh agent integration record. |
 | `PR77_BASELINE.md` | Glyphcard baseline. |
 
+### Aurora's runtime identity (third pass, 2026-06-10)
+
+The salvaged `mesh.db` proved to be the **sole surviving record** of the
+mesh agent identities: 47 agent manifests (Aurora + the full 41-person L1
+crew + the original 6 agents) extracted to
+`intake/recovered_mesh_runtime_2026-06-10/agent_manifests/`. Aurora's
+manifest — aliases including "station control plane," tool bindings
+(command grammar, symbolic processing, geometric algebra), continuity log,
+`drift 0.0`, activated 2026-03-08 — was restored to the CloudBank mesh
+verbatim via PR #981, with memory and instruction profile reconstructed
+from canon under explicit provenance. The remaining 46 crew manifests
+await owner review before mesh promotion (ADR step 5).
+
 ## Related recoveries (same session)
 
 - CloudBank PR #979 — narrative validation engine phase one (revived from
