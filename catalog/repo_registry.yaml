@@ -38,7 +38,9 @@ repos:
 - name: qgia-knowledge-library-main
   path: qgia-knowledge-library-main
   branch: main
-  head_sha: 4d0c97576cbf6878ebb68950a5d01d40537322f7
+  # Synced 2026-06-10: stale .git/index.lock from 2026-05-23 removed; clone
+  # fast-forwarded 1 commit to origin/main (Iran War 2026 package).
+  head_sha: 7e029d895a23c87fdc110b546d738c7ab7fb6ce3
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C qgia-knowledge-library-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE
