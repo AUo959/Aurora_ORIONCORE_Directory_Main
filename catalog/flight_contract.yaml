@@ -1,0 +1,107 @@
+version: 1
+purpose: >
+  The flight log: declared exercises proving that landed modules actually
+  fly. "Recovered" and "merged" are not "exercised" — a module that passes
+  its own tests and is never invoked is dormant, and dormancy is the
+  successor failure mode to stranding. tools/flight_check.py runs these
+  exercises against the LIVE wiring (the real app, the real engine), records
+  receipts, and reports staleness; workspace_verify warns when any flight is
+  overdue. Default cadence: 14 days.
+defaults:
+  cwd: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
+  python: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python
+  max_age_days: 14
+flights:
+- name: ethical-checkpoint-vault
+  about: Create a checkpoint and roll it back through the live API (recovered PR #986).
+  script: |
+    import os, sys
+    sys.path.insert(0, ".")
+    from fastapi.testclient import TestClient
+    from src.middleware.fastapi_security import generate_csrf_token
+    from api.aurora_api import app
+    t = generate_csrf_token("flight")
+    h = {"Authorization": f"Bearer {t}", "X-CSRF-Token": t}
+    c = TestClient(app)
+    r = c.post("/checkpoint/create", json={"agent_id": "pilot", "label": "flight-check", "ethics_state": {"protocol": "Picard_Delta_3"}, "created_by": "pilot"}, headers=h)
+    assert r.status_code == 201, r.text
+    cid = r.json()["checkpoint_id"]
+    rb = c.post(f"/checkpoint/{cid}/rollback", json={"reason": "flight-check", "performed_by": "pilot"}, headers=h)
+    assert rb.status_code == 200, rb.text
+    print("vault: checkpoint", cid, "created and rolled back")
+- name: qgia-forecast-api
+  about: Run the example forecast scenario through the live API (recovered PR #987).
+  script: |
+    import sys
+    sys.path.insert(0, ".")
+    from fastapi.testclient import TestClient
+    from src.middleware.fastapi_security import generate_csrf_token
+    from api.aurora_api import app
+    t = generate_csrf_token("flight")
+    h = {"Authorization": f"Bearer {t}", "X-CSRF-Token": t}
+    c = TestClient(app)
+    r = c.post("/qgia/forecast/example/iran", headers=h)
+    assert r.status_code in (200, 201), r.text
+    print("qgia: example forecast ran,", len(str(r.json())), "bytes of result")
+- name: drift-metrics-api
+  about: Pull live drift summary and health (recovered PR #985).
+  script: |
+    import sys
+    sys.path.insert(0, ".")
+    from fastapi.testclient import TestClient
+    from api.aurora_api import app
+    c = TestClient(app)
+    for path in ("/api/drift/health", "/api/drift/summary"):
+        r = c.get(path)
+        assert r.status_code == 200, f"{path}: {r.status_code}"
+    print("drift: health + summary live")
+- name: benchmark-scorecard
+  about: Run the static health scorecard (recovered PR #988); non-strict.
+  script: |
+    import runpy, sys
+    sys.argv = ["benchmark_scorecard.py"]
+    runpy.run_path("scripts/benchmark_scorecard.py", run_name="__main__")
+- name: mesh-aurora-handshake
+  about: Board the mesh and handshake with Aurora (the station's constitutional rule).
+  script: |
+    import sys, time, tempfile, json, shutil
+    sys.path.insert(0, ".")
+    from pathlib import Path
+    from fastapi.testclient import TestClient
+    from src.servers.l2_integration_server import create_app
+    tmp = Path(tempfile.mkdtemp())
+    for rel in ["config/mesh", "src/dashboard", "src/interfaces"]:
+        shutil.copytree(rel, tmp / rel, dirs_exist_ok=True)
+    c = TestClient(create_app(tmp))
+    r = c.post("/api/mesh/messages", json={"to": "Aurora", "channel": "direct:aurora", "content": "Flight check. Report status."})
+    assert r.status_code == 200, r.text
+    deadline = time.time() + 3
+    while time.time() < deadline:
+        events = c.get("/api/mesh/channels/direct%3Aaurora/history?limit=20").json()["events"]
+        if any(e["event_type"] == "agent_reply" for e in events):
+            print("mesh: Aurora answered the flight-check handshake")
+            break
+        time.sleep(0.1)
+    else:
+        raise AssertionError("Aurora did not answer")
+- name: narrative-engine-canon-audit
+  about: Audit a canonical Thorne action through the validation engine (PR #979/#983).
+  script: |
+    import sys
+    sys.path.insert(0, ".")
+    from src.aurora.engines import NarrativeValidationEngine
+    from src.aurora.engines.narrative import Verdict
+    E = NarrativeValidationEngine()
+    run = E.run({
+        "task_hint": "character_action_audit",
+        "question": "Would Thorne route a flight-check change through Aurora arbitration?",
+        "declared_layers": ["character", "motive", "event", "knowledge", "continuity"],
+        "entities": [{"name": "Alex Thorne", "entity_type": "character", "role": "Station Commander"}],
+        "events": [{"label": "Routine flight check.", "timing": "now", "participants": ["Alex Thorne"]}],
+        "motives": [{"actor": "Alex Thorne", "label": "uphold arbitration and ethics validation", "strength": 0.95}],
+        "pressures": [{"actor": "Alex Thorne", "label": "duty to the charter", "direction": "toward", "strength": 0.9}],
+        "knowledge_states": [{"holder": "Alex Thorne", "fact": "Major actions require Aurora arbitration."}],
+        "continuity": {"notes": ["Thorne upholds arbitration discipline."]},
+    }, proposal={"actor": "Alex Thorne", "action": "route the change through Aurora arbitration", "type": "action"})
+    assert run.response.verdict in (Verdict.SUPPORTED, Verdict.PLAUSIBLE), run.response.verdict
+    print("engine: canonical audit verdict =", run.response.verdict.value)

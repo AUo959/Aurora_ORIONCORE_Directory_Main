@@ -932,6 +932,56 @@ def verify_skill_sync(root: Path) -> list[Finding]:
     return findings
 
 
+def verify_flight_status(root: Path) -> list[Finding]:
+    """Warn when declared modules haven't flown recently (the flight log).
+
+    Landed-but-never-invoked is the successor failure mode to
+    stranded-but-never-published. catalog/flight_contract.yaml declares the
+    exercises; this check keeps dormancy visible.
+    """
+    findings: list[Finding] = []
+    if not (root / "catalog" / "flight_contract.yaml").exists():
+        return findings
+    try:
+        import flight_check  # lives alongside this tool in tools/
+
+        overdue = flight_check.overdue_flights(root)
+    except Exception as exc:
+        return [warning("flight_status", f"Could not run flight-status check: {exc}",
+                        "Run `python3 tools/flight_check.py status` manually.")]
+    for o in overdue:
+        findings.append(warning("flight_status", f"{o['name']}: {o['state']}", o["fix"]))
+    return findings
+
+
+def verify_publication_debt(root: Path) -> list[Finding]:
+    """Warn while undecided unpublished work exists (the landing ledger).
+
+    Every historical stranding was matured work left unpublished at session
+    end. The ledger (tools/publication_debt.py) makes that state visible;
+    this check keeps it visible on every verify run until published,
+    retired, or exempted with a documented reason.
+    """
+    findings: list[Finding] = []
+    try:
+        import publication_debt  # lives alongside this tool in tools/
+
+        debts = [d for d in publication_debt.scan_all(root) if not d.get("exempt")]
+    except Exception as exc:
+        return [warning("publication_debt", f"Could not run landing-ledger scan: {exc}",
+                        "Run `python3 tools/publication_debt.py scan` manually.")]
+    for d in debts:
+        label = d["repo"] + (f" [{d.get('branch')}]" if d.get("branch") else "")
+        findings.append(
+            warning(
+                "publication_debt",
+                f"{label}: {d['class']} — {d['detail']}",
+                d["remediation"],
+            )
+        )
+    return findings
+
+
 def verify_canon_propagation(root: Path) -> list[Finding]:
     """Warn when declared canon payloads drift between canonical sources and consumers.
 

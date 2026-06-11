@@ -165,10 +165,40 @@ def check_orphans() -> None:
 
 # ── Main ──────────────────────────────────────────────────────────────────
 
+def record_landing_ledger() -> None:
+    """Record publication debt at session close — the landing ledger.
+
+    Every stranding this workspace ever suffered was a session ending with
+    matured work unpublished. The stop hook now refuses to let that state
+    be silent: undecided unpublished work is written into session_state so
+    the NEXT session reads it before anything else.
+    """
+    try:
+        sys.path.insert(0, str(REPO_ROOT / "tools"))
+        import publication_debt
+
+        entries = publication_debt.scan_all()
+        debts = [d for d in entries if not d.get("exempt")]
+        publication_debt.record(debts)
+        if debts:
+            print("╔════════════════════════════════════════════════════════════╗")
+            print("║  LANDING LEDGER: unpublished matured work at session close  ║")
+            for d in debts[:6]:
+                label = f"{d['repo']}" + (f" [{d.get('branch')}]" if d.get('branch') else "")
+                print(f"║  - {label}: {d['class']}"[:62].ljust(62) + "║")
+            print("║  Publish (push + PR), retire deliberately, or record an     ║")
+            print("║  exemption in catalog/publication_debt_exemptions.yaml.     ║")
+            print("╚════════════════════════════════════════════════════════════╝")
+    except Exception as exc:  # never block session close on ledger failure
+        print(f"[stop-hook] landing ledger skipped: {exc}")
+
+
 def main() -> int:
     if len(sys.argv) > 1 and sys.argv[1] == "check-orphans":
         check_orphans()
         return 0
+
+    record_landing_ledger()
 
     if not STATE_PATH.exists():
         return 0

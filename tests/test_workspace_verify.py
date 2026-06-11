@@ -654,3 +654,48 @@ def test_explicit_determinism_and_relocation_checks_pass(workspace_root: Path) -
     report = json.loads(result.stdout)
     assert result.returncode == 0
     assert report["status"] == "pass"
+
+
+def test_publication_debt_exemption_logic():
+    """Exemptions match by branch list, by class, and respect expiry."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+    import publication_debt as pd
+
+    exemptions = [
+        {"repo": "r1", "branches": ["b1"], "reason": "archival"},
+        {"repo": "r2", "class": "dirty_tree", "reason": "claimed", "expires": "2099-01-01"},
+        {"repo": "r3", "class": "dirty_tree", "reason": "expired", "expires": "2000-01-01"},
+    ]
+    today = "2026-06-11"
+    assert pd.is_exempt({"repo": "r1", "class": "stranded_branch", "branch": "b1"}, exemptions, today) == "archival"
+    assert pd.is_exempt({"repo": "r1", "class": "stranded_branch", "branch": "b2"}, exemptions, today) is None
+    assert pd.is_exempt({"repo": "r2", "class": "dirty_tree"}, exemptions, today) == "claimed"
+    assert pd.is_exempt({"repo": "r3", "class": "dirty_tree"}, exemptions, today) is None
+
+
+def test_flight_overdue_logic(tmp_path):
+    """Never-flown, stale, and failed flights all surface as flight debt."""
+    import json, sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+    import flight_check as fc
+
+    (tmp_path / "tools").mkdir()
+    real_common = Path(__file__).resolve().parents[1] / "tools" / "_workspace_common.py"
+    (tmp_path / "tools" / "_workspace_common.py").write_text(real_common.read_text())
+    (tmp_path / "catalog").mkdir()
+    (tmp_path / "catalog" / "flight_contract.yaml").write_text(
+        "version: 1\ndefaults: {max_age_days: 14}\n"
+        "flights:\n- name: fresh\n  script: x\n- name: stale\n  script: x\n- name: never\n  script: x\n"
+    )
+    (tmp_path / "reports" / "automation").mkdir(parents=True)
+    (tmp_path / "reports" / "automation" / "flight_log_latest.json").write_text(json.dumps({
+        "flights": {
+            "fresh": {"status": "flown", "last_flown": "2099-01-01T00:00:00Z"},
+            "stale": {"status": "flown", "last_flown": "2020-01-01T00:00:00Z"},
+        }
+    }))
+    overdue = {o["name"] for o in fc.overdue_flights(tmp_path)}
+    assert overdue == {"stale", "never"}

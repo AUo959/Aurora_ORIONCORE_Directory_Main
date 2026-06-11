@@ -1,0 +1,43 @@
+version: 1
+purpose: >
+  Documented exemptions for the landing ledger (tools/publication_debt.py).
+  Publication debt means UNDECIDED unpublished work; an exemption is a
+  recorded decision. Every entry needs a reason and a date — an exemption
+  without a reason is itself debt.
+exemptions:
+# --- March 2026 rescue lineage: deliberately preserved as archival branches,
+#     fully covered by archives/salvage_bundles/ and the unlanded-work audit.
+- repo: aurora-cloudbank-symbolic-main
+  branches: [codex/aurora-cloudbank-safety-2026-03-13, codex/cloudbank-full-workup-2026-03-19,
+             codex/cloudbank-full-workup-pr-2026-03-19, codex/cloudbank-reconstruct-aurora-state-2026-03-26,
+             codex/cloudbank-reconstruct-bootstrap-2026-03-26, codex/cloudbank-salvage-runtime-2026-03-25,
+             codex/reconcile-origin-main-2026-03-13, codex/reconcile-origin-main-pre-stash-2026-03-13,
+             gitwiz/local-download-2026-03-09, sync/cloudbank-workup-baseline-2026-03-25]
+  reason: "March pre-reset archival lineage; preserved per unlanded_work_audit__2026-06-10; bundled."
+  recorded: "2026-06-11"
+- repo: root
+  branches: [codex/root-control-plane-local-2026-03-25, codex/root-reconstruct-recovered-protocols-2026-03-26]
+  reason: "March root rescue lineage; archival; bundled; contents extracted to recovered_canon."
+  recorded: "2026-06-11"
+# --- Verified landed via parallel history (every unique file present on main).
+- repo: root
+  branches: [codex/explain-statechange-defense-for-sws, codex/root-control-plane-sync-2026-04-01-mixed-backup]
+  reason: "Verified 2026-06-11 — all branch-unique files exist on main; parallel-history artifacts only."
+  recorded: "2026-06-11"
+# --- Closed PRs with documented decisions (remote_branch_sweep dispositions).
+- repo: aurora-cloudbank-symbolic-main
+  branches: [codex/ci-workflow-repair, codex/cloudbank-command-chain-workflow-repair-2026-04-10,
+             codex/cloudbank-issue-806-work, codex/cloudbank-issue-830-requirements-inventory,
+             codex/pages-launchpad-utility]
+  reason: "Closed-PR decisions documented in remote_branch_sweep__2026-06-11 (superseded/abandoned-with-evidence; command-chain revived as #979)."
+  recorded: "2026-06-11"
+# --- Claimed by another platform; owner directed hands-off.
+- repo: aurora-cloudbank-symbolic-main
+  class: dirty_tree
+  reason: "Codex in-progress adaptation of tests/test_mesh_router_v1.py (owner: leave Codex work alone, 2026-06-11)."
+  recorded: "2026-06-11"
+  expires: "2026-06-25"
+- repo: root
+  class: dirty_tree
+  reason: "session_state.json stop-hook churn — committed at each session close by the hook itself."
+  recorded: "2026-06-11"
