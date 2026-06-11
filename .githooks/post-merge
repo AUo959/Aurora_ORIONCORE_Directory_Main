@@ -1,0 +1,13 @@
+#!/bin/sh
+# post-merge hook:
+# Syncs skills/ to all enabled targets when a pull/merge brings in skill
+# changes — the receive-side twin of the pre-push sync, so capability
+# updates propagate no matter which platform published them.
+
+ROOT="$(git rev-parse --show-toplevel)"
+
+if git diff --name-only ORIG_HEAD HEAD -- skills/ 2>/dev/null | grep -q .; then
+    echo "[post-merge] skills/ changed in merge — syncing enabled targets..."
+    python3 "$ROOT/tools/sync_skills.py" --apply
+    echo "[post-merge] Skill sync complete."
+fi

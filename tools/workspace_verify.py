@@ -903,6 +903,35 @@ def verify_canon_resolvability(root: Path) -> list[Finding]:
     return findings
 
 
+def verify_skill_sync(root: Path) -> list[Finding]:
+    """Warn when installed skill targets drift from the canonical skills/ source.
+
+    skills/ is the canonical capability surface; catalog/skill_sync_targets.yaml
+    declares where it is installed. Drift means a platform is running stale
+    skill code relative to what the repo publishes.
+    """
+    findings: list[Finding] = []
+    if not (root / "skills").is_dir():
+        return findings
+    try:
+        import sync_skills  # lives alongside this tool in tools/
+
+        drift = sync_skills.collect_drift()
+    except Exception as exc:
+        return [warning("skill_sync", f"Could not run skill drift check: {exc}",
+                        "Run `python3 tools/sync_skills.py --check` manually.")]
+    for target_name, entries in drift.items():
+        sample = "; ".join(entries[:3])
+        findings.append(
+            warning(
+                "skill_sync",
+                f"target '{target_name}' is stale vs skills/ ({len(entries)} skill(s), e.g. {sample}).",
+                "Run `python3 tools/sync_skills.py --apply` to propagate the canonical skills.",
+            )
+        )
+    return findings
+
+
 def verify_git_locks(root: Path) -> list[Finding]:
     """Warn about stale .git/index.lock files that silently block commits.
 
@@ -951,6 +980,7 @@ def run_checks(root: Path, include_determinism: bool, include_relocation_rehears
     findings.extend(verify_root_git_repo(root))
     findings.extend(verify_git_locks(root))
     findings.extend(verify_canon_resolvability(root))
+    findings.extend(verify_skill_sync(root))
     findings.extend(verify_manifest(root))
     findings.extend(verify_privacy_redaction(root))
     findings.extend(verify_repo_registry(root))

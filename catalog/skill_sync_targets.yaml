@@ -1,0 +1,21 @@
+version: 1
+purpose: >
+  Declared destinations for canonical skill propagation. tools/sync_skills.py
+  reads this registry; the pre-push and post-merge hooks sync every enabled
+  target whenever skills/ changes, so capability improvements flow to all
+  agent platforms at publish AND receive time.
+targets:
+- name: codex
+  dest: ~/.codex/skills
+  enabled: true
+  capability_map_key: codex
+  note: Codex CLI personal skills directory (original sync target).
+- name: claude-code-user
+  dest: ~/.claude/skills
+  enabled: false
+  capability_map_key: claude-code
+  note: >
+    Claude Code personal skills directory. Disabled by default: Claude Code
+    currently loads these skills through the managed plugin marketplace, and
+    enabling a second copy could create duplicate skill names. Enable only
+    after verifying plugin/personal skill load precedence.
