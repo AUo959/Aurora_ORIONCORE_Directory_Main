@@ -62,4 +62,4 @@ defined in the station registry, not a character entity. Runtime seat: CloudBank
 
 ## Certainty Note
 
-35 entities are CANON. 6 remain **STAGING pending owner confirmation** (vessel crews and cadet): ORION.ENTITY.0004, 0007, 0015, 0028, 0034, 0036.
+All 41 entities are **CANON**. The 6 vessel-crew/cadet entities (ORION.ENTITY.0004, 0007, 0015, 0028, 0034, 0036) were owner-confirmed 2026-06-11.

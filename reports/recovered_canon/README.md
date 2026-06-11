@@ -15,10 +15,10 @@
   `canon/L3`, thaw commit `ae86f84`) via the aurora-canon-reconciler
   workflow with receipt and drift log. **CanonRec is now the authoritative
   Primary Canon surface; this directory remains as the recovery receipt
-  and provenance record.** 6 entities are STAGING pending owner
-  confirmation; root-side policies (`repo_authority_policy.yaml`,
-  `gitwiz_hygiene_policy.yaml`) and review records remain
-  pending-promotion here.
+  and provenance record.** all 41 L1 entities are owner-confirmed CANON (6 vessel-crew/cadet
+  confirmed 2026-06-11); root-side policies were promoted to `catalog/` 2026-06-10
+  (review-debt rd-20260610-authority-policy pending Codex clearance);
+  April review records remain here as provenance.
 
 ## Why this matters
 
@@ -71,14 +71,14 @@ manifest — aliases including "station control plane," tool bindings
 (command grammar, symbolic processing, geometric algebra), continuity log,
 `drift 0.0`, activated 2026-03-08 — was restored to the CloudBank mesh
 verbatim via PR #981, with memory and instruction profile reconstructed
-from canon under explicit provenance. The remaining 46 crew manifests
-await owner review before mesh promotion (ADR step 5).
+from canon under explicit provenance. The full crew boarded the
+mesh via PR #982 (47 agents, canon consistency gate enforced).
 
 ### Root-side policy and continuity salvage (fourth pass, 2026-06-10)
 
 | File | What it is |
 |---|---|
-| `repo_authority_policy.yaml` | The repo authority model written 2026-03-25 — the day of the main reset — codifying its lesson (*LOCAL_CLONES_ARE_NOT_AUTHORITATIVE*, *PUBLISHED_STATE_REQUIRES_COMMIT_AND_PUSH*). Never landed; recommended for promotion to `catalog/` via peer review. |
+| `repo_authority_policy.yaml` | The repo authority model written 2026-03-25 — the day of the main reset — codifying its lesson (*LOCAL_CLONES_ARE_NOT_AUTHORITATIVE*, *PUBLISHED_STATE_REQUIRES_COMMIT_AND_PUSH*). Promoted to `catalog/` 2026-06-10 with review-debt entry. |
 | `gitwiz_hygiene_policy.yaml` | Repo-hygiene thresholds (dirty/diverged main warnings) from the same reconstruction. |
 | `CONTINUITY_RECONSTRUCTION__2026-03-26T023454Z.{json,md}` | GITWIZ continuity reconstruction records from the day after the reset. |
 | `continuity_anchor_state.json` | Live-thread continuity anchors (`memory_core`, `symbolic_flow`, `ethics_lock`) from the rescue snapshot. |

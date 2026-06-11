@@ -233,11 +233,17 @@
       "date": "2026-06-10",
       "platform": "claude-code",
       "summary": "Coherence pass: 6 STAGING entities un-over-promoted (ledger v2 + CanonRec frontmatter); recovered_canon README status corrected; ORION.L1 prose sources found in projects/ zone and promoted to CanonRec reference tier — ALL ledger source classes now resolve; THREADCORE capsule passes governor clean (receipt in CanonRec); _workspace_common worktree-root bugfix ported from April gitwiz branch (161 tests pass); authority + hygiene policies promoted to catalog/ with review-debt rd-20260610-authority-policy. Deferred with documentation: gitwiz_sync_audit.py hardening (+128/-20, diverged both sides, needs 3-way merge — branch + bundle preserve it)."
+    },
+    {
+      "id": "l1-canon-complete-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "Owner confirmed the 6 vessel-crew/cadet entities: all 41 L1 entities now CANON across every surface (CanonRec frontmatter + owner_confirmed stamps, ledger v2 json+md, reconciliation report addendum, recovered_canon README). Three additional stale README statements corrected (policies landed, crew boarded). Owner-pending now reduced to: transcript privacy review, Codex review-debt clearance, gitwiz 3-way merge."
     }
   ],
-  "last_updated": "2026-06-10T21:01:48Z",
+  "last_updated": "2026-06-11T01:09:47Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Coherence pass: canon certainty fixed, prose sources resolved, policies promoted, THREADCORE clean",
+  "last_session_summary": "All 41 L1 entities owner-confirmed CANON; canon surfaces fully coherent",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -256,6 +262,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "205ea77",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "feat(coherence): close salvage decisions — policies promoted, clean ports landed, canon certainty corrected"
+    },
     {
       "sha": "e05cb77",
       "date": "2026-06-10",
@@ -309,12 +321,6 @@
       "date": "2026-06-10",
       "platform": "claude-code",
       "summary": "feat(canon): second-pass salvage — symbolic exports, anchor manifests, receipts; loss-prevention bundles"
-    },
-    {
-      "sha": "8c331d8",
-      "date": "2026-06-10",
-      "platform": "claude-code",
-      "summary": "feat(canon): repatriate March-lineage narrative canon to control plane"
     }
   ],
   "security_events": [
@@ -366,7 +372,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "e05cb77",
+    "main_sha": "205ea77",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
