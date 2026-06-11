@@ -275,11 +275,17 @@
       "date": "2026-06-11",
       "platform": "claude-code",
       "summary": "Full-system integration pass: orchestrator BLOCKED->PROMOTE_WITH_REMEDIATION (0 blocking). Remediated: year-old shell-mangled THREADCORE snapshot salvaged+quarantined; registry capsule fields (#989 merged); spine index regen (spine #5 merged). All nine surfaces green (174 root + 128 CloudBank tests, all gates, all propagation checks). Report: reports/analysis/integration_pass__2026-06-11.md."
+    },
+    {
+      "id": "cleared-items-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "Owner-cleared items closed: (1) zip_wizard .env — full 92-commit gitleaks scan CLEAN; content was a single localhost Postgres DATABASE_URL (low risk, characterized without transcript exposure); untracked + gitignored via zip_wizard PR #11, merged; no history rewrite needed. (2) Mesh transcripts privacy-reviewed (only false-positive timestamp pattern hits; no PII/keys) and promoted to CanonRec canon/L1/station/mesh_transcripts/ as reference-tier primary sources (c4ee8c6); mesh.db stays local-intake. Codex-claimed items left untouched per owner: review-debt rd-20260610-authority-policy and the in-progress test_mesh_router_v1.py adaptation."
     }
   ],
-  "last_updated": "2026-06-11T09:31:11Z",
+  "last_updated": "2026-06-11T09:46:32Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Integration pass complete: PROMOTE_WITH_REMEDIATION, all surfaces green",
+  "last_session_summary": "zip_wizard secured (clean scan, env untracked); transcripts promoted to CanonRec",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -298,6 +304,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "6b542b7",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "feat(integration): full-system pass — PROMOTE_WITH_REMEDIATION, all surfaces green"
+    },
     {
       "sha": "0cc0528",
       "date": "2026-06-11",
@@ -351,12 +363,6 @@
       "date": "2026-06-10",
       "platform": "claude-code",
       "summary": "chore(state): record validation engine landing (#979, #983); sync CloudBank head"
-    },
-    {
-      "sha": "0cea538",
-      "date": "2026-06-10",
-      "platform": "claude-code",
-      "summary": "chore(state): record L1 canon promotion completion; sync CloudBank head"
     }
   ],
   "security_events": [
@@ -408,7 +414,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "0cc0528",
+    "main_sha": "6b542b7",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",

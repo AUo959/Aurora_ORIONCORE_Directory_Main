@@ -22,7 +22,7 @@ repos:
   # character entities promoted as Primary Canon with reconciliation receipt
   # and drift log; L3 contracts (canonical_validation, THREADCORE, anchors)
   # promoted as source artifacts.
-  head_sha: ef3a385ec3ea0fa198b45c1124b23c0060c7c65c
+  head_sha: c4ee8c6d7ec51c94652a8755fbc472b8addab5e7
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/CanonRec rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE
@@ -78,7 +78,7 @@ repos:
   remote_url: https://github.com/AUo959/zip_wizard
   language: TypeScript
   role: spoke
-  status: dormant_since_2025-12
+  status: dormant_since_2025-12_env_untracked_2026-06-11
   move_policy: deferred_until_cloned
   notes: >
     ZIPWIZ implementation repo (archive manager; ~97MB; ARCHITECTURE/SECURITY
