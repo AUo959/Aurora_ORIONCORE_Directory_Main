@@ -239,11 +239,17 @@
       "date": "2026-06-11",
       "platform": "claude-code",
       "summary": "Owner confirmed the 6 vessel-crew/cadet entities: all 41 L1 entities now CANON across every surface (CanonRec frontmatter + owner_confirmed stamps, ledger v2 json+md, reconciliation report addendum, recovered_canon README). Three additional stale README statements corrected (policies landed, crew boarded). Owner-pending now reduced to: transcript privacy review, Codex review-debt clearance, gitwiz 3-way merge."
+    },
+    {
+      "id": "gitwiz-3way-merge-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "April gitwiz branch closed: sync-audit hardening 3-way merged onto main (comparison fallback to origin/main, behind-only path collection, dirty/incoming overlap detection, stash-preservation guidance) keeping main's loader + lint annotations; complexity refactored to ruff-clean; 12-test suite ported, 168 root tests pass. SKILL.md sandboxed-gh interpretation rule + openai.yaml operator prompt ported. DELIBERATELY ABANDONED: workspace_plan_moves.py wave5 delta (couples to never-landed wave5 relocation batch; preserved in root salvage bundle). Branch retired."
     }
   ],
-  "last_updated": "2026-06-11T01:09:47Z",
+  "last_updated": "2026-06-11T01:20:11Z",
   "last_platform": "claude-code",
-  "last_session_summary": "All 41 L1 entities owner-confirmed CANON; canon surfaces fully coherent",
+  "last_session_summary": "Gitwiz April branch fully closed: hardening merged, docs ported, wave5 delta documented-abandoned",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -262,6 +268,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "2d469dc",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "chore(state): record L1 canon promotion completion; sync CloudBank head"
+    },
     {
       "sha": "205ea77",
       "date": "2026-06-10",
@@ -315,12 +327,6 @@
       "date": "2026-06-10",
       "platform": "claude-code",
       "summary": "chore(state): stop-hook state refresh"
-    },
-    {
-      "sha": "7b46f56",
-      "date": "2026-06-10",
-      "platform": "claude-code",
-      "summary": "feat(canon): second-pass salvage — symbolic exports, anchor manifests, receipts; loss-prevention bundles"
     }
   ],
   "security_events": [
@@ -372,7 +378,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "205ea77",
+    "main_sha": "2d469dc",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",

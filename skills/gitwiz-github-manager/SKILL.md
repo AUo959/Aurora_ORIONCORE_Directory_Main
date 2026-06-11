@@ -111,6 +111,16 @@ For remote work:
 
 If `gh` exists, check `gh auth status`. If not, use plain Git and SSH.
 
+Important interpretation rule:
+
+- in Codex, `gh auth status` can fail inside the normal sandbox even when the
+  machine's real GitHub auth is healthy
+- if SSH `git push` works or the GitHub connector can view or create PRs, do not
+  treat the first sandboxed `gh` failure as proof of broken credentials
+- rerun the `gh` command with escalated execution before diagnosing auth
+- if the escalated `gh` command succeeds, record it as a sandbox or
+  execution-context issue and continue using SSH Git plus the GitHub connector
+
 ### 2. Distinguish the Operation
 
 Choose the right lane:
