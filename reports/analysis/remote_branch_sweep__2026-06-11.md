@@ -59,3 +59,57 @@ Two defenses now exist (the unlanded-work audit method + the gitwiz sync
 audit's new overlap detection); the third should be structural: a
 **branches-without-PRs check** in the periodic audit cadence, which this
 report's method now documents.
+
+---
+
+# Deep Pass Addendum — closed-PR refs and unregistered repos (same day)
+
+The branch sweep could not see closed PRs whose branches were deleted;
+GitHub's `refs/pull/N/head` can. All **103 closed-unmerged non-bot PRs**
+were fetched and cherry-checked.
+
+## Landed this pass
+
+- **Benchmark scorecard** (`scripts/benchmark_scorecard.py`, 710 lines) —
+  the extraction explicitly mandated by #837's closure note. Verified
+  against current main (issue-linked health report: 12 fails / 5 required).
+  Merged as **#988**.
+
+## Verified landed-in-modified-form (June hardening wave)
+
+#914 (R2 telemetry), #883 (rate limits) — 0 unlanded. #905/#904 (prompt
+injection defense), #890 (MCP bridge hardening), #886 (atomic writes +
+locks) — single cherry-orphans each, but the features verified present on
+main by file/content inspection. #864/#843 — deliberate evidence-cited
+closures (already documented).
+
+## Long-tail dispositions (older eras, owner-paced)
+
+| PR | Cherry | Disposition |
+|---|---|---|
+| #142/#97 Probabilistic Query Nexus (Sept era) | 18/13 | Module-era superseded by aumemmanager evolution; preserved in pull refs; evaluate only if PQN concepts return |
+| #415 L1 relay agent nomenclature | 15 | Narrative-adjacent; candidate for canon reconciliation review next session |
+| #124 async diagnostics refactor | 14 | Era-superseded; preserved |
+| #251/#262/#96 lint/CI cleanups | 12/8/7 | Superseded by current CI |
+| #405 OAuth2/RBAC route integration | 6 | Auth landed via other waves; verify-only candidate |
+| #157/#158 insecure crypto removal | 6 | No legacy crypto module present on main; resolved by evolution |
+| #107 validate command before ethics check | 6 | Ordering principle worth re-checking against current gate; small |
+| #376 CLAUDE.md | 5 | CLAUDE.md exists on main; superseded |
+| #348/#349/#350 DriftAwareAgent / EthicalCheckpoint / SymbolicForecastEngine | — | Original versions of the modules landed today as #985/#986/#987 — closed-the-loop confirmation |
+
+## Unregistered repos — now registered
+
+- **`zip_wizard`** — ZIPWIZ implementation (~97MB, 4 feature branches incl.
+  vulnerability scanner, dormant since 2025-12). **SECURITY FLAG: `.env`
+  committed at repo root on GitHub.** Owner must inspect/rotate/purge;
+  agent access to credential contents is correctly classifier-blocked.
+- **`aurora-cloudbank-symbolic1`** — single-commit Node.js skeleton
+  (2025-09-23); NOT early CloudBank history (different stack);
+  archive-or-delete candidate.
+
+## Method note
+
+`git fetch origin '+refs/pull/*/head:refs/remotes/pr/*'` + per-ref cherry
+makes deleted-branch PRs auditable. This closes the last structural blind
+spot in the recovery method: local branches, remote branches, stashes,
+worktrees, runtime databases, and now pull refs are all swept surfaces.

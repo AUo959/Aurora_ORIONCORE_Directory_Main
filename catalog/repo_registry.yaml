@@ -7,7 +7,7 @@ repos:
   # Synced 2026-06-10 (recovery session): CI-gate fix #943, salvage #944,
   # LICENSE #945, pin fix #942, recovered handoffs #946/#947/#948 all merged;
   # branch protection (CI Check required) enabled on origin main.
-  head_sha: 5f8e340e752b23a32e7ce45926c62f942dc6889b
+  head_sha: 04970fc6f976403ebb3197f78d38c1c0d387f389
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse
@@ -70,6 +70,38 @@ repos:
 # validation_command omitted until cloned locally.
 # move_policy: deferred_until_cloned
 # ---------------------------------------------------------------------------
+- name: zip_wizard
+  path: ~remote~
+  branch: main
+  head_sha: ~pending~
+  remote_status: remote_only
+  remote_url: https://github.com/AUo959/zip_wizard
+  language: TypeScript
+  role: spoke
+  status: dormant_since_2025-12
+  move_policy: deferred_until_cloned
+  notes: >
+    ZIPWIZ implementation repo (archive manager; ~97MB; ARCHITECTURE/SECURITY
+    docs; 4 feature branches incl. vulnerability scanner). Registered
+    2026-06-11 by the remote sweep. SECURITY: a .env file is committed at the
+    repo root on GitHub — owner must inspect for live credentials, rotate if
+    needed, and purge (agent access to credential contents is
+    classifier-restricted by design). Governance: zipwiz-governor skill exists
+    but this repo was outside the audit perimeter until now.
+- name: aurora-cloudbank-symbolic1
+  path: ~remote~
+  branch: main
+  head_sha: ~pending~
+  remote_status: remote_only
+  remote_url: https://github.com/AUo959/aurora-cloudbank-symbolic1
+  language: JavaScript
+  role: prototype
+  status: dormant_single_commit_2025-09-23
+  move_policy: deferred_until_cloned
+  notes: >
+    Single 'Initial commit' Node.js app skeleton (index.js/pnpm), 495KB,
+    untouched since creation. NOT early CloudBank history (different stack).
+    Registered 2026-06-11; candidate for archive-or-delete owner decision.
 - name: AuroraOS
   path: ~remote~
   branch: main
