@@ -51,6 +51,9 @@ jobs:
       - name: Prepare CI artifact directory
         run: mkdir -p reports/ci
 
+      - name: Sync skills for CI drift checks
+        run: python tools/sync_skills.py --apply --target codex
+
       - name: Run test suite
         run: |
           set -o pipefail
