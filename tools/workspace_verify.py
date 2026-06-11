@@ -932,6 +932,35 @@ def verify_skill_sync(root: Path) -> list[Finding]:
     return findings
 
 
+def verify_canon_propagation(root: Path) -> list[Finding]:
+    """Warn when declared canon payloads drift between canonical sources and consumers.
+
+    catalog/canon_sync_payloads.yaml declares the CanonRec/ledger → CloudBank
+    propagation surfaces. Drift means a consumer repo is carrying stale canon
+    relative to the authoritative source.
+    """
+    findings: list[Finding] = []
+    if not (root / "catalog" / "canon_sync_payloads.yaml").exists():
+        return findings
+    try:
+        import canon_sync  # lives alongside this tool in tools/
+
+        drift = canon_sync.collect_drift(root)
+    except Exception as exc:
+        return [warning("canon_propagation", f"Could not run canon drift check: {exc}",
+                        "Run `python3 tools/canon_sync.py --check` manually.")]
+    for payload_name, entries in drift.items():
+        sample = "; ".join(entries[:3])
+        findings.append(
+            warning(
+                "canon_propagation",
+                f"payload '{payload_name}' drifted ({len(entries)} item(s), e.g. {sample}).",
+                "Run `python3 tools/canon_sync.py --apply`, then take the staged changes through the destination repo's PR path.",
+            )
+        )
+    return findings
+
+
 def verify_git_locks(root: Path) -> list[Finding]:
     """Warn about stale .git/index.lock files that silently block commits.
 
@@ -981,6 +1010,7 @@ def run_checks(root: Path, include_determinism: bool, include_relocation_rehears
     findings.extend(verify_git_locks(root))
     findings.extend(verify_canon_resolvability(root))
     findings.extend(verify_skill_sync(root))
+    findings.extend(verify_canon_propagation(root))
     findings.extend(verify_manifest(root))
     findings.extend(verify_privacy_redaction(root))
     findings.extend(verify_repo_registry(root))

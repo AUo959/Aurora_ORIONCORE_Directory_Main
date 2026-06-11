@@ -1,0 +1,29 @@
+version: 1
+purpose: >
+  Declared payloads for canon propagation (tools/canon_sync.py). CanonRec and
+  the L1 Entity Ledger are the canonical sources; CloudBank carries in-repo
+  copies that its CI gates against. This registry makes that relationship a
+  checked surface: --check reveals drift at the desk the moment canon evolves,
+  --apply stages updates into the destination working tree ONLY (never
+  commits) so changes ride the normal branch + PR + CI path.
+payloads:
+- name: canonical-validation-contract
+  kind: file_copy
+  enabled: true
+  source: GUMAS_SIM_2.5/CanonRec/canon/L3/canonical_validation.yaml
+  dest: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/config/canonical_validation.yaml
+  note: >
+    The canon-as-code contract (anchor seed, ethics protocol, continuity seal,
+    drift lock, staff registry). CanonRec copy is authoritative; CloudBank's
+    copy feeds the canon consistency gate in CI.
+- name: l1-persona-memories
+  kind: generated_memory
+  enabled: true
+  ledger_glob: reports/analysis/L1_ENTITY_LEDGER__*.json
+  dest_dir: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/config/mesh/memory
+  note: >
+    Mesh persona memory files generated from the newest L1 Entity Ledger.
+    Only files carrying a "<!-- Canon: ORION.ENTITY.NNNN | ... -->" linkage
+    comment are managed; hand-authored memories (aurora.md, alex_thorne.md,
+    original companions) are never touched. The generation-date portion of
+    the linkage comment is treated as volatile and ignored when comparing.

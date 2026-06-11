@@ -251,11 +251,17 @@
       "date": "2026-06-11",
       "platform": "claude-code",
       "summary": "Skill propagation generalized at owner direction: catalog/skill_sync_targets.yaml target registry (codex enabled; claude-code-user declared but disabled pending load-precedence check); sync_skills.py multi-target with --check (exit 2 on drift), --target filter, and receipts to reports/automation/skill_sync_latest.json; verify_skill_sync drift warning in workspace_verify; sha256 + ruff-clean. Drift lifecycle verified end-to-end. .githooks/post-merge (receive-side sync) committed UNARMED — classifier requires explicit owner arming: chmod +x .githooks/post-merge."
+    },
+    {
+      "id": "canon-propagation-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "Canon propagation built (owner-approved second payload for the propagation pattern): catalog/canon_sync_payloads.yaml declares canonical-validation-contract (CanonRec -> CloudBank file copy) and l1-persona-memories (ledger-driven regeneration matched by the canon linkage comment; volatile date normalized; hand-authored memories never touched). tools/canon_sync.py --check/--apply with working-tree-only staging (cross-repo changes ride branch+PR+CI), receipts; verify_canon_propagation in workspace_verify; 6 tests. Drift lifecycle verified both payload kinds. NOTE: found foreign uncommitted CloudBank change tests/test_mesh_router_v1.py (+35/-22, dynamic agent-id adaptation to the 47-agent boarding) — left untouched, likely another platform's in-progress work."
     }
   ],
-  "last_updated": "2026-06-11T01:29:28Z",
+  "last_updated": "2026-06-11T01:41:34Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Skill propagation expanded: target registry, drift gate, receipts; post-merge hook awaiting owner arming",
+  "last_session_summary": "Canon propagation live: contract + persona-memory payloads, drift-checked at the desk",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -274,6 +280,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "7c82b23",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "chore(sync): arm post-merge skill propagation hook (owner clearance)"
+    },
+    {
+      "sha": "10b2eed",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "feat(sync): generalize skill propagation — target registry, drift gate, receipts"
+    },
     {
       "sha": "4aaf7e0",
       "date": "2026-06-11",
@@ -321,18 +339,6 @@
       "date": "2026-06-10",
       "platform": "claude-code",
       "summary": "docs(forensics): reconstruct the March 2026 reset; recover root policy salvage"
-    },
-    {
-      "sha": "5701af7",
-      "date": "2026-06-10",
-      "platform": "claude-code",
-      "summary": "chore(state): record Aurora seat restoration; sync CloudBank head"
-    },
-    {
-      "sha": "1c271c9",
-      "date": "2026-06-10",
-      "platform": "claude-code",
-      "summary": "docs(adr): narrative layer promotion — Aurora first; imagination-first review rule"
     }
   ],
   "security_events": [
@@ -384,7 +390,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "4aaf7e0",
+    "main_sha": "7c82b23",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
