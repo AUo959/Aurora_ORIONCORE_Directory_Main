@@ -7,7 +7,7 @@ repos:
   # Synced 2026-06-10 (recovery session): CI-gate fix #943, salvage #944,
   # LICENSE #945, pin fix #942, recovered handoffs #946/#947/#948 all merged;
   # branch protection (CI Check required) enabled on origin main.
-  head_sha: 62bbb1196a3094830cf7ff3a7239193c98df77e0
+  head_sha: 5f8e340e752b23a32e7ce45926c62f942dc6889b
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse
@@ -55,7 +55,7 @@ repos:
   branch: main
   # Synced 2026-06-10: stranded knowledge-index metadata refresh recovered and
   # merged as spine PR #3.
-  head_sha: d409cb68d81601d0d2d57c01cf06b5e34e31c346
+  head_sha: fc57f92c5d68472463fe73197985a3fd27009437
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C qgia-knowledge-spine-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE

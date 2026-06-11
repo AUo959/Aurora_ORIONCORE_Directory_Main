@@ -257,11 +257,17 @@
       "date": "2026-06-11",
       "platform": "claude-code",
       "summary": "Canon propagation built (owner-approved second payload for the propagation pattern): catalog/canon_sync_payloads.yaml declares canonical-validation-contract (CanonRec -> CloudBank file copy) and l1-persona-memories (ledger-driven regeneration matched by the canon linkage comment; volatile date normalized; hand-authored memories never touched). tools/canon_sync.py --check/--apply with working-tree-only staging (cross-repo changes ride branch+PR+CI), receipts; verify_canon_propagation in workspace_verify; 6 tests. Drift lifecycle verified both payload kinds. NOTE: found foreign uncommitted CloudBank change tests/test_mesh_router_v1.py (+35/-22, dynamic agent-id adaptation to the 47-agent boarding) — left untouched, likely another platform's in-progress work."
+    },
+    {
+      "id": "remote-branch-sweep-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "Remote-branch + closed-PR sweep (owner-directed, targeting the matured-but-never-PRd pattern): SEVEN recoveries landed — central dev roadmap (#984), autonomous drift responder w/24 tests (#985), ethical checkpoint vault (#986), QGIA forecast API (#987), spine CRITICAL log-pool fix (spine #4), peer-review protocol DRAFT->ADOPTED flip (recovered from closed #16; receipts/debts were already cleared on main), GPT-5.5 upgrade package docs to recovered_canon. Inventory found UNREGISTERED repos: aurora-cloudbank-symbolic1 (possible early-history twin) and zip_wizard — registration next session. Full dispositions in reports/analysis/remote_branch_sweep__2026-06-11.md."
     }
   ],
-  "last_updated": "2026-06-11T01:41:34Z",
+  "last_updated": "2026-06-11T02:03:35Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Canon propagation live: contract + persona-memory payloads, drift-checked at the desk",
+  "last_session_summary": "Remote sweep: 7 foundational recoveries landed; 2 unregistered repos found",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -280,6 +286,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "f6e2292",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "feat(canon): canon propagation — contract and persona-memory payloads, drift-checked"
+    },
     {
       "sha": "7c82b23",
       "date": "2026-06-11",
@@ -333,12 +345,6 @@
       "date": "2026-06-10",
       "platform": "claude-code",
       "summary": "chore(state): final salvage pass (April gitwiz docs) and next-session handoff"
-    },
-    {
-      "sha": "351718e",
-      "date": "2026-06-10",
-      "platform": "claude-code",
-      "summary": "docs(forensics): reconstruct the March 2026 reset; recover root policy salvage"
     }
   ],
   "security_events": [
@@ -390,7 +396,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "7c82b23",
+    "main_sha": "f6e2292",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",

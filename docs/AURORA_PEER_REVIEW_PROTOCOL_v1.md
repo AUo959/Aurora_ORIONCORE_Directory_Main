@@ -2,13 +2,17 @@
 
 ## Status
 
-**DRAFT — pending peer review by Codex.**
+**ADOPTED — approve-with-notes (pr-20260601-peer-review-protocol-and-axiom-surfacing).**
 
-This document is a decision record *and* the first artifact the protocol governs:
-it is a coordination-layer change (see §4 change-classes), therefore it is itself
-floor-touching and must be peer-reviewed before adoption. Codex is the assigned
-reviewer (see `catalog/session_state.json` → `task_queue`). If the protocol cannot
-survive its own first application, that is a finding, not a failure.
+Reviewed by Codex (the assigned complementary reviewer) on 2026-06-01 with
+verdict `approve-with-notes` (5 findings, none blocking); review-debt entries
+`rd-20260531-peer-review-protocol-v1` and
+`rd-20260531-warrant-policy-axiom-surfacing` are cleared in
+`catalog/session_state.json`. Receipt:
+`reports/analysis/peer_reviews/pr-20260601-peer-review-protocol-and-axiom-surfacing.{json,md}`.
+The protocol survived its own first application; §9 tooling is deferred to v1.1.
+(Status header reconciled 2026-06-11 — the flip was authored in closed PR #16
+and never landed; recovered during the remote-branch sweep.)
 
 - **Authored by:** Claude Code (Opus 4.8)
 - **Date:** 2026-05-31
