@@ -7,7 +7,7 @@ repos:
   # Synced 2026-06-10 (recovery session): CI-gate fix #943, salvage #944,
   # LICENSE #945, pin fix #942, recovered handoffs #946/#947/#948 all merged;
   # branch protection (CI Check required) enabled on origin main.
-  head_sha: cbe102337dab3239dcbdbbc2ad043e88b88ef84d
+  head_sha: 1f926dbd5e9f610d326df37c0fbb6837216b2bc0
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse
