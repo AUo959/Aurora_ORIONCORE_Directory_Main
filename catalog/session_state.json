@@ -269,11 +269,17 @@
       "date": "2026-06-11",
       "platform": "claude-code",
       "summary": "Deep pass: all 103 closed-unmerged non-bot CloudBank PRs cherry-checked via pull refs. Benchmark scorecard extracted per #837 mandate and merged (#988). June hardening wave verified fully landed. zip_wizard + aurora-cloudbank-symbolic1 registered. SECURITY: zip_wizard has .env committed at repo root on GitHub — OWNER ACTION REQUIRED (inspect/rotate/purge); agent credential access correctly blocked by classifier. Long-tail dispositions in remote_branch_sweep addendum."
+    },
+    {
+      "id": "integration-pass-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "Full-system integration pass: orchestrator BLOCKED->PROMOTE_WITH_REMEDIATION (0 blocking). Remediated: year-old shell-mangled THREADCORE snapshot salvaged+quarantined; registry capsule fields (#989 merged); spine index regen (spine #5 merged). All nine surfaces green (174 root + 128 CloudBank tests, all gates, all propagation checks). Report: reports/analysis/integration_pass__2026-06-11.md."
     }
   ],
-  "last_updated": "2026-06-11T09:20:15Z",
+  "last_updated": "2026-06-11T09:31:11Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Deep pass: 103 closed PRs audited, scorecard landed (#988), zip_wizard .env security flag raised",
+  "last_session_summary": "Integration pass complete: PROMOTE_WITH_REMEDIATION, all surfaces green",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -292,6 +298,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "0cc0528",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "feat(sweep): deep pass — 103 closed PRs audited via pull refs; scorecard landed; repos registered"
+    },
+    {
+      "sha": "f8b33d9",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "feat(sweep): remote-branch recoveries — roadmap, drift responder, vault, QGIA API landed; protocol ADOPTED"
+    },
     {
       "sha": "f6e2292",
       "date": "2026-06-11",
@@ -339,18 +357,6 @@
       "date": "2026-06-10",
       "platform": "claude-code",
       "summary": "chore(state): record L1 canon promotion completion; sync CloudBank head"
-    },
-    {
-      "sha": "60c92e5",
-      "date": "2026-06-10",
-      "platform": "claude-code",
-      "summary": "feat(canon): ledger v2 with resolvable citations; canon resolvability check in verifier"
-    },
-    {
-      "sha": "5171b13",
-      "date": "2026-06-10",
-      "platform": "claude-code",
-      "summary": "chore(state): final salvage pass (April gitwiz docs) and next-session handoff"
     }
   ],
   "security_events": [
@@ -402,7 +408,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "f6e2292",
+    "main_sha": "0cc0528",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",

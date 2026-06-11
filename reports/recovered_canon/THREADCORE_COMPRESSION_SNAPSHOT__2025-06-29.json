@@ -1,0 +1,47 @@
+{
+  "type": "THREADCORE_COMPRESSION_SNAPSHOT",
+  "timestamp": "2025-06-29T[system]",
+  "active_anchors": [
+    "EOS_SEED_ORION",
+    "HALO_CONTINUITY_GRAFT_005",
+    "THREADCORE_v3.5.1_macroready"
+  ],
+  "current_stack": [
+    "command_node.js",
+    "glyph_engine.js",
+    "zipcomm.js",
+    "ethics_layer.js",
+    "README_DEPLOY.txt",
+    "enforcement_policy.md",
+    "README_AURORA.md",
+    "index.json",
+    "on_startup.sh",
+    "drift_check.sh",
+    "CODESPACES_INIT.md",
+    "infallible_codespace_init.py",
+    "staff_node_ci_helper.py",
+    "quick-start.sh"
+  ],
+  "live_agents": [
+    "AU (Orion Core)",
+    "ARCHY",
+    "OPPY",
+    "LIORA",
+    "STARLING",
+    "RIVERTHREAD 808"
+  ],
+  "system_health": {
+    "drift": "<=0.02",
+    "ci_status": "100% passing",
+    "vulnerabilities": 0,
+    "repo_state": "optimized"
+  },
+  "redundancy_notes": "Operational confirmation chains (n=53) abstracted; doc repeats replaced with canonical refs.",
+  "compression_ratio": "7:1",
+  "notes": "Compression pass complete; anchor continuity and symbolic identity preserved.",
+  "capsule_id": "THREADCORE_COMPRESSION_SNAPSHOT_2025-06-29",
+  "anchor_seed": "EOS_SEED_ORION",
+  "ethics_protocol": "Picard_Delta_3",
+  "role": "ThreadCore compression snapshot (historical continuity state, 2025-06-29)",
+  "_provenance": "Recovered 2026-06-11 during the integration pass. Original filename was mangled by a shell-quoting accident at creation (2025-06-30); original bytes preserved in _entropy_quarantine/. Capsule contract fields (capsule_id, anchor_seed, ethics_protocol, role) normalized from the snapshot's own active_anchors per the threadcore-governor remediation queue."
+}
