@@ -105,6 +105,22 @@ flights:
     }, proposal={"actor": "Alex Thorne", "action": "route the change through Aurora arbitration", "type": "action"})
     assert run.response.verdict in (Verdict.SUPPORTED, Verdict.PLAUSIBLE), run.response.verdict
     print("engine: canonical audit verdict =", run.response.verdict.value)
+- name: sensor-array-observation
+  about: Pull live sensor readings through the observation surface (PR #1005); verify the one-way principle holds (GET-only).
+  script: |
+    import sys
+    sys.path.insert(0, ".")
+    from fastapi.testclient import TestClient
+    from api.aurora_api import app
+    c = TestClient(app)
+    sensor_routes = [r for r in app.routes if getattr(r, "path", "").startswith("/api/sensors")]
+    assert sensor_routes, "sensor array not mounted"
+    mutating = [r.path for r in sensor_routes if r.methods - {"GET", "HEAD"}]
+    assert not mutating, f"one-way principle violated: {mutating}"
+    for path in ("/api/sensors/health/status", "/api/sensors/fusion/oscillation-health"):
+        r = c.get(path)
+        assert r.status_code == 200, f"{path}: {r.status_code} {r.text[:120]}"
+    print(f"sensors: {len(sensor_routes)} GET-only routes mounted; health + fusion live")
 - name: station-roll-call
   about: Muster the original companions (Archy, Oppy, Liora, Starling AU, Riverthread 808) via the Pilot's direct line; all must answer.
   cwd: .

@@ -2,46 +2,52 @@
   "flights": {
     "ethical-checkpoint-vault": {
       "status": "flown",
-      "detail": "vault: checkpoint CHKP-81136743AE34 created and rolled back",
-      "last_attempt": "2026-06-11T10:16:06Z",
-      "last_flown": "2026-06-11T10:16:06Z"
+      "detail": "vault: checkpoint CHKP-2C2FB2232105 created and rolled back",
+      "last_attempt": "2026-06-12T18:33:03Z",
+      "last_flown": "2026-06-12T18:33:03Z"
     },
     "qgia-forecast-api": {
       "status": "flown",
       "detail": "qgia: example forecast ran, 5092 bytes of result",
-      "last_attempt": "2026-06-11T10:15:46Z",
-      "last_flown": "2026-06-11T10:15:46Z"
+      "last_attempt": "2026-06-12T18:33:03Z",
+      "last_flown": "2026-06-12T18:33:03Z"
     },
     "drift-metrics-api": {
       "status": "flown",
       "detail": "drift: health + summary live",
-      "last_attempt": "2026-06-11T10:15:46Z",
-      "last_flown": "2026-06-11T10:15:46Z"
+      "last_attempt": "2026-06-12T18:33:03Z",
+      "last_flown": "2026-06-12T18:33:03Z"
     },
     "benchmark-scorecard": {
       "status": "flown",
       "detail": "Total fails: 12 (required: 5)",
-      "last_attempt": "2026-06-11T10:15:46Z",
-      "last_flown": "2026-06-11T10:15:46Z"
+      "last_attempt": "2026-06-12T18:33:03Z",
+      "last_flown": "2026-06-12T18:33:03Z"
     },
     "mesh-aurora-handshake": {
       "status": "flown",
       "detail": "mesh: Aurora answered the flight-check handshake",
-      "last_attempt": "2026-06-11T10:15:46Z",
-      "last_flown": "2026-06-11T10:15:46Z"
+      "last_attempt": "2026-06-12T18:33:03Z",
+      "last_flown": "2026-06-12T18:33:03Z"
     },
     "narrative-engine-canon-audit": {
       "status": "flown",
       "detail": "engine: canonical audit verdict = supported",
-      "last_attempt": "2026-06-11T10:15:46Z",
-      "last_flown": "2026-06-11T10:15:46Z"
+      "last_attempt": "2026-06-12T18:33:03Z",
+      "last_flown": "2026-06-12T18:33:03Z"
     },
     "station-roll-call": {
       "status": "flown",
       "detail": "roll call: all companions awake",
-      "last_attempt": "2026-06-12T02:46:10Z",
-      "last_flown": "2026-06-12T02:46:10Z"
+      "last_attempt": "2026-06-12T18:33:03Z",
+      "last_flown": "2026-06-12T18:33:03Z"
+    },
+    "sensor-array-observation": {
+      "status": "flown",
+      "detail": "sensors: 26 GET-only routes mounted; health + fusion live",
+      "last_attempt": "2026-06-12T18:33:03Z",
+      "last_flown": "2026-06-12T18:33:03Z"
     }
   },
-  "generated_at_utc": "2026-06-12T02:46:10Z"
+  "generated_at_utc": "2026-06-12T18:33:03Z"
 }
