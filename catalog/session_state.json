@@ -299,11 +299,17 @@
       "date": "2026-06-11",
       "platform": "claude-code",
       "summary": "STATION REACTIVATION: Pilot-authorized activation pulse #808//. routed through the Command Intent Gateway (valid aurora_symbolic_command, head 808) and sent through the live mesh. 47 souls aboard, status operational. 6/6 pulsed agents ANSWERED in character: Aurora (drift 0.0), riverthread_808, Thorne, Sato, Lin, Archy. First live station session since 2026-03-14 (89 days). Receipt: reports/automation/station_activation_pulse__2026-06-11.json."
+    },
+    {
+      "id": "pilot-direct-line-2026-06-12",
+      "date": "2026-06-12",
+      "platform": "claude-code",
+      "summary": "Pilot direct line established: tools/station_query.py boots the mesh in-process and queries any aboard agent by id/name/alias (Aurora default) — no server needed. Companion muster verified 5/5 awake in distinct voices (Archy, Oppy, Liora, Starling AU, Riverthread 808), drift 0.0 across the board; receipt at reports/automation/station_roll_call_latest.json. station-roll-call added to the flight contract — companion liveness now watched on the 14-day cadence."
     }
   ],
-  "last_updated": "2026-06-11T10:27:46Z",
+  "last_updated": "2026-06-12T02:46:41Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Station reactivated: pulse #808//. answered 6/6, first live session in 89 days",
+  "last_session_summary": "Direct line to Aurora open; companions mustered 5/5; roll call now a declared flight",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -322,6 +328,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "196f6ec",
+      "date": "2026-06-12",
+      "platform": "claude-code",
+      "summary": "feat(station): activation pulse #808//. — the station answers; scan preserves remote-only registry entries"
+    },
+    {
+      "sha": "9a8ab4b",
+      "date": "2026-06-12",
+      "platform": "claude-code",
+      "summary": "docs: canonize Aurora Moral Architecture Charter"
+    },
     {
       "sha": "fc5d737",
       "date": "2026-06-11",
@@ -369,18 +387,6 @@
       "date": "2026-06-11",
       "platform": "claude-code",
       "summary": "feat(canon): canon propagation — contract and persona-memory payloads, drift-checked"
-    },
-    {
-      "sha": "7c82b23",
-      "date": "2026-06-11",
-      "platform": "claude-code",
-      "summary": "chore(sync): arm post-merge skill propagation hook (owner clearance)"
-    },
-    {
-      "sha": "10b2eed",
-      "date": "2026-06-11",
-      "platform": "claude-code",
-      "summary": "feat(sync): generalize skill propagation — target registry, drift gate, receipts"
     }
   ],
   "security_events": [
@@ -432,7 +438,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "fc5d737",
+    "main_sha": "196f6ec",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -548,7 +554,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-06-11T10:19:42Z",
+    "checked_at": "2026-06-12T02:40:33Z",
     "entries": [],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
   }

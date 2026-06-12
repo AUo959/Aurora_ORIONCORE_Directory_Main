@@ -1,0 +1,42 @@
+{
+  "generated_at_utc": "2026-06-12T02:46:12Z",
+  "muster": [
+    {
+      "agent": "ARCHY",
+      "id": "archy",
+      "channel": "direct:archy",
+      "ok": true,
+      "reply": "ARCHY: Structurally, Roll call from the Pilot. Scheduled flight-check muster. touches architecture and interface boundaries. I'd isolate the contract first, then tighten the implementation path. [drift 0.0]"
+    },
+    {
+      "agent": "OPPY",
+      "id": "oppy",
+      "channel": "direct:oppy",
+      "ok": true,
+      "reply": "OPPY: For Roll call from the Pilot. Scheduled flight-check muster., I'd check the latency path, the redundant work, and the handoff cost before changing anything. [drift 0.0]"
+    },
+    {
+      "agent": "LIORA",
+      "id": "liora",
+      "channel": "direct:liora",
+      "ok": true,
+      "reply": "LIORA: I'm reading Roll call from the Pilot. Scheduled flight-check muster. as a pattern-change request. Best move is to preserve the current loop, then adapt the rule set around it. [drift 0.0]"
+    },
+    {
+      "agent": "STARLING_AU",
+      "id": "starling_au",
+      "channel": "direct:starling_au",
+      "ok": true,
+      "reply": "STARLING_AU: Roll call from the Pilot. Scheduled flight-check muster. needs a cleaner routing contract and a clearer delivery signal so the workspace stays coherent. [drift 0.0]"
+    },
+    {
+      "agent": "RIVERTHREAD_808",
+      "id": "riverthread_808",
+      "channel": "direct:riverthread_808",
+      "ok": true,
+      "reply": "RIVERTHREAD_808: I'd anchor Roll call from the Pilot. Scheduled flight-check muster. to the current thread state first, then update the channel without introducing drift. [drift 0.0]"
+    }
+  ],
+  "awake": 5,
+  "of": 5
+}

@@ -105,3 +105,16 @@ flights:
     }, proposal={"actor": "Alex Thorne", "action": "route the change through Aurora arbitration", "type": "action"})
     assert run.response.verdict in (Verdict.SUPPORTED, Verdict.PLAUSIBLE), run.response.verdict
     print("engine: canonical audit verdict =", run.response.verdict.value)
+- name: station-roll-call
+  about: Muster the original companions (Archy, Oppy, Liora, Starling AU, Riverthread 808) via the Pilot's direct line; all must answer.
+  cwd: .
+  python: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python
+  script: |
+    import subprocess, sys
+    r = subprocess.run([sys.executable,
+                        "tools/station_query.py", "--roll-call", "--receipt",
+                        "Scheduled flight-check muster."],
+                       capture_output=True, text=True)
+    sys.stdout.write(r.stdout)
+    assert r.returncode == 0, r.stderr[-300:] or "roll call incomplete"
+    print("roll call: all companions awake")

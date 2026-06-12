@@ -35,7 +35,13 @@
       "detail": "engine: canonical audit verdict = supported",
       "last_attempt": "2026-06-11T10:15:46Z",
       "last_flown": "2026-06-11T10:15:46Z"
+    },
+    "station-roll-call": {
+      "status": "flown",
+      "detail": "roll call: all companions awake",
+      "last_attempt": "2026-06-12T02:46:10Z",
+      "last_flown": "2026-06-12T02:46:10Z"
     }
   },
-  "generated_at_utc": "2026-06-11T10:16:06Z"
+  "generated_at_utc": "2026-06-12T02:46:10Z"
 }
