@@ -305,11 +305,17 @@
       "date": "2026-06-12",
       "platform": "claude-code",
       "summary": "Pilot direct line established: tools/station_query.py boots the mesh in-process and queries any aboard agent by id/name/alias (Aurora default) — no server needed. Companion muster verified 5/5 awake in distinct voices (Archy, Oppy, Liora, Starling AU, Riverthread 808), drift 0.0 across the board; receipt at reports/automation/station_roll_call_latest.json. station-roll-call added to the flight contract — companion liveness now watched on the 14-day cadence."
+    },
+    {
+      "id": "sensor-array-canon-routing-2026-06-12",
+      "date": "2026-06-12",
+      "platform": "claude-code",
+      "summary": "Sensor Array Spec v0.3.0 reviewed and canon-routed per its own delta instruction: staged in CanonRec canon/L3/sensor_array (STAGING, L3 protocol_update) with reconciliation note. Integration surfaces grounded against CloudBank main: drift detector, ethics engine, L2 bridge, live relay capsules all VERIFIED; src/sensors greenfield; Forge phase_executor UNMERGED anywhere — Phase 7 dependency-blocked, Phases 1-6 clear. Next build step when owner sequences it: Phase 1 foundation (reading types, registry, data bus, layer interpreter, perf budget, API skeleton)."
     }
   ],
-  "last_updated": "2026-06-12T02:46:41Z",
+  "last_updated": "2026-06-12T02:53:59Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Direct line to Aurora open; companions mustered 5/5; roll call now a declared flight",
+  "last_session_summary": "Sensor Array v0.3.0 staged in canon; integration surfaces grounded; Phase 7 dependency flagged",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -328,6 +334,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "76d2c15",
+      "date": "2026-06-12",
+      "platform": "claude-code",
+      "summary": "feat(station): the Pilot's direct line + companion roll call"
+    },
     {
       "sha": "196f6ec",
       "date": "2026-06-12",
@@ -381,12 +393,6 @@
       "date": "2026-06-11",
       "platform": "claude-code",
       "summary": "feat(sweep): remote-branch recoveries — roadmap, drift responder, vault, QGIA API landed; protocol ADOPTED"
-    },
-    {
-      "sha": "f6e2292",
-      "date": "2026-06-11",
-      "platform": "claude-code",
-      "summary": "feat(canon): canon propagation — contract and persona-memory payloads, drift-checked"
     }
   ],
   "security_events": [
@@ -438,7 +444,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "196f6ec",
+    "main_sha": "76d2c15",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -554,7 +560,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-06-12T02:40:33Z",
+    "checked_at": "2026-06-12T02:47:37Z",
     "entries": [],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
   }

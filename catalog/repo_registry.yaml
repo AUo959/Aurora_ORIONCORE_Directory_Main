@@ -15,7 +15,7 @@ repos:
 - name: CanonRec
   path: GUMAS_SIM_2.5/CanonRec
   branch: main
-  head_sha: 0ff6b58fe8f2e4a58323165bdb549b7510dcb1a9
+  head_sha: 3a6b0c4e1eea73d223b250c0325553b54cbf18cd
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/CanonRec rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE
