@@ -1,0 +1,1064 @@
+{
+ "schema_version": 1,
+ "tool": "tools/aurora_salvage_scan.py",
+ "generated_at": "2026-06-12T03:04:30.309627+00:00",
+ "mode": "read_only",
+ "evidence_source": "reports/analysis/workspace_recovery_index_latest.json",
+ "summary": {
+  "surveyed": 100,
+  "salvage_contacts_adrift": 96,
+  "high_value_cargo": 13,
+  "beacon_signals": 33,
+  "derelicts": 35,
+  "debris": 15,
+  "registered": 4,
+  "registry_match_rate": 0.04,
+  "uncommitted_in_repos": 3,
+  "unpushed_commits": 0
+ },
+ "repo_divergence": {
+  "aurora-cloudbank-symbolic-main": {
+   "uncommitted": 3,
+   "unpushed_commits": 0
+  },
+  "CanonRec": {
+   "uncommitted": 0,
+   "unpushed_commits": 0
+  },
+  "DuelSim_v2.0": {
+   "uncommitted": 0,
+   "unpushed_commits": 0
+  },
+  "qgia-knowledge-library-main": {
+   "uncommitted": 0,
+   "unpushed_commits": 0
+  },
+  "qgia-knowledge-spine-main": {
+   "uncommitted": 0,
+   "unpushed_commits": 0
+  },
+  "zip_wizard": {
+   "error": "no .git",
+   "uncommitted": 0,
+   "unpushed_commits": 0
+  },
+  "aurora-cloudbank-symbolic1": {
+   "error": "no .git",
+   "uncommitted": 0,
+   "unpushed_commits": 0
+  },
+  "AuroraOS": {
+   "error": "no .git",
+   "uncommitted": 0,
+   "unpushed_commits": 0
+  },
+  "cloudbank-quantum-en": {
+   "error": "no .git",
+   "uncommitted": 0,
+   "unpushed_commits": 0
+  }
+ },
+ "candidates": [
+  {
+   "path": "SPEC__WARRANT_LENS__v1.md",
+   "maturity": 1.0,
+   "value_score": 21,
+   "classification": "registered",
+   "is_beacon": true,
+   "target_repo_hint": "qgia-knowledge-spine-main",
+   "promotion_status": "pending_review",
+   "sha256": "cc8d36dbe8d3a8c1"
+  },
+  {
+   "path": "_staging/apple_notes_recovery__2026-03-16/L1/ord_drone_fleet_v1.0.py",
+   "maturity": 0.925,
+   "value_score": 22,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "affb09adea883846"
+  },
+  {
+   "path": "intake/Aurora_CloudBank_Review_R1_R10.md",
+   "maturity": 0.8,
+   "value_score": 25,
+   "classification": "cargo",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "0ce6bafd0569c595"
+  },
+  {
+   "path": "intake/text_conversation_PDK001.txt",
+   "maturity": 0.8,
+   "value_score": 25,
+   "classification": "cargo",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "62b1be6835892fa8"
+  },
+  {
+   "path": "intake/b794f5eb-0115-48bb-ac1c-28a2c6c85a95.md",
+   "maturity": 0.8,
+   "value_score": 24,
+   "classification": "cargo",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "00b222cb48371019"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/QuantumSymbolic_Index.txt",
+   "maturity": 0.8,
+   "value_score": 22,
+   "classification": "cargo",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "7928a9ab712267fd"
+  },
+  {
+   "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs1/QuantumSymbolic_Index.txt",
+   "maturity": 0.8,
+   "value_score": 22,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "7928a9ab712267fd"
+  },
+  {
+   "path": "intake/text_25.txt",
+   "maturity": 0.8,
+   "value_score": 22,
+   "classification": "cargo",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "9e9284953f07b87b"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/package/staging/legacy_pack/SOURCE__Recovered__ORD_DroneDispatch__v0.1__2026-03-10.py",
+   "maturity": 0.925,
+   "value_score": 19,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "1b9b9f8d6316789b"
+  },
+  {
+   "path": "aurora-cloudbank-symbolic_README_DRAFT.md",
+   "maturity": 0.8,
+   "value_score": 21,
+   "classification": "cargo",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "1c55eaac6121eeff"
+  },
+  {
+   "path": "aurora-cloudbank-symbolic_outside_review.md",
+   "maturity": 0.8,
+   "value_score": 21,
+   "classification": "cargo",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "5f3394828319e13e"
+  },
+  {
+   "path": "narrative_engine_spec_parameters_to_narrative_core_v_0.md",
+   "maturity": 0.8,
+   "value_score": 21,
+   "classification": "cargo",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "a4aedede0cdd2423"
+  },
+  {
+   "path": "intake/text_Au_Steward.txt",
+   "maturity": 0.8,
+   "value_score": 21,
+   "classification": "cargo",
+   "is_beacon": false,
+   "target_repo_hint": "qgia-knowledge-spine-main",
+   "promotion_status": "pending_review",
+   "sha256": "3693a6d5463bb870"
+  },
+  {
+   "path": "intake/ORION__NAV__PERPLEXITY_SPACE_FRONT_DOOR__v2.0__2026-04-08.md",
+   "maturity": 0.75,
+   "value_score": 22,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "7fca7113127476d6"
+  },
+  {
+   "path": "AGENTS.md",
+   "maturity": 0.8,
+   "value_score": 20,
+   "classification": "registered",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "bda97261bf37a5ea"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/package/tests/test_ord_policy_engine.py",
+   "maturity": 0.725,
+   "value_score": 22,
+   "classification": "cargo",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "668c0487f5e4a647"
+  },
+  {
+   "path": "intake/text_16.txt",
+   "maturity": 0.8,
+   "value_score": 19,
+   "classification": "cargo",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "8f93299690185c06"
+  },
+  {
+   "path": "intake/text_Opal2_Core.txt",
+   "maturity": 0.8,
+   "value_score": 19,
+   "classification": "cargo",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "e53e681dcb7788d0"
+  },
+  {
+   "path": "intake/text_8.txt",
+   "maturity": 0.8,
+   "value_score": 18,
+   "classification": "cargo",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "77d33282765abfd1"
+  },
+  {
+   "path": "_staging/apple_notes_recovery__2026-03-16/L2/QUANTUM_AGENT_FORGE_PROTOCOL_v1.0.md",
+   "maturity": 0.75,
+   "value_score": 19,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "52a571a9d5f1c099"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/package/library/L3_governance/rules/ORION.L3.EVIDENCE.GATE.0001__v0.1.0__2026-02-14.rules.json",
+   "maturity": 0.925,
+   "value_score": 15,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "e77fe6851f7f564d"
+  },
+  {
+   "path": "archives/unzipped/ZipWiz_Chamber_6_28/aurora_bridge_output/relay_handshake.py",
+   "maturity": 0.725,
+   "value_score": 19,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "e55b81ede35efb8c"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/zipwiz_fixed.md",
+   "maturity": 0.8,
+   "value_score": 17,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "4d969de0a9905be5"
+  },
+  {
+   "path": "intake/ORION__POLICY__CANON_PROTOCOL__v2.0__2026-04-08.md",
+   "maturity": 0.75,
+   "value_score": 18,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "dbd2f15b880820cb"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Archy_Continuity_Thread_v1.0/tools_and_symbolic_index.json",
+   "maturity": 0.675,
+   "value_score": 19,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "94dd67baffeca4b0"
+  },
+  {
+   "path": "intake/aurora_scaffold_nexus_meta_narrative.md",
+   "maturity": 0.55,
+   "value_score": 23,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "5db6eb65185e3539"
+  },
+  {
+   "path": "intake/TOBIAS_QIN_CHARACTER_PROFILE.md",
+   "maturity": 0.55,
+   "value_score": 23,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "a97b1f18cd2396d2"
+  },
+  {
+   "path": "intake/Thread_The_Station_is_Well.md",
+   "maturity": 0.55,
+   "value_score": 22,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "7380f6ce416dea39"
+  },
+  {
+   "path": "intake/text_43.txt",
+   "maturity": 0.55,
+   "value_score": 22,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "qgia-knowledge-spine-main",
+   "promotion_status": "pending_review",
+   "sha256": "746f7cd7581f8b0d"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/LUMENNODE_PUBLIC_AGENT_DEPLOY_v1.0/PROJECT_ECHOES_FACE_DEEPQUERY/research_payload.json",
+   "maturity": 0.925,
+   "value_score": 13,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "7b23a557ab2e2c45"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/LUMENNODE_PUBLIC_AGENT_DEPLOY_v1.0/PROJECT_ECHOES_FACE_DEEPQUERY/research_payload.json",
+   "maturity": 0.925,
+   "value_score": 13,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "7b23a557ab2e2c45"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/package/library/L3_governance/protocols/ORION.L3.WORKSHOPGATES.0001__v1.0.1__2026-02-13.md",
+   "maturity": 0.75,
+   "value_score": 16,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "8b134207db6ae17d"
+  },
+  {
+   "path": "aurora-cloudbank-symbolic_review_v2.md",
+   "maturity": 0.75,
+   "value_score": 16,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "f52c8c80600c0be2"
+  },
+  {
+   "path": "intake/text_CN_v6.txt",
+   "maturity": 0.75,
+   "value_score": 16,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "20a96a39ce513842"
+  },
+  {
+   "path": "_staging/apple_notes_recovery__2026-03-16/L1/AURORA_SEED_PROTOCOL_v1.0.md",
+   "maturity": 0.75,
+   "value_score": 15,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "dae5759cb195eb8f"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Please provide a comprehensive report outlining th 1.md",
+   "maturity": 0.55,
+   "value_score": 20,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "892cfd069ed0b56f"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Please provide a comprehensive report outlining th.md",
+   "maturity": 0.55,
+   "value_score": 20,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "892cfd069ed0b56f"
+  },
+  {
+   "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs1/Please provide a comprehensive report outlining th.md",
+   "maturity": 0.55,
+   "value_score": 20,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "892cfd069ed0b56f"
+  },
+  {
+   "path": "intake/threadcore_symbiosis_delta_manifest.md",
+   "maturity": 0.55,
+   "value_score": 20,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "830751e3f4e728e0"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/package/staging/legacy_pack/L3_SPEC__AuroraCloudBank_Normalized__v0.2.0__2026-03-10.md",
+   "maturity": 0.675,
+   "value_score": 16,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "4e49f0b90ef82e6d"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/COMMANDCORE_FULL_INDEX_v1.json",
+   "maturity": 0.675,
+   "value_score": 16,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "f6d89ce079dac661"
+  },
+  {
+   "path": "intake/ORION__CANON__L1_ENTITY_REGISTRY__v2.0__2026-04-08.md",
+   "maturity": 0.75,
+   "value_score": 14,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "ca31c1bccbf5cc07"
+  },
+  {
+   "path": "intake/ORION__CANON__ORION_STATION_ENVIRONMENT__v2.0__2026-04-08.md",
+   "maturity": 0.75,
+   "value_score": 14,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "a1f47e808641089a"
+  },
+  {
+   "path": "intake/text_26.txt",
+   "maturity": 0.55,
+   "value_score": 19,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "6f0e81b87925caf0"
+  },
+  {
+   "path": "intake/deep-research-report.md",
+   "maturity": 0.55,
+   "value_score": 19,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "qgia-knowledge-spine-main",
+   "promotion_status": "pending_review",
+   "sha256": "d578f42e53a2c4ce"
+  },
+  {
+   "path": "intake/Senior_Staff_R&D_session.md",
+   "maturity": 0.55,
+   "value_score": 18,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "bc6838659d1ecd4b"
+  },
+  {
+   "path": "intake/text_CN_v4.txt",
+   "maturity": 0.6,
+   "value_score": 16,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "a4da266ce2319c8a"
+  },
+  {
+   "path": "intake/text_CN_v5.txt",
+   "maturity": 0.6,
+   "value_score": 16,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "bae5c5cf757584bb"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/package/staging/legacy_pack/STAGING_MANIFEST__LegacyPromotionCandidate__v0.2.0__2026-03-10.json",
+   "maturity": 0.675,
+   "value_score": 14,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "b61d038f06b2fe24"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/package/staging/legacy_pack/L3_SEED__AuroraContinuitySeed_Normalized__v0.2.0__2026-03-10.md",
+   "maturity": 0.675,
+   "value_score": 14,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "8ee4b9e55b243197"
+  },
+  {
+   "path": "README.md",
+   "maturity": 0.55,
+   "value_score": 17,
+   "classification": "registered",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "a696fe49c5ea34b8"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/package/modules/ord/ord_policy_engine.py",
+   "maturity": 0.475,
+   "value_score": 19,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "ac048ef9f2738875"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/package/staging/legacy_pack/L3_GOV__LegacyCommandNormalization__v0.2.0__2026-03-10.md",
+   "maturity": 0.475,
+   "value_score": 19,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "c2a18adc4fe6943d"
+  },
+  {
+   "path": "intake/text_18.txt",
+   "maturity": 0.55,
+   "value_score": 16,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "03fdb44766be09ac"
+  },
+  {
+   "path": "intake/text_54.txt",
+   "maturity": 0.55,
+   "value_score": 16,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "bd6d783b764a0819"
+  },
+  {
+   "path": "_staging/apple_notes_recovery__2026-03-16/L2/MULTILINGUAL_BEAMFORMING_ARRAY_SEED.md",
+   "maturity": 0.55,
+   "value_score": 16,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "91703ee9e5755fc2"
+  },
+  {
+   "path": "intake/thread_core_v_3.md",
+   "maturity": 0.55,
+   "value_score": 16,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "98b6461102b2fad0"
+  },
+  {
+   "path": "_staging/recovered_textAu__2026-03-13/L2/dossiers/l2_mechanic_registry__recovered_textAu.md",
+   "maturity": 0.55,
+   "value_score": 15,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "qgia-knowledge-spine-main",
+   "promotion_status": "pending_review",
+   "sha256": "553812180bfff14c"
+  },
+  {
+   "path": "_staging/recovered_textAu__2026-03-13/L1/04_aurora_simulation_steward_report.md",
+   "maturity": 0.55,
+   "value_score": 15,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "review-required",
+   "promotion_status": "pending_review",
+   "sha256": "efe01c9af3dd20a9"
+  },
+  {
+   "path": "_staging/recovered_textAu__2026-03-13/L2/03_galactic_union_mechanics_and_models.md",
+   "maturity": 0.55,
+   "value_score": 15,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "review-required",
+   "promotion_status": "pending_review",
+   "sha256": "12a6df7bb2d28fa8"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/Au_Archive_62_619/54726075.md",
+   "maturity": 0.55,
+   "value_score": 15,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "041dee63fc758a82"
+  },
+  {
+   "path": "intake/threadcore_comprehensive_manifest_and_meta_narrative.md",
+   "maturity": 0.55,
+   "value_score": 15,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "493838ff14146050"
+  },
+  {
+   "path": "intake/QGIA_SPACE_NAVAGATION_GUIDE.md",
+   "maturity": 0.55,
+   "value_score": 14,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "qgia-knowledge-library-main",
+   "promotion_status": "pending_review",
+   "sha256": "99db01d191146f6b"
+  },
+  {
+   "path": "intake/text_9.txt",
+   "maturity": 0.475,
+   "value_score": 16,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "2ec8127cee8194b9"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/package/staging/legacy_pack/CONFLICT_MATRIX__LegacyPromotionCandidate__v0.2.0__2026-03-10.md",
+   "maturity": 0.475,
+   "value_score": 15,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "72b6e7b547bd6bb4"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/Aurora_GameEngine_EduSim_v1.0.json",
+   "maturity": 0.475,
+   "value_score": 15,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "e3a7a95b1087c592"
+  },
+  {
+   "path": "archives/unzipped/ZipWiz_Chamber_6_28/aurora_bridge_output/zipwiz_bridge.py",
+   "maturity": 0.475,
+   "value_score": 15,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "51c65beb626fef83"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/Aurora_ORIONCORE_Directory_Main/Au_Archive_62_619/loom_model_selector.py",
+   "maturity": 0.475,
+   "value_score": 15,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "de2f672873bacbf5"
+  },
+  {
+   "path": ".gitleaks.toml",
+   "maturity": 0.525,
+   "value_score": 13,
+   "classification": "registered",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "210ec053f1d156df"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/package/STAGING_MANIFEST.json",
+   "maturity": 0.475,
+   "value_score": 14,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "67f73e555d5a5410"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/package/bundle.manifest.json",
+   "maturity": 0.475,
+   "value_score": 14,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "67f73e555d5a5410"
+  },
+  {
+   "path": "intake/text_44.txt",
+   "maturity": 0.475,
+   "value_score": 14,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "review-required",
+   "promotion_status": "pending_review",
+   "sha256": "884ebf9a21f7fc8e"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Archy_Continuity_Thread_v1.0/aurora_module_manifest.json",
+   "maturity": 0.475,
+   "value_score": 14,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "5e2d10b4d21bcc97"
+  },
+  {
+   "path": "_staging/orion_ord_review_fix/package/tests/test_ord_threshold_registry.py",
+   "maturity": 0.45,
+   "value_score": 14,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "review-required",
+   "promotion_status": "pending_review",
+   "sha256": "9a7b38808aad51d4"
+  },
+  {
+   "path": "_staging/apple_notes_recovery__2026-03-16/README.md",
+   "maturity": 0.4,
+   "value_score": 15,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "4f75ae2a5cb19b90"
+  },
+  {
+   "path": "intake/text_Loom.txt",
+   "maturity": 0.4,
+   "value_score": 15,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "c255b0ea9f13277b"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index (1).json",
+   "maturity": 0.4,
+   "value_score": 13,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "qgia-knowledge-spine-main",
+   "promotion_status": "pending_review",
+   "sha256": "9d88c01c13efa8d7"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index 2 (1).json",
+   "maturity": 0.4,
+   "value_score": 13,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "qgia-knowledge-spine-main",
+   "promotion_status": "pending_review",
+   "sha256": "9d88c01c13efa8d7"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index 2.json",
+   "maturity": 0.4,
+   "value_score": 13,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "qgia-knowledge-spine-main",
+   "promotion_status": "pending_review",
+   "sha256": "9d88c01c13efa8d7"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index.json",
+   "maturity": 0.4,
+   "value_score": 13,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "qgia-knowledge-spine-main",
+   "promotion_status": "pending_review",
+   "sha256": "9d88c01c13efa8d7"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index (1).json",
+   "maturity": 0.4,
+   "value_score": 13,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "qgia-knowledge-spine-main",
+   "promotion_status": "pending_review",
+   "sha256": "c534bdc1dd3dc964"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index 2 (1).json",
+   "maturity": 0.4,
+   "value_score": 13,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "qgia-knowledge-spine-main",
+   "promotion_status": "pending_review",
+   "sha256": "c534bdc1dd3dc964"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index 2.json",
+   "maturity": 0.4,
+   "value_score": 13,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "qgia-knowledge-spine-main",
+   "promotion_status": "pending_review",
+   "sha256": "c534bdc1dd3dc964"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index.json",
+   "maturity": 0.4,
+   "value_score": 13,
+   "classification": "derelict",
+   "is_beacon": false,
+   "target_repo_hint": "qgia-knowledge-spine-main",
+   "promotion_status": "pending_review",
+   "sha256": "c534bdc1dd3dc964"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/GitHub_Copilot_Custom_Instructions_Aurora_GUMAS 2.txt",
+   "maturity": 0.275,
+   "value_score": 16,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "670e24987fed341a"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/GitHub_Copilot_Custom_Instructions_Aurora_GUMAS.txt",
+   "maturity": 0.275,
+   "value_score": 16,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "d18e17ad0112b3d6"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUI/GitHub_Copilot_Custom_Instructions_Aurora_GUMAS 2.txt",
+   "maturity": 0.275,
+   "value_score": 16,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "670e24987fed341a"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUI/GitHub_Copilot_Custom_Instructions_Aurora_GUMAS.txt",
+   "maturity": 0.275,
+   "value_score": 16,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "d18e17ad0112b3d6"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUI_Cloudhub/GUI_Cloudhub/GitHub_Copilot_Custom_Instructions_Aurora_GUMAS.txt",
+   "maturity": 0.275,
+   "value_score": 16,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "d18e17ad0112b3d6"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/GUI/GitHub_Copilot_Custom_Instructions_Aurora_GUMAS 2.txt",
+   "maturity": 0.275,
+   "value_score": 16,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "670e24987fed341a"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/GUI/GitHub_Copilot_Custom_Instructions_Aurora_GUMAS.txt",
+   "maturity": 0.275,
+   "value_score": 16,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "d18e17ad0112b3d6"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/GUI_Cloudhub/GUI_Cloudhub/GitHub_Copilot_Custom_Instructions_Aurora_GUMAS.txt",
+   "maturity": 0.275,
+   "value_score": 16,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "d18e17ad0112b3d6"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/GitHub_Copilot_Custom_Instructions_Aurora_GUMAS.txt",
+   "maturity": 0.275,
+   "value_score": 16,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "d18e17ad0112b3d6"
+  },
+  {
+   "path": "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs1/GitHub_Copilot_Custom_Instructions_Aurora_GUMAS.txt",
+   "maturity": 0.275,
+   "value_score": 16,
+   "classification": "beacon",
+   "is_beacon": true,
+   "target_repo_hint": "aurora-cloudbank-symbolic-main",
+   "promotion_status": "pending_review",
+   "sha256": "d18e17ad0112b3d6"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUI/generate_manifest.py",
+   "maturity": 0.275,
+   "value_score": 16,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "76da90d2dce0025f"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/GUMAS_Master_Staff_Recovery_Archive 2/aurora_module_manifest.json",
+   "maturity": 0.275,
+   "value_score": 14,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "5e2d10b4d21bcc97"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/aurora_module_manifest (1).json",
+   "maturity": 0.275,
+   "value_score": 14,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "5e2d10b4d21bcc97"
+  },
+  {
+   "path": "archives/unzipped/Complete Archive 4_19 copy/aurora_module_manifest.json",
+   "maturity": 0.275,
+   "value_score": 14,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "5e2d10b4d21bcc97"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/GUMAS_Master_Staff_Recovery_Archive 2/aurora_module_manifest.json",
+   "maturity": 0.275,
+   "value_score": 14,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "5e2d10b4d21bcc97"
+  },
+  {
+   "path": "archives/unzipped/Unzipped Archives/GUMAS_Master_Staff_Recovery_Archive/aurora_module_manifest.json",
+   "maturity": 0.275,
+   "value_score": 14,
+   "classification": "debris",
+   "is_beacon": false,
+   "target_repo_hint": "root",
+   "promotion_status": "pending_review",
+   "sha256": "5e2d10b4d21bcc97"
+  }
+ ],
+ "promotion_note": "All candidates remain pending_review/not_promoted. Promotion requires the explicit control-plane gate; this report is routing evidence only."
+}

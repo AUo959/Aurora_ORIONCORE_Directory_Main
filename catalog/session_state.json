@@ -311,11 +311,17 @@
       "date": "2026-06-12",
       "platform": "claude-code",
       "summary": "Sensor Array Spec v0.3.0 reviewed and canon-routed per its own delta instruction: staged in CanonRec canon/L3/sensor_array (STAGING, L3 protocol_update) with reconciliation note. Integration surfaces grounded against CloudBank main: drift detector, ethics engine, L2 bridge, live relay capsules all VERIFIED; src/sensors greenfield; Forge phase_executor UNMERGED anywhere — Phase 7 dependency-blocked, Phases 1-6 clear. Next build step when owner sequences it: Phase 1 foundation (reading types, registry, data bus, layer interpreter, perf budget, API skeleton)."
+    },
+    {
+      "id": "sensor-array-foundation-landed-2026-06-12",
+      "date": "2026-06-12",
+      "platform": "claude-code",
+      "summary": "Cowork sensor work reviewed and landed: (1) root aurora_salvage_scan.py + salvage report (read-only derelict survey of the recovery index: 100 contacts, 13 high-value cargo, 33 beacons; ruff-clean, reproducible) committed; (2) CloudBank src/sensors + tests/sensors (4,161 lines, Phases 1-4 of the canon-staged v0.3.0 spec incl. integration-depth-weighted drift pre-signatures, fusion core, SalvageSensor) reviewed — 47/47 tests, zero actuation paths (one-way principle verified) — mounted in aurora_api as a 26-route GET-only surface and PR'd as #1005 (CI watching). Anchor symbols read at integration depth 1.0. SEPARATE FINDING: test_aspirational_models_default_unavailable fails (non-critical tier) — claude-4-5-opus placeholder gating; runtime boot log shows gating working; likely env-dependent test from the June model-contract change. Two more interruption-era stale index.locks cleared during the work."
     }
   ],
-  "last_updated": "2026-06-12T02:53:59Z",
+  "last_updated": "2026-06-12T10:16:33Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Sensor Array v0.3.0 staged in canon; integration surfaces grounded; Phase 7 dependency flagged",
+  "last_session_summary": "Sensor Array Phases 1-4 landed (#1005); salvage survey tool committed; station has eyes",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -334,6 +340,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "0840964",
+      "date": "2026-06-12",
+      "platform": "claude-code",
+      "summary": "chore(state): Sensor Array v0.3.0 canon-routed; CanonRec head synced"
+    },
     {
       "sha": "76d2c15",
       "date": "2026-06-12",
@@ -387,12 +399,6 @@
       "date": "2026-06-11",
       "platform": "claude-code",
       "summary": "feat(sweep): deep pass — 103 closed PRs audited via pull refs; scorecard landed; repos registered"
-    },
-    {
-      "sha": "f8b33d9",
-      "date": "2026-06-11",
-      "platform": "claude-code",
-      "summary": "feat(sweep): remote-branch recoveries — roadmap, drift responder, vault, QGIA API landed; protocol ADOPTED"
     }
   ],
   "security_events": [
@@ -444,7 +450,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "76d2c15",
+    "main_sha": "0840964",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -560,7 +566,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-06-12T02:47:37Z",
+    "checked_at": "2026-06-12T02:54:36Z",
     "entries": [],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
   }

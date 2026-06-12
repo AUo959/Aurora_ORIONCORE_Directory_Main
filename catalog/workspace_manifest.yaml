@@ -1,4 +1,4 @@
-generated_at: '2026-06-12T02:38:10Z'
+generated_at: '2026-06-12T10:17:02Z'
 root: .
 logical_taxonomy:
 - repos
@@ -246,6 +246,17 @@ entries:
   current_path: SENSOR ARRAY SPECIFICATION v0 3 0.md
   logical_zone: intake
   planned_path: intake/SENSOR ARRAY SPECIFICATION v0 3 0.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: spec-salvage-operations-v0-1-0
+  kind: intake_file
+  current_path: SPEC__SALVAGE_OPERATIONS__v0_1_0.md
+  logical_zone: intake
+  planned_path: intake/SPEC__SALVAGE_OPERATIONS__v0_1_0.md
   git_boundary: none
   storage_tier: review
   retention_policy: review

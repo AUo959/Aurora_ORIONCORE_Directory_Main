@@ -1,0 +1,12 @@
+{
+  "generated_at_utc": "2026-06-11T01:39:45Z",
+  "posture": "working-tree staging only; destination changes ride branch + PR + CI",
+  "payloads": {
+    "canonical-validation-contract": [
+      "staged: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/config/canonical_validation.yaml"
+    ],
+    "l1-persona-memories": [
+      "staged: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/config/mesh/memory/amina_velin.md"
+    ]
+  }
+}
