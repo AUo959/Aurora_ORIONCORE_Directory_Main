@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "review_id": "pr-20260612-authority-policy-and-landing-ledger",
+  "reviewed_debt_ids": [
+    "rd-20260610-authority-policy",
+    "rd-20260611-landing-ledger-stop-hook"
+  ],
+  "target": {
+    "commits": [
+      "205ea77",
+      "fc5d737"
+    ],
+    "diff_base": "205ea77^ and fc5d737^",
+    "change_class": "coordination",
+    "domain": "repo-authority-model + session-stop-hook",
+    "paths": [
+      "catalog/repo_authority_policy.yaml",
+      "catalog/gitwiz_hygiene_policy.yaml",
+      "tools/session_stop_hook.py",
+      "tools/publication_debt.py",
+      "catalog/publication_debt_exemptions.yaml",
+      "tests/test_workspace_verify.py"
+    ]
+  },
+  "author_platform": "claude-code",
+  "reviewer_platform": "codex",
+  "reviewed_at": "2026-06-12T23:04:07Z",
+  "warrant_level": "artifact",
+  "verdict": "approve-with-notes",
+  "summary": "The recovered authority and hygiene policies match the documented March failure mode, and the landing-ledger stop-hook wiring is non-blocking by construction. The only note is operational: PR-state classification is exact only when gh/network is available; offline mode intentionally reports pushed branches as UNVERIFIED instead of guessing.",
+  "reverified_gates": [
+    {
+      "gate": "root-session-context",
+      "command": "python3 -m json.tool catalog/session_state.json; git log --oneline -5",
+      "result": "pass",
+      "evidence": "session_state listed both target review debts as pending; recent root HEAD was f9bb5da with last platform claude-code."
+    },
+    {
+      "gate": "authority-policy-commit-scope",
+      "command": "git show --stat --oneline 205ea77 -- catalog/repo_authority_policy.yaml catalog/gitwiz_hygiene_policy.yaml reports/recovered_canon/README.md",
+      "result": "pass",
+      "evidence": "205ea77 adds catalog/repo_authority_policy.yaml and catalog/gitwiz_hygiene_policy.yaml and updates recovered-canon status text; no nested repo files are changed by the root policy commit."
+    },
+    {
+      "gate": "authority-policy-provenance-match",
+      "command": "read docs/CONTROL_PLANE_PROVENANCE.md, reports/analysis/march_2026_reset_forensics__2026-06-10.md, catalog/repo_authority_policy.yaml, catalog/gitwiz_hygiene_policy.yaml",
+      "result": "pass",
+      "evidence": "The policy preserves the documented rule that root archive/intake material is not canonical by default, local checkouts are working clones, and published state requires explicit commit and push."
+    },
+    {
+      "gate": "landing-ledger-commit-scope",
+      "command": "git show --stat --oneline fc5d737 -- tools/session_stop_hook.py tools/publication_debt.py catalog/publication_debt_exemptions.yaml tests/test_workspace_verify.py",
+      "result": "pass",
+      "evidence": "fc5d737 adds the publication_debt ledger, exemption file, workspace-verify coverage, and a stop-hook call site."
+    },
+    {
+      "gate": "landing-ledger-nonblocking-check",
+      "command": "read tools/session_stop_hook.py record_landing_ledger()",
+      "result": "pass",
+      "evidence": "record_landing_ledger wraps the ledger scan and record call in try/except Exception and prints a skipped message, so ledger failure cannot block session close."
+    },
+    {
+      "gate": "landing-ledger-test-slice",
+      "command": "python3 -m pytest -q tests/test_workspace_verify.py -k 'publication_debt or flight_overdue'",
+      "result": "pass",
+      "evidence": "2 passed, 25 deselected."
+    },
+    {
+      "gate": "landing-ledger-live-scan",
+      "command": "python3 tools/publication_debt.py scan --json (with gh/network access)",
+      "result": "pass",
+      "evidence": "The scan returned 21 documented exemptions and no unexempt debt entries after live PR-state verification."
+    },
+    {
+      "gate": "active-pr-separation",
+      "command": "gh pr view 1016 --json number,state,headRefName,baseRefName,url,mergeStateStatus,statusCheckRollup",
+      "result": "pass",
+      "evidence": "CloudBank PR #1016 is open from feat/ord-policy-family to main; it is active Claude-adjacent work and not an unpublished-branch debt."
+    },
+    {
+      "gate": "session-claim-conflict-check",
+      "command": "python3 tools/session_claim.py check --repo root --paths catalog/session_state.json reports/analysis/peer_reviews --json",
+      "result": "pass",
+      "evidence": "Initial status was clear; Codex then created claim codex-20260612T230308Z-codex-review-debt-clearance-2026-06-12 for the edited root paths."
+    }
+  ],
+  "findings": [
+    {
+      "id": "f1",
+      "severity": "note",
+      "evidence": "tools/publication_debt.py _branch_has_open_pr() returns None when gh is unavailable; the offline scan reported feat/ord-policy-family as PR state UNVERIFIED, while the live gh check showed PR #1016 open.",
+      "description": "Offline publication-debt scans are intentionally conservative. Operators should refresh with gh/network before treating a pushed feature branch as unpublished debt.",
+      "disposition": "accepted-with-note"
+    }
+  ],
+  "clears_review_debt": true,
+  "cleared_debt_ids": [
+    "rd-20260610-authority-policy",
+    "rd-20260611-landing-ledger-stop-hook"
+  ],
+  "next_actions": [
+    "Leave CloudBank PR #1016 and the dirty mesh-router test adaptation to the active Claude/Codex branch owner.",
+    "When the hub returns to main, refresh catalog/repo_registry.yaml from the generated workspace scan rather than hand-editing the generated registry."
+  ]
+}
