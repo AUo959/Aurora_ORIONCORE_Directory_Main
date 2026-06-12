@@ -1,12 +1,9 @@
-generated_at: '2026-06-08T15:46:00Z'
+generated_at: '2026-06-12T02:38:10Z'
 root: .
 repos:
 - name: aurora-cloudbank-symbolic-main
   path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
   branch: main
-  # Synced 2026-06-10 (recovery session): CI-gate fix #943, salvage #944,
-  # LICENSE #945, pin fix #942, recovered handoffs #946/#947/#948 all merged;
-  # branch protection (CI Check required) enabled on origin main.
   head_sha: 1f926dbd5e9f610d326df37c0fbb6837216b2bc0
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
@@ -18,10 +15,6 @@ repos:
 - name: CanonRec
   path: GUMAS_SIM_2.5/CanonRec
   branch: main
-  # Synced 2026-06-10: CanonRec thawed — first commit in 102 days. 41 L1
-  # character entities promoted as Primary Canon with reconciliation receipt
-  # and drift log; L3 contracts (canonical_validation, THREADCORE, anchors)
-  # promoted as source artifacts.
   head_sha: 0ff6b58fe8f2e4a58323165bdb549b7510dcb1a9
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
@@ -41,8 +34,6 @@ repos:
 - name: qgia-knowledge-library-main
   path: qgia-knowledge-library-main
   branch: main
-  # Synced 2026-06-10: stale .git/index.lock from 2026-05-23 removed; clone
-  # fast-forwarded 1 commit to origin/main (Iran War 2026 package).
   head_sha: 7e029d895a23c87fdc110b546d738c7ab7fb6ce3
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
@@ -53,8 +44,6 @@ repos:
 - name: qgia-knowledge-spine-main
   path: qgia-knowledge-spine-main
   branch: main
-  # Synced 2026-06-10: stranded knowledge-index metadata refresh recovered and
-  # merged as spine PR #3.
   head_sha: faeda0976725918a2ac2cf49239139afb11d3c68
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
@@ -62,14 +51,6 @@ repos:
     -u GIT_INDEX_FILE -u GIT_PREFIX git -C qgia-knowledge-spine-main status --short
     --branch
   move_policy: frozen_until_registry_adoption
-  build_phase: phase_2_wiring
-  phase_1_completed: '2026-06-08T15:39:00Z'
-# ---------------------------------------------------------------------------
-# EARLY-DEV REMOTE SPOKES
-# No local nested path in GUMAS_SIM_2.5 — remote-only at this stage.
-# validation_command omitted until cloned locally.
-# move_policy: deferred_until_cloned
-# ---------------------------------------------------------------------------
 - name: zip_wizard
   path: ~remote~
   branch: main
@@ -80,14 +61,13 @@ repos:
   role: spoke
   status: dormant_since_2025-12_env_untracked_2026-06-11
   move_policy: deferred_until_cloned
-  notes: >
-    ZIPWIZ implementation repo (archive manager; ~97MB; ARCHITECTURE/SECURITY
-    docs; 4 feature branches incl. vulnerability scanner). Registered
-    2026-06-11 by the remote sweep. SECURITY: a .env file is committed at the
-    repo root on GitHub — owner must inspect for live credentials, rotate if
-    needed, and purge (agent access to credential contents is
-    classifier-restricted by design). Governance: zipwiz-governor skill exists
-    but this repo was outside the audit perimeter until now.
+  notes: "ZIPWIZ implementation repo (archive manager; ~97MB; ARCHITECTURE/SECURITY\
+    \ docs; 4 feature branches incl. vulnerability scanner). Registered 2026-06-11\
+    \ by the remote sweep. SECURITY: a .env file is committed at the repo root on\
+    \ GitHub \u2014 owner must inspect for live credentials, rotate if needed, and\
+    \ purge (agent access to credential contents is classifier-restricted by design).\
+    \ Governance: zipwiz-governor skill exists but this repo was outside the audit\
+    \ perimeter until now.\n"
 - name: aurora-cloudbank-symbolic1
   path: ~remote~
   branch: main
@@ -98,10 +78,11 @@ repos:
   role: prototype
   status: dormant_single_commit_2025-09-23
   move_policy: deferred_until_cloned
-  notes: >
-    Single 'Initial commit' Node.js app skeleton (index.js/pnpm), 495KB,
-    untouched since creation. NOT early CloudBank history (different stack).
-    Registered 2026-06-11; candidate for archive-or-delete owner decision.
+  notes: 'Single ''Initial commit'' Node.js app skeleton (index.js/pnpm), 495KB, untouched
+    since creation. NOT early CloudBank history (different stack). Registered 2026-06-11;
+    candidate for archive-or-delete owner decision.
+
+    '
 - name: AuroraOS
   path: ~remote~
   branch: main
@@ -112,8 +93,8 @@ repos:
   role: spoke
   status: early_dev
   move_policy: deferred_until_cloned
-  notes: TypeScript OS spoke. 4 open issues. Last updated 2026-03-13. Not yet
-    wired to constellation dispatch. Register now for integration gate visibility.
+  notes: TypeScript OS spoke. 4 open issues. Last updated 2026-03-13. Not yet wired
+    to constellation dispatch. Register now for integration gate visibility.
 - name: cloudbank-quantum-en
   path: ~remote~
   branch: main

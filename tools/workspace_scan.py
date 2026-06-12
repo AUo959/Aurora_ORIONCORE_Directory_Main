@@ -13,6 +13,7 @@ from _workspace_common import (
     git,
     iter_archive_artifacts,
     load_classification_overrides,
+    load_yaml_like,
     top_level_policy_records_with_redaction,
     normalize_family,
     now_iso_utc,
@@ -236,10 +237,26 @@ def main() -> int:
         "entries": entries,
     }
 
+    # Remote-only registry entries (spokes, registered-but-uncloned repos)
+    # cannot be discovered locally, so regeneration must carry them over —
+    # including any owner notes (e.g. security flags) they hold.
+    preserved_remote_entries: list[dict[str, object]] = []
+    existing_registry_path = root / "catalog" / "repo_registry.yaml"
+    if existing_registry_path.exists():
+        try:
+            existing_registry = load_yaml_like(existing_registry_path) or {}
+            preserved_remote_entries = [
+                entry for entry in existing_registry.get("repos", [])
+                if isinstance(entry, dict) and entry.get("remote_status") == "remote_only"
+            ]
+        except Exception:
+            preserved_remote_entries = []
+
     repo_registry = {
         "generated_at": now_iso_utc(),
         "root": serialized_root(root),
-        "repos": [repo_registry_entry(root, repo_rel) for repo_rel in nested_repo_roots],
+        "repos": [repo_registry_entry(root, repo_rel) for repo_rel in nested_repo_roots]
+        + preserved_remote_entries,
     }
 
     archive_inventory, archive_stats = build_archive_inventory(

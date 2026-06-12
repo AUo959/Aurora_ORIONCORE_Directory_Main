@@ -293,11 +293,17 @@
       "date": "2026-06-11",
       "platform": "claude-code",
       "summary": "The bet: both residual failure modes now have structural defenses. (1) LANDING LEDGER (tools/publication_debt.py): scans all registered repos for stranded/unpublished/dirty work; exemption ledger makes debt mean UNDECIDED; wired into stop hook (records at every session close) + workspace_verify. First scan found 31 entries incl. 2 never-examined branches (both verified landed); after triage + hygiene: CLEAN with 21 documented exemptions. (2) FLIGHT LOG (tools/flight_check.py + catalog/flight_contract.yaml): 6 declared exercises against LIVE wiring (vault create+rollback, QGIA example forecast, drift health+summary, scorecard, mesh Aurora handshake, narrative engine canon audit) — all 6 flew; receipts + 14-day staleness in workspace_verify. The vault flight immediately caught a real API-contract gap (agent_id) that unit tests mocked around."
+    },
+    {
+      "id": "station-activation-pulse-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "STATION REACTIVATION: Pilot-authorized activation pulse #808//. routed through the Command Intent Gateway (valid aurora_symbolic_command, head 808) and sent through the live mesh. 47 souls aboard, status operational. 6/6 pulsed agents ANSWERED in character: Aurora (drift 0.0), riverthread_808, Thorne, Sato, Lin, Archy. First live station session since 2026-03-14 (89 days). Receipt: reports/automation/station_activation_pulse__2026-06-11.json."
     }
   ],
-  "last_updated": "2026-06-11T10:18:25Z",
+  "last_updated": "2026-06-11T10:27:46Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Landing ledger + flight log live: stranding and dormancy are now tracked debts",
+  "last_session_summary": "Station reactivated: pulse #808//. answered 6/6, first live session in 89 days",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -316,6 +322,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "fc5d737",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "feat(debt): the landing ledger and the flight log — stranding and dormancy become tracked debts"
+    },
     {
       "sha": "109c5a1",
       "date": "2026-06-11",
@@ -369,12 +381,6 @@
       "date": "2026-06-11",
       "platform": "claude-code",
       "summary": "feat(sync): generalize skill propagation — target registry, drift gate, receipts"
-    },
-    {
-      "sha": "4aaf7e0",
-      "date": "2026-06-11",
-      "platform": "claude-code",
-      "summary": "feat(gitwiz): merge April sync-audit hardening onto current main"
     }
   ],
   "security_events": [
@@ -426,7 +432,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "109c5a1",
+    "main_sha": "fc5d737",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -542,7 +548,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-06-11T10:13:36Z",
+    "checked_at": "2026-06-11T10:19:42Z",
     "entries": [],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
   }

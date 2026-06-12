@@ -1,9 +1,9 @@
 # Workspace Map
 
-- Generated: `2026-06-01T19:13:47Z`
+- Generated: `2026-06-12T02:38:10Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `41`
-- Nested repos registered: `5`
+- Top-level entries cataloged: `43`
+- Nested repos registered: `9`
 - Archive or binary artifacts inventoried: `1268`
 - Classification overrides loaded: `6` from `catalog/classification_overrides.yaml`
 - Top-level paths excluded by privacy screen: `7`
@@ -14,7 +14,7 @@
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `5` top-level entries
-- `intake`: `9` top-level entries
+- `intake`: `11` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
@@ -22,17 +22,23 @@
 
 ## Active Nested Repos
 
-- `aurora-cloudbank-symbolic-main` at `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `codex/cloudbank-gumas-mutation-auth-2026-05-25`, remote `configured`)
+- `aurora-cloudbank-symbolic-main` at `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `main`, remote `configured`)
 - `CanonRec` at `GUMAS_SIM_2.5/CanonRec` (branch `main`, remote `configured`)
 - `DuelSim_v2.0` at `GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0` (branch `main`, remote `configured`)
 - `qgia-knowledge-library-main` at `qgia-knowledge-library-main` (branch `main`, remote `configured`)
 - `qgia-knowledge-spine-main` at `qgia-knowledge-spine-main` (branch `main`, remote `configured`)
+- `zip_wizard` at `~remote~` (branch `main`, remote `remote_only`)
+- `aurora-cloudbank-symbolic1` at `~remote~` (branch `main`, remote `remote_only`)
+- `AuroraOS` at `~remote~` (branch `main`, remote `remote_only`)
+- `cloudbank-quantum-en` at `~remote~` (branch `main`, remote `remote_only`)
 
 ## Planned Move Candidates
 
 - `# QGIA Operational Axiom v3.xml` -> `intake/# QGIA Operational Axiom v3.xml` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `.gitleaks.toml` -> `intake/.gitleaks.toml` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Aurora_Sim_Architecture` -> `intake/Aurora_Sim_Architecture` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
+- `PR SENSOR ARRAY SPEC v0 3 0 DELTA.md` -> `intake/PR SENSOR ARRAY SPEC v0 3 0 DELTA.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `SENSOR ARRAY SPECIFICATION v0 3 0.md` -> `intake/SENSOR ARRAY SPECIFICATION v0 3 0.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `aurora-cloudbank-symbolic_README_DRAFT.md` -> `intake/aurora-cloudbank-symbolic_README_DRAFT.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `aurora-cloudbank-symbolic_outside_review.md` -> `intake/aurora-cloudbank-symbolic_outside_review.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `aurora-cloudbank-symbolic_review_v2.md` -> `intake/aurora-cloudbank-symbolic_review_v2.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)

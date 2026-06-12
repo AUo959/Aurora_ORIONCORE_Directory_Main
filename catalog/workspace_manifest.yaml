@@ -1,4 +1,4 @@
-generated_at: '2026-06-08T15:46:00Z'
+generated_at: '2026-06-12T02:38:10Z'
 root: .
 logical_taxonomy:
 - repos
@@ -220,6 +220,17 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
+- id: pr-sensor-array-spec-v0-3-0-delta
+  kind: intake_file
+  current_path: PR SENSOR ARRAY SPEC v0 3 0 DELTA.md
+  logical_zone: intake
+  planned_path: intake/PR SENSOR ARRAY SPEC v0 3 0 DELTA.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: readme
   kind: workspace_doc
   current_path: README.md
@@ -230,6 +241,17 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
+- id: sensor-array-specification-v0-3
+  kind: intake_file
+  current_path: SENSOR ARRAY SPECIFICATION v0 3 0.md
+  logical_zone: intake
+  planned_path: intake/SENSOR ARRAY SPECIFICATION v0 3 0.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: entropy-quarantine
   kind: quarantine_zone
   current_path: _entropy_quarantine
@@ -384,7 +406,6 @@ entries:
   retention_policy: preserve
   owner: repository-owner
   status: protected
-  notes: Phase 2 wiring synced 2026-06-08. Python stack and knowledge-index automation live; head_sha updated in repo_registry.yaml.
 - id: reports
   kind: report_zone
   current_path: reports
@@ -446,34 +467,3 @@ entries:
   owner: intake-review
   status: planned_move
   batch_id: wave4_root_intake_cleanup_initial
-# ---------------------------------------------------------------------------
-# EARLY-DEV REMOTE SPOKES (remote-only, not yet cloned into GUMAS_SIM_2.5)
-# ---------------------------------------------------------------------------
-- id: auroraos-spoke
-  kind: remote_spoke
-  current_path: ~remote~
-  logical_zone: repos
-  planned_path: repos/AuroraOS
-  git_boundary: remote
-  storage_tier: source
-  retention_policy: preserve
-  owner: repository-owner
-  status: early_dev
-  remote_url: https://github.com/AUo959/AuroraOS
-  language: TypeScript
-  notes: TypeScript OS spoke. Early dev. Not yet wired to constellation dispatch.
-    Register for integration gate visibility. Clone to repos/AuroraOS when ready.
-- id: cloudbank-quantum-en-spoke
-  kind: remote_spoke
-  current_path: ~remote~
-  logical_zone: repos
-  planned_path: repos/cloudbank-quantum-en
-  git_boundary: remote
-  storage_tier: source
-  retention_policy: preserve
-  owner: repository-owner
-  status: early_dev
-  remote_url: https://github.com/AUo959/cloudbank-quantum-en
-  language: TypeScript
-  notes: TypeScript quantum spoke. 9 open issues. Early dev. Not yet wired to
-    constellation dispatch. Register for integration gate visibility.
