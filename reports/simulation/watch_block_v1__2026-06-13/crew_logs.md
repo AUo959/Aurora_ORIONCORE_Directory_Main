@@ -23,8 +23,8 @@
 
 ## Commander Alex Thorne — Station Commander
 - H1 · Habitat ring spin check (2 RPM / 0.3g verification) (+0.32h)
-- H2 · Dome astronomy session calibration (+0.27h)
-- H3 · Cargo manifest reconciliation, Bay 2 intake (+0.28h)
+- H2 · Dome astronomy session calibration (+0.32h)
+- H3 · Cargo manifest reconciliation, Bay 2 intake (+0.33h)
 - H4 · Bay 2 departure clearance package (+0.28h)
 
 ## Dante Kyros — UX Architect
@@ -58,8 +58,9 @@
 - H4 — mess hall — crew meal
 
 ## Dr. Kieran Zhao — Computational Optimization Lead
-- H1 · Life-support scrubber rotation, habitat ring (+1.06h) — completed
+- H1 · Life-support scrubber rotation, habitat ring (+1.53h) — completed
 - H1 ⚡ swarm_sync: Prof. Elena Sorensen & Dr. Kieran Zhao spontaneous pair-programming
+- H1 ⚡ collaboration_boost: Dr. Kieran Zhao synergy with key collaborator
 - H2 — personal time — the Dome
 - H3 — mess hall — crew meal
 - H4 — personal time — the Dome
@@ -185,11 +186,12 @@
 - H4 — off-shift rest cycle
 
 ## Prof. Elena Sorensen — Cognitive Ethicist
-- H1 · Life-support scrubber rotation, habitat ring (+0.58h)
+- H1 · Life-support scrubber rotation, habitat ring (+0.7h)
 - H1 ⚡ swarm_sync: Prof. Elena Sorensen & Dr. Kieran Zhao spontaneous pair-programming
 - H2 · Docking Bay 2 logistics turnover (+0.58h)
 - H3 — exercise block — ring track
 - H4 — personal time — the Dome
+- H4 ⚡ collaboration_boost: Prof. Elena Sorensen synergy with key collaborator
 
 ## Rei Vatra — Atmospheric Painter & Color Theorist
 - H1 — exercise block — ring track
@@ -242,6 +244,7 @@
 ## Varya Lin — Chief Science Officer
 - H1 · Zero-g lab safety check, core section (+0.71h)
 - H2 · Dome astronomy session calibration (+0.89h) — completed
+- H2 ⚡ collaboration_boost: Varya Lin synergy with key collaborator
 - H3 · Cargo manifest reconciliation, Bay 2 intake (+0.74h)
 - H4 · ORD dispatch order execution + Shadowfax inspection (+0.77h)
 

@@ -90,6 +90,18 @@ sim.tasks = {
 }
 sim.completed = set()
 
+# Persistent history: crew who worked together in past hours (station
+# chronicle pair familiarity) become collaborators — past actions raise
+# present collaboration-boost odds. State deltas only; no L1 facts changed.
+history_pairs_applied = 0
+for pair, weight in scenario.get("history", {}).get("pair_familiarity", {}).items():
+    if float(weight) >= 1.0:
+        a, b = pair.split("|", 1)
+        if a in sim.agents and b in sim.agents:
+            sim.agents[a].collaborators.add(b)
+            sim.agents[b].collaborators.add(a)
+            history_pairs_applied += 1
+
 records = []
 _orig_apply = sim._apply_work
 def _capture(events):
@@ -127,7 +139,7 @@ out = {
                for a in sim.agents.values()],
     "task_names": {t["id"]: t["name"] for t in scenario["tasks"]},
     "task_sources": {t["id"]: t.get("source", "") for t in scenario["tasks"]},
-    "completion_ticks": {tid: None for tid in sim.tasks},
+    "history_pairs_applied": history_pairs_applied,
 }
 
 try:
@@ -414,6 +426,13 @@ def main() -> int:
         scenario["companions"] = [{"agent": b["agent"], "role_line": b["beat"]}
                                   for b in scenario["companion_beats"]]
 
+    state_path = REPO_ROOT / "catalog" / "station_state.json"
+    if state_path.exists():
+        state = json.loads(state_path.read_text())
+        scenario["history"] = {"pair_familiarity": state.get("pair_familiarity", {})}
+        print(f"📜 Station history loaded: {state.get('atoms_total', 0)} chronicle atoms, "
+              f"{len(scenario['history']['pair_familiarity'])} familiar pairs")
+
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     out_dir = Path(args.out_dir) if args.out_dir else \
         REPO_ROOT / "reports" / "simulation" / f"{scenario['name']}__{stamp}"
@@ -425,7 +444,8 @@ def main() -> int:
     s = sim["summary"]
     print(f"   roster engaged: {s['characters_used']} | hours worked: {s['total_spent']:.1f} | "
           f"completed: {len(s['completed_ids'])}/{len(sim['task_names'])} tasks | "
-          f"emergent events: {len(sim.get('events', []))}")
+          f"emergent events: {len(sim.get('events', []))} | "
+          f"history pairs applied: {sim.get('history_pairs_applied', 0)}")
 
     canon_souls = load_canon_souls()
     hour_records = build_hour_records(sim, scenario, canon_souls)
@@ -475,6 +495,13 @@ def main() -> int:
         print(f"   - {name}")
     print(f"   souls accounted: {souls['crew_logged']}/{souls['canon_l1_entities']} "
           f"canon entities{' ✅' if souls['complete'] else ' ⚠️ INCOMPLETE'}")
+
+    # This run is now history: refresh the persistent station state so the
+    # next hour aboard inherits what happened here.
+    subprocess.run(  # noqa: S603 - our own tool with a fixed argument
+        [sys.executable, str(REPO_ROOT / "tools" / "station_chronicle.py"), "state"],
+        cwd=REPO_ROOT, check=False,
+    )
     return 0
 
 

@@ -33,12 +33,13 @@
     "[00] Alex Thorne: All hands, Phase 1 security implementation beginning. Aurora, coordinate assignments.",
     "[00] Aurora: Phase 1 task distribution initiated. Assignments optimized for canonical specializations.",
     "[00] Prof. Elena Sorensen: Syncing with Dr. Kieran Zhao for collaborative sprint.",
+    "[00] Aurora: Collaboration synergy detected: Dr. Kieran Zhao performance enhanced.",
     "[00] Commander Alex Thorne: Progress on Habitat ring spin check (2 RPM / 0.3g verification): +0.32h [Commander, Orion Station]",
     "[00] Lt. Commander Maya Shepard: Dome observation watch handoff (ring Deck 4) complete. Executive Officer (XO) / FleetOps Commander validation passed.",
     "[00] Varya Lin: Progress on Zero-g lab safety check, core section: +0.71h [Chief Science Officer]",
     "[00] Dr. Amira Sato: L3 drift containment sweep complete. Chief Ethics Officer validation passed.",
     "[00] Dr. Elira Noor: Zero-g lab safety check, core section complete. Lead Reflexivity Specialist validation passed.",
-    "[00] Prof. Elena Sorensen: Progress on Life-support scrubber rotation, habitat ring: +0.58h [Cognitive Ethicist]",
+    "[00] Prof. Elena Sorensen: Progress on Life-support scrubber rotation, habitat ring: +0.70h [Cognitive Ethicist]",
     "[00] Helena Vu: Progress on EVA suit inspection cycle, core airlock: +0.61h [Cultural & HR Director]",
     "[00] Julian Markov: Progress on Quantum core coherence check: +0.81h [Chief Security Officer]",
     "[00] Leena Porter: Progress on EVA suit inspection cycle, core airlock: +0.84h [Bridge Operations]",
@@ -48,6 +49,7 @@
     "[00] Kai Drev: Progress on Crew quarters environmental audit, ring sections: +0.86h [Interface Ecologist]",
     "[00] Haneul Park: Progress on Docking Bay 2 logistics turnover: +0.90h [Immersive Experience Theorist]",
     "[00] Samantha Lee: Crew quarters environmental audit, ring sections complete. Logging & Observability Engineer validation passed.",
+    "[01] Aurora: Collaboration synergy detected: Varya Lin performance enhanced.",
     "[01] Varya Lin: Dome astronomy session calibration complete. Chief Science Officer validation passed.",
     "[01] Dr. Amira Sato: Command log review and Aurora arbitration sync complete. Chief Ethics Officer validation passed.",
     "[01] Helena Vu: EVA suit inspection cycle, core airlock complete. Cultural & HR Director validation passed.",
@@ -59,6 +61,7 @@
     "[02] Leena Porter: Cargo manifest reconciliation, Bay 2 intake complete. Bridge Operations Officer validation passed.",
     "[02] Dr. Ren Feldman: Comms array diagnostic, core mast complete. Chief Medical Officer validation passed.",
     "[02] Jessica Martinez: Galley resupply intake from Bay 2 complete. Backend Architect validation passed.",
+    "[03] Aurora: Collaboration synergy detected: Prof. Elena Sorensen performance enhanced.",
     "[03] Commander Alex Thorne: Progress on Bay 2 departure clearance package: +0.28h [Commander, Orion Station]",
     "[03] Lt. Commander Maya Shepard: Bay 2 departure clearance package complete. Executive Officer (XO) / FleetOps Commander validation passed.",
     "[03] Varya Lin: Progress on ORD dispatch order execution + Shadowfax inspection: +0.77h [Chief Science Officer]",
@@ -73,6 +76,33 @@
       "affected": [
         "Prof. Elena Sorensen",
         "Dr. Kieran Zhao"
+      ]
+    },
+    {
+      "tick": 0,
+      "kind": "collaboration_boost",
+      "description": "Dr. Kieran Zhao synergy with key collaborator",
+      "multiplier": 1.2,
+      "affected": [
+        "Dr. Kieran Zhao"
+      ]
+    },
+    {
+      "tick": 1,
+      "kind": "collaboration_boost",
+      "description": "Varya Lin synergy with key collaborator",
+      "multiplier": 1.0,
+      "affected": [
+        "Varya Lin"
+      ]
+    },
+    {
+      "tick": 3,
+      "kind": "collaboration_boost",
+      "description": "Prof. Elena Sorensen synergy with key collaborator",
+      "multiplier": 1.2,
+      "affected": [
+        "Prof. Elena Sorensen"
       ]
     }
   ],
@@ -116,8 +146,8 @@
       "tick": 0,
       "agent": "Prof. Elena Sorensen",
       "task": "Life-support scrubber rotation, habitat ring",
-      "effort": 0.58,
-      "note": "0.42h left"
+      "effort": 0.7,
+      "note": "0.30h left"
     },
     {
       "tick": 0,
@@ -158,7 +188,7 @@
       "tick": 0,
       "agent": "Dr. Kieran Zhao",
       "task": "Life-support scrubber rotation, habitat ring",
-      "effort": 1.06,
+      "effort": 1.53,
       "note": "\u2713 COMPLETE"
     },
     {
@@ -186,8 +216,8 @@
       "tick": 1,
       "agent": "Commander Alex Thorne",
       "task": "Dome astronomy session calibration",
-      "effort": 0.27,
-      "note": "0.48h left"
+      "effort": 0.32,
+      "note": "0.43h left"
     },
     {
       "tick": 1,
@@ -256,8 +286,8 @@
       "tick": 2,
       "agent": "Commander Alex Thorne",
       "task": "Cargo manifest reconciliation, Bay 2 intake",
-      "effort": 0.28,
-      "note": "1.22h left"
+      "effort": 0.33,
+      "note": "1.17h left"
     },
     {
       "tick": 2,
@@ -271,7 +301,7 @@
       "agent": "Varya Lin",
       "task": "Cargo manifest reconciliation, Bay 2 intake",
       "effort": 0.74,
-      "note": "0.48h left"
+      "note": "0.42h left"
     },
     {
       "tick": 2,
@@ -576,30 +606,7 @@
     "H15": "ORION__L1_OPERATIONS_RUNBOOK__v1.1",
     "H16": "THREADCORE v3.5.1 capsule + RIVERTHREAD anchor"
   },
-  "completion_ticks": {
-    "H1": null,
-    "H2": null,
-    "H3": null,
-    "H4": null,
-    "H6": null,
-    "H17": null,
-    "H18": null,
-    "H21": null,
-    "H22": null,
-    "H5": null,
-    "H7": null,
-    "H8": null,
-    "H9": null,
-    "H10": null,
-    "H19": null,
-    "H20": null,
-    "H11": null,
-    "H12": null,
-    "H13": null,
-    "H14": null,
-    "H15": null,
-    "H16": null
-  },
+  "history_pairs_applied": 2,
   "ord_dispatch": {
     "mission_id": "watch-block-H5",
     "drones_required": [
