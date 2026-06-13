@@ -352,9 +352,9 @@
       "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
     }
   ],
-  "last_updated": "2026-06-13T12:59:07Z",
+  "last_updated": "2026-06-13T13:26:08Z",
   "last_platform": "claude-code",
-  "last_session_summary": "feat(canon): L2 galactic canon promoted \u2014 full galaxy corpus",
+  "last_session_summary": "feat(sim): wire MECH-GOV-001 into the live GUMAS engine (fac",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -373,6 +373,24 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "48c50e7",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "feat(sim): wire MECH-GOV-001 into the live GUMAS engine (faction memory -> trust)"
+    },
+    {
+      "sha": "ebb6b34",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "feat(sim): implement MECH-GOV-001 \u2014 memory-driven faction decision model"
+    },
+    {
+      "sha": "c2639a5",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "feat(canon): finish L2 mining \u2014 timeline + factions promoted; memory_system reference staged for MECH-GOV-001"
+    },
     {
       "sha": "5537bf8",
       "date": "2026-06-13",
@@ -414,24 +432,6 @@
       "date": "2026-06-13",
       "platform": "claude-code",
       "summary": "chore(state): station purpose ruling canon-routed; CanonRec head synced; chronicle state refreshed"
-    },
-    {
-      "sha": "2317fb0",
-      "date": "2026-06-13",
-      "platform": "claude-code",
-      "summary": "feat(sim): station chronicle + persistent history \u2014 past actions now shape present behavior"
-    },
-    {
-      "sha": "bd433f4",
-      "date": "2026-06-13",
-      "platform": "claude-code",
-      "summary": "chore(sync): CloudBank pinned to 96e4818f \u2014 first-tick emergence fix merged (#1023)"
-    },
-    {
-      "sha": "0f69be4",
-      "date": "2026-06-13",
-      "platform": "claude-code",
-      "summary": "feat(sim): multi-hour watch block with full souls accounting and live emergence"
     }
   ],
   "security_events": [
@@ -477,7 +477,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "5537bf8",
+    "main_sha": "48c50e7",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -595,7 +595,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-06-13T12:59:07Z",
+    "checked_at": "2026-06-13T13:26:08Z",
     "entries": [
       {
         "repo": "aurora-cloudbank-symbolic-main",

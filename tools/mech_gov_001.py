@@ -48,6 +48,12 @@ RECENCY_DECAY_PER_TURN = 0.08
 HOSTILE_KINDS = {"betrayal", "attack", "broken_treaty", "sabotage"}
 FRIENDLY_KINDS = {"alliance", "negotiation", "aid", "honored_treaty"}
 
+# MECH-SOC-001 population grievance kinds: hardship/repression accumulate
+# grievance; relief/autonomy ease it. Slow decay -> grievances persist.
+GRIEVANCE_KINDS = {"repression", "hardship", "broken_promise", "war_loss"}
+RELIEF_KINDS = {"relief", "autonomy", "prosperity", "reform"}
+GRIEVANCE_HALF_LIFE_TURNS = 30.0
+
 DEFAULT_ACTIONS = ["ally", "negotiate", "verify", "hold", "escalate", "betray"]
 
 
@@ -78,9 +84,9 @@ class EpisodicMemory:
 
     @property
     def valence(self) -> float:
-        if self.kind in HOSTILE_KINDS:
+        if self.kind in HOSTILE_KINDS or self.kind in GRIEVANCE_KINDS:
             return -1.0
-        if self.kind in FRIENDLY_KINDS:
+        if self.kind in FRIENDLY_KINDS or self.kind in RELIEF_KINDS:
             return 1.0
         return 0.0
 
@@ -224,6 +230,52 @@ class FactionDecisionModel:
 
     def tick(self, turns: int = 1) -> None:
         """Advance the logical clock; memory decay is lazy (on retrieval)."""
+        self.turn += turns
+
+
+class PopulationGrievanceModel:
+    """MECH-SOC-001 — Population Grievance Memory (social dynamics).
+
+    A polity's population remembers hardship, repression, and broken promises
+    (grievance), and relief, autonomy, and prosperity (easing), with *slow*
+    decay so the memory persists long after the immediate cause. Accumulated
+    net grievance is the social-pressure term the canon frames as eroding
+    stability (`P_stability = E + T - C`; DSI fracture under pressure) and
+    raising insurgency onset. Makes instability path-dependent: a population
+    that suffered carries it forward.
+    """
+
+    def __init__(self, seed: int = 0) -> None:
+        self.rng = random.Random(seed)
+        self.turn = 0
+        self.stores: dict[str, FactionMemoryStore] = {}
+
+    def _store(self, faction: str) -> FactionMemoryStore:
+        return self.stores.setdefault(faction, FactionMemoryStore())
+
+    def record(self, faction: str, kind: str, importance: float = 5.0, content: str = "") -> None:
+        self._store(faction).add(EpisodicMemory(
+            kind=kind, about="__population__", content=content or kind,
+            importance=float(importance), created_turn=self.turn,
+            last_access_turn=self.turn, half_life=GRIEVANCE_HALF_LIFE_TURNS,
+        ))
+
+    def grievance_pressure(self, faction: str) -> float:
+        """Net remembered grievance in [0, 1] (0 = content, 1 = seething)."""
+        store = self.stores.get(faction)
+        if not store:
+            return 0.0
+        net = 0.0
+        for m in store.memories:
+            m.decay_to(self.turn)
+            if m.strength <= 0:
+                continue
+            # grievance pulls up, relief pulls down
+            net += -m.valence * m.strength * (m.importance / 10.0)
+        # squash to [0, 1]; only positive net grievance raises pressure
+        return max(0.0, min(1.0, math.tanh(max(0.0, net) * 0.5)))
+
+    def tick(self, turns: int = 1) -> None:
         self.turn += turns
 
 

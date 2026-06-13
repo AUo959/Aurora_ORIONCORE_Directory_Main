@@ -31,10 +31,45 @@ ENGINE_DIR = REPO_ROOT / "GUMAS_SIM_2.5" / "SIM_ENGINE_OUTPUTS"
 sys.path.insert(0, str(ENGINE_DIR))
 sys.path.insert(0, str(REPO_ROOT / "tools"))
 
-from mech_gov_001 import FactionDecisionModel  # noqa: E402
+from mech_gov_001 import FactionDecisionModel, PopulationGrievanceModel  # noqa: E402
 
 # Blend weight: how strongly memory disposition pulls the engine's trust score.
 MEMORY_PULL = 0.30
+# How strongly remembered grievance pulls the persistent housing-pressure driver.
+SOC_PULL = 0.25
+
+
+def _harvest_grievance(soc: PopulationGrievanceModel, v3) -> dict:
+    """Record this turn's social events (hardship/repression/relief) per faction."""
+    counts = {"hardship": 0, "repression": 0, "relief": 0}
+    if v3 is None:
+        return counts
+    hosting = {}
+    for ins in getattr(v3, "insurgencies", []):
+        hosting[ins.host_faction_id] = hosting.get(ins.host_faction_id, 0) + 1
+    for fid, pop in getattr(v3, "population", {}).items():
+        stress = float(getattr(pop, "demographic_stress", 0.0))
+        if hosting.get(fid):
+            soc.record(fid, "repression", importance=6.0)
+            counts["repression"] += 1
+        if stress > 0.5:
+            soc.record(fid, "hardship", importance=4.0 + 6.0 * (stress - 0.5))
+            counts["hardship"] += 1
+        elif stress < 0.3:
+            soc.record(fid, "relief", importance=4.0)
+            counts["relief"] += 1
+    return counts
+
+
+def _writeback_grievance(soc: PopulationGrievanceModel, v3) -> None:
+    """Carry remembered grievance into the persistent housing-pressure driver,
+    so a population that suffered keeps elevated stress after the cause fades."""
+    if v3 is None:
+        return
+    for fid, pop in getattr(v3, "population", {}).items():
+        gp = soc.grievance_pressure(fid)
+        cur = float(getattr(pop, "housing_pressure", 0.3))
+        pop.housing_pressure = max(0.0, min(1.0, (1 - SOC_PULL) * cur + SOC_PULL * gp))
 
 
 def _harvest(mech: FactionDecisionModel, state, prev_breach: dict, seen_conflicts: set,
@@ -108,27 +143,36 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     engine = GUMASAdvancedEngine(seed=seed)
     engine.init_scenario()
     mech = FactionDecisionModel(seed=seed) if memory_on else None
+    soc = PopulationGrievanceModel(seed=seed) if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
     traj: list[dict] = []
-    harvest_total = {"betrayals": 0, "attacks": 0, "alliances": 0}
+    harvest_total = {"betrayals": 0, "attacks": 0, "alliances": 0,
+                     "hardship": 0, "repression": 0, "relief": 0}
 
     for t in range(turns):
         res = engine.step()
         d = res.to_dict()
         state = engine.get_state()
+        v3 = engine.get_v3_state()
         if memory_on:
             mech.tick(1)
+            soc.tick(1)
             c = _harvest(mech, state, prev_breach, seen_conflicts, seen_treaties)
-            for k in harvest_total:
+            cg = _harvest_grievance(soc, v3)
+            for k in c:
                 harvest_total[k] += c[k]
+            for k in cg:
+                harvest_total[k] += cg[k]
             _writeback(mech, state)
+            _writeback_grievance(soc, v3)
         traj.append({
             "turn": d["turn"],
             "stability": d["stability_index"],
             "risk": d["risk_index"],
             "conflicts": len(state.conflicts),
+            "insurgencies": len(getattr(v3, "insurgencies", [])) if v3 else 0,
         })
 
     final = traj[-1]
@@ -136,8 +180,10 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
         "memory_on": memory_on, "seed": seed, "turns": turns,
         "final_stability": final["stability"], "final_risk": final["risk"],
         "final_conflicts": final["conflicts"],
+        "final_insurgencies": final["insurgencies"],
         "mean_risk": round(sum(p["risk"] for p in traj) / len(traj), 4),
         "peak_conflicts": max(p["conflicts"] for p in traj),
+        "peak_insurgencies": max(p["insurgencies"] for p in traj),
         "harvested": harvest_total,
         "trajectory": traj,
     }
@@ -155,19 +201,23 @@ def main() -> int:
     memory = run(args.seed, args.turns, memory_on=True)
 
     def line(label, r):
-        print(f"  {label:8} | final stability {r['final_stability']:.3f} | "
-              f"final risk {r['final_risk']:.3f} | mean risk {r['mean_risk']:.3f} | "
-              f"final conflicts {r['final_conflicts']} | peak {r['peak_conflicts']}")
+        print(f"  {label:8} | stability {r['final_stability']:.3f} | "
+              f"risk {r['final_risk']:.3f} | mean risk {r['mean_risk']:.3f} | "
+              f"insurgencies {r['final_insurgencies']} (peak {r['peak_insurgencies']}) | "
+              f"conflicts {r['final_conflicts']}")
     print("\nResults:")
     line("baseline", baseline)
     line("memory", memory)
     h = memory["harvested"]
-    print(f"\n  memory harvested: {h['betrayals']} betrayals, {h['attacks']} attacks, "
-          f"{h['alliances']} alliances -> faction episodic memory")
+    print(f"\n  diplomacy memory: {h['betrayals']} betrayals, {h['attacks']} attacks, "
+          f"{h['alliances']} alliances")
+    print(f"  social memory:    {h['hardship']} hardship, {h['repression']} repression, "
+          f"{h['relief']} relief -> population grievance")
     ds = memory["final_stability"] - baseline["final_stability"]
     dr = memory["final_risk"] - baseline["final_risk"]
+    di = memory["final_insurgencies"] - baseline["final_insurgencies"]
     print(f"  delta (memory - baseline): stability {ds:+.3f}, risk {dr:+.3f}, "
-          f"conflicts {memory['final_conflicts'] - baseline['final_conflicts']:+d}")
+          f"insurgencies {di:+d}, conflicts {memory['final_conflicts'] - baseline['final_conflicts']:+d}")
 
     if args.out_json:
         Path(args.out_json).write_text(json.dumps(

@@ -58,3 +58,42 @@ MECH-GOV-001 substrate applied to polity↔population rather than faction↔fact
 That is a v3-rebellion-module hook, a larger change than the diplomacy wiring,
 and the coherent next step. The diplomacy integration stands as the validated,
 faithful foundation.
+
+---
+
+## Update — social-dynamics integration (MECH-SOC-001)
+
+Per "include social dynamics across the galaxy," the social layer was promoted
+to `canon/L2/social_dynamics/` (DSI, social cohesion, `P_stability=E+T-C`,
+public sentiment, non-war progression) and **MECH-SOC-001 (Population Grievance
+Memory)** was built and hooked into the **actual instability axis** — the
+rebellion module — not just diplomacy.
+
+Mechanism: each turn the harness reads per-faction demographic stress and active
+insurgencies, records `hardship`/`repression`/`relief` into population grievance
+memory (slow decay, half-life 30 turns), and writes accumulated grievance back
+into the **persistent housing-pressure driver** that feeds
+`demographic_stress → rebellion onset`. Path-dependent: a population that
+suffered carries it forward; relief eases it.
+
+### A/B (seed 42, 120 turns)
+
+| Run | stability | risk | mean risk | insurgencies (peak) |
+|---|---|---|---|---|
+| baseline | 0.357 | 0.651 | 0.570 | 13 (13) |
+| memory (GOV+SOC) | 0.353 | 0.638 | 0.561 | 13 (13) |
+
+Social memory harvested: **304 hardship, 1,211 repression, 967 relief** — the
+model is heavily exercised. Risk moved **−0.013** (the first *stabilizing*
+movement; diplomacy-only had been +0.016), driven by populations also
+remembering relief, not only hardship.
+
+### Honest finding
+
+The grievance hook reaches the real instability axis and is directionally
+stabilizing, but the seed-42 collapse is **structurally robust**: 13
+insurgencies still form, stability stays ~0.35. The discrete onset events don't
+change at honest coupling; only the aggregate risk softens. Coefficients were
+**not** tuned to manufacture a larger effect (emergence principle). The
+memory mechanics are now real, canon-grounded, tested, and live in the engine —
+what they change, and don't, is reported as measured.
