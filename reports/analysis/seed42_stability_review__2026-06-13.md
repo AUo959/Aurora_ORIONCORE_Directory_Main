@@ -101,3 +101,70 @@ pathway + onset dampener (lessons §5). One of the three prerequisites (faction
 canon) is already done, and the driver substrate (grievance memory) is already
 built and wired. What remains is **MECH-SOC-002** — the resolution/war-weariness
 mechanic that gives the attractor an exit edge. Ready to build on owner go.
+
+---
+
+## 6. Expanded root cause — conflict *initiation* is over-weighted (owner insight, confirmed)
+
+The resolution gap (§2) is only half of it. The owner's suspicion — that
+conflict *initiation* is unrealistic and biased by the canon's military/political
+focus — is confirmed, and it has a documented prior solution that was never built.
+
+### The prior attempt (recovered, never implemented)
+
+`canon/L2/social_dynamics/non_war_progression_mechanics.md` opens: *"if we
+overemphasize war, we risk creating a galaxy where peace is unattainable."* It
+prescribes, concretely:
+
+- **DSI = (P + E + S) / (C + M)** — a faction absorbs crises without war when
+  political unity, economy, and social cohesion are high relative to
+  **corruption and militarization**. *Militarization is a destabilizing term* —
+  so a galaxy whose well-developed canon is Marshals, Sentinels, fleets,
+  operations, and intelligence is mechanically biased toward instability.
+- **`GDP_growth = R + I − D`**, **golden ages `P_stability = E + T − C`**,
+  cultural/scientific progression, crisis-diplomacy de-escalation paths.
+- **§4 explicit fix:** *"adjust conflict probability so that non-war events make
+  up at least 60–70% of major events,"* *"ensure war is costly,"* *"if war is
+  the only viable mechanic, it will always be used."*
+
+### What the engine actually has
+
+- The `EventType` vocabulary **is balanced** (DIPLOMATIC_OVERTURE, ECONOMIC_BOOM,
+  TRADE_AGREEMENT, TECHNOLOGY_BREAKTHROUGH, CULTURAL_MOVEMENT,
+  INFRASTRUCTURE_INVESTMENT, MEDIATION_OFFER … alongside the war types).
+- But **DSI / non-war rebalance / golden-age / costly-war: none are
+  implemented.** The v3 phase *dynamics* are the bias: rebellion + intelligence
+  self-reinforce and escalate (lessons §2.1, §2.2) while technology/negotiation
+  collapse (§1.4) — the war phases capture the event budget with no force
+  pulling the mix back toward the prescribed 60–70% non-war.
+
+So war dominates not because it's the only option but because it is the only
+**self-reinforcing, well-tuned** option, and nothing rewards the peaceful paths
+or penalizes militarization. The canon's military emphasis is the worldbuilding
+mirror of the same imbalance.
+
+## 7. Revised build plan — two-sided (drain the attractor *and* shrink the inflow)
+
+**A. Exit edge — MECH-SOC-002 (Insurgency Resolution / War-Weariness)** — as §4.
+Gives entrenched civil wars a reachable end.
+
+**B. Initiation realism — implement the non-war progression prescription:**
+
+1. **DSI onset gate.** Compute `DSI = (P + E + S)/(C + M)` per faction and gate
+   rebellion/conflict onset on it — high P/E/S absorbs crises; high
+   militarization/corruption raises onset. (Realizes the canon formula.)
+2. **Non-war progression dynamics.** Give the economic/cultural/scientific
+   phases self-reinforcing growth (golden ages via `P_stability = E + T − C`)
+   so they compete for the event budget — target the 60–70% non-war floor.
+3. **Make war costly.** War/insurgency draws down economy and legitimacy, so a
+   prosperous faction prefers diplomacy (the AI-adaptability rule).
+4. **Memory ties in.** MECH-GOV-001 already makes a betrayed faction wary and a
+   weak one negotiate; the DSI gate lets a *prosperous, cohesive* faction
+   de-escalate — the missing third disposition.
+
+**Sequencing:** A and B are independent and additive. A alone lets existing
+civil wars end; B alone slows new ones and offers alternatives; together they
+should lift the seed-42 plateau. Build both governed in `tools/`, A/B each, and
+report honestly — resolution and de-escalation made *reachable*, not forced.
+
+This is the prior solution finally built, plus the exit edge it never had.
