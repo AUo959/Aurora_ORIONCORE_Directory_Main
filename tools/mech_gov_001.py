@@ -319,6 +319,46 @@ class DiplomaticStabilityModel:
             self.dsi(political_unity, economic, cohesion_eff, corruption, militarization))
 
 
+class PostWarRecoveryModel:
+    """MECH-SOC-005 — Post-War Reconstruction.
+
+    The stability index is `0.35·population + 0.30·legitimacy + 0.25·trust +
+    0.10·peace`. The seed-42 lessons found population stability floored at ~0.09
+    (§1.5) and legitimacy the weakest contributor (§1.6) — because the engine
+    only ever *drags these down* under war and never restores them. With
+    conflict now resolvable (MECH-SOC-002), a faction at peace must be able to
+    *heal*: population stability and governance legitimacy rebuild over time,
+    and the demographic stress drivers (housing, unemployment, food) ease toward
+    healthy baselines. Recovery is gated on peace — an active insurgency halts
+    reconstruction — so it rewards ending wars rather than papering over them.
+    """
+
+    POP_TARGET = 0.72
+    POP_RECOVERY_RATE = 0.06
+    LEGIT_TARGET = 0.65
+    LEGIT_RECOVERY_RATE = 0.04
+    HOUSING_TARGET = 0.25
+    UNEMPLOY_TARGET = 0.12
+    FOOD_TARGET = 0.80
+    DRIVER_RECOVERY_RATE = 0.05
+
+    @staticmethod
+    def toward(current: float, target: float, rate: float) -> float:
+        """Lift `current` a fraction `rate` toward a higher target (population,
+        legitimacy, food security). Recovery never degrades a healthy value."""
+        if current < target:
+            return current + (target - current) * rate
+        return current
+
+    @staticmethod
+    def ease_down(current: float, target: float, rate: float) -> float:
+        """Relax `current` a fraction `rate` down toward a lower target
+        (housing pressure, unemployment)."""
+        if current > target:
+            return current - (current - target) * rate
+        return current
+
+
 class WarWearinessModel:
     """MECH-SOC-002 — Insurgency Resolution / War-Weariness (the exit edge).
 
@@ -338,6 +378,7 @@ class WarWearinessModel:
     GRACE_TURNS = 4            # early war has fresh fervor; weariness builds after
     SUPPORT_EROSION = 0.012    # per war-turn beyond grace, scaled by weariness
     STRENGTH_ATTRITION = 0.010  # direct attrition once deeply weary
+    TERRITORY_ATTRITION = 0.015  # weary insurgents cede ground -> reach SUPPRESSED
 
     def __init__(self) -> None:
         self.turns_in_war: dict[str, int] = {}
@@ -351,10 +392,16 @@ class WarWearinessModel:
         self.turns_in_war[insurgency_id] = t
         return max(0.0, min(1.0, (t - self.GRACE_TURNS) / 30.0))
 
-    def erosion(self, weariness: float) -> tuple[float, float]:
-        """Return (support_erosion, strength_attrition) for this turn."""
+    def erosion(self, weariness: float) -> tuple[float, float, float]:
+        """Return (support_erosion, strength_attrition, territory_attrition).
+
+        Territory attrition matters for resolution: an insurgency only reaches
+        the engine's SUPPRESSED gate at territory < 0.01, so a weary movement
+        must cede ground, not just lose strength. This clears the lingering
+        minor-insurgency swarm that chronically drags population stability."""
         return (self.SUPPORT_EROSION * weariness,
-                self.STRENGTH_ATTRITION * max(0.0, weariness - 0.5) * 2.0)
+                self.STRENGTH_ATTRITION * max(0.0, weariness - 0.5) * 2.0,
+                self.TERRITORY_ATTRITION * weariness)
 
 
 # --------------------------------------------------------------------------- demo

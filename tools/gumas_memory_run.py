@@ -35,9 +35,43 @@ from mech_gov_001 import (  # noqa: E402
     DiplomaticStabilityModel,
     FactionDecisionModel,
     PopulationGrievanceModel,
+    PostWarRecoveryModel,
     WarWearinessModel,
 )
 from gumas_consequence_layer import ConsequenceLayer  # noqa: E402
+
+
+def _writeback_recovery(recov: PostWarRecoveryModel, state, v3) -> None:
+    """MECH-SOC-005: a faction at peace rebuilds population stability and
+    governance legitimacy and eases its demographic stress drivers. Gated on
+    peace — an active insurgency halts reconstruction."""
+    if v3 is None:
+        return
+    # Reconstruction is halted only by *serious* conflict (civil war/escalated),
+    # not by a minor insurgency a faction is already containing — otherwise the
+    # constant churn of low-level insurgencies blocks recovery permanently.
+    serious_war = {"civil_war", "escalated"}
+    at_war = set()
+    for ins in getattr(v3, "insurgencies", []):
+        if _phase(ins) in serious_war:
+            at_war.add(ins.host_faction_id)
+    for fid, fac in state.factions.items():
+        if fid in at_war:
+            continue
+        fac.population_stability = round(
+            recov.toward(float(fac.population_stability), recov.POP_TARGET, recov.POP_RECOVERY_RATE), 4)
+        leader = state.leaders.get(fac.leader_id) if fac.leader_id else None
+        if leader is not None:
+            leader.public_legitimacy = round(
+                recov.toward(float(leader.public_legitimacy), recov.LEGIT_TARGET, recov.LEGIT_RECOVERY_RATE), 4)
+        pop = getattr(v3, "population", {}).get(fid)
+        if pop is not None:
+            pop.housing_pressure = round(
+                recov.ease_down(float(pop.housing_pressure), recov.HOUSING_TARGET, recov.DRIVER_RECOVERY_RATE), 4)
+            pop.unemployment = round(
+                recov.ease_down(float(getattr(pop, "unemployment", 0.15)), recov.UNEMPLOY_TARGET, recov.DRIVER_RECOVERY_RATE), 4)
+            pop.food_security = round(
+                recov.toward(float(getattr(pop, "food_security", 0.7)), recov.FOOD_TARGET, recov.DRIVER_RECOVERY_RATE), 4)
 
 ACTIVE_WAR_PHASES = {"civil_war", "escalated", "active"}
 
@@ -105,9 +139,10 @@ def _writeback_weariness(weary: WarWearinessModel, v3) -> int:
         w = weary.weary(ins.insurgency_id, active)
         if not active or w <= 0:
             continue
-        support_erosion, strength_attrition = weary.erosion(w)
+        support_erosion, strength_attrition, territory_attrition = weary.erosion(w)
         ins.popular_support = max(0.0, ins.popular_support - support_erosion)
         ins.insurgent_strength = max(0.0, ins.insurgent_strength - strength_attrition)
+        ins.territory_controlled = max(0.0, float(getattr(ins, "territory_controlled", 0.0)) - territory_attrition)
         touched += 1
     return touched
 
@@ -253,6 +288,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     dsi = DiplomaticStabilityModel() if memory_on else None
     weary = WarWearinessModel() if memory_on else None
     cons = ConsequenceLayer() if memory_on else None
+    recov = PostWarRecoveryModel() if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
@@ -280,6 +316,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
             _writeback_weariness(weary, v3)
             intel_pressure = min(1.0, d.get("v3_result", {}).get("intelligence_ops", 0) / 15.0)
             _writeback_consequences(cons, state, v3, intel_pressure)
+            _writeback_recovery(recov, state, v3)
         traj.append({
             "turn": d["turn"],
             "stability": d["stability_index"],

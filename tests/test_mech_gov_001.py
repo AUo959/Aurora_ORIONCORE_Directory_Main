@@ -21,6 +21,7 @@ from mech_gov_001 import (  # noqa: E402
     DiplomaticStabilityModel,
     FactionDecisionModel,
     PopulationGrievanceModel,
+    PostWarRecoveryModel,
     WarWearinessModel,
 )
 
@@ -153,12 +154,30 @@ def test_war_weariness_builds_then_erodes_support():
     for _ in range(25):
         late = w.weary("ins-1", active=True)
     assert late > early, (early, late)
-    se_late, _ = w.erosion(late)
-    se_early, _ = w.erosion(early)
+    se_late, _, _ = w.erosion(late)
+    se_early, _, _ = w.erosion(early)
     assert se_late > se_early >= 0.0
     # Resolving/ending the war resets the clock.
     assert w.weary("ins-1", active=False) == 0.0
     assert w.weary("ins-1", active=True) == 0.0
+
+
+@pytest.mark.simulation
+def test_post_war_recovery_lifts_and_never_degrades():
+    """MECH-SOC-005: reconstruction lifts low values toward health and eases
+    stress drivers down, but never degrades an already-healthy value."""
+    r = PostWarRecoveryModel()
+    # population/legitimacy/food: lift toward a higher target
+    assert r.toward(0.10, r.POP_TARGET, r.POP_RECOVERY_RATE) > 0.10
+    assert r.toward(0.90, 0.72, 0.06) == 0.90          # already healthy -> unchanged
+    # housing/unemployment: ease down toward a lower target
+    assert r.ease_down(0.80, r.HOUSING_TARGET, r.DRIVER_RECOVERY_RATE) < 0.80
+    assert r.ease_down(0.10, r.HOUSING_TARGET, 0.05) == 0.10  # already low -> unchanged
+    # repeated peacetime recovery converges toward the target
+    v = 0.10
+    for _ in range(80):
+        v = r.toward(v, r.POP_TARGET, r.POP_RECOVERY_RATE)
+    assert v > 0.65
 
 
 @pytest.mark.simulation
