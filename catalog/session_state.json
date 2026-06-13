@@ -352,9 +352,9 @@
       "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
     }
   ],
-  "last_updated": "2026-06-13T03:16:19Z",
+  "last_updated": "2026-06-13T12:35:32Z",
   "last_platform": "claude-code",
-  "last_session_summary": "feat(sim): the live station link \u2014 real-time downlink with e",
+  "last_session_summary": "docs(discovery): L2 canon genesis & lineage \u2014 traced to the ",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -373,6 +373,24 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "e086668",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "docs(discovery): L2 canon genesis & lineage \u2014 traced to the original 'Crisis & Compromise' RPG"
+    },
+    {
+      "sha": "af5cced",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "docs(discovery): authoritative simulation/GUMAS/Orion inventory index"
+    },
+    {
+      "sha": "2e67dc1",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "feat(sim): crew-life fidelity \u2014 the human layer (shifts/sleep/meals/hygiene/fatigue), shift-gated into the live watch"
+    },
     {
       "sha": "48bcdce",
       "date": "2026-06-13",
@@ -414,24 +432,6 @@
       "date": "2026-06-13",
       "platform": "claude-code",
       "summary": "feat(sim): hour-aboard pack \u2014 one simulated hour with crew logs, interaction map, companion ops accounting"
-    },
-    {
-      "sha": "8c978c7",
-      "date": "2026-06-13",
-      "platform": "claude-code",
-      "summary": "chore(sync): CloudBank pinned to 30f3464d \u2014 mesh 404 guard merged (#1021, closes the 404 half of #1020)"
-    },
-    {
-      "sha": "f7d1a48",
-      "date": "2026-06-13",
-      "platform": "claude-code",
-      "summary": "chore(sync): CloudBank clone fast-forwarded to 3494e5ac; ORD flight declared and flown"
-    },
-    {
-      "sha": "8ed2288",
-      "date": "2026-06-13",
-      "platform": "claude-code",
-      "summary": "docs(salvage): add root salvage docket"
     }
   ],
   "security_events": [
@@ -477,7 +477,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "48bcdce",
+    "main_sha": "e086668",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -595,7 +595,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-06-13T03:16:19Z",
+    "checked_at": "2026-06-13T12:35:32Z",
     "entries": [],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
   }
