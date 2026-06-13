@@ -4,7 +4,14 @@
   "crew_logged": 41,
   "crew_from_roster": 35,
   "crew_supplemental_from_canon": 6,
-  "companions_on_mesh": [],
+  "companions_on_mesh": [
+    "ARCHY",
+    "Aurora",
+    "LIORA",
+    "OPPY",
+    "RIVERTHREAD_808",
+    "STARLING_AU"
+  ],
   "complete": true,
   "note": "Every L1 canon entity carries an hour-by-hour record (task work or division duty); station intelligences are accounted in companion_ops.json."
 }

@@ -1,0 +1,176 @@
+{
+  "generated_at_utc": "2026-06-13T03:14:38Z",
+  "scenario": "live_watch_v1",
+  "link_model": {
+    "one_way_light_time_s": 5.0,
+    "round_trip_s": 10.0,
+    "downlink_targets": [
+      "aurora",
+      "archy",
+      "oppy",
+      "liora",
+      "starling_au",
+      "riverthread_808"
+    ]
+  },
+  "operations": [
+    {
+      "hour": 1,
+      "agent": "Aurora",
+      "answered": true,
+      "reply": "Aurora: I've logged Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the shared mesh context. Memory anchor: # Auror"
+    },
+    {
+      "hour": 1,
+      "agent": "ARCHY",
+      "answered": true,
+      "reply": "ARCHY: Structurally, Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundaries. I'd isolate the contract first, then "
+    },
+    {
+      "hour": 1,
+      "agent": "OPPY",
+      "answered": true,
+      "reply": "OPPY: For Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work, and the handoff cost before changing an"
+    },
+    {
+      "hour": 1,
+      "agent": "LIORA",
+      "answered": true,
+      "reply": "LIORA: I'm reading Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is to preserve the current loop, then adapt "
+    },
+    {
+      "hour": 1,
+      "agent": "STARLING_AU",
+      "answered": true,
+      "reply": "STARLING_AU: Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a clearer delivery signal so the workspace stays"
+    },
+    {
+      "hour": 1,
+      "agent": "RIVERTHREAD_808",
+      "answered": true,
+      "reply": "RIVERTHREAD_808: I'd anchor Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread state first, then update the channel witho"
+    },
+    {
+      "hour": 2,
+      "agent": "Aurora",
+      "answered": true,
+      "reply": "Aurora: I've logged Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the shared mesh context. Memory anchor: # Auror"
+    },
+    {
+      "hour": 2,
+      "agent": "ARCHY",
+      "answered": true,
+      "reply": "ARCHY: Structurally, Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundaries. I'd isolate the contract first, then "
+    },
+    {
+      "hour": 2,
+      "agent": "OPPY",
+      "answered": true,
+      "reply": "OPPY: For Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work, and the handoff cost before changing an"
+    },
+    {
+      "hour": 2,
+      "agent": "LIORA",
+      "answered": true,
+      "reply": "LIORA: I'm reading Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is to preserve the current loop, then adapt "
+    },
+    {
+      "hour": 2,
+      "agent": "STARLING_AU",
+      "answered": true,
+      "reply": "STARLING_AU: Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a clearer delivery signal so the workspace stays"
+    },
+    {
+      "hour": 2,
+      "agent": "RIVERTHREAD_808",
+      "answered": true,
+      "reply": "RIVERTHREAD_808: I'd anchor Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread state first, then update the channel witho"
+    },
+    {
+      "hour": 3,
+      "agent": "Aurora",
+      "answered": true,
+      "reply": "Aurora: I've logged Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the shared mesh context. Memory anchor: # Auror"
+    },
+    {
+      "hour": 3,
+      "agent": "ARCHY",
+      "answered": true,
+      "reply": "ARCHY: Structurally, Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundaries. I'd isolate the contract first, then "
+    },
+    {
+      "hour": 3,
+      "agent": "OPPY",
+      "answered": true,
+      "reply": "OPPY: For Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work, and the handoff cost before changing an"
+    },
+    {
+      "hour": 3,
+      "agent": "LIORA",
+      "answered": true,
+      "reply": "LIORA: I'm reading Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is to preserve the current loop, then adapt "
+    },
+    {
+      "hour": 3,
+      "agent": "STARLING_AU",
+      "answered": true,
+      "reply": "STARLING_AU: Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a clearer delivery signal so the workspace stays"
+    },
+    {
+      "hour": 3,
+      "agent": "RIVERTHREAD_808",
+      "answered": true,
+      "reply": "RIVERTHREAD_808: I'd anchor Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread state first, then update the channel witho"
+    },
+    {
+      "hour": 4,
+      "agent": "Aurora",
+      "answered": true,
+      "reply": "Aurora: I've logged Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the shared mesh context. Memory anchor: # Auror"
+    },
+    {
+      "hour": 4,
+      "agent": "ARCHY",
+      "answered": true,
+      "reply": "ARCHY: Structurally, Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundaries. I'd isolate the contract first, then "
+    },
+    {
+      "hour": 4,
+      "agent": "OPPY",
+      "answered": true,
+      "reply": "OPPY: For Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work, and the handoff cost before changing an"
+    },
+    {
+      "hour": 4,
+      "agent": "LIORA",
+      "answered": true,
+      "reply": "LIORA: I'm reading Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is to preserve the current loop, then adapt "
+    },
+    {
+      "hour": 4,
+      "agent": "STARLING_AU",
+      "answered": true,
+      "reply": "STARLING_AU: Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a clearer delivery signal so the workspace stays"
+    },
+    {
+      "hour": 4,
+      "agent": "RIVERTHREAD_808",
+      "answered": true,
+      "reply": "RIVERTHREAD_808: I'd anchor Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread state first, then update the channel witho"
+    }
+  ],
+  "ord_dispatch": {
+    "mission_id": "watch-block-H5",
+    "drones_required": [
+      "ORD-2 Delta Scout",
+      "ORD-3 Shadowfax"
+    ],
+    "receipt_sha256": "4842a48eef24ae10469e7e867989004a826c002a08591e9937dfa19f9d33f579"
+  },
+  "l3_receipt": {
+    "narrative_audit_verdict": "supported",
+    "ethics_protocol": "Picard_Delta_3",
+    "anchor_seed": "EOS_SEED_ORION",
+    "live_control_loop": "engine risk \u2192 Aurora advisory \u2192 risk-response cell (fired)"
+  }
+}

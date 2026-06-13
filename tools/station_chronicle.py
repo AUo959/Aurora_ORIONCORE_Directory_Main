@@ -187,6 +187,38 @@ def from_simulation_runs() -> list[dict]:
                                   f"{rec['agent']} completed {names.get(rec['task'], rec['task'])}",
                                   [rec["agent"]],
                                   f"reports/simulation/{run_dir.name}/sim_raw.json", rec))
+
+        # Engine telemetry (powered / live watches) — derived from the same
+        # artifact, so engine history reconstructs from disk like everything
+        # else (no reliance on an append-only side ledger).
+        eng = sim.get("engine")
+        if eng:
+            live = "feed" in sim
+            kind = "live_watch_run" if live else "powered_watch_run"
+            src = f"reports/simulation/{run_dir.name}/sim_raw.json"
+            eng_anchor = {"schema_version": LEDGER_SCHEMA, "scenario_id": scenario,
+                          "engine_class": eng.get("engine_class"), "turns": eng.get("turns_total"),
+                          "live_link": live}
+            atoms.append(atom(stamp, "STAGING", "engine", kind,
+                              f"Chassis ran {eng.get('engine_class')} for {eng.get('turns_total')} "
+                              f"turns ({'live downlink' if live else 'batched'}): final risk "
+                              f"{eng.get('final_risk')}, stability {eng.get('final_stability')}",
+                              [], src, eng_anchor))
+            for entry in eng.get("log", []):
+                if entry.get("notable"):
+                    kinds = ", ".join(f"{k}×{v}" for k, v in entry["notable"].items())
+                    atoms.append(atom(stamp, "STAGING", "engine", "engine_notable_turn",
+                                      f"Engine turn {entry['turn']} (hour {entry['hour']}): {kinds}",
+                                      [], src, entry))
+            for inj in eng.get("injected_tasks", []):
+                inj_hour = inj.get("hour") or inj.get("hour_injected")
+                detail = (f"Aurora live advisory at hour {inj_hour} (risk "
+                          f"{inj.get('trigger_risk', 0):.3f}) stood up a risk-response cell"
+                          if live else
+                          f"Engine activity at hour {inj_hour} injected an analysis cell")
+                atoms.append(atom(stamp, "STAGING", "engine",
+                                  "live_advisory_response" if live else "engine_feedback_task",
+                                  detail, ["Aurora"] if live else [], src, inj))
     return atoms
 
 

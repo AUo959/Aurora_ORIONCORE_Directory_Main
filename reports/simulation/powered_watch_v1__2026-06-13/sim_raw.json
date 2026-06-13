@@ -48,26 +48,26 @@
     "[00] Jiro Tanaka: Habitat ring spin check (2 RPM / 0.3g verification) complete. Chief Engineering Officer validation passed.",
     "[00] Chief Engineer Raj Patel: Quantum core coherence check complete. Systems Engineer / Chief Engineer validation passed.",
     "[00] Dr. Kieran Zhao: Life-support scrubber rotation, habitat ring complete. Computational Optimization Lead validation passed.",
-    "[00] Kai Drev: Crew quarters environmental audit, ring sections complete. Interface Ecologist validation passed.",
+    "[00] Kai Drev: Progress on Crew quarters environmental audit, ring sections: +0.86h [Interface Ecologist]",
     "[00] Haneul Park: Progress on Docking Bay 2 logistics turnover: +0.90h [Immersive Experience Theorist]",
-    "[01] Aurora: Collaboration synergy detected: Julian Markov performance enhanced.",
-    "[01] Varya Lin: Hydroponics nutrient cycle adjustment complete. Chief Science Officer validation passed.",
+    "[00] Samantha Lee: Crew quarters environmental audit, ring sections complete. Logging & Observability Engineer validation passed.",
+    "[01] Tariq El-Sayegh: Syncing with Dr. Elena Vasquez for collaborative sprint.",
+    "[01] Aurora: Collaboration synergy detected: Dr. Elira Noor performance enhanced.",
     "[01] Dr. Amira Sato: Command log review and Aurora arbitration sync complete. Chief Ethics Officer validation passed.",
-    "[01] Helena Vu: Dome astronomy session calibration complete. Cultural & HR Director validation passed.",
-    "[01] Julian Markov: Ring stress telemetry review complete. Chief Security Officer validation passed.",
+    "[01] Prof. Elena Sorensen: Dome astronomy session calibration complete. Cognitive Ethicist validation passed.",
+    "[01] Helena Vu: Ring stress telemetry review complete. Cultural & HR Director validation passed.",
+    "[01] Julian Markov: Comms array diagnostic, core mast complete. Chief Security Officer validation passed.",
     "[01] Leena Porter: Docking Bay 2 logistics turnover complete. Bridge Operations Officer validation passed.",
-    "[01] Dr. Ren Feldman: Comms array diagnostic, core mast complete. Chief Medical Officer validation passed.",
-    "[02] Aurora: Collaboration synergy detected: Jiro Tanaka performance enhanced.",
-    "[02] Lt. Commander Maya Shepard: ORD pre-flight reconnaissance audit (Delta Scout) complete. Executive Officer (XO) / FleetOps Commander validation passed.",
+    "[01] Dr. Ren Feldman: Hydroponics nutrient cycle adjustment complete. Chief Medical Officer validation passed.",
+    "[02] Lt. Commander Maya Shepard: Ethics ledger reconciliation (Picard Delta 3) complete. Executive Officer (XO) / FleetOps Commander validation passed.",
     "[02] Varya Lin: Analysis cell: review engine turn telemetry (hour 2: 2 notable event(s)) complete. Chief Science Officer validation passed.",
-    "[02] Dr. Amira Sato: Ethics ledger reconciliation (Picard Delta 3) complete. Chief Ethics Officer validation passed.",
-    "[02] Leena Porter: Cargo manifest reconciliation, Bay 2 intake complete. Bridge Operations Officer validation passed.",
-    "[02] Maren Koss: Galley resupply intake from Bay 2 complete. Cognitive Drift Mapper validation passed.",
-    "[03] Varya Lin: Documenting cross-functional learnings for protocol appendix.",
-    "[03] Commander Alex Thorne: Progress on Bay 2 departure clearance package: +0.40h [Commander, Orion Station]",
+    "[02] Julian Markov: ORD pre-flight reconnaissance audit (Delta Scout) complete. Chief Security Officer validation passed.",
+    "[02] Leena Porter: Galley resupply intake from Bay 2 complete. Bridge Operations Officer validation passed.",
+    "[02] Maren Koss: Cargo manifest reconciliation, Bay 2 intake complete. Cognitive Drift Mapper validation passed.",
+    "[03] Commander Alex Thorne: Progress on Bay 2 departure clearance package: +0.39h [Commander, Orion Station]",
     "[03] Lt. Commander Maya Shepard: Bay 2 departure clearance package complete. Executive Officer (XO) / FleetOps Commander validation passed.",
-    "[03] Dr. Amira Sato: Progress on ORD dispatch order execution + Shadowfax inspection: +0.90h [Chief Ethics Officer]",
-    "[03] Julian Markov: ORD dispatch order execution + Shadowfax inspection complete. Chief Security Officer validation passed."
+    "[03] Varya Lin: Progress on ORD dispatch order execution + Shadowfax inspection: +0.89h [Chief Science Officer]",
+    "[03] Helena Vu: ORD dispatch order execution + Shadowfax inspection complete. Cultural & HR Director validation passed."
   ],
   "events": [
     {
@@ -100,28 +100,22 @@
     },
     {
       "tick": 1,
-      "kind": "collaboration_boost",
-      "description": "Julian Markov synergy with key collaborator",
-      "multiplier": 1.0,
+      "kind": "swarm_sync",
+      "description": "Tariq El-Sayegh & Dr. Elena Vasquez spontaneous pair-programming",
+      "multiplier": 1.15,
       "affected": [
-        "Julian Markov"
+        "Tariq El-Sayegh",
+        "Dr. Elena Vasquez"
       ]
     },
     {
-      "tick": 2,
+      "tick": 1,
       "kind": "collaboration_boost",
-      "description": "Jiro Tanaka synergy with key collaborator",
-      "multiplier": 1.0,
+      "description": "Dr. Elira Noor synergy with key collaborator",
+      "multiplier": 1.25,
       "affected": [
-        "Jiro Tanaka"
+        "Dr. Elira Noor"
       ]
-    },
-    {
-      "tick": 3,
-      "kind": "cross_pollination",
-      "description": "Knowledge transfer across specializations",
-      "multiplier": 1.05,
-      "affected": []
     }
   ],
   "work_records": [
@@ -213,8 +207,8 @@
       "tick": 0,
       "agent": "Kai Drev",
       "task": "Crew quarters environmental audit, ring sections",
-      "effort": 1.03,
-      "note": "\u2713 COMPLETE"
+      "effort": 0.86,
+      "note": "0.14h left"
     },
     {
       "tick": 0,
@@ -224,164 +218,164 @@
       "note": "0.60h left"
     },
     {
+      "tick": 0,
+      "agent": "Samantha Lee",
+      "task": "Crew quarters environmental audit, ring sections",
+      "effort": 0.85,
+      "note": "\u2713 COMPLETE"
+    },
+    {
       "tick": 1,
       "agent": "Commander Alex Thorne",
-      "task": "Dome astronomy session calibration",
-      "effort": 0.27,
-      "note": "0.48h left"
+      "task": "Ring stress telemetry review",
+      "effort": 0.32,
+      "note": "0.68h left"
     },
     {
       "tick": 1,
       "agent": "Lt. Commander Maya Shepard",
       "task": "Hydroponics nutrient cycle adjustment",
-      "effort": 0.89,
-      "note": "0.11h left"
+      "effort": 0.7,
+      "note": "0.30h left"
     },
     {
       "tick": 1,
       "agent": "Varya Lin",
-      "task": "Hydroponics nutrient cycle adjustment",
-      "effort": 0.83,
-      "note": "\u2713 COMPLETE"
+      "task": "Dome astronomy session calibration",
+      "effort": 0.7,
+      "note": "0.05h left"
     },
     {
       "tick": 1,
       "agent": "Dr. Amira Sato",
       "task": "Command log review and Aurora arbitration sync",
-      "effort": 0.72,
+      "effort": 0.81,
       "note": "\u2713 COMPLETE"
     },
     {
       "tick": 1,
       "agent": "Dr. Elira Noor",
-      "task": "Ring stress telemetry review",
-      "effort": 0.52,
-      "note": "0.48h left"
+      "task": "Comms array diagnostic, core mast",
+      "effort": 0.98,
+      "note": "0.02h left"
     },
     {
       "tick": 1,
       "agent": "Prof. Elena Sorensen",
-      "task": "Docking Bay 2 logistics turnover",
-      "effort": 0.48,
-      "note": "0.11h left"
+      "task": "Dome astronomy session calibration",
+      "effort": 0.59,
+      "note": "\u2713 COMPLETE"
     },
     {
       "tick": 1,
       "agent": "Helena Vu",
-      "task": "Dome astronomy session calibration",
-      "effort": 0.71,
+      "task": "Ring stress telemetry review",
+      "effort": 0.89,
       "note": "\u2713 COMPLETE"
     },
     {
       "tick": 1,
       "agent": "Julian Markov",
-      "task": "Ring stress telemetry review",
-      "effort": 0.83,
+      "task": "Comms array diagnostic, core mast",
+      "effort": 0.84,
       "note": "\u2713 COMPLETE"
     },
     {
       "tick": 1,
       "agent": "Leena Porter",
       "task": "Docking Bay 2 logistics turnover",
-      "effort": 0.85,
+      "effort": 0.7,
       "note": "\u2713 COMPLETE"
     },
     {
       "tick": 1,
-      "agent": "Jiro Tanaka",
-      "task": "Comms array diagnostic, core mast",
-      "effort": 0.88,
-      "note": "0.12h left"
-    },
-    {
-      "tick": 1,
       "agent": "Dr. Ren Feldman",
-      "task": "Comms array diagnostic, core mast",
-      "effort": 0.85,
+      "task": "Hydroponics nutrient cycle adjustment",
+      "effort": 0.78,
       "note": "\u2713 COMPLETE"
     },
     {
       "tick": 2,
       "agent": "Commander Alex Thorne",
-      "task": "ORD pre-flight reconnaissance audit (Delta Scout)",
-      "effort": 0.32,
-      "note": "0.68h left"
+      "task": "Ethics ledger reconciliation (Picard Delta 3)",
+      "effort": 0.33,
+      "note": "0.17h left"
     },
     {
       "tick": 2,
       "agent": "Lt. Commander Maya Shepard",
-      "task": "ORD pre-flight reconnaissance audit (Delta Scout)",
-      "effort": 1.04,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 2,
-      "agent": "Varya Lin",
-      "task": "Analysis cell: review engine turn telemetry (hour 2: 2 notable event(s))",
-      "effort": 0.89,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 2,
-      "agent": "Dr. Amira Sato",
       "task": "Ethics ledger reconciliation (Picard Delta 3)",
       "effort": 0.78,
       "note": "\u2713 COMPLETE"
     },
     {
       "tick": 2,
-      "agent": "Dr. Elira Noor",
-      "task": "Cargo manifest reconciliation, Bay 2 intake",
-      "effort": 0.66,
-      "note": "0.84h left"
+      "agent": "Varya Lin",
+      "task": "Analysis cell: review engine turn telemetry (hour 2: 2 notable event(s))",
+      "effort": 0.88,
+      "note": "\u2713 COMPLETE"
     },
     {
       "tick": 2,
       "agent": "Prof. Elena Sorensen",
       "task": "Cargo manifest reconciliation, Bay 2 intake",
       "effort": 0.57,
-      "note": "0.27h left"
+      "note": "0.93h left"
+    },
+    {
+      "tick": 2,
+      "agent": "Helena Vu",
+      "task": "ORD pre-flight reconnaissance audit (Delta Scout)",
+      "effort": 0.75,
+      "note": "0.25h left"
+    },
+    {
+      "tick": 2,
+      "agent": "Julian Markov",
+      "task": "ORD pre-flight reconnaissance audit (Delta Scout)",
+      "effort": 0.79,
+      "note": "\u2713 COMPLETE"
     },
     {
       "tick": 2,
       "agent": "Leena Porter",
-      "task": "Cargo manifest reconciliation, Bay 2 intake",
-      "effort": 0.86,
+      "task": "Galley resupply intake from Bay 2",
+      "effort": 0.85,
       "note": "\u2713 COMPLETE"
     },
     {
       "tick": 2,
       "agent": "Maren Koss",
-      "task": "Galley resupply intake from Bay 2",
-      "effort": 0.85,
+      "task": "Cargo manifest reconciliation, Bay 2 intake",
+      "effort": 0.93,
       "note": "\u2713 COMPLETE"
     },
     {
       "tick": 3,
       "agent": "Commander Alex Thorne",
       "task": "Bay 2 departure clearance package",
-      "effort": 0.4,
-      "note": "0.35h left"
+      "effort": 0.39,
+      "note": "0.36h left"
     },
     {
       "tick": 3,
       "agent": "Lt. Commander Maya Shepard",
       "task": "Bay 2 departure clearance package",
-      "effort": 0.99,
+      "effort": 0.9,
       "note": "\u2713 COMPLETE"
     },
     {
       "tick": 3,
-      "agent": "Dr. Amira Sato",
+      "agent": "Varya Lin",
       "task": "ORD dispatch order execution + Shadowfax inspection",
-      "effort": 0.9,
-      "note": "0.10h left"
+      "effort": 0.89,
+      "note": "0.11h left"
     },
     {
       "tick": 3,
-      "agent": "Julian Markov",
+      "agent": "Helena Vu",
       "task": "ORD dispatch order execution + Shadowfax inspection",
-      "effort": 0.95,
+      "effort": 0.74,
       "note": "\u2713 COMPLETE"
     }
   ],
@@ -611,7 +605,7 @@
     "H15": "ORION__L1_OPERATIONS_RUNBOOK__v1.1",
     "H16": "THREADCORE v3.5.1 capsule + RIVERTHREAD anchor"
   },
-  "history_pairs_applied": 11,
+  "history_pairs_applied": 14,
   "engine": {
     "engine_class": "GUMASAdvancedEngine",
     "factions": 13,

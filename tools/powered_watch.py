@@ -36,7 +36,6 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 sys.path.insert(0, str(REPO_ROOT / "tools"))
 import hour_aboard  # noqa: E402  (artifact builders + clone runner)
-from station_chronicle import LEDGER_SCHEMA, STAGING_PATH, atom  # noqa: E402
 
 POWERED_DRIVER = r'''
 import json, sys
@@ -194,44 +193,6 @@ print(json.dumps(out))
 '''
 
 
-def append_engine_atoms(sim: dict, scenario: dict, stamp: str) -> int:
-    """Engine telemetry becomes STAGING chronicle atoms (domain: engine)."""
-    run_anchor = {
-        "schema_version": LEDGER_SCHEMA,
-        "scenario_id": scenario["name"],
-        "seed": scenario["seed"],
-        "engine_class": sim["engine"]["engine_class"],
-        "turns": sim["engine"]["turns_total"],
-    }
-    atoms = [atom(f"{stamp}T12:00:00Z", "STAGING", "engine", "powered_watch_run",
-                  f"Chassis ran the {sim['engine']['engine_class']} for "
-                  f"{sim['engine']['turns_total']} turns across {sim['summary']['ticks']}h: "
-                  f"stability {sim['engine']['final_stability']}, "
-                  f"risk {sim['engine']['final_risk']}",
-                  [], f"reports/simulation/{scenario['name']}__{stamp}/engine_telemetry.json",
-                  run_anchor)]
-    for entry in sim["engine"]["log"]:
-        if entry["notable"]:
-            kinds = ", ".join(f"{k}×{v}" for k, v in entry["notable"].items())
-            atoms.append(atom(f"{stamp}T12:00:00Z", "STAGING", "engine", "engine_notable_turn",
-                              f"Engine turn {entry['turn']} (watch hour {entry['hour']}): {kinds} — "
-                              f"{entry['summary'][:100]}",
-                              [], f"reports/simulation/{scenario['name']}__{stamp}/engine_telemetry.json",
-                              entry))
-    # Idempotent append: engine atoms are content-addressed (event_id), so a
-    # re-run on the same day must not duplicate them in the ledger.
-    existing = set()
-    if STAGING_PATH.exists():
-        for line in STAGING_PATH.read_text().splitlines():
-            if line.strip():
-                existing.add(json.loads(line)["event_id"])
-    new = [a for a in atoms if a["event_id"] not in existing]
-    with STAGING_PATH.open("a") as fh:
-        for a in new:
-            fh.write(json.dumps(a, sort_keys=True) + "\n")
-    return len(new)
-
-
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--scenario", default="powered_watch_scenario")
@@ -308,10 +269,9 @@ def main() -> int:
     (out_dir / "engine_telemetry.json").write_text(json.dumps(sim["engine"], indent=2) + "\n")
     (out_dir / "sim_raw.json").write_text(json.dumps(sim, indent=2) + "\n")
 
-    n_atoms = append_engine_atoms(sim, scenario, stamp)
     print(f"\n🗂  Artifacts: {out_dir.relative_to(REPO_ROOT)} (+ engine_telemetry.json)")
     print(f"   souls accounted: {souls['crew_logged']}/{souls['canon_l1_entities']} "
-          f"{'✅' if souls['complete'] else '⚠️'} | engine atoms staged: {n_atoms}")
+          f"{'✅' if souls['complete'] else '⚠️'} | engine atoms reconstruct from sim_raw.json")
 
     subprocess.run(  # noqa: S603 - our own tool with a fixed argument
         [sys.executable, str(REPO_ROOT / "tools" / "station_chronicle.py"), "state"],
