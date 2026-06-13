@@ -32,6 +32,7 @@ sys.path.insert(0, str(ENGINE_DIR))
 sys.path.insert(0, str(REPO_ROOT / "tools"))
 
 from mech_gov_001 import (  # noqa: E402
+    ComplacencyModel,
     DiplomaticStabilityModel,
     FactionDecisionModel,
     PopulationGrievanceModel,
@@ -39,6 +40,41 @@ from mech_gov_001 import (  # noqa: E402
     WarWearinessModel,
 )
 from gumas_consequence_layer import ConsequenceLayer  # noqa: E402
+
+
+def _writeback_complacency(compl: ComplacencyModel, state, v3) -> None:
+    """MECH-SOC-006: long peace breeds complacency/corruption that erodes
+    governance legitimacy, re-enabling unrest — preventing the permanent-peace
+    fixed point. Serious conflict resets a faction's complacency (renewal)."""
+    if v3 is None:
+        return
+    at_war = set()
+    for ins in getattr(v3, "insurgencies", []):
+        if _phase(ins) in ("civil_war", "escalated"):
+            at_war.add(ins.host_faction_id)
+    for fid, fac in state.factions.items():
+        complacency = compl.update(fid, fid in at_war)
+        if complacency <= 0:
+            continue
+        leader = state.leaders.get(fac.leader_id) if fac.leader_id else None
+        if leader is not None:
+            leader.public_legitimacy = round(max(
+                0.05, float(leader.public_legitimacy) - compl.legitimacy_drag(complacency)), 4)
+        # Corrupt mismanagement worsens living conditions -> rising stress
+        # re-ignites unrest (onset, overcoming peacetime recovery).
+        pop = getattr(v3, "population", {}).get(fid)
+        if pop is not None:
+            pop.housing_pressure = round(min(
+                1.0, float(pop.housing_pressure) + compl.stress_pressure(complacency)), 4)
+        # Corruption breeds strong resentment -> rebellions against a complacent
+        # regime gain support + grievance, so they mature into civil wars
+        # rather than fizzling. This is what turns the cycle.
+        fuel = compl.insurgent_fuel(complacency)
+        if fuel:
+            for ins in getattr(v3, "insurgencies", []):
+                if ins.host_faction_id == fid:
+                    ins.popular_support = round(min(1.0, float(ins.popular_support) + fuel), 4)
+                    ins.economic_grievance = round(min(1.0, float(getattr(ins, "economic_grievance", 0.5)) + fuel), 4)
 
 
 def _writeback_recovery(recov: PostWarRecoveryModel, state, v3) -> None:
@@ -130,12 +166,17 @@ def _active_civil_wars(v3) -> int:
 
 def _writeback_weariness(weary: WarWearinessModel, v3) -> int:
     """Erode war-weary popular support (and, when deeply weary, strength) so the
-    engine's own dynamics can drain an entrenched insurgency to SUPPRESSED."""
+    engine's own dynamics can drain an entrenched insurgency to SUPPRESSED.
+
+    Gated on *mature* conflict (civil war / escalated) only: a nascent
+    insurgency must be allowed to grow into a civil war, or conflict can never
+    form — the galaxy needs a wound, not just a heal. War-weariness then
+    resolves it once it has run its course."""
     if v3 is None:
         return 0
     touched = 0
     for ins in getattr(v3, "insurgencies", []):
-        active = _phase(ins) in ACTIVE_WAR_PHASES
+        active = _phase(ins) in ("civil_war", "escalated")
         w = weary.weary(ins.insurgency_id, active)
         if not active or w <= 0:
             continue
@@ -289,6 +330,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     weary = WarWearinessModel() if memory_on else None
     cons = ConsequenceLayer() if memory_on else None
     recov = PostWarRecoveryModel() if memory_on else None
+    compl = ComplacencyModel() if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
@@ -317,6 +359,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
             intel_pressure = min(1.0, d.get("v3_result", {}).get("intelligence_ops", 0) / 15.0)
             _writeback_consequences(cons, state, v3, intel_pressure)
             _writeback_recovery(recov, state, v3)
+            _writeback_complacency(compl, state, v3)
         traj.append({
             "turn": d["turn"],
             "stability": d["stability_index"],

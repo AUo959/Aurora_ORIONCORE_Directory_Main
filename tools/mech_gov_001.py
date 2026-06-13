@@ -319,6 +319,66 @@ class DiplomaticStabilityModel:
             self.dsi(political_unity, economic, cohesion_eff, corruption, militarization))
 
 
+class ComplacencyModel:
+    """MECH-SOC-006 — Complacency Cycle (the seeds of the next conflict).
+
+    A galaxy whose every stabilizer ratchets up monotonically collapses to a
+    permanent-peace fixed point — as degenerate as permanent war. Real polities
+    don't stay healthy forever: long peace breeds **corruption and complacency**,
+    which the canon names as a *destabilizer* ("if C or M are too high … it
+    increases instability" — non_war_progression). So a faction unchallenged for
+    many turns accrues complacency that raises its effective corruption in the
+    DSI, lowering its stability capacity until unrest becomes possible again.
+    Conflict (serious war) **purges** it — upheaval renews the order. The result
+    is a *limit cycle*: peace → complacency → conflict → renewal → peace.
+    """
+
+    # Calibrated for a *limit cycle*, not a ratchet: conflict waxes and wanes.
+    # Stronger values pump constant war; weaker ones let peace flatline. These
+    # produce conflict waves with stability oscillating ~0.48-0.59.
+    BUILD_RATE = 0.012        # complacency accrued per peaceful turn
+    PEAK = 0.55               # ceiling on accrued complacency
+    GRACE_TURNS = 8           # a fresh, post-conflict order is briefly clean
+
+    def __init__(self) -> None:
+        self.peace_streak: dict[str, int] = {}
+
+    LEGIT_EROSION = 0.04      # how hard complacency drags governance legitimacy
+
+    def update(self, faction: str, at_serious_war: bool) -> float:
+        """Advance the peace clock (or reset it on serious war); return the
+        current complacency level in [0, PEAK]."""
+        if at_serious_war:
+            self.peace_streak[faction] = 0
+            return 0.0
+        t = self.peace_streak.get(faction, 0) + 1
+        self.peace_streak[faction] = t
+        return max(0.0, min(self.PEAK, (t - self.GRACE_TURNS) * self.BUILD_RATE))
+
+    STRESS_PRESSURE = 0.015   # corrupt mismanagement worsens living conditions
+
+    def legitimacy_drag(self, complacency: float) -> float:
+        """Corruption erodes public legitimacy — the downward pressure that
+        long peace needs so unrest can recur."""
+        return complacency * self.LEGIT_EROSION
+
+    INSURGENT_FUEL = 0.012    # corruption breeds strong resentment in rebels
+
+    def stress_pressure(self, complacency: float) -> float:
+        """A complacent, corrupt order mismanages — housing/conditions worsen,
+        which (with eroded legitimacy) re-ignites unrest (onset). Must out-push
+        peacetime recovery, or the cycle never turns."""
+        return complacency * self.STRESS_PRESSURE
+
+    def insurgent_fuel(self, complacency: float) -> float:
+        """A corrupt order breeds *strong* resentment: rebellions against a
+        complacent regime gain popular support and grievance, so they mature
+        into civil wars rather than fizzling. This is the maturation lever the
+        onset levers alone can't supply — without it, post-conflict societies
+        spawn only weak unrest that never escalates."""
+        return complacency * self.INSURGENT_FUEL
+
+
 class PostWarRecoveryModel:
     """MECH-SOC-005 — Post-War Reconstruction.
 

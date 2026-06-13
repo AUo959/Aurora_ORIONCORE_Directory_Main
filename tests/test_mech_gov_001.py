@@ -18,6 +18,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "tools"))
 
 from mech_gov_001 import (  # noqa: E402
+    ComplacencyModel,
     DiplomaticStabilityModel,
     FactionDecisionModel,
     PopulationGrievanceModel,
@@ -178,6 +179,29 @@ def test_post_war_recovery_lifts_and_never_degrades():
     for _ in range(80):
         v = r.toward(v, r.POP_TARGET, r.POP_RECOVERY_RATE)
     assert v > 0.65
+
+
+@pytest.mark.simulation
+def test_complacency_builds_in_peace_and_purges_in_war():
+    """MECH-SOC-006: long peace breeds complacency (a destabilizer that lets
+    unrest recur); serious conflict purges it — the limit-cycle engine that
+    keeps the galaxy from freezing into permanent peace."""
+    c = ComplacencyModel()
+    # Within the grace period a fresh order stays clean.
+    for _ in range(c.GRACE_TURNS):
+        assert c.update("Velkaris", at_serious_war=False) == 0.0
+    early = c.update("Velkaris", at_serious_war=False)   # just past grace
+    for _ in range(40):
+        late = c.update("Velkaris", at_serious_war=False)
+    assert late > early > 0.0, (early, late)
+    assert late <= c.PEAK                                  # capped, never runaway
+    # Its destabilizing drags scale with the accrued complacency.
+    assert c.legitimacy_drag(late) > c.legitimacy_drag(early) >= 0.0
+    assert c.stress_pressure(late) > 0.0
+    assert c.insurgent_fuel(late) > 0.0
+    # Serious conflict resets the peace clock — upheaval renews the order.
+    assert c.update("Velkaris", at_serious_war=True) == 0.0
+    assert c.update("Velkaris", at_serious_war=False) == 0.0   # grace restarts
 
 
 @pytest.mark.simulation
