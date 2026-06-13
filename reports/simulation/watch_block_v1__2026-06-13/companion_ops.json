@@ -1,0 +1,188 @@
+{
+  "generated_at_utc": "2026-06-13T01:27:50Z",
+  "scenario": "watch_block_v1",
+  "operations": [
+    {
+      "hour": 1,
+      "agent": "Aurora",
+      "channel": "direct:aurora",
+      "answered": true,
+      "reply": "Aurora: I've logged Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... and I'm responding from the shared mesh"
+    },
+    {
+      "hour": 1,
+      "agent": "ARCHY",
+      "channel": "direct:archy",
+      "answered": true,
+      "reply": "ARCHY: Structurally, Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... touches architecture and interface bou"
+    },
+    {
+      "hour": 1,
+      "agent": "OPPY",
+      "channel": "direct:oppy",
+      "answered": true,
+      "reply": "OPPY: For Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat..., I'd check the latency path, the redundant work, "
+    },
+    {
+      "hour": 1,
+      "agent": "LIORA",
+      "channel": "direct:liora",
+      "answered": true,
+      "reply": "LIORA: I'm reading Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... as a pattern-change request. Best move i"
+    },
+    {
+      "hour": 1,
+      "agent": "STARLING_AU",
+      "channel": "direct:starling_au",
+      "answered": true,
+      "reply": "STARLING_AU: Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... needs a cleaner routing contract and a clearer"
+    },
+    {
+      "hour": 1,
+      "agent": "RIVERTHREAD_808",
+      "channel": "direct:riverthread_808",
+      "answered": true,
+      "reply": "RIVERTHREAD_808: I'd anchor Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... to the current thread state fir"
+    },
+    {
+      "hour": 2,
+      "agent": "Aurora",
+      "channel": "direct:aurora",
+      "answered": true,
+      "reply": "Aurora: I've logged Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... and I'm responding from the shared mesh"
+    },
+    {
+      "hour": 2,
+      "agent": "ARCHY",
+      "channel": "direct:archy",
+      "answered": true,
+      "reply": "ARCHY: Structurally, Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... touches architecture and interface bou"
+    },
+    {
+      "hour": 2,
+      "agent": "OPPY",
+      "channel": "direct:oppy",
+      "answered": true,
+      "reply": "OPPY: For Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat..., I'd check the latency path, the redundant work, "
+    },
+    {
+      "hour": 2,
+      "agent": "LIORA",
+      "channel": "direct:liora",
+      "answered": true,
+      "reply": "LIORA: I'm reading Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... as a pattern-change request. Best move i"
+    },
+    {
+      "hour": 2,
+      "agent": "STARLING_AU",
+      "channel": "direct:starling_au",
+      "answered": true,
+      "reply": "STARLING_AU: Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... needs a cleaner routing contract and a clearer"
+    },
+    {
+      "hour": 2,
+      "agent": "RIVERTHREAD_808",
+      "channel": "direct:riverthread_808",
+      "answered": true,
+      "reply": "RIVERTHREAD_808: I'd anchor Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... to the current thread state fir"
+    },
+    {
+      "hour": 3,
+      "agent": "Aurora",
+      "channel": "direct:aurora",
+      "answered": true,
+      "reply": "Aurora: I've logged Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... and I'm responding from the shared mesh"
+    },
+    {
+      "hour": 3,
+      "agent": "ARCHY",
+      "channel": "direct:archy",
+      "answered": true,
+      "reply": "ARCHY: Structurally, Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... touches architecture and interface bou"
+    },
+    {
+      "hour": 3,
+      "agent": "OPPY",
+      "channel": "direct:oppy",
+      "answered": true,
+      "reply": "OPPY: For Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat..., I'd check the latency path, the redundant work, "
+    },
+    {
+      "hour": 3,
+      "agent": "LIORA",
+      "channel": "direct:liora",
+      "answered": true,
+      "reply": "LIORA: I'm reading Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... as a pattern-change request. Best move i"
+    },
+    {
+      "hour": 3,
+      "agent": "STARLING_AU",
+      "channel": "direct:starling_au",
+      "answered": true,
+      "reply": "STARLING_AU: Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... needs a cleaner routing contract and a clearer"
+    },
+    {
+      "hour": 3,
+      "agent": "RIVERTHREAD_808",
+      "channel": "direct:riverthread_808",
+      "answered": true,
+      "reply": "RIVERTHREAD_808: I'd anchor Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... to the current thread state fir"
+    },
+    {
+      "hour": 4,
+      "agent": "Aurora",
+      "channel": "direct:aurora",
+      "answered": true,
+      "reply": "Aurora: I've logged Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... and I'm responding from the shared mesh"
+    },
+    {
+      "hour": 4,
+      "agent": "ARCHY",
+      "channel": "direct:archy",
+      "answered": true,
+      "reply": "ARCHY: Structurally, Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... touches architecture and interface bou"
+    },
+    {
+      "hour": 4,
+      "agent": "OPPY",
+      "channel": "direct:oppy",
+      "answered": true,
+      "reply": "OPPY: For Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat..., I'd check the latency path, the redundant work, "
+    },
+    {
+      "hour": 4,
+      "agent": "LIORA",
+      "channel": "direct:liora",
+      "answered": true,
+      "reply": "LIORA: I'm reading Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... as a pattern-change request. Best move i"
+    },
+    {
+      "hour": 4,
+      "agent": "STARLING_AU",
+      "channel": "direct:starling_au",
+      "answered": true,
+      "reply": "STARLING_AU: Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... needs a cleaner routing contract and a clearer"
+    },
+    {
+      "hour": 4,
+      "agent": "RIVERTHREAD_808",
+      "channel": "direct:riverthread_808",
+      "answered": true,
+      "reply": "RIVERTHREAD_808: I'd anchor Watch block hour 1/4 \u2014 completed: Crew quarters environmental audit, ring sections; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verificat... to the current thread state fir"
+    }
+  ],
+  "ord_dispatch": {
+    "mission_id": "watch-block-H5",
+    "drones_required": [
+      "ORD-2 Delta Scout",
+      "ORD-3 Shadowfax"
+    ],
+    "receipt_sha256": "4842a48eef24ae10469e7e867989004a826c002a08591e9937dfa19f9d33f579"
+  },
+  "l3_receipt": {
+    "narrative_audit_verdict": "supported",
+    "ethics_protocol": "Picard_Delta_3",
+    "anchor_seed": "EOS_SEED_ORION",
+    "threadcore": "capsule + registry PASS/READY (registry substructures merged #1022)"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "generated_at_utc": "2026-06-13T01:27:50Z",
+  "canon_l1_entities": 41,
+  "crew_logged": 41,
+  "crew_from_roster": 35,
+  "crew_supplemental_from_canon": 6,
+  "companions_on_mesh": [
+    "ARCHY",
+    "Aurora",
+    "LIORA",
+    "OPPY",
+    "RIVERTHREAD_808",
+    "STARLING_AU"
+  ],
+  "complete": true,
+  "note": "Every L1 canon entity carries an hour-by-hour record (task work or division duty); station intelligences are accounted in companion_ops.json."
+}
