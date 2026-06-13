@@ -104,7 +104,9 @@ def from_drift_log() -> list[dict]:
     """Canon governance decisions recorded in CanonRec DRIFT_LOG."""
     atoms = []
     text = DRIFT_LOG.read_text()
-    for m in re.finditer(r"## Drift Entry — (\d{4}-\d{2}-\d{2})\n(.*?)(?=\n## |\Z)", text, re.DOTALL):
+    # Allow trailing text after the date in the header
+    # (e.g. "## Drift Entry — 2026-06-13 (powered watch)").
+    for m in re.finditer(r"## Drift Entry — (\d{4}-\d{2}-\d{2})[^\n]*\n(.*?)(?=\n## |\Z)", text, re.DOTALL):
         date, body = m.group(1), m.group(2)
         desc = re.search(r"\*\*Description:\*\*(.*?)(?=\n- \*\*|\Z)", body, re.DOTALL)
         ents = re.search(r"\*\*Entities affected:\*\* (.+)", body)
@@ -205,16 +207,21 @@ def cmd_build() -> int:
 
 
 def load_all_atoms() -> list[dict]:
-    atoms = []
+    atoms: list[dict] = []
+    seen: set[str] = set()
     for path in (CHRONICLE_PATH, STAGING_PATH):
         if path.exists():
             for line in path.read_text().strip().splitlines():
-                if line:
-                    atoms.append(json.loads(line))
+                if not line:
+                    continue
+                a = json.loads(line)
+                if a["event_id"] not in seen:  # ledger atoms are content-addressed; dedupe
+                    seen.add(a["event_id"])
+                    atoms.append(a)
     # staging regeneration source: simulation runs not yet in the staging ledger
-    known = {a["event_id"] for a in atoms}
     for a in from_simulation_runs():
-        if a["event_id"] not in known:
+        if a["event_id"] not in seen:
+            seen.add(a["event_id"])
             atoms.append(a)
     return sorted(atoms, key=lambda a: a["occurred_at"])
 

@@ -120,23 +120,44 @@
     }
   },
   "active_task": {
-    "id": "narrative-promotion-continuation-2026-06",
+    "id": "salvage-operation-icloud-promotion-2026-06-12",
     "status": "suspended",
-    "assigned_to": "either",
-    "repo": "root + aurora-cloudbank-symbolic-main",
-    "description": "Continue the Aurora-first narrative-layer promotion per the ADR.",
-    "started_at": "2026-06-10T00:00:00Z",
-    "updated_at": "2026-06-10T20:48:31Z",
+    "assigned_to": "codex",
+    "repo": "root control plane + registered nested repos by explicit gate only",
+    "description": "Run the Aurora salvage operation: find valuable unmerged iCloud/recovery logic, classify it, and promote only through explicit owner-surface gates.",
+    "started_at": "2026-06-12T23:00:00Z",
+    "updated_at": "2026-06-12T23:25:43Z",
     "context_files": [
-      "docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md",
-      "reports/recovered_canon/README.md",
-      "reports/analysis/march_2026_reset_forensics__2026-06-10.md",
-      "reports/analysis/unlanded_work_audit__2026-06-10.md"
+      "reports/analysis/salvage_docket__2026-06-12.md",
+      "reports/analysis/aurora_salvage_report_latest.md",
+      "reports/analysis/ord_integration__2026-06-12.md",
+      "reports/analysis/orion_station_spec_recovery__2026-06-12.md",
+      "reports/analysis/remote_branch_sweep__2026-06-11.md",
+      "reports/analysis/integration_pass__2026-06-11.md"
     ],
-    "next_step": "engine_phase_2_design_plus_remaining_owner_items",
-    "next_step_detail": "Engine phase 2 design seed: LLM front-end as state_builder (prose -> canonical state extraction), engine stays deterministic judge \u2014 follow the warrant-lens split. Candidate first pipeline: GUMAS sim turn output -> next_event_continuity_check -> verdict gates canon promotion. Remaining owner items unchanged: CanonRec character spot-check + 6 STAGING-era entities; transcript privacy review; threadcore-governor over canon/L3 capsule; repo_authority_policy.yaml promotion via peer review; gitwiz April branch port/abandon; ORION.L1.* prose extraction from CanonRec_v1.3.x zips."
+    "next_step": "cloudbank_ord_pr_1016_then_selective_capsules",
+    "next_step_detail": "Cold start: read reports/analysis/salvage_docket__2026-06-12.md first. P1 is ORD policy family through CloudBank PR #1016, but leave it alone while Claude Code is actively editing that branch. P2/P3/P4 are reconciliation lanes: legacy ORD behavior comparison, Quantum Forge protocol diff against current modules/quantum_forge, and ZipWiz bridge security/owner-surface review. Do not copy staging/archive/iCloud material directly into canon or runtime."
   },
-  "task_queue": [],
+  "task_queue": [
+    {
+      "id": "narrative-promotion-continuation-2026-06",
+      "status": "queued",
+      "assigned_to": "either",
+      "priority": "medium",
+      "repo": "root + aurora-cloudbank-symbolic-main",
+      "description": "Continue the Aurora-first narrative-layer promotion per the ADR.",
+      "started_at": "2026-06-10T00:00:00Z",
+      "updated_at": "2026-06-10T20:48:31Z",
+      "context_files": [
+        "docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md",
+        "reports/recovered_canon/README.md",
+        "reports/analysis/march_2026_reset_forensics__2026-06-10.md",
+        "reports/analysis/unlanded_work_audit__2026-06-10.md"
+      ],
+      "next_step": "engine_phase_2_design_plus_remaining_owner_items",
+      "next_step_detail": "Engine phase 2 design seed: LLM front-end as state_builder (prose -> canonical state extraction), engine stays deterministic judge \u2014 follow the warrant-lens split. Candidate first pipeline: GUMAS sim turn output -> next_event_continuity_check -> verdict gates canon promotion. Remaining owner items unchanged: CanonRec character spot-check + 6 STAGING-era entities; transcript privacy review; threadcore-governor over canon/L3 capsule; repo_authority_policy.yaml promotion via peer review; gitwiz April branch port/abandon; ORION.L1.* prose extraction from CanonRec_v1.3.x zips."
+    }
+  ],
   "completed_tasks": [
     {
       "id": "phase-0-complete",
@@ -323,11 +344,17 @@
       "date": "2026-06-12",
       "platform": "codex",
       "summary": "Codex cleared review debts rd-20260610-authority-policy and rd-20260611-landing-ledger-stop-hook with receipt pr-20260612-authority-policy-and-landing-ledger; make skills-install synced 0 files and make skills-check is clean. integration-gate rerun is blocked by active hub branch/registry drift, not skill runtime drift."
+    },
+    {
+      "id": "salvage-docket-2026-06-12",
+      "date": "2026-06-12",
+      "platform": "codex",
+      "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
     }
   ],
-  "last_updated": "2026-06-12T23:04:07Z",
-  "last_platform": "codex",
-  "last_session_summary": "Cleared Codex review debts for authority policy and landing ledger; verified Codex skill runtime sync.",
+  "last_updated": "2026-06-13T01:48:49Z",
+  "last_platform": "claude-code",
+  "last_session_summary": "chore(state): station purpose ruling canon-routed; CanonRec ",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -347,64 +374,64 @@
   },
   "recent_commits": [
     {
-      "sha": "f9bb5da",
+      "sha": "172a0ba",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "chore(state): station purpose ruling canon-routed; CanonRec head synced; chronicle state refreshed"
+    },
+    {
+      "sha": "2317fb0",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "feat(sim): station chronicle + persistent history \u2014 past actions now shape present behavior"
+    },
+    {
+      "sha": "bd433f4",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "chore(sync): CloudBank pinned to 96e4818f \u2014 first-tick emergence fix merged (#1023)"
+    },
+    {
+      "sha": "0f69be4",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "feat(sim): multi-hour watch block with full souls accounting and live emergence"
+    },
+    {
+      "sha": "d43744e",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "feat(sim): hour-aboard pack \u2014 one simulated hour with crew logs, interaction map, companion ops accounting"
+    },
+    {
+      "sha": "8c978c7",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "chore(sync): CloudBank pinned to 30f3464d \u2014 mesh 404 guard merged (#1021, closes the 404 half of #1020)"
+    },
+    {
+      "sha": "f7d1a48",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "chore(sync): CloudBank clone fast-forwarded to 3494e5ac; ORD flight declared and flown"
+    },
+    {
+      "sha": "8ed2288",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "docs(salvage): add root salvage docket"
+    },
+    {
+      "sha": "1dc6b88",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "docs(salvage): ORD complementary-work scan + integration staging receipt (PR #1016)"
+    },
+    {
+      "sha": "a127220",
       "date": "2026-06-12",
-      "platform": "claude-code",
-      "summary": "feat(station): ORION Operational Library v2.2 + L1 physical config recovered and canon-routed; CanonRec head synced"
-    },
-    {
-      "sha": "d312cad",
-      "date": "2026-06-12",
-      "platform": "claude-code",
-      "summary": "chore(validate): full-system validation pass \u2014 all gates green; sensor-array flight declared and flown"
-    },
-    {
-      "sha": "e2acbe5",
-      "date": "2026-06-12",
-      "platform": "claude-code",
-      "summary": "feat(salvage): salvage scan + survey landed; sensor array merged (#1005); fleet locks cleared"
-    },
-    {
-      "sha": "0840964",
-      "date": "2026-06-12",
-      "platform": "claude-code",
-      "summary": "chore(state): Sensor Array v0.3.0 canon-routed; CanonRec head synced"
-    },
-    {
-      "sha": "76d2c15",
-      "date": "2026-06-12",
-      "platform": "claude-code",
-      "summary": "feat(station): the Pilot's direct line + companion roll call"
-    },
-    {
-      "sha": "196f6ec",
-      "date": "2026-06-12",
-      "platform": "claude-code",
-      "summary": "feat(station): activation pulse #808//. \u2014 the station answers; scan preserves remote-only registry entries"
-    },
-    {
-      "sha": "9a8ab4b",
-      "date": "2026-06-12",
-      "platform": "claude-code",
-      "summary": "docs: canonize Aurora Moral Architecture Charter"
-    },
-    {
-      "sha": "fc5d737",
-      "date": "2026-06-11",
-      "platform": "claude-code",
-      "summary": "feat(debt): the landing ledger and the flight log \u2014 stranding and dormancy become tracked debts"
-    },
-    {
-      "sha": "109c5a1",
-      "date": "2026-06-11",
-      "platform": "claude-code",
-      "summary": "chore(state): Pilot runtime alignment merged (#990); sync CloudBank head"
-    },
-    {
-      "sha": "2f5c946",
-      "date": "2026-06-11",
-      "platform": "claude-code",
-      "summary": "docs(canon): Pilot is the user-interface role \u2014 owner ruling wired into agent context"
+      "platform": "codex",
+      "summary": "chore(state): clear codex review debts"
     }
   ],
   "security_events": [
@@ -450,7 +477,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "f9bb5da",
+    "main_sha": "172a0ba",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -568,7 +595,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-06-12T23:04:07Z",
+    "checked_at": "2026-06-13T01:48:49Z",
     "entries": [],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
   }

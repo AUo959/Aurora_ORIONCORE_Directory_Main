@@ -1,0 +1,287 @@
+{
+  "scenario": "powered_watch_v1",
+  "generated_at_utc": "2026-06-13T02:06:24Z",
+  "nodes": [
+    {
+      "id": "Commander Alex Thorne",
+      "kind": "crew"
+    },
+    {
+      "id": "Lt. Commander Maya Shepard",
+      "kind": "crew"
+    },
+    {
+      "id": "Varya Lin",
+      "kind": "crew"
+    },
+    {
+      "id": "Dr. Amira Sato",
+      "kind": "crew"
+    },
+    {
+      "id": "Dr. Elira Noor",
+      "kind": "crew"
+    },
+    {
+      "id": "Prof. Elena Sorensen",
+      "kind": "crew"
+    },
+    {
+      "id": "Helena Vu",
+      "kind": "crew"
+    },
+    {
+      "id": "Julian Markov",
+      "kind": "crew"
+    },
+    {
+      "id": "Leena Porter",
+      "kind": "crew"
+    },
+    {
+      "id": "Jiro Tanaka",
+      "kind": "crew"
+    },
+    {
+      "id": "Dr. Ren Feldman",
+      "kind": "crew"
+    },
+    {
+      "id": "Chief Engineer Raj Patel",
+      "kind": "crew"
+    },
+    {
+      "id": "Dr. Elena Vasquez",
+      "kind": "crew"
+    },
+    {
+      "id": "Marcus Chen",
+      "kind": "crew"
+    },
+    {
+      "id": "Jessica Martinez",
+      "kind": "crew"
+    },
+    {
+      "id": "Ryan Patel",
+      "kind": "crew"
+    },
+    {
+      "id": "Ren Okada",
+      "kind": "crew"
+    },
+    {
+      "id": "Dr. Kieran Zhao",
+      "kind": "crew"
+    },
+    {
+      "id": "Ira Menon",
+      "kind": "crew"
+    },
+    {
+      "id": "Vincent Kale",
+      "kind": "crew"
+    },
+    {
+      "id": "Dr. Amina Velin",
+      "kind": "crew"
+    },
+    {
+      "id": "Tobias Qin",
+      "kind": "crew"
+    },
+    {
+      "id": "Emily Roberts",
+      "kind": "crew"
+    },
+    {
+      "id": "Carmen Rivas",
+      "kind": "crew"
+    },
+    {
+      "id": "Maren Koss",
+      "kind": "crew"
+    },
+    {
+      "id": "Dante Kyros",
+      "kind": "crew"
+    },
+    {
+      "id": "Naomi Vell",
+      "kind": "crew"
+    },
+    {
+      "id": "Kai Drev",
+      "kind": "crew"
+    },
+    {
+      "id": "Haneul Park",
+      "kind": "crew"
+    },
+    {
+      "id": "Juno Suresh",
+      "kind": "crew"
+    },
+    {
+      "id": "Keira Halden",
+      "kind": "crew"
+    },
+    {
+      "id": "Rei Vatra",
+      "kind": "crew"
+    },
+    {
+      "id": "Olivia Nguyen",
+      "kind": "crew"
+    },
+    {
+      "id": "Samantha Lee",
+      "kind": "crew"
+    },
+    {
+      "id": "Tariq El-Sayegh",
+      "kind": "crew"
+    },
+    {
+      "id": "Pilot",
+      "kind": "user"
+    }
+  ],
+  "edges": [
+    {
+      "source": "Commander Alex Thorne",
+      "target": "Jiro Tanaka",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Habitat ring spin check (2 RPM / 0.3g verification)"
+      ]
+    },
+    {
+      "source": "Dr. Elira Noor",
+      "target": "Varya Lin",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Zero-g lab safety check, core section"
+      ]
+    },
+    {
+      "source": "Dr. Kieran Zhao",
+      "target": "Prof. Elena Sorensen",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Life-support scrubber rotation, habitat ring"
+      ]
+    },
+    {
+      "source": "Helena Vu",
+      "target": "Leena Porter",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "EVA suit inspection cycle, core airlock"
+      ]
+    },
+    {
+      "source": "Chief Engineer Raj Patel",
+      "target": "Julian Markov",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Quantum core coherence check"
+      ]
+    },
+    {
+      "source": "Commander Alex Thorne",
+      "target": "Helena Vu",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Dome astronomy session calibration"
+      ]
+    },
+    {
+      "source": "Lt. Commander Maya Shepard",
+      "target": "Varya Lin",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Hydroponics nutrient cycle adjustment"
+      ]
+    },
+    {
+      "source": "Dr. Elira Noor",
+      "target": "Julian Markov",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Ring stress telemetry review"
+      ]
+    },
+    {
+      "source": "Leena Porter",
+      "target": "Prof. Elena Sorensen",
+      "kind": "co_work",
+      "weight": 2,
+      "tasks": [
+        "Docking Bay 2 logistics turnover",
+        "Cargo manifest reconciliation, Bay 2 intake"
+      ]
+    },
+    {
+      "source": "Dr. Ren Feldman",
+      "target": "Jiro Tanaka",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Comms array diagnostic, core mast"
+      ]
+    },
+    {
+      "source": "Commander Alex Thorne",
+      "target": "Lt. Commander Maya Shepard",
+      "kind": "co_work",
+      "weight": 2,
+      "tasks": [
+        "ORD pre-flight reconnaissance audit (Delta Scout)",
+        "Bay 2 departure clearance package"
+      ]
+    },
+    {
+      "source": "Dr. Elira Noor",
+      "target": "Leena Porter",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Cargo manifest reconciliation, Bay 2 intake"
+      ]
+    },
+    {
+      "source": "Dr. Elira Noor",
+      "target": "Prof. Elena Sorensen",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Cargo manifest reconciliation, Bay 2 intake"
+      ]
+    },
+    {
+      "source": "Dr. Amira Sato",
+      "target": "Julian Markov",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "ORD dispatch order execution + Shadowfax inspection"
+      ]
+    },
+    {
+      "source": "Prof. Elena Sorensen",
+      "target": "Dr. Kieran Zhao",
+      "kind": "swarm_sync",
+      "weight": 1,
+      "hour": 1
+    }
+  ]
+}
