@@ -37,8 +37,51 @@ from mech_gov_001 import (  # noqa: E402
     PopulationGrievanceModel,
     WarWearinessModel,
 )
+from gumas_consequence_layer import ConsequenceLayer  # noqa: E402
 
 ACTIVE_WAR_PHASES = {"civil_war", "escalated", "active"}
+
+
+def _writeback_consequences(cons: ConsequenceLayer, state, v3, intel_pressure: float) -> None:
+    """Give the inert instability signals their downstream effects (lessons
+    §2.1/§2.2/§2.4/§2.3): counter-intel response, conscription→capacity, onset
+    dampener, fragmentation drag — all derived from state."""
+    if v3 is None:
+        return
+    # Active insurgencies + max territory per host faction.
+    wars: dict[str, int] = {}
+    max_terr: dict[str, float] = {}
+    for ins in getattr(v3, "insurgencies", []):
+        if _phase(ins) in ACTIVE_WAR_PHASES:
+            fid = ins.host_faction_id
+            wars[fid] = wars.get(fid, 0) + 1
+            max_terr[fid] = max(max_terr.get(fid, 0.0), float(getattr(ins, "territory_controlled", 0.0)))
+
+    for fid, fac in state.factions.items():
+        active = wars.get(fid, 0)
+        # Conscription → military capacity (aids suppression).
+        if active:
+            fac.military_strength = round(
+                cons.conscription_target(float(fac.military_strength), active), 4)
+        # Onset dampener → legitimacy focus for the already-embattled.
+        leader = state.leaders.get(fac.leader_id) if fac.leader_id else None
+        if leader is not None and active:
+            leader.public_legitimacy = round(min(
+                1.0, float(leader.public_legitimacy) + cons.onset_dampen_bonus(active)), 4)
+        # Fragmentation consequence → lost economic capacity.
+        drag = cons.fragmentation_drag(max_terr.get(fid, 0.0))
+        if drag:
+            fac.economic_strength = round(max(0.05, float(fac.economic_strength) - drag), 4)
+
+    # Counter-intel response surface → CI investment + residual cost.
+    for fid, net in getattr(v3, "intel_networks", {}).items():
+        net.counter_intel_strength = round(
+            cons.ci_investment(float(net.counter_intel_strength), intel_pressure), 4)
+        fac = state.factions.get(fid)
+        if fac is not None:
+            fac.economic_strength = round(max(
+                0.05, float(fac.economic_strength)
+                - cons.intel_econ_cost(net.counter_intel_strength, intel_pressure)), 4)
 
 
 def _phase(ins) -> str:
@@ -209,6 +252,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     soc = PopulationGrievanceModel(seed=seed) if memory_on else None
     dsi = DiplomaticStabilityModel() if memory_on else None
     weary = WarWearinessModel() if memory_on else None
+    cons = ConsequenceLayer() if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
@@ -234,6 +278,8 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
             _writeback_grievance(soc, v3)
             _writeback_dsi(dsi, soc, state)
             _writeback_weariness(weary, v3)
+            intel_pressure = min(1.0, d.get("v3_result", {}).get("intelligence_ops", 0) / 15.0)
+            _writeback_consequences(cons, state, v3, intel_pressure)
         traj.append({
             "turn": d["turn"],
             "stability": d["stability_index"],

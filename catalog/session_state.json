@@ -352,9 +352,9 @@
       "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
     }
   ],
-  "last_updated": "2026-06-13T14:30:11Z",
+  "last_updated": "2026-06-13T20:19:57Z",
   "last_platform": "claude-code",
-  "last_session_summary": "docs(sim): expand seed-42 review \u2014 conflict initiation is ov",
+  "last_session_summary": "feat(sim): seed-42 stability solution \u2014 DSI onset gate + war",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -373,6 +373,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "cabbc9b",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "feat(sim): seed-42 stability solution \u2014 DSI onset gate + war-weariness break the civil-war attractor"
+    },
     {
       "sha": "9c418bc",
       "date": "2026-06-13",
@@ -426,12 +432,6 @@
       "date": "2026-06-13",
       "platform": "claude-code",
       "summary": "docs(discovery): authoritative simulation/GUMAS/Orion inventory index"
-    },
-    {
-      "sha": "2e67dc1",
-      "date": "2026-06-13",
-      "platform": "claude-code",
-      "summary": "feat(sim): crew-life fidelity \u2014 the human layer (shifts/sleep/meals/hygiene/fatigue), shift-gated into the live watch"
     }
   ],
   "security_events": [
@@ -477,7 +477,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "9c418bc",
+    "main_sha": "cabbc9b",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -595,7 +595,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-06-13T14:30:11Z",
+    "checked_at": "2026-06-13T20:19:57Z",
     "entries": [
       {
         "repo": "aurora-cloudbank-symbolic-main",
