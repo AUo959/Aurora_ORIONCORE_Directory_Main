@@ -1,13 +1,13 @@
 {
-  "generated_at_utc": "2026-06-13T01:41:31Z",
+  "generated_at_utc": "2026-06-13T01:47:36Z",
   "ledger_schema": "station-chronicle-v1",
-  "atoms_total": 52,
+  "atoms_total": 53,
   "atoms_by_tier": {
-    "CANON": 10,
+    "CANON": 11,
     "OPERATIONAL": 11,
     "STAGING": 31
   },
-  "chronicle_head": "84c92d2f",
+  "chronicle_head": "5ff95ea8",
   "pair_familiarity": {
     "Dr. Kieran Zhao|Prof. Elena Sorensen": 1.5,
     "Commander Alex Thorne|Varya Lin": 1.0,
