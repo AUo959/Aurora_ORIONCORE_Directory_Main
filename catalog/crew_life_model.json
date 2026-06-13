@@ -1,0 +1,48 @@
+{
+  "name": "orion_crew_life_v1",
+  "about": "Canonical crew-life parameters for Orion Station, extracted from canon/L1/station/reference_sources/orion_station_life_infrastructure.md (THE RHYTHM OF STATION LIFE, FOOD/WATER/HYGIENE SYSTEMS) and the technical addendum (Carmen Rivas post-shift routine). Drives tools/crew_life.py. Clock is the canonical 24h-labeled station timeline; the 22.1h station-day datum in the environment packet is an open reconciliation (see _clock_note).",
+  "_clock_note": "Shift labels and the daily rhythm use a 24h clock per the life-infrastructure doc. The environment packet records a 22.1h station day; until reconciled, this model treats an hour as a station-hour on the canonical rhythm and flags the discrepancy rather than silently picking one.",
+  "shifts": {
+    "Alpha":   {"work": [6, 14],  "sleep": [22, 29], "manning": "primary",  "weight": 0.40},
+    "Bravo":   {"work": [14, 22], "sleep": [5, 12],  "manning": "full",     "weight": 0.34},
+    "Charlie": {"work": [22, 26], "sleep": [14, 21], "manning": "skeleton", "weight": 0.14},
+    "Delta":   {"work": [2, 6],   "sleep": [18, 25], "manning": "minimum",  "weight": 0.12}
+  },
+  "_shift_note": "Each shift sleeps ~7h ending shortly before its watch (Alpha 22-05/work06; Bravo 05-12/work14; Charlie 14-21/work22; Delta 18-01/work02), staggered so the habitat is never fully asleep.",
+  "meal_services": {
+    "breakfast": [6, 8],
+    "lunch": [12, 13],
+    "dinner": [18, 19]
+  },
+  "rhythm": {
+    "coffee_club": 5,
+    "recreation": [20, 23],
+    "quiet_hours_start": 23
+  },
+  "needs": {
+    "sleep_debt_per_awake_hour": 1.0,
+    "sleep_recovery_per_sleep_hour": 2.0,
+    "sleep_debt_max": 24.0,
+    "fatigued_threshold": 10.0,
+    "hunger_per_awake_hour": 1.0,
+    "hunger_missed_meal_threshold": 9.0,
+    "hygiene_per_hour": 1.0,
+    "shower_interval_hours": 24,
+    "bathroom_uses_per_day": 6,
+    "morale_recreation_gain": 2.0,
+    "morale_work_drain": 0.4
+  },
+  "consumables": {
+    "shower_water_liters": 6.0,
+    "bathroom_water_liters": 1.5,
+    "water_recycle_efficiency": 0.98,
+    "meal_portions_per_serving": 1.0,
+    "co2_kg_per_awake_hour": 0.04,
+    "o2_kg_per_awake_hour": 0.035,
+    "co2_kg_per_asleep_hour": 0.022
+  },
+  "fatigue": {
+    "sleep_debt_to_fatigue": 4.0,
+    "max_fatigue": 100.0
+  }
+}

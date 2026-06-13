@@ -1,6 +1,6 @@
 {
   "scenario": "live_watch_v1",
-  "generated_at_utc": "2026-06-13T03:14:38Z",
+  "generated_at_utc": "2026-06-13T03:34:05Z",
   "nodes": [
     {
       "id": "Commander Alex Thorne",
@@ -173,17 +173,17 @@
   ],
   "edges": [
     {
-      "source": "Commander Alex Thorne",
-      "target": "Jiro Tanaka",
+      "source": "Dr. Kieran Zhao",
+      "target": "Ryan Patel",
       "kind": "co_work",
       "weight": 2,
       "tasks": [
         "Habitat ring spin check (2 RPM / 0.3g verification)",
-        "Cargo manifest reconciliation, Bay 2 intake"
+        "Docking Bay 2 logistics turnover"
       ]
     },
     {
-      "source": "Dr. Elira Noor",
+      "source": "Commander Alex Thorne",
       "target": "Varya Lin",
       "kind": "co_work",
       "weight": 1,
@@ -192,26 +192,8 @@
       ]
     },
     {
-      "source": "Dr. Kieran Zhao",
-      "target": "Prof. Elena Sorensen",
-      "kind": "co_work",
-      "weight": 1,
-      "tasks": [
-        "Life-support scrubber rotation, habitat ring"
-      ]
-    },
-    {
-      "source": "Helena Vu",
-      "target": "Leena Porter",
-      "kind": "co_work",
-      "weight": 1,
-      "tasks": [
-        "EVA suit inspection cycle, core airlock"
-      ]
-    },
-    {
-      "source": "Chief Engineer Raj Patel",
-      "target": "Julian Markov",
+      "source": "Dr. Elena Vasquez",
+      "target": "Samantha Lee",
       "kind": "co_work",
       "weight": 1,
       "tasks": [
@@ -220,61 +202,34 @@
     },
     {
       "source": "Commander Alex Thorne",
-      "target": "Helena Vu",
+      "target": "Maren Koss",
       "kind": "co_work",
       "weight": 1,
       "tasks": [
-        "Dome astronomy session calibration"
+        "EVA suit inspection cycle, core airlock"
       ]
     },
     {
-      "source": "Dr. Elira Noor",
-      "target": "Julian Markov",
+      "source": "Helena Vu",
+      "target": "Varya Lin",
       "kind": "co_work",
       "weight": 1,
       "tasks": [
-        "Ring stress telemetry review"
-      ]
-    },
-    {
-      "source": "Leena Porter",
-      "target": "Prof. Elena Sorensen",
-      "kind": "co_work",
-      "weight": 1,
-      "tasks": [
-        "Docking Bay 2 logistics turnover"
-      ]
-    },
-    {
-      "source": "Dr. Ren Feldman",
-      "target": "Jiro Tanaka",
-      "kind": "co_work",
-      "weight": 1,
-      "tasks": [
-        "Comms array diagnostic, core mast"
+        "Hydroponics nutrient cycle adjustment"
       ]
     },
     {
       "source": "Commander Alex Thorne",
-      "target": "Leena Porter",
+      "target": "Dr. Elena Vasquez",
       "kind": "co_work",
       "weight": 1,
       "tasks": [
-        "Cargo manifest reconciliation, Bay 2 intake"
+        "EVA suit inspection cycle, core airlock"
       ]
     },
     {
-      "source": "Jiro Tanaka",
-      "target": "Leena Porter",
-      "kind": "co_work",
-      "weight": 1,
-      "tasks": [
-        "Cargo manifest reconciliation, Bay 2 intake"
-      ]
-    },
-    {
-      "source": "Dr. Elira Noor",
-      "target": "Prof. Elena Sorensen",
+      "source": "Dr. Elena Vasquez",
+      "target": "Dr. Kieran Zhao",
       "kind": "co_work",
       "weight": 1,
       "tasks": [
@@ -282,29 +237,11 @@
       ]
     },
     {
-      "source": "Commander Alex Thorne",
-      "target": "Dr. Elira Noor",
-      "kind": "co_work",
-      "weight": 1,
-      "tasks": [
-        "Bay 2 departure clearance package"
-      ]
-    },
-    {
-      "source": "Lt. Commander Maya Shepard",
-      "target": "Varya Lin",
-      "kind": "co_work",
-      "weight": 1,
-      "tasks": [
-        "ORD dispatch order execution + Shadowfax inspection"
-      ]
-    },
-    {
-      "source": "Prof. Elena Sorensen",
-      "target": "Dr. Kieran Zhao",
+      "source": "Juno Suresh",
+      "target": "Commander Alex Thorne",
       "kind": "swarm_sync",
       "weight": 1,
-      "hour": 1
+      "hour": 2
     },
     {
       "source": "Pilot",

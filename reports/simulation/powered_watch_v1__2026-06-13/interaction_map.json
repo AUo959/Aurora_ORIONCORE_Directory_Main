@@ -1,6 +1,6 @@
 {
   "scenario": "powered_watch_v1",
-  "generated_at_utc": "2026-06-13T03:14:38Z",
+  "generated_at_utc": "2026-06-13T03:34:05Z",
   "nodes": [
     {
       "id": "Commander Alex Thorne",
@@ -194,35 +194,8 @@
       ]
     },
     {
-      "source": "Kai Drev",
-      "target": "Samantha Lee",
-      "kind": "co_work",
-      "weight": 1,
-      "tasks": [
-        "Crew quarters environmental audit, ring sections"
-      ]
-    },
-    {
       "source": "Commander Alex Thorne",
       "target": "Helena Vu",
-      "kind": "co_work",
-      "weight": 1,
-      "tasks": [
-        "Ring stress telemetry review"
-      ]
-    },
-    {
-      "source": "Dr. Ren Feldman",
-      "target": "Lt. Commander Maya Shepard",
-      "kind": "co_work",
-      "weight": 1,
-      "tasks": [
-        "Hydroponics nutrient cycle adjustment"
-      ]
-    },
-    {
-      "source": "Prof. Elena Sorensen",
-      "target": "Varya Lin",
       "kind": "co_work",
       "weight": 1,
       "tasks": [
@@ -230,8 +203,36 @@
       ]
     },
     {
+      "source": "Lt. Commander Maya Shepard",
+      "target": "Varya Lin",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Hydroponics nutrient cycle adjustment"
+      ]
+    },
+    {
       "source": "Dr. Elira Noor",
       "target": "Julian Markov",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Ring stress telemetry review"
+      ]
+    },
+    {
+      "source": "Leena Porter",
+      "target": "Prof. Elena Sorensen",
+      "kind": "co_work",
+      "weight": 2,
+      "tasks": [
+        "Docking Bay 2 logistics turnover",
+        "Cargo manifest reconciliation, Bay 2 intake"
+      ]
+    },
+    {
+      "source": "Dr. Ren Feldman",
+      "target": "Jiro Tanaka",
       "kind": "co_work",
       "weight": 1,
       "tasks": [
@@ -244,12 +245,21 @@
       "kind": "co_work",
       "weight": 2,
       "tasks": [
-        "Ethics ledger reconciliation (Picard Delta 3)",
+        "ORD pre-flight reconnaissance audit (Delta Scout)",
         "Bay 2 departure clearance package"
       ]
     },
     {
-      "source": "Maren Koss",
+      "source": "Dr. Elira Noor",
+      "target": "Leena Porter",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Cargo manifest reconciliation, Bay 2 intake"
+      ]
+    },
+    {
+      "source": "Dr. Elira Noor",
       "target": "Prof. Elena Sorensen",
       "kind": "co_work",
       "weight": 1,
@@ -258,17 +268,8 @@
       ]
     },
     {
-      "source": "Helena Vu",
+      "source": "Dr. Amira Sato",
       "target": "Julian Markov",
-      "kind": "co_work",
-      "weight": 1,
-      "tasks": [
-        "ORD pre-flight reconnaissance audit (Delta Scout)"
-      ]
-    },
-    {
-      "source": "Helena Vu",
-      "target": "Varya Lin",
       "kind": "co_work",
       "weight": 1,
       "tasks": [
@@ -281,13 +282,6 @@
       "kind": "swarm_sync",
       "weight": 1,
       "hour": 1
-    },
-    {
-      "source": "Tariq El-Sayegh",
-      "target": "Dr. Elena Vasquez",
-      "kind": "swarm_sync",
-      "weight": 1,
-      "hour": 2
     }
   ]
 }

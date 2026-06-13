@@ -2,9 +2,9 @@
   "engine_class": "GUMASAdvancedEngine",
   "factions": 13,
   "leaders": 21,
-  "turns_total": 11,
-  "final_stability": 0.5713,
-  "final_risk": 0.4317,
+  "turns_total": 12,
+  "final_stability": 0.567,
+  "final_risk": 0.4188,
   "log": [
     {
       "hour": 1,
@@ -65,7 +65,7 @@
       "notable": {}
     },
     {
-      "hour": 2,
+      "hour": 3,
       "turn": 8,
       "stability_index": 0.5823,
       "risk_index": 0.4065,
@@ -83,7 +83,7 @@
       "notable": {}
     },
     {
-      "hour": 3,
+      "hour": 4,
       "turn": 10,
       "stability_index": 0.5753,
       "risk_index": 0.4115,
@@ -99,12 +99,20 @@
       "notable": {
         "new_insurgencies": 1
       }
+    },
+    {
+      "hour": 4,
+      "turn": 12,
+      "stability_index": 0.567,
+      "risk_index": 0.4188,
+      "summary": "Turn 12: stability=0.567, risk=0.419, v3_events=40",
+      "notable": {}
     }
   ],
   "injected_tasks": [
     {
-      "id": "R2",
-      "hour": 2,
+      "id": "R3",
+      "hour": 3,
       "trigger_risk": 0.4065
     }
   ],

@@ -1,0 +1,1815 @@
+{
+  "start_hour": 6,
+  "hours": 4,
+  "crew_count": 41,
+  "shifts": {
+    "Alex Thorne": "Alpha",
+    "Amira Sato": "Bravo",
+    "Raj Patel": "Charlie",
+    "Chief Thomson": "Delta",
+    "Amina Velin": "Bravo",
+    "Mira Chen": "Charlie",
+    "Carmen Rivas": "Bravo",
+    "Maya Shepard": "Alpha",
+    "Dante Kyros": "Delta",
+    "Elena Sorensen": "Bravo",
+    "Elena Vasquez": "Alpha",
+    "Elira Noor": "Charlie",
+    "Emily Roberts": "Bravo",
+    "Haneul Park": "Alpha",
+    "Lt. Hassan": "Bravo",
+    "Helena Vu": "Alpha",
+    "Ira Menon": "Delta",
+    "Jessica Martinez": "Bravo",
+    "Jiro Tanaka": "Alpha",
+    "Julian Markov": "Charlie",
+    "Juno Suresh": "Alpha",
+    "Kai Drev": "Delta",
+    "Keira Halden": "Bravo",
+    "Kieran Zhao": "Alpha",
+    "Leena Porter": "Charlie",
+    "Marcus Chen": "Bravo",
+    "Maren Koss": "Alpha",
+    "Lt. Nakamura": "Bravo",
+    "Naomi Vell": "Alpha",
+    "Olivia Nguyen": "Delta",
+    "Rei Vatra": "Bravo",
+    "Ren Feldman": "Alpha",
+    "Ren Okada": "Charlie",
+    "Ren Takahashi": "Alpha",
+    "Ryan Patel": "Alpha",
+    "Samantha Gray": "Bravo",
+    "Samantha Lee": "Alpha",
+    "Tariq El-Sayegh": "Charlie",
+    "Tobias Qin": "Bravo",
+    "Varya Lin": "Alpha",
+    "Vincent Kale": "Bravo"
+  },
+  "state": {
+    "Alex Thorne": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Amira Sato": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    },
+    "Raj Patel": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 2.0,
+      "morale": 6.0,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": true,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "meal",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "hygiene",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "personal",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "personal",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Chief Thomson": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 2.0,
+      "morale": 6.0,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": true,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "meal",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "hygiene",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "personal",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "personal",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Amina Velin": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    },
+    "Mira Chen": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 2.0,
+      "morale": 6.0,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": true,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "meal",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "hygiene",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "personal",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "personal",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Carmen Rivas": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    },
+    "Maya Shepard": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Dante Kyros": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 2.0,
+      "morale": 6.0,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": true,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "meal",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "hygiene",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "personal",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "personal",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Elena Sorensen": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    },
+    "Elena Vasquez": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Elira Noor": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 2.0,
+      "morale": 6.0,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": true,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "meal",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "hygiene",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "personal",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "personal",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Emily Roberts": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    },
+    "Haneul Park": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Lt. Hassan": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    },
+    "Helena Vu": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Ira Menon": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 2.0,
+      "morale": 6.0,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": true,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "meal",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "hygiene",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "personal",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "personal",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Jessica Martinez": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    },
+    "Jiro Tanaka": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Julian Markov": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 2.0,
+      "morale": 6.0,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": true,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "meal",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "hygiene",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "personal",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "personal",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Juno Suresh": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Kai Drev": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 2.0,
+      "morale": 6.0,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": true,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "meal",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "hygiene",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "personal",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "personal",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Keira Halden": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    },
+    "Kieran Zhao": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Leena Porter": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 2.0,
+      "morale": 6.0,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": true,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "meal",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "hygiene",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "personal",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "personal",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Marcus Chen": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    },
+    "Maren Koss": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Lt. Nakamura": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    },
+    "Naomi Vell": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Olivia Nguyen": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 2.0,
+      "morale": 6.0,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": true,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "meal",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "hygiene",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "personal",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "personal",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Rei Vatra": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    },
+    "Ren Feldman": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Ren Okada": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 2.0,
+      "morale": 6.0,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": true,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "meal",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "hygiene",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "personal",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "personal",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Ren Takahashi": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Ryan Patel": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Samantha Gray": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    },
+    "Samantha Lee": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Tariq El-Sayegh": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 2.0,
+      "morale": 6.0,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": true,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "meal",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "hygiene",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "personal",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "personal",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Tobias Qin": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    },
+    "Varya Lin": {
+      "sleep_debt": 8.0,
+      "hunger": 3.0,
+      "hygiene": 10.0,
+      "morale": 4.399999999999999,
+      "meals_taken": [
+        "breakfast"
+      ],
+      "showered_today": false,
+      "bathroom_events": 2,
+      "meals_eaten": 1,
+      "peak_sleep_debt": 8.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "on_shift",
+          "sleep_debt": 5.0,
+          "hunger": 0.0,
+          "fatigue": 20.0
+        },
+        {
+          "clock": 7,
+          "activity": "on_shift",
+          "sleep_debt": 6.0,
+          "hunger": 1.0,
+          "fatigue": 24.0
+        },
+        {
+          "clock": 8,
+          "activity": "on_shift",
+          "sleep_debt": 7.0,
+          "hunger": 2.0,
+          "fatigue": 28.0
+        },
+        {
+          "clock": 9,
+          "activity": "on_shift",
+          "sleep_debt": 8.0,
+          "hunger": 3.0,
+          "fatigue": 32.0
+        }
+      ]
+    },
+    "Vincent Kale": {
+      "sleep_debt": 0.0,
+      "hunger": 2.0,
+      "hygiene": 6.0,
+      "morale": 6.0,
+      "meals_taken": [],
+      "showered_today": false,
+      "bathroom_events": 0,
+      "meals_eaten": 0,
+      "peak_sleep_debt": 4.0,
+      "hours": [
+        {
+          "clock": 6,
+          "activity": "asleep",
+          "sleep_debt": 2.0,
+          "hunger": 2.0,
+          "fatigue": 8.0
+        },
+        {
+          "clock": 7,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 8,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        },
+        {
+          "clock": 9,
+          "activity": "asleep",
+          "sleep_debt": 0.0,
+          "hunger": 2.0,
+          "fatigue": 0.0
+        }
+      ]
+    }
+  },
+  "occupancy": {
+    "0": {
+      "on_shift": 15,
+      "asleep": 14,
+      "meal": 12
+    },
+    "1": {
+      "on_shift": 15,
+      "asleep": 14,
+      "hygiene": 12
+    },
+    "2": {
+      "on_shift": 15,
+      "asleep": 14,
+      "personal": 12
+    },
+    "3": {
+      "on_shift": 15,
+      "asleep": 14,
+      "personal": 12
+    }
+  },
+  "consumables": {
+    "water_drawn_l": 153.0,
+    "water_recycled_l": 149.94,
+    "galley_portions": 27.0,
+    "co2_kg": 5.55,
+    "o2_kg": 3.78
+  },
+  "deficits": []
+}

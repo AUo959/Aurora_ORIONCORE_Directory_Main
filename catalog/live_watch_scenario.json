@@ -439,5 +439,10 @@
       "starling_au",
       "riverthread_808"
     ]
+  },
+  "start_clock": 6,
+  "crew_life": {
+    "enabled": true,
+    "model": "crew_life_model"
   }
 }

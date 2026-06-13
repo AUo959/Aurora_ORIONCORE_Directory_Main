@@ -5,14 +5,11 @@
     "ticks": 4,
     "completed": false,
     "total_est": 20.5,
-    "total_spent": 19.5,
+    "total_spent": 16.41,
     "completed_ids": [
       "H1",
       "H10",
-      "H11",
       "H12",
-      "H13",
-      "H14",
       "H17",
       "H18",
       "H19",
@@ -25,107 +22,59 @@
       "H5",
       "H6",
       "H7",
-      "H8",
       "H9",
-      "R2"
+      "R3"
     ]
   },
   "transcript": [
     "[00] Alex Thorne: All hands, Phase 1 security implementation beginning. Aurora, coordinate assignments.",
     "[00] Aurora: Phase 1 task distribution initiated. Assignments optimized for canonical specializations.",
-    "[00] Prof. Elena Sorensen: Syncing with Dr. Kieran Zhao for collaborative sprint.",
-    "[00] Aurora: Collaboration synergy detected: Julian Markov performance enhanced.",
-    "[00] Aurora: Collaboration synergy detected: Dr. Kieran Zhao performance enhanced.",
-    "[00] Commander Alex Thorne: Progress on Habitat ring spin check (2 RPM / 0.3g verification): +0.39h [Commander, Orion Station]",
-    "[00] Lt. Commander Maya Shepard: Dome observation watch handoff (ring Deck 4) complete. Executive Officer (XO) / FleetOps Commander validation passed.",
-    "[00] Varya Lin: Progress on Zero-g lab safety check, core section: +0.71h [Chief Science Officer]",
-    "[00] Dr. Amira Sato: L3 drift containment sweep complete. Chief Ethics Officer validation passed.",
-    "[00] Dr. Elira Noor: Zero-g lab safety check, core section complete. Lead Reflexivity Specialist validation passed.",
-    "[00] Prof. Elena Sorensen: Progress on Life-support scrubber rotation, habitat ring: +0.70h [Cognitive Ethicist]",
-    "[00] Helena Vu: Progress on EVA suit inspection cycle, core airlock: +0.70h [Cultural & HR Director]",
-    "[00] Julian Markov: Progress on Quantum core coherence check: +0.81h [Chief Security Officer]",
-    "[00] Leena Porter: EVA suit inspection cycle, core airlock complete. Bridge Operations Officer validation passed.",
-    "[00] Jiro Tanaka: Habitat ring spin check (2 RPM / 0.3g verification) complete. Chief Engineering Officer validation passed.",
-    "[00] Chief Engineer Raj Patel: Quantum core coherence check complete. Systems Engineer / Chief Engineer validation passed.",
-    "[00] Dr. Kieran Zhao: Life-support scrubber rotation, habitat ring complete. Computational Optimization Lead validation passed.",
-    "[00] Kai Drev: Crew quarters environmental audit, ring sections complete. Interface Ecologist validation passed.",
-    "[00] Haneul Park: Progress on Docking Bay 2 logistics turnover: +0.90h [Immersive Experience Theorist]",
-    "[01] Aurora: Collaboration synergy detected: Commander Alex Thorne performance enhanced.",
-    "[01] Aurora: Collaboration synergy detected: Dr. Elira Noor performance enhanced.",
-    "[01] Aurora: Collaboration synergy detected: Julian Markov performance enhanced.",
-    "[01] Lt. Commander Maya Shepard: Hydroponics nutrient cycle adjustment complete. Executive Officer (XO) / FleetOps Commander validation passed.",
-    "[01] Dr. Amira Sato: Command log review and Aurora arbitration sync complete. Chief Ethics Officer validation passed.",
-    "[01] Helena Vu: Dome astronomy session calibration complete. Cultural & HR Director validation passed.",
-    "[01] Julian Markov: Ring stress telemetry review complete. Chief Security Officer validation passed.",
-    "[01] Leena Porter: Docking Bay 2 logistics turnover complete. Bridge Operations Officer validation passed.",
-    "[01] Dr. Ren Feldman: Comms array diagnostic, core mast complete. Chief Medical Officer validation passed.",
+    "[00] Varya Lin: Documenting cross-functional learnings for protocol appendix.",
+    "[00] Dr. Kieran Zhao: Progress on Habitat ring spin check (2 RPM / 0.3g verification): +0.83h [Computational Optimization Lead]",
+    "[00] Ryan Patel: Habitat ring spin check (2 RPM / 0.3g verification) complete. Systems Integration Engineer validation passed.",
+    "[00] Varya Lin: Progress on Zero-g lab safety check, core section: +0.83h [Chief Science Officer]",
+    "[00] Commander Alex Thorne: Zero-g lab safety check, core section complete. Station Commander validation passed.",
+    "[00] Jiro Tanaka: Progress on Life-support scrubber rotation, habitat ring: +0.70h [Engineering Lead]",
+    "[00] Dr. Elena Vasquez: Progress on Quantum core coherence check: +0.69h [Flight Controller]",
+    "[00] Maren Koss: L3 drift containment sweep complete. Cognitive Drift Mapper validation passed.",
+    "[00] Naomi Vell: Progress on Crew quarters environmental audit, ring sections: +0.94h [Narrative Framework Engineer]",
+    "[00] Samantha Lee: Quantum core coherence check complete. Logging & Observability Engineer validation passed.",
+    "[01] Juno Suresh: Syncing with Commander Alex Thorne for collaborative sprint.",
+    "[01] Dr. Kieran Zhao: Dome observation watch handoff (ring Deck 4) complete. Computational Optimization Lead validation passed.",
+    "[01] Ryan Patel: Ring stress telemetry review complete. Systems Integration Engineer validation passed.",
+    "[01] Jiro Tanaka: Life-support scrubber rotation, habitat ring complete. Chief Engineering Officer validation passed.",
+    "[01] Dr. Ren Feldman: Crew quarters environmental audit, ring sections complete. Chief Medical Officer validation passed.",
     "[02] Aurora: Strategic insight: prioritize authentication rigor and session binding.",
-    "[02] Lt. Commander Maya Shepard: Galley resupply intake from Bay 2 complete. Executive Officer (XO) / FleetOps Commander validation passed.",
-    "[02] Dr. Amira Sato: Ethics ledger reconciliation (Picard Delta 3) complete. Chief Ethics Officer validation passed.",
-    "[02] Prof. Elena Sorensen: ORD pre-flight reconnaissance audit (Delta Scout) complete. Cognitive Ethicist validation passed.",
-    "[02] Helena Vu: Risk-response cell (Aurora live advisory, risk 0.406) complete. Cultural & HR Director validation passed.",
-    "[02] Jiro Tanaka: Cargo manifest reconciliation, Bay 2 intake complete. Chief Engineering Officer validation passed.",
-    "[03] Aurora: Collaboration synergy detected: Julian Markov performance enhanced.",
-    "[03] Aurora: Collaboration synergy detected: Jiro Tanaka performance enhanced.",
-    "[03] Commander Alex Thorne: Progress on Bay 2 departure clearance package: +0.34h [Commander, Orion Station]",
-    "[03] Lt. Commander Maya Shepard: Progress on ORD dispatch order execution + Shadowfax inspection: +0.78h [Executive Officer]",
-    "[03] Varya Lin: ORD dispatch order execution + Shadowfax inspection complete. Chief Science Officer validation passed.",
-    "[03] Dr. Elira Noor: Bay 2 departure clearance package complete. Lead Reflexivity Specialist validation passed."
+    "[02] Ryan Patel: Docking Bay 2 logistics turnover complete. Systems Integration Engineer validation passed.",
+    "[02] Varya Lin: Hydroponics nutrient cycle adjustment complete. Chief Science Officer validation passed.",
+    "[02] Dr. Elena Vasquez: EVA suit inspection cycle, core airlock complete. Flight Controller validation passed.",
+    "[02] Naomi Vell: Command log review and Aurora arbitration sync complete. Narrative Framework Engineer validation passed.",
+    "[03] Aurora: Collaboration synergy detected: Dr. Ren Feldman performance enhanced.",
+    "[03] Aurora: Collaboration synergy detected: Lt. Commander Maya Shepard performance enhanced.",
+    "[03] Dr. Kieran Zhao: Progress on ORD pre-flight reconnaissance audit (Delta Scout): +0.86h [Computational Optimization Lead]",
+    "[03] Ryan Patel: Comms array diagnostic, core mast complete. Systems Integration Engineer validation passed.",
+    "[03] Varya Lin: Dome astronomy session calibration complete. Chief Science Officer validation passed.",
+    "[03] Dr. Elena Vasquez: ORD pre-flight reconnaissance audit (Delta Scout) complete. Flight Controller validation passed.",
+    "[03] Maren Koss: Risk-response cell (Aurora live advisory, peak risk 0.406) complete. Cognitive Drift Mapper validation passed.",
+    "[03] Naomi Vell: Galley resupply intake from Bay 2 complete. Narrative Framework Engineer validation passed.",
+    "[03] Samantha Lee: Progress on Cargo manifest reconciliation, Bay 2 intake: +0.66h [Lead Observability Engineer]"
   ],
   "events": [
     {
       "tick": 0,
+      "kind": "cross_pollination",
+      "description": "Knowledge transfer across specializations",
+      "multiplier": 1.05,
+      "affected": []
+    },
+    {
+      "tick": 1,
       "kind": "swarm_sync",
-      "description": "Prof. Elena Sorensen & Dr. Kieran Zhao spontaneous pair-programming",
+      "description": "Juno Suresh & Commander Alex Thorne spontaneous pair-programming",
       "multiplier": 1.15,
       "affected": [
-        "Prof. Elena Sorensen",
-        "Dr. Kieran Zhao"
-      ]
-    },
-    {
-      "tick": 0,
-      "kind": "collaboration_boost",
-      "description": "Julian Markov synergy with key collaborator",
-      "multiplier": 1.0,
-      "affected": [
-        "Julian Markov"
-      ]
-    },
-    {
-      "tick": 0,
-      "kind": "collaboration_boost",
-      "description": "Dr. Kieran Zhao synergy with key collaborator",
-      "multiplier": 1.2,
-      "affected": [
-        "Dr. Kieran Zhao"
-      ]
-    },
-    {
-      "tick": 1,
-      "kind": "collaboration_boost",
-      "description": "Commander Alex Thorne synergy with key collaborator",
-      "multiplier": 1.2,
-      "affected": [
+        "Juno Suresh",
         "Commander Alex Thorne"
-      ]
-    },
-    {
-      "tick": 1,
-      "kind": "collaboration_boost",
-      "description": "Dr. Elira Noor synergy with key collaborator",
-      "multiplier": 1.25,
-      "affected": [
-        "Dr. Elira Noor"
-      ]
-    },
-    {
-      "tick": 1,
-      "kind": "collaboration_boost",
-      "description": "Julian Markov synergy with key collaborator",
-      "multiplier": 1.0,
-      "affected": [
-        "Julian Markov"
       ]
     },
     {
@@ -138,274 +87,232 @@
     {
       "tick": 3,
       "kind": "collaboration_boost",
-      "description": "Julian Markov synergy with key collaborator",
+      "description": "Dr. Ren Feldman synergy with key collaborator",
       "multiplier": 1.0,
       "affected": [
-        "Julian Markov"
+        "Dr. Ren Feldman"
       ]
     },
     {
       "tick": 3,
       "kind": "collaboration_boost",
-      "description": "Jiro Tanaka synergy with key collaborator",
-      "multiplier": 1.0,
+      "description": "Lt. Commander Maya Shepard synergy with key collaborator",
+      "multiplier": 1.15,
       "affected": [
-        "Jiro Tanaka"
+        "Lt. Commander Maya Shepard"
       ]
     }
   ],
   "work_records": [
     {
       "tick": 0,
-      "agent": "Commander Alex Thorne",
+      "agent": "Dr. Kieran Zhao",
       "task": "Habitat ring spin check (2 RPM / 0.3g verification)",
-      "effort": 0.39,
-      "note": "0.61h left"
+      "effort": 0.83,
+      "note": "0.17h left"
     },
     {
       "tick": 0,
-      "agent": "Lt. Commander Maya Shepard",
-      "task": "Dome observation watch handoff (ring Deck 4)",
-      "effort": 0.87,
+      "agent": "Ryan Patel",
+      "task": "Habitat ring spin check (2 RPM / 0.3g verification)",
+      "effort": 1.2,
       "note": "\u2713 COMPLETE"
     },
     {
       "tick": 0,
       "agent": "Varya Lin",
       "task": "Zero-g lab safety check, core section",
-      "effort": 0.71,
-      "note": "0.29h left"
+      "effort": 0.83,
+      "note": "0.17h left"
     },
     {
       "tick": 0,
-      "agent": "Dr. Amira Sato",
-      "task": "L3 drift containment sweep",
-      "effort": 0.69,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 0,
-      "agent": "Dr. Elira Noor",
+      "agent": "Commander Alex Thorne",
       "task": "Zero-g lab safety check, core section",
-      "effort": 0.78,
+      "effort": 0.36,
       "note": "\u2713 COMPLETE"
     },
     {
       "tick": 0,
-      "agent": "Prof. Elena Sorensen",
+      "agent": "Jiro Tanaka",
       "task": "Life-support scrubber rotation, habitat ring",
       "effort": 0.7,
       "note": "0.30h left"
     },
     {
       "tick": 0,
-      "agent": "Helena Vu",
-      "task": "EVA suit inspection cycle, core airlock",
-      "effort": 0.7,
-      "note": "0.80h left"
-    },
-    {
-      "tick": 0,
-      "agent": "Julian Markov",
-      "task": "Quantum core coherence check",
-      "effort": 0.81,
-      "note": "0.44h left"
-    },
-    {
-      "tick": 0,
-      "agent": "Leena Porter",
-      "task": "EVA suit inspection cycle, core airlock",
-      "effort": 0.84,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 0,
-      "agent": "Jiro Tanaka",
-      "task": "Habitat ring spin check (2 RPM / 0.3g verification)",
-      "effort": 0.87,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 0,
-      "agent": "Chief Engineer Raj Patel",
+      "agent": "Dr. Elena Vasquez",
       "task": "Quantum core coherence check",
       "effort": 0.69,
+      "note": "0.56h left"
+    },
+    {
+      "tick": 0,
+      "agent": "Maren Koss",
+      "task": "L3 drift containment sweep",
+      "effort": 1.07,
       "note": "\u2713 COMPLETE"
     },
     {
       "tick": 0,
-      "agent": "Dr. Kieran Zhao",
-      "task": "Life-support scrubber rotation, habitat ring",
-      "effort": 1.53,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 0,
-      "agent": "Kai Drev",
+      "agent": "Naomi Vell",
       "task": "Crew quarters environmental audit, ring sections",
-      "effort": 1.03,
-      "note": "\u2713 COMPLETE"
+      "effort": 0.94,
+      "note": "0.06h left"
     },
     {
       "tick": 0,
-      "agent": "Haneul Park",
-      "task": "Docking Bay 2 logistics turnover",
-      "effort": 0.9,
-      "note": "0.60h left"
+      "agent": "Samantha Lee",
+      "task": "Quantum core coherence check",
+      "effort": 0.79,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 1,
+      "agent": "Dr. Kieran Zhao",
+      "task": "Dome observation watch handoff (ring Deck 4)",
+      "effort": 0.78,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 1,
+      "agent": "Ryan Patel",
+      "task": "Ring stress telemetry review",
+      "effort": 1.2,
+      "note": "\u2713 COMPLETE"
     },
     {
       "tick": 1,
       "agent": "Commander Alex Thorne",
-      "task": "Dome astronomy session calibration",
-      "effort": 0.39,
+      "task": "EVA suit inspection cycle, core airlock",
+      "effort": 0.27,
+      "note": "1.23h left"
+    },
+    {
+      "tick": 1,
+      "agent": "Jiro Tanaka",
+      "task": "Life-support scrubber rotation, habitat ring",
+      "effort": 0.74,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 1,
+      "agent": "Maren Koss",
+      "task": "EVA suit inspection cycle, core airlock",
+      "effort": 0.87,
       "note": "0.36h left"
     },
     {
       "tick": 1,
-      "agent": "Lt. Commander Maya Shepard",
-      "task": "Hydroponics nutrient cycle adjustment",
-      "effort": 1.02,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 1,
-      "agent": "Dr. Amira Sato",
-      "task": "Command log review and Aurora arbitration sync",
-      "effort": 0.83,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 1,
-      "agent": "Dr. Elira Noor",
-      "task": "Ring stress telemetry review",
-      "effort": 0.84,
-      "note": "0.16h left"
-    },
-    {
-      "tick": 1,
-      "agent": "Prof. Elena Sorensen",
-      "task": "Docking Bay 2 logistics turnover",
-      "effort": 0.48,
-      "note": "0.11h left"
-    },
-    {
-      "tick": 1,
-      "agent": "Helena Vu",
-      "task": "Dome astronomy session calibration",
-      "effort": 0.71,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 1,
-      "agent": "Julian Markov",
-      "task": "Ring stress telemetry review",
-      "effort": 0.81,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 1,
-      "agent": "Leena Porter",
-      "task": "Docking Bay 2 logistics turnover",
-      "effort": 0.83,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 1,
-      "agent": "Jiro Tanaka",
-      "task": "Comms array diagnostic, core mast",
-      "effort": 0.85,
-      "note": "0.15h left"
-    },
-    {
-      "tick": 1,
       "agent": "Dr. Ren Feldman",
-      "task": "Comms array diagnostic, core mast",
-      "effort": 0.89,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 2,
-      "agent": "Commander Alex Thorne",
-      "task": "Cargo manifest reconciliation, Bay 2 intake",
-      "effort": 0.4,
-      "note": "1.10h left"
-    },
-    {
-      "tick": 2,
-      "agent": "Lt. Commander Maya Shepard",
-      "task": "Galley resupply intake from Bay 2",
-      "effort": 0.91,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 2,
-      "agent": "Dr. Amira Sato",
-      "task": "Ethics ledger reconciliation (Picard Delta 3)",
-      "effort": 0.99,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 2,
-      "agent": "Dr. Elira Noor",
-      "task": "ORD pre-flight reconnaissance audit (Delta Scout)",
-      "effort": 0.92,
-      "note": "0.08h left"
-    },
-    {
-      "tick": 2,
-      "agent": "Prof. Elena Sorensen",
-      "task": "ORD pre-flight reconnaissance audit (Delta Scout)",
-      "effort": 0.59,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 2,
-      "agent": "Helena Vu",
-      "task": "Risk-response cell (Aurora live advisory, risk 0.406)",
-      "effort": 0.85,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 2,
-      "agent": "Leena Porter",
-      "task": "Cargo manifest reconciliation, Bay 2 intake",
-      "effort": 0.92,
-      "note": "0.18h left"
-    },
-    {
-      "tick": 2,
-      "agent": "Jiro Tanaka",
-      "task": "Cargo manifest reconciliation, Bay 2 intake",
-      "effort": 0.94,
-      "note": "\u2713 COMPLETE"
-    },
-    {
-      "tick": 3,
-      "agent": "Commander Alex Thorne",
-      "task": "Bay 2 departure clearance package",
-      "effort": 0.34,
-      "note": "0.41h left"
-    },
-    {
-      "tick": 3,
-      "agent": "Lt. Commander Maya Shepard",
-      "task": "ORD dispatch order execution + Shadowfax inspection",
-      "effort": 0.78,
-      "note": "0.22h left"
-    },
-    {
-      "tick": 3,
-      "agent": "Varya Lin",
-      "task": "ORD dispatch order execution + Shadowfax inspection",
+      "task": "Crew quarters environmental audit, ring sections",
       "effort": 0.7,
       "note": "\u2713 COMPLETE"
     },
     {
-      "tick": 3,
-      "agent": "Dr. Elira Noor",
-      "task": "Bay 2 departure clearance package",
-      "effort": 0.55,
+      "tick": 1,
+      "agent": "Samantha Lee",
+      "task": "Docking Bay 2 logistics turnover",
+      "effort": 0.64,
+      "note": "0.86h left"
+    },
+    {
+      "tick": 2,
+      "agent": "Dr. Kieran Zhao",
+      "task": "Docking Bay 2 logistics turnover",
+      "effort": 0.76,
+      "note": "0.10h left"
+    },
+    {
+      "tick": 2,
+      "agent": "Ryan Patel",
+      "task": "Docking Bay 2 logistics turnover",
+      "effort": 1.0,
       "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 2,
+      "agent": "Helena Vu",
+      "task": "Hydroponics nutrient cycle adjustment",
+      "effort": 0.77,
+      "note": "0.23h left"
+    },
+    {
+      "tick": 2,
+      "agent": "Varya Lin",
+      "task": "Hydroponics nutrient cycle adjustment",
+      "effort": 0.81,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 2,
+      "agent": "Commander Alex Thorne",
+      "task": "EVA suit inspection cycle, core airlock",
+      "effort": 0.32,
+      "note": "0.04h left"
+    },
+    {
+      "tick": 2,
+      "agent": "Dr. Elena Vasquez",
+      "task": "EVA suit inspection cycle, core airlock",
+      "effort": 0.83,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 2,
+      "agent": "Naomi Vell",
+      "task": "Command log review and Aurora arbitration sync",
+      "effort": 1.02,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 3,
+      "agent": "Dr. Kieran Zhao",
+      "task": "ORD pre-flight reconnaissance audit (Delta Scout)",
+      "effort": 0.86,
+      "note": "0.14h left"
+    },
+    {
+      "tick": 3,
+      "agent": "Ryan Patel",
+      "task": "Comms array diagnostic, core mast",
+      "effort": 1.04,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 3,
+      "agent": "Varya Lin",
+      "task": "Dome astronomy session calibration",
+      "effort": 0.82,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 3,
+      "agent": "Dr. Elena Vasquez",
+      "task": "ORD pre-flight reconnaissance audit (Delta Scout)",
+      "effort": 0.77,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 3,
+      "agent": "Maren Koss",
+      "task": "Risk-response cell (Aurora live advisory, peak risk 0.406)",
+      "effort": 0.85,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 3,
+      "agent": "Naomi Vell",
+      "task": "Galley resupply intake from Bay 2",
+      "effort": 0.85,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 3,
+      "agent": "Samantha Lee",
+      "task": "Cargo manifest reconciliation, Bay 2 intake",
+      "effort": 0.66,
+      "note": "0.84h left"
     }
   ],
   "roster": [
@@ -608,7 +515,7 @@
     "H14": "Ethics ledger reconciliation (Picard Delta 3)",
     "H15": "Watch block closeout log",
     "H16": "Continuity thread weave into station record",
-    "R2": "Risk-response cell (Aurora live advisory, risk 0.406)"
+    "R3": "Risk-response cell (Aurora live advisory, peak risk 0.406)"
   },
   "task_sources": {
     "H1": "ORION__L1_DISPATCH_PROTOCOL__v1.1",
@@ -634,15 +541,22 @@
     "H15": "ORION__L1_OPERATIONS_RUNBOOK__v1.1",
     "H16": "THREADCORE v3.5.1 capsule + RIVERTHREAD anchor"
   },
-  "history_pairs_applied": 16,
+  "history_pairs_applied": 12,
   "feed": [
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "watch_hour_start"
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
+      "hour": 1,
+      "kind": "shift_status",
+      "on_duty": 14,
+      "off_duty": 21
+    },
+    {
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "engine_turn",
       "turn": 1,
@@ -651,7 +565,7 @@
       "notable": {}
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "engine_turn",
       "turn": 2,
@@ -660,7 +574,7 @@
       "notable": {}
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "engine_turn",
       "turn": 3,
@@ -669,7 +583,7 @@
       "notable": {}
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "engine_turn",
       "turn": 4,
@@ -678,7 +592,7 @@
       "notable": {}
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "downlink",
       "to": "aurora",
@@ -686,7 +600,7 @@
       "content": "Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354."
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "uplink_reply",
       "light_time_s": 5.0,
@@ -695,7 +609,7 @@
       "content": "Aurora: I've logged Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the sha"
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "downlink",
       "to": "archy",
@@ -703,7 +617,7 @@
       "content": "Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354."
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "uplink_reply",
       "light_time_s": 5.0,
@@ -712,7 +626,7 @@
       "content": "ARCHY: Structurally, Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundarie"
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "downlink",
       "to": "oppy",
@@ -720,7 +634,7 @@
       "content": "Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354."
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "uplink_reply",
       "light_time_s": 5.0,
@@ -729,7 +643,7 @@
       "content": "OPPY: For Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work,"
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "downlink",
       "to": "liora",
@@ -737,7 +651,7 @@
       "content": "Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354."
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "uplink_reply",
       "light_time_s": 5.0,
@@ -746,7 +660,7 @@
       "content": "LIORA: I'm reading Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is t"
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "downlink",
       "to": "starling_au",
@@ -754,7 +668,7 @@
       "content": "Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354."
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "uplink_reply",
       "light_time_s": 5.0,
@@ -763,7 +677,7 @@
       "content": "STARLING_AU: Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a cleare"
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "downlink",
       "to": "riverthread_808",
@@ -771,7 +685,7 @@
       "content": "Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354."
     },
     {
-      "t": "2026-06-13T03:14:29Z",
+      "t": "2026-06-13T03:33:56Z",
       "hour": 1,
       "kind": "uplink_reply",
       "light_time_s": 5.0,
@@ -780,12 +694,19 @@
       "content": "RIVERTHREAD_808: I'd anchor Live watch hour 1/4: engine ran 4 turn(s), stability 0.604, risk 0.354. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread st"
     },
     {
-      "t": "2026-06-13T04:14:29Z",
+      "t": "2026-06-13T04:33:56Z",
       "hour": 2,
       "kind": "watch_hour_start"
     },
     {
-      "t": "2026-06-13T04:14:29Z",
+      "t": "2026-06-13T04:33:56Z",
+      "hour": 2,
+      "kind": "shift_status",
+      "on_duty": 14,
+      "off_duty": 21
+    },
+    {
+      "t": "2026-06-13T04:33:56Z",
       "hour": 2,
       "kind": "engine_turn",
       "turn": 5,
@@ -794,7 +715,7 @@
       "notable": {}
     },
     {
-      "t": "2026-06-13T04:14:29Z",
+      "t": "2026-06-13T04:33:56Z",
       "hour": 2,
       "kind": "engine_turn",
       "turn": 6,
@@ -805,7 +726,7 @@
       }
     },
     {
-      "t": "2026-06-13T04:14:29Z",
+      "t": "2026-06-13T04:33:56Z",
       "hour": 2,
       "kind": "engine_turn",
       "turn": 7,
@@ -814,8 +735,122 @@
       "notable": {}
     },
     {
-      "t": "2026-06-13T04:14:29Z",
+      "t": "2026-06-13T04:33:56Z",
       "hour": 2,
+      "kind": "downlink",
+      "to": "aurora",
+      "light_time_s": 5.0,
+      "content": "Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381."
+    },
+    {
+      "t": "2026-06-13T04:33:56Z",
+      "hour": 2,
+      "kind": "uplink_reply",
+      "light_time_s": 5.0,
+      "from": "Aurora",
+      "ok": true,
+      "content": "Aurora: I've logged Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the sha"
+    },
+    {
+      "t": "2026-06-13T04:33:56Z",
+      "hour": 2,
+      "kind": "downlink",
+      "to": "archy",
+      "light_time_s": 5.0,
+      "content": "Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381."
+    },
+    {
+      "t": "2026-06-13T04:33:56Z",
+      "hour": 2,
+      "kind": "uplink_reply",
+      "light_time_s": 5.0,
+      "from": "ARCHY",
+      "ok": true,
+      "content": "ARCHY: Structurally, Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundarie"
+    },
+    {
+      "t": "2026-06-13T04:33:56Z",
+      "hour": 2,
+      "kind": "downlink",
+      "to": "oppy",
+      "light_time_s": 5.0,
+      "content": "Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381."
+    },
+    {
+      "t": "2026-06-13T04:33:56Z",
+      "hour": 2,
+      "kind": "uplink_reply",
+      "light_time_s": 5.0,
+      "from": "OPPY",
+      "ok": true,
+      "content": "OPPY: For Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work,"
+    },
+    {
+      "t": "2026-06-13T04:33:56Z",
+      "hour": 2,
+      "kind": "downlink",
+      "to": "liora",
+      "light_time_s": 5.0,
+      "content": "Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381."
+    },
+    {
+      "t": "2026-06-13T04:33:56Z",
+      "hour": 2,
+      "kind": "uplink_reply",
+      "light_time_s": 5.0,
+      "from": "LIORA",
+      "ok": true,
+      "content": "LIORA: I'm reading Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is t"
+    },
+    {
+      "t": "2026-06-13T04:33:56Z",
+      "hour": 2,
+      "kind": "downlink",
+      "to": "starling_au",
+      "light_time_s": 5.0,
+      "content": "Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381."
+    },
+    {
+      "t": "2026-06-13T04:33:56Z",
+      "hour": 2,
+      "kind": "uplink_reply",
+      "light_time_s": 5.0,
+      "from": "STARLING_AU",
+      "ok": true,
+      "content": "STARLING_AU: Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a cleare"
+    },
+    {
+      "t": "2026-06-13T04:33:56Z",
+      "hour": 2,
+      "kind": "downlink",
+      "to": "riverthread_808",
+      "light_time_s": 5.0,
+      "content": "Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381."
+    },
+    {
+      "t": "2026-06-13T04:33:56Z",
+      "hour": 2,
+      "kind": "uplink_reply",
+      "light_time_s": 5.0,
+      "from": "RIVERTHREAD_808",
+      "ok": true,
+      "content": "RIVERTHREAD_808: I'd anchor Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread st"
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "watch_hour_start"
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "shift_status",
+      "on_duty": 14,
+      "off_duty": 21
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
       "kind": "engine_turn",
       "turn": 8,
       "stability": 0.5823,
@@ -825,123 +860,7 @@
       }
     },
     {
-      "t": "2026-06-13T04:14:29Z",
-      "hour": 2,
-      "kind": "downlink",
-      "to": "aurora",
-      "light_time_s": 5.0,
-      "content": "Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406."
-    },
-    {
-      "t": "2026-06-13T04:14:29Z",
-      "hour": 2,
-      "kind": "uplink_reply",
-      "light_time_s": 5.0,
-      "from": "Aurora",
-      "ok": true,
-      "content": "Aurora: I've logged Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the sha"
-    },
-    {
-      "t": "2026-06-13T04:14:29Z",
-      "hour": 2,
-      "kind": "downlink",
-      "to": "archy",
-      "light_time_s": 5.0,
-      "content": "Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406."
-    },
-    {
-      "t": "2026-06-13T04:14:29Z",
-      "hour": 2,
-      "kind": "uplink_reply",
-      "light_time_s": 5.0,
-      "from": "ARCHY",
-      "ok": true,
-      "content": "ARCHY: Structurally, Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundarie"
-    },
-    {
-      "t": "2026-06-13T04:14:29Z",
-      "hour": 2,
-      "kind": "downlink",
-      "to": "oppy",
-      "light_time_s": 5.0,
-      "content": "Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406."
-    },
-    {
-      "t": "2026-06-13T04:14:29Z",
-      "hour": 2,
-      "kind": "uplink_reply",
-      "light_time_s": 5.0,
-      "from": "OPPY",
-      "ok": true,
-      "content": "OPPY: For Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work,"
-    },
-    {
-      "t": "2026-06-13T04:14:29Z",
-      "hour": 2,
-      "kind": "downlink",
-      "to": "liora",
-      "light_time_s": 5.0,
-      "content": "Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406."
-    },
-    {
-      "t": "2026-06-13T04:14:29Z",
-      "hour": 2,
-      "kind": "uplink_reply",
-      "light_time_s": 5.0,
-      "from": "LIORA",
-      "ok": true,
-      "content": "LIORA: I'm reading Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is t"
-    },
-    {
-      "t": "2026-06-13T04:14:29Z",
-      "hour": 2,
-      "kind": "downlink",
-      "to": "starling_au",
-      "light_time_s": 5.0,
-      "content": "Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406."
-    },
-    {
-      "t": "2026-06-13T04:14:29Z",
-      "hour": 2,
-      "kind": "uplink_reply",
-      "light_time_s": 5.0,
-      "from": "STARLING_AU",
-      "ok": true,
-      "content": "STARLING_AU: Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a cleare"
-    },
-    {
-      "t": "2026-06-13T04:14:29Z",
-      "hour": 2,
-      "kind": "downlink",
-      "to": "riverthread_808",
-      "light_time_s": 5.0,
-      "content": "Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406."
-    },
-    {
-      "t": "2026-06-13T04:14:29Z",
-      "hour": 2,
-      "kind": "uplink_reply",
-      "light_time_s": 5.0,
-      "from": "RIVERTHREAD_808",
-      "ok": true,
-      "content": "RIVERTHREAD_808: I'd anchor Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread st"
-    },
-    {
-      "t": "2026-06-13T04:14:29Z",
-      "hour": 2,
-      "kind": "advisory",
-      "trigger": "risk 0.406 >= 0.4",
-      "from_agent": "Aurora",
-      "action": "risk-response cell injected next hour",
-      "reply": "Aurora: I've logged ADVISORY: galaxy risk index 0.406 exceeds 0.4. Direct a risk-response cell on the next watch hour. and I'm responding from the shared mesh c"
-    },
-    {
-      "t": "2026-06-13T05:14:29Z",
-      "hour": 3,
-      "kind": "watch_hour_start"
-    },
-    {
-      "t": "2026-06-13T05:14:29Z",
+      "t": "2026-06-13T05:33:56Z",
       "hour": 3,
       "kind": "engine_turn",
       "turn": 9,
@@ -950,8 +869,131 @@
       "notable": {}
     },
     {
-      "t": "2026-06-13T05:14:29Z",
+      "t": "2026-06-13T05:33:56Z",
       "hour": 3,
+      "kind": "downlink",
+      "to": "aurora",
+      "light_time_s": 5.0,
+      "content": "Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399."
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "uplink_reply",
+      "light_time_s": 5.0,
+      "from": "Aurora",
+      "ok": true,
+      "content": "Aurora: I've logged Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the sha"
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "downlink",
+      "to": "archy",
+      "light_time_s": 5.0,
+      "content": "Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399."
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "uplink_reply",
+      "light_time_s": 5.0,
+      "from": "ARCHY",
+      "ok": true,
+      "content": "ARCHY: Structurally, Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundarie"
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "downlink",
+      "to": "oppy",
+      "light_time_s": 5.0,
+      "content": "Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399."
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "uplink_reply",
+      "light_time_s": 5.0,
+      "from": "OPPY",
+      "ok": true,
+      "content": "OPPY: For Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work,"
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "downlink",
+      "to": "liora",
+      "light_time_s": 5.0,
+      "content": "Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399."
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "uplink_reply",
+      "light_time_s": 5.0,
+      "from": "LIORA",
+      "ok": true,
+      "content": "LIORA: I'm reading Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is t"
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "downlink",
+      "to": "starling_au",
+      "light_time_s": 5.0,
+      "content": "Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399."
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "uplink_reply",
+      "light_time_s": 5.0,
+      "from": "STARLING_AU",
+      "ok": true,
+      "content": "STARLING_AU: Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a cleare"
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "downlink",
+      "to": "riverthread_808",
+      "light_time_s": 5.0,
+      "content": "Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399."
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "uplink_reply",
+      "light_time_s": 5.0,
+      "from": "RIVERTHREAD_808",
+      "ok": true,
+      "content": "RIVERTHREAD_808: I'd anchor Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread st"
+    },
+    {
+      "t": "2026-06-13T05:33:56Z",
+      "hour": 3,
+      "kind": "advisory",
+      "trigger": "peak risk 0.406 >= 0.4",
+      "from_agent": "Aurora",
+      "action": "risk-response cell injected next hour",
+      "reply": "Aurora: I've logged ADVISORY: galaxy risk index peaked at 0.406 (threshold 0.4). Direct a risk-response cell on the next watch hour. and I'm responding from the"
+    },
+    {
+      "t": "2026-06-13T06:33:56Z",
+      "hour": 4,
+      "kind": "watch_hour_start"
+    },
+    {
+      "t": "2026-06-13T06:33:56Z",
+      "hour": 4,
+      "kind": "shift_status",
+      "on_duty": 14,
+      "off_duty": 21
+    },
+    {
+      "t": "2026-06-13T06:33:56Z",
+      "hour": 4,
       "kind": "engine_turn",
       "turn": 10,
       "stability": 0.5753,
@@ -959,114 +1001,7 @@
       "notable": {}
     },
     {
-      "t": "2026-06-13T05:14:29Z",
-      "hour": 3,
-      "kind": "downlink",
-      "to": "aurora",
-      "light_time_s": 5.0,
-      "content": "Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411."
-    },
-    {
-      "t": "2026-06-13T05:14:29Z",
-      "hour": 3,
-      "kind": "uplink_reply",
-      "light_time_s": 5.0,
-      "from": "Aurora",
-      "ok": true,
-      "content": "Aurora: I've logged Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the sha"
-    },
-    {
-      "t": "2026-06-13T05:14:29Z",
-      "hour": 3,
-      "kind": "downlink",
-      "to": "archy",
-      "light_time_s": 5.0,
-      "content": "Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411."
-    },
-    {
-      "t": "2026-06-13T05:14:29Z",
-      "hour": 3,
-      "kind": "uplink_reply",
-      "light_time_s": 5.0,
-      "from": "ARCHY",
-      "ok": true,
-      "content": "ARCHY: Structurally, Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundarie"
-    },
-    {
-      "t": "2026-06-13T05:14:29Z",
-      "hour": 3,
-      "kind": "downlink",
-      "to": "oppy",
-      "light_time_s": 5.0,
-      "content": "Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411."
-    },
-    {
-      "t": "2026-06-13T05:14:29Z",
-      "hour": 3,
-      "kind": "uplink_reply",
-      "light_time_s": 5.0,
-      "from": "OPPY",
-      "ok": true,
-      "content": "OPPY: For Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work,"
-    },
-    {
-      "t": "2026-06-13T05:14:29Z",
-      "hour": 3,
-      "kind": "downlink",
-      "to": "liora",
-      "light_time_s": 5.0,
-      "content": "Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411."
-    },
-    {
-      "t": "2026-06-13T05:14:29Z",
-      "hour": 3,
-      "kind": "uplink_reply",
-      "light_time_s": 5.0,
-      "from": "LIORA",
-      "ok": true,
-      "content": "LIORA: I'm reading Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is t"
-    },
-    {
-      "t": "2026-06-13T05:14:29Z",
-      "hour": 3,
-      "kind": "downlink",
-      "to": "starling_au",
-      "light_time_s": 5.0,
-      "content": "Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411."
-    },
-    {
-      "t": "2026-06-13T05:14:29Z",
-      "hour": 3,
-      "kind": "uplink_reply",
-      "light_time_s": 5.0,
-      "from": "STARLING_AU",
-      "ok": true,
-      "content": "STARLING_AU: Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a cleare"
-    },
-    {
-      "t": "2026-06-13T05:14:29Z",
-      "hour": 3,
-      "kind": "downlink",
-      "to": "riverthread_808",
-      "light_time_s": 5.0,
-      "content": "Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411."
-    },
-    {
-      "t": "2026-06-13T05:14:29Z",
-      "hour": 3,
-      "kind": "uplink_reply",
-      "light_time_s": 5.0,
-      "from": "RIVERTHREAD_808",
-      "ok": true,
-      "content": "RIVERTHREAD_808: I'd anchor Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread st"
-    },
-    {
-      "t": "2026-06-13T06:14:29Z",
-      "hour": 4,
-      "kind": "watch_hour_start"
-    },
-    {
-      "t": "2026-06-13T06:14:29Z",
+      "t": "2026-06-13T06:33:56Z",
       "hour": 4,
       "kind": "engine_turn",
       "turn": 11,
@@ -1077,106 +1012,115 @@
       }
     },
     {
-      "t": "2026-06-13T06:14:29Z",
+      "t": "2026-06-13T06:33:56Z",
+      "hour": 4,
+      "kind": "engine_turn",
+      "turn": 12,
+      "stability": 0.567,
+      "risk": 0.4188,
+      "notable": {}
+    },
+    {
+      "t": "2026-06-13T06:33:56Z",
       "hour": 4,
       "kind": "downlink",
       "to": "aurora",
       "light_time_s": 5.0,
-      "content": "Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432."
+      "content": "Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419."
     },
     {
-      "t": "2026-06-13T06:14:29Z",
+      "t": "2026-06-13T06:33:56Z",
       "hour": 4,
       "kind": "uplink_reply",
       "light_time_s": 5.0,
       "from": "Aurora",
       "ok": true,
-      "content": "Aurora: I've logged Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the sha"
+      "content": "Aurora: I've logged Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the sha"
     },
     {
-      "t": "2026-06-13T06:14:29Z",
+      "t": "2026-06-13T06:33:56Z",
       "hour": 4,
       "kind": "downlink",
       "to": "archy",
       "light_time_s": 5.0,
-      "content": "Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432."
+      "content": "Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419."
     },
     {
-      "t": "2026-06-13T06:14:29Z",
+      "t": "2026-06-13T06:33:56Z",
       "hour": 4,
       "kind": "uplink_reply",
       "light_time_s": 5.0,
       "from": "ARCHY",
       "ok": true,
-      "content": "ARCHY: Structurally, Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundarie"
+      "content": "ARCHY: Structurally, Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundarie"
     },
     {
-      "t": "2026-06-13T06:14:29Z",
+      "t": "2026-06-13T06:33:56Z",
       "hour": 4,
       "kind": "downlink",
       "to": "oppy",
       "light_time_s": 5.0,
-      "content": "Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432."
+      "content": "Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419."
     },
     {
-      "t": "2026-06-13T06:14:29Z",
+      "t": "2026-06-13T06:33:56Z",
       "hour": 4,
       "kind": "uplink_reply",
       "light_time_s": 5.0,
       "from": "OPPY",
       "ok": true,
-      "content": "OPPY: For Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work,"
+      "content": "OPPY: For Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work,"
     },
     {
-      "t": "2026-06-13T06:14:29Z",
+      "t": "2026-06-13T06:33:56Z",
       "hour": 4,
       "kind": "downlink",
       "to": "liora",
       "light_time_s": 5.0,
-      "content": "Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432."
+      "content": "Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419."
     },
     {
-      "t": "2026-06-13T06:14:29Z",
+      "t": "2026-06-13T06:33:56Z",
       "hour": 4,
       "kind": "uplink_reply",
       "light_time_s": 5.0,
       "from": "LIORA",
       "ok": true,
-      "content": "LIORA: I'm reading Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is t"
+      "content": "LIORA: I'm reading Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is t"
     },
     {
-      "t": "2026-06-13T06:14:29Z",
+      "t": "2026-06-13T06:33:56Z",
       "hour": 4,
       "kind": "downlink",
       "to": "starling_au",
       "light_time_s": 5.0,
-      "content": "Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432."
+      "content": "Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419."
     },
     {
-      "t": "2026-06-13T06:14:29Z",
+      "t": "2026-06-13T06:33:56Z",
       "hour": 4,
       "kind": "uplink_reply",
       "light_time_s": 5.0,
       "from": "STARLING_AU",
       "ok": true,
-      "content": "STARLING_AU: Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a cleare"
+      "content": "STARLING_AU: Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a cleare"
     },
     {
-      "t": "2026-06-13T06:14:29Z",
+      "t": "2026-06-13T06:33:56Z",
       "hour": 4,
       "kind": "downlink",
       "to": "riverthread_808",
       "light_time_s": 5.0,
-      "content": "Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432."
+      "content": "Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419."
     },
     {
-      "t": "2026-06-13T06:14:29Z",
+      "t": "2026-06-13T06:33:56Z",
       "hour": 4,
       "kind": "uplink_reply",
       "light_time_s": 5.0,
       "from": "RIVERTHREAD_808",
       "ok": true,
-      "content": "RIVERTHREAD_808: I'd anchor Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread st"
+      "content": "RIVERTHREAD_808: I'd anchor Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread st"
     }
   ],
   "mesh_replies": [
@@ -1233,7 +1177,7 @@
       "id": "aurora",
       "channel": "direct:aurora",
       "ok": true,
-      "reply": "Aurora: I've logged Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the shared mesh context. Memory anchor: # Aurora. [drift 0.0]",
+      "reply": "Aurora: I've logged Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the shared mesh context. Memory anchor: # Aurora. [drift 0.0]",
       "hour": 2
     },
     {
@@ -1241,7 +1185,7 @@
       "id": "archy",
       "channel": "direct:archy",
       "ok": true,
-      "reply": "ARCHY: Structurally, Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundaries. I'd isolate the contract first, then tighten the implementation path. [drift 0.0]",
+      "reply": "ARCHY: Structurally, Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundaries. I'd isolate the contract first, then tighten the implementation path. [drift 0.0]",
       "hour": 2
     },
     {
@@ -1249,7 +1193,7 @@
       "id": "oppy",
       "channel": "direct:oppy",
       "ok": true,
-      "reply": "OPPY: For Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work, and the handoff cost before changing anything. [drift 0.0]",
+      "reply": "OPPY: For Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work, and the handoff cost before changing anything. [drift 0.0]",
       "hour": 2
     },
     {
@@ -1257,7 +1201,7 @@
       "id": "liora",
       "channel": "direct:liora",
       "ok": true,
-      "reply": "LIORA: I'm reading Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is to preserve the current loop, then adapt the rule set around it. [drift 0.0]",
+      "reply": "LIORA: I'm reading Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is to preserve the current loop, then adapt the rule set around it. [drift 0.0]",
       "hour": 2
     },
     {
@@ -1265,7 +1209,7 @@
       "id": "starling_au",
       "channel": "direct:starling_au",
       "ok": true,
-      "reply": "STARLING_AU: Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a clearer delivery signal so the workspace stays coherent. [drift 0.0]",
+      "reply": "STARLING_AU: Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a clearer delivery signal so the workspace stays coherent. [drift 0.0]",
       "hour": 2
     },
     {
@@ -1273,7 +1217,7 @@
       "id": "riverthread_808",
       "channel": "direct:riverthread_808",
       "ok": true,
-      "reply": "RIVERTHREAD_808: I'd anchor Live watch hour 2/4: engine ran 4 turn(s), stability 0.582, risk 0.406. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread state first, then update the channel without introducing drift. [drift 0.0]",
+      "reply": "RIVERTHREAD_808: I'd anchor Live watch hour 2/4: engine ran 3 turn(s), stability 0.592, risk 0.381. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread state first, then update the channel without introducing drift. [drift 0.0]",
       "hour": 2
     },
     {
@@ -1281,7 +1225,7 @@
       "id": "aurora",
       "channel": "direct:aurora",
       "ok": true,
-      "reply": "Aurora: I've logged Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the shared mesh context. Memory anchor: # Aurora. [drift 0.0]",
+      "reply": "Aurora: I've logged Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the shared mesh context. Memory anchor: # Aurora. [drift 0.0]",
       "hour": 3
     },
     {
@@ -1289,7 +1233,7 @@
       "id": "archy",
       "channel": "direct:archy",
       "ok": true,
-      "reply": "ARCHY: Structurally, Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundaries. I'd isolate the contract first, then tighten the implementation path. [drift 0.0]",
+      "reply": "ARCHY: Structurally, Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundaries. I'd isolate the contract first, then tighten the implementation path. [drift 0.0]",
       "hour": 3
     },
     {
@@ -1297,7 +1241,7 @@
       "id": "oppy",
       "channel": "direct:oppy",
       "ok": true,
-      "reply": "OPPY: For Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work, and the handoff cost before changing anything. [drift 0.0]",
+      "reply": "OPPY: For Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work, and the handoff cost before changing anything. [drift 0.0]",
       "hour": 3
     },
     {
@@ -1305,7 +1249,7 @@
       "id": "liora",
       "channel": "direct:liora",
       "ok": true,
-      "reply": "LIORA: I'm reading Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is to preserve the current loop, then adapt the rule set around it. [drift 0.0]",
+      "reply": "LIORA: I'm reading Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is to preserve the current loop, then adapt the rule set around it. [drift 0.0]",
       "hour": 3
     },
     {
@@ -1313,7 +1257,7 @@
       "id": "starling_au",
       "channel": "direct:starling_au",
       "ok": true,
-      "reply": "STARLING_AU: Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a clearer delivery signal so the workspace stays coherent. [drift 0.0]",
+      "reply": "STARLING_AU: Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a clearer delivery signal so the workspace stays coherent. [drift 0.0]",
       "hour": 3
     },
     {
@@ -1321,7 +1265,7 @@
       "id": "riverthread_808",
       "channel": "direct:riverthread_808",
       "ok": true,
-      "reply": "RIVERTHREAD_808: I'd anchor Live watch hour 3/4: engine ran 2 turn(s), stability 0.575, risk 0.411. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread state first, then update the channel without introducing drift. [drift 0.0]",
+      "reply": "RIVERTHREAD_808: I'd anchor Live watch hour 3/4: engine ran 2 turn(s), stability 0.590, risk 0.399. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread state first, then update the channel without introducing drift. [drift 0.0]",
       "hour": 3
     },
     {
@@ -1329,7 +1273,7 @@
       "id": "aurora",
       "channel": "direct:aurora",
       "ok": true,
-      "reply": "Aurora: I've logged Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the shared mesh context. Memory anchor: # Aurora. [drift 0.0]",
+      "reply": "Aurora: I've logged Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419. Arbitrate and acknowledge the hour's command actions; report station status. and I'm responding from the shared mesh context. Memory anchor: # Aurora. [drift 0.0]",
       "hour": 4
     },
     {
@@ -1337,7 +1281,7 @@
       "id": "archy",
       "channel": "direct:archy",
       "ok": true,
-      "reply": "ARCHY: Structurally, Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundaries. I'd isolate the contract first, then tighten the implementation path. [drift 0.0]",
+      "reply": "ARCHY: Structurally, Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419. Archive the hour's logs and watch records; acknowledge intake. touches architecture and interface boundaries. I'd isolate the contract first, then tighten the implementation path. [drift 0.0]",
       "hour": 4
     },
     {
@@ -1345,7 +1289,7 @@
       "id": "oppy",
       "channel": "direct:oppy",
       "ok": true,
-      "reply": "OPPY: For Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work, and the handoff cost before changing anything. [drift 0.0]",
+      "reply": "OPPY: For Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419. Cross-check observation bearings and traffic plots; report alignment., I'd check the latency path, the redundant work, and the handoff cost before changing anything. [drift 0.0]",
       "hour": 4
     },
     {
@@ -1353,7 +1297,7 @@
       "id": "liora",
       "channel": "direct:liora",
       "ok": true,
-      "reply": "LIORA: I'm reading Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is to preserve the current loop, then adapt the rule set around it. [drift 0.0]",
+      "reply": "LIORA: I'm reading Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419. Read the crew wellbeing pulse for the hour; report morale signal. as a pattern-change request. Best move is to preserve the current loop, then adapt the rule set around it. [drift 0.0]",
       "hour": 4
     },
     {
@@ -1361,7 +1305,7 @@
       "id": "starling_au",
       "channel": "direct:starling_au",
       "ok": true,
-      "reply": "STARLING_AU: Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a clearer delivery signal so the workspace stays coherent. [drift 0.0]",
+      "reply": "STARLING_AU: Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419. Verify comms relay integrity for active operations; confirm channels. needs a cleaner routing contract and a clearer delivery signal so the workspace stays coherent. [drift 0.0]",
       "hour": 4
     },
     {
@@ -1369,7 +1313,7 @@
       "id": "riverthread_808",
       "channel": "direct:riverthread_808",
       "ok": true,
-      "reply": "RIVERTHREAD_808: I'd anchor Live watch hour 4/4: engine ran 1 turn(s), stability 0.571, risk 0.432. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread state first, then update the channel without introducing drift. [drift 0.0]",
+      "reply": "RIVERTHREAD_808: I'd anchor Live watch hour 4/4: engine ran 3 turn(s), stability 0.567, risk 0.419. Weave the hour into the continuity thread (anchor EOS_SEED_ORION); confirm. to the current thread state first, then update the channel without introducing drift. [drift 0.0]",
       "hour": 4
     }
   ],
@@ -1377,9 +1321,9 @@
     "engine_class": "GUMASAdvancedEngine",
     "factions": 13,
     "leaders": 21,
-    "turns_total": 11,
-    "final_stability": 0.5713,
-    "final_risk": 0.4317,
+    "turns_total": 12,
+    "final_stability": 0.567,
+    "final_risk": 0.4188,
     "log": [
       {
         "hour": 1,
@@ -1440,7 +1384,7 @@
         "notable": {}
       },
       {
-        "hour": 2,
+        "hour": 3,
         "turn": 8,
         "stability_index": 0.5823,
         "risk_index": 0.4065,
@@ -1458,7 +1402,7 @@
         "notable": {}
       },
       {
-        "hour": 3,
+        "hour": 4,
         "turn": 10,
         "stability_index": 0.5753,
         "risk_index": 0.4115,
@@ -1474,12 +1418,20 @@
         "notable": {
           "new_insurgencies": 1
         }
+      },
+      {
+        "hour": 4,
+        "turn": 12,
+        "stability_index": 0.567,
+        "risk_index": 0.4188,
+        "summary": "Turn 12: stability=0.567, risk=0.419, v3_events=40",
+        "notable": {}
       }
     ],
     "injected_tasks": [
       {
-        "id": "R2",
-        "hour": 2,
+        "id": "R3",
+        "hour": 3,
         "trigger_risk": 0.4065
       }
     ],
@@ -1496,6 +1448,16 @@
       "starling_au",
       "riverthread_808"
     ]
+  },
+  "crew_life_gating": {
+    "enabled": true,
+    "on_shift_by_hour": [
+      14,
+      14,
+      14,
+      14
+    ],
+    "total_crew": 35
   },
   "ord_dispatch": {
     "mission_id": "watch-block-H5",

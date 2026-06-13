@@ -36,10 +36,18 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "tools"))
 import hour_aboard  # noqa: E402
+import crew_life  # noqa: E402
 
 LIVE_DRIVER = r'''
-import json, sys, time, tempfile, shutil, urllib.parse
+import json, sys, time, tempfile, shutil, urllib.parse, re
 from datetime import datetime, timezone, timedelta
+
+def _norm(name):
+    n = name.lower()
+    for t in ("dr.", "prof.", "lt.", "cmdr.", "commander", "chief", "cadet",
+              "ensign", "captain", "lieutenant"):
+        n = n.replace(t, "")
+    return re.sub(r"[^a-z]", "", n)
 sys.path.insert(0, ".")
 sys.path.insert(0, "simulation")
 
@@ -71,6 +79,15 @@ for char in sim.char_loader.get_all_characters():
     )
     divisions[char.name] = char.division
 sim.agents = agents
+
+# Crew-life gating: master roster + normalized lookup so we can swap in only
+# the on-shift-awake crew each hour.
+all_agents = dict(agents)
+norm_to_name = {_norm(name): name for name in all_agents}
+crew_life_cfg = scenario.get("crew_life", {})
+gate_enabled = bool(crew_life_cfg.get("enabled"))
+on_shift_by_hour = crew_life_cfg.get("on_shift_norm_by_hour", [])
+fatigue_by_hour = crew_life_cfg.get("fatigue_norm_by_hour", [])
 
 task_tags = {t["name"]: set(t.get("tags", [])) for t in scenario["tasks"]}
 sim.tasks = {
@@ -155,17 +172,32 @@ notable_kinds = list(ops["feedback"]["notable_kinds"])
 risk_threshold = float(link["risk_advisory_threshold"])
 mesh_replies, engine_log, injected, advisory_raised = [], [], [], False
 
+on_shift_counts = []
 for hour in range(ticks):
     emit(hour, "watch_hour_start")
+    # Shift-gate: only on-shift-awake crew are on the board this hour; the rest
+    # are asleep / at meals / off (tracked in crew_life). Apply their fatigue.
+    if gate_enabled and hour < len(on_shift_by_hour):
+        eligible = set(on_shift_by_hour[hour])
+        fatigues = fatigue_by_hour[hour] if hour < len(fatigue_by_hour) else {}
+        sim.agents = {norm_to_name[nz]: all_agents[norm_to_name[nz]]
+                      for nz in eligible if nz in norm_to_name}
+        for nz, ag in ((_norm(n), a) for n, a in sim.agents.items()):
+            ag.fatigue = float(fatigues.get(nz, ag.fatigue))
+        emit(hour, "shift_status", on_duty=len(sim.agents),
+             off_duty=len(all_agents) - len(sim.agents))
+        on_shift_counts.append(len(sim.agents))
     sim.tick()
     completions = [r["task"] for r in records if r["tick"] == hour and "COMPLETE" in r.get("note", "")]
     service_done = [c for c in completions if service_tags & task_tags.get(c, set())]
     turns = min(int(ops["base_turns_per_hour"]) + len(service_done), int(ops["max_turns_per_hour"]))
     results = engine.run(turns)
     hour_stability = hour_risk = None
+    hour_peak_risk = 0.0
     for res in results:
         d = res.to_dict(); v3 = d["v3_result"]
         hour_stability, hour_risk = d["stability_index"], d["risk_index"]
+        hour_peak_risk = max(hour_peak_risk, d["risk_index"])
         notable = {k: v3.get(k, 0) for k in notable_kinds if v3.get(k, 0)}
         engine_log.append({"hour": hour + 1, "turn": d["turn"], "stability_index": d["stability_index"],
                            "risk_index": d["risk_index"], "summary": d["summary"], "notable": notable})
@@ -184,20 +216,24 @@ for hour in range(ticks):
         emit(hour, "uplink_reply", light_time_s=lt, **{"from": dl["agent"], "ok": dl["ok"],
              "content": dl["reply"][:200]})
 
-    # live control loop: engine risk → Aurora advisory → chassis task
-    if hour_risk is not None and hour_risk >= risk_threshold and not advisory_raised and hour + 1 < ticks:
+    # live control loop: PEAK engine risk this hour → Aurora advisory → chassis
+    # task. Peak, not hour-end: a transient mid-hour spike is exactly the
+    # crisis Aurora must catch, even if risk settles by the closing turn.
+    if hour_peak_risk >= risk_threshold and not advisory_raised and hour + 1 < ticks:
         advisory_raised = True
-        adv = downlink("aurora", f"ADVISORY: galaxy risk index {hour_risk:.3f} exceeds "
-                                 f"{risk_threshold}. Direct a risk-response cell on the next watch hour.")
+        adv = downlink("aurora", f"ADVISORY: galaxy risk index peaked at {hour_peak_risk:.3f} "
+                                 f"(threshold {risk_threshold}). Direct a risk-response cell on the "
+                                 f"next watch hour.")
         tid = f"R{hour + 1}"
-        sim.tasks[tid] = Task(tid, f"Risk-response cell (Aurora live advisory, risk {hour_risk:.3f})",
+        sim.tasks[tid] = Task(tid, f"Risk-response cell (Aurora live advisory, peak risk {hour_peak_risk:.3f})",
                               est_hours=0.5, remaining=0.5, depends_on=[],
                               semantic_tags={"command", "ethics", "monitoring", "analysis"})
-        injected.append({"id": tid, "hour": hour + 1, "trigger_risk": hour_risk})
-        emit(hour, "advisory", trigger=f"risk {hour_risk:.3f} >= {risk_threshold}",
+        injected.append({"id": tid, "hour": hour + 1, "trigger_risk": hour_peak_risk})
+        emit(hour, "advisory", trigger=f"peak risk {hour_peak_risk:.3f} >= {risk_threshold}",
              from_agent=adv["agent"], action="risk-response cell injected next hour",
              reply=adv["reply"][:160])
 
+sim.agents = all_agents  # restore full roster for accounting
 task_names = {t["id"]: t["name"] for t in scenario["tasks"]}
 task_names.update({t["id"]: sim.tasks[t["id"]].name for t in injected})
 total_est = sum(t.est_hours for t in sim.tasks.values())
@@ -225,6 +261,8 @@ out = {
                "advisory_raised": advisory_raised},
     "link_model": {"one_way_light_time_s": lt, "round_trip_s": round(2 * lt, 2),
                    "downlink_targets": link["downlink_targets"]},
+    "crew_life_gating": {"enabled": gate_enabled, "on_shift_by_hour": on_shift_counts,
+                         "total_crew": len(all_agents)},
 }
 try:
     from modules.ord import MissionBrief, OrdPolicyEngine, canonical_sha256
@@ -284,6 +322,18 @@ def main() -> int:
     if state_path.exists():
         scenario["history"] = {"pair_familiarity": json.loads(state_path.read_text()).get("pair_familiarity", {})}
 
+    # Crew-life fidelity: who is actually on shift and awake each watch hour,
+    # and how tired. Only on-shift-awake crew work; sleep-debt fatigue slows
+    # them. Computed here (reads canon only) and injected for the driver to gate.
+    life = None
+    if scenario.get("crew_life", {}).get("enabled"):
+        start_clock = int(scenario.get("start_clock", 6))
+        life = crew_life.run_day(start_clock, int(scenario.get("ticks", 1)))
+        scenario["crew_life"]["on_shift_norm_by_hour"] = [
+            crew_life.on_shift_awake_norm(life, step) for step in range(scenario["ticks"])]
+        scenario["crew_life"]["fatigue_norm_by_hour"] = [
+            crew_life.fatigue_norm_map(life, step) for step in range(scenario["ticks"])]
+
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     out_dir = REPO_ROOT / "reports" / "simulation" / f"{scenario['name']}__{stamp}"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -292,7 +342,12 @@ def main() -> int:
           f"(seed {scenario['seed']}, light-time {scenario['live_link']['one_way_light_time_s']}s) ...")
     sim = hour_aboard._run_in_clone(LIVE_DRIVER, scenario)
     s, eng = sim["summary"], sim["engine"]
-    print(f"   chassis: {s['characters_used']} crew | {s['total_spent']:.1f}h | "
+    if life is not None:
+        gate = sim.get("crew_life_gating", {})
+        print(f"   crew-life: shift-gated — on duty by hour {gate.get('on_shift_by_hour')} "
+              f"of {gate.get('total_crew')} (rest asleep/meals/off); "
+              f"deficits: {len(life['deficits'])}")
+    print(f"   chassis: {s['characters_used']} roster | {s['total_spent']:.1f}h worked | "
           f"{len(s['completed_ids'])}/{len(sim['task_names'])} tasks | {len(sim['events'])} emergent")
     print(f"   engine:  {eng['engine_class']} | {eng['turns_total']} turns | "
           f"final risk {eng['final_risk']} | advisory {'RAISED' if eng['advisory_raised'] else 'none'}")
@@ -332,6 +387,15 @@ def main() -> int:
     (out_dir / "souls_accounting.json").write_text(json.dumps(souls, indent=2) + "\n")
     (out_dir / "engine_telemetry.json").write_text(json.dumps(sim["engine"], indent=2) + "\n")
     (out_dir / "sim_raw.json").write_text(json.dumps(sim, indent=2) + "\n")
+    if life is not None:
+        def _ser(o):
+            if isinstance(o, set):
+                return sorted(o)
+            raise TypeError(type(o).__name__)
+        crew_life_export = {k: v for k, v in life.items() if k != "by_name"}
+        (out_dir / "crew_life.json").write_text(
+            json.dumps(crew_life_export, indent=2, default=_ser) + "\n")
+        (out_dir / "crew_life.md").write_text(crew_life.render_md(life, crew_life.load_model()))
 
     print(f"\n🗂  Artifacts: {out_dir.relative_to(REPO_ROOT)} (live_downlink.jsonl + .md)")
     print(f"   souls accounted: {souls['crew_logged']}/{souls['canon_l1_entities']} "

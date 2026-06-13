@@ -23,9 +23,9 @@
 
 ## Commander Alex Thorne — Station Commander
 - H1 · Habitat ring spin check (2 RPM / 0.3g verification) (+0.39h)
-- H2 · Ring stress telemetry review (+0.32h)
-- H3 · Ethics ledger reconciliation (Picard Delta 3) (+0.33h)
-- H4 · Bay 2 departure clearance package (+0.39h)
+- H2 · Dome astronomy session calibration (+0.27h)
+- H3 · ORD pre-flight reconnaissance audit (Delta Scout) (+0.32h)
+- H4 · Bay 2 departure clearance package (+0.4h)
 
 ## Dante Kyros — UX Architect
 - H1 — personal time — the Dome
@@ -41,22 +41,20 @@
 
 ## Dr. Amira Sato — Chief Ethics Officer
 - H1 · L3 drift containment sweep (+0.69h) — completed
-- H2 · Command log review and Aurora arbitration sync (+0.81h) — completed
-- H3 — personal time — the Dome
-- H4 — personal time — the Dome
+- H2 · Command log review and Aurora arbitration sync (+0.72h) — completed
+- H3 · Ethics ledger reconciliation (Picard Delta 3) (+0.78h) — completed
+- H4 · ORD dispatch order execution + Shadowfax inspection (+0.9h)
 
 ## Dr. Elena Vasquez — Flight Controller
 - H1 — exercise block — ring track
 - H2 — exercise block — ring track
-- H2 ⚡ swarm_sync: Tariq El-Sayegh & Dr. Elena Vasquez spontaneous pair-programming
 - H3 — off-shift rest cycle
 - H4 — off-shift rest cycle
 
 ## Dr. Elira Noor — Lead Reflexivity Specialist
 - H1 · Zero-g lab safety check, core section (+0.78h) — completed
-- H2 · Comms array diagnostic, core mast (+0.98h)
-- H2 ⚡ collaboration_boost: Dr. Elira Noor synergy with key collaborator
-- H3 — mess hall — crew meal
+- H2 · Ring stress telemetry review (+0.52h)
+- H3 · Cargo manifest reconciliation, Bay 2 intake (+0.66h)
 - H4 — mess hall — crew meal
 
 ## Dr. Kieran Zhao — Computational Optimization Lead
@@ -69,7 +67,7 @@
 
 ## Dr. Ren Feldman — Chief Medical Officer
 - H1 — mess hall — crew meal
-- H2 · Hydroponics nutrient cycle adjustment (+0.78h) — completed
+- H2 · Comms array diagnostic, core mast (+0.85h) — completed
 - H3 — off-shift rest cycle
 - H4 — exercise block — ring track
 
@@ -87,9 +85,9 @@
 
 ## Helena Vu — Cultural & HR Director
 - H1 · EVA suit inspection cycle, core airlock (+0.7h)
-- H2 · Ring stress telemetry review (+0.89h) — completed
-- H3 · ORD pre-flight reconnaissance audit (Delta Scout) (+0.75h)
-- H4 · ORD dispatch order execution + Shadowfax inspection (+0.74h) — completed
+- H2 · Dome astronomy session calibration (+0.71h) — completed
+- H3 — personal time — the Dome
+- H4 — mess hall — crew meal
 
 ## Ira Menon — Compiler Engineer
 - H1 — mess hall — crew meal
@@ -105,25 +103,28 @@
 
 ## Jiro Tanaka — Chief Engineering Officer
 - H1 · Habitat ring spin check (2 RPM / 0.3g verification) (+0.87h) — completed
-- H2 — mess hall — crew meal
+- H2 · Comms array diagnostic, core mast (+0.88h)
 - H3 — mess hall — crew meal
+- H3 ⚡ collaboration_boost: Jiro Tanaka synergy with key collaborator
 - H4 — mess hall — crew meal
 
 ## Julian Markov — Chief Security Officer
 - H1 · Quantum core coherence check (+0.81h)
 - H1 ⚡ collaboration_boost: Julian Markov synergy with key collaborator
-- H2 · Comms array diagnostic, core mast (+0.84h) — completed
-- H3 · ORD pre-flight reconnaissance audit (Delta Scout) (+0.79h) — completed
-- H4 — mess hall — crew meal
+- H2 · Ring stress telemetry review (+0.83h) — completed
+- H2 ⚡ collaboration_boost: Julian Markov synergy with key collaborator
+- H3 — off-shift rest cycle
+- H4 · ORD dispatch order execution + Shadowfax inspection (+0.95h) — completed
 
 ## Juno Suresh — Symbolic Systems Artist
 - H1 — mess hall — crew meal
+- H1 ⚡ collaboration_boost: Juno Suresh synergy with key collaborator
 - H2 — off-shift rest cycle
 - H3 — mess hall — crew meal
 - H4 — exercise block — ring track
 
 ## Kai Drev — Interface Ecologist
-- H1 · Crew quarters environmental audit, ring sections (+0.86h)
+- H1 · Crew quarters environmental audit, ring sections (+1.03h) — completed
 - H2 — exercise block — ring track
 - H3 — exercise block — ring track
 - H4 — off-shift rest cycle
@@ -136,15 +137,15 @@
 
 ## Leena Porter — Bridge Operations Officer
 - H1 · EVA suit inspection cycle, core airlock (+0.84h) — completed
-- H2 · Docking Bay 2 logistics turnover (+0.7h) — completed
-- H3 · Galley resupply intake from Bay 2 (+0.85h) — completed
+- H2 · Docking Bay 2 logistics turnover (+0.85h) — completed
+- H3 · Cargo manifest reconciliation, Bay 2 intake (+0.86h) — completed
 - H4 — exercise block — ring track
 
 ## Lt. Commander Maya Shepard — Executive Officer (XO) / FleetOps Commander
 - H1 · Dome observation watch handoff (ring Deck 4) (+0.87h) — completed
-- H2 · Hydroponics nutrient cycle adjustment (+0.7h)
-- H3 · Ethics ledger reconciliation (Picard Delta 3) (+0.78h) — completed
-- H4 · Bay 2 departure clearance package (+0.9h) — completed
+- H2 · Hydroponics nutrient cycle adjustment (+0.89h)
+- H3 · ORD pre-flight reconnaissance audit (Delta Scout) (+1.04h) — completed
+- H4 · Bay 2 departure clearance package (+0.99h) — completed
 
 ## Lt. Hassan — Commanding Officer, Logistics Alpha (Cargo Transport) *(canon supplemental — duty rotation)*
 - H1 — duty roster reconciliation
@@ -167,7 +168,7 @@
 ## Maren Koss — Cognitive Drift Mapper
 - H1 — off-shift rest cycle
 - H2 — personal time — the Dome
-- H3 · Cargo manifest reconciliation, Bay 2 intake (+0.93h) — completed
+- H3 · Galley resupply intake from Bay 2 (+0.85h) — completed
 - H4 — mess hall — crew meal
 
 ## Mira Chen — Cadet / Trainee (Operations Track) *(canon supplemental — duty rotation)*
@@ -191,7 +192,7 @@
 ## Prof. Elena Sorensen — Cognitive Ethicist
 - H1 · Life-support scrubber rotation, habitat ring (+0.7h)
 - H1 ⚡ swarm_sync: Prof. Elena Sorensen & Dr. Kieran Zhao spontaneous pair-programming
-- H2 · Dome astronomy session calibration (+0.59h) — completed
+- H2 · Docking Bay 2 logistics turnover (+0.48h)
 - H3 · Cargo manifest reconciliation, Bay 2 intake (+0.57h)
 - H4 — personal time — the Dome
 
@@ -226,7 +227,7 @@
 - H4 — duty roster reconciliation
 
 ## Samantha Lee — Logging & Observability Engineer
-- H1 · Crew quarters environmental audit, ring sections (+0.85h) — completed
+- H1 — off-shift rest cycle
 - H2 — off-shift rest cycle
 - H3 — mess hall — crew meal
 - H4 — exercise block — ring track
@@ -234,7 +235,6 @@
 ## Tariq El-Sayegh — Speculative Systems Theorist
 - H1 — mess hall — crew meal
 - H2 — off-shift rest cycle
-- H2 ⚡ swarm_sync: Tariq El-Sayegh & Dr. Elena Vasquez spontaneous pair-programming
 - H3 — mess hall — crew meal
 - H4 — off-shift rest cycle
 
@@ -246,9 +246,9 @@
 
 ## Varya Lin — Chief Science Officer
 - H1 · Zero-g lab safety check, core section (+0.71h)
-- H2 · Dome astronomy session calibration (+0.7h)
-- H3 · Analysis cell: review engine turn telemetry (hour 2: 2 notable event(s)) (+0.88h) — completed
-- H4 · ORD dispatch order execution + Shadowfax inspection (+0.89h)
+- H2 · Hydroponics nutrient cycle adjustment (+0.83h) — completed
+- H3 · Analysis cell: review engine turn telemetry (hour 2: 2 notable event(s)) (+0.89h) — completed
+- H4 — mess hall — crew meal
 
 ## Vincent Kale — Layer Isolation Theorist
 - H1 — exercise block — ring track
