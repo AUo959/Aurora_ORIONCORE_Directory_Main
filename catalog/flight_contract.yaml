@@ -121,6 +121,23 @@ flights:
         r = c.get(path)
         assert r.status_code == 200, f"{path}: {r.status_code} {r.text[:120]}"
     print(f"sensors: {len(sensor_routes)} GET-only routes mounted; health + fusion live")
+- name: ord-policy-dispatch
+  about: Run a MissionBrief through the live ORD policy engine and verify the dispatch order plus canonical receipt (PR #1016).
+  script: |
+    import sys
+    sys.path.insert(0, ".")
+    from modules.ord import DroneType, MissionBrief, OrdPolicyEngine, canonical_sha256
+    engine = OrdPolicyEngine()
+    order = engine.create_dispatch_order(MissionBrief(
+        mission_id="flight-check",
+        tool_name="create_or_update_file",
+        risk_level=0.55,
+        destination="https://github.com/example/repo",
+    ))
+    assert DroneType.DELTA_SCOUT in order.drones_required, order.drones_required
+    assert DroneType.SHADOWFAX in order.drones_required, order.drones_required
+    receipt = canonical_sha256(order)
+    print(f"ord: dispatch order cut, {len(order.drones_required)} drones required, receipt {receipt[:12]}")
 - name: station-roll-call
   about: Muster the original companions (Archy, Oppy, Liora, Starling AU, Riverthread 808) via the Pilot's direct line; all must answer.
   cwd: .

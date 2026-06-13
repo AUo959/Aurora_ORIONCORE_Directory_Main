@@ -47,7 +47,13 @@
       "detail": "sensors: 26 GET-only routes mounted; health + fusion live",
       "last_attempt": "2026-06-12T18:33:03Z",
       "last_flown": "2026-06-12T18:33:03Z"
+    },
+    "ord-policy-dispatch": {
+      "status": "flown",
+      "detail": "ord: dispatch order cut, 3 drones required, receipt 9f8c6ed40820",
+      "last_attempt": "2026-06-13T00:40:03Z",
+      "last_flown": "2026-06-13T00:40:03Z"
     }
   },
-  "generated_at_utc": "2026-06-12T18:33:03Z"
+  "generated_at_utc": "2026-06-13T00:40:03Z"
 }
