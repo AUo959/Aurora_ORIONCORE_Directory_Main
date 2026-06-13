@@ -31,12 +31,75 @@ ENGINE_DIR = REPO_ROOT / "GUMAS_SIM_2.5" / "SIM_ENGINE_OUTPUTS"
 sys.path.insert(0, str(ENGINE_DIR))
 sys.path.insert(0, str(REPO_ROOT / "tools"))
 
-from mech_gov_001 import FactionDecisionModel, PopulationGrievanceModel  # noqa: E402
+from mech_gov_001 import (  # noqa: E402
+    DiplomaticStabilityModel,
+    FactionDecisionModel,
+    PopulationGrievanceModel,
+    WarWearinessModel,
+)
+
+ACTIVE_WAR_PHASES = {"civil_war", "escalated", "active"}
+
+
+def _phase(ins) -> str:
+    return getattr(getattr(ins, "phase", None), "value", str(getattr(ins, "phase", "")))
+
+
+def _active_civil_wars(v3) -> int:
+    if v3 is None:
+        return 0
+    return sum(1 for i in getattr(v3, "insurgencies", []) if _phase(i) in ("civil_war", "escalated"))
+
+
+def _writeback_weariness(weary: WarWearinessModel, v3) -> int:
+    """Erode war-weary popular support (and, when deeply weary, strength) so the
+    engine's own dynamics can drain an entrenched insurgency to SUPPRESSED."""
+    if v3 is None:
+        return 0
+    touched = 0
+    for ins in getattr(v3, "insurgencies", []):
+        active = _phase(ins) in ACTIVE_WAR_PHASES
+        w = weary.weary(ins.insurgency_id, active)
+        if not active or w <= 0:
+            continue
+        support_erosion, strength_attrition = weary.erosion(w)
+        ins.popular_support = max(0.0, ins.popular_support - support_erosion)
+        ins.insurgent_strength = max(0.0, ins.insurgent_strength - strength_attrition)
+        touched += 1
+    return touched
 
 # Blend weight: how strongly memory disposition pulls the engine's trust score.
 MEMORY_PULL = 0.30
 # How strongly remembered grievance pulls the persistent housing-pressure driver.
 SOC_PULL = 0.25
+# How strongly the DSI capacity gates the persistent legitimacy that feeds onset.
+DSI_PULL = 0.30
+
+
+def _writeback_dsi(dsi: DiplomaticStabilityModel, soc, state) -> dict:
+    """MECH-SOC-003 onset gate: a cohesive/prosperous faction earns governance
+    legitimacy (fewer insurgencies begin); a militarized/corrupt/poor one loses
+    it. Writes the DSI capacity into the persistent leader.public_legitimacy
+    that the rebellion onset formula reads (legitimacy_weight 0.30)."""
+    caps = []
+    for fid, fac in state.factions.items():
+        leader = state.leaders.get(fac.leader_id) if fac.leader_id else None
+        if leader is None:
+            continue
+        grievance = soc.grievance_pressure(fid) if soc else 0.0
+        cap = dsi.capacity_for(
+            economic=float(getattr(fac, "economic_strength", 0.5)),
+            cohesion=float(getattr(fac, "population_stability", 0.7)),
+            political_unity=float(getattr(fac, "reputation", 0.7)),
+            militarization=float(getattr(fac, "military_strength", 0.5)),
+            institutional_control=float(getattr(leader, "institutional_control", 0.5)),
+            grievance=grievance,
+        )
+        target = 0.45 + 0.35 * cap     # capacity -> legitimacy target [0.45, 0.80]
+        cur = float(getattr(leader, "public_legitimacy", 0.7))
+        leader.public_legitimacy = round((1 - DSI_PULL) * cur + DSI_PULL * target, 4)
+        caps.append(cap)
+    return {"mean_capacity": round(sum(caps) / len(caps), 3) if caps else 0.0}
 
 
 def _harvest_grievance(soc: PopulationGrievanceModel, v3) -> dict:
@@ -144,6 +207,8 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     engine.init_scenario()
     mech = FactionDecisionModel(seed=seed) if memory_on else None
     soc = PopulationGrievanceModel(seed=seed) if memory_on else None
+    dsi = DiplomaticStabilityModel() if memory_on else None
+    weary = WarWearinessModel() if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
@@ -167,12 +232,14 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
                 harvest_total[k] += cg[k]
             _writeback(mech, state)
             _writeback_grievance(soc, v3)
+            _writeback_dsi(dsi, soc, state)
+            _writeback_weariness(weary, v3)
         traj.append({
             "turn": d["turn"],
             "stability": d["stability_index"],
             "risk": d["risk_index"],
             "conflicts": len(state.conflicts),
-            "insurgencies": len(getattr(v3, "insurgencies", [])) if v3 else 0,
+            "insurgencies": _active_civil_wars(v3),
         })
 
     final = traj[-1]

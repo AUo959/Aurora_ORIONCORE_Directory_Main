@@ -279,6 +279,84 @@ class PopulationGrievanceModel:
         self.turn += turns
 
 
+class DiplomaticStabilityModel:
+    """MECH-SOC-003 — Diplomatic Stability Index (the non-war progression gate).
+
+    `DSI = (P + E + S) / (C + M)` — a faction absorbs crises *without war* when
+    political unity (P), economic prosperity (E), and social cohesion (S)
+    outweigh corruption (C) and militarization (M). Militarization is a
+    destabilizing term: a galaxy built on fleets and operations is mechanically
+    biased toward instability, which is exactly the seed-42 failure. Realizes
+    `canon/L2/social_dynamics/non_war_progression_mechanics.md`.
+
+    The derived **stability capacity** in [0,1] gates rebellion onset: high
+    capacity lifts governance legitimacy (fewer insurgencies begin); low
+    capacity (militarized/corrupt/poor) erodes it. This is the missing third
+    faction disposition — prosperous-and-cohesive → de-escalate — alongside
+    MECH-GOV-001's betrayed→wary and weak→negotiate.
+    """
+
+    DEN_FLOOR = 0.25  # keeps DSI finite when corruption+militarization ~ 0
+
+    def dsi(self, political_unity: float, economic: float, cohesion: float,
+            corruption: float, militarization: float) -> float:
+        num = max(0.0, political_unity) + max(0.0, economic) + max(0.0, cohesion)
+        den = max(0.0, corruption) + max(0.0, militarization) + self.DEN_FLOOR
+        return num / den
+
+    def stability_capacity(self, dsi_value: float) -> float:
+        """Squash DSI to [0,1]: ~0.3 (militarized/poor) .. ~0.75 (cohesive)."""
+        return max(0.0, min(1.0, math.tanh(dsi_value * 0.5)))
+
+    def capacity_for(self, *, economic: float, cohesion: float, political_unity: float,
+                     militarization: float, institutional_control: float,
+                     grievance: float = 0.0) -> float:
+        """Convenience: corruption derived from weak institutional control;
+        cohesion eroded by remembered grievance (MECH-SOC-001 tie-in)."""
+        corruption = max(0.0, 1.0 - institutional_control)
+        cohesion_eff = max(0.0, cohesion - grievance * 0.5)
+        return self.stability_capacity(
+            self.dsi(political_unity, economic, cohesion_eff, corruption, militarization))
+
+
+class WarWearinessModel:
+    """MECH-SOC-002 — Insurgency Resolution / War-Weariness (the exit edge).
+
+    The seed-42 civil war is a one-way door: `InsurgencyPhase.RESOLVED` is never
+    assigned and the engine's only exit (the SUPPRESSED gate, strength < 0.05)
+    is unreachable because insurgent strength pins at 1.0. This makes that exit
+    *reachable* without fighting the engine: a population at war wearies, and
+    its support for the insurgency erodes the longer the war grinds on. Falling
+    popular support is the engine's own primary driver of insurgent strength —
+    so eroding it lets the engine's dynamics drain strength → territory shrinks
+    → SUPPRESSED, the natural resolution the attractor never had.
+
+    Grounded in lessons §1.2 ("resource-exhaustion mechanic that forces
+    insurgency phases to decay") and the social canon's de-escalation paths.
+    """
+
+    GRACE_TURNS = 4            # early war has fresh fervor; weariness builds after
+    SUPPORT_EROSION = 0.012    # per war-turn beyond grace, scaled by weariness
+    STRENGTH_ATTRITION = 0.010  # direct attrition once deeply weary
+
+    def __init__(self) -> None:
+        self.turns_in_war: dict[str, int] = {}
+
+    def weary(self, insurgency_id: str, active: bool) -> float:
+        """Advance/reset the war clock; return a weariness factor in [0,1]."""
+        if not active:
+            self.turns_in_war.pop(insurgency_id, None)
+            return 0.0
+        t = self.turns_in_war.get(insurgency_id, 0) + 1
+        self.turns_in_war[insurgency_id] = t
+        return max(0.0, min(1.0, (t - self.GRACE_TURNS) / 30.0))
+
+    def erosion(self, weariness: float) -> tuple[float, float]:
+        """Return (support_erosion, strength_attrition) for this turn."""
+        return (self.SUPPORT_EROSION * weariness,
+                self.STRENGTH_ATTRITION * max(0.0, weariness - 0.5) * 2.0)
+
+
 # --------------------------------------------------------------------------- demo
 def _demo() -> int:
     """Show MECH-GOV-001 changing a faction's behavior as memory accrues —

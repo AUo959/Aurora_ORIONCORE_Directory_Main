@@ -17,7 +17,12 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "tools"))
 
-from mech_gov_001 import FactionDecisionModel, PopulationGrievanceModel  # noqa: E402
+from mech_gov_001 import (  # noqa: E402
+    DiplomaticStabilityModel,
+    FactionDecisionModel,
+    PopulationGrievanceModel,
+    WarWearinessModel,
+)
 
 STRONG = {"name": "Galactic Union", "military_strength": 0.7}
 WEAK = {"name": "Vel-Surak Compact", "military_strength": 0.3}
@@ -109,6 +114,51 @@ def test_grievance_persists_path_dependence():
     early = s.grievance_pressure("Torix")
     s.tick(10)   # a decade of turns later, no new relief
     assert s.grievance_pressure("Torix") > 0.5 * early, "grievance should persist"
+
+
+@pytest.mark.simulation
+def test_dsi_militarization_destabilizes():
+    """MECH-SOC-003: a cohesive, prosperous polity has higher stability
+    capacity than a militarized/corrupt one (DSI = (P+E+S)/(C+M))."""
+    d = DiplomaticStabilityModel()
+    cohesive = d.capacity_for(economic=0.8, cohesion=0.8, political_unity=0.8,
+                              militarization=0.3, institutional_control=0.8)
+    militarized = d.capacity_for(economic=0.4, cohesion=0.4, political_unity=0.4,
+                                 militarization=0.9, institutional_control=0.4)
+    assert cohesive > militarized + 0.15, (cohesive, militarized)
+    assert 0.0 <= militarized <= cohesive <= 1.0
+
+
+@pytest.mark.simulation
+def test_dsi_grievance_erodes_cohesion():
+    """Remembered grievance (MECH-SOC-001) lowers effective cohesion -> capacity."""
+    d = DiplomaticStabilityModel()
+    base = {"economic": 0.7, "cohesion": 0.7, "political_unity": 0.7,
+            "militarization": 0.5, "institutional_control": 0.6}
+    calm = d.capacity_for(grievance=0.0, **base)
+    aggrieved = d.capacity_for(grievance=0.8, **base)
+    assert aggrieved < calm
+
+
+@pytest.mark.simulation
+def test_war_weariness_builds_then_erodes_support():
+    """MECH-SOC-002: a grinding war wearies — weariness grows with time and
+    erosion rises with it; ending the war resets the clock."""
+    w = WarWearinessModel()
+    # Within the grace period, no weariness yet.
+    assert w.weary("ins-1", active=True) == 0.0  # turn 1
+    for _ in range(3):
+        w.weary("ins-1", active=True)            # turns 2..4 (grace = 4)
+    early = w.weary("ins-1", active=True)         # turn 5, just past grace
+    for _ in range(25):
+        late = w.weary("ins-1", active=True)
+    assert late > early, (early, late)
+    se_late, _ = w.erosion(late)
+    se_early, _ = w.erosion(early)
+    assert se_late > se_early >= 0.0
+    # Resolving/ending the war resets the clock.
+    assert w.weary("ins-1", active=False) == 0.0
+    assert w.weary("ins-1", active=True) == 0.0
 
 
 @pytest.mark.simulation

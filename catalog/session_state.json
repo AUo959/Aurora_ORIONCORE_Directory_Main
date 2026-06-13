@@ -352,9 +352,9 @@
       "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
     }
   ],
-  "last_updated": "2026-06-13T13:26:08Z",
+  "last_updated": "2026-06-13T14:30:11Z",
   "last_platform": "claude-code",
-  "last_session_summary": "feat(sim): wire MECH-GOV-001 into the live GUMAS engine (fac",
+  "last_session_summary": "docs(sim): expand seed-42 review \u2014 conflict initiation is ov",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -373,6 +373,24 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "9c418bc",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "docs(sim): expand seed-42 review \u2014 conflict initiation is over-weighted (confirmed); two-sided build plan"
+    },
+    {
+      "sha": "f575498",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "docs(sim): seed-42 stability review \u2014 root cause found (civil-war attractor has no exit)"
+    },
+    {
+      "sha": "b996560",
+      "date": "2026-06-13",
+      "platform": "claude-code",
+      "summary": "feat(sim): social dynamics + MECH-SOC-001 grievance memory wired into rebellion axis"
+    },
     {
       "sha": "48c50e7",
       "date": "2026-06-13",
@@ -414,24 +432,6 @@
       "date": "2026-06-13",
       "platform": "claude-code",
       "summary": "feat(sim): crew-life fidelity \u2014 the human layer (shifts/sleep/meals/hygiene/fatigue), shift-gated into the live watch"
-    },
-    {
-      "sha": "48bcdce",
-      "date": "2026-06-13",
-      "platform": "claude-code",
-      "summary": "feat(sim): the live station link \u2014 real-time downlink with engine->Aurora->chassis control loop"
-    },
-    {
-      "sha": "afad6be",
-      "date": "2026-06-13",
-      "platform": "claude-code",
-      "summary": "feat(sim): the L2 join \u2014 powered watch couples the L1 chassis to the GUMAS engine"
-    },
-    {
-      "sha": "172a0ba",
-      "date": "2026-06-13",
-      "platform": "claude-code",
-      "summary": "chore(state): station purpose ruling canon-routed; CanonRec head synced; chronicle state refreshed"
     }
   ],
   "security_events": [
@@ -477,7 +477,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "48c50e7",
+    "main_sha": "9c418bc",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -595,14 +595,21 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-06-13T13:26:08Z",
+    "checked_at": "2026-06-13T14:30:11Z",
     "entries": [
       {
         "repo": "aurora-cloudbank-symbolic-main",
-        "class": "unpublished_branch",
+        "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1015-salvage",
-        "detail": "pushed, 3 commit(s) ahead, no open PR",
-        "remediation": "gh pr create --head codex/cloudbank-issue-1015-salvage (or retire the branch deliberately)"
+        "detail": "3 commit(s) exist only on this machine",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1015-salvage && gh pr create"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "stranded_branch",
+        "branch": "codex/cloudbank-issue-1020-mesh-router-contract",
+        "detail": "1 commit(s) exist only on this machine",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1020-mesh-router-contract && gh pr create"
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
