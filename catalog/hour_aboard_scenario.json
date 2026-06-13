@@ -1,0 +1,83 @@
+{
+  "name": "hour_aboard_v1",
+  "about": "One routine operations hour aboard Orion Station. Task families drawn from the recovered ORION Operational Library v2.2 (Dispatch Protocol, Systems Bible, Operations Runbook, life infrastructure) and the L1 physical-space canon (ring/core/dome geometry). No incident drill: this is the baseline hour.",
+  "seed": 808,
+  "ticks": 1,
+  "anchor_seed": "EOS_SEED_ORION",
+  "ethics_protocol": "Picard_Delta_3",
+  "tasks": [
+    {
+      "id": "H1",
+      "name": "Docking Bay 2 logistics turnover",
+      "hours": 1.5,
+      "tags": ["operations", "logistics", "docking", "dispatch", "coordination"],
+      "source": "ORION__L1_DISPATCH_PROTOCOL__v1.1"
+    },
+    {
+      "id": "H2",
+      "name": "Habitat ring spin check (2 RPM / 0.3g verification)",
+      "hours": 1.0,
+      "tags": ["systems", "engineering", "infrastructure", "monitoring"],
+      "source": "ORION__L1_SYSTEMS_BIBLE__v1.1 + DATA__OrionStationPhysicalSpace__v1.0"
+    },
+    {
+      "id": "H3",
+      "name": "Dome observation watch handoff (ring Deck 4)",
+      "hours": 0.5,
+      "tags": ["command", "observation", "operations", "communication"],
+      "source": "ORION__L1_OPERATIONS_RUNBOOK__v1.1"
+    },
+    {
+      "id": "H4",
+      "name": "Life-support scrubber rotation, habitat ring",
+      "hours": 1.0,
+      "tags": ["engineering", "life_support", "infrastructure", "maintenance"],
+      "source": "orion_station_life_infrastructure.md"
+    },
+    {
+      "id": "H5",
+      "name": "ORD pre-flight reconnaissance audit (Delta Scout)",
+      "hours": 1.0,
+      "depends_on": ["H1"],
+      "tags": ["security", "validation", "audit", "monitoring", "api"],
+      "source": "SPEC L1L2_SYSTEM__ORD_DroneDispatch v0.5.0 (modules/ord, PR #1016)"
+    },
+    {
+      "id": "H6",
+      "name": "L3 drift containment sweep",
+      "hours": 0.5,
+      "tags": ["ethics", "validation", "drift", "compliance", "monitoring"],
+      "source": "ORION__DRIFT_CONTAINMENT_PROTOCOL__v1.1"
+    },
+    {
+      "id": "H7",
+      "name": "Command log review and Aurora arbitration sync",
+      "hours": 0.5,
+      "depends_on": ["H3"],
+      "tags": ["command", "ethics", "coordination", "communication"],
+      "source": "ORION__L1_COMMAND_STRUCTURE__v1.1 + PICARD_DELTA_3 ethics layer"
+    }
+  ],
+  "ord_mission": {
+    "mission_id": "hour-aboard-H5",
+    "tool_name": "preflight_reconnaissance",
+    "risk_level": 0.35,
+    "destination": "station://docking/bay2"
+  },
+  "companion_beats": [
+    {"agent": "aurora", "beat": "Hour-aboard simulation tick 1: command log review queued for arbitration sync (H7). Acknowledge and report station status."},
+    {"agent": "archy", "beat": "Hour-aboard simulation tick 1: archive the hour's crew logs and watch-handoff record (H3). Acknowledge intake."},
+    {"agent": "oppy", "beat": "Hour-aboard simulation tick 1: cross-check Dome observation bearings against navigation plot (H3). Report alignment."},
+    {"agent": "liora", "beat": "Hour-aboard simulation tick 1: crew wellbeing pulse during ring maintenance rotation (H4). Report morale signal."},
+    {"agent": "starling_au", "beat": "Hour-aboard simulation tick 1: relay check on docking comms loop for Bay 2 turnover (H1). Confirm channel integrity."},
+    {"agent": "riverthread_808", "beat": "Hour-aboard simulation tick 1: weave the hour's continuity thread into the station record (anchor EOS_SEED_ORION). Confirm continuity."}
+  ],
+  "l3_audit": {
+    "question": "Would Thorne route the hour's command-log review through Aurora arbitration before closing the watch?",
+    "actor": "Alex Thorne",
+    "action": "route the command-log review through Aurora arbitration before closing the watch",
+    "motive": "uphold arbitration and ethics validation",
+    "knowledge": "Major actions require Aurora arbitration.",
+    "event_label": "Routine hour: watch handoff and command log review."
+  }
+}

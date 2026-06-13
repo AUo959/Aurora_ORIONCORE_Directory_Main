@@ -1,0 +1,130 @@
+{
+  "summary": {
+    "roster_version": "2.0",
+    "characters_used": 25,
+    "ticks": 1,
+    "completed": false,
+    "total_est": 6.0,
+    "total_spent": 4.5,
+    "completed_ids": [
+      "H1",
+      "H2",
+      "H3",
+      "H4",
+      "H6"
+    ]
+  },
+  "transcript": [
+    "[00] Alex Thorne: All hands, Phase 1 security implementation beginning. Aurora, coordinate assignments.",
+    "[00] Aurora: Phase 1 task distribution initiated. Assignments optimized for canonical specializations.",
+    "[00] Commander Alex Thorne: Progress on Dome observation watch handoff (ring Deck 4): +0.31h [Commander, Orion Station]",
+    "[00] Lt. Commander Maya Shepard: L3 drift containment sweep complete. Executive Officer (XO) / FleetOps Commander validation passed.",
+    "[00] Dr. Elira Noor: Progress on Life-support scrubber rotation, habitat ring: +0.54h [Lead Reflexivity Specialist]",
+    "[00] Prof. Elena Sorensen: Progress on Docking Bay 2 logistics turnover: +0.55h [Cognitive Ethicist]",
+    "[00] Helena Vu: Progress on Habitat ring spin check (2 RPM / 0.3g verification): +0.64h [Cultural & HR Director]",
+    "[00] Marcus Chen: Dome observation watch handoff (ring Deck 4) complete. Performance Optimization Engineer validation passed.",
+    "[00] Ryan Patel: Habitat ring spin check (2 RPM / 0.3g verification) complete. Systems Integration Engineer validation passed.",
+    "[00] Vincent Kale: Life-support scrubber rotation, habitat ring complete. Layer Isolation Theorist validation passed.",
+    "[00] Naomi Vell: Progress on Docking Bay 2 logistics turnover: +0.91h [Narrative Framework Engineer]",
+    "[00] Keira Halden: Docking Bay 2 logistics turnover complete. Lead Visual Concept Designer validation passed."
+  ],
+  "emergent_events": 0,
+  "work_records": [
+    {
+      "tick": 0,
+      "agent": "Commander Alex Thorne",
+      "task": "Dome observation watch handoff (ring Deck 4)",
+      "effort": 0.31,
+      "note": "0.19h left"
+    },
+    {
+      "tick": 0,
+      "agent": "Lt. Commander Maya Shepard",
+      "task": "L3 drift containment sweep",
+      "effort": 0.87,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 0,
+      "agent": "Dr. Elira Noor",
+      "task": "Life-support scrubber rotation, habitat ring",
+      "effort": 0.54,
+      "note": "0.46h left"
+    },
+    {
+      "tick": 0,
+      "agent": "Prof. Elena Sorensen",
+      "task": "Docking Bay 2 logistics turnover",
+      "effort": 0.55,
+      "note": "0.95h left"
+    },
+    {
+      "tick": 0,
+      "agent": "Helena Vu",
+      "task": "Habitat ring spin check (2 RPM / 0.3g verification)",
+      "effort": 0.64,
+      "note": "0.36h left"
+    },
+    {
+      "tick": 0,
+      "agent": "Marcus Chen",
+      "task": "Dome observation watch handoff (ring Deck 4)",
+      "effort": 1.07,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 0,
+      "agent": "Ryan Patel",
+      "task": "Habitat ring spin check (2 RPM / 0.3g verification)",
+      "effort": 1.16,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 0,
+      "agent": "Vincent Kale",
+      "task": "Life-support scrubber rotation, habitat ring",
+      "effort": 0.88,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 0,
+      "agent": "Naomi Vell",
+      "task": "Docking Bay 2 logistics turnover",
+      "effort": 0.91,
+      "note": "0.05h left"
+    },
+    {
+      "tick": 0,
+      "agent": "Keira Halden",
+      "task": "Docking Bay 2 logistics turnover",
+      "effort": 0.8,
+      "note": "\u2713 COMPLETE"
+    }
+  ],
+  "task_names": {
+    "H1": "Docking Bay 2 logistics turnover",
+    "H2": "Habitat ring spin check (2 RPM / 0.3g verification)",
+    "H3": "Dome observation watch handoff (ring Deck 4)",
+    "H4": "Life-support scrubber rotation, habitat ring",
+    "H5": "ORD pre-flight reconnaissance audit (Delta Scout)",
+    "H6": "L3 drift containment sweep",
+    "H7": "Command log review and Aurora arbitration sync"
+  },
+  "task_sources": {
+    "H1": "ORION__L1_DISPATCH_PROTOCOL__v1.1",
+    "H2": "ORION__L1_SYSTEMS_BIBLE__v1.1 + DATA__OrionStationPhysicalSpace__v1.0",
+    "H3": "ORION__L1_OPERATIONS_RUNBOOK__v1.1",
+    "H4": "orion_station_life_infrastructure.md",
+    "H5": "SPEC L1L2_SYSTEM__ORD_DroneDispatch v0.5.0 (modules/ord, PR #1016)",
+    "H6": "ORION__DRIFT_CONTAINMENT_PROTOCOL__v1.1",
+    "H7": "ORION__L1_COMMAND_STRUCTURE__v1.1 + PICARD_DELTA_3 ethics layer"
+  },
+  "ord_dispatch": {
+    "mission_id": "hour-aboard-H5",
+    "drones_required": [
+      "ORD-2 Delta Scout",
+      "ORD-3 Shadowfax"
+    ],
+    "receipt_sha256": "dd68e544f1d795d9ca9a6b617572d832b49f1c8429a6133eb0f1453aaa60df42"
+  }
+}

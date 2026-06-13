@@ -4,7 +4,7 @@ repos:
 - name: aurora-cloudbank-symbolic-main
   path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
   branch: main
-  head_sha: 30f3464d8dcc964dd2f55e3fa8daeebea9f16eb2
+  head_sha: 1bd44a4fca12cd204e5cbc85776ca1f4b9d8be9b
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse
