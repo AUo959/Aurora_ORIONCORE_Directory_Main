@@ -54,6 +54,7 @@ from mech_gov_001 import (  # noqa: E402
     MediationModel,
     PopulationGrievanceModel,
     PostWarRecoveryModel,
+    TreatyEnforcementModel,
     WarWearinessModel,
 )
 from gumas_consequence_layer import ConsequenceLayer  # noqa: E402
@@ -131,6 +132,7 @@ def run_seed(seed: int, turns: int) -> dict:
     compl = ComplacencyModel()
     resolver = InsurgencyResolutionModel(seed=seed)
     med = MediationModel()
+    treaty = TreatyEnforcementModel(seed=seed)
     pb, sc, st_ = {}, set(), set()
 
     rows: list[dict] = []
@@ -152,7 +154,8 @@ def run_seed(seed: int, turns: int) -> dict:
         H._writeback_recovery(recov, state, v3)
         H._writeback_complacency(compl, state, v3)
         brokered = H._writeback_mediation(med, state, v3)
-        settled, mediated = H._writeback_resolution(resolver, state, v3)
+        settled, mediated = H._writeback_resolution(resolver, state, v3, treaty)
+        broken_accords = H._writeback_treaties(treaty, state, v3)
 
         comp = d.get("system_components", {})
         v3r = d.get("v3_result", {})
@@ -176,6 +179,7 @@ def run_seed(seed: int, turns: int) -> dict:
             "settlements": settled,
             "mediated_settlements": mediated,
             "brokered_insurgencies": brokered,
+            "broken_accords": broken_accords,
             "complacency_mean": round(_mean(compl_levels), 4),
             "complacency_max": round(max(compl_levels), 4) if compl_levels else 0.0,
             "grievance_mean": round(_mean(griev), 4),
@@ -292,6 +296,7 @@ def analyse_seed(res: dict) -> dict:
         "total_settlements": settlements,
         "total_mediated_settlements": mediated,
         "mediated_share": mediated_share,
+        "total_broken_accords": sum(_series(rows, "broken_accords")),
         "total_new_insurgencies": onsets,
         "off_ramp_settlement_share": off_ramp_settlement_share,
         "total_negotiations": sum(_series(rows, "v3_negotiations_concluded")),
@@ -395,7 +400,9 @@ def render_md(analyses, det_ok, when, turns, seeds) -> str:
                  f"— D1 reveals the civil-war load the engine number masks.")
         L.append(f"- **Sato (legitimacy/complacency):** legitimacy/era `{a['legitimacy_per_era']}`; "
                  f"complacency/era `{a['complacency_per_era']}` — complacency builds in calm; conflict "
-                 f"and *settlement* both renew the order (the latter is the peaceful path).")
+                 f"and *settlement* both renew the order (the latter is the peaceful path). "
+                 f"{a['total_broken_accords']} peace accords broke (MECH-DIP-003) — settled peace "
+                 f"binds but is not unconditional; a broken brokered peace burns the broker's trust.")
         L.append(f"- **Tanaka (engine):** {a['total_new_insurgencies']} insurgencies formed and "
                  f"retired (cast rotation; was ~13 pre-graft), {a['total_migrations']} migrations, "
                  f"{a['total_fragmentations']} fragmentation events — engine phases all live.\n")

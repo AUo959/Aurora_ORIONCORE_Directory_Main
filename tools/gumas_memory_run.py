@@ -39,6 +39,7 @@ from mech_gov_001 import (  # noqa: E402
     MediationModel,
     PopulationGrievanceModel,
     PostWarRecoveryModel,
+    TreatyEnforcementModel,
     WarWearinessModel,
 )
 from gumas_consequence_layer import ConsequenceLayer  # noqa: E402
@@ -217,7 +218,54 @@ def _writeback_mediation(med: MediationModel, state, v3) -> int:
     return brokered
 
 
-def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3):
+def _writeback_treaties(treaty: TreatyEnforcementModel, state, v3) -> int:
+    """MECH-DIP-003: a settled peace binds and can break. As the complacency
+    cycle rebuilds a host's stress during peace, its accord is strained; a
+    mediated accord (clear terms) resists, an exhaustion peace (vague) frays.
+    On breach, grievance resurges (renewed conflict) and — if a broker
+    guaranteed it — host<->mediator trust collapses, burning the broker's
+    credibility. Returns the number of accords broken this turn."""
+    if v3 is None:
+        return 0
+    broken = 0
+    pops = getattr(v3, "population", {})
+    for host in list(treaty.accords.keys()):
+        fac = state.factions.get(host)
+        if fac is None:
+            treaty.forget(host)
+            continue
+        accord = treaty.accords[host]
+        mediator = accord.get("mediator")
+        ts = getattr(fac, "trust_scores", {}) or {}
+        trust_with_mediator = float(ts.get(mediator, 0.5)) if mediator else 0.5
+        pop = pops.get(host)
+        current_grievance = float(getattr(pop, "demographic_stress", accord["base"])) if pop else accord["base"]
+        result = treaty.check(host, current_grievance, trust_with_mediator)
+        if result is None:
+            continue
+        broken += 1
+        # Renewed conflict: the betrayed peace re-inflames grievance.
+        if pop is not None:
+            pop.demographic_stress = round(min(
+                1.0, float(getattr(pop, "demographic_stress", 0.3)) + treaty.TRUST_BURN), 4)
+        leader = state.leaders.get(fac.leader_id) if fac.leader_id else None
+        if leader is not None:
+            leader.public_legitimacy = round(max(
+                0.05, float(leader.public_legitimacy) - 0.03), 4)
+        # A broken brokered peace burns the broker's credibility (both directions),
+        # so future peace is harder to broker for this host.
+        if mediator is not None:
+            mfac = state.factions.get(mediator)
+            if isinstance(getattr(fac, "trust_scores", None), dict) and mediator in fac.trust_scores:
+                fac.trust_scores[mediator] = round(max(
+                    0.0, float(fac.trust_scores[mediator]) - treaty.TRUST_BURN), 4)
+            if mfac is not None and isinstance(getattr(mfac, "trust_scores", None), dict) and host in mfac.trust_scores:
+                mfac.trust_scores[host] = round(max(
+                    0.0, float(mfac.trust_scores[host]) - treaty.TRUST_BURN), 4)
+    return broken
+
+
+def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3, treaty=None):
     """MECH-REB-004: give civil wars the de-escalation→settlement off-ramp the
     inter-faction conflict layer already has. A grinding, costly, stalemated
     insurgency whose host population pressures it to end can reach a negotiated
@@ -280,6 +328,12 @@ def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3):
             # path (D6), distinct from the complacency war-purge.
             leader.public_legitimacy = round(min(
                 1.0, float(leader.public_legitimacy) + resolver.LEGIT_RESTORE * bonus), 4)
+        # MECH-DIP-003: register the peace as a binding accord against the floor it
+        # just established (post-relief stress). As complacency rebuilds stress
+        # above that floor the accord is strained; a heavy backslide breaks it.
+        if treaty is not None:
+            base_floor = float(getattr(pop, "demographic_stress", host_grievance)) if pop is not None else host_grievance
+            treaty.register(fid, getattr(ins, "mediator_id", None) if was_mediated else None, base_floor)
     return (settled, mediated)
 
 
@@ -429,6 +483,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     compl = ComplacencyModel() if memory_on else None
     resolver = InsurgencyResolutionModel(seed=seed) if memory_on else None
     med = MediationModel() if memory_on else None
+    treaty = TreatyEnforcementModel(seed=seed) if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
@@ -459,7 +514,8 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
             _writeback_recovery(recov, state, v3)
             _writeback_complacency(compl, state, v3)
             _writeback_mediation(med, state, v3)
-            _writeback_resolution(resolver, state, v3)
+            _writeback_resolution(resolver, state, v3, treaty)
+            _writeback_treaties(treaty, state, v3)
         traj.append({
             "turn": d["turn"],
             "stability": d["stability_index"],

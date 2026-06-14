@@ -24,6 +24,7 @@ from mech_gov_001 import (  # noqa: E402
     InsurgencyResolutionModel,
     MediationModel,
     PopulationGrievanceModel,
+    TreatyEnforcementModel,
     PostWarRecoveryModel,
     WarWearinessModel,
 )
@@ -256,6 +257,33 @@ def test_mediation_needs_a_mutually_trusted_peaceful_broker():
     assert m.find_mediator("fringe", trust, busy=set()) is None
     # A faction fighting its own serious war can't broker (excluded via busy).
     assert m.find_mediator("union", trust, busy={"compact"}) is None
+
+
+@pytest.mark.simulation
+def test_treaty_binds_then_breaks_under_backsliding():
+    """MECH-DIP-003: a peace accord holds while conditions stay near the floor it
+    set, survives a grace window, breaks under heavy backsliding, and repeated
+    breaches compound (a later accord breaks under lighter strain)."""
+    t = TreatyEnforcementModel(seed=1)
+    t.register("velkaris", mediator="union", base_grievance=0.30)
+    # Within grace: no breach even under strain.
+    assert t.check("velkaris", current_grievance=0.55, trust_with_mediator=0.5) is None
+    # Past grace, conditions near the floor -> holds.
+    for _ in range(t.GRACE):
+        t.check("velkaris", current_grievance=0.31, trust_with_mediator=0.5)
+    assert "velkaris" in t.accords
+    # A heavy backslide breaks it; the broker is named in the broken accord.
+    t.register("velkaris", mediator="union", base_grievance=0.30)
+    for _ in range(t.GRACE):
+        t.check("velkaris", 0.30, 0.5)
+    broken = None
+    for _ in range(5):
+        broken = t.check("velkaris", current_grievance=0.55, trust_with_mediator=0.5)
+        if broken:
+            break
+    assert broken is not None and broken["mediator"] == "union"
+    assert t.breaches["velkaris"] >= 1
+    assert "velkaris" not in t.accords  # retired on breach
 
 
 @pytest.mark.simulation

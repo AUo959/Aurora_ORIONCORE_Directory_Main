@@ -47,7 +47,9 @@ from typing import Optional
 # fall back to a faithful copy kept in sync with it.
 try:  # pragma: no cover - exercised via the integration harness
     from formulas import calc_deescalation_probability as _DEESC
-except Exception:  # noqa: BLE001 - any import failure -> local copy
+    from formulas import calc_treaty_breach_score as _BREACH
+    from formulas import is_treaty_breach as _IS_BREACH
+except Exception:  # noqa: BLE001 - any import failure -> local copies
     def _DEESC(  # type: ignore[misc]
         war_cost_a: float, war_cost_b: float, stalemate_index: float,
         internal_pressure_a: float, internal_pressure_b: float,
@@ -68,6 +70,21 @@ except Exception:  # noqa: BLE001 - any import failure -> local copy
         if war_cost_a > 0.9 and war_cost_b > 0.9:
             p = max(p, 0.6)
         return max(0.0, min(1.0, p))
+
+    def _BREACH(  # type: ignore[misc]
+        action_severity: float, is_direct_action: bool, treaty_ambiguity: float,
+        faction_trust: float, *, ambiguity_tolerance: float = 0.2,
+        trust_discount_multiplier: float = 0.1,
+    ) -> float:
+        """Faithful copy of `calc_treaty_breach_score` (PR §5.2 Formula 3)."""
+        violation_weight = 1.0 if is_direct_action else 0.5
+        return (action_severity * violation_weight
+                - treaty_ambiguity * ambiguity_tolerance
+                - faction_trust * (trust_discount_multiplier * faction_trust))
+
+    def _IS_BREACH(breach_score: float, violation_threshold: float = 0.6) -> bool:
+        """Faithful copy of `is_treaty_breach`."""
+        return breach_score > violation_threshold
 
 # Memory half-life is expressed in *turns* (logical clock), not seconds.
 DEFAULT_HALF_LIFE_TURNS = 12.0
@@ -613,6 +630,70 @@ class MediationModel:
             if mutual >= best_mutual:
                 best, best_mutual = m, mutual
         return best
+
+
+class TreatyEnforcementModel:
+    """MECH-DIP-003 — Treaty Enforcement & Consequence.
+
+    A settled peace (MECH-REB-004/DIP-002) is not a free, permanent win — it
+    **binds**, and it can **break**. Each settlement registers a peace *accord*
+    (one per host) against the floor it established. Every turn the accord is
+    tested for breach with the engine's own `calc_treaty_breach_score` /
+    `is_treaty_breach`: as the host's conditions **backslide** above that floor
+    (the complacency cycle rebuilding stress during peace), the accord is
+    strained, and a heavy backslide breaks it. Repeated breaches compound: an
+    oath-breaker's later accords break under lighter strain.
+
+    When an accord breaks: grievance **resurges** (renewed conflict — the betrayed
+    peace) and, if a broker guaranteed it, the trust between host and mediator
+    **collapses**, burning the broker's credibility so future peace is harder to
+    broker. This gives the diplomacy off-ramp real *stakes* — a brokered peace is
+    faster and cheaper (DIP-002) but not automatically more lasting; a settlement
+    among rivals can still fail, and when a *mediated* one fails it costs the
+    broker. Couples the complacency cycle to the slow breakdown of peace.
+    """
+
+    GRACE = 4                      # an accord is safe just after signing
+    AMBIGUITY = 0.15               # how much benefit-of-the-doubt an accord gets
+    VIOLATION_THRESHOLD = 0.6      # engine default
+    BACKSLIDE_WEIGHT = 5.0         # renewed stress -> strain (calibrated to the
+                                   # measured backslide range: breach at ~0.13+,
+                                   # the heaviest-backsliding ~20% of accord-turns)
+    REPEAT_BREACH_WEIGHT = 0.08    # an oath-breaker's later accords break easier
+    TRUST_BURN = 0.12              # broken brokered peace burns host<->mediator trust
+
+    def __init__(self, seed: int = 0) -> None:
+        self._rng = random.Random(seed)
+        self.accords: dict[str, dict] = {}    # host_id -> accord
+        self.breaches: dict[str, int] = {}    # host_id -> cumulative breaches
+
+    def register(self, host: str, mediator, base_grievance: float) -> None:
+        """Record a peace accord for `host` (replacing any prior one)."""
+        self.accords[host] = {"mediator": mediator,
+                              "base": float(base_grievance), "age": 0}
+
+    def check(self, host: str, current_grievance: float, trust_with_mediator: float):
+        """Advance and test the host's accord. Returns the broken accord dict
+        (with 'mediator') on breach, else None. A host that lets conditions
+        collapse back into unrest has directly failed the accord (direct action)."""
+        a = self.accords.get(host)
+        if a is None:
+            return None
+        a["age"] += 1
+        if a["age"] < self.GRACE:
+            return None
+        backslide = max(0.0, float(current_grievance) - a["base"])
+        severity = min(1.0, backslide * self.BACKSLIDE_WEIGHT
+                       + self.breaches.get(host, 0) * self.REPEAT_BREACH_WEIGHT)
+        score = _BREACH(severity, True, self.AMBIGUITY, float(trust_with_mediator))
+        if _IS_BREACH(score, self.VIOLATION_THRESHOLD):
+            self.breaches[host] = self.breaches.get(host, 0) + 1
+            del self.accords[host]
+            return a
+        return None
+
+    def forget(self, host: str) -> None:
+        self.accords.pop(host, None)
 
 
 # --------------------------------------------------------------------------- demo
