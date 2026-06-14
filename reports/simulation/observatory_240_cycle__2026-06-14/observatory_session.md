@@ -1,6 +1,6 @@
 # Observatory Exercise — 240-Turn Complacency-Cycle Test Case
 
-**Run:** 2026-06-14T13:10:37Z | **Horizon:** 240 turns | **Seeds:** 42, 7, 99 | **Pipeline:** committed mechanic stack via `gumas_memory_run`
+**Run:** 2026-06-14T13:43:17Z | **Horizon:** 240 turns | **Seeds:** 42, 7, 99 | **Pipeline:** committed mechanic stack via `gumas_memory_run`
 
 > Senior staff convened in the Observatory to run the living-galaxy dynamic under standing conditions for a full 240-turn horizon — twice the canonical sim window — and certify it from instruments, not memory.
 
@@ -24,33 +24,33 @@
 
 | Seed | floor | mature plateau | honest plateau | waves | settlements | onsets | off-ramp share | recurs | off-ramp | rotates | DYNAMIC |
 |---|---|---|---|---|---|---|---|:--:|:--:|:--:|:--:|
-| 42 | 0.376 | 0.387 | 0.326 | 3 | 60 | 71 | 0.84 | ✓ | ✓ | ✓ | **✓** |
-| 7 | 0.368 | 0.384 | 0.294 | 3 | 64 | 74 | 0.86 | ✓ | ✓ | ✓ | **✓** |
-| 99 | 0.377 | 0.387 | 0.300 | 3 | 68 | 76 | 0.90 | ✓ | ✓ | ✓ | **✓** |
+| 42 | 0.368 | 0.381 | 0.319 | 3 | 61 | 71 | 0.86 | ✓ | ✓ | ✓ | **✓** |
+| 7 | 0.372 | 0.384 | 0.321 | 4 | 73 | 84 | 0.87 | ✓ | ✓ | ✓ | **✓** |
+| 99 | 0.369 | 0.384 | 0.315 | 4 | 66 | 77 | 0.86 | ✓ | ✓ | ✓ | **✓** |
 
 ## Seed 42 — trajectory (12 eras x 20 turns)
 
-- **Shepard (conflict):** civil-wars/era `[0, 0.15, 0.55, 1.4, 0.65, 1.85, 1.95, 2.4, 1.5, 1.3, 1.45, 0.55]` — 3 wave(s), peaks at era(s) [3, 7, 10]; 275 civil-war-turns, 71 insurgencies formed.
-- **Shepard (off-ramps):** 60 negotiated settlements vs military suppression; settlements/era `[0, 0.05, 0.15, 0.2, 0.3, 0.15, 0.3, 0.25, 0.55, 0.3, 0.4, 0.35]` — war is no longer the only way a civil war ends (MECH-REB-004).
-- **Velin (oscillation + honesty):** engine stability/era `[0.609, 0.613, 0.586, 0.552, 0.508, 0.452, 0.435, 0.403, 0.397, 0.393, 0.391, 0.386]` (floor 0.376); the **honest** internal-conflict-aware metric plateaus at 0.326 (floor 0.292) — D1 reveals the civil-war load the engine number masks.
-- **Sato (legitimacy/complacency):** legitimacy/era `[0.649, 0.602, 0.572, 0.556, 0.538, 0.505, 0.495, 0.467, 0.46, 0.457, 0.449, 0.439]`; complacency/era `[0.047, 0.251, 0.433, 0.39, 0.373, 0.405, 0.372, 0.36, 0.28, 0.221, 0.251, 0.319]` — complacency builds in calm; conflict and *settlement* both renew the order (the latter is the peaceful path).
-- **Tanaka (engine):** 71 insurgencies formed and retired (cast rotation; was ~13 pre-graft), 3187 migrations, 0 fragmentation events — engine phases all live.
+- **Shepard (conflict):** civil-wars/era `[0, 0.15, 0.35, 0.75, 1, 1.4, 0.65, 1.6, 2.25, 1.4, 1.95, 1.05]` — 3 wave(s), peaks at era(s) [5, 8, 10]; 251 civil-war-turns, 71 insurgencies formed.
+- **Shepard (off-ramps):** 61 negotiated settlements vs military suppression — of which **31 (51%) brokered by a trusted neighbour** (MECH-DIP-002), the rest ground to exhaustion. settlements/era `[0, 0.05, 0.15, 0.15, 0.25, 0.3, 0.2, 0.35, 0.5, 0.3, 0.45, 0.35]` — war is no longer the only way a civil war ends, and diplomacy is the faster path.
+- **Velin (oscillation + honesty):** engine stability/era `[0.609, 0.613, 0.586, 0.532, 0.503, 0.474, 0.444, 0.419, 0.395, 0.394, 0.386, 0.382]` (floor 0.368); the **honest** internal-conflict-aware metric plateaus at 0.319 (floor 0.268) — D1 reveals the civil-war load the engine number masks.
+- **Sato (legitimacy/complacency):** legitimacy/era `[0.649, 0.602, 0.57, 0.542, 0.536, 0.518, 0.503, 0.482, 0.463, 0.456, 0.444, 0.437]`; complacency/era `[0.047, 0.251, 0.435, 0.429, 0.399, 0.362, 0.359, 0.375, 0.288, 0.254, 0.272, 0.277]` — complacency builds in calm; conflict and *settlement* both renew the order (the latter is the peaceful path).
+- **Tanaka (engine):** 71 insurgencies formed and retired (cast rotation; was ~13 pre-graft), 3119 migrations, 0 fragmentation events — engine phases all live.
 
 ## Seed 7 — trajectory (12 eras x 20 turns)
 
-- **Shepard (conflict):** civil-wars/era `[0, 0.8, 1.55, 1.7, 1.55, 0.6, 0.05, 2.35, 2.85, 1.55, 1.2, 3.75]` — 3 wave(s), peaks at era(s) [3, 8, 11]; 359 civil-war-turns, 74 insurgencies formed.
-- **Shepard (off-ramps):** 64 negotiated settlements vs military suppression; settlements/era `[0.05, 0.05, 0.2, 0.3, 0.25, 0.2, 0.25, 0.2, 0.5, 0.35, 0.3, 0.55]` — war is no longer the only way a civil war ends (MECH-REB-004).
-- **Velin (oscillation + honesty):** engine stability/era `[0.605, 0.599, 0.582, 0.539, 0.505, 0.471, 0.441, 0.421, 0.4, 0.405, 0.393, 0.381]` (floor 0.368); the **honest** internal-conflict-aware metric plateaus at 0.294 (floor 0.268) — D1 reveals the civil-war load the engine number masks.
-- **Sato (legitimacy/complacency):** legitimacy/era `[0.649, 0.609, 0.576, 0.552, 0.537, 0.521, 0.496, 0.483, 0.473, 0.468, 0.448, 0.434]`; complacency/era `[0.047, 0.25, 0.383, 0.367, 0.385, 0.363, 0.426, 0.392, 0.196, 0.254, 0.308, 0.221]` — complacency builds in calm; conflict and *settlement* both renew the order (the latter is the peaceful path).
-- **Tanaka (engine):** 74 insurgencies formed and retired (cast rotation; was ~13 pre-graft), 3155 migrations, 0 fragmentation events — engine phases all live.
+- **Shepard (conflict):** civil-wars/era `[0, 0.8, 0.9, 2, 1.25, 1.25, 1.8, 1.6, 1.95, 2.95, 1.25, 1.9]` — 4 wave(s), peaks at era(s) [3, 6, 9, 11]; 353 civil-war-turns, 84 insurgencies formed.
+- **Shepard (off-ramps):** 73 negotiated settlements vs military suppression — of which **29 (40%) brokered by a trusted neighbour** (MECH-DIP-002), the rest ground to exhaustion. settlements/era `[0.05, 0.05, 0.25, 0.25, 0.3, 0.3, 0.45, 0.3, 0.4, 0.5, 0.45, 0.35]` — war is no longer the only way a civil war ends, and diplomacy is the faster path.
+- **Velin (oscillation + honesty):** engine stability/era `[0.605, 0.599, 0.574, 0.543, 0.523, 0.473, 0.426, 0.413, 0.404, 0.396, 0.387, 0.384]` (floor 0.372); the **honest** internal-conflict-aware metric plateaus at 0.321 (floor 0.275) — D1 reveals the civil-war load the engine number masks.
+- **Sato (legitimacy/complacency):** legitimacy/era `[0.649, 0.609, 0.576, 0.557, 0.547, 0.516, 0.499, 0.482, 0.469, 0.456, 0.444, 0.438]`; complacency/era `[0.047, 0.25, 0.384, 0.358, 0.352, 0.373, 0.346, 0.341, 0.324, 0.255, 0.301, 0.271]` — complacency builds in calm; conflict and *settlement* both renew the order (the latter is the peaceful path).
+- **Tanaka (engine):** 84 insurgencies formed and retired (cast rotation; was ~13 pre-graft), 3132 migrations, 0 fragmentation events — engine phases all live.
 
 ## Seed 99 — trajectory (12 eras x 20 turns)
 
-- **Shepard (conflict):** civil-wars/era `[0, 0.5, 0.55, 0.2, 0.9, 1.85, 1.7, 1.5, 1.7, 0.75, 2.25, 1.7]` — 3 wave(s), peaks at era(s) [5, 8, 10]; 272 civil-war-turns, 76 insurgencies formed.
-- **Shepard (off-ramps):** 68 negotiated settlements vs military suppression; settlements/era `[0, 0.05, 0.25, 0.25, 0.15, 0.3, 0.25, 0.45, 0.25, 0.5, 0.45, 0.5]` — war is no longer the only way a civil war ends (MECH-REB-004).
-- **Velin (oscillation + honesty):** engine stability/era `[0.612, 0.605, 0.571, 0.542, 0.474, 0.459, 0.443, 0.415, 0.421, 0.399, 0.389, 0.387]` (floor 0.377); the **honest** internal-conflict-aware metric plateaus at 0.300 (floor 0.277) — D1 reveals the civil-war load the engine number masks.
-- **Sato (legitimacy/complacency):** legitimacy/era `[0.651, 0.601, 0.567, 0.555, 0.518, 0.517, 0.499, 0.477, 0.49, 0.457, 0.447, 0.445]`; complacency/era `[0.047, 0.257, 0.421, 0.372, 0.425, 0.373, 0.374, 0.32, 0.266, 0.319, 0.279, 0.178]` — complacency builds in calm; conflict and *settlement* both renew the order (the latter is the peaceful path).
-- **Tanaka (engine):** 76 insurgencies formed and retired (cast rotation; was ~13 pre-graft), 3111 migrations, 0 fragmentation events — engine phases all live.
+- **Shepard (conflict):** civil-wars/era `[0, 0.4, 0.4, 1.5, 1.2, 1.65, 0.95, 1.65, 0.5, 0.65, 2.25, 2.1]` — 4 wave(s), peaks at era(s) [3, 5, 7, 10]; 265 civil-war-turns, 77 insurgencies formed.
+- **Shepard (off-ramps):** 66 negotiated settlements vs military suppression — of which **37 (56%) brokered by a trusted neighbour** (MECH-DIP-002), the rest ground to exhaustion. settlements/era `[0, 0.1, 0.2, 0.35, 0.2, 0.3, 0.3, 0.4, 0.25, 0.4, 0.55, 0.25]` — war is no longer the only way a civil war ends, and diplomacy is the faster path.
+- **Velin (oscillation + honesty):** engine stability/era `[0.612, 0.605, 0.577, 0.54, 0.502, 0.464, 0.441, 0.426, 0.403, 0.397, 0.392, 0.383]` (floor 0.369); the **honest** internal-conflict-aware metric plateaus at 0.315 (floor 0.274) — D1 reveals the civil-war load the engine number masks.
+- **Sato (legitimacy/complacency):** legitimacy/era `[0.651, 0.601, 0.569, 0.553, 0.537, 0.512, 0.509, 0.481, 0.469, 0.457, 0.449, 0.444]`; complacency/era `[0.047, 0.257, 0.44, 0.372, 0.399, 0.409, 0.358, 0.377, 0.369, 0.424, 0.342, 0.189]` — complacency builds in calm; conflict and *settlement* both renew the order (the latter is the peaceful path).
+- **Tanaka (engine):** 77 insurgencies formed and retired (cast rotation; was ~13 pre-graft), 3163 migrations, 0 fragmentation events — engine phases all live.
 
 ## Reading
 

@@ -36,6 +36,7 @@ from mech_gov_001 import (  # noqa: E402
     DiplomaticStabilityModel,
     FactionDecisionModel,
     InsurgencyResolutionModel,
+    MediationModel,
     PopulationGrievanceModel,
     PostWarRecoveryModel,
     WarWearinessModel,
@@ -189,23 +190,51 @@ def _writeback_weariness(weary: WarWearinessModel, v3) -> int:
     return touched
 
 
-def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3) -> int:
+def _writeback_mediation(med: MediationModel, state, v3) -> int:
+    """MECH-DIP-002: open a diplomatic off-ramp on each insurgency whose host has
+    a credible third-party mediator — a peaceful neighbour it mutually trusts —
+    found in the live trust network. Sets `mediation_available`, which the
+    resolution de-escalation formula rewards (the mediation bonus), so a
+    well-connected regime settles faster and cheaper than a distrusted one that
+    must grind to exhaustion. Returns how many insurgencies have a broker."""
+    if v3 is None:
+        return 0
+    insurgencies = getattr(v3, "insurgencies", None)
+    if not insurgencies:
+        return 0
+    # A faction fighting its own serious war can't broker peace elsewhere.
+    busy = {ins.host_faction_id for ins in insurgencies
+            if _phase(ins) in ("civil_war", "escalated")}
+    trust_by = {fid: (getattr(fac, "trust_scores", {}) or {})
+                for fid, fac in state.factions.items()}
+    brokered = 0
+    for ins in insurgencies:
+        mediator = med.find_mediator(ins.host_faction_id, trust_by, busy)
+        ins.mediation_available = mediator is not None
+        ins.mediator_id = mediator
+        if mediator is not None:
+            brokered += 1
+    return brokered
+
+
+def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3):
     """MECH-REB-004: give civil wars the de-escalation→settlement off-ramp the
     inter-faction conflict layer already has. A grinding, costly, stalemated
     insurgency whose host population pressures it to end can reach a negotiated
     SETTLEMENT: the movement is retired (the realization of the canon-declared
     InsurgencyPhase.RESOLVED — the engine has no terminal/removal path of its
     own) and the grievance that drove it is spent (eased demographic stress +
-    restored legitimacy — a peaceful renewal). The cause addressed, the conflict
-    cast can rotate instead of the same wounds reopening. Returns the number of
-    insurgencies settled this turn (off-ramp = settlement, not suppression)."""
+    restored legitimacy — a peaceful renewal). A *mediated* settlement (a broker
+    was engaged, MECH-DIP-002) is more durable — it spends more grievance and
+    restores more legitimacy than a peace won by exhaustion. The cause addressed,
+    the conflict cast can rotate. Returns (settled, mediated_settled) this turn."""
     if v3 is None:
-        return 0
+        return (0, 0)
     insurgencies = getattr(v3, "insurgencies", None)
     if not insurgencies:
-        return 0
+        return (0, 0)
     settleable = {"active", "escalated", "civil_war"}
-    settled = 0
+    settled = mediated = 0
     for ins in list(insurgencies):
         if _phase(ins) not in settleable:
             continue
@@ -216,6 +245,7 @@ def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3) -> int
         leader = state.leaders.get(fac.leader_id) if fac and fac.leader_id else None
         host_grievance = (float(getattr(ins, "economic_grievance", 0.5))
                           + float(getattr(ins, "political_grievance", 0.5))) / 2.0
+        was_mediated = bool(getattr(ins, "mediation_available", False))
         p = resolver.deescalation_p(
             host_war_pressure=float(getattr(leader, "war_pressure", 0.3)) if leader else 0.3,
             insurgent_strength=float(getattr(ins, "insurgent_strength", 0.3)),
@@ -224,7 +254,7 @@ def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3) -> int
             host_grievance=host_grievance,
             popular_support=float(getattr(ins, "popular_support", 0.3)),
             diplomacy_openness=float(getattr(leader, "diplomacy_openness", 0.5)) if leader else 0.5,
-            mediation_available=bool(getattr(ins, "mediation_available", False)),
+            mediation_available=was_mediated,
         )
         if not resolver.advance(ins.insurgency_id, p):
             continue
@@ -235,18 +265,22 @@ def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3) -> int
             pass
         resolver.forget(ins.insurgency_id)
         settled += 1
+        # A brokered peace addresses root causes better than exhaustion does.
+        bonus = 1.5 if was_mediated else 1.0
+        if was_mediated:
+            mediated += 1
         pop = getattr(v3, "population", {}).get(fid)
         if pop is not None:
             pop.demographic_stress = round(max(
-                0.0, float(getattr(pop, "demographic_stress", 0.3)) - resolver.STRESS_RELIEF), 4)
+                0.0, float(getattr(pop, "demographic_stress", 0.3)) - resolver.STRESS_RELIEF * bonus), 4)
             pop.housing_pressure = round(max(
-                0.0, float(getattr(pop, "housing_pressure", 0.3)) - resolver.GRIEVANCE_RELIEF * 0.5), 4)
+                0.0, float(getattr(pop, "housing_pressure", 0.3)) - resolver.GRIEVANCE_RELIEF * 0.5 * bonus), 4)
         if leader is not None:
             # A settled peace is legitimacy-restoring — the *peaceful* renewal
             # path (D6), distinct from the complacency war-purge.
             leader.public_legitimacy = round(min(
-                1.0, float(leader.public_legitimacy) + resolver.LEGIT_RESTORE), 4)
-    return settled
+                1.0, float(leader.public_legitimacy) + resolver.LEGIT_RESTORE * bonus), 4)
+    return (settled, mediated)
 
 
 # Blend weight: how strongly memory disposition pulls the engine's trust score.
@@ -394,6 +428,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     recov = PostWarRecoveryModel() if memory_on else None
     compl = ComplacencyModel() if memory_on else None
     resolver = InsurgencyResolutionModel(seed=seed) if memory_on else None
+    med = MediationModel() if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
@@ -423,6 +458,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
             _writeback_consequences(cons, state, v3, intel_pressure)
             _writeback_recovery(recov, state, v3)
             _writeback_complacency(compl, state, v3)
+            _writeback_mediation(med, state, v3)
             _writeback_resolution(resolver, state, v3)
         traj.append({
             "turn": d["turn"],

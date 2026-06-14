@@ -571,6 +571,50 @@ class InsurgencyResolutionModel:
         self.progress.pop(insurgency_id, None)
 
 
+class MediationModel:
+    """MECH-DIP-002 — Mediated Settlement.
+
+    Diplomacy as a *real* off-ramp, not just exhaustion. When a host faction
+    fighting an insurgency has a credible third-party mediator — a peaceful
+    neighbour it **mutually trusts** — that broker opens a negotiated path. It
+    sets `mediation_available` on the host's insurgencies, which feeds the
+    de-escalation formula's mediation bonus (MECH-REB-004), so the civil war can
+    end **faster and at lower accumulated cost/grievance** than grinding to
+    mutual exhaustion. An isolated or widely distrusted regime has no such
+    shortcut and must grind on — which is exactly the canon dynamic (a
+    well-connected polity settles; a pariah bleeds).
+
+    Emergent, not scripted: the broker is found in the live trust network that
+    MECH-GOV-001 / MECH-DIP-001 already maintain (`faction.trust_scores`). A
+    faction fighting its *own* serious war cannot broker peace and is excluded.
+    """
+
+    # Mutual trust required to be a *credible* broker. Calibrated so brokering is
+    # meaningful but not universal: at 0.58 (notably above the ~0.5 average) about
+    # half of settlements are mediated and half grind to exhaustion, and the share
+    # varies by seed with the trust network — the well-connected get a faster,
+    # cheaper peace; isolated regimes bleed. Lower makes brokers ubiquitous
+    # (diplomacy stops discriminating); higher makes them vanish.
+    TRUST_FLOOR = 0.58   # mutual trust required to be a credible broker
+
+    def find_mediator(self, host, trust_by_faction, busy):
+        """Return the best credible mediator id for `host`, or None.
+
+        `trust_by_faction`: {fid: {other_fid: trust}}; `busy`: set of faction ids
+        too embroiled in their own serious war to broker. A mediator must be
+        *mutually* trusted with the host at or above TRUST_FLOOR."""
+        host_trust = trust_by_faction.get(host, {}) or {}
+        best, best_mutual = None, self.TRUST_FLOOR
+        for m, m_trust in trust_by_faction.items():
+            if m == host or m in busy:
+                continue
+            mutual = min(float(host_trust.get(m, 0.0)),
+                         float((m_trust or {}).get(host, 0.0)))
+            if mutual >= best_mutual:
+                best, best_mutual = m, mutual
+        return best
+
+
 # --------------------------------------------------------------------------- demo
 def _demo() -> int:
     """Show MECH-GOV-001 changing a faction's behavior as memory accrues —

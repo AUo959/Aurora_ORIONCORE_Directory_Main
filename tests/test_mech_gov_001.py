@@ -22,6 +22,7 @@ from mech_gov_001 import (  # noqa: E402
     DiplomaticStabilityModel,
     FactionDecisionModel,
     InsurgencyResolutionModel,
+    MediationModel,
     PopulationGrievanceModel,
     PostWarRecoveryModel,
     WarWearinessModel,
@@ -233,6 +234,28 @@ def test_insurgency_resolution_is_earned_and_settles():
     assert settled
     r.forget("ins-1")
     assert "ins-1" not in r.progress
+
+
+@pytest.mark.simulation
+def test_mediation_needs_a_mutually_trusted_peaceful_broker():
+    """MECH-DIP-002: a credible mediator is mutually trusted (>= floor) and not
+    itself fighting a serious war. A well-connected host gets a broker; an
+    isolated/distrusted one does not (it must grind to exhaustion)."""
+    m = MediationModel()
+    trust = {
+        "union":   {"compact": 0.7, "warlord": 0.2, "fringe": 0.4},
+        "compact": {"union": 0.7, "warlord": 0.2, "fringe": 0.4},  # mutual w/ union
+        "warlord": {"union": 0.2, "compact": 0.2, "fringe": 0.2},  # distrusted by all
+        "fringe":  {"union": 0.4, "compact": 0.4, "warlord": 0.2},  # below floor
+    }
+    # Union and Compact mutually trust each other -> each can broker for the other.
+    assert m.find_mediator("union", trust, busy=set()) == "compact"
+    # The warlord is distrusted by everyone -> no credible broker.
+    assert m.find_mediator("warlord", trust, busy=set()) is None
+    # Fringe's only above-floor partner is... none at >=0.58 -> no broker.
+    assert m.find_mediator("fringe", trust, busy=set()) is None
+    # A faction fighting its own serious war can't broker (excluded via busy).
+    assert m.find_mediator("union", trust, busy={"compact"}) is None
 
 
 @pytest.mark.simulation

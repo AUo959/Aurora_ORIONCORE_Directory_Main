@@ -51,6 +51,7 @@ from mech_gov_001 import (  # noqa: E402
     DiplomaticStabilityModel,
     FactionDecisionModel,
     InsurgencyResolutionModel,
+    MediationModel,
     PopulationGrievanceModel,
     PostWarRecoveryModel,
     WarWearinessModel,
@@ -129,6 +130,7 @@ def run_seed(seed: int, turns: int) -> dict:
     recov = PostWarRecoveryModel()
     compl = ComplacencyModel()
     resolver = InsurgencyResolutionModel(seed=seed)
+    med = MediationModel()
     pb, sc, st_ = {}, set(), set()
 
     rows: list[dict] = []
@@ -149,7 +151,8 @@ def run_seed(seed: int, turns: int) -> dict:
         H._writeback_consequences(cons, state, v3, ip)
         H._writeback_recovery(recov, state, v3)
         H._writeback_complacency(compl, state, v3)
-        settled = H._writeback_resolution(resolver, state, v3)
+        brokered = H._writeback_mediation(med, state, v3)
+        settled, mediated = H._writeback_resolution(resolver, state, v3)
 
         comp = d.get("system_components", {})
         v3r = d.get("v3_result", {})
@@ -171,6 +174,8 @@ def run_seed(seed: int, turns: int) -> dict:
             "risk": round(d.get("risk_index", 0.0), 4),
             "active_civil_wars": H._active_civil_wars(v3),
             "settlements": settled,
+            "mediated_settlements": mediated,
+            "brokered_insurgencies": brokered,
             "complacency_mean": round(_mean(compl_levels), 4),
             "complacency_max": round(max(compl_levels), 4) if compl_levels else 0.0,
             "grievance_mean": round(_mean(griev), 4),
@@ -250,6 +255,8 @@ def analyse_seed(res: dict) -> dict:
 
     # --- dynamic-galaxy signals (MECH-REB-004 resolution graft) -------------- #
     settlements = sum(_series(rows, "settlements"))
+    mediated = sum(_series(rows, "mediated_settlements"))
+    mediated_share = round(mediated / settlements, 3) if settlements else 0.0
     onsets = sum(_series(rows, "v3_new_insurgencies"))
     # off-ramp diversity: conflicts that ENDED by settlement, not only suppression
     off_ramp_settlement_share = round(settlements / onsets, 3) if onsets else 0.0
@@ -283,6 +290,8 @@ def analyse_seed(res: dict) -> dict:
         "wave_peak_eras": peaks,
         "total_civil_war_turns": sum(cw),
         "total_settlements": settlements,
+        "total_mediated_settlements": mediated,
+        "mediated_share": mediated_share,
         "total_new_insurgencies": onsets,
         "off_ramp_settlement_share": off_ramp_settlement_share,
         "total_negotiations": sum(_series(rows, "v3_negotiations_concluded")),
@@ -376,8 +385,10 @@ def render_md(analyses, det_ok, when, turns, seeds) -> str:
                  f"{a['total_civil_war_turns']} civil-war-turns, "
                  f"{a['total_new_insurgencies']} insurgencies formed.")
         L.append(f"- **Shepard (off-ramps):** {a['total_settlements']} negotiated settlements vs "
-                 f"military suppression; settlements/era `{a['settlements_per_era']}` — war is no "
-                 f"longer the only way a civil war ends (MECH-REB-004).")
+                 f"military suppression — of which **{a['total_mediated_settlements']} "
+                 f"({a['mediated_share']:.0%}) brokered by a trusted neighbour** (MECH-DIP-002), "
+                 f"the rest ground to exhaustion. settlements/era `{a['settlements_per_era']}` — "
+                 f"war is no longer the only way a civil war ends, and diplomacy is the faster path.")
         L.append(f"- **Velin (oscillation + honesty):** engine stability/era `{a['stability_per_era']}` "
                  f"(floor {a['stability_floor']:.3f}); the **honest** internal-conflict-aware metric "
                  f"plateaus at {a['honest_stability_plateau']:.3f} (floor {a['honest_stability_floor']:.3f}) "
