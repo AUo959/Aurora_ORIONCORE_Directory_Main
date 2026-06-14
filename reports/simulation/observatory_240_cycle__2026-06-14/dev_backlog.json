@@ -1,0 +1,88 @@
+{
+  "source": "Observatory 240-turn cycle roundtable, 2026-06-14",
+  "exercise": "observatory_240_cycle",
+  "seeds": [42, 7, 99],
+  "principle": "Honest measurement; no tuning toward a stability target. Fixes may LOWER reported stability — that is acceptable and expected.",
+  "backlog": [
+    {
+      "id": "D1",
+      "dept": "engineering_engine",
+      "priority": "P0",
+      "title": "Stability conflict term must reflect internal war",
+      "detail": "stability uses 0.10*(1-conflict_pressure); conflict_pressure is inter-faction only and reads 0.000 in the back half while 6-10 civil wars are active. insurgency_pressure=0.886 feeds only risk. Fold internal conflict into the stability conflict-relief term (or add a distinct internal-conflict penalty) and re-baseline.",
+      "evidence": {"conflict_pressure_backhalf": 0.0, "insurgency_pressure_backhalf": 0.886, "conflict_relief_paid": 0.10, "active_civil_wars_backhalf": 6.4},
+      "expected_effect": "mature attractor drops ~0.382 -> ~0.29 (estimate); reported stability decreases"
+    },
+    {
+      "id": "D2",
+      "dept": "engineering_engine",
+      "priority": "P1",
+      "title": "Split event-counter semantics (started/ongoing/resolved)",
+      "detail": "civil_wars_started=272 from only 13 distinct onsets over 240 turns; it recounts ongoing/re-escalating wars each turn.",
+      "evidence": {"new_insurgencies_total": 13, "civil_wars_started_total": 272}
+    },
+    {
+      "id": "D3",
+      "dept": "engineering_engine",
+      "priority": "P2",
+      "title": "Audit insurgency phase gating",
+      "detail": "ins_organizing ~0.00 and ins_active low across all eras; insurgencies appear already escalated. Confirm onset->escalation is not skipping stages.",
+      "evidence": {"ins_organizing_all_eras": 0.0}
+    },
+    {
+      "id": "D4",
+      "dept": "operations_xo",
+      "priority": "P1",
+      "title": "True insurgency resolution + fresh-onset rotation",
+      "detail": "~13 chronic insurgencies reopen indefinitely; new onset nearly frozen. Add a RESOLVED retirement path and a fresh-onset pathway so the conflict cast rotates.",
+      "evidence": {"distinct_insurgencies_240t": 13}
+    },
+    {
+      "id": "D5",
+      "dept": "ethics",
+      "priority": "P1",
+      "title": "Dynamic humanitarian accounting",
+      "detail": "refugees and war_casualties saturate by era 2 then freeze for 200 turns through two conflict waves. Accrue per active war-turn.",
+      "evidence": {"refugees_flat_value": 0.234, "war_casualties_flat_value": 0.132, "frozen_from_era": 2}
+    },
+    {
+      "id": "D6",
+      "dept": "ethics_canon",
+      "priority": "P1",
+      "title": "Peaceful legitimacy-renewal path",
+      "detail": "leader_legitimacy is a one-way ratchet down (0.65->0.43); the only renewal is the conflict purge. Add reform/relief that earns legitimacy back without war.",
+      "evidence": {"legitimacy_start": 0.65, "legitimacy_end": 0.43}
+    },
+    {
+      "id": "D7",
+      "dept": "ethics",
+      "priority": "P2",
+      "title": "Surveillance / civil-liberties metric on dashboard",
+      "detail": "SURVEILLANCE_EXPANSION events already emit legitimacy penalties (-0.012..-0.025); surface cumulative surveillance load as a tracked signal."
+    },
+    {
+      "id": "D8",
+      "dept": "symbolic_systems",
+      "priority": "P2",
+      "title": "Regional coupling (conflict contagion / peace diffusion)",
+      "detail": "Complacency purges per-faction, polities desynchronize, so conflict is always present somewhere and the system damps to a plateau instead of oscillating. Prototype a coupling term to test for bloc-level oscillation."
+    },
+    {
+      "id": "D9",
+      "dept": "symbolic_systems",
+      "priority": "P1",
+      "title": "Re-derive attractor and re-validate COLLAPSE_FLOOR after D1",
+      "detail": "Honest internal-conflict-aware stability may rest ~0.29, near/under the current 0.30 collapse floor. Re-derive the mature attractor and decide whether the floor needs re-examination.",
+      "depends_on": ["D1"]
+    },
+    {
+      "id": "D10",
+      "dept": "systems_devops",
+      "priority": "P1",
+      "title": "Versioned metric schema + widen CI seed panel + D1 regression test",
+      "detail": "Promote metrics.json to a versioned contract; widen seeds (fragmentation varied 7->51 across seeds); add a regression assertion that the stability conflict term moves with civil war once D1 lands.",
+      "evidence": {"fragmentations_seed7": 51, "fragmentations_seed99": 7},
+      "depends_on": ["D1"]
+    }
+  ]
+}
