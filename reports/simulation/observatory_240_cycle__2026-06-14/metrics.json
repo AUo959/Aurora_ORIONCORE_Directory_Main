@@ -1,6 +1,6 @@
 {
   "exercise": "observatory_240_cycle",
-  "run_at": "2026-06-14T12:55:57Z",
+  "run_at": "2026-06-14T13:10:37Z",
   "turns": 240,
   "seeds": [
     42,
@@ -19,6 +19,8 @@
       "stability_range": 0.2506,
       "mature_plateau_stability": 0.3873,
       "mature_plateau_civil_wars": 0.57,
+      "sustained_civil_war_load": 1.52,
+      "collapse_cw_reference": 3.0,
       "honest_stability_floor": 0.2916,
       "honest_stability_plateau": 0.3262,
       "civil_wars_per_era": [
@@ -150,6 +152,8 @@
       "stability_range": 0.2468,
       "mature_plateau_stability": 0.3838,
       "mature_plateau_civil_wars": 3.03,
+      "sustained_civil_war_load": 1.96,
+      "collapse_cw_reference": 3.0,
       "honest_stability_floor": 0.268,
       "honest_stability_plateau": 0.2938,
       "civil_wars_per_era": [
@@ -281,6 +285,8 @@
       "stability_range": 0.2511,
       "mature_plateau_stability": 0.3868,
       "mature_plateau_civil_wars": 2.03,
+      "sustained_civil_war_load": 1.6,
+      "collapse_cw_reference": 3.0,
       "honest_stability_floor": 0.2768,
       "honest_stability_plateau": 0.3001,
       "civil_wars_per_era": [

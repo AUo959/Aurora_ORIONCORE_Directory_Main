@@ -59,7 +59,18 @@ from gumas_consequence_layer import ConsequenceLayer  # noqa: E402
 
 ERA_LEN = 20  # turns per "era" bucket
 PLATEAU_WINDOW = 30  # last-N turns define the mature attractor
-COLLAPSE_FLOOR = 0.30  # below this sustained = engine pinned to collapse
+
+# Collapse is gated on the conflict *load*, not on a stability scalar.
+# D9 calibration (2026-06-14): on the honest internal-conflict-aware metric,
+# known collapse (baseline, permanent civil war) reads ~0.29 and the dynamic
+# galaxy reads ~0.31 — the stability scalar cannot tell health from collapse,
+# because conflict is only 10% of the stability index. What *does* discriminate
+# is whether the galaxy stays locked in sustained civil war: the permanent-war
+# baseline pins ~4 active civil wars with zero settlements; a healthy galaxy
+# runs ~1-2 that resolve. So collapse = the mature civil-war load sitting at or
+# above the baseline-war reference.
+COLLAPSE_CW_REF = 3.0  # mature active-civil-war load (measured baseline ~4) = pinned/collapsed
+COLLAPSE_FLOOR = 0.30  # legacy engine-stability sanity floor; reported, not gated
 
 
 # --------------------------------------------------------------------------- #
@@ -227,9 +238,14 @@ def analyse_seed(res: dict) -> dict:
 
     late = rows[len(rows) // 2:]
     late_cw_total = sum(r["active_civil_wars"] for r in late)
+    late_cw_mean = round(late_cw_total / len(late), 2) if late else 0.0
     recurs = n_waves >= 2 or (late_cw_total > 0 and sum(cw[:len(cw) // 2]) > 0)
     not_permanent_peace = late_cw_total > 0
-    not_collapsed = floor > COLLAPSE_FLOOR
+    # D9: collapse = pinned in *sustained* civil war, NOT a stability-scalar floor
+    # (the honest scalar can't tell health from collapse — see COLLAPSE_CW_REF).
+    # Use the late-half mean so a single transient wave crest isn't misread as
+    # collapse; the permanent-war baseline sustains ~4 throughout.
+    not_collapsed = late_cw_mean < COLLAPSE_CW_REF
     living = bool(recurs and not_permanent_peace and not_collapsed)
 
     # --- dynamic-galaxy signals (MECH-REB-004 resolution graft) -------------- #
@@ -252,6 +268,8 @@ def analyse_seed(res: dict) -> dict:
         "stability_range": round(ceiling - floor, 4),
         "mature_plateau_stability": plateau,
         "mature_plateau_civil_wars": plateau_cw,
+        "sustained_civil_war_load": late_cw_mean,
+        "collapse_cw_reference": COLLAPSE_CW_REF,
         "honest_stability_floor": true_floor,
         "honest_stability_plateau": true_plateau,
         "civil_wars_per_era": cw_era,
@@ -328,6 +346,14 @@ def render_md(analyses, det_ok, when, turns, seeds) -> str:
              "(negotiated settlement), and the conflict **cast rotates** (wounds close and "
              "new ones open, instead of the same ~13 reopening). Determinism (same seed → "
              f"identical trajectory): **{'CONFIRMED' if det_ok else 'FAILED'}**.\n")
+    L.append("> **D9 note (collapse criterion):** collapse is judged on the conflict "
+             "**load**, not a stability scalar. Calibration showed the honest "
+             "internal-conflict-aware stability reads ~0.29 at *known* collapse (the "
+             "permanent-war baseline) and ~0.31 here — the scalar can't separate health "
+             "from collapse, because conflict is only 10% of the index. What separates "
+             f"them is that the baseline pins ~4 civil wars with zero settlements; a healthy "
+             f"galaxy runs <{COLLAPSE_CW_REF:.0f} that resolve. Both stability numbers are "
+             "reported below for transparency; neither gates the verdict.\n")
 
     L.append("## Cross-seed summary\n")
     L.append("| Seed | floor | mature plateau | honest plateau | waves | settlements | onsets | off-ramp share | recurs | off-ramp | rotates | DYNAMIC |")

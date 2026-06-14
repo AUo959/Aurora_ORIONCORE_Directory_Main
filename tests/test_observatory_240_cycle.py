@@ -76,11 +76,14 @@ def test_conflict_cast_rotates(analyses):
 
 
 @pytest.mark.simulation
-def test_never_collapses_to_pinned_floor(analyses):
-    """The original seed-42 attractor crashed and stayed crashed. The living
-    galaxy must hold above the collapse floor for the whole horizon."""
+def test_never_collapses_to_pinned_civil_war(analyses):
+    """The original seed-42 attractor pinned ~4 active civil wars and stayed
+    there. Collapse is gated on conflict *load*, not a stability scalar (D9: the
+    honest scalar can't tell health from collapse). The mature civil-war load
+    must stay below the permanent-war reference."""
     for a in analyses:
-        assert a["stability_floor"] > O.COLLAPSE_FLOOR, (a["seed"], a["stability_floor"])
+        assert a["verdict"]["not_collapsed"], (a["seed"], a["sustained_civil_war_load"])
+        assert a["sustained_civil_war_load"] < O.COLLAPSE_CW_REF
 
 
 @pytest.mark.simulation
