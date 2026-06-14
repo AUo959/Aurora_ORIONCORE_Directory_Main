@@ -40,6 +40,7 @@ from mech_gov_001 import (  # noqa: E402
     MediationModel,
     PopulationGrievanceModel,
     PostWarRecoveryModel,
+    PowerDynamicsModel,
     SuccessionModel,
     TreatyEnforcementModel,
     WarWearinessModel,
@@ -279,6 +280,45 @@ def _writeback_treaties(treaty: TreatyEnforcementModel, state, v3) -> int:
                 mfac.trust_scores[host] = round(max(
                     0.0, float(mfac.trust_scores[host]) - treaty.TRUST_BURN), 4)
     return broken
+
+
+def _writeback_power(power: "PowerDynamicsModel", state) -> Optional[str]:
+    """MECH-POW-001: react to the galactic balance of power. Find the hegemon
+    (most powerful faction); every other faction realigns its trust by how
+    threatened it is and by its culture — balancers (proud/defensive) pull trust
+    away from the hegemon and toward each other, bandwagoners (pragmatic/
+    survivalist) draw closer to the hegemon. Operates on the live trust network.
+    Returns the hegemon's faction id (telemetry)."""
+    facs = list(state.factions.items())
+    if len(facs) < 3:
+        return None
+    pw = {fid: power.power(getattr(fac, "military_strength", 0.5),
+                           getattr(fac, "economic_strength", 0.5),
+                           getattr(fac, "technology_level", 0.5))
+          for fid, fac in facs}
+    hegemon = max(pw, key=pw.get)
+    others = [fid for fid, _ in facs if fid != hegemon]
+    for fid in others:
+        fac = state.factions[fid]
+        ts = getattr(fac, "trust_scores", None)
+        if not isinstance(ts, dict):
+            continue
+        threat = pw[hegemon] - pw[fid]
+        if threat < power.THREAT_FLOOR:
+            continue
+        leader = state.leaders.get(fac.leader_id) if fac.leader_id else None
+        stance = power.stance(getattr(leader, "dominant_bias", None))
+        if stance == "balance":
+            if hegemon in ts:
+                ts[hegemon] = round(max(0.0, float(ts[hegemon]) - power.REALIGN_RATE * threat), 4)
+            # coalition: warm to fellow non-hegemons
+            for o in others:
+                if o != fid and o in ts:
+                    ts[o] = round(min(1.0, float(ts[o]) + power.COALITION_RATE * threat), 4)
+        elif stance == "bandwagon":
+            if hegemon in ts:
+                ts[hegemon] = round(min(1.0, float(ts[hegemon]) + power.REALIGN_RATE * threat), 4)
+    return hegemon
 
 
 def _writeback_succession(succ: SuccessionModel, state, v3) -> int:
@@ -547,6 +587,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     treaty = TreatyEnforcementModel(seed=seed) if memory_on else None
     culture = CultureModel() if memory_on else None
     succ = SuccessionModel(seed=seed) if memory_on else None
+    power = PowerDynamicsModel() if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
@@ -580,6 +621,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
             _writeback_resolution(resolver, state, v3, treaty, culture)
             _writeback_treaties(treaty, state, v3)
             _writeback_succession(succ, state, v3)
+            _writeback_power(power, state)
         traj.append({
             "turn": d["turn"],
             "stability": d["stability_index"],

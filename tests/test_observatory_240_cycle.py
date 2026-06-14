@@ -76,6 +76,16 @@ def test_conflict_cast_rotates(analyses):
 
 
 @pytest.mark.simulation
+def test_power_politics_splits_by_culture(analyses):
+    """MECH-POW-001: factions take a stance toward the galactic hegemon by
+    culture — bandwagoners end up measurably more trusting of the strongest
+    power than balancers do (a gap that is ~0 without the mechanic)."""
+    for a in analyses:
+        assert a["verdict"]["power_politics_active"], (a["seed"], a["power_realignment_gap"])
+        assert a["power_realignment_gap"] >= 0.05
+
+
+@pytest.mark.simulation
 def test_leadership_turns_over(analyses):
     """MECH-GOV-003: internal politics must not stagnate — regimes fall and
     successors take power (by coup or election), and the turnover changes

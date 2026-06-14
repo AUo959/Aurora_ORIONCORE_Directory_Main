@@ -827,6 +827,54 @@ class SuccessionModel:
                 "stress": self.COUP_STRESS if kind == "coup" else 0.0}
 
 
+class PowerDynamicsModel:
+    """MECH-POW-001 — Galactic Power Dynamics.
+
+    Factions weigh the galactic **balance of power** and realign accordingly.
+    When one polity rises toward hegemony, the others react — and *how* they react
+    is decided by their culture (MECH-GOV-002), so power politics is authentic,
+    not mechanical:
+
+      * **Balancing** — proud / defensive cultures (zero-sum, fear, sunk-cost,
+        confirmation) resist domination: they pull trust **away** from the
+        hegemon and **toward** each other (an anti-hegemon coalition).
+      * **Bandwagoning** — pragmatic / survivalist cultures (survivorship,
+        status-quo, moral-licensing, hyper-rational) seek safety or spoils with
+        the strong: they pull trust **toward** the hegemon.
+
+    The reaction scales with how *threatening* the hegemon is (how far its power
+    exceeds the faction's), so a balanced galaxy stays quiet and a lop-sided one
+    realigns. Operates on the live trust network that MECH-GOV-001/DIP-001
+    maintain, so it feeds mediation (DIP-002) and disposition.
+    """
+
+    # power = weighted military + economic + technology
+    W_MIL, W_ECO, W_TECH = 0.45, 0.40, 0.15
+    THREAT_FLOOR = 0.10   # the hegemon must exceed a faction by this to provoke
+    REALIGN_RATE = 0.10   # trust nudge per unit threat (calibrated so the power
+                          # signal reads clearly against the GOV-001 trust pull:
+                          # bandwagoners end ~0.25 more trusting of the hegemon
+                          # than balancers, vs ~0 without it)
+    COALITION_RATE = 0.03 # balancers' mutual-trust nudge toward each other
+    BALANCE_CULTURES = ("zero_sum", "fear_based", "sunk_cost", "confirmation")
+    BANDWAGON_CULTURES = ("survivorship", "status_quo", "moral_licensing", "hyper_rational")
+
+    def power(self, military: float, economic: float, technology: float) -> float:
+        return (self.W_MIL * float(military) + self.W_ECO * float(economic)
+                + self.W_TECH * float(technology))
+
+    def stance(self, dominant_bias) -> str:
+        """'balance', 'bandwagon', or 'neutral' for a leader's culture."""
+        s = str(dominant_bias).lower().replace("biastype.", "").replace("_bias", "")
+        for k in self.BALANCE_CULTURES:
+            if k in s:
+                return "balance"
+        for k in self.BANDWAGON_CULTURES:
+            if k in s:
+                return "bandwagon"
+        return "neutral"
+
+
 # --------------------------------------------------------------------------- demo
 def _demo() -> int:
     """Show MECH-GOV-001 changing a faction's behavior as memory accrues —

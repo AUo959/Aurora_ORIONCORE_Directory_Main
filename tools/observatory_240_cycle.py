@@ -55,6 +55,7 @@ from mech_gov_001 import (  # noqa: E402
     MediationModel,
     PopulationGrievanceModel,
     PostWarRecoveryModel,
+    PowerDynamicsModel,
     SuccessionModel,
     TreatyEnforcementModel,
     WarWearinessModel,
@@ -146,7 +147,11 @@ def run_seed(seed: int, turns: int) -> dict:
     treaty = TreatyEnforcementModel(seed=seed)
     culture = CultureModel()
     succ = SuccessionModel(seed=seed)
+    power = PowerDynamicsModel()
     pb, sc, st_ = {}, set(), set()
+    # MECH-POW-001 telemetry: run-averaged trust toward the *current* hegemon,
+    # split by the truster's culture stance (balance vs bandwagon).
+    heg_trust = {"balance": [], "bandwagon": []}
     # MECH-GOV-002 telemetry: settlements vs settleable-turns per dominant_bias,
     # to measure whether different cultures resolve conflict differently.
     settle_by_bias: dict[str, int] = {}
@@ -192,10 +197,21 @@ def run_seed(seed: int, turns: int) -> dict:
                 settle_by_bias[bk] = settle_by_bias.get(bk, 0) + 1
         broken_accords = H._writeback_treaties(treaty, state, v3)
         successions = H._writeback_succession(succ, state, v3)
+        hegemon = H._writeback_power(power, state)
         for fid, fac in state.factions.items():
             ld = state.leaders.get(fac.leader_id) if fac.leader_id else None
             if ld is not None:
                 bias_history.setdefault(fid, set()).add(_bias_key(getattr(ld, "dominant_bias", None)))
+        # sample trust toward the current hegemon by culture stance (after warmup)
+        if hegemon is not None and t >= 2 * ERA_LEN:
+            for fid, fac in state.factions.items():
+                if fid == hegemon:
+                    continue
+                ld = state.leaders.get(fac.leader_id) if fac.leader_id else None
+                st = power.stance(getattr(ld, "dominant_bias", None))
+                ts = getattr(fac, "trust_scores", {}) or {}
+                if st in heg_trust and hegemon in ts:
+                    heg_trust[st].append(float(ts[hegemon]))
 
         comp = d.get("system_components", {})
         v3r = d.get("v3_result", {})
@@ -238,7 +254,9 @@ def run_seed(seed: int, turns: int) -> dict:
     return {"seed": seed, "turns": turns, "rows": rows,
             "settle_by_bias": settle_by_bias, "turns_by_bias": turns_by_bias,
             "succession_counts": dict(succ.counts),
-            "factions_with_turnover": sum(1 for s in bias_history.values() if len(s) >= 2)}
+            "factions_with_turnover": sum(1 for s in bias_history.values() if len(s) >= 2),
+            "hegemon_trust_balance": round(S.mean(heg_trust["balance"]), 4) if heg_trust["balance"] else None,
+            "hegemon_trust_bandwagon": round(S.mean(heg_trust["bandwagon"]), 4) if heg_trust["bandwagon"] else None}
 
 
 # --------------------------------------------------------------------------- #
@@ -335,6 +353,13 @@ def analyse_seed(res: dict) -> dict:
     # leadership turnover happens (no stagnation) and shifts trajectories
     leadership_turns_over = total_successions > 0 and factions_with_turnover >= 1
 
+    # --- MECH-POW-001: do factions take a power stance by culture? ----------- #
+    htb = res.get("hegemon_trust_balance")
+    htw = res.get("hegemon_trust_bandwagon")
+    # bandwagoners should trust the hegemon more than balancers do
+    power_realignment_gap = round(htw - htb, 4) if (htb is not None and htw is not None) else 0.0
+    power_politics_active = power_realignment_gap >= 0.05
+
     return {
         "seed": res["seed"],
         "turns": res["turns"],
@@ -366,6 +391,9 @@ def analyse_seed(res: dict) -> dict:
         "succession_counts": succession_counts,
         "total_successions": total_successions,
         "factions_with_turnover": factions_with_turnover,
+        "hegemon_trust_balance": htb,
+        "hegemon_trust_bandwagon": htw,
+        "power_realignment_gap": power_realignment_gap,
         "total_new_insurgencies": onsets,
         "off_ramp_settlement_share": off_ramp_settlement_share,
         "total_negotiations": sum(_series(rows, "v3_negotiations_concluded")),
@@ -380,6 +408,7 @@ def analyse_seed(res: dict) -> dict:
             "cast_rotates": cast_rotates,
             "cultures_diverge": cultures_diverge,
             "leadership_turns_over": leadership_turns_over,
+            "power_politics_active": power_politics_active,
             "dynamic_galaxy": bool(living and has_off_ramp and cast_rotates),
         },
     }
@@ -478,6 +507,11 @@ def render_md(analyses, det_ok, when, turns, seeds) -> str:
                  f"`{a['settlement_rate_by_culture']}` — spread {a['culture_settlement_spread']:.0%} "
                  f"(MECH-GOV-002). Belligerent/face-saving cultures (zero-sum, sunk-cost) grind on; "
                  f"rational/survivalist orders take the off-ramp — same conditions, different choices.")
+        L.append(f"- **Shepard (power politics):** trust toward the hegemon — balancers "
+                 f"{a['hegemon_trust_balance']}, bandwagoners {a['hegemon_trust_bandwagon']} "
+                 f"(gap {a['power_realignment_gap']:+.2f}, MECH-POW-001). Proud/defensive cultures "
+                 f"balance *against* the strongest; pragmatic/survivalist ones bandwagon *with* it — "
+                 f"power politics decided by culture.")
         L.append(f"- **Sato (internal politics):** {a['total_successions']} successions "
                  f"({a['succession_counts'].get('coup', 0)} coups, {a['succession_counts'].get('election', 0)} "
                  f"elections), {a['factions_with_turnover']} factions changed regime + culture "

@@ -25,6 +25,7 @@ from mech_gov_001 import (  # noqa: E402
     InsurgencyResolutionModel,
     MediationModel,
     PopulationGrievanceModel,
+    PowerDynamicsModel,
     SuccessionModel,
     TreatyEnforcementModel,
     PostWarRecoveryModel,
@@ -342,6 +343,24 @@ def test_succession_falls_on_lost_grip_coup_vs_election():
     assert elected["new_bias"] in s.ELECTION_BIASES and elected["stress"] == 0.0
     # structural character is locked at first sight (a transient flip is ignored)
     assert s.character["warlord"] is True and s.character["compact"] is False
+
+
+@pytest.mark.simulation
+def test_power_stance_splits_balance_vs_bandwagon_by_culture():
+    """MECH-POW-001: a faction's stance toward a rising hegemon is decided by its
+    culture — proud/defensive cultures balance against the strong, pragmatic/
+    survivalist ones bandwagon with it. Power is weighted military+economic+tech."""
+    p = PowerDynamicsModel()
+    # power rises with all three components
+    assert p.power(0.9, 0.9, 1.0) > p.power(0.2, 0.2, 0.2)
+    assert p.stance("BiasType.ZERO_SUM") == "balance"
+    assert p.stance("fear_based") == "balance"
+    assert p.stance("BiasType.SURVIVORSHIP") == "bandwagon"
+    assert p.stance("status_quo") == "bandwagon"
+    assert p.stance("hyper_rationalism") == "bandwagon"
+    # an unmodelled culture takes no stance
+    assert p.stance("some_unmodelled_bias") == "neutral"
+    assert p.stance(None) == "neutral"
 
 
 @pytest.mark.simulation
