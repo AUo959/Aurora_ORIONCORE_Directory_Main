@@ -48,6 +48,7 @@ import gumas_memory_run as H  # noqa: E402  the shipped pipeline
 from engine_advanced import GUMASAdvancedEngine  # noqa: E402
 from mech_gov_001 import (  # noqa: E402
     ComplacencyModel,
+    CultureModel,
     DiplomaticStabilityModel,
     FactionDecisionModel,
     InsurgencyResolutionModel,
@@ -117,6 +118,15 @@ def _pop_leader_aggregates(state, v3) -> dict[str, float]:
     }
 
 
+def _bias_key(dominant_bias) -> str:
+    """Normalize a leader's dominant_bias to a CultureModel profile key."""
+    s = str(dominant_bias).lower().replace("biastype.", "").replace("_bias", "")
+    for k in CultureModel.PROFILE:
+        if k in s:
+            return k
+    return "other"
+
+
 # --------------------------------------------------------------------------- #
 # the run                                                                     #
 # --------------------------------------------------------------------------- #
@@ -133,7 +143,12 @@ def run_seed(seed: int, turns: int) -> dict:
     resolver = InsurgencyResolutionModel(seed=seed)
     med = MediationModel()
     treaty = TreatyEnforcementModel(seed=seed)
+    culture = CultureModel()
     pb, sc, st_ = {}, set(), set()
+    # MECH-GOV-002 telemetry: settlements vs settleable-turns per dominant_bias,
+    # to measure whether different cultures resolve conflict differently.
+    settle_by_bias: dict[str, int] = {}
+    turns_by_bias: dict[str, int] = {}
 
     rows: list[dict] = []
     for t in range(turns):
@@ -154,7 +169,22 @@ def run_seed(seed: int, turns: int) -> dict:
         H._writeback_recovery(recov, state, v3)
         H._writeback_complacency(compl, state, v3)
         brokered = H._writeback_mediation(med, state, v3)
-        settled, mediated = H._writeback_resolution(resolver, state, v3, treaty)
+        # Snapshot settleable insurgencies' host-culture before resolution; only
+        # settlement removes an insurgency, so the post-call diff is the settles.
+        pre = {}
+        for ins in getattr(v3, "insurgencies", []):
+            if H._phase(ins) in ("active", "escalated", "civil_war") and \
+                    int(getattr(ins, "turns_active", 0)) >= resolver.GRACE_TURNS:
+                fac = state.factions.get(ins.host_faction_id)
+                ld = state.leaders.get(fac.leader_id) if fac else None
+                bk = _bias_key(getattr(ld, "dominant_bias", None))
+                pre[ins.insurgency_id] = bk
+                turns_by_bias[bk] = turns_by_bias.get(bk, 0) + 1
+        settled, mediated = H._writeback_resolution(resolver, state, v3, treaty, culture)
+        survivors = {ins.insurgency_id for ins in getattr(v3, "insurgencies", [])}
+        for iid, bk in pre.items():
+            if iid not in survivors:
+                settle_by_bias[bk] = settle_by_bias.get(bk, 0) + 1
         broken_accords = H._writeback_treaties(treaty, state, v3)
 
         comp = d.get("system_components", {})
@@ -194,7 +224,8 @@ def run_seed(seed: int, turns: int) -> dict:
             row[f"ins_{k}"] = v
         row.update(_pop_leader_aggregates(state, v3))
         rows.append(row)
-    return {"seed": seed, "turns": turns, "rows": rows}
+    return {"seed": seed, "turns": turns, "rows": rows,
+            "settle_by_bias": settle_by_bias, "turns_by_bias": turns_by_bias}
 
 
 # --------------------------------------------------------------------------- #
@@ -271,6 +302,19 @@ def analyse_seed(res: dict) -> dict:
     true_floor = round(min(_series(rows, "true_stability")[warmup:]), 4)
     true_plateau = round(S.mean(_series(rows, "true_stability")[-PLATEAU_WINDOW:]), 4)
 
+    # --- MECH-GOV-002: do different cultures decide differently? -------------- #
+    sbb = res.get("settle_by_bias", {})
+    tbb = res.get("turns_by_bias", {})
+    MIN_N = 40  # only judge biases with enough settleable-turns to be meaningful
+    settle_rate_by_bias = {
+        bk: round(sbb.get(bk, 0) / tbb[bk], 3)
+        for bk in tbb if tbb[bk] >= MIN_N
+    }
+    rates = list(settle_rate_by_bias.values())
+    # spread between the most- and least-settling cultures (decision authenticity)
+    culture_settlement_spread = round(max(rates) - min(rates), 3) if len(rates) >= 2 else 0.0
+    cultures_diverge = culture_settlement_spread >= 0.05
+
     return {
         "seed": res["seed"],
         "turns": res["turns"],
@@ -297,6 +341,8 @@ def analyse_seed(res: dict) -> dict:
         "total_mediated_settlements": mediated,
         "mediated_share": mediated_share,
         "total_broken_accords": sum(_series(rows, "broken_accords")),
+        "settlement_rate_by_culture": settle_rate_by_bias,
+        "culture_settlement_spread": culture_settlement_spread,
         "total_new_insurgencies": onsets,
         "off_ramp_settlement_share": off_ramp_settlement_share,
         "total_negotiations": sum(_series(rows, "v3_negotiations_concluded")),
@@ -309,6 +355,7 @@ def analyse_seed(res: dict) -> dict:
             "living_galaxy": living,
             "has_off_ramp": has_off_ramp,
             "cast_rotates": cast_rotates,
+            "cultures_diverge": cultures_diverge,
             "dynamic_galaxy": bool(living and has_off_ramp and cast_rotates),
         },
     }
@@ -403,6 +450,10 @@ def render_md(analyses, det_ok, when, turns, seeds) -> str:
                  f"and *settlement* both renew the order (the latter is the peaceful path). "
                  f"{a['total_broken_accords']} peace accords broke (MECH-DIP-003) — settled peace "
                  f"binds but is not unconditional; a broken brokered peace burns the broker's trust.")
+        L.append(f"- **Velin (authentic decisions):** settlement rate by culture "
+                 f"`{a['settlement_rate_by_culture']}` — spread {a['culture_settlement_spread']:.0%} "
+                 f"(MECH-GOV-002). Belligerent/face-saving cultures (zero-sum, sunk-cost) grind on; "
+                 f"rational/survivalist orders take the off-ramp — same conditions, different choices.")
         L.append(f"- **Tanaka (engine):** {a['total_new_insurgencies']} insurgencies formed and "
                  f"retired (cast rotation; was ~13 pre-graft), {a['total_migrations']} migrations, "
                  f"{a['total_fragmentations']} fragmentation events — engine phases all live.\n")

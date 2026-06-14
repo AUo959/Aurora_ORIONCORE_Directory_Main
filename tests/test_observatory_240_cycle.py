@@ -76,6 +76,19 @@ def test_conflict_cast_rotates(analyses):
 
 
 @pytest.mark.simulation
+def test_cultures_decide_differently(analyses):
+    """MECH-GOV-002: under identical mechanics, different cultures must resolve
+    conflict at measurably different rates — authentic decisions, not uniform
+    behaviour. The settlement-rate spread across well-sampled dominant_bias
+    groups must be non-trivial."""
+    for a in analyses:
+        assert a["verdict"]["cultures_diverge"], (a["seed"], a["settlement_rate_by_culture"])
+        assert a["culture_settlement_spread"] >= 0.05
+        # and the spread is grounded in >= 2 well-sampled cultures
+        assert len(a["settlement_rate_by_culture"]) >= 2
+
+
+@pytest.mark.simulation
 def test_never_collapses_to_pinned_civil_war(analyses):
     """The original seed-42 attractor pinned ~4 active civil wars and stayed
     there. Collapse is gated on conflict *load*, not a stability scalar (D9: the

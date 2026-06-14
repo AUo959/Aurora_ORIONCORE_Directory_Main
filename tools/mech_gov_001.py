@@ -696,6 +696,64 @@ class TreatyEnforcementModel:
         self.accords.pop(host, None)
 
 
+class CultureModel:
+    """MECH-GOV-002 — Culture-Weighted Decisions.
+
+    The leaders carry genuinely distinct cultural biases (`dominant_bias`:
+    zero-sum clan, hyper-rational construct, fear-driven theocracy, sunk-cost
+    attritionist, ...), but the engine's behavioural knobs barely vary — every
+    faction sits near 0.5 on diplomacy-openness / escalation-threshold, so culture
+    is *labelled but not expressed*: identical conditions yield identical choices.
+
+    This translates a leader's `dominant_bias` (and `decision_style` text when
+    present) into coherent behavioural **leanings** at the decisions that bite, so
+    two civilizations facing the same pressure DECIDE differently:
+
+      * `settlement_lean` — how readily a culture accepts a negotiated end (+) vs
+        grinds on (−). A zero-sum clan or a sunk-cost attritionist resists
+        settlement ("every gain by another is our loss"; "we will not yield on
+        prior sacrifices"); a hyper-rational or survivalist order takes the
+        rational off-ramp.
+      * `escalation_lean` — how readily a culture escalates unrest vs lets it
+        cool.
+
+    Authentic decisions from culture that already exists in canon — nothing
+    invented; the bias labels are the engine's own, sourced from the charforge
+    `traits.json` capsules.
+    """
+
+    # dominant_bias key -> (settlement lean, escalation lean). Signs encode the
+    # canon character: belligerent/face-saving cultures grind, rational/survival
+    # cultures settle. Magnitudes are modest so culture *colours* decisions
+    # without overriding the situation.
+    PROFILE = {
+        "zero_sum":          (-0.25, +0.20),
+        "sunk_cost":         (-0.22, +0.05),
+        "fear_based":        (-0.12, +0.15),
+        "confirmation":      (-0.08, +0.05),
+        "status_quo":        (-0.05, -0.10),
+        "moral_licensing":   (+0.05, +0.10),
+        "moral_self":        (+0.05, +0.10),
+        "survivorship":      (+0.15, -0.05),
+        "hyper_rational":    (+0.22, -0.15),
+    }
+
+    def _key(self, dominant_bias) -> Optional[str]:
+        s = str(dominant_bias).lower().replace("biastype.", "").replace("_bias", "")
+        for k in self.PROFILE:
+            if k in s:
+                return k
+        return None
+
+    def settlement_lean(self, dominant_bias) -> float:
+        k = self._key(dominant_bias)
+        return self.PROFILE[k][0] if k else 0.0
+
+    def escalation_lean(self, dominant_bias) -> float:
+        k = self._key(dominant_bias)
+        return self.PROFILE[k][1] if k else 0.0
+
+
 # --------------------------------------------------------------------------- demo
 def _demo() -> int:
     """Show MECH-GOV-001 changing a faction's behavior as memory accrues —

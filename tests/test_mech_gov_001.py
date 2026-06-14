@@ -19,6 +19,7 @@ sys.path.insert(0, str(REPO_ROOT / "tools"))
 
 from mech_gov_001 import (  # noqa: E402
     ComplacencyModel,
+    CultureModel,
     DiplomaticStabilityModel,
     FactionDecisionModel,
     InsurgencyResolutionModel,
@@ -284,6 +285,28 @@ def test_treaty_binds_then_breaks_under_backsliding():
     assert broken is not None and broken["mediator"] == "union"
     assert t.breaches["velkaris"] >= 1
     assert "velkaris" not in t.accords  # retired on breach
+
+
+@pytest.mark.simulation
+def test_culture_weights_decisions_by_dominant_bias():
+    """MECH-GOV-002: a leader's dominant_bias colours the settle-or-grind
+    decision. A zero-sum clan or sunk-cost attritionist resists a negotiated end
+    (negative settlement lean); a hyper-rational or survivalist order takes it
+    (positive). Accepts the engine's BiasType.X form and the traits.json
+    '..._thinking'/'..._bias' text forms alike. Unknown bias is neutral."""
+    c = CultureModel()
+    assert c.settlement_lean("BiasType.ZERO_SUM") < 0
+    assert c.settlement_lean("zero_sum_thinking") < 0
+    assert c.settlement_lean("sunk_cost_fallacy") < 0
+    assert c.settlement_lean("BiasType.HYPER_RATIONALISM") > 0
+    assert c.settlement_lean("survivorship_bias") > 0
+    # the rational order settles more readily than the zero-sum clan
+    assert c.settlement_lean("hyper_rational") > c.settlement_lean("zero_sum")
+    # belligerent cultures escalate more than rational ones
+    assert c.escalation_lean("zero_sum") > c.escalation_lean("hyper_rational")
+    # unknown / missing bias is culturally neutral
+    assert c.settlement_lean(None) == 0.0
+    assert c.escalation_lean("some_unmodelled_bias") == 0.0
 
 
 @pytest.mark.simulation

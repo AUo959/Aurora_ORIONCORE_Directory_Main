@@ -33,6 +33,7 @@ sys.path.insert(0, str(REPO_ROOT / "tools"))
 
 from mech_gov_001 import (  # noqa: E402
     ComplacencyModel,
+    CultureModel,
     DiplomaticStabilityModel,
     FactionDecisionModel,
     InsurgencyResolutionModel,
@@ -265,7 +266,7 @@ def _writeback_treaties(treaty: TreatyEnforcementModel, state, v3) -> int:
     return broken
 
 
-def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3, treaty=None):
+def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3, treaty=None, culture=None):
     """MECH-REB-004: give civil wars the de-escalation→settlement off-ramp the
     inter-faction conflict layer already has. A grinding, costly, stalemated
     insurgency whose host population pressures it to end can reach a negotiated
@@ -304,6 +305,10 @@ def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3, treaty
             diplomacy_openness=float(getattr(leader, "diplomacy_openness", 0.5)) if leader else 0.5,
             mediation_available=was_mediated,
         )
+        # MECH-GOV-002: the host's culture colours the settle-or-grind decision —
+        # a zero-sum clan resists a negotiated end, a hyper-rational order takes it.
+        if culture is not None and leader is not None:
+            p = max(0.0, min(1.0, p + culture.settlement_lean(getattr(leader, "dominant_bias", None))))
         if not resolver.advance(ins.insurgency_id, p):
             continue
         # SETTLEMENT — retire the movement and spend the grievance that drove it.
@@ -484,6 +489,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     resolver = InsurgencyResolutionModel(seed=seed) if memory_on else None
     med = MediationModel() if memory_on else None
     treaty = TreatyEnforcementModel(seed=seed) if memory_on else None
+    culture = CultureModel() if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
@@ -514,7 +520,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
             _writeback_recovery(recov, state, v3)
             _writeback_complacency(compl, state, v3)
             _writeback_mediation(med, state, v3)
-            _writeback_resolution(resolver, state, v3, treaty)
+            _writeback_resolution(resolver, state, v3, treaty, culture)
             _writeback_treaties(treaty, state, v3)
         traj.append({
             "turn": d["turn"],
