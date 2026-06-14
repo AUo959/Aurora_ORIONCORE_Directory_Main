@@ -40,10 +40,25 @@ from mech_gov_001 import (  # noqa: E402
     MediationModel,
     PopulationGrievanceModel,
     PostWarRecoveryModel,
+    SuccessionModel,
     TreatyEnforcementModel,
     WarWearinessModel,
 )
 from gumas_consequence_layer import ConsequenceLayer  # noqa: E402
+
+# MECH-GOV-003 installs a new regime's culture by setting the leader's
+# dominant_bias to a real engine BiasType (the engine reads it descriptively).
+try:  # pragma: no cover - exercised via the integration harness
+    from models import BiasType  # noqa: E402
+    _BIAS_ENUM = {
+        "zero_sum": BiasType.ZERO_SUM, "fear_based": BiasType.FEAR_BASED,
+        "sunk_cost": BiasType.SUNK_COST, "hyper_rationalism": BiasType.HYPER_RATIONALISM,
+        "status_quo": BiasType.STATUS_QUO, "survivorship": BiasType.SURVIVORSHIP,
+    }
+except Exception:  # noqa: BLE001 - standalone (engine off path): fall back to strings
+    _BIAS_ENUM = {k: k for k in
+                  ("zero_sum", "fear_based", "sunk_cost", "hyper_rationalism",
+                   "status_quo", "survivorship")}
 
 
 def _writeback_complacency(compl: ComplacencyModel, state, v3) -> None:
@@ -264,6 +279,47 @@ def _writeback_treaties(treaty: TreatyEnforcementModel, state, v3) -> int:
                 mfac.trust_scores[host] = round(max(
                     0.0, float(mfac.trust_scores[host]) - treaty.TRUST_BURN), 4)
     return broken
+
+
+def _writeback_succession(succ: SuccessionModel, state, v3) -> int:
+    """MECH-GOV-003: when a leader's grip (legitimacy minus scandal + war-pressure
+    drag) collapses, the regime falls — by coup in a militarized polity, by
+    election in an economic one. The successor starts with a fresh mandate
+    (legitimacy bump, scandals cleared) and a shifted culture (new dominant_bias),
+    so internal politics visibly changes the faction's trajectory. A coup also
+    bumps demographic stress (it destabilizes). Returns successions this turn."""
+    if v3 is None:
+        return 0
+    pops = getattr(v3, "population", {})
+    n = 0
+    for fid, fac in state.factions.items():
+        leader = state.leaders.get(fac.leader_id) if fac.leader_id else None
+        if leader is None:
+            continue
+        militarized = float(getattr(fac, "military_strength", 0.5)) >= float(getattr(fac, "economic_strength", 0.5))
+        res = succ.step(
+            fid,
+            float(getattr(leader, "public_legitimacy", 0.5)),
+            float(getattr(leader, "scandals", 0) or 0),
+            float(getattr(leader, "war_pressure", 0.0) or 0.0),
+            militarized,
+        )
+        if res is None:
+            continue
+        n += 1
+        # Install the new regime: fresh mandate, cleared scandals, shifted culture.
+        leader.dominant_bias = _BIAS_ENUM.get(res["new_bias"], getattr(leader, "dominant_bias", None))
+        leader.public_legitimacy = round(float(res["legit"]), 4)
+        try:
+            leader.scandals = 0
+        except Exception:  # noqa: BLE001
+            pass
+        if res["stress"]:
+            pop = pops.get(fid)
+            if pop is not None:
+                pop.demographic_stress = round(min(
+                    1.0, float(getattr(pop, "demographic_stress", 0.3)) + res["stress"]), 4)
+    return n
 
 
 def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3, treaty=None, culture=None):
@@ -490,6 +546,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     med = MediationModel() if memory_on else None
     treaty = TreatyEnforcementModel(seed=seed) if memory_on else None
     culture = CultureModel() if memory_on else None
+    succ = SuccessionModel(seed=seed) if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
@@ -522,6 +579,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
             _writeback_mediation(med, state, v3)
             _writeback_resolution(resolver, state, v3, treaty, culture)
             _writeback_treaties(treaty, state, v3)
+            _writeback_succession(succ, state, v3)
         traj.append({
             "turn": d["turn"],
             "stability": d["stability_index"],

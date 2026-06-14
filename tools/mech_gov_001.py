@@ -754,6 +754,79 @@ class CultureModel:
         return self.PROFILE[k][1] if k else 0.0
 
 
+class SuccessionModel:
+    """MECH-GOV-003 — Internal Politics & Succession.
+
+    A leader's **grip on power** is public legitimacy minus the drag of
+    accumulated scandals and war pressure — the canon `Public_Opinion =
+    Policy_Success − Scandals (+ Economic_Stability)` form. When grip collapses
+    into a **legitimacy crisis**, the regime falls and a successor takes power.
+    *How* depends on the polity (canon sim-expansion §13, "Senate_Elections vs
+    Military_Coups"): a militarized faction resolves it by **coup**, an
+    economically/institutionally weighted one by **election**.
+
+    The new regime starts with a fresh mandate (a legitimacy bump, scandals
+    cleared) and a **shifted culture**: coups tend to install hard-line biases
+    (zero-sum / fear / sunk-cost), elections pragmatic ones (rational /
+    status-quo / survivorship). Because culture drives decisions (MECH-GOV-002),
+    turnover **visibly changes the faction's trajectory** — a coup that installs
+    a zero-sum junta makes it grind its wars; an election that seats a reformer
+    makes it settle. This prevents leadership stagnation (the canon §13 effect)
+    and gives internal politics real consequences. A coup is additionally
+    destabilizing (a stress bump); an election is smoother and more legitimating.
+    """
+
+    SCANDAL_CAP = 120.0       # scandals are roughly capped here in practice
+    SCANDAL_WEIGHT = 0.35     # how hard accumulated scandal erodes grip
+    WAR_PRESSURE_WEIGHT = 0.25
+    CRISIS_GRIP = 0.10        # grip below this risks a fall
+    FALL_SCALE = 0.9          # deeper sub-threshold grip -> higher fall chance
+    COOLDOWN = 12             # a fresh regime gets a honeymoon before it can fall
+    ELECTION_LEGIT = 0.45     # an elected successor's mandate
+    COUP_LEGIT = 0.28         # a junta's shakier starting legitimacy
+    COUP_STRESS = 0.06        # a coup destabilizes — a demographic-stress bump
+    COUP_BIASES = ("zero_sum", "fear_based", "sunk_cost")
+    ELECTION_BIASES = ("hyper_rationalism", "status_quo", "survivorship")
+
+    def __init__(self, seed: int = 0) -> None:
+        self._rng = random.Random(seed)
+        self.since: dict[str, int] = {}      # faction -> turns since last succession
+        self.character: dict[str, bool] = {}  # faction -> militarized (locked at founding)
+        self.counts = {"coup": 0, "election": 0}
+
+    def grip(self, legitimacy: float, scandals: float, war_pressure: float) -> float:
+        load = min(1.0, float(scandals) / self.SCANDAL_CAP)
+        return (float(legitimacy) - self.SCANDAL_WEIGHT * load
+                - self.WAR_PRESSURE_WEIGHT * float(war_pressure))
+
+    def step(self, faction: str, legitimacy: float, scandals: float,
+             war_pressure: float, militarized: bool):
+        """Advance the regime clock and maybe trigger a succession. Returns a
+        dict describing the new regime, or None. `militarized` is the polity's
+        structural character (mil >= econ), locked at first sight so the coup-vs-
+        election path reflects its *founding* nature, not transient war-economy
+        drift."""
+        militarized = self.character.setdefault(faction, bool(militarized))
+        t = self.since.get(faction, self.COOLDOWN) + 1
+        self.since[faction] = t
+        if t < self.COOLDOWN:
+            return None
+        g = self.grip(legitimacy, scandals, war_pressure)
+        if g >= self.CRISIS_GRIP:
+            return None
+        p_fall = min(1.0, (self.CRISIS_GRIP - g) * self.FALL_SCALE)
+        if self._rng.random() >= p_fall:
+            return None
+        self.since[faction] = 0
+        kind = "coup" if militarized else "election"
+        self.counts[kind] += 1
+        pool = self.COUP_BIASES if kind == "coup" else self.ELECTION_BIASES
+        return {"kind": kind,
+                "new_bias": self._rng.choice(pool),
+                "legit": self.COUP_LEGIT if kind == "coup" else self.ELECTION_LEGIT,
+                "stress": self.COUP_STRESS if kind == "coup" else 0.0}
+
+
 # --------------------------------------------------------------------------- demo
 def _demo() -> int:
     """Show MECH-GOV-001 changing a faction's behavior as memory accrues —

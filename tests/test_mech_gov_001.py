@@ -25,6 +25,7 @@ from mech_gov_001 import (  # noqa: E402
     InsurgencyResolutionModel,
     MediationModel,
     PopulationGrievanceModel,
+    SuccessionModel,
     TreatyEnforcementModel,
     PostWarRecoveryModel,
     WarWearinessModel,
@@ -307,6 +308,40 @@ def test_culture_weights_decisions_by_dominant_bias():
     # unknown / missing bias is culturally neutral
     assert c.settlement_lean(None) == 0.0
     assert c.escalation_lean("some_unmodelled_bias") == 0.0
+
+
+@pytest.mark.simulation
+def test_succession_falls_on_lost_grip_coup_vs_election():
+    """MECH-GOV-003: a healthy leader keeps power; a scandal-ridden, illegitimate
+    one falls after the honeymoon. A militarized polity falls by coup, an economic
+    one by election, and the successor arrives with a fresh mandate, cleared
+    scandals, and a shifted culture."""
+    s = SuccessionModel(seed=3)
+    # grip drops as legitimacy falls and scandals pile up
+    assert s.grip(0.7, 0, 0.0) > s.grip(0.3, 100, 0.3)
+    # A strong, clean leader survives indefinitely.
+    strong = [s.step("union", legitimacy=0.7, scandals=0, war_pressure=0.0, militarized=False)
+              for _ in range(60)]
+    assert all(r is None for r in strong)
+    # A failing militarized regime eventually falls — by coup, hard-line successor.
+    fell = None
+    for _ in range(80):
+        fell = s.step("warlord", legitimacy=0.15, scandals=110, war_pressure=0.4, militarized=True)
+        if fell:
+            break
+    assert fell is not None and fell["kind"] == "coup"
+    assert fell["new_bias"] in s.COUP_BIASES
+    assert fell["legit"] == s.COUP_LEGIT and fell["stress"] > 0
+    # A failing economic regime falls by election, pragmatic successor, no stress shock.
+    elected = None
+    for _ in range(80):
+        elected = s.step("compact", legitimacy=0.12, scandals=120, war_pressure=0.2, militarized=False)
+        if elected:
+            break
+    assert elected is not None and elected["kind"] == "election"
+    assert elected["new_bias"] in s.ELECTION_BIASES and elected["stress"] == 0.0
+    # structural character is locked at first sight (a transient flip is ignored)
+    assert s.character["warlord"] is True and s.character["compact"] is False
 
 
 @pytest.mark.simulation

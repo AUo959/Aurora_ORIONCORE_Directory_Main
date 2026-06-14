@@ -76,6 +76,17 @@ def test_conflict_cast_rotates(analyses):
 
 
 @pytest.mark.simulation
+def test_leadership_turns_over(analyses):
+    """MECH-GOV-003: internal politics must not stagnate — regimes fall and
+    successors take power (by coup or election), and the turnover changes
+    factions' cultures (their dominant_bias), shifting trajectories."""
+    for a in analyses:
+        assert a["verdict"]["leadership_turns_over"], (a["seed"], a["succession_counts"])
+        assert a["total_successions"] > 0
+        assert a["factions_with_turnover"] >= 1
+
+
+@pytest.mark.simulation
 def test_cultures_decide_differently(analyses):
     """MECH-GOV-002: under identical mechanics, different cultures must resolve
     conflict at measurably different rates — authentic decisions, not uniform

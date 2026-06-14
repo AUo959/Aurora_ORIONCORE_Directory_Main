@@ -1,6 +1,6 @@
 {
   "exercise": "observatory_240_cycle",
-  "run_at": "2026-06-14T20:46:39Z",
+  "run_at": "2026-06-14T20:58:13Z",
   "turns": 240,
   "seeds": [
     42,
@@ -14,15 +14,15 @@
     {
       "seed": 42,
       "turns": 240,
-      "stability_floor": 0.3748,
+      "stability_floor": 0.3691,
       "stability_ceiling": 0.6247,
-      "stability_range": 0.2499,
-      "mature_plateau_stability": 0.3896,
-      "mature_plateau_civil_wars": 1.33,
-      "sustained_civil_war_load": 1.62,
+      "stability_range": 0.2556,
+      "mature_plateau_stability": 0.3867,
+      "mature_plateau_civil_wars": 2.33,
+      "sustained_civil_war_load": 1.88,
       "collapse_cw_reference": 3.0,
       "honest_stability_floor": 0.2784,
-      "honest_stability_plateau": 0.3324,
+      "honest_stability_plateau": 0.3051,
       "civil_wars_per_era": [
         0,
         0.7,
@@ -34,8 +34,8 @@
         2.35,
         0.8,
         1.65,
-        1.5,
-        1.2
+        1.6,
+        2.6
       ],
       "stability_per_era": [
         0.609,
@@ -46,10 +46,10 @@
         0.482,
         0.449,
         0.425,
-        0.417,
+        0.418,
         0.405,
-        0.386,
-        0.39
+        0.387,
+        0.385
       ],
       "true_stability_per_era": [
         0.609,
@@ -62,8 +62,8 @@
         0.361,
         0.377,
         0.344,
-        0.306,
-        0.347
+        0.305,
+        0.306
       ],
       "settlements_per_era": [
         0,
@@ -76,8 +76,8 @@
         0.35,
         0.3,
         0.35,
-        0.55,
-        0.15
+        0.5,
+        0.3
       ],
       "legitimacy_per_era": [
         0.649,
@@ -88,10 +88,10 @@
         0.522,
         0.508,
         0.493,
-        0.481,
+        0.483,
         0.475,
-        0.447,
-        0.447
+        0.448,
+        0.443
       ],
       "complacency_per_era": [
         0.047,
@@ -105,7 +105,7 @@
         0.335,
         0.317,
         0.275,
-        0.269
+        0.251
       ],
       "grievance_per_era": [
         0.017,
@@ -119,30 +119,37 @@
         0.386,
         0.393,
         0.443,
-        0.587
+        0.563
       ],
-      "n_conflict_waves": 3,
+      "n_conflict_waves": 4,
       "wave_peak_eras": [
         3,
         7,
-        9
+        9,
+        11
       ],
-      "total_civil_war_turns": 288,
-      "total_settlements": 66,
-      "total_mediated_settlements": 35,
-      "mediated_share": 0.53,
-      "total_broken_accords": 5,
+      "total_civil_war_turns": 318,
+      "total_settlements": 68,
+      "total_mediated_settlements": 36,
+      "mediated_share": 0.529,
+      "total_broken_accords": 6,
       "settlement_rate_by_culture": {
-        "sunk_cost": 0.098,
-        "hyper_rational": 0.202,
-        "status_quo": 0.131,
-        "zero_sum": 0.089
+        "sunk_cost": 0.09,
+        "hyper_rational": 0.192,
+        "status_quo": 0.139,
+        "zero_sum": 0.082
       },
-      "culture_settlement_spread": 0.113,
-      "total_new_insurgencies": 79,
-      "off_ramp_settlement_share": 0.835,
+      "culture_settlement_spread": 0.11,
+      "succession_counts": {
+        "coup": 5,
+        "election": 3
+      },
+      "total_successions": 8,
+      "factions_with_turnover": 5,
+      "total_new_insurgencies": 78,
+      "off_ramp_settlement_share": 0.872,
       "total_negotiations": 40,
-      "total_migrations": 3125,
+      "total_migrations": 3142,
       "total_fragmentations": 0,
       "verdict": {
         "conflict_recurs": true,
@@ -152,21 +159,22 @@
         "has_off_ramp": true,
         "cast_rotates": true,
         "cultures_diverge": true,
+        "leadership_turns_over": true,
         "dynamic_galaxy": true
       }
     },
     {
       "seed": 7,
       "turns": 240,
-      "stability_floor": 0.3737,
+      "stability_floor": 0.3723,
       "stability_ceiling": 0.6148,
-      "stability_range": 0.2411,
-      "mature_plateau_stability": 0.3861,
-      "mature_plateau_civil_wars": 2.67,
-      "sustained_civil_war_load": 2.18,
+      "stability_range": 0.2425,
+      "mature_plateau_stability": 0.3885,
+      "mature_plateau_civil_wars": 1.8,
+      "sustained_civil_war_load": 2.04,
       "collapse_cw_reference": 3.0,
-      "honest_stability_floor": 0.2764,
-      "honest_stability_plateau": 0.3039,
+      "honest_stability_floor": 0.277,
+      "honest_stability_plateau": 0.3085,
       "civil_wars_per_era": [
         0,
         0.65,
@@ -177,9 +185,9 @@
         2,
         2,
         1.55,
-        2.7,
-        2.05,
-        2.8
+        2.65,
+        1.95,
+        2.1
       ],
       "stability_per_era": [
         0.605,
@@ -191,9 +199,9 @@
         0.438,
         0.412,
         0.409,
-        0.397,
-        0.396,
-        0.384
+        0.398,
+        0.399,
+        0.385
       ],
       "true_stability_per_era": [
         0.605,
@@ -205,9 +213,9 @@
         0.364,
         0.331,
         0.345,
-        0.314,
-        0.319,
-        0.297
+        0.317,
+        0.324,
+        0.298
       ],
       "settlements_per_era": [
         0,
@@ -220,8 +228,8 @@
         0.35,
         0.35,
         0.45,
-        0.45,
-        0.55
+        0.4,
+        0.6
       ],
       "legitimacy_per_era": [
         0.649,
@@ -233,8 +241,8 @@
         0.506,
         0.486,
         0.476,
-        0.457,
-        0.46,
+        0.459,
+        0.462,
         0.442
       ],
       "complacency_per_era": [
@@ -248,8 +256,8 @@
         0.275,
         0.253,
         0.285,
-        0.301,
-        0.271
+        0.297,
+        0.301
       ],
       "grievance_per_era": [
         0.024,
@@ -262,8 +270,8 @@
         0.421,
         0.507,
         0.607,
-        0.677,
-        0.803
+        0.646,
+        0.686
       ],
       "n_conflict_waves": 5,
       "wave_peak_eras": [
@@ -273,22 +281,28 @@
         9,
         11
       ],
-      "total_civil_war_turns": 462,
+      "total_civil_war_turns": 445,
       "total_settlements": 77,
-      "total_mediated_settlements": 40,
-      "mediated_share": 0.519,
-      "total_broken_accords": 7,
+      "total_mediated_settlements": 42,
+      "mediated_share": 0.545,
+      "total_broken_accords": 8,
       "settlement_rate_by_culture": {
-        "sunk_cost": 0.058,
-        "hyper_rational": 0.185,
-        "status_quo": 0.186,
-        "zero_sum": 0.065
+        "sunk_cost": 0.067,
+        "hyper_rational": 0.212,
+        "status_quo": 0.175,
+        "zero_sum": 0.05
       },
-      "culture_settlement_spread": 0.128,
-      "total_new_insurgencies": 87,
-      "off_ramp_settlement_share": 0.885,
+      "culture_settlement_spread": 0.162,
+      "succession_counts": {
+        "coup": 7,
+        "election": 1
+      },
+      "total_successions": 8,
+      "factions_with_turnover": 7,
+      "total_new_insurgencies": 86,
+      "off_ramp_settlement_share": 0.895,
       "total_negotiations": 67,
-      "total_migrations": 3156,
+      "total_migrations": 3149,
       "total_fragmentations": 9,
       "verdict": {
         "conflict_recurs": true,
@@ -298,21 +312,22 @@
         "has_off_ramp": true,
         "cast_rotates": true,
         "cultures_diverge": true,
+        "leadership_turns_over": true,
         "dynamic_galaxy": true
       }
     },
     {
       "seed": 99,
       "turns": 240,
-      "stability_floor": 0.3699,
+      "stability_floor": 0.3811,
       "stability_ceiling": 0.643,
-      "stability_range": 0.2731,
-      "mature_plateau_stability": 0.3855,
-      "mature_plateau_civil_wars": 2.8,
-      "sustained_civil_war_load": 1.87,
+      "stability_range": 0.2619,
+      "mature_plateau_stability": 0.3934,
+      "mature_plateau_civil_wars": 1.27,
+      "sustained_civil_war_load": 1.46,
       "collapse_cw_reference": 3.0,
-      "honest_stability_floor": 0.2845,
-      "honest_stability_plateau": 0.3161,
+      "honest_stability_floor": 0.2826,
+      "honest_stability_plateau": 0.3328,
       "civil_wars_per_era": [
         0,
         0.55,
@@ -323,9 +338,9 @@
         1.85,
         0.6,
         1,
-        2.35,
-        2.3,
-        3.1
+        2.25,
+        2.05,
+        1
       ],
       "stability_per_era": [
         0.612,
@@ -337,9 +352,9 @@
         0.467,
         0.433,
         0.419,
-        0.398,
-        0.393,
-        0.385
+        0.397,
+        0.39,
+        0.395
       ],
       "true_stability_per_era": [
         0.612,
@@ -351,9 +366,9 @@
         0.419,
         0.399,
         0.362,
-        0.306,
+        0.31,
         0.32,
-        0.314
+        0.335
       ],
       "settlements_per_era": [
         0,
@@ -365,9 +380,9 @@
         0.25,
         0.25,
         0.3,
-        0.5,
-        0.45,
-        0.25
+        0.55,
+        0.4,
+        0.2
       ],
       "legitimacy_per_era": [
         0.651,
@@ -378,10 +393,10 @@
         0.535,
         0.523,
         0.495,
-        0.482,
-        0.468,
-        0.463,
-        0.447
+        0.483,
+        0.469,
+        0.453,
+        0.454
       ],
       "complacency_per_era": [
         0.047,
@@ -393,9 +408,9 @@
         0.285,
         0.35,
         0.426,
-        0.322,
-        0.199,
-        0.256
+        0.329,
+        0.252,
+        0.278
       ],
       "grievance_per_era": [
         0.026,
@@ -408,33 +423,39 @@
         0.459,
         0.488,
         0.55,
-        0.526,
-        0.605
+        0.588,
+        0.703
       ],
-      "n_conflict_waves": 4,
+      "n_conflict_waves": 3,
       "wave_peak_eras": [
         2,
         6,
-        9,
-        11
+        9
       ],
-      "total_civil_war_turns": 298,
-      "total_settlements": 60,
-      "total_mediated_settlements": 39,
-      "mediated_share": 0.65,
-      "total_broken_accords": 8,
+      "total_civil_war_turns": 249,
+      "total_settlements": 59,
+      "total_mediated_settlements": 36,
+      "mediated_share": 0.61,
+      "total_broken_accords": 5,
       "settlement_rate_by_culture": {
-        "zero_sum": 0.066,
-        "status_quo": 0.139,
-        "hyper_rational": 0.193,
-        "sunk_cost": 0.06
+        "zero_sum": 0.094,
+        "status_quo": 0.143,
+        "hyper_rational": 0.17,
+        "sunk_cost": 0.072,
+        "fear_based": 0.098
       },
-      "culture_settlement_spread": 0.133,
-      "total_new_insurgencies": 70,
-      "off_ramp_settlement_share": 0.857,
+      "culture_settlement_spread": 0.098,
+      "succession_counts": {
+        "coup": 6,
+        "election": 3
+      },
+      "total_successions": 9,
+      "factions_with_turnover": 5,
+      "total_new_insurgencies": 71,
+      "off_ramp_settlement_share": 0.831,
       "total_negotiations": 34,
-      "total_migrations": 3123,
-      "total_fragmentations": 7,
+      "total_migrations": 3115,
+      "total_fragmentations": 0,
       "verdict": {
         "conflict_recurs": true,
         "not_permanent_peace": true,
@@ -443,6 +464,7 @@
         "has_off_ramp": true,
         "cast_rotates": true,
         "cultures_diverge": true,
+        "leadership_turns_over": true,
         "dynamic_galaxy": true
       }
     }

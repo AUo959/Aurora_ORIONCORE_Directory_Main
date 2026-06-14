@@ -55,6 +55,7 @@ from mech_gov_001 import (  # noqa: E402
     MediationModel,
     PopulationGrievanceModel,
     PostWarRecoveryModel,
+    SuccessionModel,
     TreatyEnforcementModel,
     WarWearinessModel,
 )
@@ -144,11 +145,15 @@ def run_seed(seed: int, turns: int) -> dict:
     med = MediationModel()
     treaty = TreatyEnforcementModel(seed=seed)
     culture = CultureModel()
+    succ = SuccessionModel(seed=seed)
     pb, sc, st_ = {}, set(), set()
     # MECH-GOV-002 telemetry: settlements vs settleable-turns per dominant_bias,
     # to measure whether different cultures resolve conflict differently.
     settle_by_bias: dict[str, int] = {}
     turns_by_bias: dict[str, int] = {}
+    # MECH-GOV-003 telemetry: distinct dominant_bias each faction holds over the
+    # run (turnover shifts trajectory) — and the running succession tallies.
+    bias_history: dict[str, set] = {}
 
     rows: list[dict] = []
     for t in range(turns):
@@ -186,6 +191,11 @@ def run_seed(seed: int, turns: int) -> dict:
             if iid not in survivors:
                 settle_by_bias[bk] = settle_by_bias.get(bk, 0) + 1
         broken_accords = H._writeback_treaties(treaty, state, v3)
+        successions = H._writeback_succession(succ, state, v3)
+        for fid, fac in state.factions.items():
+            ld = state.leaders.get(fac.leader_id) if fac.leader_id else None
+            if ld is not None:
+                bias_history.setdefault(fid, set()).add(_bias_key(getattr(ld, "dominant_bias", None)))
 
         comp = d.get("system_components", {})
         v3r = d.get("v3_result", {})
@@ -210,6 +220,7 @@ def run_seed(seed: int, turns: int) -> dict:
             "mediated_settlements": mediated,
             "brokered_insurgencies": brokered,
             "broken_accords": broken_accords,
+            "successions": successions,
             "complacency_mean": round(_mean(compl_levels), 4),
             "complacency_max": round(max(compl_levels), 4) if compl_levels else 0.0,
             "grievance_mean": round(_mean(griev), 4),
@@ -225,7 +236,9 @@ def run_seed(seed: int, turns: int) -> dict:
         row.update(_pop_leader_aggregates(state, v3))
         rows.append(row)
     return {"seed": seed, "turns": turns, "rows": rows,
-            "settle_by_bias": settle_by_bias, "turns_by_bias": turns_by_bias}
+            "settle_by_bias": settle_by_bias, "turns_by_bias": turns_by_bias,
+            "succession_counts": dict(succ.counts),
+            "factions_with_turnover": sum(1 for s in bias_history.values() if len(s) >= 2)}
 
 
 # --------------------------------------------------------------------------- #
@@ -315,6 +328,13 @@ def analyse_seed(res: dict) -> dict:
     culture_settlement_spread = round(max(rates) - min(rates), 3) if len(rates) >= 2 else 0.0
     cultures_diverge = culture_settlement_spread >= 0.05
 
+    # --- MECH-GOV-003: internal politics & succession ------------------------ #
+    succession_counts = res.get("succession_counts", {"coup": 0, "election": 0})
+    total_successions = succession_counts.get("coup", 0) + succession_counts.get("election", 0)
+    factions_with_turnover = res.get("factions_with_turnover", 0)
+    # leadership turnover happens (no stagnation) and shifts trajectories
+    leadership_turns_over = total_successions > 0 and factions_with_turnover >= 1
+
     return {
         "seed": res["seed"],
         "turns": res["turns"],
@@ -343,6 +363,9 @@ def analyse_seed(res: dict) -> dict:
         "total_broken_accords": sum(_series(rows, "broken_accords")),
         "settlement_rate_by_culture": settle_rate_by_bias,
         "culture_settlement_spread": culture_settlement_spread,
+        "succession_counts": succession_counts,
+        "total_successions": total_successions,
+        "factions_with_turnover": factions_with_turnover,
         "total_new_insurgencies": onsets,
         "off_ramp_settlement_share": off_ramp_settlement_share,
         "total_negotiations": sum(_series(rows, "v3_negotiations_concluded")),
@@ -356,6 +379,7 @@ def analyse_seed(res: dict) -> dict:
             "has_off_ramp": has_off_ramp,
             "cast_rotates": cast_rotates,
             "cultures_diverge": cultures_diverge,
+            "leadership_turns_over": leadership_turns_over,
             "dynamic_galaxy": bool(living and has_off_ramp and cast_rotates),
         },
     }
@@ -454,6 +478,11 @@ def render_md(analyses, det_ok, when, turns, seeds) -> str:
                  f"`{a['settlement_rate_by_culture']}` — spread {a['culture_settlement_spread']:.0%} "
                  f"(MECH-GOV-002). Belligerent/face-saving cultures (zero-sum, sunk-cost) grind on; "
                  f"rational/survivalist orders take the off-ramp — same conditions, different choices.")
+        L.append(f"- **Sato (internal politics):** {a['total_successions']} successions "
+                 f"({a['succession_counts'].get('coup', 0)} coups, {a['succession_counts'].get('election', 0)} "
+                 f"elections), {a['factions_with_turnover']} factions changed regime + culture "
+                 f"(MECH-GOV-003) — a fallen leader's grip lost to scandal and illegitimacy; the new "
+                 f"order decides differently, so politics shifts the faction's trajectory.")
         L.append(f"- **Tanaka (engine):** {a['total_new_insurgencies']} insurgencies formed and "
                  f"retired (cast rotation; was ~13 pre-graft), {a['total_migrations']} migrations, "
                  f"{a['total_fragmentations']} fragmentation events — engine phases all live.\n")
