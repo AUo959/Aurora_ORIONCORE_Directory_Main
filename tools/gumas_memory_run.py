@@ -44,6 +44,7 @@ from mech_gov_001 import (  # noqa: E402
     SuccessionModel,
     TerritorialConsequenceModel,
     TreatyEnforcementModel,
+    WarEconomyModel,
     WarWearinessModel,
 )
 from gumas_consequence_layer import ConsequenceLayer  # noqa: E402
@@ -314,6 +315,30 @@ def _writeback_territory(terr: "TerritorialConsequenceModel", state, v3) -> None
         # economic_strength can't exceed the (now lower) potential.
         if float(getattr(fac, "economic_strength", 0.5)) > ceiling:
             fac.economic_strength = round(ceiling, 4)
+
+
+def _writeback_economy(eco: "WarEconomyModel", state, v3) -> None:
+    """MECH-ECO-001: a faction's economy booms and busts with its wars, and the
+    economy feeds back into unrest. War scarcity suppresses output; peace drives
+    a recovery boom toward the (territory-capped) ceiling; a depressed economy
+    deepens demographic stress (-> unrest), a booming one eases it — closing the
+    loop war -> economic depression -> grievance -> war."""
+    if v3 is None:
+        return
+    at_war = {ins.host_faction_id for ins in getattr(v3, "insurgencies", [])
+              if _phase(ins) in ("civil_war", "escalated")}
+    pops = getattr(v3, "population", {})
+    for fid, fac in state.factions.items():
+        es = float(getattr(fac, "economic_strength", 0.5))
+        ep = float(getattr(fac, "economic_potential", 1.0))
+        fac.economic_strength = eco.flux(es, ep, fid in at_war)
+        # economy -> unrest feedback
+        delta = eco.stress_delta(eco.health(fac.economic_strength, ep))
+        if delta:
+            pop = pops.get(fid)
+            if pop is not None:
+                pop.demographic_stress = round(min(
+                    1.0, max(0.0, float(getattr(pop, "demographic_stress", 0.3)) + delta)), 4)
 
 
 def _writeback_power(power: "PowerDynamicsModel", state) -> Optional[str]:
@@ -623,6 +648,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     succ = SuccessionModel(seed=seed) if memory_on else None
     power = PowerDynamicsModel() if memory_on else None
     terr = TerritorialConsequenceModel() if memory_on else None
+    eco = WarEconomyModel() if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
@@ -657,6 +683,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
             _writeback_treaties(treaty, state, v3)
             _writeback_succession(succ, state, v3)
             _writeback_territory(terr, state, v3)
+            _writeback_economy(eco, state, v3)
             _writeback_power(power, state)
         traj.append({
             "turn": d["turn"],

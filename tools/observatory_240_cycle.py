@@ -59,6 +59,7 @@ from mech_gov_001 import (  # noqa: E402
     SuccessionModel,
     TerritorialConsequenceModel,
     TreatyEnforcementModel,
+    WarEconomyModel,
     WarWearinessModel,
 )
 from gumas_consequence_layer import ConsequenceLayer  # noqa: E402
@@ -150,7 +151,11 @@ def run_seed(seed: int, turns: int) -> dict:
     succ = SuccessionModel(seed=seed)
     power = PowerDynamicsModel()
     terr = TerritorialConsequenceModel()
+    eco = WarEconomyModel()
     pb, sc, st_ = {}, set(), set()
+    # MECH-ECO-001 telemetry: economic health (output/potential) of at-war vs
+    # at-peace factions — the economy busts in war and booms in peace.
+    war_health, peace_health = [], []
     # MECH-POW-001 telemetry: run-averaged trust toward the *current* hegemon,
     # split by the truster's culture stance (balance vs bandwagon).
     heg_trust = {"balance": [], "bandwagon": []}
@@ -200,7 +205,15 @@ def run_seed(seed: int, turns: int) -> dict:
         broken_accords = H._writeback_treaties(treaty, state, v3)
         successions = H._writeback_succession(succ, state, v3)
         H._writeback_territory(terr, state, v3)
+        H._writeback_economy(eco, state, v3)
         hegemon = H._writeback_power(power, state)
+        if t >= 2 * ERA_LEN:
+            at_war_e = {ins.host_faction_id for ins in getattr(v3, "insurgencies", [])
+                        if H._phase(ins) in ("civil_war", "escalated")}
+            for fid, fac in state.factions.items():
+                hp = eco.health(getattr(fac, "economic_strength", 0.5),
+                                getattr(fac, "economic_potential", 1.0))
+                (war_health if fid in at_war_e else peace_health).append(hp)
         for fid, fac in state.factions.items():
             ld = state.leaders.get(fac.leader_id) if fac.leader_id else None
             if ld is not None:
@@ -279,7 +292,9 @@ def run_seed(seed: int, turns: int) -> dict:
             "econ_potential_spread": round(max(econ_pot.values()) - min(econ_pot.values()), 4),
             "factions_lost_territory": len(losers),
             "mean_power_losers": mean_pw_losers,
-            "mean_power_holders": mean_pw_holders}
+            "mean_power_holders": mean_pw_holders,
+            "war_economic_health": round(S.mean(war_health), 4) if war_health else None,
+            "peace_economic_health": round(S.mean(peace_health), 4) if peace_health else None}
 
 
 # --------------------------------------------------------------------------- #
@@ -393,6 +408,11 @@ def analyse_seed(res: dict) -> dict:
         factions_lost_territory >= 1 and econ_potential_spread >= 0.05
         and (power_penalty is None or power_penalty > 0))
 
+    # --- MECH-ECO-001: the economy busts in war and booms in peace ----------- #
+    weh, peh = res.get("war_economic_health"), res.get("peace_economic_health")
+    war_economy_gap = round(peh - weh, 4) if (weh is not None and peh is not None) else 0.0
+    war_economy_active = war_economy_gap >= 0.15
+
     return {
         "seed": res["seed"],
         "turns": res["turns"],
@@ -430,6 +450,9 @@ def analyse_seed(res: dict) -> dict:
         "factions_lost_territory": factions_lost_territory,
         "econ_potential_spread": econ_potential_spread,
         "war_power_penalty": power_penalty,
+        "war_economic_health": weh,
+        "peace_economic_health": peh,
+        "war_economy_gap": war_economy_gap,
         "total_new_insurgencies": onsets,
         "off_ramp_settlement_share": off_ramp_settlement_share,
         "total_negotiations": sum(_series(rows, "v3_negotiations_concluded")),
@@ -446,6 +469,7 @@ def analyse_seed(res: dict) -> dict:
             "leadership_turns_over": leadership_turns_over,
             "power_politics_active": power_politics_active,
             "consequences_propagate": consequences_propagate,
+            "war_economy_active": war_economy_active,
             "dynamic_galaxy": bool(living and has_off_ramp and cast_rotates),
         },
     }
@@ -559,6 +583,11 @@ def render_md(analyses, det_ok, when, turns, seeds) -> str:
                  f"{a['econ_potential_spread']:.2f} (was ~0); war-torn factions end "
                  f"{a['war_power_penalty']:+.3f} weaker in power than the spared (MECH-TER-001) — a "
                  f"war's outcome reshapes the map, the economy, and the balance of power.")
+        L.append(f"- **Tanaka (war economy):** economic health (output/potential) — at war "
+                 f"{a['war_economic_health']}, at peace {a['peace_economic_health']} "
+                 f"(gap {a['war_economy_gap']:+.2f}, MECH-ECO-001). The economy busts in war and "
+                 f"booms in reconstruction; a depressed economy feeds unrest, closing the loop "
+                 f"war → economic depression → grievance.")
         L.append(f"- **Tanaka (engine):** {a['total_new_insurgencies']} insurgencies formed and "
                  f"retired (cast rotation; was ~13 pre-graft), {a['total_migrations']} migrations, "
                  f"{a['total_fragmentations']} fragmentation events — engine phases all live.\n")

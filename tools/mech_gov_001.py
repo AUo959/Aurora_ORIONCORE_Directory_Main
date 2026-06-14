@@ -937,6 +937,56 @@ class TerritorialConsequenceModel:
         return round(max(0.10, 1.0 - self.total_loss(fid)), 4)
 
 
+class WarEconomyModel:
+    """MECH-ECO-001 — War Economy & Market Flux (Pillar A).
+
+    War is not only a stability cost — it **wrecks the economy**, and a wrecked
+    economy **breeds unrest**. While a faction fights a mature war, scarcity
+    suppresses its economic output below its potential; at peace, reconstruction
+    drives a **recovery boom** back toward its (territory-capped, MECH-TER-001)
+    ceiling. So a faction's economy now *booms and busts* with its wars instead of
+    drifting.
+
+    And the economy **feeds back**: a depressed economy (output far below its
+    potential) deepens demographic stress, which raises unrest — closing the loop
+    **war → economic depression → grievance → war**; a booming economy eases
+    stress. `Economic_Stability` is the canon Public_Opinion term, wired live.
+    The feedback is gentle and the off-ramps/recovery counter it, so the loop
+    turns without running away.
+    """
+
+    WAR_SCARCITY = 0.020   # output suppressed per mature-war turn
+    RECOVERY_BOOM = 0.015  # peacetime rebuild toward the ceiling
+    HEALTH_FLOOR = 0.65    # output/potential below this = hardship -> unrest
+    HEALTH_CEIL = 0.90     # above this = boom -> relief
+    HARDSHIP_STRESS = 0.06 # stress added per unit of hardship depth
+    BOOM_RELIEF = 0.02     # stress eased when booming
+
+    def health(self, economic_strength: float, economic_potential: float) -> float:
+        """Output relative to the faction's own (territory-capped) potential."""
+        return float(economic_strength) / max(0.10, float(economic_potential))
+
+    def flux(self, economic_strength: float, economic_potential: float,
+             at_war: bool) -> float:
+        """The new economic output after this turn's war scarcity or peace boom,
+        bounded by the territory-capped ceiling."""
+        es = float(economic_strength)
+        if at_war:
+            es = max(0.05, es - self.WAR_SCARCITY)
+        else:
+            es = min(float(economic_potential), es + self.RECOVERY_BOOM)
+        return round(es, 4)
+
+    def stress_delta(self, health: float) -> float:
+        """Demographic-stress change from economic health: hardship deepens it,
+        a boom eases it (the economy → unrest feedback)."""
+        if health < self.HEALTH_FLOOR:
+            return self.HARDSHIP_STRESS * (self.HEALTH_FLOOR - health)
+        if health > self.HEALTH_CEIL:
+            return -self.BOOM_RELIEF
+        return 0.0
+
+
 # --------------------------------------------------------------------------- demo
 def _demo() -> int:
     """Show MECH-GOV-001 changing a faction's behavior as memory accrues —

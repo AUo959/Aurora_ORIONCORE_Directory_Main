@@ -29,6 +29,7 @@ from mech_gov_001 import (  # noqa: E402
     SuccessionModel,
     TerritorialConsequenceModel,
     TreatyEnforcementModel,
+    WarEconomyModel,
     PostWarRecoveryModel,
     WarWearinessModel,
 )
@@ -391,6 +392,25 @@ def test_territorial_loss_is_permanent_and_caps_the_economy():
     assert t.contested.get(war_torn, 0.0) == 0.0           # all contested reclaimed
     assert abs(t.total_loss(war_torn) - seceded_floor) < 1e-9   # only the core loss remains
     assert t.total_loss(war_torn) > 0.0                    # and it is permanent
+
+
+@pytest.mark.simulation
+def test_war_economy_busts_and_booms_and_feeds_back():
+    """MECH-ECO-001: war scarcity suppresses output; peace drives a recovery boom
+    toward the ceiling; and a depressed economy deepens demographic stress while a
+    booming one eases it (the economy → unrest feedback)."""
+    e = WarEconomyModel()
+    # war suppresses output; peace rebuilds it toward the (capped) ceiling
+    assert e.flux(0.6, 0.9, at_war=True) < 0.6
+    assert e.flux(0.6, 0.9, at_war=False) > 0.6
+    # recovery cannot exceed the territory-capped ceiling
+    assert e.flux(0.89, 0.9, at_war=False) <= 0.9
+    # health is output relative to potential
+    assert e.health(0.45, 0.9) == 0.5
+    # a depressed economy raises stress; a booming one eases it; healthy is neutral
+    assert e.stress_delta(0.3) > 0
+    assert e.stress_delta(0.95) < 0
+    assert e.stress_delta(0.75) == 0.0
 
 
 @pytest.mark.simulation

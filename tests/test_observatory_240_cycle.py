@@ -76,6 +76,18 @@ def test_conflict_cast_rotates(analyses):
 
 
 @pytest.mark.simulation
+def test_war_economy_busts_and_booms(analyses):
+    """MECH-ECO-001 (Pillar A): the economy must track the war/peace cycle —
+    at-war factions run a depressed economy while at-peace factions enjoy a
+    reconstruction boom, a substantial and consistent gap."""
+    for a in analyses:
+        assert a["verdict"]["war_economy_active"], (
+            a["seed"], a["war_economic_health"], a["peace_economic_health"])
+        assert a["war_economy_gap"] >= 0.15
+        assert a["peace_economic_health"] > a["war_economic_health"]
+
+
+@pytest.mark.simulation
 def test_war_outcomes_reshape_the_world(analyses):
     """MECH-TER-001 (Pillar A): a war's outcome must propagate — factions lose
     territory permanently, that loss diverges their economies (was uniform), and
