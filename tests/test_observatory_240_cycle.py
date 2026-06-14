@@ -76,6 +76,20 @@ def test_conflict_cast_rotates(analyses):
 
 
 @pytest.mark.simulation
+def test_war_outcomes_reshape_the_world(analyses):
+    """MECH-TER-001 (Pillar A): a war's outcome must propagate — factions lose
+    territory permanently, that loss diverges their economies (was uniform), and
+    the chain reaches power (war-torn factions end weaker than the spared).
+    Causal depth > 1, not a self-contained stability scalar."""
+    for a in analyses:
+        assert a["verdict"]["consequences_propagate"], (
+            a["seed"], a["factions_lost_territory"], a["econ_potential_spread"], a["war_power_penalty"])
+        assert a["factions_lost_territory"] >= 1
+        assert a["econ_potential_spread"] >= 0.05
+        assert a["war_power_penalty"] is None or a["war_power_penalty"] > 0
+
+
+@pytest.mark.simulation
 def test_power_politics_splits_by_culture(analyses):
     """MECH-POW-001: factions take a stance toward the galactic hegemon by
     culture — bandwagoners end up measurably more trusting of the strongest

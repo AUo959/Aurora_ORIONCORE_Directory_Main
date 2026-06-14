@@ -42,6 +42,7 @@ from mech_gov_001 import (  # noqa: E402
     PostWarRecoveryModel,
     PowerDynamicsModel,
     SuccessionModel,
+    TerritorialConsequenceModel,
     TreatyEnforcementModel,
     WarWearinessModel,
 )
@@ -280,6 +281,39 @@ def _writeback_treaties(treaty: TreatyEnforcementModel, state, v3) -> int:
                 mfac.trust_scores[host] = round(max(
                     0.0, float(mfac.trust_scores[host]) - treaty.TRUST_BURN), 4)
     return broken
+
+
+def _writeback_territory(terr: "TerritorialConsequenceModel", state, v3) -> None:
+    """MECH-TER-001: war reshapes the map and the economy persistently. A faction
+    with a mature civil war permanently loses ground scaled by the insurgency's
+    territorial hold; a faction at peace slowly reclaims contested ground. The
+    permanent loss caps the faction's economic_potential (the ceiling the engine
+    grows economic_strength toward), so a war's territorial outcome lowers the
+    faction's economy — and thus its galactic power — for the rest of the run."""
+    if v3 is None:
+        return
+    # the intensity of each faction's mature civil wars this turn — a civil war
+    # devastates the economy whether or not the rebels formally "hold" ground
+    # (war-weariness keeps their territory near zero), so scar by war severity.
+    intensity: dict[str, float] = {}
+    for ins in getattr(v3, "insurgencies", []):
+        if _phase(ins) in ("civil_war", "escalated"):
+            fid = ins.host_faction_id
+            sev = max(float(getattr(ins, "insurgent_strength", 0.0)),
+                      float(getattr(ins, "territory_controlled", 0.0)))
+            intensity[fid] = intensity.get(fid, 0.0) + sev
+    for fid, fac in state.factions.items():
+        if fid in intensity:
+            terr.scar(fid, intensity[fid])
+        else:
+            terr.reclaim(fid)
+        # Territory caps the economic ceiling — a permanent, propagating loss.
+        ceiling = terr.economic_ceiling(fid)
+        if float(getattr(fac, "economic_potential", 1.0)) > ceiling:
+            fac.economic_potential = ceiling
+        # economic_strength can't exceed the (now lower) potential.
+        if float(getattr(fac, "economic_strength", 0.5)) > ceiling:
+            fac.economic_strength = round(ceiling, 4)
 
 
 def _writeback_power(power: "PowerDynamicsModel", state) -> Optional[str]:
@@ -588,6 +622,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     culture = CultureModel() if memory_on else None
     succ = SuccessionModel(seed=seed) if memory_on else None
     power = PowerDynamicsModel() if memory_on else None
+    terr = TerritorialConsequenceModel() if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
@@ -621,6 +656,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
             _writeback_resolution(resolver, state, v3, treaty, culture)
             _writeback_treaties(treaty, state, v3)
             _writeback_succession(succ, state, v3)
+            _writeback_territory(terr, state, v3)
             _writeback_power(power, state)
         traj.append({
             "turn": d["turn"],

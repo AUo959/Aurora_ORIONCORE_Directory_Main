@@ -1,6 +1,6 @@
 # Observatory Exercise — 240-Turn Complacency-Cycle Test Case
 
-**Run:** 2026-06-14T21:09:28Z | **Horizon:** 240 turns | **Seeds:** 42, 7, 99 | **Pipeline:** committed mechanic stack via `gumas_memory_run`
+**Run:** 2026-06-14T21:27:00Z | **Horizon:** 240 turns | **Seeds:** 42, 7, 99 | **Pipeline:** committed mechanic stack via `gumas_memory_run`
 
 > Senior staff convened in the Observatory to run the living-galaxy dynamic under standing conditions for a full 240-turn horizon — twice the canonical sim window — and certify it from instruments, not memory.
 
@@ -26,7 +26,7 @@
 |---|---|---|---|---|---|---|---|:--:|:--:|:--:|:--:|
 | 42 | 0.400 | 0.415 | 0.335 | 3 | 91 | 99 | 0.92 | ✓ | ✓ | ✓ | **✓** |
 | 7 | 0.381 | 0.398 | 0.320 | 4 | 76 | 87 | 0.87 | ✓ | ✓ | ✓ | **✓** |
-| 99 | 0.397 | 0.425 | 0.338 | 4 | 72 | 83 | 0.87 | ✓ | ✓ | ✓ | **✓** |
+| 99 | 0.367 | 0.400 | 0.342 | 4 | 66 | 78 | 0.85 | ✓ | ✓ | ✓ | **✓** |
 
 ## Seed 42 — trajectory (12 eras x 20 turns)
 
@@ -37,6 +37,7 @@
 - **Velin (authentic decisions):** settlement rate by culture `{'status_quo': 0.2, 'sunk_cost': 0.163, 'hyper_rational': 0.229, 'zero_sum': 0.103, 'fear_based': 0.118}` — spread 13% (MECH-GOV-002). Belligerent/face-saving cultures (zero-sum, sunk-cost) grind on; rational/survivalist orders take the off-ramp — same conditions, different choices.
 - **Shepard (power politics):** trust toward the hegemon — balancers 0.5271, bandwagoners 0.7759 (gap +0.25, MECH-POW-001). Proud/defensive cultures balance *against* the strongest; pragmatic/survivalist ones bandwagon *with* it — power politics decided by culture.
 - **Sato (internal politics):** 9 successions (7 coups, 2 elections), 6 factions changed regime + culture (MECH-GOV-003) — a fallen leader's grip lost to scandal and illegitimacy; the new order decides differently, so politics shifts the faction's trajectory.
+- **Velin (emergent consequence):** 6 factions permanently lost territory to their wars; economic-ceiling spread 0.31 (was ~0); war-torn factions end +0.201 weaker in power than the spared (MECH-TER-001) — a war's outcome reshapes the map, the economy, and the balance of power.
 - **Tanaka (engine):** 99 insurgencies formed and retired (cast rotation; was ~13 pre-graft), 3107 migrations, 0 fragmentation events — engine phases all live.
 
 ## Seed 7 — trajectory (12 eras x 20 turns)
@@ -48,18 +49,20 @@
 - **Velin (authentic decisions):** settlement rate by culture `{'sunk_cost': 0.073, 'status_quo': 0.167, 'hyper_rational': 0.223, 'zero_sum': 0.119}` — spread 15% (MECH-GOV-002). Belligerent/face-saving cultures (zero-sum, sunk-cost) grind on; rational/survivalist orders take the off-ramp — same conditions, different choices.
 - **Shepard (power politics):** trust toward the hegemon — balancers 0.4892, bandwagoners 0.8029 (gap +0.31, MECH-POW-001). Proud/defensive cultures balance *against* the strongest; pragmatic/survivalist ones bandwagon *with* it — power politics decided by culture.
 - **Sato (internal politics):** 9 successions (5 coups, 4 elections), 7 factions changed regime + culture (MECH-GOV-003) — a fallen leader's grip lost to scandal and illegitimacy; the new order decides differently, so politics shifts the faction's trajectory.
+- **Velin (emergent consequence):** 5 factions permanently lost territory to their wars; economic-ceiling spread 0.25 (was ~0); war-torn factions end +0.091 weaker in power than the spared (MECH-TER-001) — a war's outcome reshapes the map, the economy, and the balance of power.
 - **Tanaka (engine):** 87 insurgencies formed and retired (cast rotation; was ~13 pre-graft), 3035 migrations, 0 fragmentation events — engine phases all live.
 
 ## Seed 99 — trajectory (12 eras x 20 turns)
 
-- **Shepard (conflict):** civil-wars/era `[0, 0.65, 1.15, 0.3, 0.35, 1.55, 1.65, 1.55, 1.2, 2.9, 1.9, 2.35]` — 4 wave(s), peaks at era(s) [2, 6, 9, 11]; 311 civil-war-turns, 83 insurgencies formed.
-- **Shepard (off-ramps):** 72 negotiated settlements vs military suppression — of which **68 (94%) brokered by a trusted neighbour** (MECH-DIP-002), the rest ground to exhaustion. settlements/era `[0, 0, 0.3, 0.25, 0.2, 0.35, 0.3, 0.25, 0.3, 0.55, 0.5, 0.6]` — war is no longer the only way a civil war ends, and diplomacy is the faster path.
-- **Velin (oscillation + honesty):** engine stability/era `[0.618, 0.631, 0.582, 0.56, 0.525, 0.507, 0.491, 0.467, 0.423, 0.435, 0.428, 0.425]` (floor 0.397); the **honest** internal-conflict-aware metric plateaus at 0.338 (floor 0.314) — D1 reveals the civil-war load the engine number masks.
-- **Sato (legitimacy/complacency):** legitimacy/era `[0.652, 0.609, 0.565, 0.557, 0.536, 0.528, 0.52, 0.508, 0.477, 0.481, 0.46, 0.454]`; complacency/era `[0.047, 0.254, 0.403, 0.407, 0.412, 0.35, 0.322, 0.325, 0.391, 0.308, 0.3, 0.272]` — complacency builds in calm; conflict and *settlement* both renew the order (the latter is the peaceful path). 12 peace accords broke (MECH-DIP-003) — settled peace binds but is not unconditional; a broken brokered peace burns the broker's trust.
-- **Velin (authentic decisions):** settlement rate by culture `{'zero_sum': 0.094, 'sunk_cost': 0.093, 'status_quo': 0.176, 'hyper_rational': 0.216, 'fear_based': 0.137}` — spread 12% (MECH-GOV-002). Belligerent/face-saving cultures (zero-sum, sunk-cost) grind on; rational/survivalist orders take the off-ramp — same conditions, different choices.
-- **Shepard (power politics):** trust toward the hegemon — balancers 0.5162, bandwagoners 0.771 (gap +0.25, MECH-POW-001). Proud/defensive cultures balance *against* the strongest; pragmatic/survivalist ones bandwagon *with* it — power politics decided by culture.
-- **Sato (internal politics):** 9 successions (6 coups, 3 elections), 7 factions changed regime + culture (MECH-GOV-003) — a fallen leader's grip lost to scandal and illegitimacy; the new order decides differently, so politics shifts the faction's trajectory.
-- **Tanaka (engine):** 83 insurgencies formed and retired (cast rotation; was ~13 pre-graft), 3064 migrations, 0 fragmentation events — engine phases all live.
+- **Shepard (conflict):** civil-wars/era `[0, 0.65, 1.15, 0.3, 0.35, 1.55, 1.65, 1.55, 0.8, 1.6, 0.9, 2.65]` — 4 wave(s), peaks at era(s) [2, 6, 9, 11]; 263 civil-war-turns, 78 insurgencies formed.
+- **Shepard (off-ramps):** 66 negotiated settlements vs military suppression — of which **62 (94%) brokered by a trusted neighbour** (MECH-DIP-002), the rest ground to exhaustion. settlements/era `[0, 0, 0.3, 0.25, 0.2, 0.35, 0.3, 0.2, 0.5, 0.35, 0.4, 0.45]` — war is no longer the only way a civil war ends, and diplomacy is the faster path.
+- **Velin (oscillation + honesty):** engine stability/era `[0.618, 0.631, 0.582, 0.56, 0.525, 0.507, 0.492, 0.463, 0.45, 0.427, 0.414, 0.394]` (floor 0.367); the **honest** internal-conflict-aware metric plateaus at 0.342 (floor 0.305) — D1 reveals the civil-war load the engine number masks.
+- **Sato (legitimacy/complacency):** legitimacy/era `[0.652, 0.609, 0.565, 0.557, 0.536, 0.528, 0.522, 0.498, 0.496, 0.478, 0.456, 0.446]`; complacency/era `[0.047, 0.254, 0.403, 0.407, 0.412, 0.35, 0.322, 0.364, 0.38, 0.265, 0.274, 0.31]` — complacency builds in calm; conflict and *settlement* both renew the order (the latter is the peaceful path). 13 peace accords broke (MECH-DIP-003) — settled peace binds but is not unconditional; a broken brokered peace burns the broker's trust.
+- **Velin (authentic decisions):** settlement rate by culture `{'zero_sum': 0.107, 'sunk_cost': 0.111, 'status_quo': 0.16, 'hyper_rational': 0.217}` — spread 11% (MECH-GOV-002). Belligerent/face-saving cultures (zero-sum, sunk-cost) grind on; rational/survivalist orders take the off-ramp — same conditions, different choices.
+- **Shepard (power politics):** trust toward the hegemon — balancers 0.4553, bandwagoners 0.792 (gap +0.34, MECH-POW-001). Proud/defensive cultures balance *against* the strongest; pragmatic/survivalist ones bandwagon *with* it — power politics decided by culture.
+- **Sato (internal politics):** 11 successions (7 coups, 4 elections), 7 factions changed regime + culture (MECH-GOV-003) — a fallen leader's grip lost to scandal and illegitimacy; the new order decides differently, so politics shifts the faction's trajectory.
+- **Velin (emergent consequence):** 3 factions permanently lost territory to their wars; economic-ceiling spread 0.33 (was ~0); war-torn factions end +0.159 weaker in power than the spared (MECH-TER-001) — a war's outcome reshapes the map, the economy, and the balance of power.
+- **Tanaka (engine):** 78 insurgencies formed and retired (cast rotation; was ~13 pre-graft), 3039 migrations, 0 fragmentation events — engine phases all live.
 
 ## Reading
 

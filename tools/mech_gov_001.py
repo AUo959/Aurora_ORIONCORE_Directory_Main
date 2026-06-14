@@ -875,6 +875,68 @@ class PowerDynamicsModel:
         return "neutral"
 
 
+class TerritorialConsequenceModel:
+    """MECH-TER-001 — Territorial Consequence (Pillar A: emergent consequence).
+
+    A war does not just cost stability — it costs **ground**, and lost ground is
+    lost **economy that does not come back**. As a faction's civil wars hold and
+    scar its territory, the faction permanently loses control of part of it
+    (secession, devastation, breakaway provinces). That permanent loss sets the
+    faction's economic **ceiling** (`economic_potential`, which the engine caps
+    `economic_strength` to), so a polity that loses a third of its land is
+    permanently a third poorer — which lowers its galactic **power** (MECH-POW-001
+    reads economy) and shifts the whole balance of power. Peace lets a faction
+    slowly reclaim *contested* ground, but the permanently-lost core does not
+    return.
+
+    This is the causal-depth lever Pillar A needs: one war's territorial outcome
+    propagates — map → economy → power → everyone's power politics — for the rest
+    of the run, instead of conflict being a self-contained stability scalar.
+    """
+
+    SCAR_RATE = 0.010      # territory lost per mature-war turn, scaled by severity
+    SECEDE_FRACTION = 0.5  # half of each loss is permanent (seceded); half contested
+    RECLAIM_RATE = 0.004   # peacetime reconquest of *contested* ground only
+    LOSS_CAP = 0.55        # a faction always keeps at least its ~45% core
+
+    def __init__(self) -> None:
+        # Two ledgers: seceded ground is gone for good; contested ground can be
+        # reclaimed at peace. Total loss = min(cap, seceded + contested).
+        self.seceded: dict[str, float] = {}
+        self.contested: dict[str, float] = {}
+
+    def total_loss(self, fid: str) -> float:
+        return min(self.LOSS_CAP, self.seceded.get(fid, 0.0) + self.contested.get(fid, 0.0))
+
+    # back-compat view used by telemetry
+    @property
+    def permanent_loss(self) -> dict:
+        keys = set(self.seceded) | set(self.contested)
+        return {fid: self.total_loss(fid) for fid in keys}
+
+    def held_territory(self, fid: str) -> float:
+        """Fraction of its original territory the faction still controls."""
+        return round(1.0 - self.total_loss(fid), 4)
+
+    def scar(self, fid: str, insurgent_territory: float) -> None:
+        """A faction's mature civil war carves out ground — half permanently
+        seceded, half contested (reclaimable later)."""
+        add = self.SCAR_RATE * max(0.0, float(insurgent_territory))
+        self.seceded[fid] = min(self.LOSS_CAP,
+                                self.seceded.get(fid, 0.0) + add * self.SECEDE_FRACTION)
+        self.contested[fid] = self.contested.get(fid, 0.0) + add * (1.0 - self.SECEDE_FRACTION)
+
+    def reclaim(self, fid: str) -> None:
+        """At peace, a faction reclaims *contested* ground — never the seceded core."""
+        c = self.contested.get(fid, 0.0)
+        if c > 0.0:
+            self.contested[fid] = max(0.0, c - self.RECLAIM_RATE)
+
+    def economic_ceiling(self, fid: str) -> float:
+        """Economic potential can rise no higher than the territory still held."""
+        return round(max(0.10, 1.0 - self.total_loss(fid)), 4)
+
+
 # --------------------------------------------------------------------------- demo
 def _demo() -> int:
     """Show MECH-GOV-001 changing a faction's behavior as memory accrues —

@@ -57,6 +57,7 @@ from mech_gov_001 import (  # noqa: E402
     PostWarRecoveryModel,
     PowerDynamicsModel,
     SuccessionModel,
+    TerritorialConsequenceModel,
     TreatyEnforcementModel,
     WarWearinessModel,
 )
@@ -148,6 +149,7 @@ def run_seed(seed: int, turns: int) -> dict:
     culture = CultureModel()
     succ = SuccessionModel(seed=seed)
     power = PowerDynamicsModel()
+    terr = TerritorialConsequenceModel()
     pb, sc, st_ = {}, set(), set()
     # MECH-POW-001 telemetry: run-averaged trust toward the *current* hegemon,
     # split by the truster's culture stance (balance vs bandwagon).
@@ -197,6 +199,7 @@ def run_seed(seed: int, turns: int) -> dict:
                 settle_by_bias[bk] = settle_by_bias.get(bk, 0) + 1
         broken_accords = H._writeback_treaties(treaty, state, v3)
         successions = H._writeback_succession(succ, state, v3)
+        H._writeback_territory(terr, state, v3)
         hegemon = H._writeback_power(power, state)
         for fid, fac in state.factions.items():
             ld = state.leaders.get(fac.leader_id) if fac.leader_id else None
@@ -251,12 +254,32 @@ def run_seed(seed: int, turns: int) -> dict:
             row[f"ins_{k}"] = v
         row.update(_pop_leader_aggregates(state, v3))
         rows.append(row)
+
+    # MECH-TER-001 end-state: the map and economy now carry each faction's war
+    # history; verify the chain reaches power (territory-losers are weaker).
+    final = eng.get_state()
+    loss = {fid: terr.permanent_loss.get(fid, 0.0) for fid in final.factions}
+    econ_pot = {fid: float(getattr(f, "economic_potential", 1.0)) for fid, f in final.factions.items()}
+    pw = {fid: power.power(getattr(f, "military_strength", 0.5),
+                           getattr(f, "economic_strength", 0.5),
+                           getattr(f, "technology_level", 0.5))
+          for fid, f in final.factions.items()}
+    losers = [fid for fid, v in loss.items() if v > 0.05]
+    holders = [fid for fid in final.factions if loss.get(fid, 0.0) <= 0.05]
+    mean_pw_losers = S.mean(pw[f] for f in losers) if losers else None
+    mean_pw_holders = S.mean(pw[f] for f in holders) if holders else None
+
     return {"seed": seed, "turns": turns, "rows": rows,
             "settle_by_bias": settle_by_bias, "turns_by_bias": turns_by_bias,
             "succession_counts": dict(succ.counts),
             "factions_with_turnover": sum(1 for s in bias_history.values() if len(s) >= 2),
             "hegemon_trust_balance": round(S.mean(heg_trust["balance"]), 4) if heg_trust["balance"] else None,
-            "hegemon_trust_bandwagon": round(S.mean(heg_trust["bandwagon"]), 4) if heg_trust["bandwagon"] else None}
+            "hegemon_trust_bandwagon": round(S.mean(heg_trust["bandwagon"]), 4) if heg_trust["bandwagon"] else None,
+            "territory_loss": {k: round(v, 3) for k, v in loss.items()},
+            "econ_potential_spread": round(max(econ_pot.values()) - min(econ_pot.values()), 4),
+            "factions_lost_territory": len(losers),
+            "mean_power_losers": mean_pw_losers,
+            "mean_power_holders": mean_pw_holders}
 
 
 # --------------------------------------------------------------------------- #
@@ -360,6 +383,16 @@ def analyse_seed(res: dict) -> dict:
     power_realignment_gap = round(htw - htb, 4) if (htb is not None and htw is not None) else 0.0
     power_politics_active = power_realignment_gap >= 0.05
 
+    # --- MECH-TER-001: does a war's outcome reshape the world (causal depth)? - #
+    factions_lost_territory = res.get("factions_lost_territory", 0)
+    econ_potential_spread = res.get("econ_potential_spread", 0.0)
+    mpl, mph = res.get("mean_power_losers"), res.get("mean_power_holders")
+    # the chain reaches power: territory-losers end weaker than holders
+    power_penalty = round(mph - mpl, 4) if (mpl is not None and mph is not None) else None
+    consequences_propagate = bool(
+        factions_lost_territory >= 1 and econ_potential_spread >= 0.05
+        and (power_penalty is None or power_penalty > 0))
+
     return {
         "seed": res["seed"],
         "turns": res["turns"],
@@ -394,6 +427,9 @@ def analyse_seed(res: dict) -> dict:
         "hegemon_trust_balance": htb,
         "hegemon_trust_bandwagon": htw,
         "power_realignment_gap": power_realignment_gap,
+        "factions_lost_territory": factions_lost_territory,
+        "econ_potential_spread": econ_potential_spread,
+        "war_power_penalty": power_penalty,
         "total_new_insurgencies": onsets,
         "off_ramp_settlement_share": off_ramp_settlement_share,
         "total_negotiations": sum(_series(rows, "v3_negotiations_concluded")),
@@ -409,6 +445,7 @@ def analyse_seed(res: dict) -> dict:
             "cultures_diverge": cultures_diverge,
             "leadership_turns_over": leadership_turns_over,
             "power_politics_active": power_politics_active,
+            "consequences_propagate": consequences_propagate,
             "dynamic_galaxy": bool(living and has_off_ramp and cast_rotates),
         },
     }
@@ -517,6 +554,11 @@ def render_md(analyses, det_ok, when, turns, seeds) -> str:
                  f"elections), {a['factions_with_turnover']} factions changed regime + culture "
                  f"(MECH-GOV-003) — a fallen leader's grip lost to scandal and illegitimacy; the new "
                  f"order decides differently, so politics shifts the faction's trajectory.")
+        L.append(f"- **Velin (emergent consequence):** {a['factions_lost_territory']} factions "
+                 f"permanently lost territory to their wars; economic-ceiling spread "
+                 f"{a['econ_potential_spread']:.2f} (was ~0); war-torn factions end "
+                 f"{a['war_power_penalty']:+.3f} weaker in power than the spared (MECH-TER-001) — a "
+                 f"war's outcome reshapes the map, the economy, and the balance of power.")
         L.append(f"- **Tanaka (engine):** {a['total_new_insurgencies']} insurgencies formed and "
                  f"retired (cast rotation; was ~13 pre-graft), {a['total_migrations']} migrations, "
                  f"{a['total_fragmentations']} fragmentation events — engine phases all live.\n")

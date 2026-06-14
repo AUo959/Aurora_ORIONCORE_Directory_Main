@@ -27,6 +27,7 @@ from mech_gov_001 import (  # noqa: E402
     PopulationGrievanceModel,
     PowerDynamicsModel,
     SuccessionModel,
+    TerritorialConsequenceModel,
     TreatyEnforcementModel,
     PostWarRecoveryModel,
     WarWearinessModel,
@@ -361,6 +362,35 @@ def test_power_stance_splits_balance_vs_bandwagon_by_culture():
     # an unmodelled culture takes no stance
     assert p.stance("some_unmodelled_bias") == "neutral"
     assert p.stance(None) == "neutral"
+
+
+@pytest.mark.simulation
+def test_territorial_loss_is_permanent_and_caps_the_economy():
+    """MECH-TER-001: a faction's mature wars permanently scar its territory, which
+    lowers its economic ceiling; peace reclaims only contested ground, never the
+    seceded core; and loss is bounded so a faction keeps its core."""
+    t = TerritorialConsequenceModel()
+    assert t.held_territory("velkaris") == 1.0 and t.economic_ceiling("velkaris") == 1.0
+    for _ in range(20):
+        t.scar("velkaris", insurgent_territory=0.6)
+    assert t.total_loss("velkaris") > 0.05
+    assert t.economic_ceiling("velkaris") < 1.0
+    assert t.held_territory("velkaris") < 1.0
+    # bounded — a faction always keeps its core
+    for _ in range(2000):
+        t.scar("velkaris", insurgent_territory=1.0)
+    assert t.total_loss("velkaris") <= t.LOSS_CAP + 1e-9
+    # the seceded core is permanent: peace reclaims contested ground, never it
+    war_torn = "torix"
+    for _ in range(10):
+        t.scar(war_torn, insurgent_territory=0.5)
+    seceded_floor = t.seceded[war_torn]
+    assert seceded_floor > 0.0
+    for _ in range(1000):
+        t.reclaim(war_torn)
+    assert t.contested.get(war_torn, 0.0) == 0.0           # all contested reclaimed
+    assert abs(t.total_loss(war_torn) - seceded_floor) < 1e-9   # only the core loss remains
+    assert t.total_loss(war_torn) > 0.0                    # and it is permanent
 
 
 @pytest.mark.simulation
