@@ -137,7 +137,28 @@
     "next_step": "review_cloudbank_pr_1183_then_continue_owner_items",
     "next_step_detail": "Codex continuation 2026-07-04T04:31:43Z: Worked from canonical root /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main and used a clean CloudBank worktree /private/tmp/cloudbank-narrative-phase2 from origin/main 23540bcc, avoiding the dirty canonical CloudBank checkout. Implemented the first phase-two engine slice from the existing root design receipt: deterministic NarrativeEvidenceSource/NarrativeFact/NarrativeEvidenceBundle receipts, build_state_from_evidence, authority-tier preservation, promotion_safety, and candidate/proposed event exclusion from continuity.established_events. Pushed CloudBank branch codex/narrative-phase2-evidence-2026-07-04 at b0637fa4 and opened draft PR #1183: https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1183. Local validation passed: narrative pytest slice 11 passed with existing pytest async-config warnings only; ruff check; ruff format --check; source pylint 10.00/10; test pylint with import-error disabled due lint env lacking pytest; bandit on new source/test; git diff --check. Next safe step: review/merge or revise PR #1183, then continue the remaining original owner items only through explicit gates: CanonRec character spot-check + 6 STAGING-era entities, transcript privacy review, threadcore-governor over canon/L3 capsule, repo_authority_policy.yaml promotion via peer review, gitwiz April branch port/abandon, and ORION.L1.* prose extraction from CanonRec_v1.3.x zips."
   },
-  "task_queue": [],
+  "task_queue": [
+    {
+      "id": "salvage-operation-icloud-promotion-2026-06-12",
+      "status": "suspended",
+      "assigned_to": "codex",
+      "priority": "medium",
+      "repo": "root control plane + registered nested repos by explicit gate only",
+      "description": "Run the Aurora salvage operation: find valuable unmerged iCloud/recovery logic, classify it, and promote only through explicit owner-surface gates.",
+      "started_at": "2026-06-12T23:00:00Z",
+      "updated_at": "2026-06-12T23:25:43Z",
+      "context_files": [
+        "reports/analysis/salvage_docket__2026-06-12.md",
+        "reports/analysis/aurora_salvage_report_latest.md",
+        "reports/analysis/ord_integration__2026-06-12.md",
+        "reports/analysis/orion_station_spec_recovery__2026-06-12.md",
+        "reports/analysis/remote_branch_sweep__2026-06-11.md",
+        "reports/analysis/integration_pass__2026-06-11.md"
+      ],
+      "next_step": "cloudbank_ord_pr_1016_then_selective_capsules",
+      "next_step_detail": "Deferred by owner request while Codex opens the CharForge capsule implementation lane. P1 is ORD policy family through CloudBank PR #1016. P2/P3/P4 remain reconciliation lanes; do not copy staging/archive/iCloud material directly into canon or runtime."
+    }
+  ],
   "completed_tasks": [
     {
       "id": "landing-ledger-flight-log-2026-06-11",
@@ -210,7 +231,7 @@
     }
   ],
   "last_updated": "2026-07-06T18:59:54Z",
-  "last_platform": "claude-code",
+  "last_platform": "codex",
   "last_session_summary": "Resolved GitHub PR backlog: committed prior session's report-root parameterization (AURORA_SIM_REPORT_ROOT) to main, merged dependabot #37/#24, then rebased and merged three stale draft PRs onto current main \u2014 #35 (py3.9 CI fix for the starlette/Python-3.10 floor), #34 (crew_life layout-flexible fix, pairs with #34), #36 (L3 narrative reconstruction artifact). All open PRs now merged; repo_registry.yaml vs ci.yml nested-repo pin drift on py3.12 is pre-existing on main, unrelated to these merges, and still open.",
   "tool_versions": {
     "gitleaks": "8.30.1",
