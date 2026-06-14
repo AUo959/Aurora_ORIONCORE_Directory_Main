@@ -21,6 +21,7 @@ from mech_gov_001 import (  # noqa: E402
     ComplacencyModel,
     DiplomaticStabilityModel,
     FactionDecisionModel,
+    InsurgencyResolutionModel,
     PopulationGrievanceModel,
     PostWarRecoveryModel,
     WarWearinessModel,
@@ -202,6 +203,36 @@ def test_complacency_builds_in_peace_and_purges_in_war():
     # Serious conflict resets the peace clock — upheaval renews the order.
     assert c.update("Velkaris", at_serious_war=True) == 0.0
     assert c.update("Velkaris", at_serious_war=False) == 0.0   # grace restarts
+
+
+@pytest.mark.simulation
+def test_insurgency_resolution_is_earned_and_settles():
+    """MECH-REB-004: a grinding, costly, stalemated insurgency whose host has
+    domestic pressure to end it de-escalates more readily than a fresh, popular
+    one; mediation helps; and repeated settlement progress reaches RESOLVED."""
+    r = InsurgencyResolutionModel(seed=1)
+    # A fresh, popular, low-cost insurgency: low de-escalation pull.
+    fresh = r.deescalation_p(
+        host_war_pressure=0.1, insurgent_strength=0.6, repression_level=0.2,
+        turns_active=2, host_grievance=0.3, popular_support=0.8,
+        diplomacy_openness=0.5, mediation_available=False)
+    # A grinding, costly, stalemated, unpopular insurgency under domestic pressure.
+    ripe = r.deescalation_p(
+        host_war_pressure=0.8, insurgent_strength=0.3, repression_level=0.6,
+        turns_active=40, host_grievance=0.8, popular_support=0.2,
+        diplomacy_openness=0.7, mediation_available=False)
+    assert ripe > fresh, (fresh, ripe)
+    # Mediation (a diplomatic overture) raises the chance further (DIP-002 hook).
+    mediated = r.deescalation_p(
+        host_war_pressure=0.8, insurgent_strength=0.3, repression_level=0.6,
+        turns_active=40, host_grievance=0.8, popular_support=0.2,
+        diplomacy_openness=0.7, mediation_available=True)
+    assert mediated > ripe
+    # Settlement is reached only after accumulated progress, then it's terminal.
+    settled = any(r.advance("ins-1", 1.0) for _ in range(5))
+    assert settled
+    r.forget("ins-1")
+    assert "ins-1" not in r.progress
 
 
 @pytest.mark.simulation

@@ -40,6 +40,35 @@ import random
 from dataclasses import dataclass, field
 from typing import Optional
 
+# MECH-REB-004 reuses the engine's *own* de-escalation formula
+# (SIM_ENGINE_OUTPUTS/formulas.py, "PR Section 5.2 Formula 1") so insurgency
+# resolution and inter-faction conflict resolution share one rule. When the
+# engine package isn't importable (e.g. standalone unit tests of this module),
+# fall back to a faithful copy kept in sync with it.
+try:  # pragma: no cover - exercised via the integration harness
+    from formulas import calc_deescalation_probability as _DEESC
+except Exception:  # noqa: BLE001 - any import failure -> local copy
+    def _DEESC(  # type: ignore[misc]
+        war_cost_a: float, war_cost_b: float, stalemate_index: float,
+        internal_pressure_a: float, internal_pressure_b: float,
+        mediation_available: bool, *, cost_weight: float = 0.3,
+        stalemate_weight: float = 0.25, pressure_weight: float = 0.25,
+        mediation_bonus: float = 0.2,
+    ) -> float:
+        """Faithful copy of `SIM_ENGINE_OUTPUTS/formulas.py`
+        `calc_deescalation_probability` (PR Section 5.2 Formula 1). Kept in sync
+        with the engine; used only when that module is off the import path."""
+        avg_war_cost = (war_cost_a + war_cost_b) / 2.0
+        avg_pressure = (internal_pressure_a + internal_pressure_b) / 2.0
+        p = (cost_weight * avg_war_cost + stalemate_weight * stalemate_index
+             + pressure_weight * avg_pressure
+             + mediation_bonus * (1.0 if mediation_available else 0.0))
+        if stalemate_index >= 1.0:
+            p = max(p, 0.5)
+        if war_cost_a > 0.9 and war_cost_b > 0.9:
+            p = max(p, 0.6)
+        return max(0.0, min(1.0, p))
+
 # Memory half-life is expressed in *turns* (logical clock), not seconds.
 DEFAULT_HALF_LIFE_TURNS = 12.0
 RECENCY_DECAY_PER_TURN = 0.08
@@ -462,6 +491,84 @@ class WarWearinessModel:
         return (self.SUPPORT_EROSION * weariness,
                 self.STRENGTH_ATTRITION * max(0.0, weariness - 0.5) * 2.0,
                 self.TERRITORY_ATTRITION * weariness)
+
+
+class InsurgencyResolutionModel:
+    """MECH-REB-004 — Insurgency Resolution / Mediated Settlement.
+
+    The inter-faction conflict layer has always carried a full de-escalation
+    ladder ending in RESOLUTION (`calc_deescalation_probability`, ported here from
+    the engine's `formulas.py`), but the insurgency layer only ever had military
+    suppression — a civil war could be *crushed* (SUPPRESSED) but never *ended*.
+    Suppression leaves the grievance intact, so the same handful of insurgencies
+    reopened indefinitely and war was the only off-ramp (Observatory roundtable,
+    2026-06-14). `InsurgencyPhase.RESOLVED` was declared in canon yet never
+    assigned.
+
+    This grafts the proven model onto insurgencies: a grinding, costly,
+    stalemated insurgency whose host population has pressure to end it can reach a
+    negotiated **settlement**. Settlement RETIRES the movement (the realization of
+    RESOLVED, since the engine has no terminal/removal path of its own) and SPENDS
+    the grievance that drove it — easing demographic stress and restoring a little
+    legitimacy (a *peaceful* renewal path, distinct from the war-purge). Because
+    the cause is addressed, the conflict cast can rotate instead of reopening.
+
+    `mediation_available` (set by a diplomatic overture, MECH-DIP-002) adds the
+    formula's mediation bonus — diplomacy becomes a faster, grievance-cheaper
+    off-ramp than grinding to mutual exhaustion.
+
+    Deliberately *self-limiting*: de-escalation probability only rises as war
+    cost, stalemate, and domestic pressure accumulate, so fresh or popular
+    insurgencies don't settle — which keeps conflict real and avoids re-creating
+    the permanent-peace fixed point. Calibrated, not tuned to a target.
+    """
+
+    GRACE_TURNS = 6            # a fresh insurgency can't be settled instantly
+    SETTLE_STEP = 0.34         # settlement progress per successful roll (~3 rungs)
+    STALEMATE_TURNS = 30.0     # turns_active at which stalemate_index saturates
+    OPENNESS_WEIGHT = 0.10     # leader diplomacy_openness sways the effective roll
+    LEGIT_RESTORE = 0.04       # a settled peace restores some legitimacy (D6)
+    STRESS_RELIEF = 0.06       # settlement eases the host's demographic stress
+    GRIEVANCE_RELIEF = 0.20    # ... and the lingering grievance drivers
+
+    def __init__(self, seed: int = 0) -> None:
+        self._rng = random.Random(seed)
+        self.progress: dict[str, float] = {}   # insurgency_id -> settlement [0,1]
+
+    def deescalation_p(
+        self, *, host_war_pressure: float, insurgent_strength: float,
+        repression_level: float, turns_active: int, host_grievance: float,
+        popular_support: float, diplomacy_openness: float,
+        mediation_available: bool,
+    ) -> float:
+        """De-escalation probability for one insurgency, via the engine's own
+        `calc_deescalation_probability`, with the insurgency's fields mapped onto
+        the inter-faction conflict inputs."""
+        war_cost_state = min(1.0, max(0.0, host_war_pressure))
+        # the insurgents' own cost: how ground-down they are
+        war_cost_rebels = min(1.0, max(repression_level, 1.0 - insurgent_strength))
+        stalemate = min(1.0, turns_active / self.STALEMATE_TURNS)
+        internal_state = min(1.0, max(0.0, host_grievance))      # population wants it ended
+        internal_rebels = min(1.0, max(0.0, 1.0 - popular_support))  # rebels losing the public
+        p = _DEESC(
+            war_cost_state, war_cost_rebels, stalemate,
+            internal_state, internal_rebels, mediation_available,
+        )
+        p += (diplomacy_openness - 0.5) * self.OPENNESS_WEIGHT
+        return max(0.0, min(1.0, p))
+
+    def advance(self, insurgency_id: str, p: float) -> bool:
+        """Roll de-escalation; accumulate settlement progress; return True the
+        turn a full settlement is reached."""
+        if self._rng.random() < p:
+            prog = self.progress.get(insurgency_id, 0.0) + self.SETTLE_STEP
+            self.progress[insurgency_id] = prog
+            if prog >= 1.0:
+                return True
+        return False
+
+    def forget(self, insurgency_id: str) -> None:
+        self.progress.pop(insurgency_id, None)
 
 
 # --------------------------------------------------------------------------- demo

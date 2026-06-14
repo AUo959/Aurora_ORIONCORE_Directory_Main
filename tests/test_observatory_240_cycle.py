@@ -56,6 +56,26 @@ def test_conflict_recurs_in_at_least_two_waves(analyses):
 
 
 @pytest.mark.simulation
+def test_conflict_has_an_off_ramp_besides_war(analyses):
+    """MECH-REB-004: civil wars must be able to END by negotiated settlement,
+    not only by military suppression. War is no longer the only off-ramp."""
+    for a in analyses:
+        assert a["verdict"]["has_off_ramp"], (a["seed"], a["total_settlements"])
+        assert a["total_settlements"] > 0
+        assert a["off_ramp_settlement_share"] > 0.0
+
+
+@pytest.mark.simulation
+def test_conflict_cast_rotates(analyses):
+    """Settlement retires a movement and spends its grievance, so the host can
+    later host a *different* insurgency — the cast rotates instead of the same
+    ~13 wounds reopening (pre-graft). Many distinct insurgencies should form."""
+    for a in analyses:
+        assert a["verdict"]["cast_rotates"], (a["seed"], a["total_new_insurgencies"])
+        assert a["total_new_insurgencies"] > 25
+
+
+@pytest.mark.simulation
 def test_never_collapses_to_pinned_floor(analyses):
     """The original seed-42 attractor crashed and stayed crashed. The living
     galaxy must hold above the collapse floor for the whole horizon."""
