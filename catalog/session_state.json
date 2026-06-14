@@ -120,25 +120,45 @@
     }
   },
   "active_task": {
-    "id": "salvage-operation-icloud-promotion-2026-06-12",
+    "id": "charforge-capsule-implementation-2026-06-14",
     "status": "suspended",
     "assigned_to": "codex",
-    "repo": "root control plane + registered nested repos by explicit gate only",
-    "description": "Run the Aurora salvage operation: find valuable unmerged iCloud/recovery logic, classify it, and promote only through explicit owner-surface gates.",
-    "started_at": "2026-06-12T23:00:00Z",
-    "updated_at": "2026-06-12T23:25:43Z",
+    "repo": "root control plane; CanonRec/CloudBank mutation gated separately",
+    "description": "Open a parallel Codex implementation lane for CharacterForge/CharForge capsules while Claude Code is unavailable, moving capsule evidence and decision-profile handling from design into implementation.",
+    "started_at": "2026-06-14T23:39:51Z",
+    "updated_at": "2026-06-14T23:42:33Z",
     "context_files": [
-      "reports/analysis/salvage_docket__2026-06-12.md",
-      "reports/analysis/aurora_salvage_report_latest.md",
-      "reports/analysis/ord_integration__2026-06-12.md",
-      "reports/analysis/orion_station_spec_recovery__2026-06-12.md",
-      "reports/analysis/remote_branch_sweep__2026-06-11.md",
-      "reports/analysis/integration_pass__2026-06-11.md"
+      "reports/analysis/charforge_capsule_implementation__2026-06-14.md",
+      "tools/character_capsule_adapter.py",
+      "tests/test_character_capsule_adapter.py",
+      "tools/mech_gov_001.py",
+      "reports/analysis/culture_weighted_decisions__2026-06-14.md",
+      "reports/analysis/narrative_engine_phase_two_contract__2026-06-14.md"
     ],
-    "next_step": "cloudbank_ord_pr_1016_then_selective_capsules",
-    "next_step_detail": "Cold start: read reports/analysis/salvage_docket__2026-06-12.md first. P1 is ORD policy family through CloudBank PR #1016, but leave it alone while Claude Code is actively editing that branch. P2/P3/P4 are reconciliation lanes: legacy ORD behavior comparison, Quantum Forge protocol diff against current modules/quantum_forge, and ZipWiz bridge security/owner-surface review. Do not copy staging/archive/iCloud material directly into canon or runtime."
+    "next_step": "wire_capsule_adapter_into_phase_two_state_builder",
+    "next_step_detail": "Cold start: work on branch codex/charforge-capsule-implementation-2026-06-14 from worktree /private/tmp/charforge-capsules-20260614. Codex owns this lane while Claude Code is usage-limited. Implemented tools/character_capsule_adapter.py and tests/test_character_capsule_adapter.py. Next: wire CharacterCapsule evidence facts into the phase-two state_builder once that builder surface lands, then add a real CanonRec fixture only after choosing the fixture owner surface. Do not mutate CanonRec or CloudBank by implication."
   },
   "task_queue": [
+    {
+      "id": "salvage-operation-icloud-promotion-2026-06-12",
+      "status": "suspended",
+      "assigned_to": "codex",
+      "priority": "medium",
+      "repo": "root control plane + registered nested repos by explicit gate only",
+      "description": "Run the Aurora salvage operation: find valuable unmerged iCloud/recovery logic, classify it, and promote only through explicit owner-surface gates.",
+      "started_at": "2026-06-12T23:00:00Z",
+      "updated_at": "2026-06-12T23:25:43Z",
+      "context_files": [
+        "reports/analysis/salvage_docket__2026-06-12.md",
+        "reports/analysis/aurora_salvage_report_latest.md",
+        "reports/analysis/ord_integration__2026-06-12.md",
+        "reports/analysis/orion_station_spec_recovery__2026-06-12.md",
+        "reports/analysis/remote_branch_sweep__2026-06-11.md",
+        "reports/analysis/integration_pass__2026-06-11.md"
+      ],
+      "next_step": "cloudbank_ord_pr_1016_then_selective_capsules",
+      "next_step_detail": "Deferred by owner request while Codex opens the CharForge capsule implementation lane. P1 is ORD policy family through CloudBank PR #1016. P2/P3/P4 remain reconciliation lanes; do not copy staging/archive/iCloud material directly into canon or runtime."
+    },
     {
       "id": "narrative-promotion-continuation-2026-06",
       "status": "queued",
@@ -352,9 +372,9 @@
       "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
     }
   ],
-  "last_updated": "2026-06-13T20:33:09Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "feat(sim): consequence layer \u2014 inert instability signals mad",
+  "last_updated": "2026-06-14T23:42:33Z",
+  "last_platform": "codex",
+  "last_session_summary": "Codex opened a parallel CharForge capsule implementation branch and added a manifest-verifying character capsule adapter with tests.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -374,64 +394,64 @@
   },
   "recent_commits": [
     {
-      "sha": "030cc17",
-      "date": "2026-06-13",
+      "sha": "bbc9268",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(sim): consequence layer \u2014 inert instability signals made consequential (lessons to-do)"
+      "summary": "feat(sim): war economy & market flux (MECH-ECO-001) \u2014 Pillar A"
     },
     {
-      "sha": "cabbc9b",
-      "date": "2026-06-13",
+      "sha": "3862b68",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(sim): seed-42 stability solution \u2014 DSI onset gate + war-weariness break the civil-war attractor"
+      "summary": "feat(sim): territorial consequence (MECH-TER-001) \u2014 Pillar A begins"
     },
     {
-      "sha": "9c418bc",
-      "date": "2026-06-13",
+      "sha": "853add6",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "docs(sim): expand seed-42 review \u2014 conflict initiation is over-weighted (confirmed); two-sided build plan"
+      "summary": "docs(sim): deep-read the Office of Strategic Diplomacy (diplomacy-as-institution)"
     },
     {
-      "sha": "f575498",
-      "date": "2026-06-13",
+      "sha": "4a7789c",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "docs(sim): seed-42 stability review \u2014 root cause found (civil-war attractor has no exit)"
+      "summary": "feat(sim): galactic power dynamics (MECH-POW-001) \u2014 Pillar C complete"
     },
     {
-      "sha": "b996560",
-      "date": "2026-06-13",
+      "sha": "26e2b0b",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(sim): social dynamics + MECH-SOC-001 grievance memory wired into rebellion axis"
+      "summary": "feat(sim): internal politics & succession (MECH-GOV-003) \u2014 regimes fall"
     },
     {
-      "sha": "48c50e7",
-      "date": "2026-06-13",
+      "sha": "405949d",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(sim): wire MECH-GOV-001 into the live GUMAS engine (faction memory -> trust)"
+      "summary": "feat(sim): culture-weighted decisions (MECH-GOV-002) \u2014 Pillar C begins"
     },
     {
-      "sha": "ebb6b34",
-      "date": "2026-06-13",
+      "sha": "32d3d10",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(sim): implement MECH-GOV-001 \u2014 memory-driven faction decision model"
+      "summary": "feat(sim): treaty enforcement (MECH-DIP-003) \u2014 settled peace binds and breaks"
     },
     {
-      "sha": "c2639a5",
-      "date": "2026-06-13",
+      "sha": "8432b9b",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(canon): finish L2 mining \u2014 timeline + factions promoted; memory_system reference staged for MECH-GOV-001"
+      "summary": "feat(sim): mediated settlement (MECH-DIP-002) \u2014 diplomacy as a real off-ramp"
     },
     {
-      "sha": "5537bf8",
-      "date": "2026-06-13",
+      "sha": "d9b4746",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(canon): L2 galactic canon promoted \u2014 full galaxy corpus routed to CanonRec canon/L2/"
+      "summary": "fix(sim): D9 \u2014 gate collapse on conflict load, not a stability scalar"
     },
     {
-      "sha": "e086668",
-      "date": "2026-06-13",
+      "sha": "3eea194",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "docs(discovery): L2 canon genesis & lineage \u2014 traced to the original 'Crisis & Compromise' RPG"
+      "summary": "feat(sim): insurgency resolution graft (MECH-REB-004 + D1) \u2014 a dynamic galaxy"
     }
   ],
   "security_events": [
@@ -477,7 +497,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "030cc17",
+    "main_sha": "bbc9268",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -595,7 +615,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-06-13T20:33:09Z",
+    "checked_at": "2026-06-14T23:42:33Z",
     "entries": [
       {
         "repo": "aurora-cloudbank-symbolic-main",
