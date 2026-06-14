@@ -5,6 +5,66 @@
 **Standing principle:** wire mechanics coherently from canon; measure honestly;
 never tune coefficients toward a target outcome. Fixes that *lower* a metric in
 exchange for truth are correct.
+**Revised:** R1 (2026-06-14) — see the revision block below; supersedes several
+"build new" calls after the prebuilt-systems inventory + conflict-machine deep read.
+
+---
+
+## Revision R1 (2026-06-14) — reuse findings change the build, not the destination
+
+Two follow-on surveys —
+[`prebuilt_simulation_systems_inventory__2026-06-14.md`](prebuilt_simulation_systems_inventory__2026-06-14.md)
+and [`conflict_resolution_machine_deepread__2026-06-14.md`](conflict_resolution_machine_deepread__2026-06-14.md)
+— found that much of what this plan scoped as "build new" **already exists in the
+codebase**, mostly from the original engine lineage. The destination (the three
+pillars) is unchanged; the path is cheaper and lower-risk.
+
+**Root cause, now precise.** The galaxy runs **two parallel conflict systems**.
+Inter-faction `ConflictState` has a complete resolution machine
+(`calc_deescalation_probability` → ladder …DEESCALATION→CEASEFIRE→NEGOTIATION→
+RESOLUTION, mediation hook, treaty breach/collapse) — and it works
+(`conflict_pressure`→0 because factions *do* settle). The intra-faction
+**insurgency** layer (`rebellion.py`) has **none of it** — only military
+suppression — even though `InsurgencyPhase.RESOLVED` is already declared and the
+insurgency carries every field the de-escalation formula needs. **The dynamic
+galaxy is mostly a matter of giving civil wars the resolution machine
+inter-faction wars already have.**
+
+**Corrected build/reuse table (supersedes the per-phase "Extend/New" columns):**
+
+| Plan item | Was scoped | R1 reality |
+|---|---|---|
+| Phase 0 / **D4** RESOLVED state | build new | **Graft** `calc_deescalation_probability` (present in `formulas.py`) onto the rebellion tick; assign the already-declared `RESOLVED`. Resolution **spends grievance** so wounds close instead of reopening |
+| **MECH-DIP-002** Mediated Settlement | build new | **Wire** the existing mediation hook (`_handle_diplomatic_overture`/`_handle_mediation_offer`) to the insurgency graft — a faster, grievance-cheaper off-ramp |
+| **MECH-DIP-003** Treaty Enforcement | build new | **Already implemented** (`calc_treaty_breach_score`, `is_treaty_breach`, `TreatyPhase.COLLAPSED`, `_handle_treaty_violation`) — register settlements as `TreatyState`, inherit consequences |
+| **MECH-GOV-002** Culture-weighted decisions | extend GOV-001 | Substrate ready: per-leader `traits.json` (`decision_style`, `dominant_bias`, tradition) + early `character_behavior_modules.py` (`reaction_triggers`, `loyalty_profile`) + `CHARACTERFORGE_SPEC` reaction-genome |
+| **MECH-GOV-003** Succession/politics | build new | Equations exist (`intake/text_early_sim_logic.txt`: `Public_Opinion`, `P(support)`, `Political_Loyalty`); leader fields (`elite_support`, `scandals`, `public_legitimacy`) live |
+| **MECH-POW-001** Power/coalitions | build new | Named gap in `GUMAS Engine Advancement.md`; `AI_Faction_Strategy` seed + alliance trust fields exist |
+| **MECH-ECO-001** War economy | build new | Named gap ("limited economic interdependency"); economic fields live on `FactionState` |
+| **Pillar A** causal depth | build new | Named gap ("sparse event provenance / no cascade tracking"); `event_id`/`payload_hash` plumbing already present to build on |
+| (already shipped) MECH-SOC-005 recovery | built by us | Was the original engine's *"Phase 4.5 peacetime recovery (the missing half)"* — convergent re-derivation; a caution to read first |
+
+**Revised sequencing (replaces the Phase 0→1 opening):**
+0a. **Recover/verify** `formulas.py`+`models.py` completeness (full copies in
+   `SIM_ENGINE_OUTPUTS/` and v2.0 staging) so the de-escalation formula is
+   importable to the rebellion tick.
+0b. **D1** honest conflict metric — now also fold `insurgency_pressure` so a
+   *resolving* civil war visibly relieves stability.
+0c. **D4 via the graft** — insurgency de-escalation ladder → `RESOLVED` (+grievance
+   spend). Re-run the Observatory gate; expect cast rotation and falling chronic
+   `insurgency_pressure`.
+1.  **MECH-DIP-002** mediation → settlement as the faster off-ramp; **DIP-003**
+   reused as-is.
+Then Pillars C (Phase 2) and A (Phase 3) as written, on a galaxy where conflict
+can finally *end*.
+
+**Net effect:** Phase 0 and Phase 1 shrink from green-field builds to a port +
+wiring of proven, canon-grounded code; risk drops (the resolution model already
+ran in v1.x) and the emergence principle is better served (we inherit the
+original equations rather than inventing coefficients). Tasks #34–38 stand;
+their contents are reframed by this revision.
+
+---
 
 ## The reframing (Pilot's diagnosis)
 
