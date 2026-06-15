@@ -181,6 +181,70 @@ def test_collect_registered_python_envs_detects_stale_status_file(tmp_path: Path
     assert envs[0]["import_versions"] == {"fastapi": "0.135.1", "httpx": "0.28.1"}
 
 
+def test_collect_registered_python_envs_uses_canonical_root_fallback(
+    tmp_path: Path,
+    monkeypatch: Any,
+) -> None:
+    worktree = tmp_path / "worktree"
+    canonical = tmp_path / "canonical"
+    repo = canonical / "repos" / "cloudbank"
+    worktree.mkdir()
+    repo.mkdir(parents=True)
+    write_file(
+        repo / ".env_status.json",
+        json.dumps({"venv_path": ".venv", "status": "ready"}) + "\n",
+    )
+    manifest = {
+        "registered_repo_python_environments": [
+            {
+                "repo_name": "cloudbank",
+                "venv_path": ".venv",
+                "python_command": [".venv/bin/python"],
+                "status_file": ".env_status.json",
+                "required": True,
+            }
+        ]
+    }
+    registered_repos = [
+        {"name": "cloudbank", "path": "repos/cloudbank", "branch": "main", "remote_status": "configured"}
+    ]
+    monkeypatch.setattr(aurora_devkit, "canonical_root_from_git", lambda root: canonical)
+
+    def fake_repo_runner(repo_path: Path, args: list[str]) -> dict[str, Any]:
+        assert repo_path == repo
+        if args[-1] == "--version":
+            return {
+                "status": "ok",
+                "command": args,
+                "path": str(repo / args[0]),
+                "returncode": 0,
+                "output": "Python 3.12.13",
+            }
+        if args[-3:] == ["pip", "--version"]:
+            return {"status": "ok", "command": args, "path": str(repo / args[0]), "returncode": 0, "output": "pip 26.0.1"}
+        if args[-2:] == ["pip", "check"]:
+            return {
+                "status": "ok",
+                "command": args,
+                "path": str(repo / args[0]),
+                "returncode": 0,
+                "output": "No broken requirements found.",
+            }
+        raise AssertionError(args)
+
+    envs = aurora_devkit.collect_registered_python_envs(
+        worktree,
+        manifest,
+        registered_repos,
+        runner=fake_repo_runner,
+    )
+
+    assert envs[0]["path_resolution"] == "canonical_root"
+    assert envs[0]["resolved_path"] == str(repo)
+    assert envs[0]["status"] == "warn"
+    assert envs[0]["evidence"] == ".env_status.json is stale"
+
+
 def test_collect_dependency_update_surfaces_detects_dependabot_coverage(tmp_path: Path) -> None:
     root = tmp_path / "workspace"
     cloudbank = root / "repos" / "cloudbank"
@@ -251,6 +315,52 @@ def test_collect_dependency_update_surfaces_detects_dependabot_coverage(tmp_path
             "next_step": "Root Dependabot coverage.",
         }
     ]
+
+
+def test_collect_dependency_update_surfaces_uses_canonical_root_fallback(
+    tmp_path: Path,
+    monkeypatch: Any,
+) -> None:
+    worktree = tmp_path / "worktree"
+    canonical = tmp_path / "canonical"
+    repo = canonical / "repos" / "cloudbank"
+    worktree.mkdir()
+    repo.mkdir(parents=True)
+    write_file(
+        repo / ".github" / "dependabot.yml",
+        'version: 2\n'
+        'updates:\n'
+        '  - package-ecosystem: "pip"\n'
+        '    directory: "/"\n'
+        '    schedule:\n'
+        '      interval: "weekly"\n',
+    )
+    manifest = {
+        "dependency_update_surfaces": [
+            {
+                "id": "cloudbank-dependabot",
+                "repo_name": "cloudbank",
+                "path": ".github/dependabot.yml",
+                "required": True,
+                "expected_updates": [{"package_ecosystem": "pip", "directory": "/"}],
+                "notes": "CloudBank Dependabot coverage.",
+            }
+        ]
+    }
+    registered_repos = [
+        {"name": "cloudbank", "path": "repos/cloudbank", "branch": "main", "remote_status": "configured"}
+    ]
+    monkeypatch.setattr(aurora_devkit, "canonical_root_from_git", lambda root: canonical)
+
+    surfaces = aurora_devkit.collect_dependency_update_surfaces(
+        worktree,
+        manifest,
+        registered_repos,
+    )
+
+    assert surfaces[0]["path_resolution"] == "canonical_root"
+    assert surfaces[0]["resolved_path"] == str(repo)
+    assert surfaces[0]["status"] == "ok"
 
 
 def test_build_install_plan_marks_user_space_recipe_ready_when_manager_exists() -> None:

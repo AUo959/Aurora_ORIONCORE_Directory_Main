@@ -115,7 +115,7 @@ def run_repo_command(repo_path: Path, args: list[str], timeout: int = 15) -> dic
             }
 
     try:
-        result = subprocess.run(
+        result = subprocess.run(  # noqa: S603 - fixed command probe against a local repo root.
             command,
             cwd=repo_path,
             text=True,
@@ -282,6 +282,50 @@ def collect_registered_repos(root: Path) -> list[dict[str, str]]:
     return repos
 
 
+def canonical_root_from_git(root: Path) -> Path | None:
+    git = shutil.which("git")
+    if git is None:
+        return None
+    try:
+        result = subprocess.run(  # noqa: S603 - fixed git probe against a local repo root.
+            [
+                git,
+                "-C",
+                str(root),
+                "rev-parse",
+                "--path-format=absolute",
+                "--git-common-dir",
+            ],
+            text=True,
+            capture_output=True,
+            timeout=5,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    if result.returncode != 0:
+        return None
+
+    git_common_dir = Path(result.stdout.strip())
+    if git_common_dir.name != ".git":
+        return None
+    return git_common_dir.parent
+
+
+def resolve_registered_repo_path(root: Path, repo_relpath: str) -> tuple[Path, str]:
+    primary = root / repo_relpath
+    if primary.exists():
+        return primary, "root"
+
+    canonical_root = canonical_root_from_git(root)
+    if canonical_root and canonical_root != root:
+        fallback = canonical_root / repo_relpath
+        if fallback.exists():
+            return fallback, "canonical_root"
+
+    return primary, "missing"
+
+
 def _import_probe(required_imports: list[str]) -> str:
     return (
         "import importlib, json; "
@@ -310,7 +354,11 @@ def collect_registered_python_envs(
         repo_name = check["repo_name"]
         repo = repo_by_name.get(repo_name)
         repo_relpath = check.get("repo_path") or (repo or {}).get("path", "")
-        repo_path = root / repo_relpath if repo_relpath else root
+        repo_path, path_resolution = (
+            resolve_registered_repo_path(root, repo_relpath)
+            if repo_relpath
+            else (root, "root")
+        )
         venv_path = check.get("venv_path", ".venv")
         python_command = check.get("python_command", [f"{venv_path}/bin/python"])
         required = bool(check.get("required", False))
@@ -323,6 +371,8 @@ def collect_registered_python_envs(
             "required": required,
             "venv_path": venv_path,
             "python_command": python_command,
+            "resolved_path": str(repo_path),
+            "path_resolution": path_resolution,
             "required_imports": required_imports,
             "update_command": check.get("update_command", []),
             "post_update_commands": check.get("post_update_commands", []),
@@ -513,7 +563,14 @@ def collect_dependency_update_surfaces(
             continue
 
         repo_relpath, repo_path, _branch = context
+        repo_path, path_resolution = (
+            resolve_registered_repo_path(root, repo_relpath)
+            if repo_relpath != "."
+            else (repo_path, "root")
+        )
         record["repo_path"] = repo_relpath
+        record["resolved_path"] = str(repo_path)
+        record["path_resolution"] = path_resolution
         dependabot_path = repo_path / config_path
         if not dependabot_path.exists():
             record["status"] = "missing"

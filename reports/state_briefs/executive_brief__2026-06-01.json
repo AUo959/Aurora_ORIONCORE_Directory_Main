@@ -1,0 +1,260 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "executive_state_brief",
+  "generated_at": "2026-06-01T17:36Z",
+  "tool": "aurora-exec-brief-pipeline",
+  "scope": "root_control_plane_plus_5_nested_repos",
+  "posture": {
+    "read_only": true,
+    "canon_promotion": false,
+    "nested_repo_mutation": false,
+    "github_push": false,
+    "command_grammar_execution": false
+  },
+  "staleness_datum": {
+    "head_sha": "286d085",
+    "head_committed_at": "2026-06-01T03:04:26Z",
+    "head_subject": "chore(reports): refresh root operator artifacts",
+    "rule": "artifacts with generated_at before head_committed_at are flagged stale"
+  },
+  "decision_snapshot": {
+    "overall_status": "GREEN on health, AMBER on integration",
+    "one_line": "The 18-commit unmerged root branch from prior weeks has landed; new critical path is (1) triage 36 secret-flagged recovery candidates, (2) push the 2 unpushed root commits and decide the CloudBank feature-branch landing strategy, (3) refresh the GITWIZ audit.",
+    "blocking_findings": 0,
+    "dimensions": {
+      "root_workspace_integrity": {"state": "PASS", "findings": 0, "as_of": "2026-06-01T03:02:59Z"},
+      "root_working_tree": {"state": "clean_tracked", "untracked_paths": 2, "modified_paths": 0},
+      "root_branch": "main",
+      "root_vs_origin_main": {"ahead": 2, "behind": 0},
+      "root_local_branch_count_excl_main": 9,
+      "nested_repos_clean_count": 4,
+      "nested_repos_dirty_count": 1,
+      "mission_control_status": "attention",
+      "operator_inbox_count": 7,
+      "approval_required_count": 6,
+      "recovery_backlog": {"discovered": 1017, "surfaced": 100, "restricted": 36},
+      "devkit_status": "READY",
+      "devkit_tools": "21/21",
+      "build_lanes": {"ready": 6, "attention": 0, "blocked": 0},
+      "stale_governance_artifacts_count": 6,
+      "operationally_stale_artifacts": ["gitwiz_sync_audit_2026-05-31T021949Z"]
+    }
+  },
+  "top_risks": [
+    {
+      "id": "R1",
+      "title": "36 restricted recovery candidates flagged as secret/key material",
+      "severity": "P1/High",
+      "category": "credential_exposure_review",
+      "evidence_refs": [
+        "reports/analysis/workspace_recovery_index_latest.json::signal_counts.secret_or_key_material",
+        "reports/analysis/aurora_mission_control_latest.json::operator_inbox[priority=P1]"
+      ],
+      "change_vs_prior_brief": "unchanged"
+    },
+    {
+      "id": "R2",
+      "title": "CloudBank on long-lived feature branch, 61 ahead / 1 behind origin/main, dirty 4 paths, no upstream tracking",
+      "severity": "Medium-High",
+      "category": "integration_divergence",
+      "branch": "codex/cloudbank-gumas-mutation-auth-2026-05-25",
+      "dirty_paths": [".env_status.json", ".github/dependabot.yml", "src/middleware/fastapi_security.py", "tests/test_security_middleware.py"],
+      "ahead": 61,
+      "behind": 1,
+      "evidence_refs": [
+        "git rev-list --left-right --count origin/main...HEAD (in cloudbank)",
+        "git status --porcelain (in cloudbank)"
+      ],
+      "change_vs_prior_brief": "new_scope"
+    },
+    {
+      "id": "R3",
+      "title": "2 unpushed root commits on main",
+      "severity": "Medium",
+      "category": "integration_gap",
+      "unpushed_commits": [
+        {"sha": "9696e40", "subject": "feat(command-safety): require GUMAS mutation auth in root gate"},
+        {"sha": "286d085", "subject": "chore(reports): refresh root operator artifacts"}
+      ],
+      "evidence_refs": ["git log origin/main..HEAD"]
+    },
+    {
+      "id": "R4",
+      "title": "Stale origin fetches in root (~27h) and CloudBank (~21h)",
+      "severity": "Low-Medium",
+      "category": "remote_freshness",
+      "fetch_age_hours": {"root": 27, "aurora-cloudbank-symbolic-main": 21}
+    },
+    {
+      "id": "R5",
+      "title": "Branch sprawl reduced but not cleared — 9 local branches besides main",
+      "severity": "Medium",
+      "category": "branch_hygiene",
+      "safe_delete": ["codex/continue-l1-entity-ledger-work", "codex/root-cleanup-before-cloudbank-issues-2026-05-11", "feat/warrant-lens"],
+      "needs_decision": [
+        {"branch": "codex/gitwiz-sync-audit-canonical-2026-04-08", "ahead_of_main": 10},
+        {"branch": "codex/explain-statechange-defense-for-sws", "ahead_of_main": 3},
+        {"branch": "codex/root-control-plane-sync-2026-04-01-mixed-backup", "ahead_of_main": 3},
+        {"branch": "codex/root-control-plane-local-2026-03-25", "ahead_of_main": 2},
+        {"branch": "codex/root-reconstruct-recovered-protocols-2026-03-26", "ahead_of_main": 2},
+        {"branch": "rescue/root-control-plane-dirty-workingcopy-2026-03-25", "ahead_of_main": 2}
+      ]
+    },
+    {
+      "id": "R6",
+      "title": "6 of 7 governance artifacts predate current HEAD; GITWIZ audit operationally stale",
+      "severity": "Low-Medium",
+      "category": "artifact_freshness",
+      "gitwiz_audit_captured_head": "96d482e1031ef93e47caca03d4f4fc41970f9603",
+      "current_head": "286d085",
+      "mission_control_git_state_issue": "reports root worktree has 12 in-progress paths; current tree has 0 modified + 2 untracked"
+    },
+    {
+      "id": "R7",
+      "title": "CanonRec nested repo stale ~93 days",
+      "severity": "Low-Medium",
+      "category": "freeze_disposition",
+      "last_commit": {"sha": "259bdc1", "date": "2026-02-28", "subject": "Survey main directory for context"}
+    },
+    {
+      "id": "R8",
+      "title": "Long-tail recovery backlog — 1,017 discovered, 100 surfaced under cap",
+      "severity": "Low",
+      "category": "review_cadence"
+    },
+    {
+      "id": "R9",
+      "title": "Runtime on Python 3.9.6 (system interpreter), past upstream EOL",
+      "severity": "Low",
+      "category": "forward_maintenance"
+    }
+  ],
+  "operational_signals": {
+    "root_repo": {
+      "branch": "main",
+      "head_sha": "286d085",
+      "head_subject": "chore(reports): refresh root operator artifacts",
+      "head_committed_at": "2026-06-01T03:04:26Z",
+      "working_tree_dirty": false,
+      "untracked_paths": [".claude/settings.local.json", "reports/automation/devkit_watch_2026-06-01.md"],
+      "modified_paths": [],
+      "vs_origin_main": {"ahead": 2, "behind": 0},
+      "unpushed_commits": [
+        {"sha": "9696e40", "subject": "feat(command-safety): require GUMAS mutation auth in root gate"},
+        {"sha": "286d085", "subject": "chore(reports): refresh root operator artifacts"}
+      ],
+      "local_branches_excl_main_count": 9,
+      "remote": "git@github-aurora:AUo959/Aurora_ORIONCORE_Directory_Main.git",
+      "last_fetch_utc": "2026-05-31T14:45:37Z",
+      "last_fetch_age_hours": 27
+    },
+    "nested_repos": [
+      {
+        "name": "aurora-cloudbank-symbolic-main",
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+        "branch": "codex/cloudbank-gumas-mutation-auth-2026-05-25",
+        "upstream": null,
+        "vs_origin_main": {"ahead": 61, "behind": 1},
+        "working_tree_dirty": true,
+        "dirty_paths": [".env_status.json", ".github/dependabot.yml", "src/middleware/fastapi_security.py", "tests/test_security_middleware.py"],
+        "last_commit": {"sha": "152634b2", "date": "2026-05-25", "subject": "fix: require auth for GUMAS mutations"},
+        "last_fetch_utc": "2026-05-31T20:44:00Z"
+      },
+      {
+        "name": "CanonRec",
+        "path": "GUMAS_SIM_2.5/CanonRec",
+        "branch": "main",
+        "upstream": "origin/main",
+        "vs_upstream": {"ahead": 0, "behind": 0},
+        "working_tree_dirty": false,
+        "last_commit": {"sha": "259bdc1", "date": "2026-02-28", "subject": "Survey main directory for context"}
+      },
+      {
+        "name": "DuelSim_v2.0",
+        "path": "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0",
+        "branch": "main",
+        "upstream": "origin/main",
+        "vs_upstream": {"ahead": 0, "behind": 0},
+        "working_tree_dirty": false,
+        "last_commit": {"sha": "0716f36", "date": "2026-05-19", "subject": "feat: add DuelSim standalone app"}
+      },
+      {
+        "name": "qgia-knowledge-library-main",
+        "path": "qgia-knowledge-library-main",
+        "branch": "main",
+        "upstream": "origin/main",
+        "vs_upstream": {"ahead": 0, "behind": 0},
+        "working_tree_dirty": false,
+        "last_commit": {"sha": "4d0c975", "date": "2026-04-22", "subject": "feat: bootstrap QGIA library closed-loop artifacts"}
+      },
+      {
+        "name": "qgia-knowledge-spine-main",
+        "path": "qgia-knowledge-spine-main",
+        "branch": "main",
+        "upstream": "origin/main",
+        "vs_upstream": {"ahead": 0, "behind": 0},
+        "working_tree_dirty": false,
+        "last_commit": {"sha": "2491371", "date": "2026-04-23", "subject": "feat: bootstrap QGIA spine closed-loop artifacts"}
+      }
+    ],
+    "governance_signals": {
+      "workspace_verify": {"path": "reports/analysis/workspace_verify_latest.json", "generated_at": "2026-06-01T03:02:59Z", "status": "pass", "findings": 0, "blocking": 0, "stale_vs_head": false, "pre_head_offset_seconds": 87},
+      "mission_control": {"path": "reports/analysis/aurora_mission_control_latest.json", "generated_at": "2026-05-31T21:08:12Z", "status": "attention", "inbox_count": 7, "blocking": 0, "approval_required": 6, "stale_vs_head": true, "committed_in_head_refresh": true, "operational_drift_notes": ["git_state item still reports 12 in-progress paths; tree is now clean tracked + 2 untracked"]},
+      "recovery_index": {"path": "reports/analysis/workspace_recovery_index_latest.json", "generated_at": "2026-05-31T21:04:06Z", "status": "READY", "discovered_candidate_count": 1017, "surfaced_candidate_count": 100, "restricted_candidate_count": 36, "routing_hints": {"aurora-cloudbank-symbolic-main": 51, "root": 31, "qgia-knowledge-spine-main": 13, "review-required": 4, "qgia-knowledge-library-main": 1}, "stale_vs_head": true, "committed_in_head_refresh": true},
+      "recommendations": {"path": "reports/analysis/aurora_recommendations_latest.json", "generated_at": "2026-05-31T21:08:02Z", "status": "open", "recommendation_count": 7, "blocking_count": 0, "approval_required_count": 6, "stale_vs_head": true, "committed_in_head_refresh": true},
+      "devkit": {"path": "reports/analysis/aurora_devkit_latest.json", "generated_at": "2026-05-31T21:04:08Z", "status": "READY", "tools_ok": 21, "tools_total": 21, "install_plan_items": 0, "stale_vs_head": true, "committed_in_head_refresh": true},
+      "confidence_audit": {"path": "reports/analysis/aurora_confidence_audit_latest.json", "generated_at": "2026-05-31T21:04:05Z", "verdict": "pass", "minimum_score": 0.93, "user_alert_count": 0, "stale_vs_head": true, "committed_in_head_refresh": true},
+      "gitwiz_sync_audit": {"path": "reports/analysis/gitwiz/GITWIZ_SYNC_AUDIT__2026-05-31T021949Z.json", "generated_at": "2026-05-31T02:19:49Z", "captured_head_sha": "96d482e1031ef93e47caca03d4f4fc41970f9603", "sync_state": "in_sync", "stale_vs_head": true, "committed_in_head_refresh": false, "operationally_stale": true}
+    }
+  },
+  "week_over_week_delta": {
+    "comparison_against": "reports/state_briefs/executive_brief__2026-05-25.md",
+    "axes": [
+      {"axis": "root_branch", "prior": "codex/root-cleanup-before-cloudbank-issues-2026-05-11", "current": "main", "change": "improved", "note": "feature branch landed"},
+      {"axis": "root_head", "prior": "42faeba", "current": "286d085", "change": "advanced"},
+      {"axis": "root_vs_origin_main", "prior": {"ahead": 18, "behind": 0}, "current": {"ahead": 2, "behind": 0}, "change": "improved", "delta_ahead": -16},
+      {"axis": "root_working_tree_paths", "prior": 15, "current": 2, "change": "improved", "note": "modified→0; only 2 untracked"},
+      {"axis": "local_branch_count_excl_main", "prior": 17, "current": 9, "change": "improved", "delta": -8},
+      {"axis": "nested_repos_dirty", "prior": 1, "current": 1, "change": "stable", "note": "CloudBank same 4 paths"},
+      {"axis": "cloudbank_branch", "prior": "main", "current": "codex/cloudbank-gumas-mutation-auth-2026-05-25", "change": "regressed_scope", "note": "now diverged 61↑/1↓ vs origin/main, no upstream"},
+      {"axis": "top_risk_count", "prior": 8, "current": 9, "change": "+1_net", "note": "retired 15-path-dirty + 18-commit-gap; added CloudBank-divergence, stale-fetch, unpushed-root"},
+      {"axis": "recovery_backlog_discovered", "prior": 1011, "current": 1017, "change": "+6"},
+      {"axis": "recovery_backlog_restricted", "prior": 36, "current": 36, "change": "stable"},
+      {"axis": "verifier_status", "prior": "PASS", "current": "PASS", "change": "stable"},
+      {"axis": "devkit_tools", "prior": "19/19", "current": "21/21", "change": "improved", "note": "toolchain coverage broadened"},
+      {"axis": "stale_governance_artifacts_count", "prior": 5, "current": 6, "change": "+1_strict_but_5_now_in_head_refresh", "note": "only GITWIZ is operationally stale"}
+    ],
+    "net_read": "Major hygiene wins (root branch landed, tree cleaned, sprawl halved); new exposure is CloudBank divergence on a no-upstream feature branch. Recovery P1 (36 restricted) unchanged across 3 briefs."
+  },
+  "recommended_actions": [
+    {"priority": "P1", "title": "Triage 36 restricted (secret/key) recovery candidates", "action_class": "credential_exposure_review", "automation_note": "weekly Gmail digest of restricted candidate filenames (redacted content) for forcing function"},
+    {"priority": "P2", "title": "Decide CloudBank feature-branch landing strategy (land / park / bisect)", "automation_note": "python3 skills/gitwiz-github-manager/scripts/gitwiz_pr_packet.py --repo-name aurora-cloudbank-symbolic-main --base origin/main"},
+    {"priority": "P2", "title": "Push 2 unpushed root commits", "commands": ["git fetch origin", "git push origin main"]},
+    {"priority": "P2", "title": "Re-fetch all remotes before sync decisions", "commands": ["git fetch --all --prune"]},
+    {"priority": "P2", "title": "Refresh the GITWIZ sync audit (only operationally stale artifact)", "automation_note": "gitwiz-github-manager all-repo audit"},
+    {"priority": "P3", "title": "Prune 3 safe-delete branches; record disposition for 6 unmerged branches", "safe_delete": ["codex/continue-l1-entity-ledger-work", "codex/root-cleanup-before-cloudbank-issues-2026-05-11", "feat/warrant-lens"]},
+    {"priority": "P3", "title": "Confirm CanonRec freeze disposition (active / archived) in catalog/repo_registry.yaml"},
+    {"priority": "P3", "title": "Work recovery review queue by target repo (cloudbank 51, root 31, spine 13, review-required 4, library 1)"},
+    {"priority": "P3", "title": "Plan Python 3.9.6 → 3.12+ migration as forward maintenance item"}
+  ],
+  "automation_opportunities": [
+    "Scheduled weekly GITWIZ all-repo audit paired with this brief",
+    "CI gate on exec-brief --strict for briefing-quality enforcement",
+    "Pre-push fetch + workspace_verify hook (.githooks/pre-push)",
+    "Gmail digest of recovery P1 restricted candidates (filenames only, redacted content)"
+  ],
+  "evidence_appendix": {
+    "live_git_state": ["git status --porcelain", "git rev-list --left-right --count origin/main...HEAD", "git log -1 --pretty=format:%h %ai %s", "git remote -v", ".git/FETCH_HEAD mtime"],
+    "artifact_paths": [
+      "reports/analysis/workspace_verify_latest.json",
+      "reports/analysis/aurora_mission_control_latest.json",
+      "reports/analysis/workspace_recovery_index_latest.json",
+      "reports/analysis/aurora_recommendations_latest.json",
+      "reports/analysis/aurora_devkit_latest.json",
+      "reports/analysis/aurora_confidence_audit_latest.json",
+      "reports/analysis/gitwiz/GITWIZ_SYNC_AUDIT__2026-05-31T021949Z.json"
+    ],
+    "prior_brief_reference": "reports/state_briefs/executive_brief__2026-05-25.md",
+    "method_note": "All repo states verified live at generation time. Read-only; no mutation, no canon promotion, no push, no command grammar execution."
+  }
+}

@@ -510,6 +510,45 @@ class WarWearinessModel:
                 self.TERRITORY_ATTRITION * weariness)
 
 
+class GalacticHomeostatModel:
+    """MECH-SOC-007 — Galactic Homeostat (systemic war-weariness).
+
+    The dynamic galaxy's coupled feedback loops (complacency seeding unrest,
+    economic hardship feeding it, territorial decline leaving weaker factions) are
+    all *stress sources* — and at long horizons they compound faster than the
+    constant-strength relief mechanisms clear them, so conflict slowly drifts
+    upward (the Phase 4 integration finding). A homeostat needs a counter-force
+    that **strengthens as the disturbance grows**.
+
+    This is that force: **systemic war-weariness.** When the galaxy *as a whole*
+    is war-torn, collective exhaustion and galaxy-wide diplomatic pressure make
+    **every** conflict de-escalate more readily (a boost added to MECH-REB-004's
+    de-escalation probability, scaling with how far galactic conflict exceeds a
+    calm baseline). When the galaxy is calm, the damper **relaxes to zero**, so
+    conflict still recurs — it stabilises the long-horizon *level* without
+    flattening the living dynamic. Negative feedback proportional to the
+    disturbance — the textbook missing piece.
+    """
+
+    BASELINE = 0.10    # galactic conflict fraction treated as "normal" — no damping
+    GAIN = 2.6         # how hard distress above baseline boosts de-escalation —
+                       # calibrated so the 360-turn late-half conflict load drops
+                       # from ~2.9 (undamped, near the 3.0 collapse reference) to
+                       # ~2.0, flattening the drift without flattening the dynamic
+    MAX_BOOST = 0.30   # cap the systemic war-weariness bonus
+
+    def distress(self, serious_wars: int, n_factions: int) -> float:
+        """Fraction of the galaxy embroiled in serious (civil-war/escalated) conflict."""
+        if n_factions <= 0:
+            return 0.0
+        return float(serious_wars) / float(n_factions)
+
+    def weariness_boost(self, distress: float) -> float:
+        """The de-escalation bonus: zero at/below baseline, rising with distress,
+        capped — so a galaxy on fire pushes hard toward peace, a calm one not at all."""
+        return min(self.MAX_BOOST, max(0.0, float(distress) - self.BASELINE) * self.GAIN)
+
+
 class InsurgencyResolutionModel:
     """MECH-REB-004 — Insurgency Resolution / Mediated Settlement.
 
@@ -556,11 +595,13 @@ class InsurgencyResolutionModel:
         self, *, host_war_pressure: float, insurgent_strength: float,
         repression_level: float, turns_active: int, host_grievance: float,
         popular_support: float, diplomacy_openness: float,
-        mediation_available: bool,
+        mediation_available: bool, systemic_boost: float = 0.0,
     ) -> float:
         """De-escalation probability for one insurgency, via the engine's own
         `calc_deescalation_probability`, with the insurgency's fields mapped onto
-        the inter-faction conflict inputs."""
+        the inter-faction conflict inputs. `systemic_boost` is the galactic
+        homeostat's war-weariness term (MECH-SOC-007) — collective exhaustion when
+        the whole galaxy is war-torn makes every conflict de-escalate more readily."""
         war_cost_state = min(1.0, max(0.0, host_war_pressure))
         # the insurgents' own cost: how ground-down they are
         war_cost_rebels = min(1.0, max(repression_level, 1.0 - insurgent_strength))
@@ -572,6 +613,7 @@ class InsurgencyResolutionModel:
             internal_state, internal_rebels, mediation_available,
         )
         p += (diplomacy_openness - 0.5) * self.OPENNESS_WEIGHT
+        p += max(0.0, systemic_boost)
         return max(0.0, min(1.0, p))
 
     def advance(self, insurgency_id: str, p: float) -> bool:

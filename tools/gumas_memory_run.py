@@ -35,6 +35,7 @@ from mech_gov_001 import (  # noqa: E402
     AssimilationModel,
     ComplacencyModel,
     CultureModel,
+    GalacticHomeostatModel,
     DiplomaticStabilityModel,
     FactionDecisionModel,
     InsurgencyResolutionModel,
@@ -453,7 +454,8 @@ def _writeback_succession(succ: SuccessionModel, state, v3) -> int:
     return n
 
 
-def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3, treaty=None, culture=None):
+def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3, treaty=None,
+                          culture=None, homeostat=None):
     """MECH-REB-004: give civil wars the de-escalation→settlement off-ramp the
     inter-faction conflict layer already has. A grinding, costly, stalemated
     insurgency whose host population pressures it to end can reach a negotiated
@@ -471,6 +473,14 @@ def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3, treaty
         return (0, 0)
     settleable = {"active", "escalated", "civil_war"}
     settled = mediated = 0
+    # MECH-SOC-007: systemic war-weariness — when the galaxy as a whole is
+    # war-torn, collective exhaustion makes every conflict de-escalate more
+    # readily. Computed once per turn from the current galactic conflict level.
+    systemic_boost = 0.0
+    if homeostat is not None:
+        serious = sum(1 for i in insurgencies if _phase(i) in ("civil_war", "escalated"))
+        systemic_boost = homeostat.weariness_boost(
+            homeostat.distress(serious, len(state.factions)))
     for ins in list(insurgencies):
         if _phase(ins) not in settleable:
             continue
@@ -491,6 +501,7 @@ def _writeback_resolution(resolver: InsurgencyResolutionModel, state, v3, treaty
             popular_support=float(getattr(ins, "popular_support", 0.3)),
             diplomacy_openness=float(getattr(leader, "diplomacy_openness", 0.5)) if leader else 0.5,
             mediation_available=was_mediated,
+            systemic_boost=systemic_boost,
         )
         # MECH-GOV-002: the host's culture colours the settle-or-grind decision —
         # a zero-sum clan resists a negotiated end, a hyper-rational order takes it.
@@ -682,6 +693,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     terr = TerritorialConsequenceModel() if memory_on else None
     eco = WarEconomyModel() if memory_on else None
     assim = AssimilationModel() if memory_on else None
+    homeostat = GalacticHomeostatModel() if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
@@ -712,7 +724,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
             _writeback_recovery(recov, state, v3)
             _writeback_complacency(compl, state, v3)
             _writeback_mediation(med, state, v3)
-            _writeback_resolution(resolver, state, v3, treaty, culture)
+            _writeback_resolution(resolver, state, v3, treaty, culture, homeostat)
             _writeback_treaties(treaty, state, v3)
             _writeback_succession(succ, state, v3)
             _writeback_territory(terr, state, v3)

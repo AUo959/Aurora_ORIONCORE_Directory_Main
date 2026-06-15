@@ -50,6 +50,7 @@ from mech_gov_001 import (  # noqa: E402
     AssimilationModel,
     ComplacencyModel,
     CultureModel,
+    GalacticHomeostatModel,
     DiplomaticStabilityModel,
     FactionDecisionModel,
     InsurgencyResolutionModel,
@@ -154,7 +155,11 @@ def run_seed(seed: int, turns: int) -> dict:
     terr = TerritorialConsequenceModel()
     eco = WarEconomyModel()
     assim = AssimilationModel()
+    homeostat = GalacticHomeostatModel()
     pb, sc, st_ = {}, set(), set()
+    # MECH-SOC-007 telemetry: the systemic war-weariness boost engaged each turn
+    # (rises with galactic distress, relaxes to 0 when calm).
+    homeostat_boost = []
     # MECH-ECO-001 telemetry: economic health (output/potential) of at-war vs
     # at-peace factions — the economy busts in war and booms in peace.
     war_health, peace_health = [], []
@@ -201,7 +206,11 @@ def run_seed(seed: int, turns: int) -> dict:
                 bk = _bias_key(getattr(ld, "dominant_bias", None))
                 pre[ins.insurgency_id] = bk
                 turns_by_bias[bk] = turns_by_bias.get(bk, 0) + 1
-        settled, mediated = H._writeback_resolution(resolver, state, v3, treaty, culture)
+        _serious = sum(1 for i in getattr(v3, "insurgencies", [])
+                       if H._phase(i) in ("civil_war", "escalated"))
+        homeostat_boost.append(homeostat.weariness_boost(
+            homeostat.distress(_serious, len(state.factions))))
+        settled, mediated = H._writeback_resolution(resolver, state, v3, treaty, culture, homeostat)
         survivors = {ins.insurgency_id for ins in getattr(v3, "insurgencies", [])}
         for iid, bk in pre.items():
             if iid not in survivors:
