@@ -76,6 +76,17 @@ def test_conflict_cast_rotates(analyses):
 
 
 @pytest.mark.simulation
+def test_cultural_cost_of_conquest_splits_by_culture(analyses):
+    """MECH-CUL-002 (Pillar A): holding reconquered ground costs differently by
+    culture — both policies are exercised across the galaxy (assimilationists
+    impose identity and breed grievance; tolerant regimes accommodate)."""
+    for a in analyses:
+        assert a["verdict"]["cultural_cost_active"], (
+            a["seed"], a["assimilations"], a["tolerations"])
+        assert a["assimilations"] > 0 and a["tolerations"] > 0
+
+
+@pytest.mark.simulation
 def test_war_economy_busts_and_booms(analyses):
     """MECH-ECO-001 (Pillar A): the economy must track the war/peace cycle —
     at-war factions run a depressed economy while at-peace factions enjoy a

@@ -126,17 +126,19 @@
     "repo": "root control plane + registered nested repos by explicit gate only",
     "description": "Run the Aurora salvage operation: find valuable unmerged iCloud/recovery logic, classify it, and promote only through explicit owner-surface gates.",
     "started_at": "2026-06-12T23:00:00Z",
-    "updated_at": "2026-06-12T23:25:43Z",
-    "context_files": [
-      "reports/analysis/salvage_docket__2026-06-12.md",
-      "reports/analysis/aurora_salvage_report_latest.md",
-      "reports/analysis/ord_integration__2026-06-12.md",
-      "reports/analysis/orion_station_spec_recovery__2026-06-12.md",
+        "updated_at": "2026-06-15T01:36:48Z",
+        "context_files": [
+            "reports/analysis/salvage_p2_p4_execution__2026-06-15.md",
+            "reports/analysis/salvage_p2_p4_reconciliation__2026-06-14.md",
+            "reports/analysis/salvage_docket__2026-06-12.md",
+            "reports/analysis/aurora_salvage_report_latest.md",
+            "reports/analysis/ord_integration__2026-06-12.md",
+            "reports/analysis/orion_station_spec_recovery__2026-06-12.md",
       "reports/analysis/remote_branch_sweep__2026-06-11.md",
       "reports/analysis/integration_pass__2026-06-11.md"
     ],
-    "next_step": "cloudbank_ord_pr_1016_then_selective_capsules",
-    "next_step_detail": "Cold start: read reports/analysis/salvage_docket__2026-06-12.md first. P1 is ORD policy family through CloudBank PR #1016, but leave it alone while Claude Code is actively editing that branch. P2/P3/P4 are reconciliation lanes: legacy ORD behavior comparison, Quantum Forge protocol diff against current modules/quantum_forge, and ZipWiz bridge security/owner-surface review. Do not copy staging/archive/iCloud material directly into canon or runtime."
+        "next_step": "publish_p2_p3_or_zipwiz_owner_gate",
+        "next_step_detail": "Cold start: read reports/analysis/salvage_p2_p4_execution__2026-06-15.md, then reports/analysis/salvage_p2_p4_reconciliation__2026-06-14.md. P1 ORD policy family remains skipped/landed via CloudBank PR #1016; do not replay it. P2 is implemented and locally committed in CloudBank worktree /private/tmp/cloudbank-salvage-p2-ord-tests-20260615 on branch codex/cloudbank-salvage-p2-ord-tests-2026-06-15 at 2588a0ea; validation: 17 passed in tests/ord. P3 is implemented and locally committed in CloudBank worktree /private/tmp/cloudbank-salvage-p3-forge-policy-20260615 on branch codex/cloudbank-salvage-p3-forge-policy-2026-06-15 at 1829ca97; validation: 78 passed across Forge v2/v3 plus lifecycle policy. Next actionable choices: push/open PRs for P2 and P3, or continue P4 only after explicit ZipWiz owner-surface selection. P4 remains blocked because zip_wizard is remote-only, no local zip_wizard checkout exists, and importlib cannot find zipwiz. Do not copy staging/archive/iCloud material directly into canon or runtime."
   },
   "task_queue": [
     {
@@ -352,9 +354,9 @@
       "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
     }
   ],
-  "last_updated": "2026-06-13T20:33:09Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "feat(sim): consequence layer \u2014 inert instability signals mad",
+    "last_updated": "2026-06-15T01:36:48Z",
+    "last_platform": "codex",
+    "last_session_summary": "Codex implemented P2 ORD salvage tests and P3 Quantum Forge lifecycle policy on isolated CloudBank branches; P4 remains blocked on ZipWiz owner-surface verification.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -374,64 +376,64 @@
   },
   "recent_commits": [
     {
-      "sha": "030cc17",
-      "date": "2026-06-13",
+      "sha": "bbc9268",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(sim): consequence layer \u2014 inert instability signals made consequential (lessons to-do)"
+      "summary": "feat(sim): war economy & market flux (MECH-ECO-001) \u2014 Pillar A"
     },
     {
-      "sha": "cabbc9b",
-      "date": "2026-06-13",
+      "sha": "3862b68",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(sim): seed-42 stability solution \u2014 DSI onset gate + war-weariness break the civil-war attractor"
+      "summary": "feat(sim): territorial consequence (MECH-TER-001) \u2014 Pillar A begins"
     },
     {
-      "sha": "9c418bc",
-      "date": "2026-06-13",
+      "sha": "853add6",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "docs(sim): expand seed-42 review \u2014 conflict initiation is over-weighted (confirmed); two-sided build plan"
+      "summary": "docs(sim): deep-read the Office of Strategic Diplomacy (diplomacy-as-institution)"
     },
     {
-      "sha": "f575498",
-      "date": "2026-06-13",
+      "sha": "4a7789c",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "docs(sim): seed-42 stability review \u2014 root cause found (civil-war attractor has no exit)"
+      "summary": "feat(sim): galactic power dynamics (MECH-POW-001) \u2014 Pillar C complete"
     },
     {
-      "sha": "b996560",
-      "date": "2026-06-13",
+      "sha": "26e2b0b",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(sim): social dynamics + MECH-SOC-001 grievance memory wired into rebellion axis"
+      "summary": "feat(sim): internal politics & succession (MECH-GOV-003) \u2014 regimes fall"
     },
     {
-      "sha": "48c50e7",
-      "date": "2026-06-13",
+      "sha": "405949d",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(sim): wire MECH-GOV-001 into the live GUMAS engine (faction memory -> trust)"
+      "summary": "feat(sim): culture-weighted decisions (MECH-GOV-002) \u2014 Pillar C begins"
     },
     {
-      "sha": "ebb6b34",
-      "date": "2026-06-13",
+      "sha": "32d3d10",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(sim): implement MECH-GOV-001 \u2014 memory-driven faction decision model"
+      "summary": "feat(sim): treaty enforcement (MECH-DIP-003) \u2014 settled peace binds and breaks"
     },
     {
-      "sha": "c2639a5",
-      "date": "2026-06-13",
+      "sha": "8432b9b",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(canon): finish L2 mining \u2014 timeline + factions promoted; memory_system reference staged for MECH-GOV-001"
+      "summary": "feat(sim): mediated settlement (MECH-DIP-002) \u2014 diplomacy as a real off-ramp"
     },
     {
-      "sha": "5537bf8",
-      "date": "2026-06-13",
+      "sha": "d9b4746",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "feat(canon): L2 galactic canon promoted \u2014 full galaxy corpus routed to CanonRec canon/L2/"
+      "summary": "fix(sim): D9 \u2014 gate collapse on conflict load, not a stability scalar"
     },
     {
-      "sha": "e086668",
-      "date": "2026-06-13",
+      "sha": "3eea194",
+      "date": "2026-06-14",
       "platform": "claude-code",
-      "summary": "docs(discovery): L2 canon genesis & lineage \u2014 traced to the original 'Crisis & Compromise' RPG"
+      "summary": "feat(sim): insurgency resolution graft (MECH-REB-004 + D1) \u2014 a dynamic galaxy"
     }
   ],
   "security_events": [
@@ -477,7 +479,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "030cc17",
+    "main_sha": "bbc9268",
     "local_branches": [
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
@@ -595,8 +597,14 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-06-13T20:33:09Z",
+    "checked_at": "2026-06-14T21:45:28Z",
     "entries": [
+      {
+        "repo": "root",
+        "class": "unpushed_main",
+        "detail": "main is 16 commit(s) ahead of origin/main",
+        "remediation": "Push main (or PR it if the repo requires review)."
+      },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
@@ -610,6 +618,12 @@
         "branch": "codex/cloudbank-issue-1020-mesh-router-contract",
         "detail": "1 commit(s) exist only on this machine",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1020-mesh-router-contract && gh pr create"
+      },
+      {
+        "repo": "CanonRec",
+        "class": "unpushed_main",
+        "detail": "main is 17 commit(s) ahead of origin/main",
+        "remediation": "Push main (or PR it if the repo requires review)."
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."

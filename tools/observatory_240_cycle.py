@@ -47,6 +47,7 @@ sys.path.insert(0, str(REPO_ROOT / "tools"))
 import gumas_memory_run as H  # noqa: E402  the shipped pipeline
 from engine_advanced import GUMASAdvancedEngine  # noqa: E402
 from mech_gov_001 import (  # noqa: E402
+    AssimilationModel,
     ComplacencyModel,
     CultureModel,
     DiplomaticStabilityModel,
@@ -152,10 +153,13 @@ def run_seed(seed: int, turns: int) -> dict:
     power = PowerDynamicsModel()
     terr = TerritorialConsequenceModel()
     eco = WarEconomyModel()
+    assim = AssimilationModel()
     pb, sc, st_ = {}, set(), set()
     # MECH-ECO-001 telemetry: economic health (output/potential) of at-war vs
     # at-peace factions — the economy busts in war and booms in peace.
     war_health, peace_health = [], []
+    # MECH-CUL-002 telemetry: the two sides of the cultural cost of conquest.
+    assimilations = tolerations = 0
     # MECH-POW-001 telemetry: run-averaged trust toward the *current* hegemon,
     # split by the truster's culture stance (balance vs bandwagon).
     heg_trust = {"balance": [], "bandwagon": []}
@@ -205,6 +209,9 @@ def run_seed(seed: int, turns: int) -> dict:
         broken_accords = H._writeback_treaties(treaty, state, v3)
         successions = H._writeback_succession(succ, state, v3)
         H._writeback_territory(terr, state, v3)
+        _as, _to = H._writeback_assimilation(assim, terr, state, v3)
+        assimilations += _as
+        tolerations += _to
         H._writeback_economy(eco, state, v3)
         hegemon = H._writeback_power(power, state)
         if t >= 2 * ERA_LEN:
@@ -294,7 +301,8 @@ def run_seed(seed: int, turns: int) -> dict:
             "mean_power_losers": mean_pw_losers,
             "mean_power_holders": mean_pw_holders,
             "war_economic_health": round(S.mean(war_health), 4) if war_health else None,
-            "peace_economic_health": round(S.mean(peace_health), 4) if peace_health else None}
+            "peace_economic_health": round(S.mean(peace_health), 4) if peace_health else None,
+            "assimilations": assimilations, "tolerations": tolerations}
 
 
 # --------------------------------------------------------------------------- #
@@ -413,6 +421,13 @@ def analyse_seed(res: dict) -> dict:
     war_economy_gap = round(peh - weh, 4) if (weh is not None and peh is not None) else 0.0
     war_economy_active = war_economy_gap >= 0.15
 
+    # --- MECH-CUL-002: the cultural cost of conquest, split by culture -------- #
+    assimilations = res.get("assimilations", 0)
+    tolerations = res.get("tolerations", 0)
+    # both policies must be exercised — assimilationists pay identity grievance,
+    # tolerant regimes preserve tradition — for the cultural cost to be "active".
+    cultural_cost_active = assimilations > 0 and tolerations > 0
+
     return {
         "seed": res["seed"],
         "turns": res["turns"],
@@ -453,6 +468,8 @@ def analyse_seed(res: dict) -> dict:
         "war_economic_health": weh,
         "peace_economic_health": peh,
         "war_economy_gap": war_economy_gap,
+        "assimilations": assimilations,
+        "tolerations": tolerations,
         "total_new_insurgencies": onsets,
         "off_ramp_settlement_share": off_ramp_settlement_share,
         "total_negotiations": sum(_series(rows, "v3_negotiations_concluded")),
@@ -470,6 +487,7 @@ def analyse_seed(res: dict) -> dict:
             "power_politics_active": power_politics_active,
             "consequences_propagate": consequences_propagate,
             "war_economy_active": war_economy_active,
+            "cultural_cost_active": cultural_cost_active,
             "dynamic_galaxy": bool(living and has_off_ramp and cast_rotates),
         },
     }
@@ -588,6 +606,10 @@ def render_md(analyses, det_ok, when, turns, seeds) -> str:
                  f"(gap {a['war_economy_gap']:+.2f}, MECH-ECO-001). The economy busts in war and "
                  f"booms in reconstruction; a depressed economy feeds unrest, closing the loop "
                  f"war → economic depression → grievance.")
+        L.append(f"- **Sato (cultural cost of conquest):** holding reconquered ground, "
+                 f"{a['assimilations']} assimilation-impositions bred identity grievance vs "
+                 f"{a['tolerations']} tolerant accommodations earning legitimacy (MECH-CUL-002) — "
+                 f"conquest costs differently depending on the conqueror's culture (modest by design).")
         L.append(f"- **Tanaka (engine):** {a['total_new_insurgencies']} insurgencies formed and "
                  f"retired (cast rotation; was ~13 pre-graft), {a['total_migrations']} migrations, "
                  f"{a['total_fragmentations']} fragmentation events — engine phases all live.\n")

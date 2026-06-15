@@ -1,21 +1,14 @@
 {
-  "generated_at": "2026-06-08T18:32:28Z",
+  "generated_at": "2026-06-14T21:31:42Z",
   "root": ".",
   "mode": "manual",
   "status": "warn",
   "summary": {
-    "finding_count": 2,
+    "finding_count": 1,
     "blocking_count": 0,
-    "warning_count": 2
+    "warning_count": 1
   },
   "findings": [
-    {
-      "check": "manifest_execution_context",
-      "severity": "warning",
-      "blocking": false,
-      "details": "Manifest includes local-only top-level entries unavailable here: ['~remote~']",
-      "suggested_fix": "Run from the canonical workspace path before treating local-only workspace inventory drift as a blocking failure."
-    },
     {
       "check": "repo_registry_coverage",
       "severity": "warning",

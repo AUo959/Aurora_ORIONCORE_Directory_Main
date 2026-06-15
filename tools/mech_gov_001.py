@@ -987,6 +987,48 @@ class WarEconomyModel:
         return 0.0
 
 
+class AssimilationModel:
+    """MECH-CUL-002 — Assimilation vs Local Tradition (Pillar A).
+
+    Holding ground taken from others is a **cultural choice**, and the choice is
+    decided by who you are (canon §12: *Cultural_Identity = Assimilation vs Local
+    Traditions*). When a faction holds **restive, recently-reconquered territory**
+    (the contested ground MECH-TER-001 tracks):
+
+      * an **assimilationist** culture (zero-sum / fear / sunk-cost / confirmation)
+        imposes its identity — restoring control now, but breeding **identity
+        grievance** (demographic stress) that fuels future, often separatist,
+        unrest. *Win the land, lose the peace.*
+      * a **tolerant** culture (survivorship / status-quo / moral-licensing /
+        rational) preserves local tradition — accepting looser integration for
+        **civic peace** (a little restored legitimacy, no identity grievance).
+
+    So conquest carries a cultural cost, and the cost — like every decision in the
+    dynamic galaxy — depends on the holder's `dominant_bias`.
+    """
+
+    ASSIMILATE_CULTURES = ("zero_sum", "fear_based", "sunk_cost", "confirmation")
+    TOLERATE_CULTURES = ("survivorship", "status_quo", "moral_licensing", "hyper_rational")
+    IDENTITY_GRIEVANCE = 0.06  # stress per unit of restive (contested) ground —
+                               # gentle, so the cultural cost is real but doesn't
+                               # by itself tip the galaxy toward more war
+    TOLERATE_LEGITIMACY = 0.01  # accommodation earns a little legitimacy back
+
+    def policy(self, dominant_bias) -> str:
+        s = str(dominant_bias).lower().replace("biastype.", "").replace("_bias", "")
+        for k in self.ASSIMILATE_CULTURES:
+            if k in s:
+                return "assimilate"
+        for k in self.TOLERATE_CULTURES:
+            if k in s:
+                return "tolerate"
+        return "neutral"
+
+    def identity_grievance(self, restive_territory: float) -> float:
+        """Stress an assimilationist regime breeds by holding restive ground."""
+        return self.IDENTITY_GRIEVANCE * max(0.0, float(restive_territory))
+
+
 # --------------------------------------------------------------------------- demo
 def _demo() -> int:
     """Show MECH-GOV-001 changing a faction's behavior as memory accrues —

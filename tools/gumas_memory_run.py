@@ -32,6 +32,7 @@ sys.path.insert(0, str(ENGINE_DIR))
 sys.path.insert(0, str(REPO_ROOT / "tools"))
 
 from mech_gov_001 import (  # noqa: E402
+    AssimilationModel,
     ComplacencyModel,
     CultureModel,
     DiplomaticStabilityModel,
@@ -315,6 +316,37 @@ def _writeback_territory(terr: "TerritorialConsequenceModel", state, v3) -> None
         # economic_strength can't exceed the (now lower) potential.
         if float(getattr(fac, "economic_strength", 0.5)) > ceiling:
             fac.economic_strength = round(ceiling, 4)
+
+
+def _writeback_assimilation(assim: "AssimilationModel", terr, state, v3):
+    """MECH-CUL-002: holding restive, recently-reconquered ground (TER-001's
+    contested territory) is a cultural choice. An assimilationist culture imposes
+    its identity and breeds identity grievance (demographic stress → future
+    separatist unrest); a tolerant culture preserves local tradition and earns a
+    little legitimacy back. Returns (assimilations, tolerations) — the two sides
+    of the cultural cost of conquest exercised this turn."""
+    if v3 is None or terr is None:
+        return (0, 0)
+    pops = getattr(v3, "population", {})
+    assimilations = tolerations = 0
+    for fid, fac in state.factions.items():
+        restive = terr.contested.get(fid, 0.0)
+        if restive <= 0.01:
+            continue
+        leader = state.leaders.get(fac.leader_id) if fac.leader_id else None
+        pol = assim.policy(getattr(leader, "dominant_bias", None))
+        if pol == "assimilate":
+            assimilations += 1
+            pop = pops.get(fid)
+            if pop is not None:
+                pop.demographic_stress = round(min(
+                    1.0, float(getattr(pop, "demographic_stress", 0.3))
+                    + assim.identity_grievance(restive)), 4)
+        elif pol == "tolerate" and leader is not None:
+            tolerations += 1
+            leader.public_legitimacy = round(min(
+                1.0, float(leader.public_legitimacy) + assim.TOLERATE_LEGITIMACY), 4)
+    return (assimilations, tolerations)
 
 
 def _writeback_economy(eco: "WarEconomyModel", state, v3) -> None:
@@ -649,6 +681,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
     power = PowerDynamicsModel() if memory_on else None
     terr = TerritorialConsequenceModel() if memory_on else None
     eco = WarEconomyModel() if memory_on else None
+    assim = AssimilationModel() if memory_on else None
     prev_breach: dict = {}
     seen_conflicts: set = set()
     seen_treaties: set = set()
@@ -683,6 +716,7 @@ def run(seed: int, turns: int, memory_on: bool) -> dict:
             _writeback_treaties(treaty, state, v3)
             _writeback_succession(succ, state, v3)
             _writeback_territory(terr, state, v3)
+            _writeback_assimilation(assim, terr, state, v3)
             _writeback_economy(eco, state, v3)
             _writeback_power(power, state)
         traj.append({

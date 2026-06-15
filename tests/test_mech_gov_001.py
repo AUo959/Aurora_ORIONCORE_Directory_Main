@@ -18,6 +18,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "tools"))
 
 from mech_gov_001 import (  # noqa: E402
+    AssimilationModel,
     ComplacencyModel,
     CultureModel,
     DiplomaticStabilityModel,
@@ -411,6 +412,23 @@ def test_war_economy_busts_and_booms_and_feeds_back():
     assert e.stress_delta(0.3) > 0
     assert e.stress_delta(0.95) < 0
     assert e.stress_delta(0.75) == 0.0
+
+
+@pytest.mark.simulation
+def test_assimilation_policy_splits_by_culture():
+    """MECH-CUL-002: holding conquered ground is a culture-driven choice —
+    proud/defensive cultures assimilate (and breed identity grievance), pragmatic/
+    survivalist cultures tolerate local tradition; the grievance scales with the
+    restive ground held."""
+    a = AssimilationModel()
+    assert a.policy("BiasType.ZERO_SUM") == "assimilate"
+    assert a.policy("fear_based") == "assimilate"
+    assert a.policy("BiasType.SURVIVORSHIP") == "tolerate"
+    assert a.policy("status_quo") == "tolerate"
+    assert a.policy(None) == "neutral"
+    # identity grievance scales with restive ground and is zero for none
+    assert a.identity_grievance(0.4) > a.identity_grievance(0.1) > 0
+    assert a.identity_grievance(0.0) == 0.0
 
 
 @pytest.mark.simulation

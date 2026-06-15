@@ -1,8 +1,8 @@
 # Workspace Map
 
-- Generated: `2026-06-12T10:17:02Z`
+- Generated: `2026-06-15T03:32:45Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `44`
+- Top-level entries cataloged: `45`
 - Nested repos registered: `9`
 - Archive or binary artifacts inventoried: `1268`
 - Classification overrides loaded: `6` from `catalog/classification_overrides.yaml`
@@ -14,7 +14,7 @@
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `5` top-level entries
-- `intake`: `12` top-level entries
+- `intake`: `13` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
@@ -38,6 +38,7 @@
 - `.gitleaks.toml` -> `intake/.gitleaks.toml` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Aurora_Sim_Architecture` -> `intake/Aurora_Sim_Architecture` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 - `PR SENSOR ARRAY SPEC v0 3 0 DELTA.md` -> `intake/PR SENSOR ARRAY SPEC v0 3 0 DELTA.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `Prplexity_Observation_6_14.md` -> `intake/Prplexity_Observation_6_14.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `SENSOR ARRAY SPECIFICATION v0 3 0.md` -> `intake/SENSOR ARRAY SPECIFICATION v0 3 0.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `SPEC__SALVAGE_OPERATIONS__v0_1_0.md` -> `intake/SPEC__SALVAGE_OPERATIONS__v0_1_0.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `aurora-cloudbank-symbolic_README_DRAFT.md` -> `intake/aurora-cloudbank-symbolic_README_DRAFT.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)

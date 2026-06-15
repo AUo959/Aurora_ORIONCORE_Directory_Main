@@ -1,4 +1,4 @@
-generated_at: '2026-06-12T10:17:02Z'
+generated_at: '2026-06-15T03:32:45Z'
 root: .
 logical_taxonomy:
 - repos
@@ -225,6 +225,17 @@ entries:
   current_path: PR SENSOR ARRAY SPEC v0 3 0 DELTA.md
   logical_zone: intake
   planned_path: intake/PR SENSOR ARRAY SPEC v0 3 0 DELTA.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: prplexity-observation-6-14
+  kind: intake_file
+  current_path: Prplexity_Observation_6_14.md
+  logical_zone: intake
+  planned_path: intake/Prplexity_Observation_6_14.md
   git_boundary: none
   storage_tier: review
   retention_policy: review
