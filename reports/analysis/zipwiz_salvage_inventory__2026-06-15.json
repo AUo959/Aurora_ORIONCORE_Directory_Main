@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-06-15T22:08:03Z",
+  "domain": "zipwiz",
+  "scope": {
+    "filesystem_root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+    "github_owner": "AUo959",
+    "primary_github_repo": "AUo959/zip_wizard",
+    "posture": "salvage_inventory_no_canon_promotion"
+  },
+  "github": {
+    "primary_repo": {
+      "name_with_owner": "AUo959/zip_wizard",
+      "url": "https://github.com/AUo959/zip_wizard",
+      "visibility": "public",
+      "default_branch": "main",
+      "main_sha": "0d2a0e1d4a19833bc13abfbe5080ed35389ff3a8",
+      "pushed_at": "2026-06-11T09:44:31Z",
+      "updated_at": "2026-06-11T09:44:37Z",
+      "disk_usage_kb": 97656,
+      "main_blob_count": 456,
+      "current_env_status": {
+        "tracks_env": false,
+        "tracks_env_example": true,
+        "restricted_note": "Historical .env path is security provenance only; contents were not read or copied."
+      }
+    },
+    "pull_requests": [
+      {
+        "number": 11,
+        "state": "closed",
+        "merged_at": "2026-06-11T09:44:30Z",
+        "title": "chore(security): untrack .env (control-plane sweep finding)",
+        "routing": "security_provenance"
+      },
+      {
+        "number": 10,
+        "state": "open",
+        "title": "Harden API privacy controls and modularize home view",
+        "head": "codex/conduct-full-code-review",
+        "head_sha": "c637acb69190a0750fe701d26a8b6006dcd01794",
+        "routing": "include_candidate",
+        "diff_stat": {
+          "files_changed": 15,
+          "insertions": 766,
+          "deletions": 354
+        }
+      },
+      {
+        "number": 9,
+        "state": "open",
+        "title": "build(deps-dev): bump js-yaml from 4.1.0 to 4.1.1 in the npm_and_yarn group across 1 directory",
+        "head": "dependabot/npm_and_yarn/npm_and_yarn-3c67cbb9cd",
+        "head_sha": "851867e7d106c29aa28f1563307346b97fe2dfb2",
+        "routing": "dependency_hygiene",
+        "diff_stat": {
+          "files_changed": 2,
+          "insertions": 691,
+          "deletions": 1525
+        }
+      }
+    ],
+    "cross_repo_hits": [
+      {
+        "repo": "AUo959/zip_wizard",
+        "routing": "primary_app_owner"
+      },
+      {
+        "repo": "AUo959/Aurora_ORIONCORE_Directory_Main",
+        "routing": "root_governance_and_reports"
+      },
+      {
+        "repo": "AUo959/aurora-cloudbank-symbolic",
+        "routing": "nested_runtime_surface"
+      },
+      {
+        "repo": "AUo959/CanonRec",
+        "routing": "private_canon_references_no_root_mutation"
+      },
+      {
+        "repo": "AUo959/AuroraOS",
+        "routing": "historical_constellation_reference"
+      },
+      {
+        "repo": "AUo959/cloudbank-quantum-en",
+        "routing": "historical_constellation_reference"
+      }
+    ]
+  },
+  "filesystem": {
+    "path_match_file_count": 515,
+    "categories": [
+      {
+        "name": "canonical_packaging_root",
+        "files": 24,
+        "bytes": 545190,
+        "routing": "include"
+      },
+      {
+        "name": "cloudbank_runtime_surface",
+        "files": 7,
+        "bytes": 45315,
+        "routing": "include_candidate_nested_repo_only"
+      },
+      {
+        "name": "gumas25_bridge_or_harvest",
+        "files": 2,
+        "bytes": 22140,
+        "routing": "include_as_evolution_evidence"
+      },
+      {
+        "name": "zipwiz_chamber_unzipped",
+        "files": 130,
+        "bytes": 2149238160,
+        "routing": "reference_evidence_backup_only_until_intake"
+      },
+      {
+        "name": "complete_archive_4_19",
+        "files": 38,
+        "bytes": 910288,
+        "routing": "backup_only"
+      },
+      {
+        "name": "session_archives",
+        "files": 27,
+        "bytes": 3570263,
+        "routing": "backup_only"
+      },
+      {
+        "name": "gumas2_project_archive",
+        "files": 75,
+        "bytes": 1325265,
+        "routing": "backup_only_except_packaging_root_subset"
+      },
+      {
+        "name": "archive_mirror_duplicates",
+        "files": 69,
+        "bytes": 3818232,
+        "routing": "backup_only"
+      },
+      {
+        "name": "reviewed_quarantine_duplicates",
+        "files": 114,
+        "bytes": 519092632,
+        "routing": "quarantine_backup_only"
+      },
+      {
+        "name": "staging_candidate",
+        "files": 2,
+        "bytes": 182388,
+        "routing": "include_candidate_needs_owner_decision"
+      },
+      {
+        "name": "root_reports",
+        "files": 1,
+        "bytes": 27059,
+        "routing": "include_as_non_canonical_reference"
+      },
+      {
+        "name": "zipwiz_governor_skill",
+        "files": 18,
+        "bytes": 156937,
+        "routing": "include"
+      },
+      {
+        "name": "other",
+        "files": 8,
+        "bytes": 4908206,
+        "routing": "inspect_before_promotion"
+      }
+    ],
+    "high_value_checksums": [
+      {
+        "path": "projects/GUMAS_SIM_2.0/05_BUILD_TOOLS/ZipWiz_Packaging/New ZipWiz/L3_GOV__ZIPWIZ_PACKAGING_PROTOCOL__v0.1.0__2026-02-08__BAY02_0814.md",
+        "sha256": "456d60bf6c27712a4d38594a6c73aa2baf0bb97922130a9c3ff05891a8bc9d0c",
+        "routing": "include"
+      },
+      {
+        "path": "projects/GUMAS_SIM_2.0/05_BUILD_TOOLS/ZipWiz_Packaging/New ZipWiz/L3_SCHEMA__ORION_BUNDLE_MANIFEST__v0.1.0__2026-02-08__BAY02_0814.schema.json",
+        "sha256": "05512420df676cc8d05b63796f75378245aaf7032b813055473104faa5b75c97",
+        "routing": "include"
+      },
+      {
+        "path": "archives/unzipped/ZipWiz_Chamber_6_28/aurora_bridge_output/zipwiz_bridge.py",
+        "sha256": "51c65beb626fef83528637d7d00b5fe32ebeb24946c75119676c04c14eef69c0",
+        "routing": "include_candidate_after_owner_surface_selection"
+      },
+      {
+        "path": "archives/unzipped/ZipWiz_Chamber_6_28/aurora_bridge_output/relay_handshake.py",
+        "sha256": "e55b81ede35efb8c770b67d2452b3c6d66b905addeffa8d98e4a9b7af858644a",
+        "routing": "include_candidate_after_owner_surface_selection"
+      },
+      {
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/bridges/zip-wizard/bridge.ts",
+        "sha256": "9d808b3352f45dca5d70fa83784a1ce7b7afd8acc5789e1bb28f3038002f807d",
+        "routing": "include_candidate_nested_repo_only"
+      },
+      {
+        "path": "reports/analysis/non_can_reports/ZIPWIZ_CHAMBER_TECHNICAL_REFERENCE.md",
+        "sha256": "efb4644826440090c11396564811e8572296daf0ef0975d203be214707bf9e71",
+        "routing": "include_as_non_canonical_reference"
+      }
+    ]
+  },
+  "zipwiz_governor": {
+    "default_root_repair": {
+      "status": "completed_in_versioned_source",
+      "changed_files": [
+        "skills/zipwiz-governor/scripts/zipwiz_rules.py",
+        "skills/zipwiz-governor/references/canonical_roots.md"
+      ],
+      "installed_runtime_sync": "blocked_by_environment_usage_limit_after_sandbox_permission_failure"
+    },
+    "validation_after_patch": {
+      "unit_tests": {
+        "command": "python3 -m unittest skills/zipwiz-governor/scripts/test_zipwiz_governance.py",
+        "result": "20 passed"
+      },
+      "default_scan": {
+        "command": "python3 skills/zipwiz-governor/scripts/zipwiz_governance_scan.py --repo . --out-json /tmp/zipwiz_governance_default_after_patch_20260615.json --out-md /tmp/zipwiz_governance_default_after_patch_20260615.md",
+        "verdict": "REVIEW",
+        "promotion_readiness": "CONDITIONAL",
+        "total_artifacts": 156,
+        "total_findings": 105,
+        "block_findings": 0,
+        "warnings": [
+          "W_EVOLUTION_VERSION_DATE_CONTRADICTION"
+        ]
+      }
+    }
+  },
+  "next_actions": [
+    {
+      "owner_surface": "root",
+      "action": "commit_and_push_salvage_receipt_and_zipwiz_governor_default_root_repair"
+    },
+    {
+      "owner_surface": "local_codex_runtime",
+      "action": "run_make_skills_install_when_approval_or_usage_allows"
+    },
+    {
+      "owner_surface": "AUo959/zip_wizard",
+      "action": "rebase_validate_and_merge_or_close_pr_10"
+    },
+    {
+      "owner_surface": "AUo959/zip_wizard",
+      "action": "rebase_test_or_close_pr_9"
+    },
+    {
+      "owner_surface": "security",
+      "action": "run_redacted_gitleaks_before_any_history_sensitive_promotion"
+    },
+    {
+      "owner_surface": "CloudBank",
+      "action": "do_not_copy_python_bridge_until_zipwiz_package_dependency_surface_is_verified"
+    }
+  ]
+}

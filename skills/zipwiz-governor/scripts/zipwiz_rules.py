@@ -12,14 +12,14 @@ from pathlib import Path
 from typing import Any
 
 DEFAULT_CANONICAL_ROOTS = [
-    "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.0/05_BUILD_TOOLS/ZipWiz_Packaging",
-    "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
-    "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_HARVEST_26",
+    "projects/GUMAS_SIM_2.0/05_BUILD_TOOLS/ZipWiz_Packaging",
+    "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+    "GUMAS_SIM_2.5/SIM_HARVEST_26",
 ]
 
 DEFAULT_REFERENCE_ROOTS = [
-    "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/ZipWiz_Chamber_6_28/ZIPWIZ_Documents",
-    "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Non_can_reports/ZIPWIZ_CHAMBER_TECHNICAL_REFERENCE.md",
+    "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents",
+    "reports/analysis/non_can_reports/ZIPWIZ_CHAMBER_TECHNICAL_REFERENCE.md",
 ]
 
 DEFAULT_EXCLUDE_PATTERNS = [
