@@ -126,8 +126,10 @@
     "repo": "root control plane + registered nested repos by explicit gate only",
     "description": "Run the Aurora salvage operation: find valuable unmerged iCloud/recovery logic, classify it, and promote only through explicit owner-surface gates.",
     "started_at": "2026-06-12T23:00:00Z",
-    "updated_at": "2026-06-15T21:55:00Z",
+    "updated_at": "2026-06-16T02:58:00Z",
     "context_files": [
+      "reports/analysis/zipwiz_salvage_inventory__2026-06-15.md",
+      "reports/analysis/zipwiz_salvage_inventory__2026-06-15.json",
       "reports/analysis/codex_parallel_work_roundup__2026-06-15.md",
       "reports/analysis/l2_scenario_seed_catalog_extraction__2026-06-15.md",
       "reports/analysis/salvage_p2_p4_execution__2026-06-15.md",
@@ -141,8 +143,8 @@
       "reports/analysis/remote_branch_sweep__2026-06-11.md",
       "reports/analysis/integration_pass__2026-06-11.md"
     ],
-    "next_step": "review_root_roundup_then_nested_handoff",
-    "next_step_detail": "Cold start: read reports/analysis/codex_parallel_work_roundup__2026-06-15.md first. Codex consolidated root-local work in commit 97c695a (MECH-SOC-007 homeostat follow-up, devkit canonical-root fallback, L2 scenario seed extraction, PAT terminal salvage scan, phase-two narrative contract, salvage P2/P3 receipts, devkit watch receipts, and executive briefs). Focused validation passed: 38 sim tests, 8 devkit tests, py_compile with PYTHONPYCACHEPREFIX, devkit READY, workspace_verify non-blocking warn only for ~remote~ registry coverage. P2/P3 CloudBank salvage PRs remain #1026 and #1027; P4 remains blocked on ZipWiz owner-surface selection. Root handoff leftovers: CharForge branch codex/charforge-capsule-implementation-2026-06-14 is clean and pushed at 4c616cc but should be rebased/cherry-picked onto current main rather than merged wholesale. Nested read-only status: CanonRec is clean and 22 commits ahead of origin/main; CloudBank main is behind 1 with dirty .env_status.json and tests/test_mesh_router_v1.py; DuelSim and QGIA repos are clean/in sync. Do not push nested repos by implication."
+    "next_step": "review_and_validate_zip_wizard_pr_10",
+    "next_step_detail": "Cold start: root ZipWiz handoff commit 30af5f4 records reports/analysis/zipwiz_salvage_inventory__2026-06-15.md/json and repairs the versioned zipwiz-governor default roots. make skills-install succeeded on 2026-06-16T02:57:41Z and synced the two zipwiz-governor runtime files to ~/.codex/skills. Root validation before commit: 20 zipwiz-governor unit tests passed and workspace_verify had 0 blocking findings. GitHub AUo959/zip_wizard live state on 2026-06-16: PR #10 is open, non-draft, mergeable, 15 files, +766/-354, privacy/security include candidate; PR #9 is open but not mergeable, dependency hygiene for js-yaml. Next: review PR #10 diff, run npm test surface if a local checkout/worktree is available or clone/fetch if needed, then merge or report blockers. Do not read or reproduce historical .env contents."
   },
   "task_queue": [
     {
@@ -358,9 +360,9 @@
       "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
     }
   ],
-  "last_updated": "2026-06-15T21:55:00Z",
+  "last_updated": "2026-06-16T02:58:00Z",
   "last_platform": "codex",
-  "last_session_summary": "Codex consolidated root-local and parallel work into commit 97c695a, prepared explicit Claude handoff instructions, and queued root main for publication.",
+  "last_session_summary": "Codex committed the root ZipWiz salvage inventory and synced the repaired zipwiz-governor runtime; ZipWiz PR #10 review/test is next.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -380,6 +382,18 @@
   },
   "recent_commits": [
     {
+      "sha": "30af5f4",
+      "date": "2026-06-16",
+      "platform": "codex",
+      "summary": "chore(zipwiz): record salvage inventory"
+    },
+    {
+      "sha": "be4424c",
+      "date": "2026-06-15",
+      "platform": "codex",
+      "summary": "chore(session): record root work roundup handoff"
+    },
+    {
       "sha": "97c695a",
       "date": "2026-06-15",
       "platform": "codex",
@@ -387,13 +401,13 @@
     },
     {
       "sha": "c8a24b3",
-      "date": "2026-06-15",
+      "date": "2026-06-14",
       "platform": "claude-code",
       "summary": "docs(sim): Phase 4 integration roundtable — DYNAMIC GALAXY certified"
     },
     {
       "sha": "4e6e7ac",
-      "date": "2026-06-15",
+      "date": "2026-06-14",
       "platform": "claude-code",
       "summary": "feat(sim): assimilation vs tradition (MECH-CUL-002) — Pillar A complete"
     },
@@ -426,18 +440,6 @@
       "date": "2026-06-14",
       "platform": "claude-code",
       "summary": "feat(sim): internal politics & succession (MECH-GOV-003) — regimes fall"
-    },
-    {
-      "sha": "405949d",
-      "date": "2026-06-14",
-      "platform": "claude-code",
-      "summary": "feat(sim): culture-weighted decisions (MECH-GOV-002) — Pillar C begins"
-    },
-    {
-      "sha": "32d3d10",
-      "date": "2026-06-14",
-      "platform": "claude-code",
-      "summary": "feat(sim): treaty enforcement (MECH-DIP-003) — settled peace binds and breaks"
     }
   ],
   "security_events": [
@@ -483,28 +485,29 @@
     }
   ],
   "known_state": {
-    "main_sha": "97c695a",
+    "main_sha": "30af5f4",
     "local_branches": [
+      "codex/charforge-capsule-implementation-2026-06-14",
       "codex/continue-l1-entity-ledger-work",
       "codex/explain-statechange-defense-for-sws",
-      "codex/gitwiz-sync-audit-canonical-2026-04-08",
       "codex/root-cleanup-before-cloudbank-issues-2026-05-11",
       "codex/root-control-plane-local-2026-03-25",
       "codex/root-control-plane-sync-2026-04-01-mixed-backup",
       "codex/root-reconstruct-recovered-protocols-2026-03-26",
-      "codex/weekly-skill-audit-mesh-router-2026-06-01",
       "feat/warrant-lens",
       "main",
-      "rescue/root-control-plane-dirty-workingcopy-2026-03-25"
+      "rescue/root-control-plane-dirty-workingcopy-2026-03-25",
+      "salvage/stash-gitwiz-pre-sync-2026-04-08",
+      "salvage/stash-qgia-json-pre-pr9",
+      "salvage/stash-root-diff-cleanup-2026-04-14"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  d7c3506 [main]",
-      "/Users/travisstreets/.codex/worktrees/0190/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/0dd6/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/4d93/Aurora_ORIONCORE_Directory_Main                         b4b3f1f (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/88a7/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/95e6/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/a45e/Aurora_ORIONCORE_Directory_Main                         bfd3a80 (detached HEAD)"
+      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  30af5f4 [main]",
+      "/private/tmp/charforge-capsules-20260614                                                           4c616cc [codex/charforge-capsule-implementation-2026-06-14]",
+      "/Users/travisstreets/.codex/worktrees/5c2f/Aurora_ORIONCORE_Directory_Main                         c8a24b3 (detached HEAD)",
+      "/Users/travisstreets/.codex/worktrees/61ad/Aurora_ORIONCORE_Directory_Main                         853add6 (detached HEAD)",
+      "/Users/travisstreets/.codex/worktrees/77bb/Aurora_ORIONCORE_Directory_Main                         853add6 (detached HEAD)",
+      "/Users/travisstreets/.codex/worktrees/7e25/Aurora_ORIONCORE_Directory_Main                         f9bb5da (detached HEAD)"
     ],
     "open_prs": [
       "CloudBank #837 remains closed unmerged, but now has extraction-plan comment #4644456473",
