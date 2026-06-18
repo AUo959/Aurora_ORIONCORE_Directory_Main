@@ -1,0 +1,170 @@
+{
+  "contract_id": "l2_scenario_fixture_generator_contract",
+  "version": 1,
+  "status": "root_control_plane_contract_ready",
+  "created_at_utc": "2026-06-18T23:54:49Z",
+  "source_catalog": "catalog/l2_scenario_seed_catalog.json",
+  "purpose": "Define how maintained L2 scenario seed cards become root fixture candidates without implying CanonRec promotion or CloudBank runtime wiring.",
+  "scope": [
+    "root_control_plane_catalog",
+    "root_fixture_candidate_generation",
+    "scenario_seed_to_watch_scenario_overlay"
+  ],
+  "out_of_scope": [
+    "CanonRec canon promotion",
+    "CloudBank runtime mutation",
+    "GUMAS live execution",
+    "copying ignored HTML/PDF source files into root Git"
+  ],
+  "authority_model": {
+    "root_control_plane": {
+      "authoritative_for": [
+        "scenario seed routing",
+        "fixture candidate contract",
+        "source lineage and disposition metadata"
+      ],
+      "not_authoritative_for": [
+        "canon truth",
+        "runtime behavior",
+        "nested repo publication"
+      ]
+    },
+    "CanonRec": {
+      "status": "not_modified_by_this_contract",
+      "gate": "explicit canon promotion task required"
+    },
+    "aurora-cloudbank-symbolic-main": {
+      "status": "not_modified_by_this_contract",
+      "gate": "explicit nested runtime task and validation required"
+    }
+  },
+  "inputs": [
+    {
+      "artifact_id": "maintained_l2_scenario_seed_catalog",
+      "path": "catalog/l2_scenario_seed_catalog.json",
+      "required_sections": [
+        "cards",
+        "lineage_backup_cards",
+        "normalized_support_structures",
+        "fixture_ready_shortlist"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "artifact_id": "root_fixture_candidate",
+      "format": "json",
+      "default_path_template": "catalog/generated_watch_scenarios/{fixture_id}.json",
+      "status": "candidate_not_runtime_wired"
+    },
+    {
+      "artifact_id": "fixture_generation_receipt",
+      "format": "markdown_or_json",
+      "default_path_template": "reports/analysis/l2_scenario_fixture_generation__{date}.md",
+      "status": "root_receipt_only"
+    }
+  ],
+  "selection_rules": [
+    "Start from fixture_ready_shortlist entries sorted by score descending.",
+    "Prefer entries with value_lanes containing runtime_fixture for executable fixture candidates.",
+    "Do not include lineage_backup_cards unless owner explicitly changes disposition from backup_only.",
+    "Block or mark manual_review when normalized fusion or wiring references contain unresolved_id.",
+    "Use setting-neutral abstractions; remove source-franchise proper-noun lore before fixture emission."
+  ],
+  "candidate_fixture_shape": {
+    "required_top_level_keys": [
+      "name",
+      "about",
+      "seed",
+      "ticks",
+      "anchor_seed",
+      "ethics_protocol",
+      "tasks",
+      "l3_audit",
+      "source_scenario_seed"
+    ],
+    "task_required_keys": [
+      "id",
+      "name",
+      "hours",
+      "tags",
+      "source"
+    ],
+    "source_scenario_seed_required_keys": [
+      "card_id",
+      "handle",
+      "catalog_ref",
+      "promotion_status"
+    ]
+  },
+  "generation_steps": [
+    {
+      "step": "load_catalog",
+      "action": "Read catalog/l2_scenario_seed_catalog.json and select maintained cards only."
+    },
+    {
+      "step": "resolve_references",
+      "action": "Use normalized_support_structures; fail closed on unresolved_id, manual_review on id_label_conflict."
+    },
+    {
+      "step": "build_fixture_overlay",
+      "action": "Map objective/opposition/pressure/ethical_hook/end_states into root watch-scenario overlay tasks and L3 audit prompt."
+    },
+    {
+      "step": "validate_boundaries",
+      "action": "Assert output path stays under root catalog or reports and does not write nested repo paths."
+    },
+    {
+      "step": "receipt",
+      "action": "Write a root receipt with source card ids, unresolved references, and explicit non-promotion status."
+    }
+  ],
+  "first_fixture_candidates": [
+    {
+      "id": "SCN-0903",
+      "handle": "The War Nobody Names",
+      "score": 9.75,
+      "fixture_id": "l2_scn_0903_the_war_nobody_names_v1",
+      "candidate_output_path": "catalog/generated_watch_scenarios/l2_scn_0903_the_war_nobody_names_v1.json",
+      "value_lanes": [
+        "canon_engine",
+        "ethics_gate",
+        "narrative_engine",
+        "runtime_fixture"
+      ]
+    },
+    {
+      "id": "SCN-0708",
+      "handle": "The One vs the Many Selves",
+      "score": 9.5,
+      "fixture_id": "l2_scn_0708_the_one_vs_the_many_selves_v1",
+      "candidate_output_path": "catalog/generated_watch_scenarios/l2_scn_0708_the_one_vs_the_many_selves_v1.json",
+      "value_lanes": [
+        "canon_engine",
+        "ethics_gate",
+        "narrative_engine",
+        "runtime_fixture"
+      ]
+    },
+    {
+      "id": "SCN-0805",
+      "handle": "The Ship That Must Survive",
+      "score": 8.5,
+      "fixture_id": "l2_scn_0805_the_ship_that_must_survive_v1",
+      "candidate_output_path": "catalog/generated_watch_scenarios/l2_scn_0805_the_ship_that_must_survive_v1.json",
+      "value_lanes": [
+        "canon_engine",
+        "ethics_gate",
+        "narrative_engine",
+        "runtime_fixture"
+      ]
+    }
+  ],
+  "validation_rules": [
+    "Catalog has 87 maintained cards and exactly five backup_only lineage cards.",
+    "SCN-0903, SCN-0708, and SCN-0805 have fixture_blueprint.fixture_status == ready_candidate.",
+    "Every fixture task source points back to catalog/l2_scenario_seed_catalog.json.",
+    "No contract output path targets GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main or GUMAS_SIM_2.5/CanonRec.",
+    "SCN-0208 remains unresolved until a source card is found or the SCN-0407 wiring link is revised by owner decision."
+  ]
+}

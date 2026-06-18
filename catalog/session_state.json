@@ -126,8 +126,14 @@
     "repo": "root control plane + registered nested repos by explicit gate only",
     "description": "Run the Aurora salvage operation: find valuable unmerged iCloud/recovery logic, classify it, and promote only through explicit owner-surface gates.",
     "started_at": "2026-06-12T23:00:00Z",
-    "updated_at": "2026-06-18T19:25:43Z",
+    "updated_at": "2026-06-18T23:58:04Z",
     "context_files": [
+      "tests/test_l2_scenario_seed_catalog.py",
+      "reports/analysis/l2_scenario_seed_catalog_artifact__2026-06-18.md",
+      "docs/L2_SCENARIO_SEED_CATALOG_WORKFLOW_v1.md",
+      "catalog/schemas/l2_scenario_seed_catalog.schema.json",
+      "catalog/contracts/l2_scenario_fixture_generator_contract_v1.json",
+      "catalog/l2_scenario_seed_catalog.json",
       "reports/analysis/zipwiz_salvage_inventory__2026-06-15.md",
       "reports/analysis/zipwiz_salvage_inventory__2026-06-15.json",
       "reports/analysis/codex_parallel_work_roundup__2026-06-15.md",
@@ -143,8 +149,8 @@
       "reports/analysis/remote_branch_sweep__2026-06-11.md",
       "reports/analysis/integration_pass__2026-06-11.md"
     ],
-    "next_step": "refresh_cloudbank_queue_after_zipwiz_pr10",
-    "next_step_detail": "Cold start: ZipWiz PR #10 (AUo959/zip_wizard, branch codex/conduct-full-code-review, worktree /private/tmp/zip_wizard-pr10) is pushed through head commit 2cf3457ca1cf3d5888a65cea5e00aa97c5a2893a after follow-up commit 2cf3457 removed the tracked .env path from the PR branch without inspecting or reproducing contents. PR #10 is open, non-draft, mergeable, and clean; all 11 check-runs passed on 2026-06-18: Codacy Static Code Analysis, GitGuardian Security Checks, ESLint, Prettier Format Check, TypeScript Type Check, Run Tests, Build Application, Full Validation, Accessibility Tests, Keyboard Navigation Tests, and Navigation System Tests. Local verification after the final push commit: npm run format:check, npm run check, npm run lint -- --quiet, npm run test:run (55/55), and npm run build all passed; build still reports existing browserslist/CSS nesting/chunk-size warnings. Receipt: reports/analysis/zipwiz_pr10_merge_ready__2026-06-18.md. No merge was performed; owner can review/merge PR #10, then refresh the CloudBank queue as next operational work. Do not read or reproduce historical .env contents."
+    "next_step": "refresh_cloudbank_queue_after_zipwiz_pr10_or_emit_l2_fixture_candidates",
+    "next_step_detail": "Cold start: Codex completed the owner-requested L2 scenario seed catalog artifact pass on 2026-06-18. New root-control-plane outputs: catalog/l2_scenario_seed_catalog.json, catalog/contracts/l2_scenario_fixture_generator_contract_v1.json, catalog/schemas/l2_scenario_seed_catalog.schema.json, docs/L2_SCENARIO_SEED_CATALOG_WORKFLOW_v1.md, reports/analysis/l2_scenario_seed_catalog_artifact__2026-06-18.md, and tests/test_l2_scenario_seed_catalog.py. The catalog preserves 87 v0.2.15 cards as maintained entries, keeps SCN-0103/0105/0106/0107/0108 as backup_only lineage cargo, normalizes 34 fusion pairings and 10 wiring-link entries, and provides ready fixture blueprints for SCN-0903, SCN-0708, and SCN-0805. Validation passed: python3 -m unittest tests/test_l2_scenario_seed_catalog.py; workspace_verify wrote /private/tmp/l2_scenario_seed_workspace_verify_20260618.json with 0 blocking findings and only pre-existing warnings for CloudBank index.lock and ~remote~ registry coverage. No CloudBank or CanonRec files were edited. Next choices: emit root-only generated fixture candidates from the contract if requested, or resume the prior CloudBank queue refresh after ZipWiz PR #10. Do not treat the catalog as canon promotion or runtime wiring."
   },
   "task_queue": [
     {
@@ -360,9 +366,9 @@
       "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
     }
   ],
-  "last_updated": "2026-06-18T19:25:43Z",
+  "last_updated": "2026-06-18T23:58:04Z",
   "last_platform": "codex",
-  "last_session_summary": "Codex pushed ZipWiz PR #10 through 2cf3457; all GitHub and Codacy checks pass, the PR is mergeable clean, and the root receipt records CloudBank queue refresh as next.",
+  "last_session_summary": "Codex turned the recovered L2 scenario seed extraction into a maintained root catalog, fixture-generator contract, workflow note, receipt, and tests without editing CloudBank or CanonRec.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -382,6 +388,12 @@
   },
   "recent_commits": [
     {
+      "sha": "1d868bd",
+      "date": "2026-06-18",
+      "platform": "codex",
+      "summary": "chore(session): refresh root commit state"
+    },
+    {
       "sha": "0a15524",
       "date": "2026-06-18",
       "platform": "codex",
@@ -395,13 +407,13 @@
     },
     {
       "sha": "bd153bf",
-      "date": "2026-06-16",
+      "date": "2026-06-15",
       "platform": "codex",
       "summary": "chore(session): record zipwiz handoff sync"
     },
     {
       "sha": "30af5f4",
-      "date": "2026-06-16",
+      "date": "2026-06-15",
       "platform": "codex",
       "summary": "chore(zipwiz): record salvage inventory"
     },
@@ -434,12 +446,6 @@
       "date": "2026-06-14",
       "platform": "claude-code",
       "summary": "feat(sim): war economy & market flux (MECH-ECO-001) — Pillar A"
-    },
-    {
-      "sha": "3862b68",
-      "date": "2026-06-14",
-      "platform": "claude-code",
-      "summary": "feat(sim): territorial consequence (MECH-TER-001) — Pillar A begins"
     }
   ],
   "security_events": [
@@ -485,7 +491,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "0a15524",
+    "main_sha": "1d868bd",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/continue-l1-entity-ledger-work",
@@ -502,12 +508,11 @@
       "salvage/stash-root-diff-cleanup-2026-04-14"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  0a15524 [main]",
+      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  1d868bd [main]",
       "/private/tmp/charforge-capsules-20260614                                                           4c616cc [codex/charforge-capsule-implementation-2026-06-14]",
-      "/Users/travisstreets/.codex/worktrees/5c2f/Aurora_ORIONCORE_Directory_Main                         c8a24b3 (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/61ad/Aurora_ORIONCORE_Directory_Main                         853add6 (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/77bb/Aurora_ORIONCORE_Directory_Main                         853add6 (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/7e25/Aurora_ORIONCORE_Directory_Main                         f9bb5da (detached HEAD)"
+      "/Users/travisstreets/.codex/worktrees/8a6f/Aurora_ORIONCORE_Directory_Main                         bd153bf (detached HEAD)",
+      "/Users/travisstreets/.codex/worktrees/c7a9/Aurora_ORIONCORE_Directory_Main                         8aebc62 (detached HEAD)",
+      "/Users/travisstreets/.codex/worktrees/fd5a/Aurora_ORIONCORE_Directory_Main                         bd153bf (detached HEAD)"
     ],
     "open_prs": [
       "CloudBank #837 remains closed unmerged, but now has extraction-plan comment #4644456473",

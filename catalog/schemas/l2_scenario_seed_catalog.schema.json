@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/l2_scenario_seed_catalog.schema.json",
+  "title": "Aurora Root L2 Scenario Seed Catalog",
+  "description": "Root-control-plane catalog for recovered L2 scenario seed cards, lineage-only backup cards, normalized support references, and fixture candidate blueprints.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "artifact_id": {
+      "const": "AURORA_ROOT_L2_SCENARIO_SEED_CATALOG_v1"
+    },
+    "artifact_type": {
+      "const": "root_control_plane_catalog"
+    },
+    "status": {
+      "const": "maintained_root_control_plane_artifact"
+    },
+    "scope": {
+      "type": "object"
+    },
+    "authority_and_promotion": {
+      "type": "object"
+    },
+    "source_evidence": {
+      "type": "object"
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "maintained_card_count",
+        "backup_only_lineage_card_count",
+        "fusion_pairing_count",
+        "fixture_shortlist_count"
+      ],
+      "properties": {
+        "maintained_card_count": {
+          "const": 87
+        },
+        "backup_only_lineage_card_count": {
+          "const": 5
+        },
+        "fusion_pairing_count": {
+          "const": 34
+        },
+        "fixture_shortlist_count": {
+          "minimum": 3,
+          "type": "integer"
+        }
+      }
+    },
+    "cards": {
+      "type": "array",
+      "minItems": 87
+    },
+    "lineage_backup_cards": {
+      "type": "array",
+      "minItems": 5
+    },
+    "normalized_support_structures": {
+      "type": "object"
+    },
+    "fixture_ready_shortlist": {
+      "type": "array",
+      "minItems": 3
+    },
+    "generator_contract_ref": {
+      "const": "catalog/contracts/l2_scenario_fixture_generator_contract_v1.json"
+    }
+  },
+  "required": [
+    "schema_version",
+    "artifact_id",
+    "artifact_type",
+    "status",
+    "scope",
+    "authority_and_promotion",
+    "source_evidence",
+    "summary",
+    "cards",
+    "lineage_backup_cards",
+    "normalized_support_structures",
+    "fixture_ready_shortlist",
+    "generator_contract_ref"
+  ]
+}
