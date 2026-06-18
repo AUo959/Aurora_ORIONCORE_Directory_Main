@@ -382,6 +382,18 @@
   },
   "recent_commits": [
     {
+      "sha": "0a15524",
+      "date": "2026-06-18",
+      "platform": "codex",
+      "summary": "chore(session): record zipwiz pr10 merge ready"
+    },
+    {
+      "sha": "8aebc62",
+      "date": "2026-06-18",
+      "platform": "codex",
+      "summary": "chore(session): record zipwiz pr10 green"
+    },
+    {
       "sha": "bd153bf",
       "date": "2026-06-16",
       "platform": "codex",
@@ -428,18 +440,6 @@
       "date": "2026-06-14",
       "platform": "claude-code",
       "summary": "feat(sim): territorial consequence (MECH-TER-001) — Pillar A begins"
-    },
-    {
-      "sha": "853add6",
-      "date": "2026-06-14",
-      "platform": "claude-code",
-      "summary": "docs(sim): deep-read the Office of Strategic Diplomacy (diplomacy-as-institution)"
-    },
-    {
-      "sha": "4a7789c",
-      "date": "2026-06-14",
-      "platform": "claude-code",
-      "summary": "feat(sim): galactic power dynamics (MECH-POW-001) — Pillar C complete"
     }
   ],
   "security_events": [
@@ -485,7 +485,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "bd153bf",
+    "main_sha": "0a15524",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/continue-l1-entity-ledger-work",
@@ -502,7 +502,7 @@
       "salvage/stash-root-diff-cleanup-2026-04-14"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  bd153bf [main]",
+      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  0a15524 [main]",
       "/private/tmp/charforge-capsules-20260614                                                           4c616cc [codex/charforge-capsule-implementation-2026-06-14]",
       "/Users/travisstreets/.codex/worktrees/5c2f/Aurora_ORIONCORE_Directory_Main                         c8a24b3 (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/61ad/Aurora_ORIONCORE_Directory_Main                         853add6 (detached HEAD)",
