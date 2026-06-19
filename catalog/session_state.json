@@ -126,7 +126,7 @@
     "repo": "root control plane + registered nested repos by explicit gate only",
     "description": "Run the Aurora salvage operation: find valuable unmerged iCloud/recovery logic, classify it, and promote only through explicit owner-surface gates.",
     "started_at": "2026-06-12T23:00:00Z",
-    "updated_at": "2026-06-19T02:20:50Z",
+    "updated_at": "2026-06-19T02:33:11Z",
     "context_files": [
       "tests/test_l2_scenario_seed_catalog.py",
       "reports/analysis/l2_scenario_seed_catalog_artifact__2026-06-18.md",
@@ -150,7 +150,7 @@
       "reports/analysis/integration_pass__2026-06-11.md"
     ],
     "next_step": "refresh_cloudbank_queue_after_zipwiz_pr10_or_emit_l2_fixture_candidates",
-    "next_step_detail": "Cold start: Codex completed and committed the owner-requested L2 scenario seed catalog artifact pass, then added explicit Dune-inspired coverage. Latest artifact commit: aa2d858 chore(root): add dune scenario coverage lane. The catalog has 87 maintained v0.2.15 cards and a thematic lane `dune_inspired_scenario_seeds`: SCN-0101 Resource Monopoly, SCN-0102 Myth Weaponization, and SCN-0104 Formal Intrigue are eligible for root fixture candidates; SCN-0103, SCN-0105, SCN-0106, SCN-0107, and SCN-0108 remain backup_only lineage cargo. SCN-0903, SCN-0708, and SCN-0805 remain the first ready fixture candidates. Validation passed: python3 -m unittest tests/test_l2_scenario_seed_catalog.py; ruff check tests/test_l2_scenario_seed_catalog.py; workspace_verify wrote /private/tmp/l2_scenario_seed_dune_lane_workspace_verify_20260619.json with 0 blocking findings and only pre-existing warnings for CloudBank index.lock and ~remote~ registry coverage. No CloudBank or CanonRec files were edited. Next choices: emit root-only generated fixture candidates from the contract if requested, or resume the prior CloudBank queue refresh after ZipWiz PR #10. Do not treat the catalog as canon promotion or runtime wiring."
+    "next_step_detail": "Cold start: Codex completed and committed the owner-requested L2 scenario seed catalog artifact pass, added explicit Dune-inspired coverage, then promoted the five complete v0.2.2 Dune lineage cards into maintained root catalog entries by owner override. Latest artifact commit: 780f0d5 chore(root): promote dune lineage scenario seeds. The catalog has 92 maintained cards: 87 v0.2.15 cards plus owner-promoted SCN-0103 Planetary Redesign, SCN-0105 Alliance With the Local Power, SCN-0106 System Addiction, SCN-0107 Foreknowledge Trap, and SCN-0108 Human Specialist Guilds. The `dune_inspired_scenario_seeds` lane now has all eight SCN-0101 through SCN-0108 cards as fixture-eligible maintained entries, with zero backup_only lineage cards. SCN-0903, SCN-0708, and SCN-0805 remain the first ready fixture candidates. Validation passed: python3 -m unittest tests/test_l2_scenario_seed_catalog.py; ruff check tests/test_l2_scenario_seed_catalog.py; workspace_verify wrote /private/tmp/l2_scenario_seed_promote_dune_lineage_workspace_verify_20260619.json with 0 blocking findings and only pre-existing warnings for CloudBank index.lock and ~remote~ registry coverage. No CloudBank or CanonRec files were edited. Next choices: emit root-only generated fixture candidates from the contract if requested, or resume the prior CloudBank queue refresh after ZipWiz PR #10. Do not treat the catalog as canon promotion or runtime wiring."
   },
   "task_queue": [
     {
@@ -366,9 +366,9 @@
       "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
     }
   ],
-  "last_updated": "2026-06-19T02:20:50Z",
+  "last_updated": "2026-06-19T02:33:11Z",
   "last_platform": "codex",
-  "last_session_summary": "Codex added explicit Dune-inspired scenario coverage to the L2 root catalog in aa2d858; backup-only lineage dispositions were preserved.",
+  "last_session_summary": "Codex promoted the five complete v0.2.2 Dune lineage cards into the maintained L2 root catalog in 780f0d5; the catalog now has all eight SCN-010x Dune cards fixture-eligible without editing CloudBank or CanonRec.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -387,6 +387,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "780f0d5",
+      "date": "2026-06-19",
+      "platform": "codex",
+      "summary": "chore(root): promote dune lineage scenario seeds"
+    },
     {
       "sha": "aa2d858",
       "date": "2026-06-18",
@@ -440,12 +446,6 @@
       "date": "2026-06-15",
       "platform": "codex",
       "summary": "chore(session): record root work roundup handoff"
-    },
-    {
-      "sha": "97c695a",
-      "date": "2026-06-15",
-      "platform": "codex",
-      "summary": "chore(root): consolidate codex parallel work"
     }
   ],
   "security_events": [
@@ -491,7 +491,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "aa2d858",
+    "main_sha": "780f0d5cd0cf87c5e287b966a48be5f1dd8a4657",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/continue-l1-entity-ledger-work",
@@ -508,7 +508,7 @@
       "salvage/stash-root-diff-cleanup-2026-04-14"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  aa2d858 [main]",
+      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  780f0d5 [main]",
       "/private/tmp/charforge-capsules-20260614                                                           4c616cc [codex/charforge-capsule-implementation-2026-06-14]",
       "/Users/travisstreets/.codex/worktrees/8a6f/Aurora_ORIONCORE_Directory_Main                         bd153bf (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/c7a9/Aurora_ORIONCORE_Directory_Main                         8aebc62 (detached HEAD)",
