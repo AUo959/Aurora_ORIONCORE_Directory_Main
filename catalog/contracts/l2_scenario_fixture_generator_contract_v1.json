@@ -4,7 +4,7 @@
   "status": "root_control_plane_contract_ready",
   "created_at_utc": "2026-06-18T23:54:49Z",
   "source_catalog": "catalog/l2_scenario_seed_catalog.json",
-  "purpose": "Define how maintained L2 scenario seed cards become root fixture candidates without implying CanonRec promotion or CloudBank runtime wiring.",
+  "purpose": "Define how maintained L2 scenario seed cards, including owner-promoted Dune lineage cards, become root fixture candidates without implying CanonRec promotion or CloudBank runtime wiring.",
   "scope": [
     "root_control_plane_catalog",
     "root_fixture_candidate_generation",
@@ -67,10 +67,10 @@
   "selection_rules": [
     "Start from fixture_ready_shortlist entries sorted by score descending.",
     "Prefer entries with value_lanes containing runtime_fixture for executable fixture candidates.",
-    "Do not include lineage_backup_cards unless owner explicitly changes disposition from backup_only.",
     "Block or mark manual_review when normalized fusion or wiring references contain unresolved_id.",
     "Use setting-neutral abstractions; remove source-franchise proper-noun lore before fixture emission.",
-    "For Dune-inspired thematic coverage batches, include at least one maintained SCN-010x card (SCN-0101, SCN-0102, or SCN-0104) and keep SCN-0103/0105/0106/0107/0108 backup_only."
+    "The owner-promoted Dune lineage cards SCN-0103/0105/0106/0107/0108 are maintained root catalog entries; include them in Dune thematic fixture batches while preserving v0.2.2 provenance.",
+    "Do not treat root fixture candidacy as CanonRec canon promotion or CloudBank runtime wiring."
   ],
   "candidate_fixture_shape": {
     "required_top_level_keys": [
@@ -162,12 +162,13 @@
     }
   ],
   "validation_rules": [
-    "Catalog has 87 maintained cards and exactly five backup_only lineage cards.",
     "SCN-0903, SCN-0708, and SCN-0805 have fixture_blueprint.fixture_status == ready_candidate.",
     "Every fixture task source points back to catalog/l2_scenario_seed_catalog.json.",
     "No contract output path targets GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main or GUMAS_SIM_2.5/CanonRec.",
     "SCN-0208 remains unresolved until a source card is found or the SCN-0407 wiring link is revised by owner decision.",
-    "Dune thematic coverage lane includes maintained SCN-0101, SCN-0102, and SCN-0104 while preserving SCN-0103/0105/0106/0107/0108 as backup_only."
+    "Catalog has 92 maintained cards and zero backup_only lineage cards after owner override.",
+    "Dune thematic coverage lane includes maintained SCN-0101, SCN-0102, SCN-0103, SCN-0104, SCN-0105, SCN-0106, SCN-0107, and SCN-0108.",
+    "SCN-0103/0105/0106/0107/0108 preserve source_version v0.2.2 and source_status lineage_only_missing_from_v0_2_15."
   ],
   "thematic_coverage_lanes": [
     {
@@ -175,16 +176,15 @@
       "required_maintained_card_ids": [
         "SCN-0101",
         "SCN-0102",
-        "SCN-0104"
-      ],
-      "backup_only_lineage_card_ids": [
         "SCN-0103",
+        "SCN-0104",
         "SCN-0105",
         "SCN-0106",
         "SCN-0107",
         "SCN-0108"
       ],
-      "fixture_generation_rule": "When fixture generation is thematic rather than score-only, include at least one maintained Dune-derived card and keep all v0.2.2 lineage-only cards backup_only unless owner review changes disposition."
+      "backup_only_lineage_card_ids": [],
+      "fixture_generation_rule": "All available SCN-010x Dune-derived cards are maintained root catalog entries and eligible for root fixture candidates; v0.2.2 cards retain source provenance."
     }
   ]
 }

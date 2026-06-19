@@ -20,16 +20,16 @@ edited.
 
 - Promoted the June 15 extraction report into a maintained root catalog artifact.
 - Preserved 87 `v0.2.15` cards as active maintained root entries.
-- Preserved the five `v0.2.2` lineage-only cards as `backup_only`:
+- Incorporated the five complete `v0.2.2` lineage-only Dune cards as maintained
+  root entries by owner override:
   `SCN-0103`, `SCN-0105`, `SCN-0106`, `SCN-0107`, and `SCN-0108`.
 - Normalized the fusion table and card wiring into ID-first references with
   explicit `ready`, `manual_review`, and `unresolved` statuses.
 - Added fixture-ready blueprints for the high-value shortlist, with first
   candidates `SCN-0903`, `SCN-0708`, and `SCN-0805`.
-- Added explicit Dune-inspired thematic coverage so `SCN-0101`, `SCN-0102`,
-  and `SCN-0104` are eligible for root fixture candidates while
-  `SCN-0103`, `SCN-0105`, `SCN-0106`, `SCN-0107`, and `SCN-0108` stay
-  `backup_only`.
+- Added explicit Dune-inspired thematic coverage so `SCN-0101` through
+  `SCN-0108` are eligible for root fixture candidates. The `v0.2.2` cards keep
+  source-version provenance and remain root-catalog-only, not canon/runtime.
 - Added a root generator contract that defines candidate fixture shape, output
   path policy, validation rules, and non-promotion boundaries.
 

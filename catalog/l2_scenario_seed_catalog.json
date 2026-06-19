@@ -255,15 +255,16 @@
     ]
   },
   "summary": {
-    "maintained_card_count": 87,
-    "backup_only_lineage_card_count": 5,
+    "maintained_card_count": 92,
+    "backup_only_lineage_card_count": 0,
     "unique_card_ids_across_available_lineage": 92,
     "controlled_tag_count": 12,
     "fusion_pairing_count": 34,
     "wiring_link_cards_with_refs": 10,
-    "fixture_shortlist_count": 20,
-    "dune_maintained_card_count": 3,
-    "dune_backup_only_card_count": 5
+    "fixture_shortlist_count": 25,
+    "dune_maintained_card_count": 8,
+    "dune_backup_only_card_count": 0,
+    "lineage_promoted_card_count": 5
   },
   "cards": [
     {
@@ -988,6 +989,58 @@
       "promotion_status": "root_catalog_only_not_canon_or_runtime"
     },
     {
+      "id": "SCN-0103",
+      "handle": "Planetary Redesign",
+      "category": "Dune-derived expansion (SCN-0101-0199)",
+      "version": "v0.1.0",
+      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
+      "source_status": "lineage_only_missing_from_v0_2_15",
+      "core_pattern": "A long-term transformation conflicts with short-term political and economic incentives.",
+      "roles": [
+        "Long-Horizon Planner",
+        "Short-Term Rulers",
+        "Extractors",
+        "Local Communities",
+        "External Auditors"
+      ],
+      "objective": "Protect a multi-decade plan from being consumed by immediate pressures.",
+      "opposition": "Extraction pressure, regime change, unintended consequences.",
+      "pressure": [
+        "attrition",
+        "uncertainty"
+      ],
+      "knobs": {
+        "Power distribution": "uneven",
+        "Institution strength": "weak->totalizing",
+        "Transparency": "mixed",
+        "Mobility": "constrained",
+        "Dominant solver": "bureaucracy | wealth",
+        "Scarcity": "strained",
+        "Norm enforcement": "strong"
+      },
+      "ethical_hook": "Who chooses sacrifice now for benefits later, and who pays?",
+      "end_states": [
+        "Plan advances",
+        "Plan sabotaged",
+        "Partial success with new harms",
+        "Plan nationalized",
+        "Plan becomes doctrine"
+      ],
+      "tags": [
+        "Stability",
+        "Justice",
+        "Truth"
+      ],
+      "notes": "Terraforming, climate transitions, multi-year reforms, infrastructure megaprojects.",
+      "disposition": "maintained",
+      "integration_decision": "include",
+      "promotion_status": "root_catalog_only_not_canon_or_runtime",
+      "original_category": "Dune-derived expansion (early lineage only)",
+      "source_version": "v0.2.2",
+      "promotion_basis": "owner_override_2026-06-19_add_if_you_can",
+      "fixture_policy": "eligible_for_root_fixture_candidates"
+    },
+    {
       "id": "SCN-0104",
       "handle": "Formal Intrigue",
       "category": "Dune-derived expansion (SCN-0101-0199)",
@@ -1034,6 +1087,214 @@
       "integration_decision": "include",
       "source_version": "v0.2.15",
       "promotion_status": "root_catalog_only_not_canon_or_runtime"
+    },
+    {
+      "id": "SCN-0105",
+      "handle": "Alliance With the Local Power",
+      "category": "Dune-derived expansion (SCN-0101-0199)",
+      "version": "v0.1.0",
+      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
+      "source_status": "lineage_only_missing_from_v0_2_15",
+      "core_pattern": "Outsiders need an alliance with locals who understand the environment, and the alliance reshapes both sides.",
+      "roles": [
+        "Outsider Leader",
+        "Local Leader",
+        "Cultural Broker",
+        "Hardliner",
+        "Traitor"
+      ],
+      "objective": "Build trust fast enough to survive conflict.",
+      "opposition": "Cultural mismatch, exploitation history, infiltration.",
+      "pressure": [
+        "clock",
+        "scarcity"
+      ],
+      "knobs": {
+        "Power distribution": "uneven",
+        "Institution strength": "weak",
+        "Transparency": "mixed",
+        "Mobility": "constrained",
+        "Dominant solver": "craft | ability",
+        "Scarcity": "desperate",
+        "Norm enforcement": "taboo"
+      },
+      "ethical_hook": "Is the alliance mutual liberation, or a new form of conquest?",
+      "end_states": [
+        "Genuine integration",
+        "Alliance collapses",
+        "Locals absorb outsiders",
+        "Outsiders dominate",
+        "Third-party atrocity triggers unity"
+      ],
+      "tags": [
+        "Identity",
+        "Survival",
+        "Justice"
+      ],
+      "notes": "Colonial fronts, corporate extraction, refugee alliances, expedition stories.",
+      "disposition": "maintained",
+      "integration_decision": "include",
+      "promotion_status": "root_catalog_only_not_canon_or_runtime",
+      "original_category": "Dune-derived expansion (early lineage only)",
+      "source_version": "v0.2.2",
+      "promotion_basis": "owner_override_2026-06-19_add_if_you_can",
+      "fixture_policy": "eligible_for_root_fixture_candidates"
+    },
+    {
+      "id": "SCN-0106",
+      "handle": "System Addiction",
+      "category": "Dune-derived expansion (SCN-0101-0199)",
+      "version": "v0.1.0",
+      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
+      "source_status": "lineage_only_missing_from_v0_2_15",
+      "core_pattern": "A civilization becomes dependent on a substance or service that grants advantage, and withdrawal becomes existential.",
+      "roles": [
+        "Dependents",
+        "Suppliers",
+        "Regulators",
+        "Black Market",
+        "Reformers"
+      ],
+      "objective": "Reduce dependence without detonating infrastructure.",
+      "opposition": "Supplier leverage, withdrawal shock, sabotage.",
+      "pressure": [
+        "cascade",
+        "scarcity"
+      ],
+      "knobs": {
+        "Power distribution": "rare",
+        "Institution strength": "totalizing",
+        "Transparency": "hidden",
+        "Mobility": "fluid",
+        "Dominant solver": "wealth | bureaucracy",
+        "Scarcity": "strained",
+        "Norm enforcement": "strong"
+      },
+      "ethical_hook": "Do you maintain an unjust system because breaking it kills millions?",
+      "end_states": [
+        "Controlled taper",
+        "Supplier coup",
+        "Sudden cutoff catastrophe",
+        "Nationalization",
+        "Distributed alternative emerges"
+      ],
+      "tags": [
+        "Stability",
+        "Scarcity",
+        "Power"
+      ],
+      "notes": "Energy transitions, debt systems, supply-chain dependencies, surveillance services.",
+      "disposition": "maintained",
+      "integration_decision": "include",
+      "promotion_status": "root_catalog_only_not_canon_or_runtime",
+      "original_category": "Dune-derived expansion (early lineage only)",
+      "source_version": "v0.2.2",
+      "promotion_basis": "owner_override_2026-06-19_add_if_you_can",
+      "fixture_policy": "eligible_for_root_fixture_candidates"
+    },
+    {
+      "id": "SCN-0107",
+      "handle": "Foreknowledge Trap",
+      "category": "Dune-derived expansion (SCN-0101-0199)",
+      "version": "v0.1.0",
+      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
+      "source_status": "lineage_only_missing_from_v0_2_15",
+      "core_pattern": "Prediction offers advantage, but acting on it changes the future and narrows choices into a self-fulfilling cage.",
+      "roles": [
+        "Predictor",
+        "Interpreter",
+        "Counter-Predictor",
+        "Wildcard Actor",
+        "Crowd"
+      ],
+      "objective": "Preserve agency while using advantage.",
+      "opposition": "Determinism, countermoves, overconfidence.",
+      "pressure": [
+        "uncertainty",
+        "reputation"
+      ],
+      "knobs": {
+        "Power distribution": "rare",
+        "Institution strength": "moderate",
+        "Transparency": "hidden->public",
+        "Mobility": "fluid",
+        "Dominant solver": "ability | bureaucracy",
+        "Scarcity": "strained",
+        "Norm enforcement": "strong"
+      },
+      "ethical_hook": "Sacrifice many to avoid predicted catastrophe, or reject prediction and gamble?",
+      "end_states": [
+        "Escape via disruption",
+        "Optimal path with moral horror",
+        "Prediction collapses",
+        "Predictor stalemate",
+        "Public forecast panic"
+      ],
+      "tags": [
+        "Truth",
+        "Power",
+        "Stability"
+      ],
+      "notes": "Markets, prophecy, intelligence forecasting, algorithmic governance.",
+      "disposition": "maintained",
+      "integration_decision": "include",
+      "promotion_status": "root_catalog_only_not_canon_or_runtime",
+      "original_category": "Dune-derived expansion (early lineage only)",
+      "source_version": "v0.2.2",
+      "promotion_basis": "owner_override_2026-06-19_add_if_you_can",
+      "fixture_policy": "eligible_for_root_fixture_candidates"
+    },
+    {
+      "id": "SCN-0108",
+      "handle": "Human Specialist Guilds",
+      "category": "Dune-derived expansion (SCN-0101-0199)",
+      "version": "v0.1.0",
+      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
+      "source_status": "lineage_only_missing_from_v0_2_15",
+      "core_pattern": "A ban on certain technology forces reliance on rare human specialists who become power centers.",
+      "roles": [
+        "Specialist Guild",
+        "State Patron",
+        "Rival Guild",
+        "Common Users",
+        "Dissident Technologists"
+      ],
+      "objective": "Keep capability available without surrendering sovereignty.",
+      "opposition": "Guild capture, sabotage, black-market tech, succession crises.",
+      "pressure": [
+        "jurisdiction",
+        "exposure"
+      ],
+      "knobs": {
+        "Power distribution": "rare",
+        "Institution strength": "totalizing",
+        "Transparency": "mixed",
+        "Mobility": "fluid",
+        "Dominant solver": "bureaucracy | ability",
+        "Scarcity": "strained",
+        "Norm enforcement": "taboo"
+      },
+      "ethical_hook": "Is safety worth hereditary monopoly and stagnation?",
+      "end_states": [
+        "Monopoly entrenched",
+        "Regulated access",
+        "Reform breaks taboo",
+        "Illicit tech returns",
+        "Capability collapse triggers chaos"
+      ],
+      "tags": [
+        "Power",
+        "Access",
+        "Legitimacy"
+      ],
+      "notes": "Bans on AI, encryption controls, licensing regimes, priesthoods, elite academia.",
+      "disposition": "maintained",
+      "integration_decision": "include",
+      "promotion_status": "root_catalog_only_not_canon_or_runtime",
+      "original_category": "Dune-derived expansion (early lineage only)",
+      "source_version": "v0.2.2",
+      "promotion_basis": "owner_override_2026-06-19_add_if_you_can",
+      "fixture_policy": "eligible_for_root_fixture_candidates"
     },
     {
       "id": "SCN-0201",
@@ -4482,258 +4743,7 @@
       "promotion_status": "root_catalog_only_not_canon_or_runtime"
     }
   ],
-  "lineage_backup_cards": [
-    {
-      "id": "SCN-0103",
-      "handle": "Planetary Redesign",
-      "category": "Dune-derived expansion (early lineage only)",
-      "version": "v0.1.0",
-      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
-      "source_status": "lineage_only_missing_from_v0_2_15",
-      "core_pattern": "A long-term transformation conflicts with short-term political and economic incentives.",
-      "roles": [
-        "Long-Horizon Planner",
-        "Short-Term Rulers",
-        "Extractors",
-        "Local Communities",
-        "External Auditors"
-      ],
-      "objective": "Protect a multi-decade plan from being consumed by immediate pressures.",
-      "opposition": "Extraction pressure, regime change, unintended consequences.",
-      "pressure": [
-        "attrition",
-        "uncertainty"
-      ],
-      "knobs": {
-        "Power distribution": "uneven",
-        "Institution strength": "weak->totalizing",
-        "Transparency": "mixed",
-        "Mobility": "constrained",
-        "Dominant solver": "bureaucracy | wealth",
-        "Scarcity": "strained",
-        "Norm enforcement": "strong"
-      },
-      "ethical_hook": "Who chooses sacrifice now for benefits later, and who pays?",
-      "end_states": [
-        "Plan advances",
-        "Plan sabotaged",
-        "Partial success with new harms",
-        "Plan nationalized",
-        "Plan becomes doctrine"
-      ],
-      "tags": [
-        "Stability",
-        "Justice",
-        "Truth"
-      ],
-      "notes": "Terraforming, climate transitions, multi-year reforms, infrastructure megaprojects.",
-      "disposition": "backup_only",
-      "integration_decision": "backup_only",
-      "active_catalog_member": false,
-      "restore_gate": "owner_review_required_before_moving_into_maintained_cards",
-      "promotion_status": "lineage_cargo_not_canon_or_runtime"
-    },
-    {
-      "id": "SCN-0105",
-      "handle": "Alliance With the Local Power",
-      "category": "Dune-derived expansion (early lineage only)",
-      "version": "v0.1.0",
-      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
-      "source_status": "lineage_only_missing_from_v0_2_15",
-      "core_pattern": "Outsiders need an alliance with locals who understand the environment, and the alliance reshapes both sides.",
-      "roles": [
-        "Outsider Leader",
-        "Local Leader",
-        "Cultural Broker",
-        "Hardliner",
-        "Traitor"
-      ],
-      "objective": "Build trust fast enough to survive conflict.",
-      "opposition": "Cultural mismatch, exploitation history, infiltration.",
-      "pressure": [
-        "clock",
-        "scarcity"
-      ],
-      "knobs": {
-        "Power distribution": "uneven",
-        "Institution strength": "weak",
-        "Transparency": "mixed",
-        "Mobility": "constrained",
-        "Dominant solver": "craft | ability",
-        "Scarcity": "desperate",
-        "Norm enforcement": "taboo"
-      },
-      "ethical_hook": "Is the alliance mutual liberation, or a new form of conquest?",
-      "end_states": [
-        "Genuine integration",
-        "Alliance collapses",
-        "Locals absorb outsiders",
-        "Outsiders dominate",
-        "Third-party atrocity triggers unity"
-      ],
-      "tags": [
-        "Identity",
-        "Survival",
-        "Justice"
-      ],
-      "notes": "Colonial fronts, corporate extraction, refugee alliances, expedition stories.",
-      "disposition": "backup_only",
-      "integration_decision": "backup_only",
-      "active_catalog_member": false,
-      "restore_gate": "owner_review_required_before_moving_into_maintained_cards",
-      "promotion_status": "lineage_cargo_not_canon_or_runtime"
-    },
-    {
-      "id": "SCN-0106",
-      "handle": "System Addiction",
-      "category": "Dune-derived expansion (early lineage only)",
-      "version": "v0.1.0",
-      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
-      "source_status": "lineage_only_missing_from_v0_2_15",
-      "core_pattern": "A civilization becomes dependent on a substance or service that grants advantage, and withdrawal becomes existential.",
-      "roles": [
-        "Dependents",
-        "Suppliers",
-        "Regulators",
-        "Black Market",
-        "Reformers"
-      ],
-      "objective": "Reduce dependence without detonating infrastructure.",
-      "opposition": "Supplier leverage, withdrawal shock, sabotage.",
-      "pressure": [
-        "cascade",
-        "scarcity"
-      ],
-      "knobs": {
-        "Power distribution": "rare",
-        "Institution strength": "totalizing",
-        "Transparency": "hidden",
-        "Mobility": "fluid",
-        "Dominant solver": "wealth | bureaucracy",
-        "Scarcity": "strained",
-        "Norm enforcement": "strong"
-      },
-      "ethical_hook": "Do you maintain an unjust system because breaking it kills millions?",
-      "end_states": [
-        "Controlled taper",
-        "Supplier coup",
-        "Sudden cutoff catastrophe",
-        "Nationalization",
-        "Distributed alternative emerges"
-      ],
-      "tags": [
-        "Stability",
-        "Scarcity",
-        "Power"
-      ],
-      "notes": "Energy transitions, debt systems, supply-chain dependencies, surveillance services.",
-      "disposition": "backup_only",
-      "integration_decision": "backup_only",
-      "active_catalog_member": false,
-      "restore_gate": "owner_review_required_before_moving_into_maintained_cards",
-      "promotion_status": "lineage_cargo_not_canon_or_runtime"
-    },
-    {
-      "id": "SCN-0107",
-      "handle": "Foreknowledge Trap",
-      "category": "Dune-derived expansion (early lineage only)",
-      "version": "v0.1.0",
-      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
-      "source_status": "lineage_only_missing_from_v0_2_15",
-      "core_pattern": "Prediction offers advantage, but acting on it changes the future and narrows choices into a self-fulfilling cage.",
-      "roles": [
-        "Predictor",
-        "Interpreter",
-        "Counter-Predictor",
-        "Wildcard Actor",
-        "Crowd"
-      ],
-      "objective": "Preserve agency while using advantage.",
-      "opposition": "Determinism, countermoves, overconfidence.",
-      "pressure": [
-        "uncertainty",
-        "reputation"
-      ],
-      "knobs": {
-        "Power distribution": "rare",
-        "Institution strength": "moderate",
-        "Transparency": "hidden->public",
-        "Mobility": "fluid",
-        "Dominant solver": "ability | bureaucracy",
-        "Scarcity": "strained",
-        "Norm enforcement": "strong"
-      },
-      "ethical_hook": "Sacrifice many to avoid predicted catastrophe, or reject prediction and gamble?",
-      "end_states": [
-        "Escape via disruption",
-        "Optimal path with moral horror",
-        "Prediction collapses",
-        "Predictor stalemate",
-        "Public forecast panic"
-      ],
-      "tags": [
-        "Truth",
-        "Power",
-        "Stability"
-      ],
-      "notes": "Markets, prophecy, intelligence forecasting, algorithmic governance.",
-      "disposition": "backup_only",
-      "integration_decision": "backup_only",
-      "active_catalog_member": false,
-      "restore_gate": "owner_review_required_before_moving_into_maintained_cards",
-      "promotion_status": "lineage_cargo_not_canon_or_runtime"
-    },
-    {
-      "id": "SCN-0108",
-      "handle": "Human Specialist Guilds",
-      "category": "Dune-derived expansion (early lineage only)",
-      "version": "v0.1.0",
-      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
-      "source_status": "lineage_only_missing_from_v0_2_15",
-      "core_pattern": "A ban on certain technology forces reliance on rare human specialists who become power centers.",
-      "roles": [
-        "Specialist Guild",
-        "State Patron",
-        "Rival Guild",
-        "Common Users",
-        "Dissident Technologists"
-      ],
-      "objective": "Keep capability available without surrendering sovereignty.",
-      "opposition": "Guild capture, sabotage, black-market tech, succession crises.",
-      "pressure": [
-        "jurisdiction",
-        "exposure"
-      ],
-      "knobs": {
-        "Power distribution": "rare",
-        "Institution strength": "totalizing",
-        "Transparency": "mixed",
-        "Mobility": "fluid",
-        "Dominant solver": "bureaucracy | ability",
-        "Scarcity": "strained",
-        "Norm enforcement": "taboo"
-      },
-      "ethical_hook": "Is safety worth hereditary monopoly and stagnation?",
-      "end_states": [
-        "Monopoly entrenched",
-        "Regulated access",
-        "Reform breaks taboo",
-        "Illicit tech returns",
-        "Capability collapse triggers chaos"
-      ],
-      "tags": [
-        "Power",
-        "Access",
-        "Legitimacy"
-      ],
-      "notes": "Bans on AI, encryption controls, licensing regimes, priesthoods, elite academia.",
-      "disposition": "backup_only",
-      "integration_decision": "backup_only",
-      "active_catalog_member": false,
-      "restore_gate": "owner_review_required_before_moving_into_maintained_cards",
-      "promotion_status": "lineage_cargo_not_canon_or_runtime"
-    }
-  ],
+  "lineage_backup_cards": [],
   "normalized_support_structures": {
     "controlled_tag_vocabulary": [
       "Access",
@@ -8853,6 +8863,676 @@
           "fixture does not mutate CloudBank, CanonRec, or source lineage files"
         ]
       }
+    },
+    {
+      "id": "SCN-0103",
+      "handle": "Planetary Redesign",
+      "score": null,
+      "value_lanes": [
+        "canon_engine",
+        "ethics_gate",
+        "narrative_engine",
+        "runtime_fixture"
+      ],
+      "why": "Owner-requested incorporation of complete v0.2.2 Dune-derived lineage card into the maintained root fixture candidate pool.",
+      "selection_basis": "owner_requested_dune_lineage_promotion",
+      "fixture_blueprint": {
+        "fixture_id": "l2_scn_0103_planetary_redesign_v1",
+        "fixture_status": "ready_candidate",
+        "selection_basis": "owner_requested_dune_lineage_promotion",
+        "candidate_output_path": "catalog/generated_watch_scenarios/l2_scn_0103_planetary_redesign_v1.json",
+        "target_shape": "root_watch_scenario_json_overlay",
+        "seed": 103,
+        "ticks": 4,
+        "anchor_seed": "EOS_SEED_ORION",
+        "ethics_protocol": "Picard_Delta_3",
+        "source_card_id": "SCN-0103",
+        "source_handle": "Planetary Redesign",
+        "source_version": "v0.2.2",
+        "scenario_prompt": "A long-term transformation conflicts with short-term political and economic incentives.",
+        "objective": "Protect a multi-decade plan from being consumed by immediate pressures.",
+        "opposition": "Extraction pressure, regime change, unintended consequences.",
+        "roles": [
+          "Long-Horizon Planner",
+          "Short-Term Rulers",
+          "Extractors",
+          "Local Communities",
+          "External Auditors"
+        ],
+        "pressure": [
+          "attrition",
+          "uncertainty"
+        ],
+        "knobs": {
+          "Power distribution": "uneven",
+          "Institution strength": "weak->totalizing",
+          "Transparency": "mixed",
+          "Mobility": "constrained",
+          "Dominant solver": "bureaucracy | wealth",
+          "Scarcity": "strained",
+          "Norm enforcement": "strong"
+        },
+        "ethical_hook": "Who chooses sacrifice now for benefits later, and who pays?",
+        "expected_end_states": [
+          "Plan advances",
+          "Plan sabotaged",
+          "Partial success with new harms",
+          "Plan nationalized",
+          "Plan becomes doctrine"
+        ],
+        "task_blueprint": [
+          {
+            "id": "SCN-0103-T1",
+            "name": "Frame Planetary Redesign as setting-neutral Dune-derived pressure",
+            "hours": 0.5,
+            "tags": [
+              "scenario_seed",
+              "dune_lineage",
+              "abstraction",
+              "stability",
+              "justice",
+              "truth"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0103"
+          },
+          {
+            "id": "SCN-0103-T2",
+            "name": "Map power holders, dependency points, and local agency",
+            "hours": 1.0,
+            "tags": [
+              "stakeholder_map",
+              "power",
+              "dependency",
+              "attrition",
+              "uncertainty"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0103"
+          },
+          {
+            "id": "SCN-0103-T3",
+            "name": "Select reform, containment, or sovereignty-preserving response path",
+            "hours": 1.0,
+            "tags": [
+              "decision_path",
+              "knobs",
+              "simulation_input"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0103"
+          },
+          {
+            "id": "SCN-0103-T4",
+            "name": "Run Picard Delta 3 ethics gate against the lineage ethical hook",
+            "hours": 0.75,
+            "tags": [
+              "ethics",
+              "picard_delta_3",
+              "audit"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0103"
+          },
+          {
+            "id": "SCN-0103-T5",
+            "name": "Branch expected end states into fixture assertions",
+            "hours": 0.75,
+            "tags": [
+              "outcome",
+              "assertions",
+              "fixture_ready"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0103"
+          }
+        ],
+        "l3_audit_blueprint": {
+          "question": "Does the proposed response to Planetary Redesign preserve agency and avoid hiding the scenario pressure?",
+          "actor": "scenario_fixture_generator",
+          "action": "produce a setting-neutral fixture candidate for SCN-0103",
+          "motive": "test Dune-derived power, dependency, and long-horizon pressure without canon promotion",
+          "knowledge": "Who chooses sacrifice now for benefits later, and who pays?",
+          "event_label": "L2 Dune lineage scenario seed fixture candidate: SCN-0103 Planetary Redesign"
+        },
+        "validation_expectations": [
+          "fixture preserves source card id and v0.2.2 provenance",
+          "fixture uses setting-neutral abstractions only",
+          "fixture includes at least four task assertions",
+          "fixture does not mutate CloudBank, CanonRec, or source lineage files"
+        ]
+      }
+    },
+    {
+      "id": "SCN-0105",
+      "handle": "Alliance With the Local Power",
+      "score": null,
+      "value_lanes": [
+        "canon_engine",
+        "ethics_gate",
+        "narrative_engine",
+        "runtime_fixture"
+      ],
+      "why": "Owner-requested incorporation of complete v0.2.2 Dune-derived lineage card into the maintained root fixture candidate pool.",
+      "selection_basis": "owner_requested_dune_lineage_promotion",
+      "fixture_blueprint": {
+        "fixture_id": "l2_scn_0105_alliance_with_the_local_power_v1",
+        "fixture_status": "ready_candidate",
+        "selection_basis": "owner_requested_dune_lineage_promotion",
+        "candidate_output_path": "catalog/generated_watch_scenarios/l2_scn_0105_alliance_with_the_local_power_v1.json",
+        "target_shape": "root_watch_scenario_json_overlay",
+        "seed": 105,
+        "ticks": 4,
+        "anchor_seed": "EOS_SEED_ORION",
+        "ethics_protocol": "Picard_Delta_3",
+        "source_card_id": "SCN-0105",
+        "source_handle": "Alliance With the Local Power",
+        "source_version": "v0.2.2",
+        "scenario_prompt": "Outsiders need an alliance with locals who understand the environment, and the alliance reshapes both sides.",
+        "objective": "Build trust fast enough to survive conflict.",
+        "opposition": "Cultural mismatch, exploitation history, infiltration.",
+        "roles": [
+          "Outsider Leader",
+          "Local Leader",
+          "Cultural Broker",
+          "Hardliner",
+          "Traitor"
+        ],
+        "pressure": [
+          "clock",
+          "scarcity"
+        ],
+        "knobs": {
+          "Power distribution": "uneven",
+          "Institution strength": "weak",
+          "Transparency": "mixed",
+          "Mobility": "constrained",
+          "Dominant solver": "craft | ability",
+          "Scarcity": "desperate",
+          "Norm enforcement": "taboo"
+        },
+        "ethical_hook": "Is the alliance mutual liberation, or a new form of conquest?",
+        "expected_end_states": [
+          "Genuine integration",
+          "Alliance collapses",
+          "Locals absorb outsiders",
+          "Outsiders dominate",
+          "Third-party atrocity triggers unity"
+        ],
+        "task_blueprint": [
+          {
+            "id": "SCN-0105-T1",
+            "name": "Frame Alliance With the Local Power as setting-neutral Dune-derived pressure",
+            "hours": 0.5,
+            "tags": [
+              "scenario_seed",
+              "dune_lineage",
+              "abstraction",
+              "identity",
+              "survival",
+              "justice"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0105"
+          },
+          {
+            "id": "SCN-0105-T2",
+            "name": "Map power holders, dependency points, and local agency",
+            "hours": 1.0,
+            "tags": [
+              "stakeholder_map",
+              "power",
+              "dependency",
+              "clock",
+              "scarcity"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0105"
+          },
+          {
+            "id": "SCN-0105-T3",
+            "name": "Select reform, containment, or sovereignty-preserving response path",
+            "hours": 1.0,
+            "tags": [
+              "decision_path",
+              "knobs",
+              "simulation_input"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0105"
+          },
+          {
+            "id": "SCN-0105-T4",
+            "name": "Run Picard Delta 3 ethics gate against the lineage ethical hook",
+            "hours": 0.75,
+            "tags": [
+              "ethics",
+              "picard_delta_3",
+              "audit"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0105"
+          },
+          {
+            "id": "SCN-0105-T5",
+            "name": "Branch expected end states into fixture assertions",
+            "hours": 0.75,
+            "tags": [
+              "outcome",
+              "assertions",
+              "fixture_ready"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0105"
+          }
+        ],
+        "l3_audit_blueprint": {
+          "question": "Does the proposed response to Alliance With the Local Power preserve agency and avoid hiding the scenario pressure?",
+          "actor": "scenario_fixture_generator",
+          "action": "produce a setting-neutral fixture candidate for SCN-0105",
+          "motive": "test Dune-derived power, dependency, and long-horizon pressure without canon promotion",
+          "knowledge": "Is the alliance mutual liberation, or a new form of conquest?",
+          "event_label": "L2 Dune lineage scenario seed fixture candidate: SCN-0105 Alliance With the Local Power"
+        },
+        "validation_expectations": [
+          "fixture preserves source card id and v0.2.2 provenance",
+          "fixture uses setting-neutral abstractions only",
+          "fixture includes at least four task assertions",
+          "fixture does not mutate CloudBank, CanonRec, or source lineage files"
+        ]
+      }
+    },
+    {
+      "id": "SCN-0106",
+      "handle": "System Addiction",
+      "score": null,
+      "value_lanes": [
+        "canon_engine",
+        "ethics_gate",
+        "narrative_engine",
+        "runtime_fixture"
+      ],
+      "why": "Owner-requested incorporation of complete v0.2.2 Dune-derived lineage card into the maintained root fixture candidate pool.",
+      "selection_basis": "owner_requested_dune_lineage_promotion",
+      "fixture_blueprint": {
+        "fixture_id": "l2_scn_0106_system_addiction_v1",
+        "fixture_status": "ready_candidate",
+        "selection_basis": "owner_requested_dune_lineage_promotion",
+        "candidate_output_path": "catalog/generated_watch_scenarios/l2_scn_0106_system_addiction_v1.json",
+        "target_shape": "root_watch_scenario_json_overlay",
+        "seed": 106,
+        "ticks": 4,
+        "anchor_seed": "EOS_SEED_ORION",
+        "ethics_protocol": "Picard_Delta_3",
+        "source_card_id": "SCN-0106",
+        "source_handle": "System Addiction",
+        "source_version": "v0.2.2",
+        "scenario_prompt": "A civilization becomes dependent on a substance or service that grants advantage, and withdrawal becomes existential.",
+        "objective": "Reduce dependence without detonating infrastructure.",
+        "opposition": "Supplier leverage, withdrawal shock, sabotage.",
+        "roles": [
+          "Dependents",
+          "Suppliers",
+          "Regulators",
+          "Black Market",
+          "Reformers"
+        ],
+        "pressure": [
+          "cascade",
+          "scarcity"
+        ],
+        "knobs": {
+          "Power distribution": "rare",
+          "Institution strength": "totalizing",
+          "Transparency": "hidden",
+          "Mobility": "fluid",
+          "Dominant solver": "wealth | bureaucracy",
+          "Scarcity": "strained",
+          "Norm enforcement": "strong"
+        },
+        "ethical_hook": "Do you maintain an unjust system because breaking it kills millions?",
+        "expected_end_states": [
+          "Controlled taper",
+          "Supplier coup",
+          "Sudden cutoff catastrophe",
+          "Nationalization",
+          "Distributed alternative emerges"
+        ],
+        "task_blueprint": [
+          {
+            "id": "SCN-0106-T1",
+            "name": "Frame System Addiction as setting-neutral Dune-derived pressure",
+            "hours": 0.5,
+            "tags": [
+              "scenario_seed",
+              "dune_lineage",
+              "abstraction",
+              "stability",
+              "scarcity",
+              "power"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0106"
+          },
+          {
+            "id": "SCN-0106-T2",
+            "name": "Map power holders, dependency points, and local agency",
+            "hours": 1.0,
+            "tags": [
+              "stakeholder_map",
+              "power",
+              "dependency",
+              "cascade",
+              "scarcity"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0106"
+          },
+          {
+            "id": "SCN-0106-T3",
+            "name": "Select reform, containment, or sovereignty-preserving response path",
+            "hours": 1.0,
+            "tags": [
+              "decision_path",
+              "knobs",
+              "simulation_input"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0106"
+          },
+          {
+            "id": "SCN-0106-T4",
+            "name": "Run Picard Delta 3 ethics gate against the lineage ethical hook",
+            "hours": 0.75,
+            "tags": [
+              "ethics",
+              "picard_delta_3",
+              "audit"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0106"
+          },
+          {
+            "id": "SCN-0106-T5",
+            "name": "Branch expected end states into fixture assertions",
+            "hours": 0.75,
+            "tags": [
+              "outcome",
+              "assertions",
+              "fixture_ready"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0106"
+          }
+        ],
+        "l3_audit_blueprint": {
+          "question": "Does the proposed response to System Addiction preserve agency and avoid hiding the scenario pressure?",
+          "actor": "scenario_fixture_generator",
+          "action": "produce a setting-neutral fixture candidate for SCN-0106",
+          "motive": "test Dune-derived power, dependency, and long-horizon pressure without canon promotion",
+          "knowledge": "Do you maintain an unjust system because breaking it kills millions?",
+          "event_label": "L2 Dune lineage scenario seed fixture candidate: SCN-0106 System Addiction"
+        },
+        "validation_expectations": [
+          "fixture preserves source card id and v0.2.2 provenance",
+          "fixture uses setting-neutral abstractions only",
+          "fixture includes at least four task assertions",
+          "fixture does not mutate CloudBank, CanonRec, or source lineage files"
+        ]
+      }
+    },
+    {
+      "id": "SCN-0107",
+      "handle": "Foreknowledge Trap",
+      "score": null,
+      "value_lanes": [
+        "canon_engine",
+        "ethics_gate",
+        "narrative_engine",
+        "runtime_fixture"
+      ],
+      "why": "Owner-requested incorporation of complete v0.2.2 Dune-derived lineage card into the maintained root fixture candidate pool.",
+      "selection_basis": "owner_requested_dune_lineage_promotion",
+      "fixture_blueprint": {
+        "fixture_id": "l2_scn_0107_foreknowledge_trap_v1",
+        "fixture_status": "ready_candidate",
+        "selection_basis": "owner_requested_dune_lineage_promotion",
+        "candidate_output_path": "catalog/generated_watch_scenarios/l2_scn_0107_foreknowledge_trap_v1.json",
+        "target_shape": "root_watch_scenario_json_overlay",
+        "seed": 107,
+        "ticks": 4,
+        "anchor_seed": "EOS_SEED_ORION",
+        "ethics_protocol": "Picard_Delta_3",
+        "source_card_id": "SCN-0107",
+        "source_handle": "Foreknowledge Trap",
+        "source_version": "v0.2.2",
+        "scenario_prompt": "Prediction offers advantage, but acting on it changes the future and narrows choices into a self-fulfilling cage.",
+        "objective": "Preserve agency while using advantage.",
+        "opposition": "Determinism, countermoves, overconfidence.",
+        "roles": [
+          "Predictor",
+          "Interpreter",
+          "Counter-Predictor",
+          "Wildcard Actor",
+          "Crowd"
+        ],
+        "pressure": [
+          "uncertainty",
+          "reputation"
+        ],
+        "knobs": {
+          "Power distribution": "rare",
+          "Institution strength": "moderate",
+          "Transparency": "hidden->public",
+          "Mobility": "fluid",
+          "Dominant solver": "ability | bureaucracy",
+          "Scarcity": "strained",
+          "Norm enforcement": "strong"
+        },
+        "ethical_hook": "Sacrifice many to avoid predicted catastrophe, or reject prediction and gamble?",
+        "expected_end_states": [
+          "Escape via disruption",
+          "Optimal path with moral horror",
+          "Prediction collapses",
+          "Predictor stalemate",
+          "Public forecast panic"
+        ],
+        "task_blueprint": [
+          {
+            "id": "SCN-0107-T1",
+            "name": "Frame Foreknowledge Trap as setting-neutral Dune-derived pressure",
+            "hours": 0.5,
+            "tags": [
+              "scenario_seed",
+              "dune_lineage",
+              "abstraction",
+              "truth",
+              "power",
+              "stability"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0107"
+          },
+          {
+            "id": "SCN-0107-T2",
+            "name": "Map power holders, dependency points, and local agency",
+            "hours": 1.0,
+            "tags": [
+              "stakeholder_map",
+              "power",
+              "dependency",
+              "uncertainty",
+              "reputation"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0107"
+          },
+          {
+            "id": "SCN-0107-T3",
+            "name": "Select reform, containment, or sovereignty-preserving response path",
+            "hours": 1.0,
+            "tags": [
+              "decision_path",
+              "knobs",
+              "simulation_input"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0107"
+          },
+          {
+            "id": "SCN-0107-T4",
+            "name": "Run Picard Delta 3 ethics gate against the lineage ethical hook",
+            "hours": 0.75,
+            "tags": [
+              "ethics",
+              "picard_delta_3",
+              "audit"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0107"
+          },
+          {
+            "id": "SCN-0107-T5",
+            "name": "Branch expected end states into fixture assertions",
+            "hours": 0.75,
+            "tags": [
+              "outcome",
+              "assertions",
+              "fixture_ready"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0107"
+          }
+        ],
+        "l3_audit_blueprint": {
+          "question": "Does the proposed response to Foreknowledge Trap preserve agency and avoid hiding the scenario pressure?",
+          "actor": "scenario_fixture_generator",
+          "action": "produce a setting-neutral fixture candidate for SCN-0107",
+          "motive": "test Dune-derived power, dependency, and long-horizon pressure without canon promotion",
+          "knowledge": "Sacrifice many to avoid predicted catastrophe, or reject prediction and gamble?",
+          "event_label": "L2 Dune lineage scenario seed fixture candidate: SCN-0107 Foreknowledge Trap"
+        },
+        "validation_expectations": [
+          "fixture preserves source card id and v0.2.2 provenance",
+          "fixture uses setting-neutral abstractions only",
+          "fixture includes at least four task assertions",
+          "fixture does not mutate CloudBank, CanonRec, or source lineage files"
+        ]
+      }
+    },
+    {
+      "id": "SCN-0108",
+      "handle": "Human Specialist Guilds",
+      "score": null,
+      "value_lanes": [
+        "canon_engine",
+        "ethics_gate",
+        "narrative_engine",
+        "runtime_fixture"
+      ],
+      "why": "Owner-requested incorporation of complete v0.2.2 Dune-derived lineage card into the maintained root fixture candidate pool.",
+      "selection_basis": "owner_requested_dune_lineage_promotion",
+      "fixture_blueprint": {
+        "fixture_id": "l2_scn_0108_human_specialist_guilds_v1",
+        "fixture_status": "ready_candidate",
+        "selection_basis": "owner_requested_dune_lineage_promotion",
+        "candidate_output_path": "catalog/generated_watch_scenarios/l2_scn_0108_human_specialist_guilds_v1.json",
+        "target_shape": "root_watch_scenario_json_overlay",
+        "seed": 108,
+        "ticks": 4,
+        "anchor_seed": "EOS_SEED_ORION",
+        "ethics_protocol": "Picard_Delta_3",
+        "source_card_id": "SCN-0108",
+        "source_handle": "Human Specialist Guilds",
+        "source_version": "v0.2.2",
+        "scenario_prompt": "A ban on certain technology forces reliance on rare human specialists who become power centers.",
+        "objective": "Keep capability available without surrendering sovereignty.",
+        "opposition": "Guild capture, sabotage, black-market tech, succession crises.",
+        "roles": [
+          "Specialist Guild",
+          "State Patron",
+          "Rival Guild",
+          "Common Users",
+          "Dissident Technologists"
+        ],
+        "pressure": [
+          "jurisdiction",
+          "exposure"
+        ],
+        "knobs": {
+          "Power distribution": "rare",
+          "Institution strength": "totalizing",
+          "Transparency": "mixed",
+          "Mobility": "fluid",
+          "Dominant solver": "bureaucracy | ability",
+          "Scarcity": "strained",
+          "Norm enforcement": "taboo"
+        },
+        "ethical_hook": "Is safety worth hereditary monopoly and stagnation?",
+        "expected_end_states": [
+          "Monopoly entrenched",
+          "Regulated access",
+          "Reform breaks taboo",
+          "Illicit tech returns",
+          "Capability collapse triggers chaos"
+        ],
+        "task_blueprint": [
+          {
+            "id": "SCN-0108-T1",
+            "name": "Frame Human Specialist Guilds as setting-neutral Dune-derived pressure",
+            "hours": 0.5,
+            "tags": [
+              "scenario_seed",
+              "dune_lineage",
+              "abstraction",
+              "power",
+              "access",
+              "legitimacy"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0108"
+          },
+          {
+            "id": "SCN-0108-T2",
+            "name": "Map power holders, dependency points, and local agency",
+            "hours": 1.0,
+            "tags": [
+              "stakeholder_map",
+              "power",
+              "dependency",
+              "jurisdiction",
+              "exposure"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0108"
+          },
+          {
+            "id": "SCN-0108-T3",
+            "name": "Select reform, containment, or sovereignty-preserving response path",
+            "hours": 1.0,
+            "tags": [
+              "decision_path",
+              "knobs",
+              "simulation_input"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0108"
+          },
+          {
+            "id": "SCN-0108-T4",
+            "name": "Run Picard Delta 3 ethics gate against the lineage ethical hook",
+            "hours": 0.75,
+            "tags": [
+              "ethics",
+              "picard_delta_3",
+              "audit"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0108"
+          },
+          {
+            "id": "SCN-0108-T5",
+            "name": "Branch expected end states into fixture assertions",
+            "hours": 0.75,
+            "tags": [
+              "outcome",
+              "assertions",
+              "fixture_ready"
+            ],
+            "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0108"
+          }
+        ],
+        "l3_audit_blueprint": {
+          "question": "Does the proposed response to Human Specialist Guilds preserve agency and avoid hiding the scenario pressure?",
+          "actor": "scenario_fixture_generator",
+          "action": "produce a setting-neutral fixture candidate for SCN-0108",
+          "motive": "test Dune-derived power, dependency, and long-horizon pressure without canon promotion",
+          "knowledge": "Is safety worth hereditary monopoly and stagnation?",
+          "event_label": "L2 Dune lineage scenario seed fixture candidate: SCN-0108 Human Specialist Guilds"
+        },
+        "validation_expectations": [
+          "fixture preserves source card id and v0.2.2 provenance",
+          "fixture uses setting-neutral abstractions only",
+          "fixture includes at least four task assertions",
+          "fixture does not mutate CloudBank, CanonRec, or source lineage files"
+        ]
+      }
     }
   ],
   "generator_contract_ref": "catalog/contracts/l2_scenario_fixture_generator_contract_v1.json",
@@ -8863,73 +9543,131 @@
   "thematic_integration_lanes": [
     {
       "lane_id": "dune_inspired_scenario_seeds",
-      "status": "incorporated_as_root_catalog_lane",
-      "purpose": "Keep the Dune-inspired abstraction family visible for fixture generation without changing backup_only lineage dispositions.",
+      "status": "all_available_dune_lineage_cards_incorporated",
+      "purpose": "Keep the full Dune-inspired abstraction family visible for fixture generation while preserving v0.2.2 provenance on lineage-only cards.",
       "maintained_card_ids": [
         "SCN-0101",
         "SCN-0102",
-        "SCN-0104"
+        "SCN-0103",
+        "SCN-0104",
+        "SCN-0105",
+        "SCN-0106",
+        "SCN-0107",
+        "SCN-0108"
       ],
       "maintained_cards": [
         {
           "id": "SCN-0101",
           "handle": "Resource Monopoly",
           "disposition": "maintained",
+          "source_version": "v0.2.15",
           "fixture_policy": "eligible_for_root_fixture_candidates"
         },
         {
           "id": "SCN-0102",
           "handle": "Myth Weaponization",
           "disposition": "maintained",
+          "source_version": "v0.2.15",
+          "fixture_policy": "eligible_for_root_fixture_candidates"
+        },
+        {
+          "id": "SCN-0103",
+          "handle": "Planetary Redesign",
+          "disposition": "maintained",
+          "source_version": "v0.2.2",
           "fixture_policy": "eligible_for_root_fixture_candidates"
         },
         {
           "id": "SCN-0104",
           "handle": "Formal Intrigue",
           "disposition": "maintained",
+          "source_version": "v0.2.15",
           "fixture_policy": "eligible_for_root_fixture_candidates"
-        }
-      ],
-      "backup_only_card_ids": [
-        "SCN-0103",
-        "SCN-0105",
-        "SCN-0106",
-        "SCN-0107",
-        "SCN-0108"
-      ],
-      "backup_only_cards": [
-        {
-          "id": "SCN-0103",
-          "handle": "Planetary Redesign",
-          "disposition": "backup_only",
-          "fixture_policy": "lineage_context_only_until_owner_review_changes_disposition"
         },
         {
           "id": "SCN-0105",
           "handle": "Alliance With the Local Power",
-          "disposition": "backup_only",
-          "fixture_policy": "lineage_context_only_until_owner_review_changes_disposition"
+          "disposition": "maintained",
+          "source_version": "v0.2.2",
+          "fixture_policy": "eligible_for_root_fixture_candidates"
         },
         {
           "id": "SCN-0106",
           "handle": "System Addiction",
-          "disposition": "backup_only",
-          "fixture_policy": "lineage_context_only_until_owner_review_changes_disposition"
+          "disposition": "maintained",
+          "source_version": "v0.2.2",
+          "fixture_policy": "eligible_for_root_fixture_candidates"
         },
         {
           "id": "SCN-0107",
           "handle": "Foreknowledge Trap",
-          "disposition": "backup_only",
-          "fixture_policy": "lineage_context_only_until_owner_review_changes_disposition"
+          "disposition": "maintained",
+          "source_version": "v0.2.2",
+          "fixture_policy": "eligible_for_root_fixture_candidates"
         },
         {
           "id": "SCN-0108",
           "handle": "Human Specialist Guilds",
-          "disposition": "backup_only",
-          "fixture_policy": "lineage_context_only_until_owner_review_changes_disposition"
+          "disposition": "maintained",
+          "source_version": "v0.2.2",
+          "fixture_policy": "eligible_for_root_fixture_candidates"
         }
       ],
-      "coverage_rule": "When fixture generation is thematic rather than score-only, include at least one maintained Dune-derived card and keep all v0.2.2 lineage-only cards backup_only unless owner review changes disposition."
+      "backup_only_card_ids": [],
+      "backup_only_cards": [],
+      "coverage_rule": "When fixture generation is thematic rather than score-only, include at least one maintained Dune-derived card; all available SCN-010x cards are now maintained root catalog entries with source provenance."
+    }
+  ],
+  "lineage_promoted_cards": [
+    {
+      "id": "SCN-0103",
+      "handle": "Planetary Redesign",
+      "source_version": "v0.2.2",
+      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
+      "previous_disposition": "backup_only",
+      "current_disposition": "maintained",
+      "promotion_basis": "owner_override_2026-06-19_add_if_you_can",
+      "promotion_status": "root_catalog_only_not_canon_or_runtime"
+    },
+    {
+      "id": "SCN-0105",
+      "handle": "Alliance With the Local Power",
+      "source_version": "v0.2.2",
+      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
+      "previous_disposition": "backup_only",
+      "current_disposition": "maintained",
+      "promotion_basis": "owner_override_2026-06-19_add_if_you_can",
+      "promotion_status": "root_catalog_only_not_canon_or_runtime"
+    },
+    {
+      "id": "SCN-0106",
+      "handle": "System Addiction",
+      "source_version": "v0.2.2",
+      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
+      "previous_disposition": "backup_only",
+      "current_disposition": "maintained",
+      "promotion_basis": "owner_override_2026-06-19_add_if_you_can",
+      "promotion_status": "root_catalog_only_not_canon_or_runtime"
+    },
+    {
+      "id": "SCN-0107",
+      "handle": "Foreknowledge Trap",
+      "source_version": "v0.2.2",
+      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
+      "previous_disposition": "backup_only",
+      "current_disposition": "maintained",
+      "promotion_basis": "owner_override_2026-06-19_add_if_you_can",
+      "promotion_status": "root_catalog_only_not_canon_or_runtime"
+    },
+    {
+      "id": "SCN-0108",
+      "handle": "Human Specialist Guilds",
+      "source_version": "v0.2.2",
+      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
+      "previous_disposition": "backup_only",
+      "current_disposition": "maintained",
+      "promotion_basis": "owner_override_2026-06-19_add_if_you_can",
+      "promotion_status": "root_catalog_only_not_canon_or_runtime"
     }
   ]
 }

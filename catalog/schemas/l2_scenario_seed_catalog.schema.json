@@ -37,10 +37,10 @@
       ],
       "properties": {
         "maintained_card_count": {
-          "const": 87
+          "const": 92
         },
         "backup_only_lineage_card_count": {
-          "const": 5
+          "const": 0
         },
         "fusion_pairing_count": {
           "const": 34
@@ -53,18 +53,19 @@
     },
     "cards": {
       "type": "array",
-      "minItems": 87
+      "minItems": 92
     },
     "lineage_backup_cards": {
       "type": "array",
-      "minItems": 5
+      "minItems": 0,
+      "maxItems": 0
     },
     "normalized_support_structures": {
       "type": "object"
     },
     "fixture_ready_shortlist": {
       "type": "array",
-      "minItems": 3
+      "minItems": 8
     },
     "generator_contract_ref": {
       "const": "catalog/contracts/l2_scenario_fixture_generator_contract_v1.json"

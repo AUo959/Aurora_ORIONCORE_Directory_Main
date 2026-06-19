@@ -22,10 +22,10 @@ class L2ScenarioSeedCatalogTests(unittest.TestCase):
     def test_catalog_counts_and_status(self) -> None:
         self.assertEqual(self.catalog["artifact_id"], "AURORA_ROOT_L2_SCENARIO_SEED_CATALOG_v1")
         self.assertEqual(self.catalog["status"], "maintained_root_control_plane_artifact")
-        self.assertEqual(len(self.catalog["cards"]), 87)
-        self.assertEqual(self.catalog["summary"]["maintained_card_count"], 87)
-        self.assertEqual(len(self.catalog["lineage_backup_cards"]), 5)
-        self.assertEqual(self.catalog["summary"]["backup_only_lineage_card_count"], 5)
+        self.assertEqual(len(self.catalog["cards"]), 92)
+        self.assertEqual(self.catalog["summary"]["maintained_card_count"], 92)
+        self.assertEqual(len(self.catalog["lineage_backup_cards"]), 0)
+        self.assertEqual(self.catalog["summary"]["backup_only_lineage_card_count"], 0)
         self.assertEqual(
             self.catalog["authority_and_promotion"]["canon_status"],
             "not_promoted_to_CanonRec",
@@ -35,15 +35,18 @@ class L2ScenarioSeedCatalogTests(unittest.TestCase):
             "not_wired_to_CloudBank_or_GUMAS_runtime",
         )
 
-    def test_five_lineage_only_cards_remain_backup_only(self) -> None:
+    def test_five_lineage_only_cards_are_owner_promoted_with_provenance(self) -> None:
         expected_ids = {"SCN-0103", "SCN-0105", "SCN-0106", "SCN-0107", "SCN-0108"}
-        backup_cards = self.catalog["lineage_backup_cards"]
-        self.assertEqual({card["id"] for card in backup_cards}, expected_ids)
-        for card in backup_cards:
-            self.assertEqual(card["disposition"], "backup_only")
-            self.assertEqual(card["integration_decision"], "backup_only")
-            self.assertFalse(card["active_catalog_member"])
-            self.assertIn("owner_review_required", card["restore_gate"])
+        cards = {card["id"]: card for card in self.catalog["cards"]}
+        self.assertEqual({card["id"] for card in self.catalog["lineage_promoted_cards"]}, expected_ids)
+        for card_id in expected_ids:
+            card = cards[card_id]
+            self.assertEqual(card["disposition"], "maintained")
+            self.assertEqual(card["integration_decision"], "include")
+            self.assertEqual(card["source_version"], "v0.2.2")
+            self.assertEqual(card["source_status"], "lineage_only_missing_from_v0_2_15")
+            self.assertEqual(card["promotion_basis"], "owner_override_2026-06-19_add_if_you_can")
+            self.assertEqual(card["promotion_status"], "root_catalog_only_not_canon_or_runtime")
 
     def test_required_fixture_candidates_are_ready(self) -> None:
         entries = {entry["id"]: entry for entry in self.catalog["fixture_ready_shortlist"]}
@@ -58,7 +61,7 @@ class L2ScenarioSeedCatalogTests(unittest.TestCase):
             for task in blueprint["task_blueprint"]:
                 self.assertIn("catalog/l2_scenario_seed_catalog.json", task["source"])
 
-    def test_dune_inspired_lane_is_incorporated_without_promoting_backups(self) -> None:
+    def test_dune_inspired_lane_includes_all_available_dune_cards(self) -> None:
         lanes = {
             lane["lane_id"]: lane for lane in self.catalog["thematic_integration_lanes"]
         }
@@ -66,26 +69,41 @@ class L2ScenarioSeedCatalogTests(unittest.TestCase):
         lane = lanes["dune_inspired_scenario_seeds"]
         self.assertEqual(
             lane["maintained_card_ids"],
-            ["SCN-0101", "SCN-0102", "SCN-0104"],
+            [
+                "SCN-0101",
+                "SCN-0102",
+                "SCN-0103",
+                "SCN-0104",
+                "SCN-0105",
+                "SCN-0106",
+                "SCN-0107",
+                "SCN-0108",
+            ],
         )
-        self.assertEqual(
-            lane["backup_only_card_ids"],
-            ["SCN-0103", "SCN-0105", "SCN-0106", "SCN-0107", "SCN-0108"],
-        )
+        self.assertEqual(lane["backup_only_card_ids"], [])
         for card in lane["maintained_cards"]:
             self.assertEqual(card["fixture_policy"], "eligible_for_root_fixture_candidates")
-        for card in lane["backup_only_cards"]:
-            self.assertEqual(card["disposition"], "backup_only")
-            self.assertEqual(
-                card["fixture_policy"],
-                "lineage_context_only_until_owner_review_changes_disposition",
-            )
+            self.assertEqual(card["disposition"], "maintained")
+        self.assertEqual(lane["backup_only_cards"], [])
         contract_lanes = {
             lane["lane_id"]: lane for lane in self.contract["thematic_coverage_lanes"]
         }
         self.assertEqual(
             contract_lanes["dune_inspired_scenario_seeds"]["required_maintained_card_ids"],
-            ["SCN-0101", "SCN-0102", "SCN-0104"],
+            [
+                "SCN-0101",
+                "SCN-0102",
+                "SCN-0103",
+                "SCN-0104",
+                "SCN-0105",
+                "SCN-0106",
+                "SCN-0107",
+                "SCN-0108",
+            ],
+        )
+        self.assertEqual(
+            contract_lanes["dune_inspired_scenario_seeds"]["backup_only_lineage_card_ids"],
+            [],
         )
 
     def test_stale_references_are_normalized_without_silent_rewrites(self) -> None:
