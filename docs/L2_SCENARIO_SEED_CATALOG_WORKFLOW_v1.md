@@ -25,11 +25,16 @@ Maintained outputs:
 
 - `catalog/l2_scenario_seed_catalog.json`
 - `catalog/contracts/l2_scenario_fixture_generator_contract_v1.json`
+- `catalog/contracts/l2_scenario_seed_uptake_contract_v1.json`
 - `catalog/schemas/l2_scenario_seed_catalog.schema.json`
+- `catalog/schemas/l2_scenario_seed_uptake_contract.schema.json`
+- `tools/l2_scenario_seed_uptake.py`
 
 Validation:
 
 - `python3 -m unittest tests/test_l2_scenario_seed_catalog.py`
+- `python3 -m unittest tests/test_l2_scenario_seed_uptake.py`
+- `python3 tools/l2_scenario_seed_uptake.py --summary`
 
 ## Disposition Rules
 
@@ -72,6 +77,35 @@ The first fixture candidates are:
 Fixture candidates are root JSON overlays only until a separate task authorizes
 an owning runtime repo. The contract requires root output paths and receipts,
 and explicitly keeps CanonRec and CloudBank out of scope.
+
+## Uptake And Emergence Contract
+
+`catalog/contracts/l2_scenario_seed_uptake_contract_v1.json` defines the
+consumer surfaces that scenario seeds may feed:
+
+- root fixture generator
+- state-builder evidence envelope
+- simulation initializer
+- ethics gate
+- narrative renderer
+- canon-promotion gate
+
+The uptake contract does not implement nested repo adapters. It creates a
+root-control-plane packet shape and validation rule set so future adapters know
+what to consume and what they are forbidden to infer.
+
+Scenario seeds must remain pressure fields and initial-condition templates, not
+scripts. The validator requires enough degrees of freedom for emergence:
+
+- at least four roles
+- at least two pressure axes
+- at least five knob axes
+- at least three expected end-state categories
+
+Expected end states are observation categories for branch coverage. They are
+not required endings, winners, or canon facts. Adapters may bound input shape,
+traceability, and safety gates; they must leave actor choices, pressure
+responses, branch timing, and outcome selection open to the simulation.
 
 ## Dune-Inspired Lane
 

@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/l2_scenario_seed_uptake_contract.schema.json",
+  "title": "L2 Scenario Seed Uptake Contract",
+  "description": "Root-control-plane contract for turning maintained L2 scenario seeds into adapter-ready uptake packets while preserving emergence and nested-repo boundaries.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "contract_id",
+    "version",
+    "status",
+    "source_catalog",
+    "required_seed_consumers",
+    "uptake_surfaces",
+    "emergence_policy",
+    "packet_shape",
+    "validation_rules"
+  ],
+  "properties": {
+    "contract_id": {
+      "const": "l2_scenario_seed_uptake_contract"
+    },
+    "version": {
+      "const": 1
+    },
+    "status": {
+      "const": "root_control_plane_uptake_ready"
+    },
+    "source_catalog": {
+      "const": "catalog/l2_scenario_seed_catalog.json"
+    },
+    "fixture_generator_contract": {
+      "const": "catalog/contracts/l2_scenario_fixture_generator_contract_v1.json"
+    },
+    "required_seed_consumers": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "string"
+      }
+    },
+    "uptake_surfaces": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object",
+        "required": [
+          "surface_id",
+          "consumer_type",
+          "status",
+          "consumes",
+          "emits",
+          "mutation_boundary",
+          "required_fields",
+          "handoff_path_policy",
+          "nested_repo_gate",
+          "emergence_role"
+        ],
+        "properties": {
+          "surface_id": {
+            "type": "string"
+          },
+          "consumer_type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "consumes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "emits": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "mutation_boundary": {
+            "type": "string"
+          },
+          "required_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "handoff_path_policy": {
+            "type": "string"
+          },
+          "nested_repo_gate": {
+            "type": "string"
+          },
+          "emergence_role": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "emergence_policy": {
+      "type": "object",
+      "required": [
+        "principle",
+        "minimum_degrees_of_freedom",
+        "required_runtime_freedoms",
+        "prohibited_seed_semantics",
+        "outcome_handling",
+        "boundedness_guard"
+      ],
+      "properties": {
+        "minimum_degrees_of_freedom": {
+          "type": "object",
+          "required": [
+            "roles",
+            "pressure_axes",
+            "knob_axes",
+            "expected_end_state_categories"
+          ],
+          "properties": {
+            "roles": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "pressure_axes": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "knob_axes": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "expected_end_state_categories": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "required_runtime_freedoms": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "string"
+          }
+        },
+        "prohibited_seed_semantics": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "packet_shape": {
+      "type": "object",
+      "required": [
+        "required_top_level_keys",
+        "consumer_payload_ids"
+      ],
+      "properties": {
+        "required_top_level_keys": {
+          "type": "array",
+          "minItems": 6,
+          "items": {
+            "type": "string"
+          }
+        },
+        "consumer_payload_ids": {
+          "type": "array",
+          "minItems": 6,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "validation_rules": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

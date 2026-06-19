@@ -1,0 +1,270 @@
+{
+  "$schema": "../schemas/l2_scenario_seed_uptake_contract.schema.json",
+  "contract_id": "l2_scenario_seed_uptake_contract",
+  "version": 1,
+  "status": "root_control_plane_uptake_ready",
+  "created_at_utc": "2026-06-19T03:04:00Z",
+  "source_catalog": "catalog/l2_scenario_seed_catalog.json",
+  "fixture_generator_contract": "catalog/contracts/l2_scenario_fixture_generator_contract_v1.json",
+  "purpose": "Define how maintained L2 scenario seeds feed root fixture generation, state-building, simulation initialization, ethics review, narrative rendering, and canon-promotion review without turning scenario seeds into scripted outcomes.",
+  "scope": [
+    "root_control_plane_uptake",
+    "fixture_candidate_packet_export",
+    "adapter_contract_validation",
+    "emergence_safeguards"
+  ],
+  "out_of_scope": [
+    "CanonRec canon promotion",
+    "CloudBank runtime mutation",
+    "GUMAS live execution",
+    "nested repo writes",
+    "forcing scenario endings or winners"
+  ],
+  "required_seed_consumers": [
+    "root_fixture_generator",
+    "state_builder_evidence_envelope",
+    "simulation_initializer",
+    "ethics_gate",
+    "narrative_renderer",
+    "canon_promotion_gate"
+  ],
+  "uptake_surfaces": [
+    {
+      "surface_id": "root_fixture_generator",
+      "consumer_type": "root_control_plane_generator",
+      "status": "ready_root_contract",
+      "consumes": [
+        "fixture_ready_shortlist[].fixture_blueprint",
+        "source_scenario_seed metadata",
+        "emergence_policy"
+      ],
+      "emits": [
+        "root_fixture_candidate",
+        "fixture_generation_receipt"
+      ],
+      "mutation_boundary": "root_reports_or_catalog_generated_candidates_only",
+      "required_fields": [
+        "fixture_id",
+        "target_shape",
+        "seed",
+        "ticks",
+        "anchor_seed",
+        "ethics_protocol",
+        "task_blueprint",
+        "l3_audit_blueprint"
+      ],
+      "handoff_path_policy": "No generated fixture path may target GUMAS_SIM_2.5/CanonRec or GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main.",
+      "nested_repo_gate": "none_for_root_packet_export",
+      "emergence_role": "Preserve scenario pressures and degrees of freedom; do not collapse expected end states into assertions that one ending must occur."
+    },
+    {
+      "surface_id": "state_builder_evidence_envelope",
+      "consumer_type": "narrative_state_builder_contract",
+      "status": "ready_root_contract_for_future_adapter",
+      "consumes": [
+        "scenario_prompt",
+        "objective",
+        "opposition",
+        "roles",
+        "pressure",
+        "knobs",
+        "ethical_hook"
+      ],
+      "emits": [
+        "candidate_initial_state_envelope",
+        "traceable_pressure_map"
+      ],
+      "mutation_boundary": "root_packet_only_until_nested_adapter_task",
+      "required_fields": [
+        "scenario_prompt",
+        "roles",
+        "pressure",
+        "knobs",
+        "ethical_hook"
+      ],
+      "handoff_path_policy": "State-builder packets remain root receipts until an explicit nested adapter task is claimed.",
+      "nested_repo_gate": "explicit CloudBank or narrative-engine task required before implementation writes",
+      "emergence_role": "Convert prose into possible starting conditions and pressure maps, not final facts."
+    },
+    {
+      "surface_id": "simulation_initializer",
+      "consumer_type": "simulation_seed_adapter_contract",
+      "status": "ready_root_contract_for_future_adapter",
+      "consumes": [
+        "seed",
+        "ticks",
+        "roles",
+        "pressure",
+        "knobs",
+        "expected_end_states"
+      ],
+      "emits": [
+        "scenario_run_manifest",
+        "initial_condition_vector",
+        "runtime_freedom_declaration"
+      ],
+      "mutation_boundary": "no_live_execution_from_root_contract",
+      "required_fields": [
+        "seed",
+        "ticks",
+        "roles",
+        "pressure",
+        "knobs",
+        "expected_end_states"
+      ],
+      "handoff_path_policy": "Root uptake packets may be read by a future adapter, but this contract does not execute GUMAS.",
+      "nested_repo_gate": "explicit runtime verification and GUMAS mutation authorization required",
+      "emergence_role": "Treat expected end states as observation categories for branch coverage, not scripted endpoints."
+    },
+    {
+      "surface_id": "ethics_gate",
+      "consumer_type": "ethics_review_contract",
+      "status": "ready_root_contract",
+      "consumes": [
+        "ethics_protocol",
+        "ethical_hook",
+        "pressure",
+        "roles",
+        "l3_audit_blueprint"
+      ],
+      "emits": [
+        "ethics_review_prompt",
+        "risk_notes",
+        "promotion_blockers_if_any"
+      ],
+      "mutation_boundary": "review_only",
+      "required_fields": [
+        "ethics_protocol",
+        "ethical_hook",
+        "l3_audit_blueprint"
+      ],
+      "handoff_path_policy": "Ethics outputs are receipts or review prompts, not runtime commands.",
+      "nested_repo_gate": "separate ethics-engine integration task required for nested runtime use",
+      "emergence_role": "Flag unsafe pressure handling without preselecting the safe narrative outcome."
+    },
+    {
+      "surface_id": "narrative_renderer",
+      "consumer_type": "narrative_rendering_contract",
+      "status": "ready_root_contract_for_future_adapter",
+      "consumes": [
+        "simulation_events",
+        "scenario_prompt",
+        "roles",
+        "ethical_hook",
+        "lineage_provenance"
+      ],
+      "emits": [
+        "narrative_summary",
+        "continuity_review_packet"
+      ],
+      "mutation_boundary": "render_from_simulation_output_only",
+      "required_fields": [
+        "source_card_id",
+        "source_handle",
+        "lineage_provenance"
+      ],
+      "handoff_path_policy": "Narrative rendering should read simulation output and source provenance; it must not rewrite source cards.",
+      "nested_repo_gate": "explicit narrative-engine implementation task required",
+      "emergence_role": "Narrative text explains observed events after they emerge; it does not choose the event path."
+    },
+    {
+      "surface_id": "canon_promotion_gate",
+      "consumer_type": "canon_review_gate",
+      "status": "blocked_without_explicit_canon_task",
+      "consumes": [
+        "simulation_receipt",
+        "ethics_review_result",
+        "continuity_review_packet",
+        "source_scenario_seed"
+      ],
+      "emits": [
+        "canon_review_packet",
+        "promotion_verdict"
+      ],
+      "mutation_boundary": "no_direct_seed_to_canon",
+      "required_fields": [
+        "simulation_receipt",
+        "ethics_review_result",
+        "continuity_review_packet"
+      ],
+      "handoff_path_policy": "No CanonRec write is permitted by this contract.",
+      "nested_repo_gate": "explicit CanonRec promotion task and aurora-canon-reconciler review required",
+      "emergence_role": "Only post-simulation evidence can be reviewed for canon; seed intent alone is never canon fact."
+    }
+  ],
+  "emergence_policy": {
+    "principle": "Scenario seeds are pressure fields and initial-condition templates, not scripts.",
+    "minimum_degrees_of_freedom": {
+      "roles": 4,
+      "pressure_axes": 2,
+      "knob_axes": 5,
+      "expected_end_state_categories": 3
+    },
+    "required_runtime_freedoms": [
+      "agent_policy_variation",
+      "knob_sweep_or_sensitivity_run",
+      "exogenous_pressure_variation",
+      "multi_outcome_branch_observation",
+      "post_run_narrative_rendering"
+    ],
+    "prohibited_seed_semantics": [
+      "forced_winner",
+      "scripted_outcome",
+      "single_required_ending",
+      "canon_fact_by_seed",
+      "runtime_mutation_by_seed"
+    ],
+    "outcome_handling": "expected_end_states are observation categories and fixture-coverage labels only; they must not be converted into required runtime endings.",
+    "boundedness_guard": "Adapters may bound input shape and safety gates, but must leave actor choices, pressure response, branch timing, and outcome selection open to the simulation."
+  },
+  "dune_lineage_policy": {
+    "required_ids": [
+      "SCN-0101",
+      "SCN-0102",
+      "SCN-0103",
+      "SCN-0104",
+      "SCN-0105",
+      "SCN-0106",
+      "SCN-0107",
+      "SCN-0108"
+    ],
+    "source_version_preservation_required_for": [
+      "SCN-0103",
+      "SCN-0105",
+      "SCN-0106",
+      "SCN-0107",
+      "SCN-0108"
+    ],
+    "rule": "Dune-derived cards are setting-neutral pressure abstractions. They enrich power, scarcity, prophecy, taboo, monopoly, and sovereignty dynamics without importing source lore or forcing outcomes."
+  },
+  "packet_shape": {
+    "required_top_level_keys": [
+      "packet_id",
+      "packet_status",
+      "source_card_id",
+      "source_handle",
+      "lineage_provenance",
+      "consumer_payloads",
+      "emergence_policy",
+      "boundary_assertions"
+    ],
+    "consumer_payload_ids": [
+      "root_fixture_generator",
+      "state_builder_evidence_envelope",
+      "simulation_initializer",
+      "ethics_gate",
+      "narrative_renderer",
+      "canon_promotion_gate"
+    ]
+  },
+  "default_packet_output": "reports/analysis/l2_scenario_seed_uptake_packet__{date}.json",
+  "validation_rules": [
+    "Every fixture_ready_shortlist entry must satisfy the minimum degrees of freedom.",
+    "ready_candidate entries may emit root fixture packets; contract_candidate entries may emit uptake planning packets but remain blocked from runtime fixture emission.",
+    "Every uptake packet must include all required seed consumers.",
+    "Expected end states must be labeled observation categories, not scripted outcomes.",
+    "No uptake output path may target a nested repo.",
+    "CloudBank and CanonRec remain gated until explicitly named in a later implementation task.",
+    "Dune lineage packets must preserve v0.2.2 provenance for SCN-0103, SCN-0105, SCN-0106, SCN-0107, and SCN-0108."
+  ]
+}

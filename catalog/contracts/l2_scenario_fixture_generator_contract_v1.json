@@ -4,6 +4,7 @@
   "status": "root_control_plane_contract_ready",
   "created_at_utc": "2026-06-18T23:54:49Z",
   "source_catalog": "catalog/l2_scenario_seed_catalog.json",
+  "uptake_contract_ref": "catalog/contracts/l2_scenario_seed_uptake_contract_v1.json",
   "purpose": "Define how maintained L2 scenario seed cards, including owner-promoted Dune lineage cards, become root fixture candidates without implying CanonRec promotion or CloudBank runtime wiring.",
   "scope": [
     "root_control_plane_catalog",
@@ -70,6 +71,7 @@
     "Block or mark manual_review when normalized fusion or wiring references contain unresolved_id.",
     "Use setting-neutral abstractions; remove source-franchise proper-noun lore before fixture emission.",
     "The owner-promoted Dune lineage cards SCN-0103/0105/0106/0107/0108 are maintained root catalog entries; include them in Dune thematic fixture batches while preserving v0.2.2 provenance.",
+    "Apply the L2 scenario seed uptake contract before adapter handoff so seeds remain pressure fields and expected end states remain observation categories, not scripted outcomes.",
     "Do not treat root fixture candidacy as CanonRec canon promotion or CloudBank runtime wiring."
   ],
   "candidate_fixture_shape": {
@@ -168,7 +170,8 @@
     "SCN-0208 remains unresolved until a source card is found or the SCN-0407 wiring link is revised by owner decision.",
     "Catalog has 92 maintained cards and zero backup_only lineage cards after owner override.",
     "Dune thematic coverage lane includes maintained SCN-0101, SCN-0102, SCN-0103, SCN-0104, SCN-0105, SCN-0106, SCN-0107, and SCN-0108.",
-    "SCN-0103/0105/0106/0107/0108 preserve source_version v0.2.2 and source_status lineage_only_missing_from_v0_2_15."
+    "SCN-0103/0105/0106/0107/0108 preserve source_version v0.2.2 and source_status lineage_only_missing_from_v0_2_15.",
+    "Uptake packets generated from fixture candidates include root_fixture_generator, state_builder_evidence_envelope, simulation_initializer, ethics_gate, narrative_renderer, and canon_promotion_gate payloads."
   ],
   "thematic_coverage_lanes": [
     {

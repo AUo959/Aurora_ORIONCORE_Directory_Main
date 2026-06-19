@@ -1,4 +1,4 @@
-.PHONY: help setup test verify scan sync-audit pr-packet lint health devkit-check devkit-report devkit-install-plan skills-check skills-install session-claims session-claim-check cloudbank-broker cloudbank-broker-check recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report confidence-audit confidence-audit-report integration-gate clean
+.PHONY: help setup test verify scan sync-audit pr-packet lint health devkit-check devkit-report devkit-install-plan skills-check skills-install session-claims session-claim-check cloudbank-broker cloudbank-broker-check recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report confidence-audit confidence-audit-report integration-gate l2-scenario-uptake clean
 
 PYTHON ?= python3
 PYTEST ?= pytest
@@ -113,6 +113,9 @@ confidence-audit-report: ## Persist the bootstrap confidence audit example repor
 
 integration-gate: ## Run the root command/agent/provenance integration gate
 	$(PYTHON) tools/aurora_integration_gate.py --summary
+
+l2-scenario-uptake: ## Validate L2 scenario seed uptake packets and emergence guardrails
+	$(PYTHON) tools/l2_scenario_seed_uptake.py --summary
 
 # ── Git / Sync ───────────────────────────────────────────────────────────
 

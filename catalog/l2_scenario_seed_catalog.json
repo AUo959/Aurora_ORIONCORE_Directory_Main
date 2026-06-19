@@ -9536,6 +9536,7 @@
     }
   ],
   "generator_contract_ref": "catalog/contracts/l2_scenario_fixture_generator_contract_v1.json",
+  "uptake_contract_ref": "catalog/contracts/l2_scenario_seed_uptake_contract_v1.json",
   "validation": {
     "test_ref": "tests/test_l2_scenario_seed_catalog.py",
     "manual_receipt_ref": "reports/analysis/l2_scenario_seed_catalog_artifact__2026-06-18.md"

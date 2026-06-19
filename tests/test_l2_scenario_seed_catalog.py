@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / "catalog/l2_scenario_seed_catalog.json"
 CONTRACT_PATH = ROOT / "catalog/contracts/l2_scenario_fixture_generator_contract_v1.json"
+UPTAKE_CONTRACT_PATH = ROOT / "catalog/contracts/l2_scenario_seed_uptake_contract_v1.json"
 SCHEMA_PATH = ROOT / "catalog/schemas/l2_scenario_seed_catalog.schema.json"
 
 
@@ -18,6 +19,7 @@ class L2ScenarioSeedCatalogTests(unittest.TestCase):
     def setUp(self) -> None:
         self.catalog = load_json(CATALOG_PATH)
         self.contract = load_json(CONTRACT_PATH)
+        self.uptake_contract = load_json(UPTAKE_CONTRACT_PATH)
 
     def test_catalog_counts_and_status(self) -> None:
         self.assertEqual(self.catalog["artifact_id"], "AURORA_ROOT_L2_SCENARIO_SEED_CATALOG_v1")
@@ -123,6 +125,18 @@ class L2ScenarioSeedCatalogTests(unittest.TestCase):
     def test_contract_keeps_nested_repos_out_of_scope(self) -> None:
         self.assertEqual(self.contract["contract_id"], "l2_scenario_fixture_generator_contract")
         self.assertEqual(self.contract["source_catalog"], "catalog/l2_scenario_seed_catalog.json")
+        self.assertEqual(
+            self.contract["uptake_contract_ref"],
+            "catalog/contracts/l2_scenario_seed_uptake_contract_v1.json",
+        )
+        self.assertEqual(
+            self.catalog["uptake_contract_ref"],
+            "catalog/contracts/l2_scenario_seed_uptake_contract_v1.json",
+        )
+        self.assertEqual(
+            self.uptake_contract["source_catalog"],
+            "catalog/l2_scenario_seed_catalog.json",
+        )
         self.assertIn("CanonRec canon promotion", self.contract["out_of_scope"])
         self.assertIn("CloudBank runtime mutation", self.contract["out_of_scope"])
         for output in self.contract["outputs"]:

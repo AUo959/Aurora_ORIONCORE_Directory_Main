@@ -69,6 +69,9 @@
     },
     "generator_contract_ref": {
       "const": "catalog/contracts/l2_scenario_fixture_generator_contract_v1.json"
+    },
+    "uptake_contract_ref": {
+      "const": "catalog/contracts/l2_scenario_seed_uptake_contract_v1.json"
     }
   },
   "required": [
@@ -84,6 +87,7 @@
     "lineage_backup_cards",
     "normalized_support_structures",
     "fixture_ready_shortlist",
-    "generator_contract_ref"
+    "generator_contract_ref",
+    "uptake_contract_ref"
   ]
 }
