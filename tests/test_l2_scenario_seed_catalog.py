@@ -58,6 +58,36 @@ class L2ScenarioSeedCatalogTests(unittest.TestCase):
             for task in blueprint["task_blueprint"]:
                 self.assertIn("catalog/l2_scenario_seed_catalog.json", task["source"])
 
+    def test_dune_inspired_lane_is_incorporated_without_promoting_backups(self) -> None:
+        lanes = {
+            lane["lane_id"]: lane for lane in self.catalog["thematic_integration_lanes"]
+        }
+        self.assertIn("dune_inspired_scenario_seeds", lanes)
+        lane = lanes["dune_inspired_scenario_seeds"]
+        self.assertEqual(
+            lane["maintained_card_ids"],
+            ["SCN-0101", "SCN-0102", "SCN-0104"],
+        )
+        self.assertEqual(
+            lane["backup_only_card_ids"],
+            ["SCN-0103", "SCN-0105", "SCN-0106", "SCN-0107", "SCN-0108"],
+        )
+        for card in lane["maintained_cards"]:
+            self.assertEqual(card["fixture_policy"], "eligible_for_root_fixture_candidates")
+        for card in lane["backup_only_cards"]:
+            self.assertEqual(card["disposition"], "backup_only")
+            self.assertEqual(
+                card["fixture_policy"],
+                "lineage_context_only_until_owner_review_changes_disposition",
+            )
+        contract_lanes = {
+            lane["lane_id"]: lane for lane in self.contract["thematic_coverage_lanes"]
+        }
+        self.assertEqual(
+            contract_lanes["dune_inspired_scenario_seeds"]["required_maintained_card_ids"],
+            ["SCN-0101", "SCN-0102", "SCN-0104"],
+        )
+
     def test_stale_references_are_normalized_without_silent_rewrites(self) -> None:
         support = self.catalog["normalized_support_structures"]
         summary = support["reference_summary"]

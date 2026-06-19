@@ -26,6 +26,10 @@ edited.
   explicit `ready`, `manual_review`, and `unresolved` statuses.
 - Added fixture-ready blueprints for the high-value shortlist, with first
   candidates `SCN-0903`, `SCN-0708`, and `SCN-0805`.
+- Added explicit Dune-inspired thematic coverage so `SCN-0101`, `SCN-0102`,
+  and `SCN-0104` are eligible for root fixture candidates while
+  `SCN-0103`, `SCN-0105`, `SCN-0106`, `SCN-0107`, and `SCN-0108` stay
+  `backup_only`.
 - Added a root generator contract that defines candidate fixture shape, output
   path policy, validation rules, and non-promotion boundaries.
 

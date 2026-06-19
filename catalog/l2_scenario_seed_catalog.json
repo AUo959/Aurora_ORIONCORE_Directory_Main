@@ -261,7 +261,9 @@
     "controlled_tag_count": 12,
     "fusion_pairing_count": 34,
     "wiring_link_cards_with_refs": 10,
-    "fixture_shortlist_count": 20
+    "fixture_shortlist_count": 20,
+    "dune_maintained_card_count": 3,
+    "dune_backup_only_card_count": 5
   },
   "cards": [
     {
@@ -8857,5 +8859,77 @@
   "validation": {
     "test_ref": "tests/test_l2_scenario_seed_catalog.py",
     "manual_receipt_ref": "reports/analysis/l2_scenario_seed_catalog_artifact__2026-06-18.md"
-  }
+  },
+  "thematic_integration_lanes": [
+    {
+      "lane_id": "dune_inspired_scenario_seeds",
+      "status": "incorporated_as_root_catalog_lane",
+      "purpose": "Keep the Dune-inspired abstraction family visible for fixture generation without changing backup_only lineage dispositions.",
+      "maintained_card_ids": [
+        "SCN-0101",
+        "SCN-0102",
+        "SCN-0104"
+      ],
+      "maintained_cards": [
+        {
+          "id": "SCN-0101",
+          "handle": "Resource Monopoly",
+          "disposition": "maintained",
+          "fixture_policy": "eligible_for_root_fixture_candidates"
+        },
+        {
+          "id": "SCN-0102",
+          "handle": "Myth Weaponization",
+          "disposition": "maintained",
+          "fixture_policy": "eligible_for_root_fixture_candidates"
+        },
+        {
+          "id": "SCN-0104",
+          "handle": "Formal Intrigue",
+          "disposition": "maintained",
+          "fixture_policy": "eligible_for_root_fixture_candidates"
+        }
+      ],
+      "backup_only_card_ids": [
+        "SCN-0103",
+        "SCN-0105",
+        "SCN-0106",
+        "SCN-0107",
+        "SCN-0108"
+      ],
+      "backup_only_cards": [
+        {
+          "id": "SCN-0103",
+          "handle": "Planetary Redesign",
+          "disposition": "backup_only",
+          "fixture_policy": "lineage_context_only_until_owner_review_changes_disposition"
+        },
+        {
+          "id": "SCN-0105",
+          "handle": "Alliance With the Local Power",
+          "disposition": "backup_only",
+          "fixture_policy": "lineage_context_only_until_owner_review_changes_disposition"
+        },
+        {
+          "id": "SCN-0106",
+          "handle": "System Addiction",
+          "disposition": "backup_only",
+          "fixture_policy": "lineage_context_only_until_owner_review_changes_disposition"
+        },
+        {
+          "id": "SCN-0107",
+          "handle": "Foreknowledge Trap",
+          "disposition": "backup_only",
+          "fixture_policy": "lineage_context_only_until_owner_review_changes_disposition"
+        },
+        {
+          "id": "SCN-0108",
+          "handle": "Human Specialist Guilds",
+          "disposition": "backup_only",
+          "fixture_policy": "lineage_context_only_until_owner_review_changes_disposition"
+        }
+      ],
+      "coverage_rule": "When fixture generation is thematic rather than score-only, include at least one maintained Dune-derived card and keep all v0.2.2 lineage-only cards backup_only unless owner review changes disposition."
+    }
+  ]
 }

@@ -70,3 +70,27 @@ The first fixture candidates are:
 Fixture candidates are root JSON overlays only until a separate task authorizes
 an owning runtime repo. The contract requires root output paths and receipts,
 and explicitly keeps CanonRec and CloudBank out of scope.
+
+## Dune-Inspired Lane
+
+The catalog also carries a thematic coverage lane named
+`dune_inspired_scenario_seeds` so score-only fixture selection does not hide the
+Dune-derived abstraction family.
+
+Maintained cards eligible for root fixture candidates:
+
+- `SCN-0101` - Resource Monopoly
+- `SCN-0102` - Myth Weaponization
+- `SCN-0104` - Formal Intrigue
+
+Lineage-only cards preserved as `backup_only`:
+
+- `SCN-0103` - Planetary Redesign
+- `SCN-0105` - Alliance With the Local Power
+- `SCN-0106` - System Addiction
+- `SCN-0107` - Foreknowledge Trap
+- `SCN-0108` - Human Specialist Guilds
+
+For thematic fixture batches, include at least one maintained `SCN-010x` card.
+Do not emit the five `backup_only` cards into fixtures unless owner review
+changes their disposition first.
