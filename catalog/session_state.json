@@ -126,8 +126,9 @@
     "repo": "root control plane + registered nested repos by explicit gate only",
     "description": "Run the Aurora salvage operation: find valuable unmerged iCloud/recovery logic, classify it, and promote only through explicit owner-surface gates.",
     "started_at": "2026-06-12T23:00:00Z",
-    "updated_at": "2026-06-20T01:20:15Z",
+    "updated_at": "2026-06-20T01:41:22Z",
     "context_files": [
+      "reports/analysis/branch_cleanup_tier2__2026-06-20.md",
       "reports/analysis/branch_cleanup_tier1__2026-06-20.md",
       "reports/automation/skill_sync_latest.json",
       "tests/test_publication_debt.py",
@@ -168,8 +169,8 @@
       "reports/analysis/remote_branch_sweep__2026-06-11.md",
       "reports/analysis/integration_pass__2026-06-11.md"
     ],
-    "next_step": "resume_no_pr_branch_triage_or_publish_cloudbank_scenario_adapter",
-    "next_step_detail": "Post-commit continuation 2026-06-20T01:20:15Z: root GitWiz gh sandbox hardening was committed as f097c0c and pushed to origin/main. Tier 1 cleanup from reports/analysis/branch_inventory__2026-06-19.md was applied: deleted merged root local branches codex/continue-l1-entity-ledger-work, codex/root-cleanup-before-cloudbank-issues-2026-05-11, and feat/warrant-lens; pruned stale worktree metadata in root, CloudBank, and qgia-knowledge-library-main. CloudBank remote prune dry-run was empty at execution time, so no remote-tracking ref was pruned. Verification: root git branch --merged origin/main now returns only main; git worktree prune --dry-run -v is empty for root, CloudBank, and qgia-library. New receipt: reports/analysis/branch_cleanup_tier1__2026-06-20.md. Remaining work: continue no-PR branch triage from the branch inventory, or return to CloudBank scenario adapter publication. Do not assume gh token is broken; use make gh-auth-check with escalated/real context when needed. CloudBank remains separate on codex/l2-scenario-seed-simulation-initializer with .env_status.json modified; local/mesh-router-test-stabilization remains separate."
+    "next_step": "publish_cloudbank_scenario_adapter_or_decide_remaining_unresolved_branches",
+    "next_step_detail": "Continuation 2026-06-20T01:41:22Z: Tier 2 safe branch pruning completed and recorded in reports/analysis/branch_cleanup_tier2__2026-06-20.md. Deleted only branches with live merged-PR evidence, branches already contained in main, or the stale local qgia-library origin/pr-3 tracking ref. Root, CloudBank, qgia, ZipWiz, AuroraOS, and cloudbank-quantum-en safe residue branches were pruned. Remaining unresolved no-open-PR branches are documented in the Tier 2 receipt: root backup/prepopulate-main-2026-03-09, claude/repo-context-setup-NhAqS, codex/charforge-capsule-implementation-2026-06-14, codex/gitwiz-sync-audit-canonical-2026-04-08, codex/gpt-5-5-aurora-orion-upgrade-package-2026-04-29, codex/root-control-plane-local-2026-03-25, codex/weekly-skill-audit-mesh-router-2026-06-01; CloudBank claude/issue-798-token-budgets, claude/issue-829-integration-schema-validation, claude/youthful-wright-BU0M2, codex/ci-workflow-repair, codex/cloudbank-command-chain-workflow-repair-2026-04-10, codex/cloudbank-issue-806-work, codex/cloudbank-issue-830-requirements-inventory, copilot/fix-failing-workflows-actions, copilot/improve-aurora-agent, copilot/update-open-dependency-prs, worktree-agent-aed90d4638c913729; qgia-spine critical-fixes-20260228. Remote-only qgia-library, ZipWiz, AuroraOS, and cloudbank-quantum-en now have no remaining no-open-PR side branches. Root worktree was clean before this receipt; CloudBank still remains separate on codex/l2-scenario-seed-simulation-initializer with .env_status.json modified. Next safe work is to publish/PR CloudBank scenario adapter or evaluate remaining unresolved branches one at a time with file-level diffs before any further deletion."
   },
   "task_queue": [
     {
@@ -385,9 +386,9 @@
       "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
     }
   ],
-  "last_updated": "2026-06-20T01:20:15Z",
+  "last_updated": "2026-06-20T01:41:22Z",
   "last_platform": "codex",
-  "last_session_summary": "Published GitWiz gh sandbox-auth hardening, completed Tier 1 local branch/worktree metadata cleanup, and recorded the remaining branch triage handoff.",
+  "last_session_summary": "Completed Tier 2 safe branch residue pruning across root, CloudBank, qgia, ZipWiz, AuroraOS, and cloudbank-quantum-en; remaining unresolved branches are receipt-listed for owner publication/retire decisions.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -510,10 +511,9 @@
     }
   ],
   "known_state": {
-    "main_sha": "f097c0c6a4cdb7c7ce5e44c5b7f33325176a691f",
+    "main_sha": "2be4d0822a968022c9cf70a51fcb74d6b95f7f28",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
-      "codex/explain-statechange-defense-for-sws",
       "codex/root-control-plane-local-2026-03-25",
       "codex/root-control-plane-sync-2026-04-01-mixed-backup",
       "codex/root-reconstruct-recovered-protocols-2026-03-26",
@@ -524,7 +524,7 @@
       "salvage/stash-root-diff-cleanup-2026-04-14"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  f097c0c [main]",
+      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  2be4d08 [main]",
       "/Users/travisstreets/.codex/worktrees/3d89/Aurora_ORIONCORE_Directory_Main                         711603b (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/8a6f/Aurora_ORIONCORE_Directory_Main                         bd153bf (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/c7a9/Aurora_ORIONCORE_Directory_Main                         8aebc62 (detached HEAD)",
