@@ -1,17 +1,11 @@
 {
-  "generated_at_utc": "2026-06-19T14:44:31Z",
+  "generated_at_utc": "2026-06-20T01:16:02Z",
   "source": "skills/",
   "targets": {
     "codex": {
       "dest": "/Users/travisstreets/.codex/skills",
-      "files_changed": 3,
-      "skills_changed": {
-        "gitwiz-github-manager": [
-          "update: SKILL.md",
-          "update: scripts/gitwiz_sync_audit.py",
-          "add: scripts/gitwiz_gh_auth_probe.py"
-        ]
-      }
+      "files_changed": 0,
+      "skills_changed": {}
     }
   }
 }
