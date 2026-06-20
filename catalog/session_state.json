@@ -386,9 +386,9 @@
       "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
     }
   ],
-  "last_updated": "2026-06-20T01:41:22Z",
+  "last_updated": "2026-06-20T20:40:23Z",
   "last_platform": "codex",
-  "last_session_summary": "Completed Tier 2 safe branch residue pruning across root, CloudBank, qgia, ZipWiz, AuroraOS, and cloudbank-quantum-en; remaining unresolved branches are receipt-listed for owner publication/retire decisions.",
+  "last_session_summary": "Codex refreshed CloudBank PR #1060 against current CloudBank main, pushed 1d048853 to copilot/replace-shallow-assertions-tier1, verified focused tests passed, and left PR checks pending while make lint remains blocked by pre-existing reflective_autonomy lint findings outside the PR diff.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -408,8 +408,20 @@
   },
   "recent_commits": [
     {
+      "sha": "e4e1f02",
+      "date": "2026-06-19",
+      "platform": "codex",
+      "summary": "chore(session): record branch cleanup tier2"
+    },
+    {
+      "sha": "2be4d08",
+      "date": "2026-06-19",
+      "platform": "codex",
+      "summary": "chore(session): record branch cleanup tier1"
+    },
+    {
       "sha": "f097c0c",
-      "date": "2026-06-20",
+      "date": "2026-06-19",
       "platform": "codex",
       "summary": "fix(gitwiz): classify gh sandbox auth failures"
     },
@@ -421,51 +433,39 @@
     },
     {
       "sha": "711603b",
-      "date": "2026-06-19",
+      "date": "2026-06-18",
       "platform": "codex",
       "summary": "chore(session): record l2 seed uptake handoff"
     },
     {
       "sha": "38be2e2",
-      "date": "2026-06-19",
+      "date": "2026-06-18",
       "platform": "codex",
       "summary": "chore(root): add l2 scenario seed uptake contract"
     },
     {
+      "sha": "2175734",
+      "date": "2026-06-18",
+      "platform": "codex",
+      "summary": "chore(session): record dune lineage promotion"
+    },
+    {
       "sha": "780f0d5",
-      "date": "2026-06-19",
+      "date": "2026-06-18",
       "platform": "codex",
       "summary": "chore(root): promote dune lineage scenario seeds"
+    },
+    {
+      "sha": "3dbc5b7",
+      "date": "2026-06-18",
+      "platform": "codex",
+      "summary": "chore(session): record dune scenario coverage lane"
     },
     {
       "sha": "aa2d858",
       "date": "2026-06-18",
       "platform": "codex",
       "summary": "chore(root): add dune scenario coverage lane"
-    },
-    {
-      "sha": "3693739",
-      "date": "2026-06-18",
-      "platform": "codex",
-      "summary": "chore(session): record l2 scenario catalog handoff"
-    },
-    {
-      "sha": "da44892",
-      "date": "2026-06-18",
-      "platform": "codex",
-      "summary": "chore(root): maintain l2 scenario seed catalog"
-    },
-    {
-      "sha": "1d868bd",
-      "date": "2026-06-18",
-      "platform": "codex",
-      "summary": "chore(session): refresh root commit state"
-    },
-    {
-      "sha": "0a15524",
-      "date": "2026-06-18",
-      "platform": "codex",
-      "summary": "chore(session): record zipwiz pr10 merge ready"
     }
   ],
   "security_events": [
@@ -511,7 +511,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "2be4d0822a968022c9cf70a51fcb74d6b95f7f28",
+    "main_sha": "e4e1f02e57e1ee8177259423a8cc7cdb27c993a1",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -524,11 +524,9 @@
       "salvage/stash-root-diff-cleanup-2026-04-14"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  2be4d08 [main]",
+      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main  e4e1f02 [main]",
       "/Users/travisstreets/.codex/worktrees/3d89/Aurora_ORIONCORE_Directory_Main                         711603b (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/8a6f/Aurora_ORIONCORE_Directory_Main                         bd153bf (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/c7a9/Aurora_ORIONCORE_Directory_Main                         8aebc62 (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/fd5a/Aurora_ORIONCORE_Directory_Main                         bd153bf (detached HEAD)"
+      "/Users/travisstreets/.codex/worktrees/c7a9/Aurora_ORIONCORE_Directory_Main                         8aebc62 (detached HEAD)"
     ],
     "open_prs": [
       "CloudBank #837 remains closed unmerged, but now has extraction-plan comment #4644456473",
