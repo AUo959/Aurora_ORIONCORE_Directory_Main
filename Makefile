@@ -1,4 +1,4 @@
-.PHONY: help setup test verify scan sync-audit pr-packet lint health devkit-check devkit-report devkit-install-plan skills-check skills-install session-claims session-claim-check cloudbank-broker cloudbank-broker-check recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report confidence-audit confidence-audit-report integration-gate l2-scenario-uptake clean
+.PHONY: help setup test verify scan sync-audit sync-audit-all gh-auth-check pr-packet lint health devkit-check devkit-report devkit-install-plan skills-check skills-install session-claims session-claim-check cloudbank-broker cloudbank-broker-check recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report confidence-audit confidence-audit-report integration-gate l2-scenario-uptake clean
 
 PYTHON ?= python3
 PYTEST ?= pytest
@@ -120,11 +120,15 @@ l2-scenario-uptake: ## Validate L2 scenario seed uptake packets and emergence gu
 # ── Git / Sync ───────────────────────────────────────────────────────────
 
 sync-audit: ## Run sync audit for root repo
-	$(PYTHON) skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo root
+	$(PYTHON) skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo root --check-gh-auth
 
 sync-audit-all: ## Run sync audit for all registered repos
 	$(PYTHON) skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo all \
-		--canonical-root "$(shell pwd)"
+		--canonical-root "$(shell pwd)" \
+		--check-gh-auth
+
+gh-auth-check: ## Probe GitHub CLI auth in the current execution context
+	$(PYTHON) skills/gitwiz-github-manager/scripts/gitwiz_gh_auth_probe.py --repo AUo959/aurora-cloudbank-symbolic
 
 pr-packet: ## Draft a PR packet for root repo
 	$(PYTHON) skills/gitwiz-github-manager/scripts/gitwiz_pr_packet.py \

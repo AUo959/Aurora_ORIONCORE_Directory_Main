@@ -126,8 +126,19 @@
     "repo": "root control plane + registered nested repos by explicit gate only",
     "description": "Run the Aurora salvage operation: find valuable unmerged iCloud/recovery logic, classify it, and promote only through explicit owner-surface gates.",
     "started_at": "2026-06-12T23:00:00Z",
-    "updated_at": "2026-06-19T14:08:13Z",
+    "updated_at": "2026-06-19T14:47:25Z",
     "context_files": [
+      "reports/automation/skill_sync_latest.json",
+      "tests/test_publication_debt.py",
+      "tests/test_gitwiz_sync_audit.py",
+      "tests/test_gitwiz_gh_auth_probe.py",
+      "tools/publication_debt.py",
+      "skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py",
+      "skills/gitwiz-github-manager/scripts/gitwiz_gh_auth_probe.py",
+      "skills/gitwiz-github-manager/SKILL.md",
+      "Makefile",
+      "reports/analysis/branch_inventory__2026-06-19.md",
+      "reports/analysis/session_quicksave__2026-06-19_gitwiz_gh_auth.md",
       "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/tests/test_scenario_seed_initializer.py",
       "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/simulation/scenario_seed_initializer.py",
       "tools/l2_scenario_seed_uptake.py",
@@ -156,8 +167,8 @@
       "reports/analysis/remote_branch_sweep__2026-06-11.md",
       "reports/analysis/integration_pass__2026-06-11.md"
     ],
-    "next_step": "publish_or_review_cloudbank_scenario_initializer_adapter",
-    "next_step_detail": "Cold start: Codex resumed the L2 scenario seed uptake task and explicitly entered the named CloudBank nested repo. Root remains the control plane; no CanonRec files were edited. CloudBank canonical main was fast-forwarded from 96e4818f to d915c935 after a network-enabled git fetch. Mesh-router terminal work was preserved separately on local/mesh-router-test-stabilization at f941aea9 with commit message \"test(mesh): stabilize async router acknowledgements\"; only .env_status.json stayed uncommitted. Scenario adapter work is on CloudBank branch codex/l2-scenario-seed-simulation-initializer at 1eedd38f, commit \"feat(sim): add scenario seed initializer adapter\". New CloudBank files: simulation/scenario_seed_initializer.py and tests/test_scenario_seed_initializer.py. The adapter consumes root L2 uptake packet consumer_payloads.simulation_initializer, validates seed/ticks/anchor_seed/initial_condition_vector/runtime_freedoms, rejects nested-write or CanonRec-promotion authorization, rejects scripted-outcome keys, and returns a narrow initial state without executing a simulation or treating expected end states as required outcomes. Validation passed: .venv/bin/python -m pytest tests/test_scenario_seed_initializer.py tests/test_orion_simulation.py -q (8 passed, 1 warning); PYTHONPYCACHEPREFIX=/private/tmp/cloudbank_scenario_seed_pycache python3 -m py_compile simulation/scenario_seed_initializer.py; python3 -m pytest tests/test_scenario_seed_initializer.py -q (5 passed, 2 warnings). Baseline note: .venv/bin/python -m pytest tests/test_mesh_router_v1.py -q on updated CloudBank main still has one unrelated failure in test_broadcast_routes_to_all_channel_agents because it waits for all agent_reply events; keep that in the mesh-router stabilization lane and do not mix it into the scenario adapter branch unless explicitly requested. Current nested status expected after this handoff: CloudBank branch codex/l2-scenario-seed-simulation-initializer with only .env_status.json modified/uncommitted. Next safe step is review/push/PR the scenario adapter branch, or separately rebase/fix/publish the mesh-router test branch."
+    "next_step": "commit_gitwiz_gh_auth_hardening_then_resume_branch_pruning",
+    "next_step_detail": "Quicksave 2026-06-19T14:47:25Z: latest user-directed work is root branch inventory + GitWiz gh sandbox hardening. Do not restart by assuming the GitHub token is broken. Evidence: normal Codex sandbox probe now returns auth_failed_in_current_context, while escalated make gh-auth-check returns Status: usable, Login: AUo959. Implemented but not committed root changes: Makefile adds gh-auth-check and sync-audit --check-gh-auth; GitWiz adds scripts/gitwiz_gh_auth_probe.py and sync-audit GitHub CLI context reporting; publication_debt now records failed gh as current-context unverified; tests added for gh probe and publication-debt behavior; branch inventory report added. Validation passed: python3 -m pytest tests/test_gitwiz_gh_auth_probe.py tests/test_gitwiz_sync_audit.py tests/test_publication_debt.py -q => 18 passed; py_compile passed with PYTHONPYCACHEPREFIX=/private/tmp/aurora_gh_probe_pycache; make skills-install applied the GitWiz runtime update and make skills-check is clean. Ruff was not run because active Python lacks ruff. Current root status expected: main at 20c21e9 with modified Makefile, reports/automation/skill_sync_latest.json, skills/gitwiz-github-manager/SKILL.md, skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py, tests/test_gitwiz_sync_audit.py, tools/publication_debt.py, catalog/session_state.json, plus untracked reports/analysis/branch_inventory__2026-06-19.md, reports/analysis/session_quicksave__2026-06-19_gitwiz_gh_auth.md, skills/gitwiz-github-manager/scripts/gitwiz_gh_auth_probe.py, tests/test_gitwiz_gh_auth_probe.py, tests/test_publication_debt.py. No branch pruning has been performed. Next safe step: review/stage/commit the root GitWiz hardening and branch inventory receipt; then resume Tier 1 pruning only if owner approves the exact list in reports/analysis/branch_inventory__2026-06-19.md. CloudBank remains separate: branch codex/l2-scenario-seed-simulation-initializer at 1eedd38f with .env_status.json modified; local/mesh-router-test-stabilization at f941aea9 remains separate. Do not mix these into root GitWiz hardening."
   },
   "task_queue": [
     {
@@ -373,9 +384,9 @@
       "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
     }
   ],
-  "last_updated": "2026-06-19T14:08:13Z",
+  "last_updated": "2026-06-19T14:47:25Z",
   "last_platform": "codex",
-  "last_session_summary": "Codex preserved the CloudBank mesh-router test stabilization on a separate local branch and added a narrow CloudBank scenario seed initializer adapter on codex/l2-scenario-seed-simulation-initializer.",
+  "last_session_summary": "Quicksaved branch inventory and GitWiz gh sandbox-auth hardening; no pruning performed; root changes are implemented, verified, installed to the Codex skill runtime, and ready to commit.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -394,6 +405,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "20c21e9",
+      "date": "2026-06-19",
+      "platform": "codex",
+      "summary": "chore(session): record scenario initializer handoff"
+    },
     {
       "sha": "711603b",
       "date": "2026-06-19",
@@ -447,12 +464,6 @@
       "date": "2026-06-18",
       "platform": "codex",
       "summary": "chore(session): record zipwiz pr10 green"
-    },
-    {
-      "sha": "bd153bf",
-      "date": "2026-06-15",
-      "platform": "codex",
-      "summary": "chore(session): record zipwiz handoff sync"
     }
   ],
   "security_events": [
@@ -498,7 +509,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "711603bb274b2d51e875d7a5695cfbf6f38a8761",
+    "main_sha": "20c21e9ef1b4eb3f3144812bf6481d9e47ef0a43",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/continue-l1-entity-ledger-work",

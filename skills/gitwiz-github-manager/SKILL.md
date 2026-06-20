@@ -87,6 +87,11 @@ Use these instead of improvising audit logic:
   - drafts a PR packet from the current branch against a base ref
   - writes JSON and Markdown packets
   - use after the branch is committed and pushed, or when you need a PR-ready summary
+- `scripts/gitwiz_gh_auth_probe.py`
+  - probes `gh auth status`, `gh api user`, and optionally `gh pr list`
+  - never prints tokens
+  - classifies failures as current execution-context failures until rerun
+    unsandboxed/escalated in Codex
 
 Default output location for both:
 
@@ -109,17 +114,23 @@ For remote work:
 - `git ls-remote --heads <remote>`
 - `git fetch <remote> main` when you need to inspect divergence
 
-If `gh` exists, check `gh auth status`. If not, use plain Git and SSH.
+If `gh` exists, run the GITWIZ probe before branch/PR inventory:
+
+- `python3 skills/gitwiz-github-manager/scripts/gitwiz_gh_auth_probe.py --repo AUo959/aurora-cloudbank-symbolic`
+- or `make gh-auth-check`
 
 Important interpretation rule:
 
 - in Codex, `gh auth status` can fail inside the normal sandbox even when the
   machine's real GitHub auth is healthy
-- if SSH `git push` works or the GitHub connector can view or create PRs, do not
-  treat the first sandboxed `gh` failure as proof of broken credentials
-- rerun the `gh` command with escalated execution before diagnosing auth
+- do not write "token invalid", rotate credentials, or fall back to public API
+  solely because a sandboxed `gh` call failed
+- rerun the probe or `gh auth status` with escalated execution before
+  diagnosing auth
 - if the escalated `gh` command succeeds, record it as a sandbox or
   execution-context issue and continue using SSH Git plus the GitHub connector
+- if escalation is not available, record PR state as
+  `UNVERIFIED_CURRENT_CONTEXT`, not as broken credentials
 
 ### 2. Distinguish the Operation
 
@@ -141,7 +152,7 @@ Choose the right lane:
 - Nested repo publishing:
   - only after explicit user instruction naming the nested repo
 - Sync audit:
-  - run `gitwiz_sync_audit.py`
+  - run `gitwiz_sync_audit.py --check-gh-auth`
   - inspect suggested actions before mutating Git state
 - PR drafting:
   - run `gitwiz_pr_packet.py`
@@ -177,6 +188,8 @@ Recommended patterns:
   - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo root`
 - all repos with canonical workspace access:
   - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo all --canonical-root "<canonical-workspace-root>"`
+- GitHub-aware branch/PR work:
+  - `python3 skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo root --check-gh-auth`
 
 Treat this as the first step before any "make GitHub match local" workflow.
 

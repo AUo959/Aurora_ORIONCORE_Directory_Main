@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import subprocess
 import sys
@@ -18,6 +19,29 @@ def utcnow_compact() -> str:
 
 def utcnow_display() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+
+def load_gh_auth_probe():
+    probe_path = Path(__file__).with_name("gitwiz_gh_auth_probe.py")
+    spec = importlib.util.spec_from_file_location("gitwiz_gh_auth_probe", probe_path)
+    if not spec or not spec.loader:
+        raise RuntimeError(f"Could not load GitHub CLI auth probe: {probe_path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def collect_gh_auth_context(check: bool, repo: str | None = None) -> dict[str, Any]:
+    if not check:
+        return {
+            "checked": False,
+            "status": "not_checked",
+            "next_step": "Run with --check-gh-auth before diagnosing GitHub CLI token state.",
+        }
+    probe = load_gh_auth_probe()
+    payload = probe.probe_gh_auth(repo=repo)
+    payload["checked"] = True
+    return payload
 
 
 def run_git(repo_path: Path, args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -418,6 +442,16 @@ def markdown_report(report: dict[str, Any]) -> str:
     lines.append(f"- Repos needing attention: `{len(problem_repos)}`")
     if problem_repos:
         lines.append(f"- Attention targets: {', '.join(problem_repos)}")
+    gh_auth = report.get("github_cli_auth", {})
+    lines.extend(["", "## GitHub CLI Context", ""])
+    lines.append(f"- Checked: `{gh_auth.get('checked', False)}`")
+    lines.append(f"- Status: `{gh_auth.get('status', 'unknown')}`")
+    if gh_auth.get("login"):
+        lines.append(f"- Login: `{gh_auth['login']}`")
+    if gh_auth.get("repo"):
+        lines.append(f"- Repo probe: `{gh_auth['repo']}`")
+    if gh_auth.get("next_step"):
+        lines.append(f"- Next step: {gh_auth['next_step']}")
     lines.extend(["", "## Repo Findings", ""])
     for repo in report["repos"]:
         lines.append(f"### {repo['name']}")
@@ -440,6 +474,8 @@ def main() -> int:
     parser.add_argument("--workspace-root", help="Root workspace repo path. Defaults to current Git toplevel.")
     parser.add_argument("--canonical-root", help="Canonical workspace root used to resolve nested repos outside the current worktree.")
     parser.add_argument("--fetch", action="store_true", help="Fetch remotes before evaluating ahead/behind state.")
+    parser.add_argument("--check-gh-auth", action="store_true", help="Probe gh auth and record current execution-context status in the report.")
+    parser.add_argument("--gh-repo", help="Optional owner/repo probe for gh PR access when --check-gh-auth is set.")
     parser.add_argument("--output-dir", help="Directory to write JSON and Markdown reports into.")
     args = parser.parse_args()
 
@@ -455,6 +491,7 @@ def main() -> int:
         "workspace_root": str(workspace_root),
         "canonical_root": str(canonical_root) if canonical_root else "",
         "selection": args.repo,
+        "github_cli_auth": collect_gh_auth_context(args.check_gh_auth, args.gh_repo),
         "repos": repo_reports,
     }
 

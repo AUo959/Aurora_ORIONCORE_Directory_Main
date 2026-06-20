@@ -162,8 +162,14 @@ def scan_repo(name: str, repo: Path) -> list[dict]:
             elif pr is None:
                 debts.append({
                     "repo": name, "class": "unpublished_branch", "branch": branch,
-                    "detail": f"pushed, {ahead} commit(s) ahead, PR state UNVERIFIED (gh unavailable)",
-                    "remediation": "Verify a PR exists once gh/network is available.",
+                    "detail": (
+                        f"pushed, {ahead} commit(s) ahead, PR state UNVERIFIED "
+                        "(gh failed or is unavailable in the current execution context)"
+                    ),
+                    "remediation": (
+                        "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before "
+                        "treating the token as broken; then verify or create the PR."
+                    ),
                 })
     return debts
 

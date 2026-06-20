@@ -302,3 +302,31 @@ def test_build_repo_summary_reports_dirty_behind_overlap(monkeypatch: pytest.Mon
     assert summary["local_dirty_paths"] == ["overlap.txt", "local.txt", "staged.txt", "new.txt"]
     assert summary["incoming_remote_paths"] == ["other.txt", "overlap.txt", "staged.txt"]
     assert summary["overlap_paths"] == ["overlap.txt", "staged.txt"]
+
+
+def test_collect_gh_auth_context_skips_probe_when_not_requested() -> None:
+    context = gitwiz_sync_audit.collect_gh_auth_context(False)
+
+    assert context["checked"] is False
+    assert context["status"] == "not_checked"
+
+
+def test_markdown_report_includes_github_cli_context() -> None:
+    report = {
+        "generated_at_utc": "2026-06-19 00:00:00 UTC",
+        "workspace_root": "/workspace",
+        "canonical_root": "",
+        "selection": "root",
+        "github_cli_auth": {
+            "checked": True,
+            "status": "auth_failed_in_current_context",
+            "next_step": "Rerun escalated before changing tokens.",
+        },
+        "repos": [],
+    }
+
+    markdown = gitwiz_sync_audit.markdown_report(report)
+
+    assert "## GitHub CLI Context" in markdown
+    assert "- Status: `auth_failed_in_current_context`" in markdown
+    assert "Rerun escalated before changing tokens." in markdown
