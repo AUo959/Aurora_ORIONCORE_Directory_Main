@@ -680,93 +680,86 @@ def build_reconstruction(sim: dict, scenario: dict, audit: dict,
     }
 
 
-def render_reconstruction_md(recon: dict, audit: dict) -> str:
-    w = recon["watch"]
-    l3 = recon.get("l3", {})
-    resp = l3.get("response", {}) if isinstance(l3, dict) else {}
-    state = l3.get("state", {}) if isinstance(l3, dict) else {}
-    lines: list[str] = []
-    lines.append(f"# Narrative Reconstruction — {recon['scenario']}")
-    lines.append("")
-    lines.append(f"**Watch:** {w['hours']}h aboard Orion Station · station hour {recon['station_hour']} · "
-                 f"seed {recon['seed']}  ")
-    lines.append(f"**Anchor:** {recon['anchor_seed']} · **Ethics:** {recon['ethics_protocol']}  ")
-    lines.append(f"**Roster engaged:** {w['roster_engaged']} · **Souls accounted:** {w['souls_accounted']} "
-                 "canon entities  ")
-    lines.append(f"**Effort:** {w['effort_spent_h']}h of {w['effort_estimate_h']}h estimated · "
-                 f"**Closed:** {', '.join(w['closed_ids'])} ({len(w['closed_ids'])}/{w['task_total']} task families)")
-    lines.append("")
-    lines.append("## The watch, reconstructed")
-    lines.append("")
-    closed = [c["label"] for c in recon["event_chain"] if c["phase"] == "this watch"]
-    answered = sum(1 for m in recon["off_board_receipts"]["mesh"] if m["answered"])
-    total_mesh = len(recon["off_board_receipts"]["mesh"])
-    prose = (f"Commander {audit['actor']} opened the watch and handed coordination to Aurora. "
-             f"Within the block the crew brought **{len(closed)}** task families to a validated close. "
-             f"Over the mesh, **{answered}/{total_mesh} companion beats were answered**. "
-             f"The L3 engine was then asked to audit the closeout: **{audit.get('question','')}**")
-    lines.append(prose)
-    lines.append("")
-    if isinstance(state, dict) and state.get("layers"):
-        lines.append("## Reconstructed canonical layers")
-        lines.append("")
-        lines.append("| Layer | Origin | Conf | Status |")
-        lines.append("|---|---|---|---|")
-        for layer in state["layers"]:
-            lines.append(f"| {layer.get('name','')} | {layer.get('origin','')} | "
-                         f"{layer.get('confidence','')} | {layer.get('status','')} |")
-        lines.append("")
-    lines.append("## Event chain")
-    lines.append("")
-    for c in recon["event_chain"]:
-        who = ", ".join(c.get("participants", [])) or "—"
-        lines.append(f"- **[{c['phase']}]** {c['label']} — _{who}_")
-    lines.append("")
-    lines.append("## Off-board receipts")
-    lines.append("")
+def _render_layers_md(state: dict) -> list[str]:
+    if not (isinstance(state, dict) and state.get("layers")):
+        return []
+    out = ["## Reconstructed canonical layers", "", "| Layer | Origin | Conf | Status |", "|---|---|---|---|"]
+    for layer in state["layers"]:
+        out.append(f"| {layer.get('name','')} | {layer.get('origin','')} | "
+                   f"{layer.get('confidence','')} | {layer.get('status','')} |")
+    out.append("")
+    return out
+
+
+def _render_receipts_md(recon: dict, audit: dict, resp: dict) -> list[str]:
+    out = ["## Off-board receipts", ""]
     ord_d = recon["off_board_receipts"]["ord_dispatch"]
     if ord_d.get("drones_required"):
         rsha = str(ord_d.get("receipt_sha256", ""))[:16]
-        lines.append(f"- **ORD dispatch** `{ord_d.get('mission_id','')}` → "
-                     f"{', '.join(ord_d['drones_required'])} · receipt `{rsha}…`")
+        out.append(f"- **ORD dispatch** `{ord_d.get('mission_id','')}` → "
+                   f"{', '.join(ord_d['drones_required'])} · receipt `{rsha}…`")
     # Summarize the mesh per companion (a 4-hour block answers each companion
     # once per hour); the per-beat detail stays in narrative_reconstruction.json.
-    mesh = recon["off_board_receipts"]["mesh"]
     by_agent: dict[str, dict] = {}
-    for m in mesh:
+    for m in recon["off_board_receipts"]["mesh"]:
         a = by_agent.setdefault(m["agent"], {"answered": 0, "total": 0, "sample": m["reply"]})
         a["total"] += 1
         a["answered"] += 1 if m["answered"] else 0
     for agent, agg in by_agent.items():
-        lines.append(f"- **mesh / {agent}** — {agg['answered']}/{agg['total']} beats answered · "
-                     f"e.g. {agg['sample']}")
-    lines.append(f"- **L3 receipt** · narrative audit verdict **{resp.get('verdict', audit.get('verdict'))}** · "
-                 f"ethics {recon['ethics_protocol']} · anchor {recon['anchor_seed']}")
-    lines.append("")
-    lines.append("## Validation verdict")
-    lines.append("")
+        out.append(f"- **mesh / {agent}** — {agg['answered']}/{agg['total']} beats answered · "
+                   f"e.g. {agg['sample']}")
+    out.append(f"- **L3 receipt** · narrative audit verdict **{resp.get('verdict', audit.get('verdict'))}** · "
+               f"ethics {recon['ethics_protocol']} · anchor {recon['anchor_seed']}")
+    out.append("")
+    return out
+
+
+def _render_verdict_md(resp: dict, audit: dict) -> list[str]:
     verdict = str(resp.get("verdict", audit.get("verdict", ""))).upper()
     conf = resp.get("confidence")
-    lines.append(f"> **{verdict}**" + (f" · confidence {conf}" if conf is not None else ""))
-    lines.append("")
+    out = ["## Validation verdict", "",
+           f"> **{verdict}**" + (f" · confidence {conf}" if conf is not None else ""), ""]
     if resp.get("summary"):
-        lines.append(resp["summary"])
-        lines.append("")
-    if resp.get("main_supports"):
-        lines.append("### Supports")
-        for sup in resp["main_supports"]:
-            lines.append(f"- {sup}")
-        lines.append("")
-    if resp.get("main_blockers"):
-        lines.append("### Blockers")
-        for blk in resp["main_blockers"]:
-            lines.append(f"- {blk}")
-        lines.append("")
-    if resp.get("smallest_fix"):
-        lines.append("### Smallest fix")
-        for fix in resp["smallest_fix"]:
-            lines.append(f"- {fix}")
-        lines.append("")
+        out += [resp["summary"], ""]
+    for heading, key in (("Supports", "main_supports"), ("Blockers", "main_blockers"),
+                         ("Smallest fix", "smallest_fix")):
+        if resp.get(key):
+            out.append(f"### {heading}")
+            out += [f"- {item}" for item in resp[key]]
+            out.append("")
+    return out
+
+
+def render_reconstruction_md(recon: dict, audit: dict) -> str:
+    w = recon["watch"]
+    l3 = recon.get("l3", {}) if isinstance(recon.get("l3"), dict) else {}
+    resp = l3.get("response", {})
+    state = l3.get("state", {})
+    closed = [c for c in recon["event_chain"] if c["phase"] == "this watch"]
+    mesh = recon["off_board_receipts"]["mesh"]
+    answered = sum(1 for m in mesh if m["answered"])
+    lines = [
+        f"# Narrative Reconstruction — {recon['scenario']}", "",
+        f"**Watch:** {w['hours']}h aboard Orion Station · station hour {recon['station_hour']} · "
+        f"seed {recon['seed']}  ",
+        f"**Anchor:** {recon['anchor_seed']} · **Ethics:** {recon['ethics_protocol']}  ",
+        f"**Roster engaged:** {w['roster_engaged']} · **Souls accounted:** {w['souls_accounted']} canon entities  ",
+        f"**Effort:** {w['effort_spent_h']}h of {w['effort_estimate_h']}h estimated · "
+        f"**Closed:** {', '.join(w['closed_ids'])} ({len(w['closed_ids'])}/{w['task_total']} task families)", "",
+        "## The watch, reconstructed", "",
+        f"Commander {audit['actor']} opened the watch and handed coordination to Aurora. "
+        f"Within the block the crew brought **{len(closed)}** task families to a validated close. "
+        f"Over the mesh, **{answered}/{len(mesh)} companion beats were answered**. "
+        f"The L3 engine was then asked to audit the closeout: **{audit.get('question','')}**", "",
+    ]
+    lines += _render_layers_md(state)
+    lines += ["## Event chain", ""]
+    for c in recon["event_chain"]:
+        who = ", ".join(c.get("participants", [])) or "—"
+        lines.append(f"- **[{c['phase']}]** {c['label']} — _{who}_")
+    lines.append("")
+    lines += _render_receipts_md(recon, audit, resp)
+    lines += _render_verdict_md(resp, audit)
     return "\n".join(lines).rstrip() + "\n"
 
 
