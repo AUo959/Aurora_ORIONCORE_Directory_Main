@@ -203,19 +203,21 @@ def main() -> int:
     scenario = json.loads(scenario_path.read_text())
     scenario["engine_ops"]["_engine_dir_abs"] = str(REPO_ROOT / scenario["engine_ops"]["engine_dir"])
 
-    state_path = REPO_ROOT / "catalog" / "station_state.json"
-    if state_path.exists():
-        state = json.loads(state_path.read_text())
+    if hour_aboard.STATE_PATH.exists():
+        state = json.loads(hour_aboard.STATE_PATH.read_text())
         scenario["history"] = {"pair_familiarity": state.get("pair_familiarity", {})}
         print(f"📜 Station history loaded: {state.get('atoms_total', 0)} chronicle atoms")
+
+    # Living clock: advance to the next hours on the station's timeline.
+    hour_index = hour_aboard.apply_hour_clock(scenario)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     out_dir = REPO_ROOT / "reports" / "simulation" / f"{scenario['name']}__{stamp}"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     hours = scenario.get("ticks", 1)
-    print(f"⚡ Powered watch: {hours}h aboard, chassis operating the engine "
-          f"(seed {scenario['seed']}) ...")
+    print(f"⚡ Powered watch: {hours}h aboard (station hour {hour_index + 1}), chassis operating "
+          f"the engine (seed {scenario['seed']} = base {scenario['base_seed']}+{hour_index}) ...")
     sim = hour_aboard._run_in_clone(POWERED_DRIVER, scenario)
     s, eng = sim["summary"], sim["engine"]
     print(f"   chassis: {s['characters_used']} crew | {s['total_spent']:.1f}h worked | "
@@ -266,6 +268,8 @@ def main() -> int:
     (out_dir / "interaction_map.md").write_text(hour_aboard.render_interaction_md(graph))
     (out_dir / "companion_ops.json").write_text(json.dumps(companion_ops, indent=2) + "\n")
     (out_dir / "souls_accounting.json").write_text(json.dumps(souls, indent=2) + "\n")
+    sim["engine"]["seed"] = scenario["seed"]
+    sim["engine"]["station_hour"] = hour_index + 1
     (out_dir / "engine_telemetry.json").write_text(json.dumps(sim["engine"], indent=2) + "\n")
     (out_dir / "sim_raw.json").write_text(json.dumps(sim, indent=2) + "\n")
 
@@ -277,6 +281,7 @@ def main() -> int:
         [sys.executable, str(REPO_ROOT / "tools" / "station_chronicle.py"), "state"],
         cwd=REPO_ROOT, check=False,
     )
+    hour_aboard.advance_station_clock(int(scenario.get("ticks", 1)))
     return 0
 
 

@@ -318,9 +318,13 @@ def main() -> int:
     scenario = json.loads((REPO_ROOT / "catalog" / f"{args.scenario.removesuffix('.json')}.json").read_text())
     scenario["engine_ops"]["_engine_dir_abs"] = str(REPO_ROOT / scenario["engine_ops"]["engine_dir"])
 
-    state_path = REPO_ROOT / "catalog" / "station_state.json"
-    if state_path.exists():
-        scenario["history"] = {"pair_familiarity": json.loads(state_path.read_text()).get("pair_familiarity", {})}
+    if hour_aboard.STATE_PATH.exists():
+        scenario["history"] = {"pair_familiarity":
+                               json.loads(hour_aboard.STATE_PATH.read_text()).get("pair_familiarity", {})}
+
+    # Living clock: this watch is the next block of hours on the station's
+    # continuous timeline, never a replay of one fixed seed.
+    hour_index = hour_aboard.apply_hour_clock(scenario)
 
     # Crew-life fidelity: who is actually on shift and awake each watch hour,
     # and how tired. Only on-shift-awake crew work; sleep-debt fatigue slows
@@ -385,6 +389,8 @@ def main() -> int:
     (out_dir / "interaction_map.md").write_text(hour_aboard.render_interaction_md(graph))
     (out_dir / "companion_ops.json").write_text(json.dumps(companion_ops, indent=2) + "\n")
     (out_dir / "souls_accounting.json").write_text(json.dumps(souls, indent=2) + "\n")
+    sim["engine"]["seed"] = scenario["seed"]
+    sim["engine"]["station_hour"] = hour_index + 1
     (out_dir / "engine_telemetry.json").write_text(json.dumps(sim["engine"], indent=2) + "\n")
     (out_dir / "sim_raw.json").write_text(json.dumps(sim, indent=2) + "\n")
     if life is not None:
@@ -404,6 +410,7 @@ def main() -> int:
     subprocess.run(  # noqa: S603 - our own tool, fixed argument
         [sys.executable, str(REPO_ROOT / "tools" / "station_chronicle.py"), "state"],
         cwd=REPO_ROOT, check=False)
+    hour_aboard.advance_station_clock(int(scenario.get("ticks", 1)))
     return 0
 
 

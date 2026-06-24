@@ -71,6 +71,47 @@ CANON_CHARACTERS = _resolve(
     marker="characters", default=_CANON_NESTED.parent,
 ) / "characters"
 
+# --- Station hour clock -----------------------------------------------------
+# Orion Station keeps a continuous history: each check-in is a NEW hour, never a
+# replay of one fixed seed. The hour index advances from the persistent station
+# state (hours_elapsed), and the run seed is base_seed + hour_index, so the
+# sequence is reproducible from history yet never repeats the same hour. Tests
+# point AURORA_STATION_STATE at an isolated state file to walk a deterministic
+# sequence of distinct hours without touching the repo's chronicle.
+STATE_PATH = Path(os.environ.get("AURORA_STATION_STATE") or (REPO_ROOT / "catalog" / "station_state.json"))
+
+
+def station_hours_elapsed() -> int:
+    """Hours Orion Station has logged so far — the live clock."""
+    if STATE_PATH.exists():
+        try:
+            return int(json.loads(STATE_PATH.read_text()).get("hours_elapsed", 0))
+        except (ValueError, json.JSONDecodeError):
+            return 0
+    return 0
+
+
+def apply_hour_clock(scenario: dict) -> int:
+    """Offset the scenario seed by the station clock; return the hour index."""
+    hour_index = station_hours_elapsed()
+    scenario["base_seed"] = int(scenario["seed"])
+    scenario["seed"] = scenario["base_seed"] + hour_index
+    return hour_index
+
+
+def advance_station_clock(hours: int) -> None:
+    """Tick the station clock forward so the next check-in is a fresh hour."""
+    state: dict = {}
+    if STATE_PATH.exists():
+        try:
+            state = json.loads(STATE_PATH.read_text())
+        except json.JSONDecodeError:
+            state = {}
+    state["hours_elapsed"] = int(state.get("hours_elapsed", 0)) + int(hours)
+    STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    STATE_PATH.write_text(json.dumps(state, indent=2) + "\n")
+
+
 RUN_ENV = {"CSRF_SECRET_KEY": "hour-aboard", "WS_AUTH_SECRET": "hour-aboard",
            "JWT_SECRET_KEY": "hour-aboard-jwt-local", "PYTHONPYCACHEPREFIX": "/tmp/pyc"}  # noqa: S108
 
@@ -451,12 +492,13 @@ def main() -> int:
         scenario["companions"] = [{"agent": b["agent"], "role_line": b["beat"]}
                                   for b in scenario["companion_beats"]]
 
-    state_path = REPO_ROOT / "catalog" / "station_state.json"
-    if state_path.exists():
-        state = json.loads(state_path.read_text())
+    if STATE_PATH.exists():
+        state = json.loads(STATE_PATH.read_text())
         scenario["history"] = {"pair_familiarity": state.get("pair_familiarity", {})}
         print(f"📜 Station history loaded: {state.get('atoms_total', 0)} chronicle atoms, "
               f"{len(scenario['history']['pair_familiarity'])} familiar pairs")
+
+    hour_index = apply_hour_clock(scenario)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     out_dir = Path(args.out_dir) if args.out_dir else \
@@ -464,7 +506,8 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     hours = scenario.get("ticks", 1)
-    print(f"⏱  Simulating {hours} hour(s) aboard ({scenario['name']}, seed {scenario['seed']}) ...")
+    print(f"⏱  Simulating {hours} hour(s) aboard ({scenario['name']}, station hour {hour_index + 1}, "
+          f"seed {scenario['seed']} = base {scenario['base_seed']}+{hour_index}) ...")
     sim = _run_in_clone(SIM_DRIVER, scenario)
     s = sim["summary"]
     print(f"   roster engaged: {s['characters_used']} | hours worked: {s['total_spent']:.1f} | "
@@ -518,7 +561,11 @@ def main() -> int:
     (out_dir / "souls_accounting.json").write_text(json.dumps(souls, indent=2) + "\n")
     (out_dir / "sim_raw.json").write_text(json.dumps(sim, indent=2) + "\n")
 
-    print(f"\n🗂  Artifacts: {out_dir.relative_to(REPO_ROOT)}")
+    try:
+        _shown_dir = out_dir.relative_to(REPO_ROOT)
+    except ValueError:
+        _shown_dir = out_dir  # explicit --out-dir outside the repo
+    print(f"\n🗂  Artifacts: {_shown_dir}")
     for name in ("crew_logs.md", "interaction_map.json", "interaction_map.md",
                  "companion_ops.json", "souls_accounting.json", "sim_raw.json"):
         print(f"   - {name}")
@@ -526,11 +573,15 @@ def main() -> int:
           f"canon entities{' ✅' if souls['complete'] else ' ⚠️ INCOMPLETE'}")
 
     # This run is now history: refresh the persistent station state so the
-    # next hour aboard inherits what happened here.
+    # next hour aboard inherits what happened here (station_chronicle preserves
+    # hours_elapsed), then tick the clock so the next check-in is a fresh hour.
     subprocess.run(  # noqa: S603 - our own tool with a fixed argument
         [sys.executable, str(REPO_ROOT / "tools" / "station_chronicle.py"), "state"],
         cwd=REPO_ROOT, check=False,
     )
+    advance_station_clock(int(scenario.get("ticks", 1)))
+    print(f"🕰  Station clock: hour {hour_index + 1} logged → next check-in is hour "
+          f"{station_hours_elapsed() + 1}")
     return 0
 
 
