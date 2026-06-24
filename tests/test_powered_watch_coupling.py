@@ -40,7 +40,7 @@ def test_powered_watch_coupling_is_live_across_advancing_hours(tmp_path):
 
     seeds: list[int] = []
     for _ in range(2):
-        result = subprocess.run(
+        result = subprocess.run(  # noqa: S603 - intentional CLI regression test with fixed argv.
             [sys.executable, str(REPO_ROOT / "tools" / "powered_watch.py"), "--no-mesh"],
             capture_output=True, text=True, cwd=REPO_ROOT, env=env, timeout=600,
         )

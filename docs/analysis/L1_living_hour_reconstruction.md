@@ -53,9 +53,9 @@ That leaves the watch-close question the L3 engine was asked to audit: with H3 (
 
 This character move is supported: Commander Alex Thorne's pressure 'duty to the charter' pulls toward the move., but no major blocker is established..
 
-**Supports**
+### Supports
 - Commander Alex Thorne's pressure 'duty to the charter' pulls toward the move.
 - Commander Alex Thorne's pressure 'watch-clock pressure (4.25h of 6.0h logged)' pulls toward the move.
 
-**Smallest fix**
+### Smallest fix
 - Preserve the current setup and add one more direct support if stronger confidence is required.

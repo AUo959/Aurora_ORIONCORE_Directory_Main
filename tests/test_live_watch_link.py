@@ -28,7 +28,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 def _run_live_watch(env: dict) -> tuple[list[dict], dict]:
-    result = subprocess.run(
+    result = subprocess.run(  # noqa: S603 - intentional CLI regression test with fixed argv.
         [sys.executable, str(REPO_ROOT / "tools" / "live_watch.py")],
         capture_output=True, text=True, cwd=REPO_ROOT, env=env, timeout=600,
     )
