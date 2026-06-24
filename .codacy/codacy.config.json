@@ -7731,5 +7731,9 @@
       ]
     }
   ],
-  "exclude": []
+  "exclude": [
+    "docs/analysis/*reconstruction*.json",
+    "docs/analysis/*reconstruction*.md",
+    "reports/simulation/**"
+  ]
 }

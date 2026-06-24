@@ -1,0 +1,12 @@
+# Codacy analysis configuration.
+#
+# Generated narrative-reconstruction artifacts and raw simulation outputs are
+# DATA, not authored source: hour_aboard.py emits them from a sim run (full L3
+# request/state/evaluation/response plus crew/event payloads). Static analysis
+# of these files produces spurious "security"/"documentation" findings on
+# machine-generated content, so they are excluded from analysis. The harness
+# code and tests that PRODUCE them remain fully analyzed.
+exclude_paths:
+  - 'docs/analysis/*reconstruction*.json'
+  - 'docs/analysis/*reconstruction*.md'
+  - 'reports/simulation/**'

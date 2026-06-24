@@ -1,0 +1,575 @@
+{
+  "generated_at_utc": "2026-06-24T21:52:41Z",
+  "scenario": "watch_block_v1",
+  "station_hour": 6,
+  "seed": 813,
+  "anchor_seed": "EOS_SEED_ORION",
+  "ethics_protocol": "Picard_Delta_3",
+  "watch": {
+    "hours": 4,
+    "roster_engaged": 35,
+    "souls_accounted": "41/41",
+    "effort_spent_h": 19.0,
+    "effort_estimate_h": 20.0,
+    "closed_ids": [
+      "H1",
+      "H2",
+      "H3",
+      "H4",
+      "H5",
+      "H6",
+      "H7",
+      "H8",
+      "H9",
+      "H10",
+      "H11",
+      "H12",
+      "H13",
+      "H14",
+      "H17",
+      "H18",
+      "H19",
+      "H20",
+      "H21",
+      "H22"
+    ],
+    "task_total": 22
+  },
+  "event_chain": [
+    {
+      "phase": "watch open",
+      "label": "Commander Alex Thorne opens the watch; Aurora coordinates canonical task distribution.",
+      "participants": [
+        "Alex Thorne",
+        "Aurora"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Docking Bay 2 logistics turnover validated and closed.",
+      "participants": [
+        "Dr. Elena Vasquez"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Hydroponics nutrient cycle adjustment validated and closed.",
+      "participants": [
+        "Dr. Kieran Zhao"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "ORD dispatch order execution + Shadowfax inspection validated and closed.",
+      "participants": [
+        "Dr. Amira Sato"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Dome astronomy session calibration validated and closed.",
+      "participants": [
+        "Varya Lin"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Bay 2 departure clearance package validated and closed.",
+      "participants": [
+        "Lt. Commander Maya Shepard"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Ethics ledger reconciliation (Picard Delta 3) validated and closed.",
+      "participants": [
+        "Lt. Commander Maya Shepard"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "EVA suit inspection cycle, core airlock validated and closed.",
+      "participants": [
+        "Dr. Ren Feldman"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Zero-g lab safety check, core section validated and closed.",
+      "participants": [
+        "Julian Markov"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Comms array diagnostic, core mast validated and closed.",
+      "participants": [
+        "Ryan Patel"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Habitat ring spin check (2 RPM / 0.3g verification) validated and closed.",
+      "participants": [
+        "Chief Engineer Raj Patel"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Galley resupply intake from Bay 2 validated and closed.",
+      "participants": [
+        "Dr. Ren Feldman"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Quantum core coherence check validated and closed.",
+      "participants": [
+        "Marcus Chen"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Crew quarters environmental audit, ring sections validated and closed.",
+      "participants": [
+        "Dr. Elira Noor"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Dome observation watch handoff (ring Deck 4) validated and closed.",
+      "participants": [
+        "Lt. Commander Maya Shepard"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Life-support scrubber rotation, habitat ring validated and closed.",
+      "participants": [
+        "Jessica Martinez"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "ORD pre-flight reconnaissance audit (Delta Scout) validated and closed.",
+      "participants": [
+        "Helena Vu"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "L3 drift containment sweep validated and closed.",
+      "participants": [
+        "Dr. Amira Sato"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Command log review and Aurora arbitration sync validated and closed.",
+      "participants": [
+        "Dr. Amira Sato"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Cargo manifest reconciliation, Bay 2 intake validated and closed.",
+      "participants": [
+        "Leena Porter"
+      ]
+    },
+    {
+      "phase": "this watch",
+      "label": "Ring stress telemetry review validated and closed.",
+      "participants": [
+        "Marcus Chen"
+      ]
+    },
+    {
+      "phase": "emergent",
+      "label": "hour 1: Tobias Qin & Emily Roberts spontaneous pair-programming (swarm_sync) \u00d71.15",
+      "participants": [
+        "Tobias Qin",
+        "Emily Roberts"
+      ]
+    },
+    {
+      "phase": "emergent",
+      "label": "hour 3: Ira Menon & Dr. Amina Velin spontaneous pair-programming (swarm_sync) \u00d71.15",
+      "participants": [
+        "Ira Menon",
+        "Dr. Amina Velin"
+      ]
+    },
+    {
+      "phase": "emergent",
+      "label": "hour 4: Lt. Commander Maya Shepard synergy with key collaborator (collaboration_boost) \u00d71.15",
+      "participants": [
+        "Lt. Commander Maya Shepard"
+      ]
+    },
+    {
+      "phase": "emergent",
+      "label": "hour 4: Vincent Kale synergy with key collaborator (collaboration_boost) \u00d71.2",
+      "participants": [
+        "Vincent Kale"
+      ]
+    },
+    {
+      "phase": "emergent",
+      "label": "hour 4: Knowledge transfer across specializations (cross_pollination) \u00d71.05",
+      "participants": []
+    },
+    {
+      "phase": "off-board",
+      "label": "ORD pre-flight reconnaissance dispatched (ORD-2 Delta Scout, ORD-3 Shadowfax).",
+      "participants": [
+        "Aurora",
+        "ORD control"
+      ]
+    },
+    {
+      "phase": "watch close",
+      "label": "Four-hour watch block: waves of routine operations, closeout, and continuity weave.",
+      "participants": [
+        "Alex Thorne",
+        "Aurora"
+      ]
+    },
+    {
+      "phase": "proposal",
+      "label": "route the watch-block closeout through Aurora arbitration before relieving the watch",
+      "participants": [
+        "Alex Thorne"
+      ]
+    }
+  ],
+  "off_board_receipts": {
+    "ord_dispatch": {
+      "mission_id": "watch-block-H5",
+      "drones_required": [
+        "ORD-2 Delta Scout",
+        "ORD-3 Shadowfax"
+      ],
+      "receipt_sha256": "4842a48eef24ae10469e7e867989004a826c002a08591e9937dfa19f9d33f579"
+    },
+    "mesh": [
+      {
+        "agent": "Aurora",
+        "answered": true,
+        "reply": "Aurora: I've logged Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin c"
+      },
+      {
+        "agent": "ARCHY",
+        "answered": true,
+        "reply": "ARCHY: Structurally, Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin "
+      },
+      {
+        "agent": "OPPY",
+        "answered": true,
+        "reply": "OPPY: For Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin check (2 RP"
+      },
+      {
+        "agent": "LIORA",
+        "answered": true,
+        "reply": "LIORA: I'm reading Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin ch"
+      },
+      {
+        "agent": "STARLING_AU",
+        "answered": true,
+        "reply": "STARLING_AU: Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin check (2"
+      },
+      {
+        "agent": "RIVERTHREAD_808",
+        "answered": true,
+        "reply": "RIVERTHREAD_808: I'd anchor Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat rin"
+      },
+      {
+        "agent": "Aurora",
+        "answered": true,
+        "reply": "Aurora: I've logged Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin c"
+      },
+      {
+        "agent": "ARCHY",
+        "answered": true,
+        "reply": "ARCHY: Structurally, Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin "
+      },
+      {
+        "agent": "OPPY",
+        "answered": true,
+        "reply": "OPPY: For Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin check (2 RP"
+      },
+      {
+        "agent": "LIORA",
+        "answered": true,
+        "reply": "LIORA: I'm reading Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin ch"
+      },
+      {
+        "agent": "STARLING_AU",
+        "answered": true,
+        "reply": "STARLING_AU: Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin check (2"
+      },
+      {
+        "agent": "RIVERTHREAD_808",
+        "answered": true,
+        "reply": "RIVERTHREAD_808: I'd anchor Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat rin"
+      },
+      {
+        "agent": "Aurora",
+        "answered": true,
+        "reply": "Aurora: I've logged Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin c"
+      },
+      {
+        "agent": "ARCHY",
+        "answered": true,
+        "reply": "ARCHY: Structurally, Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin "
+      },
+      {
+        "agent": "OPPY",
+        "answered": true,
+        "reply": "OPPY: For Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin check (2 RP"
+      },
+      {
+        "agent": "LIORA",
+        "answered": true,
+        "reply": "LIORA: I'm reading Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin ch"
+      },
+      {
+        "agent": "STARLING_AU",
+        "answered": true,
+        "reply": "STARLING_AU: Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin check (2"
+      },
+      {
+        "agent": "RIVERTHREAD_808",
+        "answered": true,
+        "reply": "RIVERTHREAD_808: I'd anchor Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat rin"
+      },
+      {
+        "agent": "Aurora",
+        "answered": true,
+        "reply": "Aurora: I've logged Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin c"
+      },
+      {
+        "agent": "ARCHY",
+        "answered": true,
+        "reply": "ARCHY: Structurally, Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin "
+      },
+      {
+        "agent": "OPPY",
+        "answered": true,
+        "reply": "OPPY: For Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin check (2 RP"
+      },
+      {
+        "agent": "LIORA",
+        "answered": true,
+        "reply": "LIORA: I'm reading Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin ch"
+      },
+      {
+        "agent": "STARLING_AU",
+        "answered": true,
+        "reply": "STARLING_AU: Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat ring spin check (2"
+      },
+      {
+        "agent": "RIVERTHREAD_808",
+        "answered": true,
+        "reply": "RIVERTHREAD_808: I'd anchor Watch block hour 1/4 \u2014 completed: Dome observation watch handoff (ring Deck 4); EVA suit inspection cycle, core airlock; Habitat rin"
+      }
+    ]
+  },
+  "l3": {
+    "request": {
+      "task_kind": "character_action_audit",
+      "proposal_present": true,
+      "strictness": "default",
+      "task_type": "validate",
+      "desired_output_form": "audit",
+      "input_kind": "mapping",
+      "user_query": "Would Thorne route the watch-block closeout through Aurora arbitration before relieving the watch?",
+      "supported_in_phase_one": true,
+      "unsupported_reason": null
+    },
+    "state": {
+      "state_id": "10337d89c862",
+      "input_profile": {
+        "evidence_density": "rich",
+        "input_kind": "mapping",
+        "question": "Would Thorne route the watch-block closeout through Aurora arbitration before relieving the watch?"
+      },
+      "layers": [
+        {
+          "name": "character",
+          "origin": "declared",
+          "confidence": 1.0,
+          "status": "available",
+          "notes": []
+        },
+        {
+          "name": "continuity",
+          "origin": "declared",
+          "confidence": 1.0,
+          "status": "available",
+          "notes": []
+        },
+        {
+          "name": "event",
+          "origin": "declared",
+          "confidence": 1.0,
+          "status": "available",
+          "notes": []
+        },
+        {
+          "name": "knowledge",
+          "origin": "declared",
+          "confidence": 1.0,
+          "status": "available",
+          "notes": []
+        },
+        {
+          "name": "motive",
+          "origin": "declared",
+          "confidence": 1.0,
+          "status": "available",
+          "notes": []
+        },
+        {
+          "name": "pressure",
+          "origin": "recovered",
+          "confidence": 0.9,
+          "status": "available",
+          "notes": []
+        },
+        {
+          "name": "temporal",
+          "origin": "inferred",
+          "confidence": 0.7,
+          "status": "available",
+          "notes": []
+        }
+      ],
+      "entities": [
+        {
+          "name": "Alex Thorne",
+          "entity_type": "character",
+          "role": "Station Commander",
+          "traits": [],
+          "source": "declared",
+          "confidence": 1.0
+        }
+      ],
+      "relations": [],
+      "pressures": [
+        {
+          "actor": "Alex Thorne",
+          "label": "duty to the charter",
+          "direction": "toward",
+          "strength": 0.9,
+          "source": "declared",
+          "confidence": 1.0
+        }
+      ],
+      "constraints": [],
+      "motives": [
+        {
+          "actor": "Alex Thorne",
+          "label": "uphold arbitration and ethics validation",
+          "strength": 0.95,
+          "source": "declared",
+          "confidence": 1.0,
+          "inferred": false
+        }
+      ],
+      "events": [
+        {
+          "label": "Four-hour watch block: waves of routine operations, closeout, and continuity weave.",
+          "status": "established",
+          "timing": "now",
+          "participants": [
+            "Alex Thorne"
+          ],
+          "source": "declared",
+          "confidence": 1.0,
+          "notes": []
+        },
+        {
+          "label": "route the watch-block closeout through Aurora arbitration before relieving the watch",
+          "status": "proposed",
+          "timing": "",
+          "participants": [
+            "Alex Thorne"
+          ],
+          "source": "declared",
+          "confidence": 1.0,
+          "notes": [
+            "proposal_preserved_as_provisional"
+          ]
+        }
+      ],
+      "knowledge_states": [
+        {
+          "holder": "Alex Thorne",
+          "fact": "Major actions require Aurora arbitration.",
+          "status": "knows",
+          "source": "declared",
+          "confidence": 1.0
+        }
+      ],
+      "uncertainties": [],
+      "continuity": {
+        "notes": [
+          "Thorne upholds arbitration discipline."
+        ],
+        "established_events": [
+          "Four-hour watch block: waves of routine operations, closeout, and continuity weave."
+        ]
+      },
+      "narrative_context": {
+        "question": "Would Thorne route the watch-block closeout through Aurora arbitration before relieving the watch?",
+        "declared_layers": [
+          "character",
+          "motive",
+          "event",
+          "knowledge",
+          "continuity"
+        ],
+        "task_kind": "character_action_audit"
+      }
+    },
+    "evaluation": {
+      "active_layers": [
+        "character",
+        "motive",
+        "event",
+        "knowledge",
+        "continuity"
+      ],
+      "missing_layers": [],
+      "selected_operators": [
+        "motive_inference",
+        "knowledge_propagation",
+        "setup_sufficiency_check"
+      ],
+      "supports": [
+        "Alex Thorne's pressure 'duty to the charter' pulls toward the move."
+      ],
+      "blocks": [],
+      "missing_bridges": [],
+      "hard_blocks": [],
+      "soft_blocks": [],
+      "confidence_notes": []
+    },
+    "response": {
+      "summary": "This character move is supported: Alex Thorne's pressure 'duty to the charter' pulls toward the move., but no major blocker is established..",
+      "verdict": "supported",
+      "main_supports": [
+        "Alex Thorne's pressure 'duty to the charter' pulls toward the move."
+      ],
+      "main_blockers": [],
+      "missing_bridges": [],
+      "smallest_fix": [
+        "Preserve the current setup and add one more direct support if stronger confidence is required."
+      ],
+      "confidence": 0.93,
+      "supported_in_phase_one": true,
+      "unsupported_reason": null
+    }
+  }
+}
