@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "contract_id": "AURORA_CANONREC__CONTRACT__BRIDGE_CONTROL_PLANE__v1.0__2026-06-24",
+  "status": "draft_control_plane_scaffold",
+  "tracking_issue": 27,
+  "purpose": "Define the minimum safe contract for Directory_Main to prepare evidence-bearing CanonRec pull requests without direct canon promotion from chat, simulation seeds, or recovered artifacts.",
+  "repositories": {
+    "control_plane": "AUo959/Aurora_ORIONCORE_Directory_Main",
+    "canon_target": "AUo959/CanonRec",
+    "runtime_mirror": "AUo959/aurora-cloudbank-symbolic"
+  },
+  "allowed_v1_actions": [
+    "read_canonrec_files",
+    "prepare_promotion_packet",
+    "emit_evidence_receipt_pointer",
+    "create_canonrec_branch",
+    "create_or_update_canonrec_file_on_branch",
+    "open_draft_canonrec_pr",
+    "write_directory_main_receipt",
+    "run_downstream_drift_check"
+  ],
+  "disallowed_v1_actions": [
+    "write_canonrec_main_directly",
+    "merge_canonrec_pr_without_explicit_owner_approval",
+    "delete_canonrec_files",
+    "rewrite_git_history",
+    "promote_chat_output_without_evidence_receipt",
+    "promote_scenario_seed_as_canon_fact",
+    "mutate_cloudbank_mirror_without_separate_pr",
+    "store_or_print_token_values"
+  ],
+  "promotion_packet_required_fields": [
+    "packet_id",
+    "created_at_utc",
+    "source_repo",
+    "source_refs",
+    "target_repo",
+    "target_branch_base",
+    "target_paths",
+    "layer",
+    "claim_status",
+    "evidence_receipts",
+    "ethics_gate",
+    "continuity_gate",
+    "rollback_plan",
+    "merge_approval_required"
+  ],
+  "allowed_layers": [
+    "L1",
+    "L2",
+    "L3"
+  ],
+  "claim_status_vocabulary": [
+    "SUPPORTED",
+    "ASSUMPTION",
+    "UNKNOWN",
+    "REJECTED",
+    "SUPERSEDED"
+  ],
+  "gate_requirements": {
+    "evidence_gate": {
+      "required": true,
+      "minimum_status": "SUPPORTED_OR_EXPLICITLY_REVIEWED",
+      "notes": "Evidence receipts must record provenance pointers and stable hashes where available. Missing evidence must remain UNKNOWN or ASSUMPTION."
+    },
+    "ethics_gate": {
+      "required": true,
+      "minimum_status": "PASS_OR_EXPLICITLY_REVIEWED",
+      "notes": "Ethics claims require evidence; docs alone do not prove enforcement."
+    },
+    "continuity_gate": {
+      "required": true,
+      "minimum_status": "PASS_OR_EXPLICITLY_REVIEWED",
+      "notes": "Continuity review must check L1/L2/L3 boundary integrity and duplicate canon risk."
+    },
+    "owner_merge_gate": {
+      "required": true,
+      "minimum_status": "EXPLICIT_OWNER_APPROVAL",
+      "notes": "The bridge may open a draft PR; it must not merge without explicit owner instruction."
+    }
+  },
+  "layer_boundary_rules": {
+    "L1": [
+      "Preserve operational-reality constraints.",
+      "Do not import symbolic or simulation behavior as operational fact without explicit canon evidence."
+    ],
+    "L2": [
+      "Preserve simulation determinism unless intentionally changed and validated.",
+      "Do not treat scenario prompts, seeds, or desired endings as canon facts."
+    ],
+    "L3": [
+      "Record THREADCORE, capsule, ethics, drift, and continuity logic as governance material.",
+      "Do not override L1 operational reality or L2 simulation determinism."
+    ]
+  },
+  "canonrec_pr_rules": {
+    "branch_required": true,
+    "draft_pr_default": true,
+    "pr_body_required_sections": [
+      "summary",
+      "canon_target_paths",
+      "source_evidence",
+      "layer_classification",
+      "validation",
+      "risks",
+      "rollback",
+      "merge_approval"
+    ],
+    "current_file_sha_required_for_updates": true,
+    "rollback_plan_required": true
+  },
+  "downstream_sync_rules": {
+    "after_canonrec_merge": [
+      "run Directory_Main canon sync drift check",
+      "identify CloudBank mirror impact",
+      "open separate CloudBank PR if mirror changes are required",
+      "link CloudBank PR to CanonRec PR and Directory_Main receipt"
+    ],
+    "no_unrelated_cleanup": true
+  },
+  "receipt_rules": {
+    "directory_main_receipt_required": true,
+    "receipt_destination": "reports/automation/",
+    "receipt_must_include": [
+      "promotion_packet_id",
+      "canonrec_branch",
+      "canonrec_pr",
+      "target_paths",
+      "evidence_receipt_ids",
+      "gate_statuses",
+      "rollback_plan",
+      "final_disposition"
+    ]
+  }
+}
