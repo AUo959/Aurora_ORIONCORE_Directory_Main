@@ -48,6 +48,37 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest pyyaml
 
+      # The crew-life and live/powered-watch integration tests drive the L1
+      # simulation harness, which expects the CloudBank clone and the CanonRec
+      # L1 character ledger nested under GUMAS_SIM_2.5/. Provision both so the
+      # harness resolves them (see tools/hour_aboard.py path resolution).
+      - name: Provision CloudBank simulation clone (public)
+        uses: actions/checkout@v6
+        with:
+          repository: AUo959/aurora-cloudbank-symbolic
+          ref: main
+          path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
+
+      - name: Check CanonRec access token
+        env:
+          CANONREC_TOKEN: ${{ secrets.WORKSPACE_REPO_TOKEN }}
+        run: |
+          if [ -z "$CANONREC_TOKEN" ]; then
+            echo "::error::Secret WORKSPACE_REPO_TOKEN is required to clone the private AUo959/CanonRec repo for the L1 integration tests. Add a fine-grained PAT (or GitHub App token) with read access to AUo959/CanonRec as the repository secret WORKSPACE_REPO_TOKEN."
+            exit 1
+          fi
+
+      - name: Provision CanonRec L1 ledger (private)
+        uses: actions/checkout@v6
+        with:
+          repository: AUo959/CanonRec
+          ref: main
+          token: ${{ secrets.WORKSPACE_REPO_TOKEN }}
+          path: GUMAS_SIM_2.5/CanonRec
+
+      - name: Install CloudBank runtime deps (mesh server + engines)
+        run: pip install -r GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/requirements.txt
+
       - name: Prepare CI artifact directory
         run: mkdir -p reports/ci
 
