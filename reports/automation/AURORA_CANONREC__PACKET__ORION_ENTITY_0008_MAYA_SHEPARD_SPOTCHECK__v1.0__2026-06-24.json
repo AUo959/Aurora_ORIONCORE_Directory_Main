@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "packet_id": "AURORA_CANONREC__PACKET__ORION_ENTITY_0008_MAYA_SHEPARD_SPOTCHECK__v1.0__2026-06-24",
+  "created_at_utc": "2026-06-24T04:12:00Z",
+  "packet_status": "review_only_no_canonrec_write_requested",
+  "tracking_issue": 27,
+  "source_repo": "AUo959/Aurora_ORIONCORE_Directory_Main",
+  "source_refs": [
+    {
+      "path": "reports/analysis/L1_ENTITY_LEDGER__2026-06-10.json",
+      "ref": "main",
+      "blob_sha": "da908894b8ea439f0e85b7c7f2b3afa21ec02b85",
+      "evidence_range": "lines 101-144",
+      "observed_claim": "Directory_Main L1 Entity Ledger records ORION.ENTITY.0008 as Lt. Commander Maya Shepard, Executive Officer (XO), Command & Ethics, CONFIRMED, CANON, primary authority, with CanonRec path GUMAS_SIM_2.5/CanonRec/canon/L1/characters/ORION.ENTITY.0008__maya-shepard.md."
+    }
+  ],
+  "target_repo": "AUo959/CanonRec",
+  "target_branch_base": "main",
+  "target_paths": [
+    {
+      "path": "canon/L1/characters/ORION.ENTITY.0008__maya-shepard.md",
+      "current_blob_sha": "96b8b2ae44268d6efaef818b4c26386cfa0e0269",
+      "intended_operation": "review_only",
+      "observed_claim": "CanonRec already contains ORION.ENTITY.0008 as Lt. Commander Maya Shepard, L1 character, Executive Officer (XO), Command & Ethics, CONFIRMED, CANON_PROMOTE, primary authority."
+    }
+  ],
+  "layer": "L1",
+  "entity": {
+    "entity_id": "ORION.ENTITY.0008",
+    "name": "Lt. Commander Maya Shepard",
+    "display_name": "Maya Shepard",
+    "entity_type": "character",
+    "role": "Executive Officer (XO)",
+    "division": "Command & Ethics"
+  },
+  "claim_status": "SUPPORTED",
+  "evidence_receipts": [
+    {
+      "receipt_type": "manual_bridge_spotcheck_v1",
+      "status": "SUPPORTED",
+      "sources": [
+        "Directory_Main reports/analysis/L1_ENTITY_LEDGER__2026-06-10.json",
+        "CanonRec canon/L1/characters/ORION.ENTITY.0008__maya-shepard.md"
+      ],
+      "note": "This first packet validates the bridge shape using an already-promoted L1 entity and intentionally does not request a CanonRec write."
+    }
+  ],
+  "ethics_gate": {
+    "required": true,
+    "status": "PASS_REVIEW_ONLY",
+    "notes": "No behavioral, runtime, or authority expansion is requested. The packet preserves existing L1 role boundaries."
+  },
+  "continuity_gate": {
+    "required": true,
+    "status": "PASS_REVIEW_ONLY",
+    "notes": "Directory_Main ledger and CanonRec target agree on entity id, name, L1 layer, role, division, and primary status. Legacy aliases remain explicitly labeled as legacy/superseded in CanonRec."
+  },
+  "boundary_assertions": {
+    "l1_operational_reality_preserved": true,
+    "l2_simulation_not_mutated": true,
+    "l3_symbolic_mesh_not_mutated": true,
+    "scenario_seed_not_promoted": true,
+    "canonrec_write_requested": false,
+    "cloudbank_mirror_write_requested": false
+  },
+  "rollback_plan": {
+    "needed": false,
+    "reason": "No CanonRec or CloudBank mutation is requested by this packet. If the packet is rejected, close the tracking issue item or supersede this packet with a corrected receipt."
+  },
+  "merge_approval_required": true,
+  "recommended_next_action": "Use this review-only packet as the first bridge fixture. After PR #28 lands, convert the bridge scaffold into executable packet validation tooling before attempting a CanonRec write packet."
+}
