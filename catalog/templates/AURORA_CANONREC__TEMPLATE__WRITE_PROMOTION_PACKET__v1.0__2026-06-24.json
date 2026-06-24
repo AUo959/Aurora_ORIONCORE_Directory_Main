@@ -1,0 +1,86 @@
+{
+  "template_id": "AURORA_CANONREC__TEMPLATE__WRITE_PROMOTION_PACKET__v1.0__2026-06-24",
+  "template_status": "template_only_not_a_live_packet",
+  "instructions": [
+    "Copy this template to reports/automation/AURORA_CANONREC__PACKET__<TOPIC>__vX.X__YYYY-MM-DD.json only when preparing a real promotion packet.",
+    "Replace every TEMPLATE_* value before validation.",
+    "Run tools/canonrec_bridge_validate.py against the copied packet before opening any CanonRec branch.",
+    "Do not use delete/remove operations in v1.",
+    "Do not open or merge a CanonRec PR without explicit owner approval."
+  ],
+  "packet": {
+    "schema_version": 1,
+    "packet_id": "TEMPLATE_PACKET_ID_REPLACE_BEFORE_USE",
+    "created_at_utc": "TEMPLATE_YYYY-MM-DDTHH:MM:SSZ",
+    "packet_status": "draft_write_candidate_not_executed",
+    "tracking_issue": "TEMPLATE_DIRECTORY_MAIN_ISSUE_NUMBER",
+    "source_repo": "AUo959/Aurora_ORIONCORE_Directory_Main",
+    "source_refs": [
+      {
+        "path": "TEMPLATE_SOURCE_PATH",
+        "ref": "TEMPLATE_SOURCE_REF_OR_COMMIT_SHA",
+        "blob_sha": "TEMPLATE_SOURCE_BLOB_SHA_OR_ARTIFACT_HASH",
+        "evidence_range": "TEMPLATE_LINE_RANGE_OR_ARTIFACT_POINTER",
+        "observed_claim": "TEMPLATE_OBSERVED_SOURCE_CLAIM"
+      }
+    ],
+    "target_repo": "AUo959/CanonRec",
+    "target_branch_base": "main",
+    "target_paths": [
+      {
+        "path": "TEMPLATE_CANONREC_TARGET_PATH",
+        "current_blob_sha": "TEMPLATE_REQUIRED_FOR_UPDATE_NULL_FOR_CREATE",
+        "intended_operation": "TEMPLATE_create_OR_update_ONLY",
+        "observed_claim": "TEMPLATE_TARGET_STATE_OR_NEW_PATH_REASON"
+      }
+    ],
+    "proposed_canonrec_branch": "codex/canonrec-<topic>-v1-YYYY-MM-DD",
+    "proposed_canonrec_pr_title": "canon: TEMPLATE_SHORT_FUNCTIONAL_TITLE",
+    "layer": "TEMPLATE_L1_OR_L2_OR_L3",
+    "entity": {
+      "entity_id": "TEMPLATE_ENTITY_ID_OR_NULL",
+      "name": "TEMPLATE_ENTITY_OR_RECORD_NAME",
+      "display_name": "TEMPLATE_DISPLAY_NAME_OR_NULL",
+      "entity_type": "TEMPLATE_CHARACTER_PROTOCOL_CAPSULE_RECORD_OR_OTHER",
+      "role": "TEMPLATE_ROLE_OR_NULL",
+      "division": "TEMPLATE_DIVISION_OR_NULL"
+    },
+    "claim_status": "TEMPLATE_SUPPORTED_OR_ASSUMPTION_OR_UNKNOWN",
+    "evidence_receipts": [
+      {
+        "receipt_type": "TEMPLATE_EVIDENCE_RECEIPT_TYPE",
+        "receipt_id": "TEMPLATE_RECEIPT_ID_OR_HASH",
+        "status": "TEMPLATE_SUPPORTED_OR_EXPLICITLY_REVIEWED",
+        "sources": [
+          "TEMPLATE_SOURCE_POINTER"
+        ],
+        "note": "TEMPLATE_EVIDENCE_NOTE"
+      }
+    ],
+    "ethics_gate": {
+      "required": true,
+      "status": "TEMPLATE_PASS_OR_EXPLICITLY_REVIEWED",
+      "notes": "TEMPLATE_ETHICS_REVIEW_NOTES"
+    },
+    "continuity_gate": {
+      "required": true,
+      "status": "TEMPLATE_PASS_OR_EXPLICITLY_REVIEWED",
+      "notes": "TEMPLATE_CONTINUITY_REVIEW_NOTES"
+    },
+    "boundary_assertions": {
+      "l1_operational_reality_preserved": "TEMPLATE_true_OR_reviewed_false_WITH_REASON",
+      "l2_simulation_not_mutated": true,
+      "l3_symbolic_mesh_not_mutated": "TEMPLATE_true_UNLESS_THIS_IS_L3_RECORD",
+      "scenario_seed_not_promoted": true,
+      "canonrec_write_requested": true,
+      "cloudbank_mirror_write_requested": false
+    },
+    "rollback_plan": {
+      "needed": true,
+      "method": "Close unmerged CanonRec PR, or revert merged CanonRec PR with a normal revert commit.",
+      "downstream_mirror_handling": "Run canon sync drift check after merge; open separate CloudBank PR only if mirror changes are required."
+    },
+    "merge_approval_required": true,
+    "recommended_next_action": "Validate this packet, inspect target path/current SHA, then open a CanonRec draft PR only if owner approves the specific candidate."
+  }
+}
