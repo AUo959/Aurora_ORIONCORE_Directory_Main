@@ -52,11 +52,14 @@ jobs:
       # simulation harness, which expects the CloudBank clone and the CanonRec
       # L1 character ledger nested under GUMAS_SIM_2.5/. Provision both so the
       # harness resolves them (see tools/hour_aboard.py path resolution).
+      # Pin to the exact commits recorded in catalog/repo_registry.yaml so the
+      # workspace-verification repo_head_match check passes deterministically.
+      # Update both places together if the canonical nested-repo heads move.
       - name: Provision CloudBank simulation clone (public)
         uses: actions/checkout@v6
         with:
           repository: AUo959/aurora-cloudbank-symbolic
-          ref: main
+          ref: 8194ecb05fa81dba631bf3bff9b40e3dfe257a91
           path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
 
       - name: Check CanonRec access token
@@ -72,7 +75,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: AUo959/CanonRec
-          ref: main
+          ref: 5731c50862e1fc9f7079ef9b22505597a8cb3d75
           token: ${{ secrets.WORKSPACE_REPO_TOKEN }}
           path: GUMAS_SIM_2.5/CanonRec
 
