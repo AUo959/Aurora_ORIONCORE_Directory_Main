@@ -19,6 +19,7 @@
 !/.github/**
 !/.codacy/
 !/.codacy/**
+!/.codacy.yaml
 !/.pre-commit-config.yaml
 !/Makefile
 !/AGENTS.md
