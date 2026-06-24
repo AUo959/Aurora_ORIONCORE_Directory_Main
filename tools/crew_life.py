@@ -29,12 +29,26 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 from collections import defaultdict
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 MODEL_PATH = REPO_ROOT / "catalog" / "crew_life_model.json"
-CANON_CHARACTERS = REPO_ROOT / "GUMAS_SIM_2.5" / "CanonRec" / "canon" / "L1" / "characters"
+
+# Resolve the canon L1 roster the SAME way the hour_aboard harness does, so the
+# two tools cannot drift apart: the canonical layout nests CanonRec under
+# GUMAS_SIM_2.5/, but a flat multi-repo checkout keeps it as a sibling of this
+# repo. hour_aboard owns the layout-flexible marker lookup (see its
+# CANON_CHARACTERS); reuse it. Fall back to the nested default if hour_aboard is
+# not importable, preserving the original behaviour.
+sys.path.insert(0, str(REPO_ROOT / "tools"))
+try:
+    import hour_aboard as _hour_aboard
+
+    CANON_CHARACTERS = _hour_aboard.CANON_CHARACTERS
+except Exception:  # pragma: no cover - defensive fallback to the canonical nested layout
+    CANON_CHARACTERS = REPO_ROOT / "GUMAS_SIM_2.5" / "CanonRec" / "canon" / "L1" / "characters"
 
 # Command/senior roles we guarantee across all four shifts for coverage.
 COMMAND_HINTS = ("Commander", "Executive Officer", "XO", "Chief", "Officer", "Lt", "Lieutenant")
