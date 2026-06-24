@@ -1,0 +1,260 @@
+{
+  "summary": {
+    "roster_version": "2.0",
+    "characters_used": 25,
+    "ticks": 1,
+    "completed": false,
+    "total_est": 6.0,
+    "total_spent": 4.25,
+    "completed_ids": [
+      "H1",
+      "H2",
+      "H3",
+      "H6"
+    ]
+  },
+  "transcript": [
+    "[00] Alex Thorne: All hands, Phase 1 security implementation beginning. Aurora, coordinate assignments.",
+    "[00] Aurora: Phase 1 task distribution initiated. Assignments optimized for canonical specializations.",
+    "[00] Aurora: Collaboration synergy detected: Lt. Commander Maya Shepard performance enhanced.",
+    "[00] Commander Alex Thorne: Progress on L3 drift containment sweep: +0.32h [Commander, Orion Station]",
+    "[00] Lt. Commander Maya Shepard: L3 drift containment sweep complete. Executive Officer (XO) / FleetOps Commander validation passed.",
+    "[00] Dr. Elira Noor: Progress on Docking Bay 2 logistics turnover: +0.58h [Lead Reflexivity Specialist]",
+    "[00] Prof. Elena Sorensen: Progress on Habitat ring spin check (2 RPM / 0.3g verification): +0.62h [Cognitive Ethicist]",
+    "[00] Helena Vu: Progress on Life-support scrubber rotation, habitat ring: +0.75h [Cultural & HR Director]",
+    "[00] Jessica Martinez: Habitat ring spin check (2 RPM / 0.3g verification) complete. Backend Architect validation passed.",
+    "[00] Dr. Kieran Zhao: Progress on Docking Bay 2 logistics turnover: +0.89h [Computational Optimization Lead]",
+    "[00] Vincent Kale: Docking Bay 2 logistics turnover complete. Layer Isolation Theorist validation passed.",
+    "[00] Emily Roberts: Dome observation watch handoff (ring Deck 4) complete. LLM-Simulation Bridge Developer validation passed."
+  ],
+  "events": [
+    {
+      "tick": 0,
+      "kind": "collaboration_boost",
+      "description": "Lt. Commander Maya Shepard synergy with key collaborator",
+      "multiplier": 1.15,
+      "affected": [
+        "Lt. Commander Maya Shepard"
+      ]
+    }
+  ],
+  "work_records": [
+    {
+      "tick": 0,
+      "agent": "Commander Alex Thorne",
+      "task": "L3 drift containment sweep",
+      "effort": 0.32,
+      "note": "0.18h left"
+    },
+    {
+      "tick": 0,
+      "agent": "Lt. Commander Maya Shepard",
+      "task": "L3 drift containment sweep",
+      "effort": 1.09,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 0,
+      "agent": "Dr. Elira Noor",
+      "task": "Docking Bay 2 logistics turnover",
+      "effort": 0.58,
+      "note": "0.92h left"
+    },
+    {
+      "tick": 0,
+      "agent": "Prof. Elena Sorensen",
+      "task": "Habitat ring spin check (2 RPM / 0.3g verification)",
+      "effort": 0.62,
+      "note": "0.38h left"
+    },
+    {
+      "tick": 0,
+      "agent": "Helena Vu",
+      "task": "Life-support scrubber rotation, habitat ring",
+      "effort": 0.75,
+      "note": "0.25h left"
+    },
+    {
+      "tick": 0,
+      "agent": "Jessica Martinez",
+      "task": "Habitat ring spin check (2 RPM / 0.3g verification)",
+      "effort": 1.21,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 0,
+      "agent": "Dr. Kieran Zhao",
+      "task": "Docking Bay 2 logistics turnover",
+      "effort": 0.89,
+      "note": "0.04h left"
+    },
+    {
+      "tick": 0,
+      "agent": "Vincent Kale",
+      "task": "Docking Bay 2 logistics turnover",
+      "effort": 0.92,
+      "note": "\u2713 COMPLETE"
+    },
+    {
+      "tick": 0,
+      "agent": "Emily Roberts",
+      "task": "Dome observation watch handoff (ring Deck 4)",
+      "effort": 0.99,
+      "note": "\u2713 COMPLETE"
+    }
+  ],
+  "roster": [
+    {
+      "name": "Commander Alex Thorne",
+      "role": "Station Commander",
+      "division": "Command & Ethics"
+    },
+    {
+      "name": "Lt. Commander Maya Shepard",
+      "role": "Executive Officer (XO) / FleetOps Commander",
+      "division": "Command & Ethics"
+    },
+    {
+      "name": "Dr. Elira Noor",
+      "role": "Lead Reflexivity Specialist",
+      "division": "Command & Ethics"
+    },
+    {
+      "name": "Prof. Elena Sorensen",
+      "role": "Cognitive Ethicist",
+      "division": "Command & Ethics (Advisor)"
+    },
+    {
+      "name": "Helena Vu",
+      "role": "Cultural & HR Director",
+      "division": "Command & Ethics"
+    },
+    {
+      "name": "Marcus Chen",
+      "role": "Performance Optimization Engineer",
+      "division": "Systems & Infrastructure"
+    },
+    {
+      "name": "Jessica Martinez",
+      "role": "Backend Architect",
+      "division": "Systems & Infrastructure"
+    },
+    {
+      "name": "Ryan Patel",
+      "role": "Systems Integration Engineer",
+      "division": "Systems & Infrastructure"
+    },
+    {
+      "name": "Ren Okada",
+      "role": "Systems Portability Specialist",
+      "division": "Systems & Infrastructure"
+    },
+    {
+      "name": "Dr. Kieran Zhao",
+      "role": "Computational Optimization Lead",
+      "division": "Systems & Infrastructure"
+    },
+    {
+      "name": "Ira Menon",
+      "role": "Compiler Engineer",
+      "division": "Systems & Infrastructure"
+    },
+    {
+      "name": "Vincent Kale",
+      "role": "Layer Isolation Theorist",
+      "division": "Systems & Infrastructure"
+    },
+    {
+      "name": "Dr. Amina Velin",
+      "role": "Symbolic Systems Research Lead",
+      "division": "Simulation & Cognitive Systems"
+    },
+    {
+      "name": "Tobias Qin",
+      "role": "Code/Narrative Systems Engineer",
+      "division": "Simulation & Cognitive Systems"
+    },
+    {
+      "name": "Emily Roberts",
+      "role": "LLM-Simulation Bridge Developer",
+      "division": "Simulation & Cognitive Systems"
+    },
+    {
+      "name": "Carmen Rivas",
+      "role": "Simulation Binding Specialist",
+      "division": "Simulation & Cognitive Systems"
+    },
+    {
+      "name": "Maren Koss",
+      "role": "Cognitive Drift Mapper",
+      "division": "Simulation & Cognitive Systems"
+    },
+    {
+      "name": "Dante Kyros",
+      "role": "UX Architect",
+      "division": "Interface & Aesthetics"
+    },
+    {
+      "name": "Naomi Vell",
+      "role": "Narrative Framework Engineer",
+      "division": "Interface & Aesthetics"
+    },
+    {
+      "name": "Kai Drev",
+      "role": "Interface Ecologist",
+      "division": "Interface & Aesthetics"
+    },
+    {
+      "name": "Haneul Park",
+      "role": "Immersive Experience Theorist",
+      "division": "Interface & Aesthetics"
+    },
+    {
+      "name": "Juno Suresh",
+      "role": "Symbolic Systems Artist",
+      "division": "Interface & Aesthetics"
+    },
+    {
+      "name": "Keira Halden",
+      "role": "Lead Visual Concept Designer",
+      "division": "Interface & Aesthetics"
+    },
+    {
+      "name": "Rei Vatra",
+      "role": "Atmospheric Painter & Color Theorist",
+      "division": "Interface & Aesthetics"
+    },
+    {
+      "name": "Tariq El-Sayegh",
+      "role": "Speculative Systems Theorist",
+      "division": "Operations & Quality Assurance"
+    }
+  ],
+  "task_names": {
+    "H1": "Docking Bay 2 logistics turnover",
+    "H2": "Habitat ring spin check (2 RPM / 0.3g verification)",
+    "H3": "Dome observation watch handoff (ring Deck 4)",
+    "H4": "Life-support scrubber rotation, habitat ring",
+    "H5": "ORD pre-flight reconnaissance audit (Delta Scout)",
+    "H6": "L3 drift containment sweep",
+    "H7": "Command log review and Aurora arbitration sync"
+  },
+  "task_sources": {
+    "H1": "ORION__L1_DISPATCH_PROTOCOL__v1.1",
+    "H2": "ORION__L1_SYSTEMS_BIBLE__v1.1 + DATA__OrionStationPhysicalSpace__v1.0",
+    "H3": "ORION__L1_OPERATIONS_RUNBOOK__v1.1",
+    "H4": "orion_station_life_infrastructure.md",
+    "H5": "SPEC L1L2_SYSTEM__ORD_DroneDispatch v0.5.0 (modules/ord, PR #1016)",
+    "H6": "ORION__DRIFT_CONTAINMENT_PROTOCOL__v1.1",
+    "H7": "ORION__L1_COMMAND_STRUCTURE__v1.1 + PICARD_DELTA_3 ethics layer"
+  },
+  "history_pairs_applied": 4,
+  "ord_dispatch": {
+    "mission_id": "hour-aboard-H5",
+    "drones_required": [
+      "ORD-2 Delta Scout",
+      "ORD-3 Shadowfax"
+    ],
+    "receipt_sha256": "dd68e544f1d795d9ca9a6b617572d832b49f1c8429a6133eb0f1453aaa60df42"
+  }
+}

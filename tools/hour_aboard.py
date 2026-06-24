@@ -42,9 +42,34 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-CLOUDBANK = REPO_ROOT / "GUMAS_SIM_2.5" / "Aurora_Sim_Architecture" / "aurora-cloudbank-symbolic-main"
-VENV_PY = CLOUDBANK / ".venv" / "bin" / "python"
-CANON_CHARACTERS = REPO_ROOT / "GUMAS_SIM_2.5" / "CanonRec" / "canon" / "L1" / "characters"
+
+
+def _resolve(candidates: list[Path], marker: str, default: Path) -> Path:
+    """First candidate that contains the marker path, else the documented default."""
+    for cand in candidates:
+        if (cand / marker).exists():
+            return cand
+    return default
+
+
+# Layout-flexible resolution: the canonical layout nests the CloudBank clone and
+# CanonRec under GUMAS_SIM_2.5/, but a flat multi-repo checkout keeps them as
+# siblings of this repo. Resolve both by a marker file, and prefer a project
+# .venv when present (falling back to the current interpreter so the harness
+# runs without one).
+_CB_NESTED = REPO_ROOT / "GUMAS_SIM_2.5" / "Aurora_Sim_Architecture" / "aurora-cloudbank-symbolic-main"
+CLOUDBANK = _resolve(
+    [_CB_NESTED, REPO_ROOT.parent / "aurora-cloudbank-symbolic", REPO_ROOT / "aurora-cloudbank-symbolic"],
+    marker="simulation/orion_station_simulation_v2.py", default=_CB_NESTED,
+)
+_VENV_PY = CLOUDBANK / ".venv" / "bin" / "python"
+VENV_PY = _VENV_PY if _VENV_PY.exists() else Path(sys.executable)
+_CANON_NESTED = REPO_ROOT / "GUMAS_SIM_2.5" / "CanonRec" / "canon" / "L1" / "characters"
+CANON_CHARACTERS = _resolve(
+    [_CANON_NESTED.parent, (REPO_ROOT.parent / "CanonRec" / "canon" / "L1"),
+     (REPO_ROOT / "CanonRec" / "canon" / "L1")],
+    marker="characters", default=_CANON_NESTED.parent,
+) / "characters"
 
 RUN_ENV = {"CSRF_SECRET_KEY": "hour-aboard", "WS_AUTH_SECRET": "hour-aboard",
            "JWT_SECRET_KEY": "hour-aboard-jwt-local", "PYTHONPYCACHEPREFIX": "/tmp/pyc"}  # noqa: S108
@@ -455,9 +480,13 @@ def main() -> int:
     mesh_results: list[dict] = []
     if not args.no_mesh:
         print("📡 Pulsing companions for each hour over the mesh ...")
-        mesh_results = run_mesh_hours(sim, scenario)
-        answered = sum(1 for r in mesh_results if r["ok"])
-        print(f"   {answered}/{len(mesh_results)} companion beats answered")
+        try:
+            mesh_results = run_mesh_hours(sim, scenario)
+            answered = sum(1 for r in mesh_results if r["ok"])
+            print(f"   {answered}/{len(mesh_results)} companion beats answered")
+        except (Exception, SystemExit) as exc:  # noqa: BLE001 - mesh is optional; degrade
+            mesh_results = []
+            print(f"   ⚠️  mesh bridge unavailable ({str(exc)[:120]}); continuing without companion ops")
 
     print("⚖️  L3 narrative audit ...")
     audit = _run_in_clone(L3_AUDIT_DRIVER, scenario["l3_audit"])

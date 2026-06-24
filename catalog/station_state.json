@@ -1,18 +1,18 @@
 {
-  "generated_at_utc": "2026-06-13T03:35:06Z",
+  "generated_at_utc": "2026-06-24T01:56:31Z",
   "ledger_schema": "station-chronicle-v1",
-  "atoms_total": 118,
+  "atoms_total": 99,
   "atoms_by_tier": {
-    "CANON": 14,
-    "OPERATIONAL": 11,
-    "STAGING": 93
+    "STAGING": 99
   },
-  "chronicle_head": "3021a74c",
+  "chronicle_head": "e8fa6e00",
   "pair_familiarity": {
     "Dr. Kieran Zhao|Prof. Elena Sorensen": 3.0,
+    "Commander Alex Thorne|Lt. Commander Maya Shepard": 2.0,
     "Commander Alex Thorne|Varya Lin": 1.5,
-    "Commander Alex Thorne|Lt. Commander Maya Shepard": 1.5,
     "Commander Alex Thorne|Juno Suresh": 1.0,
+    "Dr. Elira Noor|Vincent Kale": 1.0,
+    "Jessica Martinez|Prof. Elena Sorensen": 1.0,
     "Dr. Kieran Zhao|Ryan Patel": 1.0,
     "Commander Alex Thorne|Jiro Tanaka": 1.0,
     "Dr. Elira Noor|Varya Lin": 1.0,
@@ -21,11 +21,12 @@
     "Leena Porter|Prof. Elena Sorensen": 1.0,
     "Dr. Ren Feldman|Jiro Tanaka": 1.0,
     "Commander Alex Thorne|Marcus Chen": 0.5,
-    "Dr. Elira Noor|Vincent Kale": 0.5,
     "Keira Halden|Naomi Vell": 0.5,
     "Keira Halden|Prof. Elena Sorensen": 0.5,
     "Naomi Vell|Prof. Elena Sorensen": 0.5,
     "Helena Vu|Ryan Patel": 0.5,
+    "Dr. Elira Noor|Dr. Kieran Zhao": 0.5,
+    "Dr. Kieran Zhao|Vincent Kale": 0.5,
     "Dr. Elena Vasquez|Samantha Lee": 0.5,
     "Commander Alex Thorne|Maren Koss": 0.5,
     "Helena Vu|Varya Lin": 0.5,
@@ -40,7 +41,6 @@
     "Kai Drev|Samantha Lee": 0.5,
     "Dr. Ren Feldman|Lt. Commander Maya Shepard": 0.5,
     "Dr. Elira Noor|Jiro Tanaka": 0.5,
-    "Jessica Martinez|Prof. Elena Sorensen": 0.5,
     "Commander Alex Thorne|Leena Porter": 0.5,
     "Leena Porter|Varya Lin": 0.5,
     "Dr. Elira Noor|Jessica Martinez": 0.5,
@@ -48,7 +48,7 @@
     "Dr. Amira Sato|Varya Lin": 0.5
   },
   "crew_experience_completions": {
-    "Lt. Commander Maya Shepard": 7.0,
+    "Lt. Commander Maya Shepard": 8.0,
     "Dr. Amira Sato": 6.0,
     "Ryan Patel": 5.0,
     "Varya Lin": 5.0,
@@ -58,18 +58,19 @@
     "Maren Koss": 3.0,
     "Dr. Kieran Zhao": 3.0,
     "Julian Markov": 3.0,
+    "Jessica Martinez": 3.0,
+    "Vincent Kale": 2.0,
     "Samantha Lee": 2.0,
     "Dr. Elena Vasquez": 2.0,
     "Naomi Vell": 2.0,
     "Dr. Elira Noor": 2.0,
     "Chief Engineer Raj Patel": 2.0,
     "Helena Vu": 2.0,
-    "Jessica Martinez": 2.0,
     "Marcus Chen": 1.0,
-    "Vincent Kale": 1.0,
     "Keira Halden": 1.0,
     "Commander Alex Thorne": 1.0,
-    "Kai Drev": 1.0
+    "Kai Drev": 1.0,
+    "Emily Roberts": 1.0
   },
   "scenario_completed_tasks": {
     "hour_aboard": [
@@ -142,6 +143,12 @@
       "H7",
       "H8",
       "H9"
+    ],
+    "hour_aboard_v1": [
+      "H1",
+      "H2",
+      "H3",
+      "H6"
     ]
   }
 }
