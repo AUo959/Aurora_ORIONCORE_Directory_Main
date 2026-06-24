@@ -29,6 +29,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import sys
 from collections import defaultdict
@@ -40,7 +41,9 @@ CANONREC = REPO_ROOT / "GUMAS_SIM_2.5" / "CanonRec"
 CHRONICLE_DIR = CANONREC / "canon" / "L1" / "station" / "chronicle"
 CHRONICLE_PATH = CHRONICLE_DIR / "STATION_CHRONICLE.ndjson"
 STAGING_PATH = REPO_ROOT / "catalog" / "station_chronicle_staging.ndjson"
-STATE_PATH = REPO_ROOT / "catalog" / "station_state.json"
+# Honor the station-clock override so an isolated state file (e.g. in tests)
+# stays isolated across the chronicle refresh too.
+STATE_PATH = Path(os.environ.get("AURORA_STATION_STATE") or (REPO_ROOT / "catalog" / "station_state.json"))
 
 TRANSCRIPTS = CANONREC / "canon" / "L1" / "station" / "mesh_transcripts"
 DRIFT_LOG = CANONREC / "DRIFT_LOG.md"
@@ -258,6 +261,16 @@ def load_all_atoms() -> list[dict]:
     return sorted(atoms, key=lambda a: a["occurred_at"])
 
 
+def _preserved_hours_elapsed() -> int:
+    """Existing station hour clock, carried forward across the state rewrite."""
+    if STATE_PATH.exists():
+        try:
+            return int(json.loads(STATE_PATH.read_text()).get("hours_elapsed", 0))
+        except (ValueError, json.JSONDecodeError):
+            return 0
+    return 0
+
+
 def cmd_state() -> int:
     atoms = load_all_atoms()
     familiarity: dict[str, float] = defaultdict(float)
@@ -296,6 +309,9 @@ def cmd_state() -> int:
     state = {
         "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "ledger_schema": LEDGER_SCHEMA,
+        # Preserve the station hour clock across the rewrite — the chronicle
+        # records what happened; hour_aboard owns advancing the clock.
+        "hours_elapsed": _preserved_hours_elapsed(),
         "atoms_total": len(atoms),
         "atoms_by_tier": dict(sorted(
             defaultdict(int, {t: sum(1 for a in atoms if a["tier"] == t)
@@ -309,7 +325,11 @@ def cmd_state() -> int:
     print(f"Station state derived: {state['atoms_total']} atoms → "
           f"{len(state['pair_familiarity'])} familiar pairs, "
           f"{len(state['crew_experience_completions'])} crew with completions")
-    print(f"  → {STATE_PATH.relative_to(REPO_ROOT)}")
+    try:
+        shown = STATE_PATH.relative_to(REPO_ROOT)
+    except ValueError:
+        shown = STATE_PATH  # state override outside the repo (e.g. an isolated test clock)
+    print(f"  → {shown}")
     return 0
 
 

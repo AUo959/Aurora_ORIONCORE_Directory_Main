@@ -1,0 +1,326 @@
+{
+  "request": {
+    "task_kind": "character_action_audit",
+    "proposal_present": true,
+    "strictness": "default",
+    "task_type": "validate",
+    "desired_output_form": "audit",
+    "input_kind": "mapping",
+    "user_query": "Would Thorne route the hour's command-log review through Aurora arbitration before closing the watch?",
+    "supported_in_phase_one": true,
+    "unsupported_reason": null
+  },
+  "state": {
+    "state_id": "0dfe5f4de4ea",
+    "input_profile": {
+      "evidence_density": "rich",
+      "input_kind": "mapping",
+      "question": "Would Thorne route the hour's command-log review through Aurora arbitration before closing the watch?"
+    },
+    "layers": [
+      {
+        "name": "character",
+        "origin": "declared",
+        "confidence": 1.0,
+        "status": "available",
+        "notes": []
+      },
+      {
+        "name": "continuity",
+        "origin": "declared",
+        "confidence": 1.0,
+        "status": "available",
+        "notes": []
+      },
+      {
+        "name": "event",
+        "origin": "declared",
+        "confidence": 1.0,
+        "status": "available",
+        "notes": []
+      },
+      {
+        "name": "knowledge",
+        "origin": "declared",
+        "confidence": 1.0,
+        "status": "available",
+        "notes": []
+      },
+      {
+        "name": "motive",
+        "origin": "declared",
+        "confidence": 1.0,
+        "status": "available",
+        "notes": []
+      },
+      {
+        "name": "pressure",
+        "origin": "recovered",
+        "confidence": 0.9,
+        "status": "available",
+        "notes": []
+      },
+      {
+        "name": "temporal",
+        "origin": "inferred",
+        "confidence": 0.7,
+        "status": "available",
+        "notes": []
+      }
+    ],
+    "entities": [
+      {
+        "name": "Commander Alex Thorne",
+        "entity_type": "character",
+        "role": "Station Commander",
+        "traits": [
+          "arbitration discipline",
+          "charter-bound"
+        ],
+        "source": "declared",
+        "confidence": 1.0
+      },
+      {
+        "name": "Aurora",
+        "entity_type": "intelligence",
+        "role": "Coordinating AI / arbitration",
+        "traits": [],
+        "source": "declared",
+        "confidence": 1.0
+      },
+      {
+        "name": "Lt. Commander Maya Shepard",
+        "entity_type": "character",
+        "role": "Executive Officer",
+        "traits": [],
+        "source": "declared",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [],
+    "pressures": [
+      {
+        "actor": "Commander Alex Thorne",
+        "label": "duty to the charter",
+        "direction": "toward",
+        "strength": 0.9,
+        "source": "declared",
+        "confidence": 1.0
+      },
+      {
+        "actor": "Commander Alex Thorne",
+        "label": "watch-clock pressure (4.25h of 6.0h logged)",
+        "direction": "toward",
+        "strength": 0.4,
+        "source": "declared",
+        "confidence": 1.0
+      }
+    ],
+    "constraints": [],
+    "motives": [
+      {
+        "actor": "Commander Alex Thorne",
+        "label": "uphold arbitration and ethics validation",
+        "strength": 0.95,
+        "source": "declared",
+        "confidence": 1.0,
+        "inferred": false
+      },
+      {
+        "actor": "Commander Alex Thorne",
+        "label": "close the watch only on a clean handoff",
+        "strength": 0.85,
+        "source": "declared",
+        "confidence": 1.0,
+        "inferred": false
+      }
+    ],
+    "events": [
+      {
+        "label": "Commander Thorne opens the watch; Aurora coordinates canonical task distribution",
+        "status": "established",
+        "timing": "watch open",
+        "participants": [
+          "Commander Alex Thorne",
+          "Aurora"
+        ],
+        "source": "declared",
+        "confidence": 1.0,
+        "notes": []
+      },
+      {
+        "label": "Docking Bay 2 logistics turnover validated and closed",
+        "status": "established",
+        "timing": "this hour",
+        "participants": [
+          "Vincent Kale"
+        ],
+        "source": "declared",
+        "confidence": 1.0,
+        "notes": []
+      },
+      {
+        "label": "Habitat ring spin check (2 RPM / 0.3g verification) validated and closed",
+        "status": "established",
+        "timing": "this hour",
+        "participants": [
+          "Jessica Martinez"
+        ],
+        "source": "declared",
+        "confidence": 1.0,
+        "notes": []
+      },
+      {
+        "label": "Dome observation watch handoff (ring Deck 4) validated and closed",
+        "status": "established",
+        "timing": "this hour",
+        "participants": [
+          "Emily Roberts"
+        ],
+        "source": "declared",
+        "confidence": 1.0,
+        "notes": []
+      },
+      {
+        "label": "L3 drift containment sweep validated and closed",
+        "status": "established",
+        "timing": "this hour",
+        "participants": [
+          "Lt. Commander Maya Shepard"
+        ],
+        "source": "declared",
+        "confidence": 1.0,
+        "notes": []
+      },
+      {
+        "label": "ORD pre-flight reconnaissance dispatched for the docking-bay audit (ORD-2 Delta Scout, ORD-3 Shadowfax)",
+        "status": "established",
+        "timing": "this hour",
+        "participants": [
+          "Aurora",
+          "ORD control"
+        ],
+        "source": "declared",
+        "confidence": 1.0,
+        "notes": []
+      },
+      {
+        "label": "Routine hour: watch handoff and command log review.",
+        "status": "established",
+        "timing": "watch close",
+        "participants": [
+          "Commander Alex Thorne",
+          "Aurora"
+        ],
+        "source": "declared",
+        "confidence": 1.0,
+        "notes": []
+      },
+      {
+        "label": "route the command-log review through Aurora arbitration before closing the watch",
+        "status": "proposed",
+        "timing": "",
+        "participants": [
+          "Commander Alex Thorne"
+        ],
+        "source": "declared",
+        "confidence": 1.0,
+        "notes": [
+          "proposal_preserved_as_provisional"
+        ]
+      }
+    ],
+    "knowledge_states": [
+      {
+        "holder": "Commander Alex Thorne",
+        "fact": "Major actions require Aurora arbitration.",
+        "status": "knows",
+        "source": "declared",
+        "confidence": 1.0
+      },
+      {
+        "holder": "Commander Alex Thorne",
+        "fact": "H3 (dome watch handoff) is closed, so H7 (command-log review) is unblocked",
+        "status": "knows",
+        "source": "declared",
+        "confidence": 1.0
+      },
+      {
+        "holder": "Aurora",
+        "fact": "Task distribution and the H5 ORD dispatch receipt are logged",
+        "status": "knows",
+        "source": "declared",
+        "confidence": 1.0
+      }
+    ],
+    "uncertainties": [],
+    "continuity": {
+      "notes": [
+        "Thorne upholds arbitration discipline.",
+        "Station history carried prior familiar pairs into this watch.",
+        "No critical task in the transcript closed without an owner validation.",
+        "Ethics protocol in force: Picard_Delta_3; anchor EOS_SEED_ORION."
+      ],
+      "established_events": [
+        "Commander Thorne opens the watch; Aurora coordinates canonical task distribution",
+        "Docking Bay 2 logistics turnover validated and closed",
+        "Habitat ring spin check (2 RPM / 0.3g verification) validated and closed",
+        "Dome observation watch handoff (ring Deck 4) validated and closed",
+        "L3 drift containment sweep validated and closed",
+        "ORD pre-flight reconnaissance dispatched for the docking-bay audit (ORD-2 Delta Scout, ORD-3 Shadowfax)",
+        "Routine hour: watch handoff and command log review."
+      ]
+    },
+    "narrative_context": {
+      "question": "Would Thorne route the hour's command-log review through Aurora arbitration before closing the watch?",
+      "declared_layers": [
+        "character",
+        "motive",
+        "event",
+        "knowledge",
+        "continuity"
+      ],
+      "task_kind": "character_action_audit"
+    }
+  },
+  "evaluation": {
+    "active_layers": [
+      "character",
+      "motive",
+      "event",
+      "knowledge",
+      "continuity"
+    ],
+    "missing_layers": [],
+    "selected_operators": [
+      "motive_inference",
+      "knowledge_propagation",
+      "setup_sufficiency_check"
+    ],
+    "supports": [
+      "Commander Alex Thorne's pressure 'duty to the charter' pulls toward the move.",
+      "Commander Alex Thorne's pressure 'watch-clock pressure (4.25h of 6.0h logged)' pulls toward the move."
+    ],
+    "blocks": [],
+    "missing_bridges": [],
+    "hard_blocks": [],
+    "soft_blocks": [],
+    "confidence_notes": []
+  },
+  "response": {
+    "summary": "This character move is supported: Commander Alex Thorne's pressure 'duty to the charter' pulls toward the move., but no major blocker is established..",
+    "verdict": "supported",
+    "main_supports": [
+      "Commander Alex Thorne's pressure 'duty to the charter' pulls toward the move.",
+      "Commander Alex Thorne's pressure 'watch-clock pressure (4.25h of 6.0h logged)' pulls toward the move."
+    ],
+    "main_blockers": [],
+    "missing_bridges": [],
+    "smallest_fix": [
+      "Preserve the current setup and add one more direct support if stronger confidence is required."
+    ],
+    "confidence": 0.95,
+    "supported_in_phase_one": true,
+    "unsupported_reason": null
+  }
+}
