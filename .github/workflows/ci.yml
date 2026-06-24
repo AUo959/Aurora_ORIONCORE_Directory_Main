@@ -79,6 +79,15 @@ jobs:
           token: ${{ secrets.WORKSPACE_REPO_TOKEN }}
           path: GUMAS_SIM_2.5/CanonRec
 
+      # actions/checkout at a pinned SHA leaves the repo in detached HEAD; the
+      # workspace-verification repo_branch_match check expects branch `main`.
+      # Re-point a local main branch at the pinned commit so both branch and
+      # head_sha match catalog/repo_registry.yaml.
+      - name: Place provisioned repos on their canonical branch
+        run: |
+          git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main checkout -B main
+          git -C GUMAS_SIM_2.5/CanonRec checkout -B main
+
       - name: Install CloudBank runtime deps (mesh server + engines)
         run: pip install -r GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/requirements.txt
 
