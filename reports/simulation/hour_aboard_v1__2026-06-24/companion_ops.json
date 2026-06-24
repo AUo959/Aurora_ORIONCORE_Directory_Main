@@ -1,0 +1,62 @@
+{
+  "generated_at_utc": "2026-06-24T01:56:31Z",
+  "scenario": "hour_aboard_v1",
+  "operations": [
+    {
+      "hour": 1,
+      "agent": "Aurora",
+      "channel": "direct:aurora",
+      "answered": true,
+      "reply": "Aurora: I've logged Watch block hour 1/1 \u2014 completed: Docking Bay 2 logistics turnover; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verification). events: Lt... and I'm responding from the shared mesh"
+    },
+    {
+      "hour": 1,
+      "agent": "ARCHY",
+      "channel": "direct:archy",
+      "answered": true,
+      "reply": "ARCHY: Structurally, Watch block hour 1/1 \u2014 completed: Docking Bay 2 logistics turnover; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verification). events: Lt... touches architecture and interface bou"
+    },
+    {
+      "hour": 1,
+      "agent": "OPPY",
+      "channel": "direct:oppy",
+      "answered": true,
+      "reply": "OPPY: For Watch block hour 1/1 \u2014 completed: Docking Bay 2 logistics turnover; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verification). events: Lt..., I'd check the latency path, the redundant work, "
+    },
+    {
+      "hour": 1,
+      "agent": "LIORA",
+      "channel": "direct:liora",
+      "answered": true,
+      "reply": "LIORA: I'm reading Watch block hour 1/1 \u2014 completed: Docking Bay 2 logistics turnover; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verification). events: Lt... as a pattern-change request. Best move i"
+    },
+    {
+      "hour": 1,
+      "agent": "STARLING_AU",
+      "channel": "direct:starling_au",
+      "answered": true,
+      "reply": "STARLING_AU: Watch block hour 1/1 \u2014 completed: Docking Bay 2 logistics turnover; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verification). events: Lt... needs a cleaner routing contract and a clearer"
+    },
+    {
+      "hour": 1,
+      "agent": "RIVERTHREAD_808",
+      "channel": "direct:riverthread_808",
+      "answered": true,
+      "reply": "RIVERTHREAD_808: I'd anchor Watch block hour 1/1 \u2014 completed: Docking Bay 2 logistics turnover; Dome observation watch handoff (ring Deck 4); Habitat ring spin check (2 RPM / 0.3g verification). events: Lt... to the current thread state fir"
+    }
+  ],
+  "ord_dispatch": {
+    "mission_id": "hour-aboard-H5",
+    "drones_required": [
+      "ORD-2 Delta Scout",
+      "ORD-3 Shadowfax"
+    ],
+    "receipt_sha256": "dd68e544f1d795d9ca9a6b617572d832b49f1c8429a6133eb0f1453aaa60df42"
+  },
+  "l3_receipt": {
+    "narrative_audit_verdict": "supported",
+    "ethics_protocol": "Picard_Delta_3",
+    "anchor_seed": "EOS_SEED_ORION",
+    "threadcore": "capsule + registry PASS/READY (registry substructures merged #1022)"
+  }
+}

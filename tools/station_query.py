@@ -25,8 +25,17 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-CLOUDBANK = REPO_ROOT / "GUMAS_SIM_2.5" / "Aurora_Sim_Architecture" / "aurora-cloudbank-symbolic-main"
-VENV_PY = CLOUDBANK / ".venv" / "bin" / "python"
+
+# Layout-flexible: prefer the nested CloudBank clone, fall back to a flat
+# sibling checkout; prefer a project .venv, fall back to the current interpreter.
+_CB_NESTED = REPO_ROOT / "GUMAS_SIM_2.5" / "Aurora_Sim_Architecture" / "aurora-cloudbank-symbolic-main"
+CLOUDBANK = next(
+    (c for c in (_CB_NESTED, REPO_ROOT.parent / "aurora-cloudbank-symbolic", REPO_ROOT / "aurora-cloudbank-symbolic")
+     if (c / "src" / "servers" / "l2_integration_server.py").exists()),
+    _CB_NESTED,
+)
+_VENV_PY = CLOUDBANK / ".venv" / "bin" / "python"
+VENV_PY = _VENV_PY if _VENV_PY.exists() else Path(sys.executable)
 RECEIPT_PATH = REPO_ROOT / "reports" / "automation" / "station_roll_call_latest.json"
 
 QUERY_ENV = {"CSRF_SECRET_KEY": "station-query", "WS_AUTH_SECRET": "station-query",

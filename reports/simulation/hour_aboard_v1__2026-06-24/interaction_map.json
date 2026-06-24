@@ -1,0 +1,229 @@
+{
+  "scenario": "hour_aboard_v1",
+  "generated_at_utc": "2026-06-24T01:56:31Z",
+  "nodes": [
+    {
+      "id": "Commander Alex Thorne",
+      "kind": "crew"
+    },
+    {
+      "id": "Lt. Commander Maya Shepard",
+      "kind": "crew"
+    },
+    {
+      "id": "Dr. Elira Noor",
+      "kind": "crew"
+    },
+    {
+      "id": "Prof. Elena Sorensen",
+      "kind": "crew"
+    },
+    {
+      "id": "Helena Vu",
+      "kind": "crew"
+    },
+    {
+      "id": "Marcus Chen",
+      "kind": "crew"
+    },
+    {
+      "id": "Jessica Martinez",
+      "kind": "crew"
+    },
+    {
+      "id": "Ryan Patel",
+      "kind": "crew"
+    },
+    {
+      "id": "Ren Okada",
+      "kind": "crew"
+    },
+    {
+      "id": "Dr. Kieran Zhao",
+      "kind": "crew"
+    },
+    {
+      "id": "Ira Menon",
+      "kind": "crew"
+    },
+    {
+      "id": "Vincent Kale",
+      "kind": "crew"
+    },
+    {
+      "id": "Dr. Amina Velin",
+      "kind": "crew"
+    },
+    {
+      "id": "Tobias Qin",
+      "kind": "crew"
+    },
+    {
+      "id": "Emily Roberts",
+      "kind": "crew"
+    },
+    {
+      "id": "Carmen Rivas",
+      "kind": "crew"
+    },
+    {
+      "id": "Maren Koss",
+      "kind": "crew"
+    },
+    {
+      "id": "Dante Kyros",
+      "kind": "crew"
+    },
+    {
+      "id": "Naomi Vell",
+      "kind": "crew"
+    },
+    {
+      "id": "Kai Drev",
+      "kind": "crew"
+    },
+    {
+      "id": "Haneul Park",
+      "kind": "crew"
+    },
+    {
+      "id": "Juno Suresh",
+      "kind": "crew"
+    },
+    {
+      "id": "Keira Halden",
+      "kind": "crew"
+    },
+    {
+      "id": "Rei Vatra",
+      "kind": "crew"
+    },
+    {
+      "id": "Tariq El-Sayegh",
+      "kind": "crew"
+    },
+    {
+      "id": "Pilot",
+      "kind": "user"
+    },
+    {
+      "id": "Aurora",
+      "kind": "companion"
+    },
+    {
+      "id": "ARCHY",
+      "kind": "companion"
+    },
+    {
+      "id": "OPPY",
+      "kind": "companion"
+    },
+    {
+      "id": "LIORA",
+      "kind": "companion"
+    },
+    {
+      "id": "STARLING_AU",
+      "kind": "companion"
+    },
+    {
+      "id": "RIVERTHREAD_808",
+      "kind": "companion"
+    }
+  ],
+  "edges": [
+    {
+      "source": "Commander Alex Thorne",
+      "target": "Lt. Commander Maya Shepard",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "L3 drift containment sweep"
+      ]
+    },
+    {
+      "source": "Dr. Elira Noor",
+      "target": "Dr. Kieran Zhao",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Docking Bay 2 logistics turnover"
+      ]
+    },
+    {
+      "source": "Dr. Elira Noor",
+      "target": "Vincent Kale",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Docking Bay 2 logistics turnover"
+      ]
+    },
+    {
+      "source": "Dr. Kieran Zhao",
+      "target": "Vincent Kale",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Docking Bay 2 logistics turnover"
+      ]
+    },
+    {
+      "source": "Jessica Martinez",
+      "target": "Prof. Elena Sorensen",
+      "kind": "co_work",
+      "weight": 1,
+      "tasks": [
+        "Habitat ring spin check (2 RPM / 0.3g verification)"
+      ]
+    },
+    {
+      "source": "Pilot",
+      "target": "Aurora",
+      "kind": "mesh_beat",
+      "weight": 1,
+      "answered": 1
+    },
+    {
+      "source": "Pilot",
+      "target": "ARCHY",
+      "kind": "mesh_beat",
+      "weight": 1,
+      "answered": 1
+    },
+    {
+      "source": "Pilot",
+      "target": "OPPY",
+      "kind": "mesh_beat",
+      "weight": 1,
+      "answered": 1
+    },
+    {
+      "source": "Pilot",
+      "target": "LIORA",
+      "kind": "mesh_beat",
+      "weight": 1,
+      "answered": 1
+    },
+    {
+      "source": "Pilot",
+      "target": "STARLING_AU",
+      "kind": "mesh_beat",
+      "weight": 1,
+      "answered": 1
+    },
+    {
+      "source": "Pilot",
+      "target": "RIVERTHREAD_808",
+      "kind": "mesh_beat",
+      "weight": 1,
+      "answered": 1
+    },
+    {
+      "source": "Commander Alex Thorne",
+      "target": "Aurora",
+      "kind": "arbitration_sync",
+      "weight": 1
+    }
+  ]
+}
