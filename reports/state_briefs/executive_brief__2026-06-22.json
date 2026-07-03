@@ -1,0 +1,237 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "aurora_executive_brief",
+  "generated_at": "2026-06-22T12:10:46Z",
+  "pipeline": "aurora-exec-brief-pipeline",
+  "posture": "read_only",
+  "staleness_datum": {
+    "root_head_sha": "2ce76d4",
+    "root_head_subject": "chore(session): record PR 1060 final blocker",
+    "root_head_timestamp": "2026-06-20T20:47:04-04:00"
+  },
+  "overall_status": "AMBER",
+  "overall_status_note": "Root integration gap closed. CanonRec divergence persists (4th brief). QGIA library 64-commit upstream drift is new high-severity finding.",
+  "root_repo": {
+    "branch": "main",
+    "head_sha": "2ce76d4",
+    "head_subject": "chore(session): record PR 1060 final blocker",
+    "head_date": "2026-06-20T20:47:04-04:00",
+    "dirty": false,
+    "untracked_count": 1,
+    "untracked_notable": [".claude/settings.local.json"],
+    "ahead_of_origin_main": 0,
+    "behind_origin_main": 0,
+    "sync_state": "in_sync",
+    "local_branch_count_excl_main": 8
+  },
+  "nested_repos": [
+    {
+      "name": "aurora-cloudbank-symbolic-main",
+      "relative_path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "branch": "codex/l2-scenario-seed-simulation-initializer",
+      "head_sha": "1eedd38f",
+      "head_subject": "feat(sim): add scenario seed initializer adapter",
+      "head_date": "2026-06-19T10:06:49-04:00",
+      "dirty": true,
+      "dirty_paths": [".env_status.json"],
+      "ahead_of_tracking": 1,
+      "behind_tracking": 0,
+      "sync_state": "1_ahead_no_pr",
+      "note": "Active feature sprint; PR not yet opened"
+    },
+    {
+      "name": "CanonRec",
+      "relative_path": "GUMAS_SIM_2.5/CanonRec",
+      "branch": "main",
+      "head_sha": "179a44c",
+      "head_subject": "docs(canon): Phase 4 — dynamic-galaxy integration certified (with honest drift finding)",
+      "head_date": "2026-06-14T23:40:57-04:00",
+      "dirty": false,
+      "ahead_of_origin_main": 22,
+      "behind_origin_main": 0,
+      "sync_state": "22_commits_ahead_local_only",
+      "risk": "P1",
+      "note": "22 Phase 4 canon absorbs are local-only — 4th consecutive brief without push"
+    },
+    {
+      "name": "DuelSim_v2.0",
+      "relative_path": "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0",
+      "branch": "main",
+      "head_sha": "0716f36",
+      "head_subject": "feat: add DuelSim standalone app",
+      "head_date": "2026-05-19T13:37:45-04:00",
+      "dirty": false,
+      "ahead_of_origin_main": 0,
+      "behind_origin_main": 0,
+      "sync_state": "in_sync"
+    },
+    {
+      "name": "qgia-knowledge-library-main",
+      "relative_path": "qgia-knowledge-library-main",
+      "branch": "main",
+      "head_sha": "7e029d8",
+      "head_subject": "docs(library): add Iran War 2026 package",
+      "head_date": "2026-05-04T01:08:39-04:00",
+      "dirty": false,
+      "ahead_of_origin_main": 0,
+      "behind_origin_main": 64,
+      "sync_state": "64_commits_behind_remote",
+      "risk": "P1",
+      "note": "New critical finding — 64 upstream commits not pulled; local HEAD 49 days old"
+    },
+    {
+      "name": "qgia-knowledge-spine-main",
+      "relative_path": "qgia-knowledge-spine-main",
+      "branch": "main",
+      "head_sha": "faeda09",
+      "head_subject": "chore: regenerate knowledge index (integration-pass contract finding) (#5)",
+      "head_date": "2026-06-11T05:29:07-04:00",
+      "dirty": false,
+      "ahead_of_origin_main": 0,
+      "behind_origin_main": 1,
+      "sync_state": "1_commit_behind_remote",
+      "risk": "Low-Medium"
+    }
+  ],
+  "governance_artifacts": [
+    {
+      "artifact": "workspace_verify_latest.json",
+      "path": "reports/analysis/workspace_verify_latest.json",
+      "generated_at": "2026-06-14T21:31:42Z",
+      "status": "warn",
+      "staleness_days": 6,
+      "stale": true,
+      "findings_count": 1,
+      "blocking_count": 0
+    },
+    {
+      "artifact": "aurora_devkit_latest.json",
+      "path": "reports/analysis/aurora_devkit_latest.json",
+      "generated_at": "2026-06-15T21:48:41Z",
+      "status": "READY",
+      "staleness_days": 7,
+      "stale": true,
+      "findings_count": 0
+    },
+    {
+      "artifact": "gitwiz_sync_audit_latest",
+      "path": "reports/analysis/gitwiz/GITWIZ_SYNC_AUDIT__2026-06-15T215450Z.json",
+      "generated_at": "2026-06-15T21:54:50Z",
+      "status": "in_sync_at_time_of_capture",
+      "staleness_days": 7,
+      "stale": true,
+      "note": "Captures root HEAD be4424cf; does not see QGIA 64-commit drift or CloudBank feature branch"
+    },
+    {
+      "artifact": "aurora_mission_control_latest.json",
+      "path": "reports/analysis/aurora_mission_control_latest.json",
+      "generated_at": "2026-05-31T21:08:12Z",
+      "status": "attention",
+      "staleness_days": 22,
+      "stale": true,
+      "operator_inbox_count": 7,
+      "blocking_count": 0,
+      "approval_required_count": 6
+    },
+    {
+      "artifact": "aurora_recommendations_latest.json",
+      "path": "reports/analysis/aurora_recommendations_latest.json",
+      "generated_at": "2026-05-31T21:08:02Z",
+      "status": "open",
+      "staleness_days": 22,
+      "stale": true,
+      "recommendation_count": 7,
+      "p1_count": 1,
+      "p2_count": 6
+    },
+    {
+      "artifact": "workspace_recovery_index_latest.json",
+      "path": "reports/analysis/workspace_recovery_index_latest.json",
+      "generated_at": "2026-05-31T21:04:06Z",
+      "status": "READY",
+      "staleness_days": 22,
+      "stale": true,
+      "candidates_discovered": 1017,
+      "candidates_surfaced": 100,
+      "restricted_count": 36
+    },
+    {
+      "artifact": "aurora_confidence_audit_latest.json",
+      "path": "reports/analysis/aurora_confidence_audit_latest.json",
+      "generated_at": "2026-05-31T21:04:05Z",
+      "status": "pass",
+      "staleness_days": 22,
+      "stale": true,
+      "score": 0.93,
+      "band": "high"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-1",
+      "title": "36 restricted recovery candidates — secret/key material — 4th consecutive brief without triage",
+      "severity": "P1",
+      "category": "security",
+      "consecutive_briefs": 4,
+      "source_artifact": "workspace_recovery_index_latest.json"
+    },
+    {
+      "id": "risk-2",
+      "title": "CanonRec 22 commits ahead of origin/main — 4th consecutive brief",
+      "severity": "P1",
+      "category": "data_preservation",
+      "consecutive_briefs": 4,
+      "repo": "CanonRec"
+    },
+    {
+      "id": "risk-3",
+      "title": "qgia-knowledge-library-main 64 commits behind origin/main — NEW",
+      "severity": "P1",
+      "category": "sync_drift",
+      "new_this_brief": true,
+      "repo": "qgia-knowledge-library-main"
+    },
+    {
+      "id": "risk-4",
+      "title": "Operator artifact set 22+ days stale — no refresh since 2026-05-31",
+      "severity": "P1",
+      "category": "governance_staleness"
+    },
+    {
+      "id": "risk-5",
+      "title": "CloudBank on feature branch with 1 unpushed commit",
+      "severity": "Medium",
+      "category": "integration",
+      "repo": "aurora-cloudbank-symbolic-main"
+    },
+    {
+      "id": "risk-6",
+      "title": "qgia-knowledge-spine-main 1 commit behind origin/main",
+      "severity": "Low-Medium",
+      "category": "sync_drift",
+      "repo": "qgia-knowledge-spine-main"
+    }
+  ],
+  "recommended_actions": [
+    {"priority": "P0", "action": "Push CanonRec main to origin/main", "repo": "CanonRec", "command": "git push origin main"},
+    {"priority": "P0", "action": "Pull qgia-knowledge-library-main from origin/main", "repo": "qgia-knowledge-library-main", "command": "git pull origin main"},
+    {"priority": "P1", "action": "Triage 36 restricted recovery candidates (4th consecutive brief)", "tool": "python3 tools/workspace_recovery_index.py --summary"},
+    {"priority": "P1", "action": "Refresh governance artifact set (make mission-control-report, make recovery-report)"},
+    {"priority": "P2", "action": "Pull qgia-knowledge-spine-main from origin/main", "repo": "qgia-knowledge-spine-main", "command": "git pull origin main"},
+    {"priority": "P2", "action": "Open or draft PR for CloudBank codex/l2-scenario-seed-simulation-initializer"},
+    {"priority": "P2", "action": "Refresh GITWIZ sync audit all-repo"},
+    {"priority": "P3", "action": "Investigate devkit automation 0/N status"},
+    {"priority": "P3", "action": "Review disposition of remaining 8 local branches"}
+  ],
+  "wow_delta": {
+    "reference_brief": "executive_brief__2026-06-15.md",
+    "root_push_gap": {"prev": "18 ahead", "curr": "0 ahead (in sync)", "change": "resolved"},
+    "root_branch_count": {"prev": 12, "curr": 8, "change": "improved"},
+    "canonrec_push_gap": {"prev": "22 ahead", "curr": "22 ahead", "change": "no_change"},
+    "qgia_library_sync": {"prev": "in_sync", "curr": "64 behind remote", "change": "new_critical_finding"},
+    "qgia_spine_sync": {"prev": "in_sync", "curr": "1 behind remote", "change": "minor_regression"},
+    "root_working_tree": {"prev": "4M + 12 untracked", "curr": "1 untracked", "change": "resolved"},
+    "governance_staleness_days": {"prev": 14, "curr": 22, "change": "worsening"},
+    "top_risk_count": {"prev": 11, "curr": 9, "change": "improved (net -2; root push gap resolved, 2 new risks added)"}
+  }
+}

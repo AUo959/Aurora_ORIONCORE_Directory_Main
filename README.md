@@ -30,6 +30,12 @@ nested repo internals stay out of root Git history.
 - Current advisory recommendations: [reports/analysis/aurora_recommendations_latest.json](reports/analysis/aurora_recommendations_latest.json)
 - Mission Control workflow: [docs/AURORA_MISSION_CONTROL_WORKFLOW_v1.md](docs/AURORA_MISSION_CONTROL_WORKFLOW_v1.md)
 - Current Mission Control report: [reports/analysis/aurora_mission_control_latest.json](reports/analysis/aurora_mission_control_latest.json)
+- Current stack validation report: [reports/analysis/aurora_stack_validation_latest.json](reports/analysis/aurora_stack_validation_latest.json)
+- Current command-intent snapshot: [reports/analysis/aurora_command_intent_snapshot_latest.json](reports/analysis/aurora_command_intent_snapshot_latest.json)
+- Current simulation readiness: [reports/analysis/aurora_simulation_readiness_latest.json](reports/analysis/aurora_simulation_readiness_latest.json)
+- Current Docker demo readiness: [reports/analysis/aurora_demo_readiness_latest.json](reports/analysis/aurora_demo_readiness_latest.json)
+- Current Kubernetes readiness: [reports/analysis/aurora_kubernetes_readiness_latest.json](reports/analysis/aurora_kubernetes_readiness_latest.json)
+- Current operator-console snapshot: [reports/analysis/aurora_operator_snapshot_latest.json](reports/analysis/aurora_operator_snapshot_latest.json)
 - Confidence audit workflow: [docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md](docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md)
 - Current confidence audit report: [reports/analysis/aurora_confidence_audit_latest.json](reports/analysis/aurora_confidence_audit_latest.json)
 - Interaction warrant policy: [docs/AURORA_INTERACTION_WARRANT_POLICY_v1.md](docs/AURORA_INTERACTION_WARRANT_POLICY_v1.md)
@@ -77,12 +83,19 @@ Command Intent Gateway examples:
 python3 tools/aurora_command_intent.py parse "THREADWAKE"
 python3 tools/aurora_command_intent.py envelope --text "001//005//"
 python3 tools/aurora_command_intent.py simulate-range "001//005//"
+python3 tools/aurora_command_intent_snapshot.py --summary
+python3 tools/aurora_command_intent_snapshot.py --persist-report
+make command-intent-snapshot
+make command-intent-snapshot-report
 ```
 
 `simulate-range` is an in-process CloudBank `SymbolicEngine` simulation for
 valid numeric `RangeChain` inputs only. It is not live runtime execution.
 Any CloudBank/GUMAS mutation also requires verified GUMAS mutation
 authorization before runtime execution can move from blocked to approval-ready.
+The command-intent snapshot persists compact parse/simulation evidence for
+operator consoles and keeps invalid or mesh-route probes as evidence only; it
+does not execute live handlers, send mesh messages, or mutate nested repos.
 
 Integration safety gate:
 
@@ -132,6 +145,61 @@ devkit, recommendations, and root Git status into a read-only operator inbox
 plus build-readiness lanes. It does not promote recovery candidates, execute
 Aurora command grammar, send mesh messages, mutate nested repos, install
 packages, or publish GitHub changes.
+
+Operator console snapshot:
+
+```bash
+python3 tools/aurora_stack_validation.py --summary
+python3 tools/aurora_stack_validation.py --persist-report
+python3 tools/aurora_command_intent_snapshot.py --summary
+python3 tools/aurora_command_intent_snapshot.py --persist-report
+python3 tools/aurora_simulation_readiness.py --summary
+python3 tools/aurora_simulation_readiness.py --persist-report
+python3 tools/aurora_simulation_readiness.py --persist-report --run-smoke
+python3 tools/aurora_demo_readiness.py --summary
+python3 tools/aurora_demo_readiness.py --persist-report
+python3 tools/aurora_kubernetes_readiness.py --summary
+python3 tools/aurora_kubernetes_readiness.py --persist-report
+python3 tools/aurora_operator_snapshot.py --summary
+python3 tools/aurora_operator_snapshot.py --persist-report
+make stack-validation
+make stack-validation-report
+make command-intent-snapshot
+make command-intent-snapshot-report
+make simulation-readiness
+make simulation-readiness-report
+make simulation-smoke-report
+make demo-readiness
+make demo-readiness-report
+make kubernetes-readiness
+make kubernetes-readiness-report
+make operator-snapshot
+make operator-snapshot-report
+```
+
+The stack validation report records read-only Docker Desktop and localhost
+endpoint evidence for the CloudBank compose stack. The operator snapshot
+compacts that receipt plus existing root reports and registered-repo marker
+files into a JSON payload for local browser consoles. The command-intent
+snapshot adds compact parser and in-process range-simulation evidence to that
+console without changing the execution boundary. The simulation readiness report
+makes the system's actual purpose explicit: it inventories GUMAS, DuelSim,
+scenario-seed, QGIA forecast-loop, and command-range simulation surfaces, and
+can optionally run a bounded local GUMAS smoke simulation into a temp output
+file. The demo readiness report turns the stack and command-intent receipts into
+explicit ready/attention/blocked gates for local presentations. The Kubernetes
+readiness report inventories CloudBank's existing `k8s/` manifests, deployment
+scripts, CI workflow, and local `kubectl` client without probing a cluster or
+applying manifests. These tools do not build images, start services, mutate
+nested repos, execute live Aurora commands, deploy Kubernetes workloads, or
+promote canon.
+
+The CloudBank Docker GUI now treats `/` and `/simulation-console` as the
+canonical Aurora Simulation Console routes. The existing component Synergy
+Dashboard is exposed at `/synergy-dashboard`. The former Quantum VSA playground
+is retired from the primary operator flow; `/legacy/vsa` returns an explicit
+retired-route response while archived project material remains preserved under
+CloudBank `static/archive/`.
 
 Cross-platform session claims:
 
@@ -196,6 +264,19 @@ python3 tools/aurora_recommendation_engine.py --summary
 python3 tools/aurora_recommendation_engine.py --persist-report
 python3 tools/aurora_mission_control.py --summary
 python3 tools/aurora_mission_control.py --persist-report
+python3 tools/aurora_stack_validation.py --summary
+python3 tools/aurora_stack_validation.py --persist-report
+python3 tools/aurora_command_intent_snapshot.py --summary
+python3 tools/aurora_command_intent_snapshot.py --persist-report
+python3 tools/aurora_simulation_readiness.py --summary
+python3 tools/aurora_simulation_readiness.py --persist-report
+python3 tools/aurora_simulation_readiness.py --persist-report --run-smoke
+python3 tools/aurora_demo_readiness.py --summary
+python3 tools/aurora_demo_readiness.py --persist-report
+python3 tools/aurora_kubernetes_readiness.py --summary
+python3 tools/aurora_kubernetes_readiness.py --persist-report
+python3 tools/aurora_operator_snapshot.py --summary
+python3 tools/aurora_operator_snapshot.py --persist-report
 python3 tools/aurora_confidence_audit.py score --claim-type analysis --text "Example claim"
 python3 tools/aurora_confidence_audit.py audit --input claims.jsonl --jsonl --threshold 0.70
 python3 tools/session_claim.py check --repo root --paths . --json
@@ -217,6 +298,9 @@ make recommendations
 make recommendations-report
 make mission-control
 make mission-control-report
+make simulation-readiness
+make simulation-readiness-report
+make simulation-smoke-report
 make confidence-audit
 make confidence-audit-report
 make session-claims

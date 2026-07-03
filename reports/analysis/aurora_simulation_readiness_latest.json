@@ -1,0 +1,369 @@
+{
+  "artifact_evidence": {
+    "latest_output": {
+      "available": true,
+      "export_timestamp": "2026-05-21T17:04:36.555566+00:00",
+      "latest_metrics": {
+        "risk_index": 0.6518297237531535,
+        "stability_index": 0.35677148888945076,
+        "summary": "Turn 123: stability=0.357, risk=0.652, v3_events=33"
+      },
+      "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/advanced_skill_output.json",
+      "turn": 123,
+      "version": "4.0.0-synth"
+    },
+    "primary_event_ledger": {
+      "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/advanced_event_ledger.ndjson",
+      "record_count": 4411
+    },
+    "seed99_event_ledger": {
+      "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS_SEED99/advanced_event_ledger.ndjson",
+      "record_count": 5621
+    }
+  },
+  "execution_paths": [
+    {
+      "command": [
+        "PYTHONPYCACHEPREFIX=/tmp/aurora_gumas_pycache",
+        "python3",
+        "/Users/travisstreets/.codex/skills/gumas-simulation-engine/scripts/run_gumas_advanced.py",
+        "--workspace",
+        "$PWD",
+        "--turns",
+        "5",
+        "--seed",
+        "42",
+        "--output",
+        "/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/aurora_gumas_smoke_latest.json"
+      ],
+      "nested_repo_mutation": false,
+      "path_id": "gumas_advanced_seeded_smoke",
+      "status": "ready",
+      "title": "Run bounded GUMAS advanced simulation smoke",
+      "writes_to_repo": false
+    },
+    {
+      "command": [
+        "PYTHONPYCACHEPREFIX=/tmp/aurora_gumas_pycache",
+        "python3",
+        "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/hourly_retrospective.py",
+        "--workspace",
+        ".",
+        "--dry-run"
+      ],
+      "nested_repo_mutation": false,
+      "path_id": "gumas_hourly_retrospective_dry_run",
+      "status": "ready",
+      "title": "Compute the next GUMAS retrospective turn without canonical writes",
+      "writes_to_repo": false
+    },
+    {
+      "command": [
+        "python3",
+        "tools/aurora_command_intent.py",
+        "simulate-range",
+        "001//005//"
+      ],
+      "nested_repo_mutation": false,
+      "path_id": "command_intent_range_simulation",
+      "status": "ready",
+      "title": "Run in-process command range simulation",
+      "writes_to_repo": false
+    }
+  ],
+  "generated_at": "2026-06-27T02:02:43Z",
+  "live_runtime_execution": false,
+  "mutation_posture": "advisory_only",
+  "nested_repo_mutation": false,
+  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "run_mode": "read_only_inventory_plus_optional_bounded_smoke",
+  "schema_version": 1,
+  "simulation_smoke_executed": true,
+  "simulation_surfaces": [
+    {
+      "execution_boundary": "local_seeded_engine_run",
+      "markers": [
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/engine.py",
+          "required": true
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/engine_advanced.py",
+          "required": true
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/engine_base.py",
+          "required": true
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/models.py",
+          "required": true
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/scenarios.py",
+          "required": true
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/formulas.py",
+          "required": true
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/advanced_skill_output.json",
+          "required": true
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/advanced_event_ledger.ndjson",
+          "required": true
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/GUMAS_ENGINE_VALIDATION_REPORT.json",
+          "required": true
+        }
+      ],
+      "missing_required_markers": [],
+      "repo": "root/GUMAS_SIM_2.5",
+      "required": true,
+      "role": "primary_multi_turn_simulation_runtime",
+      "status": "ready",
+      "surface_id": "gumas_advanced_engine",
+      "title": "GUMAS advanced simulation engine"
+    },
+    {
+      "execution_boundary": "runs_local_simulation_to_temp_output_only",
+      "markers": [
+        {
+          "exists": true,
+          "path": "/Users/travisstreets/.codex/skills/gumas-simulation-engine/scripts/run_gumas_advanced.py",
+          "required": true
+        }
+      ],
+      "missing_required_markers": [],
+      "repo": "local_codex_runtime",
+      "required": true,
+      "role": "bounded_seeded_smoke_execution",
+      "status": "ready",
+      "surface_id": "gumas_skill_runner",
+      "title": "Codex GUMAS simulation runner"
+    },
+    {
+      "execution_boundary": "persisted_output_evidence_only",
+      "markers": [
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS_SEED99/advanced_skill_output.json",
+          "required": false
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS_SEED99/advanced_event_ledger.ndjson",
+          "required": false
+        }
+      ],
+      "missing_required_markers": [],
+      "repo": "root/GUMAS_SIM_2.5",
+      "required": false,
+      "role": "comparison_seed_evidence",
+      "status": "ready",
+      "surface_id": "gumas_seed99_outputs",
+      "title": "GUMAS seed 99 output corpus"
+    },
+    {
+      "execution_boundary": "scenario_fixture_generation_requires_explicit_nested_repo_gate",
+      "markers": [
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/simulation/scenario_seed_initializer.py",
+          "required": true
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/tests/test_scenario_seed_initializer.py",
+          "required": true
+        },
+        {
+          "exists": true,
+          "path": "tools/l2_scenario_seed_uptake.py",
+          "required": true
+        },
+        {
+          "exists": true,
+          "path": "catalog/l2_scenario_seed_catalog.json",
+          "required": true
+        }
+      ],
+      "missing_required_markers": [],
+      "repo": "aurora-cloudbank-symbolic-main",
+      "required": true,
+      "role": "scenario_seed_uptake_and_runtime_adapter",
+      "status": "ready",
+      "surface_id": "cloudbank_scenario_seed_bridge",
+      "title": "CloudBank scenario seed bridge"
+    },
+    {
+      "execution_boundary": "separate_nested_repo_runtime",
+      "markers": [
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0/app_server.py",
+          "required": false
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0/scripts/release_gate_v2_4_1.py",
+          "required": false
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0/web_app",
+          "required": false
+        }
+      ],
+      "missing_required_markers": [],
+      "repo": "DuelSim_v2.0",
+      "required": false,
+      "role": "interactive_simulation_app_surface",
+      "status": "ready",
+      "surface_id": "duelsim_runtime",
+      "title": "DuelSim app and release gate"
+    },
+    {
+      "execution_boundary": "ledger_presence_only",
+      "markers": [
+        {
+          "exists": true,
+          "path": "qgia-knowledge-library-main/data/intake/evidence-ledger.jsonl",
+          "required": false
+        },
+        {
+          "exists": true,
+          "path": "qgia-knowledge-library-main/data/truth/outcome-ledger.jsonl",
+          "required": false
+        },
+        {
+          "exists": true,
+          "path": "qgia-knowledge-spine-main/data/forecasts/forecast-ledger.jsonl",
+          "required": false
+        },
+        {
+          "exists": true,
+          "path": "qgia-knowledge-spine-main/data/priors/prior-table.json",
+          "required": false
+        },
+        {
+          "exists": true,
+          "path": "qgia-knowledge-spine-main/data/calibration/calibration-report.json",
+          "required": false
+        }
+      ],
+      "missing_required_markers": [],
+      "repo": "qgia-knowledge-library-main/qgia-knowledge-spine-main",
+      "required": false,
+      "role": "forecast_simulation_feedback_loop",
+      "status": "ready",
+      "surface_id": "qgia_forecast_loop",
+      "title": "QGIA forecast and outcome ledgers"
+    },
+    {
+      "execution_boundary": "catalog_and_fixture_evidence_only",
+      "markers": [
+        {
+          "exists": true,
+          "path": "catalog/l2_scenario_seed_catalog.json",
+          "required": false
+        },
+        {
+          "exists": true,
+          "path": "docs/L2_SCENARIO_SEED_CATALOG_WORKFLOW_v1.md",
+          "required": false
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/ORION_SCENARIO_CATALOG_v0_2_15.html",
+          "required": false
+        },
+        {
+          "exists": true,
+          "path": "GUMAS_SIM_2.5/ORION_SCENARIO_CATALOG_v0_2_15.pdf",
+          "required": false
+        }
+      ],
+      "missing_required_markers": [],
+      "repo": "root/GUMAS_SIM_2.5",
+      "required": false,
+      "role": "simulation_scenario_supply",
+      "status": "ready",
+      "surface_id": "scenario_catalog",
+      "title": "Scenario catalog and fixture contract"
+    }
+  ],
+  "smoke_probe": {
+    "command": [
+      "python3",
+      "/Users/travisstreets/.codex/skills/gumas-simulation-engine/scripts/run_gumas_advanced.py",
+      "--workspace",
+      "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+      "--turns",
+      "5",
+      "--seed",
+      "42",
+      "--output",
+      "/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/aurora_gumas_smoke_latest.json"
+    ],
+    "live_runtime_execution": false,
+    "nested_repo_mutation": false,
+    "output_path": "/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/aurora_gumas_smoke_latest.json",
+    "recommended_next_action": null,
+    "requested": true,
+    "result": {
+      "engine_class": "GUMASAdvancedEngine",
+      "engine_dir": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS",
+      "engine_mode": "advanced",
+      "last_summary": "Turn 5: stability=0.597, risk=0.360, v3_events=25",
+      "output_exists": true,
+      "output_path": "/private/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/aurora_gumas_smoke_latest.json",
+      "scenario_id": "gumas_canonical_v1",
+      "turns_completed": 5,
+      "turns_requested": 5,
+      "workspace": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main"
+    },
+    "returncode": 0,
+    "seed": 42,
+    "status": "ready",
+    "stderr_preview": "",
+    "stdout_preview": "{\n  \"workspace\": \"/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main\",\n  \"engine_dir\": \"/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS\",\n  \"engine_mode\": \"advanced\",\n  \"engine_class\": \"GUMASAdvancedEngine\",\n  \"scenario_id\": \"gumas_canonical_v1\",\n  \"turns_requested\": 5,\n  \"turns_completed\": 5,\n  \"last_summary\": \"Turn 5: stability=0.597, risk=0.360, v3_events=25\",\n  \"output_path\": \"/private/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/aurora_gumas_smoke_latest.json\",\n  \"output_exists\": true\n}\n",
+    "turns": 5,
+    "writes_to_repo": false
+  },
+  "status": "ready",
+  "summary": {
+    "attention_surface_count": 0,
+    "available_execution_path_count": 3,
+    "blocked_required_surface_count": 0,
+    "blocked_surface_count": 0,
+    "execution_path_count": 3,
+    "persisted_output_turn": 123,
+    "primary_event_ledger_records": 4411,
+    "ready_required_surface_count": 3,
+    "ready_surface_count": 7,
+    "required_surface_count": 3,
+    "smoke_probe_requested": true,
+    "smoke_probe_status": "ready",
+    "surface_count": 7
+  },
+  "tool": "aurora_simulation_readiness",
+  "validation_commands": [
+    "python3 tools/aurora_simulation_readiness.py --persist-report --summary",
+    "python3 tools/aurora_simulation_readiness.py --persist-report --run-smoke --summary",
+    "python3 tools/aurora_operator_snapshot.py --persist-report --summary",
+    "python3 -m pytest -q tests/test_aurora_simulation_readiness.py tests/test_aurora_operator_snapshot.py"
+  ]
+}

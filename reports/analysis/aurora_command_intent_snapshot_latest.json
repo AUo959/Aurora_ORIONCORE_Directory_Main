@@ -1,0 +1,193 @@
+{
+  "authority_refs": [
+    "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora/core/command_grammar",
+    "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora/core/symbolic_engine.py",
+    "plugins/aurora-command-grammar/skills/aurora-command-grammar/references/command-intent-envelope.schema.json"
+  ],
+  "commands": [
+    {
+      "arguments": [],
+      "ast_shape": "command_invocation",
+      "authority_refs": [
+        "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora/core/command_grammar",
+        "plugins/aurora-command-grammar/skills/aurora-command-grammar/references/command-intent-envelope.schema.json"
+      ],
+      "command_heads": [
+        "THREADWAKE"
+      ],
+      "execution_scope": "none",
+      "grammar_family": "aurora_symbolic_command",
+      "gumas_mutation_auth_required": false,
+      "gumas_mutation_auth_status": "not_applicable",
+      "intent_type": "parse",
+      "live_runtime_execution": false,
+      "modifier": null,
+      "normalized_text": "THREADWAKE//.",
+      "probe_mode": "parse_only",
+      "range_edges": null,
+      "raw_text": "THREADWAKE",
+      "recommended_next_action": "Verify target repo and live runtime before execution; grammar-valid text is not execution approval.",
+      "run_mode": "parse_only",
+      "runtime_handler_verified": false,
+      "runtime_refs": [],
+      "simulation_status": "not_applicable",
+      "target_repo": null,
+      "tool_status": "ready",
+      "validation_issues": [],
+      "validation_status": "valid_with_warnings",
+      "warnings": [
+        {
+          "code": "missing_execution_sigil",
+          "message": "Added missing execution sigil '//.' to normalize the invocation."
+        }
+      ]
+    },
+    {
+      "arguments": [],
+      "ast_shape": "range_chain",
+      "authority_refs": [
+        "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora/core/command_grammar",
+        "plugins/aurora-command-grammar/skills/aurora-command-grammar/references/command-intent-envelope.schema.json"
+      ],
+      "command_heads": [],
+      "execution_scope": "in_process_simulation",
+      "grammar_family": "aurora_symbolic_command",
+      "gumas_mutation_auth_required": false,
+      "gumas_mutation_auth_status": "not_applicable",
+      "intent_type": "execute_request",
+      "live_runtime_execution": false,
+      "modifier": null,
+      "normalized_text": "001//005//.",
+      "probe_mode": "in_process_simulation",
+      "range_edges": {
+        "end": "005",
+        "start": "001"
+      },
+      "raw_text": "001//005//",
+      "recommended_next_action": "Review the in-process simulation output; no live runtime state was changed.",
+      "run_mode": "in_process_simulation",
+      "runtime_handler_verified": false,
+      "runtime_refs": [
+        "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora/core/symbolic_engine.py::SymbolicEngine.execute_chain_notation"
+      ],
+      "simulation": {
+        "chain_id": "001//005//",
+        "error": null,
+        "execution_scope": "in_process_simulation",
+        "live_runtime_execution": false,
+        "ok": true,
+        "run_mode": "in_process_simulation",
+        "runtime_authority": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora/core/symbolic_engine.py",
+        "simulation_label": "in-process SymbolicEngine simulation only; not live runtime execution",
+        "simulation_status": "completed",
+        "status_code": 0,
+        "step_count": 5
+      },
+      "simulation_status": "completed",
+      "target_repo": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "tool_status": "ready",
+      "validation_issues": [],
+      "validation_status": "valid_with_warnings",
+      "warnings": [
+        {
+          "code": "legacy_partial_terminator",
+          "message": "Normalized legacy trailing '//' terminator to '//.'."
+        }
+      ]
+    },
+    {
+      "arguments": [],
+      "ast_shape": "mesh_route",
+      "authority_refs": [
+        "plugins/aurora-command-grammar/skills/aurora-command-grammar/references/command-intent-envelope.schema.json"
+      ],
+      "command_heads": [],
+      "execution_scope": "none",
+      "grammar_family": "mesh_router",
+      "gumas_mutation_auth_required": false,
+      "gumas_mutation_auth_status": "not_applicable",
+      "intent_type": "parse",
+      "live_runtime_execution": false,
+      "modifier": null,
+      "normalized_text": "@mesh status",
+      "probe_mode": "parse_only",
+      "range_edges": null,
+      "raw_text": "@mesh status",
+      "recommended_next_action": "Map through the mesh-router runtime contract before routing; no mesh message was sent.",
+      "run_mode": "mesh_route_map",
+      "runtime_handler_verified": false,
+      "runtime_refs": [],
+      "simulation_status": "not_applicable",
+      "target_repo": null,
+      "tool_status": "ready",
+      "validation_issues": [],
+      "validation_status": "not_validated",
+      "warnings": []
+    },
+    {
+      "arguments": [],
+      "ast_shape": "command_invocation",
+      "authority_refs": [
+        "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora/core/command_grammar",
+        "plugins/aurora-command-grammar/skills/aurora-command-grammar/references/command-intent-envelope.schema.json"
+      ],
+      "command_heads": [
+        "UNKNOWNCOMMAND"
+      ],
+      "execution_scope": "none",
+      "grammar_family": "aurora_symbolic_command",
+      "gumas_mutation_auth_required": false,
+      "gumas_mutation_auth_status": "not_applicable",
+      "intent_type": "parse",
+      "live_runtime_execution": false,
+      "modifier": null,
+      "normalized_text": "UNKNOWNCOMMAND//.",
+      "probe_mode": "parse_only",
+      "range_edges": null,
+      "raw_text": "UNKNOWNCOMMAND//.",
+      "recommended_next_action": "Resolve validation issues before routing or execution.",
+      "run_mode": "parse_only",
+      "runtime_handler_verified": false,
+      "runtime_refs": [],
+      "simulation_status": "not_applicable",
+      "target_repo": null,
+      "tool_status": "ready",
+      "validation_issues": [
+        {
+          "code": "unknown_command",
+          "head": "UNKNOWNCOMMAND",
+          "message": "Command head 'UNKNOWNCOMMAND' is not present in the grammar catalog.",
+          "severity": "error"
+        }
+      ],
+      "validation_status": "invalid",
+      "warnings": []
+    }
+  ],
+  "generated_at": "2026-06-26T15:35:09Z",
+  "live_runtime_execution": false,
+  "mutation_posture": "advisory_only",
+  "nested_repo_mutation": false,
+  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "run_mode": "read_only",
+  "schema_version": 1,
+  "status": "ready",
+  "summary": {
+    "attention_command_count": 0,
+    "invalid_count": 1,
+    "live_execution_count": 0,
+    "not_validated_count": 1,
+    "runtime_verified_count": 0,
+    "simulated_count": 1,
+    "total_commands": 4,
+    "valid_count": 2,
+    "validation_issue_count": 1,
+    "warning_count": 2
+  },
+  "tool": "aurora_command_intent_snapshot",
+  "validation_commands": [
+    "python3 tools/aurora_command_intent_snapshot.py --persist-report --summary",
+    "python3 tools/aurora_operator_snapshot.py --persist-report --summary",
+    "python3 -m pytest -q tests/test_aurora_command_intent_snapshot.py tests/test_aurora_operator_snapshot.py"
+  ]
+}

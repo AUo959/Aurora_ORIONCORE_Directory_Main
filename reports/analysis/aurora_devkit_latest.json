@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-15T21:48:41Z",
+  "generated_at": "2026-06-28T21:40:08Z",
   "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "manifest_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
   "toolkit_id": "aurora-dev-toolkit",
@@ -174,7 +174,7 @@
       ],
       "path": "/Users/travisstreets/.local/bin/ruff",
       "returncode": 0,
-      "output": "ruff 0.15.17"
+      "output": "ruff 0.15.20"
     },
     {
       "id": "mypy",
@@ -216,7 +216,7 @@
       ],
       "path": "/Users/travisstreets/.local/bin/pipx",
       "returncode": 0,
-      "output": "1.14.0"
+      "output": "1.15.0"
     },
     {
       "id": "pnpm",
@@ -228,9 +228,9 @@
         "pnpm",
         "--version"
       ],
-      "path": "/Users/travisstreets/.nvm/versions/node/v24.14.0/bin/pnpm",
+      "path": "/Users/travisstreets/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/pnpm",
       "returncode": 0,
-      "output": "11.6.0"
+      "output": "11.7.0"
     },
     {
       "id": "docker",
@@ -244,7 +244,7 @@
       ],
       "path": "/usr/local/bin/docker",
       "returncode": 0,
-      "output": "Docker version 29.4.3, build 055a478"
+      "output": "Docker version 29.5.3, build d1c06ef"
     },
     {
       "id": "brew",
@@ -658,7 +658,7 @@
           ],
           "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
           "returncode": 0,
-          "output": "{\"missing\": [], \"versions\": {\"fastapi\": \"0.137.0\", \"httpx\": \"0.28.1\", \"slowapi\": \"unknown\"}}"
+          "output": "{\"missing\": [], \"versions\": {\"fastapi\": \"0.138.1\", \"httpx\": \"0.28.1\", \"slowapi\": \"unknown\"}}"
         },
         "pip_check": {
           "status": "ok",
@@ -675,7 +675,7 @@
       },
       "notes": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
       "import_versions": {
-        "fastapi": "0.137.0",
+        "fastapi": "0.138.1",
         "httpx": "0.28.1",
         "slowapi": "unknown"
       },
@@ -857,13 +857,14 @@
       "jupyter-notebook",
       "mesh-router",
       "pdf",
+      "playwright",
       "security-best-practices",
       "security-threat-model",
       "threadcore-governor",
       "zipwiz-governor"
     ],
     "repo_local_count": 16,
-    "installed_count": 27,
+    "installed_count": 28,
     "missing_installed_for_repo_source": [],
     "skills_root": "/Users/travisstreets/.codex/skills"
   },

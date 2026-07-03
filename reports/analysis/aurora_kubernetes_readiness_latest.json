@@ -1,0 +1,1455 @@
+{
+  "apply_blockers": [
+    {
+      "blocks_apply": true,
+      "category": "secret_placeholder",
+      "detail": "Secret manifest still contains placeholder API key material.",
+      "line": 134,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+      "severity": "attention",
+      "snippet": "anthropic-api-key: <redacted>"
+    },
+    {
+      "blocks_apply": true,
+      "category": "secret_placeholder",
+      "detail": "Secret manifest still contains placeholder API key material.",
+      "line": 137,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+      "severity": "attention",
+      "snippet": "openai-api-key: <redacted>"
+    },
+    {
+      "blocks_apply": true,
+      "category": "mutable_or_local_image",
+      "detail": "Image reference is local or mutable; a repeatable apply needs a registry reference pinned to a digest or release tag.",
+      "line": 155,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-gui-cloudhub-deployment.yaml",
+      "severity": "attention",
+      "snippet": "image: aurora-cloudbank-symbolic:latest"
+    },
+    {
+      "blocks_apply": true,
+      "category": "example_domain",
+      "detail": "Ingress or certificate configuration still references example Aurora domains.",
+      "line": 83,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+      "severity": "attention",
+      "snippet": "- aurora.example.com"
+    },
+    {
+      "blocks_apply": true,
+      "category": "example_domain",
+      "detail": "Ingress or certificate configuration still references example Aurora domains.",
+      "line": 84,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+      "severity": "attention",
+      "snippet": "- www.aurora.example.com"
+    },
+    {
+      "blocks_apply": true,
+      "category": "example_domain",
+      "detail": "Ingress or certificate configuration still references example Aurora domains.",
+      "line": 85,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+      "severity": "attention",
+      "snippet": "- api.aurora.example.com"
+    },
+    {
+      "blocks_apply": true,
+      "category": "example_domain",
+      "detail": "Ingress or certificate configuration still references example Aurora domains.",
+      "line": 91,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+      "severity": "attention",
+      "snippet": "- host: aurora.example.com"
+    },
+    {
+      "blocks_apply": true,
+      "category": "example_domain",
+      "detail": "Ingress or certificate configuration still references example Aurora domains.",
+      "line": 140,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+      "severity": "attention",
+      "snippet": "- host: api.aurora.example.com"
+    },
+    {
+      "blocks_apply": true,
+      "category": "example_domain",
+      "detail": "Ingress or certificate configuration still references example Aurora domains.",
+      "line": 221,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+      "severity": "attention",
+      "snippet": "- aurora.example.com"
+    },
+    {
+      "blocks_apply": true,
+      "category": "example_domain",
+      "detail": "Ingress or certificate configuration still references example Aurora domains.",
+      "line": 222,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+      "severity": "attention",
+      "snippet": "- www.aurora.example.com"
+    },
+    {
+      "blocks_apply": true,
+      "category": "example_domain",
+      "detail": "Ingress or certificate configuration still references example Aurora domains.",
+      "line": 223,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+      "severity": "attention",
+      "snippet": "- api.aurora.example.com"
+    },
+    {
+      "blocks_apply": true,
+      "category": "example_domain",
+      "detail": "Ingress or certificate configuration still references example Aurora domains.",
+      "line": 238,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+      "severity": "attention",
+      "snippet": "email: admin@aurora.example.com  # Replace with your email"
+    },
+    {
+      "blocks_apply": true,
+      "category": "sealed_secret_template_placeholder",
+      "detail": "SealedSecret template still contains kube-seal replacement placeholders.",
+      "line": 37,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+      "severity": "attention",
+      "snippet": "anthropic-api-key: \"<redacted>\""
+    },
+    {
+      "blocks_apply": true,
+      "category": "sealed_secret_template_placeholder",
+      "detail": "SealedSecret template still contains kube-seal replacement placeholders.",
+      "line": 40,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+      "severity": "attention",
+      "snippet": "openai-api-key: \"<redacted>\""
+    },
+    {
+      "blocks_apply": true,
+      "category": "sealed_secret_template_placeholder",
+      "detail": "SealedSecret template still contains kube-seal replacement placeholders.",
+      "line": 43,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+      "severity": "attention",
+      "snippet": "csrf-secret-key: \"<redacted>\""
+    },
+    {
+      "blocks_apply": true,
+      "category": "sealed_secret_template_placeholder",
+      "detail": "SealedSecret template still contains kube-seal replacement placeholders.",
+      "line": 46,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+      "severity": "attention",
+      "snippet": "jwt-secret-key: \"<redacted>\""
+    },
+    {
+      "blocks_apply": true,
+      "category": "mutable_or_local_image",
+      "detail": "Image reference is local or mutable; a repeatable apply needs a registry reference pinned to a digest or release tag.",
+      "line": 30,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/deployment/aurora-cloudbank.yml",
+      "severity": "attention",
+      "snippet": "image: ghcr.io/auo959/aurora-cloudbank-symbolic:latest # Placeholder image"
+    }
+  ],
+  "cluster_probe": {
+    "reason": "Cluster probing is intentionally omitted; this receipt is manifest/client readiness only.",
+    "status": "skipped"
+  },
+  "deployment_scripts": [
+    {
+      "executable": true,
+      "exists": true,
+      "has_dry_run": true,
+      "has_help": true,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/scripts/k8s_deploy_relays.sh"
+    },
+    {
+      "executable": true,
+      "exists": true,
+      "has_dry_run": true,
+      "has_help": true,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/scripts/k8s_deploy_mcp.sh"
+    },
+    {
+      "executable": true,
+      "exists": true,
+      "has_dry_run": true,
+      "has_help": true,
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/scripts/k8s_deploy_firewall.sh"
+    }
+  ],
+  "devcontainer": {
+    "available": true,
+    "feature_config": {
+      "helm": "latest",
+      "kubectl": "latest",
+      "minikube": "none"
+    },
+    "kubectl_helm_minikube_feature": "ghcr.io/devcontainers/features/kubectl-helm-minikube:1",
+    "path": ".devcontainer/devcontainer.json",
+    "status": "ready"
+  },
+  "gates": [
+    {
+      "evidence": {
+        "kustomize_version": "v5.7.1",
+        "platform": "darwin/arm64",
+        "version": "v1.34.1"
+      },
+      "gate_id": "kubectl_client_available",
+      "recommended_next_action": null,
+      "required": true,
+      "status": "ready",
+      "title": "kubectl client is available locally"
+    },
+    {
+      "evidence": {
+        "missing_required": [],
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s"
+      },
+      "gate_id": "k8s_manifest_surface_present",
+      "recommended_next_action": null,
+      "required": true,
+      "status": "ready",
+      "title": "CloudBank Kubernetes manifest surface is present"
+    },
+    {
+      "evidence": {
+        "manifest_file_count": 10,
+        "parse_error_files": []
+      },
+      "gate_id": "k8s_yaml_parse_valid",
+      "recommended_next_action": null,
+      "required": true,
+      "status": "ready",
+      "title": "Kubernetes YAML parses cleanly"
+    },
+    {
+      "evidence": {
+        "gui_deployment": true,
+        "gui_service": true,
+        "namespace": true
+      },
+      "gate_id": "k8s_core_resources_present",
+      "recommended_next_action": null,
+      "required": true,
+      "status": "ready",
+      "title": "Core namespace, GUI deployment, and service resources are present"
+    },
+    {
+      "evidence": {
+        "apply_blocker_category_counts": {
+          "example_domain": 9,
+          "mutable_or_local_image": 2,
+          "sealed_secret_template_placeholder": 4,
+          "secret_placeholder": 2
+        },
+        "apply_blocker_count": 17,
+        "blocker_files": [
+          "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+          "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-gui-cloudhub-deployment.yaml",
+          "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+          "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+          "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/deployment/aurora-cloudbank.yml"
+        ]
+      },
+      "gate_id": "k8s_apply_blockers_cleared",
+      "recommended_next_action": "Resolve the listed apply_blockers entries before kubectl apply or cluster dry-run.",
+      "required": true,
+      "status": "attention",
+      "title": "Known apply blockers are cleared"
+    },
+    {
+      "evidence": {
+        "nemo_deployment": true,
+        "nemo_service": true
+      },
+      "gate_id": "k8s_gpu_nemo_surface_present",
+      "recommended_next_action": null,
+      "required": false,
+      "status": "ready",
+      "title": "Optional NeMo GPU Kubernetes surface is present"
+    },
+    {
+      "evidence": {
+        "scripts": [
+          {
+            "executable": true,
+            "exists": true,
+            "has_dry_run": true,
+            "has_help": true,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/scripts/k8s_deploy_relays.sh"
+          },
+          {
+            "executable": true,
+            "exists": true,
+            "has_dry_run": true,
+            "has_help": true,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/scripts/k8s_deploy_mcp.sh"
+          },
+          {
+            "executable": true,
+            "exists": true,
+            "has_dry_run": true,
+            "has_help": true,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/scripts/k8s_deploy_firewall.sh"
+          }
+        ]
+      },
+      "gate_id": "k8s_deployment_scripts_dry_run_capable",
+      "recommended_next_action": null,
+      "required": false,
+      "status": "ready",
+      "title": "Kubernetes deployment scripts are present and dry-run capable"
+    },
+    {
+      "evidence": {
+        "has_build_job": true,
+        "has_deploy_job": true,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.github/workflows/k8s-deploy.yml",
+        "uses_ghcr": true
+      },
+      "gate_id": "k8s_workflow_present",
+      "recommended_next_action": null,
+      "required": false,
+      "status": "ready",
+      "title": "Kubernetes CI workflow is present"
+    }
+  ],
+  "generated_at": "2026-06-26T23:18:50Z",
+  "live_runtime_execution": false,
+  "manifests": {
+    "apply_blocker_category_counts": {
+      "example_domain": 9,
+      "mutable_or_local_image": 2,
+      "sealed_secret_template_placeholder": 4,
+      "secret_placeholder": 2
+    },
+    "apply_blocker_count": 17,
+    "apply_blockers": [
+      {
+        "blocks_apply": true,
+        "category": "secret_placeholder",
+        "detail": "Secret manifest still contains placeholder API key material.",
+        "line": 134,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+        "severity": "attention",
+        "snippet": "anthropic-api-key: <redacted>"
+      },
+      {
+        "blocks_apply": true,
+        "category": "secret_placeholder",
+        "detail": "Secret manifest still contains placeholder API key material.",
+        "line": 137,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+        "severity": "attention",
+        "snippet": "openai-api-key: <redacted>"
+      },
+      {
+        "blocks_apply": true,
+        "category": "mutable_or_local_image",
+        "detail": "Image reference is local or mutable; a repeatable apply needs a registry reference pinned to a digest or release tag.",
+        "line": 155,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-gui-cloudhub-deployment.yaml",
+        "severity": "attention",
+        "snippet": "image: aurora-cloudbank-symbolic:latest"
+      },
+      {
+        "blocks_apply": true,
+        "category": "example_domain",
+        "detail": "Ingress or certificate configuration still references example Aurora domains.",
+        "line": 83,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+        "severity": "attention",
+        "snippet": "- aurora.example.com"
+      },
+      {
+        "blocks_apply": true,
+        "category": "example_domain",
+        "detail": "Ingress or certificate configuration still references example Aurora domains.",
+        "line": 84,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+        "severity": "attention",
+        "snippet": "- www.aurora.example.com"
+      },
+      {
+        "blocks_apply": true,
+        "category": "example_domain",
+        "detail": "Ingress or certificate configuration still references example Aurora domains.",
+        "line": 85,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+        "severity": "attention",
+        "snippet": "- api.aurora.example.com"
+      },
+      {
+        "blocks_apply": true,
+        "category": "example_domain",
+        "detail": "Ingress or certificate configuration still references example Aurora domains.",
+        "line": 91,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+        "severity": "attention",
+        "snippet": "- host: aurora.example.com"
+      },
+      {
+        "blocks_apply": true,
+        "category": "example_domain",
+        "detail": "Ingress or certificate configuration still references example Aurora domains.",
+        "line": 140,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+        "severity": "attention",
+        "snippet": "- host: api.aurora.example.com"
+      },
+      {
+        "blocks_apply": true,
+        "category": "example_domain",
+        "detail": "Ingress or certificate configuration still references example Aurora domains.",
+        "line": 221,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+        "severity": "attention",
+        "snippet": "- aurora.example.com"
+      },
+      {
+        "blocks_apply": true,
+        "category": "example_domain",
+        "detail": "Ingress or certificate configuration still references example Aurora domains.",
+        "line": 222,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+        "severity": "attention",
+        "snippet": "- www.aurora.example.com"
+      },
+      {
+        "blocks_apply": true,
+        "category": "example_domain",
+        "detail": "Ingress or certificate configuration still references example Aurora domains.",
+        "line": 223,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+        "severity": "attention",
+        "snippet": "- api.aurora.example.com"
+      },
+      {
+        "blocks_apply": true,
+        "category": "example_domain",
+        "detail": "Ingress or certificate configuration still references example Aurora domains.",
+        "line": 238,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+        "severity": "attention",
+        "snippet": "email: admin@aurora.example.com  # Replace with your email"
+      },
+      {
+        "blocks_apply": true,
+        "category": "sealed_secret_template_placeholder",
+        "detail": "SealedSecret template still contains kube-seal replacement placeholders.",
+        "line": 37,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+        "severity": "attention",
+        "snippet": "anthropic-api-key: \"<redacted>\""
+      },
+      {
+        "blocks_apply": true,
+        "category": "sealed_secret_template_placeholder",
+        "detail": "SealedSecret template still contains kube-seal replacement placeholders.",
+        "line": 40,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+        "severity": "attention",
+        "snippet": "openai-api-key: \"<redacted>\""
+      },
+      {
+        "blocks_apply": true,
+        "category": "sealed_secret_template_placeholder",
+        "detail": "SealedSecret template still contains kube-seal replacement placeholders.",
+        "line": 43,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+        "severity": "attention",
+        "snippet": "csrf-secret-key: \"<redacted>\""
+      },
+      {
+        "blocks_apply": true,
+        "category": "sealed_secret_template_placeholder",
+        "detail": "SealedSecret template still contains kube-seal replacement placeholders.",
+        "line": 46,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+        "severity": "attention",
+        "snippet": "jwt-secret-key: \"<redacted>\""
+      },
+      {
+        "blocks_apply": true,
+        "category": "mutable_or_local_image",
+        "detail": "Image reference is local or mutable; a repeatable apply needs a registry reference pinned to a digest or release tag.",
+        "line": 30,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/deployment/aurora-cloudbank.yml",
+        "severity": "attention",
+        "snippet": "image: ghcr.io/auo959/aurora-cloudbank-symbolic:latest # Placeholder image"
+      }
+    ],
+    "exists": true,
+    "files": [
+      {
+        "apply_blocker_category_counts": {
+          "secret_placeholder": 2
+        },
+        "apply_blocker_count": 2,
+        "finding_category_counts": {
+          "comment_only_example": 4,
+          "secret_placeholder": 2
+        },
+        "finding_count": 6,
+        "findings": [
+          {
+            "blocks_apply": false,
+            "category": "comment_only_example",
+            "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+            "line": 133,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+            "severity": "info",
+            "snippet": "# Anthropic Claude API key (base64 encoded placeholder)"
+          },
+          {
+            "blocks_apply": true,
+            "category": "secret_placeholder",
+            "detail": "Secret manifest still contains placeholder API key material.",
+            "line": 134,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+            "severity": "attention",
+            "snippet": "anthropic-api-key: <redacted>"
+          },
+          {
+            "blocks_apply": false,
+            "category": "comment_only_example",
+            "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+            "line": 136,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+            "severity": "info",
+            "snippet": "# OpenAI GPT API key (base64 encoded placeholder)"
+          },
+          {
+            "blocks_apply": true,
+            "category": "secret_placeholder",
+            "detail": "Secret manifest still contains placeholder API key material.",
+            "line": 137,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+            "severity": "attention",
+            "snippet": "openai-api-key: <redacted>"
+          },
+          {
+            "blocks_apply": false,
+            "category": "comment_only_example",
+            "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+            "line": 145,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+            "severity": "info",
+            "snippet": ""
+          },
+          {
+            "blocks_apply": false,
+            "category": "comment_only_example",
+            "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+            "line": 146,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+            "severity": "info",
+            "snippet": ""
+          }
+        ],
+        "mutable_or_local_image_reference_count": 0,
+        "parse_error": null,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+        "placeholder_hit_count": 1,
+        "placeholder_patterns": [
+          "placeholder"
+        ],
+        "resource_count": 4,
+        "resources": [
+          {
+            "api_version": "v1",
+            "document_index": 1,
+            "kind": "ConfigMap",
+            "name": "mcp-bridge-config",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "v1",
+            "document_index": 2,
+            "kind": "Secret",
+            "name": "aurora-api-keys",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "v1",
+            "document_index": 3,
+            "kind": "ConfigMap",
+            "name": "aurora-ethics-protocol",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "v1",
+            "document_index": 4,
+            "kind": "ConfigMap",
+            "name": "aurora-runtime-config",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          }
+        ],
+        "status": "ready"
+      },
+      {
+        "apply_blocker_category_counts": {
+          "mutable_or_local_image": 1
+        },
+        "apply_blocker_count": 1,
+        "finding_category_counts": {
+          "mutable_or_local_image": 1
+        },
+        "finding_count": 1,
+        "findings": [
+          {
+            "blocks_apply": true,
+            "category": "mutable_or_local_image",
+            "detail": "Image reference is local or mutable; a repeatable apply needs a registry reference pinned to a digest or release tag.",
+            "line": 155,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-gui-cloudhub-deployment.yaml",
+            "severity": "attention",
+            "snippet": "image: aurora-cloudbank-symbolic:latest"
+          }
+        ],
+        "mutable_or_local_image_reference_count": 1,
+        "parse_error": null,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-gui-cloudhub-deployment.yaml",
+        "placeholder_hit_count": 0,
+        "placeholder_patterns": [],
+        "resource_count": 2,
+        "resources": [
+          {
+            "api_version": "apps/v1",
+            "document_index": 1,
+            "kind": "Deployment",
+            "name": "aurora-gui-cloudhub",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "policy/v1",
+            "document_index": 2,
+            "kind": "PodDisruptionBudget",
+            "name": "aurora-gui-cloudhub-pdb",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          }
+        ],
+        "status": "ready"
+      },
+      {
+        "apply_blocker_category_counts": {},
+        "apply_blocker_count": 0,
+        "finding_category_counts": {},
+        "finding_count": 0,
+        "findings": [],
+        "mutable_or_local_image_reference_count": 0,
+        "parse_error": null,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-gui-cloudhub-service.yaml",
+        "placeholder_hit_count": 0,
+        "placeholder_patterns": [],
+        "resource_count": 3,
+        "resources": [
+          {
+            "api_version": "v1",
+            "document_index": 1,
+            "kind": "Service",
+            "name": "aurora-gui-cloudhub",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "v1",
+            "document_index": 2,
+            "kind": "Service",
+            "name": "aurora-gui-cloudhub-headless",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "v1",
+            "document_index": 3,
+            "kind": "Service",
+            "name": "aurora-gui-cloudhub-internal",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          }
+        ],
+        "status": "ready"
+      },
+      {
+        "apply_blocker_category_counts": {},
+        "apply_blocker_count": 0,
+        "finding_category_counts": {},
+        "finding_count": 0,
+        "findings": [],
+        "mutable_or_local_image_reference_count": 0,
+        "parse_error": null,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-hpa-monitoring.yaml",
+        "placeholder_hit_count": 0,
+        "placeholder_patterns": [],
+        "resource_count": 4,
+        "resources": [
+          {
+            "api_version": "autoscaling/v2",
+            "document_index": 1,
+            "kind": "HorizontalPodAutoscaler",
+            "name": "aurora-gui-cloudhub-hpa",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "autoscaling.k8s.io/v1",
+            "document_index": 2,
+            "kind": "VerticalPodAutoscaler",
+            "name": "aurora-gui-cloudhub-vpa",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "monitoring.coreos.com/v1",
+            "document_index": 3,
+            "kind": "PodMonitor",
+            "name": "aurora-gui-cloudhub-metrics",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "monitoring.coreos.com/v1",
+            "document_index": 4,
+            "kind": "ServiceMonitor",
+            "name": "aurora-gui-cloudhub-service-metrics",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          }
+        ],
+        "status": "ready"
+      },
+      {
+        "apply_blocker_category_counts": {
+          "example_domain": 9
+        },
+        "apply_blocker_count": 9,
+        "finding_category_counts": {
+          "example_domain": 10
+        },
+        "finding_count": 10,
+        "findings": [
+          {
+            "blocks_apply": true,
+            "category": "example_domain",
+            "detail": "Ingress or certificate configuration still references example Aurora domains.",
+            "line": 83,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+            "severity": "attention",
+            "snippet": "- aurora.example.com"
+          },
+          {
+            "blocks_apply": true,
+            "category": "example_domain",
+            "detail": "Ingress or certificate configuration still references example Aurora domains.",
+            "line": 84,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+            "severity": "attention",
+            "snippet": "- www.aurora.example.com"
+          },
+          {
+            "blocks_apply": true,
+            "category": "example_domain",
+            "detail": "Ingress or certificate configuration still references example Aurora domains.",
+            "line": 85,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+            "severity": "attention",
+            "snippet": "- api.aurora.example.com"
+          },
+          {
+            "blocks_apply": true,
+            "category": "example_domain",
+            "detail": "Ingress or certificate configuration still references example Aurora domains.",
+            "line": 91,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+            "severity": "attention",
+            "snippet": "- host: aurora.example.com"
+          },
+          {
+            "blocks_apply": true,
+            "category": "example_domain",
+            "detail": "Ingress or certificate configuration still references example Aurora domains.",
+            "line": 140,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+            "severity": "attention",
+            "snippet": "- host: api.aurora.example.com"
+          },
+          {
+            "blocks_apply": false,
+            "category": "example_domain",
+            "detail": "Ingress or certificate configuration still references example Aurora domains.",
+            "line": 168,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+            "severity": "info",
+            "snippet": "#   - match: Host(`aurora.example.com`)"
+          },
+          {
+            "blocks_apply": true,
+            "category": "example_domain",
+            "detail": "Ingress or certificate configuration still references example Aurora domains.",
+            "line": 221,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+            "severity": "attention",
+            "snippet": "- aurora.example.com"
+          },
+          {
+            "blocks_apply": true,
+            "category": "example_domain",
+            "detail": "Ingress or certificate configuration still references example Aurora domains.",
+            "line": 222,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+            "severity": "attention",
+            "snippet": "- www.aurora.example.com"
+          },
+          {
+            "blocks_apply": true,
+            "category": "example_domain",
+            "detail": "Ingress or certificate configuration still references example Aurora domains.",
+            "line": 223,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+            "severity": "attention",
+            "snippet": "- api.aurora.example.com"
+          },
+          {
+            "blocks_apply": true,
+            "category": "example_domain",
+            "detail": "Ingress or certificate configuration still references example Aurora domains.",
+            "line": 238,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+            "severity": "attention",
+            "snippet": "email: admin@aurora.example.com  # Replace with your email"
+          }
+        ],
+        "mutable_or_local_image_reference_count": 0,
+        "parse_error": null,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+        "placeholder_hit_count": 1,
+        "placeholder_patterns": [
+          "aurora\\.example\\.com"
+        ],
+        "resource_count": 3,
+        "resources": [
+          {
+            "api_version": "networking.k8s.io/v1",
+            "document_index": 1,
+            "kind": "Ingress",
+            "name": "aurora-gui-cloudhub-ingress",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "cert-manager.io/v1",
+            "document_index": 4,
+            "kind": "Certificate",
+            "name": "aurora-tls-cert",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "cert-manager.io/v1",
+            "document_index": 5,
+            "kind": "ClusterIssuer",
+            "name": "letsencrypt-prod",
+            "namespace": null,
+            "valid": true
+          }
+        ],
+        "status": "ready"
+      },
+      {
+        "apply_blocker_category_counts": {},
+        "apply_blocker_count": 0,
+        "finding_category_counts": {},
+        "finding_count": 0,
+        "findings": [],
+        "mutable_or_local_image_reference_count": 0,
+        "parse_error": null,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-namespace-rbac.yaml",
+        "placeholder_hit_count": 0,
+        "placeholder_patterns": [],
+        "resource_count": 9,
+        "resources": [
+          {
+            "api_version": "v1",
+            "document_index": 1,
+            "kind": "Namespace",
+            "name": "aurora-cloudbank",
+            "namespace": null,
+            "valid": true
+          },
+          {
+            "api_version": "v1",
+            "document_index": 2,
+            "kind": "ServiceAccount",
+            "name": "aurora-gui-cloudhub",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "rbac.authorization.k8s.io/v1",
+            "document_index": 3,
+            "kind": "Role",
+            "name": "aurora-gui-cloudhub-role",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "rbac.authorization.k8s.io/v1",
+            "document_index": 4,
+            "kind": "RoleBinding",
+            "name": "aurora-gui-cloudhub-rolebinding",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "rbac.authorization.k8s.io/v1",
+            "document_index": 5,
+            "kind": "ClusterRole",
+            "name": "aurora-gui-cloudhub-clusterrole",
+            "namespace": null,
+            "valid": true
+          },
+          {
+            "api_version": "rbac.authorization.k8s.io/v1",
+            "document_index": 6,
+            "kind": "ClusterRoleBinding",
+            "name": "aurora-gui-cloudhub-clusterrolebinding",
+            "namespace": null,
+            "valid": true
+          },
+          {
+            "api_version": "v1",
+            "document_index": 7,
+            "kind": "ResourceQuota",
+            "name": "aurora-cloudbank-quota",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "v1",
+            "document_index": 8,
+            "kind": "LimitRange",
+            "name": "aurora-cloudbank-limitrange",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "networking.k8s.io/v1",
+            "document_index": 9,
+            "kind": "NetworkPolicy",
+            "name": "aurora-gui-cloudhub-netpol",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          }
+        ],
+        "status": "ready"
+      },
+      {
+        "apply_blocker_category_counts": {},
+        "apply_blocker_count": 0,
+        "finding_category_counts": {},
+        "finding_count": 0,
+        "findings": [],
+        "mutable_or_local_image_reference_count": 0,
+        "parse_error": null,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-nemo-deployment.yaml",
+        "placeholder_hit_count": 0,
+        "placeholder_patterns": [],
+        "resource_count": 2,
+        "resources": [
+          {
+            "api_version": "apps/v1",
+            "document_index": 1,
+            "kind": "Deployment",
+            "name": "aurora-nemo-service",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          },
+          {
+            "api_version": "v1",
+            "document_index": 2,
+            "kind": "PersistentVolumeClaim",
+            "name": "nemo-models-pvc",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          }
+        ],
+        "status": "ready"
+      },
+      {
+        "apply_blocker_category_counts": {},
+        "apply_blocker_count": 0,
+        "finding_category_counts": {},
+        "finding_count": 0,
+        "findings": [],
+        "mutable_or_local_image_reference_count": 0,
+        "parse_error": null,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-nemo-service.yaml",
+        "placeholder_hit_count": 0,
+        "placeholder_patterns": [],
+        "resource_count": 1,
+        "resources": [
+          {
+            "api_version": "v1",
+            "document_index": 1,
+            "kind": "Service",
+            "name": "aurora-nemo-service",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          }
+        ],
+        "status": "ready"
+      },
+      {
+        "apply_blocker_category_counts": {
+          "sealed_secret_template_placeholder": 4
+        },
+        "apply_blocker_count": 4,
+        "finding_category_counts": {
+          "comment_only_example": 4,
+          "sealed_secret_template_placeholder": 4
+        },
+        "finding_count": 8,
+        "findings": [
+          {
+            "blocks_apply": true,
+            "category": "sealed_secret_template_placeholder",
+            "detail": "SealedSecret template still contains kube-seal replacement placeholders.",
+            "line": 37,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+            "severity": "attention",
+            "snippet": "anthropic-api-key: \"<redacted>\""
+          },
+          {
+            "blocks_apply": true,
+            "category": "sealed_secret_template_placeholder",
+            "detail": "SealedSecret template still contains kube-seal replacement placeholders.",
+            "line": 40,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+            "severity": "attention",
+            "snippet": "openai-api-key: \"<redacted>\""
+          },
+          {
+            "blocks_apply": true,
+            "category": "sealed_secret_template_placeholder",
+            "detail": "SealedSecret template still contains kube-seal replacement placeholders.",
+            "line": 43,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+            "severity": "attention",
+            "snippet": "csrf-secret-key: \"<redacted>\""
+          },
+          {
+            "blocks_apply": true,
+            "category": "sealed_secret_template_placeholder",
+            "detail": "SealedSecret template still contains kube-seal replacement placeholders.",
+            "line": 46,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+            "severity": "attention",
+            "snippet": "jwt-secret-key: \"<redacted>\""
+          },
+          {
+            "blocks_apply": false,
+            "category": "comment_only_example",
+            "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+            "line": 86,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+            "severity": "info",
+            "snippet": "#      --from-literal=anthropic-api-key='YOUR_ACTUAL_KEY' \\"
+          },
+          {
+            "blocks_apply": false,
+            "category": "comment_only_example",
+            "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+            "line": 87,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+            "severity": "info",
+            "snippet": "#      --from-literal=openai-api-key='YOUR_ACTUAL_KEY' \\"
+          },
+          {
+            "blocks_apply": false,
+            "category": "comment_only_example",
+            "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+            "line": 88,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+            "severity": "info",
+            "snippet": "#      --from-literal=csrf-secret-key='YOUR_ACTUAL_KEY' \\"
+          },
+          {
+            "blocks_apply": false,
+            "category": "comment_only_example",
+            "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+            "line": 89,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+            "severity": "info",
+            "snippet": "#      --from-literal=jwt-secret-key='YOUR_ACTUAL_KEY' \\"
+          }
+        ],
+        "mutable_or_local_image_reference_count": 0,
+        "parse_error": null,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+        "placeholder_hit_count": 1,
+        "placeholder_patterns": [
+          "REPLACE_WITH_"
+        ],
+        "resource_count": 1,
+        "resources": [
+          {
+            "api_version": "bitnami.com/v1alpha1",
+            "document_index": 1,
+            "kind": "SealedSecret",
+            "name": "aurora-api-keys",
+            "namespace": "aurora-cloudbank",
+            "valid": true
+          }
+        ],
+        "status": "ready"
+      },
+      {
+        "apply_blocker_category_counts": {
+          "mutable_or_local_image": 1
+        },
+        "apply_blocker_count": 1,
+        "finding_category_counts": {
+          "mutable_or_local_image": 1
+        },
+        "finding_count": 1,
+        "findings": [
+          {
+            "blocks_apply": true,
+            "category": "mutable_or_local_image",
+            "detail": "Image reference is local or mutable; a repeatable apply needs a registry reference pinned to a digest or release tag.",
+            "line": 30,
+            "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/deployment/aurora-cloudbank.yml",
+            "severity": "attention",
+            "snippet": "image: ghcr.io/auo959/aurora-cloudbank-symbolic:latest # Placeholder image"
+          }
+        ],
+        "mutable_or_local_image_reference_count": 1,
+        "parse_error": null,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/deployment/aurora-cloudbank.yml",
+        "placeholder_hit_count": 1,
+        "placeholder_patterns": [
+          "placeholder"
+        ],
+        "resource_count": 2,
+        "resources": [
+          {
+            "api_version": "apps/v1",
+            "document_index": 1,
+            "kind": "Deployment",
+            "name": "aurora-cloudbank",
+            "namespace": null,
+            "valid": true
+          },
+          {
+            "api_version": "v1",
+            "document_index": 2,
+            "kind": "Service",
+            "name": "aurora-cloudbank",
+            "namespace": null,
+            "valid": true
+          }
+        ],
+        "status": "ready"
+      }
+    ],
+    "finding_category_counts": {
+      "comment_only_example": 8,
+      "example_domain": 10,
+      "mutable_or_local_image": 2,
+      "sealed_secret_template_placeholder": 4,
+      "secret_placeholder": 2
+    },
+    "finding_count": 26,
+    "informational_finding_count": 9,
+    "informational_findings": [
+      {
+        "blocks_apply": false,
+        "category": "comment_only_example",
+        "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+        "line": 133,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+        "severity": "info",
+        "snippet": "# Anthropic Claude API key (base64 encoded placeholder)"
+      },
+      {
+        "blocks_apply": false,
+        "category": "comment_only_example",
+        "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+        "line": 136,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+        "severity": "info",
+        "snippet": "# OpenAI GPT API key (base64 encoded placeholder)"
+      },
+      {
+        "blocks_apply": false,
+        "category": "comment_only_example",
+        "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+        "line": 145,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+        "severity": "info",
+        "snippet": ""
+      },
+      {
+        "blocks_apply": false,
+        "category": "comment_only_example",
+        "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+        "line": 146,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml",
+        "severity": "info",
+        "snippet": ""
+      },
+      {
+        "blocks_apply": false,
+        "category": "example_domain",
+        "detail": "Ingress or certificate configuration still references example Aurora domains.",
+        "line": 168,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml",
+        "severity": "info",
+        "snippet": "#   - match: Host(`aurora.example.com`)"
+      },
+      {
+        "blocks_apply": false,
+        "category": "comment_only_example",
+        "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+        "line": 86,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+        "severity": "info",
+        "snippet": "#      --from-literal=anthropic-api-key='YOUR_ACTUAL_KEY' \\"
+      },
+      {
+        "blocks_apply": false,
+        "category": "comment_only_example",
+        "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+        "line": 87,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+        "severity": "info",
+        "snippet": "#      --from-literal=openai-api-key='YOUR_ACTUAL_KEY' \\"
+      },
+      {
+        "blocks_apply": false,
+        "category": "comment_only_example",
+        "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+        "line": 88,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+        "severity": "info",
+        "snippet": "#      --from-literal=csrf-secret-key='YOUR_ACTUAL_KEY' \\"
+      },
+      {
+        "blocks_apply": false,
+        "category": "comment_only_example",
+        "detail": "Comment-only placeholder/example text is documentation context, not an apply blocker.",
+        "line": 89,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml",
+        "severity": "info",
+        "snippet": "#      --from-literal=jwt-secret-key='YOUR_ACTUAL_KEY' \\"
+      }
+    ],
+    "kind_counts": {
+      "Certificate": 1,
+      "ClusterIssuer": 1,
+      "ClusterRole": 1,
+      "ClusterRoleBinding": 1,
+      "ConfigMap": 3,
+      "Deployment": 3,
+      "HorizontalPodAutoscaler": 1,
+      "Ingress": 1,
+      "LimitRange": 1,
+      "Namespace": 1,
+      "NetworkPolicy": 1,
+      "PersistentVolumeClaim": 1,
+      "PodDisruptionBudget": 1,
+      "PodMonitor": 1,
+      "ResourceQuota": 1,
+      "Role": 1,
+      "RoleBinding": 1,
+      "SealedSecret": 1,
+      "Secret": 1,
+      "Service": 5,
+      "ServiceAccount": 1,
+      "ServiceMonitor": 1,
+      "VerticalPodAutoscaler": 1
+    },
+    "manifest_file_count": 10,
+    "optional_manifests": [
+      {
+        "exists": true,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-hpa-monitoring.yaml"
+      },
+      {
+        "exists": true,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-ingress.yaml"
+      },
+      {
+        "exists": true,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-nemo-deployment.yaml"
+      },
+      {
+        "exists": true,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-nemo-service.yaml"
+      },
+      {
+        "exists": true,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-sealed-secrets-template.yaml"
+      },
+      {
+        "exists": true,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/deployment/aurora-cloudbank.yml"
+      }
+    ],
+    "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s",
+    "required_manifests": [
+      {
+        "exists": true,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-namespace-rbac.yaml"
+      },
+      {
+        "exists": true,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-configmap-secrets.yaml"
+      },
+      {
+        "exists": true,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-gui-cloudhub-deployment.yaml"
+      },
+      {
+        "exists": true,
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/k8s/aurora-gui-cloudhub-service.yaml"
+      }
+    ],
+    "resource_count": 31
+  },
+  "mutation_posture": "advisory_only",
+  "nested_repo_mutation": false,
+  "remediation_plan": [
+    {
+      "blocker_count": 9,
+      "category": "example_domain",
+      "recommended_next_action": "Replace example ingress hosts/email with an owned local or staging domain, or exclude ingress from the apply set."
+    },
+    {
+      "blocker_count": 2,
+      "category": "mutable_or_local_image",
+      "recommended_next_action": "Publish the image to a registry and pin it to an immutable digest or release tag before applying deployments."
+    },
+    {
+      "blocker_count": 4,
+      "category": "sealed_secret_template_placeholder",
+      "recommended_next_action": "Generate sealed values with kubeseal, or exclude the sealed-secret template from the apply set."
+    },
+    {
+      "blocker_count": 2,
+      "category": "secret_placeholder",
+      "recommended_next_action": "Replace placeholder Secret entries through sealed-secrets or external secret management; do not commit live plaintext secrets."
+    }
+  ],
+  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "run_mode": "read_only",
+  "schema_version": 1,
+  "status": "attention",
+  "summary": {
+    "apply_blocker_category_counts": {
+      "example_domain": 9,
+      "mutable_or_local_image": 2,
+      "sealed_secret_template_placeholder": 4,
+      "secret_placeholder": 2
+    },
+    "apply_blocker_count": 17,
+    "attention_gate_count": 1,
+    "blocked_gate_count": 0,
+    "finding_count": 26,
+    "gate_count": 8,
+    "informational_finding_count": 9,
+    "kind_counts": {
+      "Certificate": 1,
+      "ClusterIssuer": 1,
+      "ClusterRole": 1,
+      "ClusterRoleBinding": 1,
+      "ConfigMap": 3,
+      "Deployment": 3,
+      "HorizontalPodAutoscaler": 1,
+      "Ingress": 1,
+      "LimitRange": 1,
+      "Namespace": 1,
+      "NetworkPolicy": 1,
+      "PersistentVolumeClaim": 1,
+      "PodDisruptionBudget": 1,
+      "PodMonitor": 1,
+      "ResourceQuota": 1,
+      "Role": 1,
+      "RoleBinding": 1,
+      "SealedSecret": 1,
+      "Secret": 1,
+      "Service": 5,
+      "ServiceAccount": 1,
+      "ServiceMonitor": 1,
+      "VerticalPodAutoscaler": 1
+    },
+    "manifest_file_count": 10,
+    "optional_gate_count": 3,
+    "optional_ready": 3,
+    "optional_total": 3,
+    "ready_gate_count": 7,
+    "required_gate_count": 5,
+    "required_ready": 4,
+    "required_total": 5,
+    "resource_count": 31
+  },
+  "tool": "aurora_kubernetes_readiness",
+  "toolchain": {
+    "helm": {
+      "command": [
+        "helm",
+        "version",
+        "--template",
+        "{{.Version}}\\n"
+      ],
+      "id": "helm",
+      "returncode": 127,
+      "status": "attention",
+      "stderr_preview": "[Errno 2] No such file or directory: 'helm'",
+      "stdout_preview": ""
+    },
+    "kubectl": {
+      "command": [
+        "kubectl",
+        "version",
+        "--client=true",
+        "--output=json"
+      ],
+      "id": "kubectl",
+      "kustomize_version": "v5.7.1",
+      "platform": "darwin/arm64",
+      "returncode": 0,
+      "status": "ready",
+      "stderr_preview": "",
+      "stdout_preview": "{\n  \"clientVersion\": {\n    \"major\": \"1\",\n    \"minor\": \"34\",\n    \"gitVersion\": \"v1.34.1\",\n    \"gitCommit\": \"93248f9ae092f571eb870b7664c534bfc7d00f03\",\n    \"gitTreeState\": \"clean\",\n    \"buildDate\": \"2025-09-09T19:44:50Z\",\n    \"goVersion\": \"go1.24.6\",\n    \"compiler\": \"gc\",\n    \"platform\": \"darwin/arm64\"\n  },\n  \"kustomizeVersion\": \"v5.7.1\"\n}\n",
+      "version": "v1.34.1"
+    }
+  },
+  "validation_commands": [
+    "python3 tools/aurora_kubernetes_readiness.py --persist-report --summary",
+    "python3 tools/aurora_operator_snapshot.py --persist-report --summary",
+    "python3 -m pytest -q tests/test_aurora_kubernetes_readiness.py tests/test_aurora_operator_snapshot.py"
+  ],
+  "workflow": {
+    "document_count": 1,
+    "exists": true,
+    "has_build_job": true,
+    "has_deploy_job": true,
+    "parse_error": null,
+    "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.github/workflows/k8s-deploy.yml",
+    "status": "ready",
+    "uses_ghcr": true
+  }
+}
