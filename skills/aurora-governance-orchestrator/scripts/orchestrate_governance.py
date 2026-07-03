@@ -31,29 +31,30 @@ NARRATIVE_TONE_SCAN_SCRIPT = SKILLS_ROOT / "aurora-narrative-tone-governor" / "s
 
 CANON_VALIDATE_SCRIPT = SKILLS_ROOT / "aurora-canon-reconciler" / "scripts" / "validate_entity.py"
 
+# Repo-relative fallbacks; resolve_roots() rebases them against --repo.
 THREADCORE_DEFAULT_ROOTS_FALLBACK = [
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5",
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/Aurora_Project_Cloudhub_Deploy",
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/GUI_Cloudhub",
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+    "GUMAS_SIM_2.5",
+    "projects/Aurora_Project_Cloudhub_Deploy",
+    "projects/GUI_Cloudhub",
+    "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
 ]
 
 ZIPWIZ_DEFAULT_CANONICAL_ROOTS_FALLBACK = [
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.0/05_BUILD_TOOLS/ZipWiz_Packaging",
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_HARVEST_26",
+    "projects/GUMAS_SIM_2.0/05_BUILD_TOOLS/ZipWiz_Packaging",
+    "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+    "GUMAS_SIM_2.5/SIM_HARVEST_26",
 ]
 
 ZIPWIZ_DEFAULT_REFERENCE_ROOTS_FALLBACK = [
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/ZipWiz_Chamber_6_28/ZIPWIZ_Documents",
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/Non_can_reports/ZIPWIZ_CHAMBER_TECHNICAL_REFERENCE.md",
+    "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents",
+    "reports/analysis/non_can_reports/ZIPWIZ_CHAMBER_TECHNICAL_REFERENCE.md",
 ]
 
 NARRATIVE_TONE_DEFAULT_ROOTS_FALLBACK = [
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0",
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.0/03_SIMULATION/Location_Data/Sim_Locations",
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19",
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/PROJECT_KNOWLEDGE",
+    "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0",
+    "projects/GUMAS_SIM_2.0/03_SIMULATION/Location_Data/Sim_Locations",
+    "GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19",
+    "GUMAS_SIM_2.5/PROJECT_KNOWLEDGE",
 ]
 
 DOMAIN_ORDER = ["threadcore", "zipwiz", "script_governor", "narrative_tone", "repo_stabilizer", "canon"]

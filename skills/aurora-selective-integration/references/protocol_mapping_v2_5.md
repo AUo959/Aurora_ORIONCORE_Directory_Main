@@ -5,7 +5,7 @@ This reference maps protocol fields to capsule-generation behavior.
 ## Source Protocol
 
 Example protocol path used during development:
-`/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Auora2.5_DEV/Aurora_SelectiveIntegrationProtocol_v2.5_VIEW.json`
+`/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/projects/Auora2.5_DEV/Aurora_SelectiveIntegrationProtocol_v2.5_VIEW.json`
 
 ## Field Mapping
 

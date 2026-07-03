@@ -18,7 +18,7 @@ Run the scanner with focused defaults:
 
 ```bash
 python3 /Users/travisstreets/.codex/skills/aurora-skill-finder/scripts/scan_skill_fit.py \
-  --root /Users/travisstreets/Library/Mobile\ Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main \
+  --root /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main \
   --scope focused
 ```
 

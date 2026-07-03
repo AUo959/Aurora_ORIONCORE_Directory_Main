@@ -1,5 +1,13 @@
 # Aurora Package Watch Memory
 
+## Path migration note (2026-07-02)
+- The workspace moved off iCloud on 2026-07-01. All `…/Library/Mobile
+  Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/…` paths in
+  the run record below now resolve under
+  `/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/…` (same tails).
+- Future runs must operate only in `~/dev`; the iCloud copy is inert.
+  See `docs/WORKSPACE_MIGRATION_2026-07-01.md`.
+
 ## Latest run
 - Run timestamp (UTC): 2026-03-14T04:53:30Z
 - Runtime: ~13m

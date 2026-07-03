@@ -3,6 +3,17 @@
 This file is the fast operational reference for agents working in the root
 workspace repo.
 
+## Workspace location (since 2026-07-01)
+
+The canonical workspace is `/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main`
+on local disk. The former iCloud Drive copy
+(`~/Library/Mobile Documents/com~apple~CloudDocs/...`) is inert — git is
+disabled there and it must not be worked in. If your session's repo root
+contains `Library/Mobile Documents`, stop and re-open from `~/dev`. Legacy
+iCloud/Readdle paths in historical artifacts map to current locations via
+the tables in `docs/WORKSPACE_MIGRATION_2026-07-01.md` — read that file for
+the full migration context, root cause, and standing path rules.
+
 ## Scope
 
 This repo is the root control-plane repo for the workspace. It is not the same

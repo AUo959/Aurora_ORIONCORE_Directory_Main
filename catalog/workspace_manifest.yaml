@@ -1,4 +1,4 @@
-generated_at: '2026-06-15T03:32:45Z'
+generated_at: '2026-07-03T03:43:12Z'
 root: .
 logical_taxonomy:
 - repos
@@ -22,16 +22,6 @@ entries:
   owner: intake-review
   status: planned_move
   batch_id: wave4_root_intake_cleanup_initial
-- id: ds-store
-  kind: cache_or_local_artifact
-  current_path: .DS_Store
-  logical_zone: _staging
-  planned_path: .DS_Store
-  git_boundary: none
-  storage_tier: ephemeral
-  retention_policy: regenerate
-  owner: local-user
-  status: ignored
 - id: dot-agents
   kind: control_surface
   current_path: .agents
@@ -200,6 +190,17 @@ entries:
   owner: intake-review
   status: planned_move
   batch_id: wave4_root_intake_cleanup_initial
+- id: claude
+  kind: intake_file
+  current_path: CLAUDE.md
+  logical_zone: intake
+  planned_path: intake/CLAUDE.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: gumas-sim-2
   kind: repo_hub
   current_path: GUMAS_SIM_2.5
@@ -236,6 +237,28 @@ entries:
   current_path: Prplexity_Observation_6_14.md
   logical_zone: intake
   planned_path: intake/Prplexity_Observation_6_14.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: qgia-axiom-doctrine-narrative
+  kind: intake_file
+  current_path: QGIA_Axiom_Doctrine_Narrative.md
+  logical_zone: intake
+  planned_path: intake/QGIA_Axiom_Doctrine_Narrative.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
+- id: qgia-runtime-onepager
+  kind: intake_file
+  current_path: QGIA_Runtime_OnePager.md
+  logical_zone: intake
+  planned_path: intake/QGIA_Runtime_OnePager.md
   git_boundary: none
   storage_tier: review
   retention_policy: review

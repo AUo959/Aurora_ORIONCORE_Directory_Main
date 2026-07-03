@@ -10,11 +10,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
+# Repo-relative; resolved against --repo at scan time (see scan_repo).
+# Aurora_Sim_Architecture here is the root-level tree, kept disjoint from
+# GUMAS_SIM_2.5 because _iter_candidate_files does not dedupe nested roots.
 DEFAULT_CANONICAL_ROOTS = [
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5",
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/Aurora_Project_Cloudhub_Deploy",
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/GUI_Cloudhub",
-    "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+    "GUMAS_SIM_2.5",
+    "projects/Aurora_Project_Cloudhub_Deploy",
+    "projects/GUI_Cloudhub",
+    "Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
 ]
 
 VALID_ETHICS_PROTOCOL = "Picard_Delta_3"

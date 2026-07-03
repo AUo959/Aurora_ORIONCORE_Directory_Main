@@ -24,14 +24,14 @@ Base run:
 
 ```bash
 python3 /Users/travisstreets/.codex/skills/aurora-quantum-forge-ops/scripts/build_qforge_ops_report.py \
-  --forge-root "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19"
+  --forge-root "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19"
 ```
 
 Run with capsule generation and verification:
 
 ```bash
 python3 /Users/travisstreets/.codex/skills/aurora-quantum-forge-ops/scripts/build_qforge_ops_report.py \
-  --forge-root "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19" \
+  --forge-root "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19" \
   --turns 10 \
   --generate-capsules \
   --verify-capsules \
@@ -42,7 +42,7 @@ Run with payload context:
 
 ```bash
 python3 /Users/travisstreets/.codex/skills/aurora-quantum-forge-ops/scripts/build_qforge_ops_report.py \
-  --forge-root "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19" \
+  --forge-root "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19" \
   --qforge-manifest "/path/to/QUANTUM_FORGE_Manifest.json" \
   --vector-injections "/path/to/Symbolic_Vector_Injections.json"
 ```

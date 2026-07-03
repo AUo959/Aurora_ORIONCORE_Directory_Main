@@ -1,11 +1,16 @@
 # Canonical Roots Policy
 
-Default authority roots are intentionally focused and deterministic.
+Default authority roots are intentionally focused and deterministic. Roots are
+repo-relative and resolved against the `--repo` argument at scan time, so they
+survive workspace relocations (iCloud → `~/dev` on 2026-07-01).
 
-1. `/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5`
-2. `/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/Aurora_Project_Cloudhub_Deploy`
-3. `/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/GUI_Cloudhub`
-4. `/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/Documents/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
+1. `GUMAS_SIM_2.5`
+2. `projects/Aurora_Project_Cloudhub_Deploy`
+3. `projects/GUI_Cloudhub`
+4. `Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
+
+Root 4 is the root-level tree, kept disjoint from `GUMAS_SIM_2.5` so nested
+roots are never scanned twice (the file iterator does not dedupe).
 
 ## Rationale
 

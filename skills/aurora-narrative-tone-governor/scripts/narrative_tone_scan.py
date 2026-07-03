@@ -11,8 +11,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 DEFAULT_CANONICAL_ROOTS = [
-    "GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0",
-    "GUMAS_SIM_2.0/03_SIMULATION/Location_Data/Sim_Locations",
+    "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0",
+    "projects/GUMAS_SIM_2.0/03_SIMULATION/Location_Data/Sim_Locations",
     "GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19",
     "GUMAS_SIM_2.5/PROJECT_KNOWLEDGE",
 ]

@@ -128,12 +128,17 @@ valid finding; "this is bureaucracy" without that analysis is not.
 
 ## Rule 7 — Environment Caveat
 
-This workspace lives in iCloud Drive (`com~apple~CloudDocs`). Sync-conflict
-duplicates, file eviction placeholders (`*.icloud`), and timestamp drift are
-live risks to Git integrity in all six repos. If you observe anomalies
-(duplicate files with conflict suffixes, missing blobs, mtime weirdness),
-consider sync interference before concluding repo corruption — and flag any
-such observation explicitly.
+As of 2026-07-01 this workspace lives on local disk at
+`/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main`. It previously
+lived in iCloud Drive (`com~apple~CloudDocs`), where file eviction
+placeholders and sync drift corrupted Git behavior; that copy still exists
+but is inert (git disabled via renamed `.git/HEAD`, guard notices in place —
+see `docs/WORKSPACE_MIGRATION_2026-07-01.md`). Never work in the iCloud
+copy. If you encounter artifacts referencing `Mobile Documents` paths,
+treat them as pre-migration records, not as instructions about where files
+live now. Sync-conflict duplicates (files with conflict suffixes) may still
+appear in material recovered from the iCloud era — flag them explicitly
+rather than concluding repo corruption.
 
 ## Reviewer Posture
 
