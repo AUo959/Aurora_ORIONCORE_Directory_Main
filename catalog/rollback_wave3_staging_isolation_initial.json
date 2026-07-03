@@ -1,7 +1,7 @@
 {
   "batch_id": "wave3_staging_isolation_initial_rollback",
   "for_batch": "wave3_staging_isolation_initial",
-  "generated_at": "2026-05-24T03:27:01Z",
+  "generated_at": "2026-07-03T17:55:04Z",
   "operations": [
     {
       "batch_id": "wave3_staging_isolation_initial_rollback",

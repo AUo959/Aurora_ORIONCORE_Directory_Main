@@ -118,6 +118,9 @@ _entropy_quarantine/
 /reports/analysis/gitwiz/GITWIZ_*.json
 /reports/analysis/gitwiz/GITWIZ_*.md
 
+# Local rollback snapshots from the 2026-07 iCloud-to-dev migration.
+*.pre-icloud-sync-*.bak
+
 
 #Ignore vscode AI rules
 .github/instructions/codacy.instructions.md

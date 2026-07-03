@@ -1,6 +1,8 @@
 legacy_path,canonical_path,status
+# QGIA Operational Axiom v3.xml,intake/# QGIA Operational Axiom v3.xml,pending
 .devcontainer,intake/.devcontainer,pending
 .github,intake/.github,pending
+.gitleaks.toml,intake/.gitleaks.toml,pending
 .pre-commit-config.yaml,intake/.pre-commit-config.yaml,pending
 4.txt,intake/4.txt,pending
 AURIC_AGENT_CORE_v1.0.yaml,intake/AURIC_AGENT_CORE_v1.0.yaml,active
@@ -17,6 +19,7 @@ Automation_Reports/archive_entropy_guard_2026-03-07.md,reports/automation/archiv
 Automation_Reports/archive_entropy_guard_report_2026-03-07.md,reports/automation/archive-entropy-guard/2026-03-07/archive_entropy_guard_report_2026-03-07.md,active
 Bridgewalker_to_EmergentEcho_link.json,intake/Bridgewalker_to_EmergentEcho_link.json,active
 CICADA_Symbolic_Module_v1.0.md,intake/CICADA_Symbolic_Module_v1.0.md,active
+CLAUDE.md,intake/CLAUDE.md,pending
 GUMAS_Staff_Core_Module_Rebuild.json,intake/GUMAS_Staff_Core_Module_Rebuild.json,active
 Image.png,intake/Image.png,active
 Non_can_reports,reports/analysis/non_can_reports,active
@@ -26,20 +29,29 @@ ORION__CANON__ORION_STATION_ENVIRONMENT__v2.0__2026-04-08.md,intake/ORION__CANON
 ORION__NAV__PERPLEXITY_SPACE_FRONT_DOOR__v2.0__2026-04-08.md,intake/ORION__NAV__PERPLEXITY_SPACE_FRONT_DOOR__v2.0__2026-04-08.md,pending
 ORION__POLICY__CANON_PROTOCOL__v2.0__2026-04-08.md,intake/ORION__POLICY__CANON_PROTOCOL__v2.0__2026-04-08.md,pending
 Opal2_Modular_System_Dev,projects/Opal2_Modular_System_Dev,active
+PR SENSOR ARRAY SPEC v0 3 0 DELTA.md,intake/PR SENSOR ARRAY SPEC v0 3 0 DELTA.md,pending
 PROJECT_SPACE_BANNER.md,intake/PROJECT_SPACE_BANNER.md,active
 Perplexity_repo_report_04_26.pdf,intake/Perplexity_repo_report_04_26.pdf,pending
 Perplexity_report_repo_04_26,intake/Perplexity_report_repo_04_26,pending
 Perplexity_system_exam_04_26,intake/Perplexity_system_exam_04_26,pending
+Prplexity_Observation_6_14.md,intake/Prplexity_Observation_6_14.md,pending
+QGIA_Axiom_Doctrine_Narrative.md,intake/QGIA_Axiom_Doctrine_Narrative.md,pending
+QGIA_Runtime_OnePager.md,intake/QGIA_Runtime_OnePager.md,pending
 QGIA_SPACE_NAVAGATION_GUIDE.md,intake/QGIA_SPACE_NAVAGATION_GUIDE.md,active
 Quantum_Forge_Index,projects/Quantum_Forge_Index,active
 REPO_BOUNDARY_NOTICE.md,docs/repo-boundary-notice.md,active
 Recovery Codes,_staging/Recovery Codes,active
+SENSOR ARRAY SPECIFICATION v0 3 0.md,intake/SENSOR ARRAY SPECIFICATION v0 3 0.md,pending
+SPEC__SALVAGE_OPERATIONS__v0_1_0.md,intake/SPEC__SALVAGE_OPERATIONS__v0_1_0.md,pending
 Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json,intake/Symbolic_Module_Specs_CONSTELLINK_ORACULITH.json,active
 THREAD.MEMORY.COMPRESSION.SYMBOLIC.0424.beacon.json.pdf.pdf,intake/THREAD.MEMORY.COMPRESSION.SYMBOLIC.0424.beacon.json.pdf.pdf,pending
 THREADCORE_GUMAS_Master_Restore_v1_RC.yaml,intake/THREADCORE_GUMAS_Master_Restore_v1_RC.yaml,active
 Text_109.txt,intake/Text_109.txt,pending
 Threadcore Library,intake/Threadcore Library,active
 agent_template_quantum_elira.vsig,intake/agent_template_quantum_elira.vsig,active
+aurora-cloudbank-symbolic_README_DRAFT.md,intake/aurora-cloudbank-symbolic_README_DRAFT.md,pending
+aurora-cloudbank-symbolic_outside_review.md,intake/aurora-cloudbank-symbolic_outside_review.md,pending
+aurora-cloudbank-symbolic_review_v2.md,intake/aurora-cloudbank-symbolic_review_v2.md,pending
 aurora-viz.pdf,intake/aurora-viz.pdf,pending
 aurora_cloudbank_symbolic_architecture_discovery_report.md,reports/analysis/aurora_cloudbank_symbolic_architecture_discovery_report.md,active
 aurora_scaffold_nexus_meta_narrative.md,intake/aurora_scaffold_nexus_meta_narrative.md,pending
@@ -299,3 +311,4 @@ thread_core_v_3.md,intake/thread_core_v_3.md,pending
 threadcore_auronaut_metanarrative_2025_04_27.md,intake/threadcore_auronaut_metanarrative_2025_04_27.md,pending
 threadcore_comprehensive_manifest_and_meta_narrative.md,intake/threadcore_comprehensive_manifest_and_meta_narrative.md,pending
 threadcore_symbiosis_delta_manifest.md,intake/threadcore_symbiosis_delta_manifest.md,pending
+warrant-lens,intake/warrant-lens,pending

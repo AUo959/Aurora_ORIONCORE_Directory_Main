@@ -126,7 +126,7 @@
     "repo": "root control plane + registered nested repos by explicit gate only",
     "description": "Run the Aurora salvage operation: find valuable unmerged iCloud/recovery logic, classify it, and promote only through explicit owner-surface gates.",
     "started_at": "2026-06-12T23:00:00Z",
-    "updated_at": "2026-07-03T17:39:37Z",
+    "updated_at": "2026-07-03T17:53:40Z",
     "context_files": [
       "reports/analysis/cloudbank_scenario_seed_adapter_pr_ready_blocker__2026-07-01.md",
       "reports/analysis/branch_cleanup_tier2__2026-06-20.md",
@@ -171,8 +171,8 @@
       "reports/analysis/integration_pass__2026-06-11.md",
       "docs/WORKSPACE_MIGRATION_2026-07-01.md"
     ],
-    "next_step": "monitor_cloudbank_pr_1182_checks_and_review_then_continue_publication_debt_triage",
-    "next_step_detail": "Continuation 2026-07-03T17:36:37Z: Opened and operated from canonical root /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main, not the inert iCloud copy. Read docs/WORKSPACE_MIGRATION_2026-07-01.md and confirmed the prior blocker was iCloud eviction/pathing, not GitHub credentials. The old /private/tmp/cloudbank-l2-scenario-adapter worktree was clean but unsafe because its .git file still pointed to /Users/travisstreets/Library/Mobile Documents/.../aurora-cloudbank-symbolic-main/.git/worktrees/cloudbank-l2-scenario-adapter, so it was not used for publication. Created fresh detached worktree /private/tmp/cloudbank-l2-scenario-adapter-dev from the CloudBank checkout under ~/dev; its git common dir is under /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.git. Fetched origin/main successfully (d915c935..464de5b6). Rebased the adapter commit 1eedd38f onto current origin/main as 0122c101d744839eb100a8464a4b8084c82db053; adapter file contents are unchanged from the old remote branch and the diff remains exactly simulation/scenario_seed_initializer.py plus tests/test_scenario_seed_initializer.py (309 insertions, rev-list origin/main...HEAD = 0 1). Validation passed after rebase: PYTHONPYCACHEPREFIX=/private/tmp/cloudbank-l2-scenario-pycache python3 -m pytest tests/test_scenario_seed_initializer.py -q (5 passed, two existing pytest config warnings); PYTHONPYCACHEPREFIX=/private/tmp/cloudbank-l2-scenario-pycache python3 -m py_compile simulation/scenario_seed_initializer.py tests/test_scenario_seed_initializer.py; root PYTHONPYCACHEPREFIX=/private/tmp/aurora-root-pycache python3 tools/l2_scenario_seed_uptake.py --ids SCN-0903 --summary (status valid); explicit file-path smoke root build_report(..., ['SCN-0903']) into CloudBank initialize_from_uptake_packet passed with seed 903, roles 6, pressure axes 3, knob axes 7. Remote branch codex/l2-scenario-seed-simulation-initializer already existed at old commit 1eedd38f and had no PR; after verifying adapter files were identical, updated it with force-with-lease pinned to 1eedd38f. Created CloudBank PR #1182: https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1182. PR metadata at creation: head 0122c101, base 464de5b6, mergeable MERGEABLE, mergeStateStatus BLOCKED while checks/review are pending. Check snapshot: many checks passed including validate-dependencies 3.11/3.12, guardrails, health-check, security-scan, evaluate-and-integrate, GitGuardian; pending at handoff were Analyze, CI Check, code_quality, evaluate, test, and Codacy Static Code Analysis. Root repo had pre-existing dirty changes in catalog/session_state.json, reports/automation/skill_sync_latest.json, catalog/session_state.json.pre-icloud-sync-20260701.bak, and reports/simulation/powered_watch_v1__2026-07-03/; preserve those as Claude/user work. Next safe step: monitor gh pr checks 1182 --repo AUo959/aurora-cloudbank-symbolic, then route to human review/merge if checks pass. After #1182 is settled, continue publication_debt triage for stranded CloudBank branches codex/cloudbank-issue-1015-salvage and codex/cloudbank-issue-1020-mesh-router-contract. Do not use the dirty canonical CloudBank checkout as an edit surface for those follow-ups. Final closeout refresh 2026-07-03T17:39:37Z: gh pr view reports PR #1182 state OPEN, head 0122c101, base 464de5b6, mergeable MERGEABLE, mergeStateStatus UNSTABLE, reviewDecision empty. gh pr checks shows GitHub Actions/Sonar/GitGuardian checks passing; only external Codacy Static Code Analysis remained pending, with non-applicable auto-merge/integration/label jobs skipped."
+    "next_step": "address_cloudbank_pr_1182_codacy_failure_then_continue_publication_debt_triage",
+    "next_step_detail": "Continuation 2026-07-03T17:36:37Z: Opened and operated from canonical root /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main, not the inert iCloud copy. Read docs/WORKSPACE_MIGRATION_2026-07-01.md and confirmed the prior blocker was iCloud eviction/pathing, not GitHub credentials. The old /private/tmp/cloudbank-l2-scenario-adapter worktree was clean but unsafe because its .git file still pointed to /Users/travisstreets/Library/Mobile Documents/.../aurora-cloudbank-symbolic-main/.git/worktrees/cloudbank-l2-scenario-adapter, so it was not used for publication. Created fresh detached worktree /private/tmp/cloudbank-l2-scenario-adapter-dev from the CloudBank checkout under ~/dev; its git common dir is under /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.git. Fetched origin/main successfully (d915c935..464de5b6). Rebased the adapter commit 1eedd38f onto current origin/main as 0122c101d744839eb100a8464a4b8084c82db053; adapter file contents are unchanged from the old remote branch and the diff remains exactly simulation/scenario_seed_initializer.py plus tests/test_scenario_seed_initializer.py (309 insertions, rev-list origin/main...HEAD = 0 1). Validation passed after rebase: PYTHONPYCACHEPREFIX=/private/tmp/cloudbank-l2-scenario-pycache python3 -m pytest tests/test_scenario_seed_initializer.py -q (5 passed, two existing pytest config warnings); PYTHONPYCACHEPREFIX=/private/tmp/cloudbank-l2-scenario-pycache python3 -m py_compile simulation/scenario_seed_initializer.py tests/test_scenario_seed_initializer.py; root PYTHONPYCACHEPREFIX=/private/tmp/aurora-root-pycache python3 tools/l2_scenario_seed_uptake.py --ids SCN-0903 --summary (status valid); explicit file-path smoke root build_report(..., ['SCN-0903']) into CloudBank initialize_from_uptake_packet passed with seed 903, roles 6, pressure axes 3, knob axes 7. Remote branch codex/l2-scenario-seed-simulation-initializer already existed at old commit 1eedd38f and had no PR; after verifying adapter files were identical, updated it with force-with-lease pinned to 1eedd38f. Created CloudBank PR #1182: https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1182. PR metadata at creation: head 0122c101, base 464de5b6, mergeable MERGEABLE, mergeStateStatus BLOCKED while checks/review are pending. Check snapshot: many checks passed including validate-dependencies 3.11/3.12, guardrails, health-check, security-scan, evaluate-and-integrate, GitGuardian; pending at handoff were Analyze, CI Check, code_quality, evaluate, test, and Codacy Static Code Analysis. Root repo had pre-existing dirty changes in catalog/session_state.json, reports/automation/skill_sync_latest.json, catalog/session_state.json.pre-icloud-sync-20260701.bak, and reports/simulation/powered_watch_v1__2026-07-03/; preserve those as Claude/user work. Next safe step: monitor gh pr checks 1182 --repo AUo959/aurora-cloudbank-symbolic, then route to human review/merge if checks pass. After #1182 is settled, continue publication_debt triage for stranded CloudBank branches codex/cloudbank-issue-1015-salvage and codex/cloudbank-issue-1020-mesh-router-contract. Do not use the dirty canonical CloudBank checkout as an edit surface for those follow-ups. Final closeout refresh 2026-07-03T17:39:37Z: gh pr view reports PR #1182 state OPEN, head 0122c101, base 464de5b6, mergeable MERGEABLE, mergeStateStatus UNSTABLE, reviewDecision empty. gh pr checks shows GitHub Actions/Sonar/GitGuardian checks passing; only external Codacy Static Code Analysis remained pending, with non-applicable auto-merge/integration/label jobs skipped. Hygiene pass 2026-07-03T17:53:40Z: stayed in canonical root /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main. Root checks: make session-state-check OK; make skills-check reported 0 changes across 16 project-owned skills and Codex target up-to-date; python3 tools/workspace_verify.py had 0 blocking findings, with warnings for remote-only registered repos and session_state_freshness before this handoff refresh; make devkit-check reported 21/21 tools OK with CloudBank Python environment warning. Live PR refresh: CloudBank PR #1182 is OPEN, head 0122c101, base 464de5b6, mergeable MERGEABLE, mergeStateStatus UNSTABLE; GitHub Actions, SonarCloud, CodeQL, GitGuardian, dependency validation, guardrails, health-check, security-scan, evaluate, and test checks pass, but external Codacy Static Code Analysis now fails. Root gitwiz audit confirmed main is 0 ahead / 0 behind origin/main and dirty only from local hygiene artifacts. Added .gitignore rule for *.pre-icloud-sync-*.bak so migration rollback snapshots remain local and do not pollute git status. Reports/simulation/powered_watch_v1__2026-07-03 JSON files parse cleanly and are treated as report artifacts, not canon promotion. Next safe step: inspect/fix Codacy findings on PR #1182 or decide whether the external Codacy failure is acceptable; then continue publication-debt triage."
   },
   "task_queue": [
     {
@@ -401,9 +401,9 @@
       "summary": "Read the 2026-07-01 workspace migration handoff, verified canonical ~/dev operation, and avoided the stale iCloud-backed /private/tmp CloudBank worktree."
     }
   ],
-  "last_updated": "2026-07-03T17:39:37Z",
+  "last_updated": "2026-07-03T17:53:40Z",
   "last_platform": "codex",
-  "last_session_summary": "Codex opened CloudBank PR #1182 from the ~/dev-backed worktree, pushed root handoff state, and confirmed final PR status MERGEABLE/UNSTABLE with only external Codacy still pending.",
+  "last_session_summary": "Codex ran a root hygiene pass, ignored local iCloud migration backups, recorded the clean skill-sync receipt plus simulation report, and found CloudBank PR #1182 now blocked by failed external Codacy.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -422,6 +422,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "faef8e9",
+      "date": "2026-07-03",
+      "platform": "codex",
+      "summary": "chore(session): record CloudBank adapter PR handoff"
+    },
+    {
+      "sha": "d674266",
+      "date": "2026-07-03",
+      "platform": "codex",
+      "summary": "chore(session): refresh CloudBank PR 1182 status"
+    },
     {
       "sha": "13e2d1d",
       "date": "2026-07-03",
@@ -469,18 +481,6 @@
       "date": "2026-06-19",
       "platform": "codex",
       "summary": "chore(session): record branch cleanup tier2"
-    },
-    {
-      "sha": "2be4d08",
-      "date": "2026-06-19",
-      "platform": "codex",
-      "summary": "chore(session): record branch cleanup tier1"
-    },
-    {
-      "sha": "f097c0c",
-      "date": "2026-06-19",
-      "platform": "codex",
-      "summary": "fix(gitwiz): classify gh sandbox auth failures"
     }
   ],
   "security_events": [
@@ -530,11 +530,11 @@
       "id": "cloudbank-adapter-publish-retry-2026-07-02",
       "priority": "high",
       "assigned_to": "codex",
-      "description": "CloudBank scenario-seed adapter publication retry is now PR #1182 (https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1182), head 0122c101 on base 464de5b6. Monitor checks/review before merge. Remaining publication-debt follow-up from this queue item: triage stranded branches codex/cloudbank-issue-1015-salvage (3 commits) and codex/cloudbank-issue-1020-mesh-router-contract (1 commit)."
+      "description": "CloudBank scenario-seed adapter publication retry is PR #1182 (https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1182), head 0122c101 on base 464de5b6. GitHub Actions/Sonar/GitGuardian checks pass, but external Codacy Static Code Analysis is failing as of 2026-07-03T17:53:40Z; inspect/fix or make an explicit accept/override decision before merge. Remaining publication-debt follow-up: triage stranded branches codex/cloudbank-issue-1015-salvage (3 commits) and codex/cloudbank-issue-1020-mesh-router-contract (1 commit)."
     }
   ],
   "known_state": {
-    "main_sha": "13e2d1d",
+    "main_sha": "d674266",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -547,7 +547,7 @@
       "salvage/stash-root-diff-cleanup-2026-04-14"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main                    2ce76d4 [main]",
+      "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main                    d674266 [main]",
       "/Users/travisstreets/.codex/worktrees/19cf/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/a12a/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)",
       "/Users/travisstreets/.codex/worktrees/cdb0/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)"
@@ -560,7 +560,7 @@
       "Do not replay the other 63 files from #837; use issue-specific PRs from current main",
       "Live open PR count during extraction planning was 43; Claude added #913-#915 during stabilization window",
       "CloudBank workflow fix branch codex/cloudbank-fix-knowledge-aggregator-2026-06-08 pushed at 36f2ba71; PR creation blocked by GitHub API rate limit on 2026-06-09.",
-      "CloudBank #1182 open: scenario-seed initializer adapter, head 0122c101, base 464de5b6; mergeable MERGEABLE, mergeStateStatus UNSTABLE, external Codacy Static Code Analysis pending at 2026-07-03T17:39:37Z."
+      "CloudBank #1182 open: scenario-seed initializer adapter, head 0122c101, base 464de5b6; mergeable MERGEABLE, mergeStateStatus UNSTABLE, external Codacy Static Code Analysis failing at 2026-07-03T17:53:40Z."
     ],
     "codacy_status": "Root main has local workflow cleanup commit d7c3506 pending publication; workspace_verify has no blocking findings and only remote-only spoke warnings pending generator support.",
     "devkit_status": "READY 21/21 tools as of 2026-05-31; canonical Python floor declared in af846ac.",
@@ -707,10 +707,10 @@
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
-        "class": "open_pr_pending",
+        "class": "open_pr_failing_check",
         "branch": "codex/l2-scenario-seed-simulation-initializer",
-        "detail": "PR #1182 open at head 0122c101; external Codacy/review pending",
-        "remediation": "Monitor PR #1182 Codacy/review, then merge or revise deliberately."
+        "detail": "PR #1182 open at head 0122c101; external Codacy Static Code Analysis failing",
+        "remediation": "Inspect/fix PR #1182 Codacy findings or make an explicit accept/override decision."
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",

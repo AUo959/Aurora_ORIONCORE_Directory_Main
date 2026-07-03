@@ -1,32 +1,11 @@
 {
-  "generated_at_utc": "2026-07-03T02:29:59Z",
+  "generated_at_utc": "2026-07-03T04:19:20Z",
   "source": "skills/",
   "targets": {
     "codex": {
       "dest": "/Users/travisstreets/.codex/skills",
-      "files_changed": 8,
-      "skills_changed": {
-        "aurora-governance-orchestrator": [
-          "update: scripts/orchestrate_governance.py"
-        ],
-        "aurora-narrative-tone-governor": [
-          "update: scripts/narrative_tone_scan.py"
-        ],
-        "aurora-quantum-forge-ops": [
-          "update: SKILL.md",
-          "update: references/forge_api_contract.md"
-        ],
-        "aurora-selective-integration": [
-          "update: references/protocol_mapping_v2_5.md"
-        ],
-        "aurora-skill-finder": [
-          "update: SKILL.md"
-        ],
-        "threadcore-governor": [
-          "update: references/canonical_roots.md",
-          "update: scripts/threadcore_rules.py"
-        ]
-      }
+      "files_changed": 0,
+      "skills_changed": {}
     }
   }
 }

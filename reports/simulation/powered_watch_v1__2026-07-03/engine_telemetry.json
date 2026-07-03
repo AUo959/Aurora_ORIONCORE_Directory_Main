@@ -1,0 +1,133 @@
+{
+  "engine_class": "GUMASAdvancedEngine",
+  "factions": 13,
+  "leaders": 21,
+  "turns_total": 11,
+  "final_stability": 0.5713,
+  "final_risk": 0.4317,
+  "log": [
+    {
+      "hour": 1,
+      "turn": 1,
+      "stability_index": 0.6075,
+      "risk_index": 0.3521,
+      "summary": "Turn 1: stability=0.607, risk=0.352, v3_events=154",
+      "notable": {},
+      "tech_breakthroughs": 0,
+      "negotiations_concluded": 5
+    },
+    {
+      "hour": 1,
+      "turn": 2,
+      "stability_index": 0.6054,
+      "risk_index": 0.3538,
+      "summary": "Turn 2: stability=0.605, risk=0.354, v3_events=24",
+      "notable": {},
+      "tech_breakthroughs": 0,
+      "negotiations_concluded": 0
+    },
+    {
+      "hour": 1,
+      "turn": 3,
+      "stability_index": 0.6055,
+      "risk_index": 0.3533,
+      "summary": "Turn 3: stability=0.605, risk=0.353, v3_events=34",
+      "notable": {},
+      "tech_breakthroughs": 0,
+      "negotiations_concluded": 0
+    },
+    {
+      "hour": 1,
+      "turn": 4,
+      "stability_index": 0.604,
+      "risk_index": 0.3543,
+      "summary": "Turn 4: stability=0.604, risk=0.354, v3_events=26",
+      "notable": {},
+      "tech_breakthroughs": 0,
+      "negotiations_concluded": 1
+    },
+    {
+      "hour": 2,
+      "turn": 5,
+      "stability_index": 0.6007,
+      "risk_index": 0.3571,
+      "summary": "Turn 5: stability=0.601, risk=0.357, v3_events=26",
+      "notable": {},
+      "tech_breakthroughs": 0,
+      "negotiations_concluded": 1
+    },
+    {
+      "hour": 2,
+      "turn": 6,
+      "stability_index": 0.5969,
+      "risk_index": 0.3769,
+      "summary": "Turn 6: stability=0.597, risk=0.377, v3_events=30",
+      "notable": {
+        "new_insurgencies": 1
+      },
+      "tech_breakthroughs": 0,
+      "negotiations_concluded": 0
+    },
+    {
+      "hour": 2,
+      "turn": 7,
+      "stability_index": 0.5921,
+      "risk_index": 0.3811,
+      "summary": "Turn 7: stability=0.592, risk=0.381, v3_events=33",
+      "notable": {},
+      "tech_breakthroughs": 0,
+      "negotiations_concluded": 3
+    },
+    {
+      "hour": 2,
+      "turn": 8,
+      "stability_index": 0.5823,
+      "risk_index": 0.4065,
+      "summary": "Turn 8: stability=0.582, risk=0.407, v3_events=33",
+      "notable": {
+        "new_insurgencies": 1
+      },
+      "tech_breakthroughs": 0,
+      "negotiations_concluded": 0
+    },
+    {
+      "hour": 3,
+      "turn": 9,
+      "stability_index": 0.5896,
+      "risk_index": 0.3986,
+      "summary": "Turn 9: stability=0.590, risk=0.399, v3_events=36",
+      "notable": {},
+      "tech_breakthroughs": 0,
+      "negotiations_concluded": 1
+    },
+    {
+      "hour": 3,
+      "turn": 10,
+      "stability_index": 0.5753,
+      "risk_index": 0.4115,
+      "summary": "Turn 10: stability=0.575, risk=0.412, v3_events=30",
+      "notable": {},
+      "tech_breakthroughs": 0,
+      "negotiations_concluded": 1
+    },
+    {
+      "hour": 4,
+      "turn": 11,
+      "stability_index": 0.5713,
+      "risk_index": 0.4317,
+      "summary": "Turn 11: stability=0.571, risk=0.432, v3_events=28",
+      "notable": {
+        "new_insurgencies": 1
+      },
+      "tech_breakthroughs": 0,
+      "negotiations_concluded": 1
+    }
+  ],
+  "injected_tasks": [
+    {
+      "id": "E2",
+      "name": "Analysis cell: review engine turn telemetry (hour 2: 2 notable event(s))",
+      "hour_injected": 2
+    }
+  ]
+}
