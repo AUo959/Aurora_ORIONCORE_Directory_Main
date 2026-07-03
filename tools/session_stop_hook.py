@@ -4,11 +4,16 @@ session_stop_hook.py — Runs on Claude Code session Stop.
 
 Four jobs:
   1. Auto-write mechanical fields to catalog/session_state.json
-     (last_platform, last_updated, known_state.main_sha, recent_commits)
-  2. Commit + push session_state.json so Codex sees it immediately
+     (last_platform, last_updated, known_state.main_sha, recent_commits).
+     ADVISORY ONLY — the update rides along with the operator's next real
+     commit; the hook deliberately never commits or pushes (churn +
+     force-push hazard).
+  2. Record the landing ledger (publication debt) at session close
   3. If there are uncommitted tracked changes, write an orphan marker so
      the next session (either platform) surfaces the abandoned work
-  4. Print a summary of what was done
+     (surfaced via the SessionStart hook running `check-orphans`)
+  4. Validate session_state.json against the queue contract
+     (tools/session_state_check.py) and warn on drift
 
 Invoked from .claude/settings.json → hooks → Stop.
 """
@@ -64,17 +69,18 @@ def _git_log_since(since_sha: str) -> list[dict]:
 
 
 def _git_uncommitted_tracked() -> list[str]:
-    """Return list of tracked files with uncommitted changes."""
-    raw = _git("status", "--porcelain")
-    changed = []
-    for line in raw.splitlines():
-        if len(line) >= 3:
-            status = line[:2]
-            path = line[3:].strip()
-            # Only tracked modifications (M, D) — not untracked (??)
-            if "?" not in status and path and "catalog/session_state.json" not in path:
-                changed.append(path)
-    return changed
+    """Return list of tracked files with uncommitted changes.
+
+    Uses `git diff --name-only HEAD` (staged + unstaged, tracked only):
+    parsing `--porcelain` through _git() is unsafe because _git() strips
+    stdout, which eats the leading space of the first porcelain line and
+    truncates that path's first character.
+    """
+    raw = _git("diff", "--name-only", "HEAD")
+    return [
+        path.strip() for path in raw.splitlines()
+        if path.strip() and "catalog/session_state.json" not in path
+    ]
 
 
 # ── State update ──────────────────────────────────────────────────────────
@@ -212,6 +218,19 @@ def main() -> int:
         state = json.loads(STATE_PATH.read_text())
     except Exception:
         return 0
+
+    # Contract check (warn only — never block session close on drift)
+    try:
+        import session_state_check
+
+        drift = session_state_check.validate(state)
+        if drift:
+            print(f"[stop-hook] session_state.json contract drift ({len(drift)}):")
+            for finding in drift[:5]:
+                print(f"  - {finding}")
+            print("  Run: make session-state-check")
+    except Exception as exc:
+        print(f"[stop-hook] contract check skipped: {exc}")
 
     known_sha = state.get("known_state", {}).get("main_sha", "")
 

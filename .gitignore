@@ -22,6 +22,7 @@
 !/.pre-commit-config.yaml
 !/Makefile
 !/AGENTS.md
+!/CLAUDE.md
 !/README.md
 !/SPEC__WARRANT_LENS__v1.md
 !/warrant-lens/

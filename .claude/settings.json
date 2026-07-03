@@ -3,6 +3,18 @@
     "codacy-skills@codacy": true
   },
   "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 tools/session_stop_hook.py check-orphans",
+            "statusMessage": "Checking for orphaned work from previous sessions"
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "matcher": "",
