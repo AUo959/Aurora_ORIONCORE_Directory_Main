@@ -394,9 +394,9 @@
       "detail": "All four approved owner items executed: branch protection live (CI Check required on main), root pushed, recovered PRs #946/#947/#948 + spine #3 reviewed and merged, closed-PR triage done (#617/#864/#843 stay closed with rationale; #640 revived as PR #979, CI green, 14 tests pass, AWAITING OWNER REVIEW — 2,103 lines narrative validation engine phase one). Remaining backlog: March rescue lineage extraction (gitleaks-clean, see reports/analysis/unlanded_work_audit__2026-06-10.md) and root branches (gitwiz-sync-audit 9 commits, weekly-skill-audit 1)."
     }
   ],
-  "last_updated": "2026-07-01T17:19:13Z",
-  "last_platform": "codex",
-  "last_session_summary": "Codex resumed the CloudBank scenario-seed adapter branch, verified the actual local diff as one adapter commit adding simulation/scenario_seed_initializer.py and tests/test_scenario_seed_initializer.py, validated it in /private/tmp/cloudbank-l2-scenario-adapter against focused tests and a real root-generated SCN-0903 uptake packet, and recorded a PR-ready blocker receipt because git fetch origin main failed or hung before remote freshness/publication could be completed.",
+  "last_updated": "2026-07-03T04:06:01Z",
+  "last_platform": "claude-code",
+  "last_session_summary": "Claude Code post-migration hardening: repointed all remaining iCloud/Readdle paths (Codex trust config, governance skill roots now repo-relative, docs), wrote docs/WORKSPACE_MIGRATION_2026-07-01.md and repo CLAUDE.md, fixed session_stop_hook porcelain-parsing bug + wired check-orphans into SessionStart, repaired the pending queue (legacy item-keyed entry, adapter publish retry queued for codex), and landed the queue contract (schema + session_state_check + 16 tests + make target). Also landed the pending readiness tooling suite. All four commits on main; conflict-dupe disposition and iCloud-tree deletion remain Pilot decisions.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -415,6 +415,30 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "9b6315a",
+      "date": "2026-07-03",
+      "platform": "claude-code",
+      "summary": "feat(tools): land the readiness tooling suite and pending reports"
+    },
+    {
+      "sha": "fef8d0c",
+      "date": "2026-07-03",
+      "platform": "claude-code",
+      "summary": "feat(session): queue contract for the shared session state"
+    },
+    {
+      "sha": "ba8de88",
+      "date": "2026-07-03",
+      "platform": "claude-code",
+      "summary": "feat(session): Claude Code side of the collaboration layer"
+    },
+    {
+      "sha": "55872b8",
+      "date": "2026-07-03",
+      "platform": "claude-code",
+      "summary": "chore(workspace): complete the iCloud->~/dev migration cleanup"
+    },
     {
       "sha": "2ce76d4",
       "date": "2026-06-20",
@@ -450,30 +474,6 @@
       "date": "2026-06-19",
       "platform": "codex",
       "summary": "chore(session): record scenario initializer handoff"
-    },
-    {
-      "sha": "711603b",
-      "date": "2026-06-18",
-      "platform": "codex",
-      "summary": "chore(session): record l2 seed uptake handoff"
-    },
-    {
-      "sha": "38be2e2",
-      "date": "2026-06-18",
-      "platform": "codex",
-      "summary": "chore(root): add l2 scenario seed uptake contract"
-    },
-    {
-      "sha": "2175734",
-      "date": "2026-06-18",
-      "platform": "codex",
-      "summary": "chore(session): record dune lineage promotion"
-    },
-    {
-      "sha": "780f0d5",
-      "date": "2026-06-18",
-      "platform": "codex",
-      "summary": "chore(root): promote dune lineage scenario seeds"
     }
   ],
   "security_events": [
@@ -533,7 +533,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "2ce76d4bb781c20ccf33d46dd55700b828769a33",
+    "main_sha": "9b6315a78cdc57c0306cc11194d82ea58c209534",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
