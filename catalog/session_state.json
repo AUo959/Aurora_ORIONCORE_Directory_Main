@@ -396,7 +396,7 @@
   ],
   "last_updated": "2026-07-03T04:06:01Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Claude Code post-migration hardening: repointed all remaining iCloud/Readdle paths (Codex trust config, governance skill roots now repo-relative, docs), wrote docs/WORKSPACE_MIGRATION_2026-07-01.md and repo CLAUDE.md, fixed session_stop_hook porcelain-parsing bug + wired check-orphans into SessionStart, repaired the pending queue (legacy item-keyed entry, adapter publish retry queued for codex), and landed the queue contract (schema + session_state_check + 16 tests + make target). Also landed the pending readiness tooling suite. All four commits on main; conflict-dupe disposition and iCloud-tree deletion remain Pilot decisions.",
+  "last_session_summary": "Claude Code post-migration hardening: repointed all remaining iCloud/Readdle paths (Codex trust config, governance skill roots now repo-relative, docs), wrote docs/WORKSPACE_MIGRATION_2026-07-01.md and repo CLAUDE.md, fixed session_stop_hook porcelain-parsing bug + wired check-orphans into SessionStart, repaired the pending queue (legacy item-keyed entry, adapter publish retry queued for codex), and landed the queue contract (schema + session_state_check + 16 tests + make target). Also landed the pending readiness tooling suite. All four commits on main; conflict-dupe disposition and iCloud-tree deletion remain Pilot decisions. Post-close: first successful fetch since the migration revealed 5 unfetched remote commits (CanonRec bridge scaffolds, living station clock PR #26, L1 harness PR #25); local work rebased on top, generated surfaces reconciled. CloudBank .venv was a 0-byte rsync skeleton — rebuilt from requirements, pip check clean, 19 middleware tests pass.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -416,25 +416,25 @@
   },
   "recent_commits": [
     {
-      "sha": "9b6315a",
+      "sha": "79bba33",
       "date": "2026-07-03",
       "platform": "claude-code",
       "summary": "feat(tools): land the readiness tooling suite and pending reports"
     },
     {
-      "sha": "fef8d0c",
+      "sha": "0b9f9f8",
       "date": "2026-07-03",
       "platform": "claude-code",
       "summary": "feat(session): queue contract for the shared session state"
     },
     {
-      "sha": "ba8de88",
+      "sha": "318b14e",
       "date": "2026-07-03",
       "platform": "claude-code",
       "summary": "feat(session): Claude Code side of the collaboration layer"
     },
     {
-      "sha": "55872b8",
+      "sha": "83baea0",
       "date": "2026-07-03",
       "platform": "claude-code",
       "summary": "chore(workspace): complete the iCloud->~/dev migration cleanup"
@@ -533,7 +533,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "9b6315a78cdc57c0306cc11194d82ea58c209534",
+    "main_sha": "ab0e1d6dd570103915d7a7f7476b8fd00aba5aca",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
