@@ -55,6 +55,14 @@ anything that fails the queue contract:
 For edits the CLI doesn't cover, import `session_state_io` and use its
 `load()`/`save()` (save validates and writes canonically).
 
+Concurrent commits to session state from both platforms auto-merge: a
+structural 3-way merge driver (`tools/session_state_merge.py`, mapped via
+`.gitattributes`) unions append-only surfaces, honors completions as
+removals, and keeps both sides' narrative continuations. It is configured
+per clone by `make setup` and self-healed by the Stop hook; if a merge of
+`session_state.json` ever shows textual conflict markers, run
+`python3 tools/session_state_merge.py --install` and retry the merge.
+
 ## Cross-platform routing
 
 This repo is worked on by both **Codex** and **Claude Code**; either may

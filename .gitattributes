@@ -8,3 +8,6 @@
 *.csv text
 *.sh text eol=lf
 
+
+# Structural 3-way merge for the shared session state (tools/session_state_merge.py)
+catalog/session_state.json merge=session-state

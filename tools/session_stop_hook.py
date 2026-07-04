@@ -221,6 +221,13 @@ def main() -> int:
     except Exception:
         return 0
 
+    # Self-heal the structural merge driver config (idempotent, per clone).
+    try:
+        _git("config", "merge.session-state.driver",
+             "python3 tools/session_state_merge.py %O %A %B")
+    except Exception:
+        pass
+
     # Contract check (warn only — never block session close on drift)
     try:
         import session_state_check

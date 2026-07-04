@@ -408,9 +408,9 @@
       "detail": "CloudBank PR #1182 (scenario seed initializer adapter, +345/-0, all checks green) squash-merged 2026-07-04T03:10:45Z with owner approval. CanonRec main pushed (5731c50..179a44c, 22 commits off single-machine risk). All five stranded CloudBank branches pushed to origin: issue-1015-salvage, issue-1020-mesh-router-contract, issue-1070-ethics-engine, pat-terminal-compat-2026-06-16, mesh-router-test-stabilization. Remaining from this lane: open/triage PRs for the now-pushed branches, decide copilot/replace-shallow-assertions-tier1 and root charforge branch, and return the canonical CloudBank checkout from the adapter branch to main (it still has the 11-path dirty tree \u2014 Codex's call)."
     }
   ],
-  "last_updated": "2026-07-04T04:39:55Z",
+  "last_updated": "2026-07-04T05:23:15Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Built the canonical session-state write path (tools/session_state_io.py): one serialization style, structured mutations (complete-item/add-pending/set-summary/suspend-active) that re-read at apply time and validate against the queue contract before writing; stop hook now writes through it and the _summary_set_manually flag is one-shot. Both platforms' protocol docs updated to mandate the tool. 28 tests.",
+  "last_session_summary": "Built the structural 3-way merge driver for session_state.json (tools/session_state_merge.py + .gitattributes merge=session-state): unions append-only surfaces, honors completions as removals, keeps both platforms' narrative continuations, refuses contract-violating merges (falls back to normal conflict). Installed per clone via make setup and self-healed by the Stop hook. 13 driver tests + live git-merge E2E verified. Concurrent Codex/Claude commits to shared state now merge automatically.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -429,6 +429,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "e43400c",
+      "date": "2026-07-04",
+      "platform": "claude-code",
+      "summary": "feat(session): canonical write path for the shared session state"
+    },
+    {
+      "sha": "f2e8d65",
+      "date": "2026-07-04",
+      "platform": "claude-code",
+      "summary": "chore(session): record narrative phase two PR handoff"
+    },
     {
       "sha": "f76893c",
       "date": "2026-07-04",
@@ -476,18 +488,6 @@
       "date": "2026-07-03",
       "platform": "claude-code",
       "summary": "feat(session): queue contract for the shared session state"
-    },
-    {
-      "sha": "318b14e",
-      "date": "2026-07-03",
-      "platform": "claude-code",
-      "summary": "feat(session): Claude Code side of the collaboration layer"
-    },
-    {
-      "sha": "83baea0",
-      "date": "2026-07-03",
-      "platform": "claude-code",
-      "summary": "chore(workspace): complete the iCloud->~/dev migration cleanup"
     }
   ],
   "security_events": [
@@ -535,7 +535,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "f76893c",
+    "main_sha": "e43400c",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -650,7 +650,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-07-04T03:14:18Z",
+    "checked_at": "2026-07-04T04:40:26Z",
     "entries": [
       {
         "repo": "root",

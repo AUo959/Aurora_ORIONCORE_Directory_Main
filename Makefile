@@ -13,6 +13,7 @@ setup: ## Install Python deps and configure git hooks
 	$(PYTHON) -m pip install --upgrade pip
 	$(PYTHON) -m pip install pytest pyyaml jsonschema
 	git config core.hooksPath .githooks
+	$(PYTHON) tools/session_state_merge.py --install
 	@echo "\n✓ Setup complete. Git hooks active."
 
 # ── Testing ──────────────────────────────────────────────────────────────
