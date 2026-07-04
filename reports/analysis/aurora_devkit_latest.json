@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-28T21:40:08Z",
-  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
-  "manifest_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
+  "generated_at": "2026-07-04T06:34:28Z",
+  "root": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
+  "manifest_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
   "toolkit_id": "aurora-dev-toolkit",
-  "status": "READY",
+  "status": "WARN",
   "toolchain": [
     {
       "id": "git",
@@ -228,9 +228,9 @@
         "pnpm",
         "--version"
       ],
-      "path": "/Users/travisstreets/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/pnpm",
+      "path": "/Users/travisstreets/.nvm/versions/node/v24.14.0/bin/pnpm",
       "returncode": 0,
-      "output": "11.7.0"
+      "output": "11.9.0"
     },
     {
       "id": "docker",
@@ -529,7 +529,7 @@
     {
       "name": "aurora-cloudbank-symbolic-main",
       "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
-      "branch": "main",
+      "branch": "codex/l2-scenario-seed-simulation-initializer",
       "remote_status": "configured"
     },
     {
@@ -590,7 +590,7 @@
       "python_command": [
         ".venv/bin/python"
       ],
-      "resolved_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "resolved_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
       "path_resolution": "root",
       "required_imports": [
         "fastapi",
@@ -625,7 +625,7 @@
       ],
       "auto_update_lane": "aurora-dev-toolkit-user-space-update",
       "status_file": ".env_status.json",
-      "status": "ok",
+      "status": "warn",
       "checks": {
         "python_version": {
           "status": "ok",
@@ -633,7 +633,7 @@
             ".venv/bin/python",
             "--version"
           ],
-          "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
           "returncode": 0,
           "output": "Python 3.12.13"
         },
@@ -645,9 +645,9 @@
             "pip",
             "--version"
           ],
-          "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
           "returncode": 0,
-          "output": "pip 25.0.1 from /Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/lib/python3.12/site-packages/pip (python 3.12)"
+          "output": "pip 25.0.1 from /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/lib/python3.12/site-packages/pip (python 3.12)"
         },
         "required_imports": {
           "status": "ok",
@@ -656,9 +656,9 @@
             "-c",
             "import importlib, json; names=['fastapi', 'httpx', 'slowapi']; versions={}; missing=[]; \nfor name in names:\n    try:\n        module = importlib.import_module(name)\n        versions[name] = getattr(module, '__version__', 'unknown')\n    except Exception as exc:\n        missing.append({'name': name, 'error': f'{type(exc).__name__}: {exc}'})\nprint(json.dumps({'versions': versions, 'missing': missing}, sort_keys=True))"
           ],
-          "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
           "returncode": 0,
-          "output": "{\"missing\": [], \"versions\": {\"fastapi\": \"0.138.1\", \"httpx\": \"0.28.1\", \"slowapi\": \"unknown\"}}"
+          "output": "{\"missing\": [], \"versions\": {\"fastapi\": \"0.139.0\", \"httpx\": \"0.28.1\", \"slowapi\": \"unknown\"}}"
         },
         "pip_check": {
           "status": "ok",
@@ -668,20 +668,23 @@
             "pip",
             "check"
           ],
-          "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
           "returncode": 0,
           "output": "No broken requirements found."
         }
       },
       "notes": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
       "import_versions": {
-        "fastapi": "0.138.1",
+        "fastapi": "0.139.0",
         "httpx": "0.28.1",
         "slowapi": "unknown"
       },
       "missing_imports": [],
-      "status_file_state": "ok",
-      "status_file_stale_fields": []
+      "status_file_state": "stale",
+      "status_file_stale_fields": [
+        "pip_version"
+      ],
+      "evidence": ".env_status.json is stale"
     }
   ],
   "dependency_update_surfaces": [
@@ -722,7 +725,7 @@
       ],
       "missing_updates": [],
       "notes": "Root dependency automation should open PRs for GitHub Actions, pre-commit hook revisions, and devcontainer features.",
-      "resolved_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+      "resolved_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
       "path_resolution": "root"
     },
     {
@@ -810,7 +813,7 @@
       ],
       "missing_updates": [],
       "notes": "CloudBank dependency automation should open PRs for active Python, JavaScript, GitHub Actions, and pre-commit manifests. Archived docs and dependency caches remain excluded.",
-      "resolved_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "resolved_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
       "path_resolution": "root"
     }
   ],
@@ -961,7 +964,15 @@
       "path": "/Users/travisstreets/.codex/automations/weekly-skill-audit/automation.toml"
     }
   ],
-  "findings": [],
+  "findings": [
+    {
+      "severity": "warning",
+      "id": "repo_python_env_aurora-cloudbank-symbolic-main_warn",
+      "message": "aurora-cloudbank-symbolic-main Python environment is warn.",
+      "evidence": ".env_status.json is stale",
+      "next_step": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment."
+    }
+  ],
   "install_plan": [],
   "validation_commands": [
     "python3 tools/aurora_devkit.py --persist-report",
