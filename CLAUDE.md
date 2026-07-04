@@ -6,8 +6,8 @@ same shared-state protocol.
 
 **Canonical workspace path (since 2026-07-01):**
 `/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main`. The old iCloud
-copy under `~/Library/Mobile Documents/` is inert; never work there. Full
-migration context and legacy path mapping:
+copy was deleted 2026-07-04; legacy `Mobile Documents` paths in historical
+artifacts map to current locations via
 `docs/WORKSPACE_MIGRATION_2026-07-01.md`.
 
 ## Session start — do this first
