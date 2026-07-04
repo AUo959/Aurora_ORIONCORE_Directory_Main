@@ -103,8 +103,10 @@ def _update_state(state: dict, head: str) -> tuple[dict, list[dict]]:
     state["last_platform"] = PLATFORM
     state["last_updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    # Summary from new commits if no manual summary was set this session
-    if new_commits and not state.get("_summary_set_manually"):
+    # Summary from new commits if no manual summary was set this session.
+    # The flag is one-shot: honor it once, then clear it, so a stale flag
+    # can never suppress auto-summaries in later sessions.
+    if not state.pop("_summary_set_manually", False) and new_commits:
         summaries = [c["summary"][:60] for c in new_commits[:3]]
         state["last_session_summary"] = "; ".join(summaries)
 
@@ -253,7 +255,16 @@ def main() -> int:
     # NOT git-commit or git-push here: auto-committing every turn created commit
     # churn, and auto-pushing risked the force-push hazard AGENTS.md warns about.
     state, new_commits = _update_state(state, head)
-    STATE_PATH.write_text(json.dumps(state, indent=2) + "\n")
+    try:
+        import session_state_io
+
+        drift = session_state_io.save(state)
+        if drift:
+            # Never lose the mechanical update, but make the drift loud.
+            STATE_PATH.write_text(session_state_io.dumps_canonical(state))
+            print(f"[stop-hook] wrote state WITH {len(drift)} contract finding(s) — run make session-state-check")
+    except ImportError:
+        STATE_PATH.write_text(json.dumps(state, indent=2) + "\n")
 
     uncommitted = _git_uncommitted_tracked()
     if uncommitted:

@@ -36,14 +36,24 @@ or pushes, so committing `session_state.json` (with your other changes)
 remains your responsibility.
 
 You are still responsible for the narrative fields — the hook cannot write
-those:
+those. **Edit session state through `tools/session_state_io.py`, not by
+hand-writing JSON** — it uses one canonical serialization (so diffs stay
+readable across platforms), re-reads the file at apply time (so a
+concurrent session's commit isn't clobbered), and refuses to write
+anything that fails the queue contract:
 
-1. If mid-task: set `active_task.status = "suspended"` and write
-   `next_step` / `next_step_detail` clearly enough for a cold start on
-   either platform.
-2. Write `last_session_summary` if the session did meaningful work (the
-   hook only falls back to commit subjects).
-3. Move finished queue items to `completed_tasks`.
+1. If mid-task:
+   `python3 tools/session_state_io.py suspend-active --next-step ... [--next-step-detail ...]`
+2. If the session did meaningful work:
+   `python3 tools/session_state_io.py set-summary "..."`
+   (sets a one-shot flag so the hook won't overwrite it with commit subjects)
+3. Finished queue items:
+   `python3 tools/session_state_io.py complete-item <id> [--detail "..."]`
+4. New work for later:
+   `python3 tools/session_state_io.py add-pending <id> --description "..." [--priority ...] [--assigned-to ...]`
+
+For edits the CLI doesn't cover, import `session_state_io` and use its
+`load()`/`save()` (save validates and writes canonically).
 
 ## Cross-platform routing
 
