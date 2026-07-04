@@ -9,8 +9,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 tools/session_stop_hook.py check-orphans",
-            "statusMessage": "Checking for orphaned work from previous sessions"
+            "command": "python3 tools/session_stop_hook.py session-start",
+            "statusMessage": "Session start: orphan check + auto-claim"
           }
         ]
       }

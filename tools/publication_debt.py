@@ -77,6 +77,28 @@ def _git(repo: Path, *args: str) -> str:
     return result.stdout.strip()
 
 
+def _live_remote_branches(repo: Path) -> set[str] | None:
+    """Branch names actually on origin right now, or None if unreachable.
+
+    Local tracking refs (refs/remotes/origin/*) go stale in both directions —
+    2026-07-04 field finding: two branches classified 'pushed' had no remote
+    ref at all. One ls-remote per repo gives ground truth; None (offline)
+    falls back to tracking refs with the entry annotated as unverified.
+    """
+    result = subprocess.run(  # noqa: S603, S607 - git with repo-audit controlled args
+        ["git", "-C", str(repo), "ls-remote", "--heads", "origin"],  # noqa: S607
+        capture_output=True, text=True, timeout=30,
+    )
+    if result.returncode != 0:
+        return None
+    branches: set[str] = set()
+    for line in result.stdout.splitlines():
+        parts = line.split("\t", 1)
+        if len(parts) == 2 and parts[1].startswith("refs/heads/"):
+            branches.add(parts[1][len("refs/heads/"):])
+    return branches
+
+
 def registered_repos(root: Path = REPO_ROOT) -> list[tuple[str, Path]]:
     sys.path.insert(0, str(root / "tools"))
     from _workspace_common import load_yaml_like
@@ -130,6 +152,11 @@ def scan_repo(name: str, repo: Path) -> list[dict]:
             "remediation": "Commit or deliberately discard the working-tree changes.",
         })
 
+    try:
+        live_branches = _live_remote_branches(repo)
+    except Exception:
+        live_branches = None
+
     for branch in _git(repo, "for-each-ref", "refs/heads", "--format=%(refname:short)").splitlines():
         if not branch or branch.startswith(EXEMPT_BRANCH_PREFIXES):
             continue
@@ -144,11 +171,16 @@ def scan_repo(name: str, repo: Path) -> list[dict]:
                 "remediation": "Push main (or PR it if the repo requires review).",
             })
             continue
-        has_remote = bool(_git(repo, "rev-parse", "--verify", "-q", f"refs/remotes/origin/{branch}"))
+        if live_branches is not None:
+            has_remote = branch in live_branches
+            remote_note = ""
+        else:
+            has_remote = bool(_git(repo, "rev-parse", "--verify", "-q", f"refs/remotes/origin/{branch}"))
+            remote_note = " (remote UNVERIFIED — offline; classification from local tracking refs)"
         if not has_remote:
             debts.append({
                 "repo": name, "class": "stranded_branch", "branch": branch,
-                "detail": f"{ahead} commit(s) exist only on this machine",
+                "detail": f"{ahead} commit(s) exist only on this machine{remote_note}",
                 "remediation": f"Push and open a PR: git push -u origin {branch} && gh pr create",
             })
         else:
@@ -156,7 +188,7 @@ def scan_repo(name: str, repo: Path) -> list[dict]:
             if pr is False:
                 debts.append({
                     "repo": name, "class": "unpublished_branch", "branch": branch,
-                    "detail": f"pushed, {ahead} commit(s) ahead, no open PR",
+                    "detail": f"pushed, {ahead} commit(s) ahead, no open PR{remote_note}",
                     "remediation": f"gh pr create --head {branch} (or retire the branch deliberately)",
                 })
             elif pr is None:

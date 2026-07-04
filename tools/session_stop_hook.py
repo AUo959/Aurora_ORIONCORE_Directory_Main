@@ -68,6 +68,18 @@ def _git_log_since(since_sha: str) -> list[dict]:
     return commits
 
 
+# Mechanical receipts that hooks/gates rewrite around commit time — a dirty
+# copy of these is workflow residue, not abandoned work, so they never
+# produce orphan markers (2026-07-04 field finding: the pre-push skill-sync
+# receipt manufactured a fresh orphan after every skills push).
+ORPHAN_EXEMPT_PATHS = (
+    "catalog/session_state.json",
+    "reports/automation/skill_sync_latest.json",
+    "reports/analysis/workspace_verify_latest.json",
+    "reports/analysis/workspace_scan_summary.json",
+)
+
+
 def _git_uncommitted_tracked() -> list[str]:
     """Return list of tracked files with uncommitted changes.
 
@@ -79,7 +91,7 @@ def _git_uncommitted_tracked() -> list[str]:
     raw = _git("diff", "--name-only", "HEAD")
     return [
         path.strip() for path in raw.splitlines()
-        if path.strip() and "catalog/session_state.json" not in path
+        if path.strip() and path.strip() not in ORPHAN_EXEMPT_PATHS
     ]
 
 
@@ -215,6 +227,59 @@ def check_orphans() -> None:
     print("╚══════════════════════════════════════════════════════════╝\n")
 
 
+# ── Auto session claim ─────────────────────────────────────────────────────
+# Field finding 2026-07-04: live sessions never filed claims voluntarily, so
+# the session_state_io write guard had nothing to key on. SessionStart files
+# one automatically; Stop releases it. Machine-local, advisory, TTL-bounded.
+
+AUTO_CLAIM_MARKER = CLAIMS_DIR / ".claude_auto_claim"
+AUTO_CLAIM_TTL_MINUTES = 240
+
+
+def _run_claim(*args: str) -> subprocess.CompletedProcess:
+    return subprocess.run(
+        ["python3", str(REPO_ROOT / "tools" / "session_claim.py"), *args],
+        capture_output=True, text=True, cwd=REPO_ROOT,
+    )
+
+
+def file_auto_claim() -> None:
+    """File the per-session advisory claim on the shared state file."""
+    try:
+        if AUTO_CLAIM_MARKER.exists():
+            return  # a claim from this session (or an unreleased one) exists
+        claim_id = f"claude-auto-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
+        result = _run_claim(
+            "create", "--platform", "claude-code", "--task-id", "auto-session",
+            "--repo", "root", "--paths", "catalog/session_state.json",
+            "--mutation-posture", "editing",
+            "--ttl-minutes", str(AUTO_CLAIM_TTL_MINUTES),
+            "--claim-id", claim_id, "--allow-conflict",
+            "--notes", "Automatic session-presence claim (SessionStart hook).",
+        )
+        if result.returncode == 0:
+            CLAIMS_DIR.mkdir(parents=True, exist_ok=True)
+            AUTO_CLAIM_MARKER.write_text(claim_id + "\n")
+            print(f"[session-start] auto-claim filed: {claim_id}")
+        else:
+            print(f"[session-start] auto-claim skipped: {result.stderr.strip()[:120]}")
+    except Exception as exc:  # advisory — never block a session on claims
+        print(f"[session-start] auto-claim skipped: {exc}")
+
+
+def release_auto_claim() -> None:
+    """Release this session's advisory claim, if one was filed."""
+    try:
+        if not AUTO_CLAIM_MARKER.exists():
+            return
+        claim_id = AUTO_CLAIM_MARKER.read_text().strip()
+        if claim_id:
+            _run_claim("release", "--claim-id", claim_id)
+        AUTO_CLAIM_MARKER.unlink()
+    except Exception:
+        pass
+
+
 # ── Main ──────────────────────────────────────────────────────────────────
 
 def record_landing_ledger() -> None:
@@ -249,7 +314,12 @@ def main() -> int:
     if len(sys.argv) > 1 and sys.argv[1] == "check-orphans":
         check_orphans()
         return 0
+    if len(sys.argv) > 1 and sys.argv[1] == "session-start":
+        check_orphans()
+        file_auto_claim()
+        return 0
 
+    release_auto_claim()
     record_landing_ledger()
 
     if not STATE_PATH.exists():

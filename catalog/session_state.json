@@ -120,80 +120,24 @@
     }
   },
   "active_task": {
-    "id": "salvage-operation-icloud-promotion-2026-06-12",
+    "id": "narrative-promotion-continuation-2026-06",
     "status": "suspended",
-    "assigned_to": "codex",
-    "repo": "root control plane + registered nested repos by explicit gate only",
-    "description": "Run the Aurora salvage operation: find valuable unmerged iCloud/recovery logic, classify it, and promote only through explicit owner-surface gates.",
-    "started_at": "2026-06-12T23:00:00Z",
-    "updated_at": "2026-07-04T01:55:03Z",
+    "assigned_to": "either",
+    "priority": "medium",
+    "repo": "root + aurora-cloudbank-symbolic-main",
+    "description": "Continue the Aurora-first narrative-layer promotion per the ADR.",
+    "started_at": "2026-06-10T00:00:00Z",
+    "updated_at": "2026-07-04T08:20:08Z",
     "context_files": [
-      "reports/analysis/cloudbank_scenario_seed_adapter_pr_ready_blocker__2026-07-01.md",
-      "reports/analysis/branch_cleanup_tier2__2026-06-20.md",
-      "reports/analysis/branch_cleanup_tier1__2026-06-20.md",
-      "reports/automation/skill_sync_latest.json",
-      "tests/test_publication_debt.py",
-      "tests/test_gitwiz_sync_audit.py",
-      "tests/test_gitwiz_gh_auth_probe.py",
-      "tools/publication_debt.py",
-      "skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py",
-      "skills/gitwiz-github-manager/scripts/gitwiz_gh_auth_probe.py",
-      "skills/gitwiz-github-manager/SKILL.md",
-      "Makefile",
-      "reports/analysis/branch_inventory__2026-06-19.md",
-      "reports/analysis/session_quicksave__2026-06-19_gitwiz_gh_auth.md",
-      "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/tests/test_scenario_seed_initializer.py",
-      "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/simulation/scenario_seed_initializer.py",
-      "tools/l2_scenario_seed_uptake.py",
-      "tests/test_l2_scenario_seed_uptake.py",
-      "tests/test_l2_scenario_seed_catalog.py",
-      "reports/analysis/l2_scenario_seed_uptake_contract__2026-06-19.md",
-      "reports/analysis/l2_scenario_seed_catalog_artifact__2026-06-18.md",
-      "docs/L2_SCENARIO_SEED_CATALOG_WORKFLOW_v1.md",
-      "catalog/schemas/l2_scenario_seed_uptake_contract.schema.json",
-      "catalog/schemas/l2_scenario_seed_catalog.schema.json",
-      "catalog/contracts/l2_scenario_seed_uptake_contract_v1.json",
-      "catalog/contracts/l2_scenario_fixture_generator_contract_v1.json",
-      "catalog/l2_scenario_seed_catalog.json",
-      "reports/analysis/zipwiz_salvage_inventory__2026-06-15.md",
-      "reports/analysis/zipwiz_salvage_inventory__2026-06-15.json",
-      "reports/analysis/codex_parallel_work_roundup__2026-06-15.md",
-      "reports/analysis/l2_scenario_seed_catalog_extraction__2026-06-15.md",
-      "reports/analysis/salvage_p2_p4_execution__2026-06-15.md",
-      "reports/analysis/salvage_p2_p4_reconciliation__2026-06-14.md",
-      "reports/analysis/narrative_engine_phase_two_contract__2026-06-14.md",
-      "reports/analysis/pat_terminal_salvage_scan__2026-06-14.md",
-      "reports/analysis/salvage_docket__2026-06-12.md",
-      "reports/analysis/aurora_salvage_report_latest.md",
-      "reports/analysis/ord_integration__2026-06-12.md",
-      "reports/analysis/orion_station_spec_recovery__2026-06-12.md",
-      "reports/analysis/remote_branch_sweep__2026-06-11.md",
-      "reports/analysis/integration_pass__2026-06-11.md",
-      "docs/WORKSPACE_MIGRATION_2026-07-01.md"
+      "docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md",
+      "reports/recovered_canon/README.md",
+      "reports/analysis/march_2026_reset_forensics__2026-06-10.md",
+      "reports/analysis/unlanded_work_audit__2026-06-10.md"
     ],
-    "next_step": "continue_publication_debt_triage",
-    "next_step_detail": "Continuation 2026-07-03T17:36:37Z: Opened and operated from canonical root /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main, not the inert iCloud copy. Read docs/WORKSPACE_MIGRATION_2026-07-01 [full handoff: catalog/handoffs/20260704T053301Z-codex-continue-publication-debt-triage.md]"
+    "next_step": "review_cloudbank_pr_1183_then_continue_owner_items",
+    "next_step_detail": "Codex continuation 2026-07-04T04:31:43Z: Worked from canonical root /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main and used a clean CloudBank worktree /private/tmp/cloudbank-narrative-phase2 from origin/main 23540bcc, avoiding the dirty canonical CloudBank checkout. Implemented the first phase-two engine slice from the existing root design receipt: deterministic NarrativeEvidenceSource/NarrativeFact/NarrativeEvidenceBundle receipts, build_state_from_evidence, authority-tier preservation, promotion_safety, and candidate/proposed event exclusion from continuity.established_events. Pushed CloudBank branch codex/narrative-phase2-evidence-2026-07-04 at b0637fa4 and opened draft PR #1183: https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1183. Local validation passed: narrative pytest slice 11 passed with existing pytest async-config warnings only; ruff check; ruff format --check; source pylint 10.00/10; test pylint with import-error disabled due lint env lacking pytest; bandit on new source/test; git diff --check. Next safe step: review/merge or revise PR #1183, then continue the remaining original owner items only through explicit gates: CanonRec character spot-check + 6 STAGING-era entities, transcript privacy review, threadcore-governor over canon/L3 capsule, repo_authority_policy.yaml promotion via peer review, gitwiz April branch port/abandon, and ORION.L1.* prose extraction from CanonRec_v1.3.x zips."
   },
-  "task_queue": [
-    {
-      "id": "narrative-promotion-continuation-2026-06",
-      "status": "suspended",
-      "assigned_to": "either",
-      "priority": "medium",
-      "repo": "root + aurora-cloudbank-symbolic-main",
-      "description": "Continue the Aurora-first narrative-layer promotion per the ADR.",
-      "started_at": "2026-06-10T00:00:00Z",
-      "updated_at": "2026-07-04T04:31:43Z",
-      "context_files": [
-        "docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md",
-        "reports/recovered_canon/README.md",
-        "reports/analysis/march_2026_reset_forensics__2026-06-10.md",
-        "reports/analysis/unlanded_work_audit__2026-06-10.md"
-      ],
-      "next_step": "review_cloudbank_pr_1183_then_continue_owner_items",
-      "next_step_detail": "Codex continuation 2026-07-04T04:31:43Z: Worked from canonical root /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main and used a clean CloudBank worktree /private/tmp/cloudbank-narrative-phase2 from origin/main 23540bcc, avoiding the dirty canonical CloudBank checkout. Implemented the first phase-two engine slice from the existing root design receipt: deterministic NarrativeEvidenceSource/NarrativeFact/NarrativeEvidenceBundle receipts, build_state_from_evidence, authority-tier preservation, promotion_safety, and candidate/proposed event exclusion from continuity.established_events. Pushed CloudBank branch codex/narrative-phase2-evidence-2026-07-04 at b0637fa4 and opened draft PR #1183: https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1183. Local validation passed: narrative pytest slice 11 passed with existing pytest async-config warnings only; ruff check; ruff format --check; source pylint 10.00/10; test pylint with import-error disabled due lint env lacking pytest; bandit on new source/test; git diff --check. Next safe step: review/merge or revise PR #1183, then continue the remaining original owner items only through explicit gates: CanonRec character spot-check + 6 STAGING-era entities, transcript privacy review, threadcore-governor over canon/L3 capsule, repo_authority_policy.yaml promotion via peer review, gitwiz April branch port/abandon, and ORION.L1.* prose extraction from CanonRec_v1.3.x zips."
-    }
-  ],
+  "task_queue": [],
   "completed_tasks": [
     {
       "id": "landing-ledger-flight-log-2026-06-11",
@@ -256,11 +200,18 @@
       "completed_at": "2026-07-04T03:12:00Z",
       "platform": "claude-code",
       "detail": "CloudBank PR #1182 (scenario seed initializer adapter, +345/-0, all checks green) squash-merged 2026-07-04T03:10:45Z with owner approval. CanonRec main pushed (5731c50..179a44c, 22 commits off single-machine risk). All five stranded CloudBank branches pushed to origin: issue-1015-salvage, issue-1020-mesh-router-contract, issue-1070-ethics-engine, pat-terminal-compat-2026-06-16, mesh-router-test-stabilization. Remaining from this lane: open/triage PRs for the now-pushed branches, decide copilot/replace-shallow-assertions-tier1 and root charforge branch, and return the canonical CloudBank checkout from the adapter branch to main (it still has the 11-path dirty tree \u2014 Codex's call)."
+    },
+    {
+      "id": "salvage-operation-icloud-promotion-2026-06-12",
+      "status": "completed",
+      "completed_at": "2026-07-04T08:20:08Z",
+      "platform": "claude-code",
+      "detail": "Umbrella task retired 2026-07-04 after its lanes closed or moved to discrete queue items: adapter lane done (PR #1182 merged); test-branch triage done (receipt reports/analysis/cloudbank_test_branch_triage__2026-07-04.md); iCloud salvage complete and the iCloud tree deleted; remaining publication-debt work split to pending item publication-debt-triage-continuation. Final narrative: Continuation 2026-07-03T17:36:37Z: Opened and operated from canonical root /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main, not the inert iCloud copy. Read docs/WORKSPACE_MIGRATION_2026-07-01 [full handoff: catalog/handoffs/20260704T053301Z-codex-continue-publication-debt-triage.md]"
     }
   ],
-  "last_updated": "2026-07-04T07:49:17Z",
-  "last_platform": "codex",
-  "last_session_summary": "Automation churn reduced: paused noisy/mutating Codex automations, kept only root health, weekly multi-repo git health, and daily CloudBank PR sentinel active, and moved retained CWDs to canonical ~/dev workspace. Untracked live/powered watch reports appeared during cleanup and were left untouched.",
+  "last_updated": "2026-07-04T08:24:42Z",
+  "last_platform": "claude-code",
+  "last_session_summary": "Field-findings wave built (all five): (1) AUTO-CLAIMS \u2014 SessionStart hook files a claude-code presence claim on session_state.json, Stop releases it; Codex AGENTS.md has mirror create/release steps; the write guard now actually fires (verified: codex-side mutations would block while a claude session is live). (2) Debt scanner verifies branches against live ls-remote per repo (offline falls back to tracking refs, annotated UNVERIFIED) \u2014 fixes the machine-only-classified-as-pushed bug found twice. (3) Orphan markers exempt mechanical receipts (skill_sync/verify/scan receipts) \u2014 kills the pre-push receipt orphan loop. (4) Pre-commit workspace-verify is self-healing: regenerable-only blocking findings trigger workspace_scan + stage + re-verify automatically; real findings still fail loud. (5) Umbrella active_task retired to completed_tasks; narrative-promotion promoted to active_task; publication-debt continuation is a discrete pending item. 75 tests green across the collab modules.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -279,6 +230,12 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "f68b9b4",
+      "date": "2026-07-04",
+      "platform": "claude-code",
+      "summary": "chore(session): record automation cleanup"
+    },
     {
       "sha": "edf584a",
       "date": "2026-07-04",
@@ -332,12 +289,6 @@
       "date": "2026-07-04",
       "platform": "claude-code",
       "summary": "chore(session): record publication wave \u2014 PR 1182 merged, stranded work pushed"
-    },
-    {
-      "sha": "00f4879",
-      "date": "2026-07-04",
-      "platform": "claude-code",
-      "summary": "chore(session): record CloudBank PR 1182 cleanup"
     }
   ],
   "security_events": [
@@ -382,10 +333,16 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Backlog carried out of cloudbank-followups-2026-06-10: (a) March rescue lineage extraction (gitleaks-clean; see reports/analysis/unlanded_work_audit__2026-06-10.md), (b) root branches gitwiz-sync-audit (9 commits) and weekly-skill-audit (1 commit) need publish-or-retire decisions."
+    },
+    {
+      "id": "publication-debt-triage-continuation",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Continue landing-ledger triage (9 entries as of 2026-07-04, all verified against live remote): PR-or-retire the four pushed codex/cloudbank-issue-* branches and root charforge branch (use the test-branch triage pattern: clean worktree, rebase-check against main, receipt); Codex to return the canonical CloudBank checkout from the merged adapter branch to main and resolve its 11-path dirty tree; qgia-library dirty tree is live Codex work."
     }
   ],
   "known_state": {
-    "main_sha": "edf584a523f87e965804e4bdb9188b7a76ff8f8b",
+    "main_sha": "f68b9b4",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -500,7 +457,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-07-04T07:31:42Z",
+    "checked_at": "2026-07-04T07:52:16Z",
     "entries": [
       {
         "repo": "root",

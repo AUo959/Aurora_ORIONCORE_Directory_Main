@@ -16,8 +16,8 @@ repos:
   - repo: local
     hooks:
       - id: workspace-verify
-        name: workspace-verify
-        entry: python3 tools/workspace_verify.py --git-pre-commit
+        name: workspace-verify (self-healing for regenerable surfaces)
+        entry: python3 tools/workspace_verify_precommit.py
         language: system
         pass_filenames: false
         always_run: true
