@@ -5,6 +5,18 @@ purpose: >
   recorded decision. Every entry needs a reason and a date — an exemption
   without a reason is itself debt.
 exemptions:
+# --- Test-branch triage 2026-07-04 (receipt: reports/analysis/cloudbank_test_branch_triage__2026-07-04.md)
+- repo: aurora-cloudbank-symbolic-main
+  branches: [copilot/replace-shallow-assertions-tier1]
+  reason: >-
+    Retired-in-place 2026-07-04: 18-commit Copilot bot stack (tip bc9d21bb)
+    replacing bare asserts with if/raise AssertionError — conflicts with the
+    TestCase-method convention adopted on PR #1182, loses pytest
+    introspection, and rebases with conflicts across 10 files after 3 weeks
+    of main drift. Residual value (a few genuinely behavioral checks) should
+    be re-derived fresh under the current convention. Remote branch kept as
+    the archival copy; do not merge.
+  recorded: "2026-07-04"
 # --- March 2026 rescue lineage: deliberately preserved as archival branches,
 #     fully covered by archives/salvage_bundles/ and the unlanded-work audit.
 - repo: aurora-cloudbank-symbolic-main
