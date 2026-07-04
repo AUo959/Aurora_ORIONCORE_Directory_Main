@@ -175,8 +175,13 @@ they are records of what happened, not live configuration. Do not "fix" them.
   hashed inventory in
   `reports/analysis/icloud_conflict_duplicates__2026-07-02.md` (25 identical
   to base, 4 content forks, 2 orphans). No deletions performed.
-- **Pilot decision pending:** delete or keep the inert iCloud tree
-  (`~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`).
+- **RESOLVED 2026-07-04:** the inert iCloud tree was deleted with Pilot
+  approval after verification (zero files modified post-guard; the only
+  unique file was a ruff cache tag; dependency dirs rebuilt in ~/dev).
+  Recovery window: iCloud Drive "Recently Deleted" for ~30 days from
+  2026-07-04. The "never work in Mobile Documents" rule stands — the
+  path no longer exists, but legacy references in history still point
+  there; map them per §4.
 - `reports/analysis/aurora_*_latest.json` snapshots generated before the
   cleanup may still cite iCloud paths; they will self-correct on their next
   regeneration from `~/dev`.
