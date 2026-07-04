@@ -258,9 +258,9 @@
       "detail": "CloudBank PR #1182 (scenario seed initializer adapter, +345/-0, all checks green) squash-merged 2026-07-04T03:10:45Z with owner approval. CanonRec main pushed (5731c50..179a44c, 22 commits off single-machine risk). All five stranded CloudBank branches pushed to origin: issue-1015-salvage, issue-1020-mesh-router-contract, issue-1070-ethics-engine, pat-terminal-compat-2026-06-16, mesh-router-test-stabilization. Remaining from this lane: open/triage PRs for the now-pushed branches, decide copilot/replace-shallow-assertions-tier1 and root charforge branch, and return the canonical CloudBank checkout from the adapter branch to main (it still has the 11-path dirty tree \u2014 Codex's call)."
     }
   ],
-  "last_updated": "2026-07-04T07:27:02Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "Disk cleanup executed with Pilot approval. Deleted the inert iCloud Aurora tree after utmost-caution verification: zero files modified after the 2026-07-01 guard date and exactly one unique file (a ruff cache tag) vs ~/dev; 30-day recovery via iCloud Recently Deleted. Also cleared rebuildable dev/app caches (Homebrew, pip, browser caches ~5.2GB; ms-playwright kept for the Codex plugin), removed 6 orphaned ~/.codex worktree dirs (registered ones kept), and 5 redundant app installers from Downloads (apps verified installed; VS Code app kept \u2014 it runs from Downloads and is NOT in /Applications). Disk: 17GB -> 25GB free. Migration doc open item marked RESOLVED. The never-work-in-Mobile-Documents rule stands.",
+  "last_updated": "2026-07-04T07:49:17Z",
+  "last_platform": "codex",
+  "last_session_summary": "Automation churn reduced: paused noisy/mutating Codex automations, kept only root health, weekly multi-repo git health, and daily CloudBank PR sentinel active, and moved retained CWDs to canonical ~/dev workspace. Untracked live/powered watch reports appeared during cleanup and were left untouched.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -279,6 +279,18 @@
     "go": "1.26.3"
   },
   "recent_commits": [
+    {
+      "sha": "edf584a",
+      "date": "2026-07-04",
+      "platform": "claude-code",
+      "summary": "docs: iCloud copy is deleted, not inert \u2014 update path headers"
+    },
+    {
+      "sha": "27ec4f3",
+      "date": "2026-07-04",
+      "platform": "claude-code",
+      "summary": "chore(workspace): record iCloud tree deletion and disk cleanup"
+    },
     {
       "sha": "b9d70fa",
       "date": "2026-07-04",
@@ -326,18 +338,6 @@
       "date": "2026-07-04",
       "platform": "claude-code",
       "summary": "chore(session): record CloudBank PR 1182 cleanup"
-    },
-    {
-      "sha": "5c62926",
-      "date": "2026-07-03",
-      "platform": "codex",
-      "summary": "chore(workspace): refresh root hygiene surfaces"
-    },
-    {
-      "sha": "faef8e9",
-      "date": "2026-07-03",
-      "platform": "codex",
-      "summary": "chore(session): record CloudBank adapter PR handoff"
     }
   ],
   "security_events": [
@@ -385,7 +385,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "b9d70fa",
+    "main_sha": "edf584a523f87e965804e4bdb9188b7a76ff8f8b",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -500,7 +500,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-07-04T06:55:12Z",
+    "checked_at": "2026-07-04T07:31:42Z",
     "entries": [
       {
         "repo": "root",
