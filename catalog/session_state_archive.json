@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "completed_tasks": [
+    {
+      "id": "phase-0-complete",
+      "date": "2026-05-30",
+      "summary": "Phase 0: Agentlinter 20\u21925 accepted, branch prune (8 branches), secret triage (1 OpenAI key rotated), gitleaks CI gate, devkit 20/20, skills consolidated, cross-platform handoff layer built, 5 Dependabot PRs merged, 2 stale PRs closed"
+    },
+    {
+      "id": "phase-0-followups-efg-python-floor",
+      "date": "2026-05-31",
+      "summary": "Commits 6b853b8, dba9507, and af846ac landed after the prior state snapshot and address pending E/F/G plus roadmap 1.2."
+    },
+    {
+      "id": "coordination-session-claims",
+      "date": "2026-05-31",
+      "summary": "Codex added local session-claim tooling and docs for concurrent Codex/Claude Code path-claim checks."
+    },
+    {
+      "id": "coherence-checklist-audit",
+      "date": "2026-05-31",
+      "summary": "Codex added a root coherence checklist and audit receipt while Claude Code's CL-fix claim remained active; no Claude-claimed paths were edited."
+    },
+    {
+      "id": "post-claude-cl-verification",
+      "date": "2026-05-31",
+      "summary": "Codex verified Claude Code commit 3f872f3, restored the warrant-lens default HeuristicClient import, fixed GitWiz registry loading, and confirmed root tests/health pass; installed skill runtime sync is pending."
+    },
+    {
+      "id": "review-peer-review-protocol-v1",
+      "date": "2026-06-01",
+      "summary": "Codex reviewed the Peer Review Protocol v1 plus paired Axiom Surfacing warrant-policy change, issued an approve-with-notes receipt, and cleared rd-20260531-peer-review-protocol-v1 plus rd-20260531-warrant-policy-axiom-surfacing."
+    },
+    {
+      "id": "cloudbank-issue-broker-v1",
+      "date": "2026-06-01",
+      "summary": "Codex added a root CloudBank issue broker workflow and CLI so Codex and Claude Code can claim CloudBank issues and paths before creating clean issue worktrees."
+    },
+    {
+      "id": "cloudbank-pr-stabilization-2026-06-07",
+      "date": "2026-06-07",
+      "summary": "Codex implemented the first CloudBank PR stabilization pass: closed stale draft PRs #843 and #864 with evidence comments, reduced open PRs to 37, and recorded a root receipt without editing the nested checkout."
+    },
+    {
+      "id": "cloudbank-pr-duplicate-head-cleanup-2026-06-07",
+      "date": "2026-06-07",
+      "summary": "Codex closed duplicate/mis-targeted CloudBank draft PRs #904 and #905 with evidence comments, verified linked issues #798 and #829 remained open, and recorded a root cleanup receipt."
+    },
+    {
+      "id": "cloudbank-pr-umbrella-cleanup-2026-06-07",
+      "date": "2026-06-07",
+      "summary": "Codex closed stale broad CloudBank draft PR #837 with evidence comment, kept #860 open because #840 remains open, and recorded updated live counts after new drafts #911 and #912 appeared."
+    },
+    {
+      "id": "cloudbank-pr-837-extraction-plan-2026-06-07",
+      "date": "2026-06-07",
+      "summary": "Codex corrected the #837 closure by posting and recording a concrete extraction plan for the benchmark scorecard: recover scripts/benchmark_scorecard.py only, create/designate a tracking issue, use the broker and a clean worktree, and avoid replaying the other 63 files."
+    },
+    {
+      "id": "root-github-workflow-cleanup-2026-06-08",
+      "date": "2026-06-08",
+      "summary": "Codex confirmed latest root main workflows are green, closed superseded stale draft PR #16 with evidence comment 4654303203, and ported the safe git-fixture signing hardening into current main."
+    },
+    {
+      "id": "cloudbank-ci-gate-and-sync-2026-06-10",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "CloudBank CI gate restored: PR #943 (entangle_vectors slowapi param fix + GUMAS test auth + CSRF_SECRET_KEY setdefault interaction fix) makes CI Check green (121 passed); PR #944 salvages unlanded security middleware 403-contract + Dependabot github-actions coverage; PR #945 restores truncated MIT LICENSE. Local clone fast-forwarded 1,486 commits to origin/main (de12f054); feature branch retired; stale index.lock (2026-06-01) and 20+ prunable worktrees cleaned. Registry head synced."
+    },
+    {
+      "id": "narrative-cargo-recovery-2026-06-10",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "March-lineage narrative cargo extracted (owner-approved): 19 canon artifacts to reports/recovered_canon/ (incl. ORION_STATION_CANONICAL_STAFF_REGISTRY.json \u2014 resolves L1 ledger source gap \u2014 canonical_validation.yaml contract, THREADCORE v3.5.1 capsule, chamber guides); CloudBank PR #980 merged (V1 mesh contract tests, /health factory route, anti-flourish Thorne persona); private mesh transcripts + mesh.db to untracked intake/recovered_mesh_runtime_2026-06-10/ pending privacy review. Command grammar and Aurora Fusion verified already byte-identical on main. PR #979 (narrative validation engine) still awaits owner review."
+    },
+    {
+      "id": "aurora-seat-restoration-2026-06-10",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "Aurora-first promotion executed: mesh.db proved sole record of 47 agent identities (extracted to intake/); Aurora manifest restored verbatim to CloudBank mesh via PR #981 (merged, CI-enforced handshake: total_agents 7, direct:aurora roundtrip); memory + instruction profile reconstructed from canon with provenance. ADR-Lite NARRATIVE_LAYER_PROMOTION v1.0 records the imagination-first ordering; reviewer orientation Rule 2 amended (inversion failure named). Remaining ADR steps: #979 owner review, CanonRec thaw, canon consistency gate, 46 crew manifests pending owner review."
+    },
+    {
+      "id": "l1-canon-promotion-2026-06-10",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "ADR steps 3-5 executed: CanonRec thawed (first commit in 102 days, ae86f84) \u2014 41 L1 characters promoted as Primary Canon via aurora-canon-reconciler workflow with receipt + drift log (4 role conflicts resolved by ledger primacy); L3 contracts promoted; CanonRec pushed. Ledger v2 with fully resolvable citations. Canon consistency gate live both sides: CloudBank tests/test_canon_consistency.py (critical, 5 assertions, in CI Check) and root verify_canon_resolvability. Full L1 crew boarded: mesh roster 7\u219247 via PR #982 (merged, green) with canon-grounded memory files."
+    },
+    {
+      "id": "narrative-engine-landed-2026-06-10",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "PR #979 merged: narrative validation engine phase one on main (final review: no external calls, 2,103 lines, CI green against post-boarding main). First canonical assignment in PR #983: Thorne audited against Aurora arbitration charter \u2014 charter-compliant action supported (0.93), unilateral bypass possible_with_setup with discipline blocker + smallest_fix. Engine behavior empirically verified before pinning assertions."
+    },
+    {
+      "id": "coherence-pass-2026-06-10",
+      "date": "2026-06-10",
+      "platform": "claude-code",
+      "summary": "Coherence pass: 6 STAGING entities un-over-promoted (ledger v2 + CanonRec frontmatter); recovered_canon README status corrected; ORION.L1 prose sources found in projects/ zone and promoted to CanonRec reference tier \u2014 ALL ledger source classes now resolve; THREADCORE capsule passes governor clean (receipt in CanonRec); _workspace_common worktree-root bugfix ported from April gitwiz branch (161 tests pass); authority + hygiene policies promoted to catalog/ with review-debt rd-20260610-authority-policy. Deferred with documentation: gitwiz_sync_audit.py hardening (+128/-20, diverged both sides, needs 3-way merge \u2014 branch + bundle preserve it)."
+    },
+    {
+      "id": "l1-canon-complete-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "Owner confirmed the 6 vessel-crew/cadet entities: all 41 L1 entities now CANON across every surface (CanonRec frontmatter + owner_confirmed stamps, ledger v2 json+md, reconciliation report addendum, recovered_canon README). Three additional stale README statements corrected (policies landed, crew boarded). Owner-pending now reduced to: transcript privacy review, Codex review-debt clearance, gitwiz 3-way merge."
+    },
+    {
+      "id": "gitwiz-3way-merge-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "April gitwiz branch closed: sync-audit hardening 3-way merged onto main (comparison fallback to origin/main, behind-only path collection, dirty/incoming overlap detection, stash-preservation guidance) keeping main's loader + lint annotations; complexity refactored to ruff-clean; 12-test suite ported, 168 root tests pass. SKILL.md sandboxed-gh interpretation rule + openai.yaml operator prompt ported. DELIBERATELY ABANDONED: workspace_plan_moves.py wave5 delta (couples to never-landed wave5 relocation batch; preserved in root salvage bundle). Branch retired."
+    },
+    {
+      "id": "skill-propagation-expansion-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "Skill propagation generalized at owner direction: catalog/skill_sync_targets.yaml target registry (codex enabled; claude-code-user declared but disabled pending load-precedence check); sync_skills.py multi-target with --check (exit 2 on drift), --target filter, and receipts to reports/automation/skill_sync_latest.json; verify_skill_sync drift warning in workspace_verify; sha256 + ruff-clean. Drift lifecycle verified end-to-end. .githooks/post-merge (receive-side sync) committed UNARMED \u2014 classifier requires explicit owner arming: chmod +x .githooks/post-merge."
+    },
+    {
+      "id": "canon-propagation-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "Canon propagation built (owner-approved second payload for the propagation pattern): catalog/canon_sync_payloads.yaml declares canonical-validation-contract (CanonRec -> CloudBank file copy) and l1-persona-memories (ledger-driven regeneration matched by the canon linkage comment; volatile date normalized; hand-authored memories never touched). tools/canon_sync.py --check/--apply with working-tree-only staging (cross-repo changes ride branch+PR+CI), receipts; verify_canon_propagation in workspace_verify; 6 tests. Drift lifecycle verified both payload kinds. NOTE: found foreign uncommitted CloudBank change tests/test_mesh_router_v1.py (+35/-22, dynamic agent-id adaptation to the 47-agent boarding) \u2014 left untouched, likely another platform's in-progress work."
+    },
+    {
+      "id": "remote-branch-sweep-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "Remote-branch + closed-PR sweep (owner-directed, targeting the matured-but-never-PRd pattern): SEVEN recoveries landed \u2014 central dev roadmap (#984), autonomous drift responder w/24 tests (#985), ethical checkpoint vault (#986), QGIA forecast API (#987), spine CRITICAL log-pool fix (spine #4), peer-review protocol DRAFT->ADOPTED flip (recovered from closed #16; receipts/debts were already cleared on main), GPT-5.5 upgrade package docs to recovered_canon. Inventory found UNREGISTERED repos: aurora-cloudbank-symbolic1 (possible early-history twin) and zip_wizard \u2014 registration next session. Full dispositions in reports/analysis/remote_branch_sweep__2026-06-11.md."
+    },
+    {
+      "id": "deep-pass-closed-prs-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "Deep pass: all 103 closed-unmerged non-bot CloudBank PRs cherry-checked via pull refs. Benchmark scorecard extracted per #837 mandate and merged (#988). June hardening wave verified fully landed. zip_wizard + aurora-cloudbank-symbolic1 registered. SECURITY: zip_wizard has .env committed at repo root on GitHub \u2014 OWNER ACTION REQUIRED (inspect/rotate/purge); agent credential access correctly blocked by classifier. Long-tail dispositions in remote_branch_sweep addendum."
+    },
+    {
+      "id": "integration-pass-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "Full-system integration pass: orchestrator BLOCKED->PROMOTE_WITH_REMEDIATION (0 blocking). Remediated: year-old shell-mangled THREADCORE snapshot salvaged+quarantined; registry capsule fields (#989 merged); spine index regen (spine #5 merged). All nine surfaces green (174 root + 128 CloudBank tests, all gates, all propagation checks). Report: reports/analysis/integration_pass__2026-06-11.md."
+    },
+    {
+      "id": "cleared-items-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "Owner-cleared items closed: (1) zip_wizard .env \u2014 full 92-commit gitleaks scan CLEAN; content was a single localhost Postgres DATABASE_URL (low risk, characterized without transcript exposure); untracked + gitignored via zip_wizard PR #11, merged; no history rewrite needed. (2) Mesh transcripts privacy-reviewed (only false-positive timestamp pattern hits; no PII/keys) and promoted to CanonRec canon/L1/station/mesh_transcripts/ as reference-tier primary sources (c4ee8c6); mesh.db stays local-intake. Codex-claimed items left untouched per owner: review-debt rd-20260610-authority-policy and the in-progress test_mesh_router_v1.py adaptation."
+    },
+    {
+      "id": "pilot-role-canon-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "Owner definitional ruling locked in: user role = Pilot (ORION.ROLE.PILOT, CANON); Thorne commands Orion Station; Captain = legacy alias from early sessions. CanonRec record + drift entry (0ff6b58); AGENTS.md user-context updated; CloudBank runtime defaults pilot/Pilot with captain back-compat aliases (PR #990); historical channel ids and transcripts deliberately unchanged."
+    }
+  ]
+}

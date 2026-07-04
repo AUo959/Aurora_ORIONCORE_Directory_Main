@@ -24,8 +24,19 @@ CLI:
     python3 tools/session_state_io.py set-summary TEXT
     python3 tools/session_state_io.py suspend-active --next-step TEXT
         [--next-step-detail TEXT]
+    python3 tools/session_state_io.py record-commits   # mechanical: recent_commits + main_sha from git log
+    python3 tools/session_state_io.py archive-completed [--keep N]
 
-Exit codes: 0 ok, 1 refused (validation findings or unknown id), 2 io error.
+Long handoff narratives (next_step_detail > 600 chars) are spilled to a
+per-session file under catalog/handoffs/ with a pointer left in the state —
+keeps the shared file small and contention low.
+
+Mutations refuse to run (exit 3) while the OTHER platform holds an active
+mutating session claim overlapping catalog/session_state.json; override
+with --force when you know the claim is abandoned.
+
+Exit codes: 0 ok, 1 refused (validation findings or unknown id),
+2 io error, 3 blocked by another platform's active claim.
 """
 
 from __future__ import annotations
@@ -39,6 +50,10 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 STATE_PATH = REPO_ROOT / "catalog" / "session_state.json"
+HANDOFF_DIR = REPO_ROOT / "catalog" / "handoffs"
+ARCHIVE_PATH = REPO_ROOT / "catalog" / "session_state_archive.json"
+SPILL_THRESHOLD = 600  # chars of next_step_detail kept inline
+ARCHIVE_KEEP_DEFAULT = 10
 
 sys.path.insert(0, str(REPO_ROOT / "tools"))
 import session_state_check  # noqa: E402
@@ -79,6 +94,47 @@ def _refuse(findings: list[str]) -> int:
     for f in findings:
         print(f"  - {f}", file=sys.stderr)
     return 1
+
+
+def blocking_claims(platform: str, root: Path = REPO_ROOT) -> list[dict]:
+    """Active mutating claims by the OTHER platform overlapping the state file."""
+    try:
+        import session_claim
+        from datetime import datetime, timezone as _tz
+
+        now = datetime.now(_tz.utc).replace(microsecond=0)
+        state_rel = "catalog/session_state.json"
+        blockers = []
+        for record in session_claim.load_claim_records(root):
+            claim = record.get("claim", record)
+            if not session_claim.is_active_claim(claim, now):
+                continue
+            if claim.get("platform") == platform:
+                continue
+            if not session_claim.posture_is_mutating(str(claim.get("posture", "mutating"))):
+                continue
+            paths = claim.get("paths") or ["."]
+            if any(session_claim.path_overlaps(p, state_rel) for p in paths):
+                blockers.append(claim)
+        return blockers
+    except Exception:
+        return []  # claim system unavailable — never block on infrastructure
+
+
+def _spill_handoff(detail: str, platform: str, next_step: str) -> str:
+    """Write a long narrative to catalog/handoffs/ and return the inline pointer."""
+    HANDOFF_DIR.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    step_slug = "".join(c if c.isalnum() or c == "-" else "-" for c in next_step.lower())[:48].strip("-")
+    name = f"{ts}-{platform}-{step_slug or 'handoff'}.md"
+    path = HANDOFF_DIR / name
+    path.write_text(
+        f"# Session handoff — {platform} — {ts}\n\n"
+        f"Next step: {next_step}\n\n{detail}\n",
+        encoding="utf-8",
+    )
+    first_line = detail.strip().splitlines()[0][:200]
+    return f"{first_line} [full handoff: catalog/handoffs/{name}]"
 
 
 # ── Mutations (each loads fresh at apply time) ─────────────────────────────
@@ -173,11 +229,76 @@ def op_suspend_active(args: argparse.Namespace) -> int:
     active["updated_at"] = _now()
     active["next_step"] = args.next_step
     if args.next_step_detail:
-        active["next_step_detail"] = args.next_step_detail
+        detail = args.next_step_detail
+        if len(detail) > SPILL_THRESHOLD:
+            detail = _spill_handoff(detail, args.platform, args.next_step)
+        active["next_step_detail"] = detail
     findings = save(state)
     if findings:
         return _refuse(findings)
     print(f"session-state-io: active_task suspended (next_step: {args.next_step})")
+    return 0
+
+
+def op_record_commits(args: argparse.Namespace) -> int:
+    """Mechanically refresh recent_commits + known_state.main_sha from git."""
+    import subprocess
+
+    def _git(*cmd: str) -> str:
+        return subprocess.run(["git", *cmd], capture_output=True, text=True,
+                              cwd=REPO_ROOT).stdout.strip()
+
+    state = load()
+    head = _git("rev-parse", "HEAD")
+    known = state.get("known_state", {}).get("main_sha", "")
+    # A recorded sha can vanish from local history (e.g. after a rebase);
+    # fall back to the last 10 commits rather than silently recording none.
+    if known and not _git("rev-parse", "--verify", "--quiet", f"{known}^{{commit}}"):
+        known = ""
+    raw = _git("log", "--oneline", f"{known}..HEAD") if known else _git("log", "--oneline", "-10")
+    existing = state.get("recent_commits", [])
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    added = 0
+    for line in reversed([l for l in raw.splitlines() if l.strip()]):
+        sha, _, summary = line.partition(" ")
+        if not any(e.get("sha") == sha for e in existing):
+            existing.insert(0, {"sha": sha, "date": today,
+                                "platform": args.platform, "summary": summary})
+            added += 1
+    state["recent_commits"] = existing[:10]
+    state.setdefault("known_state", {})["main_sha"] = head
+    findings = save(state)
+    if findings:
+        return _refuse(findings)
+    print(f"session-state-io: recorded {added} commit(s); main_sha={head[:9]}")
+    return 0
+
+
+def op_archive_completed(args: argparse.Namespace) -> int:
+    """Move all but the newest --keep completed_tasks to the archive file."""
+    state = load()
+    completed = state.get("completed_tasks", [])
+    if len(completed) <= args.keep:
+        print(f"session-state-io: {len(completed)} completed task(s) — nothing to archive")
+        return 0
+    to_archive, remain = completed[:-args.keep], completed[-args.keep:]
+    archive = {"schema_version": 1, "completed_tasks": []}
+    if ARCHIVE_PATH.exists():
+        archive = json.loads(ARCHIVE_PATH.read_text(encoding="utf-8"))
+    known_ids = {t.get("id") for t in archive["completed_tasks"]}
+    archive["completed_tasks"].extend(t for t in to_archive if t.get("id") not in known_ids)
+    ARCHIVE_PATH.write_text(json.dumps(archive, indent=2, ensure_ascii=True) + "\n",
+                            encoding="utf-8")
+    state["completed_tasks"] = remain
+    findings = save(state)
+    if findings:
+        return _refuse(findings)
+    try:
+        archive_label = str(ARCHIVE_PATH.relative_to(REPO_ROOT))
+    except ValueError:
+        archive_label = str(ARCHIVE_PATH)
+    print(f"session-state-io: archived {len(to_archive)} task(s) to "
+          f"{archive_label}; {len(remain)} kept inline")
     return 0
 
 
@@ -186,6 +307,8 @@ def main() -> int:
     parser.add_argument("--platform", default=detect_platform(),
                         choices=["codex", "claude-code"],
                         help="Writing platform (auto-detected by default)")
+    parser.add_argument("--force", action="store_true",
+                        help="Write even if the other platform holds an active claim")
     sub = parser.add_subparsers(dest="command", required=True)
 
     sub.add_parser("fmt", help="Rewrite the file in canonical serialization")
@@ -211,6 +334,13 @@ def main() -> int:
     p.add_argument("--next-step", required=True)
     p.add_argument("--next-step-detail")
 
+    sub.add_parser("record-commits",
+                   help="Refresh recent_commits + known_state.main_sha from git log")
+
+    p = sub.add_parser("archive-completed",
+                       help="Move older completed_tasks to catalog/session_state_archive.json")
+    p.add_argument("--keep", type=int, default=ARCHIVE_KEEP_DEFAULT)
+
     args = parser.parse_args()
     handlers = {
         "fmt": op_fmt,
@@ -219,7 +349,20 @@ def main() -> int:
         "add-pending": op_add_pending,
         "set-summary": op_set_summary,
         "suspend-active": op_suspend_active,
+        "record-commits": op_record_commits,
+        "archive-completed": op_archive_completed,
     }
+    if args.command != "get" and not args.force:
+        blockers = blocking_claims(args.platform)
+        if blockers:
+            claim = blockers[0]
+            print("session-state-io: BLOCKED — active mutating claim by "
+                  f"'{claim.get('platform')}' overlaps the state file "
+                  f"(claim id: {claim.get('claim_id') or claim.get('id', '?')}, "
+                  f"task: {claim.get('task', '?')}). "
+                  "Wait, release the claim, or re-run with --force.",
+                  file=sys.stderr)
+            return 3
     try:
         return handlers[args.command](args)
     except FileNotFoundError:

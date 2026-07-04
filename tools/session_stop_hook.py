@@ -142,11 +142,55 @@ def _write_orphan_marker(changed_files: list[str], head: str) -> Path:
 
 # ── Session start check ───────────────────────────────────────────────────
 
+def _debt_staleness_warning() -> None:
+    """Warn when the landing-ledger snapshot is older than 24h."""
+    try:
+        state = json.loads(STATE_PATH.read_text())
+        checked_at = state.get("publication_debt", {}).get("checked_at", "")
+        if not checked_at:
+            return
+        age = datetime.now(timezone.utc) - datetime.strptime(
+            checked_at, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+        if age.total_seconds() > 24 * 3600:
+            hours = int(age.total_seconds() // 3600)
+            print(f"[session-start] publication_debt snapshot is {hours}h old — "
+                  "verify entries against live git/PR state before acting on them.")
+    except Exception:
+        pass
+
+
 def check_orphans() -> None:
-    """Print any orphan markers left from previous sessions. Call on session start."""
+    """Surface orphan markers from previous sessions; auto-resolve stale ones.
+
+    A marker is resolved when none of its recorded files are still dirty —
+    the work it flagged has since been committed (possibly by the other
+    platform), so the marker is deleted instead of nagging forever.
+    """
+    _debt_staleness_warning()
     if not CLAIMS_DIR.exists():
         return
-    orphans = sorted(CLAIMS_DIR.glob(f".orphan_*.json"))
+    orphans = sorted(CLAIMS_DIR.glob(".orphan_*.json"))
+    if not orphans:
+        return
+
+    still_dirty = set(_git_uncommitted_tracked())
+    unresolved = []
+    resolved = 0
+    for marker in orphans:
+        try:
+            files = set(json.loads(marker.read_text()).get("uncommitted_files", []))
+        except Exception:
+            unresolved.append(marker)
+            continue
+        if files & still_dirty:
+            unresolved.append(marker)
+        else:
+            marker.unlink()
+            resolved += 1
+    if resolved:
+        print(f"[session-start] auto-resolved {resolved} orphan marker(s) — "
+              "their files have since been committed.")
+    orphans = unresolved
     if not orphans:
         return
     print("\n╔══════════════════════════════════════════════════════════╗")

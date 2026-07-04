@@ -55,6 +55,18 @@ anything that fails the queue contract:
 For edits the CLI doesn't cover, import `session_state_io` and use its
 `load()`/`save()` (save validates and writes canonically).
 
+Notes on the write path:
+- Long `--next-step-detail` (>600 chars) auto-spills to a dated file in
+  `catalog/handoffs/` with a pointer left inline — write rich handoffs
+  freely; the state file stays small. Handoff files are committed.
+- Mutations refuse (exit 3) while the other platform holds an active
+  mutating claim overlapping the state file; `--force` overrides.
+- When `completed_tasks` grows past ~15, run
+  `python3 tools/session_state_io.py archive-completed` (history moves to
+  `catalog/session_state_archive.json`, newest 10 stay inline).
+- `recent_commits` is mechanical — the Stop hook maintains it; never
+  hand-edit it.
+
 Concurrent commits to session state from both platforms auto-merge: a
 structural 3-way merge driver (`tools/session_state_merge.py`, mapped via
 `.gitattributes`) unions append-only surfaces, honors completions as
