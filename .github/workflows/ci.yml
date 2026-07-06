@@ -34,7 +34,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -56,7 +56,7 @@ jobs:
       # workspace-verification repo_head_match check passes deterministically.
       # Update both places together if the canonical nested-repo heads move.
       - name: Provision CloudBank simulation clone (public)
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: AUo959/aurora-cloudbank-symbolic
           ref: 8194ecb05fa81dba631bf3bff9b40e3dfe257a91
@@ -72,7 +72,7 @@ jobs:
           fi
 
       - name: Provision CanonRec L1 ledger (private)
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: AUo959/CanonRec
           ref: 5731c50862e1fc9f7079ef9b22505597a8cb3d75
@@ -133,7 +133,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -157,7 +157,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set up Python
         uses: actions/setup-python@v6
