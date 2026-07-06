@@ -268,7 +268,18 @@ run = NarrativeValidationEngine().run({
     "knowledge_states": [{"holder": audit["actor"], "fact": audit["knowledge"]}],
     "continuity": {"notes": ["Thorne upholds arbitration discipline."]},
 }, proposal={"actor": audit["actor"], "action": audit["action"], "type": "action"})
-print(json.dumps({"verdict": run.response.verdict.value}))
+
+
+def _enc(o):
+    import enum
+    if isinstance(o, enum.Enum):
+        return o.value
+    return str(o)
+
+
+# Full reconstruction (request/state/evaluation/response), not just the verdict,
+# so the harness can emit a complete L3 narrative reconstruction artifact.
+print(json.dumps({"verdict": run.response.verdict.value, "reconstruction": run.to_dict()}, default=_enc))
 """
 
 
@@ -590,6 +601,168 @@ def build_souls_accounting(
     }
 
 
+def _task_owners(sim: dict) -> dict[str, str]:
+    """Map each closed task to the crew member who signed it off (note '✓ COMPLETE')."""
+    owners: dict[str, str] = {}
+    for wr in sim.get("work_records", []):
+        if "COMPLETE" in str(wr.get("note", "")).upper():
+            owners[wr["task"]] = wr["agent"]
+    return owners
+
+
+def build_event_chain(sim: dict, scenario: dict, audit: dict) -> list[dict]:
+    """The ordered chain of what happened this watch, reconstructed from the sim."""
+    actor = audit["actor"]
+    task_names = sim.get("task_names", {})
+    owners = _task_owners(sim)
+    chain: list[dict] = [
+        {"phase": "watch open", "label": f"Commander {actor} opens the watch; Aurora coordinates "
+         "canonical task distribution.", "participants": [actor, "Aurora"]},
+    ]
+    for tid in sim.get("summary", {}).get("completed_ids", []):
+        name = task_names.get(tid, tid)
+        owner = owners.get(name, "station crew")
+        chain.append({"phase": "this watch", "label": f"{name} validated and closed.",
+                      "participants": [owner]})
+    for ev in sim.get("events", []):
+        desc = ev.get("label") or ev.get("description") or ev.get("kind", "emergent event")
+        kind = ev.get("kind")
+        tick = ev.get("tick")
+        mult = ev.get("multiplier")
+        label = desc
+        if kind and kind not in desc:
+            label = f"{desc} ({kind})"
+        if tick is not None:
+            label = f"hour {int(tick) + 1}: {label}"
+        if mult and mult != 1.0:
+            label = f"{label} ×{mult}"
+        chain.append({"phase": "emergent", "label": label,
+                      "participants": ev.get("affected") or ev.get("participants", [])})
+    ord_d = sim.get("ord_dispatch") or {}
+    if ord_d.get("drones_required"):
+        chain.append({"phase": "off-board", "label": "ORD pre-flight reconnaissance dispatched "
+                      f"({', '.join(ord_d['drones_required'])}).", "participants": ["Aurora", "ORD control"]})
+    chain.append({"phase": "watch close", "label": audit.get("event_label", "Watch closeout."),
+                  "participants": [actor, "Aurora"]})
+    chain.append({"phase": "proposal", "label": audit["action"], "participants": [actor]})
+    return chain
+
+
+def build_reconstruction(sim: dict, scenario: dict, audit: dict,
+                         mesh_results: list[dict], souls: dict) -> dict:
+    """Assemble the full L3 narrative reconstruction artifact for this watch."""
+    s = sim.get("summary", {})
+    return {
+        "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "scenario": scenario["name"],
+        "station_hour": scenario.get("seed", 0) - scenario.get("base_seed", 0) + 1,
+        "seed": scenario.get("seed"),
+        "anchor_seed": scenario.get("anchor_seed"),
+        "ethics_protocol": scenario.get("ethics_protocol"),
+        "watch": {
+            "hours": scenario.get("ticks", 1),
+            "roster_engaged": s.get("characters_used"),
+            "souls_accounted": f"{souls.get('crew_logged')}/{souls.get('canon_l1_entities')}",
+            "effort_spent_h": s.get("total_spent"),
+            "effort_estimate_h": s.get("total_est"),
+            "closed_ids": sorted(s.get("completed_ids", []),
+                                  key=lambda t: int("".join(filter(str.isdigit, t)) or 0)),
+            "task_total": len(sim.get("task_names", {})),
+        },
+        "event_chain": build_event_chain(sim, scenario, audit),
+        "off_board_receipts": {
+            "ord_dispatch": sim.get("ord_dispatch", {}),
+            "mesh": [{"agent": r["agent"], "answered": bool(r["ok"]), "reply": r["reply"][:160]}
+                     for r in mesh_results],
+        },
+        # The L3 narrative-validation engine's full output: request/state/evaluation/response.
+        "l3": audit.get("reconstruction", {"verdict": audit.get("verdict")}),
+    }
+
+
+def _render_layers_md(state: dict) -> list[str]:
+    if not (isinstance(state, dict) and state.get("layers")):
+        return []
+    out = ["## Reconstructed canonical layers", "", "| Layer | Origin | Conf | Status |", "|---|---|---|---|"]
+    for layer in state["layers"]:
+        out.append(f"| {layer.get('name','')} | {layer.get('origin','')} | "
+                   f"{layer.get('confidence','')} | {layer.get('status','')} |")
+    out.append("")
+    return out
+
+
+def _render_receipts_md(recon: dict, audit: dict, resp: dict) -> list[str]:
+    out = ["## Off-board receipts", ""]
+    ord_d = recon["off_board_receipts"]["ord_dispatch"]
+    if ord_d.get("drones_required"):
+        rsha = str(ord_d.get("receipt_sha256", ""))[:16]
+        out.append(f"- **ORD dispatch** `{ord_d.get('mission_id','')}` → "
+                   f"{', '.join(ord_d['drones_required'])} · receipt `{rsha}…`")
+    # Summarize the mesh per companion (a 4-hour block answers each companion
+    # once per hour); the per-beat detail stays in narrative_reconstruction.json.
+    by_agent: dict[str, dict] = {}
+    for m in recon["off_board_receipts"]["mesh"]:
+        a = by_agent.setdefault(m["agent"], {"answered": 0, "total": 0, "sample": m["reply"]})
+        a["total"] += 1
+        a["answered"] += 1 if m["answered"] else 0
+    for agent, agg in by_agent.items():
+        out.append(f"- **mesh / {agent}** — {agg['answered']}/{agg['total']} beats answered · "
+                   f"e.g. {agg['sample']}")
+    out.append(f"- **L3 receipt** · narrative audit verdict **{resp.get('verdict', audit.get('verdict'))}** · "
+               f"ethics {recon['ethics_protocol']} · anchor {recon['anchor_seed']}")
+    out.append("")
+    return out
+
+
+def _render_verdict_md(resp: dict, audit: dict) -> list[str]:
+    verdict = str(resp.get("verdict", audit.get("verdict", ""))).upper()
+    conf = resp.get("confidence")
+    out = ["## Validation verdict", "",
+           f"> **{verdict}**" + (f" · confidence {conf}" if conf is not None else ""), ""]
+    if resp.get("summary"):
+        out += [resp["summary"], ""]
+    for heading, key in (("Supports", "main_supports"), ("Blockers", "main_blockers"),
+                         ("Smallest fix", "smallest_fix")):
+        if resp.get(key):
+            out.append(f"### {heading}")
+            out += [f"- {item}" for item in resp[key]]
+            out.append("")
+    return out
+
+
+def render_reconstruction_md(recon: dict, audit: dict) -> str:
+    w = recon["watch"]
+    l3 = recon.get("l3", {}) if isinstance(recon.get("l3"), dict) else {}
+    resp = l3.get("response", {})
+    state = l3.get("state", {})
+    closed = [c for c in recon["event_chain"] if c["phase"] == "this watch"]
+    mesh = recon["off_board_receipts"]["mesh"]
+    answered = sum(1 for m in mesh if m["answered"])
+    lines = [
+        f"# Narrative Reconstruction — {recon['scenario']}", "",
+        f"**Watch:** {w['hours']}h aboard Orion Station · station hour {recon['station_hour']} · "
+        f"seed {recon['seed']}  ",
+        f"**Anchor:** {recon['anchor_seed']} · **Ethics:** {recon['ethics_protocol']}  ",
+        f"**Roster engaged:** {w['roster_engaged']} · **Souls accounted:** {w['souls_accounted']} canon entities  ",
+        f"**Effort:** {w['effort_spent_h']}h of {w['effort_estimate_h']}h estimated · "
+        f"**Closed:** {', '.join(w['closed_ids'])} ({len(w['closed_ids'])}/{w['task_total']} task families)", "",
+        "## The watch, reconstructed", "",
+        f"Commander {audit['actor']} opened the watch and handed coordination to Aurora. "
+        f"Within the block the crew brought **{len(closed)}** task families to a validated close. "
+        f"Over the mesh, **{answered}/{len(mesh)} companion beats were answered**. "
+        f"The L3 engine was then asked to audit the closeout: **{audit.get('question','')}**", "",
+    ]
+    lines += _render_layers_md(state)
+    lines += ["## Event chain", ""]
+    for c in recon["event_chain"]:
+        who = ", ".join(c.get("participants", [])) or "—"
+        lines.append(f"- **[{c['phase']}]** {c['label']} — _{who}_")
+    lines.append("")
+    lines += _render_receipts_md(recon, audit, resp)
+    lines += _render_verdict_md(resp, audit)
+    return "\n".join(lines).rstrip() + "\n"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
@@ -694,6 +867,7 @@ def main() -> int:
         },
     }
     souls = build_souls_accounting(hour_records, mesh_results, canon_souls)
+    reconstruction = build_reconstruction(sim, scenario, {**scenario["l3_audit"], **audit}, mesh_results, souls)
 
     (out_dir / "crew_logs.md").write_text(build_crew_logs(hour_records, sim, scenario))
     (out_dir / "interaction_map.json").write_text(json.dumps(graph, indent=2) + "\n")
@@ -703,6 +877,9 @@ def main() -> int:
     )
     (out_dir / "souls_accounting.json").write_text(json.dumps(souls, indent=2) + "\n")
     (out_dir / "sim_raw.json").write_text(json.dumps(sim, indent=2) + "\n")
+    (out_dir / "narrative_reconstruction.json").write_text(json.dumps(reconstruction, indent=2) + "\n")
+    (out_dir / "narrative_reconstruction.md").write_text(
+        render_reconstruction_md(reconstruction, {**scenario["l3_audit"], **audit}))
 
     try:
         _shown_dir = out_dir.relative_to(REPO_ROOT)
@@ -716,6 +893,8 @@ def main() -> int:
         "companion_ops.json",
         "souls_accounting.json",
         "sim_raw.json",
+        "narrative_reconstruction.json",
+        "narrative_reconstruction.md",
     ):
         print(f"   - {name}")
     print(
