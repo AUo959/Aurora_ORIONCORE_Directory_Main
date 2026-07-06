@@ -215,6 +215,7 @@ def check_claims(
     paths: list[str],
     mutation_posture: str = "editing",
     exclude_claim_id: str | None = None,
+    exclude_platform: str | None = None,
     now: datetime | None = None,
 ) -> dict[str, Any]:
     checked_at = now or utc_now()
@@ -235,6 +236,11 @@ def check_claims(
 
         claim = record["claim"]
         if claim.get("claim_id") == exclude_claim_id:
+            continue
+        # Auto-claims (2026-07-04) mean a live session always holds a claim
+        # on the shared state file; when asking "can *my platform* start
+        # work", its own presence claims are not conflicts.
+        if exclude_platform and claim.get("platform") == exclude_platform:
             continue
         if normalize_repo(str(claim.get("repo", "root"))) != normalized_repo:
             continue

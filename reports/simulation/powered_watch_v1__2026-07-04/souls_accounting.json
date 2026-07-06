@@ -1,0 +1,10 @@
+{
+  "generated_at_utc": "2026-07-04T07:46:51Z",
+  "canon_l1_entities": 41,
+  "crew_logged": 41,
+  "crew_from_roster": 35,
+  "crew_supplemental_from_canon": 6,
+  "companions_on_mesh": [],
+  "complete": true,
+  "note": "Every L1 canon entity carries an hour-by-hour record (task work or division duty); station intelligences are accounted in companion_ops.json."
+}

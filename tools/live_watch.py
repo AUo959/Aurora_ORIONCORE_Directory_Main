@@ -38,7 +38,7 @@ sys.path.insert(0, str(REPO_ROOT / "tools"))
 import hour_aboard  # noqa: E402
 import crew_life  # noqa: E402
 
-LIVE_DRIVER = r'''
+LIVE_DRIVER = r"""
 import json, sys, time, tempfile, shutil, urllib.parse, re
 from datetime import datetime, timezone, timedelta
 
@@ -277,7 +277,7 @@ except Exception as exc:
     out["ord_dispatch"] = {"error": str(exc)[:160]}
 
 print(json.dumps(out))
-'''
+"""
 
 
 def render_feed_md(sim: dict, scenario: dict) -> str:
@@ -290,37 +290,63 @@ def render_feed_md(sim: dict, scenario: dict) -> str:
         f"{sim['engine']['engine_class']}, {sim['engine']['factions']} factions.",
         "",
     ]
-    icons = {"watch_hour_start": "🕐", "engine_turn": "⚙️", "downlink": "📡↓",
-             "uplink_reply": "📡↑", "advisory": "🚨"}
+    icons = {
+        "watch_hour_start": "🕐",
+        "engine_turn": "⚙️",
+        "downlink": "📡↓",
+        "uplink_reply": "📡↑",
+        "advisory": "🚨",
+    }
     for ev in sim["feed"]:
         ic = icons.get(ev["kind"], "·")
         if ev["kind"] == "watch_hour_start":
             lines.append(f"\n### {ic} Hour {ev['hour']} — {ev['t']}")
         elif ev["kind"] == "engine_turn":
-            note = (" | " + ", ".join(f"{k}×{v}" for k, v in ev["notable"].items())) if ev["notable"] else ""
-            lines.append(f"- {ic} turn {ev['turn']}: stability {ev['stability']:.3f}, risk {ev['risk']:.3f}{note}")
+            note = (
+                (" | " + ", ".join(f"{k}x{v}" for k, v in ev["notable"].items()))
+                if ev["notable"]
+                else ""
+            )
+            lines.append(
+                f"- {ic} turn {ev['turn']}: stability {ev['stability']:.3f}, risk {ev['risk']:.3f}{note}"
+            )
         elif ev["kind"] == "downlink":
-            lines.append(f"- {ic} → {ev['to']} (+{ev['light_time_s']}s light): {ev['content']}")
+            lines.append(
+                f"- {ic} → {ev['to']} (+{ev['light_time_s']}s light): {ev['content']}"
+            )
         elif ev["kind"] == "uplink_reply":
             mark = "" if ev["ok"] else " ⚠"
             lines.append(f"- {ic} {ev['from']}{mark}: {ev['content']}")
         elif ev["kind"] == "advisory":
-            lines.append(f"- {ic} **ADVISORY** ({ev['trigger']}) — {ev['from_agent']}: {ev['action']}")
+            lines.append(
+                f"- {ic} **ADVISORY** ({ev['trigger']}) — {ev['from_agent']}: {ev['action']}"
+            )
             lines.append(f"    ↳ {ev['reply']}")
     return "\n".join(lines) + "\n"
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
     parser.add_argument("--scenario", default="live_watch_scenario")
     args = parser.parse_args()
 
-    scenario = json.loads((REPO_ROOT / "catalog" / f"{args.scenario.removesuffix('.json')}.json").read_text())
-    scenario["engine_ops"]["_engine_dir_abs"] = str(REPO_ROOT / scenario["engine_ops"]["engine_dir"])
+    scenario = json.loads(
+        (
+            REPO_ROOT / "catalog" / f"{args.scenario.removesuffix('.json')}.json"
+        ).read_text()
+    )
+    scenario["engine_ops"]["_engine_dir_abs"] = str(
+        REPO_ROOT / scenario["engine_ops"]["engine_dir"]
+    )
 
     if hour_aboard.STATE_PATH.exists():
-        scenario["history"] = {"pair_familiarity":
-                               json.loads(hour_aboard.STATE_PATH.read_text()).get("pair_familiarity", {})}
+        scenario["history"] = {
+            "pair_familiarity": json.loads(hour_aboard.STATE_PATH.read_text()).get(
+                "pair_familiarity", {}
+            )
+        }
 
     # Living clock: this watch is the next block of hours on the station's
     # continuous timeline, never a replay of one fixed seed.
@@ -334,31 +360,46 @@ def main() -> int:
         start_clock = int(scenario.get("start_clock", 6))
         life = crew_life.run_day(start_clock, int(scenario.get("ticks", 1)))
         scenario["crew_life"]["on_shift_norm_by_hour"] = [
-            crew_life.on_shift_awake_norm(life, step) for step in range(scenario["ticks"])]
+            crew_life.on_shift_awake_norm(life, step)
+            for step in range(scenario["ticks"])
+        ]
         scenario["crew_life"]["fatigue_norm_by_hour"] = [
-            crew_life.fatigue_norm_map(life, step) for step in range(scenario["ticks"])]
+            crew_life.fatigue_norm_map(life, step) for step in range(scenario["ticks"])
+        ]
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    out_dir = REPO_ROOT / "reports" / "simulation" / f"{scenario['name']}__{stamp}"
+    out_dir = hour_aboard.SIM_REPORT_ROOT / f"{scenario['name']}__{stamp}"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"🔗 Live station link up: {scenario.get('ticks')}h watch, real-time downlink "
-          f"(seed {scenario['seed']}, light-time {scenario['live_link']['one_way_light_time_s']}s) ...")
+    print(
+        f"🔗 Live station link up: {scenario.get('ticks')}h watch, real-time downlink "
+        f"(seed {scenario['seed']}, light-time {scenario['live_link']['one_way_light_time_s']}s) ..."
+    )
     sim = hour_aboard._run_in_clone(LIVE_DRIVER, scenario)
     s, eng = sim["summary"], sim["engine"]
     if life is not None:
         gate = sim.get("crew_life_gating", {})
-        print(f"   crew-life: shift-gated — on duty by hour {gate.get('on_shift_by_hour')} "
-              f"of {gate.get('total_crew')} (rest asleep/meals/off); "
-              f"deficits: {len(life['deficits'])}")
-    print(f"   chassis: {s['characters_used']} roster | {s['total_spent']:.1f}h worked | "
-          f"{len(s['completed_ids'])}/{len(sim['task_names'])} tasks | {len(sim['events'])} emergent")
-    print(f"   engine:  {eng['engine_class']} | {eng['turns_total']} turns | "
-          f"final risk {eng['final_risk']} | advisory {'RAISED' if eng['advisory_raised'] else 'none'}")
+        print(
+            f"   crew-life: shift-gated — on duty by hour {gate.get('on_shift_by_hour')} "
+            f"of {gate.get('total_crew')} (rest asleep/meals/off); "
+            f"deficits: {len(life['deficits'])}"
+        )
+    print(
+        f"   chassis: {s['characters_used']} roster | {s['total_spent']:.1f}h worked | "
+        f"{len(s['completed_ids'])}/{len(sim['task_names'])} tasks | {len(sim['events'])} emergent"
+    )
+    print(
+        f"   engine:  {eng['engine_class']} | {eng['turns_total']} turns | "
+        f"final risk {eng['final_risk']} | advisory {'RAISED' if eng['advisory_raised'] else 'none'}"
+    )
     answered = sum(1 for r in sim["mesh_replies"] if r["ok"])
-    print(f"   link:    {answered}/{len(sim['mesh_replies'])} downlinks answered in-loop")
+    print(
+        f"   link:    {answered}/{len(sim['mesh_replies'])} downlinks answered in-loop"
+    )
     for inj in eng["injected_tasks"]:
-        print(f"   🚨 Aurora advisory (hour {inj['hour']}, risk {inj['trigger_risk']:.3f}) → risk-response cell")
+        print(
+            f"   🚨 Aurora advisory (hour {inj['hour']}, risk {inj['trigger_risk']:.3f}) → risk-response cell"
+        )
 
     print("⚖️  L3 narrative audit ...")
     audit = hour_aboard._run_in_clone(hour_aboard.L3_AUDIT_DRIVER, scenario["l3_audit"])
@@ -367,49 +408,85 @@ def main() -> int:
     canon_souls = hour_aboard.load_canon_souls()
     hour_records = hour_aboard.build_hour_records(sim, scenario, canon_souls)
     graph = hour_aboard.build_interaction_map(sim, sim["mesh_replies"], scenario)
-    souls = hour_aboard.build_souls_accounting(hour_records, sim["mesh_replies"], canon_souls)
+    souls = hour_aboard.build_souls_accounting(
+        hour_records, sim["mesh_replies"], canon_souls
+    )
     companion_ops = {
         "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "scenario": scenario["name"], "link_model": sim["link_model"],
-        "operations": [{"hour": r.get("hour"), "agent": r["agent"], "answered": bool(r["ok"]),
-                        "reply": r["reply"][:240]} for r in sim["mesh_replies"]],
+        "scenario": scenario["name"],
+        "link_model": sim["link_model"],
+        "operations": [
+            {
+                "hour": r.get("hour"),
+                "agent": r["agent"],
+                "answered": bool(r["ok"]),
+                "reply": r["reply"][:240],
+            }
+            for r in sim["mesh_replies"]
+        ],
         "ord_dispatch": sim.get("ord_dispatch", {}),
-        "l3_receipt": {"narrative_audit_verdict": audit["verdict"],
-                       "ethics_protocol": scenario["ethics_protocol"],
-                       "anchor_seed": scenario["anchor_seed"],
-                       "live_control_loop": (f"engine risk → Aurora advisory → risk-response cell "
-                                             f"({'fired' if eng['advisory_raised'] else 'armed, not triggered'})")},
+        "l3_receipt": {
+            "narrative_audit_verdict": audit["verdict"],
+            "ethics_protocol": scenario["ethics_protocol"],
+            "anchor_seed": scenario["anchor_seed"],
+            "live_control_loop": (
+                f"engine risk → Aurora advisory → risk-response cell "
+                f"({'fired' if eng['advisory_raised'] else 'armed, not triggered'})"
+            ),
+        },
     }
 
     (out_dir / "live_downlink.jsonl").write_text(
-        "\n".join(json.dumps(e) for e in sim["feed"]) + "\n")
+        "\n".join(json.dumps(e) for e in sim["feed"]) + "\n"
+    )
     (out_dir / "live_downlink.md").write_text(render_feed_md(sim, scenario))
-    (out_dir / "crew_logs.md").write_text(hour_aboard.build_crew_logs(hour_records, sim, scenario))
+    (out_dir / "crew_logs.md").write_text(
+        hour_aboard.build_crew_logs(hour_records, sim, scenario)
+    )
     (out_dir / "interaction_map.json").write_text(json.dumps(graph, indent=2) + "\n")
-    (out_dir / "interaction_map.md").write_text(hour_aboard.render_interaction_md(graph))
-    (out_dir / "companion_ops.json").write_text(json.dumps(companion_ops, indent=2) + "\n")
+    (out_dir / "interaction_map.md").write_text(
+        hour_aboard.render_interaction_md(graph)
+    )
+    (out_dir / "companion_ops.json").write_text(
+        json.dumps(companion_ops, indent=2) + "\n"
+    )
     (out_dir / "souls_accounting.json").write_text(json.dumps(souls, indent=2) + "\n")
     sim["engine"]["seed"] = scenario["seed"]
     sim["engine"]["station_hour"] = hour_index + 1
-    (out_dir / "engine_telemetry.json").write_text(json.dumps(sim["engine"], indent=2) + "\n")
+    (out_dir / "engine_telemetry.json").write_text(
+        json.dumps(sim["engine"], indent=2) + "\n"
+    )
     (out_dir / "sim_raw.json").write_text(json.dumps(sim, indent=2) + "\n")
     if life is not None:
+
         def _ser(o):
             if isinstance(o, set):
                 return sorted(o)
             raise TypeError(type(o).__name__)
+
         crew_life_export = {k: v for k, v in life.items() if k != "by_name"}
         (out_dir / "crew_life.json").write_text(
-            json.dumps(crew_life_export, indent=2, default=_ser) + "\n")
-        (out_dir / "crew_life.md").write_text(crew_life.render_md(life, crew_life.load_model()))
+            json.dumps(crew_life_export, indent=2, default=_ser) + "\n"
+        )
+        (out_dir / "crew_life.md").write_text(
+            crew_life.render_md(life, crew_life.load_model())
+        )
 
-    print(f"\n🗂  Artifacts: {out_dir.relative_to(REPO_ROOT)} (live_downlink.jsonl + .md)")
-    print(f"   souls accounted: {souls['crew_logged']}/{souls['canon_l1_entities']} "
-          f"{'✅' if souls['complete'] else '⚠️'} | engine atoms reconstruct from sim_raw.json")
+    try:
+        shown_dir = out_dir.relative_to(REPO_ROOT)
+    except ValueError:
+        shown_dir = out_dir
+    print(f"\n🗂  Artifacts: {shown_dir} (live_downlink.jsonl + .md)")
+    print(
+        f"   souls accounted: {souls['crew_logged']}/{souls['canon_l1_entities']} "
+        f"{'✅' if souls['complete'] else '⚠️'} | engine atoms reconstruct from sim_raw.json"
+    )
 
     subprocess.run(  # noqa: S603 - our own tool, fixed argument
         [sys.executable, str(REPO_ROOT / "tools" / "station_chronicle.py"), "state"],
-        cwd=REPO_ROOT, check=False)
+        cwd=REPO_ROOT,
+        check=False,
+    )
     hour_aboard.advance_station_clock(int(scenario.get("ticks", 1)))
     return 0
 

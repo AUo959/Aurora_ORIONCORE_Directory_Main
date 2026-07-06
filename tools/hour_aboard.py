@@ -57,19 +57,36 @@ def _resolve(candidates: list[Path], marker: str, default: Path) -> Path:
 # siblings of this repo. Resolve both by a marker file, and prefer a project
 # .venv when present (falling back to the current interpreter so the harness
 # runs without one).
-_CB_NESTED = REPO_ROOT / "GUMAS_SIM_2.5" / "Aurora_Sim_Architecture" / "aurora-cloudbank-symbolic-main"
+_CB_NESTED = (
+    REPO_ROOT
+    / "GUMAS_SIM_2.5"
+    / "Aurora_Sim_Architecture"
+    / "aurora-cloudbank-symbolic-main"
+)
 CLOUDBANK = _resolve(
-    [_CB_NESTED, REPO_ROOT.parent / "aurora-cloudbank-symbolic", REPO_ROOT / "aurora-cloudbank-symbolic"],
-    marker="simulation/orion_station_simulation_v2.py", default=_CB_NESTED,
+    [
+        _CB_NESTED,
+        REPO_ROOT.parent / "aurora-cloudbank-symbolic",
+        REPO_ROOT / "aurora-cloudbank-symbolic",
+    ],
+    marker="simulation/orion_station_simulation_v2.py",
+    default=_CB_NESTED,
 )
 _VENV_PY = CLOUDBANK / ".venv" / "bin" / "python"
 VENV_PY = _VENV_PY if _VENV_PY.exists() else Path(sys.executable)
 _CANON_NESTED = REPO_ROOT / "GUMAS_SIM_2.5" / "CanonRec" / "canon" / "L1" / "characters"
-CANON_CHARACTERS = _resolve(
-    [_CANON_NESTED.parent, (REPO_ROOT.parent / "CanonRec" / "canon" / "L1"),
-     (REPO_ROOT / "CanonRec" / "canon" / "L1")],
-    marker="characters", default=_CANON_NESTED.parent,
-) / "characters"
+CANON_CHARACTERS = (
+    _resolve(
+        [
+            _CANON_NESTED.parent,
+            (REPO_ROOT.parent / "CanonRec" / "canon" / "L1"),
+            (REPO_ROOT / "CanonRec" / "canon" / "L1"),
+        ],
+        marker="characters",
+        default=_CANON_NESTED.parent,
+    )
+    / "characters"
+)
 
 # --- Station hour clock -----------------------------------------------------
 # Orion Station keeps a continuous history: each check-in is a NEW hour, never a
@@ -78,7 +95,13 @@ CANON_CHARACTERS = _resolve(
 # sequence is reproducible from history yet never repeats the same hour. Tests
 # point AURORA_STATION_STATE at an isolated state file to walk a deterministic
 # sequence of distinct hours without touching the repo's chronicle.
-STATE_PATH = Path(os.environ.get("AURORA_STATION_STATE") or (REPO_ROOT / "catalog" / "station_state.json"))
+STATE_PATH = Path(
+    os.environ.get("AURORA_STATION_STATE")
+    or (REPO_ROOT / "catalog" / "station_state.json")
+)
+SIM_REPORT_ROOT = Path(
+    os.environ.get("AURORA_SIM_REPORT_ROOT") or (REPO_ROOT / "reports" / "simulation")
+)
 
 
 def station_hours_elapsed() -> int:
@@ -112,12 +135,16 @@ def advance_station_clock(hours: int) -> None:
     STATE_PATH.write_text(json.dumps(state, indent=2) + "\n")
 
 
-RUN_ENV = {"CSRF_SECRET_KEY": "hour-aboard", "WS_AUTH_SECRET": "hour-aboard",
-           "JWT_SECRET_KEY": "hour-aboard-jwt-local", "PYTHONPYCACHEPREFIX": "/tmp/pyc"}  # noqa: S108
+RUN_ENV = {
+    "CSRF_SECRET_KEY": "hour-aboard",
+    "WS_AUTH_SECRET": "hour-aboard",
+    "JWT_SECRET_KEY": "hour-aboard-jwt-local",
+    "PYTHONPYCACHEPREFIX": "/tmp/pyc",  # noqa: S108
+}
 
 DEFAULT_DUTY_POOLS = {"_off_shift": ["off-shift rest cycle", "mess hall — crew meal"]}
 
-SIM_DRIVER = r'''
+SIM_DRIVER = r"""
 import json, sys
 sys.path.insert(0, ".")
 sys.path.insert(0, "simulation")
@@ -223,9 +250,9 @@ except Exception as exc:
     out["ord_dispatch"] = {"error": str(exc)[:160]}
 
 print(json.dumps(out))
-'''
+"""
 
-L3_AUDIT_DRIVER = r'''
+L3_AUDIT_DRIVER = r"""
 import json, sys
 sys.path.insert(0, ".")
 from src.aurora.engines import NarrativeValidationEngine
@@ -242,7 +269,7 @@ run = NarrativeValidationEngine().run({
     "continuity": {"notes": ["Thorne upholds arbitration discipline."]},
 }, proposal={"actor": audit["actor"], "action": audit["action"], "type": "action"})
 print(json.dumps({"verdict": run.response.verdict.value}))
-'''
+"""
 
 
 def _run_in_clone(driver: str, payload: dict) -> dict:
@@ -250,10 +277,16 @@ def _run_in_clone(driver: str, payload: dict) -> dict:
     env.update(RUN_ENV)
     result = subprocess.run(  # noqa: S603 - clone venv python with our fixed driver
         [str(VENV_PY), "-c", driver, json.dumps(payload)],
-        capture_output=True, text=True, cwd=CLOUDBANK, env=env, timeout=600,
+        capture_output=True,
+        text=True,
+        cwd=CLOUDBANK,
+        env=env,
+        timeout=600,
     )
     if result.returncode != 0:
-        tail = result.stderr.strip().splitlines()[-1] if result.stderr else "unknown error"
+        tail = (
+            result.stderr.strip().splitlines()[-1] if result.stderr else "unknown error"
+        )
         raise SystemExit(f"clone driver failed: {tail}")
     return json.loads(result.stdout.strip().splitlines()[-1])
 
@@ -271,25 +304,27 @@ def load_canon_souls() -> list[dict]:
     for path in sorted(CANON_CHARACTERS.glob("ORION.ENTITY.*.md")):
         front = path.read_text().split("---", 2)[1]
         fields = dict(re.findall(r'^(\w+):\s*"(.*)"\s*$', front, re.MULTILINE))
-        souls.append({
-            "entity_id": fields.get("entity_id", path.stem),
-            "name": fields.get("display_name") or fields.get("name", path.stem),
-            "full_name": fields.get("name", ""),
-            "role": fields.get("role", ""),
-            "division": fields.get("division", ""),
-        })
+        souls.append(
+            {
+                "entity_id": fields.get("entity_id", path.stem),
+                "name": fields.get("display_name") or fields.get("name", path.stem),
+                "full_name": fields.get("name", ""),
+                "role": fields.get("role", ""),
+                "division": fields.get("division", ""),
+            }
+        )
     return souls
 
 
 def duty_for(seed: int, tick: int, name: str, division: str, pools: dict) -> str:
-    rng = random.Random(f"{seed}:{tick}:{name}")
+    rng = random.Random(f"{seed}:{tick}:{name}")  # noqa: S311 - deterministic duty rotation, not crypto.
     division_pool = pools.get(division) or []
     if division_pool and rng.random() < 0.7:
         return rng.choice(division_pool)
     return rng.choice(pools.get("_off_shift") or DEFAULT_DUTY_POOLS["_off_shift"])
 
 
-def build_hour_records(sim: dict, scenario: dict, canon_souls: list[dict]) -> dict:
+def build_hour_records(sim: dict, scenario: dict, canon_souls: list[dict]) -> dict:  # noqa: C901
     """Per-soul, per-hour entries: task work, division duty, or canon duty."""
     ticks = sim["summary"]["ticks"]
     seed = scenario["seed"]
@@ -303,14 +338,27 @@ def build_hour_records(sim: dict, scenario: dict, canon_souls: list[dict]) -> di
     roster_by_norm = {_norm(r["name"]): r for r in sim["roster"]}
     souls: dict[str, dict] = {}
     for r in sim["roster"]:
-        souls[r["name"]] = {"name": r["name"], "kind": "crew", "role": r["role"],
-                            "division": r["division"], "hours": {}}
+        souls[r["name"]] = {
+            "name": r["name"],
+            "kind": "crew",
+            "role": r["role"],
+            "division": r["division"],
+            "hours": {},
+        }
     supplemental = []
     for cs in canon_souls:
-        if _norm(cs["name"]) not in roster_by_norm and _norm(cs["full_name"]) not in roster_by_norm:
+        if (
+            _norm(cs["name"]) not in roster_by_norm
+            and _norm(cs["full_name"]) not in roster_by_norm
+        ):
             supplemental.append(cs)
-            souls[cs["name"]] = {"name": cs["name"], "kind": "crew_supplemental",
-                                 "role": cs["role"], "division": cs["division"], "hours": {}}
+            souls[cs["name"]] = {
+                "name": cs["name"],
+                "kind": "crew_supplemental",
+                "role": cs["role"],
+                "division": cs["division"],
+                "hours": {},
+            }
 
     events_by_tick = defaultdict(list)
     for ev in sim.get("events", []):
@@ -323,14 +371,29 @@ def build_hour_records(sim: dict, scenario: dict, canon_souls: list[dict]) -> di
             for rec in work_by.get(soul["name"], {}).get(tick, []):
                 task_name = names.get(rec["task"], rec["task"])
                 done = " — completed" if "COMPLETE" in rec.get("note", "") else ""
-                entries.append({"type": "work", "detail": f"{task_name} (+{rec['effort']}h){done}",
-                                "task": rec["task"]})
+                entries.append(
+                    {
+                        "type": "work",
+                        "detail": f"{task_name} (+{rec['effort']}h){done}",
+                        "task": rec["task"],
+                    }
+                )
             for ev in events_by_tick.get(tick, []):
                 if soul["name"] in ev.get("affected", []):
-                    entries.append({"type": "event", "detail": f"{ev['kind']}: {ev['description']}"})
+                    entries.append(
+                        {
+                            "type": "event",
+                            "detail": f"{ev['kind']}: {ev['description']}",
+                        }
+                    )
             if not any(e["type"] == "work" for e in entries):
-                entries.insert(0, {"type": "duty",
-                                   "detail": duty_for(seed, tick, soul["name"], division, pools)})
+                entries.insert(
+                    0,
+                    {
+                        "type": "duty",
+                        "detail": duty_for(seed, tick, soul["name"], division, pools),
+                    },
+                )
             soul["hours"][str(tick)] = entries
 
     return {"souls": souls, "supplemental_count": len(supplemental), "ticks": ticks}
@@ -338,8 +401,13 @@ def build_hour_records(sim: dict, scenario: dict, canon_souls: list[dict]) -> di
 
 def hour_highlights(sim: dict, tick: int) -> str:
     names = sim["task_names"]
-    done = sorted({names.get(r["task"], r["task"]) for r in sim["work_records"]
-                   if r["tick"] == tick and "COMPLETE" in r.get("note", "")})
+    done = sorted(
+        {
+            names.get(r["task"], r["task"])
+            for r in sim["work_records"]
+            if r["tick"] == tick and "COMPLETE" in r.get("note", "")
+        }
+    )
     evs = [e["description"] for e in sim.get("events", []) if e["tick"] == tick][:2]
     parts = []
     if done:
@@ -358,12 +426,16 @@ def run_mesh_hours(sim: dict, scenario: dict) -> list[dict]:
     for tick in range(sim["summary"]["ticks"]):
         highlights = hour_highlights(sim, tick)
         for comp in scenario["companions"]:
-            requests.append({"agent": comp["agent"],
-                             "message": f"Watch block hour {tick + 1}/{sim['summary']['ticks']} — "
-                                        f"{highlights}. {comp['role_line']}"})
+            requests.append(
+                {
+                    "agent": comp["agent"],
+                    "message": f"Watch block hour {tick + 1}/{sim['summary']['ticks']} — "
+                    f"{highlights}. {comp['role_line']}",
+                }
+            )
             meta.append({"hour": tick + 1, "agent": comp["agent"]})
     results = query(requests)
-    for m, r in zip(meta, results):
+    for m, r in zip(meta, results, strict=False):
         r["hour"] = m["hour"]
     return results
 
@@ -383,7 +455,11 @@ def build_crew_logs(hour_records: dict, sim: dict, scenario: dict) -> str:
     ]
     for name in sorted(hour_records["souls"]):
         soul = hour_records["souls"][name]
-        tag = " *(canon supplemental — duty rotation)*" if soul["kind"] == "crew_supplemental" else ""
+        tag = (
+            " *(canon supplemental — duty rotation)*"
+            if soul["kind"] == "crew_supplemental"
+            else ""
+        )
         lines.append(f"## {name} — {soul['role']}{tag}")
         for tick in range(hour_records["ticks"]):
             for entry in soul["hours"][str(tick)]:
@@ -393,18 +469,26 @@ def build_crew_logs(hour_records: dict, sim: dict, scenario: dict) -> str:
     return "\n".join(lines)
 
 
-def build_interaction_map(sim: dict, mesh_results: list[dict], scenario: dict) -> dict:
+def build_interaction_map(sim: dict, mesh_results: list[dict], scenario: dict) -> dict:  # noqa: C901
     names = sim["task_names"]
     edges: list[dict] = []
     co_work: dict[tuple, dict] = {}
     tick_task_agents = defaultdict(list)
     for rec in sim["work_records"]:
         tick_task_agents[(rec["tick"], rec["task"])].append(rec["agent"])
-    for (tick, task), agents in tick_task_agents.items():
+    for (_tick, task), agents in tick_task_agents.items():
         for i, a in enumerate(sorted(set(agents))):
-            for b in sorted(set(agents))[i + 1:]:
-                edge = co_work.setdefault((a, b), {"source": a, "target": b, "kind": "co_work",
-                                                   "weight": 0, "tasks": []})
+            for b in sorted(set(agents))[i + 1 :]:
+                edge = co_work.setdefault(
+                    (a, b),
+                    {
+                        "source": a,
+                        "target": b,
+                        "kind": "co_work",
+                        "weight": 0,
+                        "tasks": [],
+                    },
+                )
                 edge["weight"] += 1
                 if names.get(task, task) not in edge["tasks"]:
                     edge["tasks"].append(names.get(task, task))
@@ -413,8 +497,15 @@ def build_interaction_map(sim: dict, mesh_results: list[dict], scenario: dict) -
     for ev in sim.get("events", []):
         if ev["kind"] == "swarm_sync" and len(ev.get("affected", [])) == 2:
             a, b = ev["affected"]
-            edges.append({"source": a, "target": b, "kind": "swarm_sync",
-                          "weight": 1, "hour": ev["tick"] + 1})
+            edges.append(
+                {
+                    "source": a,
+                    "target": b,
+                    "kind": "swarm_sync",
+                    "weight": 1,
+                    "hour": ev["tick"] + 1,
+                }
+            )
 
     companion_pairs = defaultdict(lambda: {"sent": 0, "answered": 0})
     for r in mesh_results:
@@ -422,11 +513,24 @@ def build_interaction_map(sim: dict, mesh_results: list[dict], scenario: dict) -
         cp["sent"] += 1
         cp["answered"] += bool(r["ok"])
     for agent, counts in companion_pairs.items():
-        edges.append({"source": "Pilot", "target": agent, "kind": "mesh_beat",
-                      "weight": counts["sent"], "answered": counts["answered"]})
+        edges.append(
+            {
+                "source": "Pilot",
+                "target": agent,
+                "kind": "mesh_beat",
+                "weight": counts["sent"],
+                "answered": counts["answered"],
+            }
+        )
     if companion_pairs:
-        edges.append({"source": "Commander Alex Thorne", "target": "Aurora",
-                      "kind": "arbitration_sync", "weight": 1})
+        edges.append(
+            {
+                "source": "Commander Alex Thorne",
+                "target": "Aurora",
+                "kind": "arbitration_sync",
+                "weight": 1,
+            }
+        )
 
     nodes = [{"id": r["name"], "kind": "crew"} for r in sim["roster"]]
     nodes.append({"id": "Pilot", "kind": "user"})
@@ -444,25 +548,33 @@ def render_interaction_md(graph: dict) -> str:
     lines.append("## Crew co-work (shared tasks)")
     for e in graph["edges"]:
         if e["kind"] == "co_work":
-            lines.append(f"- {e['source']} ↔ {e['target']} ({e['weight']}h) — {', '.join(e['tasks'])}")
+            lines.append(
+                f"- {e['source']} ↔ {e['target']} ({e['weight']}h) — {', '.join(e['tasks'])}"
+            )
     sync = [e for e in graph["edges"] if e["kind"] == "swarm_sync"]
     if sync:
         lines.append("")
         lines.append("## Emergent swarm syncs")
         for e in sync:
-            lines.append(f"- H{e['hour']} ⚡ {e['source']} ↔ {e['target']} — spontaneous pairing")
+            lines.append(
+                f"- H{e['hour']} ⚡ {e['source']} ↔ {e['target']} — spontaneous pairing"
+            )
     lines.append("")
     lines.append("## Mesh exchanges")
     for e in graph["edges"]:
         if e["kind"] == "mesh_beat":
-            lines.append(f"- Pilot → {e['target']} — {e['answered']}/{e['weight']} hours answered")
+            lines.append(
+                f"- Pilot → {e['target']} — {e['answered']}/{e['weight']} hours answered"
+            )
         elif e["kind"] == "arbitration_sync":
             lines.append(f"- {e['source']} → {e['target']} — arbitration sync")
     lines.append("")
     return "\n".join(lines)
 
 
-def build_souls_accounting(hour_records: dict, mesh_results: list[dict], canon_souls: list[dict]) -> dict:
+def build_souls_accounting(
+    hour_records: dict, mesh_results: list[dict], canon_souls: list[dict]
+) -> dict:
     companion_names = sorted({r["agent"] for r in mesh_results}) if mesh_results else []
     crew_total = len(hour_records["souls"])
     return {
@@ -474,51 +586,73 @@ def build_souls_accounting(hour_records: dict, mesh_results: list[dict], canon_s
         "companions_on_mesh": companion_names,
         "complete": crew_total >= len(canon_souls),
         "note": "Every L1 canon entity carries an hour-by-hour record (task work or "
-                "division duty); station intelligences are accounted in companion_ops.json.",
+        "division duty); station intelligences are accounted in companion_ops.json.",
     }
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--scenario", default="hour_aboard_scenario",
-                        help="catalog scenario name (without .json)")
-    parser.add_argument("--no-mesh", action="store_true", help="skip the live mesh companion bridge")
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        "--scenario",
+        default="hour_aboard_scenario",
+        help="catalog scenario name (without .json)",
+    )
+    parser.add_argument(
+        "--no-mesh", action="store_true", help="skip the live mesh companion bridge"
+    )
     parser.add_argument("--out-dir", default=None, help="artifact directory override")
     args = parser.parse_args()
 
-    scenario_path = REPO_ROOT / "catalog" / f"{args.scenario.removesuffix('.json')}.json"
+    scenario_path = (
+        REPO_ROOT / "catalog" / f"{args.scenario.removesuffix('.json')}.json"
+    )
     scenario = json.loads(scenario_path.read_text())
     if "companions" not in scenario and "companion_beats" in scenario:
-        scenario["companions"] = [{"agent": b["agent"], "role_line": b["beat"]}
-                                  for b in scenario["companion_beats"]]
+        scenario["companions"] = [
+            {"agent": b["agent"], "role_line": b["beat"]}
+            for b in scenario["companion_beats"]
+        ]
 
     if STATE_PATH.exists():
         state = json.loads(STATE_PATH.read_text())
         scenario["history"] = {"pair_familiarity": state.get("pair_familiarity", {})}
-        print(f"📜 Station history loaded: {state.get('atoms_total', 0)} chronicle atoms, "
-              f"{len(scenario['history']['pair_familiarity'])} familiar pairs")
+        print(
+            f"📜 Station history loaded: {state.get('atoms_total', 0)} chronicle atoms, "
+            f"{len(scenario['history']['pair_familiarity'])} familiar pairs"
+        )
 
     hour_index = apply_hour_clock(scenario)
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    out_dir = Path(args.out_dir) if args.out_dir else \
-        REPO_ROOT / "reports" / "simulation" / f"{scenario['name']}__{stamp}"
+    out_dir = (
+        Path(args.out_dir)
+        if args.out_dir
+        else SIM_REPORT_ROOT / f"{scenario['name']}__{stamp}"
+    )
     out_dir.mkdir(parents=True, exist_ok=True)
 
     hours = scenario.get("ticks", 1)
-    print(f"⏱  Simulating {hours} hour(s) aboard ({scenario['name']}, station hour {hour_index + 1}, "
-          f"seed {scenario['seed']} = base {scenario['base_seed']}+{hour_index}) ...")
+    print(
+        f"⏱  Simulating {hours} hour(s) aboard ({scenario['name']}, station hour {hour_index + 1}, "
+        f"seed {scenario['seed']} = base {scenario['base_seed']}+{hour_index}) ..."
+    )
     sim = _run_in_clone(SIM_DRIVER, scenario)
     s = sim["summary"]
-    print(f"   roster engaged: {s['characters_used']} | hours worked: {s['total_spent']:.1f} | "
-          f"completed: {len(s['completed_ids'])}/{len(sim['task_names'])} tasks | "
-          f"emergent events: {len(sim.get('events', []))} | "
-          f"history pairs applied: {sim.get('history_pairs_applied', 0)}")
+    print(
+        f"   roster engaged: {s['characters_used']} | hours worked: {s['total_spent']:.1f} | "
+        f"completed: {len(s['completed_ids'])}/{len(sim['task_names'])} tasks | "
+        f"emergent events: {len(sim.get('events', []))} | "
+        f"history pairs applied: {sim.get('history_pairs_applied', 0)}"
+    )
 
     canon_souls = load_canon_souls()
     hour_records = build_hour_records(sim, scenario, canon_souls)
-    print(f"👥 Souls logged: {len(hour_records['souls'])} "
-          f"({hour_records['supplemental_count']} supplemental from canon)")
+    print(
+        f"👥 Souls logged: {len(hour_records['souls'])} "
+        f"({hour_records['supplemental_count']} supplemental from canon)"
+    )
 
     mesh_results: list[dict] = []
     if not args.no_mesh:
@@ -529,7 +663,9 @@ def main() -> int:
             print(f"   {answered}/{len(mesh_results)} companion beats answered")
         except (Exception, SystemExit) as exc:  # noqa: BLE001 - mesh is optional; degrade
             mesh_results = []
-            print(f"   ⚠️  mesh bridge unavailable ({str(exc)[:120]}); continuing without companion ops")
+            print(
+                f"   ⚠️  mesh bridge unavailable ({str(exc)[:120]}); continuing without companion ops"
+            )
 
     print("⚖️  L3 narrative audit ...")
     audit = _run_in_clone(L3_AUDIT_DRIVER, scenario["l3_audit"])
@@ -540,8 +676,13 @@ def main() -> int:
         "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "scenario": scenario["name"],
         "operations": [
-            {"hour": r.get("hour"), "agent": r["agent"], "channel": r.get("channel"),
-             "answered": bool(r["ok"]), "reply": r["reply"][:240]}
+            {
+                "hour": r.get("hour"),
+                "agent": r["agent"],
+                "channel": r.get("channel"),
+                "answered": bool(r["ok"]),
+                "reply": r["reply"][:240],
+            }
             for r in mesh_results
         ],
         "ord_dispatch": sim.get("ord_dispatch", {}),
@@ -557,7 +698,9 @@ def main() -> int:
     (out_dir / "crew_logs.md").write_text(build_crew_logs(hour_records, sim, scenario))
     (out_dir / "interaction_map.json").write_text(json.dumps(graph, indent=2) + "\n")
     (out_dir / "interaction_map.md").write_text(render_interaction_md(graph))
-    (out_dir / "companion_ops.json").write_text(json.dumps(companion_ops, indent=2) + "\n")
+    (out_dir / "companion_ops.json").write_text(
+        json.dumps(companion_ops, indent=2) + "\n"
+    )
     (out_dir / "souls_accounting.json").write_text(json.dumps(souls, indent=2) + "\n")
     (out_dir / "sim_raw.json").write_text(json.dumps(sim, indent=2) + "\n")
 
@@ -566,22 +709,33 @@ def main() -> int:
     except ValueError:
         _shown_dir = out_dir  # explicit --out-dir outside the repo
     print(f"\n🗂  Artifacts: {_shown_dir}")
-    for name in ("crew_logs.md", "interaction_map.json", "interaction_map.md",
-                 "companion_ops.json", "souls_accounting.json", "sim_raw.json"):
+    for name in (
+        "crew_logs.md",
+        "interaction_map.json",
+        "interaction_map.md",
+        "companion_ops.json",
+        "souls_accounting.json",
+        "sim_raw.json",
+    ):
         print(f"   - {name}")
-    print(f"   souls accounted: {souls['crew_logged']}/{souls['canon_l1_entities']} "
-          f"canon entities{' ✅' if souls['complete'] else ' ⚠️ INCOMPLETE'}")
+    print(
+        f"   souls accounted: {souls['crew_logged']}/{souls['canon_l1_entities']} "
+        f"canon entities{' ✅' if souls['complete'] else ' ⚠️ INCOMPLETE'}"
+    )
 
     # This run is now history: refresh the persistent station state so the
     # next hour aboard inherits what happened here (station_chronicle preserves
     # hours_elapsed), then tick the clock so the next check-in is a fresh hour.
     subprocess.run(  # noqa: S603 - our own tool with a fixed argument
         [sys.executable, str(REPO_ROOT / "tools" / "station_chronicle.py"), "state"],
-        cwd=REPO_ROOT, check=False,
+        cwd=REPO_ROOT,
+        check=False,
     )
     advance_station_clock(int(scenario.get("ticks", 1)))
-    print(f"🕰  Station clock: hour {hour_index + 1} logged → next check-in is hour "
-          f"{station_hours_elapsed() + 1}")
+    print(
+        f"🕰  Station clock: hour {hour_index + 1} logged → next check-in is hour "
+        f"{station_hours_elapsed() + 1}"
+    )
     return 0
 
 

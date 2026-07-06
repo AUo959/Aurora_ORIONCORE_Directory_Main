@@ -27,14 +27,22 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
-def _run_live_watch(env: dict) -> tuple[list[dict], dict]:
+def _run_live_watch(env: dict, report_root: Path) -> tuple[list[dict], dict]:
     result = subprocess.run(  # noqa: S603 - intentional CLI regression test with fixed argv.
         [sys.executable, str(REPO_ROOT / "tools" / "live_watch.py")],
-        capture_output=True, text=True, cwd=REPO_ROOT, env=env, timeout=600,
+        capture_output=True,
+        text=True,
+        cwd=REPO_ROOT,
+        env=env,
+        timeout=600,
     )
     assert result.returncode == 0, result.stderr[-800:]
-    run = sorted((REPO_ROOT / "reports" / "simulation").glob("live_watch_v1__*"))[-1]
-    feed = [json.loads(line) for line in (run / "live_downlink.jsonl").read_text().splitlines() if line]
+    run = sorted(report_root.glob("live_watch_v1__*"))[-1]
+    feed = [
+        json.loads(line)
+        for line in (run / "live_downlink.jsonl").read_text().splitlines()
+        if line
+    ]
     telemetry = json.loads((run / "engine_telemetry.json").read_text())
     return feed, telemetry
 
@@ -46,12 +54,17 @@ def test_live_link_is_fresh_and_clock_advances(tmp_path):
     coherent control loop, and the station clock must advance between them."""
     state = tmp_path / "station_state.json"
     state.write_text(json.dumps({"hours_elapsed": 0, "pair_familiarity": {}}) + "\n")
-    env = {**os.environ, "AURORA_STATION_STATE": str(state)}
+    report_root = tmp_path / "reports" / "simulation"
+    env = {
+        **os.environ,
+        "AURORA_STATION_STATE": str(state),
+        "AURORA_SIM_REPORT_ROOT": str(report_root),
+    }
 
     seeds: list[int] = []
     advisory_seen = False
     for _ in range(2):
-        feed, telemetry = _run_live_watch(env)
+        feed, telemetry = _run_live_watch(env, report_root)
 
         # Pair each hour's downlink with the following uplink reply and assert
         # the reply echoes the SAME hour's content (the stale-reply bug made
@@ -69,18 +82,26 @@ def test_live_link_is_fresh_and_clock_advances(tmp_path):
                     )
                     checked += 1
                 pending_to = None
-        assert checked >= 4, f"too few fresh-reply checks ({checked}) — link may not be exercising"
+        assert checked >= 4, (
+            f"too few fresh-reply checks ({checked}) — link may not be exercising"
+        )
 
         # Control loop coherence: an advisory implies a risk-response cell was
         # injected the same watch (deterministic mechanism, any hour).
         if telemetry["advisory_raised"]:
             advisory_seen = True
-            assert telemetry["injected_tasks"], "advisory raised but no risk-response cell injected"
+            assert telemetry["injected_tasks"], (
+                "advisory raised but no risk-response cell injected"
+            )
 
         seeds.append(int(telemetry["seed"]))
 
     # The station clock advanced — the second block is a new hour, not a replay.
-    assert seeds[0] != seeds[1], f"station clock did not advance between check-ins: {seeds}"
+    assert seeds[0] != seeds[1], (
+        f"station clock did not advance between check-ins: {seeds}"
+    )
     assert seeds[1] > seeds[0], f"clock ran backwards: {seeds}"
     # Across the sequence the control loop must actually fire at least once.
-    assert advisory_seen, "no advisory fired across the watch sequence — control loop never exercised"
+    assert advisory_seen, (
+        "no advisory fired across the watch sequence — control loop never exercised"
+    )

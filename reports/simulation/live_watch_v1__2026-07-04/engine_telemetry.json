@@ -1,0 +1,122 @@
+{
+  "engine_class": "GUMASAdvancedEngine",
+  "factions": 13,
+  "leaders": 21,
+  "turns_total": 12,
+  "final_stability": 0.5567,
+  "final_risk": 0.43,
+  "log": [
+    {
+      "hour": 1,
+      "turn": 1,
+      "stability_index": 0.6055,
+      "risk_index": 0.3539,
+      "summary": "Turn 1: stability=0.606, risk=0.354, v3_events=148",
+      "notable": {}
+    },
+    {
+      "hour": 1,
+      "turn": 2,
+      "stability_index": 0.6044,
+      "risk_index": 0.3548,
+      "summary": "Turn 2: stability=0.604, risk=0.355, v3_events=34",
+      "notable": {}
+    },
+    {
+      "hour": 1,
+      "turn": 3,
+      "stability_index": 0.5996,
+      "risk_index": 0.3588,
+      "summary": "Turn 3: stability=0.600, risk=0.359, v3_events=36",
+      "notable": {}
+    },
+    {
+      "hour": 1,
+      "turn": 4,
+      "stability_index": 0.5914,
+      "risk_index": 0.3661,
+      "summary": "Turn 4: stability=0.591, risk=0.366, v3_events=25",
+      "notable": {}
+    },
+    {
+      "hour": 2,
+      "turn": 5,
+      "stability_index": 0.5856,
+      "risk_index": 0.371,
+      "summary": "Turn 5: stability=0.586, risk=0.371, v3_events=37",
+      "notable": {}
+    },
+    {
+      "hour": 2,
+      "turn": 6,
+      "stability_index": 0.5828,
+      "risk_index": 0.3734,
+      "summary": "Turn 6: stability=0.583, risk=0.373, v3_events=27",
+      "notable": {}
+    },
+    {
+      "hour": 2,
+      "turn": 7,
+      "stability_index": 0.581,
+      "risk_index": 0.3749,
+      "summary": "Turn 7: stability=0.581, risk=0.375, v3_events=35",
+      "notable": {}
+    },
+    {
+      "hour": 3,
+      "turn": 8,
+      "stability_index": 0.5755,
+      "risk_index": 0.3796,
+      "summary": "Turn 8: stability=0.576, risk=0.380, v3_events=28",
+      "notable": {}
+    },
+    {
+      "hour": 3,
+      "turn": 9,
+      "stability_index": 0.5722,
+      "risk_index": 0.3827,
+      "summary": "Turn 9: stability=0.572, risk=0.383, v3_events=29",
+      "notable": {
+        "new_insurgencies": 1
+      }
+    },
+    {
+      "hour": 3,
+      "turn": 10,
+      "stability_index": 0.5673,
+      "risk_index": 0.4038,
+      "summary": "Turn 10: stability=0.567, risk=0.404, v3_events=36",
+      "notable": {
+        "new_insurgencies": 1
+      }
+    },
+    {
+      "hour": 3,
+      "turn": 11,
+      "stability_index": 0.5622,
+      "risk_index": 0.4251,
+      "summary": "Turn 11: stability=0.562, risk=0.425, v3_events=37",
+      "notable": {
+        "new_insurgencies": 1
+      }
+    },
+    {
+      "hour": 4,
+      "turn": 12,
+      "stability_index": 0.5567,
+      "risk_index": 0.43,
+      "summary": "Turn 12: stability=0.557, risk=0.430, v3_events=22",
+      "notable": {}
+    }
+  ],
+  "injected_tasks": [
+    {
+      "id": "R3",
+      "hour": 3,
+      "trigger_risk": 0.4251
+    }
+  ],
+  "advisory_raised": true,
+  "seed": 812,
+  "station_hour": 5
+}

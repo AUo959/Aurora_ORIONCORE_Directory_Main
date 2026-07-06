@@ -36,17 +36,30 @@ def test_powered_watch_coupling_is_live_across_advancing_hours(tmp_path):
     # without touching the repo's committed chronicle.
     state = tmp_path / "station_state.json"
     state.write_text(json.dumps({"hours_elapsed": 0, "pair_familiarity": {}}) + "\n")
-    env = {**os.environ, "AURORA_STATION_STATE": str(state)}
+    report_root = tmp_path / "reports" / "simulation"
+    env = {
+        **os.environ,
+        "AURORA_STATION_STATE": str(state),
+        "AURORA_SIM_REPORT_ROOT": str(report_root),
+    }
 
     seeds: list[int] = []
     for _ in range(2):
         result = subprocess.run(  # noqa: S603 - intentional CLI regression test with fixed argv.
-            [sys.executable, str(REPO_ROOT / "tools" / "powered_watch.py"), "--no-mesh"],
-            capture_output=True, text=True, cwd=REPO_ROOT, env=env, timeout=600,
+            [
+                sys.executable,
+                str(REPO_ROOT / "tools" / "powered_watch.py"),
+                "--no-mesh",
+            ],
+            capture_output=True,
+            text=True,
+            cwd=REPO_ROOT,
+            env=env,
+            timeout=600,
         )
         assert result.returncode == 0, result.stderr[-800:]
 
-        run = sorted((REPO_ROOT / "reports" / "simulation").glob("powered_watch_v1__*"))[-1]
+        run = sorted(report_root.glob("powered_watch_v1__*"))[-1]
         telemetry = json.loads((run / "engine_telemetry.json").read_text())
 
         log = telemetry["log"]
@@ -68,5 +81,7 @@ def test_powered_watch_coupling_is_live_across_advancing_hours(tmp_path):
 
     # The station clock advanced: the second block is a different hour, never a
     # replay of the first.
-    assert seeds[0] != seeds[1], f"station clock did not advance between check-ins: {seeds}"
+    assert seeds[0] != seeds[1], (
+        f"station clock did not advance between check-ins: {seeds}"
+    )
     assert seeds[1] > seeds[0], f"clock ran backwards: {seeds}"
