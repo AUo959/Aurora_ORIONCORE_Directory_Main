@@ -1,12 +1,12 @@
 # Workspace Map
 
-- Generated: `2026-07-08T05:36:54Z`
+- Generated: `2026-07-08T05:58:46Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
 - Top-level entries cataloged: `47`
 - Nested repos registered: `9`
 - Archive or binary artifacts inventoried: `601`
 - Classification overrides loaded: `6` from `catalog/classification_overrides.yaml`
-- Top-level paths excluded by privacy screen: `8`
+- Top-level paths excluded by privacy screen: `9`
 
 ## Zones
 
@@ -22,7 +22,7 @@
 
 ## Active Nested Repos
 
-- `aurora-cloudbank-symbolic-main` at `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `codex/l2-scenario-seed-simulation-initializer`, remote `configured`)
+- `aurora-cloudbank-symbolic-main` at `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `codex/ga-ethics-hub-integration-2026-07-08`, remote `configured`)
 - `CanonRec` at `GUMAS_SIM_2.5/CanonRec` (branch `main`, remote `configured`)
 - `DuelSim_v2.0` at `GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0` (branch `main`, remote `configured`)
 - `qgia-knowledge-library-main` at `qgia-knowledge-library-main` (branch `main`, remote `configured`)
@@ -52,7 +52,7 @@
 
 ## Privacy Screen
 
-- `auto_scope_unknown`: `8` top-level paths excluded
+- `auto_scope_unknown`: `9` top-level paths excluded
 
 ## Largest Archive/Binary Artifacts
 

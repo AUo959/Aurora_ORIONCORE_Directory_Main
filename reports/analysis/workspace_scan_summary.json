@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T05:36:58Z",
+  "generated_at": "2026-07-08T05:58:50Z",
   "root": ".",
   "top_level_entry_count": 47,
   "logical_zone_counts": {
@@ -18,8 +18,8 @@
   "archive_artifact_bytes": 7802183114,
   "planned_move_count": 15,
   "override_count": 6,
-  "privacy_exclusion_count": 8,
+  "privacy_exclusion_count": 9,
   "privacy_exclusion_reasons": {
-    "auto_scope_unknown": 8
+    "auto_scope_unknown": 9
   }
 }
