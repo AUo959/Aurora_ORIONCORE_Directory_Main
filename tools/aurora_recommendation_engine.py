@@ -312,9 +312,62 @@ def recommendations_from_integration_gate(
     return out
 
 
+RESOLVED_TRIAGE_CLASSIFICATIONS = {"false_positive", "benign_test_fixture"}
+
+
+def load_restricted_triage(root: Path) -> dict[str, str]:
+    """Load path -> classification from reports/analysis/restricted_recovery_triage__*.json.
+
+    Later-dated files (sorted by filename) win when the same path appears in more
+    than one triage log, since a later review supersedes an earlier one.
+    """
+    triage_dir = root / "reports" / "analysis"
+    classifications: dict[str, str] = {}
+    if not triage_dir.is_dir():
+        return classifications
+    for path in sorted(triage_dir.glob("restricted_recovery_triage__*.json")):
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        for entry in payload.get("entries", []) if isinstance(payload, dict) else []:
+            if not isinstance(entry, dict):
+                continue
+            entry_path = entry.get("path")
+            classification = entry.get("classification")
+            if entry_path and classification:
+                classifications[str(entry_path)] = str(classification)
+    return classifications
+
+
+def split_restricted_by_triage(
+    restricted: list[dict[str, Any]],
+    triage: dict[str, str],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    """Split restricted candidates into (live_confirmed, needs_owner_review, untriaged).
+
+    Candidates already resolved (false_positive/benign_test_fixture) are dropped.
+    """
+    live_confirmed: list[dict[str, Any]] = []
+    needs_owner_review: list[dict[str, Any]] = []
+    untriaged: list[dict[str, Any]] = []
+    for item in restricted:
+        classification = triage.get(str(item.get("path", "")))
+        if classification in RESOLVED_TRIAGE_CLASSIFICATIONS:
+            continue
+        if classification == "live_credential_confirmed":
+            live_confirmed.append(item)
+        elif classification == "needs_owner_review":
+            needs_owner_review.append(item)
+        else:
+            untriaged.append(item)
+    return live_confirmed, needs_owner_review, untriaged
+
+
 def recommendations_from_recovery_index(
     report: dict[str, Any],
     manifest: dict[str, Any],
+    root: Path,
 ) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     candidates = [item for item in report.get("candidates", []) if isinstance(item, dict)]
@@ -347,22 +400,60 @@ def recommendations_from_recovery_index(
 
     restricted = [item for item in candidates if item.get("restricted_material_possible")]
     if restricted:
-        out.append(
-            recommendation(
-                category="recovery_review",
-                source="recovery_index",
-                priority="P1",
-                title=f"Review {len(restricted)} restricted recovery candidates carefully",
-                evidence_refs=[str(item.get("path", "<unknown>")) for item in restricted],
-                suggested_commands=["python3 tools/workspace_recovery_index.py --summary"],
-                recommended_next_action="Handle restricted candidates through a separate review decision; do not copy them into issues, PRs, or canon surfaces by default.",
-                approval_required=True,
-                blocking=False,
-                status="open",
-                confidence="medium",
-                manifest=manifest,
+        triage = load_restricted_triage(root)
+        live_confirmed, needs_owner_review, untriaged = split_restricted_by_triage(restricted, triage)
+
+        if live_confirmed:
+            out.append(
+                recommendation(
+                    category="recovery_review",
+                    source="recovery_index",
+                    priority="P0",
+                    title=f"Escalate {len(live_confirmed)} confirmed live credential(s) to owner",
+                    evidence_refs=[str(item.get("path", "<unknown>")) for item in live_confirmed],
+                    suggested_commands=["python3 tools/workspace_recovery_index.py --summary"],
+                    recommended_next_action="A restricted_recovery_triage log classified these as live_credential_confirmed. Escalate directly to the owner for rotation before any further git operations on these files; do not commit, move, or delete them as a way of handling it.",
+                    approval_required=True,
+                    blocking=True,
+                    status="blocked",
+                    confidence="high",
+                    manifest=manifest,
+                )
             )
-        )
+        if untriaged:
+            out.append(
+                recommendation(
+                    category="recovery_review",
+                    source="recovery_index",
+                    priority="P1",
+                    title=f"Review {len(untriaged)} restricted recovery candidates carefully",
+                    evidence_refs=[str(item.get("path", "<unknown>")) for item in untriaged],
+                    suggested_commands=["python3 tools/workspace_recovery_index.py --summary"],
+                    recommended_next_action="Handle restricted candidates through a separate review decision; do not copy them into issues, PRs, or canon surfaces by default.",
+                    approval_required=True,
+                    blocking=False,
+                    status="open",
+                    confidence="medium",
+                    manifest=manifest,
+                )
+            )
+        if needs_owner_review:
+            out.append(
+                recommendation(
+                    category="recovery_review",
+                    source="recovery_index",
+                    priority="P2",
+                    title=f"Owner review needed for {len(needs_owner_review)} triaged-but-ambiguous candidates",
+                    evidence_refs=[str(item.get("path", "<unknown>")) for item in needs_owner_review],
+                    suggested_commands=["python3 tools/workspace_recovery_index.py --summary"],
+                    recommended_next_action="A restricted_recovery_triage log already classified these as needs_owner_review (can't confirm live/dead without owner context). Batch these to the owner rather than re-reviewing from scratch.",
+                    approval_required=True,
+                    blocking=False,
+                    status="open",
+                    confidence="medium",
+                    manifest=manifest,
+                )
+            )
 
     groups: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     for item in candidates:
@@ -525,17 +616,21 @@ def recommendations_from_source_error(
 def build_recommendations(
     sources: dict[str, dict[str, Any]],
     manifest: dict[str, Any],
+    root: Path,
 ) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     builders = {
         "workspace_verify": recommendations_from_workspace_verify,
         "integration_gate": recommendations_from_integration_gate,
-        "recovery_index": recommendations_from_recovery_index,
         "devkit": recommendations_from_devkit,
         "git_status": recommendations_from_git_status,
     }
     for source_id, report in sources.items():
         out.extend(recommendations_from_source_error(source_id, report, manifest))
+        if source_id == "recovery_index":
+            if not report.get("error"):
+                out.extend(recommendations_from_recovery_index(report, manifest, root))
+            continue
         builder = builders.get(source_id)
         if builder and not report.get("error"):
             out.extend(builder(report, manifest))
@@ -627,7 +722,7 @@ def build_report(
 ) -> dict[str, Any]:
     manifest = load_manifest(manifest_path)
     sources = collect_sources(root, manifest, collectors=collectors)
-    recommendations = build_recommendations(sources, manifest)
+    recommendations = build_recommendations(sources, manifest, root)
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_iso_utc(),

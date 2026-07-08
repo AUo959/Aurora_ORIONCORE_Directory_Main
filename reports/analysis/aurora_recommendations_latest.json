@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-08T05:37:58Z",
+  "generated_at": "2026-07-08T05:49:45Z",
   "root": ".",
   "tool": "aurora_recommendation_engine",
   "run_mode": "read_only",
@@ -9,22 +9,22 @@
   "manifest_path": "catalog/recommendation_engine_manifest.json",
   "status": "open",
   "summary": {
-    "recommendation_count": 10,
+    "recommendation_count": 9,
     "blocking_count": 0,
-    "approval_required_count": 8,
+    "approval_required_count": 7,
     "by_priority": {
-      "P1": 2,
+      "P1": 1,
       "P2": 8
     },
     "by_category": {
       "boundary": 1,
       "developer_tooling": 2,
       "git_state": 1,
-      "recovery_review": 6
+      "recovery_review": 5
     },
     "by_status": {
       "informational": 1,
-      "open": 9
+      "open": 8
     }
   },
   "source_reports": {
@@ -50,7 +50,7 @@
     },
     "git_status": {
       "status": "dirty",
-      "changed_path_count": 12,
+      "changed_path_count": 4,
       "branch": "main...origin/main"
     }
   },
@@ -72,38 +72,6 @@
         "python3 tools/workspace_verify.py"
       ],
       "approval_required": false,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "recommendation_id": "aurora-rec-p1-recovery_index-recovery_review-review-30-restricted-recovery-candidates-carefully",
-      "title": "Review 30 restricted recovery candidates carefully",
-      "category": "recovery_review",
-      "priority": "P1",
-      "confidence": "medium",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "intake/Aurora_CloudBank_Review_R1_R10.md",
-        "intake/text_conversation_PDK001.txt",
-        "intake/aurora_scaffold_nexus_meta_narrative.md",
-        "intake/TOBIAS_QIN_CHARACTER_PROFILE.md",
-        "_staging/orion_ord_review_fix/package/tests/test_ord_policy_engine.py",
-        "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/QuantumSymbolic_Index.txt",
-        "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs1/QuantumSymbolic_Index.txt",
-        "intake/text_25.txt",
-        "_staging/apple_notes_recovery__2026-03-16/L1/ord_drone_fleet_v1.0.py",
-        "SPEC__WARRANT_LENS__v1.md",
-        "AGENTS.md",
-        "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Please provide a comprehensive report outlining th 1.md"
-      ],
-      "source": "recovery_index",
-      "recommended_next_action": "Handle restricted candidates through a separate review decision; do not copy them into issues, PRs, or canon surfaces by default.",
-      "suggested_commands": [
-        "python3 tools/workspace_recovery_index.py --summary"
-      ],
-      "approval_required": true,
       "mutation_posture": "advisory_only",
       "blocking": false,
       "status": "open"
@@ -292,26 +260,18 @@
       "status": "open"
     },
     {
-      "recommendation_id": "aurora-rec-p2-git_status-git_state-root-worktree-has-12-in-progress-paths",
-      "title": "Root worktree has 12 in-progress paths",
+      "recommendation_id": "aurora-rec-p2-git_status-git_state-root-worktree-has-4-in-progress-paths",
+      "title": "Root worktree has 4 in-progress paths",
       "category": "git_state",
       "priority": "P2",
       "confidence": "high",
       "target_repo": "root",
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
-        "catalog/repo_registry.yaml",
         "catalog/session_claims/.claude_auto_claim",
-        "catalog/session_state.json",
-        "catalog/workspace_manifest.yaml",
-        "docs/workspace-map.md",
-        "reports/analysis/ACTION_PLAN__CLOUDBANK_HYGIENE_RESTRICTED_RECOVERY_GOVERNANCE_REFRESH__2026-07-08.md",
-        "reports/analysis/aurora_devkit_latest.json",
-        "reports/analysis/restricted_recovery_triage__2026-07-08.json",
-        "reports/analysis/workspace_recovery_index_latest.json",
-        "reports/analysis/workspace_scan_summary.json",
-        "reports/state_briefs/executive_brief__2026-07-08.json",
-        "reports/state_briefs/executive_brief__2026-07-08.md"
+        "reports/analysis/aurora_recommendations_latest.json",
+        "tests/test_aurora_recommendation_engine.py",
+        "tools/aurora_recommendation_engine.py"
       ],
       "source": "git_status",
       "recommended_next_action": "Review ownership before staging or committing. Treat existing command-grammar, integration-gate, and recommendation-engine edits as separate root-control-plane work unless intentionally combined.",

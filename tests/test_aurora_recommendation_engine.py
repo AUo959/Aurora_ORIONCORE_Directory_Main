@@ -170,6 +170,15 @@ def collectors(
     }
 
 
+def write_triage_log(root: Path, filename: str, entries: list[dict[str, Any]]) -> None:
+    payload = {
+        "schema_version": 1,
+        "generated_at": "2026-07-08T05:15:00Z",
+        "entries": entries,
+    }
+    write_file(root / "reports" / "analysis" / filename, json.dumps(payload, indent=2) + "\n")
+
+
 def build_test_report(
     tmp_path: Path,
     *,
@@ -245,6 +254,115 @@ def test_restricted_recovery_candidates_get_careful_handling_recommendation(tmp_
     assert restricted[0]["priority"] == "P1"
     assert restricted[0]["approval_required"] is True
     assert "do not copy" in restricted[0]["recommended_next_action"].lower()
+
+
+def test_triaged_false_positive_suppresses_restricted_recommendation(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    manifest = root / "catalog" / "recommendation_engine_manifest.json"
+    write_manifest(manifest)
+    write_triage_log(
+        root,
+        "restricted_recovery_triage__2026-07-08.json",
+        [
+            {
+                "path": "intake/restricted-token.txt",
+                "classification": "false_positive",
+                "reviewer": "claude-code",
+                "reviewed_at": "2026-07-08T05:15:00Z",
+                "notes": "Heuristic false positive.",
+            }
+        ],
+    )
+    report = engine.build_report(
+        root,
+        manifest,
+        collectors=collectors(),
+        generated_at="2026-05-21T00:00:00Z",
+    )
+
+    restricted_titles = [
+        item["title"]
+        for item in report["recommendations"]
+        if item["source"] == "recovery_index" and item["category"] == "recovery_review"
+    ]
+    assert not any("restricted" in title.lower() for title in restricted_titles)
+    assert not any("escalate" in title.lower() for title in restricted_titles)
+    assert not any("owner review needed" in title.lower() for title in restricted_titles)
+
+
+def test_triaged_live_credential_becomes_blocking_p0(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    manifest = root / "catalog" / "recommendation_engine_manifest.json"
+    write_manifest(manifest)
+    write_triage_log(
+        root,
+        "restricted_recovery_triage__2026-07-08.json",
+        [
+            {
+                "path": "intake/restricted-token.txt",
+                "classification": "live_credential_confirmed",
+                "reviewer": "claude-code",
+                "reviewed_at": "2026-07-08T05:15:00Z",
+                "notes": "Confirmed live key.",
+            }
+        ],
+    )
+    report = engine.build_report(
+        root,
+        manifest,
+        collectors=collectors(),
+        generated_at="2026-05-21T00:00:00Z",
+    )
+
+    escalations = [
+        item
+        for item in report["recommendations"]
+        if item["source"] == "recovery_index" and "escalate" in item["title"].lower()
+    ]
+    assert len(escalations) == 1
+    assert escalations[0]["priority"] == "P0"
+    assert escalations[0]["blocking"] is True
+    assert escalations[0]["status"] == "blocked"
+    # No untriaged "review carefully" duplicate for the same candidate.
+    assert not any(
+        "review carefully" in item["title"].lower()
+        for item in report["recommendations"]
+        if item["source"] == "recovery_index"
+    )
+
+
+def test_triaged_needs_owner_review_becomes_p2_batch(tmp_path: Path) -> None:
+    root = tmp_path / "workspace"
+    manifest = root / "catalog" / "recommendation_engine_manifest.json"
+    write_manifest(manifest)
+    write_triage_log(
+        root,
+        "restricted_recovery_triage__2026-07-08.json",
+        [
+            {
+                "path": "intake/restricted-token.txt",
+                "classification": "needs_owner_review",
+                "reviewer": "claude-code",
+                "reviewed_at": "2026-07-08T05:15:00Z",
+                "notes": "Ambiguous internal reference.",
+            }
+        ],
+    )
+    report = engine.build_report(
+        root,
+        manifest,
+        collectors=collectors(),
+        generated_at="2026-05-21T00:00:00Z",
+    )
+
+    owner_review_items = [
+        item
+        for item in report["recommendations"]
+        if item["source"] == "recovery_index" and "owner review needed" in item["title"].lower()
+    ]
+    assert len(owner_review_items) == 1
+    assert owner_review_items[0]["priority"] == "P2"
+    assert owner_review_items[0]["blocking"] is False
 
 
 def test_devkit_warnings_remain_approval_gated(tmp_path: Path) -> None:
