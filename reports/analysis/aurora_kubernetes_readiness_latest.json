@@ -319,7 +319,7 @@
       "title": "Kubernetes CI workflow is present"
     }
   ],
-  "generated_at": "2026-06-26T23:18:50Z",
+  "generated_at": "2026-07-08T05:38:32Z",
   "live_runtime_execution": false,
   "manifests": {
     "apply_blocker_category_counts": {
@@ -1353,7 +1353,7 @@
       "recommended_next_action": "Replace placeholder Secret entries through sealed-secrets or external secret management; do not commit live plaintext secrets."
     }
   ],
-  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "root": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
   "run_mode": "read_only",
   "schema_version": 1,
   "status": "attention",

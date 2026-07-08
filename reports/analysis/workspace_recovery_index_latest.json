@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-31T21:04:06Z",
+  "generated_at": "2026-07-08T05:37:48Z",
   "root": ".",
   "tool": "workspace_recovery_index",
   "mode": "read_only",
@@ -8,39 +8,40 @@
   "status": "READY",
   "summary": {
     "scan_root_count": 5,
-    "scanned_file_count": 2380,
+    "scanned_file_count": 2441,
     "candidate_count": 100,
-    "discovered_candidate_count": 1017,
+    "discovered_candidate_count": 1077,
     "candidate_limit_applied": true,
     "skip_counts": {
       "auto_private_content": 12,
-      "below_threshold": 262,
-      "extension": 1063,
+      "auto_private_path": 1,
+      "below_threshold": 261,
+      "extension": 1064,
       "size": 24,
       "unreadable_or_binary": 2
     },
     "candidates_by_target_repo_hint": {
-      "aurora-cloudbank-symbolic-main": 51,
-      "qgia-knowledge-library-main": 1,
-      "qgia-knowledge-spine-main": 13,
+      "aurora-cloudbank-symbolic-main": 55,
+      "qgia-knowledge-library-main": 2,
+      "qgia-knowledge-spine-main": 5,
       "review-required": 4,
-      "root": 31
+      "root": 34
     },
     "candidates_by_source_status": {
-      "archive": 39,
-      "intake": 31,
-      "loose_root_intake": 8,
-      "staged": 22
+      "archive": 29,
+      "intake": 33,
+      "loose_root_intake": 15,
+      "staged": 23
     },
     "signal_counts": {
-      "cloudbank_runtime": 77,
-      "code_logic": 81,
+      "cloudbank_runtime": 83,
+      "code_logic": 80,
       "contract_or_schema": 89,
-      "governance_or_control_plane": 63,
+      "governance_or_control_plane": 72,
       "narrative_or_agent_logic": 96,
-      "qgia_or_forecast": 21,
-      "secret_or_key_material": 36,
-      "test_or_fixture": 25
+      "qgia_or_forecast": 27,
+      "secret_or_key_material": 30,
+      "test_or_fixture": 27
     }
   },
   "scan_roots": [
@@ -52,8 +53,8 @@
       "reason": "loose root files may be early local work that needs explicit routing",
       "exists": true,
       "truncated": false,
-      "scanned_file_count": 17,
-      "candidate_count": 10
+      "scanned_file_count": 25,
+      "candidate_count": 19
     },
     {
       "path": "Aurora_Sim_Architecture",
@@ -74,8 +75,8 @@
       "reason": "explicit review lane for ambiguous local material",
       "exists": true,
       "truncated": false,
-      "scanned_file_count": 365,
-      "candidate_count": 245
+      "scanned_file_count": 417,
+      "candidate_count": 295
     },
     {
       "path": "archives/unzipped",
@@ -96,8 +97,8 @@
       "reason": "rollback-safe staging lane for recoverable work bundles",
       "exists": true,
       "truncated": false,
-      "scanned_file_count": 114,
-      "candidate_count": 99
+      "scanned_file_count": 115,
+      "candidate_count": 100
     }
   ],
   "tracked_recovery_objects": {
@@ -188,6 +189,33 @@
       "notes": "restricted signal requires careful handling"
     },
     {
+      "path": "PR SENSOR ARRAY SPEC v0 3 0 DELTA.md",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "aurora-cloudbank-symbolic-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 24,
+      "signals": [
+        "cloudbank_runtime",
+        "code_logic",
+        "contract_or_schema",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "qgia_or_forecast",
+        "test_or_fixture"
+      ],
+      "restricted_material_possible": false,
+      "size_bytes": 27141,
+      "mtime": 1781193965,
+      "sha256": "35e446093f5c0af72c1570679e84f5acb566584ec15208517c6a9011cb3dffc4",
+      "extension": ".md",
+      "line_count": 326,
+      "notes": ""
+    },
+    {
       "path": "intake/b794f5eb-0115-48bb-ac1c-28a2c6c85a95.md",
       "source_root": "intake",
       "source_status": "intake",
@@ -267,6 +295,32 @@
       "extension": ".md",
       "line_count": 546,
       "notes": "restricted signal requires careful handling"
+    },
+    {
+      "path": "QGIA_Runtime_OnePager.md",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "aurora-cloudbank-symbolic-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 22,
+      "signals": [
+        "cloudbank_runtime",
+        "code_logic",
+        "contract_or_schema",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "qgia_or_forecast"
+      ],
+      "restricted_material_possible": false,
+      "size_bytes": 18978,
+      "mtime": 1781882068,
+      "sha256": "4712bae35a51e0a8b20da2dfca1796dabf346adc1880e142436d782560922c64",
+      "extension": ".md",
+      "line_count": 406,
+      "notes": ""
     },
     {
       "path": "_staging/orion_ord_review_fix/package/tests/test_ord_policy_engine.py",
@@ -455,6 +509,32 @@
       "notes": ""
     },
     {
+      "path": "Prplexity_Observation_6_14.md",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "root",
+      "owner_surface_hint": "root control-plane repo",
+      "value_score": 22,
+      "signals": [
+        "cloudbank_runtime",
+        "code_logic",
+        "contract_or_schema",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "qgia_or_forecast"
+      ],
+      "restricted_material_possible": false,
+      "size_bytes": 12479,
+      "mtime": 1781492259,
+      "sha256": "8ff56aaa54f1d049ae5b80f80cff5e2a2118502084cf00f1e27499d824267e7a",
+      "extension": ".md",
+      "line_count": 122,
+      "notes": ""
+    },
+    {
       "path": "_staging/apple_notes_recovery__2026-03-16/L1/ord_drone_fleet_v1.0.py",
       "source_root": "_staging",
       "source_status": "staged",
@@ -480,6 +560,32 @@
       "extension": ".py",
       "line_count": 939,
       "notes": "restricted signal requires careful handling"
+    },
+    {
+      "path": "_staging/codex_wip/test_mesh_router_v1__codex_wip_preserved_2026-06-13.py",
+      "source_root": "_staging",
+      "source_status": "staged",
+      "source_priority": "medium",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "aurora-cloudbank-symbolic-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 21,
+      "signals": [
+        "cloudbank_runtime",
+        "code_logic",
+        "contract_or_schema",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "test_or_fixture"
+      ],
+      "restricted_material_possible": false,
+      "size_bytes": 6813,
+      "mtime": 1781311067,
+      "sha256": "a8090b82273408005a8d681c616a5072f8ff84e9af97713f8c048b85e534d5a6",
+      "extension": ".py",
+      "line_count": 181,
+      "notes": ""
     },
     {
       "path": "aurora-cloudbank-symbolic_README_DRAFT.md",
@@ -632,12 +738,64 @@
         "test_or_fixture"
       ],
       "restricted_material_possible": true,
-      "size_bytes": 18403,
-      "mtime": 1780237993,
-      "sha256": "bda97261bf37a5eadc9c05abf6ca718de9408f8c94a66e9361d7bf146b5016ff",
+      "size_bytes": 21263,
+      "mtime": 1783364078,
+      "sha256": "b25392379a8a50d246fd24241dd8d29660570018350de2406975944f0c43189c",
       "extension": ".md",
-      "line_count": 419,
+      "line_count": 469,
       "notes": "restricted signal requires careful handling"
+    },
+    {
+      "path": "SPEC__SALVAGE_OPERATIONS__v0_1_0.md",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "aurora-cloudbank-symbolic-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 20,
+      "signals": [
+        "cloudbank_runtime",
+        "code_logic",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "qgia_or_forecast",
+        "test_or_fixture"
+      ],
+      "restricted_material_possible": false,
+      "size_bytes": 6780,
+      "mtime": 1781233436,
+      "sha256": "6f4adbca4443495cce29c6e5b4e02e5aae11b4ac6cb1ce1fbc8d3aeb58507990",
+      "extension": ".md",
+      "line_count": 89,
+      "notes": ""
+    },
+    {
+      "path": "SENSOR ARRAY SPECIFICATION v0 3 0.md",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "root",
+      "owner_surface_hint": "root control-plane repo",
+      "value_score": 20,
+      "signals": [
+        "code_logic",
+        "contract_or_schema",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "qgia_or_forecast",
+        "test_or_fixture"
+      ],
+      "restricted_material_possible": false,
+      "size_bytes": 86669,
+      "mtime": 1781193857,
+      "sha256": "8a35d68e6b090d736e2950219aa7bef7424a53ff973d1038772c8b29b0fd1c98",
+      "extension": ".md",
+      "line_count": 1395,
+      "notes": ""
     },
     {
       "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Please provide a comprehensive report outlining th 1.md",
@@ -1090,11 +1248,11 @@
         "qgia_or_forecast"
       ],
       "restricted_material_possible": false,
-      "size_bytes": 12352,
-      "mtime": 1780237611,
-      "sha256": "a696fe49c5ea34b8ff0d3cfa81e4bfe13646398b8ebde3b28fe5061562ab2d1a",
+      "size_bytes": 18885,
+      "mtime": 1783364078,
+      "sha256": "0dcfac44d24185438272dd0227dbdd31aadf48cfd272cf8c352770b4fcfd12ea",
       "extension": ".md",
-      "line_count": 237,
+      "line_count": 349,
       "notes": ""
     },
     {
@@ -1122,6 +1280,31 @@
       "extension": ".md",
       "line_count": 191,
       "notes": "restricted signal requires careful handling"
+    },
+    {
+      "path": "Makefile",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "aurora-cloudbank-symbolic-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 16,
+      "signals": [
+        "cloudbank_runtime",
+        "contract_or_schema",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "test_or_fixture"
+      ],
+      "restricted_material_possible": false,
+      "size_bytes": 10346,
+      "mtime": 1783364078,
+      "sha256": "0b328d44fcfb12db433f3a4472336b7f165aca47cb3c9c85a45c48ef08608c56",
+      "extension": "",
+      "line_count": 198,
+      "notes": ""
     },
     {
       "path": "_staging/orion_ord_review_fix/package/library/L3_governance/protocols/ORION.L3.WORKSHOPGATES.0001__v1.0.1__2026-02-13.md",
@@ -1533,6 +1716,31 @@
       "notes": ""
     },
     {
+      "path": "CLAUDE.md",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "root",
+      "owner_surface_hint": "root control-plane repo",
+      "value_score": 16,
+      "signals": [
+        "code_logic",
+        "contract_or_schema",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "secret_or_key_material"
+      ],
+      "restricted_material_possible": true,
+      "size_bytes": 5274,
+      "mtime": 1783364078,
+      "sha256": "b4ba043e4f0c61f3dd607d327d616c841929d1860f9d19371aafc663ad94bc9d",
+      "extension": ".md",
+      "line_count": 104,
+      "notes": "restricted signal requires careful handling"
+    },
+    {
       "path": "_staging/apple_notes_recovery__2026-03-16/L2/MULTILINGUAL_BEAMFORMING_ARRAY_SEED.md",
       "source_root": "_staging",
       "source_status": "staged",
@@ -1751,6 +1959,56 @@
       "extension": ".py",
       "line_count": 335,
       "notes": ""
+    },
+    {
+      "path": "intake/recovered_mesh_runtime_2026-06-10/agent_manifests/aurora.json",
+      "source_root": "intake",
+      "source_status": "intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "aurora-cloudbank-symbolic-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 15,
+      "signals": [
+        "cloudbank_runtime",
+        "contract_or_schema",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "secret_or_key_material"
+      ],
+      "restricted_material_possible": true,
+      "size_bytes": 1008,
+      "mtime": 1781106139,
+      "sha256": "e11e9c5f4414c464f1fa24d71572e4634cfa51e2d9e7c40aec086471417d097b",
+      "extension": ".json",
+      "line_count": 45,
+      "notes": "restricted signal requires careful handling"
+    },
+    {
+      "path": "intake/recovered_mesh_runtime_2026-06-10/direct_aurora.jsonl",
+      "source_root": "intake",
+      "source_status": "intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "aurora-cloudbank-symbolic-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 15,
+      "signals": [
+        "cloudbank_runtime",
+        "contract_or_schema",
+        "governance_or_control_plane",
+        "narrative_or_agent_logic",
+        "secret_or_key_material"
+      ],
+      "restricted_material_possible": true,
+      "size_bytes": 4612,
+      "mtime": 1781103151,
+      "sha256": "d390e737d9676887f19328b602aecdd1328abe6f78e71e1932b43928cd0dca81",
+      "extension": ".jsonl",
+      "line_count": 10,
+      "notes": "restricted signal requires careful handling"
     },
     {
       "path": "_staging/recovered_textAu__2026-03-13/L2/dossiers/l2_mechanic_registry__recovered_textAu.md",
@@ -2067,6 +2325,30 @@
       "notes": ""
     },
     {
+      "path": "QGIA_Axiom_Doctrine_Narrative.md",
+      "source_root": ".",
+      "source_status": "loose_root_intake",
+      "source_priority": "high",
+      "promotion_status": "pending_review",
+      "canonical_status": "not_promoted",
+      "target_repo_hint": "qgia-knowledge-library-main",
+      "owner_surface_hint": "canonical nested repo",
+      "value_score": 14,
+      "signals": [
+        "cloudbank_runtime",
+        "contract_or_schema",
+        "narrative_or_agent_logic",
+        "qgia_or_forecast"
+      ],
+      "restricted_material_possible": false,
+      "size_bytes": 14159,
+      "mtime": 1781882084,
+      "sha256": "f84fc62731fbcfb3064662a25ba7f6253ba4e7bcaefa948cc0a7478d9bf2891a",
+      "extension": ".md",
+      "line_count": 227,
+      "notes": ""
+    },
+    {
       "path": "intake/QGIA_SPACE_NAVAGATION_GUIDE.md",
       "source_root": "intake",
       "source_status": "intake",
@@ -2353,271 +2635,6 @@
       "extension": ".md",
       "line_count": 211,
       "notes": ""
-    },
-    {
-      "path": ".gitleaks.toml",
-      "source_root": ".",
-      "source_status": "loose_root_intake",
-      "source_priority": "high",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "aurora-cloudbank-symbolic-main",
-      "owner_surface_hint": "canonical nested repo",
-      "value_score": 13,
-      "signals": [
-        "cloudbank_runtime",
-        "governance_or_control_plane",
-        "narrative_or_agent_logic",
-        "secret_or_key_material",
-        "test_or_fixture"
-      ],
-      "restricted_material_possible": true,
-      "size_bytes": 2147,
-      "mtime": 1780175762,
-      "sha256": "210ec053f1d156dffc5380458b346a313c6aa1b68e82fc7f26a7217f14095d67",
-      "extension": ".toml",
-      "line_count": 59,
-      "notes": "restricted signal requires careful handling"
-    },
-    {
-      "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/LUMENNODE_PUBLIC_AGENT_DEPLOY_v1.0/PROJECT_ECHOES_FACE_DEEPQUERY/research_payload.json",
-      "source_root": "archives/unzipped",
-      "source_status": "archive",
-      "source_priority": "medium",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "aurora-cloudbank-symbolic-main",
-      "owner_surface_hint": "canonical nested repo",
-      "value_score": 13,
-      "signals": [
-        "cloudbank_runtime",
-        "contract_or_schema",
-        "narrative_or_agent_logic",
-        "test_or_fixture"
-      ],
-      "restricted_material_possible": false,
-      "size_bytes": 2649,
-      "mtime": 1751202370,
-      "sha256": "7b23a557ab2e2c455d5ed20072ad9b2899cf8bf4d26e07549ab779d25aa0803c",
-      "extension": ".json",
-      "line_count": 87,
-      "notes": ""
-    },
-    {
-      "path": "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/LUMENNODE_PUBLIC_AGENT_DEPLOY_v1.0/PROJECT_ECHOES_FACE_DEEPQUERY/research_payload.json",
-      "source_root": "archives/unzipped",
-      "source_status": "archive",
-      "source_priority": "medium",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "aurora-cloudbank-symbolic-main",
-      "owner_surface_hint": "canonical nested repo",
-      "value_score": 13,
-      "signals": [
-        "cloudbank_runtime",
-        "contract_or_schema",
-        "narrative_or_agent_logic",
-        "test_or_fixture"
-      ],
-      "restricted_material_possible": false,
-      "size_bytes": 2649,
-      "mtime": 1751194943,
-      "sha256": "7b23a557ab2e2c455d5ed20072ad9b2899cf8bf4d26e07549ab779d25aa0803c",
-      "extension": ".json",
-      "line_count": 87,
-      "notes": ""
-    },
-    {
-      "path": "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index (1).json",
-      "source_root": "archives/unzipped",
-      "source_status": "archive",
-      "source_priority": "medium",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "qgia-knowledge-spine-main",
-      "owner_surface_hint": "canonical nested repo",
-      "value_score": 13,
-      "signals": [
-        "code_logic",
-        "contract_or_schema",
-        "narrative_or_agent_logic",
-        "secret_or_key_material"
-      ],
-      "restricted_material_possible": true,
-      "size_bytes": 1912138,
-      "mtime": 1743538394,
-      "sha256": "9d88c01c13efa8d7db4d917397b6189a6a6a6517ce5e6fef7b66fa3fc3aea067",
-      "extension": ".json",
-      "line_count": 7,
-      "notes": "restricted signal requires careful handling"
-    },
-    {
-      "path": "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index 2 (1).json",
-      "source_root": "archives/unzipped",
-      "source_status": "archive",
-      "source_priority": "medium",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "qgia-knowledge-spine-main",
-      "owner_surface_hint": "canonical nested repo",
-      "value_score": 13,
-      "signals": [
-        "code_logic",
-        "contract_or_schema",
-        "narrative_or_agent_logic",
-        "secret_or_key_material"
-      ],
-      "restricted_material_possible": true,
-      "size_bytes": 1912138,
-      "mtime": 1743538394,
-      "sha256": "9d88c01c13efa8d7db4d917397b6189a6a6a6517ce5e6fef7b66fa3fc3aea067",
-      "extension": ".json",
-      "line_count": 7,
-      "notes": "restricted signal requires careful handling"
-    },
-    {
-      "path": "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index 2.json",
-      "source_root": "archives/unzipped",
-      "source_status": "archive",
-      "source_priority": "medium",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "qgia-knowledge-spine-main",
-      "owner_surface_hint": "canonical nested repo",
-      "value_score": 13,
-      "signals": [
-        "code_logic",
-        "contract_or_schema",
-        "narrative_or_agent_logic",
-        "secret_or_key_material"
-      ],
-      "restricted_material_possible": true,
-      "size_bytes": 1912138,
-      "mtime": 1743538394,
-      "sha256": "9d88c01c13efa8d7db4d917397b6189a6a6a6517ce5e6fef7b66fa3fc3aea067",
-      "extension": ".json",
-      "line_count": 7,
-      "notes": "restricted signal requires careful handling"
-    },
-    {
-      "path": "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index.json",
-      "source_root": "archives/unzipped",
-      "source_status": "archive",
-      "source_priority": "medium",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "qgia-knowledge-spine-main",
-      "owner_surface_hint": "canonical nested repo",
-      "value_score": 13,
-      "signals": [
-        "code_logic",
-        "contract_or_schema",
-        "narrative_or_agent_logic",
-        "secret_or_key_material"
-      ],
-      "restricted_material_possible": true,
-      "size_bytes": 1912138,
-      "mtime": 1743538394,
-      "sha256": "9d88c01c13efa8d7db4d917397b6189a6a6a6517ce5e6fef7b66fa3fc3aea067",
-      "extension": ".json",
-      "line_count": 7,
-      "notes": "restricted signal requires careful handling"
-    },
-    {
-      "path": "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index (1).json",
-      "source_root": "archives/unzipped",
-      "source_status": "archive",
-      "source_priority": "medium",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "qgia-knowledge-spine-main",
-      "owner_surface_hint": "canonical nested repo",
-      "value_score": 13,
-      "signals": [
-        "code_logic",
-        "contract_or_schema",
-        "narrative_or_agent_logic",
-        "secret_or_key_material"
-      ],
-      "restricted_material_possible": true,
-      "size_bytes": 1932497,
-      "mtime": 1743540084,
-      "sha256": "c534bdc1dd3dc964e4ab53ae155f01c552dd1d7287404648d7bf02f82f6cfe76",
-      "extension": ".json",
-      "line_count": 7,
-      "notes": "restricted signal requires careful handling"
-    },
-    {
-      "path": "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index 2 (1).json",
-      "source_root": "archives/unzipped",
-      "source_status": "archive",
-      "source_priority": "medium",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "qgia-knowledge-spine-main",
-      "owner_surface_hint": "canonical nested repo",
-      "value_score": 13,
-      "signals": [
-        "code_logic",
-        "contract_or_schema",
-        "narrative_or_agent_logic",
-        "secret_or_key_material"
-      ],
-      "restricted_material_possible": true,
-      "size_bytes": 1932497,
-      "mtime": 1743540084,
-      "sha256": "c534bdc1dd3dc964e4ab53ae155f01c552dd1d7287404648d7bf02f82f6cfe76",
-      "extension": ".json",
-      "line_count": 7,
-      "notes": "restricted signal requires careful handling"
-    },
-    {
-      "path": "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index 2.json",
-      "source_root": "archives/unzipped",
-      "source_status": "archive",
-      "source_priority": "medium",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "qgia-knowledge-spine-main",
-      "owner_surface_hint": "canonical nested repo",
-      "value_score": 13,
-      "signals": [
-        "code_logic",
-        "contract_or_schema",
-        "narrative_or_agent_logic",
-        "secret_or_key_material"
-      ],
-      "restricted_material_possible": true,
-      "size_bytes": 1932497,
-      "mtime": 1743540084,
-      "sha256": "c534bdc1dd3dc964e4ab53ae155f01c552dd1d7287404648d7bf02f82f6cfe76",
-      "extension": ".json",
-      "line_count": 7,
-      "notes": "restricted signal requires careful handling"
-    },
-    {
-      "path": "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index.json",
-      "source_root": "archives/unzipped",
-      "source_status": "archive",
-      "source_priority": "medium",
-      "promotion_status": "pending_review",
-      "canonical_status": "not_promoted",
-      "target_repo_hint": "qgia-knowledge-spine-main",
-      "owner_surface_hint": "canonical nested repo",
-      "value_score": 13,
-      "signals": [
-        "code_logic",
-        "contract_or_schema",
-        "narrative_or_agent_logic",
-        "secret_or_key_material"
-      ],
-      "restricted_material_possible": true,
-      "size_bytes": 1932497,
-      "mtime": 1743540084,
-      "sha256": "c534bdc1dd3dc964e4ab53ae155f01c552dd1d7287404648d7bf02f82f6cfe76",
-      "extension": ".json",
-      "line_count": 7,
-      "notes": "restricted signal requires careful handling"
     }
   ],
   "validation_commands": [

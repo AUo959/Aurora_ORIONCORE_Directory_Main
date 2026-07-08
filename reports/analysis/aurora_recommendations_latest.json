@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-31T21:08:02Z",
+  "generated_at": "2026-07-08T05:37:58Z",
   "root": ".",
   "tool": "aurora_recommendation_engine",
   "run_mode": "read_only",
@@ -9,26 +9,28 @@
   "manifest_path": "catalog/recommendation_engine_manifest.json",
   "status": "open",
   "summary": {
-    "recommendation_count": 7,
+    "recommendation_count": 10,
     "blocking_count": 0,
-    "approval_required_count": 6,
+    "approval_required_count": 8,
     "by_priority": {
-      "P1": 1,
-      "P2": 6
+      "P1": 2,
+      "P2": 8
     },
     "by_category": {
+      "boundary": 1,
+      "developer_tooling": 2,
       "git_state": 1,
       "recovery_review": 6
     },
     "by_status": {
       "informational": 1,
-      "open": 6
+      "open": 9
     }
   },
   "source_reports": {
     "workspace_verify": {
-      "status": "pass",
-      "finding_count": 0,
+      "status": "warn",
+      "finding_count": 1,
       "blocking_count": 0
     },
     "integration_gate": {
@@ -39,12 +41,12 @@
     "recovery_index": {
       "status": "READY",
       "candidate_count": 100,
-      "discovered_candidate_count": 1017
+      "discovered_candidate_count": 1077
     },
     "devkit": {
-      "status": "READY",
-      "finding_count": 0,
-      "install_plan_items": 0
+      "status": "WARN",
+      "finding_count": 2,
+      "install_plan_items": 1
     },
     "git_status": {
       "status": "dirty",
@@ -54,8 +56,29 @@
   },
   "recommendations": [
     {
-      "recommendation_id": "aurora-rec-p1-recovery_index-recovery_review-review-36-restricted-recovery-candidates-carefully",
-      "title": "Review 36 restricted recovery candidates carefully",
+      "recommendation_id": "aurora-rec-p1-workspace_verify-boundary-resolve-workspace-verifier-finding-repo-registry-coverage",
+      "title": "Resolve workspace verifier finding: repo_registry_coverage",
+      "category": "boundary",
+      "priority": "P1",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "tools/workspace_verify.py::repo_registry_coverage"
+      ],
+      "source": "workspace_verify",
+      "recommended_next_action": "Run from the canonical workspace path or update `catalog/repo_registry.yaml` if the repo locations changed.",
+      "suggested_commands": [
+        "python3 tools/workspace_verify.py"
+      ],
+      "approval_required": false,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p1-recovery_index-recovery_review-review-30-restricted-recovery-candidates-carefully",
+      "title": "Review 30 restricted recovery candidates carefully",
       "category": "recovery_review",
       "priority": "P1",
       "confidence": "medium",
@@ -86,14 +109,58 @@
       "status": "open"
     },
     {
-      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-1-recovery-candidates-routed-to-qgia-knowledge-library-main",
-      "title": "Review 1 recovery candidates routed to qgia-knowledge-library-main",
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-aurora-dev-toolkit-watch-exists-but-is-not-active",
+      "title": "aurora-dev-toolkit-watch exists but is not active.",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::automation_aurora_dev_toolkit_watch_paused"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Use a devkit watch lane for read-only drift detection, then apply package changes with explicit approval.",
+      "suggested_commands": [
+        "python3 tools/aurora_devkit.py --install-plan"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-pnpm-is-error",
+      "title": "pnpm is error.",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_pnpm_error"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Recommended package manager for large JS workspaces when activated through corepack.",
+      "suggested_commands": [
+        "corepack enable pnpm",
+        "corepack prepare pnpm@latest --activate"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-2-recovery-candidates-routed-to-qgia-knowledge-library-main",
+      "title": "Review 2 recovery candidates routed to qgia-knowledge-library-main",
       "category": "recovery_review",
       "priority": "P2",
       "confidence": "medium",
       "target_repo": "qgia-knowledge-library-main",
       "owner_surface": "canonical nested repo",
       "evidence_refs": [
+        "QGIA_Axiom_Doctrine_Narrative.md",
         "intake/QGIA_SPACE_NAVAGATION_GUIDE.md"
       ],
       "source": "recovery_index",
@@ -108,41 +175,8 @@
       "status": "open"
     },
     {
-      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-13-recovery-candidates-routed-to-qgia-knowledge-spine-main",
-      "title": "Review 13 recovery candidates routed to qgia-knowledge-spine-main",
-      "category": "recovery_review",
-      "priority": "P2",
-      "confidence": "medium",
-      "target_repo": "qgia-knowledge-spine-main",
-      "owner_surface": "canonical nested repo",
-      "evidence_refs": [
-        "intake/text_43.txt",
-        "SPEC__WARRANT_LENS__v1.md",
-        "intake/text_Au_Steward.txt",
-        "intake/deep-research-report.md",
-        "_staging/recovered_textAu__2026-03-13/L2/dossiers/l2_mechanic_registry__recovered_textAu.md",
-        "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index (1).json",
-        "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index 2 (1).json",
-        "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index 2.json",
-        "archives/unzipped/Complete Archive 4_19 copy/formatted_galactic_union_memory_index.json",
-        "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index (1).json",
-        "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index 2 (1).json",
-        "archives/unzipped/Complete Archive 4_19 copy/merged_galactic_union_memory_index 2.json"
-      ],
-      "source": "recovery_index",
-      "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
-      "suggested_commands": [
-        "python3 tools/workspace_recovery_index.py --summary",
-        "python3 tools/workspace_recovery_index.py --persist-report"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-31-recovery-candidates-routed-to-root",
-      "title": "Review 31 recovery candidates routed to root",
+      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-34-recovery-candidates-routed-to-root",
+      "title": "Review 34 recovery candidates routed to root",
       "category": "recovery_review",
       "priority": "P2",
       "confidence": "medium",
@@ -151,16 +185,16 @@
       "evidence_refs": [
         "intake/text_conversation_PDK001.txt",
         "intake/TOBIAS_QIN_CHARACTER_PROFILE.md",
+        "Prplexity_Observation_6_14.md",
         "_staging/apple_notes_recovery__2026-03-16/L1/ord_drone_fleet_v1.0.py",
+        "SENSOR ARRAY SPECIFICATION v0 3 0.md",
         "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Please provide a comprehensive report outlining th 1.md",
         "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Please provide a comprehensive report outlining th.md",
         "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs1/Please provide a comprehensive report outlining th.md",
         "intake/threadcore_symbiosis_delta_manifest.md",
         "archives/unzipped/ZipWiz_Chamber_6_28/aurora_bridge_output/relay_handshake.py",
         "intake/ORION__POLICY__CANON_PROTOCOL__v2.0__2026-04-08.md",
-        "_staging/apple_notes_recovery__2026-03-16/L2/MULTILINGUAL_BEAMFORMING_ARRAY_SEED.md",
-        "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUI/generate_manifest.py",
-        "intake/text_CN_v4.txt"
+        "CLAUDE.md"
       ],
       "source": "recovery_index",
       "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
@@ -199,8 +233,34 @@
       "status": "open"
     },
     {
-      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-51-recovery-candidates-routed-to-aurora-cloudbank-symbolic-main",
-      "title": "Review 51 recovery candidates routed to aurora-cloudbank-symbolic-main",
+      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-5-recovery-candidates-routed-to-qgia-knowledge-spine-main",
+      "title": "Review 5 recovery candidates routed to qgia-knowledge-spine-main",
+      "category": "recovery_review",
+      "priority": "P2",
+      "confidence": "medium",
+      "target_repo": "qgia-knowledge-spine-main",
+      "owner_surface": "canonical nested repo",
+      "evidence_refs": [
+        "intake/text_43.txt",
+        "SPEC__WARRANT_LENS__v1.md",
+        "intake/text_Au_Steward.txt",
+        "intake/deep-research-report.md",
+        "_staging/recovered_textAu__2026-03-13/L2/dossiers/l2_mechanic_registry__recovered_textAu.md"
+      ],
+      "source": "recovery_index",
+      "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
+      "suggested_commands": [
+        "python3 tools/workspace_recovery_index.py --summary",
+        "python3 tools/workspace_recovery_index.py --persist-report"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-recovery_index-recovery_review-review-55-recovery-candidates-routed-to-aurora-cloudbank-symbolic-main",
+      "title": "Review 55 recovery candidates routed to aurora-cloudbank-symbolic-main",
       "category": "recovery_review",
       "priority": "P2",
       "confidence": "medium",
@@ -208,17 +268,17 @@
       "owner_surface": "canonical nested repo",
       "evidence_refs": [
         "intake/Aurora_CloudBank_Review_R1_R10.md",
+        "PR SENSOR ARRAY SPEC v0 3 0 DELTA.md",
         "intake/b794f5eb-0115-48bb-ac1c-28a2c6c85a95.md",
         "intake/aurora_scaffold_nexus_meta_narrative.md",
+        "QGIA_Runtime_OnePager.md",
         "_staging/orion_ord_review_fix/package/tests/test_ord_policy_engine.py",
         "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/QuantumSymbolic_Index.txt",
         "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs1/QuantumSymbolic_Index.txt",
         "intake/ORION__NAV__PERPLEXITY_SPACE_FRONT_DOOR__v2.0__2026-04-08.md",
         "intake/Thread_The_Station_is_Well.md",
         "intake/text_25.txt",
-        "aurora-cloudbank-symbolic_README_DRAFT.md",
-        "aurora-cloudbank-symbolic_outside_review.md",
-        "narrative_engine_spec_parameters_to_narrative_core_v_0.md"
+        "_staging/codex_wip/test_mesh_router_v1__codex_wip_preserved_2026-06-13.py"
       ],
       "source": "recovery_index",
       "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
@@ -241,17 +301,17 @@
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
         "catalog/repo_registry.yaml",
+        "catalog/session_claims/.claude_auto_claim",
         "catalog/session_state.json",
         "catalog/workspace_manifest.yaml",
         "docs/workspace-map.md",
-        "reports/analysis/aurora_confidence_audit_latest.json",
+        "reports/analysis/ACTION_PLAN__CLOUDBANK_HYGIENE_RESTRICTED_RECOVERY_GOVERNANCE_REFRESH__2026-07-08.md",
         "reports/analysis/aurora_devkit_latest.json",
-        "reports/analysis/aurora_mission_control_latest.json",
-        "reports/analysis/aurora_recommendations_latest.json",
-        "reports/analysis/root_control_plane_artifact_refresh_receipt__2026-05-31.md",
+        "reports/analysis/restricted_recovery_triage__2026-07-08.json",
         "reports/analysis/workspace_recovery_index_latest.json",
         "reports/analysis/workspace_scan_summary.json",
-        "reports/analysis/workspace_verify_latest.json"
+        "reports/state_briefs/executive_brief__2026-07-08.json",
+        "reports/state_briefs/executive_brief__2026-07-08.md"
       ],
       "source": "git_status",
       "recommended_next_action": "Review ownership before staging or committing. Treat existing command-grammar, integration-gate, and recommendation-engine edits as separate root-control-plane work unless intentionally combined.",
