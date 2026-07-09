@@ -34,6 +34,7 @@ nested repo internals stay out of root Git history.
 - Current command-intent snapshot: [reports/analysis/aurora_command_intent_snapshot_latest.json](reports/analysis/aurora_command_intent_snapshot_latest.json)
 - Current simulation readiness: [reports/analysis/aurora_simulation_readiness_latest.json](reports/analysis/aurora_simulation_readiness_latest.json)
 - Current Docker demo readiness: [reports/analysis/aurora_demo_readiness_latest.json](reports/analysis/aurora_demo_readiness_latest.json)
+- Current project focus announcements: [catalog/project_focus_announcements.json](catalog/project_focus_announcements.json)
 - Current Kubernetes readiness: [reports/analysis/aurora_kubernetes_readiness_latest.json](reports/analysis/aurora_kubernetes_readiness_latest.json)
 - Current operator-console snapshot: [reports/analysis/aurora_operator_snapshot_latest.json](reports/analysis/aurora_operator_snapshot_latest.json)
 - Confidence audit workflow: [docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md](docs/AURORA_CONFIDENCE_AUDIT_WORKFLOW_v1.md)
@@ -204,12 +205,18 @@ CloudBank `static/archive/`.
 Cross-platform session claims:
 
 ```bash
+python3 tools/project_focus_announcement.py --summary
 python3 tools/session_claim.py check --repo root --paths . --json
 python3 tools/session_claim.py create --platform codex --task-id example --repo root --paths tools/session_claim.py --mutation-posture editing
 python3 tools/session_claim.py release --claim-id <claim-id>
+make project-focus
 make session-claims
 make session-claim-check
 ```
+
+Project-focus announcements are tracked advisory guidance surfaced at session
+start and through Mission Control. They do not replace task ownership,
+session-state handoffs, or path claims.
 
 Session claims are local, short-lived path leases under
 `catalog/session_claims/`. Live claim JSON files are ignored by Git so the
@@ -279,6 +286,7 @@ python3 tools/aurora_operator_snapshot.py --summary
 python3 tools/aurora_operator_snapshot.py --persist-report
 python3 tools/aurora_confidence_audit.py score --claim-type analysis --text "Example claim"
 python3 tools/aurora_confidence_audit.py audit --input claims.jsonl --jsonl --threshold 0.70
+python3 tools/project_focus_announcement.py --summary
 python3 tools/session_claim.py check --repo root --paths . --json
 python3 tools/session_claim.py list
 python3 tools/cloudbank_issue_broker.py status
@@ -303,6 +311,7 @@ make simulation-readiness-report
 make simulation-smoke-report
 make confidence-audit
 make confidence-audit-report
+make project-focus
 make session-claims
 make session-claim-check
 make cloudbank-broker

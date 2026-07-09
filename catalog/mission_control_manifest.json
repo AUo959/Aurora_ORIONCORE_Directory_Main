@@ -8,6 +8,10 @@
   "max_evidence_refs": 12,
   "sources": [
     {
+      "id": "project_focus",
+      "enabled": true
+    },
+    {
       "id": "workspace_verify",
       "enabled": true
     },
@@ -100,6 +104,7 @@
     }
   ],
   "validation_commands": [
+    "python3 tools/project_focus_announcement.py --summary",
     "python3 tools/aurora_mission_control.py --summary",
     "python3 tools/aurora_mission_control.py --persist-report",
     "python3 -m pytest -q tests/test_aurora_mission_control.py",

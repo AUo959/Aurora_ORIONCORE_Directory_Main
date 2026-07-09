@@ -10,7 +10,7 @@
           {
             "type": "command",
             "command": "python3 tools/session_stop_hook.py session-start",
-            "statusMessage": "Session start: orphan check + auto-claim"
+            "statusMessage": "Session start: project focus + orphan check + auto-claim"
           }
         ]
       }

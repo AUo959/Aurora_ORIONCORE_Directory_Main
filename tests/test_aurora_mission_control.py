@@ -28,6 +28,7 @@ def write_manifest(path: Path) -> None:
         "max_inbox_items": 12,
         "max_evidence_refs": 12,
         "sources": [
+            {"id": "project_focus", "enabled": True},
             {"id": "workspace_verify", "enabled": True},
             {"id": "integration_gate", "enabled": True},
             {"id": "recovery_index", "enabled": True},
@@ -179,6 +180,32 @@ def recommendations_report(blocking: bool = False) -> dict[str, Any]:
     }
 
 
+def project_focus_report() -> dict[str, Any]:
+    return {
+        "status": "active",
+        "summary": {
+            "announcement_count": 1,
+            "active_count": 1,
+            "included_count": 1,
+        },
+        "announcements": [
+            {
+                "id": "public-demo-focus-2026-07-08",
+                "status": "active",
+                "active": True,
+                "priority": "P2",
+                "title": "Current project focus: workable public demos",
+                "summary": "Build workable demos for the public.",
+                "agent_expectation": "Surface concrete demo proposals when relevant.",
+                "target_repo": "root",
+                "owner_surface": "root control-plane repo",
+                "evidence_refs": ["reports/analysis/aurora_demo_readiness_latest.json"],
+                "suggested_commands": ["make demo-readiness"],
+            }
+        ],
+    }
+
+
 def git_report(dirty: bool = False) -> dict[str, Any]:
     return {
         "status": "dirty" if dirty else "clean",
@@ -194,6 +221,7 @@ def collectors(
     missing_tool: str | None = None,
 ) -> dict[str, mission.Collector]:
     return {
+        "project_focus": lambda root, manifest: project_focus_report(),
         "workspace_verify": lambda root, manifest: workspace_report(blocking),
         "integration_gate": lambda root, manifest: integration_report(blocking),
         "recovery_index": lambda root, manifest: recovery_report(),
@@ -228,8 +256,8 @@ def test_report_shape_and_read_only_invariants(tmp_path: Path) -> None:
     assert report["mutation_posture"] == "advisory_only"
     assert report["nested_repo_mutation"] is False
     assert report["status"] == "attention"
-    assert report["summary"]["source_count"] == 6
-    assert report["summary"]["operator_inbox_count"] == 2
+    assert report["summary"]["source_count"] == 7
+    assert report["summary"]["operator_inbox_count"] == 3
     assert report["summary"]["approval_required_count"] == 2
     assert report["operator_inbox"][0]["mutation_posture"] == "advisory_only"
 
@@ -299,3 +327,18 @@ def test_source_errors_become_operator_inbox_items(tmp_path: Path) -> None:
     ]
     assert len(source_error_items) == 1
     assert source_error_items[0]["category"] == "validation"
+
+
+def test_project_focus_becomes_open_advisory_inbox_item(tmp_path: Path) -> None:
+    report = build_test_report(tmp_path)
+
+    focus_items = [
+        item
+        for item in report["operator_inbox"]
+        if item["category"] == "project_focus"
+    ]
+
+    assert len(focus_items) == 1
+    assert focus_items[0]["status"] == "open"
+    assert focus_items[0]["approval_required"] is False
+    assert focus_items[0]["suggested_commands"] == ["make demo-readiness"]

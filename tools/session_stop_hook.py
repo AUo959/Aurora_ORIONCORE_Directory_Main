@@ -9,10 +9,12 @@ Four jobs:
      commit; the hook deliberately never commits or pushes (churn +
      force-push hazard).
   2. Record the landing ledger (publication debt) at session close
-  3. If there are uncommitted tracked changes, write an orphan marker so
+  3. On session start, surface tracked project-focus announcements so agents
+     know the current collaboration focus before selecting work.
+  4. If there are uncommitted tracked changes, write an orphan marker so
      the next session (either platform) surfaces the abandoned work
      (surfaced via the SessionStart hook running `check-orphans`)
-  4. Validate session_state.json against the queue contract
+  5. Validate session_state.json against the queue contract
      (tools/session_state_check.py) and warn on drift
 
 Invoked from .claude/settings.json → hooks → Stop.
@@ -171,6 +173,27 @@ def _debt_staleness_warning() -> None:
         pass
 
 
+def _run_project_focus(*args: str) -> subprocess.CompletedProcess:
+    return subprocess.run(
+        ["python3", str(REPO_ROOT / "tools" / "project_focus_announcement.py"), *args],
+        capture_output=True, text=True, cwd=REPO_ROOT,
+    )
+
+
+def surface_project_focus() -> None:
+    """Print active project-focus announcements at session start."""
+    try:
+        result = _run_project_focus("--summary")
+        if result.returncode == 0 and result.stdout.strip():
+            print(result.stdout.strip())
+            return
+        detail = (result.stderr or result.stdout).strip().splitlines()
+        if detail:
+            print(f"[session-start] project focus skipped: {detail[0][:120]}")
+    except Exception as exc:  # advisory - never block a session on focus text
+        print(f"[session-start] project focus skipped: {exc}")
+
+
 def check_orphans() -> None:
     """Surface orphan markers from previous sessions; auto-resolve stale ones.
 
@@ -315,6 +338,7 @@ def main() -> int:
         check_orphans()
         return 0
     if len(sys.argv) > 1 and sys.argv[1] == "session-start":
+        surface_project_focus()
         check_orphans()
         file_auto_claim()
         return 0

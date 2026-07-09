@@ -18,6 +18,7 @@ from typing import Any, Callable
 import aurora_devkit
 import aurora_integration_gate
 import aurora_recommendation_engine
+import project_focus_announcement
 import workspace_recovery_index
 import workspace_verify
 from _workspace_common import now_iso_utc, serialized_root, write_json
@@ -45,6 +46,7 @@ INBOX_FIELDS = (
 )
 
 DEFAULT_SOURCE_IDS = [
+    "project_focus",
     "workspace_verify",
     "integration_gate",
     "recovery_index",
@@ -163,7 +165,16 @@ def collect_git_status(root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
     return aurora_recommendation_engine.collect_git_status(root, manifest)
 
 
+def collect_project_focus(root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
+    del manifest
+    return project_focus_announcement.build_report(
+        root,
+        root / "catalog" / "project_focus_announcements.json",
+    )
+
+
 DEFAULT_COLLECTORS: dict[str, Collector] = {
+    "project_focus": collect_project_focus,
     "workspace_verify": collect_workspace_verify,
     "integration_gate": collect_integration_gate,
     "recovery_index": collect_recovery_index,
@@ -314,6 +325,34 @@ def inbox_from_source_errors(
     return out
 
 
+def inbox_from_project_focus(report: dict[str, Any], manifest: dict[str, Any]) -> list[dict[str, Any]]:
+    max_refs = int(manifest.get("max_evidence_refs", 12))
+    out: list[dict[str, Any]] = []
+    for item in report.get("announcements", []):
+        if not isinstance(item, dict) or not item.get("active", False):
+            continue
+        item_id = str(item.get("id", "project-focus"))
+        out.append(
+            {
+                "item_id": f"mission-{str(item.get('priority', 'P2')).lower()}-project-focus-{item_id}",
+                "title": str(item.get("title", "Project focus announcement")),
+                "category": "project_focus",
+                "priority": str(item.get("priority", "P2")),
+                "source": "project_focus",
+                "target_repo": str(item.get("target_repo", "root")),
+                "owner_surface": str(item.get("owner_surface", "root control-plane repo")),
+                "evidence_refs": [str(ref) for ref in item.get("evidence_refs", [])[:max_refs]],
+                "recommended_next_action": str(item.get("agent_expectation") or item.get("summary", "")),
+                "suggested_commands": [str(command) for command in item.get("suggested_commands", [])],
+                "approval_required": False,
+                "mutation_posture": "advisory_only",
+                "blocking": False,
+                "status": "open",
+            }
+        )
+    return out
+
+
 def sort_and_limit_inbox(items: list[dict[str, Any]], manifest: dict[str, Any]) -> list[dict[str, Any]]:
     priority_rank = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
     status_rank = {"blocked": 0, "open": 1, "informational": 2}
@@ -336,6 +375,9 @@ def build_operator_inbox(
     manifest: dict[str, Any],
 ) -> list[dict[str, Any]]:
     out = inbox_from_source_errors(sources, manifest)
+    project_focus = sources.get("project_focus", {})
+    if project_focus and "error" not in project_focus:
+        out.extend(inbox_from_project_focus(project_focus, manifest))
     recommendations = sources.get("recommendations", {})
     if recommendations and "error" not in recommendations:
         out.extend(inbox_from_recommendations(recommendations, manifest))
@@ -387,6 +429,13 @@ def source_summary(name: str, report: dict[str, Any]) -> dict[str, Any]:
             "status": report.get("status"),
             "changed_path_count": len(report.get("changed_paths", [])),
             "branch": report.get("branch", ""),
+        }
+    if name == "project_focus":
+        summary = report.get("summary", {})
+        return {
+            "status": report.get("status"),
+            "announcement_count": summary.get("announcement_count"),
+            "active_count": summary.get("active_count"),
         }
     return {"status": report.get("status", "unknown")}
 

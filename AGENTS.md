@@ -410,6 +410,7 @@ This repo is worked on by both **Claude Code** and **Codex**. Either platform ma
 3. Check `task_queue` for items assigned to your platform or `"either"`.
 4. Check `tool_versions` for tools installed since you last worked here.
 5. Run `git log --oneline -5` to see what landed since `last_updated`.
+6. Check active project-focus announcements with `python3 tools/project_focus_announcement.py --summary` if the startup hook did not already print them. These announcements are advisory focus guidance; they do not authorize nested-repo mutation or canon promotion.
 
 ### On session end (do this before closing, unless the session made no meaningful changes)
 
@@ -427,6 +428,7 @@ This repo is worked on by both **Claude Code** and **Codex**. Either platform ma
 - **PR lifecycle:** `catalog/workflows/pr-lifecycle.md` — branch → implement → PR → review → merge
 - **Governance fix loop:** `catalog/workflows/governance-fix-loop.md` — scan → triage → fix → verify
 - **CloudBank issue broker:** `docs/CLOUDBANK_ISSUE_BROKER_WORKFLOW_v1.md` — live issue state → local claim → clean worktree → PR → release
+- **Project focus announcements:** `catalog/project_focus_announcements.json` — active advisory focus surfaced at session start and through Mission Control
 
 ### Platform capability map
 

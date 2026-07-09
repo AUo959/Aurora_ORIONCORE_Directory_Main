@@ -108,6 +108,23 @@ If a task pauses and needs to survive thread or platform changes, write the
 resume details to `catalog/session_state.json`; do not rely on an active claim
 as the only handoff record.
 
+## Session-Start Announcements
+
+Project-focus announcements live in
+`catalog/project_focus_announcements.json`. They are tracked advisory focus
+guidance, not task ownership and not a mutation claim.
+
+The SessionStart hook surfaces active announcements through:
+
+```bash
+python3 tools/project_focus_announcement.py --summary
+```
+
+Already-running sessions can discover the same focus by running that command,
+`make project-focus`, or Mission Control (`make mission-control`). Mission
+Control includes active announcements as advisory operator-inbox items so
+current agents can see project focus without restarting their session.
+
 ## Claim Schema (v2)
 
 Each claim file carries:

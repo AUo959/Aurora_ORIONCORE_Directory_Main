@@ -7,6 +7,8 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -97,6 +99,36 @@ class TestAutoClaim(unittest.TestCase):
     def test_release_without_marker_is_noop(self):
         hook.release_auto_claim()
         self.assertEqual(self.calls, [])
+
+
+class TestProjectFocusStartup(unittest.TestCase):
+    def test_surface_project_focus_prints_summary(self):
+        calls = []
+        orig = hook._run_project_focus
+        hook._run_project_focus = lambda *a: (  # type: ignore
+            calls.append(a), SimpleNamespace(returncode=0, stdout="Focus summary\n", stderr="")
+        )[1]
+        try:
+            buf = StringIO()
+            with redirect_stdout(buf):
+                hook.surface_project_focus()
+        finally:
+            hook._run_project_focus = orig
+        self.assertEqual(calls, [("--summary",)])
+        self.assertIn("Focus summary", buf.getvalue())
+
+    def test_surface_project_focus_is_advisory_on_failure(self):
+        orig = hook._run_project_focus
+        hook._run_project_focus = lambda *a: SimpleNamespace(  # type: ignore
+            returncode=1, stdout="", stderr="broken registry\n"
+        )
+        try:
+            buf = StringIO()
+            with redirect_stdout(buf):
+                hook.surface_project_focus()
+        finally:
+            hook._run_project_focus = orig
+        self.assertIn("project focus skipped: broken registry", buf.getvalue())
 
 
 class TestPrecommitClassification(unittest.TestCase):

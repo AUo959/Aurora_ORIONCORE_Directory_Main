@@ -1,4 +1,4 @@
-.PHONY: help setup test verify scan sync-audit sync-audit-all gh-auth-check pr-packet lint health devkit-check devkit-report devkit-install-plan skills-check skills-install session-claims session-claim-check session-state-check cloudbank-broker cloudbank-broker-check recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report stack-validation stack-validation-report command-intent-snapshot command-intent-snapshot-report simulation-readiness simulation-readiness-report simulation-smoke-report demo-readiness demo-readiness-report kubernetes-readiness kubernetes-readiness-report operator-snapshot operator-snapshot-report confidence-audit confidence-audit-report integration-gate l2-scenario-uptake clean
+.PHONY: help setup test verify scan sync-audit sync-audit-all gh-auth-check pr-packet lint health devkit-check devkit-report devkit-install-plan skills-check skills-install session-claims session-claim-check session-state-check project-focus cloudbank-broker cloudbank-broker-check recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report stack-validation stack-validation-report command-intent-snapshot command-intent-snapshot-report simulation-readiness simulation-readiness-report simulation-smoke-report demo-readiness demo-readiness-report kubernetes-readiness kubernetes-readiness-report operator-snapshot operator-snapshot-report confidence-audit confidence-audit-report integration-gate l2-scenario-uptake clean
 
 PYTHON ?= python3
 PYTEST ?= pytest
@@ -71,6 +71,9 @@ session-claim-check: ## Check for root-wide overlapping active session claims
 
 session-state-check: ## Validate catalog/session_state.json against the queue contract
 	$(PYTHON) tools/session_state_check.py
+
+project-focus: ## Show active project-focus announcements
+	$(PYTHON) tools/project_focus_announcement.py --summary
 
 cloudbank-broker: ## Show CloudBank issue broker status
 	$(PYTHON) tools/cloudbank_issue_broker.py status
