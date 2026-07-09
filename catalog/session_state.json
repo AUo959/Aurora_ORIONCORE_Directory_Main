@@ -251,9 +251,9 @@
       "detail": "Both parts resolved. (b) Root branches: codex/gitwiz-sync-audit-canonical-2026-04-08 (9 commits) confirmed already 3-way-merged onto main 2026-06-10 (commit 4aaf7e0, one piece -- workspace_plan_moves.py wave5 -- deliberately abandoned per that commit's own note); codex/weekly-skill-audit-mesh-router-2026-06-01 (1 commit) confirmed byte-identical to main after rebase. Both deleted. (a) March rescue lineage extraction: ran gitleaks over all 10 CloudBank March branches first (mandatory security gate per the source audit, given a same-era OpenAI key rotation) -- clean, only 2 benign findings (a hex placeholder in an archived doc, a test fixture string 'test_glyph_123'), identical across branches from shared history. Content review: of ~18 distinct commits across the 10 CloudBank branches, everything from 2026-02-28 through 2026-03-19 (14 commits: Aurora Fusion layer, command grammar module, mesh router runtime, selective-integration gate, threadcore/zipwiz governance remediation, etc.) was already merged via CloudBank PR #501 ('Sync CloudBank shared-history workup to main', merged 2026-03-22) -- confirmed by direct file presence + git-log --follow provenance, and in one case (src/aurora_fusion/engine.py) main's version is more evolved than the branch's. 6 of 10 branches contained only this already-landed content -- deleted (local-only, never pushed). The remaining 4 branches (2026-03-25 commits, made 3 days after PR #501 already landed the content) were reviewed individually: a macOS launchd plist (hardcodes the now-deleted iCloud workspace path, needs full rewrite to be usable, not extracted); a .aurora/ narrative/audit-doc dump duplicated across 2 commits (STUB_AND_INTEGRATION_AUDIT.md etc. -- already independently triaged via the ISSUE_1015 classification report/PR #1019, not new work); and a 545-line alternate threadcore.js design (reads payload files that already exist on main and are consumed by a different, current 188-line implementation at src/core/command_node/threadcore.js -- confirmed abandoned, the 'driftpulse' concept it introduces is referenced nowhere in current code). All 4 deleted. Root's 3 March-era twin branches (root-control-plane-local, root-reconstruct-recovered-protocols, rescue/root-control-plane-dirty-workingcopy) independently confirmed already-landed via root commit 205ea77 ('close salvage decisions -- policies promoted, clean ports landed', 2026-06-10: repo_authority_policy.yaml + gitwiz_hygiene_policy.yaml promoted, clean ports from _workspace_common and weekly-skill-audit) -- deleted. Also dropped 2 leftover CloudBank stashes from the same era (stash@{1}: 66-file March 13 snapshot pre-dating the later root-sprawl reorg, paths no longer applicable, mesh/security content superseded; stash@{0}: untracked workflow-output only, audit already called this low-value). Net: 13 branches + 2 stashes retired across root+CloudBank, zero content lost -- everything of value had already landed through PR #501, PR #1019, or root commit 205ea77 over the preceding 3 months. publication_debt.py scan: 1 entry remains (qgia-knowledge-library-main dirty tree, documented live Codex work, untouched)."
     }
   ],
-  "last_updated": "2026-07-08T07:03:06Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "Following up on 'there is plenty to do in cloudbank': surveyed all open CloudBank PRs and found all 4 PRs from today's session (#1190-1193) failing Codacy 'Up to Standards' gate on bare-assert (B101) and complexity findings. Fixed all of them: converted asserts to unittest.TestCase() on every diff-touched line across 6 test files (repo convention, matches prior precedent like tests/test_aurora_consciousness_agent_ethics.py); resolved all 5 complexity findings via pure extraction/splitting with no behavior change (field_curvature.py's GA wiring, terminals.py's load_terminal_directory -> _apply_manifest_to_profile/_reconcile_profile_with_manifest/_apply_pat_overlay, runtime.py's _resolve_channel -> _channel_from_terminal_profiles, and 2 oversized test functions split into focused tests). Also discovered and reconciled two real content divergences from main during PR #1191's overdue rebase: kept main's more-rigorous reply-based broadcast-completion polling over the branch's weaker ack-only check (confirmed by reading src/mesh/runtime.py's actual event-emission order), and adopted main's already-refactored tests/test_scenario_seed_initializer.py wholesale (PR #1190) instead of re-deriving the same TestCase fix on a stale copy. Result: PR #1190/#1191/#1193 now pass Codacy 'Up to Standards'; #1192 fixed and awaiting re-analysis. One known remainder left undone: static/js/synergy-dashboard.js renderSynergyScores() complexity (Medium/POTENTIAL, JS, lower priority, documented in PR #1190). Separately confirmed the 3 failing GitHub Actions (aurora-release.yml, deploy-pages.yml, codacy.yml) on these PRs are pre-existing repo-wide breakage (malformed 'if: false' disable attempts) that fail identically on every push to main for days -- matches the already-tracked roadmap-1.1 CI-sprawl item, not a new finding, did not touch. Also found a live Codex session (~/Documents/Codex/2026-07-06/investigate-the-recent-vercel-deployment-failures) already actively investigating the Vercel deploy failures on these same PRs -- deliberately did not duplicate that work.",
+  "last_updated": "2026-07-09T07:07:16Z",
+  "last_platform": "codex",
+  "last_session_summary": "Added tracked project-focus announcements for public-demo work, surfaced at session start and through Mission Control; committed root feature 3e7600f after focused validation.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -273,6 +273,48 @@
   },
   "recent_commits": [
     {
+      "sha": "3e7600f",
+      "date": "2026-07-09",
+      "platform": "codex",
+      "summary": "feat(session): surface project focus announcements"
+    },
+    {
+      "sha": "f57e61b",
+      "date": "2026-07-09",
+      "platform": "codex",
+      "summary": "chore: regenerate remaining workspace_scan.py surfaces"
+    },
+    {
+      "sha": "ff97ed8",
+      "date": "2026-07-09",
+      "platform": "codex",
+      "summary": "chore(session): record CloudBank PR CI-hygiene pass"
+    },
+    {
+      "sha": "ac2af4e",
+      "date": "2026-07-09",
+      "platform": "codex",
+      "summary": "chore(session): close cloudbank-followups-remaining-backlog"
+    },
+    {
+      "sha": "64fe1e4",
+      "date": "2026-07-09",
+      "platform": "codex",
+      "summary": "chore(session): close publication-debt-triage-continuation and ga-ethics-hub-integration"
+    },
+    {
+      "sha": "a2ed868",
+      "date": "2026-07-09",
+      "platform": "codex",
+      "summary": "feat(recommendations): consume restricted_recovery_triage logs"
+    },
+    {
+      "sha": "f65f568",
+      "date": "2026-07-09",
+      "platform": "codex",
+      "summary": "chore(session): execute AP-20260708-cloudbank-restricted-governance"
+    },
+    {
       "sha": "8e6e68c",
       "date": "2026-07-06",
       "platform": "claude-code",
@@ -289,48 +331,6 @@
       "date": "2026-07-06",
       "platform": "claude-code",
       "summary": "fix(sim): make crew_life roster resolution layout-flexible (#34)"
-    },
-    {
-      "sha": "a9619e6",
-      "date": "2026-07-06",
-      "platform": "claude-code",
-      "summary": "ci: repurpose the py3.9 leg to a CloudBank-independent unit run (#35)"
-    },
-    {
-      "sha": "9a1ba1d",
-      "date": "2026-07-06",
-      "platform": "claude-code",
-      "summary": "chore(codacy): commit the .codacy.yaml exclude (whitelist in .gitignore)"
-    },
-    {
-      "sha": "97ad2d0",
-      "date": "2026-07-06",
-      "platform": "claude-code",
-      "summary": "chore(sim): exclude generated reconstruction artifacts from Codacy; cut renderer complexity"
-    },
-    {
-      "sha": "e8159f1",
-      "date": "2026-07-06",
-      "platform": "claude-code",
-      "summary": "feat(sim): emit a full L3 narrative reconstruction from the hour-aboard harness"
-    },
-    {
-      "sha": "2f63cf4",
-      "date": "2026-07-06",
-      "platform": "claude-code",
-      "summary": "feat(sim): parameterize simulation report root via AURORA_SIM_REPORT_ROOT"
-    },
-    {
-      "sha": "f2547ca",
-      "date": "2026-07-06",
-      "platform": "claude-code",
-      "summary": "deps: bump actions/checkout from 6 to 7 (#24)"
-    },
-    {
-      "sha": "189f7ac",
-      "date": "2026-07-06",
-      "platform": "claude-code",
-      "summary": "deps: bump ghcr.io/devcontainers/features/docker-in-docker (#37)"
     }
   ],
   "security_events": [
@@ -360,7 +360,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "8e6e68c",
+    "main_sha": "3e7600f1f2ebdfb2b204f35869d2af530b37b92c",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
