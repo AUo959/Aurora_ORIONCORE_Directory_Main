@@ -1,40 +1,46 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-08T05:38:07Z",
+  "generated_at": "2026-07-09T07:23:47Z",
   "root": ".",
   "tool": "aurora_mission_control",
   "run_mode": "read_only",
   "mutation_posture": "advisory_only",
   "nested_repo_mutation": false,
   "manifest_path": "catalog/mission_control_manifest.json",
-  "status": "blocked",
+  "status": "attention",
   "summary": {
-    "source_count": 6,
+    "source_count": 7,
     "source_error_count": 0,
     "operator_inbox_count": 10,
     "blocking_count": 0,
-    "approval_required_count": 8,
+    "approval_required_count": 7,
     "by_priority": {
-      "P1": 2,
-      "P2": 8
+      "P1": 1,
+      "P2": 9
     },
     "by_category": {
       "boundary": 1,
       "developer_tooling": 2,
       "git_state": 1,
-      "recovery_review": 6
+      "project_focus": 1,
+      "recovery_review": 5
     },
     "by_status": {
       "informational": 1,
       "open": 9
     },
     "build_lanes": {
-      "ready": 5,
+      "ready": 6,
       "attention": 0,
-      "blocked": 1
+      "blocked": 0
     }
   },
   "source_reports": {
+    "project_focus": {
+      "status": "active",
+      "announcement_count": 1,
+      "active_count": 1
+    },
     "workspace_verify": {
       "status": "warn",
       "finding_count": 1,
@@ -53,20 +59,20 @@
     },
     "devkit": {
       "status": "WARN",
-      "tools_ok": 20,
+      "tools_ok": 21,
       "tools_total": 21,
       "finding_count": 2,
-      "install_plan_items": 1
+      "install_plan_items": 0
     },
     "recommendations": {
       "status": "open",
-      "recommendation_count": 10,
+      "recommendation_count": 9,
       "blocking_count": 0,
-      "approval_required_count": 8
+      "approval_required_count": 7
     },
     "git_status": {
       "status": "dirty",
-      "changed_path_count": 13,
+      "changed_path_count": 7,
       "branch": "main...origin/main"
     }
   },
@@ -96,7 +102,7 @@
     {
       "lane_id": "frontend-dashboard",
       "title": "Local frontend dashboard",
-      "status": "blocked",
+      "status": "ready",
       "required_tools": [
         "node",
         "npm",
@@ -104,9 +110,7 @@
         "pnpm"
       ],
       "recommended_tools": [],
-      "missing_required_tools": [
-        "pnpm"
-      ],
+      "missing_required_tools": [],
       "missing_recommended_tools": [],
       "next_action": "Use this lane for a localhost-only Vite dashboard after a CLI/report contract is stable.",
       "evidence_refs": [
@@ -203,19 +207,19 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p1-recovery_index-recovery_review-review-30-restricted-recovery-candidates-carefully",
-      "title": "Review 30 restricted recovery candidates carefully",
-      "category": "recovery_review",
-      "priority": "P1",
-      "source": "recovery_index",
+      "item_id": "mission-p2-devkit-developer_tooling-aurora-cloudbank-symbolic-main-python-environment-is-warn",
+      "title": "aurora-cloudbank-symbolic-main Python environment is warn.",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "source": "devkit",
       "target_repo": "root",
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
-        "reports/analysis/workspace_recovery_index_latest.json::restricted_recovery_candidates_metadata"
+        "catalog/dev_toolkit_manifest.json::repo_python_env_aurora-cloudbank-symbolic-main_warn"
       ],
-      "recommended_next_action": "Handle restricted candidates through a separate review decision; do not copy them into issues, PRs, or canon surfaces by default.",
+      "recommended_next_action": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
       "suggested_commands": [
-        "python3 tools/workspace_recovery_index.py --summary"
+        "python3 tools/aurora_devkit.py --install-plan"
       ],
       "approval_required": true,
       "mutation_posture": "advisory_only",
@@ -243,22 +247,26 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p2-devkit-developer_tooling-pnpm-is-error",
-      "title": "pnpm is error.",
-      "category": "developer_tooling",
+      "item_id": "mission-p2-project-focus-public-demo-focus-2026-07-08",
+      "title": "Current project focus: workable public demos",
+      "category": "project_focus",
       "priority": "P2",
-      "source": "devkit",
+      "source": "project_focus",
       "target_repo": "root",
-      "owner_surface": "root control-plane repo",
+      "owner_surface": "root control-plane repo plus explicitly named demo owner repos",
       "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::tool_pnpm_error"
+        "reports/analysis/aurora_demo_readiness_latest.json",
+        "reports/analysis/aurora_mission_control_latest.json",
+        "reports/analysis/aurora_operator_snapshot_latest.json",
+        "README.md::Current Docker demo readiness"
       ],
-      "recommended_next_action": "Recommended package manager for large JS workspaces when activated through corepack.",
+      "recommended_next_action": "Every agent working on the project should keep public-demo readiness in mind and surface concrete demo proposals when relevant.",
       "suggested_commands": [
-        "corepack enable pnpm",
-        "corepack prepare pnpm@latest --activate"
+        "python3 tools/project_focus_announcement.py --summary",
+        "make demo-readiness",
+        "make mission-control"
       ],
-      "approval_required": true,
+      "approval_required": false,
       "mutation_posture": "advisory_only",
       "blocking": false,
       "status": "open"
@@ -399,26 +407,21 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p2-git_status-git_state-root-worktree-has-13-in-progress-paths",
-      "title": "Root worktree has 13 in-progress paths",
+      "item_id": "mission-p2-git_status-git_state-root-worktree-has-7-in-progress-paths",
+      "title": "Root worktree has 7 in-progress paths",
       "category": "git_state",
       "priority": "P2",
       "source": "git_status",
       "target_repo": "root",
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
-        "catalog/repo_registry.yaml",
         "catalog/session_claims/.claude_auto_claim",
         "catalog/session_state.json",
-        "catalog/workspace_manifest.yaml",
-        "docs/workspace-map.md",
-        "reports/analysis/ACTION_PLAN__CLOUDBANK_HYGIENE_RESTRICTED_RECOVERY_GOVERNANCE_REFRESH__2026-07-08.md",
         "reports/analysis/aurora_devkit_latest.json",
+        "reports/analysis/aurora_mission_control_latest.json",
         "reports/analysis/aurora_recommendations_latest.json",
-        "reports/analysis/restricted_recovery_triage__2026-07-08.json",
-        "reports/analysis/workspace_recovery_index_latest.json",
-        "reports/analysis/workspace_scan_summary.json",
-        "reports/state_briefs/executive_brief__2026-07-08.json"
+        "tests/test_session_state_io.py",
+        "tools/session_state_io.py"
       ],
       "recommended_next_action": "Review ownership before staging or committing. Treat existing command-grammar, integration-gate, and recommendation-engine edits as separate root-control-plane work unless intentionally combined.",
       "suggested_commands": [
@@ -431,6 +434,7 @@
     }
   ],
   "validation_commands": [
+    "python3 tools/project_focus_announcement.py --summary",
     "python3 tools/aurora_mission_control.py --summary",
     "python3 tools/aurora_mission_control.py --persist-report",
     "python3 -m pytest -q tests/test_aurora_mission_control.py",

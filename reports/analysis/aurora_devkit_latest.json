@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-08T05:37:39Z",
+  "generated_at": "2026-07-09T07:16:14Z",
   "root": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
   "manifest_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
   "toolkit_id": "aurora-dev-toolkit",
@@ -102,9 +102,9 @@
         "node",
         "--version"
       ],
-      "path": "/Users/travisstreets/.nvm/versions/node/v20.20.2/bin/node",
+      "path": "/opt/homebrew/bin/node",
       "returncode": 0,
-      "output": "v20.20.2"
+      "output": "v26.5.0"
     },
     {
       "id": "npm",
@@ -116,9 +116,9 @@
         "npm",
         "--version"
       ],
-      "path": "/Users/travisstreets/.nvm/versions/node/v20.20.2/bin/npm",
+      "path": "/opt/homebrew/bin/npm",
       "returncode": 0,
-      "output": "10.8.2"
+      "output": "11.17.0"
     },
     {
       "id": "corepack",
@@ -130,9 +130,9 @@
         "corepack",
         "--version"
       ],
-      "path": "/Users/travisstreets/.nvm/versions/node/v20.20.2/bin/corepack",
+      "path": "/opt/homebrew/bin/corepack",
       "returncode": 0,
-      "output": "0.34.6"
+      "output": "0.35.0"
     },
     {
       "id": "sqlite3",
@@ -223,14 +223,14 @@
       "category": "javascript",
       "required": false,
       "impact": "Recommended package manager for large JS workspaces when activated through corepack.",
-      "status": "error",
+      "status": "ok",
       "command": [
         "pnpm",
         "--version"
       ],
-      "path": "/Users/travisstreets/.nvm/versions/node/v24.14.0/bin/pnpm",
-      "returncode": 1,
-      "output": "warn: This version of pnpm requires at least Node.js v22.13\nwarn: The current version of Node.js is v20.20.2\nwarn: Visit https://r.pnpm.io/comp to see the list of past pnpm versions with respective Node.js version support.\nnode:internal/modules/cjs/loader:1031"
+      "path": "/opt/homebrew/bin/pnpm",
+      "returncode": 0,
+      "output": "11.9.0"
     },
     {
       "id": "docker",
@@ -258,7 +258,7 @@
       ],
       "path": "/opt/homebrew/bin/brew",
       "returncode": 0,
-      "output": "Homebrew 6.0.8"
+      "output": "Homebrew 6.0.9"
     },
     {
       "id": "xcodebuild",
@@ -529,7 +529,7 @@
     {
       "name": "aurora-cloudbank-symbolic-main",
       "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
-      "branch": "codex/l2-scenario-seed-simulation-initializer",
+      "branch": "codex/cloudbank-pat-terminal-compat-2026-06-16",
       "remote_status": "configured"
     },
     {
@@ -625,7 +625,7 @@
       ],
       "auto_update_lane": "aurora-dev-toolkit-user-space-update",
       "status_file": ".env_status.json",
-      "status": "ok",
+      "status": "warn",
       "checks": {
         "python_version": {
           "status": "ok",
@@ -680,8 +680,11 @@
         "slowapi": "unknown"
       },
       "missing_imports": [],
-      "status_file_state": "ok",
-      "status_file_stale_fields": []
+      "status_file_state": "stale",
+      "status_file_stale_fields": [
+        "pip_version"
+      ],
+      "evidence": ".env_status.json is stale"
     }
   ],
   "dependency_update_surfaces": [
@@ -963,43 +966,20 @@
   "findings": [
     {
       "severity": "warning",
-      "id": "tool_pnpm_error",
-      "message": "pnpm is error.",
-      "evidence": "warn: This version of pnpm requires at least Node.js v22.13\nwarn: The current version of Node.js is v20.20.2\nwarn: Visit https://r.pnpm.io/comp to see the list of past pnpm versions with respective Node.js version support.\nnode:internal/modules/cjs/loader:1031",
-      "next_step": "Recommended package manager for large JS workspaces when activated through corepack."
-    },
-    {
-      "severity": "warning",
       "id": "automation_aurora_dev_toolkit_watch_paused",
       "message": "aurora-dev-toolkit-watch exists but is not active.",
       "evidence": "status=PAUSED",
       "next_step": "Use a devkit watch lane for read-only drift detection, then apply package changes with explicit approval."
-    }
-  ],
-  "install_plan": [
+    },
     {
-      "tool_id": "pnpm",
-      "lane": "javascript-user",
-      "manager": "corepack",
-      "status": "ready",
-      "approval_required": true,
-      "blocked_by": [],
-      "install_command": [
-        "corepack",
-        "enable",
-        "pnpm"
-      ],
-      "install_command_text": "corepack enable pnpm",
-      "update_command": [
-        "corepack",
-        "prepare",
-        "pnpm@latest",
-        "--activate"
-      ],
-      "update_command_text": "corepack prepare pnpm@latest --activate",
-      "notes": "Enables the pnpm shim through Corepack; update uses corepack prepare pnpm@latest --activate."
+      "severity": "warning",
+      "id": "repo_python_env_aurora-cloudbank-symbolic-main_warn",
+      "message": "aurora-cloudbank-symbolic-main Python environment is warn.",
+      "evidence": ".env_status.json is stale",
+      "next_step": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment."
     }
   ],
+  "install_plan": [],
   "validation_commands": [
     "python3 tools/aurora_devkit.py --persist-report",
     "python3 tools/aurora_devkit.py --install-plan --persist-install-plan",

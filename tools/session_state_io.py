@@ -22,6 +22,7 @@ CLI:
     python3 tools/session_state_io.py add-pending <id> --description TEXT
         [--priority high|medium|low] [--assigned-to codex|claude-code|either|owner]
     python3 tools/session_state_io.py set-summary TEXT
+    python3 tools/session_state_io.py set-tool-version <tool> <version>
     python3 tools/session_state_io.py suspend-active --next-step TEXT
         [--next-step-detail TEXT]
     python3 tools/session_state_io.py record-commits   # mechanical: recent_commits + main_sha from git log
@@ -219,6 +220,22 @@ def op_set_summary(args: argparse.Namespace) -> int:
     return 0
 
 
+def op_set_tool_version(args: argparse.Namespace) -> int:
+    state = load()
+    versions = state.setdefault("tool_versions", {})
+    if not isinstance(versions, dict):
+        print("session-state-io: tool_versions must be an object", file=sys.stderr)
+        return 1
+    versions[args.tool] = args.version
+    state["last_platform"] = args.platform
+    state["last_updated"] = _now()
+    findings = save(state)
+    if findings:
+        return _refuse(findings)
+    print(f"session-state-io: tool_versions.{args.tool} set")
+    return 0
+
+
 def op_suspend_active(args: argparse.Namespace) -> int:
     state = load()
     active = state.get("active_task")
@@ -330,6 +347,10 @@ def main() -> int:
     p = sub.add_parser("set-summary", help="Set last_session_summary (+platform/updated)")
     p.add_argument("text")
 
+    p = sub.add_parser("set-tool-version", help="Set a tool_versions entry (+platform/updated)")
+    p.add_argument("tool")
+    p.add_argument("version")
+
     p = sub.add_parser("suspend-active", help="Suspend active_task with a next step")
     p.add_argument("--next-step", required=True)
     p.add_argument("--next-step-detail")
@@ -348,6 +369,7 @@ def main() -> int:
         "complete-item": op_complete_item,
         "add-pending": op_add_pending,
         "set-summary": op_set_summary,
+        "set-tool-version": op_set_tool_version,
         "suspend-active": op_suspend_active,
         "record-commits": op_record_commits,
         "archive-completed": op_archive_completed,

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-08T05:49:45Z",
+  "generated_at": "2026-07-09T07:23:25Z",
   "root": ".",
   "tool": "aurora_recommendation_engine",
   "run_mode": "read_only",
@@ -46,11 +46,11 @@
     "devkit": {
       "status": "WARN",
       "finding_count": 2,
-      "install_plan_items": 1
+      "install_plan_items": 0
     },
     "git_status": {
       "status": "dirty",
-      "changed_path_count": 4,
+      "changed_path_count": 6,
       "branch": "main...origin/main"
     }
   },
@@ -77,6 +77,27 @@
       "status": "open"
     },
     {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-aurora-cloudbank-symbolic-main-python-environment-is-warn",
+      "title": "aurora-cloudbank-symbolic-main Python environment is warn.",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::repo_python_env_aurora-cloudbank-symbolic-main_warn"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
+      "suggested_commands": [
+        "python3 tools/aurora_devkit.py --install-plan"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
       "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-aurora-dev-toolkit-watch-exists-but-is-not-active",
       "title": "aurora-dev-toolkit-watch exists but is not active.",
       "category": "developer_tooling",
@@ -91,28 +112,6 @@
       "recommended_next_action": "Use a devkit watch lane for read-only drift detection, then apply package changes with explicit approval.",
       "suggested_commands": [
         "python3 tools/aurora_devkit.py --install-plan"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-pnpm-is-error",
-      "title": "pnpm is error.",
-      "category": "developer_tooling",
-      "priority": "P2",
-      "confidence": "high",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::tool_pnpm_error"
-      ],
-      "source": "devkit",
-      "recommended_next_action": "Recommended package manager for large JS workspaces when activated through corepack.",
-      "suggested_commands": [
-        "corepack enable pnpm",
-        "corepack prepare pnpm@latest --activate"
       ],
       "approval_required": true,
       "mutation_posture": "advisory_only",
@@ -260,8 +259,8 @@
       "status": "open"
     },
     {
-      "recommendation_id": "aurora-rec-p2-git_status-git_state-root-worktree-has-4-in-progress-paths",
-      "title": "Root worktree has 4 in-progress paths",
+      "recommendation_id": "aurora-rec-p2-git_status-git_state-root-worktree-has-6-in-progress-paths",
+      "title": "Root worktree has 6 in-progress paths",
       "category": "git_state",
       "priority": "P2",
       "confidence": "high",
@@ -269,9 +268,11 @@
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
         "catalog/session_claims/.claude_auto_claim",
-        "reports/analysis/aurora_recommendations_latest.json",
-        "tests/test_aurora_recommendation_engine.py",
-        "tools/aurora_recommendation_engine.py"
+        "catalog/session_state.json",
+        "reports/analysis/aurora_devkit_latest.json",
+        "reports/analysis/aurora_mission_control_latest.json",
+        "tests/test_session_state_io.py",
+        "tools/session_state_io.py"
       ],
       "source": "git_status",
       "recommended_next_action": "Review ownership before staging or committing. Treat existing command-grammar, integration-gate, and recommendation-engine edits as separate root-control-plane work unless intentionally combined.",

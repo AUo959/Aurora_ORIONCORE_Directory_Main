@@ -126,6 +126,22 @@ class TestMutations(unittest.TestCase):
         self.assertEqual(state["last_session_summary"], "Manual summary.")
         self.assertTrue(state["_summary_set_manually"])
 
+    def test_set_tool_version_updates_map(self):
+        rc = sio.op_set_tool_version(self._ns(tool="node", version="26.5.0"))
+        self.assertEqual(rc, 0)
+        state = json.loads(self.path.read_text())
+        self.assertEqual(state["tool_versions"]["node"], "26.5.0")
+        self.assertEqual(state["last_platform"], "claude-code")
+
+    def test_set_tool_version_refuses_non_object(self):
+        state = _valid_state()
+        state["tool_versions"] = []
+        self.path.write_text(sio.dumps_canonical(state))
+        rc = sio.op_set_tool_version(self._ns(tool="node", version="26.5.0"))
+        self.assertEqual(rc, 1)
+        state = json.loads(self.path.read_text())
+        self.assertEqual(state["tool_versions"], [])
+
     def test_suspend_active(self):
         rc = sio.op_suspend_active(self._ns(
             next_step="resume_here", next_step_detail="Cold start notes."))
