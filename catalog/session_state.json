@@ -276,6 +276,18 @@
   },
   "recent_commits": [
     {
+      "sha": "d89e5b1",
+      "date": "2026-07-09",
+      "platform": "codex",
+      "summary": "fix(devkit): restore node toolchain"
+    },
+    {
+      "sha": "39fcac8",
+      "date": "2026-07-09",
+      "platform": "codex",
+      "summary": "chore(session): record project focus announcement work"
+    },
+    {
       "sha": "3e7600f",
       "date": "2026-07-09",
       "platform": "codex",
@@ -322,18 +334,6 @@
       "date": "2026-07-06",
       "platform": "claude-code",
       "summary": "chore(session): record PR backlog resolution"
-    },
-    {
-      "sha": "5b09fc5",
-      "date": "2026-07-06",
-      "platform": "claude-code",
-      "summary": "feat(sim): emit a full L3 narrative reconstruction from the hour-aboard harness (#36)"
-    },
-    {
-      "sha": "49cc4db",
-      "date": "2026-07-06",
-      "platform": "claude-code",
-      "summary": "fix(sim): make crew_life roster resolution layout-flexible (#34)"
     }
   ],
   "security_events": [
@@ -363,7 +363,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "3e7600f1f2ebdfb2b204f35869d2af530b37b92c",
+    "main_sha": "d89e5b149b6ae7bf0e28260a91c8961581ad73c6",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
