@@ -1,121 +1,154 @@
 {
-  "schema_version": 1,
-  "updated_at": "2026-03-10",
-  "objects": [
-    {
-      "object_id": "recovered-key-aurora-pdk-001",
-      "category": "recovered_key_material",
-      "status": "open",
-      "priority": "high",
-      "canonical_name": "AURORA-PDK-001",
-      "title": "Recovered Aurora digital key",
-      "resolution_goal": "Determine which archive surfaces this key unlocks and whether it functions as an activation credential, a content decryption key, or both.",
-      "secret_handling": {
-        "raw_material_policy": "Do not duplicate the full key outside the original source files.",
-        "source_material_contains_full_key": true
-      },
-      "provenance": {
-        "source_files": [
-          "GUI_Cloudhub/aurora_digital_key 2.txt",
-          "Au_Archive_42_45/aurora_digital_key.txt",
-          "Complete Archive 4_19 copy/aurora_digital_key.txt"
-        ],
-        "related_files": [
-          "GUI_Cloudhub/aurora_digital_key_readable 2.json",
-          "Au_Archive_412_417/Riverthread_808_Aurora_Activation_Guide.md",
-          "reports/analysis/BLANK_FILE_RECOVERY_AUDIT__2026-03-10.md"
-        ]
-      },
-      "recovered_properties": {
-        "issued_to": "The Pilot",
-        "command_code_required": "Picard_Delta_3",
-        "encoding": "base64-url-safe",
-        "decoded_length_bytes": 32,
-        "decoded_sha256": "068a094ddbfe21cc97b7658f7fd7305aad29dd5979286618863a8576250ffa56",
-        "preview": "uzOtxx5Sjl..._fEzk="
-      },
-      "current_findings": [
-        "The recovered key is structurally valid and decodes to 32 bytes.",
-        "It does not decrypt the sample AES-sealed payload in GUI_Cloudhub/ENCRYPTION_CORE_BUNDLE.zip.",
-        "It may be an activation or authorization key rather than the archive dev seal key.",
-        "It is now paired with a recovery baseline that includes the preferred legacy instruction profile, safety lock, continuity seal, and boot manifest."
-      ],
-      "blockers": [
-        "Archive symbolicSeal.js is syntactically broken on current Node because of invalid multiline string literals.",
-        "No directly matching encrypted payload has yet been found that proves AURORA-PDK-001 is the active content key."
-      ],
-      "next_actions": [
-        "Search older archives for payloads explicitly bound to AURORA-PDK-001.",
-        "Test the key against additional recovered payloads that sit closer to the Riverthread 808 activation stack than the GUI_Cloudhub AES sample."
-      ]
-    },
-    {
-      "object_id": "resolve-canonical-aurora-instruction-profile",
-      "category": "activation_component_resolution",
-      "status": "baseline_assembled",
-      "priority": "medium",
-      "canonical_name": "aurora_instruction_profile.json",
-      "title": "Resolve canonical Aurora instruction profile",
-      "resolution_goal": "Determine which recovered instruction profile belongs to the Riverthread 808 activation flow so the recovered key can be evaluated in its intended stack.",
-      "provenance": {
-        "source_files": [
-          "Au_Archive_412_417/Riverthread_808_Aurora_Activation_Guide.md"
-        ],
-        "related_files": [
-          "Unzipped Archives/Archy_Continuity_Thread_v1.0/aurora_safety_lock.json",
-          "reports/analysis/BLANK_FILE_RECOVERY_AUDIT__2026-03-10.md"
-        ]
-      },
-      "preferred_candidate": {
-        "path": "Complete Archive 4_19 copy/aurora_instruction_profile.json",
-        "family_normalized_sha256": "f9b2e59a0d51cefb81abe4d59cc963bac7bd03dd8c703279d2431103545b7c81",
-        "paired_safety_lock_source": "Complete Archive 4_19 copy/Archy_Continuity_Thread_v1.0.zip::aurora_safety_lock.json"
-      },
-      "current_findings": [
-        "The activation guide explicitly requires aurora_instruction_profile.json.",
-        "A matching aurora_safety_lock.json was recovered from Complete Archive 4_19 copy/Archy_Continuity_Thread_v1.0.zip.",
-        "Legacy 2025 instruction-profile candidates collapse to one logical object.",
-        "The preferred recovery copy is Complete Archive 4_19 copy/aurora_instruction_profile.json because it is co-located with the activation guide and recovered key material.",
-        "The 2026 mesh/runtime profile is a different generation and should not be used for the Riverthread 808 activation path.",
-        "The published ZIPWIZ instruction-profile hash does not match any recovered surviving copy."
-      ],
-      "next_actions": [
-        "Use the preferred candidate and paired safety lock as the activation-stack recovery baseline.",
-        "Keep the ZIPWIZ hash mismatch open as provenance drift until a matching historical serialization is found."
-      ]
-    },
-    {
-      "object_id": "zipwiz-instruction-profile-hash-drift",
-      "category": "provenance_drift",
-      "status": "open",
-      "priority": "medium",
-      "canonical_name": "ZIPWIZ instruction-profile hash drift",
-      "title": "Resolve ZIPWIZ instruction-profile hash drift",
-      "resolution_goal": "Determine why the ZIPWIZ-published instruction-profile SHA256 does not match any recovered surviving instruction-profile copy.",
-      "provenance": {
-        "source_files": [
-          "reports/analysis/non_can_reports/ZIPWIZ_CHAMBER_TECHNICAL_REFERENCE.md"
-        ],
-        "related_files": [
-          "Complete Archive 4_19 copy/aurora_instruction_profile.json",
-          "catalog/riverthread_808_recovery_capsule__2026-03-10.json",
-          "reports/analysis/AURORA_ACTIVATION_STACK_PROFILE_RESOLUTION__2026-03-10.md"
-        ]
-      },
-      "published_hash": "31c9abff15273829c85ea2c0668087b365710f60060793c2f5e4d5f757afba49",
-      "recovered_family_hashes": {
-        "legacy_raw_sha256": "b0d985cf9660806ec37eba8f3ff72161b69bdae698773656e0071e2d10bcae77",
-        "legacy_family_normalized_sha256": "f9b2e59a0d51cefb81abe4d59cc963bac7bd03dd8c703279d2431103545b7c81",
-        "zipwiz_docs_raw_sha256": "4c92e8b03412d0e7cce9a4e652680e4346ac8efa7762dc9463ff430ab811fe8a"
-      },
-      "current_findings": [
-        "The ZIPWIZ technical reference publishes an instruction-profile hash that does not match the surviving legacy file copies.",
-        "The ZIPWIZ docs copy normalizes to the same logical content as the other legacy copies, so the mismatch likely comes from serialization drift or a missing historical copy."
-      ],
-      "next_actions": [
-        "Search archive surfaces for another serialized instruction-profile export that matches the published ZIPWIZ hash.",
-        "If no match is found, record the ZIPWIZ hash as unresolved provenance drift rather than a live competing profile."
-      ]
-    }
-  ]
+ "schema_version": 1,
+ "updated_at": "2026-07-10",
+ "objects": [
+  {
+   "object_id": "recovered-key-aurora-pdk-001",
+   "category": "recovered_key_material",
+   "status": "resolved",
+   "priority": "high",
+   "canonical_name": "AURORA-PDK-001",
+   "title": "Recovered Aurora digital key",
+   "resolution_goal": "Determine which archive surfaces this key unlocks and whether it functions as an activation credential, a content decryption key, or both.",
+   "secret_handling": {
+    "raw_material_policy": "Do not duplicate the full key outside the original source files.",
+    "source_material_contains_full_key": true
+   },
+   "provenance": {
+    "source_files": [
+     "GUI_Cloudhub/aurora_digital_key 2.txt",
+     "Au_Archive_42_45/aurora_digital_key.txt",
+     "Complete Archive 4_19 copy/aurora_digital_key.txt"
+    ],
+    "related_files": [
+     "GUI_Cloudhub/aurora_digital_key_readable 2.json",
+     "Au_Archive_412_417/Riverthread_808_Aurora_Activation_Guide.md",
+     "reports/analysis/BLANK_FILE_RECOVERY_AUDIT__2026-03-10.md"
+    ]
+   },
+   "recovered_properties": {
+    "issued_to": "The Pilot",
+    "command_code_required": "Picard_Delta_3",
+    "encoding": "base64-url-safe",
+    "decoded_length_bytes": 32,
+    "decoded_sha256": "068a094ddbfe21cc97b7658f7fd7305aad29dd5979286618863a8576250ffa56",
+    "preview": "uzOtxx5Sjl..._fEzk="
+   },
+   "current_findings": [
+    "The recovered key is structurally valid and decodes to 32 bytes.",
+    "It does not decrypt the sample AES-sealed payload in GUI_Cloudhub/ENCRYPTION_CORE_BUNDLE.zip.",
+    "It may be an activation or authorization key rather than the archive dev seal key.",
+    "It is now paired with a recovery baseline that includes the preferred legacy instruction profile, safety lock, continuity seal, and boot manifest."
+   ],
+   "blockers": [
+    "Archive symbolicSeal.js is syntactically broken on current Node because of invalid multiline string literals.",
+    "No directly matching encrypted payload has yet been found that proves AURORA-PDK-001 is the active content key."
+   ],
+   "next_actions": [
+    "(resolved) Treat AURORA-PDK-001 as the Riverthread 808 activation credential presented with command code Picard_Delta_3; do not expect AES content decryption.",
+    "Optional low-priority: repair symbolicSeal.js multiline-literal syntax if the archive seal tooling is needed later."
+   ],
+   "resolution": {
+    "date": "2026-07-10",
+    "by": "claude-code (Cowork)",
+    "determination": "activation/authorization credential — NOT a content decryption key",
+    "evidence": [
+     "Riverthread_808_Aurora_Activation_Guide.md: \"I, The Pilot, invoke Picard_Delta_3 with key AURORA-PDK-001. This unlocks Aurora’s sealed presence and confirms command authenticity.\" — symbolic auth via manual phrase, not decryption.",
+     "catalog/riverthread_808_recovery_capsule__2026-03-10.json activation_sequence.step_1: \"Present AURORA-PDK-001 using the manual phrase from the activation guide.\" Key is presented as an activation credential.",
+     "Capsule known_limits: \"AURORA-PDK-001 has not yet been proven to decrypt any recovered AES content payload.\"",
+     "Bound-payload search 2026-07-10: no encrypted payload anywhere in the workspace is bound to AURORA-PDK-001; the GUI_Cloudhub AES sample is not opened by it. Absence is expected for an auth credential."
+    ],
+    "confidence": "high for activation-credential role; content-key role disproven for all recovered payloads (cannot exclude a lost/unrecovered payload).",
+    "residual": "Archive symbolicSeal.js repair remains a separate low-priority tooling task; not required to determine the key role."
+   }
+  },
+  {
+   "object_id": "resolve-canonical-aurora-instruction-profile",
+   "category": "activation_component_resolution",
+   "status": "resolved",
+   "priority": "medium",
+   "canonical_name": "aurora_instruction_profile.json",
+   "title": "Resolve canonical Aurora instruction profile",
+   "resolution_goal": "Determine which recovered instruction profile belongs to the Riverthread 808 activation flow so the recovered key can be evaluated in its intended stack.",
+   "provenance": {
+    "source_files": [
+     "Au_Archive_412_417/Riverthread_808_Aurora_Activation_Guide.md"
+    ],
+    "related_files": [
+     "Unzipped Archives/Archy_Continuity_Thread_v1.0/aurora_safety_lock.json",
+     "reports/analysis/BLANK_FILE_RECOVERY_AUDIT__2026-03-10.md"
+    ]
+   },
+   "preferred_candidate": {
+    "path": "Complete Archive 4_19 copy/aurora_instruction_profile.json",
+    "family_normalized_sha256": "f9b2e59a0d51cefb81abe4d59cc963bac7bd03dd8c703279d2431103545b7c81",
+    "paired_safety_lock_source": "Complete Archive 4_19 copy/Archy_Continuity_Thread_v1.0.zip::aurora_safety_lock.json"
+   },
+   "current_findings": [
+    "The activation guide explicitly requires aurora_instruction_profile.json.",
+    "A matching aurora_safety_lock.json was recovered from Complete Archive 4_19 copy/Archy_Continuity_Thread_v1.0.zip.",
+    "Legacy 2025 instruction-profile candidates collapse to one logical object.",
+    "The preferred recovery copy is Complete Archive 4_19 copy/aurora_instruction_profile.json because it is co-located with the activation guide and recovered key material.",
+    "The 2026 mesh/runtime profile is a different generation and should not be used for the Riverthread 808 activation path.",
+    "The published ZIPWIZ instruction-profile hash does not match any recovered surviving copy."
+   ],
+   "next_actions": [
+    "(resolved) Adopt Complete Archive 4_19 copy/aurora_instruction_profile.json (+ paired safety lock) as the Riverthread 808 activation-stack instruction-profile baseline."
+   ],
+   "resolution": {
+    "date": "2026-07-10",
+    "by": "claude-code (Cowork)",
+    "determination": "Baseline verified and adopted.",
+    "evidence": [
+     "Preferred candidate archives/unzipped/Complete Archive 4_19 copy/aurora_instruction_profile.json exists; raw sha256 b0d985cf..., normalizes to family f9b2e59a... (matches preferred_candidate.family_normalized_sha256).",
+     "All 6+ surviving legacy copies (loose and inside zips) normalize to the same logical profile f9b2e59a; the 2026 CloudBank mesh profile (raw 3a0cf0b1) is a distinct generation, correctly excluded from the Riverthread 808 path.",
+     "Paired safety lock aurora_safety_lock.json recovered from Complete Archive 4_19 copy/Archy_Continuity_Thread_v1.0.zip."
+    ],
+    "residual": "The ZIPWIZ published-hash mismatch is tracked separately as zipwiz-instruction-profile-hash-drift (now resolved-as-drift)."
+   }
+  },
+  {
+   "object_id": "zipwiz-instruction-profile-hash-drift",
+   "category": "provenance_drift",
+   "status": "resolved_as_drift",
+   "priority": "medium",
+   "canonical_name": "ZIPWIZ instruction-profile hash drift",
+   "title": "Resolve ZIPWIZ instruction-profile hash drift",
+   "resolution_goal": "Determine why the ZIPWIZ-published instruction-profile SHA256 does not match any recovered surviving instruction-profile copy.",
+   "provenance": {
+    "source_files": [
+     "reports/analysis/non_can_reports/ZIPWIZ_CHAMBER_TECHNICAL_REFERENCE.md"
+    ],
+    "related_files": [
+     "Complete Archive 4_19 copy/aurora_instruction_profile.json",
+     "catalog/riverthread_808_recovery_capsule__2026-03-10.json",
+     "reports/analysis/AURORA_ACTIVATION_STACK_PROFILE_RESOLUTION__2026-03-10.md"
+    ]
+   },
+   "published_hash": "31c9abff15273829c85ea2c0668087b365710f60060793c2f5e4d5f757afba49",
+   "recovered_family_hashes": {
+    "legacy_raw_sha256": "b0d985cf9660806ec37eba8f3ff72161b69bdae698773656e0071e2d10bcae77",
+    "legacy_family_normalized_sha256": "f9b2e59a0d51cefb81abe4d59cc963bac7bd03dd8c703279d2431103545b7c81",
+    "zipwiz_docs_raw_sha256": "4c92e8b03412d0e7cce9a4e652680e4346ac8efa7762dc9463ff430ab811fe8a"
+   },
+   "current_findings": [
+    "The ZIPWIZ technical reference publishes an instruction-profile hash that does not match the surviving legacy file copies.",
+    "The ZIPWIZ docs copy normalizes to the same logical content as the other legacy copies, so the mismatch likely comes from serialization drift or a missing historical copy."
+   ],
+   "next_actions": [
+    "(resolved-as-drift) Treat 31c9abff... as historical provenance drift, not a competing live profile. Reopen only if a serialization hashing to it is later recovered."
+   ],
+   "resolution": {
+    "date": "2026-07-10",
+    "by": "claude-code (Cowork)",
+    "determination": "Confirmed provenance drift — the ZIPWIZ-published hash matches no surviving serialization.",
+    "evidence": [
+     "Exhaustive hash sweep 2026-07-10 of every aurora_instruction_profile.json (loose AND inside all ZIPWIZ/Archy/Aurora zips): all serializations hash to raw b0d985cf... or 4c92e8b0..., both normalizing to logical f9b2e59a...",
+     "No copy anywhere hashes to the published 31c9abff...; the published value appears only as a reference inside ZIPWIZ docs (Archy_Core_Consolidated_v1.json / ZIPWIZ_CHAMBER_TECHNICAL_REFERENCE.md), not as any live file.",
+     "Therefore the published hash reflects a serialization that no longer survives (serialization drift or a lost historical copy), not a live competing profile."
+    ],
+    "residual": "Recorded as unresolved provenance drift per the object next_action fallback; reopen only if a matching historical serialization surfaces."
+   }
+  }
+ ]
 }

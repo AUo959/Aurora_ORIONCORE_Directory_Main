@@ -36,15 +36,11 @@ Status legend: 🟢 landed · 🟡 queued · 🔵 newly surfaced (un-triaged) ·
 
 Source: `catalog/recovery_objects_to_resolve.json`
 
-| # | Object | Priority | Status | Next gate |
+| # | Object | Priority | Status | Outcome (triaged 2026-07-10) |
 |---|--------|----------|--------|-----------|
-| R1 | 🟡 **AURORA-PDK-001 recovered key** (`recovered-key-aurora-pdk-001`) | high | open | Find a payload explicitly bound to AURORA-PDK-001. Key is structurally valid (32 bytes, base64url) but does **not** decrypt the GUI_Cloudhub AES sample — may be an activation/authorization key, not the content key. Blocked partly by broken `symbolicSeal.js`. |
-| R2 | 🟡 **Canonical Aurora instruction profile** (`resolve-canonical-aurora-instruction-profile`) | medium | baseline_assembled | Adopt preferred candidate + paired safety lock as the activation-stack recovery baseline. |
-| R3 | 🟡 **ZIPWIZ instruction-profile hash drift** (`zipwiz-instruction-profile-hash-drift`) | medium | open | Locate a serialized instruction-profile export matching the published hash to resolve provenance drift. |
-
-> R1 handling note: full key material must not be duplicated outside the original
-> source files (per object `secret_handling`). Cross-reference candidate
-> `intake/text_conversation_PDK001.txt` (indexer score 25) as a related surface.
+| R1 | 🟢 **AURORA-PDK-001 recovered key** (`recovered-key-aurora-pdk-001`) | high | **resolved** | **Determined: activation/authorization credential, not a content-decryption key.** Evidence: the activation guide ("invoke Picard_Delta_3 with key AURORA-PDK-001 … unlocks Aurora's sealed presence and confirms command authenticity" — manual-phrase auth, not decryption) and the recovery capsule (`activation_sequence.step_1` presents the key; `known_limits` records it has never decrypted any AES payload). A 2026-07-10 bound-payload search found **no** encrypted payload anywhere bound to PDK-001 — expected for an auth credential. Content-key hypothesis disproven for all recovered payloads (a lost/unrecovered payload can't be fully excluded). Residual: `symbolicSeal.js` repair is a separate low-priority tooling task, not needed for the role determination. Key material handled as hashes/paths only. |
+| R2 | 🟢 **Canonical Aurora instruction profile** (`resolve-canonical-aurora-instruction-profile`) | medium | **resolved** | **Baseline verified and adopted.** Preferred candidate `Complete Archive 4_19 copy/aurora_instruction_profile.json` exists (raw `b0d985cf…` → normalizes to family `f9b2e59a…`, matching the recorded target); all 6+ legacy copies normalize to the same logical profile; the 2026 CloudBank mesh profile (`3a0cf0b1…`) is a distinct generation, correctly excluded from the Riverthread 808 path. Paired safety lock recovered. Only residual was the ZIPWIZ hash mismatch → R3. |
+| R3 | 🟢 **ZIPWIZ instruction-profile hash drift** (`zipwiz-instruction-profile-hash-drift`) | medium | **resolved_as_drift** | **Confirmed provenance drift.** Exhaustive hash sweep (every `aurora_instruction_profile.json`, loose **and** inside all ZIPWIZ/Archy/Aurora zips) → all hash to `b0d985cf…` or `4c92e8b0…`, both normalizing to `f9b2e59a…`; **none** matches the published `31c9abff…`, which appears only as a reference inside ZIPWIZ docs. The published hash reflects a serialization that no longer survives — historical drift, not a live competing profile. Reopen only if a matching serialization is later recovered. |
 
 ---
 

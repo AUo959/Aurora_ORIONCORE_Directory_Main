@@ -258,9 +258,9 @@
       "detail": "N8 recovered 2026-07-10: foundational narrative-engine spec placed tracked at docs/ORION__SPEC__NARRATIVE_ENGINE__PARAMETERS_TO_NARRATIVE_CORE__v0.1__2026-04-12.md (byte-identical, sha a4aedede) + code-grounded reconciliation map docs/ORION__SPEC__NARRATIVE_ENGINE__RECONCILIATION__2026-07-10.md. Finding: validation mode + CanonicalState + verdicts built (phase-1 CloudBank); expansion/translation gated at phase-1 boundary; state_builder is phase-two target. Remaining schema-diff/phase-two follow-ups belong to active task narrative-promotion-continuation-2026-06."
     }
   ],
-  "last_updated": "2026-07-10T20:51:44Z",
+  "last_updated": "2026-07-10T21:36:58Z",
   "last_platform": "claude-code",
-  "last_session_summary": "N8 narrative-engine spec recovered: foundational spec (untracked gitignored loose file) placed tracked in docs/ alongside ADR + phase-two contract, with code-grounded reconciliation map (validation built phase-1, expansion/translation gated, state_builder = phase-two). Manifest + path_aliases reconciled; loose original removed. Ties into suspended active task narrative-promotion-continuation-2026-06.",
+  "last_session_summary": "Tracked recovery objects R1-R3 resolved: R1 AURORA-PDK-001 determined to be an activation/authorization credential (not a content-decryption key) via activation guide + recovery capsule + exhaustive bound-payload search; R2 canonical instruction-profile baseline verified/adopted (Complete Archive 4_19 copy, normalizes f9b2e59a); R3 ZIPWIZ hash drift confirmed as historical provenance drift (exhaustive hash sweep of all loose+zipped profiles; none match published 31c9abff). Key material handled as hashes only.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
