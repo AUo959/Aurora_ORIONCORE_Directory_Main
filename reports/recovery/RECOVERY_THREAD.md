@@ -41,9 +41,19 @@ promotes via canon-reconciler; not silently canonized). Complements the recovere
 narrative-engine spec. CanonRec is a separate nested repo — that commit
 (`16fc171`) needs a separate push to `AUo959/CanonRec`.
 
-Four other archive-only artifacts (galactic-union ships module, meta-reflection
-layer, unified-process principle, STW patch spec) catalogued as low-priority in
-the salvage capsule; all early-gen and plausibly superseded. Full detail:
+**Correction (content-based, same day).** The above was filename-derived and
+undercounted. A content-hash diff (live-repo index of 7,317 unique hashes vs the
+unpacked archive tree) found **450 archive code/spec files whose content is
+present nowhere live** — 294 JSON, 77 MD, 21 distinct Python modules (runtime
+loader, memory core, loom git-bridge, anchor validator, ZipWiz optimizer/bridge,
+benchmark/model tooling, …). A sampled fingerprint check confirmed several
+modules' distinctive symbols are genuinely absent from CloudBank source. So the
+archive is **not** "mostly explored"; SNPM was one recovery, but a substantial
+early-gen corpus remains. Caveat: 450 is an upper bound (includes reformatted
+landings + deliberately-superseded designs); real recoverable value needs
+per-module supersession assessment. Working set:
+`reports/recovery/data/archive_content_not_live__2026-07-10.tsv`; systematic
+triage queued as `archive-content-triage-450`. Full detail + methodology:
 `reports/recovery/SALVAGE_CAPSULE__archive_sweep__2026-07-10.md`.
 
 ---

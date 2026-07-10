@@ -52,16 +52,55 @@ canonized**; a short list is genuinely archive-only.
 - **1 genuine recovery:** SNPM, staged into CanonRec L2 (its own nested-repo
   commit; push separately). It is a distinct galaxy-scale narrative-plausibility
   mechanic, verified absent from all landed L2 canon.
-- **4 low-priority archive-only artifacts** catalogued for owner decision; each
-  needs a "check nested repos first" pass before any recovery, and all are
-  early-generation (v2.2.6b) and plausibly superseded.
+- **4 low-priority archive-only artifacts** catalogued for owner decision.
 - **Bulk of the zip surface is noise** (repo snapshots + third-party deps).
 
-## Recommended next steps
+## CORRECTION — content-based re-investigation (2026-07-10, later same day)
+
+The findings above were derived by **filename** matching, which is unsound for a
+completeness claim: it produces false negatives (content that landed under a
+different name) and false positives (same name, different content). Redone by
+**content**:
+
+- Built a content-hash index of all live-repo files (8,222 files → 7,317 unique
+  sha256), excluding `archives/`, `.git`, and dependency trees.
+- Hashed the unpacked archive code/spec tree (643 `.py/.json/.md/.yaml` files,
+  excluding repo snapshots + deps + `__MACOSX`).
+- **450 of 643 archive files have content that is byte-identically present
+  nowhere in the live repos** — not the 5 the filename skim implied.
+
+Breakdown of the 450: **294 JSON, 77 MD, 66 PY (21 unique module names), 13 YAML**.
+Full inventory: `reports/recovery/data/archive_content_not_live__2026-07-10.tsv`;
+module list: `reports/recovery/data/archive_py_modules_not_live__2026-07-10.txt`.
+
+**Sampled content-fingerprint check** (distinctive class/def symbols vs CloudBank
+`src/`): `loom_gitbridge_wiring.py` (`LoomEventRegistry`), `anchor_validator.py`
+(`validate_anchor_integrity`), and `gumas_memory_core.py` (`MemoryItem`) all have
+their distinctive top-level symbol **absent from CloudBank source** — i.e. genuine
+un-landed code logic, not just renamed copies.
+
+**Correction to the record:** the earlier "one genuine recovery (SNPM); archive
+mostly explored; diminishing returns" conclusion was **wrong and premature**.
+There is a substantial early-generation code/spec corpus (~21 distinct Python
+modules — runtime loader, memory core, loom git-bridge, anchor validator, ZipWiz
+optimizer/bridge, benchmark/model tooling — plus hundreds of JSON/MD) whose
+content is not present in the live repos.
+
+**Caveat (still needs per-item judgment):** "content not byte-identically live"
+is an **upper bound** on unrecovered material. It includes (a) reformatted or
+lightly-edited versions of content that *did* land, and (b) early-gen designs that
+were deliberately superseded by CloudBank's current implementation. The genuine
+*recoverable-value* count is smaller than 450 and requires a per-module
+supersession assessment (does the current CloudBank implementation already cover
+this behavior?). What the content pass establishes is only that **recovery is not
+complete** and cannot be judged complete from filenames.
+
+## Recommended next steps (revised)
 
 1. Owner review of the SNPM staging note; promote via canon-reconciler if wanted.
-2. Optional: quick supersession check on the 4 archive-only artifacts (ships
-   module, meta-reflection, unified-process principle, STW patch) — recover only
-   any that are both non-duplicate and still relevant.
-3. The remaining early-gen bundles are unlikely to hold much beyond duplicates;
-   further digging has diminishing returns given the observed hit rate.
+2. **Systematic content-based triage** of the 450-file inventory, batched by
+   cluster (start with the 21 Python modules — highest signal), each assessed for
+   supersession against current CloudBank/CanonRec by symbol/behavior, not name.
+   Queued as `archive-content-triage-450`.
+3. Treat the `.tsv` inventory as the working set; retire the filename-based
+   "mostly explored" framing.

@@ -258,9 +258,9 @@
       "detail": "N8 recovered 2026-07-10: foundational narrative-engine spec placed tracked at docs/ORION__SPEC__NARRATIVE_ENGINE__PARAMETERS_TO_NARRATIVE_CORE__v0.1__2026-04-12.md (byte-identical, sha a4aedede) + code-grounded reconciliation map docs/ORION__SPEC__NARRATIVE_ENGINE__RECONCILIATION__2026-07-10.md. Finding: validation mode + CanonicalState + verdicts built (phase-1 CloudBank); expansion/translation gated at phase-1 boundary; state_builder is phase-two target. Remaining schema-diff/phase-two follow-ups belong to active task narrative-promotion-continuation-2026-06."
     }
   ],
-  "last_updated": "2026-07-10T22:07:21Z",
+  "last_updated": "2026-07-10T22:17:55Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Deeper archive salvage sweep (605 zips, indexer blind spot): bulk is noise (repo snapshots + deps); early-gen v2.2.6b worldbuilding mostly already in CanonRec L2. One genuine recovery: SNPM (Scalable Narrative Probability Model) \u2014 galaxy-scale narrative-plausibility mechanic, archive-only, absent from all landed L2 \u2014 staged byte-identical to CanonRec canon/L2/mechanics/ with reconciliation note (NOT promoted; CanonRec commit 16fc171 needs separate push to AUo959/CanonRec). 4 other archive-only artifacts catalogued low-priority in salvage capsule. Complements narrative-engine work.",
+  "last_session_summary": "CORRECTION to archive salvage: filename-based sweep undercounted. Content-hash diff (live index 7317 hashes vs unpacked archive tree) found 450 archive code/spec files with no byte-identical content live (294 json, 77 md, 21 distinct py modules); sampled fingerprint check confirms several modules' logic genuinely absent from CloudBank. Archive NOT mostly-explored; SNPM was one recovery, substantial early-gen corpus remains. Inventory saved; systematic triage queued (archive-content-triage-450). GitHub Desktop now has all 3 repos (root+CloudBank+CanonRec); SNPM pushed to AUo959/CanonRec (16fc171).",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -403,6 +403,12 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "Owner review of staged SNPM (Scalable Narrative Probability Model) at CanonRec canon/L2/mechanics/ (see SNPM__RECONCILIATION_NOTE__2026-07-10). If accepted, route aurora-canon-reconciler -> CANON_PROMOTE and cross-link into 03_galactic_union_mechanics_and_models.md + narrative-engine input relationship. Also push CanonRec commit 16fc171 to AUo959/CanonRec."
+    },
+    {
+      "id": "archive-content-triage-450",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Systematic CONTENT-based triage of the 450 archive files whose content is not present in the live repos (reports/recovery/data/archive_content_not_live__2026-07-10.tsv). Prior filename-based sweep undercounted (found 5). Start with the 21 distinct Python modules (runtime loader, gumas memory core, loom git-bridge, anchor validator, ZipWiz optimizer/bridge, etc.); assess each for supersession against current CloudBank/CanonRec by symbol/behavior not name. 450 is an upper bound (reformatted landings + superseded early-gen designs included)."
     }
   ],
   "known_state": {
