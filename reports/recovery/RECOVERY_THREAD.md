@@ -85,11 +85,11 @@ needs an owner lane decision before any migration.
 
 | # | Candidate | Score | Self-declared layer | Proposed lane / next gate |
 |---|-----------|-------|---------------------|---------------------------|
-| N1 | 🔵 `SENSOR ARRAY SPECIFICATION v0 3 0.md` (1,741 ln) + `PR SENSOR ARRAY SPEC v0 3 0 DELTA.md` (delta) | 24 | L1+L2+L3 | **Not in git.** June "sensor-array-canon-routing" task completed but these specs never landed → publication-debt candidate. Route: root spec reconciliation; confirm whether superseded by what landed. |
+| N1 | 🟢 **RESOLVED (triaged 2026-07-10)** — `SENSOR ARRAY SPECIFICATION v0 3 0.md` (1,741 ln) + `PR SENSOR ARRAY SPEC v0 3 0 DELTA.md` (delta) | 24 | L1+L2+L3 | **Not unrecovered work — already routed.** The root loose files are byte-identical (sha `8a35d68e…`) to the canon copies committed in the **CanonRec nested repo** (`GUMAS_SIM_2.5/CanonRec/canon/L3/sensor_array/`, commit `3a6b0c4`, with reconciliation note) and implemented in CloudBank `src/sensors` + `tests/sensors` (47/47 tests, PR #1005). The earlier "not in git" flag was a false positive from checking root-repo tracking only. **Disposition: cleanable intake residue** — recommend removing/relocating the two root loose duplicates; no recovery action needed. |
 | N2 | 🔵 `intake/Aurora_CloudBank_Review_R1_R10.md` (323 ln) | 25 | CloudBank | 10-round remediation plan for `aurora-cloudbank-symbolic`. Check which rounds are already executed vs outstanding; route residuals to CloudBank issue broker. |
 | N3 | 🔵 `intake/threadcore_symbiosis_delta_manifest.md` (373 ln) | 20 | L3 / THREADCORE | Validate with `threadcore-governor` before any promotion; check anchor/ethics integrity. |
 | N4 | 🔵 `QGIA_Runtime_OnePager.md` (406 ln) | 22 | QGIA | Route to `qgia-knowledge-library-main` / `qgia-knowledge-spine-main`; reconcile with landed QGIA surfaces (see R13 dirty tree). |
-| N5 | 🔵 `SPEC__SALVAGE_OPERATIONS__v0_1_0.md` (89 ln) | 20 | L1 doctrine | Root control-plane doctrine tied to the Sensor Array (N1). Route with N1. |
+| N5 | 🟢 **RESOLVED (triaged 2026-07-10)** — `SPEC__SALVAGE_OPERATIONS__v0_1_0.md` (89 ln) | 20 | L1 doctrine | Same story as N1: byte-identical to the canon copy committed in CanonRec (`canon/L1/station/`, commit `9d98d49`). **Disposition: cleanable intake residue**, no recovery action needed. |
 | N6 | 🔵 `intake/TOBIAS_QIN_CHARACTER_PROFILE.md` (546 ln) | 23 | L2/L3 narrative | Intake-side draft, self-declared "not canon-promoted." Route to `aurora-canon-reconciler` for drift/duplicate check. |
 | N7 | 🔵 `intake/aurora_scaffold_nexus_meta_narrative.md` (1,193 ln) | 23 | narrative/continuity | `aurora-canon-reconciler`; large — budget a dedicated pass. |
 | N8 | 🔵 `narrative_engine_spec_parameters_to_narrative_core_v_0.md` (6,721 ln) | 21 | L2/L3 narrative core | Largest single find. Split review; reconcile against narrative-layer promotion ADR (`docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md`). |
@@ -104,12 +104,24 @@ secret/key material 30. Future passes should sweep these by signal cluster.
 
 ## 5. Next actions
 
-1. Owner assigns lanes for N1–N9 (archive / CloudBank / CanonRec / reject).
-2. N1 + N5 (sensor array + salvage doctrine) look like the cleanest next
-   recovery — self-contained specs, one publication-debt gap, no security review.
-3. R1 (PDK-001) is highest-priority tracked object but blocked; needs a bound
+1. **N1 + N5 triaged 2026-07-10 → RESOLVED (already routed, not recovery).** Both
+   were false positives: byte-identical to canon copies already committed in the
+   CanonRec nested repo and, for the sensor array, implemented in CloudBank
+   (PR #1005). Lesson for future search passes: check nested-repo tracking
+   (CanonRec, CloudBank) and CloudBank PR history, not just root-repo
+   `git ls-files`, before flagging a loose file as unrecovered.
+2. **Optional cleanup:** the root loose duplicates
+   (`SENSOR ARRAY SPECIFICATION v0 3 0.md`, `PR SENSOR ARRAY SPEC v0 3 0 DELTA.md`,
+   `SPEC__SALVAGE_OPERATIONS__v0_1_0.md`) are intake residue safe to remove or
+   relocate to a processed-intake area. They are `.gitignore`-excluded, so this
+   is housekeeping, not a canon change.
+3. Owner assigns lanes for the remaining un-triaged finds **N2, N3, N4, N6, N7,
+   N8, N9** (archive / CloudBank / CanonRec / reject). Next cleanest candidate:
+   N9 (preserved Codex WIP mesh-router test — small, verifiable against current
+   CloudBank code).
+4. R1 (PDK-001) is highest-priority tracked object but blocked; needs a bound
    payload before it can advance.
-4. Regenerate the indexer report (it predates the P7 landing) before the next
+5. Regenerate the indexer report (it predates the P7 landing) before the next
    search pass: `python3 tools/workspace_recovery_index.py --persist-report`.
 
 ---
