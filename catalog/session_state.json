@@ -127,7 +127,7 @@
     "repo": "root + aurora-cloudbank-symbolic-main",
     "description": "Continue the Aurora-first narrative-layer promotion per the ADR.",
     "started_at": "2026-06-10T00:00:00Z",
-    "updated_at": "2026-07-09T18:13:47Z",
+    "updated_at": "2026-07-10T20:57:40Z",
     "context_files": [
       "docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md",
       "reports/recovered_canon/README.md",
@@ -135,7 +135,7 @@
       "reports/analysis/unlanded_work_audit__2026-06-10.md"
     ],
     "next_step": "owner_review_or_merge_pr1183_then_continue_narrative_promotion",
-    "next_step_detail": "CloudBank PR #1183 is no longer draft and is ready for owner review/merge. Pushed e7b6cf06 to codex/narrative-phase2-evidence-2026-07-04 from /private/tmp/cloudbank-pr1183-canonicalize. Fix cleared 4 Codacy findings by factoring narrative helpers/tests and cleared Vercel by adding the proven Node 22/.vercelignore backend-surface exclusion. Remote final: mergeStateStatus CLEAN; Codacy, Vercel, CI Check, CodeQL, SonarCloud, GitGuardian, Kubernetes, branch-protection checks green; only intentional skips remain."
+    "next_step_detail": "VERIFIED 2026-07-10 (Cowork): PR #1183 branch codex/narrative-phase2-evidence-2026-07-04 is on origin, 3 commits ahead of origin/main (b0637fa4 feat phase-two evidence bundle contract; c37a2a1a stabil [full handoff: catalog/handoffs/20260710T205740Z-claude-code-owner-review-or-merge-pr1183-then-continue-narra.md]"
   },
   "task_queue": [],
   "completed_tasks": [
