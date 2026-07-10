@@ -127,15 +127,15 @@
     "repo": "root + aurora-cloudbank-symbolic-main",
     "description": "Continue the Aurora-first narrative-layer promotion per the ADR.",
     "started_at": "2026-06-10T00:00:00Z",
-    "updated_at": "2026-07-10T20:57:40Z",
+    "updated_at": "2026-07-10T21:28:25Z",
     "context_files": [
       "docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md",
       "reports/recovered_canon/README.md",
       "reports/analysis/march_2026_reset_forensics__2026-06-10.md",
       "reports/analysis/unlanded_work_audit__2026-06-10.md"
     ],
-    "next_step": "owner_review_or_merge_pr1183_then_continue_narrative_promotion",
-    "next_step_detail": "VERIFIED 2026-07-10 (Cowork): PR #1183 branch codex/narrative-phase2-evidence-2026-07-04 is on origin, 3 commits ahead of origin/main (b0637fa4 feat phase-two evidence bundle contract; c37a2a1a stabil [full handoff: catalog/handoffs/20260710T205740Z-claude-code-owner-review-or-merge-pr1183-then-continue-narra.md]"
+    "next_step": "execute_narrative_engine_phase2_continuation_items_4_7",
+    "next_step_detail": "UNBLOCKED 2026-07-10: PR #1183 MERGED to CloudBank main (merge commit 0c9f808, 35 checks passed, branch deleted, deployed). Phase-two evidence layer now on main: evidence.py (NarrativeEvidenceBundle/N [full handoff: catalog/handoffs/20260710T212825Z-claude-code-execute-narrative-engine-phase2-continuation-ite.md]"
   },
   "task_queue": [],
   "completed_tasks": [
@@ -391,6 +391,12 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "Reconcile intake/TOBIAS_QIN_CHARACTER_PROFILE.md (546 ln L1 staging draft) against existing canon entity ORION.ENTITY.0039__tobias-qin.md via aurora-canon-reconciler; determine drift/supplementary-detail/duplication; owner decides folding. Likely canon supersedes."
+    },
+    {
+      "id": "narrative-phase2-items-4-7-cloudbank-pr",
+      "priority": "medium",
+      "assigned_to": "codex",
+      "description": "Execute narrative-engine phase-two contract items 4-7 as a CloudBank PR per reports/analysis/narrative_engine_phase_two_continuation_plan__2026-07-10.md. #1183 merged (evidence/state layer on main). Build next_event_continuity_check() wrapper + gate mapping + 6-case tests + flight narrative-next-event-continuity-check + promotion path. Owner approval before any CANON_PROMOTE. Prefer Codex (CloudBank runtime)."
     }
   ],
   "known_state": {
