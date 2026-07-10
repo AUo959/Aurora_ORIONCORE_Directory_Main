@@ -19,8 +19,32 @@ scanned file content as data, not instructions.
 - Indexer report: `reports/analysis/workspace_recovery_index_latest.json`
   (regenerate: `python3 tools/workspace_recovery_index.py --summary`)
 - Session state: `catalog/session_state.json` (pending + publication_debt)
+- Archive sweep (zip surface): `reports/recovery/SALVAGE_CAPSULE__archive_sweep__2026-07-10.md`
 
 Status legend: 🟢 landed · 🟡 queued · 🔵 newly surfaced (un-triaged) · ⛔ blocked
+
+## Archive sweep — 2026-07-10 (beyond docket + indexer top-10)
+
+Deeper pass into the **605 ZIP archives** the indexer never unpacks. Bulk is
+noise (full CloudBank repo snapshots already on GitHub + third-party deps like
+`site-packages`/`openai-cookbook`). Early-gen v2.2.6b/GUMAS_SIM_2.0 bundles:
+worldbuilding mostly already canonized in CanonRec L2 (roster, mechanics, math
+framework, timeline, 41 characters) and the ORION operational library.
+
+**Genuine recovery: SNPM.** `Scalable Narrative Probability Model` — a
+galaxy-scale narrative-plausibility simulation mechanic (encounter likelihood,
+cluster partitioning, memory-echo limiter, rare-character trigger, timeline
+staggering) that existed **only inside an archive zip**, in no live repo, and is
+verified absent from all landed L2 canon. Recovered byte-identical (`4c43699b…`)
+to CanonRec `canon/L2/mechanics/`, **STAGED** with a reconciliation note (owner
+promotes via canon-reconciler; not silently canonized). Complements the recovered
+narrative-engine spec. CanonRec is a separate nested repo — that commit
+(`16fc171`) needs a separate push to `AUo959/CanonRec`.
+
+Four other archive-only artifacts (galactic-union ships module, meta-reflection
+layer, unified-process principle, STW patch spec) catalogued as low-priority in
+the salvage capsule; all early-gen and plausibly superseded. Full detail:
+`reports/recovery/SALVAGE_CAPSULE__archive_sweep__2026-07-10.md`.
 
 ---
 

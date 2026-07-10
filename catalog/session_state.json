@@ -258,9 +258,9 @@
       "detail": "N8 recovered 2026-07-10: foundational narrative-engine spec placed tracked at docs/ORION__SPEC__NARRATIVE_ENGINE__PARAMETERS_TO_NARRATIVE_CORE__v0.1__2026-04-12.md (byte-identical, sha a4aedede) + code-grounded reconciliation map docs/ORION__SPEC__NARRATIVE_ENGINE__RECONCILIATION__2026-07-10.md. Finding: validation mode + CanonicalState + verdicts built (phase-1 CloudBank); expansion/translation gated at phase-1 boundary; state_builder is phase-two target. Remaining schema-diff/phase-two follow-ups belong to active task narrative-promotion-continuation-2026-06."
     }
   ],
-  "last_updated": "2026-07-10T21:51:42Z",
+  "last_updated": "2026-07-10T22:07:21Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Salvage docket P1-P6 swept against CloudBank/CanonRec: P1 ORD policy family RESOLVED (landed on CloudBank main, ord_policy_engine.py byte-identical ac048ef9 to staged evidence, PR #1016 merged); P2 resolved backup_only (superseded by P1); P3 Quantum Agent Forge SUPERSEDED (CloudBank v3 impl+tests+docs on main); P5 governance pack EVIDENCE LOST (iCloud source deleted 2026-07-04, no in-repo copy; rules already in root policy); P4 ZipWiz bridge + P6 GUI CloudHub remain the only open docket items, both owner/security-gated.",
+  "last_session_summary": "Deeper archive salvage sweep (605 zips, indexer blind spot): bulk is noise (repo snapshots + deps); early-gen v2.2.6b worldbuilding mostly already in CanonRec L2. One genuine recovery: SNPM (Scalable Narrative Probability Model) \u2014 galaxy-scale narrative-plausibility mechanic, archive-only, absent from all landed L2 \u2014 staged byte-identical to CanonRec canon/L2/mechanics/ with reconciliation note (NOT promoted; CanonRec commit 16fc171 needs separate push to AUo959/CanonRec). 4 other archive-only artifacts catalogued low-priority in salvage capsule. Complements narrative-engine work.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -397,6 +397,12 @@
       "priority": "medium",
       "assigned_to": "codex",
       "description": "Execute narrative-engine phase-two contract items 4-7 as a CloudBank PR per reports/analysis/narrative_engine_phase_two_continuation_plan__2026-07-10.md. #1183 merged (evidence/state layer on main). Build next_event_continuity_check() wrapper + gate mapping + 6-case tests + flight narrative-next-event-continuity-check + promotion path. Owner approval before any CANON_PROMOTE. Prefer Codex (CloudBank runtime)."
+    },
+    {
+      "id": "snpm-canon-promote-review",
+      "priority": "low",
+      "assigned_to": "either",
+      "description": "Owner review of staged SNPM (Scalable Narrative Probability Model) at CanonRec canon/L2/mechanics/ (see SNPM__RECONCILIATION_NOTE__2026-07-10). If accepted, route aurora-canon-reconciler -> CANON_PROMOTE and cross-link into 03_galactic_union_mechanics_and_models.md + narrative-engine input relationship. Also push CanonRec commit 16fc171 to AUo959/CanonRec."
     }
   ],
   "known_state": {
