@@ -90,9 +90,9 @@ needs an owner lane decision before any migration.
 | N3 | 🟠 **TRIAGED 2026-07-10 — owner decision needed** — `intake/threadcore_symbiosis_delta_manifest.md` (373 ln) | 20 | L3 narrative | **Not a structured THREADCORE artifact** — zero beacon/threadreflect/checkpoint/anchor/capsule/schema markers (grep count 0). Pure meta-narrative retrospective ("WHY THIS SYSTEM EXISTS", "Deeper Meaning") of a session that built a "SYMBIOSIS-Δ module", with speculative external-integration claims presented as done (DALL·E/Sora/OpenAI, quantum diffusion) that are not evidenced in any repo. **Correction:** original lane (`threadcore-governor`) does not apply — that skill validates structured artifacts this file lacks; correct lane is **`aurora-canon-reconciler`** (session-import / meta-narrative / drift review). Not a duplicate of the landed `THREADCORE_UPGRADED_PAYLOAD_v3.5.1` in CanonRec (which *is* a structured payload; 0 SYMBIOSIS refs). **Disposition: hold from canon** pending owner decision on whether this narrative belongs in canon at all; if yes, run `aurora-canon-reconciler`, do not promote speculative claims as fact. |
 | N4 | 🟢 **GENUINE CANDIDATE (triaged 2026-07-10) — route forward** — `QGIA_Runtime_OnePager.md` (406 ln) | 22 | QGIA | **Not landed anywhere** (absent from both qgia repos and CanonRec; the R13 dirty-tree files are unrelated knowledge-contract edits). Self-contained, well-structured "portable, LLM-executable process export" (v4.2.1): identity init, pre-response checklist, deliverable template, axiom overrides, math toolkit (confidence composite, Bayesian update, Brier, CIs), mandatory SATs, bias mitigations, activation logic, operational constants. Fictional-agency framing ("Quantum Geopolitical Intelligence Agency") but legitimate forecasting/analytic methodology; not code, not a THREADCORE artifact, not speculative narrative. **First find that is genuinely unrecovered and worth routing.** **Disposition:** route to the QGIA knowledge domain (`qgia-knowledge-library-main` or `-spine-main`) — owner picks repo + path. **Dependency:** resolve R13 (qgia-library dirty tree) first to avoid compounding uncommitted state. Queued as `qgia-runtime-onepager-route`. |
 | N5 | 🟢 **RESOLVED (triaged 2026-07-10)** — `SPEC__SALVAGE_OPERATIONS__v0_1_0.md` (89 ln) | 20 | L1 doctrine | Same story as N1: byte-identical to the canon copy committed in CanonRec (`canon/L1/station/`, commit `9d98d49`). **Disposition: cleanable intake residue**, no recovery action needed. |
-| N6 | 🔵 `intake/TOBIAS_QIN_CHARACTER_PROFILE.md` (546 ln) | 23 | L2/L3 narrative | Intake-side draft, self-declared "not canon-promoted." Route to `aurora-canon-reconciler` for drift/duplicate check. |
-| N7 | 🔵 `intake/aurora_scaffold_nexus_meta_narrative.md` (1,193 ln) | 23 | narrative/continuity | `aurora-canon-reconciler`; large — budget a dedicated pass. |
-| N8 | 🔵 `narrative_engine_spec_parameters_to_narrative_core_v_0.md` (6,721 ln) | 21 | L2/L3 narrative core | Largest single find. Split review; reconcile against narrative-layer promotion ADR (`docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md`). |
+| N6 | 🟠 **TRIAGED 2026-07-10 — reconcile draft vs existing canon** — `intake/TOBIAS_QIN_CHARACTER_PROFILE.md` (546 ln) | 23 | L1 character | **The entity is already in canon** — `GUMAS_SIM_2.5/CanonRec/canon/L1/characters/ORION.ENTITY.0039__tobias-qin.md` exists. This intake file is a self-declared "Character Profile v2.5 (L1 Staging Draft), STAGING, not canon-promoted." So this is a **draft-vs-canon reconciliation**, not new recovery. **Disposition:** run `aurora-canon-reconciler` to diff the draft against ORION.ENTITY.0039 (drift / supplementary detail / duplication); owner decides whether any draft detail folds into the canon entity. Likely the canon entity supersedes. |
+| N7 | 🟠 **TRIAGED 2026-07-10 — owner decision (like N3)** — `intake/aurora_scaffold_nexus_meta_narrative.md` (1,193 ln) | 23 | narrative/continuity | Meta-narrative + "Technical Extraction & Continuity Analysis" (sections: Thread Carbon Dating Protocol, Why This Thread Happened, Chronological Meta-Narrative). Not landed in CanonRec. 27 anchor/ethics refs but wrapped in retrospective meta-narrative. **Disposition:** route to `aurora-canon-reconciler` for continuity/session-import review; **hold from canon pending owner call** — the "Technical Extraction" sections may hold salvageable design detail, but the meta-narrative wrapper isn't canon material as-is. Owner decides scope of any extraction. |
+| N8 | 🟢 **GENUINE CANDIDATE (triaged 2026-07-10) — route into narrative-promotion workstream** — `narrative_engine_spec_parameters_to_narrative_core_v_0.md` (6,721 ln) | 21 | L2/L3 narrative core | Largest single find and a real **specification** (Design Principles, Operating Modes, Input Handling, Layer Protocol, Canonical State Model), not prose. Not integrated: referenced only by `docs/workspace-map.md` (index), **not** cited by the narrative-promotion ADR. Thematically overlaps the landed `ORION__NARRATIVE_OUTPUT_PROTOCOL__ANTI_FLOURISH__v1.1` in CanonRec. **Ties directly to the suspended active task** `narrative-promotion-continuation-2026-06`. **Disposition:** route into that narrative-promotion workstream — reconcile against the landed anti-flourish protocol + the ADR via `aurora-canon-reconciler` and `aurora-narrative-tone-governor`; dedicated multi-pass review given size. Queued as `narrative-engine-spec-reconcile`. |
 | N9 | 🟢 **RESOLVED (triaged 2026-07-10)** — `_staging/codex_wip/test_mesh_router_v1__codex_wip_preserved_2026-06-13.py` (181 ln) | 21 | CloudBank runtime | **Superseded.** The landed CloudBank test `tests/test_mesh_router_v1.py` (292 ln, committed `7e56455a`) is a strict superset — it contains all 3 of the WIP's test functions plus 6 more. No unique coverage to recover. **Disposition: leave in staging** (rollback-safe lane) or discard; no recovery action needed. |
 
 **Long tail (not itemized):** `intake/` holds 287 files; `archives/unzipped/` and
@@ -131,7 +131,26 @@ secret/key material 30. Future passes should sweep these by signal cluster.
 5. **N4 triaged 2026-07-10 → genuine candidate, route forward.** Portable QGIA
    runtime one-pager, not landed anywhere; route to the QGIA knowledge domain
    (owner picks repo/path); depends on resolving R13 first. Queued as
-   `qgia-runtime-onepager-route`. Remaining un-triaged finds: **N6, N7, N8**.
+   `qgia-runtime-onepager-route`.
+6. **N6/N7/N8 triaged 2026-07-10 → curated sweep complete.** N6: entity already
+   in canon (`ORION.ENTITY.0039__tobias-qin`), reconcile draft vs canon. N7:
+   meta-narrative, owner decision (like N3). N8: genuine narrative-engine spec,
+   routed into the suspended narrative-promotion workstream, queued as
+   `narrative-engine-spec-reconcile`.
+
+### Curated-sweep outcome (N1–N9)
+
+All nine curated indexer finds are now triaged. Tally: **4 already-landed / superseded**
+(N1, N5, N9, and N2's P0s), **3 owner-decision narrative** (N3, N7, plus N6 which
+reconciles against an existing canon entity), **2 genuine route-forward candidates**
+(N4 QGIA one-pager, N8 narrative-engine spec). The dominant signal held throughout:
+the indexer surfaces far more already-landed duplicates and meta-narrative than
+genuine unrecovered work, and every "not in root git" flag must be checked against
+the CanonRec/CloudBank nested repos first. Genuine yield: ~2 of 9.
+
+Remaining thread work is the **tracked objects (R1–R3)**, **docket P1–P6**, the two
+new route-forward queue items, and the owner decisions on N3/N6/N7. The intake/
+long tail (287 files) is unswept and low-priority given the observed hit rate.
 
 ### Push status (2026-07-10)
 
