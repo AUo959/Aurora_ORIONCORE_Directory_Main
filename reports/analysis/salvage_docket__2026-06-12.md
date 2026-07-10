@@ -244,6 +244,27 @@ Next gate:
   reference, or root recovered-prototype archive.
 - If selected, build a small behavior inventory before code migration.
 
+Resolution (2026-07-10):
+
+- Owner selected lane: root recovered-prototype archive. Recovery executed;
+  P7 is closed in this docket.
+- The docket evidence file was found byte-identical (hash `20df6280...`) to
+  an existing in-repo copy at
+  `projects/Aurora_New_11_9/04_DEVELOPMENT/Python_Modules/biological_pneumatic_engine.py`,
+  which is a live dependency of `pdp_v2_mvp/core/pneumatic_engine.py`.
+- Pristine snapshot frozen at
+  `archives/recovered_prototypes/biological_pneumatic_engine/` with
+  `RECOVERY_RECORD__2026-07-10.md` (provenance, hashes, lane decision) and
+  `BEHAVIOR_INVENTORY__2026-07-10.md` (next-gate deliverable).
+- Operative copy received two surgical fixes (dead scipy import removed;
+  adapter import-guard narrowed to ImportError); post-fix hash
+  `e4d6fe55d7cea6a2c1088da385eb8d11ee759106a200d64c17da663733c64a26`.
+  PDP v2 MVP tests 7/7 pass.
+- Finding for any future migration: external prototype and fallback engine
+  are not behaviorally equivalent (latency model diverges; see inventory
+  item 7). CloudBank routing remains a future option starting from the
+  inventory.
+
 ## Reject Or Defer
 
 - `symbolicSeal.js`: reject direct promotion. Existing reports/catalog already
