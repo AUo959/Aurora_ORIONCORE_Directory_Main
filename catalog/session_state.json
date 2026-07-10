@@ -366,6 +366,12 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "Decide canonical latency model for pneumatic engine: external prototype fails committed targets under default config (~202ms, eff 0.0) while pdp_v2_mvp fallback passes; see archives/recovered_prototypes/biological_pneumatic_engine/BEHAVIOR_INVENTORY__2026-07-10.md item 7. Retune constants or fix flow term before any CloudBank routing."
+    },
+    {
+      "id": "cloudbank-review-r1r10-residual-hardening",
+      "priority": "medium",
+      "assigned_to": "codex",
+      "description": "CloudBank R1-R10 review (intake/Aurora_CloudBank_Review_R1_R10.md): all 7 P0 deployment-blockers verified fixed as of CloudBank HEAD 2026-07-08; residual P1/P3 hardening still open (spot-verified P3-2 provenance hash still 'pass', P3-4 _detect_unauthorized_access still 'return False'). Audit remaining P1/P2/P3/stub items line-by-line and fix in CloudBank nested repo."
     }
   ],
   "known_state": {
