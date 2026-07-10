@@ -1,4 +1,4 @@
-generated_at: '2026-07-10T18:19:20Z'
+generated_at: '2026-07-10T20:50:29Z'
 root: .
 logical_taxonomy:
 - repos
@@ -361,21 +361,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: narrative-engine-spec-parameters-to-narrative-core-v-0
-  kind: intake_file
-  current_path: narrative_engine_spec_parameters_to_narrative_core_v_0.md
-  logical_zone: intake
-  planned_path: intake/narrative_engine_spec_parameters_to_narrative_core_v_0.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-  scan_policy: include
-  notes: Local early project specification for a narrative engine; include in root
-    intake routing metadata without promoting the source text into canon or a nested
-    repo.
 - id: plugins
   kind: control_surface
   current_path: plugins

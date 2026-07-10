@@ -249,11 +249,18 @@
       "completed_at": "2026-07-08T06:20:27Z",
       "platform": "claude-code",
       "detail": "Both parts resolved. (b) Root branches: codex/gitwiz-sync-audit-canonical-2026-04-08 (9 commits) confirmed already 3-way-merged onto main 2026-06-10 (commit 4aaf7e0, one piece -- workspace_plan_moves.py wave5 -- deliberately abandoned per that commit's own note); codex/weekly-skill-audit-mesh-router-2026-06-01 (1 commit) confirmed byte-identical to main after rebase. Both deleted. (a) March rescue lineage extraction: ran gitleaks over all 10 CloudBank March branches first (mandatory security gate per the source audit, given a same-era OpenAI key rotation) -- clean, only 2 benign findings (a hex placeholder in an archived doc, a test fixture string 'test_glyph_123'), identical across branches from shared history. Content review: of ~18 distinct commits across the 10 CloudBank branches, everything from 2026-02-28 through 2026-03-19 (14 commits: Aurora Fusion layer, command grammar module, mesh router runtime, selective-integration gate, threadcore/zipwiz governance remediation, etc.) was already merged via CloudBank PR #501 ('Sync CloudBank shared-history workup to main', merged 2026-03-22) -- confirmed by direct file presence + git-log --follow provenance, and in one case (src/aurora_fusion/engine.py) main's version is more evolved than the branch's. 6 of 10 branches contained only this already-landed content -- deleted (local-only, never pushed). The remaining 4 branches (2026-03-25 commits, made 3 days after PR #501 already landed the content) were reviewed individually: a macOS launchd plist (hardcodes the now-deleted iCloud workspace path, needs full rewrite to be usable, not extracted); a .aurora/ narrative/audit-doc dump duplicated across 2 commits (STUB_AND_INTEGRATION_AUDIT.md etc. -- already independently triaged via the ISSUE_1015 classification report/PR #1019, not new work); and a 545-line alternate threadcore.js design (reads payload files that already exist on main and are consumed by a different, current 188-line implementation at src/core/command_node/threadcore.js -- confirmed abandoned, the 'driftpulse' concept it introduces is referenced nowhere in current code). All 4 deleted. Root's 3 March-era twin branches (root-control-plane-local, root-reconstruct-recovered-protocols, rescue/root-control-plane-dirty-workingcopy) independently confirmed already-landed via root commit 205ea77 ('close salvage decisions -- policies promoted, clean ports landed', 2026-06-10: repo_authority_policy.yaml + gitwiz_hygiene_policy.yaml promoted, clean ports from _workspace_common and weekly-skill-audit) -- deleted. Also dropped 2 leftover CloudBank stashes from the same era (stash@{1}: 66-file March 13 snapshot pre-dating the later root-sprawl reorg, paths no longer applicable, mesh/security content superseded; stash@{0}: untracked workflow-output only, audit already called this low-value). Net: 13 branches + 2 stashes retired across root+CloudBank, zero content lost -- everything of value had already landed through PR #501, PR #1019, or root commit 205ea77 over the preceding 3 months. publication_debt.py scan: 1 entry remains (qgia-knowledge-library-main dirty tree, documented live Codex work, untouched)."
+    },
+    {
+      "id": "narrative-engine-spec-reconcile",
+      "status": "completed",
+      "completed_at": "2026-07-10T20:51:44Z",
+      "platform": "claude-code",
+      "detail": "N8 recovered 2026-07-10: foundational narrative-engine spec placed tracked at docs/ORION__SPEC__NARRATIVE_ENGINE__PARAMETERS_TO_NARRATIVE_CORE__v0.1__2026-04-12.md (byte-identical, sha a4aedede) + code-grounded reconciliation map docs/ORION__SPEC__NARRATIVE_ENGINE__RECONCILIATION__2026-07-10.md. Finding: validation mode + CanonicalState + verdicts built (phase-1 CloudBank); expansion/translation gated at phase-1 boundary; state_builder is phase-two target. Remaining schema-diff/phase-two follow-ups belong to active task narrative-promotion-continuation-2026-06."
     }
   ],
-  "last_updated": "2026-07-10T19:00:40Z",
+  "last_updated": "2026-07-10T20:51:44Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Recovery thread progressing: N1/N5/N9 resolved (already-landed dupes), N2 partially resolved (7 CloudBank P0s fixed, GitHub-confirmed at origin/main; residual hardening queued), N3 triaged to owner-decision (meta-narrative, route aurora-canon-reconciler not threadcore-governor, hold from canon). GitHub unreachable from sandbox (SSH egress blocked, MCP needs OAuth) \u2014 using nested-repo origin refs as proxy. 8 root commits committed locally, unpushed. Remaining un-triaged: N4/N6/N7/N8 + tracked objects R1-R3 + docket P1-P6.",
+  "last_session_summary": "N8 narrative-engine spec recovered: foundational spec (untracked gitignored loose file) placed tracked in docs/ alongside ADR + phase-two contract, with code-grounded reconciliation map (validation built phase-1, expansion/translation gated, state_builder = phase-two). Manifest + path_aliases reconciled; loose original removed. Ties into suspended active task narrative-promotion-continuation-2026-06.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -378,12 +385,6 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Route QGIA_Runtime_OnePager.md (root loose, 406 ln, v4.2.1) into the QGIA knowledge domain. Genuine unrecovered artifact: portable LLM-executable analytic process export (identity/checklist/axioms/math toolkit/SATs). Not in qgia repos or CanonRec. Owner picks target repo (qgia-knowledge-library-main or -spine-main) + path. Dependency: resolve R13 (qgia-knowledge-library dirty tree) first."
-    },
-    {
-      "id": "narrative-engine-spec-reconcile",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Reconcile narrative_engine_spec_parameters_to_narrative_core_v_0.md (root loose, 6721 ln) into the narrative-promotion workstream. Genuine unrecovered spec (Design Principles, Operating Modes, Layer Protocol, Canonical State Model), not cited by the narrative-promotion ADR, overlaps landed ORION__NARRATIVE_OUTPUT_PROTOCOL__ANTI_FLOURISH__v1.1. Ties to suspended active task narrative-promotion-continuation-2026-06. Multi-pass reconcile via aurora-canon-reconciler + aurora-narrative-tone-governor."
     },
     {
       "id": "tobias-qin-draft-reconcile",
