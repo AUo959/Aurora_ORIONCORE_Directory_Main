@@ -48,14 +48,20 @@ Source: `catalog/recovery_objects_to_resolve.json`
 
 Source: `reports/analysis/salvage_docket__2026-06-12.md`. P7 closed 2026-07-10 (see R0).
 
-| # | Item | Disposition | Blocker / next gate |
-|---|------|-------------|---------------------|
-| R4 | 🟡 **P1 — ORD Policy Family** | include — staged for CloudBank | Landing via PR #1016; inspect PR + CI before Codex-side CloudBank mutation |
-| R5 | 🟡 **P2 — ORD Legacy Fleet + Apple Notes pack** | backup_only | Behavior reconciliation; source `_staging/apple_notes_recovery__2026-03-16/L1/ord_drone_fleet_v1.0.py` |
-| R6 | 🟡 **P3 — Quantum Agent Forge Protocol** | include as spec reconciliation (not runtime copy) | Reconcile against current `modules/quantum_forge/`; source `_staging/apple_notes_recovery__2026-03-16/L2/QUANTUM_AGENT_FORGE_PROTOCOL_v1.0.md` |
-| R7 | ⛔ **P4 — ZipWiz Python Bridge** | include candidate | Blocked on owner-surface decision + security review |
-| R8 | 🟡 **P5 — Canon Promotion Governance Pack** | include candidate | Diff against `AGENTS.md`/`README`/workflow docs; promote only non-duplicative rules |
-| R9 | ⛔ **P6 — GUI CloudHub + Recovery Utilities** | selective backup_only | `gumas_recovery_wizard.py` has unsafe archive extraction — do not promote directly; extract tests/helpers only after security review |
+Swept 2026-07-10 against CloudBank/CanonRec nested repos + PR history (see the
+docket's "Docket Sweep Resolutions — 2026-07-10").
+
+| # | Item | Status | Outcome |
+|---|------|--------|---------|
+| R4 | **P1 — ORD Policy Family** | 🟢 resolved (landed) | `modules/ord/` policy family + `src/entities/fleet/` on CloudBank main; PR #1016 merged; on-main `ord_policy_engine.py` **byte-identical** to staged evidence (`ac048ef9…`). |
+| R5 | **P2 — ORD Legacy Fleet + Apple Notes pack** | 🟢 resolved (backup_only) | Superseded by the clean family landed via P1; legacy 1,349-ln source kept as reference only; no unique gap found. |
+| R6 | **P3 — Quantum Agent Forge Protocol** | 🟢 superseded | CloudBank main has Quantum Forge **v3** (impl + `test_quantum_forge_v3.py` + v2/lifecycle tests + complete guide). Recovered v1.0 retained as historical reference; optional light reconciliation only. |
+| R7 | **P4 — ZipWiz Python Bridge** | ⛔ still blocked | Owner-surface decision (CloudBank `src/bridges/` vs `zip_wizard` repo vs root) **+** `zipwiz-governor`/security review required before promotion. |
+| R8 | **P5 — Canon Promotion Governance Pack** | 🟥 evidence lost | Only source was the iCloud `Downloads/` path deleted 2026-07-04; survives nowhere in-repo. Rules already reflected in current root policy; closed as unrecoverable. |
+| R9 | **P6 — GUI CloudHub + Recovery Utilities** | ⛔ still blocked | `gumas_recovery_wizard.py` unsafe archive extraction; extract isolated tests/helpers only after a security review. |
+
+**Docket net:** P1 landed (hash-verified), P2/P3/P5 closed (superseded/lost), and
+**P4 + P6 are the only genuinely open docket items — both owner/security-gated.**
 
 ---
 

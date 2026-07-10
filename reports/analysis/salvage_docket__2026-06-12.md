@@ -265,6 +265,49 @@ Resolution (2026-07-10):
   item 7). CloudBank routing remains a future option starting from the
   inventory.
 
+## Docket Sweep Resolutions — 2026-07-10
+
+Cross-checked P1-P6 against the CloudBank/CanonRec nested repos and PR history
+(the "check nested repos before treating as unrecovered" rule). Evidence read
+from CloudBank `origin/main` on 2026-07-10.
+
+- **P1 — ORD Policy Family → RESOLVED (landed).** The whole `modules/ord/`
+  policy family is on CloudBank `main` (`ord_policy_engine.py`,
+  `ord_inspection_policy.py`, `ord_threshold_registry.py`, `ord_receipts.py`,
+  governance registry) plus `src/entities/fleet/` accessors. PR `#1016` merged.
+  On-main `ord_policy_engine.py` hashes to `ac048ef9f2738875…` — **byte-identical
+  to the staged evidence**. Legacy ORD source was correctly not copied into
+  runtime. Closed.
+- **P2 — ORD Legacy Fleet + Apple Notes → RESOLVED (backup_only, superseded).**
+  The clean policy family landed via P1/#1016; the legacy 1,349-line source
+  (`ord_drone_fleet_v1.0.py`, older shapes DeltaScout/Shadowfax/GammaSwarm) stays
+  a backup reference only. No unique tests/constants identified as missing from
+  the landed family; reopen only if a specific gap is found.
+- **P3 — Quantum Agent Forge Protocol → SUPERSEDED.** CloudBank `main` has a full
+  Quantum Forge **v3**: implementation, `tests/test_quantum_forge_v3.py`
+  (+ v2 + lifecycle-policy tests), and `docs/QUANTUM_FORGE_V3_COMPLETE_GUIDE.md`.
+  The recovered v1.0 protocol is an early spec well behind v3; retain as
+  historical reference. Optional light reconciliation: confirm no unique v1.0
+  governance/lifecycle claim is absent from v3, else close outright.
+- **P4 — ZipWiz Python Bridge → STILL BLOCKED.** CloudBank has the TS stub
+  `src/bridges/zip-wizard/bridge.ts`; the recovered Python bridge remains gated
+  on an owner-surface decision (CloudBank `src/bridges/` vs a separate
+  `zip_wizard` repo vs root tooling) **and** a `zipwiz-governor`/security review
+  before any promotion. Genuinely open — owner + security decision required.
+- **P5 — Canon Promotion Governance Pack → EVIDENCE LOST.** The pack's only
+  source was the iCloud `Downloads/` path deleted 2026-07-04; it survives nowhere
+  in the workspace (unlike P7, it had no in-repo copy). Its hard rules already
+  align with current root authority policy per this docket's own "Current fit",
+  so no live gap. Closed as unrecoverable evidence; reopen only if a copy
+  resurfaces.
+- **P6 — GUI CloudHub + Recovery Utilities → STILL BLOCKED (backup_only).**
+  `gumas_recovery_wizard.py` has unsafe archive-extraction behavior; do not
+  promote directly. Extract isolated tests/helpers only after a security review.
+  Genuinely open — security review required.
+
+Net: P1 landed (hash-verified), P2/P3/P5 closable (superseded/lost), **P4 and P6
+remain the only genuinely open docket items — both owner/security-gated.**
+
 ## Reject Or Defer
 
 - `symbolicSeal.js`: reject direct promotion. Existing reports/catalog already
