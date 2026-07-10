@@ -1,4 +1,4 @@
-generated_at: '2026-07-08T16:44:49Z'
+generated_at: '2026-07-10T18:19:20Z'
 root: .
 logical_taxonomy:
 - repos
@@ -221,17 +221,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: pr-sensor-array-spec-v0-3-0-delta
-  kind: intake_file
-  current_path: PR SENSOR ARRAY SPEC v0 3 0 DELTA.md
-  logical_zone: intake
-  planned_path: intake/PR SENSOR ARRAY SPEC v0 3 0 DELTA.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: prplexity-observation-6-14
   kind: intake_file
   current_path: Prplexity_Observation_6_14.md
@@ -275,28 +264,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: sensor-array-specification-v0-3
-  kind: intake_file
-  current_path: SENSOR ARRAY SPECIFICATION v0 3 0.md
-  logical_zone: intake
-  planned_path: intake/SENSOR ARRAY SPECIFICATION v0 3 0.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: spec-salvage-operations-v0-1-0
-  kind: intake_file
-  current_path: SPEC__SALVAGE_OPERATIONS__v0_1_0.md
-  logical_zone: intake
-  planned_path: intake/SPEC__SALVAGE_OPERATIONS__v0_1_0.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: entropy-quarantine
   kind: quarantine_zone
   current_path: _entropy_quarantine

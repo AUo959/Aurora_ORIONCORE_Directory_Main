@@ -115,8 +115,13 @@ secret/key material 30. Future passes should sweep these by signal cluster.
    `git ls-files`, before flagging a loose file as unrecovered.
 2. **Cleanup done 2026-07-10:** the three root loose sensor/salvage duplicates were
    deleted after re-verifying each was byte-identical to a committed, clean CanonRec
-   canon copy (`.gitignore`-excluded, so no root-repo diff). The N9 WIP test is left
-   in `_staging/codex_wip/` (rollback-safe lane).
+   canon copy (`.gitignore`-excluded, so no root-repo diff). These were tracked in
+   the workspace manifest as `wave4_root_intake_cleanup_initial` `planned_move`
+   intake entries; since they were already canon-landed (not pending review), the
+   manifest was regenerated (`tools/workspace_scan.py`) to drop the three stale
+   entries and the matching `catalog/path_aliases.csv` rows were removed —
+   `workspace_verify` `manifest_execution_context` now clean. The N9 WIP test is
+   left in `_staging/codex_wip/` (rollback-safe lane).
 3. Owner assigns lanes for the remaining un-triaged finds **N2, N3, N4, N6, N7, N8**
    (archive / CloudBank / CanonRec / reject). Given the pattern above, each should
    first be checked against CanonRec + CloudBank before being treated as new
