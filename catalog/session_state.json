@@ -372,6 +372,12 @@
       "priority": "medium",
       "assigned_to": "codex",
       "description": "CloudBank R1-R10 review (intake/Aurora_CloudBank_Review_R1_R10.md): all 7 P0 deployment-blockers verified fixed as of CloudBank HEAD 2026-07-08; residual P1/P3 hardening still open (spot-verified P3-2 provenance hash still 'pass', P3-4 _detect_unauthorized_access still 'return False'). Audit remaining P1/P2/P3/stub items line-by-line and fix in CloudBank nested repo."
+    },
+    {
+      "id": "qgia-runtime-onepager-route",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Route QGIA_Runtime_OnePager.md (root loose, 406 ln, v4.2.1) into the QGIA knowledge domain. Genuine unrecovered artifact: portable LLM-executable analytic process export (identity/checklist/axioms/math toolkit/SATs). Not in qgia repos or CanonRec. Owner picks target repo (qgia-knowledge-library-main or -spine-main) + path. Dependency: resolve R13 (qgia-knowledge-library dirty tree) first."
     }
   ],
   "known_state": {
