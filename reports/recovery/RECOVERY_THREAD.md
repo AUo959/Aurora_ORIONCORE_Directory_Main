@@ -93,7 +93,7 @@ needs an owner lane decision before any migration.
 | N6 | 🔵 `intake/TOBIAS_QIN_CHARACTER_PROFILE.md` (546 ln) | 23 | L2/L3 narrative | Intake-side draft, self-declared "not canon-promoted." Route to `aurora-canon-reconciler` for drift/duplicate check. |
 | N7 | 🔵 `intake/aurora_scaffold_nexus_meta_narrative.md` (1,193 ln) | 23 | narrative/continuity | `aurora-canon-reconciler`; large — budget a dedicated pass. |
 | N8 | 🔵 `narrative_engine_spec_parameters_to_narrative_core_v_0.md` (6,721 ln) | 21 | L2/L3 narrative core | Largest single find. Split review; reconcile against narrative-layer promotion ADR (`docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md`). |
-| N9 | 🔵 `_staging/codex_wip/test_mesh_router_v1__codex_wip_preserved_2026-06-13.py` (181 ln) | 21 | CloudBank runtime | Preserved Codex WIP test for Mesh Router V1. Verify against current mesh-router code; land or discard. |
+| N9 | 🟢 **RESOLVED (triaged 2026-07-10)** — `_staging/codex_wip/test_mesh_router_v1__codex_wip_preserved_2026-06-13.py` (181 ln) | 21 | CloudBank runtime | **Superseded.** The landed CloudBank test `tests/test_mesh_router_v1.py` (292 ln, committed `7e56455a`) is a strict superset — it contains all 3 of the WIP's test functions plus 6 more. No unique coverage to recover. **Disposition: leave in staging** (rollback-safe lane) or discard; no recovery action needed. |
 
 **Long tail (not itemized):** `intake/` holds 287 files; `archives/unzipped/` and
 `_staging/` add large trees. Signal counts from the indexer: narrative/agent
@@ -104,21 +104,23 @@ secret/key material 30. Future passes should sweep these by signal cluster.
 
 ## 5. Next actions
 
-1. **N1 + N5 triaged 2026-07-10 → RESOLVED (already routed, not recovery).** Both
-   were false positives: byte-identical to canon copies already committed in the
-   CanonRec nested repo and, for the sensor array, implemented in CloudBank
-   (PR #1005). Lesson for future search passes: check nested-repo tracking
-   (CanonRec, CloudBank) and CloudBank PR history, not just root-repo
+1. **N1, N5, N9 triaged 2026-07-10 → all RESOLVED (already landed, not recovery).**
+   All three were false positives — loose/staged copies of work already committed
+   in nested repos: N1 (sensor array spec) byte-identical to CanonRec + implemented
+   in CloudBank PR #1005; N5 (salvage doctrine) byte-identical to CanonRec; N9
+   (mesh-router WIP test) a strict subset of the landed CloudBank test (`7e56455a`).
+   **Pattern:** the recovery indexer surfaces staging/loose duplicates of work that
+   already landed in the CanonRec and CloudBank nested repos. Future passes must
+   check nested-repo tracking and CloudBank PR history, not just root-repo
    `git ls-files`, before flagging a loose file as unrecovered.
-2. **Optional cleanup:** the root loose duplicates
-   (`SENSOR ARRAY SPECIFICATION v0 3 0.md`, `PR SENSOR ARRAY SPEC v0 3 0 DELTA.md`,
-   `SPEC__SALVAGE_OPERATIONS__v0_1_0.md`) are intake residue safe to remove or
-   relocate to a processed-intake area. They are `.gitignore`-excluded, so this
-   is housekeeping, not a canon change.
-3. Owner assigns lanes for the remaining un-triaged finds **N2, N3, N4, N6, N7,
-   N8, N9** (archive / CloudBank / CanonRec / reject). Next cleanest candidate:
-   N9 (preserved Codex WIP mesh-router test — small, verifiable against current
-   CloudBank code).
+2. **Cleanup done 2026-07-10:** the three root loose sensor/salvage duplicates were
+   deleted after re-verifying each was byte-identical to a committed, clean CanonRec
+   canon copy (`.gitignore`-excluded, so no root-repo diff). The N9 WIP test is left
+   in `_staging/codex_wip/` (rollback-safe lane).
+3. Owner assigns lanes for the remaining un-triaged finds **N2, N3, N4, N6, N7, N8**
+   (archive / CloudBank / CanonRec / reject). Given the pattern above, each should
+   first be checked against CanonRec + CloudBank before being treated as new
+   recovery. N2 (CloudBank R1–R10 review plan) is the next highest-value.
 4. R1 (PDK-001) is highest-priority tracked object but blocked; needs a bound
    payload before it can advance.
 5. Regenerate the indexer report (it predates the P7 landing) before the next
