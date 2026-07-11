@@ -127,15 +127,15 @@
     "repo": "root + aurora-cloudbank-symbolic-main",
     "description": "Continue the Aurora-first narrative-layer promotion per the ADR.",
     "started_at": "2026-06-10T00:00:00Z",
-    "updated_at": "2026-07-11T01:36:52Z",
+    "updated_at": "2026-07-11T02:33:14Z",
     "context_files": [
       "docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md",
       "reports/recovered_canon/README.md",
       "reports/analysis/march_2026_reset_forensics__2026-06-10.md",
       "reports/analysis/unlanded_work_audit__2026-06-10.md"
     ],
-    "next_step": "owner_review_or_merge_pr1195_then_activate_narrative_continuity_flight",
-    "next_step_detail": "CloudBank PR #1195 is open, non-draft, mergeable, and green at d9af818f: 14 GitHub Actions succeeded, 2 policy workflows skipped, Vercel succeeded, and no review threads exist. It implements phase-two items 4, 5, and 7. Root catalog/flight_contract.yaml has an uncommitted narrative-next-event-continuity-check flight that smoke-tested against the branch; do not activate or commit it until #1195 merges. After merge, refresh CloudBank main, run the flight twice, commit the root flight plus receipt, then continue. No CanonRec promotion."
+    "next_step": "owner_review_future_candidate_receipts_before_any_canon_promote",
+    "next_step_detail": "Phase-two contract items 4-7 are implemented and merged via CloudBank PR #1195 (merge 5dd18d36). Root flight is registered and current; latest receipt 93ac4c44e8680206 produced gate=candidate using fresh prior flight status. This validates the path only; there are no proposed CanonRec files and no promotion was executed. Any future canon-reconciler packet still requires a concrete candidate receipt plus explicit owner approval before CANON_PROMOTE."
   },
   "task_queue": [],
   "completed_tasks": [
@@ -256,11 +256,18 @@
       "completed_at": "2026-07-10T20:51:44Z",
       "platform": "claude-code",
       "detail": "N8 recovered 2026-07-10: foundational narrative-engine spec placed tracked at docs/ORION__SPEC__NARRATIVE_ENGINE__PARAMETERS_TO_NARRATIVE_CORE__v0.1__2026-04-12.md (byte-identical, sha a4aedede) + code-grounded reconciliation map docs/ORION__SPEC__NARRATIVE_ENGINE__RECONCILIATION__2026-07-10.md. Finding: validation mode + CanonicalState + verdicts built (phase-1 CloudBank); expansion/translation gated at phase-1 boundary; state_builder is phase-two target. Remaining schema-diff/phase-two follow-ups belong to active task narrative-promotion-continuation-2026-06."
+    },
+    {
+      "id": "narrative-phase2-items-4-7-cloudbank-pr",
+      "status": "completed",
+      "completed_at": "2026-07-11T02:33:14Z",
+      "platform": "codex",
+      "detail": "Completed 2026-07-11: CloudBank PR #1195 merged as 5dd18d36 after fixing and resolving two actionable review threads at ee0cf2b0. Phase-two continuity wrapper, gate mapping, 6-case-plus hardening tests, deterministic receipts, and owner-gated canon-reconciler candidate packet path are on main. Root flight narrative-next-event-continuity-check flew twice against merge commit: missing-history gate owner_review_required, then fresh-history gate candidate (receipt 93ac4c44e8680206). No CanonRec mutation or CANON_PROMOTE."
     }
   ],
-  "last_updated": "2026-07-11T01:37:20Z",
+  "last_updated": "2026-07-11T02:33:14Z",
   "last_platform": "codex",
-  "last_session_summary": "CloudBank PR #1195 opened from d9af818f with narrative phase-two continuity gate, six-case tests, and owner-gated canon-reconciler packet path; all current checks green. Root flight registration is prepared and smoke-tested but remains uncommitted until the CloudBank PR merges.",
+  "last_session_summary": "Merged CloudBank PR #1195 at 5dd18d36 after review hardening; 13 workflows and Vercel green, two expected skips, threads resolved. Registered and flew narrative-next-event-continuity-check twice; fresh run produced deterministic candidate receipt 93ac4c44e8680206. No CanonRec promotion.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -282,6 +289,18 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "777e096",
+      "date": "2026-07-11",
+      "platform": "codex",
+      "summary": "feat(flight): exercise narrative continuity gate"
+    },
+    {
+      "sha": "c20b3fb",
+      "date": "2026-07-11",
+      "platform": "codex",
+      "summary": "chore(session): record CloudBank PR 1195 handoff"
+    },
     {
       "sha": "7c4a2f4",
       "date": "2026-07-11",
@@ -329,18 +348,6 @@
       "date": "2026-07-11",
       "platform": "claude-code",
       "summary": "recovery(thread): triage N6/N7/N8 -> curated sweep complete"
-    },
-    {
-      "sha": "dff4815",
-      "date": "2026-07-11",
-      "platform": "claude-code",
-      "summary": "recovery(thread): triage N4 -> genuine candidate (QGIA runtime one-pager)"
-    },
-    {
-      "sha": "e3d4df3",
-      "date": "2026-07-11",
-      "platform": "claude-code",
-      "summary": "recovery(thread): triage N3 -> owner decision; add GitHub-reachability note"
     }
   ],
   "security_events": [
@@ -393,12 +400,6 @@
       "description": "Reconcile intake/TOBIAS_QIN_CHARACTER_PROFILE.md (546 ln L1 staging draft) against existing canon entity ORION.ENTITY.0039__tobias-qin.md via aurora-canon-reconciler; determine drift/supplementary-detail/duplication; owner decides folding. Likely canon supersedes."
     },
     {
-      "id": "narrative-phase2-items-4-7-cloudbank-pr",
-      "priority": "medium",
-      "assigned_to": "codex",
-      "description": "Execute narrative-engine phase-two contract items 4-7 as a CloudBank PR per reports/analysis/narrative_engine_phase_two_continuation_plan__2026-07-10.md. #1183 merged (evidence/state layer on main). Build next_event_continuity_check() wrapper + gate mapping + 6-case tests + flight narrative-next-event-continuity-check + promotion path. Owner approval before any CANON_PROMOTE. Prefer Codex (CloudBank runtime)."
-    },
-    {
       "id": "snpm-canon-promote-review",
       "priority": "low",
       "assigned_to": "either",
@@ -412,7 +413,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "7c4a2f486b2baf6f00dfacc72bfdf0667bc058f5",
+    "main_sha": "777e096e7df8afe623dac21102583331f7146048",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
