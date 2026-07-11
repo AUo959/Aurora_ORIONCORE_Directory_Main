@@ -127,15 +127,15 @@
     "repo": "root + aurora-cloudbank-symbolic-main",
     "description": "Continue the Aurora-first narrative-layer promotion per the ADR.",
     "started_at": "2026-06-10T00:00:00Z",
-    "updated_at": "2026-07-10T21:28:25Z",
+    "updated_at": "2026-07-11T01:36:52Z",
     "context_files": [
       "docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md",
       "reports/recovered_canon/README.md",
       "reports/analysis/march_2026_reset_forensics__2026-06-10.md",
       "reports/analysis/unlanded_work_audit__2026-06-10.md"
     ],
-    "next_step": "execute_narrative_engine_phase2_continuation_items_4_7",
-    "next_step_detail": "UNBLOCKED 2026-07-10: PR #1183 MERGED to CloudBank main (merge commit 0c9f808, 35 checks passed, branch deleted, deployed). Phase-two evidence layer now on main: evidence.py (NarrativeEvidenceBundle/N [full handoff: catalog/handoffs/20260710T212825Z-claude-code-execute-narrative-engine-phase2-continuation-ite.md]"
+    "next_step": "owner_review_or_merge_pr1195_then_activate_narrative_continuity_flight",
+    "next_step_detail": "CloudBank PR #1195 is open, non-draft, mergeable, and green at d9af818f: 14 GitHub Actions succeeded, 2 policy workflows skipped, Vercel succeeded, and no review threads exist. It implements phase-two items 4, 5, and 7. Root catalog/flight_contract.yaml has an uncommitted narrative-next-event-continuity-check flight that smoke-tested against the branch; do not activate or commit it until #1195 merges. After merge, refresh CloudBank main, run the flight twice, commit the root flight plus receipt, then continue. No CanonRec promotion."
   },
   "task_queue": [],
   "completed_tasks": [
@@ -258,9 +258,9 @@
       "detail": "N8 recovered 2026-07-10: foundational narrative-engine spec placed tracked at docs/ORION__SPEC__NARRATIVE_ENGINE__PARAMETERS_TO_NARRATIVE_CORE__v0.1__2026-04-12.md (byte-identical, sha a4aedede) + code-grounded reconciliation map docs/ORION__SPEC__NARRATIVE_ENGINE__RECONCILIATION__2026-07-10.md. Finding: validation mode + CanonicalState + verdicts built (phase-1 CloudBank); expansion/translation gated at phase-1 boundary; state_builder is phase-two target. Remaining schema-diff/phase-two follow-ups belong to active task narrative-promotion-continuation-2026-06."
     }
   ],
-  "last_updated": "2026-07-10T22:17:55Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "CORRECTION to archive salvage: filename-based sweep undercounted. Content-hash diff (live index 7317 hashes vs unpacked archive tree) found 450 archive code/spec files with no byte-identical content live (294 json, 77 md, 21 distinct py modules); sampled fingerprint check confirms several modules' logic genuinely absent from CloudBank. Archive NOT mostly-explored; SNPM was one recovery, substantial early-gen corpus remains. Inventory saved; systematic triage queued (archive-content-triage-450). GitHub Desktop now has all 3 repos (root+CloudBank+CanonRec); SNPM pushed to AUo959/CanonRec (16fc171).",
+  "last_updated": "2026-07-11T01:37:20Z",
+  "last_platform": "codex",
+  "last_session_summary": "CloudBank PR #1195 opened from d9af818f with narrative phase-two continuity gate, six-case tests, and owner-gated canon-reconciler packet path; all current checks green. Root flight registration is prepared and smoke-tested but remains uncommitted until the CloudBank PR merges.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -283,64 +283,64 @@
   },
   "recent_commits": [
     {
-      "sha": "30d455d",
-      "date": "2026-07-09",
+      "sha": "7c4a2f4",
+      "date": "2026-07-11",
       "platform": "claude-code",
-      "summary": "chore(session): record PR 1183 review follow-up"
+      "summary": "recovery: CORRECT archive sweep with content-based re-investigation"
     },
     {
-      "sha": "2a02b4a",
-      "date": "2026-07-09",
-      "platform": "codex",
-      "summary": "chore(session): record node toolchain fix"
+      "sha": "b324411",
+      "date": "2026-07-11",
+      "platform": "claude-code",
+      "summary": "recovery: archive salvage sweep -> recover SNPM (staged to CanonRec L2) + capsule"
     },
     {
-      "sha": "d89e5b1",
-      "date": "2026-07-09",
-      "platform": "codex",
-      "summary": "fix(devkit): restore node toolchain"
+      "sha": "3011fa2",
+      "date": "2026-07-11",
+      "platform": "claude-code",
+      "summary": "recovery: sweep salvage docket P1-P6 vs CloudBank/CanonRec"
     },
     {
-      "sha": "39fcac8",
-      "date": "2026-07-09",
-      "platform": "codex",
-      "summary": "chore(session): record project focus announcement work"
+      "sha": "8af7e98",
+      "date": "2026-07-11",
+      "platform": "claude-code",
+      "summary": "recovery: resolve tracked objects R1-R3 (PDK-001, instruction profile, ZIPWIZ drift)"
     },
     {
-      "sha": "3e7600f",
-      "date": "2026-07-09",
-      "platform": "codex",
-      "summary": "feat(session): surface project focus announcements"
+      "sha": "765a442",
+      "date": "2026-07-11",
+      "platform": "claude-code",
+      "summary": "narrative-promotion: PR #1183 merged -> unblock task, queue items 4-7"
     },
     {
-      "sha": "f57e61b",
-      "date": "2026-07-09",
-      "platform": "codex",
-      "summary": "chore: regenerate remaining workspace_scan.py surfaces"
+      "sha": "b61f9ba",
+      "date": "2026-07-11",
+      "platform": "claude-code",
+      "summary": "narrative-promotion: refresh handoff + post-merge continuation plan"
     },
     {
-      "sha": "ff97ed8",
-      "date": "2026-07-09",
-      "platform": "codex",
-      "summary": "chore(session): record CloudBank PR CI-hygiene pass"
+      "sha": "c1ac729",
+      "date": "2026-07-11",
+      "platform": "claude-code",
+      "summary": "recover(N8): promote foundational narrative-engine spec to tracked docs/"
     },
     {
-      "sha": "ac2af4e",
-      "date": "2026-07-09",
-      "platform": "codex",
-      "summary": "chore(session): close cloudbank-followups-remaining-backlog"
+      "sha": "bbb19cb",
+      "date": "2026-07-11",
+      "platform": "claude-code",
+      "summary": "recovery(thread): triage N6/N7/N8 -> curated sweep complete"
     },
     {
-      "sha": "64fe1e4",
-      "date": "2026-07-09",
-      "platform": "codex",
-      "summary": "chore(session): close publication-debt-triage-continuation and ga-ethics-hub-integration"
+      "sha": "dff4815",
+      "date": "2026-07-11",
+      "platform": "claude-code",
+      "summary": "recovery(thread): triage N4 -> genuine candidate (QGIA runtime one-pager)"
     },
     {
-      "sha": "a2ed868",
-      "date": "2026-07-09",
-      "platform": "codex",
-      "summary": "feat(recommendations): consume restricted_recovery_triage logs"
+      "sha": "e3d4df3",
+      "date": "2026-07-11",
+      "platform": "claude-code",
+      "summary": "recovery(thread): triage N3 -> owner decision; add GitHub-reachability note"
     }
   ],
   "security_events": [
@@ -412,7 +412,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "30d455dfbec1257c0b9f73df4d80b44b56a68968",
+    "main_sha": "7c4a2f486b2baf6f00dfacc72bfdf0667bc058f5",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
