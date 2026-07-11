@@ -53,7 +53,13 @@
       "detail": "ord: dispatch order cut, 3 drones required, receipt 9f8c6ed40820",
       "last_attempt": "2026-06-13T00:40:03Z",
       "last_flown": "2026-06-13T00:40:03Z"
+    },
+    "narrative-next-event-continuity-check": {
+      "status": "flown",
+      "detail": "narrative: head=5dd18d36, receipt=93ac4c44e8680206, gate=candidate",
+      "last_attempt": "2026-07-11T02:30:44Z",
+      "last_flown": "2026-07-11T02:30:44Z"
     }
   },
-  "generated_at_utc": "2026-06-13T00:40:03Z"
+  "generated_at_utc": "2026-07-11T02:30:44Z"
 }

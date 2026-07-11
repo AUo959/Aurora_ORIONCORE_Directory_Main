@@ -105,6 +105,81 @@ flights:
     }, proposal={"actor": "Alex Thorne", "action": "route the change through Aurora arbitration", "type": "action"})
     assert run.response.verdict in (Verdict.SUPPORTED, Verdict.PLAUSIBLE), run.response.verdict
     print("engine: canonical audit verdict =", run.response.verdict.value)
+- name: narrative-next-event-continuity-check
+  about: Build current chronicle evidence and fly the deterministic phase-two continuity gate.
+  script: |
+    import json, os, subprocess, sys
+    from datetime import datetime, timezone
+    from pathlib import Path
+    sys.path.insert(0, ".")
+    from src.aurora.engines.narrative import (
+        NormalizedTaskRequest, Strictness, TaskKind, build_evidence_bundle,
+        build_state_from_evidence, next_event_continuity_check,
+    )
+    workspace_root = Path(os.environ.get("AURORA_WORKSPACE_ROOT", Path.cwd().parents[2]))
+    chronicle_path = workspace_root / "GUMAS_SIM_2.5/CanonRec/canon/L1/station/chronicle/STATION_CHRONICLE.ndjson"
+    atom = next(json.loads(line) for line in chronicle_path.read_text().splitlines()
+                if line.strip() and json.loads(line).get("tier") == "CANON")
+    source_id = f"canon:station-chronicle:{atom['event_id']}"
+    sources = [
+        {"source_id": source_id, "authority_tier": "canon",
+         "source_type": "canon_file", "uri": str(chronicle_path),
+         "observed_at_utc": atom["occurred_at"]},
+        {"source_id": "canon:aurora-identity", "authority_tier": "canon",
+         "source_type": "canon_file", "uri": "config/canonical_validation.yaml"},
+    ]
+    facts = [
+        *({"fact_id": f"layer:{layer}", "claim_type": "layer",
+           "payload": {"name": layer}, "source_ids": (source_id,),
+           "authority_tier": "canon"}
+          for layer in ("event", "temporal", "knowledge", "continuity", "character")),
+        {"fact_id": f"event:{atom['event_id']}", "claim_type": "event",
+         "payload": {"label": atom["summary"], "timing": atom["occurred_at"],
+                     "participants": atom.get("participants", [])},
+         "source_ids": (source_id,), "authority_tier": "canon"},
+        {"fact_id": "entity:alex-thorne", "claim_type": "entity",
+         "payload": {"name": "Alex Thorne", "entity_type": "character",
+                     "role": "Station Commander"},
+         "source_ids": ("canon:aurora-identity",), "authority_tier": "canon"},
+        {"fact_id": "knowledge:aurora-arbitration", "claim_type": "knowledge_state",
+         "payload": {"holder": "Alex Thorne",
+                     "fact": "Major actions require Aurora arbitration and ethics validation."},
+         "source_ids": ("canon:aurora-identity",), "authority_tier": "canon"},
+        {"fact_id": "continuity:aurora-invariants", "claim_type": "continuity",
+         "payload": {"anchor_seed": "EOS_SEED_ORION",
+                     "continuity_seal": "Aurora_Continuity_Seal_v2.2.5",
+                     "ethics_protocol": "Picard_Delta_3", "drift_lock": 0.0},
+         "source_ids": ("canon:aurora-identity",), "authority_tier": "canon"},
+    ]
+    bundle = build_evidence_bundle(sources, facts, generated_at_utc=atom["occurred_at"])
+    request = NormalizedTaskRequest(
+        task_kind=TaskKind.NEXT_EVENT_CONTINUITY_CHECK, proposal_present=True,
+        strictness=Strictness.DEFAULT, input_kind="evidence_bundle",
+        user_query="Can this flight-check beat happen next?",
+    )
+    proposal = {"actor": "Alex Thorne",
+                "action": "route the flight-check change through Aurora arbitration",
+                "aurora_arbitration": True, "ethics_validation": True,
+                "timing": "next_turn", "type": "event"}
+    state, state_receipt = build_state_from_evidence(bundle, request, proposal)
+    log_path = workspace_root / "reports/automation/flight_log_latest.json"
+    entry = (json.loads(log_path.read_text()).get("flights", {})
+             .get("narrative-next-event-continuity-check", {})) if log_path.exists() else {}
+    stale = True
+    if entry.get("last_flown"):
+        last = datetime.strptime(entry["last_flown"], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+        stale = (datetime.now(timezone.utc) - last).days > 14
+    flight_status = {"status": entry.get("status", "missing"), "stale": stale}
+    first = next_event_continuity_check(state, proposal, state_receipt,
+                                        flight_status=flight_status)
+    second = next_event_continuity_check(state, proposal, state_receipt,
+                                         flight_status=flight_status)
+    assert first.receipt_id == second.receipt_id
+    expected_gate = "candidate" if flight_status["status"] == "flown" and not stale \
+                    else "owner_review_required"
+    assert first.promotion_gate == expected_gate, first.to_dict()
+    head = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], text=True).strip()
+    print(f"narrative: head={head}, receipt={first.receipt_id}, gate={first.promotion_gate}")
 - name: sensor-array-observation
   about: Pull live sensor readings through the observation surface (PR #1005); verify the one-way principle holds (GET-only).
   script: |
