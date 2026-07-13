@@ -1,0 +1,26 @@
+# Per-repo governance config for doc-audit `execute`.
+#
+# governance_mode:
+#   standard_pr           -> open a branch + PR (never merge); for review.
+#   canon_promotion_queue -> route into the Drift Containment Protocol:
+#                            quarantine the draft, append DRIFT_LOG.md entry,
+#                            append a promotion-queue proposal. Never edits canon
+#                            directly and never opens a PR against canon content.
+#
+# Add new repos/modes here without changing code.
+
+repos:
+  Aurora_ORIONCORE_Directory_Main:
+    governance_mode: standard_pr
+    default_branch: main
+
+  aurora-cloudbank-symbolic:
+    governance_mode: standard_pr
+    default_branch: main
+
+  CanonRec:
+    governance_mode: canon_promotion_queue
+    default_branch: main
+    drift_log_path: DRIFT_LOG.md
+    promotion_queue_path: canon/L1/station/operational_library_v2_2/LOG__PROMOTION_QUEUE__v1.1.md
+    quarantine_dir: canon/_quarantine/drift
