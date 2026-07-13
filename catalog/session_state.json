@@ -263,11 +263,18 @@
       "completed_at": "2026-07-11T02:33:14Z",
       "platform": "codex",
       "detail": "Completed 2026-07-11: CloudBank PR #1195 merged as 5dd18d36 after fixing and resolving two actionable review threads at ee0cf2b0. Phase-two continuity wrapper, gate mapping, 6-case-plus hardening tests, deterministic receipts, and owner-gated canon-reconciler candidate packet path are on main. Root flight narrative-next-event-continuity-check flew twice against merge commit: missing-history gate owner_review_required, then fresh-history gate candidate (receipt 93ac4c44e8680206). No CanonRec mutation or CANON_PROMOTE."
+    },
+    {
+      "id": "cloudbank-open-issue-resolution-workshop",
+      "status": "completed",
+      "completed_at": "2026-07-13T07:53:55Z",
+      "platform": "codex",
+      "detail": "CloudBank workshop tranche completed 2026-07-13: merged PRs #1201/#1202/#1203/#1205, closing issues #1144/#1145/#1142/#1146; opened scoped follow-ups #1200 and #1204. Live queue: 2 draft PRs (#1194, #1080) and 46 open issues. PR #1194 has one fresh unresolved review thread; prepared worktree /private/tmp/cloudbank-pr1194 is clean on branch claude/architecture-advancements-review-v2cxi0 at a47f1a61. Editing was blocked by Codex usage limit before any file changed."
     }
   ],
-  "last_updated": "2026-07-13T06:28:40Z",
+  "last_updated": "2026-07-13T07:53:55Z",
   "last_platform": "codex",
-  "last_session_summary": "CloudBank workshop: merged PRs #1157-#1159, #1170, #1190-#1191, #1193, and issue-delivery PRs #1196-#1199; closed issues #1087, #1139-#1140, #1143, #1151-#1153, #1161, #1175, and #1185. Live queue: two draft owner holds (#1194 and #1080) plus 48 open issues. No mutation-ready PR remains; continue bounded issue claims from current main, preserving #1141/#1138/#1130 blockers.",
+  "last_session_summary": "CloudBank workshop: merged #1201/#1202/#1203/#1205, closing #1144/#1145/#1142/#1146; opened #1200 consent implementation and #1204 router-coverage validation. Live state: 2 draft PRs (#1194, #1080), 46 issues. #1194 has one unresolved deterministic tie-break review; clean prepared worktree is ready but the edit was blocked by the Codex usage limit before mutation.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -289,6 +296,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "345ec08",
+      "date": "2026-07-13",
+      "platform": "codex",
+      "summary": "chore(session): record CloudBank workshop batch"
+    },
     {
       "sha": "b4cbcf9",
       "date": "2026-07-13",
@@ -342,12 +355,6 @@
       "date": "2026-07-11",
       "platform": "claude-code",
       "summary": "recovery: resolve tracked objects R1-R3 (PDK-001, instruction profile, ZIPWIZ drift)"
-    },
-    {
-      "sha": "765a442",
-      "date": "2026-07-11",
-      "platform": "claude-code",
-      "summary": "narrative-promotion: PR #1183 merged -> unblock task, queue items 4-7"
     }
   ],
   "security_events": [
@@ -412,14 +419,14 @@
       "description": "Systematic CONTENT-based triage of the 450 archive files whose content is not present in the live repos (reports/recovery/data/archive_content_not_live__2026-07-10.tsv). Prior filename-based sweep undercounted (found 5). Start with the 21 distinct Python modules (runtime loader, gumas memory core, loom git-bridge, anchor validator, ZipWiz optimizer/bridge, etc.); assess each for supersession against current CloudBank/CanonRec by symbol/behavior not name. 450 is an upper bound (reformatted landings + superseded early-gen designs included)."
     },
     {
-      "id": "cloudbank-open-issue-resolution-workshop",
+      "id": "cloudbank-open-issue-resolution-workshop-pass3",
       "priority": "medium",
       "assigned_to": "codex",
-      "description": "Continue the CloudBank workshop from current main. Mutation-ready PR queue is clear; drafts #1194 and #1080 remain owner-gated. Fresh issue queue is 48 after #1087, #1139, #1140, #1143, #1151-#1153, #1161, #1175, and #1185 closed. Use cloudbank_issue_broker.py for one bounded issue at a time; do not close #1141, #1138, or #1130 without their missing design/custody/security authority."
+      "description": "Resume CloudBank workshop from live main. First address PR #1194 unresolved core.py tie-break review: include severity in the hard-veto binding total-order key (prefer higher severity on otherwise identical vetoes) and add a reversed-input regression test; prepared clean worktree /private/tmp/cloudbank-pr1194 is on the PR head branch at a47f1a61. Then re-run named superposition-gate/ethics tests, inspect all review threads and workflows, and leave draft/merge transition to the owner gate. PR #1080 remains a 56-commit draft and non-mergeable. After PRs, continue one brokered issue at a time; live issue count was 46, including follow-ups #1200 and #1204."
     }
   ],
   "known_state": {
-    "main_sha": "b4cbcf9fb6bf8f27495f1ebd8841ba7edf954d2a",
+    "main_sha": "345ec0810a340277bc623889f863b54860acb699",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
