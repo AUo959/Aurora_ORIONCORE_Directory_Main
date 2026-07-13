@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "packet_id": "AURORA_CANONREC__PACKET__ORION_ENTITY_0008_MAYA_SHEPARD_ADDENDA_NORMALIZATION_DRY_RUN__v1.0__2026-06-24",
+  "created_at_utc": "2026-06-24T04:34:00Z",
+  "packet_status": "dry_run_only",
+  "tracking_issue": 33,
+  "source_repo": "AUo959/Aurora_ORIONCORE_Directory_Main",
+  "source_refs": [
+    {
+      "path": "reports/analysis/L1_ENTITY_LEDGER__2026-06-10.json",
+      "ref": "main",
+      "blob_sha": "da908894b8ea439f0e85b7c7f2b3afa21ec02b85",
+      "evidence_range": "lines 100-145",
+      "observed_claim": "Ledger records ORION.ENTITY.0008 as Maya Shepard, Executive Officer, Command & Ethics, confirmed canon, with structured constellation and legacy drift fields."
+    },
+    {
+      "path": "canon/L1/characters/ORION.ENTITY.0008__maya-shepard.md",
+      "ref": "AUo959/CanonRec main",
+      "blob_sha": "96b8b2ae44268d6efaef818b4c26386cfa0e0269",
+      "evidence_range": "lines 1-52",
+      "observed_claim": "Target record exists and matches the core L1 identity fields; reference addenda appears as an inline dictionary-style block."
+    }
+  ],
+  "target_repo": "AUo959/CanonRec",
+  "target_branch_base": "main",
+  "target_paths": [
+    {
+      "path": "canon/L1/characters/ORION.ENTITY.0008__maya-shepard.md",
+      "current_blob_sha": "96b8b2ae44268d6efaef818b4c26386cfa0e0269",
+      "intended_operation": "update",
+      "observed_claim": "Candidate would preserve content while making the reference addenda easier to review."
+    }
+  ],
+  "proposed_canonrec_branch": "codex/canonrec-maya-shepard-addenda-normalization-v1-2026-06-24",
+  "proposed_canonrec_pr_title": "canon: normalize Maya Shepard addenda formatting",
+  "layer": "L1",
+  "entity": {
+    "entity_id": "ORION.ENTITY.0008",
+    "name": "Lt. Commander Maya Shepard",
+    "display_name": "Maya Shepard",
+    "entity_type": "character",
+    "role": "Executive Officer (XO)",
+    "division": "Command & Ethics"
+  },
+  "claim_status": "SUPPORTED",
+  "evidence_receipts": [
+    {
+      "receipt_type": "bridge_dry_run_packet_v1",
+      "receipt_id": "AURORA_CANONREC__RECEIPT__ORION_ENTITY_0008_MAYA_SHEPARD_ADDENDA_NORMALIZATION_DRY_RUN__v1.0__2026-06-24",
+      "status": "SUPPORTED",
+      "sources": [
+        "Directory_Main reports/analysis/L1_ENTITY_LEDGER__2026-06-10.json lines 100-145",
+        "CanonRec canon/L1/characters/ORION.ENTITY.0008__maya-shepard.md lines 1-52"
+      ],
+      "note": "Dry-run packet only."
+    }
+  ],
+  "ethics_gate": {
+    "required": true,
+    "status": "PASS_DRY_RUN_ONLY",
+    "notes": "No role, authority, behavior, or enforcement claim is added."
+  },
+  "continuity_gate": {
+    "required": true,
+    "status": "PASS_DRY_RUN_ONLY",
+    "notes": "Core L1 identity fields align across Directory_Main and CanonRec. Existing legacy labels remain intact."
+  },
+  "boundary_assertions": {
+    "l1_operational_reality_preserved": true,
+    "l2_simulation_not_mutated": true,
+    "l3_symbolic_mesh_not_mutated": true,
+    "scenario_seed_not_promoted": true,
+    "cloudbank_mirror_write_requested": false
+  },
+  "rollback_plan": {
+    "needed": true,
+    "method": "Close the later review branch if the candidate is rejected; revert by normal Git commit if a later accepted change needs reversal.",
+    "downstream_mirror_handling": "Run canon sync drift check after any later accepted CanonRec change."
+  },
+  "merge_approval_required": true,
+  "recommended_next_action": "Validate this packet and review the prepared draft PR body before deciding whether to open a CanonRec draft PR."
+}
