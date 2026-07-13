@@ -1,8 +1,8 @@
 # Workspace Map
 
-- Generated: `2026-07-08T16:44:49Z`
+- Generated: `2026-07-13T04:30:27Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `47`
+- Top-level entries cataloged: `43`
 - Nested repos registered: `9`
 - Archive or binary artifacts inventoried: `601`
 - Classification overrides loaded: `6` from `catalog/classification_overrides.yaml`
@@ -14,7 +14,7 @@
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `5` top-level entries
-- `intake`: `16` top-level entries
+- `intake`: `12` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
@@ -38,16 +38,12 @@
 - `.gitleaks.toml` -> `intake/.gitleaks.toml` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Aurora_Sim_Architecture` -> `intake/Aurora_Sim_Architecture` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 - `CLAUDE.md` -> `intake/CLAUDE.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `PR SENSOR ARRAY SPEC v0 3 0 DELTA.md` -> `intake/PR SENSOR ARRAY SPEC v0 3 0 DELTA.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Prplexity_Observation_6_14.md` -> `intake/Prplexity_Observation_6_14.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `QGIA_Axiom_Doctrine_Narrative.md` -> `intake/QGIA_Axiom_Doctrine_Narrative.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `QGIA_Runtime_OnePager.md` -> `intake/QGIA_Runtime_OnePager.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `SENSOR ARRAY SPECIFICATION v0 3 0.md` -> `intake/SENSOR ARRAY SPECIFICATION v0 3 0.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `SPEC__SALVAGE_OPERATIONS__v0_1_0.md` -> `intake/SPEC__SALVAGE_OPERATIONS__v0_1_0.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `aurora-cloudbank-symbolic_README_DRAFT.md` -> `intake/aurora-cloudbank-symbolic_README_DRAFT.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `aurora-cloudbank-symbolic_outside_review.md` -> `intake/aurora-cloudbank-symbolic_outside_review.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `aurora-cloudbank-symbolic_review_v2.md` -> `intake/aurora-cloudbank-symbolic_review_v2.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `narrative_engine_spec_parameters_to_narrative_core_v_0.md` -> `intake/narrative_engine_spec_parameters_to_narrative_core_v_0.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `warrant-lens` -> `intake/warrant-lens` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 
 ## Privacy Screen

@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-08T16:44:53Z",
+  "generated_at": "2026-07-13T04:30:31Z",
   "root": ".",
-  "top_level_entry_count": 47,
+  "top_level_entry_count": 43,
   "logical_zone_counts": {
-    "intake": 16,
+    "intake": 12,
     "tools": 11,
     "_staging": 7,
     "docs": 5,
@@ -16,7 +16,7 @@
   "nested_repo_count": 9,
   "archive_artifact_count": 601,
   "archive_artifact_bytes": 7802183114,
-  "planned_move_count": 15,
+  "planned_move_count": 11,
   "override_count": 6,
   "privacy_exclusion_count": 9,
   "privacy_exclusion_reasons": {

@@ -265,9 +265,9 @@
       "detail": "Completed 2026-07-11: CloudBank PR #1195 merged as 5dd18d36 after fixing and resolving two actionable review threads at ee0cf2b0. Phase-two continuity wrapper, gate mapping, 6-case-plus hardening tests, deterministic receipts, and owner-gated canon-reconciler candidate packet path are on main. Root flight narrative-next-event-continuity-check flew twice against merge commit: missing-history gate owner_review_required, then fresh-history gate candidate (receipt 93ac4c44e8680206). No CanonRec mutation or CANON_PROMOTE."
     }
   ],
-  "last_updated": "2026-07-11T02:33:14Z",
+  "last_updated": "2026-07-13T04:30:20Z",
   "last_platform": "codex",
-  "last_session_summary": "Merged CloudBank PR #1195 at 5dd18d36 after review hardening; 13 workflows and Vercel green, two expected skips, threads resolved. Registered and flew narrative-next-event-continuity-check twice; fresh run produced deterministic candidate receipt 93ac4c44e8680206. No CanonRec promotion.",
+  "last_session_summary": "Refreshed live CloudBank workshop context; merged PR #1192 at 55d36c48 after current-main integration, nine review threads resolved, 13 workflows plus Vercel green, two expected skips, and 22 focused tests passing. Open queue is now 9 PRs and 58 issues. Root main publication remains protected/rejected; local commits are preserved.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -289,6 +289,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "bab3565",
+      "date": "2026-07-13",
+      "platform": "codex",
+      "summary": "chore(session): complete narrative phase-two continuation"
+    },
     {
       "sha": "777e096",
       "date": "2026-07-11",
@@ -342,12 +348,6 @@
       "date": "2026-07-11",
       "platform": "claude-code",
       "summary": "recover(N8): promote foundational narrative-engine spec to tracked docs/"
-    },
-    {
-      "sha": "bbb19cb",
-      "date": "2026-07-11",
-      "platform": "claude-code",
-      "summary": "recovery(thread): triage N6/N7/N8 -> curated sweep complete"
     }
   ],
   "security_events": [
@@ -413,7 +413,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "777e096e7df8afe623dac21102583331f7146048",
+    "main_sha": "bab356545847f3d22aa51b01186fdf90a89adb3f",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
