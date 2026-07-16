@@ -43,8 +43,9 @@ def test_probe_does_not_call_failed_auth_a_broken_token(monkeypatch: pytest.Monk
     assert payload["status"] == "auth_failed_in_current_context"
     assert "sandbox failure is not proof" in payload["next_step"]
     assert "broken" in payload["next_step"]
-    assert "gh auth logout" in payload["next_step"]
-    assert "gh auth login" in payload["next_step"]
+    for expected_command in ("gh auth logout", "gh auth login"):
+        if expected_command not in payload["next_step"]:
+            pytest.fail(f"missing safe-auth guidance for {expected_command}")
 
 
 def test_probe_reports_usable_auth_and_repo_access(monkeypatch: pytest.MonkeyPatch) -> None:
