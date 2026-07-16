@@ -355,6 +355,12 @@ Use `--no-verify` only when:
 
 - prefer SSH over HTTPS for GitHub remotes
 - prefer `origin` as the primary remote name
+- treat a sandboxed `gh auth status` failure as an execution-context result,
+  not proof that the stored GitHub credential is invalid
+- before declaring GitHub authentication broken or changing auth state, rerun
+  `make gh-auth-check` or `gh auth status` with unsandboxed/escalated execution
+- never print or persist the token, and never run `gh auth logout`, rerun
+  `gh auth login`, or rotate credentials solely because a sandboxed probe failed
 - prefer private GitHub repos; do not create a public repo without explicit user confirmation of public visibility
 - back up remote bootstrap history before replacing it
 - never push nested repos by implication, unless the user explicitly names the nested repo as the push target in the current request
