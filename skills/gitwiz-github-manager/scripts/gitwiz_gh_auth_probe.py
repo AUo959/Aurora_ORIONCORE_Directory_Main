@@ -64,7 +64,7 @@ def probe_gh_auth(repo: str | None = None, cwd: Path | None = None) -> dict[str,
         payload["next_step"] = (
             "Codex: rerun this probe or `gh auth status` with escalated/unsandboxed execution "
             "before changing tokens. A sandbox failure is not proof that the keyring token is broken. "
-            "Do not run `gh auth logout`, rerun `gh auth login`, or rotate credentials from this result."
+            "Do not run `gh auth logout` or `gh auth login`, and do not rotate credentials from this result."
         )
         return payload
 
@@ -74,8 +74,8 @@ def probe_gh_auth(repo: str | None = None, cwd: Path | None = None) -> dict[str,
         payload["status"] = "api_failed_in_current_context"
         payload["next_step"] = (
             "Auth status passed, but API access failed in this execution context. "
-            "Rerun unsandboxed/escalated before changing auth state; do not logout, login, or rotate "
-            "credentials from this result."
+            "Rerun unsandboxed/escalated before changing auth state. Do not run `gh auth logout` or "
+            "`gh auth login`, and do not rotate credentials from this result."
         )
         return payload
 
