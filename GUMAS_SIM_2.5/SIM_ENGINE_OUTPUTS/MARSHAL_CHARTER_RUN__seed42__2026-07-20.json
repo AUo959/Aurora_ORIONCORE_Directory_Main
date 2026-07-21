@@ -1,0 +1,456 @@
+{
+ "artifact": "MARSHAL_CHARTER_RUN_RECEIPTS",
+ "version": "1.0",
+ "date": "2026-07-20",
+ "engine": "GUMASAdvancedEngine",
+ "seed": 42,
+ "turns": 40,
+ "reproduce": "build_default_scenario(seed=42); GUMASAdvancedEngine(seed=42).init_scenario(state); run(40) \u2014 deterministic; full export regenerable (1.9MB, excluded per repo large-file policy)",
+ "anchor": "GUMAS-ENGINE-ADVANCED-SYNTH",
+ "export_timestamp": "2026-07-21T02:45:39.363934+00:00",
+ "trend": [
+  {
+   "turn": 1,
+   "stability": 0.6042,
+   "risk": 0.3553
+  },
+  {
+   "turn": 2,
+   "stability": 0.6031,
+   "risk": 0.3561
+  },
+  {
+   "turn": 3,
+   "stability": 0.6013,
+   "risk": 0.3574
+  },
+  {
+   "turn": 4,
+   "stability": 0.5995,
+   "risk": 0.3587
+  },
+  {
+   "turn": 5,
+   "stability": 0.5975,
+   "risk": 0.3603
+  },
+  {
+   "turn": 6,
+   "stability": 0.5923,
+   "risk": 0.3647
+  },
+  {
+   "turn": 7,
+   "stability": 0.5861,
+   "risk": 0.3701
+  },
+  {
+   "turn": 8,
+   "stability": 0.5805,
+   "risk": 0.4085
+  },
+  {
+   "turn": 9,
+   "stability": 0.5703,
+   "risk": 0.4345
+  },
+  {
+   "turn": 10,
+   "stability": 0.5647,
+   "risk": 0.4396
+  },
+  {
+   "turn": 11,
+   "stability": 0.5567,
+   "risk": 0.4468
+  },
+  {
+   "turn": 12,
+   "stability": 0.5486,
+   "risk": 0.4543
+  },
+  {
+   "turn": 13,
+   "stability": 0.5577,
+   "risk": 0.4449
+  },
+  {
+   "turn": 14,
+   "stability": 0.5651,
+   "risk": 0.4376
+  },
+  {
+   "turn": 15,
+   "stability": 0.5611,
+   "risk": 0.4412
+  },
+  {
+   "turn": 16,
+   "stability": 0.5547,
+   "risk": 0.447
+  },
+  {
+   "turn": 17,
+   "stability": 0.546,
+   "risk": 0.455
+  },
+  {
+   "turn": 18,
+   "stability": 0.5469,
+   "risk": 0.4376
+  },
+  {
+   "turn": 19,
+   "stability": 0.5426,
+   "risk": 0.4415
+  },
+  {
+   "turn": 20,
+   "stability": 0.5397,
+   "risk": 0.4442
+  },
+  {
+   "turn": 21,
+   "stability": 0.5452,
+   "risk": 0.4389
+  },
+  {
+   "turn": 22,
+   "stability": 0.5339,
+   "risk": 0.4492
+  },
+  {
+   "turn": 23,
+   "stability": 0.5353,
+   "risk": 0.4643
+  },
+  {
+   "turn": 24,
+   "stability": 0.5347,
+   "risk": 0.4647
+  },
+  {
+   "turn": 25,
+   "stability": 0.5339,
+   "risk": 0.4653
+  },
+  {
+   "turn": 26,
+   "stability": 0.5399,
+   "risk": 0.4588
+  },
+  {
+   "turn": 27,
+   "stability": 0.5421,
+   "risk": 0.4566
+  },
+  {
+   "turn": 28,
+   "stability": 0.5411,
+   "risk": 0.4741
+  },
+  {
+   "turn": 29,
+   "stability": 0.5347,
+   "risk": 0.4967
+  },
+  {
+   "turn": 30,
+   "stability": 0.5351,
+   "risk": 0.4794
+  },
+  {
+   "turn": 31,
+   "stability": 0.534,
+   "risk": 0.4969
+  },
+  {
+   "turn": 32,
+   "stability": 0.5293,
+   "risk": 0.4847
+  },
+  {
+   "turn": 33,
+   "stability": 0.5251,
+   "risk": 0.4884
+  },
+  {
+   "turn": 34,
+   "stability": 0.5155,
+   "risk": 0.5142
+  },
+  {
+   "turn": 35,
+   "stability": 0.5107,
+   "risk": 0.5184
+  },
+  {
+   "turn": 36,
+   "stability": 0.5046,
+   "risk": 0.5239
+  },
+  {
+   "turn": 37,
+   "stability": 0.4989,
+   "risk": 0.5292
+  },
+  {
+   "turn": 38,
+   "stability": 0.4975,
+   "risk": 0.5305
+  },
+  {
+   "turn": 39,
+   "stability": 0.4898,
+   "risk": 0.538
+  },
+  {
+   "turn": 40,
+   "stability": 0.4787,
+   "risk": 0.5484
+  }
+ ],
+ "final_leader_states": {
+  "zylox_rhaegos": {
+   "risk_tolerance": 0.5,
+   "escalation_threshold": 0.5,
+   "oversight_resistance": 0.5,
+   "public_legitimacy": 0.0,
+   "elite_support": 0.11,
+   "institutional_control": 0.5,
+   "war_pressure": 0.5634
+  },
+  "kael_durn": {
+   "risk_tolerance": 0.5898,
+   "escalation_threshold": 0.4401,
+   "oversight_resistance": 0.5,
+   "public_legitimacy": 0.7,
+   "elite_support": 0.6,
+   "institutional_control": 0.5,
+   "war_pressure": 0.16
+  },
+  "lirian_vael_torin": {
+   "risk_tolerance": 0.5,
+   "escalation_threshold": 0.5,
+   "oversight_resistance": 0.45,
+   "public_legitimacy": 0.7,
+   "elite_support": 0.6,
+   "institutional_control": 0.5,
+   "war_pressure": 0.0
+  },
+  "varek_norr": {
+   "risk_tolerance": 0.55,
+   "escalation_threshold": 0.5,
+   "oversight_resistance": 0.6,
+   "public_legitimacy": 0.7,
+   "elite_support": 0.6,
+   "institutional_control": 0.5,
+   "war_pressure": 0.0
+  },
+  "vael_saros": {
+   "risk_tolerance": 0.55,
+   "escalation_threshold": 0.45,
+   "oversight_resistance": 0.65,
+   "public_legitimacy": 0.7,
+   "elite_support": 0.6,
+   "institutional_control": 0.5,
+   "war_pressure": 0.0
+  },
+  "renn_valcor": {
+   "risk_tolerance": 0.4,
+   "escalation_threshold": 0.6,
+   "oversight_resistance": 0.55,
+   "public_legitimacy": 0.7,
+   "elite_support": 0.6,
+   "institutional_control": 0.5,
+   "war_pressure": 0.0
+  },
+  "selene_arcturus": {
+   "risk_tolerance": 0.6,
+   "escalation_threshold": 0.45,
+   "oversight_resistance": 0.5,
+   "public_legitimacy": 0.7,
+   "elite_support": 0.6,
+   "institutional_control": 0.5,
+   "war_pressure": 0.0
+  },
+  "callan_deyrus": {
+   "risk_tolerance": 0.55,
+   "escalation_threshold": 0.5,
+   "oversight_resistance": 0.6,
+   "public_legitimacy": 0.7,
+   "elite_support": 0.6,
+   "institutional_control": 0.5,
+   "war_pressure": 0.0
+  },
+  "anaya_ral_seyr": {
+   "risk_tolerance": 0.5,
+   "escalation_threshold": 0.5,
+   "oversight_resistance": 0.45,
+   "public_legitimacy": 0.7,
+   "elite_support": 0.6,
+   "institutional_control": 0.5,
+   "war_pressure": 0.0
+  }
+ },
+ "gu_base_events": [
+  {
+   "turn": 1,
+   "event_id": "aggression_galactic_union_velar_imperium_1",
+   "type": "military_escalation"
+  },
+  {
+   "turn": 3,
+   "event_id": "aggression_galactic_union_ai_warlord_3",
+   "type": "military_escalation"
+  },
+  {
+   "turn": 6,
+   "event_id": "tech_galactic_union_6",
+   "type": "technology_breakthrough"
+  },
+  {
+   "turn": 7,
+   "event_id": "espionage_galactic_union_ai_warlord_7",
+   "type": "espionage_exposure"
+  },
+  {
+   "turn": 11,
+   "event_id": "espionage_galactic_union_ai_warlord_11",
+   "type": "espionage_exposure"
+  },
+  {
+   "turn": 13,
+   "event_id": "aggression_galactic_union_ai_warlord_13",
+   "type": "military_escalation"
+  },
+  {
+   "turn": 13,
+   "event_id": "trade_galactic_union_tharaxian_nomads_13",
+   "type": "trade_agreement"
+  },
+  {
+   "turn": 15,
+   "event_id": "econ_shock_galactic_union_15",
+   "type": "economic_shock"
+  },
+  {
+   "turn": 15,
+   "event_id": "trade_galactic_union_vorran_clans_15",
+   "type": "trade_agreement"
+  },
+  {
+   "turn": 15,
+   "event_id": "trade_galactic_union_pmc_syndicate_15",
+   "type": "trade_agreement"
+  },
+  {
+   "turn": 16,
+   "event_id": "trade_galactic_union_prime_construct_16",
+   "type": "trade_agreement"
+  },
+  {
+   "turn": 16,
+   "event_id": "infra_galactic_union_16",
+   "type": "infrastructure_investment"
+  },
+  {
+   "turn": 17,
+   "event_id": "econ_shock_galactic_union_17",
+   "type": "economic_shock"
+  },
+  {
+   "turn": 17,
+   "event_id": "aggression_galactic_union_ai_warlord_17",
+   "type": "military_escalation"
+  },
+  {
+   "turn": 17,
+   "event_id": "trade_galactic_union_velar_imperium_17",
+   "type": "trade_agreement"
+  },
+  {
+   "turn": 20,
+   "event_id": "econ_shock_galactic_union_20",
+   "type": "economic_shock"
+  },
+  {
+   "turn": 21,
+   "event_id": "trade_galactic_union_elari_ascendancy_21",
+   "type": "trade_agreement"
+  },
+  {
+   "turn": 22,
+   "event_id": "econ_shock_galactic_union_22",
+   "type": "economic_shock"
+  },
+  {
+   "turn": 22,
+   "event_id": "trade_galactic_union_elari_ascendancy_22",
+   "type": "trade_agreement"
+  },
+  {
+   "turn": 23,
+   "event_id": "econ_shock_galactic_union_23",
+   "type": "economic_shock"
+  },
+  {
+   "turn": 23,
+   "event_id": "trade_galactic_union_prime_construct_23",
+   "type": "trade_agreement"
+  },
+  {
+   "turn": 25,
+   "event_id": "trade_galactic_union_kaelar_orders_25",
+   "type": "trade_agreement"
+  },
+  {
+   "turn": 30,
+   "event_id": "trade_galactic_union_pmc_syndicate_30",
+   "type": "trade_agreement"
+  },
+  {
+   "turn": 32,
+   "event_id": "trade_galactic_union_elari_ascendancy_32",
+   "type": "trade_agreement"
+  },
+  {
+   "turn": 34,
+   "event_id": "econ_shock_galactic_union_34",
+   "type": "economic_shock"
+  },
+  {
+   "turn": 35,
+   "event_id": "econ_shock_galactic_union_35",
+   "type": "economic_shock"
+  },
+  {
+   "turn": 36,
+   "event_id": "econ_shock_galactic_union_36",
+   "type": "economic_shock"
+  },
+  {
+   "turn": 37,
+   "event_id": "trade_galactic_union_ai_warlord_37",
+   "type": "trade_agreement"
+  },
+  {
+   "turn": 37,
+   "event_id": "infra_galactic_union_37",
+   "type": "infrastructure_investment"
+  }
+ ],
+ "cross_seed_checks": {
+  "zylox_public_legitimacy_T40": {
+   "42": 0.0,
+   "7": 0.074,
+   "99": 0.032
+  },
+  "valcor_public_legitimacy_T40": {
+   "42": 0.7,
+   "7": 0.7,
+   "99": 0.7
+  },
+  "saros_oversight_resistance": "0.30 (T0 structural) -> 0.65 (T40), invariant across seeds"
+ }
+}
