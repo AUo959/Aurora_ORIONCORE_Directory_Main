@@ -291,11 +291,18 @@
       "completed_at": "2026-07-21T04:47:10Z",
       "platform": "claude-code",
       "detail": "All four Velar map-anchor requirements now have entity records (STAGING): loc_vel_core_01 + loc_vel_border_01 from placed systems (map sec.8.6/8.5, position canon), loc_velar_ruin_worlds + loc_velar_outer_colony_nodes as anchor-class placeholders (unplaced, position staging). Authority-table rows added (both copies); all anchored to loc_zone_velar_crescent. Vel-Surak reformist-founding lineage note staged as INFERENCE_PENDING_SOURCE. CanonRec 72cb6d6. Velar linter: 9 entities, 0 violations."
+    },
+    {
+      "id": "spatha-canon-promotion",
+      "status": "completed",
+      "completed_at": "2026-07-21T05:14:06Z",
+      "platform": "claude-code",
+      "detail": "Promotion pass executed (owner-directed): SPATHA_MODERNA kit-detail CANON (naming/physical/doctrine from 2026-02 design thread); sim capture landed in CanonRec canon/L2/operations/; roster closure \u2014 char_cross, char_vorn (female), char_roake (logistics/pilot), char_kade (Sentinel) CANON with do-not-invent guards; marshals_sentinels kit copy SUPERSEDED pointer. Validator clean. CanonRec 8b7de64. Open optional: equipment-class records (G5), character capsule builds."
     }
   ],
-  "last_updated": "2026-07-21T04:47:10Z",
+  "last_updated": "2026-07-21T05:14:06Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Velar domain fully closed for this arc: fabric pass -> 5 rulings -> Vel-Surak placement (Union rebind, GU-ECON-01) -> Crescent anchor records (VEL-CORE-01/VEL-BORDER-01 + Ruin/Outer classes, STAGING) -> lineage note staged as non-citable inference. Linter exit 0 across 9 Velar entities. CanonRec d94b805..72cb6d6. Open for owner: STAGING promotion review of anchor records + zone entities; system-name ratification; lineage sourcing. Still queued: capsule-location-binding-rebuild, reconciler-fabric-checks, cloudbank-fabric-drift-wiring.",
+  "last_session_summary": "Spatha promotion pass complete (owner-directed, follows context-recovery report): design-thread canon ratified into SPATHA_MODERNA__KIT_DETAIL (CANON); L2 sim capture landed honoring its L1-promotion claim; all four capture actors now have character records (Cross, Vorn, Roake, Kade \u2014 roster closure per C4, unestablished details guarded); kit deduped (operations/ canonical, marshals_sentinels pointer). CanonRec 8b7de64, pushed with root. Earlier today: full Velar arc (fabric pass, 5+1 rulings, placement, Crescent anchors). Queued: capsule-location-binding-rebuild, reconciler-fabric-checks, cloudbank-fabric-drift-wiring.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -462,12 +469,6 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Implement RULING-FABRIC-WIRING in aurora-cloudbank-symbolic-main: fabric_invariants_check findings -> DriftAlert -> DriftResponder runbooks (VIOLATION->alert/escalate, GAP->log/notify). Trace receipts: reports/analysis/velar_fabric_pass__2026-07-21.md sec.2."
-    },
-    {
-      "id": "spatha-canon-promotion",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Promote spatha design canon per reports/analysis/spatha_context_report__2026-07-21.md: (G1) fold thread-locked naming/physical/doctrine content into marshals ledger or kit-detail file via aurora-canon-reconciler (source: 2026-02-01/02 archive thread); (G2) land L2 sim capture in CanonRec with promotion receipt or demote its sec.9 claim; (G3) Cross & Vorn roster ruling (C4); (G4) dedupe Marshal_Standard_Kit copies (operations/ = canonical, SUPERSEDE marshals_sentinels copy)."
     }
   ],
   "known_state": {
