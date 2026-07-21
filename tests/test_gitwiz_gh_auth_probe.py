@@ -43,6 +43,30 @@ def test_probe_does_not_call_failed_auth_a_broken_token(monkeypatch: pytest.Monk
     assert payload["status"] == "auth_failed_in_current_context"
     assert "sandbox failure is not proof" in payload["next_step"]
     assert "broken" in payload["next_step"]
+    for expected_command in ("gh auth logout", "gh auth login"):
+        if expected_command not in payload["next_step"]:
+            pytest.fail(f"missing safe-auth guidance for {expected_command}")
+
+
+def test_probe_preserves_auth_state_when_api_user_probe_fails(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(gitwiz_gh_auth_probe.shutil, "which", lambda _name: "/usr/local/bin/gh")
+
+    def fake_run_command(args: list[str], cwd: Path | None = None):
+        if args == ["gh", "auth", "status"]:
+            return completed(args, stdout="github.com\n  ✓ Logged in")
+        if args == ["gh", "api", "user", "--jq", ".login"]:
+            return completed(args, stderr="network unavailable", returncode=1)
+        pytest.fail(f"unexpected command: {args}")
+
+    monkeypatch.setattr(gitwiz_gh_auth_probe, "run_command", fake_run_command)
+
+    payload = gitwiz_gh_auth_probe.probe_gh_auth()
+
+    if payload["status"] != "api_failed_in_current_context":
+        pytest.fail(f"unexpected API failure status: {payload['status']}")
+    for expected_command in ("gh auth logout", "gh auth login"):
+        if expected_command not in payload["next_step"]:
+            pytest.fail(f"missing safe-auth guidance for {expected_command}")
 
 
 def test_probe_reports_usable_auth_and_repo_access(monkeypatch: pytest.MonkeyPatch) -> None:

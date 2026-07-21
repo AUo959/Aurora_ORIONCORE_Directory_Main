@@ -125,6 +125,8 @@ Important interpretation rule:
   machine's real GitHub auth is healthy
 - do not write "token invalid", rotate credentials, or fall back to public API
   solely because a sandboxed `gh` call failed
+- never print or persist the token; based only on that result, do not run
+  `gh auth logout` or `gh auth login`, and do not otherwise mutate credential state
 - rerun the probe or `gh auth status` with escalated execution before
   diagnosing auth
 - if the escalated `gh` command succeeds, record it as a sandbox or
