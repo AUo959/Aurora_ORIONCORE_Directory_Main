@@ -32,7 +32,7 @@ STATUS_VOCAB = {
     "alias_forward_only",  # SUPERSEDED alias-forward records (CERTAINTY_TAGS.md)
 }
 
-DOMAIN_FACTIONS = {"velar": {"velar_imperium"}}
+DOMAIN_FACTIONS = {"velar": {"velar_imperium"}, "union": {"galactic_union"}}
 
 
 def add(findings, code, severity, subject, detail):
@@ -360,15 +360,44 @@ def check_corporeal(findings, domain_terms):
                 )
         # C1: characters need a single location binding to be checkable.
         if os.path.basename(path) == "identity.json":
-            loc_fields = [k for k in rec if "location" in k.lower() or "vessel" in k.lower()]
-            if not loc_fields:
+            binding = rec.get("location_binding")
+            if binding is None:
+                loc_fields = [
+                    k for k in rec if "location" in k.lower() or "vessel" in k.lower()
+                ]
+                if not loc_fields:
+                    add(
+                        findings,
+                        "C1",
+                        "GAP",
+                        subject,
+                        "Character capsule has no location_binding field; "
+                        "one-body-one-place is unenforceable statically or in-engine.",
+                    )
+            elif isinstance(binding, list):
                 add(
                     findings,
                     "C1",
-                    "GAP",
+                    "VIOLATION",
                     subject,
-                    "Character capsule has no location/vessel binding field; "
-                    "one-body-one-place is unenforceable statically or in-engine.",
+                    f"Multiple simultaneous location bindings: {binding}.",
+                )
+            elif not isinstance(binding, dict) or not binding.get("target_id"):
+                add(
+                    findings,
+                    "C1",
+                    "VIOLATION",
+                    subject,
+                    "location_binding present but malformed (needs type/target_id/basis).",
+                )
+            elif binding["target_id"] not in domain_terms["all_ids"]:
+                add(
+                    findings,
+                    "C1",
+                    "VIOLATION",
+                    subject,
+                    f"location_binding target {binding['target_id']!r} does not resolve "
+                    "to a canonical entity.",
                 )
             # C3: collect office claims (title prefix of name + role).
             name = rec.get("name") or rec.get("character_name") or ""
@@ -404,7 +433,13 @@ def check_corporeal(findings, domain_terms):
             r"(?:Chancellor|Marshal|Commander|General|Chief|Lord)\s+([A-Z][a-z']+)", text
         ):
             person = m.group(1)
-            if person.lower() in {"council", "academy", "class"}:
+            # Title-compound stopwords: "Chief Science Officer", "Lord Commander" etc.
+            # are role strings, not personal names.
+            if person.lower() in {
+                "council", "academy", "class", "science", "medical", "engineering",
+                "security", "operations", "command", "staff", "officer", "marshal",
+                "commander", "general", "chief", "high", "standard", "of", "the",
+            }:
                 continue
             resolved = any(
                 person.lower() in n.lower() for n in known_names
