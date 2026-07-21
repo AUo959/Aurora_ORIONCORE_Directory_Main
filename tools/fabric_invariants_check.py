@@ -27,7 +27,10 @@ CANONREC = os.path.join(
     "CanonRec",
 )
 
-STATUS_VOCAB = {"active", "deceased", "destroyed", "retired", "unknown", "inactive"}
+STATUS_VOCAB = {
+    "active", "deceased", "destroyed", "retired", "unknown", "inactive",
+    "alias_forward_only",  # SUPERSEDED alias-forward records (CERTAINTY_TAGS.md)
+}
 
 DOMAIN_FACTIONS = {"velar": {"velar_imperium"}}
 
@@ -256,6 +259,8 @@ def check_physical(findings, domain_terms):
         rel = os.path.relpath(path, CANONREC)
         kind = rec.get("entity_kind")
         if kind == "location":
+            if rec.get("certainty") == "SUPERSEDED":
+                continue  # alias-forward records carry no placement obligations
             # P1: map/table is source of truth for placement.
             key, row = table_row(rec.get("name", ""))
             ent_status = rec.get("canonical_position_status")
@@ -299,7 +304,11 @@ def check_physical(findings, domain_terms):
                     f"region_id {region!r} does not resolve to a canonical entity.",
                 )
             note = rec.get("promotion_note") or ""
-            if "collapse into" in note and not rec.get("parent_org_id"):
+            if (
+                "collapse into" in note
+                and not rec.get("parent_org_id")
+                and not rec.get("forwarded_to")
+            ):
                 add(
                     findings,
                     "P3",

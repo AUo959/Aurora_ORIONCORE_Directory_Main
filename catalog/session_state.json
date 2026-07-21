@@ -277,11 +277,18 @@
       "completed_at": "2026-07-21T03:56:03Z",
       "platform": "claude-code",
       "detail": "Velar fabric pass complete: static linter built (tools/fabric_invariants_check.py); P1 Vel-Surak placement contradiction found (entity canon-claim vs map STAGING/TBD); cloudbank symbolic layer traced (zero semantic fabric enforcement); engine seed-42 x40 verified (T1/T4/C4 pass, P4 route-citation gap). Receipts: reports/analysis/velar_fabric_pass__2026-07-21.md; CanonRec d94b805 (LEDGER-VELAR-0001..0006 + drift entry). No canon modified."
+    },
+    {
+      "id": "velar-fabric-owner-rulings",
+      "status": "completed",
+      "completed_at": "2026-07-21T04:22:33Z",
+      "platform": "claude-code",
+      "detail": "All 5 rulings resolved by owner 2026-07-21 (recommended options): P1 downgrade applied to both Vel-Surak records; megacity collapsed SUPERSEDED alias-forward; placement_rule on 16 mobile assets; P4 promotion-gated; DriftResponder wiring approved. CanonRec 39eaf51. Linter now exit 0 (0 violations; remaining gaps open by design)."
     }
   ],
-  "last_updated": "2026-07-21T04:01:00Z",
+  "last_updated": "2026-07-21T04:22:44Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Velar fabric pass (queue item velar-fabric-pass) executed end-to-end per FABRIC_INVARIANTS v0.1: new deterministic linter tools/fabric_invariants_check.py (T/P/C static checks, exit-coded); 2 P1 violations (Vel-Surak placement canon-claim vs map-authority STAGING/TBD), P3/C1/P2 gaps; aurora-cloudbank-symbolic trace shows zero semantic fabric enforcement (integration point: checker->DriftAlert->DriftResponder); GUMASAdvancedEngine seed-42 x40 event-ledger verified (T1/T4/C4 pass, P4 migration-route gap, turn-1 tech backfill noted). CanonRec d94b805; 5 owner rulings queued.",
+  "last_session_summary": "Velar fabric pass + ruling batch complete: pass found 2 P1 violations, traced zero semantic fabric enforcement in cloudbank symbolic layer, verified engine seed-42x40 ledger (T1/T4/C4 pass, P4 gap). Owner resolved all 5 rulings same day: P1 downgrade (Vel-Surak canon->staging per map primacy), megacity SUPERSEDED collapse, placement_rule on 16 mobile assets, P4 promotion-gated, DriftResponder wiring approved. Linter tools/fabric_invariants_check.py now exit 0. CanonRec d94b805+39eaf51. Queued: capsule-location-binding-rebuild, reconciler-fabric-checks, cloudbank-fabric-drift-wiring.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -432,10 +439,22 @@
       "description": "Resume CloudBank workshop from live main. First address PR #1194 unresolved core.py tie-break review: include severity in the hard-veto binding total-order key (prefer higher severity on otherwise identical vetoes) and add a reversed-input regression test; prepared clean worktree /private/tmp/cloudbank-pr1194 is on the PR head branch at a47f1a61. Then re-run named superposition-gate/ethics tests, inspect all review threads and workflows, and leave draft/merge transition to the owner gate. PR #1080 remains a 56-commit draft and non-mergeable. After PRs, continue one brokered issue at a time; live issue count was 46, including follow-ups #1200 and #1204."
     },
     {
-      "id": "velar-fabric-owner-rulings",
-      "priority": "high",
-      "assigned_to": "owner",
-      "description": "Owner rulings from Velar fabric pass: RULING-VELAR-P1 (Vel-Surak placement: fix map row or downgrade entity position status), RULING-VELAR-P3 (region_id/adjacency + megacity collapse), RULING-FABRIC-SCHEMA (placement_rule on mobile assets, location binding on character capsules), RULING-FABRIC-WIRING (fabric checker -> DriftAlert -> DriftResponder), RULING-ENGINE-P4 (migration route citation). Details: reports/analysis/velar_fabric_pass__2026-07-21.md par.4; CanonRec canon/L2/velar/VELAR_FABRIC_PASS__2026-07-21.md."
+      "id": "capsule-location-binding-rebuild",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Implement RULING-FABRIC-SCHEMA part (b): add location_binding field to charforge capsule identity schema and rebuild all sha256-manifested capsules (charforge-capsule-v1.0) \u2014 hand-editing breaks manifest integrity. Then extend tools/fabric_invariants_check.py C1 check to validate the binding."
+    },
+    {
+      "id": "reconciler-fabric-checks",
+      "priority": "medium",
+      "assigned_to": "codex",
+      "description": "Implement RULING-ENGINE-P4 + RULING-FABRIC-SCHEMA reconciler checks in aurora-canon-reconciler: (1) P4 promotion gate \u2014 canon promotions citing movement/cross-region events must include canonical route/drive citation; (2) P2 placement_rule validation on mobile assets; (3) P1 rule \u2014 entity canonical_position_status must not exceed map authority row status. Spec: FABRIC_INVARIANTS v0.1 verification table."
+    },
+    {
+      "id": "cloudbank-fabric-drift-wiring",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Implement RULING-FABRIC-WIRING in aurora-cloudbank-symbolic-main: fabric_invariants_check findings -> DriftAlert -> DriftResponder runbooks (VIOLATION->alert/escalate, GAP->log/notify). Trace receipts: reports/analysis/velar_fabric_pass__2026-07-21.md sec.2."
     }
   ],
   "known_state": {
@@ -794,5 +813,6 @@
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
-  }
+  },
+  "_summary_set_manually": true
 }
