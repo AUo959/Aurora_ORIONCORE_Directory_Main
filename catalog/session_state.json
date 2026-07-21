@@ -272,9 +272,9 @@
       "detail": "CloudBank workshop tranche completed 2026-07-13: merged PRs #1201/#1202/#1203/#1205, closing issues #1144/#1145/#1142/#1146; opened scoped follow-ups #1200 and #1204. Live queue: 2 draft PRs (#1194, #1080) and 46 open issues. PR #1194 has one fresh unresolved review thread; prepared worktree /private/tmp/cloudbank-pr1194 is clean on branch claude/architecture-advancements-review-v2cxi0 at a47f1a61. Editing was blocked by Codex usage limit before any file changed."
     }
   ],
-  "last_updated": "2026-07-21T02:54:42Z",
+  "last_updated": "2026-07-21T03:02:09Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Marshals Charter Promotion Pass complete: CanonRec 08df762 locks Charter v0.1 Articles I-III,V as CANON (three-tier override, official-acts immunity, 9-jurist Judicial Council, Grand Marshal Aric Thal); Art IV APPROX. org_judicial_council + org_sentinel_high_command STAGING->CANON. Engine-derived (GUMASAdvancedEngine seeds 42/7/99, receipts committed root 751218a). Remaining STAGING: Sentinel-Diplomat variant. Remaining UNCONFIRMED: Judicator supercarrier gloss. Marshals domain fully reconciled.",
+  "last_session_summary": "Marshals Closeout Pass (CanonRec e62875b): Art IV chronology anchored to canonical timeline convention (pact ~8 ya UFC-E3, cohort ~4 ya UFC-E4, transition ~2 ya UFC-E5; minimal constraint-satisfying rule); Sentinel-Diplomat seventh variant CANON; Judicator 'supercarrier' CANON hull-type descriptor. Marshals domain: zero open holds \u2014 fully reconciled from repo survey through engine-derived charter to final closeout, all receipts on GitHub.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",

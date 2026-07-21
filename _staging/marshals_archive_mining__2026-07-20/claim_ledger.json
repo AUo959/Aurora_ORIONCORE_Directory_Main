@@ -78,10 +78,10 @@
       "entity_id": "vessel_gu_001",
       "claim_type": "attribute",
       "value": "Class gloss: 'supercarrier' as descriptor of CLASS-JUDICATOR-01 (not a rename)",
-      "certainty": "UNCONFIRMED",
+      "certainty": "CANON_PROMOTE",
       "doc_source": "'Team Dev_GUMAS' thread, 2025-03-27",
       "conflicts_with": "C3 \u2014 canon class_id CLASS-JUDICATOR-01",
-      "notes": "Held back from promotion | HELD at UNCONFIRMED per report C3"
+      "notes": "Held back from promotion | HELD at UNCONFIRMED per report C3 | RESOLVED (Closeout Pass 2026-07-21): supercarrier = CANON hull-type descriptor of CLASS-JUDICATOR-01, no rename"
     },
     {
       "claim_id": "CL-05",
@@ -171,7 +171,7 @@
       "certainty": "STAGING",
       "doc_source": "'MAS - Glactic Union' thread 2025-03-15 + Sentinel doctrine passages",
       "conflicts_with": "(a) Grand Marshal vs Chief Marshal office ambiguity; (b) canonical six-variant list (LEDGER-SENTINEL-0003)",
-      "notes": "Owner ruling needed before promotion (LEDGER-SENTINEL-0004). | RESOLVED (owner, 2026-07-20): (a) Grand Marshal ruled DISTINCT office \u2014 org_sentinel_high_command created at STAGING; factions.json parallel-substructure anomaly now coherent (LEDGER-MARSHALS-0006). (b) Diplomatic-Class admitted as seventh variant \"Sentinel-Diplomat\" at STAGING (LEDGER-SENTINEL-0005)."
+      "notes": "Owner ruling needed before promotion (LEDGER-SENTINEL-0004). | RESOLVED (owner, 2026-07-20): (a) Grand Marshal ruled DISTINCT office \u2014 org_sentinel_high_command created at STAGING; factions.json parallel-substructure anomaly now coherent (LEDGER-MARSHALS-0006). (b) Diplomatic-Class admitted as seventh variant \"Sentinel-Diplomat\" at STAGING (LEDGER-SENTINEL-0005). | Sentinel-Diplomat promoted to CANON (Closeout Pass 2026-07-21)"
     },
     {
       "claim_id": "CL-14",
@@ -201,7 +201,7 @@
       "certainty": "APPROX",
       "doc_source": "Charter Art. IV; engine cadence F8",
       "conflicts_with": null,
-      "notes": "No calendar dates invented; anchoring deferred until canonical GU calendar exists"
+      "notes": "No calendar dates invented; anchoring deferred until canonical GU calendar exists | ANCHORED (Closeout Pass 2026-07-21): timeline convention \"~N years ago\" \u2014 pact ~8 ya (UFC-E3), cohort ~4 ya (UFC-E4), transition ~2 ya (UFC-E5); minimal constraint-satisfying rule, 1 cycle = 1 year"
     }
   ],
   "resolution_pass": {
@@ -223,7 +223,8 @@
       "5. CanonRec commit locks CANON_PROMOTE claims as CANON",
       "6. CL-13 rulings (owner, 2026-07-20): SHC distinct office + Sentinel-Diplomat 7th variant; applied and pushed (SHAs in cl13_commits)",
       "7. Charter derivation pass (2026-07-20): GUMAS engine runs seeds 42/7/99 -> Charter v0.1 STAGING, Grand Marshal Aric Thal, relative chronology; CL-14..16",
-      "8. Marshals Charter Promotion Pass (owner-approved, 2026-07-20): Articles I-III,V -> CANON; org_judicial_council + org_sentinel_high_command STAGING->CANON; Art IV stays APPROX; SHA in charter_promotion_commit"
+      "8. Marshals Charter Promotion Pass (owner-approved, 2026-07-20): Articles I-III,V -> CANON; org_judicial_council + org_sentinel_high_command STAGING->CANON; Art IV stays APPROX; SHA in charter_promotion_commit",
+      "9. Marshals Closeout Pass (owner-approved, 2026-07-21): Art IV anchored to timeline (UFC-E3..E5); Sentinel-Diplomat CANON; supercarrier gloss CANON hull-type. Zero open holds. SHA in closeout_commit"
     ],
     "authoritative_record": "this file (claims + resolution_pass) and CanonRec DRIFT_LOG.md",
     "canonrec_commit": "744e3a064241467044bd22549f2c6830a72e596b",
@@ -232,6 +233,7 @@
       "canonrec": "14eb011",
       "root": "containing commit (self-referential; see git log for this file)"
     },
-    "charter_promotion_commit": "08df762"
+    "charter_promotion_commit": "08df762",
+    "closeout_commit": "e62875b"
   }
 }
