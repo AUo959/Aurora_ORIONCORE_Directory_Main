@@ -298,11 +298,18 @@
       "completed_at": "2026-07-21T05:14:06Z",
       "platform": "claude-code",
       "detail": "Promotion pass executed (owner-directed): SPATHA_MODERNA kit-detail CANON (naming/physical/doctrine from 2026-02 design thread); sim capture landed in CanonRec canon/L2/operations/; roster closure \u2014 char_cross, char_vorn (female), char_roake (logistics/pilot), char_kade (Sentinel) CANON with do-not-invent guards; marshals_sentinels kit copy SUPERSEDED pointer. Validator clean. CanonRec 8b7de64. Open optional: equipment-class records (G5), character capsule builds."
+    },
+    {
+      "id": "aric-thal-entity-record",
+      "status": "completed",
+      "completed_at": "2026-07-21T05:37:00Z",
+      "platform": "claude-code",
+      "detail": "Closed by the Roster Closure Pass, which also found a second gap class: the complete Operation Silent Dagger Sentinel team. Five records created (char_aric_thal with dual-role career, char_lior_serath, char_veyna_koris, char_kael_voss, char_darek_voss KIA/deceased per C2). Report: reports/analysis/roster_closure_audit__2026-07-21.md. Verification: 0 true roster gaps canon-wide; fabric linter union 0 violations/78 entities, velar clean. CanonRec b181742."
     }
   ],
-  "last_updated": "2026-07-21T05:30:24Z",
+  "last_updated": "2026-07-21T05:37:00Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Spatha arc closed end-to-end: context report -> promotion pass -> G5. G5 delivered equipment-class records (spade/iron/viper/shield), Ranger gunboat vessel_gu_015, and CharForge capsules for Cross/Vorn/Roake/Kade \u2014 all four verify clean through character_capsule_adapter (33 capsules total, zero mismatches) and carry the FIRST location_binding rollout (C1). Linter extended: C1 now validates bindings, C4 title-stopwords added, union domain added. Surfaced genuine C4 gap: Grand Marshal Aric Thal is CANON with no entity record (queued). CanonRec 3d73107+. Earlier today: full Velar arc. Queued: aric-thal-entity-record, capsule-location-binding-rebuild (29 legacy capsules), reconciler-fabric-checks, cloudbank-fabric-drift-wiring.",
+  "last_session_summary": "Roster closure complete: Aric Thal gap (Charter Art. V CANON incumbent, no record) resolved, and a systematic canon-wide sweep found a second class \u2014 the entire Operation Silent Dagger Sentinel team unrecorded. Five records created from ledger/Charter/SRC-0005 facts only (Darek Voss deceased/KIA per C2; Kael Voss/Darek Voss surname ambiguity flagged not resolved). Canon now has ZERO unrecorded named actors; fabric linter union domain 0 violations across 78 entities. Full day: Velar fabric arc + spatha context recovery/promotion + G5 equipment-and-capsules + roster closure. CanonRec b181742. Queued: sentinel-team-capsules, capsule-location-binding-rebuild (17 legacy), reconciler-fabric-checks, cloudbank-fabric-drift-wiring.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -471,10 +478,10 @@
       "description": "Implement RULING-FABRIC-WIRING in aurora-cloudbank-symbolic-main: fabric_invariants_check findings -> DriftAlert -> DriftResponder runbooks (VIOLATION->alert/escalate, GAP->log/notify). Trace receipts: reports/analysis/velar_fabric_pass__2026-07-21.md sec.2."
     },
     {
-      "id": "aric-thal-entity-record",
-      "priority": "medium",
+      "id": "sentinel-team-capsules",
+      "priority": "low",
       "assigned_to": "either",
-      "description": "C4 roster gap surfaced by the union-domain fabric linter: Grand Marshal Aric Thal is CANON (Marshals Charter Promotion Pass 2026-07-20, Article V incumbent of org_sentinel_high_command) but has NO entity record \u2014 he is referenced in org_sentinel_high_command and char_kade knowledge with nothing to resolve to. Create canon/L2/entities/characters/char_aric_thal.json (and optionally a capsule) recording only charter-established facts; do not invent history. Same class of gap as the Cross/Vorn closure."
+      "description": "Optional follow-on from the Roster Closure Pass: build CharForge capsules for the five Sentinel-team records (char_aric_thal, char_lior_serath, char_veyna_koris, char_kael_voss, char_darek_voss) so they are engine-instantiable, following the Cross-crew pattern (charforge-capsule-v1.0, location_binding, deterministic state-vector rule). Also optional: cross-link Sentinel variant strings (Praetor/Phantom/Striker/Stalker/Vanguard) to the canonical seven-variant taxonomy as equipment records."
     }
   ],
   "known_state": {
