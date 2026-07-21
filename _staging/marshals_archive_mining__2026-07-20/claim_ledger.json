@@ -1,0 +1,199 @@
+{
+  "ledger_type": "L2_CLAIM_LEDGER",
+  "generated": "2026-07-20",
+  "source": "_staging/marshals_archive_mining__2026-07-20/marshals_excerpts_curated.md",
+  "claims": [
+    {
+      "claim_id": "CL-01",
+      "entity_id": "org_union_marshals",
+      "claim_type": "relationship",
+      "value": "Oversight model: Senate sets budget and confirms the Chief Marshal; Chief Marshal reports to the Judicial Council, not the Chancellor; Chancellor appoints the Chief Marshal with Senate approval and cannot issue orders in criminal investigations; chain of command independent of military and planetary police.",
+      "certainty": "CANON_PROMOTE",
+      "doc_source": "archives/session_archives/Au_Archive_323_41 \u2014 'MAS - Glactic Union' thread, 2025-03-12",
+      "conflicts_with": "None on Union Marshals; 'Judicial Council' is a ghost entity (C5)",
+      "notes": "Fills ledger Open Question #1 and grounds LEDGER-EXTRAP-0002 | Judicial Council ghost resolved: org_judicial_council created at STAGING"
+    },
+    {
+      "claim_id": "CL-02a",
+      "entity_id": "org_union_marshals",
+      "claim_type": "attribute",
+      "value": "jurisdiction: crimes crossing planetary or sector boundaries (organized crime, political crimes, fugitives)",
+      "certainty": "CANON_PROMOTE",
+      "doc_source": "'MAS - Glactic Union' thread, 2025-03-12",
+      "conflicts_with": null,
+      "notes": "Canon field currently null \u2014 pure gap-fill"
+    },
+    {
+      "claim_id": "CL-02b",
+      "entity_id": "org_union_marshals",
+      "claim_type": "attribute",
+      "value": "Authority to override local planetary police; operates with diplomatic immunity across borders",
+      "certainty": "CANON_PROMOTE",
+      "doc_source": "'MAS - Glactic Union' thread, 2025-03-12",
+      "conflicts_with": null,
+      "notes": ""
+    },
+    {
+      "claim_id": "CL-02c",
+      "entity_id": "org_union_marshals",
+      "claim_type": "attribute",
+      "value": "Institutional weaknesses: minimal Outer Colony presence; vulnerable to corrupt local governments",
+      "certainty": "CANON_PROMOTE",
+      "doc_source": "'MAS - Glactic Union' thread, 2025-03-12",
+      "conflicts_with": null,
+      "notes": "Consistent with ledger threat model and seed42 review"
+    },
+    {
+      "claim_id": "CL-03",
+      "entity_id": "EVT-DRAFT-ZYLOX-DURN-PACT",
+      "claim_type": "attribute",
+      "value": "Origin event: Chancellor's pact with Marshals leadership delivered the combat-shielded power suit (Sentinel program genesis), the capital-planet academy (Marshal Academy genesis), expedited funding, and an anti-AI-overreach task force.",
+      "certainty": "CANON_PROMOTE",
+      "doc_source": "'MAS - Glactic Union' thread, 2025-03-12",
+      "conflicts_with": "C1 (Durn as Marshals Director vs canon Saros/Durn roles); C2 (Zylox Verrin vs Rhaegos)",
+      "notes": "Promotable only via Option C retcon (Durn as prior Director) or held as LEGEND_CONTESTED in-world account | RESOLVED via owner-approved retcon (Durn as prior Director); promoted in addendum LEDGER-MARSHALS-0005"
+    },
+    {
+      "claim_id": "CL-04a",
+      "entity_id": "vessel_gu_001",
+      "claim_type": "attribute",
+      "value": "crew: ~12,000",
+      "certainty": "APPROX",
+      "doc_source": "'Team Dev_GUMAS' thread, 2025-03-27",
+      "conflicts_with": null,
+      "notes": ""
+    },
+    {
+      "claim_id": "CL-04b",
+      "entity_id": "vessel_gu_001",
+      "claim_type": "attribute",
+      "value": "Role: command ship for Marshal-led strike forces; hosts a full Sentinel-class strike unit",
+      "certainty": "CANON_PROMOTE",
+      "doc_source": "'Team Dev_GUMAS' thread, 2025-03-27",
+      "conflicts_with": null,
+      "notes": "Coheres with Marshal-Captain Elias Drayen's CANON ship_assignment; CO remains Alric Tann"
+    },
+    {
+      "claim_id": "CL-04c",
+      "entity_id": "vessel_gu_001",
+      "claim_type": "attribute",
+      "value": "Class gloss: 'supercarrier' as descriptor of CLASS-JUDICATOR-01 (not a rename)",
+      "certainty": "UNCONFIRMED",
+      "doc_source": "'Team Dev_GUMAS' thread, 2025-03-27",
+      "conflicts_with": "C3 \u2014 canon class_id CLASS-JUDICATOR-01",
+      "notes": "Held back from promotion | HELD at UNCONFIRMED per report C3"
+    },
+    {
+      "claim_id": "CL-05",
+      "entity_id": "GU-SHIPCLASS-HUNTER-01",
+      "claim_type": "attribute",
+      "value": "Sentinel-Class Hunter Vessel: top-secret covert-ops class (stealth, cloaking, signal jamming, disinformation warfare; anti-warlord, deep-space hunting)",
+      "certainty": "UNCONFIRMED",
+      "doc_source": "'Team Dev_GUMAS' thread, 2025-03-27",
+      "conflicts_with": "C4 \u2014 canonical 6-class Marshal fleet table; role overlap with Phantom-Class Stealth Frigate",
+      "notes": "Options: alias of Phantom-Class, or admit as classified 7th class | RESOLVED: ruled early alias of Phantom-Class Stealth Frigate (no new entity); alias registered in fleet CSV"
+    },
+    {
+      "claim_id": "CL-06",
+      "entity_id": "org_union_marshals",
+      "claim_type": "attribute",
+      "value": "Doctrine strings: Espionage_Tactics=Union_Marshals_vs_Corporate_Black_Ops; Sentinels=Evolving_Battlefield_Adaptability; role descriptor 'internal security, counterterrorism'; Sentinel-integrated covert units",
+      "certainty": "CANON_PROMOTE",
+      "doc_source": "'Dev_GUMAS'/'Team Dev_GUMAS' threads, 2025-03",
+      "conflicts_with": null,
+      "notes": "Candidate for L2 Mechanic Registry entry"
+    },
+    {
+      "claim_id": "CL-07",
+      "entity_id": "virex_talvaren",
+      "claim_type": "relationship",
+      "value": "The Velar Imperium's 'Marshal-Council System' (born during gravitic-drive conquest ~300 yrs prior) is the origin of the 'Lord Marshal' title; unrelated to Union Marshals.",
+      "certainty": "CANON_PROMOTE",
+      "doc_source": "'MAS - Glactic Union' thread, 2025-03-12",
+      "conflicts_with": null,
+      "notes": "Disambiguation value; coheres with canon Virex Tal'Varen profile"
+    },
+    {
+      "claim_id": "CL-08",
+      "entity_id": "org_union_marshals",
+      "claim_type": "attribute",
+      "value": "Local-police override legal trigger: UNSPECIFIED in all sources. Candidate mechanisms (design options only): Union warrant; Judicial Council order; cross-sector nexus; local-corruption finding; emergency declaration.",
+      "certainty": "UNCONFIRMED",
+      "doc_source": "Second-sweep review 2026-07-20; no archive evidence",
+      "conflicts_with": null,
+      "notes": "Legal scope pending Marshal Charter (LEDGER-CHARTER-0001). Override power itself is CANON_PROMOTE (CL-02b); only the trigger is open."
+    },
+    {
+      "claim_id": "CL-09",
+      "entity_id": "org_union_marshals",
+      "claim_type": "attribute",
+      "value": "Diplomatic immunity scope: purpose-bound to authorized cross-border pursuit ('to chase criminals across borders') \u2014 official-actions immunity, not blanket personal immunity.",
+      "certainty": "STAGING",
+      "doc_source": "'MAS - Glactic Union' thread, 2025-03-12",
+      "conflicts_with": null,
+      "notes": "Legal scope pending Marshal Charter (LEDGER-CHARTER-0002): local-arrest immunity outside pursuit, Judicial Council waiver process, liability for unlawful ops all UNSPECIFIED."
+    },
+    {
+      "claim_id": "CL-10",
+      "entity_id": "org_judicial_council",
+      "claim_type": "attribute",
+      "value": "Institutional design open: membership, appointment, court vs administrative status, warrant authority, appeals, investigative review, power to suspend Marshal operations. Related archive body: High Judiciary & Galactic Tribunal (relationship undefined).",
+      "certainty": "UNCONFIRMED",
+      "doc_source": "'MAS - Glactic Union' thread + second sweep 2026-07-20",
+      "conflicts_with": null,
+      "notes": "Pending Marshal Charter (LEDGER-CHARTER-0003); recorded in org_judicial_council.design_open_questions."
+    },
+    {
+      "claim_id": "CL-11",
+      "entity_id": "EVT-DRAFT-ZYLOX-DURN-PACT",
+      "claim_type": "attribute",
+      "value": "Durn chronology: 'Director'->'Chief Marshal' are sequential titles for the same office (STAGING, owner retcon). Open: tenure dates; whether Saros was immediate successor; when Durn moved to Supreme Military Commander. Ordering constraint: pact (Durn era) -> Sentinel program operational -> Saros expansion (World Bible v0.2).",
+      "certainty": "UNCONFIRMED",
+      "doc_source": "Owner retcon 2026-07-20 + archive ordering evidence",
+      "conflicts_with": null,
+      "notes": "Timeline stubs, not contradictions (LEDGER-CHARTER-0004). No dates in any source; do not invent."
+    },
+    {
+      "claim_id": "CL-12",
+      "entity_id": "org_union_marshals",
+      "claim_type": "relationship",
+      "value": "Contradictory archive line: Chancellor 'has direct oversight over the Marshalls Division' \u2014 conflicts with approved oversight model (CL-01).",
+      "certainty": "LEGEND_CONTESTED",
+      "doc_source": "'MAS - Glactic Union' thread (governance overview passage)",
+      "conflicts_with": "CL-01 (owner-approved model prevails)",
+      "notes": "Ruled in-world misreading of appointment/budget influence as direct control (LEDGER-DRIFT-NOTE). Same passage traces 'Marshalls' double-L misspelling to Mar-2025 sources (45 instances)."
+    },
+    {
+      "claim_id": "CL-13",
+      "entity_id": "GU-SENTINEL-SHC-DRAFT",
+      "claim_type": "attribute",
+      "value": "Second-sweep finds: (a) Sentinel High Command led by a Grand Marshal, advising Chancellor & Military High Command, with division commanders, tactical unit leaders, autonomous strike teams, mission-critical override authority; (b) Diplomatic-Class Sentinel \u2014 seventh suit class (elite pairs, concealed weaponry, counter-surveillance, low-profile armor).",
+      "certainty": "UNCONFIRMED",
+      "doc_source": "'MAS - Glactic Union' thread 2025-03-15 + Sentinel doctrine passages",
+      "conflicts_with": "(a) Grand Marshal vs Chief Marshal office ambiguity; (b) canonical six-variant list (LEDGER-SENTINEL-0003)",
+      "notes": "Owner ruling needed before promotion (LEDGER-SENTINEL-0004)."
+    }
+  ],
+  "resolution_pass": {
+    "date": "2026-07-20",
+    "approved_by": "owner",
+    "decisions": {
+      "C1": "retcon prior era",
+      "C4": "Phantom-Class alias",
+      "C5": "org_judicial_council at STAGING",
+      "promotion": "all five approved, applied to canon files"
+    }
+  },
+  "workflow_state": {
+    "temporal_ordering": [
+      "1. RECONCILIATION_REPORT.md body + DRIFT_LOG_entries.md written as PRE-DECISION snapshots",
+      "2. Owner decisions C1/C4/C5 + promotion approval (2026-07-20, AskUserQuestion session)",
+      "3. resolution_pass recorded in this ledger; canon files updated; CanonRec DRIFT_LOG.md appended with RESOLVED entries",
+      "4. Package sync 2026-07-20: report Final Disposition added, staged drift entries updated to RESOLVED, CL-08..CL-13 added",
+      "5. CanonRec commit locks CANON_PROMOTE claims as CANON"
+    ],
+    "authoritative_record": "this file (claims + resolution_pass) and CanonRec DRIFT_LOG.md",
+    "canonrec_commit": "744e3a064241467044bd22549f2c6830a72e596b",
+    "canonrec_commit_parent": "16fc1717 (SNPM salvage) \u2014 resolves external verification gap"
+  }
+}
