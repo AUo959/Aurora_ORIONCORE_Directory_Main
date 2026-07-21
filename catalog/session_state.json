@@ -284,11 +284,18 @@
       "completed_at": "2026-07-21T04:22:33Z",
       "platform": "claude-code",
       "detail": "All 5 rulings resolved by owner 2026-07-21 (recommended options): P1 downgrade applied to both Vel-Surak records; megacity collapsed SUPERSEDED alias-forward; placement_rule on 16 mobile assets; P4 promotion-gated; DriftResponder wiring approved. CanonRec 39eaf51. Linter now exit 0 (0 violations; remaining gaps open by design)."
+    },
+    {
+      "id": "velar-crescent-anchor-entities",
+      "status": "completed",
+      "completed_at": "2026-07-21T04:47:10Z",
+      "platform": "claude-code",
+      "detail": "All four Velar map-anchor requirements now have entity records (STAGING): loc_vel_core_01 + loc_vel_border_01 from placed systems (map sec.8.6/8.5, position canon), loc_velar_ruin_worlds + loc_velar_outer_colony_nodes as anchor-class placeholders (unplaced, position staging). Authority-table rows added (both copies); all anchored to loc_zone_velar_crescent. Vel-Surak reformist-founding lineage note staged as INFERENCE_PENDING_SOURCE. CanonRec 72cb6d6. Velar linter: 9 entities, 0 violations."
     }
   ],
-  "last_updated": "2026-07-21T04:29:10Z",
+  "last_updated": "2026-07-21T04:47:10Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Velar fabric pass fully closed out: pass + 5 ruling batch + Vel-Surak placement ruling. Placement review surfaced faction-binding drift (primary sources: Vel-Surak = UNION economic capital, Engine of the Union / Trade Coalition HQ); owner ruled Inner Mid-Disk Core placement (map sec.8.7 GU-ECON-01), binding corrected velar_imperium->galactic_union, authority row CANON, 7 macro-zone entities staged for region anchoring. Linter exit 0. CanonRec d94b805+39eaf51+4d13959. Queued: velar-crescent-anchor-entities, capsule-location-binding-rebuild, reconciler-fabric-checks, cloudbank-fabric-drift-wiring.",
+  "last_session_summary": "Velar domain fully closed for this arc: fabric pass -> 5 rulings -> Vel-Surak placement (Union rebind, GU-ECON-01) -> Crescent anchor records (VEL-CORE-01/VEL-BORDER-01 + Ruin/Outer classes, STAGING) -> lineage note staged as non-citable inference. Linter exit 0 across 9 Velar entities. CanonRec d94b805..72cb6d6. Open for owner: STAGING promotion review of anchor records + zone entities; system-name ratification; lineage sourcing. Still queued: capsule-location-binding-rebuild, reconciler-fabric-checks, cloudbank-fabric-drift-wiring.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -455,12 +462,6 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Implement RULING-FABRIC-WIRING in aurora-cloudbank-symbolic-main: fabric_invariants_check findings -> DriftAlert -> DriftResponder runbooks (VIOLATION->alert/escalate, GAP->log/notify). Trace receipts: reports/analysis/velar_fabric_pass__2026-07-21.md sec.2."
-    },
-    {
-      "id": "velar-crescent-anchor-entities",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Create entity records for the Velar Imperium's map anchors: VEL-CORE-01 and VEL-BORDER-01 placed systems (map source-of-truth sec.8.5/8.6) plus Ruin World and Outer Colony Node requirements (sec.4) \u2014 anchored to loc_zone_velar_crescent. Follow-on from RULING-VELAR-PLACEMENT: Vel-Surak rebound to galactic_union (Union economic capital, GU-ECON-01), leaving Velar with no recorded location entities."
     }
   ],
   "known_state": {
