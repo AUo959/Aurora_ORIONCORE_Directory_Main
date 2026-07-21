@@ -272,9 +272,9 @@
       "detail": "CloudBank workshop tranche completed 2026-07-13: merged PRs #1201/#1202/#1203/#1205, closing issues #1144/#1145/#1142/#1146; opened scoped follow-ups #1200 and #1204. Live queue: 2 draft PRs (#1194, #1080) and 46 open issues. PR #1194 has one fresh unresolved review thread; prepared worktree /private/tmp/cloudbank-pr1194 is clean on branch claude/architecture-advancements-review-v2cxi0 at a47f1a61. Editing was blocked by Codex usage limit before any file changed."
     }
   ],
-  "last_updated": "2026-07-21T02:42:07Z",
+  "last_updated": "2026-07-21T02:54:42Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Marshals reconciliation complete + live on GitHub. CanonRec: 744e3a06 (promotions), 14eb011 (CL-13 rulings: org_sentinel_high_command STAGING, Sentinel-Diplomat 7th variant STAGING, addendum Part III). Root: d004718 (dossier + mining reports + reconciliation package), ddb2c6b (CL-13 ledger update). All CL claims resolved or explicitly held (CL-04c gloss UNCONFIRMED; charter queue LEDGER-CHARTER-0001..0004 open pending Marshal Charter). Next candidates: draft Marshal Charter; name Grand Marshal incumbent; promote SHC/Sentinel-Diplomat from STAGING.",
+  "last_session_summary": "Marshals Charter Promotion Pass complete: CanonRec 08df762 locks Charter v0.1 Articles I-III,V as CANON (three-tier override, official-acts immunity, 9-jurist Judicial Council, Grand Marshal Aric Thal); Art IV APPROX. org_judicial_council + org_sentinel_high_command STAGING->CANON. Engine-derived (GUMASAdvancedEngine seeds 42/7/99, receipts committed root 751218a). Remaining STAGING: Sentinel-Diplomat variant. Remaining UNCONFIRMED: Judicator supercarrier gloss. Marshals domain fully reconciled.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",

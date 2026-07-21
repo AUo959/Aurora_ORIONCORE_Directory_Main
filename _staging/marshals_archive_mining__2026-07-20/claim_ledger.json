@@ -121,7 +121,7 @@
       "certainty": "UNCONFIRMED",
       "doc_source": "Second-sweep review 2026-07-20; no archive evidence",
       "conflicts_with": null,
-      "notes": "Legal scope pending Marshal Charter (LEDGER-CHARTER-0001). Override power itself is CANON_PROMOTE (CL-02b); only the trigger is open. | DRAFT ANSWER derived via GUMAS engine 2026-07-20 (Charter v0.1, STAGING)"
+      "notes": "Legal scope pending Marshal Charter (LEDGER-CHARTER-0001). Override power itself is CANON_PROMOTE (CL-02b); only the trigger is open. | DRAFT ANSWER derived via GUMAS engine 2026-07-20 (Charter v0.1, STAGING) | CLOSED by Charter v0.1 promotion (CANON)"
     },
     {
       "claim_id": "CL-09",
@@ -131,7 +131,7 @@
       "certainty": "STAGING",
       "doc_source": "'MAS - Glactic Union' thread, 2025-03-12",
       "conflicts_with": null,
-      "notes": "Legal scope pending Marshal Charter (LEDGER-CHARTER-0002): local-arrest immunity outside pursuit, Judicial Council waiver process, liability for unlawful ops all UNSPECIFIED. | DRAFT ANSWER derived via GUMAS engine 2026-07-20 (Charter v0.1, STAGING)"
+      "notes": "Legal scope pending Marshal Charter (LEDGER-CHARTER-0002): local-arrest immunity outside pursuit, Judicial Council waiver process, liability for unlawful ops all UNSPECIFIED. | DRAFT ANSWER derived via GUMAS engine 2026-07-20 (Charter v0.1, STAGING) | CLOSED by Charter v0.1 promotion (CANON)"
     },
     {
       "claim_id": "CL-10",
@@ -141,7 +141,7 @@
       "certainty": "UNCONFIRMED",
       "doc_source": "'MAS - Glactic Union' thread + second sweep 2026-07-20",
       "conflicts_with": null,
-      "notes": "Pending Marshal Charter (LEDGER-CHARTER-0003); recorded in org_judicial_council.design_open_questions. | DRAFT ANSWER derived via GUMAS engine 2026-07-20 (Charter v0.1, STAGING)"
+      "notes": "Pending Marshal Charter (LEDGER-CHARTER-0003); recorded in org_judicial_council.design_open_questions. | DRAFT ANSWER derived via GUMAS engine 2026-07-20 (Charter v0.1, STAGING) | CLOSED by Charter v0.1 promotion (CANON)"
     },
     {
       "claim_id": "CL-11",
@@ -151,7 +151,7 @@
       "certainty": "UNCONFIRMED",
       "doc_source": "Owner retcon 2026-07-20 + archive ordering evidence",
       "conflicts_with": null,
-      "notes": "Timeline stubs, not contradictions (LEDGER-CHARTER-0004). No dates in any source; do not invent. | DRAFT ANSWER derived via GUMAS engine 2026-07-20 (Charter v0.1, STAGING)"
+      "notes": "Timeline stubs, not contradictions (LEDGER-CHARTER-0004). No dates in any source; do not invent. | DRAFT ANSWER derived via GUMAS engine 2026-07-20 (Charter v0.1, STAGING) | CLOSED as APPROX by Charter Art. IV (relative chronology canonical; calendar deferred)"
     },
     {
       "claim_id": "CL-12",
@@ -178,20 +178,20 @@
       "entity_id": "org_union_marshals",
       "claim_type": "attribute",
       "value": "Marshal Charter v0.1 Articles I-III: three-tier override regime (Council warrant / Chief Marshal exigent certification 1-cycle / Senate emergency); official-acts immunity on registered pursuit orders with Council waiver + Tribunal liability; 9-jurist Judicial Council, Senate-confirmed, 6-of-9 suspension power.",
-      "certainty": "STAGING",
+      "certainty": "CANON_PROMOTE",
       "doc_source": "GUMASAdvancedEngine seeds 42/7/99 x40 turns; MARSHAL_CHARTER__v0.1__SIM_DERIVED__2026-07-20.md",
       "conflicts_with": null,
-      "notes": "Engine findings F1-F8 documented with receipts; run artifact MARSHAL_CHARTER_RUN__seed42__2026-07-20.json"
+      "notes": "Engine findings F1-F8 documented with receipts; run artifact MARSHAL_CHARTER_RUN__seed42__2026-07-20.json | PROMOTED: owner-approved Marshals Charter Promotion Pass 2026-07-20; locks as CANON at CanonRec commit"
     },
     {
       "claim_id": "CL-15",
       "entity_id": "org_sentinel_high_command",
       "claim_type": "relationship",
       "value": "Grand Marshal incumbent: Aric Thal (Silent Dagger mission lead, Sentinel-Praetor). Selected by deterministic rule: highest-seniority canon-named Praetor commander, no engine-roster collision.",
-      "certainty": "STAGING",
+      "certainty": "CANON_PROMOTE",
       "doc_source": "Charter Art. V; LEDGER-MISSIONS-0001",
       "conflicts_with": null,
-      "notes": "Not an invention: name pre-exists in CANON-promoted ledger; elevation is the new claim"
+      "notes": "Not an invention: name pre-exists in CANON-promoted ledger; elevation is the new claim | PROMOTED: Grand Marshal Aric Thal CANON in org_sentinel_high_command"
     },
     {
       "claim_id": "CL-16",
@@ -222,7 +222,8 @@
       "4. Package sync 2026-07-20: report Final Disposition added, staged drift entries updated to RESOLVED, CL-08..CL-13 added",
       "5. CanonRec commit locks CANON_PROMOTE claims as CANON",
       "6. CL-13 rulings (owner, 2026-07-20): SHC distinct office + Sentinel-Diplomat 7th variant; applied and pushed (SHAs in cl13_commits)",
-      "7. Charter derivation pass (2026-07-20): GUMAS engine runs seeds 42/7/99 -> Charter v0.1 STAGING, Grand Marshal Aric Thal, relative chronology; CL-14..16"
+      "7. Charter derivation pass (2026-07-20): GUMAS engine runs seeds 42/7/99 -> Charter v0.1 STAGING, Grand Marshal Aric Thal, relative chronology; CL-14..16",
+      "8. Marshals Charter Promotion Pass (owner-approved, 2026-07-20): Articles I-III,V -> CANON; org_judicial_council + org_sentinel_high_command STAGING->CANON; Art IV stays APPROX; SHA in charter_promotion_commit"
     ],
     "authoritative_record": "this file (claims + resolution_pass) and CanonRec DRIFT_LOG.md",
     "canonrec_commit": "744e3a064241467044bd22549f2c6830a72e596b",
@@ -230,6 +231,7 @@
     "cl13_commits": {
       "canonrec": "14eb011",
       "root": "containing commit (self-referential; see git log for this file)"
-    }
+    },
+    "charter_promotion_commit": "08df762"
   }
 }
