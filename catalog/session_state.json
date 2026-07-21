@@ -462,6 +462,12 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Implement RULING-FABRIC-WIRING in aurora-cloudbank-symbolic-main: fabric_invariants_check findings -> DriftAlert -> DriftResponder runbooks (VIOLATION->alert/escalate, GAP->log/notify). Trace receipts: reports/analysis/velar_fabric_pass__2026-07-21.md sec.2."
+    },
+    {
+      "id": "spatha-canon-promotion",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Promote spatha design canon per reports/analysis/spatha_context_report__2026-07-21.md: (G1) fold thread-locked naming/physical/doctrine content into marshals ledger or kit-detail file via aurora-canon-reconciler (source: 2026-02-01/02 archive thread); (G2) land L2 sim capture in CanonRec with promotion receipt or demote its sec.9 claim; (G3) Cross & Vorn roster ruling (C4); (G4) dedupe Marshal_Standard_Kit copies (operations/ = canonical, SUPERSEDE marshals_sentinels copy)."
     }
   ],
   "known_state": {
