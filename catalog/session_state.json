@@ -314,9 +314,9 @@
       "detail": "Five capsules built (charforge-capsule-v1.0), adapter-verified clean; workspace now 38 capsules. Living four bind to org_sentinel_high_command (no vessel \u2014 Silent Dagger's Phantom-Class hull is unnamed in canon, not invented). Darek Voss carries a TERMINAL binding to loc_blackreach_station, marked historical-record/not-for-live-instantiation across capsule, runtime stub, cns lifecycle_status and BUILD_RECEIPT. Linter gained a C2 cross-check (active assets may not roster deceased personnel). CanonRec fcd908a."
     }
   ],
-  "last_updated": "2026-07-21T05:40:55Z",
+  "last_updated": "2026-07-21T05:54:31Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Sentinel team capsules complete \u2014 the Silent Dagger five (Aric Thal, Serath, Koris, Kael Voss, Darek Voss) are now engine-instantiable alongside the Cross crew; 38 capsules workspace-wide, all adapter-verified. Darek Voss handled as a terminal-state historical capsule (KIA) rather than a live actor. Linter extended: C1 binding validation, C4 stopwords, C2 deceased-crew cross-check; union domain 0 violations across 83 entities. Full session arc: Velar fabric pass -> 6 owner rulings -> Vel-Surak placement + Crescent anchors -> spatha context recovery -> promotion pass -> G5 equipment/capsules -> roster closure -> Sentinel capsules. CanonRec fcd908a, all pushed. Queued: capsule-location-binding-rebuild (17 legacy capsules), reconciler-fabric-checks, cloudbank-fabric-drift-wiring.",
+  "last_session_summary": "Judicator Prime promotion pass complete (same arc as the spatha): context report -> 3 owner rulings -> execution. Specs promoted from two corroborating sources; crew-count conflict resolved 12,000-governs (registry 2,500 superseded on cls_judicator); 8 senior officers bound both ways (vessel crew_ids + capsule location_binding, Drayen marked embarked); Ship Registry v1.0 landed in canon/L2/fleet/; all 12 ship-class records created so class refs resolve fleet-wide. C1 gaps 17 -> 9. Surfaced a NEW defect: anaya_ral_seyr state.bin is 0 bytes since original promotion e34ec16 (flagged, not laundered). CanonRec 8572cf3. Queued: anaya-capsule-state-defect, kharon-sablewake-class-assignment, capsule-location-binding-rebuild (9 remaining), reconciler-fabric-checks, cloudbank-fabric-drift-wiring.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -483,6 +483,18 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Implement RULING-FABRIC-WIRING in aurora-cloudbank-symbolic-main: fabric_invariants_check findings -> DriftAlert -> DriftResponder runbooks (VIOLATION->alert/escalate, GAP->log/notify). Trace receipts: reports/analysis/velar_fabric_pass__2026-07-21.md sec.2."
+    },
+    {
+      "id": "anaya-capsule-state-defect",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "NEW FINDING from the Judicator pass (not repaired, needs owner decision): canon/L2/entities/anaya_ral_seyr/capsule/state.bin is 0 bytes and has been since the original L2 promotion commit e34ec16 \u2014 the 21-slot state vector was never written, so the capsule fails manifest verification (only failing capsule of 38). Options: (a) regenerate the vector from traits/cns using the documented deterministic rule and re-hash, (b) rebuild the capsule from source, (c) mark the capsule degraded. Do NOT simply re-hash the empty file \u2014 that would launder the defect. Also worth checking whether sibling capsules from the same original promotion have zero-byte artifacts."
+    },
+    {
+      "id": "kharon-sablewake-class-assignment",
+      "priority": "low",
+      "assigned_to": "either",
+      "description": "Ship Registry v1.0 sec.5.1 open item (P2), now carried into canon: G.U.S. Kharon (vessel_gu_013) and G.U.S. Sablewake (vessel_gu_014) have no ship class. Both records now carry class_open_item markers. Assign to one of the 12 canonical classes (cls_* records exist) or create new class records if the sources support it."
     }
   ],
   "known_state": {
