@@ -408,6 +408,28 @@ def check_corporeal(findings, domain_terms):
                 offices.setdefault((m.group(1), faction), []).append(subject)
             if "Supreme Military Commander" in role and status == "active":
                 offices.setdefault(("Supreme Military Commander", faction), []).append(subject)
+    # C2 cross-check: deceased characters must not sit on active crew rosters.
+    deceased = set()
+    for path, rec in domain_terms["entities"]:
+        if rec.get("status") == "deceased":
+            deceased.add(rec.get("canonical_id") or rec.get("entity_id") or "")
+    if deceased:
+        for path, rec in domain_terms["entities"]:
+            if rec.get("entity_kind") != "mobile_asset" and not rec.get("crew_ids"):
+                continue
+            roster = set(rec.get("crew_ids") or [])
+            if rec.get("commanding_officer_id"):
+                roster.add(rec["commanding_officer_id"])
+            overlap = sorted(roster & deceased)
+            if overlap and rec.get("status") == "active":
+                add(
+                    findings,
+                    "C2",
+                    "VIOLATION",
+                    rec.get("canonical_id") or rec.get("entity_id") or path,
+                    f"Active asset lists deceased personnel on its roster: {overlap}.",
+                )
+
     # C3: at most one living incumbent per office per faction.
     for (office, faction), holders in sorted(offices.items()):
         if len(holders) > 1:

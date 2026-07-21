@@ -305,11 +305,18 @@
       "completed_at": "2026-07-21T05:37:00Z",
       "platform": "claude-code",
       "detail": "Closed by the Roster Closure Pass, which also found a second gap class: the complete Operation Silent Dagger Sentinel team. Five records created (char_aric_thal with dual-role career, char_lior_serath, char_veyna_koris, char_kael_voss, char_darek_voss KIA/deceased per C2). Report: reports/analysis/roster_closure_audit__2026-07-21.md. Verification: 0 true roster gaps canon-wide; fabric linter union 0 violations/78 entities, velar clean. CanonRec b181742."
+    },
+    {
+      "id": "sentinel-team-capsules",
+      "status": "completed",
+      "completed_at": "2026-07-21T05:40:55Z",
+      "platform": "claude-code",
+      "detail": "Five capsules built (charforge-capsule-v1.0), adapter-verified clean; workspace now 38 capsules. Living four bind to org_sentinel_high_command (no vessel \u2014 Silent Dagger's Phantom-Class hull is unnamed in canon, not invented). Darek Voss carries a TERMINAL binding to loc_blackreach_station, marked historical-record/not-for-live-instantiation across capsule, runtime stub, cns lifecycle_status and BUILD_RECEIPT. Linter gained a C2 cross-check (active assets may not roster deceased personnel). CanonRec fcd908a."
     }
   ],
-  "last_updated": "2026-07-21T05:37:00Z",
+  "last_updated": "2026-07-21T05:40:55Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Roster closure complete: Aric Thal gap (Charter Art. V CANON incumbent, no record) resolved, and a systematic canon-wide sweep found a second class \u2014 the entire Operation Silent Dagger Sentinel team unrecorded. Five records created from ledger/Charter/SRC-0005 facts only (Darek Voss deceased/KIA per C2; Kael Voss/Darek Voss surname ambiguity flagged not resolved). Canon now has ZERO unrecorded named actors; fabric linter union domain 0 violations across 78 entities. Full day: Velar fabric arc + spatha context recovery/promotion + G5 equipment-and-capsules + roster closure. CanonRec b181742. Queued: sentinel-team-capsules, capsule-location-binding-rebuild (17 legacy), reconciler-fabric-checks, cloudbank-fabric-drift-wiring.",
+  "last_session_summary": "Sentinel team capsules complete \u2014 the Silent Dagger five (Aric Thal, Serath, Koris, Kael Voss, Darek Voss) are now engine-instantiable alongside the Cross crew; 38 capsules workspace-wide, all adapter-verified. Darek Voss handled as a terminal-state historical capsule (KIA) rather than a live actor. Linter extended: C1 binding validation, C4 stopwords, C2 deceased-crew cross-check; union domain 0 violations across 83 entities. Full session arc: Velar fabric pass -> 6 owner rulings -> Vel-Surak placement + Crescent anchors -> spatha context recovery -> promotion pass -> G5 equipment/capsules -> roster closure -> Sentinel capsules. CanonRec fcd908a, all pushed. Queued: capsule-location-binding-rebuild (17 legacy capsules), reconciler-fabric-checks, cloudbank-fabric-drift-wiring.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -476,12 +483,6 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Implement RULING-FABRIC-WIRING in aurora-cloudbank-symbolic-main: fabric_invariants_check findings -> DriftAlert -> DriftResponder runbooks (VIOLATION->alert/escalate, GAP->log/notify). Trace receipts: reports/analysis/velar_fabric_pass__2026-07-21.md sec.2."
-    },
-    {
-      "id": "sentinel-team-capsules",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "Optional follow-on from the Roster Closure Pass: build CharForge capsules for the five Sentinel-team records (char_aric_thal, char_lior_serath, char_veyna_koris, char_kael_voss, char_darek_voss) so they are engine-instantiable, following the Cross-crew pattern (charforge-capsule-v1.0, location_binding, deterministic state-vector rule). Also optional: cross-link Sentinel variant strings (Praetor/Phantom/Striker/Stalker/Vanguard) to the canonical seven-variant taxonomy as equipment records."
     }
   ],
   "known_state": {
