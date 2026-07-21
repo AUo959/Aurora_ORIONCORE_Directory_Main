@@ -272,9 +272,9 @@
       "detail": "CloudBank workshop tranche completed 2026-07-13: merged PRs #1201/#1202/#1203/#1205, closing issues #1144/#1145/#1142/#1146; opened scoped follow-ups #1200 and #1204. Live queue: 2 draft PRs (#1194, #1080) and 46 open issues. PR #1194 has one fresh unresolved review thread; prepared worktree /private/tmp/cloudbank-pr1194 is clean on branch claude/architecture-advancements-review-v2cxi0 at a47f1a61. Editing was blocked by Codex usage limit before any file changed."
     }
   ],
-  "last_updated": "2026-07-21T03:02:09Z",
+  "last_updated": "2026-07-21T03:09:23Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Marshals Closeout Pass (CanonRec e62875b): Art IV chronology anchored to canonical timeline convention (pact ~8 ya UFC-E3, cohort ~4 ya UFC-E4, transition ~2 ya UFC-E5; minimal constraint-satisfying rule); Sentinel-Diplomat seventh variant CANON; Judicator 'supercarrier' CANON hull-type descriptor. Marshals domain: zero open holds \u2014 fully reconciled from repo survey through engine-derived charter to final closeout, all receipts on GitHub.",
+  "last_session_summary": "L2 Corpus Audit complete: canon structurally sound, zero contradictions; raw archives fully mined/duplicate-verified; fixed invalid STAGING_CONFIRMED tags (vessel_gu_013/014), registered 2 substructure aliases, staged 5 missing faction-substructure orgs. Queue: promote/hold new orgs, SUPERSEDED tag ruling, Velar + AI-Warlord domain passes, alias enrichment, cloudbank skim. Report: reports/analysis/l2_corpus_audit__2026-07-21.md",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
