@@ -168,10 +168,10 @@
       "entity_id": "GU-SENTINEL-SHC-DRAFT",
       "claim_type": "attribute",
       "value": "Second-sweep finds: (a) Sentinel High Command led by a Grand Marshal, advising Chancellor & Military High Command, with division commanders, tactical unit leaders, autonomous strike teams, mission-critical override authority; (b) Diplomatic-Class Sentinel \u2014 seventh suit class (elite pairs, concealed weaponry, counter-surveillance, low-profile armor).",
-      "certainty": "UNCONFIRMED",
+      "certainty": "STAGING",
       "doc_source": "'MAS - Glactic Union' thread 2025-03-15 + Sentinel doctrine passages",
       "conflicts_with": "(a) Grand Marshal vs Chief Marshal office ambiguity; (b) canonical six-variant list (LEDGER-SENTINEL-0003)",
-      "notes": "Owner ruling needed before promotion (LEDGER-SENTINEL-0004)."
+      "notes": "Owner ruling needed before promotion (LEDGER-SENTINEL-0004). | RESOLVED (owner, 2026-07-20): (a) Grand Marshal ruled DISTINCT office \u2014 org_sentinel_high_command created at STAGING; factions.json parallel-substructure anomaly now coherent (LEDGER-MARSHALS-0006). (b) Diplomatic-Class admitted as seventh variant \"Sentinel-Diplomat\" at STAGING (LEDGER-SENTINEL-0005)."
     }
   ],
   "resolution_pass": {
@@ -190,10 +190,15 @@
       "2. Owner decisions C1/C4/C5 + promotion approval (2026-07-20, AskUserQuestion session)",
       "3. resolution_pass recorded in this ledger; canon files updated; CanonRec DRIFT_LOG.md appended with RESOLVED entries",
       "4. Package sync 2026-07-20: report Final Disposition added, staged drift entries updated to RESOLVED, CL-08..CL-13 added",
-      "5. CanonRec commit locks CANON_PROMOTE claims as CANON"
+      "5. CanonRec commit locks CANON_PROMOTE claims as CANON",
+      "6. CL-13 rulings (owner, 2026-07-20): SHC distinct office + Sentinel-Diplomat 7th variant; applied and pushed (SHAs in cl13_commits)"
     ],
     "authoritative_record": "this file (claims + resolution_pass) and CanonRec DRIFT_LOG.md",
     "canonrec_commit": "744e3a064241467044bd22549f2c6830a72e596b",
-    "canonrec_commit_parent": "16fc1717 (SNPM salvage) \u2014 resolves external verification gap"
+    "canonrec_commit_parent": "16fc1717 (SNPM salvage) \u2014 resolves external verification gap",
+    "cl13_commits": {
+      "canonrec": "14eb011",
+      "root": "containing commit (self-referential; see git log for this file)"
+    }
   }
 }
