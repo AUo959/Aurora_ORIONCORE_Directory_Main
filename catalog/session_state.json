@@ -314,9 +314,9 @@
       "detail": "Five capsules built (charforge-capsule-v1.0), adapter-verified clean; workspace now 38 capsules. Living four bind to org_sentinel_high_command (no vessel \u2014 Silent Dagger's Phantom-Class hull is unnamed in canon, not invented). Darek Voss carries a TERMINAL binding to loc_blackreach_station, marked historical-record/not-for-live-instantiation across capsule, runtime stub, cns lifecycle_status and BUILD_RECEIPT. Linter gained a C2 cross-check (active assets may not roster deceased personnel). CanonRec fcd908a."
     }
   ],
-  "last_updated": "2026-07-21T05:54:31Z",
+  "last_updated": "2026-07-21T06:18:35Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Judicator Prime promotion pass complete (same arc as the spatha): context report -> 3 owner rulings -> execution. Specs promoted from two corroborating sources; crew-count conflict resolved 12,000-governs (registry 2,500 superseded on cls_judicator); 8 senior officers bound both ways (vessel crew_ids + capsule location_binding, Drayen marked embarked); Ship Registry v1.0 landed in canon/L2/fleet/; all 12 ship-class records created so class refs resolve fleet-wide. C1 gaps 17 -> 9. Surfaced a NEW defect: anaya_ral_seyr state.bin is 0 bytes since original promotion e34ec16 (flagged, not laundered). CanonRec 8572cf3. Queued: anaya-capsule-state-defect, kharon-sablewake-class-assignment, capsule-location-binding-rebuild (9 remaining), reconciler-fabric-checks, cloudbank-fabric-drift-wiring.",
+  "last_session_summary": "Registry pin-drift toil fixed: added tools/registry_sync_heads.py (surgical head_sha refresh, --check mode, 7 passing tests), make registry-sync / registry-sync-check, and a Stop-hook advisory that reports stale pins before the pre-commit gate can block. Gate deliberately kept blocking (owner ruling: keep signal, remove toil). Documented in CLAUDE.md + AGENTS.md. Verified: perfect YAML round-trip (zero diff), idempotent, silent when clean, warns on the ahead==0 path that previously skipped output. Noted overlapping unpublished branch fix/ci-dynamic-registry-pins for review. Earlier today: Velar arc, spatha recovery+promotion+G5, roster closure, Sentinel capsules, Judicator pass.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -339,64 +339,64 @@
   },
   "recent_commits": [
     {
-      "sha": "5a2a739",
+      "sha": "e93bd10",
       "date": "2026-07-21",
       "platform": "claude-code",
-      "summary": "state: L2 ruling batch recorded; velar-fabric-pass queued"
+      "summary": "registry: CanonRec head db3314a (Judicator architecture v1.1 bound to system anchors)"
     },
     {
-      "sha": "610e55b",
+      "sha": "cf5725a",
       "date": "2026-07-21",
       "platform": "claude-code",
-      "summary": "reports(L2): corpus audit + reconciliation queue; session state"
+      "summary": "registry: CanonRec head fbcb7c5 (Judicator functional architecture v1.1)"
     },
     {
-      "sha": "e37ba3e",
+      "sha": "0aa0c61",
       "date": "2026-07-21",
       "platform": "claude-code",
-      "summary": "reports(marshals): closeout pass recorded (CanonRec e62875b); session state"
+      "summary": "reports: refresh generated snapshots (recovery index, skill sync) to current workspace state"
     },
     {
-      "sha": "9bb3eea",
+      "sha": "c1f67ec",
       "date": "2026-07-21",
       "platform": "claude-code",
-      "summary": "reports(marshals): charter promotion pass recorded (CanonRec 08df762); session state"
+      "summary": "registry: CanonRec head a63614d (Judicator pass merged with owner hosted-asset doctrine + functional architecture)"
     },
     {
-      "sha": "751218a",
+      "sha": "2f45e89",
       "date": "2026-07-21",
       "platform": "claude-code",
-      "summary": "sim(marshals): Marshal Charter derivation receipts (seed 42, deterministic) + CL-14..16; session state (CanonRec ae74bd2)"
+      "summary": "reports: Judicator Prime context report + promotion pass recorded (CanonRec 8572cf3); anaya capsule defect and Kharon/Sablewake class items queued"
     },
     {
-      "sha": "ddb2c6b",
+      "sha": "0fa8025",
       "date": "2026-07-21",
       "platform": "claude-code",
-      "summary": "reports(marshals): CL-13 rulings recorded \u2014 SHC distinct office + Sentinel-Diplomat 7th variant (CanonRec 14eb011)"
+      "summary": "sentinel capsules: C2 deceased-crew cross-check in linter, registry head fcd908a, session state; sentinel-team-capsules completed"
     },
     {
-      "sha": "d004718",
+      "sha": "cb3c8f0",
       "date": "2026-07-21",
       "platform": "claude-code",
-      "summary": "Merge branch 'main' of github-aurora:AUo959/Aurora_ORIONCORE_Directory_Main"
+      "summary": "reports: roster closure audit \u2014 Aric Thal + Silent Dagger team recorded; zero named-actor gaps canon-wide (CanonRec b181742)"
     },
     {
-      "sha": "d9f9263",
+      "sha": "e960a2d",
       "date": "2026-07-21",
       "platform": "claude-code",
-      "summary": "reports(marshals): Union Marshals dossier + April-2025 archive mining pass + reconciliation package; session state"
+      "summary": "registry: CanonRec head dc993e8 (G5 merged with Spatha escalation-language alignment; pushed)"
     },
     {
-      "sha": "bd25b79",
+      "sha": "d483cb3",
       "date": "2026-07-21",
       "platform": "claude-code",
-      "summary": "fix: harden GitHub auth context handling (#42)"
+      "summary": "fabric-linter: C1 validates location_binding (first bindings live), C4 title stopwords, union domain; registry head 3d73107; queue Aric Thal roster gap"
     },
     {
-      "sha": "77b05c7",
+      "sha": "6fd19a2",
       "date": "2026-07-21",
       "platform": "claude-code",
-      "summary": "ci: read nested-repo pins dynamically from catalog/repo_registry.yaml (#41)"
+      "summary": "registry: CanonRec head 320be21 (spatha promotion merged with remote drone/Spatha doctrine specs; pushed)"
     }
   ],
   "security_events": [
@@ -495,10 +495,16 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "Ship Registry v1.0 sec.5.1 open item (P2), now carried into canon: G.U.S. Kharon (vessel_gu_013) and G.U.S. Sablewake (vessel_gu_014) have no ship class. Both records now carry class_open_item markers. Assign to one of the 12 canonical classes (cls_* records exist) or create new class records if the sources support it."
+    },
+    {
+      "id": "ci-dynamic-registry-pins-branch",
+      "priority": "low",
+      "assigned_to": "either",
+      "description": "Pre-existing branch fix/ci-dynamic-registry-pins (commit b3bb45c 'ci: read nested-repo pins dynamically from catalog/repo_registry.yaml') is unpublished and overlaps the registry-sync tooling added 2026-07-21 (tools/registry_sync_heads.py + make registry-sync + Stop-hook advisory). Review whether that branch is superseded, complementary (CI-side vs local-side), or should be merged/retired. Flagged by the landing ledger as unpublished_branch."
     }
   ],
   "known_state": {
-    "main_sha": "5a2a739",
+    "main_sha": "e93bd10",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -613,7 +619,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-07-21T04:01:00Z",
+    "checked_at": "2026-07-21T06:17:16Z",
     "entries": [
       {
         "repo": "root",
@@ -838,12 +844,6 @@
         "branch": "codex/opal2-foundry-phase2-2026-07-18",
         "detail": "pushed, 5 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
         "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
-      },
-      {
-        "repo": "CanonRec",
-        "class": "unpushed_main",
-        "detail": "main is 1 commit(s) ahead of origin/main",
-        "remediation": "Push main (or PR it if the repo requires review)."
       },
       {
         "repo": "qgia-knowledge-library-main",

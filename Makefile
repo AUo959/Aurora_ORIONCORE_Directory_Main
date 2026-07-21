@@ -165,6 +165,12 @@ l2-scenario-uptake: ## Validate L2 scenario seed uptake packets and emergence gu
 
 # ── Git / Sync ───────────────────────────────────────────────────────────
 
+registry-sync: ## Refresh nested-repo head_sha pins in catalog/repo_registry.yaml
+	$(PYTHON) tools/registry_sync_heads.py
+
+registry-sync-check: ## Report stale nested-repo pins without writing (exit 1 on drift)
+	$(PYTHON) tools/registry_sync_heads.py --check
+
 sync-audit: ## Run sync audit for root repo
 	$(PYTHON) skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo root --check-gh-auth
 

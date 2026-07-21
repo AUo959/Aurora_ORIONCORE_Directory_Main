@@ -333,6 +333,37 @@ def record_landing_ledger() -> None:
         print(f"[stop-hook] landing ledger skipped: {exc}")
 
 
+def _stale_registry_pins() -> list:
+    """Nested repos whose registry head_sha no longer matches actual HEAD.
+
+    Advisory only: surfaces pin drift at session end, when it is cheap to fix,
+    instead of letting the pre-commit `repo_head_match` gate block the next
+    commit. Never writes and never raises — a broken checkout must not take a
+    session down with it.
+    """
+    try:
+        import registry_sync_heads as rsh
+
+        text = rsh.REGISTRY.read_text(encoding="utf-8")
+        repos, order = rsh.parse_registry(text)
+        stale = []
+        for name in order:
+            entry = repos[name]
+            pinned = entry.get("head_sha", "")
+            rel = entry.get("path", "")
+            if not rel or rsh.PLACEHOLDER.match(pinned or ""):
+                continue
+            repo_dir = rsh.ROOT / rel
+            if not (repo_dir / ".git").exists():
+                continue
+            r = rsh.git(["rev-parse", "HEAD"], cwd=repo_dir)
+            if r.returncode == 0 and r.stdout.strip() != pinned:
+                stale.append({"repo": name, "actual": r.stdout.strip()})
+        return stale
+    except Exception:  # advisory — never block a session on pin inspection
+        return []
+
+
 def main() -> int:
     if len(sys.argv) > 1 and sys.argv[1] == "check-orphans":
         check_orphans()
@@ -345,6 +376,13 @@ def main() -> int:
 
     release_auto_claim()
     record_landing_ledger()
+
+    # Pin drift is reported before any early return below: it is independent of
+    # whether new commits landed, and the operator can only act on it cheaply
+    # here — otherwise the pre-commit repo_head_match gate blocks the next commit.
+    for pin in _stale_registry_pins():
+        print(f"[stop-hook] stale nested-repo pin: {pin['repo']} "
+              f"-> {pin['actual'][:12]} — run `make registry-sync`")
 
     if not STATE_PATH.exists():
         return 0

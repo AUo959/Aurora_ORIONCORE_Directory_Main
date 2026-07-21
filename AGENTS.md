@@ -464,6 +464,17 @@ make skills-install  # apply: push skills/ → ~/.codex/skills/
 
 Edit skills in `skills/` first, then run `make skills-install`. The `.codex_skill_edits/` directory is retired.
 
+### Nested-repo pin sync
+
+`catalog/repo_registry.yaml` pins each nested repo's `head_sha`; the pre-commit `repo_head_match` gate blocks when a pin goes stale. The gate is intentional (it catches nested repos moving unnoticed) and is never auto-refreshed. After an intentional nested-repo commit:
+
+```bash
+make registry-sync        # rewrite stale pins, print what moved
+make registry-sync-check  # report only; exit 1 on drift (CI/hooks)
+```
+
+Only `head_sha` values change, by surgical line edit — YAML formatting and folded `validation_command` blocks are preserved. Prefer this over `tools/workspace_scan.py`, which also regenerates the manifest, inventory, and workspace map. The Stop hook reports stale pins at session end, before they can block a commit.
+
 ## Practical Continuity Rule
 
 If a fact should survive thread changes, write it into one of:
