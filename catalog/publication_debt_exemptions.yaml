@@ -36,6 +36,14 @@ exemptions:
   branches: [codex/explain-statechange-defense-for-sws, codex/root-control-plane-sync-2026-04-01-mixed-backup]
   reason: "Verified 2026-06-11 — all branch-unique files exist on main; parallel-history artifacts only."
   recorded: "2026-06-11"
+- repo: aurora-cloudbank-symbolic-main
+  branches: [codex/cloudbank-pat-terminal-compat-2026-06-16]
+  reason: >-
+    Verified landed 2026-07-22 via squash-merged PR #1192 at 55d36c48.
+    The local six-commit head 6da05ecf and merged commit have the identical
+    tree 45ab0487f7169c28c297542f6bf4ec7db718b714; preserve the local branch
+    as parallel history rather than republishing it.
+  recorded: "2026-07-22"
 # --- Closed PRs with documented decisions (remote_branch_sweep dispositions).
 - repo: aurora-cloudbank-symbolic-main
   branches: [codex/ci-workflow-repair, codex/cloudbank-command-chain-workflow-repair-2026-04-10,
