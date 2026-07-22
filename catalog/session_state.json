@@ -314,9 +314,9 @@
       "detail": "Five capsules built (charforge-capsule-v1.0), adapter-verified clean; workspace now 38 capsules. Living four bind to org_sentinel_high_command (no vessel \u2014 Silent Dagger's Phantom-Class hull is unnamed in canon, not invented). Darek Voss carries a TERMINAL binding to loc_blackreach_station, marked historical-record/not-for-live-instantiation across capsule, runtime stub, cns lifecycle_status and BUILD_RECEIPT. Linter gained a C2 cross-check (active assets may not roster deceased personnel). CanonRec fcd908a."
     }
   ],
-  "last_updated": "2026-07-22T06:36:51Z",
+  "last_updated": "2026-07-22T16:00:32Z",
   "last_platform": "codex",
-  "last_session_summary": "CloudBank PR #1306 follow-up commit 3b3605bf clears the remaining FastAPI and Starlette deprecation notices via lifespan migration, the httpx2 TestClient transport, and shutdown regression coverage. Local warning-strict tests passed (27), Ruff/Bandit/pre-commit/dependency resolution passed, and all remote checks are green; PR remains open, CLEAN, and unmerged.",
+  "last_session_summary": "Opened green CloudBank PR #1307 (ef73ef4e) fixing issue #1305's dashboard artifact publication, SBOM image reference, release workflow validity, and Sonar reporter validity.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -338,6 +338,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "f2a88b1",
+      "date": "2026-07-22",
+      "platform": "codex",
+      "summary": "chore(session): record deprecation notice cleanup"
+    },
     {
       "sha": "6d1fe8d",
       "date": "2026-07-22",
@@ -391,12 +397,6 @@
       "date": "2026-07-21",
       "platform": "claude-code",
       "summary": "reports: refresh generated snapshots (recovery index, skill sync) to current workspace state"
-    },
-    {
-      "sha": "c1f67ec",
-      "date": "2026-07-21",
-      "platform": "claude-code",
-      "summary": "registry: CanonRec head a63614d (Judicator pass merged with owner hosted-asset doctrine + functional architecture)"
     }
   ],
   "security_events": [
@@ -504,7 +504,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "6d1fe8d3cdb53e73c3f1459f7f19ae624edfe347",
+    "main_sha": "f2a88b13f718839fec3455e837d0b68694718fd6",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
