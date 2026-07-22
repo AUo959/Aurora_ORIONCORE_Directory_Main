@@ -314,9 +314,9 @@
       "detail": "Five capsules built (charforge-capsule-v1.0), adapter-verified clean; workspace now 38 capsules. Living four bind to org_sentinel_high_command (no vessel \u2014 Silent Dagger's Phantom-Class hull is unnamed in canon, not invented). Darek Voss carries a TERMINAL binding to loc_blackreach_station, marked historical-record/not-for-live-instantiation across capsule, runtime stub, cns lifecycle_status and BUILD_RECEIPT. Linter gained a C2 cross-check (active assets may not roster deceased personnel). CanonRec fcd908a."
     }
   ],
-  "last_updated": "2026-07-22T03:37:07Z",
+  "last_updated": "2026-07-22T04:16:54Z",
   "last_platform": "codex",
-  "last_session_summary": "PAT landing reconciliation complete: CloudBank PR #1192 had already squash-merged the full terminal compatibility overlay as 55d36c48; local head 6da05ecf and the merged commit share exact tree 45ab0487f7169c28c297542f6bf4ec7db718b714, and the current PAT/mesh suite passes 23 tests. The local six-commit branch remains preserved as parallel history and is now exempted from publication debt rather than republished.",
+  "last_session_summary": "CloudBank mesh security/lint cleanup published as PR #1306 at 0fcc5144: split the oversized mesh app factory, added explicit exception chains and documented responses, adopted Annotated security dependencies, made loopback the default bind, replaced 58 bare test assertions, and fixed canonical-validator source-identifier drift discovered by the repository hook. Local Ruff and Bandit are clean; 26 focused tests and all pre-commit hooks pass. GitHub CI, SonarCloud, Codacy, CodeQL, security, Vercel, and deployment checks are green; PR is mergeable CLEAN and remains unmerged pending separate approval. CloudBank main and the root nested-repo registry remain at 71f55f54.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -338,6 +338,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "7cfbe49",
+      "date": "2026-07-22",
+      "platform": "codex",
+      "summary": "chore(session): record PAT reconciliation"
+    },
     {
       "sha": "690fbe2",
       "date": "2026-07-22",
@@ -391,12 +397,6 @@
       "date": "2026-07-21",
       "platform": "claude-code",
       "summary": "reports: Judicator Prime context report + promotion pass recorded (CanonRec 8572cf3); anaya capsule defect and Kharon/Sablewake class items queued"
-    },
-    {
-      "sha": "0fa8025",
-      "date": "2026-07-21",
-      "platform": "claude-code",
-      "summary": "sentinel capsules: C2 deceased-crew cross-check in linter, registry head fcd908a, session state; sentinel-team-capsules completed"
     }
   ],
   "security_events": [
@@ -504,7 +504,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "690fbe2af7b4dfc799f8b0a3365c32a30b6d23d1",
+    "main_sha": "7cfbe49f93ff17bd071b38f22af2cca8337f2b7d",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
