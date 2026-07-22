@@ -339,6 +339,12 @@
   },
   "recent_commits": [
     {
+      "sha": "e369290",
+      "date": "2026-07-22",
+      "platform": "codex",
+      "summary": "chore(workspace): close OPAL2 phase 2.1"
+    },
+    {
       "sha": "242e532",
       "date": "2026-07-22",
       "platform": "codex",
@@ -391,12 +397,6 @@
       "date": "2026-07-21",
       "platform": "claude-code",
       "summary": "registry: CanonRec head dc993e8 (G5 merged with Spatha escalation-language alignment; pushed)"
-    },
-    {
-      "sha": "d483cb3",
-      "date": "2026-07-21",
-      "platform": "claude-code",
-      "summary": "fabric-linter: C1 validates location_binding (first bindings live), C4 title stopwords, union domain; registry head 3d73107; queue Aric Thal roster gap"
     }
   ],
   "security_events": [
@@ -504,7 +504,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "242e53257ae257a88cd23c98688c2ba9324b63dc",
+    "main_sha": "e3692902937363fa35c924a21e90783f1ceff432",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
