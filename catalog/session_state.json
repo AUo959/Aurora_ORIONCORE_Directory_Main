@@ -339,6 +339,18 @@
   },
   "recent_commits": [
     {
+      "sha": "690fbe2",
+      "date": "2026-07-22",
+      "platform": "codex",
+      "summary": "chore(workspace): reconcile landed PAT branch"
+    },
+    {
+      "sha": "3b4bb9e",
+      "date": "2026-07-22",
+      "platform": "codex",
+      "summary": "chore(session): record OPAL2 closeout commit"
+    },
+    {
       "sha": "e369290",
       "date": "2026-07-22",
       "platform": "codex",
@@ -385,18 +397,6 @@
       "date": "2026-07-21",
       "platform": "claude-code",
       "summary": "sentinel capsules: C2 deceased-crew cross-check in linter, registry head fcd908a, session state; sentinel-team-capsules completed"
-    },
-    {
-      "sha": "cb3c8f0",
-      "date": "2026-07-21",
-      "platform": "claude-code",
-      "summary": "reports: roster closure audit \u2014 Aric Thal + Silent Dagger team recorded; zero named-actor gaps canon-wide (CanonRec b181742)"
-    },
-    {
-      "sha": "e960a2d",
-      "date": "2026-07-21",
-      "platform": "claude-code",
-      "summary": "registry: CanonRec head dc993e8 (G5 merged with Spatha escalation-language alignment; pushed)"
     }
   ],
   "security_events": [
@@ -504,7 +504,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "e3692902937363fa35c924a21e90783f1ceff432",
+    "main_sha": "690fbe2af7b4dfc799f8b0a3365c32a30b6d23d1",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
