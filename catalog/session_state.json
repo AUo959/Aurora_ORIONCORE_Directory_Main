@@ -314,9 +314,9 @@
       "detail": "Five capsules built (charforge-capsule-v1.0), adapter-verified clean; workspace now 38 capsules. Living four bind to org_sentinel_high_command (no vessel \u2014 Silent Dagger's Phantom-Class hull is unnamed in canon, not invented). Darek Voss carries a TERMINAL binding to loc_blackreach_station, marked historical-record/not-for-live-instantiation across capsule, runtime stub, cns lifecycle_status and BUILD_RECEIPT. Linter gained a C2 cross-check (active assets may not roster deceased personnel). CanonRec fcd908a."
     }
   ],
-  "last_updated": "2026-07-22T04:16:54Z",
+  "last_updated": "2026-07-22T06:36:51Z",
   "last_platform": "codex",
-  "last_session_summary": "CloudBank mesh security/lint cleanup published as PR #1306 at 0fcc5144: split the oversized mesh app factory, added explicit exception chains and documented responses, adopted Annotated security dependencies, made loopback the default bind, replaced 58 bare test assertions, and fixed canonical-validator source-identifier drift discovered by the repository hook. Local Ruff and Bandit are clean; 26 focused tests and all pre-commit hooks pass. GitHub CI, SonarCloud, Codacy, CodeQL, security, Vercel, and deployment checks are green; PR is mergeable CLEAN and remains unmerged pending separate approval. CloudBank main and the root nested-repo registry remain at 71f55f54.",
+  "last_session_summary": "CloudBank PR #1306 follow-up commit 3b3605bf clears the remaining FastAPI and Starlette deprecation notices via lifespan migration, the httpx2 TestClient transport, and shutdown regression coverage. Local warning-strict tests passed (27), Ruff/Bandit/pre-commit/dependency resolution passed, and all remote checks are green; PR remains open, CLEAN, and unmerged.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -338,6 +338,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "6d1fe8d",
+      "date": "2026-07-22",
+      "platform": "codex",
+      "summary": "chore(session): record mesh warning cleanup"
+    },
     {
       "sha": "7cfbe49",
       "date": "2026-07-22",
@@ -391,12 +397,6 @@
       "date": "2026-07-21",
       "platform": "claude-code",
       "summary": "registry: CanonRec head a63614d (Judicator pass merged with owner hosted-asset doctrine + functional architecture)"
-    },
-    {
-      "sha": "2f45e89",
-      "date": "2026-07-21",
-      "platform": "claude-code",
-      "summary": "reports: Judicator Prime context report + promotion pass recorded (CanonRec 8572cf3); anaya capsule defect and Kharon/Sablewake class items queued"
     }
   ],
   "security_events": [
@@ -504,7 +504,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "7cfbe49f93ff17bd071b38f22af2cca8337f2b7d",
+    "main_sha": "6d1fe8d3cdb53e73c3f1459f7f19ae624edfe347",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
