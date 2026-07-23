@@ -328,9 +328,9 @@
       "detail": "Widened prose sweep run: rebuilt roster (329 names), swept 30 mixed-content exports. Found 2 genuine new L2 chars (Colonel Idris Vale, Dr. Syrr Velkonn) + Selia Tren-Voss alias->Selia Trask. Heavy noise (real-world news + L1 dev-persona expert panel) correctly excluded. CanonRec 79738ee."
     }
   ],
-  "last_updated": "2026-07-23T01:41:49Z",
+  "last_updated": "2026-07-23T01:50:45Z",
   "last_platform": "claude-code",
-  "last_session_summary": "MAJOR PROMOTION PASS: 50 STAGING L2 entity records promoted to CANON after a zero-conflict scan (no name/office collisions, fabric linter clean, identity dimensions honored) \u2014 19 locations, 16 characters, 6 polities, 6 species, 2 vessels (Kharon/Sablewake), 1 anomaly (Eltari Nexus) + 2 capsules re-promoted. Position axis preserved (10 locations stay unplaced pending map \u00a78; certainty\u2260placement). Held: 4 UNCONFIRMED (Haden Korr/Iskar Veyr/Vaxtan Rhel generative, Shroudborn myth) + 3 SUPERSEDED. Naming gate passes (11 pre-gate records retrofitted). CanonRec 03aaa02. The salvage corpus is now substantially CANON. Open: UNCONFIRMED affirmations, owner naming exemptions, map placement, anaya defect.",
+  "last_session_summary": "Filesystem artifact audit found the biggest gap yet: the 4 MAJOR ACTIVE ENGINE FACTIONS (Separatist Confederation, AI-Warlord Collective, PMC Syndicate, Crimson Pact) had NO polity records despite the sim running on them \u2014 my earlier civilizations pass used the lore list not the engine faction set. Recorded all 4 + Overseer Theta-9 (moderate AI diplomat) from the never-opened gumas_lore_db.json. CanonRec 23db400. STILL UNMINED (queued fs-artifact-mining-continue): Staff Registry SSOT zip, machine-readable MECHANICS packet, staging dossier, session-archive zips.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -533,6 +533,12 @@
       "priority": "medium",
       "assigned_to": "owner",
       "description": "Your L2 naming-admission gate (a242f3e, effective 2026-07-22) flags 10 char records from your parallel buildout as lacking naming_receipt/naming_exemption: char_aveline_soryn, char_calder_vey, char_corin_hale, char_eira_valkyrie, char_iven_raal, char_maelin_saye, char_mara_venn, char_selene_ark, char_sera_thalen, char_tessa_korr. All predate the gate (grandfathered; CI only checks PR-diff files so they won't block unless re-touched). NOT modified by me \u2014 your records: add naming_receipt (if minted via NameService) or naming_exemption (owner_locked/recovered_source) as appropriate. All 26 of my salvage/capsule character records now carry recovered_source exemptions and pass the gate."
+    },
+    {
+      "id": "fs-artifact-mining-continue",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Owner was right: key L2 artifacts still exist only in the filesystem. Found+filled the 4 active engine factions from the never-opened GUMAS_Unified_Registry/gumas_lore_db.json. STILL UNMINED: (1) AURORA_GUMAS_STAFF_REGISTRY_SSOT zip (single-source-of-truth staff registry), (2) machine-readable reference packet = the L2 MECHANICS library (leadership cognitive bias system, diplomacy/de-escalation, treaty+reputation memory, export-math) \u2014 not landed as canon, (3) L2 Staging Dossier v0.6 (process-control doc + file index), (4) other session-archive zips (Au_Archive_*). Continue extracting+diffing these against CanonRec."
     }
   ],
   "known_state": {
