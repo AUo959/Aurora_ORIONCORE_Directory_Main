@@ -328,9 +328,9 @@
       "detail": "Widened prose sweep run: rebuilt roster (329 names), swept 30 mixed-content exports. Found 2 genuine new L2 chars (Colonel Idris Vale, Dr. Syrr Velkonn) + Selia Tren-Voss alias->Selia Trask. Heavy noise (real-world news + L1 dev-persona expert panel) correctly excluded. CanonRec 79738ee."
     }
   ],
-  "last_updated": "2026-07-23T01:32:32Z",
+  "last_updated": "2026-07-23T01:41:49Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Identity de-flattening pass: corrected polity==people conflation from the polity/species passes. Species now carry origin_polity_id + member_polities (plural) + distribution (Human spans Union/Separatist/PMC; Velari span Imperium/Union with cultural note re Vel-Surak); polities carry founding/dominant_species_id + multispecies flag + peoplehood_note (Nythran Ascendancy = two peoples organic+AI; Zyphari multispecies). Characters keep faction orthogonal to species (verified clean). New IDENTITY_DIMENSIONS v0.1 anti-flattening principle (species/polity/culture/region orthogonal). CanonRec c61c450. Linter clean.",
+  "last_session_summary": "MAJOR PROMOTION PASS: 50 STAGING L2 entity records promoted to CANON after a zero-conflict scan (no name/office collisions, fabric linter clean, identity dimensions honored) \u2014 19 locations, 16 characters, 6 polities, 6 species, 2 vessels (Kharon/Sablewake), 1 anomaly (Eltari Nexus) + 2 capsules re-promoted. Position axis preserved (10 locations stay unplaced pending map \u00a78; certainty\u2260placement). Held: 4 UNCONFIRMED (Haden Korr/Iskar Veyr/Vaxtan Rhel generative, Shroudborn myth) + 3 SUPERSEDED. Naming gate passes (11 pre-gate records retrofitted). CanonRec 03aaa02. The salvage corpus is now substantially CANON. Open: UNCONFIRMED affirmations, owner naming exemptions, map placement, anaya defect.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
