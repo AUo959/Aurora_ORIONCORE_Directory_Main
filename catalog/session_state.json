@@ -314,9 +314,9 @@
       "detail": "Five capsules built (charforge-capsule-v1.0), adapter-verified clean; workspace now 38 capsules. Living four bind to org_sentinel_high_command (no vessel \u2014 Silent Dagger's Phantom-Class hull is unnamed in canon, not invented). Darek Voss carries a TERMINAL binding to loc_blackreach_station, marked historical-record/not-for-live-instantiation across capsule, runtime stub, cns lifecycle_status and BUILD_RECEIPT. Linter gained a C2 cross-check (active assets may not roster deceased personnel). CanonRec fcd908a."
     }
   ],
-  "last_updated": "2026-07-22T16:12:23Z",
-  "last_platform": "codex",
-  "last_session_summary": "CloudBank PR #1307 merged as c1d2c75c and closed issue #1305; every merge-commit push workflow passed or intentionally skipped, dashboard and SBOM artifacts uploaded successfully, release/Sonar workflows are active, and the Sonar reporter handled the live check_run validly (skipped because main had no associated PR). External SonarCloud main analysis remains red and provider-scoped.",
+  "last_updated": "2026-07-23T00:02:34Z",
+  "last_platform": "claude-code",
+  "last_session_summary": "L2 character salvage complete: filesystem-wide sweep (5,711 files, all repos+archives+notes) found 3 unrecorded L2 characters. Eriana Vos (PMC intel chief) + Selia Trask (Separatist governor) promoted STAGING with adapter-verified capsules; Haden Korr (Union admiral) recorded UNCONFIRMED (archive 'AI-Generated Character' demo, no capsule). Vos/Voss surname cluster disambiguated: 'Lirian Vos'->lirian_vael_torin and 'Rhaegon Voss'->rhaegon_torr_kai registered as drift aliases (capsule manifests re-hashed). 40 capsules total. Note dumps had no GUMAS content. CanonRec 8c0a92f. Queued: haden-korr-affirmation; earlier open items (anaya state.bin defect, Kharon/Sablewake class, capsule-location-binding-rebuild, reconciler+cloudbank fabric wiring).",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -501,6 +501,12 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "Pre-existing branch fix/ci-dynamic-registry-pins (commit b3bb45c 'ci: read nested-repo pins dynamically from catalog/repo_registry.yaml') is unpublished and overlaps the registry-sync tooling added 2026-07-21 (tools/registry_sync_heads.py + make registry-sync + Stop-hook advisory). Review whether that branch is superseded, complementary (CI-side vs local-side), or should be merged/retired. Flagged by the landing ledger as unpublished_branch."
+    },
+    {
+      "id": "haden-korr-affirmation",
+      "priority": "low",
+      "assigned_to": "owner",
+      "description": "Haden Korr (Union Navy Fleet Admiral) recorded at UNCONFIRMED by the L2 Character Salvage Pass \u2014 his profile was an archive 'AI-Generated Character' demonstration, not standing canon. Owner decision: affirm him as STAGING canon (build capsule, bind to org_union_naval_forces) or leave UNCONFIRMED. Record: canon/L2/entities/characters/char_haden_korr.json."
     }
   ],
   "known_state": {
