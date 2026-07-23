@@ -321,9 +321,9 @@
       "detail": "Left for owner (still queued as a finding) \u2014 no change; my supplement pass added 14 records without touching char_selene_ark."
     }
   ],
-  "last_updated": "2026-07-23T01:00:46Z",
+  "last_updated": "2026-07-23T01:17:04Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Species salvage: 6 species records (Velari, Xenon, Human, Nythran, Harkoni, Zyphari) \u2014 first canon/L2/entities/species/, cross-linked to polities/characters. Session salvage arc (all pushed, naming gate PASS throughout): characters (3+14), Zylox/Durn chronicle reconciliation, 7 locations, Dyson twin-spheres + 4 precursor civilizations, 3 major polities, 6 species. CanonRec 69383aa. Open salvage: named vessels, mechanics/artifacts, org sub-factions, widened prose sweep.",
+  "last_session_summary": "Salvage arc extensive coverage reached. This pass: confirmed vessel domain complete (16/16 registry + source ships already recorded); recorded the Eltari Nexus anomaly (Kovas discovery, Eltari Nebula). Full session salvage: characters (17), Zylox/Durn chronicle reconciliation, 7 locations, Dyson twin-spheres + 4 precursor civs, 3 major polities, 6 species, 1 anomaly. All naming-gate-clean, all pushed. CanonRec 0d11e8c. Remaining lower-yield: org sub-factions, mechanics registry, widened prose sweep.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
