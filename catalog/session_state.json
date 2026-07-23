@@ -319,11 +319,18 @@
       "completed_at": "2026-07-23T00:17:51Z",
       "platform": "claude-code",
       "detail": "Left for owner (still queued as a finding) \u2014 no change; my supplement pass added 14 records without touching char_selene_ark."
+    },
+    {
+      "id": "v226b-prose-sweep-widen",
+      "status": "completed",
+      "completed_at": "2026-07-23T01:22:26Z",
+      "platform": "claude-code",
+      "detail": "Widened prose sweep run: rebuilt roster (329 names), swept 30 mixed-content exports. Found 2 genuine new L2 chars (Colonel Idris Vale, Dr. Syrr Velkonn) + Selia Tren-Voss alias->Selia Trask. Heavy noise (real-world news + L1 dev-persona expert panel) correctly excluded. CanonRec 79738ee."
     }
   ],
-  "last_updated": "2026-07-23T01:17:04Z",
+  "last_updated": "2026-07-23T01:22:26Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Salvage arc extensive coverage reached. This pass: confirmed vessel domain complete (16/16 registry + source ships already recorded); recorded the Eltari Nexus anomaly (Kovas discovery, Eltari Nebula). Full session salvage: characters (17), Zylox/Durn chronicle reconciliation, 7 locations, Dyson twin-spheres + 4 precursor civs, 3 major polities, 6 species, 1 anomaly. All naming-gate-clean, all pushed. CanonRec 0d11e8c. Remaining lower-yield: org sub-factions, mechanics registry, widened prose sweep.",
+  "last_session_summary": "Widened prose sweep complete: 2 new L2 chars (Idris Vale - Marshal Intel/Sentinel commander; Syrr Velkonn - Velar anthropologist) + Selia Tren-Voss alias. Real-world-news + L1-dev-persona noise filtered out. Prose tail substantially mined. Full salvage arc (all pushed, gate-clean): 19 characters, Zylox/Durn reconciliation, 8 locations, Dyson+4 precursors, 3 major polities, 6 species, 1 anomaly. CanonRec 79738ee.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -514,12 +521,6 @@
       "priority": "low",
       "assigned_to": "owner",
       "description": "Haden Korr (Union Navy Fleet Admiral) recorded at UNCONFIRMED by the L2 Character Salvage Pass \u2014 his profile was an archive 'AI-Generated Character' demonstration, not standing canon. Owner decision: affirm him as STAGING canon (build capsule, bind to org_union_naval_forces) or leave UNCONFIRMED. Record: canon/L2/entities/characters/char_haden_korr.json."
-    },
-    {
-      "id": "v226b-prose-sweep-widen",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "Broaden the prose/relationship-reference character sweep beyond the v2.2.6b core to other mixed-content exports and archive knowledge cores, to catch any remaining L2 characters described only in relationship fields (the class the Pirate Queen question exposed). 14 salvaged from v2.2.6b; other exports not yet swept with the prose method."
     },
     {
       "id": "selene-ark-status-vocab",
