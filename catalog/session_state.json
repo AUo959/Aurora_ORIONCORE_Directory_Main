@@ -520,6 +520,12 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "Broaden the prose/relationship-reference character sweep beyond the v2.2.6b core to other mixed-content exports and archive knowledge cores, to catch any remaining L2 characters described only in relationship fields (the class the Pirate Queen question exposed). 14 salvaged from v2.2.6b; other exports not yet swept with the prose method."
+    },
+    {
+      "id": "selene-ark-status-vocab",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Fabric linter C2 flags char_selene_ark status 'alive_in_union_medical_custody' (your canon) as outside vocabulary. NOT auto-fixed. Character is alive so the one-body invariant holds \u2014 vocabulary-vs-freeform mismatch. Options: (a) status='active' + custody flag field, or (b) admit a custody status to STATUS_VOCAB + CERTAINTY_TAGS.md (SUPERSEDED-ratification pattern). Still open \u2014 mistakenly closed once, re-queued."
     }
   ],
   "known_state": {
