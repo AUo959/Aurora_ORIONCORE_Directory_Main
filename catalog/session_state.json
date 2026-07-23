@@ -507,6 +507,12 @@
       "priority": "low",
       "assigned_to": "owner",
       "description": "Haden Korr (Union Navy Fleet Admiral) recorded at UNCONFIRMED by the L2 Character Salvage Pass \u2014 his profile was an archive 'AI-Generated Character' demonstration, not standing canon. Owner decision: affirm him as STAGING canon (build capsule, bind to org_union_naval_forces) or leave UNCONFIRMED. Record: canon/L2/entities/characters/char_haden_korr.json."
+    },
+    {
+      "id": "selene-ark-status-vocab",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Fabric linter C2 flags char_selene_ark status 'alive_in_union_medical_custody' as outside vocabulary. NOT auto-fixed (owner canon). It is a descriptive living-status (character is alive), so the underlying one-body-one-status invariant holds \u2014 this is a vocabulary-vs-freeform mismatch. Owner options: (a) normalize to status='active' with a custody flag field, or (b) admit a custody status value to the C2 vocabulary in CERTAINTY_TAGS.md + tools/fabric_invariants_check.py STATUS_VOCAB. Same pattern as the SUPERSEDED vocabulary ratification."
     }
   ],
   "known_state": {
