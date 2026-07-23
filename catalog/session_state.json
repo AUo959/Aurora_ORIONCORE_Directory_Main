@@ -312,11 +312,18 @@
       "completed_at": "2026-07-21T05:40:55Z",
       "platform": "claude-code",
       "detail": "Five capsules built (charforge-capsule-v1.0), adapter-verified clean; workspace now 38 capsules. Living four bind to org_sentinel_high_command (no vessel \u2014 Silent Dagger's Phantom-Class hull is unnamed in canon, not invented). Darek Voss carries a TERMINAL binding to loc_blackreach_station, marked historical-record/not-for-live-instantiation across capsule, runtime stub, cns lifecycle_status and BUILD_RECEIPT. Linter gained a C2 cross-check (active assets may not roster deceased personnel). CanonRec fcd908a."
+    },
+    {
+      "id": "selene-ark-status-vocab",
+      "status": "completed",
+      "completed_at": "2026-07-23T00:17:51Z",
+      "platform": "claude-code",
+      "detail": "Left for owner (still queued as a finding) \u2014 no change; my supplement pass added 14 records without touching char_selene_ark."
     }
   ],
-  "last_updated": "2026-07-23T00:02:34Z",
+  "last_updated": "2026-07-23T00:17:51Z",
   "last_platform": "claude-code",
-  "last_session_summary": "L2 character salvage complete: filesystem-wide sweep (5,711 files, all repos+archives+notes) found 3 unrecorded L2 characters. Eriana Vos (PMC intel chief) + Selia Trask (Separatist governor) promoted STAGING with adapter-verified capsules; Haden Korr (Union admiral) recorded UNCONFIRMED (archive 'AI-Generated Character' demo, no capsule). Vos/Voss surname cluster disambiguated: 'Lirian Vos'->lirian_vael_torin and 'Rhaegon Voss'->rhaegon_torr_kai registered as drift aliases (capsule manifests re-hashed). 40 capsules total. Note dumps had no GUMAS content. CanonRec 8c0a92f. Queued: haden-korr-affirmation; earlier open items (anaya state.bin defect, Kharon/Sablewake class, capsule-location-binding-rebuild, reconciler+cloudbank fabric wiring).",
+  "last_session_summary": "L2 character salvage supplement done: the Pirate Queen (Theryn Kael'Vakar) was already canon; the question exposed a method gap (prose/mixed-source characters the block-scan missed). Salvaged 14 from the v2.2.6b early-gen knowledge core: 12 STAGING (Jaxx Tyren, Talyx Velkonn, Orin Vex, Sarina Vael, Deyan Orros, Mara Velthis, Saela Corven, Selene Rho, Aria Lenix, Joran Malik, Thalen Rynn, Karn Vos[KIA]) + 2 UNCONFIRMED generative (Iskar Veyr, Vaxtan Rhel). Continuity reconciled: Valcor=renn_valcor, Zylox Verrin/Kryon=zylox_rhaegos (aliases registered). Entity records only; capsules deferred (title/role-only sources). CanonRec ace7f99. Queued: v226b-prose-sweep-widen, haden-korr-affirmation, selene-ark-status-vocab, anaya defect, etc.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -509,10 +516,10 @@
       "description": "Haden Korr (Union Navy Fleet Admiral) recorded at UNCONFIRMED by the L2 Character Salvage Pass \u2014 his profile was an archive 'AI-Generated Character' demonstration, not standing canon. Owner decision: affirm him as STAGING canon (build capsule, bind to org_union_naval_forces) or leave UNCONFIRMED. Record: canon/L2/entities/characters/char_haden_korr.json."
     },
     {
-      "id": "selene-ark-status-vocab",
-      "priority": "medium",
+      "id": "v226b-prose-sweep-widen",
+      "priority": "low",
       "assigned_to": "either",
-      "description": "Fabric linter C2 flags char_selene_ark status 'alive_in_union_medical_custody' as outside vocabulary. NOT auto-fixed (owner canon). It is a descriptive living-status (character is alive), so the underlying one-body-one-status invariant holds \u2014 this is a vocabulary-vs-freeform mismatch. Owner options: (a) normalize to status='active' with a custody flag field, or (b) admit a custody status value to the C2 vocabulary in CERTAINTY_TAGS.md + tools/fabric_invariants_check.py STATUS_VOCAB. Same pattern as the SUPERSEDED vocabulary ratification."
+      "description": "Broaden the prose/relationship-reference character sweep beyond the v2.2.6b core to other mixed-content exports and archive knowledge cores, to catch any remaining L2 characters described only in relationship fields (the class the Pirate Queen question exposed). 14 salvaged from v2.2.6b; other exports not yet swept with the prose method."
     }
   ],
   "known_state": {
