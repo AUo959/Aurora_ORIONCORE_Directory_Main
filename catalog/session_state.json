@@ -526,6 +526,12 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Fabric linter C2 flags char_selene_ark status 'alive_in_union_medical_custody' (your canon) as outside vocabulary. NOT auto-fixed. Character is alive so the one-body invariant holds \u2014 vocabulary-vs-freeform mismatch. Options: (a) status='active' + custody flag field, or (b) admit a custody status to STATUS_VOCAB + CERTAINTY_TAGS.md (SUPERSEDED-ratification pattern). Still open \u2014 mistakenly closed once, re-queued."
+    },
+    {
+      "id": "naming-gate-owner-records",
+      "priority": "medium",
+      "assigned_to": "owner",
+      "description": "Your L2 naming-admission gate (a242f3e, effective 2026-07-22) flags 10 char records from your parallel buildout as lacking naming_receipt/naming_exemption: char_aveline_soryn, char_calder_vey, char_corin_hale, char_eira_valkyrie, char_iven_raal, char_maelin_saye, char_mara_venn, char_selene_ark, char_sera_thalen, char_tessa_korr. All predate the gate (grandfathered; CI only checks PR-diff files so they won't block unless re-touched). NOT modified by me \u2014 your records: add naming_receipt (if minted via NameService) or naming_exemption (owner_locked/recovered_source) as appropriate. All 26 of my salvage/capsule character records now carry recovered_source exemptions and pass the gate."
     }
   ],
   "known_state": {
