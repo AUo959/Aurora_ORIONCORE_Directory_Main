@@ -461,7 +461,13 @@ def check_corporeal(findings, domain_terms):
                 "council", "academy", "class", "science", "medical", "engineering",
                 "security", "operations", "command", "staff", "officer", "marshal",
                 "commander", "general", "chief", "high", "standard", "of", "the",
+                "charter", "corps", "service", "bureau", "directorate", "assembly",
+                "council's", "charter's", "academy's", "prime", "supreme",
             }:
+                continue
+            # Trailing possessive ("Chief Marshal's reports") leaves a stray token.
+            person = person.rstrip("'’s")
+            if not person or person.lower() in {"marshal", "chief", "high"}:
                 continue
             resolved = any(
                 person.lower() in n.lower() for n in known_names
