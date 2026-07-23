@@ -321,9 +321,9 @@
       "detail": "Left for owner (still queued as a finding) \u2014 no change; my supplement pass added 14 records without touching char_selene_ark."
     }
   ],
-  "last_updated": "2026-07-23T00:50:45Z",
+  "last_updated": "2026-07-23T00:56:19Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Precursor/Dyson salvage pass: recorded the Dyson Sphere Frontier's twin megastructures (loc_dyson_twin_spheres, Orak-Thuun-built, 'Forbidden prize') and the 4 canonical precursor civilizations \u2014 Orak-Thuun (Celestial Engineers/Dyson builders), Sythrex Conclave (Bio-Ascendants), Vorthan Imperium (Great Tyranny, felled by AI revolt) STAGING; Shroudborn UNCONFIRMED. First canon/L2/entities/precursors/ records. Enriched Xyphos Prime ruins + Hollow Expanse with Orak-Thuun builder attribution. Prior salvage today: 3+14 characters, Zylox/Durn chronicle reconciliation, 7 locations. Naming gate PASS on all. CanonRec b28b175. Open: map \u00a78 placement for Dyson systems; more salvage domains (orgs, vessels, mechanics, species).",
+  "last_session_summary": "Major polity salvage: recorded Zyphari Compact, Nythran Ascendancy, Harkon Sovereignty \u2014 3 of the 7 major galactic civilizations that had no records (species + government detail; timeline-attested via Velar-Harkon Wars / Nythran Cyber Uprising). First canon/L2/entities/polities/ records. Continuing the salvage arc (chars, Zylox/Durn reconciliation, 7 locations, Dyson/precursors, now polities). Naming gate PASS. CanonRec 0ca5af1. Open salvage domains: species records, remaining named vessels, mechanics/artifacts, orgs/sub-factions, widened prose sweep.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
