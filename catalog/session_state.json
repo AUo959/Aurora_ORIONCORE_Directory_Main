@@ -321,9 +321,9 @@
       "detail": "Left for owner (still queued as a finding) \u2014 no change; my supplement pass added 14 records without touching char_selene_ark."
     }
   ],
-  "last_updated": "2026-07-23T00:28:49Z",
+  "last_updated": "2026-07-23T00:50:45Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Chronicle reconciliation done: enriched Zylox (Xenon species, ~54 cycles, Merchant-Chancellor rise-to-power, doctrine) and Kael Durn (Iron Sentinel, Teraxis Prime; Marshals-directorship reconciled as his pre-succession role) from the v2.2.6b rich leadership sourcebook. Name variants treated as chronicler churn per owner directive; no canon overwritten, both capsules re-verify. Rich-profile sweep (40 files) converged on only these two. Reconciled dossier at zylox_rhaegos/DOSSIER. CanonRec 324483d. Still open: v226b-prose-sweep-widen (broaden churn-aware sweep to remaining mixed exports), haden-korr-affirmation, selene-ark-status-vocab, anaya state.bin defect.",
+  "last_session_summary": "Precursor/Dyson salvage pass: recorded the Dyson Sphere Frontier's twin megastructures (loc_dyson_twin_spheres, Orak-Thuun-built, 'Forbidden prize') and the 4 canonical precursor civilizations \u2014 Orak-Thuun (Celestial Engineers/Dyson builders), Sythrex Conclave (Bio-Ascendants), Vorthan Imperium (Great Tyranny, felled by AI revolt) STAGING; Shroudborn UNCONFIRMED. First canon/L2/entities/precursors/ records. Enriched Xyphos Prime ruins + Hollow Expanse with Orak-Thuun builder attribution. Prior salvage today: 3+14 characters, Zylox/Durn chronicle reconciliation, 7 locations. Naming gate PASS on all. CanonRec b28b175. Open: map \u00a78 placement for Dyson systems; more salvage domains (orgs, vessels, mechanics, species).",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
