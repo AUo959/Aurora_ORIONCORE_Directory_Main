@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-07-22T03:37:11Z",
+  "generated_at": "2026-07-25T02:37:11Z",
   "root": ".",
   "mode": "manual",
   "status": "warn",
   "summary": {
-    "finding_count": 1,
+    "finding_count": 2,
     "blocking_count": 0,
-    "warning_count": 1
+    "warning_count": 2
   },
   "findings": [
     {
@@ -15,6 +15,13 @@
       "blocking": false,
       "details": "Configured repos are unavailable in this execution context: ['~remote~']",
       "suggested_fix": "Run from the canonical workspace path or update `catalog/repo_registry.yaml` if the repo locations changed."
+    },
+    {
+      "check": "session_state_freshness",
+      "severity": "warning",
+      "blocking": false,
+      "details": "catalog/session_state.json is 2 commit(s) behind HEAD (last recorded: 790a599). The other platform may be operating on stale workspace context.",
+      "suggested_fix": "Run `python3 tools/session_stop_hook.py` to auto-update, or update catalog/session_state.json manually and commit."
     }
   ]
 }

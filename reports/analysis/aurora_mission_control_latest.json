@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-09T07:23:47Z",
+  "generated_at": "2026-07-25T02:37:23Z",
   "root": ".",
   "tool": "aurora_mission_control",
   "run_mode": "read_only",
@@ -11,11 +11,11 @@
   "summary": {
     "source_count": 7,
     "source_error_count": 0,
-    "operator_inbox_count": 10,
+    "operator_inbox_count": 12,
     "blocking_count": 0,
-    "approval_required_count": 7,
+    "approval_required_count": 8,
     "by_priority": {
-      "P1": 1,
+      "P1": 3,
       "P2": 9
     },
     "by_category": {
@@ -23,11 +23,12 @@
       "developer_tooling": 2,
       "git_state": 1,
       "project_focus": 1,
-      "recovery_review": 5
+      "recovery_review": 6,
+      "validation": 1
     },
     "by_status": {
       "informational": 1,
-      "open": 9
+      "open": 11
     },
     "build_lanes": {
       "ready": 6,
@@ -43,7 +44,7 @@
     },
     "workspace_verify": {
       "status": "warn",
-      "finding_count": 1,
+      "finding_count": 2,
       "blocking_count": 0
     },
     "integration_gate": {
@@ -54,8 +55,8 @@
     "recovery_index": {
       "status": "READY",
       "candidate_count": 100,
-      "discovered_candidate_count": 1077,
-      "restricted_candidate_count": 30
+      "discovered_candidate_count": 1078,
+      "restricted_candidate_count": 32
     },
     "devkit": {
       "status": "WARN",
@@ -66,14 +67,14 @@
     },
     "recommendations": {
       "status": "open",
-      "recommendation_count": 9,
+      "recommendation_count": 11,
       "blocking_count": 0,
-      "approval_required_count": 7
+      "approval_required_count": 8
     },
     "git_status": {
       "status": "dirty",
-      "changed_path_count": 7,
-      "branch": "main...origin/main"
+      "changed_path_count": 18,
+      "branch": "main...origin/main [ahead 4]"
     }
   },
   "build_lanes": [
@@ -207,6 +208,46 @@
       "status": "open"
     },
     {
+      "item_id": "mission-p1-recovery_index-recovery_review-review-2-restricted-recovery-candidates-carefully",
+      "title": "Review 2 restricted recovery candidates carefully",
+      "category": "recovery_review",
+      "priority": "P1",
+      "source": "recovery_index",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "reports/analysis/workspace_recovery_index_latest.json::restricted_recovery_candidates_metadata"
+      ],
+      "recommended_next_action": "Handle restricted candidates through a separate review decision; do not copy them into issues, PRs, or canon surfaces by default.",
+      "suggested_commands": [
+        "python3 tools/workspace_recovery_index.py --summary"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "item_id": "mission-p1-workspace_verify-validation-resolve-workspace-verifier-finding-session-state-freshness",
+      "title": "Resolve workspace verifier finding: session_state_freshness",
+      "category": "validation",
+      "priority": "P1",
+      "source": "workspace_verify",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "tools/workspace_verify.py::session_state_freshness"
+      ],
+      "recommended_next_action": "Run `python3 tools/session_stop_hook.py` to auto-update, or update catalog/session_state.json manually and commit.",
+      "suggested_commands": [
+        "python3 tools/workspace_verify.py"
+      ],
+      "approval_required": false,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
       "item_id": "mission-p2-devkit-developer_tooling-aurora-cloudbank-symbolic-main-python-environment-is-warn",
       "title": "aurora-cloudbank-symbolic-main Python environment is warn.",
       "category": "developer_tooling",
@@ -306,14 +347,14 @@
         "intake/TOBIAS_QIN_CHARACTER_PROFILE.md",
         "Prplexity_Observation_6_14.md",
         "_staging/apple_notes_recovery__2026-03-16/L1/ord_drone_fleet_v1.0.py",
-        "SENSOR ARRAY SPECIFICATION v0 3 0.md",
         "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Please provide a comprehensive report outlining th 1.md",
         "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Please provide a comprehensive report outlining th.md",
         "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs1/Please provide a comprehensive report outlining th.md",
         "intake/threadcore_symbiosis_delta_manifest.md",
         "archives/unzipped/ZipWiz_Chamber_6_28/aurora_bridge_output/relay_handshake.py",
         "intake/ORION__POLICY__CANON_PROTOCOL__v2.0__2026-04-08.md",
-        "CLAUDE.md"
+        "CLAUDE.md",
+        "_staging/apple_notes_recovery__2026-03-16/L2/MULTILINGUAL_BEAMFORMING_ARRAY_SEED.md"
       ],
       "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
       "suggested_commands": [
@@ -384,7 +425,6 @@
       "owner_surface": "canonical nested repo",
       "evidence_refs": [
         "intake/Aurora_CloudBank_Review_R1_R10.md",
-        "PR SENSOR ARRAY SPEC v0 3 0 DELTA.md",
         "intake/b794f5eb-0115-48bb-ac1c-28a2c6c85a95.md",
         "intake/aurora_scaffold_nexus_meta_narrative.md",
         "QGIA_Runtime_OnePager.md",
@@ -394,7 +434,8 @@
         "intake/ORION__NAV__PERPLEXITY_SPACE_FRONT_DOOR__v2.0__2026-04-08.md",
         "intake/Thread_The_Station_is_Well.md",
         "intake/text_25.txt",
-        "_staging/codex_wip/test_mesh_router_v1__codex_wip_preserved_2026-06-13.py"
+        "_staging/codex_wip/test_mesh_router_v1__codex_wip_preserved_2026-06-13.py",
+        "aurora-cloudbank-symbolic_README_DRAFT.md"
       ],
       "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
       "suggested_commands": [
@@ -407,21 +448,26 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p2-git_status-git_state-root-worktree-has-7-in-progress-paths",
-      "title": "Root worktree has 7 in-progress paths",
+      "item_id": "mission-p2-git_status-git_state-root-worktree-has-18-in-progress-paths",
+      "title": "Root worktree has 18 in-progress paths",
       "category": "git_state",
       "priority": "P2",
       "source": "git_status",
       "target_repo": "root",
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
-        "catalog/session_claims/.claude_auto_claim",
-        "catalog/session_state.json",
-        "reports/analysis/aurora_devkit_latest.json",
-        "reports/analysis/aurora_mission_control_latest.json",
+        "Makefile",
+        "archives/recovered_prototypes/biological_pneumatic_engine/Biological_Pneumatic_Engine_Whitepaper.docx",
+        "catalog/relocation_plan.json",
+        "catalog/rollback_wave2_automation_reports_initial.json",
+        "catalog/rollback_wave2_root_docs_and_analysis_initial.json",
+        "catalog/rollback_wave3_small_intake_files_initial.json",
+        "catalog/rollback_wave3_small_structured_dirs_initial.json",
+        "catalog/rollback_wave3_staging_isolation_initial.json",
+        "catalog/rollback_wave4_root_intake_cleanup_initial.json",
+        "docs/workspace-map.md",
         "reports/analysis/aurora_recommendations_latest.json",
-        "tests/test_session_state_io.py",
-        "tools/session_state_io.py"
+        "reports/analysis/workspace_recovery_index_latest.json"
       ],
       "recommended_next_action": "Review ownership before staging or committing. Treat existing command-grammar, integration-gate, and recommendation-engine edits as separate root-control-plane work unless intentionally combined.",
       "suggested_commands": [
