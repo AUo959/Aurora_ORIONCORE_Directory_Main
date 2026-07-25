@@ -328,7 +328,7 @@
       "detail": "Widened prose sweep run: rebuilt roster (329 names), swept 30 mixed-content exports. Found 2 genuine new L2 chars (Colonel Idris Vale, Dr. Syrr Velkonn) + Selia Tren-Voss alias->Selia Trask. Heavy noise (real-world news + L1 dev-persona expert panel) correctly excluded. CanonRec 79738ee."
     }
   ],
-  "last_updated": "2026-07-25T04:26:33Z",
+  "last_updated": "2026-07-25T04:29:27Z",
   "last_platform": "claude-code",
   "last_session_summary": "Control-plane behavior changed 2026-07-25 \u2014 read AGENTS.md 'Generated Surfaces and Freshness Gates' before debugging a blocked commit or an unchanged report. (1) write_json now compares meaning not timestamps: reports/analysis/*_latest.json stay clean when findings are unchanged; a tool changing nothing is expected, not a skip. Verification time goes to git-ignored reports/analysis/.lastrun/. session_state.json unaffected (uses dumps_canonical). (2) session_state_freshness blocks at 10 commits behind and self-heals via the pre-commit wrapper \u2014 let it work, do not --no-verify. repo_head_match stays manual (make registry-sync) by design. (3) New brief_freshness gate: warns at 60 commits since the last brief, blocks at 150; run 'make brief'. (4) hour_aboard.py emits run_meta.json recording its own output_dir \u2014 a directory whose name disagrees with it was copied, not generated. Also: CanonRec lineage reconciled (Cultural Tapestry x Dark Star, both entries retained, tag pre-reconcile-2026-07-25); root + CanonRec pushed; CloudBank PRs #1309/#1310 open awaiting owner merge.",
   "tool_versions": {
@@ -353,64 +353,64 @@
   },
   "recent_commits": [
     {
-      "sha": "790a599",
+      "sha": "d36a17f",
       "date": "2026-07-25",
       "platform": "claude-code",
-      "summary": "catalog: register presentation plan in workspace manifest"
+      "summary": "docs: surface the 2026-07-25 control-plane changes on the read-first path"
     },
     {
-      "sha": "7f87d55",
+      "sha": "9dcb072",
       "date": "2026-07-25",
       "platform": "claude-code",
-      "summary": "state: peoples & cultural tapestry pass (CanonRec bacd3e6); registry sync"
+      "summary": "reports: refresh governance artifacts under the new write semantics"
     },
     {
-      "sha": "1a4abfb",
+      "sha": "0796e85",
       "date": "2026-07-25",
       "platform": "claude-code",
-      "summary": "state: active-faction salvage + fs-mining continuation queued (CanonRec 23db400); registry sync"
+      "summary": "sim: record run provenance so output can be attributed"
     },
     {
-      "sha": "f15367c",
+      "sha": "b14d017",
       "date": "2026-07-25",
       "platform": "claude-code",
-      "summary": "state: major promotion pass recorded (CanonRec 03aaa02); registry sync"
+      "summary": "tools: stop generated reports going dirty on every run"
     },
     {
-      "sha": "9e28e50",
+      "sha": "ea997d1",
       "date": "2026-07-25",
       "platform": "claude-code",
-      "summary": "state: identity de-flattening recorded (CanonRec c61c450); registry sync"
+      "summary": "reports(sim): commit hour_aboard_v1 run from 2026-07-13"
     },
     {
-      "sha": "23b349e",
+      "sha": "59ebea4",
       "date": "2026-07-25",
       "platform": "claude-code",
-      "summary": "state: widened prose sweep complete (CanonRec 79738ee); registry sync"
+      "summary": "chore(workspace): commit regenerable surfaces from the 2026-07-22 scan"
     },
     {
-      "sha": "c7c66a8",
+      "sha": "95b1123",
       "date": "2026-07-25",
       "platform": "claude-code",
-      "summary": "state: vessel confirmation + anomaly salvage (CanonRec 0d11e8c); registry sync"
+      "summary": "reports: refresh governance artifacts via `make brief`"
     },
     {
-      "sha": "6b7b577",
+      "sha": "e18d20e",
       "date": "2026-07-25",
       "platform": "claude-code",
-      "summary": "state: species salvage recorded (CanonRec 69383aa); registry sync"
+      "summary": "tools: make governance freshness self-enforcing"
     },
     {
-      "sha": "0be1aba",
+      "sha": "8708a98",
       "date": "2026-07-25",
       "platform": "claude-code",
-      "summary": "state: major polity salvage recorded (CanonRec 0ca5af1); registry sync"
+      "summary": "reports: executive brief 2026-07-25 \u2014 record two long-standing P1 closures"
     },
     {
-      "sha": "fd440d9",
+      "sha": "61c2511",
       "date": "2026-07-25",
       "platform": "claude-code",
-      "summary": "state: precursor/Dyson salvage recorded (CanonRec b28b175); registry sync"
+      "summary": "chore(session): record session state through 790a599"
     }
   ],
   "security_events": [
@@ -542,7 +542,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "790a599",
+    "main_sha": "d36a17f",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -657,7 +657,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-07-25T02:15:58Z",
+    "checked_at": "2026-07-25T04:29:26Z",
     "entries": [
       {
         "repo": "root",
@@ -679,12 +679,6 @@
         "branch": "fix/ci-dynamic-registry-pins",
         "detail": "pushed, 1 commit(s) ahead, no open PR",
         "remediation": "gh pr create --head fix/ci-dynamic-registry-pins (or retire the branch deliberately)"
-      },
-      {
-        "repo": "root",
-        "class": "unpushed_main",
-        "detail": "main is 2 commit(s) ahead of origin/main",
-        "remediation": "Push main (or PR it if the repo requires review)."
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
@@ -869,12 +863,6 @@
         "remediation": "Push and open a PR: git push -u origin codex/narrative-phase2-evidence-2026-07-04 && gh pr create"
       },
       {
-        "repo": "CanonRec",
-        "class": "unpushed_main",
-        "detail": "main is 1 commit(s) ahead of origin/main",
-        "remediation": "Push main (or PR it if the repo requires review)."
-      },
-      {
         "repo": "qgia-knowledge-library-main",
         "class": "dirty_tree",
         "detail": "4 uncommitted tracked path(s)",
@@ -882,6 +870,5 @@
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
-  },
-  "_summary_set_manually": true
+  }
 }

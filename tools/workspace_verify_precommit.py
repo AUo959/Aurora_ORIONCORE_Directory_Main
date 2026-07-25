@@ -52,9 +52,16 @@ GENERATED_SURFACES = [
 # wrapper exists to remove — a blocked commit whose only correct response is to
 # run one known command and retry.
 #
-# repo_head_match / repo_branch_match are deliberately NOT given a heal command
-# here. Per CLAUDE.md that gate is meant to catch nested repos moving unnoticed;
-# `make registry-sync` is an intentional human act.
+# repo_head_match / repo_branch_match get no dedicated heal command here, but
+# note they are already in REGENERABLE_CHECKS above, so the workspace_scan
+# fallback below *does* refresh nested pins. That contradicts CLAUDE.md, which
+# states the pin gate "is not auto-refreshed" because it exists to catch nested
+# repos moving unnoticed. Observed 2026-07-25: a commit silently advanced
+# CanonRec's pin bacd3e6 -> 527de7a.
+#
+# Left as-is rather than quietly changed: removing those checks would alter
+# enforcement behaviour, which is an owner decision. Documented in AGENTS.md
+# under "Generated Surfaces and Freshness Gates".
 HEAL_COMMANDS: dict[str, tuple[list[str], list[str]]] = {
     "session_state_freshness": (
         [sys.executable, "tools/session_stop_hook.py"],
