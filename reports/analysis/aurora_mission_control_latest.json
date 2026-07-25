@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T02:37:23Z",
+  "generated_at": "2026-07-25T03:55:17Z",
   "root": ".",
   "tool": "aurora_mission_control",
   "run_mode": "read_only",
@@ -73,8 +73,8 @@
     },
     "git_status": {
       "status": "dirty",
-      "changed_path_count": 18,
-      "branch": "main...origin/main [ahead 4]"
+      "changed_path_count": 5,
+      "branch": "main...origin/main [ahead 10]"
     }
   },
   "build_lanes": [
@@ -448,26 +448,19 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p2-git_status-git_state-root-worktree-has-18-in-progress-paths",
-      "title": "Root worktree has 18 in-progress paths",
+      "item_id": "mission-p2-git_status-git_state-root-worktree-has-5-in-progress-paths",
+      "title": "Root worktree has 5 in-progress paths",
       "category": "git_state",
       "priority": "P2",
       "source": "git_status",
       "target_repo": "root",
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
-        "Makefile",
         "archives/recovered_prototypes/biological_pneumatic_engine/Biological_Pneumatic_Engine_Whitepaper.docx",
-        "catalog/relocation_plan.json",
-        "catalog/rollback_wave2_automation_reports_initial.json",
-        "catalog/rollback_wave2_root_docs_and_analysis_initial.json",
-        "catalog/rollback_wave3_small_intake_files_initial.json",
-        "catalog/rollback_wave3_small_structured_dirs_initial.json",
-        "catalog/rollback_wave3_staging_isolation_initial.json",
-        "catalog/rollback_wave4_root_intake_cleanup_initial.json",
-        "docs/workspace-map.md",
+        "reports/analysis/aurora_mission_control_latest.json",
         "reports/analysis/aurora_recommendations_latest.json",
-        "reports/analysis/workspace_recovery_index_latest.json"
+        "reports/analysis/workspace_verify_latest.json",
+        "reports/simulation/hour_aboard_v1__2026-07-25/"
       ],
       "recommended_next_action": "Review ownership before staging or committing. Treat existing command-grammar, integration-gate, and recommendation-engine edits as separate root-control-plane work unless intentionally combined.",
       "suggested_commands": [
