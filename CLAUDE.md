@@ -24,6 +24,13 @@ artifacts map to current locations via
 5. Then read: `AGENTS.md`, `catalog/workspace_manifest.yaml`,
    `catalog/repo_registry.yaml` as needed.
 
+> **Changed 2026-07-25 — read before debugging a blocked commit.** Generated
+> reports no longer rewrite when only timestamps moved, `session_state_freshness`
+> blocks at 10 commits behind (and self-heals via the pre-commit wrapper), a
+> `brief_freshness` gate warns at 60 commits since the last brief, and simulation
+> runs now emit `run_meta.json`. A tool that changes nothing is now the expected
+> outcome. Full detail: **AGENTS.md → "Generated Surfaces and Freshness Gates"**.
+
 ## Session end — division of labor
 
 The Stop hook (`tools/session_stop_hook.py`, wired in

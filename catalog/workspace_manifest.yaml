@@ -1,4 +1,4 @@
-generated_at: '2026-07-22T13:02:05Z'
+generated_at: '2026-07-25T04:27:30Z'
 root: .
 logical_taxonomy:
 - repos
@@ -320,22 +320,22 @@ entries:
   owner: intake-review
   status: planned_move
   batch_id: wave4_root_intake_cleanup_initial
-- id: aurora-cloudbank-symbolic-review-v2
+- id: aurora-cloudbank-symbolic-presentation-plan
   kind: intake_file
-  current_path: aurora-cloudbank-symbolic_review_v2.md
+  current_path: aurora-cloudbank-symbolic_presentation_plan.md
   logical_zone: intake
-  planned_path: intake/aurora-cloudbank-symbolic_review_v2.md
+  planned_path: intake/aurora-cloudbank-symbolic_presentation_plan.md
   git_boundary: none
   storage_tier: review
   retention_policy: review
   owner: intake-review
   status: planned_move
   batch_id: wave4_root_intake_cleanup_initial
-- id: aurora-cloudbank-symbolic-presentation-plan
+- id: aurora-cloudbank-symbolic-review-v2
   kind: intake_file
-  current_path: aurora-cloudbank-symbolic_presentation_plan.md
+  current_path: aurora-cloudbank-symbolic_review_v2.md
   logical_zone: intake
-  planned_path: intake/aurora-cloudbank-symbolic_presentation_plan.md
+  planned_path: intake/aurora-cloudbank-symbolic_review_v2.md
   git_boundary: none
   storage_tier: review
   retention_policy: review

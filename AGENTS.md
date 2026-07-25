@@ -351,6 +351,62 @@ Use `--no-verify` only when:
 - the failure is clearly due to worktree path mismatch
 - the user still wants the commit
 
+## Generated Surfaces and Freshness Gates
+
+Changed 2026-07-25. Both platforms are affected. Read this before treating a
+blocked commit or an unchanged report as a fault.
+
+**Generated reports no longer rewrite themselves on every run.**
+`write_json` in `tools/_workspace_common.py` compares meaning, not timestamps:
+if stripping volatile keys (`generated_at`, `timestamp`, `checked_at`, and
+similar, at any depth) leaves the payload identical to what is on disk, the
+file is left alone and `write_json` returns `False`.
+
+- A tool running and changing nothing is now the expected outcome, not a
+  failure. `reports/analysis/*_latest.json` staying clean in `git status`
+  means the finding set is unchanged — it does **not** mean the tool skipped.
+- Verification time is still recorded, to `reports/analysis/.lastrun/` which
+  is git-ignored. `generated_at` now means "when this content was produced";
+  the marker means "when we last confirmed it". Those are different questions
+  and were previously conflated.
+- Need a real rewrite anyway (heartbeats, run ledgers)? Pass
+  `always_write=True`. Need different volatile keys for one artifact? Pass
+  `volatile_keys`.
+- `catalog/session_state.json` is **not** affected — it writes through
+  `session_state_io.dumps_canonical`, and its serialization contract with the
+  merge driver is unchanged.
+
+Why: every `*_latest.json` was permanently dirty, because two runs seconds
+apart differed only in `generated_at`. A file that is always dirty is a file
+everyone learns to ignore, which is how eight surfaces sat uncommitted for
+three days and two resolved P1s went unrecorded for seventeen.
+
+**`session_state_freshness` now blocks at 10 commits behind HEAD.**
+Below that it stays a warning. It is in `REGENERABLE_CHECKS`, so the
+pre-commit wrapper heals it for you — it runs `tools/session_stop_hook.py`
+and stages `catalog/session_state.json` — and the block clears on the same
+commit that triggered it. If you see it, let the wrapper work; do not reach
+for `--no-verify`.
+
+`repo_head_match` / `repo_branch_match` are deliberately **not** auto-healed.
+That gate exists to catch nested repos moving unnoticed, so refreshing pins
+stays an intentional act: `make registry-sync`.
+
+**New `brief_freshness` check.** Measured in commits landed since the newest
+brief, never in wall-clock days, so a quiet period produces no nagging.
+Warns at 60, blocks at 150 — calibrated against observed cadence (median 34
+commits between briefs; the gap that hid two P1 closures was 90). Run
+`make brief` to refresh the governance artifacts and scaffold the next brief,
+`make brief-check` to see freshness alone. Record a documented exemption in
+`catalog/brief_freshness_exemption.yaml` if a gap is deliberate.
+
+**Simulation runs record their own provenance.** `tools/hour_aboard.py`
+writes `run_meta.json` beside its artifacts: tool, write time, scenario,
+seed, pid/ppid, parent command, argv, cwd, user, and which agent environment
+was active. It records its own `output_dir`, so a directory whose name
+disagrees with it was **copied, not generated** — check that first before
+investigating a run you cannot account for.
+
 ## Operational Defaults
 
 - prefer SSH over HTTPS for GitHub remotes

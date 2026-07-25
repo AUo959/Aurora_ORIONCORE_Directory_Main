@@ -1,8 +1,8 @@
 # Workspace Map
 
-- Generated: `2026-07-22T13:02:05Z`
+- Generated: `2026-07-25T04:27:30Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `43`
+- Top-level entries cataloged: `44`
 - Nested repos registered: `9`
 - Archive or binary artifacts inventoried: `601`
 - Classification overrides loaded: `6` from `catalog/classification_overrides.yaml`
@@ -14,7 +14,7 @@
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `5` top-level entries
-- `intake`: `12` top-level entries
+- `intake`: `13` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
@@ -43,6 +43,7 @@
 - `QGIA_Runtime_OnePager.md` -> `intake/QGIA_Runtime_OnePager.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `aurora-cloudbank-symbolic_README_DRAFT.md` -> `intake/aurora-cloudbank-symbolic_README_DRAFT.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `aurora-cloudbank-symbolic_outside_review.md` -> `intake/aurora-cloudbank-symbolic_outside_review.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `aurora-cloudbank-symbolic_presentation_plan.md` -> `intake/aurora-cloudbank-symbolic_presentation_plan.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `aurora-cloudbank-symbolic_review_v2.md` -> `intake/aurora-cloudbank-symbolic_review_v2.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `warrant-lens` -> `intake/warrant-lens` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 
