@@ -127,3 +127,7 @@ _entropy_quarantine/
 
 #Ignore vscode AI rules
 .github/instructions/codacy.instructions.md
+
+# Liveness markers for generated reports — records that a tool ran and found
+# no change, without dirtying the tracked artifact. See tools/_workspace_common.py.
+.lastrun/

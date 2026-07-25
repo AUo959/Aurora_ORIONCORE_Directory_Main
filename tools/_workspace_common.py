@@ -464,9 +464,92 @@ def dump_yaml_like(data: Any, path: Path) -> None:
     path.write_text(rendered, encoding="utf-8")
 
 
-def write_json(path: Path, data: Any) -> None:
+# Fields that record *when* a report was produced rather than *what* it found.
+# Two runs seconds apart differ in these and in nothing else, so rewriting on
+# every run leaves generated artifacts permanently dirty in git — which trains
+# everyone to ignore them, and is how real changes end up hiding among the
+# churn. Compare semantics, not timestamps.
+#
+# Same idea as CanonRec's validate_entity.py, which separates a content hash
+# from an output hash so identity survives cosmetic change.
+VOLATILE_JSON_KEYS: frozenset[str] = frozenset({
+    "generated_at",
+    "timestamp",
+    "checked_at",
+    "created_at",
+    "run_at",
+    "scanned_at",
+    "produced_at",
+    "last_updated",
+})
+
+# Where "we ran, and nothing had changed" is recorded. Git-ignored: it is
+# liveness evidence, not content, and tracking it would reintroduce the churn
+# this exists to remove.
+LASTRUN_DIR_NAME = ".lastrun"
+
+
+def _strip_volatile(value: Any, volatile_keys: frozenset[str]) -> Any:
+    """Recursively drop volatile keys so two reports compare on meaning alone."""
+    if isinstance(value, dict):
+        return {
+            k: _strip_volatile(v, volatile_keys)
+            for k, v in value.items()
+            if k not in volatile_keys
+        }
+    if isinstance(value, list):
+        return [_strip_volatile(v, volatile_keys) for v in value]
+    return value
+
+
+def _record_lastrun(path: Path) -> None:
+    """Touch a git-ignored marker so freshness tooling can still tell when a
+    report was last *verified*, as distinct from when its content last changed."""
+    try:
+        marker_dir = path.parent / LASTRUN_DIR_NAME
+        marker_dir.mkdir(parents=True, exist_ok=True)
+        (marker_dir / f"{path.name}.lastrun").write_text(
+            now_iso_utc() + "\n", encoding="utf-8"
+        )
+    except Exception:
+        # Liveness bookkeeping must never fail a report write.
+        pass
+
+
+def write_json(
+    path: Path,
+    data: Any,
+    *,
+    volatile_keys: frozenset[str] | None = None,
+    always_write: bool = False,
+) -> bool:
+    """Write *data* as JSON, skipping the write when only timestamps changed.
+
+    Returns True when the file was written, False when it was left alone
+    because its meaningful content was unchanged.
+
+    Pass ``always_write=True`` for artifacts whose timestamp *is* the payload
+    (heartbeats, run ledgers). Pass ``volatile_keys`` to override which fields
+    count as non-semantic for a given artifact.
+    """
     ensure_parent(path)
-    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    payload = json.dumps(data, indent=2) + "\n"
+
+    if not always_write and path.exists():
+        keys = VOLATILE_JSON_KEYS if volatile_keys is None else volatile_keys
+        try:
+            existing = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            existing = None  # unreadable or not JSON — fall through and rewrite
+        if existing is not None and _strip_volatile(existing, keys) == _strip_volatile(
+            data, keys
+        ):
+            _record_lastrun(path)
+            return False
+
+    path.write_text(payload, encoding="utf-8")
+    _record_lastrun(path)
+    return True
 
 
 def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
