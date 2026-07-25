@@ -853,19 +853,112 @@ def verify_session_state(root: Path) -> list[Finding]:
     if ahead <= 1:
         return []  # 0 = current; 1 = auto-commit pending, acceptable
 
-    return [
-        warning(
-            "session_state_freshness",
-            f"catalog/session_state.json is {ahead} commit(s) behind HEAD "
-            f"(last recorded: {known_sha}). The other platform may be operating "
-            "on stale workspace context.",
-            "Run `python3 tools/session_stop_hook.py` to auto-update, or update "
-            "catalog/session_state.json manually and commit.",
-        )
-    ]
+    details = (
+        f"catalog/session_state.json is {ahead} commit(s) behind HEAD "
+        f"(last recorded: {known_sha}). The other platform may be operating "
+        "on stale workspace context."
+    )
+    fix = (
+        "Run `python3 tools/session_stop_hook.py` to auto-update, or update "
+        "catalog/session_state.json manually and commit."
+    )
 
+    # Past the threshold this stops being advisory: a cross-platform handoff
+    # reading state this far behind is reading fiction. The pre-commit wrapper
+    # treats this check as regenerable and heals it automatically, so the block
+    # normally resolves itself on the same commit that triggered it.
+    if ahead >= SESSION_STATE_BLOCKING_COMMITS:
+        return [error("session_state_freshness", details, fix)]
+
+    return [warning("session_state_freshness", details, fix)]
+
+
+# Past this many commits behind HEAD, stale session state stops being advisory.
+# The pre-commit wrapper heals this automatically, so the block is self-clearing.
+SESSION_STATE_BLOCKING_COMMITS = 10
 
 GIT_LOCK_STALE_SECONDS = 30 * 60
+
+# ── Brief freshness ──────────────────────────────────────────────────────
+#
+# Measured in commits landed since the last brief, never in wall-clock days.
+# That distinction is the whole design: a quiet fortnight produces no commits,
+# so it produces no nagging, while a busy week trips the check exactly when the
+# brief has stopped describing reality.
+#
+# Calibrated against the observed cadence rather than invented. Commits between
+# consecutive briefs, 2026-05-24 → 2026-07-25: 0, 55, 99, 19, 5, 34, 90.
+# Median 34.
+#
+#   warn at 60   — above normal cadence; would have fired twice in seven briefs,
+#                  on the 99- and 90-commit gaps. The 90-commit gap is the one
+#                  that hid two resolved P1s for seventeen days.
+#   block at 150 — beyond anything observed. A backstop, not a routine gate.
+#
+# Escape hatch: BRIEF_EXEMPT_FILE, matching the publication-debt exemption
+# convention. A documented decision always beats a bypassed gate.
+BRIEF_WARN_COMMITS = 60
+BRIEF_BLOCKING_COMMITS = 150
+BRIEF_DIR = Path("reports/state_briefs")
+BRIEF_EXEMPT_FILE = Path("catalog/brief_freshness_exemption.yaml")
+
+
+def verify_brief_freshness(root: Path) -> list[Finding]:
+    """Flag when enough has changed that the newest brief no longer describes it.
+
+    Silent by design when nothing has landed: staleness that nobody could have
+    caused is not a finding.
+    """
+    import subprocess as _sp
+
+    if (root / BRIEF_EXEMPT_FILE).exists():
+        return []
+
+    brief_dir = root / BRIEF_DIR
+    if not brief_dir.is_dir():
+        return []
+
+    briefs = sorted(brief_dir.glob("executive_brief__*.md"))
+    if not briefs:
+        return []
+
+    newest = briefs[-1]
+    result = _sp.run(
+        ["git", "log", "-1", "--format=%H", "--", str(newest.relative_to(root))],
+        capture_output=True, text=True, cwd=root, check=False,
+    )
+    brief_sha = result.stdout.strip()
+    if result.returncode != 0 or not brief_sha:
+        return []  # never committed yet — nothing to measure against
+
+    result = _sp.run(
+        ["git", "rev-list", "--count", f"{brief_sha}..HEAD"],
+        capture_output=True, text=True, cwd=root, check=False,
+    )
+    if result.returncode != 0:
+        return []
+    try:
+        ahead = int(result.stdout.strip() or 0)
+    except ValueError:
+        return []
+
+    if ahead < BRIEF_WARN_COMMITS:
+        return []
+
+    details = (
+        f"{ahead} commit(s) have landed since the newest brief ({newest.name}) "
+        f"was committed. Findings in it are unverified against current state, "
+        f"and closures since then are unrecorded."
+    )
+    fix = (
+        "Run `make brief` to regenerate the governance artifacts and open the "
+        "brief scaffold, or record a documented exemption in "
+        f"{BRIEF_EXEMPT_FILE}."
+    )
+
+    if ahead >= BRIEF_BLOCKING_COMMITS:
+        return [error("brief_freshness", details, fix)]
+    return [warning("brief_freshness", details, fix)]
 
 
 def verify_canon_resolvability(root: Path) -> list[Finding]:
@@ -1068,6 +1161,7 @@ def run_checks(root: Path, include_determinism: bool, include_relocation_rehears
     findings.extend(verify_relocation_plan(root))
     findings.extend(verify_tracked_sizes(root))
     findings.extend(verify_session_state(root))
+    findings.extend(verify_brief_freshness(root))
     if include_determinism:
         findings.extend(verify_determinism(root))
     if include_relocation_rehearsal:

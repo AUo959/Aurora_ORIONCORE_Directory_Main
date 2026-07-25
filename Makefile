@@ -199,6 +199,25 @@ gumas-validate: ## Run GUMAS v3.0 validation suite
 gumas-api: ## Start GUMAS simulation API server (port 8000)
 	$(PYTHON) tools/gumas_api.py --host 0.0.0.0 --port 8000
 
+# ── Executive brief ──────────────────────────────────────────────────────
+
+brief: ## Refresh governance artifacts and scaffold the next executive brief
+	@echo "── Refreshing governance artifacts ──"
+	$(PYTHON) tools/workspace_verify.py --persist-report
+	$(PYTHON) tools/workspace_recovery_index.py --persist-report
+	$(PYTHON) tools/aurora_recommendation_engine.py --persist-report
+	$(PYTHON) tools/aurora_mission_control.py --persist-report
+	@echo ""
+	@echo "── Current signals ──"
+	@$(PYTHON) tools/aurora_mission_control.py --summary
+	@echo ""
+	@$(PYTHON) tools/publication_debt.py scan || true
+	@echo ""
+	@$(PYTHON) tools/brief_scaffold.py
+
+brief-check: ## Report brief freshness only; exit 1 when a brief is overdue
+	@$(PYTHON) tools/brief_scaffold.py --check
+
 # ── Cleanup ──────────────────────────────────────────────────────────────
 
 clean: ## Remove Python caches and temp files

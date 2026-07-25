@@ -29,6 +29,7 @@ REGENERABLE_CHECKS = {
     "manifest_top_level_coverage",
     "repo_head_match",
     "repo_branch_match",
+    "session_state_freshness",
 }
 
 GENERATED_SURFACES = [
@@ -38,6 +39,28 @@ GENERATED_SURFACES = [
     "docs/workspace-map.md",
     "reports/analysis/workspace_scan_summary.json",
 ]
+
+# Not every regenerable check is healed by workspace_scan.py. Each entry maps a
+# check to the command that fixes it and the surfaces to stage afterwards; the
+# default remains workspace_scan.py over GENERATED_SURFACES.
+#
+# session_state_freshness heals via the Stop hook. That hook is advisory by
+# design — it writes state to disk and deliberately never commits, leaving the
+# commit to a human. Staging it here does not change that intent: the file only
+# gets staged onto a commit the human is already making, and only once state has
+# fallen far enough behind to block. The alternative is the exact situation this
+# wrapper exists to remove — a blocked commit whose only correct response is to
+# run one known command and retry.
+#
+# repo_head_match / repo_branch_match are deliberately NOT given a heal command
+# here. Per CLAUDE.md that gate is meant to catch nested repos moving unnoticed;
+# `make registry-sync` is an intentional human act.
+HEAL_COMMANDS: dict[str, tuple[list[str], list[str]]] = {
+    "session_state_freshness": (
+        [sys.executable, "tools/session_stop_hook.py"],
+        ["catalog/session_state.json"],
+    ),
+}
 
 
 def _run_verify() -> tuple[int, str]:
@@ -71,16 +94,33 @@ def main() -> int:
         return code or 1
 
     print(f"[pre-commit] blocking findings {sorted(blocking)} are all "
-          "regenerable — running workspace_scan and staging surfaces...")
-    scan = subprocess.run(
-        [sys.executable, str(REPO_ROOT / "tools" / "workspace_scan.py")],
-        capture_output=True, text=True, cwd=REPO_ROOT,
-    )
-    if scan.returncode != 0:
-        print(scan.stdout, scan.stderr)
-        return 1
-    subprocess.run(["git", "add", *GENERATED_SURFACES],
-                   capture_output=True, cwd=REPO_ROOT)
+          "regenerable — healing and staging surfaces...")
+
+    # Checks with a dedicated heal command; anything else falls back to a
+    # single workspace_scan.py pass over GENERATED_SURFACES.
+    for check in sorted(blocking & HEAL_COMMANDS.keys()):
+        command, surfaces = HEAL_COMMANDS[check]
+        print(f"[pre-commit]   {check}: {' '.join(command)}")
+        healed = subprocess.run(
+            command, capture_output=True, text=True, cwd=REPO_ROOT,
+        )
+        if healed.returncode != 0:
+            print(healed.stdout, healed.stderr)
+            return 1
+        subprocess.run(["git", "add", *surfaces],
+                       capture_output=True, cwd=REPO_ROOT)
+
+    if blocking - HEAL_COMMANDS.keys():
+        print("[pre-commit]   running workspace_scan...")
+        scan = subprocess.run(
+            [sys.executable, str(REPO_ROOT / "tools" / "workspace_scan.py")],
+            capture_output=True, text=True, cwd=REPO_ROOT,
+        )
+        if scan.returncode != 0:
+            print(scan.stdout, scan.stderr)
+            return 1
+        subprocess.run(["git", "add", *GENERATED_SURFACES],
+                       capture_output=True, cwd=REPO_ROOT)
 
     code, out = _run_verify()
     blocking = _blocking_checks(out)
