@@ -328,7 +328,7 @@
       "detail": "Widened prose sweep run: rebuilt roster (329 names), swept 30 mixed-content exports. Found 2 genuine new L2 chars (Colonel Idris Vale, Dr. Syrr Velkonn) + Selia Tren-Voss alias->Selia Trask. Heavy noise (real-world news + L1 dev-persona expert panel) correctly excluded. CanonRec 79738ee."
     }
   ],
-  "last_updated": "2026-07-23T01:56:35Z",
+  "last_updated": "2026-07-25T02:15:58Z",
   "last_platform": "claude-code",
   "last_session_summary": "Peoples & Cultural Tapestry pass: mechanics library confirmed already-landed (23 MECH ids). Landed the L2 Cultural Tapestry (art movements/philosophy/media) \u2014 the culture dimension, previously absent \u2014 which surfaced 4 more unrecorded engine peoples: Elari Ascendancy, Vorran Clans, Kaelar Monastic Orders, Tharaxian Nomads (each with faction_type+bias+cultural traditions, engine-cross-corroborated). ALL 13 ENGINE FACTIONS NOW RECORDED. CanonRec bacd3e6. Open: Elari/Vorran/Kaelar/Tharaxian species records; Staff Registry SSOT zip; culture entity_kind if wanted.",
   "tool_versions": {
@@ -353,64 +353,64 @@
   },
   "recent_commits": [
     {
-      "sha": "c2bd06d",
-      "date": "2026-07-22",
-      "platform": "codex",
-      "summary": "chore(session): record CloudBank workflow repair"
-    },
-    {
-      "sha": "f2a88b1",
-      "date": "2026-07-22",
-      "platform": "codex",
-      "summary": "chore(session): record deprecation notice cleanup"
-    },
-    {
-      "sha": "6d1fe8d",
-      "date": "2026-07-22",
-      "platform": "codex",
-      "summary": "chore(session): record mesh warning cleanup"
-    },
-    {
-      "sha": "7cfbe49",
-      "date": "2026-07-22",
-      "platform": "codex",
-      "summary": "chore(session): record PAT reconciliation"
-    },
-    {
-      "sha": "690fbe2",
-      "date": "2026-07-22",
-      "platform": "codex",
-      "summary": "chore(workspace): reconcile landed PAT branch"
-    },
-    {
-      "sha": "3b4bb9e",
-      "date": "2026-07-22",
-      "platform": "codex",
-      "summary": "chore(session): record OPAL2 closeout commit"
-    },
-    {
-      "sha": "e369290",
-      "date": "2026-07-22",
-      "platform": "codex",
-      "summary": "chore(workspace): close OPAL2 phase 2.1"
-    },
-    {
-      "sha": "242e532",
-      "date": "2026-07-22",
-      "platform": "codex",
-      "summary": "tools: registry-sync for nested-repo pins \u2014 surgical head_sha refresh + --check, make targets, Stop-hook drift advisory, tests, docs"
-    },
-    {
-      "sha": "e93bd10",
-      "date": "2026-07-21",
+      "sha": "790a599",
+      "date": "2026-07-25",
       "platform": "claude-code",
-      "summary": "registry: CanonRec head db3314a (Judicator architecture v1.1 bound to system anchors)"
+      "summary": "catalog: register presentation plan in workspace manifest"
     },
     {
-      "sha": "cf5725a",
-      "date": "2026-07-21",
+      "sha": "7f87d55",
+      "date": "2026-07-25",
       "platform": "claude-code",
-      "summary": "registry: CanonRec head fbcb7c5 (Judicator functional architecture v1.1)"
+      "summary": "state: peoples & cultural tapestry pass (CanonRec bacd3e6); registry sync"
+    },
+    {
+      "sha": "1a4abfb",
+      "date": "2026-07-25",
+      "platform": "claude-code",
+      "summary": "state: active-faction salvage + fs-mining continuation queued (CanonRec 23db400); registry sync"
+    },
+    {
+      "sha": "f15367c",
+      "date": "2026-07-25",
+      "platform": "claude-code",
+      "summary": "state: major promotion pass recorded (CanonRec 03aaa02); registry sync"
+    },
+    {
+      "sha": "9e28e50",
+      "date": "2026-07-25",
+      "platform": "claude-code",
+      "summary": "state: identity de-flattening recorded (CanonRec c61c450); registry sync"
+    },
+    {
+      "sha": "23b349e",
+      "date": "2026-07-25",
+      "platform": "claude-code",
+      "summary": "state: widened prose sweep complete (CanonRec 79738ee); registry sync"
+    },
+    {
+      "sha": "c7c66a8",
+      "date": "2026-07-25",
+      "platform": "claude-code",
+      "summary": "state: vessel confirmation + anomaly salvage (CanonRec 0d11e8c); registry sync"
+    },
+    {
+      "sha": "6b7b577",
+      "date": "2026-07-25",
+      "platform": "claude-code",
+      "summary": "state: species salvage recorded (CanonRec 69383aa); registry sync"
+    },
+    {
+      "sha": "0be1aba",
+      "date": "2026-07-25",
+      "platform": "claude-code",
+      "summary": "state: major polity salvage recorded (CanonRec 0ca5af1); registry sync"
+    },
+    {
+      "sha": "fd440d9",
+      "date": "2026-07-25",
+      "platform": "claude-code",
+      "summary": "state: precursor/Dyson salvage recorded (CanonRec b28b175); registry sync"
     }
   ],
   "security_events": [
@@ -542,7 +542,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "c2bd06d0d3ec37d12928d50eac621e38c4668c3c",
+    "main_sha": "790a599",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -657,7 +657,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-07-22T03:36:51Z",
+    "checked_at": "2026-07-25T02:15:58Z",
     "entries": [
       {
         "repo": "root",
@@ -679,6 +679,12 @@
         "branch": "fix/ci-dynamic-registry-pins",
         "detail": "pushed, 1 commit(s) ahead, no open PR",
         "remediation": "gh pr create --head fix/ci-dynamic-registry-pins (or retire the branch deliberately)"
+      },
+      {
+        "repo": "root",
+        "class": "unpushed_main",
+        "detail": "main is 2 commit(s) ahead of origin/main",
+        "remediation": "Push main (or PR it if the repo requires review)."
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
@@ -864,9 +870,9 @@
       },
       {
         "repo": "CanonRec",
-        "class": "dirty_tree",
-        "detail": "1 uncommitted tracked path(s)",
-        "remediation": "Commit or deliberately discard the working-tree changes."
+        "class": "unpushed_main",
+        "detail": "main is 1 commit(s) ahead of origin/main",
+        "remediation": "Push main (or PR it if the repo requires review)."
       },
       {
         "repo": "qgia-knowledge-library-main",
@@ -876,6 +882,5 @@
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
-  },
-  "_summary_set_manually": true
+  }
 }
