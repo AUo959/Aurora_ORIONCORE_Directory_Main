@@ -583,6 +583,62 @@ def render_interaction_md(graph: dict) -> str:
     return "\n".join(lines)
 
 
+def build_run_meta(out_dir: Path, scenario: dict) -> dict:
+    """Record who produced this run, so the next unexplained directory is a
+    one-command answer rather than an evening of archaeology.
+
+    Field finding 2026-07-25: a simulation directory appeared with a name
+    nobody could attribute. It turned out to be a byte-identical *copy* of an
+    earlier run rather than a fresh one — which was only provable by re-running
+    the tool and diffing, because the output recorded nothing about its own
+    origin.
+
+    ``output_dir`` is deliberately recorded. If this file is ever found in a
+    directory whose name disagrees with it, the directory was copied, not
+    generated, and the disagreement says so immediately.
+    """
+    def _cmd(pid: str) -> str:
+        try:
+            out = subprocess.run(
+                ["ps", "-o", "command=", "-p", pid],
+                capture_output=True, text=True, check=False, timeout=5,
+            )
+            return out.stdout.strip()[:300] or "unknown"
+        except Exception:
+            return "unknown"
+
+    ppid = str(os.getppid())
+    try:
+        recorded_dir = str(out_dir.relative_to(REPO_ROOT))
+    except ValueError:
+        recorded_dir = str(out_dir)
+
+    return {
+        "schema": "aurora.sim.run_meta/v1",
+        "tool": "tools/hour_aboard.py",
+        "written_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "output_dir": recorded_dir,
+        "scenario": scenario.get("name"),
+        "seed": scenario.get("seed"),
+        "anchor_seed": scenario.get("anchor_seed"),
+        "process": {
+            "pid": os.getpid(),
+            "ppid": ppid,
+            "parent_command": _cmd(ppid),
+            "argv": " ".join(sys.argv)[:300],
+            "cwd": os.getcwd(),
+            "user": os.environ.get("USER") or os.environ.get("LOGNAME") or "unknown",
+        },
+        "environment": {
+            # Which agent, if any, drove this. Absent keys mean a plain shell.
+            "claude_code": bool(os.environ.get("CLAUDECODE")),
+            "codex": bool(os.environ.get("CODEX_SANDBOX") or os.environ.get("CODEX_HOME")),
+            "ci": bool(os.environ.get("CI")),
+            "sim_report_root_override": os.environ.get("AURORA_SIM_REPORT_ROOT"),
+        },
+    }
+
+
 def build_souls_accounting(
     hour_records: dict, mesh_results: list[dict], canon_souls: list[dict]
 ) -> dict:
@@ -877,6 +933,9 @@ def main() -> int:
     )
     (out_dir / "souls_accounting.json").write_text(json.dumps(souls, indent=2) + "\n")
     (out_dir / "sim_raw.json").write_text(json.dumps(sim, indent=2) + "\n")
+    (out_dir / "run_meta.json").write_text(
+        json.dumps(build_run_meta(out_dir, scenario), indent=2) + "\n"
+    )
     (out_dir / "narrative_reconstruction.json").write_text(json.dumps(reconstruction, indent=2) + "\n")
     (out_dir / "narrative_reconstruction.md").write_text(
         render_reconstruction_md(reconstruction, {**scenario["l3_audit"], **audit}))
@@ -893,6 +952,7 @@ def main() -> int:
         "companion_ops.json",
         "souls_accounting.json",
         "sim_raw.json",
+        "run_meta.json",
         "narrative_reconstruction.json",
         "narrative_reconstruction.md",
     ):
