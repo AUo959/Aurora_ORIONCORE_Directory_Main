@@ -100,7 +100,7 @@ These remain L1 because they model operational institutions and decisions. They 
 
 | Value | Meaning |
 |---|---|
-| `l1_simulated_institutional_rehearsal` | Deterministic or bounded-replay L1 execution of an institutional workflow using simulated roles and interactions |
+| `l1_simulated_institutional_rehearsal` | Deterministic L1 execution of an institutional workflow using simulated roles and interactions |
 | `real_world_internal_exercise` | Activity performed by real Aurora participants or an accountable internal team |
 | `real_world_external_engagement` | Activity performed by a verified external organization or independently accountable external assessor |
 | `not_applicable` | Artifact does not represent an institutional event |
@@ -164,11 +164,14 @@ A deterministic L1 institutional event must record at minimum:
 - operator or invoking agent,
 - institutional roles and whether each role is simulated or verified real-world,
 - evidence inputs and outputs,
+- revision number and prior-event digest,
 - execution mode,
 - evidence authority,
 - data treatment.
 
-A run that cannot be replayed exactly must declare the bounded source of nondeterminism and preserve enough state to reproduce the decision path.
+Nondeterministic institutional experiments are outside `l1_simulated_institutional_rehearsal` and require a separately governed execution mode. Gate-001A records must be deterministic.
+
+Every event also records a revision number and prior-event digest. Execution mode and assurance fields are immutable across revisions; a different mode requires a new event ID.
 
 ---
 
@@ -262,5 +265,6 @@ Pause when an artifact or report:
 - Simulated provenance does not reduce data treatment.
 - Evidence authority constrains claims; it does not rank data quality.
 - No simulation artifact becomes real-world evidence by implication or relabeling.
-- No external assurance claim is valid without independently attributable external evidence.
+- No external assurance claim is valid without structured external-verification metadata and digest-resolved external evidence.
+- Execution mode is immutable across revisions of the same event ID.
 - Repository commit is required before any governance artifact becomes canon.
