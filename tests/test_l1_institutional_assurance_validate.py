@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 from pathlib import Path
 
@@ -17,6 +18,8 @@ def simulated_event() -> dict:
     return {
         "event_id": "GATE-001A-security-review-rehearsal",
         "run_id": "run-seed-808",
+        "revision": 1,
+        "previous_event_digest": None,
         "canon_status": "current_canon",
         "layer": "L1",
         "execution_mode": "l1_simulated_institutional_rehearsal",
@@ -52,10 +55,12 @@ def simulated_event() -> dict:
     }
 
 
-def external_event() -> dict:
+def external_event(evidence_path: str, digest: str) -> dict:
     return {
         "event_id": "GATE-001B-external-review-2027",
         "run_id": "engagement-001",
+        "revision": 1,
+        "previous_event_digest": None,
         "canon_status": "current_canon",
         "layer": "L1",
         "execution_mode": "real_world_external_engagement",
@@ -73,6 +78,15 @@ def external_event() -> dict:
             "executed_at": "2027-01-15T12:00:00Z",
             "operator": "verified-owner",
         },
+        "external_verification": {
+            "organization": "Verified Security Firm",
+            "assessor": "Verified Assessor",
+            "scope_reference": "scope-001",
+            "authorization_reference": "authorization-001",
+            "verified_by": "Aurora Owner",
+            "verified_at": "2027-01-15T12:00:00Z",
+            "verification_method": "repository_evidence_digest",
+        },
         "institutional_roles": [
             {
                 "role_id": "external-firm",
@@ -83,7 +97,8 @@ def external_event() -> dict:
         "evidence_references": [
             {
                 "origin": "external_primary_evidence",
-                "reference": "controlled://engagement/scope-and-findings-001",
+                "reference": evidence_path,
+                "sha256": digest,
             },
             {
                 "origin": "simulation_primary_evidence",
@@ -97,8 +112,32 @@ def test_committed_simulated_output_is_valid_first_class_data():
     assert validator.validate_event(simulated_event()) == []
 
 
-def test_external_engagement_with_external_primary_evidence_is_valid():
-    assert validator.validate_event(external_event()) == []
+def test_external_engagement_requires_resolved_digest_evidence(tmp_path):
+    receipt = tmp_path / "evidence" / "external_receipt.json"
+    receipt.parent.mkdir()
+    receipt.write_text('{"assessor":"verified"}\n', encoding="utf-8")
+    digest = hashlib.sha256(receipt.read_bytes()).hexdigest()
+    event = external_event("evidence/external_receipt.json", digest)
+    assert validator.validate_event(event, evidence_root=tmp_path) == []
+
+
+def test_external_engagement_without_evidence_root_fails_closed():
+    event = external_event("evidence/external_receipt.json", "b" * 64)
+    errors = validator.validate_event(event)
+    assert any("requires evidence_root" in error for error in errors)
+
+
+def test_external_engagement_rejects_missing_or_mismatched_evidence(tmp_path):
+    event = external_event("evidence/missing.json", "b" * 64)
+    errors = validator.validate_event(event, evidence_root=tmp_path)
+    assert any("does not resolve to a file" in error for error in errors)
+
+    receipt = tmp_path / "evidence" / "external_receipt.json"
+    receipt.parent.mkdir()
+    receipt.write_text("different", encoding="utf-8")
+    event = external_event("evidence/external_receipt.json", "b" * 64)
+    errors = validator.validate_event(event, evidence_root=tmp_path)
+    assert any("sha256 does not match" in error for error in errors)
 
 
 def test_simulation_cannot_claim_real_world_interaction_or_assurance():
@@ -124,15 +163,15 @@ def test_simulated_roles_cannot_be_relabelled_as_verified_external_entities():
     assert any("not allowed" in error for error in errors)
 
 
-def test_gate_001b_requires_external_primary_evidence():
-    event = external_event()
+def test_gate_001b_requires_external_primary_evidence(tmp_path):
+    event = external_event("evidence/receipt.json", "b" * 64)
     event["evidence_references"] = [
         {
             "origin": "simulation_primary_evidence",
             "reference": "reports/simulation/gate-001a/run-seed-808.json",
         }
     ]
-    errors = validator.validate_event(event)
+    errors = validator.validate_event(event, evidence_root=tmp_path)
     assert any("external_primary_evidence" in error for error in errors)
 
 
@@ -150,3 +189,37 @@ def test_simulation_requires_replay_provenance():
     errors = validator.validate_event(event)
     assert any("deterministic=true" in error for error in errors)
     assert any("provenance.seed" in error for error in errors)
+
+
+def test_revision_history_prevents_execution_mode_rewrite(tmp_path):
+    prior = simulated_event()
+    current = external_event("evidence/receipt.json", "b" * 64)
+    current["event_id"] = prior["event_id"]
+    current["revision"] = 2
+    current["previous_event_digest"] = validator.canonical_event_digest(prior)
+    errors = validator.validate_event(current, prior_event=prior, evidence_root=tmp_path)
+    assert any("immutable revision field changed: execution_mode" in error for error in errors)
+    assert any("immutable revision field changed: evidence_authority" in error for error in errors)
+
+
+def test_same_mode_revision_with_matching_digest_is_valid():
+    prior = simulated_event()
+    current = simulated_event()
+    current["revision"] = 2
+    current["run_id"] = "run-seed-808-retest"
+    current["previous_event_digest"] = validator.canonical_event_digest(prior)
+    current["evidence_references"].append(
+        {
+            "origin": "reference_evidence",
+            "reference": "issues/44/retest-note",
+        }
+    )
+    assert validator.validate_event(current, prior_event=prior) == []
+
+
+def test_revision_greater_than_one_requires_prior_event():
+    event = simulated_event()
+    event["revision"] = 2
+    event["previous_event_digest"] = "c" * 64
+    errors = validator.validate_event(event)
+    assert any("requires --prior-event" in error for error in errors)
