@@ -329,7 +329,7 @@
     }
   ],
   "last_updated": "2026-07-27T05:50:56Z",
-  "last_platform": "githubops",
+  "last_platform": "codex",
   "last_session_summary": "Gate-001 governance capability: first-class deterministic L1 institutional records, immutable execution-mode lineage, and verified external-evidence boundary.",
   "tool_versions": {
     "gitleaks": "8.30.1",
