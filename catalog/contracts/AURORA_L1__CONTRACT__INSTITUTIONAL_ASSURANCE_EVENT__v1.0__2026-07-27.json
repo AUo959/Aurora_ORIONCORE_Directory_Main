@@ -8,6 +8,8 @@
   "required_fields": [
     "event_id",
     "run_id",
+    "revision",
+    "previous_event_digest",
     "canon_status",
     "layer",
     "execution_mode",
@@ -55,7 +57,8 @@
       "internal_primary_evidence",
       "external_primary_evidence",
       "reference_evidence"
-    ]
+    ],
+    "external_verification_method": ["repository_evidence_digest"]
   },
   "mode_rules": {
     "l1_simulated_institutional_rehearsal": {
@@ -92,7 +95,9 @@
         "verified_external_person",
         "verified_external_organization"
       ],
-      "required_evidence_origin": "external_primary_evidence"
+      "required_evidence_origin": "external_primary_evidence",
+      "external_verification_required": true,
+      "evidence_resolution_required": true
     }
   },
   "provenance_required": [
@@ -104,11 +109,30 @@
     "operator"
   ],
   "simulated_provenance_required": ["deterministic", "seed"],
+  "external_verification_required": [
+    "organization",
+    "assessor",
+    "scope_reference",
+    "authorization_reference",
+    "verified_by",
+    "verified_at",
+    "verification_method"
+  ],
+  "immutable_revision_fields": [
+    "event_id",
+    "layer",
+    "execution_mode",
+    "evidence_authority",
+    "gate_track",
+    "real_world_interaction",
+    "independent_external_assurance",
+    "substitutes_for_real_world_review"
+  ],
   "non_substitution_rules": [
-    "Execution mode is historical provenance and may not be changed on an existing event.",
+    "Execution mode is historical provenance and may not be changed on an existing event revision.",
     "A simulated role may not be promoted into a verified real identity by relabeling.",
     "A GATE-001A event may not satisfy GATE-001B.",
-    "A GATE-001B event requires at least one external_primary_evidence reference.",
+    "A GATE-001B event requires structured external verification and a digest-resolved external_primary_evidence reference.",
     "substitutes_for_real_world_review must always be false."
   ]
 }
