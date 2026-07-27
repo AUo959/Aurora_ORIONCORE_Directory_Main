@@ -328,9 +328,9 @@
       "detail": "Widened prose sweep run: rebuilt roster (329 names), swept 30 mixed-content exports. Found 2 genuine new L2 chars (Colonel Idris Vale, Dr. Syrr Velkonn) + Selia Tren-Voss alias->Selia Trask. Heavy noise (real-world news + L1 dev-persona expert panel) correctly excluded. CanonRec 79738ee."
     }
   ],
-  "last_updated": "2026-07-25T04:29:27Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "Control-plane behavior changed 2026-07-25 \u2014 read AGENTS.md 'Generated Surfaces and Freshness Gates' before debugging a blocked commit or an unchanged report. (1) write_json now compares meaning not timestamps: reports/analysis/*_latest.json stay clean when findings are unchanged; a tool changing nothing is expected, not a skip. Verification time goes to git-ignored reports/analysis/.lastrun/. session_state.json unaffected (uses dumps_canonical). (2) session_state_freshness blocks at 10 commits behind and self-heals via the pre-commit wrapper \u2014 let it work, do not --no-verify. repo_head_match stays manual (make registry-sync) by design. (3) New brief_freshness gate: warns at 60 commits since the last brief, blocks at 150; run 'make brief'. (4) hour_aboard.py emits run_meta.json recording its own output_dir \u2014 a directory whose name disagrees with it was copied, not generated. Also: CanonRec lineage reconciled (Cultural Tapestry x Dark Star, both entries retained, tag pre-reconcile-2026-07-25); root + CanonRec pushed; CloudBank PRs #1309/#1310 open awaiting owner merge.",
+  "last_updated": "2026-07-27T05:50:56Z",
+  "last_platform": "codex",
+  "last_session_summary": "Gate-001 governance capability: first-class deterministic L1 institutional records, immutable execution-mode lineage, and verified external-evidence boundary.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -353,64 +353,64 @@
   },
   "recent_commits": [
     {
-      "sha": "d36a17f",
-      "date": "2026-07-25",
-      "platform": "claude-code",
-      "summary": "docs: surface the 2026-07-25 control-plane changes on the read-first path"
+      "sha": "ed1083d",
+      "date": "2026-07-27",
+      "platform": "githubops",
+      "summary": "ci: repair branch-neutral session handoff state"
     },
     {
-      "sha": "9dcb072",
-      "date": "2026-07-25",
-      "platform": "claude-code",
-      "summary": "reports: refresh governance artifacts under the new write semantics"
+      "sha": "9c2510d",
+      "date": "2026-07-27",
+      "platform": "githubops",
+      "summary": "chore: refresh session handoff state"
     },
     {
-      "sha": "0796e85",
-      "date": "2026-07-25",
-      "platform": "claude-code",
-      "summary": "sim: record run provenance so output can be attributed"
+      "sha": "a949e8c",
+      "date": "2026-07-27",
+      "platform": "githubops",
+      "summary": "ci: refresh branch session handoff state"
     },
     {
-      "sha": "b14d017",
-      "date": "2026-07-25",
-      "platform": "claude-code",
-      "summary": "tools: stop generated reports going dirty on every run"
+      "sha": "7699557",
+      "date": "2026-07-27",
+      "platform": "githubops",
+      "summary": "docs: clarify L1 institutional records and simulated role residency"
     },
     {
-      "sha": "ea997d1",
-      "date": "2026-07-25",
-      "platform": "claude-code",
-      "summary": "reports(sim): commit hour_aboard_v1 run from 2026-07-13"
+      "sha": "9b0ec03",
+      "date": "2026-07-27",
+      "platform": "githubops",
+      "summary": "docs: require verified external receipts and immutable event revisions"
     },
     {
-      "sha": "59ebea4",
-      "date": "2026-07-25",
-      "platform": "claude-code",
-      "summary": "chore(workspace): commit regenerable surfaces from the 2026-07-22 scan"
+      "sha": "077cfe9",
+      "date": "2026-07-27",
+      "platform": "githubops",
+      "summary": "docs: align deterministic mode and immutable assurance history"
     },
     {
-      "sha": "95b1123",
-      "date": "2026-07-25",
-      "platform": "claude-code",
-      "summary": "reports: refresh governance artifacts via `make brief`"
+      "sha": "a5972e7",
+      "date": "2026-07-27",
+      "platform": "githubops",
+      "summary": "tests: cover external evidence resolution and immutable revisions"
     },
     {
-      "sha": "e18d20e",
-      "date": "2026-07-25",
-      "platform": "claude-code",
-      "summary": "tools: make governance freshness self-enforcing"
+      "sha": "04704d5",
+      "date": "2026-07-27",
+      "platform": "githubops",
+      "summary": "tools: verify external evidence and immutable assurance lineage"
     },
     {
-      "sha": "8708a98",
-      "date": "2026-07-25",
-      "platform": "claude-code",
-      "summary": "reports: executive brief 2026-07-25 \u2014 record two long-standing P1 closures"
+      "sha": "e99e39b",
+      "date": "2026-07-27",
+      "platform": "githubops",
+      "summary": "governance: harden L1 assurance evidence and revision lineage"
     },
     {
-      "sha": "61c2511",
-      "date": "2026-07-25",
-      "platform": "claude-code",
-      "summary": "chore(session): record session state through 790a599"
+      "sha": "f4a7685",
+      "date": "2026-07-27",
+      "platform": "githubops",
+      "summary": "docs: define L1 institutional assurance protocol"
     }
   ],
   "security_events": [
@@ -542,7 +542,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "d36a17f",
+    "main_sha": "ed1083d",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
