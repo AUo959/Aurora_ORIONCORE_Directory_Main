@@ -1,0 +1,38 @@
+name: Align Session Platform
+
+on:
+  push:
+    branches:
+      - governance/l1-institutional-assurance-classification
+    paths:
+      - .github/workflows/agent-fix-session-platform.yml
+
+permissions:
+  contents: write
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v7
+        with:
+          ref: governance/l1-institutional-assurance-classification
+          fetch-depth: 0
+
+      - name: Align platform and remove temporary workflow
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path('catalog/session_state.json')
+          state = json.loads(path.read_text(encoding='utf-8'))
+          state['last_platform'] = 'codex'
+          path.write_text(json.dumps(state, indent=2, ensure_ascii=True) + '\n', encoding='utf-8')
+          PY
+          git rm .github/workflows/agent-fix-session-platform.yml
+          git add catalog/session_state.json
+          git config user.name "aurora-githubops"
+          git config user.email "aurora-githubops@users.noreply.github.com"
+          git commit -m "chore: align session platform with handoff schema"
+          git push origin HEAD:governance/l1-institutional-assurance-classification
