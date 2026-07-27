@@ -86,7 +86,9 @@ Required dimensions include:
 - non-substitution flag,
 - deterministic provenance,
 - institutional role representation,
-- evidence references.
+- evidence references,
+- event revision and prior-event digest,
+- structured external verification for Gate-001B.
 
 ---
 
@@ -137,11 +139,11 @@ A real-world engagement record may cite Gate-001A artifacts as:
 - remediation evidence,
 - replay fixtures.
 
-It must still include new external primary evidence. The real-world record receives a new event ID and its own provenance.
+It must still include new external primary evidence. The real-world record receives a new event ID and its own provenance. Gate-001B validation resolves a committed evidence receipt beneath an explicit evidence root and verifies its SHA-256 digest.
 
 Forbidden actions include:
 
-- changing `execution_mode` on an existing event,
+- changing `execution_mode` on an existing event or later revision,
 - changing simulated role representation to verified real identity,
 - treating a simulated signature as approval,
 - claiming external discovery from a simulation-only evidence chain,
@@ -169,7 +171,7 @@ Pass conditions:
 - a verified external assessor or organization is identified;
 - scope and baseline are recorded;
 - authorization and engagement evidence are attributable;
-- findings or attestation originate from the external engagement;
+- findings or attestation originate from the external engagement and are bound to a digest-resolved evidence receipt;
 - remediation and retest records preserve external provenance;
 - no Gate-001A artifact is substituted for missing external evidence.
 
@@ -207,7 +209,7 @@ Real-world assurance requires a separate event with external provenance.
 Run:
 
 ```bash
-python3 tools/l1_institutional_assurance_validate.py <event.json>
+python3 tools/l1_institutional_assurance_validate.py <event.json> [--prior-event <prior.json>] [--evidence-root <root>]
 ```
 
 The validator fails closed on:
@@ -219,7 +221,8 @@ The validator fails closed on:
 - non-first-class treatment for Gate-001A output,
 - missing deterministic provenance,
 - simulated roles represented as verified real entities,
-- Gate-001B records without external primary evidence.
+- Gate-001B records without structured external verification and digest-resolved external primary evidence,
+- revision history that changes execution mode or assurance authority.
 
 ---
 
