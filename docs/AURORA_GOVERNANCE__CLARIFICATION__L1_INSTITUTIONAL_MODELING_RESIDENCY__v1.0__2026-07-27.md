@@ -26,6 +26,8 @@ The represented assessor, firm, agency, committee, approver, or signature is a `
 
 The execution locus—a local workstation, hosted runner, or another governed tool—does not change the event's layer or authority when the same accountable baseline, provenance, evidence custody, and deterministic contract are preserved.
 
+Tool and operator identity belong in the event provenance. They do not require inventing new values in unrelated repository session-platform fields.
+
 ---
 
 ## L1 versus L2
