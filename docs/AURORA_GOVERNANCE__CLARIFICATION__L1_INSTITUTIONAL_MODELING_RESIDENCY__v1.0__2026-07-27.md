@@ -24,6 +24,8 @@ The L1 classification applies to the accountable operational process and its rec
 
 The represented assessor, firm, agency, committee, approver, or signature is a `simulated_role` fixture. It has no physical location, registry identity, credential, biography, or real-world agency.
 
+The execution locus—a local workstation, hosted runner, or another governed tool—does not change the event's layer or authority when the same accountable baseline, provenance, evidence custody, and deterministic contract are preserved.
+
 ---
 
 ## L1 versus L2
