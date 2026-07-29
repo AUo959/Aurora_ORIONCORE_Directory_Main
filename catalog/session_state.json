@@ -335,9 +335,9 @@
       "detail": "Continued mining: found+filled the 4 active engine factions + 4 secondary peoples (Elari/Vorran/Kaelar/Tharaxian) + landed the Cultural Tapestry \u2014 ALL 13 engine factions now recorded. Staff Registry SSOT confirmed L1 (not L2) and complete. Species records added for the 4 peoples. CanonRec c1f25e5. L2 salvage seams substantially exhausted."
     }
   ],
-  "last_updated": "2026-07-27T15:52:55Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "L2 salvage arc substantially complete. Final passes: all 13 engine factions recorded (4 active factions + 4 secondary peoples Elari/Vorran/Kaelar/Tharaxian), Cultural Tapestry landed, 10 species records (incl. the 4 peoples), Staff Registry SSOT confirmed L1+complete. Naming gate clean throughout; 50-record major promotion earlier moved the salvage corpus to CANON. CanonRec c1f25e5. Open (owner): UNCONFIRMED affirmations (Haden Korr/Iskar Veyr/Vaxtan Rhel/Shroudborn), owner naming exemptions (10 records), map placement for unplaced locations, anaya state.bin defect, amelia-rivers L1 question.",
+  "last_updated": "2026-07-29T06:11:57Z",
+  "last_platform": "codex",
+  "last_session_summary": "CanonRec PR #6 squash-merged as d1321eb and AUo959/CanonRec is PUBLIC (anonymous HTTP 200 verified); it remains intentionally unlicensed for review-only publication. CloudBank PR #1385 squash-merged as 1b188cc with CanonRec provenance and the MCP v1 compatibility ceiling. Root PR #51 carries the regenerated CanonRec and CloudBank head pins plus the public-readiness handoff; its merge completes the recommended publication sequence. Local canon sync, registry sync, workspace verification, and session-state validation passed.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -359,6 +359,42 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "c8fe578",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "chore: pin published CanonRec and CloudBank heads"
+    },
+    {
+      "sha": "fb4dcb0",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "state: finalize public-readiness validation"
+    },
+    {
+      "sha": "951d09a",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "state: record public-review readiness handoff"
+    },
+    {
+      "sha": "57f37f4",
+      "date": "2026-07-29",
+      "platform": "claude-code",
+      "summary": "chore: refresh CloudBank registry pin"
+    },
+    {
+      "sha": "57ec4ab",
+      "date": "2026-07-29",
+      "platform": "claude-code",
+      "summary": "state: peoples-species + SSOT check (CanonRec c1f25e5); registry sync; fs-mining item closed"
+    },
+    {
+      "sha": "51ebb83",
+      "date": "2026-07-29",
+      "platform": "claude-code",
+      "summary": "governance: make L1 institutional simulations first-class operational data (#45)"
+    },
     {
       "sha": "ed1083d",
       "date": "2026-07-27",
@@ -382,42 +418,6 @@
       "date": "2026-07-27",
       "platform": "githubops",
       "summary": "docs: clarify L1 institutional records and simulated role residency"
-    },
-    {
-      "sha": "9b0ec03",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "docs: require verified external receipts and immutable event revisions"
-    },
-    {
-      "sha": "077cfe9",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "docs: align deterministic mode and immutable assurance history"
-    },
-    {
-      "sha": "a5972e7",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "tests: cover external evidence resolution and immutable revisions"
-    },
-    {
-      "sha": "04704d5",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "tools: verify external evidence and immutable assurance lineage"
-    },
-    {
-      "sha": "e99e39b",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "governance: harden L1 assurance evidence and revision lineage"
-    },
-    {
-      "sha": "f4a7685",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "docs: define L1 institutional assurance protocol"
     }
   ],
   "security_events": [
@@ -546,10 +546,34 @@
       "priority": "low",
       "assigned_to": "owner",
       "description": "L1 (not L2): AURORA_GUMAS_STAFF_REGISTRY_SSOT profile amelia-rivers has no matching canon/L1/characters record. Previously identified as an L1 dev/expert-panel persona (Simulation Architect reviewer) rather than an in-world Orion Station crew member. Owner: confirm whether she is a station crew member needing an L1 record, or a meta/dev persona to leave out."
+    },
+    {
+      "id": "canonrec-public-license-selection",
+      "priority": "high",
+      "assigned_to": "owner",
+      "description": "Owner must choose an open-source license before CanonRec is described as open source; public visibility alone grants no reuse rights. CanonRec PR #6 intentionally leaves LICENSE absent."
+    },
+    {
+      "id": "canonrec-staff-registry-authority",
+      "priority": "high",
+      "assigned_to": "owner",
+      "description": "Choose the authoritative staff-registry contract or approve a deterministic merge between CanonRec canon/L1/station/ORION_STATION_CANONICAL_STAFF_REGISTRY.json and CloudBank ORION_STATION_CANONICAL_STAFF_REGISTRY.json. CloudBank PR #1385 records hashes and blocks sole-SSOT claims."
+    },
+    {
+      "id": "canonrec-empty-organization-record",
+      "priority": "medium",
+      "assigned_to": "owner",
+      "description": "Repair or explicitly demote the zero-byte canon/L2/entities/organizations/org_tactical_enforcement_officers.json from authoritative source evidence. Do not invent content; CanonRec PR #6 baselines it as a strict public-release blocker."
+    },
+    {
+      "id": "cloudbank-mcp-v2-migration",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Migrate connector/server.py and connector tests from the MCP v1 Server API to MCP v2, then remove the temporary mcp<2.0.0 compatibility ceiling added in CloudBank PR #1385. Evidence: base CI with mcp 1.28.1 passed; an unconstrained install resolved mcp 2.0.0 and failed six Server.list_tools tests."
     }
   ],
   "known_state": {
-    "main_sha": "ed1083d",
+    "main_sha": "c8fe5783a5e52b8adf4c9c76715e504fcee03d1c",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
