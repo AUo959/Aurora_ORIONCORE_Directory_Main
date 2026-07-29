@@ -1,10 +1,10 @@
-generated_at: '2026-07-29T05:31:16Z'
+generated_at: '2026-07-29T06:10:40Z'
 root: .
 repos:
 - name: aurora-cloudbank-symbolic-main
   path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
   branch: main
-  head_sha: 84a361019312660cada1cbfce91ddf6203569a21
+  head_sha: 1b188cc63e9b222a38e9d397ada3badd9f1e0934
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse
@@ -15,7 +15,7 @@ repos:
 - name: CanonRec
   path: GUMAS_SIM_2.5/CanonRec
   branch: main
-  head_sha: c1f25e57a99ed98f8df6ed8eb2a93ba94bd2aa14
+  head_sha: d1321eb81a4fb726f3187802cefd3a1f0dfe2584
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/CanonRec rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE
