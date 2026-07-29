@@ -335,9 +335,9 @@
       "detail": "Continued mining: found+filled the 4 active engine factions + 4 secondary peoples (Elari/Vorran/Kaelar/Tharaxian) + landed the Cultural Tapestry \u2014 ALL 13 engine factions now recorded. Staff Registry SSOT confirmed L1 (not L2) and complete. Species records added for the 4 peoples. CanonRec c1f25e5. L2 salvage seams substantially exhausted."
     }
   ],
-  "last_updated": "2026-07-29T06:11:57Z",
+  "last_updated": "2026-07-29T07:39:17Z",
   "last_platform": "codex",
-  "last_session_summary": "CanonRec PR #6 squash-merged as d1321eb and AUo959/CanonRec is PUBLIC (anonymous HTTP 200 verified); it remains intentionally unlicensed for review-only publication. CloudBank PR #1385 squash-merged as 1b188cc with CanonRec provenance and the MCP v1 compatibility ceiling. Root PR #51 carries the regenerated CanonRec and CloudBank head pins plus the public-readiness handoff; its merge completes the recommended publication sequence. Local canon sync, registry sync, workspace verification, and session-state validation passed.",
+  "last_session_summary": "CloudBank public-readiness security and CI debt merged via PR #1386 as b83b9680 with the full GitHub matrix green and SonarCloud reporting zero open PR findings. CanonRec PR #7 recorded enabled private vulnerability reporting; CanonRec and the Aurora root are public, and both now accept private vulnerability reports. Root PR #52 carries immutable action pins, exact wheel-only installs, public tokenless CanonRec checkout, CloudBank hash-lock consumption, and the refreshed CloudBank registry pin; final CI validation is in progress. Remaining owner gates are CanonRec/root license selection plus CanonRec's baseline strict-integrity and staff-authority decisions.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -360,64 +360,64 @@
   },
   "recent_commits": [
     {
-      "sha": "c8fe578",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "chore: pin published CanonRec and CloudBank heads"
-    },
-    {
-      "sha": "fb4dcb0",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "state: finalize public-readiness validation"
-    },
-    {
-      "sha": "951d09a",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "state: record public-review readiness handoff"
-    },
-    {
-      "sha": "57f37f4",
+      "sha": "1dd5265",
       "date": "2026-07-29",
       "platform": "claude-code",
-      "summary": "chore: refresh CloudBank registry pin"
+      "summary": "registry: refresh public dependency heads"
     },
     {
-      "sha": "57ec4ab",
+      "sha": "66cb207",
       "date": "2026-07-29",
       "platform": "claude-code",
-      "summary": "state: peoples-species + SSOT check (CanonRec c1f25e5); registry sync; fs-mining item closed"
+      "summary": "ci: consume public dependencies safely"
     },
     {
-      "sha": "51ebb83",
+      "sha": "6fda264",
       "date": "2026-07-29",
       "platform": "claude-code",
-      "summary": "governance: make L1 institutional simulations first-class operational data (#45)"
+      "summary": "chore(registry): re-sync CanonRec pin -> aaca07e (post-rebase onto upstream docs commit)"
     },
     {
-      "sha": "ed1083d",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "ci: repair branch-neutral session handoff state"
+      "sha": "7cf631d",
+      "date": "2026-07-29",
+      "platform": "claude-code",
+      "summary": "chore(registry): sync CanonRec pin -> c942c60 (Obsidian Dawn AI antagonists + Velar Imperium correction)"
     },
     {
-      "sha": "9c2510d",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "chore: refresh session handoff state"
+      "sha": "a2a2391",
+      "date": "2026-07-29",
+      "platform": "claude-code",
+      "summary": "chore(registry): sync CanonRec pin -> bf13f50 (Velar Imperium referent closure + GU substructure cross-link)"
     },
     {
-      "sha": "a949e8c",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "ci: refresh branch session handoff state"
+      "sha": "efebca6",
+      "date": "2026-07-29",
+      "platform": "claude-code",
+      "summary": "registry: CanonRec head 3a233df (stub reconciliation \u2014 0 thin records)"
     },
     {
-      "sha": "7699557",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "docs: clarify L1 institutional records and simulated role residency"
+      "sha": "5898c87",
+      "date": "2026-07-29",
+      "platform": "claude-code",
+      "summary": "reports: L2 stub audit (16 stubs categorized: 2 enriched, 7 owner-flagged, 8 thin-as-source); registry sync CanonRec 5c69410"
+    },
+    {
+      "sha": "388e27f",
+      "date": "2026-07-29",
+      "platform": "claude-code",
+      "summary": "registry: CanonRec head df0b49c (Prime Construct polity + Kaelor's Rift enrichment)"
+    },
+    {
+      "sha": "e889dfc",
+      "date": "2026-07-29",
+      "platform": "claude-code",
+      "summary": "state: engine-authoritative audit + process routing (CanonRec 83087fa); registry sync"
+    },
+    {
+      "sha": "08bccfb",
+      "date": "2026-07-29",
+      "platform": "claude-code",
+      "summary": "chore: pin published CanonRec and CloudBank heads (#51)"
     }
   ],
   "security_events": [
@@ -570,10 +570,16 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Migrate connector/server.py and connector tests from the MCP v1 Server API to MCP v2, then remove the temporary mcp<2.0.0 compatibility ceiling added in CloudBank PR #1385. Evidence: base CI with mcp 1.28.1 passed; an unconstrained install resolved mcp 2.0.0 and failed six Server.list_tools tests."
+    },
+    {
+      "id": "root-public-license-selection",
+      "priority": "high",
+      "assigned_to": "owner",
+      "description": "Owner must choose an open-source license before the public Aurora root control-plane repository is described as open source; public visibility alone grants no reuse rights."
     }
   ],
   "known_state": {
-    "main_sha": "c8fe5783a5e52b8adf4c9c76715e504fcee03d1c",
+    "main_sha": "1dd5265b09238928e6c2ad8e8375b1045ed63fc8",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
