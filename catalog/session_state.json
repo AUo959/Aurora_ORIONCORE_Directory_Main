@@ -333,11 +333,18 @@
       "completed_at": "2026-07-27T15:52:54Z",
       "platform": "claude-code",
       "detail": "Continued mining: found+filled the 4 active engine factions + 4 secondary peoples (Elari/Vorran/Kaelar/Tharaxian) + landed the Cultural Tapestry \u2014 ALL 13 engine factions now recorded. Staff Registry SSOT confirmed L1 (not L2) and complete. Species records added for the 4 peoples. CanonRec c1f25e5. L2 salvage seams substantially exhausted."
+    },
+    {
+      "id": "canonrec-public-license-selection",
+      "status": "completed",
+      "completed_at": "2026-07-29T07:53:34Z",
+      "platform": "codex",
+      "detail": "Owner selected MIT. CanonRec PR #8 merged as 6c07b442; LICENSE matches CloudBank's MIT grant (Copyright 2025 Aurora), GitHub integrity and secret checks passed, and the root CanonRec pin was refreshed."
     }
   ],
-  "last_updated": "2026-07-29T07:43:40Z",
+  "last_updated": "2026-07-29T07:53:34Z",
   "last_platform": "codex",
-  "last_session_summary": "Public-readiness debt pass completed in dependency-first order. CanonRec PR #7 merged as 02e51c5 and private vulnerability reporting is enabled. CloudBank PR #1386 merged as b83b9680 after the full GitHub matrix passed and SonarCloud reported zero open PR findings. Root PR #52 merged as 5fbf372 with public tokenless CanonRec checkout, immutable action pins, exact wheel-only installs, CloudBank hash-lock consumption, and refreshed dependency pins; end-to-end Python 3.12 integration/workspace verification and all other PR checks passed. Remaining owner gates are CanonRec/root license selection plus CanonRec's three baseline strict-integrity findings and staff-registry authority decision.",
+  "last_session_summary": "CanonRec is now open source under the MIT License, matching CloudBank. PR #8 merged as 6c07b442 after repository-integrity, history-secret, and GitGuardian checks passed; local make validate reported all three known findings baseline-matched with zero new findings. README and public-readiness docs now separate open-source licensing from the still-open strict canon-integrity and staff-authority gates. Root registry pin refreshed to 6c07b442. Root license selection remains an owner decision.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -359,6 +366,18 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "b11eba8",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "chore(registry): sync CanonRec pin -> c49a941 (old-prose sweep: 4 recovered STAGING records)"
+    },
+    {
+      "sha": "7b5b97c",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "state: finalize public readiness debt pass"
+    },
     {
       "sha": "5fbf372",
       "date": "2026-07-29",
@@ -406,18 +425,6 @@
       "date": "2026-07-29",
       "platform": "claude-code",
       "summary": "chore(registry): sync CanonRec pin -> bf13f50 (Velar Imperium referent closure + GU substructure cross-link)"
-    },
-    {
-      "sha": "efebca6",
-      "date": "2026-07-29",
-      "platform": "claude-code",
-      "summary": "registry: CanonRec head 3a233df (stub reconciliation \u2014 0 thin records)"
-    },
-    {
-      "sha": "5898c87",
-      "date": "2026-07-29",
-      "platform": "claude-code",
-      "summary": "reports: L2 stub audit (16 stubs categorized: 2 enriched, 7 owner-flagged, 8 thin-as-source); registry sync CanonRec 5c69410"
     }
   ],
   "security_events": [
@@ -548,12 +555,6 @@
       "description": "L1 (not L2): AURORA_GUMAS_STAFF_REGISTRY_SSOT profile amelia-rivers has no matching canon/L1/characters record. Previously identified as an L1 dev/expert-panel persona (Simulation Architect reviewer) rather than an in-world Orion Station crew member. Owner: confirm whether she is a station crew member needing an L1 record, or a meta/dev persona to leave out."
     },
     {
-      "id": "canonrec-public-license-selection",
-      "priority": "high",
-      "assigned_to": "owner",
-      "description": "Owner must choose an open-source license before CanonRec is described as open source; public visibility alone grants no reuse rights. CanonRec PR #6 intentionally leaves LICENSE absent."
-    },
-    {
       "id": "canonrec-staff-registry-authority",
       "priority": "high",
       "assigned_to": "owner",
@@ -579,7 +580,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "5fbf372beac4c3efaa2821719b06db9d3e4a65e8",
+    "main_sha": "b11eba89ea5ebdfb70bb5cb2e75b329a377b48c4",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
