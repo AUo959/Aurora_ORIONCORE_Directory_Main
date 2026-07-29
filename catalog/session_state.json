@@ -335,9 +335,9 @@
       "detail": "Continued mining: found+filled the 4 active engine factions + 4 secondary peoples (Elari/Vorran/Kaelar/Tharaxian) + landed the Cultural Tapestry \u2014 ALL 13 engine factions now recorded. Staff Registry SSOT confirmed L1 (not L2) and complete. Species records added for the 4 peoples. CanonRec c1f25e5. L2 salvage seams substantially exhausted."
     }
   ],
-  "last_updated": "2026-07-29T05:39:07Z",
+  "last_updated": "2026-07-29T05:54:46Z",
   "last_platform": "codex",
-  "last_session_summary": "Prepared CloudBank plus CanonRec for public review without changing GitHub visibility: CanonRec PR #6 adds public docs, security and integrity gates, and exact secret-scan baselines; CloudBank PR #1385 adds CanonRec provenance and tests; root PR #51 refreshes the CloudBank registry pin to current main. CanonRec CI is green; CloudBank and root checks are still settling. Owner decisions remain license, staff-registry authority, and the zero-byte organization record.",
+  "last_session_summary": "Prepared CloudBank plus CanonRec for public review without changing GitHub visibility: CanonRec PR #6 adds public docs, security and integrity gates; CloudBank PR #1385 adds CanonRec provenance and tests, and pins the supported MCP v1 range after MCP 2.0 broke connector tests; root PR #51 refreshes the CloudBank registry pin. All three PRs are mergeable with CI green. Owner decisions remain license, staff-registry authority, and the zero-byte organization record.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -359,6 +359,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "951d09a",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "state: record public-review readiness handoff"
+    },
     {
       "sha": "57f37f4",
       "date": "2026-07-29",
@@ -412,12 +418,6 @@
       "date": "2026-07-27",
       "platform": "githubops",
       "summary": "docs: align deterministic mode and immutable assurance history"
-    },
-    {
-      "sha": "a5972e7",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "tests: cover external evidence resolution and immutable revisions"
     }
   ],
   "security_events": [
@@ -564,10 +564,16 @@
       "priority": "medium",
       "assigned_to": "owner",
       "description": "Repair or explicitly demote the zero-byte canon/L2/entities/organizations/org_tactical_enforcement_officers.json from authoritative source evidence. Do not invent content; CanonRec PR #6 baselines it as a strict public-release blocker."
+    },
+    {
+      "id": "cloudbank-mcp-v2-migration",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Migrate connector/server.py and connector tests from the MCP v1 Server API to MCP v2, then remove the temporary mcp<2.0.0 compatibility ceiling added in CloudBank PR #1385. Evidence: base CI with mcp 1.28.1 passed; an unconstrained install resolved mcp 2.0.0 and failed six Server.list_tools tests."
     }
   ],
   "known_state": {
-    "main_sha": "57f37f4d9d3614309671bb6048dca634803cb794",
+    "main_sha": "951d09a9e41d5cf127b536a20f650517942b3941",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
