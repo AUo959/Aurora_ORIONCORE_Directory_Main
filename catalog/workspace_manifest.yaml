@@ -1,4 +1,4 @@
-generated_at: '2026-07-29T06:10:40Z'
+generated_at: '2026-07-29T08:49:13Z'
 root: .
 logical_taxonomy:
 - repos
@@ -11,17 +11,6 @@ logical_taxonomy:
 - intake
 - _staging
 entries:
-- id: qgia-operational-axiom-v3
-  kind: intake_file
-  current_path: '# QGIA Operational Axiom v3.xml'
-  logical_zone: intake
-  planned_path: intake/# QGIA Operational Axiom v3.xml
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: dot-agents
   kind: control_surface
   current_path: .agents
@@ -45,16 +34,6 @@ entries:
   owner: local-user
   status: ignored
   batch_id: wave4_root_intake_cleanup_initial
-- id: codex-skill-edits
-  kind: cache_or_local_artifact
-  current_path: .codex_skill_edits
-  logical_zone: _staging
-  planned_path: .codex_skill_edits
-  git_boundary: none
-  storage_tier: ephemeral
-  retention_policy: regenerate
-  owner: local-user
-  status: ignored
 - id: devcontainer
   kind: control_surface
   current_path: .devcontainer
@@ -65,16 +44,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: git-decommissioned-20260304-233325
-  kind: rollback_artifact
-  current_path: .git_decommissioned_20260304_233325
-  logical_zone: _staging
-  planned_path: .git_decommissioned_20260304_233325
-  git_boundary: none
-  storage_tier: workspace-meta
-  retention_policy: preserve
-  owner: workspace-admin
-  status: protected
 - id: gitattributes
   kind: policy_file
   current_path: .gitattributes
@@ -139,16 +108,6 @@ entries:
   batch_id: ''
   notes: Fingerprint-only baseline for previously triaged historical secret-scan findings;
     does not approve credential validity or skip owner deactivation checks.
-- id: gitwiz
-  kind: cache_or_local_artifact
-  current_path: .gitwiz
-  logical_zone: _staging
-  planned_path: .gitwiz
-  git_boundary: none
-  storage_tier: ephemeral
-  retention_policy: regenerate
-  owner: local-user
-  status: ignored
 - id: pre-commit-config
   kind: policy_file
   current_path: .pre-commit-config.yaml
@@ -179,17 +138,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: aurora-sim-architecture
-  kind: intake_collection
-  current_path: Aurora_Sim_Architecture
-  logical_zone: intake
-  planned_path: intake/Aurora_Sim_Architecture
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: claude
   kind: intake_file
   current_path: CLAUDE.md
@@ -201,16 +149,28 @@ entries:
   owner: intake-review
   status: planned_move
   batch_id: wave4_root_intake_cleanup_initial
+- id: contributing
+  kind: intake_file
+  current_path: CONTRIBUTING.md
+  logical_zone: intake
+  planned_path: intake/CONTRIBUTING.md
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: gumas-sim-2
-  kind: repo_hub
+  kind: intake_collection
   current_path: GUMAS_SIM_2.5
-  logical_zone: repos
-  planned_path: GUMAS_SIM_2.5
-  git_boundary: nested
-  storage_tier: source
-  retention_policy: preserve
-  owner: repository-owner
-  status: protected
+  logical_zone: intake
+  planned_path: intake/GUMAS_SIM_2.5
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: makefile
   kind: control_surface
   current_path: Makefile
@@ -221,39 +181,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: prplexity-observation-6-14
-  kind: intake_file
-  current_path: Prplexity_Observation_6_14.md
-  logical_zone: intake
-  planned_path: intake/Prplexity_Observation_6_14.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: qgia-axiom-doctrine-narrative
-  kind: intake_file
-  current_path: QGIA_Axiom_Doctrine_Narrative.md
-  logical_zone: intake
-  planned_path: intake/QGIA_Axiom_Doctrine_Narrative.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: qgia-runtime-onepager
-  kind: intake_file
-  current_path: QGIA_Runtime_OnePager.md
-  logical_zone: intake
-  planned_path: intake/QGIA_Runtime_OnePager.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: readme
   kind: workspace_doc
   current_path: README.md
@@ -264,20 +191,17 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: entropy-quarantine
-  kind: quarantine_zone
-  current_path: _entropy_quarantine
-  logical_zone: _staging
-  planned_path: _entropy_quarantine
+- id: security
+  kind: intake_file
+  current_path: SECURITY.md
+  logical_zone: intake
+  planned_path: intake/SECURITY.md
   git_boundary: none
-  storage_tier: quarantine
-  retention_policy: review-before-delete
-  owner: workspace-admin
-  status: protected
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
   batch_id: wave4_root_intake_cleanup_initial
-  notes: Verified-duplicate archive quarantine. Files are byte-for-byte identical
-    to their canonical copies. Safe to delete once reviewed. See _entropy_quarantine/RESTORE_MANIFEST.json
-    to restore any file.
 - id: staging
   kind: logical_zone
   current_path: _staging
@@ -298,50 +222,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: aurora-cloudbank-symbolic-readme-draft
-  kind: intake_file
-  current_path: aurora-cloudbank-symbolic_README_DRAFT.md
-  logical_zone: intake
-  planned_path: intake/aurora-cloudbank-symbolic_README_DRAFT.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: aurora-cloudbank-symbolic-outside-review
-  kind: intake_file
-  current_path: aurora-cloudbank-symbolic_outside_review.md
-  logical_zone: intake
-  planned_path: intake/aurora-cloudbank-symbolic_outside_review.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: aurora-cloudbank-symbolic-presentation-plan
-  kind: intake_file
-  current_path: aurora-cloudbank-symbolic_presentation_plan.md
-  logical_zone: intake
-  planned_path: intake/aurora-cloudbank-symbolic_presentation_plan.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: aurora-cloudbank-symbolic-review-v2
-  kind: intake_file
-  current_path: aurora-cloudbank-symbolic_review_v2.md
-  logical_zone: intake
-  planned_path: intake/aurora-cloudbank-symbolic_review_v2.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: catalog
   kind: control_surface
   current_path: catalog
@@ -394,26 +274,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: qgia-knowledge-library-main
-  kind: repo_hub
-  current_path: qgia-knowledge-library-main
-  logical_zone: repos
-  planned_path: qgia-knowledge-library-main
-  git_boundary: nested
-  storage_tier: source
-  retention_policy: preserve
-  owner: repository-owner
-  status: protected
-- id: qgia-knowledge-spine-main
-  kind: repo_hub
-  current_path: qgia-knowledge-spine-main
-  logical_zone: repos
-  planned_path: qgia-knowledge-spine-main
-  git_boundary: nested
-  storage_tier: source
-  retention_policy: preserve
-  owner: repository-owner
-  status: protected
 - id: reports
   kind: report_zone
   current_path: reports

@@ -15,6 +15,19 @@ Phase 1 is metadata-first. The root repo tracks only workspace docs, manifests,
 policies, reports, and tooling. Large archives, binary dumps, caches, and
 nested repo internals stay out of root Git history.
 
+## Public Repository Status
+
+This repository is public for inspection and review. It is an operator
+workspace, not a published Python or npm package; use the Makefile workflows
+below instead of `pip install` or `npm install` at the repository root.
+
+No open-source license is currently granted for this root control-plane
+repository. Public visibility permits review but does not grant reuse rights.
+CloudBank and CanonRec are separate repositories with their own licenses.
+
+- Security reports: [SECURITY.md](SECURITY.md)
+- Contribution boundaries and checks: [CONTRIBUTING.md](CONTRIBUTING.md)
+
 ## Start Here
 
 - Reviewing this project? Read

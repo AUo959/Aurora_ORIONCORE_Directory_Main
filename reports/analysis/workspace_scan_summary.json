@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-07-25T04:27:34Z",
+  "generated_at": "2026-07-29T08:49:13Z",
   "root": ".",
-  "top_level_entry_count": 44,
+  "top_level_entry_count": 31,
   "logical_zone_counts": {
-    "intake": 13,
     "tools": 11,
-    "_staging": 7,
+    "_staging": 3,
     "docs": 5,
-    "repos": 4,
+    "intake": 7,
     "archives": 1,
     "catalog": 1,
     "projects": 1,
-    "reports": 1
+    "reports": 1,
+    "repos": 1
   },
-  "nested_repo_count": 9,
-  "archive_artifact_count": 601,
-  "archive_artifact_bytes": 7802183114,
-  "planned_move_count": 12,
+  "nested_repo_count": 4,
+  "archive_artifact_count": 0,
+  "archive_artifact_bytes": 0,
+  "planned_move_count": 6,
   "override_count": 6,
-  "privacy_exclusion_count": 10,
+  "privacy_exclusion_count": 6,
   "privacy_exclusion_reasons": {
-    "auto_scope_unknown": 10
+    "auto_scope_unknown": 6
   }
 }
