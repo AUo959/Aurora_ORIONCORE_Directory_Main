@@ -335,9 +335,9 @@
       "detail": "Continued mining: found+filled the 4 active engine factions + 4 secondary peoples (Elari/Vorran/Kaelar/Tharaxian) + landed the Cultural Tapestry \u2014 ALL 13 engine factions now recorded. Staff Registry SSOT confirmed L1 (not L2) and complete. Species records added for the 4 peoples. CanonRec c1f25e5. L2 salvage seams substantially exhausted."
     }
   ],
-  "last_updated": "2026-07-29T07:39:17Z",
+  "last_updated": "2026-07-29T07:43:40Z",
   "last_platform": "codex",
-  "last_session_summary": "CloudBank public-readiness security and CI debt merged via PR #1386 as b83b9680 with the full GitHub matrix green and SonarCloud reporting zero open PR findings. CanonRec PR #7 recorded enabled private vulnerability reporting; CanonRec and the Aurora root are public, and both now accept private vulnerability reports. Root PR #52 carries immutable action pins, exact wheel-only installs, public tokenless CanonRec checkout, CloudBank hash-lock consumption, and the refreshed CloudBank registry pin; final CI validation is in progress. Remaining owner gates are CanonRec/root license selection plus CanonRec's baseline strict-integrity and staff-authority decisions.",
+  "last_session_summary": "Public-readiness debt pass completed in dependency-first order. CanonRec PR #7 merged as 02e51c5 and private vulnerability reporting is enabled. CloudBank PR #1386 merged as b83b9680 after the full GitHub matrix passed and SonarCloud reported zero open PR findings. Root PR #52 merged as 5fbf372 with public tokenless CanonRec checkout, immutable action pins, exact wheel-only installs, CloudBank hash-lock consumption, and refreshed dependency pins; end-to-end Python 3.12 integration/workspace verification and all other PR checks passed. Remaining owner gates are CanonRec/root license selection plus CanonRec's three baseline strict-integrity findings and staff-registry authority decision.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -359,6 +359,24 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "5fbf372",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "ci: consume public dependencies safely (#52)"
+    },
+    {
+      "sha": "9312e22",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "state: record public readiness debt closure"
+    },
+    {
+      "sha": "ba3f361",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "chore(registry): sync CanonRec pin -> d6d699f (Operation Obsidian Dawn event promotion)"
+    },
     {
       "sha": "1dd5265",
       "date": "2026-07-29",
@@ -400,24 +418,6 @@
       "date": "2026-07-29",
       "platform": "claude-code",
       "summary": "reports: L2 stub audit (16 stubs categorized: 2 enriched, 7 owner-flagged, 8 thin-as-source); registry sync CanonRec 5c69410"
-    },
-    {
-      "sha": "388e27f",
-      "date": "2026-07-29",
-      "platform": "claude-code",
-      "summary": "registry: CanonRec head df0b49c (Prime Construct polity + Kaelor's Rift enrichment)"
-    },
-    {
-      "sha": "e889dfc",
-      "date": "2026-07-29",
-      "platform": "claude-code",
-      "summary": "state: engine-authoritative audit + process routing (CanonRec 83087fa); registry sync"
-    },
-    {
-      "sha": "08bccfb",
-      "date": "2026-07-29",
-      "platform": "claude-code",
-      "summary": "chore: pin published CanonRec and CloudBank heads (#51)"
     }
   ],
   "security_events": [
@@ -579,7 +579,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "1dd5265b09238928e6c2ad8e8375b1045ed63fc8",
+    "main_sha": "5fbf372beac4c3efaa2821719b06db9d3e4a65e8",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
