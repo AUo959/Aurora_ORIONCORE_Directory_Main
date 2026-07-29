@@ -335,9 +335,9 @@
       "detail": "Continued mining: found+filled the 4 active engine factions + 4 secondary peoples (Elari/Vorran/Kaelar/Tharaxian) + landed the Cultural Tapestry \u2014 ALL 13 engine factions now recorded. Staff Registry SSOT confirmed L1 (not L2) and complete. Species records added for the 4 peoples. CanonRec c1f25e5. L2 salvage seams substantially exhausted."
     }
   ],
-  "last_updated": "2026-07-29T05:54:46Z",
+  "last_updated": "2026-07-29T06:11:57Z",
   "last_platform": "codex",
-  "last_session_summary": "Prepared CloudBank plus CanonRec for public review without changing GitHub visibility: CanonRec PR #6 adds public docs, security and integrity gates; CloudBank PR #1385 adds CanonRec provenance and tests, and pins the supported MCP v1 range after MCP 2.0 broke connector tests; root PR #51 refreshes the CloudBank registry pin. All three PRs are mergeable with CI green. Owner decisions remain license, staff-registry authority, and the zero-byte organization record.",
+  "last_session_summary": "CanonRec PR #6 squash-merged as d1321eb and AUo959/CanonRec is PUBLIC (anonymous HTTP 200 verified); it remains intentionally unlicensed for review-only publication. CloudBank PR #1385 squash-merged as 1b188cc with CanonRec provenance and the MCP v1 compatibility ceiling. Root PR #51 carries the regenerated CanonRec and CloudBank head pins plus the public-readiness handoff; its merge completes the recommended publication sequence. Local canon sync, registry sync, workspace verification, and session-state validation passed.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -359,6 +359,18 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "c8fe578",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "chore: pin published CanonRec and CloudBank heads"
+    },
+    {
+      "sha": "fb4dcb0",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "state: finalize public-readiness validation"
+    },
     {
       "sha": "951d09a",
       "date": "2026-07-29",
@@ -406,18 +418,6 @@
       "date": "2026-07-27",
       "platform": "githubops",
       "summary": "docs: clarify L1 institutional records and simulated role residency"
-    },
-    {
-      "sha": "9b0ec03",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "docs: require verified external receipts and immutable event revisions"
-    },
-    {
-      "sha": "077cfe9",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "docs: align deterministic mode and immutable assurance history"
     }
   ],
   "security_events": [
@@ -573,7 +573,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "951d09a9e41d5cf127b536a20f650517942b3941",
+    "main_sha": "c8fe5783a5e52b8adf4c9c76715e504fcee03d1c",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
