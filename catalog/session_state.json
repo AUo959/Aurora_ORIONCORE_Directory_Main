@@ -335,9 +335,9 @@
       "detail": "Continued mining: found+filled the 4 active engine factions + 4 secondary peoples (Elari/Vorran/Kaelar/Tharaxian) + landed the Cultural Tapestry \u2014 ALL 13 engine factions now recorded. Staff Registry SSOT confirmed L1 (not L2) and complete. Species records added for the 4 peoples. CanonRec c1f25e5. L2 salvage seams substantially exhausted."
     }
   ],
-  "last_updated": "2026-07-27T15:52:55Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "L2 salvage arc substantially complete. Final passes: all 13 engine factions recorded (4 active factions + 4 secondary peoples Elari/Vorran/Kaelar/Tharaxian), Cultural Tapestry landed, 10 species records (incl. the 4 peoples), Staff Registry SSOT confirmed L1+complete. Naming gate clean throughout; 50-record major promotion earlier moved the salvage corpus to CANON. CanonRec c1f25e5. Open (owner): UNCONFIRMED affirmations (Haden Korr/Iskar Veyr/Vaxtan Rhel/Shroudborn), owner naming exemptions (10 records), map placement for unplaced locations, anaya state.bin defect, amelia-rivers L1 question.",
+  "last_updated": "2026-07-29T05:39:07Z",
+  "last_platform": "codex",
+  "last_session_summary": "Prepared CloudBank plus CanonRec for public review without changing GitHub visibility: CanonRec PR #6 adds public docs, security and integrity gates, and exact secret-scan baselines; CloudBank PR #1385 adds CanonRec provenance and tests; root PR #51 refreshes the CloudBank registry pin to current main. CanonRec CI is green; CloudBank and root checks are still settling. Owner decisions remain license, staff-registry authority, and the zero-byte organization record.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -359,6 +359,24 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "57f37f4",
+      "date": "2026-07-29",
+      "platform": "claude-code",
+      "summary": "chore: refresh CloudBank registry pin"
+    },
+    {
+      "sha": "57ec4ab",
+      "date": "2026-07-29",
+      "platform": "claude-code",
+      "summary": "state: peoples-species + SSOT check (CanonRec c1f25e5); registry sync; fs-mining item closed"
+    },
+    {
+      "sha": "51ebb83",
+      "date": "2026-07-29",
+      "platform": "claude-code",
+      "summary": "governance: make L1 institutional simulations first-class operational data (#45)"
+    },
     {
       "sha": "ed1083d",
       "date": "2026-07-27",
@@ -400,24 +418,6 @@
       "date": "2026-07-27",
       "platform": "githubops",
       "summary": "tests: cover external evidence resolution and immutable revisions"
-    },
-    {
-      "sha": "04704d5",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "tools: verify external evidence and immutable assurance lineage"
-    },
-    {
-      "sha": "e99e39b",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "governance: harden L1 assurance evidence and revision lineage"
-    },
-    {
-      "sha": "f4a7685",
-      "date": "2026-07-27",
-      "platform": "githubops",
-      "summary": "docs: define L1 institutional assurance protocol"
     }
   ],
   "security_events": [
@@ -546,10 +546,28 @@
       "priority": "low",
       "assigned_to": "owner",
       "description": "L1 (not L2): AURORA_GUMAS_STAFF_REGISTRY_SSOT profile amelia-rivers has no matching canon/L1/characters record. Previously identified as an L1 dev/expert-panel persona (Simulation Architect reviewer) rather than an in-world Orion Station crew member. Owner: confirm whether she is a station crew member needing an L1 record, or a meta/dev persona to leave out."
+    },
+    {
+      "id": "canonrec-public-license-selection",
+      "priority": "high",
+      "assigned_to": "owner",
+      "description": "Owner must choose an open-source license before CanonRec is described as open source; public visibility alone grants no reuse rights. CanonRec PR #6 intentionally leaves LICENSE absent."
+    },
+    {
+      "id": "canonrec-staff-registry-authority",
+      "priority": "high",
+      "assigned_to": "owner",
+      "description": "Choose the authoritative staff-registry contract or approve a deterministic merge between CanonRec canon/L1/station/ORION_STATION_CANONICAL_STAFF_REGISTRY.json and CloudBank ORION_STATION_CANONICAL_STAFF_REGISTRY.json. CloudBank PR #1385 records hashes and blocks sole-SSOT claims."
+    },
+    {
+      "id": "canonrec-empty-organization-record",
+      "priority": "medium",
+      "assigned_to": "owner",
+      "description": "Repair or explicitly demote the zero-byte canon/L2/entities/organizations/org_tactical_enforcement_officers.json from authoritative source evidence. Do not invent content; CanonRec PR #6 baselines it as a strict public-release blocker."
     }
   ],
   "known_state": {
-    "main_sha": "ed1083d",
+    "main_sha": "57f37f4d9d3614309671bb6048dca634803cb794",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
