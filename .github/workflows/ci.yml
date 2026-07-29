@@ -39,19 +39,20 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
         with:
           python-version: "${{ matrix.python-version }}"
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install pytest pyyaml
+          python -m pip install --only-binary=:all: \
+            pytest==8.4.2 \
+            pyyaml==6.0.3
 
       # The crew-life and live/powered-watch integration tests drive the L1
       # simulation harness, which expects the CloudBank clone and the CanonRec
@@ -89,29 +90,18 @@ jobs:
 
       - name: Provision CloudBank simulation clone (public)
         if: matrix.python-version == '3.12'
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: AUo959/aurora-cloudbank-symbolic
           ref: ${{ steps.registry_pins.outputs.cloudbank_sha }}
           path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
 
-      - name: Check CanonRec access token
+      - name: Provision CanonRec L1 ledger (public)
         if: matrix.python-version == '3.12'
-        env:
-          CANONREC_TOKEN: ${{ secrets.WORKSPACE_REPO_TOKEN }}
-        run: |
-          if [ -z "$CANONREC_TOKEN" ]; then
-            echo "::error::Secret WORKSPACE_REPO_TOKEN is required to clone the private AUo959/CanonRec repo for the L1 integration tests. Add a fine-grained PAT (or GitHub App token) with read access to AUo959/CanonRec as the repository secret WORKSPACE_REPO_TOKEN."
-            exit 1
-          fi
-
-      - name: Provision CanonRec L1 ledger (private)
-        if: matrix.python-version == '3.12'
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: AUo959/CanonRec
           ref: ${{ steps.registry_pins.outputs.canonrec_sha }}
-          token: ${{ secrets.WORKSPACE_REPO_TOKEN }}
           path: GUMAS_SIM_2.5/CanonRec
 
       # actions/checkout at a pinned SHA leaves the repo in detached HEAD; the
@@ -127,7 +117,9 @@ jobs:
 
       - name: Install CloudBank runtime deps (mesh server + engines)
         if: matrix.python-version == '3.12'
-        run: pip install -r GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/requirements.txt
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: \
+            -r GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/requirements-hashed.txt
 
       - name: Prepare CI artifact directory
         run: mkdir -p reports/ci
@@ -157,7 +149,7 @@ jobs:
 
       - name: Upload pytest report
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.0
         with:
           name: pytest-report-py${{ matrix.python-version }}
           path: |
@@ -176,7 +168,7 @@ jobs:
 
       - name: Upload verification report
         if: always() && hashFiles(format('reports/ci/workspace-verify-py{0}.json', matrix.python-version)) != ''
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.0
         with:
           name: workspace-verify-report-py${{ matrix.python-version }}
           path: reports/ci/workspace-verify-py${{ matrix.python-version }}.json
@@ -189,19 +181,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
         with:
           python-version: "3.12"
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install pyyaml
+          python -m pip install --only-binary=:all: pyyaml==6.0.3
 
       - name: Run root sync audit
         run: python skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo root
@@ -213,17 +204,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
         with:
           python-version: "3.12"
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install pyyaml jsonschema
+          python -m pip install --only-binary=:all: \
+            jsonschema==4.26.0 \
+            pyyaml==6.0.3
 
       - name: Validate YAML manifests
         run: |
