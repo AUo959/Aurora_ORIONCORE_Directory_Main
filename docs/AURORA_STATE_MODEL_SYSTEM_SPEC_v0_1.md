@@ -84,7 +84,7 @@ The root repository MUST NOT impersonate repo-local runtime implementation.
 
 Simulation repositories SHOULD own:
 
-- scenario compilation
+- scenario compilation once a repo-local compiler is implemented
 - authoritative simulated world state
 - intervention application
 - state-transition and event generation
@@ -92,6 +92,11 @@ Simulation repositories SHOULD own:
 
 They MUST emit or adapt to the episode schema without changing the root
 authority model.
+
+The current GUMAS `build_default_scenario(scenario_id, seed)` surface MUST NOT
+be represented as a parameterized scenario compiler. It builds one fixed world.
+L2 scenario cards MAY seed future families only after a versioned adapter maps
+their prose knobs to typed `GUMASState` and intervention parameters.
 
 ### 4.3 QGIA Knowledge Library
 
@@ -173,7 +178,8 @@ catalog/schemas/aurora_state_episode_v1.schema.json
 An episode MUST contain:
 
 - identity, version, authority, classification, and timestamp
-- exact source revisions and seed bundle
+- exact source revisions, requested and realized seed bundles, and a
+  post-initialization RNG-state fingerprint
 - scenario identity and step
 - world state before the intervention
 - intervention
@@ -225,17 +231,37 @@ A manifest MUST preserve:
 - known limitations
 - explicit promotion ineligibility until reviewed
 
+### 6.4 Teacher-sufficiency report
+
+The canonical teacher-sufficiency schema is:
+
+catalog/schemas/aurora_teacher_sufficiency_report_v1.schema.json
+
+The report MUST preserve:
+
+- the measured dataset and generator references
+- the complete planned seed-by-parameter grid and dataset horizons
+- joint event entropy and conditional event entropy given the previous turn
+- macro-trajectory spread at the declared horizons
+- declared and effective scenario-family counts after deduplication
+- predeclared decision thresholds and G1.5 status
+- known limitations and explicit non-promotion
+
+Dataset volume, byte size, and unconditional event diversity MUST NOT be used
+alone as evidence of teacher sufficiency.
+
 ## 7. Episode lifecycle
 
 1. Resolve exact repository revisions.
 2. Resolve a scenario version and configuration.
-3. Allocate independent seed scopes for world, epistemic, intervention, and
-   serialization behavior.
+3. Allocate independent requested seed scopes for world, epistemic,
+   intervention, and serialization behavior.
 4. Generate the world transition.
 5. Generate or retrieve the epistemic trace.
 6. Assemble the episode without mutating teacher outputs.
 7. Validate schemas, references, invariants, and authority.
-8. Replay the episode from the recorded seed bundle.
+8. Record and validate the realized post-initialization seeds plus an RNG-state
+   fingerprint, then replay the episode from that realized state.
 9. Write an immutable episode shard.
 10. Update a new dataset manifest version.
 
@@ -249,6 +275,9 @@ The generation system MUST:
 
 - record independent seeds for world, epistemic, intervention, and
   serialization scopes
+- assert requested seeds against the teacher's realized post-initialization
+  seeds and fail unexplained mismatches
+- fingerprint the RNG state immediately after teacher initialization
 - record exact source repository revisions
 - hash effective configuration after defaults are resolved
 - avoid shared mutable random-number generator state between episodes
@@ -354,16 +383,20 @@ Splits MUST be grouped by:
 - intervention lineage
 - near-duplicate content hash
 
-At least one complete scenario family SHOULD be held out. Counterfactual pairs
-MUST remain in the same split unless the evaluation explicitly tests
-generalization across intervention families.
+At least one complete scenario family SHOULD be held out. A manifest MUST NOT
+mark its leakage check `passed` unless it contains at least two effective
+scenario families; a single-family ASM-001 fixture MUST report `not_run`.
+Counterfactual pairs MUST remain in the same split unless the evaluation
+explicitly tests generalization across intervention families.
 
 ## 14. Quality gates
 
 ### Gate G0: contract conformance
 
 - all files parse
-- all fixtures conform to required schema shape
+- every schema passes Draft 2020-12 metaschema validation
+- every fixture passes full Draft 2020-12 validation, including nested and
+  conditional constraints
 - all authority and promotion rules pass
 
 ### Gate G1: generator reproducibility
@@ -372,6 +405,17 @@ generalization across intervention families.
 - replay classification recorded
 - no unexplained drift
 - stable identifiers and ordering
+
+### Gate G1.5: teacher sufficiency
+
+- joint event entropy and conditional event entropy given the previous turn are
+  measured against predeclared thresholds
+- macro-trajectory spread is measured over the complete seed-by-parameter grid
+  at each dataset horizon
+- effective scenario-family count is measured after deduplication
+- any comparison against a copy-previous-state baseline is reproducible
+- failure blocks adapter expansion and training, but does not invalidate or
+  delay completion of ASM-001
 
 ### Gate G2: dataset integrity
 
@@ -434,6 +478,7 @@ It MUST produce:
 - one dataset manifest
 - replay receipts
 - a validation report
+- a teacher-sufficiency report
 
 It MUST NOT:
 
@@ -441,6 +486,10 @@ It MUST NOT:
 - write to a canonical QGIA ledger
 - change a nested repository's authority declaration
 - claim real-world calibration
+
+ASM-001 MUST record G1.5 evidence after generation. It MAY complete with G1.5
+failed; in that state no adapter expansion or model-training proposal is
+authorized.
 
 ## 17. Adoption protocol
 
@@ -452,7 +501,8 @@ Adoption is staged:
 3. Cross-repository conformance is tested against synthetic fixtures.
 4. ASM-001 is generated in a clean integration environment.
 5. The root receipt changes from design-ready to generator-validated.
-6. Only then may a baseline training proposal be opened.
+6. G1.5 is evaluated from the generated evidence.
+7. A baseline training proposal may be opened only if G1.5 passes.
 
 The machine-readable contract remains a proposal until repo-local adoption is
 confirmed by committed code and tests.

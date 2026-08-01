@@ -46,6 +46,8 @@
       "serialization"
     ],
     "isolated_per_episode": true,
+    "records_realized_seeds": true,
+    "records_post_initialization_rng_state_fingerprint": true,
     "derivation": "Explicit independent fixture seeds; no shared mutable RNG."
   },
   "split_policy": {
@@ -85,6 +87,11 @@
       "evidence_refs": []
     },
     {
+      "id": "G1.5",
+      "status": "not_run",
+      "evidence_refs": []
+    },
+    {
       "id": "G2",
       "status": "not_run",
       "evidence_refs": []
@@ -100,7 +107,8 @@
   },
   "known_limitations": [
     "This is a hand-authored conformance fixture, not generated runtime data.",
-    "Root repository license selection remains an owner decision.",
+    "The single scenario family cannot support a meaningful grouped holdout, so leakage_check remains not_run.",
+    "Training-source and derivative-artifact licensing remain owner decisions.",
     "Artifact hashes are schema-shaped placeholders for manifest conformance tests."
   ],
   "promotion": {

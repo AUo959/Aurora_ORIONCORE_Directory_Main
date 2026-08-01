@@ -24,7 +24,7 @@ across repository boundaries.
 | WS4 Forecast semantics | QGIA Spine | Synthetic forecast/prior/calibration adapter |
 | WS5 Validation | CanonRec plus repo-local validators | Invariant and authority validation |
 | WS6 Dataset factory | CloudBank orchestration | Episode assembler, shards, manifests, receipts |
-| WS7 Baselines | New model workspace selected after G2 | No-change, sequence, and graph baselines |
+| WS7 Baselines | New model workspace selected after G1.5 | No-change, sequence, and graph baselines |
 | WS8 Serving | CloudBank | Simulation-only inference surface |
 
 No nested repository is authorized by this plan alone. Each workstream requires
@@ -60,7 +60,11 @@ engines.
 Tasks:
 
 - inventory the smallest complete GUMAS world-state snapshot
+- document that the current default builder produces one hardcoded world and
+  that L2 prose knobs do not yet map to `GUMASState`
 - inventory CloudBank QSFE internal latent beliefs, events, and seed flow
+- verify the existing GUMAS event-injection seam and QSFE belief-history export
+  gap before defining adapters
 - identify QGIA forecast and evidence fields reusable in simulation authority
 - define canonical entity identifiers and state-delta operations
 - determine which CanonRec checks can run per step and per episode
@@ -77,7 +81,8 @@ Goal: produce the first 12 governed episodes.
 
 Tasks:
 
-- implement independent seed scopes
+- implement independent requested seed scopes, assert realized seeds after
+  initialization, and fingerprint the post-initialization RNG state
 - add a 20-turn scenario adapter
 - add one intervention family
 - add three evidence masks
@@ -85,6 +90,8 @@ Tasks:
 - export QGIA-shaped epistemic traces
 - assemble episode and trace files
 - generate manifest, hashes, replay receipts, and validation report
+- generate a G1.5 teacher-sufficiency report without making G1.5 an ASM-001
+  completion dependency
 
 Exit:
 
@@ -92,6 +99,8 @@ Exit:
 - replay requirement satisfied
 - no canonical ledger mutation
 - dataset manifest passes G0, G1, and G2
+- G1.5 is evaluated as the stop/go decision for expansion and training; ASM-001
+  may finish with that gate failed
 
 ### Phase 3: Evaluation harness
 
@@ -100,8 +109,11 @@ Goal: make model utility measurable before training.
 Tasks:
 
 - define no-change and empirical-frequency baselines
+- predeclare conditional-entropy and trajectory-spread thresholds before
+  evaluating G1.5
 - implement structural, numerical, event, forecast, and rollout metrics
-- group dataset splits by scenario family and generator lineage
+- group dataset splits by scenario family and generator lineage only when at
+  least two effective scenario families exist
 - add counterfactual-pair checks
 - add invariant-violation summaries
 
@@ -113,6 +125,9 @@ Exit:
 ### Phase 4: First learned baseline
 
 Goal: determine whether a learned surrogate captures useful state dynamics.
+
+Entry: G1.5 passed. A frozen dataset that passes G2 without G1.5 does not
+authorize this phase.
 
 Tasks:
 
@@ -183,6 +198,21 @@ Deliver:
 - typed delta operations
 - event mapping
 - replay entrypoint
+- requested-versus-realized seed assertion and RNG-state fingerprint
+- an explicit unsupported-surface record for scenario-family parameters
+
+### ASM-002A: L2-to-GUMAS scenario-family compiler
+
+Owner: root contract plus simulation repository
+Depends on: ASM-001 evidence and ASM-002 state mapping
+Deliver:
+
+- versioned numeric mapping from selected L2 prose knobs to `GUMASState` and
+  intervention parameters
+- at least two effective scenario families after state/transition deduplication
+- stable family identifiers, parameter-set hashes, and counterfactual pairs
+- proof that root watch-scenario overlays are design sources rather than direct
+  GUMAS runtime inputs
 
 ### ASM-003: QSFE epistemic export
 
@@ -190,7 +220,8 @@ Owner: CloudBank
 Deliver:
 
 - isolated seed scope
-- latent or aggregate belief snapshots
+- export of latent or aggregate belief snapshots currently computed inside
+  `run_forecast` but omitted from `ForecastOutput`
 - network hash
 - evidence-mask identity
 - dissent, echo, forecast, and confidence fields
@@ -223,6 +254,7 @@ Deliver:
 - split lineage
 - disclosure and license metadata
 - quality-gate aggregation
+- teacher-sufficiency report aggregation
 
 ### ASM-007: Baseline evaluation harness
 
@@ -231,7 +263,8 @@ Deliver:
 
 - trivial baselines
 - metric implementations
-- held-out scenario-family split
+- held-out scenario-family split, with `not_run` rather than `passed` when fewer
+  than two effective families exist
 - reproducible report
 
 ### ASM-008: Sequence transition baseline
@@ -277,7 +310,8 @@ and always publish aggregate summaries in the contract record.
 ### D4: Model workspace
 
 Recommendation: create or designate a model repository only after ASM-001
-passes G2. Until then, a model repo would encode guesses about inputs.
+passes G2 and G1.5. Until then, a model repo would encode guesses about inputs
+or commit the project to an information-poor teacher.
 
 ### D5: Public release posture
 
@@ -291,7 +325,9 @@ publication as separate owner-approved decisions.
       -> epistemic adapter
       -> CanonRec validator
       -> ASM-001 generator
-      -> dataset manifest and evaluation harness
+      -> dataset manifest and teacher-sufficiency evaluation (G1.5)
+      -> L2-to-GUMAS scenario-family compiler when diversity is insufficient
+      -> evaluation harness
       -> sequence baseline
       -> epistemic/rollout model
       -> simulation-only serving
@@ -308,6 +344,7 @@ synthetic ASM-001 traces.
 | QSFE replay is not isolated | Same seed produces different traces | Per-episode RNG and environment receipt | Unexplained drift remains |
 | Synthetic and real QGIA data mix | Shared ledger/path without authority filter | Separate namespace and schema authority | Any synthetic truth-ledger write |
 | Dataset leakage | Near-identical scenarios cross splits | Family and lineage grouped splits | Cannot reconstruct split lineage |
+| Teacher is degenerate or information-poor | Low previous-turn conditional entropy or macro-trajectory spread collapse | Widen scenario parameters and add controlled counterfactual pairs | G1.5 cannot clear the predeclared threshold needed to beat copy-previous-state |
 | Model emits invalid state | High invariant rejection rate | Typed decoder and validator feedback | Model does not beat trivial baseline |
 | License/disclosure unclear | Source without usable rights metadata | Internal-only allowlist and review | Any planned public artifact has unresolved source |
 | Simulator bias is mistaken for reality | Real-world claims from synthetic score | Simulation labeling and QGIA outcome comparison | Marketing or API removes authority label |
@@ -355,8 +392,11 @@ synthetic ASM-001 traces.
 4. Implement root fixture conformance in each participating repository.
 5. Implement ASM-001 in a clean integration branch.
 6. Publish the generator receipt for review.
-7. Decide whether a dedicated model repository is warranted.
-8. Only then authorize ASM-007 and ASM-008.
+7. Evaluate G1.5; stop after the 12 episodes if it fails.
+8. Implement ASM-002A and regenerate evidence if scenario diversity is the
+   limiting factor.
+9. Decide whether a dedicated model repository is warranted.
+10. Only then authorize ASM-007 and ASM-008.
 
 ## 10. Handoff rule
 

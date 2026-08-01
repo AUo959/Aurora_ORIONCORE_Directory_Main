@@ -16,12 +16,19 @@
       "epistemic_adapter": "fixture-1"
     },
     "config_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    "seed_bundle": {
+    "requested_seed_bundle": {
       "world": 1101,
       "epistemic": 2201,
       "intervention": 3301,
       "serialization": 4401
-    }
+    },
+    "realized_seed_bundle": {
+      "world": 1101,
+      "epistemic": 2201,
+      "intervention": 3301,
+      "serialization": 4401
+    },
+    "post_initialization_rng_state_fingerprint": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
   },
   "scenario": {
     "scenario_id": "ASM-FIXTURE-001",
@@ -119,6 +126,8 @@
   "validation": {
     "schema_valid": true,
     "deterministic_replay": "byte_stable",
+    "seed_consistency": "matched",
+    "seed_validation_detail": "Requested and realized fixture seeds are identical after teacher initialization.",
     "constraint_violations": [],
     "validator_refs": [
       "fixture-validator:1"

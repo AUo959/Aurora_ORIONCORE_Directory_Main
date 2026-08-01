@@ -44,7 +44,7 @@
           "type": "string",
           "pattern": "^sha256:[a-f0-9]{64}$"
         },
-        "seed_bundle": {
+        "requested_seed_bundle": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
@@ -59,13 +59,35 @@
             "intervention",
             "serialization"
           ]
+        },
+        "realized_seed_bundle": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "world": {"type": "integer", "minimum": 0},
+            "epistemic": {"type": "integer", "minimum": 0},
+            "intervention": {"type": "integer", "minimum": 0},
+            "serialization": {"type": "integer", "minimum": 0}
+          },
+          "required": [
+            "world",
+            "epistemic",
+            "intervention",
+            "serialization"
+          ]
+        },
+        "post_initialization_rng_state_fingerprint": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
         }
       },
       "required": [
         "source_revisions",
         "generator_versions",
         "config_hash",
-        "seed_bundle"
+        "requested_seed_bundle",
+        "realized_seed_bundle",
+        "post_initialization_rng_state_fingerprint"
       ]
     },
     "scenario": {
@@ -190,6 +212,10 @@
             "not_run"
           ]
         },
+        "seed_consistency": {
+          "enum": ["matched", "documented_override", "mismatch"]
+        },
+        "seed_validation_detail": {"type": "string", "minLength": 1},
         "constraint_violations": {
           "type": "array",
           "items": {"type": "string"}
@@ -203,6 +229,8 @@
       "required": [
         "schema_valid",
         "deterministic_replay",
+        "seed_consistency",
+        "seed_validation_detail",
         "constraint_violations",
         "validator_refs"
       ]

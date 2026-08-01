@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "record_type": "aurora_teacher_sufficiency_report",
+  "report_id": "asm.teacher-sufficiency.synthetic-fixture-001",
+  "authority": "synthetic_fixture",
+  "created_at": "2026-08-01T00:00:00Z",
+  "source": {
+    "dataset_id": "asm.dataset.synthetic-fixture-001",
+    "generator_refs": [
+      "asm-synthetic-fixture-generator:0.1.0"
+    ],
+    "measurement_window": {
+      "turn_start": 0,
+      "turn_end": 20
+    }
+  },
+  "planned_generation_grid": {
+    "world_seeds": [1101, 1102],
+    "scenario_parameter_sets": ["station-readiness-fixture-default"],
+    "horizons": [10, 20]
+  },
+  "event_information": {
+    "atom_count": null,
+    "distinct_event_type_count": null,
+    "joint_entropy_bits_per_atom": null,
+    "conditional_entropy_bits_per_atom": null,
+    "conditioning": "previous_turn",
+    "baseline": "copy_previous_turn",
+    "minimum_conditional_entropy_bits": null,
+    "status": "not_evaluated"
+  },
+  "trajectory_spread": {
+    "metric": "normalized_macro_state_range_across_seed_parameter_grid",
+    "observations": [],
+    "minimum_meaningful_spread": null,
+    "status": "not_evaluated"
+  },
+  "scenario_diversity": {
+    "declared_family_count": 1,
+    "effective_family_count": null,
+    "dedup_method": "canonical_state_and_transition_signature; implementation pending",
+    "minimum_effective_family_count": 2,
+    "status": "not_evaluated"
+  },
+  "gate": {
+    "id": "G1.5",
+    "name": "teacher_sufficiency",
+    "status": "not_evaluated",
+    "required_before": "repo_local_adapter_expansion_or_training",
+    "evidence_refs": []
+  },
+  "known_limitations": [
+    "This is a hand-authored schema fixture; it contains no teacher-sufficiency measurement.",
+    "ASM-001 intentionally uses one scenario family, so it can generate gate evidence but cannot itself demonstrate cross-family diversity."
+  ],
+  "promotion": {
+    "eligible": false,
+    "reason": "Synthetic conformance fixture; no runtime gate has been evaluated."
+  }
+}

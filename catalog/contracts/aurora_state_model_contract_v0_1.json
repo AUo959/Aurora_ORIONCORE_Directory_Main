@@ -109,6 +109,13 @@
       "schema_path": "catalog/schemas/aurora_dataset_manifest_v1.schema.json",
       "fixture_path": "tests/fixtures/aurora_state_model/dataset_manifest_v1.json",
       "owner": "Aurora_ORIONCORE_Directory_Main"
+    },
+    {
+      "artifact_id": "aurora_teacher_sufficiency_report",
+      "format": "json",
+      "schema_path": "catalog/schemas/aurora_teacher_sufficiency_report_v1.schema.json",
+      "fixture_path": "tests/fixtures/aurora_state_model/teacher_sufficiency_report_v1.json",
+      "owner": "Aurora_ORIONCORE_Directory_Main"
     }
   ],
   "training_contract": {
@@ -142,7 +149,9 @@
         "episode_id",
         "authority",
         "scenario_id",
-        "seed_bundle",
+        "requested_seed_bundle",
+        "realized_seed_bundle",
+        "post_initialization_rng_state_fingerprint",
         "content_hash"
       ]
     },
@@ -206,7 +215,7 @@
     },
     {
       "id": "ASM-INV-005",
-      "rule": "Every episode records exact source revisions, effective configuration hash, and isolated seed scopes."
+      "rule": "Every episode records exact source revisions, effective configuration hash, requested and realized isolated seed scopes, and a post-initialization RNG-state fingerprint."
     },
     {
       "id": "ASM-INV-006",
@@ -231,6 +240,11 @@
       "id": "G1",
       "name": "generator_reproducibility",
       "required_before": "dataset_sealing"
+    },
+    {
+      "id": "G1.5",
+      "name": "teacher_sufficiency",
+      "required_before": "repo_local_adapter_expansion_or_training"
     },
     {
       "id": "G2",
@@ -264,6 +278,7 @@
     "world_seed_count": 2,
     "epistemic_seed_count": 2,
     "model_training_authorized": false,
+    "post_generation_decision_gate": "G1.5",
     "required_gates": [
       "G0",
       "G1",
@@ -278,6 +293,7 @@
     "implement_canonrec_episode_validator",
     "generate_asm_001",
     "seal_and_review_dataset",
+    "evaluate_teacher_sufficiency",
     "authorize_baseline_training"
   ]
 }

@@ -103,9 +103,17 @@
           }
         },
         "isolated_per_episode": {"const": true},
+        "records_realized_seeds": {"const": true},
+        "records_post_initialization_rng_state_fingerprint": {"const": true},
         "derivation": {"type": "string", "minLength": 1}
       },
-      "required": ["scopes", "isolated_per_episode", "derivation"]
+      "required": [
+        "scopes",
+        "isolated_per_episode",
+        "records_realized_seeds",
+        "records_post_initialization_rng_state_fingerprint",
+        "derivation"
+      ]
     },
     "split_policy": {
       "type": "object",
@@ -144,7 +152,7 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "id": {"type": "string", "pattern": "^G[0-5]$"},
+          "id": {"type": "string", "pattern": "^(G[0-5]|G1\\.5)$"},
           "status": {"enum": ["passed", "failed", "not_run"]},
           "evidence_refs": {
             "type": "array",
@@ -194,6 +202,24 @@
       "required": ["eligible", "reason"]
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "split_policy": {
+            "properties": {"leakage_check": {"const": "passed"}},
+            "required": ["leakage_check"]
+          }
+        },
+        "required": ["split_policy"]
+      },
+      "then": {
+        "properties": {
+          "scenario_families": {"minItems": 2}
+        }
+      }
+    }
+  ],
   "required": [
     "schema_version",
     "record_type",

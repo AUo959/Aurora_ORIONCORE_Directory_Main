@@ -4,6 +4,7 @@
 
 Version: 0.1
 Date: 2026-07-29
+Review revision: 2026-08-01
 Status: DRAFT DESIGN PROPOSAL
 Activation: NOT RUNTIME-ACTIVE
 Canon authority: NONE
@@ -94,8 +95,8 @@ teacher system.
 | Surface | Proposed role | Current design evidence |
 | --- | --- | --- |
 | Root control plane | Contracts, schemas, governance, receipts, cross-repo adoption | Existing machine-readable catalogs, QGIA closed-loop contract, session and validation tooling |
-| GUMAS simulation architecture | World-state transitions and controlled scenario generation | Scenario, simulation, and generated-output infrastructure |
-| CloudBank QSFE | Agent-network belief propagation and scalable episode generation | Seeded network simulations, reliability-weighted propagation, API and test surfaces |
+| GUMAS simulation architecture | World-state transitions and intervention execution | A seeded engine, event injection, and generated-output infrastructure; its current default builder instantiates one hardcoded world rather than compiling parameterized scenario families |
+| CloudBank QSFE | Agent-network belief propagation and scalable episode generation | Seeded network simulations and reliability-weighted propagation; current forecast execution computes beliefs and belief history but does not return either at its API boundary |
 | QGIA Knowledge Library | Evidence semantics, curated domain knowledge, eventual resolved outcomes | Evidence-oriented corpus and an adoption-ready closed-loop authority contract |
 | QGIA Knowledge Spine | Forecast semantics, priors, calibration, resolution policy | Forecast schemas and methodology structure; canonical ledgers still require adoption and population |
 | CanonRec | Invariant enforcement and canonical promotion gate | Deterministic reconciliation and authority-preserving workflows |
@@ -114,15 +115,50 @@ The design inspection on 2026-07-29 found:
 - canonical QGIA forecast, prior, outcome, and calibration surfaces are not yet
   populated enough to train or score a forecasting model
 - CloudBank's QSFE can generate structured belief propagation, but its current
-  public result shape does not preserve the full latent belief trajectory
-- a shared stochastic runtime can advance random state across calls, so seed
-  isolation and replay receipts must become explicit dataset requirements
+  public result shape does not preserve the full latent belief trajectory:
+  `run_forecast` computes final beliefs and `belief_history`, uses them to form
+  tier assessments, then returns a `ForecastOutput` without those two fields
+- GUMAS exposes `inject_event`, which queues a marked external event for the
+  next tick; this is a usable intervention seam for ASM-001
+- `build_default_scenario(scenario_id, seed)` currently constructs the same
+  canonical faction, leader, trust, and conflict topology for every scenario
+  identifier; parameterized scenario compilation is still unwritten
+- when `GUMASEngine.init_scenario(state=...)` receives a prebuilt state, the
+  constructor seed is superseded and the RNG is reinitialized from
+  `state.seed`; requested and realized seeds therefore must both be recorded
+- a post-initialization RNG-state fingerprint, seed isolation, and replay
+  receipts must become explicit dataset requirements
 - some legacy and canonical QGIA data paths coexist and should be normalized
   before they become training inputs
 - the QGIA Library's local checkout contains pre-existing uncommitted work and
   was intentionally left untouched by this proposal
 
 These are tractable contract and adapter gaps, not evidence against the model.
+
+### 3.2 Teacher maturity and information content
+
+The epistemic teacher is currently more mature than the ontic scenario space.
+QSFE already performs multi-round belief propagation; the missing work is an
+export adapter. GUMAS already performs seeded transitions and accepts injected
+events, but its default scenario surface supplies one fixed world. The larger
+ontic task is therefore controlled scenario-family variation, not merely state
+serialization.
+
+The L2 scenario seed catalog is promising design input, not an implemented
+compiler. It contains 92 cards with the same seven conceptual knob axes and a
+25-card fixture shortlist. The shortlist targets root watch-scenario overlays,
+and the knobs are prose rather than numeric `GUMASState` parameters. A governed
+mapping from L2 cards to versioned GUMAS state and intervention parameter sets
+must be specified, deduplicated, and tested before those cards count as teacher
+diversity.
+
+A committed historical GUMAS ledger provides a useful warning and baseline:
+5,621 event atoms over 153 turns and 4,044,393 bytes contain 14 event types,
+2.717 bits of event-type entropy per atom, and 822 distinct
+`(event type, faction tuple, magnitude rounded to 3 decimals)` symbols with
+7.478 bits of joint entropy per atom. These measurements do not establish
+training sufficiency. They show why dataset size in bytes or rows is a poor
+proxy for learnable conditional information.
 
 ## 4. The model should predict state, not prose
 
@@ -153,7 +189,7 @@ The architecture has two planes.
 
 ~~~mermaid
 flowchart LR
-    SC["Scenario compiler"] --> GW["GUMAS world teacher"]
+    SC["Proposed scenario-family compiler"] --> GW["GUMAS world teacher"]
     EM["Evidence and visibility masks"] --> QE["QGIA and QSFE epistemic teacher"]
     QL["QGIA Library semantics"] --> QE
     QS["QGIA Spine forecast semantics"] --> QE
@@ -170,8 +206,9 @@ flowchart LR
 
 The teacher plane creates governed episodes.
 
-1. A scenario compiler selects a scenario version, parameter set, intervention
-   family, visibility mask, and seed bundle.
+1. A proposed scenario-family compiler selects a versioned parameter set,
+   intervention family, visibility mask, and requested seed bundle. This
+   compiler is a required new adapter, not an existing GUMAS capability.
 2. A GUMAS-compatible simulator produces world-state transitions and events.
 3. QGIA/QSFE produces the corresponding belief trajectory, disagreement
    structure, forecasts, and confidence decomposition.
@@ -371,6 +408,18 @@ Mitigation: label it a simulation model, use multiple generators, hold out
 scenario families, compare against real resolved outcomes only when the QGIA
 closed loop is populated, and communicate epistemic limits.
 
+### Information-poor teacher
+
+A generator can be perfectly reproducible yet emit mostly repeated or
+predictable transitions. Mitigation: after ASM-001, measure joint and
+previous-turn conditional event entropy, macro-trajectory spread across the
+full seed-by-parameter grid at dataset horizons, and effective scenario-family
+count after deduplication. Stop adapter expansion and training if conditional
+entropy cannot clear the predeclared threshold needed to beat a
+copy-previous-state baseline or if trajectory spread and effective diversity
+collapse. Widen scenario parameters and add controlled counterfactual pairs
+before reconsidering the gate.
+
 ## 11. First implementable slice
 
 The proposed first slice is ASM-001: Reproducible World-and-Belief Episode.
@@ -388,29 +437,40 @@ It should contain:
 Exit criteria:
 
 - all episodes validate against the v1 schemas
-- repeated generation with the same seed bundle is byte-stable or produces an
-  explicitly documented nondeterminism receipt
+- repeated generation with the same requested seed bundle is byte-stable or
+  produces an explicitly documented nondeterminism receipt
+- every episode records requested seeds, realized post-initialization seeds,
+  their consistency classification, and a post-initialization RNG-state
+  fingerprint
 - world state and belief state remain separately addressable
 - every episode names exact source revisions and config hashes
 - no synthetic record is written to canonical QGIA truth or forecast ledgers
 - a dataset manifest can be regenerated and audited
+- a teacher-sufficiency report is emitted for the G1.5 decision
 
 This slice tests the hardest assumption first: whether Aurora can produce a
 stable learning object from its existing engines.
+
+ASM-001 is intentionally allowed to finish even if G1.5 fails. A failure is a
+successful early stop: it blocks repo-local adapter expansion and all model
+training until the teacher has more conditional information and scenario
+diversity.
 
 ## 12. Roadmap
 
 1. Adopt the v1 episode and epistemic trace contracts in repo-local adapters.
 2. Implement ASM-001 and publish only internal synthetic fixtures and receipts.
-3. Build a deterministic serializer and one-step baseline.
-4. Establish held-out scenario-family evaluation.
-5. Add counterfactual pairs and multi-step rollouts.
-6. Populate and validate the real QGIA closed loop before attempting
+3. Evaluate G1.5 from ASM-001 and stop if the teacher is information-poor.
+4. Implement the L2-to-GUMAS scenario-family compiler and establish at least
+   two effective families before claiming a grouped holdout.
+5. Build a deterministic serializer and one-step baseline only after G1.5.
+6. Add counterfactual pairs and multi-step rollouts.
+7. Populate and validate the real QGIA closed loop before attempting
    real-world calibration claims.
-7. Introduce a graph or hybrid model only after the sequence baseline exposes
+8. Introduce a graph or hybrid model only after the sequence baseline exposes
    measurable limitations.
-8. Evaluate CloudBank serving behind an explicit simulation-only API.
-9. Run disclosure, license, and canon-authority reviews before any wider
+9. Evaluate CloudBank serving behind an explicit simulation-only API.
+10. Run disclosure, license, and canon-authority reviews before any wider
    distribution.
 
 ## 13. Conclusion
@@ -438,3 +498,5 @@ then train.
   catalog/schemas/aurora_epistemic_trace_v1.schema.json
 - Dataset manifest schema:
   catalog/schemas/aurora_dataset_manifest_v1.schema.json
+- Teacher sufficiency schema:
+  catalog/schemas/aurora_teacher_sufficiency_report_v1.schema.json
