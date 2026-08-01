@@ -26,8 +26,8 @@ policy; it is not a hosted service or a published Python package. Nested
 repositories have independent Git histories, release decisions, and security
 policies.
 
-Operational credentials are never valid repository content. Deterministic
-test values must be clearly scoped and must not be reused in deployments.
+Repository policy prohibits operational credentials. Deterministic test values
+are confined to clearly scoped fixtures and excluded from deployments.
 Exact historical false positives may be recorded by fingerprint in
 `.gitleaksignore`; broad rules and path-wide exclusions are not accepted.
 
