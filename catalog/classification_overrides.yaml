@@ -66,6 +66,34 @@
       "notes": "Repo-local Codex plugin bundles for workspace tooling."
     },
     {
+      "current_path": "CONTRIBUTING.md",
+      "id": "contributing",
+      "kind": "workspace_doc",
+      "logical_zone": "docs",
+      "planned_path": "CONTRIBUTING.md",
+      "git_boundary": "root",
+      "storage_tier": "workspace-control",
+      "retention_policy": "versioned",
+      "owner": "workspace-admin",
+      "status": "managed",
+      "batch_id": "",
+      "notes": "Public contribution policy for the root control-plane repository."
+    },
+    {
+      "current_path": "SECURITY.md",
+      "id": "security",
+      "kind": "policy_file",
+      "logical_zone": "docs",
+      "planned_path": "SECURITY.md",
+      "git_boundary": "root",
+      "storage_tier": "workspace-control",
+      "retention_policy": "versioned",
+      "owner": "workspace-admin",
+      "status": "managed",
+      "batch_id": "",
+      "notes": "Public vulnerability-reporting and security-boundary policy."
+    },
+    {
       "current_path": "narrative_engine_spec_parameters_to_narrative_core_v_0.md",
       "id": "narrative-engine-spec-parameters-to-narrative-core-v-0",
       "kind": "intake_file",

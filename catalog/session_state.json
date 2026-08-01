@@ -723,6 +723,12 @@
       "summary": "chore: record CanonRec MIT licensing"
     },
     {
+      "sha": "e3670f1",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "docs: harden root public review metadata (#53)"
+    },
+    {
       "sha": "b11eba8",
       "date": "2026-07-29",
       "platform": "codex",
@@ -745,12 +751,6 @@
       "date": "2026-07-29",
       "platform": "codex",
       "summary": "state: record public readiness debt closure"
-    },
-    {
-      "sha": "ba3f361",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "chore(registry): sync CanonRec pin -> d6d699f (Operation Obsidian Dawn event promotion)"
     }
   ],
   "security_events": [
