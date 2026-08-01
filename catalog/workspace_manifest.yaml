@@ -1,4 +1,4 @@
-generated_at: '2026-08-01T04:50:50Z'
+generated_at: '2026-08-01T05:33:38Z'
 root: .
 logical_taxonomy:
 - repos
@@ -201,6 +201,18 @@ entries:
   owner: intake-review
   status: planned_move
   batch_id: wave4_root_intake_cleanup_initial
+- id: code-of-conduct
+  kind: policy_file
+  current_path: CODE_OF_CONDUCT.md
+  logical_zone: docs
+  planned_path: CODE_OF_CONDUCT.md
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+  batch_id: ''
+  notes: Public participation and enforcement policy for the root control-plane repository.
 - id: contributing
   kind: workspace_doc
   current_path: CONTRIBUTING.md
@@ -223,6 +235,18 @@ entries:
   retention_policy: preserve
   owner: repository-owner
   status: protected
+- id: license
+  kind: policy_file
+  current_path: LICENSE
+  logical_zone: docs
+  planned_path: LICENSE
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+  batch_id: ''
+  notes: MIT license for the public root control-plane repository.
 - id: makefile
   kind: control_surface
   current_path: Makefile

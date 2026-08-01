@@ -1,0 +1,63 @@
+name: General work item
+description: Report a control-plane bug or propose documentation, governance, tooling, or integration work.
+title: ""
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This repository is the Aurora workspace control plane. CloudBank runtime issues and CanonRec authority issues belong in their own repositories; use the links on the issue chooser when appropriate.
+  - type: dropdown
+    id: work_type
+    attributes:
+      label: Work type
+      description: Choose the closest category.
+      options:
+        - Bug
+        - Documentation
+        - Governance
+        - Tooling
+        - Integration
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: target
+    attributes:
+      label: Target path or surface
+      description: Name the root path, tool, manifest, report, or workflow affected.
+      placeholder: catalog/repo_registry.yaml
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or proposed outcome
+      description: Explain the current behavior and the desired reviewable outcome.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and authority
+      description: Link or cite committed files, manifests, schemas, receipts, or reproducible output. Label uncertainty and canon status explicitly.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation or acceptance criteria
+      description: List the checks or observable conditions that would close this item.
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Submission checks
+      options:
+        - label: I confirmed that this root control-plane repository is the intended target.
+          required: true
+        - label: I removed credentials, private personal material, and confidential security details.
+          required: true
+        - label: I identified draft, recovered, staged, generated, or canonical status where it matters.
+          required: true

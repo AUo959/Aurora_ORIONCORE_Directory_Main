@@ -80,6 +80,34 @@
       "notes": "Public contribution policy for the root control-plane repository."
     },
     {
+      "current_path": "CODE_OF_CONDUCT.md",
+      "id": "code-of-conduct",
+      "kind": "policy_file",
+      "logical_zone": "docs",
+      "planned_path": "CODE_OF_CONDUCT.md",
+      "git_boundary": "root",
+      "storage_tier": "workspace-control",
+      "retention_policy": "versioned",
+      "owner": "workspace-admin",
+      "status": "managed",
+      "batch_id": "",
+      "notes": "Public participation and enforcement policy for the root control-plane repository."
+    },
+    {
+      "current_path": "LICENSE",
+      "id": "license",
+      "kind": "policy_file",
+      "logical_zone": "docs",
+      "planned_path": "LICENSE",
+      "git_boundary": "root",
+      "storage_tier": "workspace-control",
+      "retention_policy": "versioned",
+      "owner": "workspace-admin",
+      "status": "managed",
+      "batch_id": "",
+      "notes": "MIT license for the public root control-plane repository."
+    },
+    {
       "current_path": "SECURITY.md",
       "id": "security",
       "kind": "policy_file",
