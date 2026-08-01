@@ -18,13 +18,19 @@ read and write. This module fixes both:
 CLI:
     python3 tools/session_state_io.py fmt
     python3 tools/session_state_io.py get last_platform
+    python3 tools/session_state_io.py add-item <id> --description TEXT
+        --next-action TEXT --definition-of-done TEXT [lifecycle options]
+    python3 tools/session_state_io.py start-item <id>
+    python3 tools/session_state_io.py ready-item <id> --review-at TIMESTAMP
+    python3 tools/session_state_io.py complete-active [--detail TEXT]
     python3 tools/session_state_io.py complete-item <id> [--detail TEXT]
-    python3 tools/session_state_io.py add-pending <id> --description TEXT
-        [--priority high|medium|low] [--assigned-to codex|claude-code|either|owner]
+    python3 tools/session_state_io.py wait-active --waiting-on owner|external|artifact|date
+        --trigger TEXT --review-at TIMESTAMP [owner-gate options]
+    python3 tools/session_state_io.py park-active --reason TEXT --review-at TIMESTAMP
     python3 tools/session_state_io.py set-summary TEXT
     python3 tools/session_state_io.py set-tool-version <tool> <version>
     python3 tools/session_state_io.py suspend-active --next-step TEXT
-        [--next-step-detail TEXT]
+        --resume-by TIMESTAMP [--next-step-detail TEXT]
     python3 tools/session_state_io.py record-commits   # mechanical: recent_commits + main_sha from git log
     python3 tools/session_state_io.py archive-completed [--keep N]
 
@@ -62,6 +68,42 @@ import session_state_check  # noqa: E402
 
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _touch_state(state: dict, platform: str) -> None:
+    state["last_platform"] = platform
+    state["last_updated"] = _now()
+
+
+def _find_queue_item(state: dict, item_id: str) -> tuple[dict | None, list]:
+    queue = state.setdefault("task_queue", [])
+    match = next((item for item in queue if item.get("id") == item_id), None)
+    return match, queue
+
+
+def _completion_record(
+    item: dict,
+    *,
+    platform: str,
+    detail: str | None,
+    status: str = "completed",
+    approval_evidence: str | None = None,
+) -> dict:
+    record = {
+        "id": item["id"],
+        "status": status,
+        "completed_at": _now(),
+        "platform": platform,
+        "detail": detail or item.get("description") or item.get("definition_of_done", ""),
+    }
+    if item.get("evidence_refs"):
+        record["evidence_refs"] = item["evidence_refs"]
+    for field in ("gate_scope", "decision_options", "trigger"):
+        if item.get(field):
+            record[field] = item[field]
+    if approval_evidence:
+        record["approval_evidence"] = approval_evidence
+    return record
 
 
 def detect_platform() -> str:
@@ -162,46 +204,272 @@ def op_get(args: argparse.Namespace) -> int:
 
 def op_complete_item(args: argparse.Namespace) -> int:
     state = load()
-    for section in ("pending_for_next_session", "task_queue"):
-        entries = state.get(section, [])
-        match = next((e for e in entries if e.get("id") == args.item_id), None)
-        if match:
-            entries.remove(match)
-            break
-    else:
+    match, queue = _find_queue_item(state, args.item_id)
+    if match is None:
         print(f"session-state-io: no queue item with id '{args.item_id}'", file=sys.stderr)
         return 1
-    completed = {
-        "id": args.item_id,
-        "status": "completed",
-        "completed_at": _now(),
-        "platform": args.platform,
-    }
-    if args.detail:
-        completed["detail"] = args.detail
-    elif match.get("description"):
-        completed["detail"] = match["description"]
-    state.setdefault("completed_tasks", []).append(completed)
+    if match.get("approval_required") and not args.approval_evidence:
+        print(
+            "session-state-io: owner-gated decisions require --approval-evidence",
+            file=sys.stderr,
+        )
+        return 1
+    queue.remove(match)
+    state.setdefault("completed_tasks", []).append(
+        _completion_record(
+            match,
+            platform=args.platform,
+            detail=args.detail,
+            approval_evidence=args.approval_evidence,
+        )
+    )
+    _touch_state(state, args.platform)
     findings = save(state)
     if findings:
         return _refuse(findings)
-    print(f"session-state-io: completed '{args.item_id}' (from {section})")
+    print(f"session-state-io: completed '{args.item_id}' (from task_queue)")
+    return 0
+
+
+def _queue_item_from_args(args: argparse.Namespace) -> dict:
+    now = _now()
+    status = "waiting" if args.approval_required else args.status
+    assigned_to = "owner" if args.approval_required else args.assigned_to
+    kind = "decision" if args.approval_required else args.kind
+    item = {
+        "id": args.item_id,
+        "status": status,
+        "priority": args.priority,
+        "assigned_to": assigned_to,
+        "kind": kind,
+        "repo": args.repo,
+        "description": args.description,
+        "created_at": args.created_at or now,
+        "updated_at": now,
+        "review_at": args.review_at,
+        "next_action": args.next_action,
+        "definition_of_done": args.definition_of_done,
+        "approval_required": args.approval_required,
+    }
+    if status == "waiting":
+        item["waiting_on"] = "owner" if args.approval_required else args.waiting_on
+        item["trigger"] = args.trigger
+    elif status == "parked":
+        item["trigger"] = args.trigger
+    if args.evidence_ref:
+        item["evidence_refs"] = args.evidence_ref
+    if args.approval_required:
+        item["gate_scope"] = args.gate_scope
+        item["decision_options"] = args.decision_option or []
+    return item
+
+
+def op_add_item(args: argparse.Namespace) -> int:
+    state = load()
+    item = _queue_item_from_args(args)
+    state.setdefault("task_queue", []).append(item)
+    _touch_state(state, args.platform)
+    findings = save(state)
+    if findings:
+        return _refuse(findings)
+    print(
+        f"session-state-io: queued '{args.item_id}' "
+        f"({item['status']}, {args.priority}, {item['assigned_to']})"
+    )
     return 0
 
 
 def op_add_pending(args: argparse.Namespace) -> int:
+    """Compatibility alias: old pending additions become actionable queue work."""
+    now = _now()
+    args.status = "ready"
+    args.kind = "work"
+    args.repo = "root"
+    args.created_at = now
+    args.review_at = args.review_at or now
+    args.next_action = args.description
+    args.definition_of_done = "The described work is completed and validated."
+    args.approval_required = False
+    args.waiting_on = None
+    args.trigger = None
+    args.gate_scope = None
+    args.evidence_ref = []
+    args.decision_option = []
+    print(
+        "session-state-io: add-pending is deprecated; routing item into task_queue status='ready'",
+        file=sys.stderr,
+    )
+    return op_add_item(args)
+
+
+def op_start_item(args: argparse.Namespace) -> int:
     state = load()
-    item = {
-        "id": args.item_id,
-        "priority": args.priority,
-        "assigned_to": args.assigned_to,
-        "description": args.description,
-    }
-    state.setdefault("pending_for_next_session", []).append(item)
+    if state.get("active_task") is not None:
+        print("session-state-io: active_task is already occupied", file=sys.stderr)
+        return 1
+    match, queue = _find_queue_item(state, args.item_id)
+    if match is None:
+        print(f"session-state-io: no queue item with id '{args.item_id}'", file=sys.stderr)
+        return 1
+    if match.get("status") != "ready" or match.get("approval_required"):
+        print(
+            "session-state-io: only non-gated status='ready' items can be started",
+            file=sys.stderr,
+        )
+        return 1
+    queue.remove(match)
+    match["status"] = "active"
+    match["started_at"] = _now()
+    match["updated_at"] = _now()
+    match.pop("review_at", None)
+    state["active_task"] = match
+    _touch_state(state, args.platform)
     findings = save(state)
     if findings:
         return _refuse(findings)
-    print(f"session-state-io: queued '{args.item_id}' ({args.priority}, {args.assigned_to})")
+    print(f"session-state-io: started '{args.item_id}'")
+    return 0
+
+
+def op_ready_item(args: argparse.Namespace) -> int:
+    """Return waiting/parked work to ready, with auditable gate correction."""
+    state = load()
+    match, _queue = _find_queue_item(state, args.item_id)
+    if match is None:
+        print(f"session-state-io: no queue item with id '{args.item_id}'", file=sys.stderr)
+        return 1
+    if match.get("status") not in {"waiting", "parked"}:
+        print(
+            "session-state-io: ready-item requires status='waiting' or 'parked'",
+            file=sys.stderr,
+        )
+        return 1
+    was_owner_gate = match.get("approval_required") is True
+    if was_owner_gate and not args.reason:
+        print(
+            "session-state-io: reclassifying an owner gate requires --reason",
+            file=sys.stderr,
+        )
+        return 1
+    now = _now()
+    match["status"] = "ready"
+    match["updated_at"] = now
+    match["review_at"] = args.review_at
+    match["approval_required"] = False
+    if args.next_action:
+        match["next_action"] = args.next_action
+    if args.assigned_to:
+        match["assigned_to"] = args.assigned_to
+    elif was_owner_gate:
+        match["assigned_to"] = "either"
+    if was_owner_gate:
+        match["kind"] = "work"
+        match["gate_reclassified_at"] = now
+        match["gate_reclassification_reason"] = args.reason
+    for field in ("waiting_on", "trigger", "gate_scope", "decision_options"):
+        match.pop(field, None)
+    _touch_state(state, args.platform)
+    findings = save(state)
+    if findings:
+        return _refuse(findings)
+    print(f"session-state-io: returned '{args.item_id}' to ready")
+    return 0
+
+
+def op_complete_active(args: argparse.Namespace) -> int:
+    state = load()
+    active = state.get("active_task")
+    if not isinstance(active, dict):
+        print("session-state-io: no active task to complete", file=sys.stderr)
+        return 1
+    state.setdefault("completed_tasks", []).append(
+        _completion_record(active, platform=args.platform, detail=args.detail)
+    )
+    state["active_task"] = None
+    _touch_state(state, args.platform)
+    findings = save(state)
+    if findings:
+        return _refuse(findings)
+    print(f"session-state-io: completed active task '{active['id']}' and cleared slot")
+    return 0
+
+
+def op_wait_active(args: argparse.Namespace) -> int:
+    state = load()
+    active = state.get("active_task")
+    if not isinstance(active, dict):
+        print("session-state-io: no active task to move to waiting", file=sys.stderr)
+        return 1
+    active["status"] = "waiting"
+    active["updated_at"] = _now()
+    active["review_at"] = args.review_at
+    active["waiting_on"] = args.waiting_on
+    active["trigger"] = args.trigger
+    active["approval_required"] = args.approval_required
+    active.pop("resume_by", None)
+    if args.approval_required:
+        active["kind"] = "decision"
+        active["assigned_to"] = "owner"
+        active["gate_scope"] = args.gate_scope
+        active["evidence_refs"] = args.evidence_ref or []
+        active["decision_options"] = args.decision_option or []
+    state.setdefault("task_queue", []).append(active)
+    state["active_task"] = None
+    _touch_state(state, args.platform)
+    findings = save(state)
+    if findings:
+        return _refuse(findings)
+    print(f"session-state-io: moved '{active['id']}' to waiting and cleared active slot")
+    return 0
+
+
+def op_park_active(args: argparse.Namespace) -> int:
+    state = load()
+    active = state.get("active_task")
+    if not isinstance(active, dict):
+        print("session-state-io: no active task to park", file=sys.stderr)
+        return 1
+    active["status"] = "parked"
+    active["updated_at"] = _now()
+    active["review_at"] = args.review_at
+    active["trigger"] = args.reason
+    active["approval_required"] = False
+    active.pop("resume_by", None)
+    state.setdefault("task_queue", []).append(active)
+    state["active_task"] = None
+    _touch_state(state, args.platform)
+    findings = save(state)
+    if findings:
+        return _refuse(findings)
+    print(f"session-state-io: parked '{active['id']}' and cleared active slot")
+    return 0
+
+
+def op_cancel_item(args: argparse.Namespace) -> int:
+    state = load()
+    active = state.get("active_task")
+    if isinstance(active, dict) and active.get("id") == args.item_id:
+        item = active
+        state["active_task"] = None
+    else:
+        item, queue = _find_queue_item(state, args.item_id)
+        if item is None:
+            print(f"session-state-io: no open item with id '{args.item_id}'", file=sys.stderr)
+            return 1
+        queue.remove(item)
+    state.setdefault("completed_tasks", []).append(
+        _completion_record(
+            item,
+            platform=args.platform,
+            detail=args.reason,
+            status="cancelled",
+        )
+    )
+    _touch_state(state, args.platform)
+    findings = save(state)
+    if findings:
+        return _refuse(findings)
+    print(f"session-state-io: cancelled '{args.item_id}'")
     return 0
 
 
@@ -244,12 +512,15 @@ def op_suspend_active(args: argparse.Namespace) -> int:
         return 1
     active["status"] = "suspended"
     active["updated_at"] = _now()
+    active["resume_by"] = args.resume_by
+    active["next_action"] = args.next_step
     active["next_step"] = args.next_step
     if args.next_step_detail:
         detail = args.next_step_detail
         if len(detail) > SPILL_THRESHOLD:
             detail = _spill_handoff(detail, args.platform, args.next_step)
         active["next_step_detail"] = detail
+    _touch_state(state, args.platform)
     findings = save(state)
     if findings:
         return _refuse(findings)
@@ -276,7 +547,7 @@ def op_record_commits(args: argparse.Namespace) -> int:
     existing = state.get("recent_commits", [])
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     added = 0
-    for line in reversed([l for l in raw.splitlines() if l.strip()]):
+    for line in reversed([entry for entry in raw.splitlines() if entry.strip()]):
         sha, _, summary = line.partition(" ")
         if not any(e.get("sha") == sha for e in existing):
             existing.insert(0, {"sha": sha, "date": today,
@@ -284,6 +555,7 @@ def op_record_commits(args: argparse.Namespace) -> int:
             added += 1
     state["recent_commits"] = existing[:10]
     state.setdefault("known_state", {})["main_sha"] = head
+    _touch_state(state, args.platform)
     findings = save(state)
     if findings:
         return _refuse(findings)
@@ -307,6 +579,7 @@ def op_archive_completed(args: argparse.Namespace) -> int:
     ARCHIVE_PATH.write_text(json.dumps(archive, indent=2, ensure_ascii=True) + "\n",
                             encoding="utf-8")
     state["completed_tasks"] = remain
+    _touch_state(state, args.platform)
     findings = save(state)
     if findings:
         return _refuse(findings)
@@ -328,21 +601,78 @@ def main() -> int:
                         help="Write even if the other platform holds an active claim")
     sub = parser.add_subparsers(dest="command", required=True)
 
+    def add_item_arguments(p: argparse.ArgumentParser) -> None:
+        p.add_argument("item_id")
+        p.add_argument("--description", required=True)
+        p.add_argument("--next-action", required=True)
+        p.add_argument("--definition-of-done", required=True)
+        p.add_argument("--status", default="ready", choices=["ready", "waiting", "parked"])
+        p.add_argument("--priority", default="medium", choices=["high", "medium", "low"])
+        p.add_argument("--assigned-to", default="either", choices=["codex", "claude-code", "either", "owner"])
+        p.add_argument("--kind", default="work", choices=["work", "decision", "watch"])
+        p.add_argument("--repo", default="root")
+        p.add_argument("--created-at")
+        p.add_argument("--review-at", required=True)
+        p.add_argument("--waiting-on", choices=["owner", "external", "artifact", "date"])
+        p.add_argument("--trigger")
+        p.add_argument("--approval-required", action="store_true")
+        p.add_argument("--gate-scope")
+        p.add_argument("--evidence-ref", action="append")
+        p.add_argument("--decision-option", action="append")
+
     sub.add_parser("fmt", help="Rewrite the file in canonical serialization")
 
     p = sub.add_parser("get", help="Print a value by dotted keypath")
     p.add_argument("keypath")
 
-    p = sub.add_parser("complete-item", help="Move a queue/pending item to completed_tasks")
+    p = sub.add_parser("complete-item", help="Move a task_queue item to completed_tasks")
     p.add_argument("item_id")
     p.add_argument("--detail", help="Completion detail (defaults to the item's description)")
+    p.add_argument("--approval-evidence", help="Required when completing a true owner-gated decision")
 
-    p = sub.add_parser("add-pending", help="Append a well-formed pending item")
+    p = sub.add_parser("add-item", help="Append a lifecycle-aware task_queue item")
+    add_item_arguments(p)
+
+    p = sub.add_parser("add-pending", help="Deprecated alias: add an immediately ready task")
     p.add_argument("item_id")
     p.add_argument("--description", required=True)
     p.add_argument("--priority", default="medium", choices=["high", "medium", "low"])
     p.add_argument("--assigned-to", default="either",
                    choices=["codex", "claude-code", "either", "owner"])
+    p.add_argument("--review-at")
+
+    p = sub.add_parser("start-item", help="Move a ready queue item into active_task")
+    p.add_argument("item_id")
+
+    p = sub.add_parser("ready-item", help="Return waiting/parked work to ready")
+    p.add_argument("item_id")
+    p.add_argument("--review-at", required=True)
+    p.add_argument("--next-action")
+    p.add_argument("--assigned-to", choices=["codex", "claude-code", "either"])
+    p.add_argument(
+        "--reason",
+        help="Required when correcting a previously owner-gated item",
+    )
+
+    p = sub.add_parser("complete-active", help="Complete active_task and clear the active slot atomically")
+    p.add_argument("--detail")
+
+    p = sub.add_parser("wait-active", help="Move active_task to a concrete waiting trigger")
+    p.add_argument("--waiting-on", required=True, choices=["owner", "external", "artifact", "date"])
+    p.add_argument("--trigger", required=True)
+    p.add_argument("--review-at", required=True)
+    p.add_argument("--approval-required", action="store_true")
+    p.add_argument("--gate-scope")
+    p.add_argument("--evidence-ref", action="append")
+    p.add_argument("--decision-option", action="append")
+
+    p = sub.add_parser("park-active", help="Deliberately park active_task with a review date")
+    p.add_argument("--reason", required=True)
+    p.add_argument("--review-at", required=True)
+
+    p = sub.add_parser("cancel-item", help="Cancel an active or queued item with a receipt")
+    p.add_argument("item_id")
+    p.add_argument("--reason", required=True)
 
     p = sub.add_parser("set-summary", help="Set last_session_summary (+platform/updated)")
     p.add_argument("text")
@@ -353,6 +683,7 @@ def main() -> int:
 
     p = sub.add_parser("suspend-active", help="Suspend active_task with a next step")
     p.add_argument("--next-step", required=True)
+    p.add_argument("--resume-by", required=True)
     p.add_argument("--next-step-detail")
 
     sub.add_parser("record-commits",
@@ -367,7 +698,14 @@ def main() -> int:
         "fmt": op_fmt,
         "get": op_get,
         "complete-item": op_complete_item,
+        "add-item": op_add_item,
         "add-pending": op_add_pending,
+        "start-item": op_start_item,
+        "ready-item": op_ready_item,
+        "complete-active": op_complete_active,
+        "wait-active": op_wait_active,
+        "park-active": op_park_active,
+        "cancel-item": op_cancel_item,
         "set-summary": op_set_summary,
         "set-tool-version": op_set_tool_version,
         "suspend-active": op_suspend_active,

@@ -42,6 +42,8 @@ CloudBank and CanonRec are separate repositories with their own licenses.
 - Current dev toolkit report: [reports/analysis/aurora_devkit_latest.json](reports/analysis/aurora_devkit_latest.json)
 - Current advisory recommendations: [reports/analysis/aurora_recommendations_latest.json](reports/analysis/aurora_recommendations_latest.json)
 - Mission Control workflow: [docs/AURORA_MISSION_CONTROL_WORKFLOW_v1.md](docs/AURORA_MISSION_CONTROL_WORKFLOW_v1.md)
+- Session queue lifecycle: [docs/SESSION_QUEUE_LIFECYCLE_v1.md](docs/SESSION_QUEUE_LIFECYCLE_v1.md)
+- Session queue policy: [catalog/session_queue_policy.json](catalog/session_queue_policy.json)
 - Current Mission Control report: [reports/analysis/aurora_mission_control_latest.json](reports/analysis/aurora_mission_control_latest.json)
 - Current stack validation report: [reports/analysis/aurora_stack_validation_latest.json](reports/analysis/aurora_stack_validation_latest.json)
 - Current command-intent snapshot: [reports/analysis/aurora_command_intent_snapshot_latest.json](reports/analysis/aurora_command_intent_snapshot_latest.json)
@@ -154,11 +156,12 @@ make mission-control
 make mission-control-report
 ```
 
-Mission Control aggregates the verifier, integration gate, recovery index,
-devkit, recommendations, and root Git status into a read-only operator inbox
-plus build-readiness lanes. It does not promote recovery candidates, execute
-Aurora command grammar, send mesh messages, mutate nested repos, install
-packages, or publish GitHub changes.
+Mission Control aggregates queue health, the verifier, integration gate,
+recovery index, devkit, recommendations, and root Git status into a read-only
+operator inbox plus build-readiness lanes. Actionable reversible work and
+concrete owner decisions remain separate. It does not promote recovery
+candidates, execute Aurora command grammar, send mesh messages, mutate nested
+repos, install packages, or publish GitHub changes.
 
 Operator console snapshot:
 
@@ -222,7 +225,11 @@ python3 tools/project_focus_announcement.py --summary
 python3 tools/session_claim.py check --repo root --paths . --json
 python3 tools/session_claim.py create --platform codex --task-id example --repo root --paths tools/session_claim.py --mutation-posture editing
 python3 tools/session_claim.py release --claim-id <claim-id>
+python3 tools/session_queue_health.py --summary
+python3 tools/session_state_io.py start-item <id>
+python3 tools/session_state_io.py complete-active --detail "Implemented and validated."
 make project-focus
+make queue-health
 make session-claims
 make session-claim-check
 ```
@@ -230,6 +237,13 @@ make session-claim-check
 Project-focus announcements are tracked advisory guidance surfaced at session
 start and through Mission Control. They do not replace task ownership,
 session-state handoffs, or path claims.
+
+The session queue uses one nullable active slot plus explicit `ready`, `waiting`,
+and `parked` states. Owner approval is reserved for concrete consequential
+decisions; investigation, diagnosis, tests, reversible local edits, and decision
+packet preparation remain actionable. Every queued item carries a review date,
+next action, definition of done, and lifecycle timestamps so work cannot vanish
+into an unreviewed backlog.
 
 Session claims are local, short-lived path leases under
 `catalog/session_claims/`. Live claim JSON files are ignored by Git so the

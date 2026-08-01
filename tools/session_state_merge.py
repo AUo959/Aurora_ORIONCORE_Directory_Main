@@ -14,7 +14,8 @@ conflict_rule ("do not overwrite — append") plus removal semantics:
   blocks (publication_debt, known_state, ...): the side whose top-level
   last_updated is newer.
 - active_task: field-wise 3-way; if both sides appended to next_step_detail,
-  both suffixes are kept (ours then theirs).
+  both suffixes are kept (ours then theirs). Concurrent selection of different
+  active task ids is a real conflict, never a newer-wins overwrite.
 
 The merged result must pass the queue contract (session_state_check) or the
 driver exits non-zero and git falls back to a normal conflict for a human.
@@ -42,6 +43,10 @@ import session_state_io  # noqa: E402
 
 DRIVER_NAME = "session-state"
 DRIVER_CMD = "python3 tools/session_state_merge.py %O %A %B"
+
+
+class ActiveTaskConflict(ValueError):
+    """Both sides selected different active tasks from the same base."""
 
 # Keys where the newer side (by top-level last_updated) wins outright when
 # both sides changed: point-in-time snapshots, not append surfaces.
@@ -98,6 +103,13 @@ def _merge_queue(base: list, ours: list, theirs: list, ours_newer: bool) -> list
 
 
 def _merge_active_task(base: dict, ours: dict, theirs: dict, newer: dict) -> dict:
+    base_id = base.get("id")
+    ours_id = ours.get("id")
+    theirs_id = theirs.get("id")
+    if ours_id != theirs_id and ours_id != base_id and theirs_id != base_id:
+        raise ActiveTaskConflict(
+            f"concurrent active task selection: ours={ours_id!r}, theirs={theirs_id!r}"
+        )
     merged = {}
     for key in dict.fromkeys(list(ours) + list(theirs)):
         b, o, t = base.get(key), ours.get(key), theirs.get(key)
@@ -144,9 +156,21 @@ def merge_states(base: dict, ours: dict, theirs: dict) -> dict:
             merged[key] = union[:10]
         elif key in ("pending_for_next_session", "task_queue"):
             merged[key] = _merge_queue(b or [], o or [], t or [], ours_newer)
-        elif key == "active_task" and all(isinstance(x, dict) for x in (b or {}, o, t)):
-            merged[key] = _merge_active_task(b or {}, o, t,
-                                             newer.get(key, {}) if isinstance(newer.get(key), dict) else {})
+        elif key == "active_task":
+            if o is None or t is None:
+                # Completion/parking clears the slot atomically. If the other
+                # side only continued the same inherited task, clearing wins
+                # so a finished task cannot be resurrected by merge order.
+                merged[key] = None
+            elif all(isinstance(x, dict) for x in (b or {}, o, t)):
+                merged[key] = _merge_active_task(
+                    b or {},
+                    o,
+                    t,
+                    newer.get(key, {}) if isinstance(newer.get(key), dict) else {},
+                )
+            else:
+                merged[key] = newer.get(key, older.get(key))
         elif key in SNAPSHOT_KEYS:
             merged[key] = newer.get(key, older.get(key))
         else:
@@ -185,7 +209,14 @@ def main(argv: list[str]) -> int:
               "falling back to normal conflict", file=sys.stderr)
         return 1
 
-    merged = merge_states(base, ours, theirs)
+    try:
+        merged = merge_states(base, ours, theirs)
+    except ActiveTaskConflict as exc:
+        print(
+            f"session-state-merge: {exc}; falling back to normal conflict",
+            file=sys.stderr,
+        )
+        return 1
     findings = session_state_check.validate(merged)
     if findings:
         print(f"session-state-merge: merged state fails the queue contract "
