@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T06:15:17Z",
+  "generated_at": "2026-08-01T06:21:39Z",
   "artifact": "aurora_state_model_design_package",
   "version": "0.1",
   "status": "draft_adoption_ready",
@@ -35,6 +35,12 @@
     "tests/fixtures/aurora_state_model/dataset_manifest_v1.json",
     "tests/test_aurora_state_model_contract.py"
   ],
+  "publication_base": {
+    "refreshed_at": "2026-08-01T06:21:39Z",
+    "origin_main_revision": "5084f622e62abd7719d777a3da63a5919d1c77c4",
+    "integrated": true,
+    "notes": "Includes root PRs #55, #57, and #58; CanonRec registry pin and root MIT/community metadata are current in the PR branch."
+  },
   "source_snapshot": {
     "refreshed_at": "2026-08-01T04:41:39Z",
     "Aurora_ORIONCORE_Directory_Main": {
@@ -129,9 +135,9 @@
       "result": "Four local repositories in sync, the local canonical root pin one commit behind CanonRec, and four remote-only entries skipped; origin/main already pins CanonRec 1fc35f08."
     },
     {
-      "command": "python3 -m pytest tests/test_aurora_state_model_contract.py tests/test_qgia_closed_loop_contract.py -q",
+      "command": "python3 -m pytest tests/test_aurora_state_model_contract.py tests/test_qgia_closed_loop_contract.py tests/test_ci_public_dependencies.py -q",
       "status": "passed",
-      "result": "20 focused contract tests passed"
+      "result": "25 focused contract and public-dependency tests passed after merging origin/main"
     },
     {
       "command": "JSON parse sweep over contract, ASM schemas, fixtures, and receipt",
