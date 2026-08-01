@@ -150,6 +150,145 @@
       "date": "2026-06-11",
       "platform": "claude-code",
       "summary": "Owner definitional ruling locked in: user role = Pilot (ORION.ROLE.PILOT, CANON); Thorne commands Orion Station; Captain = legacy alias from early sessions. CanonRec record + drift entry (0ff6b58); AGENTS.md user-context updated; CloudBank runtime defaults pilot/Pilot with captain back-compat aliases (PR #990); historical channel ids and transcripts deliberately unchanged."
+    },
+    {
+      "id": "landing-ledger-flight-log-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "The bet: both residual failure modes now have structural defenses. (1) LANDING LEDGER (tools/publication_debt.py): scans all registered repos for stranded/unpublished/dirty work; exemption ledger makes debt mean UNDECIDED; wired into stop hook (records at every session close) + workspace_verify. First scan found 31 entries incl. 2 never-examined branches (both verified landed); after triage + hygiene: CLEAN with 21 documented exemptions. (2) FLIGHT LOG (tools/flight_check.py + catalog/flight_contract.yaml): 6 declared exercises against LIVE wiring (vault create+rollback, QGIA example forecast, drift health+summary, scorecard, mesh Aurora handshake, narrative engine canon audit) \u2014 all 6 flew; receipts + 14-day staleness in workspace_verify. The vault flight immediately caught a real API-contract gap (agent_id) that unit tests mocked around."
+    },
+    {
+      "id": "station-activation-pulse-2026-06-11",
+      "date": "2026-06-11",
+      "platform": "claude-code",
+      "summary": "STATION REACTIVATION: Pilot-authorized activation pulse #808//. routed through the Command Intent Gateway (valid aurora_symbolic_command, head 808) and sent through the live mesh. 47 souls aboard, status operational. 6/6 pulsed agents ANSWERED in character: Aurora (drift 0.0), riverthread_808, Thorne, Sato, Lin, Archy. First live station session since 2026-03-14 (89 days). Receipt: reports/automation/station_activation_pulse__2026-06-11.json."
+    },
+    {
+      "id": "pilot-direct-line-2026-06-12",
+      "date": "2026-06-12",
+      "platform": "claude-code",
+      "summary": "Pilot direct line established: tools/station_query.py boots the mesh in-process and queries any aboard agent by id/name/alias (Aurora default) \u2014 no server needed. Companion muster verified 5/5 awake in distinct voices (Archy, Oppy, Liora, Starling AU, Riverthread 808), drift 0.0 across the board; receipt at reports/automation/station_roll_call_latest.json. station-roll-call added to the flight contract \u2014 companion liveness now watched on the 14-day cadence."
+    },
+    {
+      "id": "sensor-array-canon-routing-2026-06-12",
+      "date": "2026-06-12",
+      "platform": "claude-code",
+      "summary": "Sensor Array Spec v0.3.0 reviewed and canon-routed per its own delta instruction: staged in CanonRec canon/L3/sensor_array (STAGING, L3 protocol_update) with reconciliation note. Integration surfaces grounded against CloudBank main: drift detector, ethics engine, L2 bridge, live relay capsules all VERIFIED; src/sensors greenfield; Forge phase_executor UNMERGED anywhere \u2014 Phase 7 dependency-blocked, Phases 1-6 clear. Next build step when owner sequences it: Phase 1 foundation (reading types, registry, data bus, layer interpreter, perf budget, API skeleton)."
+    },
+    {
+      "id": "sensor-array-foundation-landed-2026-06-12",
+      "date": "2026-06-12",
+      "platform": "claude-code",
+      "summary": "Cowork sensor work reviewed and landed: (1) root aurora_salvage_scan.py + salvage report (read-only derelict survey of the recovery index: 100 contacts, 13 high-value cargo, 33 beacons; ruff-clean, reproducible) committed; (2) CloudBank src/sensors + tests/sensors (4,161 lines, Phases 1-4 of the canon-staged v0.3.0 spec incl. integration-depth-weighted drift pre-signatures, fusion core, SalvageSensor) reviewed \u2014 47/47 tests, zero actuation paths (one-way principle verified) \u2014 mounted in aurora_api as a 26-route GET-only surface and PR'd as #1005 (CI watching). Anchor symbols read at integration depth 1.0. SEPARATE FINDING: test_aspirational_models_default_unavailable fails (non-critical tier) \u2014 claude-4-5-opus placeholder gating; runtime boot log shows gating working; likely env-dependent test from the June model-contract change. Two more interruption-era stale index.locks cleared during the work."
+    },
+    {
+      "id": "codex-review-debt-and-skill-sync-2026-06-12",
+      "date": "2026-06-12",
+      "platform": "codex",
+      "summary": "Codex cleared review debts rd-20260610-authority-policy and rd-20260611-landing-ledger-stop-hook with receipt pr-20260612-authority-policy-and-landing-ledger; make skills-install synced 0 files and make skills-check is clean. integration-gate rerun is blocked by active hub branch/registry drift, not skill runtime drift."
+    },
+    {
+      "id": "salvage-docket-2026-06-12",
+      "date": "2026-06-12",
+      "platform": "codex",
+      "summary": "Codex read the active salvage/recovery reports, ran bounded root and iCloud candidate surveys, verified staged ORD policy tests (15 passed), and recorded the selective integration queue in reports/analysis/salvage_docket__2026-06-12.md without promoting any candidate."
+    },
+    {
+      "id": "cloudbank-followups-2026-06-10",
+      "status": "completed",
+      "completed_at": "2026-06-10T20:48:31Z",
+      "note": "Moved from pending_for_next_session on 2026-07-02 (was stored there in a non-queue schema). Original detail follows.",
+      "detail": "All four approved owner items executed: branch protection live (CI Check required on main), root pushed, recovered PRs #946/#947/#948 + spine #3 reviewed and merged, closed-PR triage done (#617/#864/#843 stay closed with rationale; #640 revived as PR #979, CI green, 14 tests pass, AWAITING OWNER REVIEW \u2014 2,103 lines narrative validation engine phase one). Remaining backlog: March rescue lineage extraction (gitleaks-clean, see reports/analysis/unlanded_work_audit__2026-06-10.md) and root branches (gitwiz-sync-audit 9 commits, weekly-skill-audit 1)."
+    },
+    {
+      "id": "workspace-migration-context-2026-07-01",
+      "date": "2026-07-03",
+      "platform": "codex",
+      "summary": "Read the 2026-07-01 workspace migration handoff, verified canonical ~/dev operation, and avoided the stale iCloud-backed /private/tmp CloudBank worktree."
+    },
+    {
+      "id": "cloudbank-adapter-publish-retry-2026-07-02",
+      "status": "completed",
+      "completed_at": "2026-07-04T03:12:00Z",
+      "platform": "claude-code",
+      "detail": "CloudBank PR #1182 (scenario seed initializer adapter, +345/-0, all checks green) squash-merged 2026-07-04T03:10:45Z with owner approval. CanonRec main pushed (5731c50..179a44c, 22 commits off single-machine risk). All five stranded CloudBank branches pushed to origin: issue-1015-salvage, issue-1020-mesh-router-contract, issue-1070-ethics-engine, pat-terminal-compat-2026-06-16, mesh-router-test-stabilization. Remaining from this lane: open/triage PRs for the now-pushed branches, decide copilot/replace-shallow-assertions-tier1 and root charforge branch, and return the canonical CloudBank checkout from the adapter branch to main (it still has the 11-path dirty tree \u2014 Codex's call)."
+    },
+    {
+      "id": "salvage-operation-icloud-promotion-2026-06-12",
+      "status": "completed",
+      "completed_at": "2026-07-04T08:20:08Z",
+      "platform": "claude-code",
+      "detail": "Umbrella task retired 2026-07-04 after its lanes closed or moved to discrete queue items: adapter lane done (PR #1182 merged); test-branch triage done (receipt reports/analysis/cloudbank_test_branch_triage__2026-07-04.md); iCloud salvage complete and the iCloud tree deleted; remaining publication-debt work split to pending item publication-debt-triage-continuation. Final narrative: Continuation 2026-07-03T17:36:37Z: Opened and operated from canonical root /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main, not the inert iCloud copy. Read docs/WORKSPACE_MIGRATION_2026-07-01 [full handoff: catalog/handoffs/20260704T053301Z-codex-continue-publication-debt-triage.md]"
+    },
+    {
+      "id": "roadmap-0.5",
+      "status": "completed",
+      "completed_at": "2026-07-08T05:07:11Z",
+      "platform": "claude-code",
+      "detail": "Superseded by events: CanonRec is essential and has received substantial recent promotion work (see GUMAS_SIM_2.5/CanonRec/reports/RECONCILIATION_REPORT__2026-06-10.md and related canon-promotion activity). Decision made: keep and continue formalizing as the active skill-release/reconciliation repo, not archive it. roadmap-0.5's formalize-vs-archive question is resolved in favor of formalize; item closed."
+    },
+    {
+      "id": "AP-20260708-cloudbank-restricted-governance",
+      "status": "completed",
+      "completed_at": "2026-07-08T05:39:28Z",
+      "platform": "claude-code",
+      "detail": "All three parts executed in one session (claude-code). Part 1: CloudBank branch hygiene \u2014 working branch codex/l2-scenario-seed-simulation-initializer cleaned (3 logical commits, stale .bak migration artifact removed, 5/5 tests pass), pushed, PR #1190 opened. Of the 5 stranded branches, 3 (issue-1015-salvage, issue-1070-ethics-engine, salvage-p3-forge-policy) were verified already-merged into main via git cherry + direct file-presence checks (content moved paths during a later docs restructure) and deleted; the other 2 (issue-1020-mesh-router-contract, pat-terminal-compat-2026-06-16) were genuinely unlanded and opened as PR #1191/#1192, flagged for rebase since main has since diverged on tests/test_mesh_router_v1.py. Root's own codex/charforge-capsule-implementation-2026-06-14 was rebased onto current main in a scratch worktree; the original commit's session_state.json diff was stale (reintroduced an already-resolved task_queue item) and was dropped, keeping only the real tools/character_capsule_adapter.py deliverable (4/4 tests pass) \u2014 pushed as -rebased, opened as root PR #38, original branch deleted. Part 2: live recovery-index re-run showed 30 secret_or_key_material candidates (not the stale 36 \u2014 six resolved by ongoing intake cleanup); all 30 triaged file-by-file (keyword-context read + a combined real-credential-shape regex scan) and logged to reports/analysis/restricted_recovery_triage__2026-07-08.json: 28 false_positive, 2 benign_test_fixture, 0 live_credential_confirmed, 0 needs_owner_review. Nothing to escalate to Travis. Part 3: all 8 governance refresh commands run in the specified order (verify, devkit-report, recovery-report, recommendations-report, mission-control-report, confidence-audit-report, kubernetes-readiness-report, gitwiz_sync_audit --repo all --fetch); repo_registry.yaml/workspace_manifest.yaml regenerated via tools/workspace_scan.py to clear the CloudBank head-drift finding from the Part-1 commits. Also cleared 4 stale git index.lock files (root, CloudBank, CanonRec, qgia-knowledge-library-main, qgia-knowledge-spine-main) left by an interrupted Codex tool-block session, all confirmed >45min old with no live git process. Post-refresh spot-check: mission-control operator-inbox count changed 7->10 (P1/P2 split 1/6->2/8), confirming the refresh picked up new signal rather than reproducing the stale 2026-05-31 snapshot. FOLLOW-UP NOTE: aurora_mission_control / aurora_recommendation_engine still surface 'review 30 restricted recovery candidates' as a P1 item even though restricted_recovery_triage__2026-07-08.json now classifies all 30 \u2014 the recommendation engine doesn't yet consume the triage file as a resolution signal. Worth wiring that up so future briefs don't re-flag already-triaged candidates."
+    },
+    {
+      "id": "recommendation-engine-consume-triage-log",
+      "status": "completed",
+      "completed_at": "2026-07-08T05:51:33Z",
+      "platform": "claude-code",
+      "detail": "Implemented: tools/aurora_recommendation_engine.py now loads reports/analysis/restricted_recovery_triage__*.json and splits restricted candidates by classification (false_positive/benign_test_fixture dropped, live_credential_confirmed -> blocking P0 owner escalation, needs_owner_review -> P2 batch, untriaged -> original P1). Verified end to end: recommendation count dropped 10->9 and P1 count 2->1 against the real 2026-07-08 triage log; mission-control operator inbox no longer lists the resolved recovery-review P1. 3 new tests added (10 total in test_aurora_recommendation_engine.py), all pass; ruff check clean (only a pre-existing unrelated S607 in collect_git_status); mypy clean for this file. Committed a2ed868, pushed to origin/main."
+    },
+    {
+      "id": "publication-debt-triage-continuation",
+      "status": "completed",
+      "completed_at": "2026-07-08T05:54:02Z",
+      "platform": "claude-code",
+      "detail": "Resolved by today's AP-20260708-cloudbank-restricted-governance Part 1 work: all 4 pushed codex/cloudbank-issue-* + pat-terminal-compat + salvage-p3-forge-policy branches PR'd or retired (3 confirmed already-merged and deleted, 2 opened as PR #1191/#1192); root charforge branch rebased and opened as PR #38, original deleted. CloudBank's dirty tree (11 uncommitted paths) is now clean -- committed in 3 logical commits on codex/l2-scenario-seed-simulation-initializer, pushed, PR #1190 opened; checkout remains on that feature branch rather than main by design (work isn't merged yet). qgia-knowledge-library-main dirty tree remains, confirmed still live Codex work per publication_debt.py scan (1 entry, 20 exempted)."
+    },
+    {
+      "id": "ga-ethics-hub-integration",
+      "status": "completed",
+      "completed_at": "2026-07-08T05:58:36Z",
+      "platform": "claude-code",
+      "detail": "Implemented and opened for review as CloudBank PR #1193 (branch codex/ga-ethics-hub-integration-2026-07-08, off clean origin/main). The old blocking branch (codex/cloudbank-gumas-mutation-auth-2026-05-25, dirty with uncommitted auth-middleware work) no longer exists on origin -- resolved separately, so this integration lands on a fresh branch per the pending item's own instruction. Vendored tools/geometric_ethics_curvature.py as modules/ethics_field/geometric_curvature.py (calculate_ga_curvature, same Cl(5,0) model, same graceful clifford-optional degradation). Wired into FieldCurvature via a new enable_ga_composite constructor flag (default False, no behavior change); when True, calculate_curvature() attaches a ga_composite dict (alignment/interaction_penalty/composite_scalar/backend) without touching composite_score/resistance_level/formation_allowed -- scalar gate stays authoritative per the pending item's requirement. New test file tests/test_ethics_field_geometric_curvature.py (7 tests: flag-off/on wiring + the same interaction-detection math contract pinned in the root reference tests) -- 16/16 pass combined with the existing tests/test_ethics_field.py, no regressions. flake8/bandit clean on changed files. Awaiting CI + owner review on PR #1193."
+    },
+    {
+      "id": "cloudbank-followups-remaining-backlog",
+      "status": "completed",
+      "completed_at": "2026-07-08T06:20:27Z",
+      "platform": "claude-code",
+      "detail": "Both parts resolved. (b) Root branches: codex/gitwiz-sync-audit-canonical-2026-04-08 (9 commits) confirmed already 3-way-merged onto main 2026-06-10 (commit 4aaf7e0, one piece -- workspace_plan_moves.py wave5 -- deliberately abandoned per that commit's own note); codex/weekly-skill-audit-mesh-router-2026-06-01 (1 commit) confirmed byte-identical to main after rebase. Both deleted. (a) March rescue lineage extraction: ran gitleaks over all 10 CloudBank March branches first (mandatory security gate per the source audit, given a same-era OpenAI key rotation) -- clean, only 2 benign findings (a hex placeholder in an archived doc, a test fixture string 'test_glyph_123'), identical across branches from shared history. Content review: of ~18 distinct commits across the 10 CloudBank branches, everything from 2026-02-28 through 2026-03-19 (14 commits: Aurora Fusion layer, command grammar module, mesh router runtime, selective-integration gate, threadcore/zipwiz governance remediation, etc.) was already merged via CloudBank PR #501 ('Sync CloudBank shared-history workup to main', merged 2026-03-22) -- confirmed by direct file presence + git-log --follow provenance, and in one case (src/aurora_fusion/engine.py) main's version is more evolved than the branch's. 6 of 10 branches contained only this already-landed content -- deleted (local-only, never pushed). The remaining 4 branches (2026-03-25 commits, made 3 days after PR #501 already landed the content) were reviewed individually: a macOS launchd plist (hardcodes the now-deleted iCloud workspace path, needs full rewrite to be usable, not extracted); a .aurora/ narrative/audit-doc dump duplicated across 2 commits (STUB_AND_INTEGRATION_AUDIT.md etc. -- already independently triaged via the ISSUE_1015 classification report/PR #1019, not new work); and a 545-line alternate threadcore.js design (reads payload files that already exist on main and are consumed by a different, current 188-line implementation at src/core/command_node/threadcore.js -- confirmed abandoned, the 'driftpulse' concept it introduces is referenced nowhere in current code). All 4 deleted. Root's 3 March-era twin branches (root-control-plane-local, root-reconstruct-recovered-protocols, rescue/root-control-plane-dirty-workingcopy) independently confirmed already-landed via root commit 205ea77 ('close salvage decisions -- policies promoted, clean ports landed', 2026-06-10: repo_authority_policy.yaml + gitwiz_hygiene_policy.yaml promoted, clean ports from _workspace_common and weekly-skill-audit) -- deleted. Also dropped 2 leftover CloudBank stashes from the same era (stash@{1}: 66-file March 13 snapshot pre-dating the later root-sprawl reorg, paths no longer applicable, mesh/security content superseded; stash@{0}: untracked workflow-output only, audit already called this low-value). Net: 13 branches + 2 stashes retired across root+CloudBank, zero content lost -- everything of value had already landed through PR #501, PR #1019, or root commit 205ea77 over the preceding 3 months. publication_debt.py scan: 1 entry remains (qgia-knowledge-library-main dirty tree, documented live Codex work, untouched)."
+    },
+    {
+      "id": "narrative-engine-spec-reconcile",
+      "status": "completed",
+      "completed_at": "2026-07-10T20:51:44Z",
+      "platform": "claude-code",
+      "detail": "N8 recovered 2026-07-10: foundational narrative-engine spec placed tracked at docs/ORION__SPEC__NARRATIVE_ENGINE__PARAMETERS_TO_NARRATIVE_CORE__v0.1__2026-04-12.md (byte-identical, sha a4aedede) + code-grounded reconciliation map docs/ORION__SPEC__NARRATIVE_ENGINE__RECONCILIATION__2026-07-10.md. Finding: validation mode + CanonicalState + verdicts built (phase-1 CloudBank); expansion/translation gated at phase-1 boundary; state_builder is phase-two target. Remaining schema-diff/phase-two follow-ups belong to active task narrative-promotion-continuation-2026-06."
+    },
+    {
+      "id": "narrative-phase2-items-4-7-cloudbank-pr",
+      "status": "completed",
+      "completed_at": "2026-07-11T02:33:14Z",
+      "platform": "codex",
+      "detail": "Completed 2026-07-11: CloudBank PR #1195 merged as 5dd18d36 after fixing and resolving two actionable review threads at ee0cf2b0. Phase-two continuity wrapper, gate mapping, 6-case-plus hardening tests, deterministic receipts, and owner-gated canon-reconciler candidate packet path are on main. Root flight narrative-next-event-continuity-check flew twice against merge commit: missing-history gate owner_review_required, then fresh-history gate candidate (receipt 93ac4c44e8680206). No CanonRec mutation or CANON_PROMOTE."
+    },
+    {
+      "id": "cloudbank-open-issue-resolution-workshop",
+      "status": "completed",
+      "completed_at": "2026-07-13T07:53:55Z",
+      "platform": "codex",
+      "detail": "CloudBank workshop tranche completed 2026-07-13: merged PRs #1201/#1202/#1203/#1205, closing issues #1144/#1145/#1142/#1146; opened scoped follow-ups #1200 and #1204. Live queue: 2 draft PRs (#1194, #1080) and 46 open issues. PR #1194 has one fresh unresolved review thread; prepared worktree /private/tmp/cloudbank-pr1194 is clean on branch claude/architecture-advancements-review-v2cxi0 at a47f1a61. Editing was blocked by Codex usage limit before any file changed."
+    },
+    {
+      "id": "velar-fabric-pass",
+      "status": "completed",
+      "completed_at": "2026-07-21T03:56:03Z",
+      "platform": "claude-code",
+      "detail": "Velar fabric pass complete: static linter built (tools/fabric_invariants_check.py); P1 Vel-Surak placement contradiction found (entity canon-claim vs map STAGING/TBD); cloudbank symbolic layer traced (zero semantic fabric enforcement); engine seed-42 x40 verified (T1/T4/C4 pass, P4 route-citation gap). Receipts: reports/analysis/velar_fabric_pass__2026-07-21.md; CanonRec d94b805 (LEDGER-VELAR-0001..0006 + drift entry). No canon modified."
     }
   ]
 }

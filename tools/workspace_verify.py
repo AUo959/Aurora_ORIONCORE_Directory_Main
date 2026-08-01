@@ -26,6 +26,8 @@ from _workspace_common import (
     write_json,
 )
 
+import session_queue_health
+
 
 DEFAULT_REPORT_RELATIVE_PATH = Path("reports") / "analysis" / "workspace_verify_latest.json"
 GIT_ENV_STRIP_KEYS = {"GIT_DIR", "GIT_WORK_TREE", "GIT_INDEX_FILE", "GIT_PREFIX"}
@@ -873,6 +875,29 @@ def verify_session_state(root: Path) -> list[Finding]:
     return [warning("session_state_freshness", details, fix)]
 
 
+def verify_session_queue_lifecycle(root: Path) -> list[Finding]:
+    """Surface semantic queue drift that structural JSON freshness cannot see."""
+    if not (root / "catalog" / "session_state.json").exists():
+        return []
+    try:
+        report = session_queue_health.build_report(root)
+    except Exception as exc:
+        return [
+            error(
+                "session_queue_health",
+                f"Session queue lifecycle audit failed: {exc}",
+                "Repair catalog/session_queue_policy.json or catalog/session_state.json, then run `make queue-health`.",
+            )
+        ]
+    findings: list[Finding] = []
+    for item in report.get("findings", []):
+        check = str(item.get("check", "session_queue_health"))
+        details = str(item.get("details", "Session queue lifecycle finding."))
+        fix = str(item.get("suggested_fix", "Run `make queue-health` and triage the item."))
+        findings.append(error(check, details, fix) if item.get("blocking") else warning(check, details, fix))
+    return findings
+
+
 # Past this many commits behind HEAD, stale session state stops being advisory.
 # The pre-commit wrapper heals this automatically, so the block is self-clearing.
 SESSION_STATE_BLOCKING_COMMITS = 10
@@ -1161,6 +1186,7 @@ def run_checks(root: Path, include_determinism: bool, include_relocation_rehears
     findings.extend(verify_relocation_plan(root))
     findings.extend(verify_tracked_sizes(root))
     findings.extend(verify_session_state(root))
+    findings.extend(verify_session_queue_lifecycle(root))
     findings.extend(verify_brief_freshness(root))
     if include_determinism:
         findings.extend(verify_determinism(root))
