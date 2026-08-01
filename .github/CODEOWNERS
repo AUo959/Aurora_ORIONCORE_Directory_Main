@@ -1,0 +1,8 @@
+# Default review ownership for the Aurora workspace control plane.
+* @AUo959
+
+# High-authority control and automation surfaces.
+/catalog/ @AUo959
+/.github/ @AUo959
+/skills/ @AUo959
+/tools/ @AUo959
