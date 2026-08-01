@@ -1,4 +1,4 @@
-generated_at: '2026-07-29T06:10:40Z'
+generated_at: '2026-08-01T04:50:50Z'
 root: .
 logical_taxonomy:
 - repos
@@ -201,6 +201,18 @@ entries:
   owner: intake-review
   status: planned_move
   batch_id: wave4_root_intake_cleanup_initial
+- id: contributing
+  kind: workspace_doc
+  current_path: CONTRIBUTING.md
+  logical_zone: docs
+  planned_path: CONTRIBUTING.md
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+  batch_id: ''
+  notes: Public contribution policy for the root control-plane repository.
 - id: gumas-sim-2
   kind: repo_hub
   current_path: GUMAS_SIM_2.5
@@ -264,6 +276,18 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
+- id: security
+  kind: policy_file
+  current_path: SECURITY.md
+  logical_zone: docs
+  planned_path: SECURITY.md
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+  batch_id: ''
+  notes: Public vulnerability-reporting and security-boundary policy.
 - id: entropy-quarantine
   kind: quarantine_zone
   current_path: _entropy_quarantine
