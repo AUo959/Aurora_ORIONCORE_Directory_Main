@@ -668,7 +668,7 @@
       ]
     }
   ],
-  "last_updated": "2026-08-01T05:26:10Z",
+  "last_updated": "2026-08-01T05:29:09Z",
   "last_platform": "codex",
   "last_session_summary": "Session queue lifecycle v1 implemented: schema v3 now separates active/ready/waiting/parked work, queue health is surfaced through startup, workspace verification, and Mission Control, false owner gates have an auditable reclassification path, routine recovery/diagnostic recommendations no longer require approval, the months-old narrative umbrella is closed with its landed evidence, and CloudBank PR #1392 is preserved as a concrete external wait.",
   "tool_versions": {
@@ -692,6 +692,30 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "e3bb4c9",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "Merge remote-tracking branch 'origin/main' into codex/session-queue-lifecycle-2026-08-01"
+    },
+    {
+      "sha": "939dfe0",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "chore(session): record queue lifecycle receipt"
+    },
+    {
+      "sha": "81ccbcc",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "chore(registry): sync CanonRec strict-integrity recovery (#55)"
+    },
+    {
+      "sha": "a5ab80d",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "state: record CloudBank issue 1384 PR handoff"
+    },
     {
       "sha": "f91c8ac",
       "date": "2026-08-01",
@@ -727,30 +751,6 @@
       "date": "2026-08-01",
       "platform": "codex",
       "summary": "docs: harden root public review metadata (#53)"
-    },
-    {
-      "sha": "b11eba8",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "chore(registry): sync CanonRec pin -> c49a941 (old-prose sweep: 4 recovered STAGING records)"
-    },
-    {
-      "sha": "7b5b97c",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "state: finalize public readiness debt pass"
-    },
-    {
-      "sha": "5fbf372",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "ci: consume public dependencies safely (#52)"
-    },
-    {
-      "sha": "9312e22",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "state: record public readiness debt closure"
     }
   ],
   "security_events": [
@@ -767,7 +767,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "f91c8ac5b2014b78724859f5b97a7ee936a64633",
+    "main_sha": "e3bb4c96d72a67b9a942e7a7ccd9811a4aa4de0f",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
