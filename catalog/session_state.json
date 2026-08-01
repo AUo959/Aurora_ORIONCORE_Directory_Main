@@ -342,9 +342,9 @@
       "detail": "Owner selected MIT. CanonRec PR #8 merged as 6c07b442; LICENSE matches CloudBank's MIT grant (Copyright 2025 Aurora), GitHub integrity and secret checks passed, and the root CanonRec pin was refreshed."
     }
   ],
-  "last_updated": "2026-07-29T07:53:34Z",
+  "last_updated": "2026-08-01T04:57:42Z",
   "last_platform": "codex",
-  "last_session_summary": "CanonRec is now open source under the MIT License, matching CloudBank. PR #8 merged as 6c07b442 after repository-integrity, history-secret, and GitGuardian checks passed; local make validate reported all three known findings baseline-matched with zero new findings. README and public-readiness docs now separate open-source licensing from the still-open strict canon-integrity and staff-authority gates. Root registry pin refreshed to 6c07b442. Root license selection remains an owner decision.",
+  "last_session_summary": "CloudBank issue #1384 fixed in clean worktree and published as draft PR #1392 (commit 5d26aa02): aligned standalone MCP dependency metadata/docs to >=1.28.1,<2.0.0, added v1 handler-registration coverage, and strengthened sanitized-error assertions. Exact locked mcp==1.28.1 connector tests passed 10/10; full suite passed 3170 with expected skips/xfails. PR is mergeable; GitHub checks are running. Issues #1381 and #1382 were not modified.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -366,6 +366,18 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "046fc1d",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "docs(recon): old-prose reconciliation report + sync CanonRec pin -> 4b907df (4 records promoted to CANON via reconciler process)"
+    },
+    {
+      "sha": "9d424cc",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "chore: record CanonRec MIT licensing"
+    },
     {
       "sha": "b11eba8",
       "date": "2026-07-29",
@@ -413,18 +425,6 @@
       "date": "2026-07-29",
       "platform": "claude-code",
       "summary": "chore(registry): re-sync CanonRec pin -> aaca07e (post-rebase onto upstream docs commit)"
-    },
-    {
-      "sha": "7cf631d",
-      "date": "2026-07-29",
-      "platform": "claude-code",
-      "summary": "chore(registry): sync CanonRec pin -> c942c60 (Obsidian Dawn AI antagonists + Velar Imperium correction)"
-    },
-    {
-      "sha": "a2a2391",
-      "date": "2026-07-29",
-      "platform": "claude-code",
-      "summary": "chore(registry): sync CanonRec pin -> bf13f50 (Velar Imperium referent closure + GU substructure cross-link)"
     }
   ],
   "security_events": [
@@ -580,7 +580,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "b11eba89ea5ebdfb70bb5cb2e75b329a377b48c4",
+    "main_sha": "046fc1d3b9b0ebf00add28061b961b22ec028e49",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
