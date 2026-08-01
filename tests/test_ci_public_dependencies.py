@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from unittest import TestCase
 
@@ -5,6 +6,7 @@ from unittest import TestCase
 ROOT = Path(__file__).resolve().parents[1]
 CI_WORKFLOW = ROOT / ".github" / "workflows" / "ci.yml"
 WORKFLOW_DIR = ROOT / ".github" / "workflows"
+CLASSIFICATION_OVERRIDES = ROOT / "catalog" / "classification_overrides.yaml"
 CHECK = TestCase()
 
 
@@ -53,3 +55,17 @@ def test_all_root_workflows_use_immutable_action_refs():
             set(ref) <= set("0123456789abcdef"),
             msg=f"non-commit action ref in {workflow_path}: {ref}",
         )
+
+
+def test_public_metadata_is_managed_root_documentation():
+    records = {
+        record["current_path"]: record
+        for record in json.loads(CLASSIFICATION_OVERRIDES.read_text(encoding="utf-8"))["overrides"]
+    }
+
+    CHECK.assertEqual("workspace_doc", records["CONTRIBUTING.md"]["kind"])
+    CHECK.assertEqual("policy_file", records["SECURITY.md"]["kind"])
+    for path in ("CONTRIBUTING.md", "SECURITY.md"):
+        CHECK.assertEqual("docs", records[path]["logical_zone"])
+        CHECK.assertEqual("root", records[path]["git_boundary"])
+        CHECK.assertEqual("managed", records[path]["status"])
