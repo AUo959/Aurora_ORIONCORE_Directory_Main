@@ -7,6 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 CI_WORKFLOW = ROOT / ".github" / "workflows" / "ci.yml"
 WORKFLOW_DIR = ROOT / ".github" / "workflows"
 CLASSIFICATION_OVERRIDES = ROOT / "catalog" / "classification_overrides.yaml"
+LICENSE = ROOT / "LICENSE"
+README = ROOT / "README.md"
 CHECK = TestCase()
 
 
@@ -63,9 +65,31 @@ def test_public_metadata_is_managed_root_documentation():
         for record in json.loads(CLASSIFICATION_OVERRIDES.read_text(encoding="utf-8"))["overrides"]
     }
 
-    CHECK.assertEqual("workspace_doc", records["CONTRIBUTING.md"]["kind"])
-    CHECK.assertEqual("policy_file", records["SECURITY.md"]["kind"])
-    for path in ("CONTRIBUTING.md", "SECURITY.md"):
+    expected_kinds = {
+        "CODE_OF_CONDUCT.md": "policy_file",
+        "CONTRIBUTING.md": "workspace_doc",
+        "LICENSE": "policy_file",
+        "SECURITY.md": "policy_file",
+    }
+    for path, kind in expected_kinds.items():
+        CHECK.assertEqual(kind, records[path]["kind"])
         CHECK.assertEqual("docs", records[path]["logical_zone"])
         CHECK.assertEqual("root", records[path]["git_boundary"])
         CHECK.assertEqual("managed", records[path]["status"])
+
+
+def test_root_public_license_and_community_files_are_present():
+    license_text = LICENSE.read_text(encoding="utf-8")
+    readme = README.read_text(encoding="utf-8")
+
+    CHECK.assertTrue(license_text.startswith("MIT License\n"))
+    CHECK.assertIn("Copyright (c) 2025 Aurora", license_text)
+    CHECK.assertIn("[MIT License](LICENSE)", readme)
+    for path in (
+        ROOT / "CODE_OF_CONDUCT.md",
+        ROOT / ".github" / "CODEOWNERS",
+        ROOT / ".github" / "pull_request_template.md",
+        ROOT / ".github" / "ISSUE_TEMPLATE" / "work_item.yml",
+        ROOT / ".github" / "ISSUE_TEMPLATE" / "config.yml",
+    ):
+        CHECK.assertTrue(path.is_file(), msg=f"missing public community file: {path}")

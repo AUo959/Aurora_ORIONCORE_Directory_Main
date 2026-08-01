@@ -21,12 +21,14 @@ This repository is public for inspection and review. It is an operator
 workspace, not a published Python or npm package; use the Makefile workflows
 below instead of `pip install` or `npm install` at the repository root.
 
-No open-source license is currently granted for this root control-plane
-repository. Public visibility permits review but does not grant reuse rights.
-CloudBank and CanonRec are separate repositories with their own licenses.
+The root control-plane repository is available under the
+[MIT License](LICENSE). That license applies to files in this repository's Git
+history. CloudBank and CanonRec remain separate repositories with their own
+licenses and release decisions.
 
 - Security reports: [SECURITY.md](SECURITY.md)
 - Contribution boundaries and checks: [CONTRIBUTING.md](CONTRIBUTING.md)
+- Participation expectations: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 ## Start Here
 

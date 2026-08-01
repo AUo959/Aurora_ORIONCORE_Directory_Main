@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/security/advisories/new
+    about: Report vulnerabilities and sensitive security details privately.
+  - name: CloudBank runtime issue
+    url: https://github.com/AUo959/aurora-cloudbank-symbolic/issues/new/choose
+    about: Report runtime, application, deployment, or CloudBank integration issues.
+  - name: CanonRec authority issue
+    url: https://github.com/AUo959/CanonRec/issues/new/choose
+    about: Report canon authority, ledger, or integrity issues.
