@@ -1,0 +1,283 @@
+{
+  "contract_id": "aurora_state_model_contract",
+  "version": "0.1",
+  "status": "draft_adoption_ready",
+  "runtime_status": "not_implemented",
+  "canon_status": "non_canonical_design_proposal",
+  "purpose": "Define a governed cross-repository learning object for an Aurora-native model of simulated world state and epistemic state.",
+  "scope": [
+    "Aurora_ORIONCORE_Directory_Main",
+    "aurora-cloudbank-symbolic-main",
+    "qgia-knowledge-library-main",
+    "qgia-knowledge-spine-main",
+    "CanonRec",
+    "DuelSim_v2.0"
+  ],
+  "documents": {
+    "white_paper": "docs/AURORA_STATE_MODEL_WHITE_PAPER_v0_1.md",
+    "system_specification": "docs/AURORA_STATE_MODEL_SYSTEM_SPEC_v0_1.md",
+    "implementation_plan": "docs/AURORA_STATE_MODEL_IMPLEMENTATION_PLAN_v0_1.md",
+    "design_receipt": "reports/analysis/aurora_state_model_design_package__2026-08-01.json"
+  },
+  "authority_model": {
+    "allowed_episode_authorities": [
+      "simulation",
+      "evaluation",
+      "synthetic_fixture"
+    ],
+    "prohibited_episode_authorities": [
+      "canon",
+      "operational_truth",
+      "adjudicated_real_world_outcome"
+    ],
+    "learner_output_authority": "simulation",
+    "promotion_default": "ineligible",
+    "promotion_judge": "CanonRec plus owning-repository validators"
+  },
+  "repository_roles": {
+    "Aurora_ORIONCORE_Directory_Main": {
+      "owns": [
+        "cross_repo_contract",
+        "schemas",
+        "conformance_fixtures",
+        "adoption_receipts",
+        "promotion_gates"
+      ],
+      "adoption_status": "proposal_committed"
+    },
+    "aurora-cloudbank-symbolic-main": {
+      "owns": [
+        "episode_generation_orchestration",
+        "qsfe_epistemic_adapter",
+        "artifact_storage_adapter",
+        "simulation_only_serving"
+      ],
+      "adoption_status": "not_started"
+    },
+    "qgia-knowledge-library-main": {
+      "owns": [
+        "evidence_semantics",
+        "real_outcome_semantics",
+        "curated_domain_knowledge"
+      ],
+      "adoption_status": "not_started",
+      "hard_boundary": "Synthetic ASM episodes must not enter the canonical truth ledger."
+    },
+    "qgia-knowledge-spine-main": {
+      "owns": [
+        "forecast_semantics",
+        "prior_semantics",
+        "resolution_policy",
+        "calibration_semantics"
+      ],
+      "adoption_status": "not_started",
+      "hard_boundary": "Simulation-authority forecasts must remain separate from real-world forecast ledgers."
+    },
+    "CanonRec": {
+      "owns": [
+        "invariant_validation",
+        "canonical_reference_checks",
+        "promotion_decisions"
+      ],
+      "adoption_status": "not_started"
+    },
+    "DuelSim_v2.0": {
+      "owns": [
+        "optional_paired_or_adversarial_teacher_adapter"
+      ],
+      "adoption_status": "deferred"
+    }
+  },
+  "artifacts": [
+    {
+      "artifact_id": "aurora_state_episode",
+      "format": "json_or_jsonl",
+      "schema_path": "catalog/schemas/aurora_state_episode_v1.schema.json",
+      "fixture_path": "tests/fixtures/aurora_state_model/episode_v1.json",
+      "owner": "Aurora_ORIONCORE_Directory_Main"
+    },
+    {
+      "artifact_id": "aurora_epistemic_trace",
+      "format": "json_or_jsonl",
+      "schema_path": "catalog/schemas/aurora_epistemic_trace_v1.schema.json",
+      "fixture_path": "tests/fixtures/aurora_state_model/epistemic_trace_v1.json",
+      "owner": "Aurora_ORIONCORE_Directory_Main"
+    },
+    {
+      "artifact_id": "aurora_dataset_manifest",
+      "format": "json",
+      "schema_path": "catalog/schemas/aurora_dataset_manifest_v1.schema.json",
+      "fixture_path": "tests/fixtures/aurora_state_model/dataset_manifest_v1.json",
+      "owner": "Aurora_ORIONCORE_Directory_Main"
+    }
+  ],
+  "training_contract": {
+    "minimum_inputs": [
+      "world_state_before",
+      "intervention",
+      "observation_view"
+    ],
+    "optional_inputs": [
+      "prior_epistemic_state",
+      "retrieved_evidence_refs"
+    ],
+    "minimum_targets": [
+      "state_delta",
+      "event_labels",
+      "belief_delta_summary"
+    ],
+    "conditional_targets": [
+      "forecast_probabilities",
+      "terminal_outcome_distribution",
+      "confidence_components",
+      "invariant_risk"
+    ],
+    "manifest_rule": "Training jobs consume a frozen manifest and must not discover unmanifested files."
+  },
+  "event_contract": [
+    {
+      "name": "asm.episode.generated",
+      "producer": "episode_generator",
+      "minimum_payload_keys": [
+        "episode_id",
+        "authority",
+        "scenario_id",
+        "seed_bundle",
+        "content_hash"
+      ]
+    },
+    {
+      "name": "asm.episode.validated",
+      "producer": "validator_pipeline",
+      "minimum_payload_keys": [
+        "episode_id",
+        "schema_valid",
+        "replay_classification",
+        "validator_refs"
+      ]
+    },
+    {
+      "name": "asm.dataset.sealed",
+      "producer": "dataset_manifest_builder",
+      "minimum_payload_keys": [
+        "dataset_id",
+        "version",
+        "episode_count",
+        "manifest_hash"
+      ]
+    },
+    {
+      "name": "asm.model.evaluated",
+      "producer": "evaluation_harness",
+      "minimum_payload_keys": [
+        "model_release_id",
+        "dataset_id",
+        "metric_report_ref",
+        "quality_gate"
+      ]
+    },
+    {
+      "name": "asm.transition.proposed",
+      "producer": "simulation_inference_service",
+      "minimum_payload_keys": [
+        "model_release_id",
+        "episode_schema_version",
+        "authority",
+        "validator_result"
+      ]
+    }
+  ],
+  "invariants": [
+    {
+      "id": "ASM-INV-001",
+      "rule": "Every learning record declares authority, classification, provenance, and promotion eligibility."
+    },
+    {
+      "id": "ASM-INV-002",
+      "rule": "Synthetic evidence, forecasts, and outcomes never enter canonical QGIA real-world ledgers."
+    },
+    {
+      "id": "ASM-INV-003",
+      "rule": "A learner cannot mutate canonical state or elevate its own authority."
+    },
+    {
+      "id": "ASM-INV-004",
+      "rule": "World-state and epistemic-state targets remain independently addressable."
+    },
+    {
+      "id": "ASM-INV-005",
+      "rule": "Every episode records exact source revisions, effective configuration hash, and isolated seed scopes."
+    },
+    {
+      "id": "ASM-INV-006",
+      "rule": "Dataset splits group by scenario family and generator lineage rather than random row."
+    },
+    {
+      "id": "ASM-INV-007",
+      "rule": "Deterministic validators remain authoritative over learned proposals."
+    },
+    {
+      "id": "ASM-INV-008",
+      "rule": "Public dataset or checkpoint release requires explicit disclosure and license approval."
+    }
+  ],
+  "quality_gates": [
+    {
+      "id": "G0",
+      "name": "contract_conformance",
+      "required_before": "repo_local_adapter_work"
+    },
+    {
+      "id": "G1",
+      "name": "generator_reproducibility",
+      "required_before": "dataset_sealing"
+    },
+    {
+      "id": "G2",
+      "name": "dataset_integrity",
+      "required_before": "model_training"
+    },
+    {
+      "id": "G3",
+      "name": "baseline_utility",
+      "required_before": "multi_step_training"
+    },
+    {
+      "id": "G4",
+      "name": "rollout_utility",
+      "required_before": "serving_work"
+    },
+    {
+      "id": "G5",
+      "name": "simulation_serving_readiness",
+      "required_before": "controlled_runtime_activation"
+    }
+  ],
+  "first_slice": {
+    "id": "ASM-001",
+    "name": "Reproducible World-and-Belief Episode",
+    "episode_count": 12,
+    "scenario_count": 1,
+    "turns_per_scenario": 20,
+    "intervention_family_count": 1,
+    "evidence_mask_count": 3,
+    "world_seed_count": 2,
+    "epistemic_seed_count": 2,
+    "model_training_authorized": false,
+    "required_gates": [
+      "G0",
+      "G1",
+      "G2"
+    ]
+  },
+  "adoption_order": [
+    "review_root_contract",
+    "map_world_state_adapter",
+    "map_qsfe_epistemic_adapter",
+    "define_qgia_simulation_namespace",
+    "implement_canonrec_episode_validator",
+    "generate_asm_001",
+    "seal_and_review_dataset",
+    "authorize_baseline_training"
+  ]
+}

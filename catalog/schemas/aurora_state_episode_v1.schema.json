@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/aurora_state_episode_v1.schema.json",
+  "title": "Aurora State Model Episode v1",
+  "description": "Governed simulation-authority transition record for ASM training and evaluation.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "record_type": {"const": "aurora_state_episode"},
+    "episode_id": {
+      "type": "string",
+      "pattern": "^asm\\.episode\\.[A-Za-z0-9_.:-]+$"
+    },
+    "authority": {
+      "enum": ["simulation", "evaluation", "synthetic_fixture"]
+    },
+    "classification": {
+      "enum": [
+        "internal_simulation",
+        "restricted_simulation",
+        "synthetic_test_fixture"
+      ]
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_revisions": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{7,40}$"
+          }
+        },
+        "generator_versions": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "string", "minLength": 1}
+        },
+        "config_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "seed_bundle": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "world": {"type": "integer", "minimum": 0},
+            "epistemic": {"type": "integer", "minimum": 0},
+            "intervention": {"type": "integer", "minimum": 0},
+            "serialization": {"type": "integer", "minimum": 0}
+          },
+          "required": [
+            "world",
+            "epistemic",
+            "intervention",
+            "serialization"
+          ]
+        }
+      },
+      "required": [
+        "source_revisions",
+        "generator_versions",
+        "config_hash",
+        "seed_bundle"
+      ]
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scenario_id": {"type": "string", "minLength": 1},
+        "scenario_version": {"type": "string", "minLength": 1},
+        "scenario_family": {"type": "string", "minLength": 1},
+        "turn_index": {"type": "integer", "minimum": 0},
+        "total_turns": {"type": "integer", "minimum": 1}
+      },
+      "required": [
+        "scenario_id",
+        "scenario_version",
+        "scenario_family",
+        "turn_index",
+        "total_turns"
+      ]
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "world_state_before": {"type": "object"},
+        "intervention": {
+          "type": "object",
+          "required": ["intervention_id", "intervention_type", "payload"]
+        },
+        "observation_view": {
+          "type": "object",
+          "required": ["mask_id", "visible_state", "evidence_refs"]
+        },
+        "constraint_refs": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "required": [
+        "world_state_before",
+        "intervention",
+        "observation_view",
+        "constraint_refs"
+      ]
+    },
+    "teacher": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "world_state_after": {"type": "object"},
+        "state_delta": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/delta"}
+        },
+        "events": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/event"}
+        },
+        "epistemic_trace_ref": {
+          "type": "string",
+          "pattern": "^asm\\.trace\\.[A-Za-z0-9_.:-]+$"
+        }
+      },
+      "required": [
+        "world_state_after",
+        "state_delta",
+        "events",
+        "epistemic_trace_ref"
+      ]
+    },
+    "targets": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state_delta": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/delta"}
+        },
+        "event_labels": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        },
+        "belief_delta_summary": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "number"}
+        },
+        "probability_targets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "target_id": {"type": "string", "minLength": 1},
+              "probability": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "required": ["target_id", "probability"]
+          }
+        }
+      },
+      "required": [
+        "state_delta",
+        "event_labels",
+        "belief_delta_summary",
+        "probability_targets"
+      ]
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_valid": {"type": "boolean"},
+        "deterministic_replay": {
+          "enum": [
+            "byte_stable",
+            "structurally_stable",
+            "nondeterministic",
+            "not_run"
+          ]
+        },
+        "constraint_violations": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "validator_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "required": [
+        "schema_valid",
+        "deterministic_replay",
+        "constraint_violations",
+        "validator_refs"
+      ]
+    },
+    "promotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "eligible": {"const": false},
+        "reason": {"type": "string", "minLength": 1}
+      },
+      "required": ["eligible", "reason"]
+    }
+  },
+  "$defs": {
+    "delta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "enum": ["set", "add", "remove", "increment", "link", "unlink"]
+        },
+        "path": {"type": "string", "pattern": "^/"},
+        "value": {},
+        "ref": {"type": "string", "minLength": 1}
+      },
+      "required": ["op", "path"]
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "pattern": "^asm\\.event\\.[A-Za-z0-9_.:-]+$"
+        },
+        "event_type": {"type": "string", "minLength": 1},
+        "payload": {}
+      },
+      "required": ["event_id", "event_type", "payload"]
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_type",
+    "episode_id",
+    "authority",
+    "classification",
+    "created_at",
+    "provenance",
+    "scenario",
+    "input",
+    "teacher",
+    "targets",
+    "validation",
+    "promotion"
+  ]
+}

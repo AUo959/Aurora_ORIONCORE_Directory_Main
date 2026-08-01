@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "record_type": "aurora_state_episode",
+  "episode_id": "asm.episode.fixture-001.turn-07",
+  "authority": "synthetic_fixture",
+  "classification": "synthetic_test_fixture",
+  "created_at": "2026-08-01T00:00:00Z",
+  "provenance": {
+    "source_revisions": {
+      "Aurora_ORIONCORE_Directory_Main": "046fc1d3b9b0ebf00add28061b961b22ec028e49",
+      "aurora-cloudbank-symbolic-main": "b83b968028a3888a869ca047016e28e39c3ec46a"
+    },
+    "generator_versions": {
+      "fixture_generator": "0.1.0",
+      "world_adapter": "fixture-1",
+      "epistemic_adapter": "fixture-1"
+    },
+    "config_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "seed_bundle": {
+      "world": 1101,
+      "epistemic": 2201,
+      "intervention": 3301,
+      "serialization": 4401
+    }
+  },
+  "scenario": {
+    "scenario_id": "ASM-FIXTURE-001",
+    "scenario_version": "1.0",
+    "scenario_family": "station-readiness",
+    "turn_index": 7,
+    "total_turns": 20
+  },
+  "input": {
+    "world_state_before": {
+      "station": {
+        "readiness": 0.7,
+        "power_margin": 0.2
+      }
+    },
+    "intervention": {
+      "intervention_id": "power-reroute-01",
+      "intervention_type": "resource_reallocation",
+      "payload": {
+        "power_delta": -0.05
+      }
+    },
+    "observation_view": {
+      "mask_id": "mask-partial-02",
+      "visible_state": {
+        "station": {
+          "readiness": 0.7
+        }
+      },
+      "evidence_refs": [
+        "asm.synthetic.evidence.power-margin-01"
+      ]
+    },
+    "constraint_refs": [
+      "ASM-FIXTURE-CONSTRAINT-POWER-NONNEGATIVE"
+    ]
+  },
+  "teacher": {
+    "world_state_after": {
+      "station": {
+        "readiness": 0.75,
+        "power_margin": 0.15
+      }
+    },
+    "state_delta": [
+      {
+        "op": "increment",
+        "path": "/station/readiness",
+        "value": 0.05
+      },
+      {
+        "op": "increment",
+        "path": "/station/power_margin",
+        "value": -0.05
+      }
+    ],
+    "events": [
+      {
+        "event_id": "asm.event.fixture-001.power-rerouted",
+        "event_type": "station.power.rerouted",
+        "payload": {
+          "destination": "readiness"
+        }
+      }
+    ],
+    "epistemic_trace_ref": "asm.trace.fixture-001.turn-07"
+  },
+  "targets": {
+    "state_delta": [
+      {
+        "op": "increment",
+        "path": "/station/readiness",
+        "value": 0.05
+      },
+      {
+        "op": "increment",
+        "path": "/station/power_margin",
+        "value": -0.05
+      }
+    ],
+    "event_labels": [
+      "station.power.rerouted"
+    ],
+    "belief_delta_summary": {
+      "readiness_success_mean": 0.08,
+      "readiness_success_variance": -0.01
+    },
+    "probability_targets": [
+      {
+        "target_id": "readiness-maintained-through-turn-20",
+        "probability": 0.72
+      }
+    ]
+  },
+  "validation": {
+    "schema_valid": true,
+    "deterministic_replay": "byte_stable",
+    "constraint_violations": [],
+    "validator_refs": [
+      "fixture-validator:1"
+    ]
+  },
+  "promotion": {
+    "eligible": false,
+    "reason": "Synthetic conformance fixture; never canon-eligible."
+  }
+}

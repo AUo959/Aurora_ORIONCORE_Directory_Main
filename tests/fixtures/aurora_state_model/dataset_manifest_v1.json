@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "record_type": "aurora_dataset_manifest",
+  "dataset_id": "asm.dataset.synthetic-fixture-001",
+  "version": "0.1.0",
+  "status": "draft",
+  "authority": "synthetic_fixture",
+  "created_at": "2026-08-01T00:00:00Z",
+  "schemas": {
+    "episode": "catalog/schemas/aurora_state_episode_v1.schema.json",
+    "epistemic_trace": "catalog/schemas/aurora_epistemic_trace_v1.schema.json"
+  },
+  "source_repositories": [
+    {
+      "repo": "Aurora_ORIONCORE_Directory_Main",
+      "inspected_revision": "046fc1d3b9b0ebf00add28061b961b22ec028e49",
+      "github_head_revision": "046fc1d3b9b0ebf00add28061b961b22ec028e49",
+      "relation": "aligned"
+    },
+    {
+      "repo": "aurora-cloudbank-symbolic-main",
+      "inspected_revision": "b83b968028a3888a869ca047016e28e39c3ec46a",
+      "github_head_revision": "5b56ae3efae031e4eab859da5d4e366ff2f563a7",
+      "relation": "inspected_behind"
+    }
+  ],
+  "generators": [
+    {
+      "component": "asm-synthetic-fixture-generator",
+      "version": "0.1.0",
+      "config_hash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  ],
+  "episode_count": 1,
+  "authority_counts": {
+    "synthetic_fixture": 1
+  },
+  "scenario_families": [
+    "station-readiness"
+  ],
+  "seed_policy": {
+    "scopes": [
+      "world",
+      "epistemic",
+      "intervention",
+      "serialization"
+    ],
+    "isolated_per_episode": true,
+    "derivation": "Explicit independent fixture seeds; no shared mutable RNG."
+  },
+  "split_policy": {
+    "strategy": "grouped_by_scenario_family",
+    "group_keys": [
+      "scenario_family",
+      "generator_version",
+      "intervention_lineage"
+    ],
+    "leakage_check": "not_run"
+  },
+  "artifacts": [
+    {
+      "path": "tests/fixtures/aurora_state_model/episode_v1.json",
+      "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "media_type": "application/json",
+      "record_count": 1
+    },
+    {
+      "path": "tests/fixtures/aurora_state_model/epistemic_trace_v1.json",
+      "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "media_type": "application/json",
+      "record_count": 1
+    }
+  ],
+  "quality_gates": [
+    {
+      "id": "G0",
+      "status": "passed",
+      "evidence_refs": [
+        "tests/test_aurora_state_model_contract.py"
+      ]
+    },
+    {
+      "id": "G1",
+      "status": "not_run",
+      "evidence_refs": []
+    },
+    {
+      "id": "G2",
+      "status": "not_run",
+      "evidence_refs": []
+    }
+  ],
+  "governance": {
+    "classification": "synthetic_test_fixture",
+    "public_release_eligible": false,
+    "licenses_resolved": false,
+    "review_refs": [
+      "catalog/contracts/aurora_state_model_contract_v0_1.json"
+    ]
+  },
+  "known_limitations": [
+    "This is a hand-authored conformance fixture, not generated runtime data.",
+    "Root repository license selection remains an owner decision.",
+    "Artifact hashes are schema-shaped placeholders for manifest conformance tests."
+  ],
+  "promotion": {
+    "eligible": false,
+    "reason": "Draft synthetic fixture manifest; generator, disclosure, and license gates have not run."
+  }
+}
