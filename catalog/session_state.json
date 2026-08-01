@@ -342,9 +342,9 @@
       "detail": "Owner selected MIT. CanonRec PR #8 merged as 6c07b442; LICENSE matches CloudBank's MIT grant (Copyright 2025 Aurora), GitHub integrity and secret checks passed, and the root CanonRec pin was refreshed."
     }
   ],
-  "last_updated": "2026-08-01T04:58:27Z",
+  "last_updated": "2026-08-01T04:59:33Z",
   "last_platform": "codex",
-  "last_session_summary": "Opened root draft PR #54 for the Aurora State Model v0.1 design package. GitHub Actions passed on Python 3.9 and 3.12; lint/schema validation, secret scans, and GitGuardian passed. Codacy Static Code Analysis is the sole failing check and was classified by gh-fix-ci as external with no GitHub Actions run or log; details: https://app.codacy.com/gh/AUo959/Aurora_ORIONCORE_Directory_Main/pull-requests/54. PR remains draft; no merge, canon promotion, model training, or nested-repository mutation occurred. Next step is inspect/resolve the external Codacy result, then review the root contract before repo-local adapter work.",
+  "last_session_summary": "CloudBank issue #1384 fixed in clean worktree and published as draft PR #1392 (commit 5d26aa02): aligned standalone MCP dependency metadata/docs to >=1.28.1,<2.0.0, added v1 handler-registration coverage, and strengthened sanitized-error assertions. Exact locked mcp==1.28.1 connector tests passed 10/10; full suite passed 3170 with expected skips/xfails. PR is mergeable; GitHub checks are running. Issues #1381 and #1382 were not modified.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -367,16 +367,10 @@
   },
   "recent_commits": [
     {
-      "sha": "a7d2f39",
+      "sha": "e3670f1",
       "date": "2026-08-01",
       "platform": "codex",
-      "summary": "state: queue Aurora state model adoption"
-    },
-    {
-      "sha": "450179b",
-      "date": "2026-08-01",
-      "platform": "codex",
-      "summary": "docs(asm): define Aurora state model design package"
+      "summary": "docs: harden root public review metadata (#53)"
     },
     {
       "sha": "046fc1d",
@@ -389,6 +383,18 @@
       "date": "2026-08-01",
       "platform": "codex",
       "summary": "chore: record CanonRec MIT licensing"
+    },
+    {
+      "sha": "a7d2f39",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "state: queue Aurora state model adoption"
+    },
+    {
+      "sha": "450179b",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "docs(asm): define Aurora state model design package"
     },
     {
       "sha": "b11eba8",
@@ -419,12 +425,6 @@
       "date": "2026-07-29",
       "platform": "codex",
       "summary": "chore(registry): sync CanonRec pin -> d6d699f (Operation Obsidian Dawn event promotion)"
-    },
-    {
-      "sha": "1dd5265",
-      "date": "2026-07-29",
-      "platform": "claude-code",
-      "summary": "registry: refresh public dependency heads"
     }
   ],
   "security_events": [
@@ -586,7 +586,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "a7d2f399af500744cbe6cb606ace5988380df407",
+    "main_sha": "e3670f13e9934b998f7a05e25a53f0b2011235cb",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
