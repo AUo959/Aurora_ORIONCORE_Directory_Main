@@ -668,9 +668,9 @@
       ]
     }
   ],
-  "last_updated": "2026-08-01T05:24:18Z",
+  "last_updated": "2026-08-01T05:26:10Z",
   "last_platform": "codex",
-  "last_session_summary": "CloudBank issue #1384 fixed in clean worktree and published as draft PR #1392 (commit 5d26aa02): aligned standalone MCP dependency metadata/docs to >=1.28.1,<2.0.0, added v1 handler-registration coverage, and strengthened sanitized-error assertions. Exact locked mcp==1.28.1 connector tests passed 10/10; full suite passed 3170 with expected skips/xfails. PR is mergeable; GitHub checks are running. Issues #1381 and #1382 were not modified.",
+  "last_session_summary": "Session queue lifecycle v1 implemented: schema v3 now separates active/ready/waiting/parked work, queue health is surfaced through startup, workspace verification, and Mission Control, false owner gates have an auditable reclassification path, routine recovery/diagnostic recommendations no longer require approval, the months-old narrative umbrella is closed with its landed evidence, and CloudBank PR #1392 is preserved as a concrete external wait.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -692,6 +692,24 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "f91c8ac",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "Merge branch 'main' into codex/session-queue-lifecycle-2026-08-01"
+    },
+    {
+      "sha": "4bd25b8",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "feat(session): enforce actionable queue lifecycle"
+    },
+    {
+      "sha": "9bc93a3",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "state: record CloudBank issue 1384 PR handoff"
+    },
     {
       "sha": "046fc1d",
       "date": "2026-08-01",
@@ -733,24 +751,6 @@
       "date": "2026-07-29",
       "platform": "codex",
       "summary": "chore(registry): sync CanonRec pin -> d6d699f (Operation Obsidian Dawn event promotion)"
-    },
-    {
-      "sha": "1dd5265",
-      "date": "2026-07-29",
-      "platform": "claude-code",
-      "summary": "registry: refresh public dependency heads"
-    },
-    {
-      "sha": "66cb207",
-      "date": "2026-07-29",
-      "platform": "claude-code",
-      "summary": "ci: consume public dependencies safely"
-    },
-    {
-      "sha": "6fda264",
-      "date": "2026-07-29",
-      "platform": "claude-code",
-      "summary": "chore(registry): re-sync CanonRec pin -> aaca07e (post-rebase onto upstream docs commit)"
     }
   ],
   "security_events": [
@@ -767,7 +767,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "046fc1d3b9b0ebf00add28061b961b22ec028e49",
+    "main_sha": "f91c8ac5b2014b78724859f5b97a7ee936a64633",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
