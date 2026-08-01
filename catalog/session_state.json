@@ -342,9 +342,9 @@
       "detail": "Owner selected MIT. CanonRec PR #8 merged as 6c07b442; LICENSE matches CloudBank's MIT grant (Copyright 2025 Aurora), GitHub integrity and secret checks passed, and the root CanonRec pin was refreshed."
     }
   ],
-  "last_updated": "2026-08-01T04:59:33Z",
+  "last_updated": "2026-08-01T05:03:04Z",
   "last_platform": "codex",
-  "last_session_summary": "CloudBank issue #1384 fixed in clean worktree and published as draft PR #1392 (commit 5d26aa02): aligned standalone MCP dependency metadata/docs to >=1.28.1,<2.0.0, added v1 handler-registration coverage, and strengthened sanitized-error assertions. Exact locked mcp==1.28.1 connector tests passed 10/10; full suite passed 3170 with expected skips/xfails. PR is mergeable; GitHub checks are running. Issues #1381 and #1382 were not modified.",
+  "last_session_summary": "Root draft PR #54 contains the Aurora State Model v0.1 design package and has integrated current origin/main without force-push. Python 3.9/3.12, lint/schema validation, both secret scans, and GitGuardian passed on the prior head; Codacy remains the sole external ACTION_REQUIRED check with no GitHub Actions log. The ASM contract tests and QGIA closed-loop tests still pass after integrating main. PR remains draft; no merge, canon promotion, training, or nested-repository mutation occurred. Next step is resolve or disposition the external Codacy gate, then review the contract before repo-local adapter work.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -366,6 +366,24 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "310af51",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "Merge remote-tracking branch 'origin/main' into codex/aurora-state-model-specs-v0-1"
+    },
+    {
+      "sha": "a5ab80d",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "state: record CloudBank issue 1384 PR handoff"
+    },
+    {
+      "sha": "9823e92",
+      "date": "2026-08-01",
+      "platform": "codex",
+      "summary": "state: record Aurora state model draft PR"
+    },
     {
       "sha": "e3670f1",
       "date": "2026-08-01",
@@ -407,24 +425,6 @@
       "date": "2026-07-29",
       "platform": "codex",
       "summary": "state: finalize public readiness debt pass"
-    },
-    {
-      "sha": "5fbf372",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "ci: consume public dependencies safely (#52)"
-    },
-    {
-      "sha": "9312e22",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "state: record public readiness debt closure"
-    },
-    {
-      "sha": "ba3f361",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "chore(registry): sync CanonRec pin -> d6d699f (Operation Obsidian Dawn event promotion)"
     }
   ],
   "security_events": [
@@ -586,7 +586,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "e3670f13e9934b998f7a05e25a53f0b2011235cb",
+    "main_sha": "310af5107013d8123717efaa14061fa7fc289a32",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
