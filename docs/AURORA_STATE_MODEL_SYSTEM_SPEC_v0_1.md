@@ -350,6 +350,25 @@ The learner MAY also predict:
 Training jobs MUST consume a frozen dataset manifest. They MUST NOT discover
 unmanifested files at runtime.
 
+### 11.1 Initial learner scope and earned scale
+
+The first learned ASM baseline MUST be deliberately small and specialized
+relative to the architectures and task breadth available to the project. Its
+purpose is to demonstrate that governed learning adds a measurable capability
+that Aurora's deterministic validators, retrieval surfaces, simulation engines,
+and surrounding runtime do not already provide economically or reliably.
+
+Model size, parameter count, or task breadth MUST NOT be treated as evidence of
+Aurora nativeness or model quality. A proposal to increase parameter count,
+architecture complexity, training scope, or task breadth SHOULD identify a
+measured deficiency in the smaller baseline and SHOULD predeclare the metric or
+capability improvement that the added scale is expected to deliver.
+
+Scale SHOULD be earned through demonstrated deficiencies and measurable gains,
+not assumed as a default development direction. Specialized learned components
+MAY later be composed under shared Aurora governance; version 0.1 does not
+require or presume a single monolithic Aurora model.
+
 ## 12. Inference interface
 
 A future inference endpoint SHOULD accept:
