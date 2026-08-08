@@ -208,18 +208,11 @@
       "completed_at": "2026-08-01T05:44:28Z",
       "platform": "codex",
       "detail": "Resolved by CanonRec PR #9 on 2026-08-01: the empty tactical-enforcement organization record was recovered without invented content and the refreshed strict integrity baseline passed all 838 tracked files with zero mismatches."
-    },
-    {
-      "id": "aurora-state-model-asm-001-adoption",
-      "status": "completed",
-      "completed_at": "2026-08-01T06:22:28Z",
-      "platform": "codex",
-      "detail": "Superseded after detailed PR #54 review: root design review is addressed; repo-local adapter issue creation and ASM-001 implementation remain in the revised follow-up item."
     }
   ],
-  "last_updated": "2026-08-01T06:22:28Z",
+  "last_updated": "2026-08-01T05:44:28Z",
   "last_platform": "codex",
-  "last_session_summary": "Addressed the detailed human review on root draft PR #54: added G1.5 teacher-sufficiency schema/gate and early-stop semantics, corrected the one-world GUMAS and L2 compiler assumptions, hardened seed/split provenance, exported verified QSFE/GUMAS substrate facts into the design, and replaced shape-only checks with Draft 2020-12 validation. Focused post-merge suite: 25 passed. Review commit 0cfc9ab; latest origin/main 5084f62 integrated. Next: owner reviews PR #54, then repo-local ASM-001 adapter issues; no training authorized.",
+  "last_session_summary": "Root public-readiness housekeeping completed 2026-08-01. PR #57 merged as ebe18b62: root is MIT-licensed; README boundaries, code of conduct, CODEOWNERS, general issue/PR templates, managed routing, generated manifest/map, and regression coverage landed. Exact-head CI, Codacy, GitGuardian, and secret scans passed. GitHub reports a 100% community profile and MIT; native secret scanning, push protection, automatic merged-branch deletion, and seven accurate topics are enabled. Homepage and Discussions remain unset pending a verified site and moderation workflow.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -241,30 +234,6 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
-    {
-      "sha": "7d9ea17",
-      "date": "2026-08-01",
-      "platform": "codex",
-      "summary": "Merge remote-tracking branch 'origin/main' into codex/aurora-state-model-specs-v0-1"
-    },
-    {
-      "sha": "0cfc9ab",
-      "date": "2026-08-01",
-      "platform": "codex",
-      "summary": "docs: harden Aurora state model teacher gates"
-    },
-    {
-      "sha": "5084f62",
-      "date": "2026-08-01",
-      "platform": "codex",
-      "summary": "state: close root public license readiness (#58)"
-    },
-    {
-      "sha": "8d4d9f1",
-      "date": "2026-08-01",
-      "platform": "codex",
-      "summary": "state: refresh Aurora state model PR handoff"
-    },
     {
       "sha": "ebe18b6",
       "date": "2026-08-01",
@@ -300,6 +269,30 @@
       "date": "2026-08-01",
       "platform": "codex",
       "summary": "chore: record CanonRec MIT licensing"
+    },
+    {
+      "sha": "b11eba8",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "chore(registry): sync CanonRec pin -> c49a941 (old-prose sweep: 4 recovered STAGING records)"
+    },
+    {
+      "sha": "7b5b97c",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "state: finalize public readiness debt pass"
+    },
+    {
+      "sha": "5fbf372",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "ci: consume public dependencies safely (#52)"
+    },
+    {
+      "sha": "9312e22",
+      "date": "2026-07-29",
+      "platform": "codex",
+      "summary": "state: record public readiness debt closure"
     }
   ],
   "security_events": [
@@ -434,16 +427,10 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Migrate connector/server.py and connector tests from the MCP v1 Server API to MCP v2, then remove the temporary mcp<2.0.0 compatibility ceiling added in CloudBank PR #1385. Evidence: base CI with mcp 1.28.1 passed; an unconstrained install resolved mcp 2.0.0 and failed six Server.list_tools tests."
-    },
-    {
-      "id": "aurora-state-model-asm-001-implementation",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "After owner review of root draft PR #54, open repo-local adapter-mapping issues for GUMAS/CloudBank, QGIA, and CanonRec. Implement the 12-episode ASM-001 slice first; record requested and realized seeds plus post-init RNG fingerprint; emit G1.5 teacher-sufficiency evidence. G1.5 failure may stop expansion but does not invalidate ASM-001. Do not train until G0, G1, G1.5, and G2 requirements are satisfied."
     }
   ],
   "known_state": {
-    "main_sha": "7d9ea17242c8064646761bcdc60d7ab469cf1b6c",
+    "main_sha": "ebe18b62f08ef697023a8a6885664f2b88f8bc03",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
