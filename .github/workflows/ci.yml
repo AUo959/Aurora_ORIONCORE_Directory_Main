@@ -160,10 +160,12 @@ jobs:
 
       # Workspace verification asserts the provisioned nested-repo heads/branches
       # match catalog/repo_registry.yaml, so it only runs on the 3.12 leg that
-      # provisions them. On 3.9 the repos are intentionally absent.
+      # provisions them. On PRs, the CI wrapper re-anchors unchanged session-state
+      # freshness to the authoritative PR base instead of the synthetic merge HEAD.
+      # PRs that actually modify session_state.json retain the strict verifier result.
       - name: Run workspace verification
         if: matrix.python-version == '3.12'
-        run: python tools/workspace_verify.py --report-out reports/ci/workspace-verify-py${{ matrix.python-version }}.json
+        run: python tools/ci_workspace_verify.py --report-out reports/ci/workspace-verify-py${{ matrix.python-version }}.json
         continue-on-error: false
 
       - name: Upload verification report
