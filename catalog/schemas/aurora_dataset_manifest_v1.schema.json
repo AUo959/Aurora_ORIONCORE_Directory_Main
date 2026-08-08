@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/aurora_dataset_manifest_v1.schema.json",
+  "title": "Aurora State Model Dataset Manifest v1",
+  "description": "Immutable lineage, split, quality, and governance record for a set of ASM episodes.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "record_type": {"const": "aurora_dataset_manifest"},
+    "dataset_id": {
+      "type": "string",
+      "pattern": "^asm\\.dataset\\.[A-Za-z0-9_.:-]+$"
+    },
+    "version": {"type": "string", "minLength": 1},
+    "status": {
+      "enum": ["draft", "frozen", "quarantined", "superseded"]
+    },
+    "authority": {
+      "enum": ["simulation", "evaluation", "synthetic_fixture"]
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "schemas": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "episode": {"type": "string", "minLength": 1},
+        "epistemic_trace": {"type": "string", "minLength": 1}
+      },
+      "required": ["episode", "epistemic_trace"]
+    },
+    "source_repositories": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "repo": {"type": "string", "minLength": 1},
+          "inspected_revision": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{7,40}$"
+          },
+          "github_head_revision": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{7,40}$"
+          },
+          "relation": {
+            "enum": ["aligned", "inspected_behind", "github_unverified"]
+          }
+        },
+        "required": [
+          "repo",
+          "inspected_revision",
+          "github_head_revision",
+          "relation"
+        ]
+      }
+    },
+    "generators": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "component": {"type": "string", "minLength": 1},
+          "version": {"type": "string", "minLength": 1},
+          "config_hash": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          }
+        },
+        "required": ["component", "version", "config_hash"]
+      }
+    },
+    "episode_count": {"type": "integer", "minimum": 1},
+    "authority_counts": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "scenario_families": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "seed_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "world",
+              "epistemic",
+              "intervention",
+              "serialization"
+            ]
+          }
+        },
+        "isolated_per_episode": {"const": true},
+        "records_realized_seeds": {"const": true},
+        "records_post_initialization_rng_state_fingerprint": {"const": true},
+        "derivation": {"type": "string", "minLength": 1}
+      },
+      "required": [
+        "scopes",
+        "isolated_per_episode",
+        "records_realized_seeds",
+        "records_post_initialization_rng_state_fingerprint",
+        "derivation"
+      ]
+    },
+    "split_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "strategy": {"const": "grouped_by_scenario_family"},
+        "group_keys": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "leakage_check": {"enum": ["passed", "failed", "not_run"]}
+      },
+      "required": ["strategy", "group_keys", "leakage_check"]
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "media_type": {"type": "string", "minLength": 1},
+          "record_count": {"type": "integer", "minimum": 1}
+        },
+        "required": ["path", "sha256", "media_type", "record_count"]
+      }
+    },
+    "quality_gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^(G[0-5]|G1\\.5)$"},
+          "status": {"enum": ["passed", "failed", "not_run"]},
+          "evidence_refs": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1}
+          }
+        },
+        "required": ["id", "status", "evidence_refs"]
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "classification": {
+          "enum": [
+            "internal_simulation",
+            "restricted_simulation",
+            "synthetic_test_fixture"
+          ]
+        },
+        "public_release_eligible": {"const": false},
+        "licenses_resolved": {"type": "boolean"},
+        "review_refs": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "required": [
+        "classification",
+        "public_release_eligible",
+        "licenses_resolved",
+        "review_refs"
+      ]
+    },
+    "known_limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "promotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "eligible": {"const": false},
+        "reason": {"type": "string", "minLength": 1}
+      },
+      "required": ["eligible", "reason"]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "split_policy": {
+            "properties": {"leakage_check": {"const": "passed"}},
+            "required": ["leakage_check"]
+          }
+        },
+        "required": ["split_policy"]
+      },
+      "then": {
+        "properties": {
+          "scenario_families": {"minItems": 2}
+        }
+      }
+    }
+  ],
+  "required": [
+    "schema_version",
+    "record_type",
+    "dataset_id",
+    "version",
+    "status",
+    "authority",
+    "created_at",
+    "schemas",
+    "source_repositories",
+    "generators",
+    "episode_count",
+    "authority_counts",
+    "scenario_families",
+    "seed_policy",
+    "split_policy",
+    "artifacts",
+    "quality_gates",
+    "governance",
+    "known_limitations",
+    "promotion"
+  ]
+}
