@@ -249,6 +249,18 @@
   },
   "recent_commits": [
     {
+      "sha": "d90fe8e",
+      "date": "2026-08-09",
+      "platform": "codex",
+      "summary": "state: queue 42-issue CloudBank continuation"
+    },
+    {
+      "sha": "05ca24a",
+      "date": "2026-08-09",
+      "platform": "codex",
+      "summary": "state: refresh root commit receipt"
+    },
+    {
       "sha": "b7d84e2",
       "date": "2026-08-09",
       "platform": "codex",
@@ -295,18 +307,6 @@
       "date": "2026-08-09",
       "platform": "codex",
       "summary": "state: close root public license readiness (#58)"
-    },
-    {
-      "sha": "ebe18b6",
-      "date": "2026-08-01",
-      "platform": "codex",
-      "summary": "docs: license root and complete community profile (#57)"
-    },
-    {
-      "sha": "81ccbcc",
-      "date": "2026-08-01",
-      "platform": "codex",
-      "summary": "chore(registry): sync CanonRec strict-integrity recovery (#55)"
     }
   ],
   "security_events": [
@@ -444,7 +444,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "b7d84e28e80466c0f1ce289240b97acab0a05482",
+    "main_sha": "d90fe8ee853783e1c49c57e20576f2e491b891a5",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
