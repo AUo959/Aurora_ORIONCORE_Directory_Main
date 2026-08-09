@@ -242,6 +242,18 @@
   },
   "recent_commits": [
     {
+      "sha": "b7d84e2",
+      "date": "2026-08-09",
+      "platform": "codex",
+      "summary": "state: record CloudBank hygiene wave progress"
+    },
+    {
+      "sha": "7c5cc45",
+      "date": "2026-08-09",
+      "platform": "codex",
+      "summary": "state: queue CloudBank issue hygiene wave"
+    },
+    {
       "sha": "59a24bd",
       "date": "2026-08-09",
       "platform": "codex",
@@ -288,18 +300,6 @@
       "date": "2026-08-01",
       "platform": "codex",
       "summary": "chore(registry): sync CanonRec strict-integrity recovery (#55)"
-    },
-    {
-      "sha": "a5ab80d",
-      "date": "2026-08-01",
-      "platform": "codex",
-      "summary": "state: record CloudBank issue 1384 PR handoff"
-    },
-    {
-      "sha": "e3670f1",
-      "date": "2026-08-01",
-      "platform": "codex",
-      "summary": "docs: harden root public review metadata (#53)"
     }
   ],
   "security_events": [
@@ -437,7 +437,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "59a24bdb48d7d8e2be497c3219c9d6590f786db2",
+    "main_sha": "b7d84e28e80466c0f1ce289240b97acab0a05482",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
