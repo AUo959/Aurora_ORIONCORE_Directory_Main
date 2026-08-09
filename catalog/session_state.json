@@ -208,11 +208,18 @@
       "completed_at": "2026-08-01T05:44:28Z",
       "platform": "codex",
       "detail": "Resolved by CanonRec PR #9 on 2026-08-01: the empty tactical-enforcement organization record was recovered without invented content and the refreshed strict integrity baseline passed all 838 tracked files with zero mismatches."
+    },
+    {
+      "id": "cloudbank-open-issue-resolution-workshop-pass3",
+      "status": "completed",
+      "completed_at": "2026-08-09T16:46:39Z",
+      "platform": "codex",
+      "detail": "Superseded by the 2026-08-09 live CloudBank inventory: the prior named PR lanes are no longer open, and the current 47-issue triage plus draft PR #1486 are recorded in a fresh continuation item."
     }
   ],
-  "last_updated": "2026-08-01T05:44:28Z",
+  "last_updated": "2026-08-09T16:46:39Z",
   "last_platform": "codex",
-  "last_session_summary": "Root public-readiness housekeeping completed 2026-08-01. PR #57 merged as ebe18b62: root is MIT-licensed; README boundaries, code of conduct, CODEOWNERS, general issue/PR templates, managed routing, generated manifest/map, and regression coverage landed. Exact-head CI, Codacy, GitGuardian, and secret scans passed. GitHub reports a 100% community profile and MIT; native secret scanning, push protection, automatic merged-branch deletion, and seven accurate topics are enabled. Homepage and Discussions remain unset pending a verified site and moderation workflow.",
+  "last_session_summary": "CloudBank live triage confirmed 47 open issues. Started repo hygiene with brokered issue #1403 in a clean /private/tmp worktree and published draft PR #1486; local focused/full Node/web validation passed, diagnostics.json stayed unchanged, and two Copilot findings were incorporated. Recorded the prioritized next wave and preserved the suspended owner-gated root task.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -234,6 +241,42 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "59a24bd",
+      "date": "2026-08-09",
+      "platform": "codex",
+      "summary": "fix(ci): scope session-state freshness to authoritative PR base (#61)"
+    },
+    {
+      "sha": "185c15f",
+      "date": "2026-08-09",
+      "platform": "codex",
+      "summary": "fix: restore lint setup step"
+    },
+    {
+      "sha": "d9c8112",
+      "date": "2026-08-09",
+      "platform": "codex",
+      "summary": "ci: use PR-aware workspace verifier"
+    },
+    {
+      "sha": "ae4f5a9",
+      "date": "2026-08-09",
+      "platform": "codex",
+      "summary": "test: cover PR session freshness policy"
+    },
+    {
+      "sha": "6f4f13b",
+      "date": "2026-08-09",
+      "platform": "codex",
+      "summary": "ci: scope session freshness to PR base"
+    },
+    {
+      "sha": "5084f62",
+      "date": "2026-08-09",
+      "platform": "codex",
+      "summary": "state: close root public license readiness (#58)"
+    },
     {
       "sha": "ebe18b6",
       "date": "2026-08-01",
@@ -257,42 +300,6 @@
       "date": "2026-08-01",
       "platform": "codex",
       "summary": "docs: harden root public review metadata (#53)"
-    },
-    {
-      "sha": "046fc1d",
-      "date": "2026-08-01",
-      "platform": "codex",
-      "summary": "docs(recon): old-prose reconciliation report + sync CanonRec pin -> 4b907df (4 records promoted to CANON via reconciler process)"
-    },
-    {
-      "sha": "9d424cc",
-      "date": "2026-08-01",
-      "platform": "codex",
-      "summary": "chore: record CanonRec MIT licensing"
-    },
-    {
-      "sha": "b11eba8",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "chore(registry): sync CanonRec pin -> c49a941 (old-prose sweep: 4 recovered STAGING records)"
-    },
-    {
-      "sha": "7b5b97c",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "state: finalize public readiness debt pass"
-    },
-    {
-      "sha": "5fbf372",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "ci: consume public dependencies safely (#52)"
-    },
-    {
-      "sha": "9312e22",
-      "date": "2026-07-29",
-      "platform": "codex",
-      "summary": "state: record public readiness debt closure"
     }
   ],
   "security_events": [
@@ -355,12 +362,6 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Systematic CONTENT-based triage of the 450 archive files whose content is not present in the live repos (reports/recovery/data/archive_content_not_live__2026-07-10.tsv). Prior filename-based sweep undercounted (found 5). Start with the 21 distinct Python modules (runtime loader, gumas memory core, loom git-bridge, anchor validator, ZipWiz optimizer/bridge, etc.); assess each for supersession against current CloudBank/CanonRec by symbol/behavior not name. 450 is an upper bound (reformatted landings + superseded early-gen designs included)."
-    },
-    {
-      "id": "cloudbank-open-issue-resolution-workshop-pass3",
-      "priority": "medium",
-      "assigned_to": "codex",
-      "description": "Resume CloudBank workshop from live main. First address PR #1194 unresolved core.py tie-break review: include severity in the hard-veto binding total-order key (prefer higher severity on otherwise identical vetoes) and add a reversed-input regression test; prepared clean worktree /private/tmp/cloudbank-pr1194 is on the PR head branch at a47f1a61. Then re-run named superposition-gate/ethics tests, inspect all review threads and workflows, and leave draft/merge transition to the owner gate. PR #1080 remains a 56-commit draft and non-mergeable. After PRs, continue one brokered issue at a time; live issue count was 46, including follow-ups #1200 and #1204."
     },
     {
       "id": "capsule-location-binding-rebuild",
@@ -427,10 +428,16 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Migrate connector/server.py and connector tests from the MCP v1 Server API to MCP v2, then remove the temporary mcp<2.0.0 compatibility ceiling added in CloudBank PR #1385. Evidence: base CI with mcp 1.28.1 passed; an unconstrained install resolved mcp 2.0.0 and failed six Server.list_tools tests."
+    },
+    {
+      "id": "cloudbank-open-issue-hygiene-wave-2026-08-09",
+      "priority": "high",
+      "assigned_to": "codex",
+      "description": "Continue the brokered CloudBank 47-issue hygiene wave from origin/main. First stabilize draft PR #1486 for #1403; recommend owner closure review for #1475, #1410, and #1352; then work #1446 and #1424, followed by residual #1362/#1342/#1329. Re-triage L1 child acceptance deltas without duplicating merged PR #1461 work; #1453/#1457/#1456 remain substantive and #1481 is already represented by PR #1482. Keep each issue in a clean /private/tmp worktree, publish draft-only, and do not merge/close/comment/ready or INIT without explicit authorization."
     }
   ],
   "known_state": {
-    "main_sha": "ebe18b62f08ef697023a8a6885664f2b88f8bc03",
+    "main_sha": "59a24bdb48d7d8e2be497c3219c9d6590f786db2",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
