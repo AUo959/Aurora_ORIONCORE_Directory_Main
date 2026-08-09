@@ -249,6 +249,18 @@
   },
   "recent_commits": [
     {
+      "sha": "4aa7cd9",
+      "date": "2026-08-09",
+      "platform": "codex",
+      "summary": "state: finalize CloudBank hygiene phase"
+    },
+    {
+      "sha": "58157f7",
+      "date": "2026-08-09",
+      "platform": "codex",
+      "summary": "state: refresh 42-issue handoff receipt"
+    },
+    {
       "sha": "d90fe8e",
       "date": "2026-08-09",
       "platform": "codex",
@@ -295,18 +307,6 @@
       "date": "2026-08-09",
       "platform": "codex",
       "summary": "test: cover PR session freshness policy"
-    },
-    {
-      "sha": "6f4f13b",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "ci: scope session freshness to PR base"
-    },
-    {
-      "sha": "5084f62",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "state: close root public license readiness (#58)"
     }
   ],
   "security_events": [
@@ -444,7 +444,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "d90fe8ee853783e1c49c57e20576f2e491b891a5",
+    "main_sha": "4aa7cd9c9041d507bea0e4cd0b028379554f0ca8",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
