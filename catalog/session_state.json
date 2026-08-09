@@ -217,9 +217,9 @@
       "detail": "Superseded by the 2026-08-09 live CloudBank inventory: the prior named PR lanes are no longer open, and the current 47-issue triage plus draft PR #1486 are recorded in a fresh continuation item."
     }
   ],
-  "last_updated": "2026-08-09T16:46:39Z",
+  "last_updated": "2026-08-09T22:36:38Z",
   "last_platform": "codex",
-  "last_session_summary": "CloudBank live triage confirmed 47 open issues. Started repo hygiene with brokered issue #1403 in a clean /private/tmp worktree and published draft PR #1486; local focused/full Node/web validation passed, diagnostics.json stayed unchanged, and two Copilot findings were incorporated. Recorded the prioritized next wave and preserved the suspended owner-gated root task.",
+  "last_session_summary": "CloudBank 47-issue hygiene wave advanced through brokered draft fixes for #1446 and #1424. Draft PR #1487 makes gate_registry.json the human-gate authority for OPEN_GATES.md, adds blocking registry/queue coherence checks, and is mergeable with the full check suite green; 38 focused tests passed. Draft PR #1488 consolidates QGIA_Integration casing, repairs active references, and adds tracked-path casefold guards in pre-commit plus always-on Linux and macOS/Windows CI; 28 focused tests passed, Codacy/CodeQL/Sonar/security/cross-platform checks are green, with only the long aggregate CI job still running at handoff. No merge, issue closure, review reply/resolution, ready transition, canon promotion, or INIT was performed. Next ordered work remains #1362, then #1342 and #1329; owner should separately review closure candidates #1475/#1410/#1352.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
