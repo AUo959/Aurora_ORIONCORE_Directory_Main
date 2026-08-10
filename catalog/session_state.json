@@ -334,6 +334,13 @@
       "completed_at": "2026-08-10T19:13:23Z",
       "platform": "claude-code",
       "detail": "Rolled out across all four major prose corpora 2026-08-09: .md tier (838), deep_filtered (416), conversations 15MB (361), conversations.json 252MB (1198). Consolidated to 1,044 unique claims across 108 canon entities; ledger committed at reports/recovery/data/prose_claim_ledger__2026-08-09.json. Also made a third precision fix structurally: single-word entity names now match case-sensitively (species_human was matching bare 'human' 562 times, sweeping in AI-architecture prose). Salvage from the ledger is ongoing work, queued separately."
+    },
+    {
+      "id": "sovereign-nexus-name-collision",
+      "status": "completed",
+      "completed_at": "2026-08-10T22:41:22Z",
+      "platform": "claude-code",
+      "detail": "RESOLVED 2026-08-09 by evidence, not assumption. Early prose attests Sovereign Nexus as a place three independent ways (strategically vital region; hyperlane chokepoint with Separatist force concentration; setting of the Sovereign Nexus Crisis). Created loc_sovereign_nexus for the region; org_sovereign_nexus remains the rogue AI. Both cross-linked with disambiguation blocks. Neither merged; relationship between them explicitly UNDETERMINED. Surfaced 'the Sovereign Nexus Crisis' as a further unminted event."
     }
   ],
   "last_updated": "2026-08-10T19:05:53Z",
@@ -555,12 +562,6 @@
       "description": "Build a standing reference-integrity sweep over canon: verify every faction_binding, organization_ids, crew_ids, commanding_officer_id, location_refs, participant_refs, event_refs and *_id field resolves to an existing entity record. This technique \u2014 not prose mining \u2014 produced every structural finding of 2026-08-09: the Velar Imperium referent, the 29 capsule-only characters, and the Outer Colonies/Trade Coalition/AI Vanguard blocs. Make it a test so new dangling referents fail CI rather than waiting to be discovered by an archive sweep."
     },
     {
-      "id": "sovereign-nexus-name-collision",
-      "priority": "high",
-      "assigned_to": "either",
-      "description": "CONFLICT: org_sovereign_nexus (created 2026-08-09 from the Obsidian Dawn outcome file as a rogue AI intelligence) collides with early-project prose describing 'Sovereign Nexus' as a PLACE \u2014 'Separatist hardliners are amassing forces in Sovereign Nexus, a hyperlane chokepoint'. Readings: (a) two distinct referents sharing a name; (b) one referent, the AI named for or operating from the chokepoint; (c) naming churn across project eras. Canon settles neither. Record is flagged conflict_flags=[name_collision_sovereign_nexus] with both readings recorded; NOTHING merged. Route through aurora-canon-reconciler."
-    },
-    {
       "id": "archive-new-referents-naming-batch2",
       "priority": "low",
       "assigned_to": "either",
@@ -571,6 +572,12 @@
       "priority": "high",
       "assigned_to": "either",
       "description": "Work the consolidated prose claim ledger (reports/recovery/data/prose_claim_ledger__2026-08-09.json): 1,044 unique claims across 108 canon entities, from 284MB of early-project prose. Per the corrected method: for each claim, first check whether canon already holds the fact elsewhere (timeline/operations/narratives) \u2014 very often it does and the entity record simply never carried it, as with the Velar Imperium history; reconcile from the authoritative source. Where canon is silent, conflict-scan and promote per the standing rule. Never assert identity on partial evidence. Highest-claim entities: org_galactic_union (230), org_prime_construct_polity (152), polity_velar_imperium (63), vessel_gu_001 (47), org_trade_coalition (35), org_ai_vanguard (33)."
+    },
+    {
+      "id": "sovereign-nexus-crisis-event",
+      "priority": "low",
+      "assigned_to": "either",
+      "description": "The Sovereign Nexus Crisis \u2014 a high-stakes multi-faction standoff over the strategically vital Sovereign Nexus region, with Separatist hardliners massing forces per Union Intelligence intercepts. Named event attested in early-project prose with no canon record. Recovered_source name; route through the naming gate and the event-promotion pattern used for Operation Obsidian Dawn."
     }
   ],
   "known_state": {
