@@ -382,6 +382,34 @@ def check_corporeal(findings, domain_terms):
                     subject,
                     f"Multiple simultaneous location bindings: {binding}.",
                 )
+            elif (
+                isinstance(binding, dict)
+                and str(binding.get("type") or "").lower() == "undetermined"
+            ):
+                # An explicit undetermined binding ANSWERS the one-body-one-place
+                # question: canon establishes no seat, vessel or world for this
+                # character. That is materially different from nobody having looked,
+                # and demanding a target would fabricate a canonical place. Same
+                # convention as canonical_position_status: unplaced and route_exemption.
+                if not binding.get("basis"):
+                    add(
+                        findings,
+                        "C1",
+                        "VIOLATION",
+                        subject,
+                        "location_binding is 'undetermined' but gives no basis; an "
+                        "undetermined binding must say why no place is established.",
+                    )
+                else:
+                    add(
+                        findings,
+                        "C1",
+                        "INFO",
+                        subject,
+                        "location_binding explicitly undetermined (no canonical seat/"
+                        "vessel/world established for this office); binding is recorded "
+                        "and re-resolves when a duty station enters canon.",
+                    )
             elif not isinstance(binding, dict) or not binding.get("target_id"):
                 add(
                     findings,

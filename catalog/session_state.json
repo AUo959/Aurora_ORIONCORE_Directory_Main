@@ -271,6 +271,13 @@
       "completed_at": "2026-08-10T16:36:36Z",
       "platform": "claude-code",
       "detail": "Resolved 2026-08-09. Canon names no corridor; it attests movements between named places. Widened the registry detector to see location_type (the Hollow Expanse is typed 'region / lawless corridor'), so P4 escalated from WARN to a live BLOCK. Made P4 satisfiable without invention via route_exemption (canonical endpoints + basis + resolution path), mirroring naming_exemption. Both waiting records carry exemptions. No route name minted \u2014 that belongs to NameService. ROUTE_REGISTRY v0.1 documents the state."
+    },
+    {
+      "id": "capsule-location-binding-rebuild",
+      "status": "completed",
+      "completed_at": "2026-08-10T17:20:15Z",
+      "platform": "claude-code",
+      "detail": "Resolved 2026-08-09. All 40 capsules now carry location_binding; the 22 unbound ones are explicitly 'undetermined' with basis, since canon names no seat for any office-holder. Capsules rebuilt (sha256 manifests re-derived, all 40 verify). C1 check extended to distinguish an answered-undetermined binding (INFO) from a missing one (GAP), rejecting baseless undetermined. Queued l2-seat-of-government-locations and canon-identity-key-unification."
     }
   ],
   "last_updated": "2026-08-10T16:36:36Z",
@@ -414,12 +421,6 @@
       "description": "Systematic CONTENT-based triage of the 450 archive files whose content is not present in the live repos (reports/recovery/data/archive_content_not_live__2026-07-10.tsv). Prior filename-based sweep undercounted (found 5). Start with the 21 distinct Python modules (runtime loader, gumas memory core, loom git-bridge, anchor validator, ZipWiz optimizer/bridge, etc.); assess each for supersession against current CloudBank/CanonRec by symbol/behavior not name. 450 is an upper bound (reformatted landings + superseded early-gen designs included)."
     },
     {
-      "id": "capsule-location-binding-rebuild",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Implement RULING-FABRIC-SCHEMA part (b): add location_binding field to charforge capsule identity schema and rebuild all sha256-manifested capsules (charforge-capsule-v1.0) \u2014 hand-editing breaks manifest integrity. Then extend tools/fabric_invariants_check.py C1 check to validate the binding."
-    },
-    {
       "id": "cloudbank-fabric-drift-wiring",
       "priority": "medium",
       "assigned_to": "either",
@@ -478,6 +479,18 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "warrant-lens/ is planned for intake/ but MUST NOT be moved as-is: it is an editable pip install (.venv/.../warrant_lens-1.1.0.dist-info/direct_url.json points at file:///\u2026/warrant-lens) and is referenced by root SPEC__WARRANT_LENS__v1.md. Relocating breaks the venv. Resolve by either adding a classification override to keep it root-anchored, or moving it AND reinstalling (pip install -e new/path) + updating the spec reference."
+    },
+    {
+      "id": "l2-seat-of-government-locations",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Establish seat-of-government / duty-station locations in canon. 22 capsule location_bindings are type 'undetermined' because canon names no seat for any office-holder: the Union capital is referenced only as 'the capital planet' (Marshal Academy charter) with no location entity, and no polity seats exist (Elari, Vorran, Zyphari, Kaelar, Tharaxian, Crimson Pact, PMC, AI-Warlord, Prime Construct, Velar, Separatist, Outer Colonies). Route naming through NameService rather than minting. When seats land, fill in each binding's type/target_id and rebuild the affected capsules (sha256-manifested \u2014 do not hand-edit)."
+    },
+    {
+      "id": "canon-identity-key-unification",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "All 23 mobile_asset records key identity as 'canonical_id'; the other 166 canon records use 'entity_id'. Any tool that indexes only entity_id silently skips every vessel \u2014 this hid the vessels from full-canon validation runs and made valid location_bindings (vessel_gu_001) look like ghost destinations. Decide one canonical spelling and migrate, or formally document both as accepted and audit every indexer. Found 2026-08-09 during the C1 rollout."
     }
   ],
   "known_state": {

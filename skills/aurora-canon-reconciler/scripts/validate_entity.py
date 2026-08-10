@@ -180,8 +180,12 @@ REQUIRED_FIELDS = {
         "species": [],
         "character": ["role", ("faction_bindings", "faction"),
                       ("source_refs", "doc_sources", "sources")],
-        "ship": [("type", "subtype", "class_entity_id")],
-        "mobile_asset": [("class_entity_id", "type", "subtype")],
+        "ship": [],
+        # A class link is valuable but is NOT an identity requirement: some vessels
+        # are unidentified by construction (vessel_unknown_dark_star_001 is *the*
+        # unknown derelict; vessel_shadow_001 is a hostile ship whose class the Union
+        # never determined). Requiring a class there would demand invention.
+        "mobile_asset": [],
         "mechanic": ["mechanic_id", "category", "description"],
         "anomaly": [],
         "facility": [],
