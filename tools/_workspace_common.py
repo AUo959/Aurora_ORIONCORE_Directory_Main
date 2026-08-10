@@ -552,6 +552,86 @@ def write_json(
     return True
 
 
+def write_yaml(
+    path: Path,
+    data: Any,
+    *,
+    volatile_keys: frozenset[str] | None = None,
+    always_write: bool = False,
+) -> bool:
+    """YAML counterpart of write_json — skip the write on timestamp-only change.
+
+    Uses the same dumper as dump_yaml_like, so formatting is unchanged; this only
+    gates *whether* the write happens. Without this, a no-op scan rewrites
+    `generated_at` and leaves the manifest permanently dirty, which trains
+    everyone to treat these files as noise (see VOLATILE_JSON_KEYS note above).
+    """
+    ensure_parent(path)
+
+    if not always_write and path.exists():
+        keys = VOLATILE_JSON_KEYS if volatile_keys is None else volatile_keys
+        try:
+            existing = load_yaml_like(path)
+        except Exception:
+            existing = None  # unreadable/unparseable — fall through and rewrite
+        if existing is not None and _strip_volatile(existing, keys) == _strip_volatile(
+            data, keys
+        ):
+            _record_lastrun(path)
+            return False
+
+    dump_yaml_like(data, path)
+    _record_lastrun(path)
+    return True
+
+
+# Lines whose only content is a regenerated timestamp. Markdown has no schema to
+# strip keys from, so volatility is matched line-wise instead.
+VOLATILE_TEXT_PATTERNS: tuple[str, ...] = (
+    r"^\s*[-*]?\s*Generated:\s*`?[^`]*`?\s*$",
+    r"^\s*[-*]?\s*Last updated:\s*`?[^`]*`?\s*$",
+)
+
+
+def _strip_volatile_lines(text: str, patterns: tuple[str, ...]) -> str:
+    compiled = [re.compile(p) for p in patterns]
+    return "\n".join(
+        line for line in text.splitlines()
+        if not any(rx.match(line) for rx in compiled)
+    )
+
+
+def write_text(
+    path: Path,
+    text: str,
+    *,
+    volatile_patterns: tuple[str, ...] | None = None,
+    always_write: bool = False,
+) -> bool:
+    """Text counterpart of write_json — skip the write on timestamp-only change.
+
+    Returns True when written, False when left alone because only volatile lines
+    (e.g. a regenerated "- Generated: `<ts>`" header) differed.
+    """
+    ensure_parent(path)
+
+    if not always_write and path.exists():
+        patterns = VOLATILE_TEXT_PATTERNS if volatile_patterns is None else volatile_patterns
+        try:
+            existing = path.read_text(encoding="utf-8")
+        except Exception:
+            existing = None
+        if existing is not None and _strip_volatile_lines(
+            existing, patterns
+        ) == _strip_volatile_lines(text, patterns):
+            _record_lastrun(path)
+            return False
+
+    path.write_text(text, encoding="utf-8")
+    _record_lastrun(path)
+    return True
+
+
 def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
     ensure_parent(path)
     with path.open("w", encoding="utf-8") as handle:
