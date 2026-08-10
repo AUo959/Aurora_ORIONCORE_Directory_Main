@@ -327,6 +327,13 @@
       "completed_at": "2026-08-10T18:52:35Z",
       "platform": "claude-code",
       "detail": "Completed 2026-08-09. Mined deep_filtered_galactic_union_simulation_conversations (9.3MB, 1.8MB text, 6 conversations). Prose extraction was almost entirely noise \u2014 name fragments of existing canon, profile field labels, reputation metrics \u2014 consistent with the .md finding that this material family is already heavily mined (its sibling is cited by 8 canon records). BUT cross-checking references produced 3 real closures: polity_outer_colonies (faction binding used by 5 records with no entity record), org_trade_coalition and org_ai_vanguard (the alliance that elected Zylox, attested in committed canon). Dangling faction referents now zero; canon 218 -> 221. Recommendation recorded: stop mining this tier for prose; run reference-integrity sweeps instead, which is what actually finds things."
+    },
+    {
+      "id": "prose-claim-salvage-rollout",
+      "status": "completed",
+      "completed_at": "2026-08-10T19:13:23Z",
+      "platform": "claude-code",
+      "detail": "Rolled out across all four major prose corpora 2026-08-09: .md tier (838), deep_filtered (416), conversations 15MB (361), conversations.json 252MB (1198). Consolidated to 1,044 unique claims across 108 canon entities; ledger committed at reports/recovery/data/prose_claim_ledger__2026-08-09.json. Also made a third precision fix structurally: single-word entity names now match case-sensitively (species_human was matching bare 'human' 562 times, sweeping in AI-architecture prose). Salvage from the ledger is ongoing work, queued separately."
     }
   ],
   "last_updated": "2026-08-10T19:05:53Z",
@@ -554,16 +561,16 @@
       "description": "CONFLICT: org_sovereign_nexus (created 2026-08-09 from the Obsidian Dawn outcome file as a rogue AI intelligence) collides with early-project prose describing 'Sovereign Nexus' as a PLACE \u2014 'Separatist hardliners are amassing forces in Sovereign Nexus, a hyperlane chokepoint'. Readings: (a) two distinct referents sharing a name; (b) one referent, the AI named for or operating from the chokepoint; (c) naming churn across project eras. Canon settles neither. Record is flagged conflict_flags=[name_collision_sovereign_nexus] with both readings recorded; NOTHING merged. Route through aurora-canon-reconciler."
     },
     {
-      "id": "prose-claim-salvage-rollout",
-      "priority": "high",
-      "assigned_to": "either",
-      "description": "Run tools/prose_claim_extractor.py across ALL prose corpora and reconcile the claim ledgers per protocol. The early project lived in prose, so this is a standing obligation, not a one-off. Done: deep_filtered_galactic_union_simulation_conversations (469 claims / 72 entities). Remaining: conversations.json (263MB), conversations (1)(1).json (15MB), the memory-index blobs, the .md tier (re-run with the claim extractor rather than the discredited name heuristic), and the GUMAS knowledge bundles. Claims are EVIDENCE \u2014 route every ledger through the reconciler conflict scan before promoting. New referents already surfaced and awaiting the naming gate: Jasrek Tyr, Arkelon Theta, Iron Fang Mercenaries, Varnak."
-    },
-    {
       "id": "archive-new-referents-naming-batch2",
       "priority": "low",
       "assigned_to": "either",
       "description": "Naming-gate batch from prose-claim salvage: Jasrek Tyr (Velar warlord, seized a Precursor vault), Arkelon Theta (the vault site), Iron Fang Mercenaries (operate in the Outer Colonies, hired for planetary defence), Varnak (Zylox's electoral rival, military-defence platform). All recovered_source. Not minted."
+    },
+    {
+      "id": "prose-claim-ledger-reconciliation",
+      "priority": "high",
+      "assigned_to": "either",
+      "description": "Work the consolidated prose claim ledger (reports/recovery/data/prose_claim_ledger__2026-08-09.json): 1,044 unique claims across 108 canon entities, from 284MB of early-project prose. Per the corrected method: for each claim, first check whether canon already holds the fact elsewhere (timeline/operations/narratives) \u2014 very often it does and the entity record simply never carried it, as with the Velar Imperium history; reconcile from the authoritative source. Where canon is silent, conflict-scan and promote per the standing rule. Never assert identity on partial evidence. Highest-claim entities: org_galactic_union (230), org_prime_construct_polity (152), polity_velar_imperium (63), vessel_gu_001 (47), org_trade_coalition (35), org_ai_vanguard (33)."
     }
   ],
   "known_state": {

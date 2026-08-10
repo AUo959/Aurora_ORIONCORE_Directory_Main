@@ -152,8 +152,22 @@ def _collect_chat_parts(node, out: list) -> None:
 
 
 def extract(text: str, forms: dict[str, str], source: str) -> dict[str, list]:
+    """Collect claim sentences per entity.
+
+    Single-word entity names are matched **case-sensitively** against the original
+    sentence, so they only fire on proper-noun usage. Without this, `species_human`
+    ("Human") matched the bare word "human" 562 times in one corpus and swept in
+    AI-architecture discussion — "as the human-AI bridge, Aurora translates human
+    commands…". A stoplist cannot keep up with that; requiring capitalisation is the
+    general fix. Multi-word names stay case-insensitive: they are distinctive enough
+    that casing varies harmlessly.
+    """
     claims: dict[str, list] = collections.defaultdict(list)
-    patterns = {f: re.compile(r"\b" + re.escape(f) + r"\b") for f in forms}
+    multiword = {f: re.compile(r"\b" + re.escape(f) + r"\b") for f in forms if " " in f}
+    single = {
+        f: re.compile(r"\b" + re.escape(f[:1].upper() + f[1:]) + r"\b")
+        for f in forms if " " not in f
+    }
     for raw in re.split(r"(?<=[.!?])\s+|\n+", text):
         sentence = " ".join(raw.split())
         if not (MIN_LEN < len(sentence) < MAX_LEN):
@@ -161,11 +175,19 @@ def extract(text: str, forms: dict[str, str], source: str) -> dict[str, list]:
         if not ASSERTIVE.search(sentence):
             continue
         low = sentence.lower()
-        for form, rx in patterns.items():
+        hit = None
+        for form, rx in multiword.items():
             if rx.search(low):
-                claims[forms[form]].append({"claim": sentence, "matched": form,
-                                            "source": source})
+                hit = form
                 break
+        if hit is None:
+            for form, rx in single.items():
+                if rx.search(sentence):  # case-sensitive, original text
+                    hit = form
+                    break
+        if hit is not None:
+            claims[forms[hit]].append({"claim": sentence, "matched": hit,
+                                       "source": source})
     return claims
 
 

@@ -378,3 +378,35 @@ earlier the same day is what that restraint is for.
    fragment), record it as a claim — do not assert it.
 
 Prose salvage is a standing obligation, not a sweep that gets declared finished.
+
+## Rollout across all major prose corpora
+
+| Corpus | Size | Claims |
+|---|---|---|
+| `.md` tier (52 blobs) | 7.3 MB | 838 |
+| `deep_filtered_galactic_union_simulation_conversations` | 9.3 MB | 416 |
+| `conversations (1) (1).json` | 15 MB | 361 |
+| **`conversations.json`** (the raw export) | **252 MB** | **1,198** |
+
+**Consolidated: 1,044 unique claims across 108 canon entities** (2,813 raw, deduped by
+claim text). Ledger committed at
+`reports/recovery/data/prose_claim_ledger__2026-08-09.json`.
+
+Every one of these corpora had been written off — the `.md` tier explicitly, the rest by
+the recommendation to stop mining prose. The recommendation was wrong.
+
+### A third precision fix, made structurally
+
+`species_human` initially returned **562 claims** from the 263 MB export. It was matching
+the bare word "human" and sweeping in AI-architecture discussion: *"as the human-AI
+bridge, Aurora translates human commands…"*. Same failure class as the "diplomacy" match
+and the Voss-Aurai surname collision — the third instance in one day.
+
+Rather than extend the stoplist again, the extractor now matches **single-word entity
+names case-sensitively**, so they only fire on proper-noun usage. Multi-word names stay
+case-insensitive, being distinctive enough that casing varies harmlessly. `species_human`
+dropped 562 → 58, and total claims fell 2,813 → a much cleaner set.
+
+The general lesson, now encoded in the tool: **in this setting, a partial or
+lowercase match is not evidence of reference.** Three separate near-misses were caused by
+matching too loosely, and each would have written plausible-looking falsehoods into canon.
