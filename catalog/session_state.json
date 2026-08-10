@@ -278,11 +278,18 @@
       "completed_at": "2026-08-10T17:20:15Z",
       "platform": "claude-code",
       "detail": "Resolved 2026-08-09. All 40 capsules now carry location_binding; the 22 unbound ones are explicitly 'undetermined' with basis, since canon names no seat for any office-holder. Capsules rebuilt (sha256 manifests re-derived, all 40 verify). C1 check extended to distinguish an answered-undetermined binding (INFO) from a missing one (GAP), rejecting baseless undetermined. Queued l2-seat-of-government-locations and canon-identity-key-unification."
+    },
+    {
+      "id": "cloudbank-fabric-drift-wiring",
+      "status": "completed",
+      "completed_at": "2026-08-10T17:25:34Z",
+      "platform": "claude-code",
+      "detail": "Resolved 2026-08-09. src/monitoring/fabric_invariant_bridge.py converts fabric_invariants_check findings to DriftAlerts (VIOLATION->alert/escalate, GAP->log/notify, INFO non-actionable). Fabric findings get dedicated runbooks rather than the statistical levels \u2014 the stock critical runbook suspends+rebaselines, which is wrong for a corpus-integrity finding; a test enforces no suspend/throttle/rebaseline. DriftResponder honours metadata['runbook'] with loud fallback. Verified end-to-end on real canon findings. 14 tests. CLOSES the 2026-07-21 fabric ruling batch."
     }
   ],
-  "last_updated": "2026-08-10T16:36:36Z",
+  "last_updated": "2026-08-10T17:25:34Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Closed the reconciler gate work: fixed REQUIRED_FIELDS/certainty-vocabulary drift (canon validation 0% -> 100% clean across 166 records), then made FABRIC P4 enforceable and satisfiable via the route registry + route_exemption mechanism. 29 tests.",
+  "last_session_summary": "Closed the 2026-07-21 fabric ruling batch: completed the C1 capsule rollout (all 40 bound, manifests rebuilt) and wired fabric findings into CloudBank DriftAlert/DriftResponder with dedicated runbooks. Canon validates 189/189 clean.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -419,12 +426,6 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Systematic CONTENT-based triage of the 450 archive files whose content is not present in the live repos (reports/recovery/data/archive_content_not_live__2026-07-10.tsv). Prior filename-based sweep undercounted (found 5). Start with the 21 distinct Python modules (runtime loader, gumas memory core, loom git-bridge, anchor validator, ZipWiz optimizer/bridge, etc.); assess each for supersession against current CloudBank/CanonRec by symbol/behavior not name. 450 is an upper bound (reformatted landings + superseded early-gen designs included)."
-    },
-    {
-      "id": "cloudbank-fabric-drift-wiring",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Implement RULING-FABRIC-WIRING in aurora-cloudbank-symbolic-main: fabric_invariants_check findings -> DriftAlert -> DriftResponder runbooks (VIOLATION->alert/escalate, GAP->log/notify). Trace receipts: reports/analysis/velar_fabric_pass__2026-07-21.md sec.2."
     },
     {
       "id": "kharon-sablewake-class-assignment",
