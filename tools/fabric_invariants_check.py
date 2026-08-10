@@ -27,10 +27,47 @@ CANONREC = os.path.join(
     "CanonRec",
 )
 
+# Lifecycle status vocabulary, per entity kind.
+#
+# This was a single flat set, which is the wrong shape: it is body-oriented (C2 —
+# one body, one place; the dead do not act) but was applied to species, events,
+# reports and places too. A species is not "active", it is EXTANT; an event is
+# CONCLUDED; a report is SUBMITTED. The flat set forced those records to either
+# lie or fall outside the vocabulary, and 25 of them fell outside.
+#
+# `status` carries LIFECYCLE only — the part an invariant can reason about.
+# Situational detail (custody, quarantine, covert reoccupation, strength unknown)
+# is canon and is preserved verbatim in `status_detail`, which is free text.
+_COMMON = {"unknown", "alias_forward_only"}
+
+STATUS_VOCAB_BY_KIND = {
+    "character": {"active", "deceased", "retired"} | _COMMON,
+    "species": {"extant", "extinct"} | _COMMON,
+    "polity": {"active", "inactive", "extinct", "destroyed"} | _COMMON,
+    "organization": {"active", "inactive", "destroyed", "disbanded"} | _COMMON,
+    "mobile_asset": {"active", "destroyed", "inactive", "retired"} | _COMMON,
+    "ship_class": {"active", "retired", "inactive"} | _COMMON,
+    "equipment": {"active", "destroyed", "inactive"} | _COMMON,
+    "location": {"active", "inactive", "destroyed"} | _COMMON,
+    "place": {"active", "inactive", "destroyed"} | _COMMON,
+    "event": {"concluded", "ongoing"} | _COMMON,
+    "conflict": {"active", "concluded", "dormant"} | _COMMON,
+    "report": {"draft", "submitted", "accepted", "superseded"} | _COMMON,
+    "anomaly": {"active", "inactive", "destroyed"} | _COMMON,
+    "domain": {"active", "inactive", "extinct"} | _COMMON,
+}
+
+#: Fallback for kinds without a dedicated lifecycle (keeps the check honest rather
+#: than silently passing an unknown kind).
 STATUS_VOCAB = {
     "active", "deceased", "destroyed", "retired", "unknown", "inactive",
     "alias_forward_only",  # SUPERSEDED alias-forward records (CERTAINTY_TAGS.md)
 }
+
+
+def status_vocab_for(kind):
+    """Lifecycle vocabulary for an entity kind, falling back to the generic set."""
+    return STATUS_VOCAB_BY_KIND.get(kind, STATUS_VOCAB)
 
 DOMAIN_FACTIONS = {"velar": {"velar_imperium"}, "union": {"galactic_union"}}
 
@@ -350,14 +387,19 @@ def check_corporeal(findings, domain_terms):
         if status is not None:
             if isinstance(status, list):
                 add(findings, "C2", "VIOLATION", subject, f"Multiple statuses: {status}.")
-            elif status not in STATUS_VOCAB:
-                add(
-                    findings,
-                    "C2",
-                    "VIOLATION",
-                    subject,
-                    f"Status {status!r} outside vocabulary {sorted(STATUS_VOCAB)}.",
-                )
+            else:
+                vocab = status_vocab_for(rec.get("entity_kind"))
+                if status not in vocab:
+                    add(
+                        findings,
+                        "C2",
+                        "VIOLATION",
+                        subject,
+                        f"Status {status!r} outside the {rec.get('entity_kind')!r} "
+                        f"lifecycle vocabulary {sorted(vocab)}. Situational detail "
+                        "(custody, quarantine, strength) belongs in 'status_detail'; "
+                        "'status' carries lifecycle only.",
+                    )
         # C1: characters need a single location binding to be checkable.
         if os.path.basename(path) == "identity.json":
             binding = rec.get("location_binding")

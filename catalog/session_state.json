@@ -292,6 +292,13 @@
       "completed_at": "2026-08-10T17:54:11Z",
       "platform": "claude-code",
       "detail": "Resolved 2026-08-09 additively: all 23 mobile_asset records gained entity_id (same value) and kept canonical_id for back-compat. entity_id index now covers 189/189; canonical_id readers still work. Guard tests in tests/test_canon_identity_keys.py pin the invariant (verified to catch a simulated regression). Root cause of two wrong results earlier in the session: validation reporting 166/189 as clean coverage, and vessel_gu_001 binding targets appearing to be ghosts."
+    },
+    {
+      "id": "selene-ark-status-vocab",
+      "status": "completed",
+      "completed_at": "2026-08-10T17:59:29Z",
+      "platform": "claude-code",
+      "detail": "Resolved 2026-08-09, generalised beyond the single record. Root cause: STATUS_VOCAB was one flat body-oriented set applied to every entity kind, leaving 25 of 189 records outside it and C2 unenforced. Fixed with STATUS_VOCAB_BY_KIND (species extant/extinct, events concluded/ongoing, reports submitted, characters active/deceased) plus a loud generic fallback. 11 composite statuses split: status=lifecycle, status_detail=situational canon verbatim, prev_status=original. No canon detail lost \u2014 char_selene_ark reads 'active' with medical custody preserved. 8 tests."
     }
   ],
   "last_updated": "2026-08-10T17:54:11Z",
@@ -445,12 +452,6 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "Pre-existing branch fix/ci-dynamic-registry-pins (commit b3bb45c 'ci: read nested-repo pins dynamically from catalog/repo_registry.yaml') is unpublished and overlaps the registry-sync tooling added 2026-07-21 (tools/registry_sync_heads.py + make registry-sync + Stop-hook advisory). Review whether that branch is superseded, complementary (CI-side vs local-side), or should be merged/retired. Flagged by the landing ledger as unpublished_branch."
-    },
-    {
-      "id": "selene-ark-status-vocab",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Fabric linter C2 flags char_selene_ark status 'alive_in_union_medical_custody' (your canon) as outside vocabulary. NOT auto-fixed. Character is alive so the one-body invariant holds \u2014 vocabulary-vs-freeform mismatch. Options: (a) status='active' + custody flag field, or (b) admit a custody status to STATUS_VOCAB + CERTAINTY_TAGS.md (SUPERSEDED-ratification pattern). Still open \u2014 mistakenly closed once, re-queued."
     },
     {
       "id": "naming-gate-owner-records",
