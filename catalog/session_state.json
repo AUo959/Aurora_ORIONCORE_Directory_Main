@@ -243,6 +243,13 @@
       "completed_at": "2026-08-10T16:01:23Z",
       "platform": "claude-code",
       "detail": "Resolved by process 2026-08-09: conflict scan CLEAN but held at UNCONFIRMED on evidentiary grounds \u2014 the source block is explicitly headed 'AI-Generated Character', a demonstration of on-demand generation, i.e. tooling meta-content rather than in-world fact. Reason recorded on the record as certainty_hold."
+    },
+    {
+      "id": "reconciler-fabric-checks",
+      "status": "completed",
+      "completed_at": "2026-08-10T16:18:25Z",
+      "platform": "claude-code",
+      "detail": "Implemented RULING-ENGINE-P4 + RULING-FABRIC-SCHEMA in skills/aurora-canon-reconciler/scripts/validate_entity.py: P1 map-primacy, P2 moving-entity placement, P4 movement-promotion route gate. Semantics pinned to tools/fabric_invariants_check.py. 20 tests. Also fixed VALID_ENTITY_KINDS drift (77 of 189 canon records were rejected on entity_kind alone). Queued two follow-ups: reconciler-required-fields-schema-drift, fabric-p1-canon-remediation (29 pre-existing P1 findings the Velar-scoped linter never saw)."
     }
   ],
   "last_updated": "2026-08-10T02:14:30Z",
@@ -392,12 +399,6 @@
       "description": "Implement RULING-FABRIC-SCHEMA part (b): add location_binding field to charforge capsule identity schema and rebuild all sha256-manifested capsules (charforge-capsule-v1.0) \u2014 hand-editing breaks manifest integrity. Then extend tools/fabric_invariants_check.py C1 check to validate the binding."
     },
     {
-      "id": "reconciler-fabric-checks",
-      "priority": "medium",
-      "assigned_to": "codex",
-      "description": "Implement RULING-ENGINE-P4 + RULING-FABRIC-SCHEMA reconciler checks in aurora-canon-reconciler: (1) P4 promotion gate \u2014 canon promotions citing movement/cross-region events must include canonical route/drive citation; (2) P2 placement_rule validation on mobile assets; (3) P1 rule \u2014 entity canonical_position_status must not exceed map authority row status. Spec: FABRIC_INVARIANTS v0.1 verification table."
-    },
-    {
       "id": "cloudbank-fabric-drift-wiring",
       "priority": "medium",
       "assigned_to": "either",
@@ -456,6 +457,18 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "warrant-lens/ is planned for intake/ but MUST NOT be moved as-is: it is an editable pip install (.venv/.../warrant_lens-1.1.0.dist-info/direct_url.json points at file:///\u2026/warrant-lens) and is referenced by root SPEC__WARRANT_LENS__v1.md. Relocating breaks the venv. Resolve by either adding a classification override to keep it root-anchored, or moving it AND reinstalling (pip install -e new/path) + updating the spec reference."
+    },
+    {
+      "id": "reconciler-required-fields-schema-drift",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "aurora-canon-reconciler REQUIRED_FIELDS expects a schema CanonRec does not use: it demands 'canonical_name' and 'type' while committed records carry 'name' and 'subtype'. Consequence: every real canon record validates as BLOCKED on missing-required-field grounds even when it is perfectly well-formed, which trains users to ignore the validator. Found 2026-08-09 while wiring the FABRIC P1/P2/P4 checks (VALID_ENTITY_KINDS had the same drift and was fixed then; REQUIRED_FIELDS is the remaining half). Fix: reconcile REQUIRED_FIELDS against the field names canon actually uses, or accept either spelling."
+    },
+    {
+      "id": "fabric-p1-canon-remediation",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "The newly wired reconciler P1 check finds 29 pre-existing placement issues in committed canon that tools/fabric_invariants_check.py never saw because it is Velar-domain-scoped (16 of 158 entities): 16 records claim canonical_position_status='canon' while their Location Authority Table row is STAGING/TBD, and 13 claim canon placement with no LAT row at all. Documented resolution for a P1 violation is downgrade (precedent: Vel-Surak, 2026-07-21 ruling batch \u2014 '2 violations found -> RESOLVED by downgrade'). Remediate by downgrading position status to match map authority, then consider widening the linter beyond the Velar domain."
     }
   ],
   "known_state": {

@@ -34,7 +34,20 @@ VALID_CERTAINTY_TAGS = {
 
 VALID_ENTITY_KINDS = {
     "location", "ship", "fleet", "anomaly", "megafauna", "facility",
-    "domain", "polity", "species", "character"
+    "domain", "polity", "species", "character",
+    # Synced to committed canon 2026-08-09. These eight kinds are in active use in
+    # CanonRec but were absent from this vocabulary, so the validator rejected 77 of
+    # 189 canonical records on entity_kind alone — including every mobile_asset,
+    # which is the kind P2 exists to police. Canon is the source of truth for the
+    # vocabulary, not the other way round.
+    "organization",   # 25 records
+    "mobile_asset",   # 23 — vessels/fleets; the moving-entity kind P2 governs
+    "ship_class",     # 14 — class specs that vessels derive capabilities from
+    "equipment",      #  5
+    "place",          #  3 — coarser sibling of "location" (Dark Star arc)
+    "conflict",       #  3 — scenario-defined canonical tension points
+    "event",          #  2 — event hub records
+    "report",         #  1 — in-canon documentation artifact
 }
 
 VALID_L2_LOCATION_SUBTYPES = {
@@ -61,7 +74,10 @@ VALID_L1_SYSTEM_STATUSES = {
     "NOMINAL", "DEGRADED", "OFFLINE", "MAINTENANCE"
 }
 
-MOVING_ENTITY_KINDS = {"ship", "fleet", "megafauna"}
+# "mobile_asset" is the kind CanonRec actually uses for vessels/fleets (23 records
+# under canon/L2/entities/mobile_assets/); it was missing here, so P2 was silently
+# unenforced for every real moving entity in canon. Added 2026-08-09.
+MOVING_ENTITY_KINDS = {"ship", "fleet", "megafauna", "mobile_asset", "vessel"}
 
 L1_CHARACTER_ID_PREFIXES = {
     "CMD_", "ENG_", "SCI_", "MED_", "OPS_", "SEC_", "AI_"
@@ -406,6 +422,197 @@ def apply_context_identity_scan(data: dict, report: "ValidationReport", context:
 # Validation engine
 # ---------------------------------------------------------------------------
 
+# ── FABRIC_INVARIANTS v0.1 — P1/P2/P4 ─────────────────────────────────────
+#
+# Spec: canon/L2/mechanics/FABRIC_INVARIANTS__v0.1__2026-07-21.md (verification
+# table, 2026-07-21 ruling batch). The static linter tools/fabric_invariants_check.py
+# enforces T/P/C over committed canon; these are the three invariants the owner
+# rulings assigned to the *reconciler*, i.e. checked before content becomes canon:
+#
+#   P1  entity canonical_position_status must not exceed its map authority row
+#   P2  moving entities never hold fixed coordinates; placement_rule required
+#   P4  canon promotions citing movement/cross-region events must cite a route/drive
+#
+# Field names and severities mirror the linter deliberately.
+
+# Placement fields that pin an entity to a fixed point (linter parity).
+FIXED_PLACEMENT_FIELDS = ("region_id", "coordinates", "position", "fixed_position")
+
+# Phrases that assert a movement / cross-region EVENT occurred.
+#
+# Deliberately narrow. An earlier draft matched bare "deploy"/"ftl"/"jump", which
+# fired on capability and property text — a ship class listing "rapid sentinel
+# deployment", a court described as "deployed", a region described as an
+# "FTL-disruption anomaly". None of those cite a movement event, and P4 is a
+# promotion gate: a gate that cries wolf gets switched off. Markers must read as
+# something that happened, and P4 additionally requires event context (below).
+MOVEMENT_MARKERS = (
+    "migrated", "migration of", "transited", "in transit to", "relocated",
+    "voyage to", "crossed into", "crossing into", "traversed", "withdrew from",
+    "withdrew to", "evacuated to", "evacuated from", "arrived from", "arrived at",
+    "departed for", "departed from", "convoyed", "incursion into", "expedition to",
+    "jumped to", "ftl transit", "made the crossing",
+)
+
+# Fields that satisfy the P4 route/drive citation requirement.
+ROUTE_CITATION_FIELDS = (
+    "route_ref", "route_citation", "route_id", "drive_ref", "drive_citation",
+    "propulsion_ref", "transit_route", "route",
+)
+
+# Certainty values that mean "this is being made canon now".
+PROMOTION_CERTAINTIES = {"CANON", "CANON_PROMOTE"}
+
+
+def _movement_claim_text(data: dict) -> str:
+    """Concatenate the free-text surfaces where a movement claim would appear."""
+    parts = []
+    for key in ("description", "notes", "nature", "operational_summary",
+                "role", "fate", "promotion_note", "status_note"):
+        v = data.get(key)
+        if isinstance(v, str):
+            parts.append(v)
+    for key in ("canonical_sequence", "event_refs", "canon_observations"):
+        v = data.get(key)
+        if isinstance(v, list):
+            parts.extend(x for x in v if isinstance(x, str))
+    return " ".join(parts).lower()
+
+
+def load_map_authority_rows(context: Optional[dict]) -> Optional[dict]:
+    """Best-effort load of the L2 Location Authority Table.
+
+    Returns {row_name_lower: {"status":…, "notes":…}} or None when the table
+    cannot be located. P1 degrades to INFO rather than failing closed: the skill
+    must stay usable outside a full CanonRec checkout.
+    """
+    root = (context or {}).get("context_root")
+    if not root:
+        return None
+    candidates = list(Path(root).rglob("*LOCATION_AUTHORITY_TABLE*.md"))
+    if not candidates:
+        return None
+    rows: dict = {}
+    try:
+        text = candidates[0].read_text(encoding="utf-8", errors="ignore")
+    except Exception:
+        return None
+    for line in text.splitlines():
+        if not line.startswith("|"):
+            continue
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if len(cells) < 4 or cells[0].lower() in ("name", "location", "---"):
+            continue
+        if set(cells[0]) <= set("-: "):
+            continue
+        name = cells[0].replace("‑", "-")
+        status = cells[3] if len(cells) > 3 else ""
+        notes = cells[-1] if len(cells) > 4 else ""
+        rows[name.lower()] = {"status": status, "notes": notes, "name": name}
+    return rows or None
+
+
+def _match_authority_row(name: str, rows: dict):
+    """Fuzzy-match an entity name to a table row, mirroring the linter's matcher."""
+    if not name:
+        return None, None
+    norm = name.replace("‑", "-").lower()
+    for key, row in rows.items():
+        head = norm[: max(len(norm) // 2, 8)]
+        if key.startswith(head) or norm in key:
+            return row.get("name", key), row
+    return None, None
+
+
+def check_fabric_invariants(data: dict, ek: Optional[str], report: "ValidationReport",
+                            context: Optional[dict] = None) -> None:
+    """Enforce FABRIC_INVARIANTS P1, P2 and P4 at validation time."""
+    certainty = str(data.get("certainty") or "").upper()
+
+    # ── P2: moving entities carry no fixed placement ──────────────────────
+    if ek in MOVING_ENTITY_KINDS:
+        for field in FIXED_PLACEMENT_FIELDS:
+            if data.get(field):
+                report.add(
+                    "BLOCK", "FABRIC_P2_MOVING_ENTITY_FIXED_PLACEMENT",
+                    f"P2: entity kind '{ek}' is a moving entity and must NOT hold a fixed "
+                    f"placement field '{field}'. Express movement via 'placement_rule'.",
+                    field,
+                )
+        if not data.get("placement_rule"):
+            report.add(
+                "WARN", "FABRIC_P2_NO_PLACEMENT_RULE",
+                f"P2: moving entity '{ek}' has no 'placement_rule' describing its movement pattern.",
+                "placement_rule",
+            )
+
+    # ── P1: position status must not exceed the map authority row ─────────
+    if ek == "location" and certainty != "SUPERSEDED":
+        ent_status = str(data.get("canonical_position_status") or "").lower()
+        rows = load_map_authority_rows(context)
+        if rows is None:
+            if ent_status == "canon":
+                report.add(
+                    "INFO", "FABRIC_P1_MAP_UNVERIFIED",
+                    "P1: entity claims canonical placement but the Location Authority Table "
+                    "could not be located, so map primacy is unverified here. Run "
+                    "tools/fabric_invariants_check.py against CanonRec for authoritative P1.",
+                    "canonical_position_status",
+                )
+        else:
+            key, row = _match_authority_row(data.get("name", ""), rows)
+            if row is None:
+                if ent_status == "canon":
+                    report.add(
+                        "BLOCK", "FABRIC_P1_NO_MAP_ROW",
+                        "P1: entity claims canonical placement but has no row in the Location "
+                        "Authority Table. The map is the source of truth for placement.",
+                        "canonical_position_status",
+                    )
+                else:
+                    report.add(
+                        "INFO", "FABRIC_P1_NO_MAP_ROW",
+                        "P1: no Location Authority Table row for this location; placement remains "
+                        "unresolved (route via the map-authority / Reconciliation Workflow process).",
+                        "canonical_position_status",
+                    )
+            else:
+                unresolved = ("TBD" in (row.get("notes") or "").upper()
+                              or "TBD" in (row.get("status") or "").upper())
+                staging = (row.get("status") or "").strip().upper() == "STAGING"
+                if ent_status == "canon" and (unresolved or staging):
+                    report.add(
+                        "BLOCK", "FABRIC_P1_POSITION_EXCEEDS_MAP",
+                        f"P1: entity claims canonical placement but map authority row {key!r} is "
+                        f"'{row.get('status')}' (notes: {row.get('notes')!r}). The map is the source "
+                        "of truth; entity position status must not exceed its map row.",
+                        "canonical_position_status",
+                    )
+
+    # ── P4: movement claims promoted to canon must cite a route/drive ─────
+    # Requires BOTH event context and an event-shaped movement phrase. The ruling
+    # gates promotions "citing movement/cross-region EVENTS" — a capability spec or
+    # a place description is neither, and must not trip the gate.
+    if certainty in PROMOTION_CERTAINTIES:
+        has_event_context = (
+            ek == "event"
+            or bool(data.get("event_refs"))
+            or bool(data.get("canonical_sequence"))
+        )
+        text = _movement_claim_text(data)
+        hit = next((m for m in MOVEMENT_MARKERS if m in text), None)
+        if has_event_context and hit and not any(data.get(f) for f in ROUTE_CITATION_FIELDS):
+            report.add(
+                "BLOCK", "FABRIC_P4_MOVEMENT_WITHOUT_ROUTE",
+                f"P4 promotion gate: this record is being promoted to canon and describes a "
+                f"movement / cross-region event (matched {hit!r}), but cites no canonical route "
+                f"or drive. Add one of {list(ROUTE_CITATION_FIELDS)}. Engine-generated movement "
+                "flows are acceptable in-run, but a route/drive citation is required at canon "
+                "promotion (RULING-ENGINE-P4).",
+                "route_ref",
+            )
+
+
 class ValidationReport:
     """Collects validation findings at BLOCK/WARN/INFO severity."""
 
@@ -563,17 +770,12 @@ def validate_entity(
                             f"Polity subtype '{st}' is not standard. Expected: {sorted(VALID_L2_POLITY_SUBTYPES)}",
                             "subtype")
 
-        # Moving entity coordinate check
-        if ek in MOVING_ENTITY_KINDS:
-            if data.get("coordinates") is not None:
-                report.add("BLOCK", "MOVING_ENTITY_FIXED_COORDS",
-                            f"Entity kind '{ek}' is a moving entity and must NOT have fixed coordinates. "
-                            "Use 'placement_rule' for movement patterns instead.",
-                            "coordinates")
-            if not data.get("placement_rule"):
-                report.add("WARN", "MOVING_ENTITY_NO_RULE",
-                            f"Moving entity '{ek}' should have a 'placement_rule' describing movement patterns.",
-                            "placement_rule")
+        # FABRIC_INVARIANTS v0.1 — P1/P2/P4 enforcement at validation time.
+        # Implements RULING-ENGINE-P4 + RULING-FABRIC-SCHEMA (verification table,
+        # canon/L2/mechanics/FABRIC_INVARIANTS__v0.1__2026-07-21.md). Semantics are
+        # kept identical to tools/fabric_invariants_check.py so the static linter and
+        # this gate cannot disagree — one rule, two enforcement points.
+        check_fabric_invariants(data, ek, report, context)
 
         # Canonical ID format check
         cid = data.get("canonical_id")
