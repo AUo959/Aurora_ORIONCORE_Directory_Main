@@ -119,25 +119,25 @@
       ]
     }
   },
-  "active_task": {
-    "id": "narrative-promotion-continuation-2026-06",
-    "status": "suspended",
-    "assigned_to": "either",
-    "priority": "medium",
-    "repo": "root + aurora-cloudbank-symbolic-main",
-    "description": "Continue the Aurora-first narrative-layer promotion per the ADR.",
-    "started_at": "2026-06-10T00:00:00Z",
-    "updated_at": "2026-07-11T02:33:14Z",
-    "context_files": [
-      "docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md",
-      "reports/recovered_canon/README.md",
-      "reports/analysis/march_2026_reset_forensics__2026-06-10.md",
-      "reports/analysis/unlanded_work_audit__2026-06-10.md"
-    ],
-    "next_step": "owner_review_future_candidate_receipts_before_any_canon_promote",
-    "next_step_detail": "Phase-two contract items 4-7 are implemented and merged via CloudBank PR #1195 (merge 5dd18d36). Root flight is registered and current; latest receipt 93ac4c44e8680206 produced gate=candidate using fresh prior flight status. This validates the path only; there are no proposed CanonRec files and no promotion was executed. Any future canon-reconciler packet still requires a concrete candidate receipt plus explicit owner approval before CANON_PROMOTE."
-  },
-  "task_queue": [],
+  "active_task": null,
+  "task_queue": [
+    {
+      "id": "narrative-promotion-continuation-2026-06",
+      "status": "queued",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Aurora-first narrative-layer promotion per ADR (docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md). PROCESS-ROUTED: run candidate receipts through aurora-canon-reconciler (conflict scan + advisor); non-conflicting reconciled content is canon at commit. Owner is the commit gate, not the adjudicator of what is true.",
+      "repo": "root + aurora-cloudbank-symbolic-main",
+      "context_files": [
+        "docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md",
+        "reports/recovered_canon/README.md",
+        "reports/analysis/march_2026_reset_forensics__2026-06-10.md",
+        "reports/analysis/unlanded_work_audit__2026-06-10.md"
+      ],
+      "next_step": "run_candidate_receipts_through_reconciler_process",
+      "next_step_detail": "Phase-two contract items 4-7 are implemented and merged via CloudBank PR #1195 (merge 5dd18d36). Root flight is registered and current; latest receipt 93ac4c44e8680206 produced gate=candidate using fresh prior flight status. This validates the path only; there are no proposed CanonRec files and no promotion was executed. Any future canon-reconciler packet still requires a concrete candidate receipt plus explicit owner approval before CANON_PROMOTE. | GATE REFRAMED 2026-08-09: the prior next_step read \"owner_review_...before_any_canon_promote\", which mis-specified the owner as the adjudicator of canon. Correct routing: run any candidate receipt through aurora-canon-reconciler (conflict scan + advisor). Non-conflicting reconciled content IS canon and lands at commit; the owner gates the commit, not the truth determination."
+    }
+  ],
   "completed_tasks": [
     {
       "id": "spatha-canon-promotion",
@@ -369,7 +369,8 @@
       "id": "snpm-canon-promote-review",
       "priority": "low",
       "assigned_to": "either",
-      "description": "Owner review of staged SNPM (Scalable Narrative Probability Model) at CanonRec canon/L2/mechanics/ (see SNPM__RECONCILIATION_NOTE__2026-07-10). If accepted, route aurora-canon-reconciler -> CANON_PROMOTE and cross-link into 03_galactic_union_mechanics_and_models.md + narrative-engine input relationship. Also push CanonRec commit 16fc171 to AUo959/CanonRec."
+      "description": "SNPM (Scalable Narrative Probability Model) at CanonRec canon/L2/mechanics/ \u2014 PROCESS-ROUTED: run through aurora-canon-reconciler (conflict scan vs committed mechanics + advisor scoring). If the conflict scan is clean it is canon and lands at commit. This is not an owner adjudication of whether the model is true; it is a conflict check against canon.",
+      "gate_reframed": "2026-08-09: owner-adjudication framing replaced with a process route (owner gates the commit, not the truth determination)."
     },
     {
       "id": "archive-content-triage-450",
@@ -410,8 +411,9 @@
     {
       "id": "haden-korr-affirmation",
       "priority": "low",
-      "assigned_to": "owner",
-      "description": "Haden Korr (Union Navy Fleet Admiral) recorded at UNCONFIRMED by the L2 Character Salvage Pass \u2014 his profile was an archive 'AI-Generated Character' demonstration, not standing canon. Owner decision: affirm him as STAGING canon (build capsule, bind to org_union_naval_forces) or leave UNCONFIRMED. Record: canon/L2/entities/characters/char_haden_korr.json."
+      "assigned_to": "either",
+      "description": "Haden Korr certainty resolution \u2014 PROCESS-ROUTED: run the reconciler certainty advisor against available evidence. His profile traces to an archive AI-Generated Character demonstration, so the question is an evidentiary one (does a source-of-truth artifact exist?), resolved by the advisor + conflict scan \u2014 not an owner fiat to affirm or deny. Rises above UNCONFIRMED only when evidence supports it.",
+      "gate_reframed": "2026-08-09: owner-adjudication framing replaced with a process route (owner gates the commit, not the truth determination)."
     },
     {
       "id": "selene-ark-status-vocab",
