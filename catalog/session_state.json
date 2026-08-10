@@ -494,6 +494,24 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Establish seat-of-government / duty-station locations in canon. 22 capsule location_bindings are type 'undetermined' because canon names no seat for any office-holder: the Union capital is referenced only as 'the capital planet' (Marshal Academy charter) with no location entity, and no polity seats exist (Elari, Vorran, Zyphari, Kaelar, Tharaxian, Crimson Pact, PMC, AI-Warlord, Prime Construct, Velar, Separatist, Outer Colonies). Route naming through NameService rather than minting. When seats land, fill in each binding's type/target_id and rebuild the affected capsules (sha256-manifested \u2014 do not hand-edit)."
+    },
+    {
+      "id": "archive-ship-profiles-reconcile",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Reconcile the 5 ship profiles recovered from archives/unzipped/Complete Archive 4_19 copy/galactic_union_core_ships_module (1).py into canon vessel records (traits, reputation, crew complement, weapons, defence, propulsion, embarked craft, cyberwarfare, recent actions, directives). Characters already exist (char_saela_corven, char_mara_velthis, char_deyan_orros) but the ship<->officer linkage and specs were never landed. MUST route through the conflict scan: canon sets vessel_gu_001.commanding_officer_id=alric_tann (a Captain) while the archive names Fleet Admiral Saela Corven \u2014 likely embarked flag officer vs ship's captain (both true), but that is a reconciliation, not an assumption. Express as two fields if it holds; do not overwrite. See reports/analysis/archive_content_triage__2026-08-09.md."
+    },
+    {
+      "id": "archive-md-blob-read",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Read the 37 .md blobs (of 52) flagged as containing 5+ capitalised names absent from canon, from the archive-content triage. Smallest and densest remaining surface, most likely to hold prose canon of the kind the 2026-08-09 old-prose sweep recovered. Then the 59 flagged .json blobs (~295MB, mostly conversation exports) which need a content-aware extractor rather than a name grep. See reports/analysis/archive_content_triage__2026-08-09.md."
+    },
+    {
+      "id": "wrath-09-naming-gate",
+      "priority": "low",
+      "assigned_to": "either",
+      "description": "WRATH-09 (Prime AI Core) commands the AI-Warlord Leviathan Dreadnought, which is already canon as a vessel, but WRATH-09 has no canon record and is a new named referent. Route through the L2 Naming Admission gate (recovered_source: the name is verbatim from the archived galactic_union_core_ships_module). Recovered 2026-08-09."
     }
   ],
   "known_state": {
