@@ -55,9 +55,17 @@ TEXT_LIKE_EXTENSIONS = {
 
 MANAGED_ROOT_PATHS = {
     "AGENTS.md",
+    # CLAUDE.md is the Claude Code counterpart of AGENTS.md and is read at every
+    # session start. It postdates this allowlist, so the planner kept proposing a
+    # move to intake/ — an operation nobody could approve, which froze the whole
+    # wave4 batch (found 2026-08-09). Root-anchored by function, like AGENTS.md.
+    "CLAUDE.md",
     "README.md",
     ".gitignore",
     ".gitattributes",
+    # Pinned to root by .github/workflows/secret-scan.yml (GITLEAKS_CONFIG:
+    # .gitleaks.toml). Relocating it silently disables secret scanning.
+    ".gitleaks.toml",
     ".githooks",
     "docs",
     "catalog",
@@ -1184,7 +1192,7 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             owner="workspace-admin",
             status="managed",
         )
-    if name in {".gitignore", ".gitattributes"}:
+    if name in {".gitignore", ".gitattributes", ".gitleaks.toml", ".gitleaksignore"}:
         return base_record(
             kind="policy_file",
             logical_zone="docs",
@@ -1217,7 +1225,7 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             owner="workspace-admin",
             status="managed",
         )
-    if name in {"README.md", "AGENTS.md"}:
+    if name in {"README.md", "AGENTS.md", "CLAUDE.md"}:
         return base_record(
             kind="workspace_doc",
             logical_zone="docs",

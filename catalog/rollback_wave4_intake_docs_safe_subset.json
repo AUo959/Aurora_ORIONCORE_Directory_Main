@@ -1,0 +1,72 @@
+{
+  "batch_id": "wave4_intake_docs_safe_subset_rollback",
+  "for_batch": "wave4_intake_docs_safe_subset",
+  "generated_at": "2026-08-10T02:13:40Z",
+  "operations": [
+    {
+      "batch_id": "wave4_intake_docs_safe_subset_rollback",
+      "source": "intake/Prplexity_Observation_6_14.md",
+      "destination": "Prplexity_Observation_6_14.md",
+      "operation": "move",
+      "pre_hash": "8ff56aaa54f1d049ae5b80f80cff5e2a2118502084cf00f1e27499d824267e7a",
+      "post_hash": "8ff56aaa54f1d049ae5b80f80cff5e2a2118502084cf00f1e27499d824267e7a",
+      "rollback_source": "intake/Prplexity_Observation_6_14.md",
+      "reason": "Rollback for wave4_intake_docs_safe_subset",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    },
+    {
+      "batch_id": "wave4_intake_docs_safe_subset_rollback",
+      "source": "intake/aurora-cloudbank-symbolic_README_DRAFT.md",
+      "destination": "aurora-cloudbank-symbolic_README_DRAFT.md",
+      "operation": "move",
+      "pre_hash": "1c55eaac6121eeff43eb026ed63f4cb730179787ff05357d1cbdaf9b0bcae86d",
+      "post_hash": "1c55eaac6121eeff43eb026ed63f4cb730179787ff05357d1cbdaf9b0bcae86d",
+      "rollback_source": "intake/aurora-cloudbank-symbolic_README_DRAFT.md",
+      "reason": "Rollback for wave4_intake_docs_safe_subset",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    },
+    {
+      "batch_id": "wave4_intake_docs_safe_subset_rollback",
+      "source": "intake/aurora-cloudbank-symbolic_outside_review.md",
+      "destination": "aurora-cloudbank-symbolic_outside_review.md",
+      "operation": "move",
+      "pre_hash": "5f3394828319e13e76b9278729af71d53d5d91c537cd7f6f992dd68853386c1d",
+      "post_hash": "5f3394828319e13e76b9278729af71d53d5d91c537cd7f6f992dd68853386c1d",
+      "rollback_source": "intake/aurora-cloudbank-symbolic_outside_review.md",
+      "reason": "Rollback for wave4_intake_docs_safe_subset",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    },
+    {
+      "batch_id": "wave4_intake_docs_safe_subset_rollback",
+      "source": "intake/aurora-cloudbank-symbolic_presentation_plan.md",
+      "destination": "aurora-cloudbank-symbolic_presentation_plan.md",
+      "operation": "move",
+      "pre_hash": "b6be6c8f31ddf562a40ebabbfa26cf235cc7f6bf4803c52c65748be873a6b149",
+      "post_hash": "b6be6c8f31ddf562a40ebabbfa26cf235cc7f6bf4803c52c65748be873a6b149",
+      "rollback_source": "intake/aurora-cloudbank-symbolic_presentation_plan.md",
+      "reason": "Rollback for wave4_intake_docs_safe_subset",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    },
+    {
+      "batch_id": "wave4_intake_docs_safe_subset_rollback",
+      "source": "intake/aurora-cloudbank-symbolic_review_v2.md",
+      "destination": "aurora-cloudbank-symbolic_review_v2.md",
+      "operation": "move",
+      "pre_hash": "f52c8c80600c0be28158ab1e54557b47c2dc6c9b30a11ad316b1f9773521b552",
+      "post_hash": "f52c8c80600c0be28158ab1e54557b47c2dc6c9b30a11ad316b1f9773521b552",
+      "rollback_source": "intake/aurora-cloudbank-symbolic_review_v2.md",
+      "reason": "Rollback for wave4_intake_docs_safe_subset",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    }
+  ]
+}

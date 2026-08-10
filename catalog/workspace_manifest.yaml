@@ -1,4 +1,4 @@
-generated_at: '2026-08-01T05:33:38Z'
+generated_at: '2026-08-10T02:14:03Z'
 root: .
 logical_taxonomy:
 - repos
@@ -116,16 +116,15 @@ entries:
   owner: workspace-admin
   status: managed
 - id: gitleaks
-  kind: intake_file
+  kind: policy_file
   current_path: .gitleaks.toml
-  logical_zone: intake
-  planned_path: intake/.gitleaks.toml
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
+  logical_zone: docs
+  planned_path: .gitleaks.toml
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
 - id: gitleaks-ignore
   kind: policy_file
   current_path: .gitleaksignore
@@ -191,16 +190,15 @@ entries:
   status: planned_move
   batch_id: wave4_root_intake_cleanup_initial
 - id: claude
-  kind: intake_file
+  kind: workspace_doc
   current_path: CLAUDE.md
-  logical_zone: intake
-  planned_path: intake/CLAUDE.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
+  logical_zone: docs
+  planned_path: CLAUDE.md
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
 - id: code-of-conduct
   kind: policy_file
   current_path: CODE_OF_CONDUCT.md
@@ -257,17 +255,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: prplexity-observation-6-14
-  kind: intake_file
-  current_path: Prplexity_Observation_6_14.md
-  logical_zone: intake
-  planned_path: intake/Prplexity_Observation_6_14.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: qgia-axiom-doctrine-narrative
   kind: intake_file
   current_path: QGIA_Axiom_Doctrine_Narrative.md
@@ -346,50 +333,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: aurora-cloudbank-symbolic-readme-draft
-  kind: intake_file
-  current_path: aurora-cloudbank-symbolic_README_DRAFT.md
-  logical_zone: intake
-  planned_path: intake/aurora-cloudbank-symbolic_README_DRAFT.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: aurora-cloudbank-symbolic-outside-review
-  kind: intake_file
-  current_path: aurora-cloudbank-symbolic_outside_review.md
-  logical_zone: intake
-  planned_path: intake/aurora-cloudbank-symbolic_outside_review.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: aurora-cloudbank-symbolic-presentation-plan
-  kind: intake_file
-  current_path: aurora-cloudbank-symbolic_presentation_plan.md
-  logical_zone: intake
-  planned_path: intake/aurora-cloudbank-symbolic_presentation_plan.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
-- id: aurora-cloudbank-symbolic-review-v2
-  kind: intake_file
-  current_path: aurora-cloudbank-symbolic_review_v2.md
-  logical_zone: intake
-  planned_path: intake/aurora-cloudbank-symbolic_review_v2.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: catalog
   kind: control_surface
   current_path: catalog

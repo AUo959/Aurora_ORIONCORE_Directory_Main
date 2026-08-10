@@ -1,8 +1,8 @@
 # Workspace Map
 
-- Generated: `2026-08-01T05:33:38Z`
+- Generated: `2026-08-10T02:14:03Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `48`
+- Top-level entries cataloged: `43`
 - Nested repos registered: `9`
 - Archive or binary artifacts inventoried: `601`
 - Classification overrides loaded: `10` from `catalog/classification_overrides.yaml`
@@ -13,8 +13,8 @@
 - `_staging`: `7` top-level entries
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
-- `docs`: `9` top-level entries
-- `intake`: `13` top-level entries
+- `docs`: `11` top-level entries
+- `intake`: `6` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
@@ -35,16 +35,9 @@
 ## Planned Move Candidates
 
 - `# QGIA Operational Axiom v3.xml` -> `intake/# QGIA Operational Axiom v3.xml` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `.gitleaks.toml` -> `intake/.gitleaks.toml` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Aurora_Sim_Architecture` -> `intake/Aurora_Sim_Architecture` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
-- `CLAUDE.md` -> `intake/CLAUDE.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `Prplexity_Observation_6_14.md` -> `intake/Prplexity_Observation_6_14.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `QGIA_Axiom_Doctrine_Narrative.md` -> `intake/QGIA_Axiom_Doctrine_Narrative.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `QGIA_Runtime_OnePager.md` -> `intake/QGIA_Runtime_OnePager.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `aurora-cloudbank-symbolic_README_DRAFT.md` -> `intake/aurora-cloudbank-symbolic_README_DRAFT.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `aurora-cloudbank-symbolic_outside_review.md` -> `intake/aurora-cloudbank-symbolic_outside_review.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `aurora-cloudbank-symbolic_presentation_plan.md` -> `intake/aurora-cloudbank-symbolic_presentation_plan.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
-- `aurora-cloudbank-symbolic_review_v2.md` -> `intake/aurora-cloudbank-symbolic_review_v2.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `warrant-lens` -> `intake/warrant-lens` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 
 ## Privacy Screen
