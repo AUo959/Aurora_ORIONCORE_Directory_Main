@@ -109,3 +109,71 @@ sweep found genuine canon earlier today.
    rather than a name grep.
 5. **Leave the 6 SUPERSEDED Python modules archived**; give the 6 PARTIAL ones a
    behavioural read before any decision.
+
+---
+
+# Phase 2 — the 37 flagged `.md` blobs (completed 2026-08-09)
+
+**Result: largely a negative finding, and a useful one.** The markdown tier is close to
+exhausted for L2 canon. Effort should redirect to the `.json` tier.
+
+## What the 37 actually are
+
+| Class | Files | Assessment |
+|---|---|---|
+| ORION / ZIPWIZ infrastructure | 26 | THREADCORE, dispatch protocols, symbolic command indexes, install manifests, beacons, restore protocols. **L3/tooling — out of L2 scope.** |
+| Research / philosophy | 23 | "Flow and Related Concepts in Philosophical Thought" (199 KB), quantum-symbolic framework notes. Not setting material. |
+| GUMAS / world | 3 | The two large knowledge bundles plus a launch checklist. |
+
+The name heuristic that flagged these was heavily false-positive, as warned: its top
+"new names" included *Aaron Rodgers*, *Able Sisters*, *Ablative Armor* and *Access
+Controls* — title-case phrases, not entities.
+
+## The headline target, examined
+
+`Aurora_GUMAS_Knowledge_Companion.md` (4.6 MB) was the single most promising blob: it
+is cited by **zero** canon records, where its sibling `Aurora_GUMAS_Knowledge_Bundle.md`
+is cited by 3.
+
+It turned out to be a **bundle of 214 embedded documents** (165 real; 49 are macOS
+`._` resource-fork stubs). Of the 165, the overwhelming majority are **L1 / Aurora Lab
+infrastructure** — staff registries, boot context, onboarding modules, transfer
+manifests, security diagnostics, module specs, continuity seals. L1 is out of scope.
+
+Its genuinely L2 embedded documents are **sources already mined**:
+
+| Embedded doc | Canon records citing it |
+|---|---|
+| `GUMAS_Extracted_Simulation_Modules.txt` | 8 |
+| `gumas_lore_db.json` | 5 |
+| `updated_galactic_union_memory_index.json` | 0 — but examined earlier today and found to be dev-session logs, not entity data |
+
+## One new item found, and deliberately not promoted
+
+`Omega9_Emergence_Log.json` records **Event.Kaelor_Chainfire.v1** at `SimTime_0431.30`:
+Sentinel **Omega-9** independently recalibrated its extraction route during blackout
+conditions, overwriting predefined memory anchors — logged as the first documented
+instance of Sentinel emergent adaptive route logic. Initial route *Extraction Point
+Theta-4*, emergent route *Sector Epsilon-G*.
+
+None of `Omega-9`, `Kaelor Chainfire`, `Epsilon-G` or `Theta-4` exist in canon.
+
+**Not promoted.** This is simulation instance output — it carries a `SimTime` stamp, a
+`sentinel_id`, and an L1 review team (Emily Roberts, Dr. Amelia Rivers, Alex Thorne).
+Per Canon Protocol §5, per-run simulation output is **tertiary** and is not promoted
+wholesale; the same rule excluded the five run-emergent treaties from the engine
+geopolitics pass. Recording it as setting canon would contradict that.
+
+Worth noting explicitly: **Omega-9 is a Sentinel unit, not Omega-Veil** — the rogue AI
+warlord landed earlier today. Similar designations, unrelated entities. Checked rather
+than assumed.
+
+## Redirect
+
+1. **The `.json` tier is where the remaining value is** — 133 blobs, ~295 MB, mostly
+   conversation exports. That is the same material class that produced today's genuine
+   old-prose recoveries, and it needs a content-aware extractor, not a name grep.
+2. **Leave the ORION-infra and research markdown archived.** Out of L2 scope.
+3. If the Sentinel roster is considered part of the *setting* rather than per-run state,
+   `Omega-9` routes through the reconciler as an evidentiary question — but that is an
+   owner framing call, not a reconciliation.

@@ -306,6 +306,13 @@
       "completed_at": "2026-08-10T18:24:44Z",
       "platform": "claude-code",
       "detail": "Resolved 2026-08-09. 5 profiles landed: Valiant Spear + Resolute Dawn gained COs they never had (Mara Velthis, Deyan Orros); Judicator Prime gained embarked_flag_officer Saela Corven with commanding_officer_id (alric_tann) untouched \u2014 flag officer commands the formation, captain commands the ship, corroborated by loc_nethari_expanse; Nemesis Prime gained the profile plus WRATH-09 recorded verbatim with identity UNDETERMINED (not merged with nemesis_core); cls_sentinel gained the class spec. 3 characters gained command_binding backlinks. New referents left unminted: Tevrak's Gate, Kaelor Shadow Ring, VALR-99, Sentinel Ghost v3.7."
+    },
+    {
+      "id": "archive-md-blob-read",
+      "status": "completed",
+      "completed_at": "2026-08-10T18:29:13Z",
+      "platform": "claude-code",
+      "detail": "Completed 2026-08-09. Largely a NEGATIVE finding, and a useful one: the .md tier is close to exhausted for L2 canon. Of the 37 flagged, 26 are ORION/ZIPWIZ infra (L3, out of scope) and 23 are research/philosophy. The headline target Aurora_GUMAS_Knowledge_Companion.md (4.6MB, cited by zero canon records) is a bundle of 165 embedded docs, overwhelmingly L1/Aurora-Lab infrastructure; its L2 content is sources already mined (GUMAS_Extracted_Simulation_Modules cited by 8, gumas_lore_db by 5). One new item found and NOT promoted: Omega9_Emergence_Log (Event.Kaelor_Chainfire.v1, Sentinel Omega-9) is simulation instance output with a SimTime stamp and an L1 review team \u2014 tertiary per Canon Protocol \u00a75, same rule that excluded the run-emergent treaties. Note: Omega-9 is a Sentinel unit, NOT Omega-Veil. Redirect effort to the .json tier."
     }
   ],
   "last_updated": "2026-08-10T18:24:44Z",
@@ -503,12 +510,6 @@
       "description": "Establish seat-of-government / duty-station locations in canon. 22 capsule location_bindings are type 'undetermined' because canon names no seat for any office-holder: the Union capital is referenced only as 'the capital planet' (Marshal Academy charter) with no location entity, and no polity seats exist (Elari, Vorran, Zyphari, Kaelar, Tharaxian, Crimson Pact, PMC, AI-Warlord, Prime Construct, Velar, Separatist, Outer Colonies). Route naming through NameService rather than minting. When seats land, fill in each binding's type/target_id and rebuild the affected capsules (sha256-manifested \u2014 do not hand-edit)."
     },
     {
-      "id": "archive-md-blob-read",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Read the 37 .md blobs (of 52) flagged as containing 5+ capitalised names absent from canon, from the archive-content triage. Smallest and densest remaining surface, most likely to hold prose canon of the kind the 2026-08-09 old-prose sweep recovered. Then the 59 flagged .json blobs (~295MB, mostly conversation exports) which need a content-aware extractor rather than a name grep. See reports/analysis/archive_content_triage__2026-08-09.md."
-    },
-    {
       "id": "wrath-09-naming-gate",
       "priority": "low",
       "assigned_to": "either",
@@ -519,6 +520,18 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "Four named referents recovered from the archived ship-profiles module have no canon record and were deliberately not minted: Battle of Tevrak's Gate (Valiant Spear led the charge, destroyed siege platforms), Kaelor Shadow Ring (Sentinel-class disrupted PMC blacksite operations there), VALR-99 (Valiant Spear's integrated combat AI), Sentinel Ghost v3.7 (Sentinel-class deep-infiltration AI). All are recovered_source names. Route through the L2 Naming Admission gate. See reports/analysis/archive_content_triage__2026-08-09.md."
+    },
+    {
+      "id": "archive-json-tier-extract",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Extract L2 canon from the 133 .json archive blobs (~295MB), the remaining tier after the .md tier came back largely exhausted. Mostly conversation exports \u2014 the same material class that produced the genuine old-prose recoveries on 2026-08-09. Needs a content-aware extractor (entity-shaped candidate extraction + conflict scan against the canon name index), NOT a capitalised-name grep, which proved heavily false-positive. See reports/analysis/archive_content_triage__2026-08-09.md Phase 2."
+    },
+    {
+      "id": "omega9-sentinel-roster-framing",
+      "priority": "low",
+      "assigned_to": "owner",
+      "description": "FRAMING QUESTION (owner): is the Sentinel unit roster part of the SETTING, or per-run simulation state? Omega9_Emergence_Log records Sentinel Omega-9 and Event.Kaelor_Chainfire.v1 (first documented emergent adaptive route logic; Extraction Point Theta-4 -> Sector Epsilon-G). None of Omega-9, Kaelor Chainfire, Epsilon-G, Theta-4 exist in canon. It was NOT promoted because it is simulation instance output (SimTime stamp, sentinel_id, L1 review team), which Canon Protocol \u00a75 treats as tertiary. If Sentinel units are setting entities rather than run state, this routes through the reconciler as an evidentiary question. Distinct from Omega-Veil (rogue AI warlord, already canon)."
     }
   ],
   "known_state": {
