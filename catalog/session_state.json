@@ -341,11 +341,18 @@
       "completed_at": "2026-08-10T22:41:22Z",
       "platform": "claude-code",
       "detail": "RESOLVED 2026-08-09 by evidence, not assumption. Early prose attests Sovereign Nexus as a place three independent ways (strategically vital region; hyperlane chokepoint with Separatist force concentration; setting of the Sovereign Nexus Crisis). Created loc_sovereign_nexus for the region; org_sovereign_nexus remains the rogue AI. Both cross-linked with disambiguation blocks. Neither merged; relationship between them explicitly UNDETERMINED. Surfaced 'the Sovereign Nexus Crisis' as a further unminted event."
+    },
+    {
+      "id": "velar-neutral-houses-referent",
+      "status": "completed",
+      "completed_at": "2026-08-10T23:34:36Z",
+      "platform": "claude-code",
+      "detail": "Promoted as org_neutral_houses under the owner directive (promote Velari detail unless there is a direct reason not to). Fourth pole of the Velar political spectrum; opportunists/hedgers."
     }
   ],
-  "last_updated": "2026-08-10T23:25:52Z",
+  "last_updated": "2026-08-10T23:34:44Z",
   "last_platform": "claude-code",
-  "last_session_summary": "reports: executive decision brief 2026-08-10 (closes brief_f",
+  "last_session_summary": "chore(catalog): sync CanonRec pin; queue Velar Neutral House",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -367,6 +374,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "cc29c74",
+      "date": "2026-08-10",
+      "platform": "claude-code",
+      "summary": "chore(catalog): sync CanonRec pin; queue Velar Neutral Houses + Talyx name-variant observations"
+    },
     {
       "sha": "18e92bb",
       "date": "2026-08-10",
@@ -420,12 +433,6 @@
       "date": "2026-08-10",
       "platform": "claude-code",
       "summary": "docs(recovery): mega-blob pass \u2014 prose exhausted, reference-integrity is what finds things"
-    },
-    {
-      "sha": "539c433",
-      "date": "2026-08-10",
-      "platform": "claude-code",
-      "summary": "chore: sync CanonRec pin -> f6559b6; close capsule-only-entity-records"
     }
   ],
   "security_events": [
@@ -622,20 +629,20 @@
       "description": "No workflow/cron/launchd generates briefs; cadence has been human-triggered across the whole series (7d,14d,7d,9d,17d,16d). The Stop-hook pattern already solved this class for session state. Add a weekly GitHub Actions workflow running 'make brief'. See executive_brief__2026-08-10.md Risk 4."
     },
     {
-      "id": "velar-neutral-houses-referent",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "The 'Foundations of the Velar Imperium' blueprint lists a fourth Velar grouping beyond the three canonical internal factions: 'Neutral Houses' \u2014 hesitant or opportunistic factions watching for leverage or safety. No entity record exists. Naming gate / referent closure. Recorded on polity_velar_imperium.political_spectrum_note."
-    },
-    {
       "id": "velar-talyx-name-variant",
       "priority": "low",
       "assigned_to": "either",
       "description": "Early prose names a Velar noble 'Talyx Varneth'; canon holds 'Talyx Velkonn' (Exiled Grand Duke, Velar Imperial restorationist). Same given name, different house element. Under the now-recorded lineage-prefix system Vel- is noble and Varn- is a military bloodline, and canon's Velkonn is internally consistent with his ducal rank \u2014 so the prose form is most likely a superseded draft name. NOT merged or renamed: recorded as an observation. Route through aurora-canon-reconciler if it recurs."
+    },
+    {
+      "id": "tkaras-host-identity",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Sira Velkonn's alignment: the 'Debate at T'karas' prose frames her as the Reformist leader hosting Union envoys, while canon (and the same archive message's own faction table) places her with the Imperial Loyalists as Thalen Rynn's fixed rival pole. Canon position retained; recorded as char_sira_velkonn.alignment_conflict and event_debate_at_tkaras.actor_role_conflict. Resolve via aurora-canon-reconciler conflict scan; note that inverting her also inverts Thalen Rynn's definition."
     }
   ],
   "known_state": {
-    "main_sha": "18e92bb",
+    "main_sha": "cc29c74",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -750,7 +757,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-10T23:25:52Z",
+    "checked_at": "2026-08-10T23:34:44Z",
     "entries": [
       {
         "repo": "root",
