@@ -240,3 +240,40 @@ because the same trap will catch the next indexer.
   `deep_filtered_galactic_union_simulation_conversations` (9.3 MB, already filtered to GU
   simulation content) rather than the raw 263 MB export.
 - The ~120 remaining small structured blobs.
+
+## Mega-blob pass — `deep_filtered_galactic_union_simulation_conversations` (9.3 MB)
+
+Six ChatGPT conversations, 1.8 MB of message text (two of the six are unrelated
+simulations — a civics campaign and a caste-system sim). Extracted every message part and
+ran signal-word entity extraction against the canon index, now 218 records.
+
+**Almost everything the extractor surfaced was noise**, in three recognisable classes:
+
+1. *Fragments of names already canon* — "Judicator" (196), "Velar" (140), "Zylox" (132),
+   "Durn", "Tann", "Nemesis", "Xyphos", "Xarlok". Partial captures of records that exist.
+2. *Profile-template field labels* — "Recent Actions" (93), "Decision Style" (78),
+   "Personal Relationships" (62), "Core Directives", "Storage Priority".
+3. *Reputation metrics* — "Fleet Trust" (39), "Senate Approval" (49), "Separatist Trust".
+
+That is consistent with the `.md` finding: this conversation family is the same material
+that produced `GUMAS_Extracted_Simulation_Modules.txt`, which is already cited by 8 canon
+records. **The prose has been heavily mined.**
+
+### But three real referents fell out
+
+Filtering to multi-word phrases absent from canon surfaced **Trade Coalition** (36
+mentions) and **AI Vanguard**, which turned out to be attested in *committed canon* —
+they are the alliance that elected Chancellor Zylox — with no entity records. Checking
+faction bindings then exposed a third: **`outer_colonies`** was bound by 5 canonical
+records with nothing behind it.
+
+All three were created (see DRIFT_LOG 2026-08-09). **Dangling faction referents: zero.**
+
+### Assessment of the remaining 5 mega-blobs
+
+The value in this tier is not new lore — it is **structural gaps exposed by cross-checking
+references**. The raw 263 MB `conversations.json` and its 15 MB sibling are unfiltered
+exports of the same material; the memory-index blobs (~1.9 MB each) were examined earlier
+and are dev-session logs. Recommendation: **stop mining this tier for prose** and instead
+run reference-integrity sweeps (faction bindings, org ids, crew ids, location refs)
+against canon, which is what actually produced findings today.

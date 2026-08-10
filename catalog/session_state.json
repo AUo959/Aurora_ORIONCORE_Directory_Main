@@ -320,6 +320,13 @@
       "completed_at": "2026-08-10T18:47:04Z",
       "platform": "claude-code",
       "detail": "Resolved 2026-08-09. 29 entity records created from capsules (authoritative canon) with capsule_ref backlinks; 15 enriched from archived master lists. Canon 189 -> 218 records, capsule-only 29 -> 0, all 8 Judicator crew refs + CO ref now resolve. 218/218 validate clean, linter clean, 47 guards green. Caught and removed a surname-fallback matching error that had given Aelindra Voss-Aurai the profile of Lyra Voss and matched Lirian Vael-Torin to Vael Saros \u2014 enrichment is exact-match only."
+    },
+    {
+      "id": "archive-json-tier-extract",
+      "status": "completed",
+      "completed_at": "2026-08-10T18:52:35Z",
+      "platform": "claude-code",
+      "detail": "Completed 2026-08-09. Mined deep_filtered_galactic_union_simulation_conversations (9.3MB, 1.8MB text, 6 conversations). Prose extraction was almost entirely noise \u2014 name fragments of existing canon, profile field labels, reputation metrics \u2014 consistent with the .md finding that this material family is already heavily mined (its sibling is cited by 8 canon records). BUT cross-checking references produced 3 real closures: polity_outer_colonies (faction binding used by 5 records with no entity record), org_trade_coalition and org_ai_vanguard (the alliance that elected Zylox, attested in committed canon). Dangling faction referents now zero; canon 218 -> 221. Recommendation recorded: stop mining this tier for prose; run reference-integrity sweeps instead, which is what actually finds things."
     }
   ],
   "last_updated": "2026-08-10T18:47:05Z",
@@ -529,16 +536,16 @@
       "description": "Four named referents recovered from the archived ship-profiles module have no canon record and were deliberately not minted: Battle of Tevrak's Gate (Valiant Spear led the charge, destroyed siege platforms), Kaelor Shadow Ring (Sentinel-class disrupted PMC blacksite operations there), VALR-99 (Valiant Spear's integrated combat AI), Sentinel Ghost v3.7 (Sentinel-class deep-infiltration AI). All are recovered_source names. Route through the L2 Naming Admission gate. See reports/analysis/archive_content_triage__2026-08-09.md."
     },
     {
-      "id": "archive-json-tier-extract",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Extract L2 canon from the 133 .json archive blobs (~295MB), the remaining tier after the .md tier came back largely exhausted. Mostly conversation exports \u2014 the same material class that produced the genuine old-prose recoveries on 2026-08-09. Needs a content-aware extractor (entity-shaped candidate extraction + conflict scan against the canon name index), NOT a capitalised-name grep, which proved heavily false-positive. See reports/analysis/archive_content_triage__2026-08-09.md Phase 2."
-    },
-    {
       "id": "omega9-sentinel-roster-framing",
       "priority": "low",
       "assigned_to": "owner",
       "description": "FRAMING QUESTION (owner): is the Sentinel unit roster part of the SETTING, or per-run simulation state? Omega9_Emergence_Log records Sentinel Omega-9 and Event.Kaelor_Chainfire.v1 (first documented emergent adaptive route logic; Extraction Point Theta-4 -> Sector Epsilon-G). None of Omega-9, Kaelor Chainfire, Epsilon-G, Theta-4 exist in canon. It was NOT promoted because it is simulation instance output (SimTime stamp, sentinel_id, L1 review team), which Canon Protocol \u00a75 treats as tertiary. If Sentinel units are setting entities rather than run state, this routes through the reconciler as an evidentiary question. Distinct from Omega-Veil (rogue AI warlord, already canon)."
+    },
+    {
+      "id": "reference-integrity-sweep",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Build a standing reference-integrity sweep over canon: verify every faction_binding, organization_ids, crew_ids, commanding_officer_id, location_refs, participant_refs, event_refs and *_id field resolves to an existing entity record. This technique \u2014 not prose mining \u2014 produced every structural finding of 2026-08-09: the Velar Imperium referent, the 29 capsule-only characters, and the Outer Colonies/Trade Coalition/AI Vanguard blocs. Make it a test so new dangling referents fail CI rather than waiting to be discovered by an archive sweep."
     }
   ],
   "known_state": {
