@@ -285,11 +285,18 @@
       "completed_at": "2026-08-10T17:25:34Z",
       "platform": "claude-code",
       "detail": "Resolved 2026-08-09. src/monitoring/fabric_invariant_bridge.py converts fabric_invariants_check findings to DriftAlerts (VIOLATION->alert/escalate, GAP->log/notify, INFO non-actionable). Fabric findings get dedicated runbooks rather than the statistical levels \u2014 the stock critical runbook suspends+rebaselines, which is wrong for a corpus-integrity finding; a test enforces no suspend/throttle/rebaseline. DriftResponder honours metadata['runbook'] with loud fallback. Verified end-to-end on real canon findings. 14 tests. CLOSES the 2026-07-21 fabric ruling batch."
+    },
+    {
+      "id": "canon-identity-key-unification",
+      "status": "completed",
+      "completed_at": "2026-08-10T17:54:11Z",
+      "platform": "claude-code",
+      "detail": "Resolved 2026-08-09 additively: all 23 mobile_asset records gained entity_id (same value) and kept canonical_id for back-compat. entity_id index now covers 189/189; canonical_id readers still work. Guard tests in tests/test_canon_identity_keys.py pin the invariant (verified to catch a simulated regression). Root cause of two wrong results earlier in the session: validation reporting 166/189 as clean coverage, and vessel_gu_001 binding targets appearing to be ghosts."
     }
   ],
-  "last_updated": "2026-08-10T17:25:34Z",
+  "last_updated": "2026-08-10T17:54:11Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Closed the 2026-07-21 fabric ruling batch: completed the C1 capsule rollout (all 40 bound, manifests rebuilt) and wired fabric findings into CloudBank DriftAlert/DriftResponder with dedicated runbooks. Canon validates 189/189 clean.",
+  "last_session_summary": "Unified the canon identity key: 23 vessels gained entity_id (canonical_id retained), fixing silent partial-corpus coverage in 6 of 7 canon-walking tools. Guard tests added. Earlier in session: closed the 2026-07-21 fabric ruling batch across all three repos.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -486,12 +493,6 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Establish seat-of-government / duty-station locations in canon. 22 capsule location_bindings are type 'undetermined' because canon names no seat for any office-holder: the Union capital is referenced only as 'the capital planet' (Marshal Academy charter) with no location entity, and no polity seats exist (Elari, Vorran, Zyphari, Kaelar, Tharaxian, Crimson Pact, PMC, AI-Warlord, Prime Construct, Velar, Separatist, Outer Colonies). Route naming through NameService rather than minting. When seats land, fill in each binding's type/target_id and rebuild the affected capsules (sha256-manifested \u2014 do not hand-edit)."
-    },
-    {
-      "id": "canon-identity-key-unification",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "All 23 mobile_asset records key identity as 'canonical_id'; the other 166 canon records use 'entity_id'. Any tool that indexes only entity_id silently skips every vessel \u2014 this hid the vessels from full-canon validation runs and made valid location_bindings (vessel_gu_001) look like ghost destinations. Decide one canonical spelling and migrate, or formally document both as accepted and audit every indexer. Found 2026-08-09 during the C1 rollout."
     }
   ],
   "known_state": {
