@@ -65,6 +65,30 @@ VALID_L2_POLITY_SUBTYPES = {
     "pmc", "pact", "confederation",
     # v1.1: Added for entities that blur the polity/domain boundary
     "remnant_network", "precursor_remnant",
+    # Synced to committed canon 2026-08-09, on the same principle already applied
+    # to VALID_ENTITY_KINDS: canon is the source of truth for the vocabulary, not
+    # the other way round.
+    #
+    # The two sets had ZERO overlap. Every one of the 19 canonical polity records
+    # raised INVALID_POLITY_SUBTYPE — the warning fired on 19 of 19, which makes it
+    # noise rather than a signal and teaches people to ignore the validator (the
+    # failure mode already documented on REQUIRED_FIELDS).
+    #
+    # The cause is that the original list enumerates *structural forms* of a state
+    # (federation, confederation, nation_state) while canon classifies polities by
+    # their *condition and role* — whether the state is intact, fractured, external,
+    # or coextensive with a people. Both are legitimate; canon's is the one in use.
+    "major_civilization",       # e.g. polity_prime_construct
+    "fragmented_former_empire",  # e.g. polity_velar_imperium — a failed/fractured state
+    "external_militant_empire",  # e.g. polity_xarlok_empire — outside-the-Union power
+    "frontier_polity_bloc",      # e.g. polity_outer_colonies
+    "people_and_polity",         # where the state is coextensive with a people
+    "active_faction",
+    # The four precursor civilizations (polity_vorthan_imperium, polity_shroudborn,
+    # polity_orak_thuun, polity_sythrex_conclave) live under entities/precursors/,
+    # not entities/polities/, and were missed by a first sync that scanned only the
+    # polities directory. Entity KIND, not directory, is what the validator keys on.
+    "precursor_civilization",
 }
 
 VALID_L2_SPECIES_SUBTYPES = {
@@ -1111,25 +1135,38 @@ def detect_layer_and_type(data: dict) -> tuple[str, str]:
     # L2 signatures
     if "canonical_id" in data or "entity_kind" in data:
         ek = data.get("entity_kind", "")
-        if ek in ("polity",):
-            return "L2", "polity"
-        if ek in ("species",):
-            return "L2", "species"
-        if ek in ("ship",):
-            return "L2", "ship"
-        if ek in ("location",):
-            return "L2", "location"
-        if ek in ("facility",):
-            return "L2", "facility"
-        if ek in ("domain",):
-            return "L2", "domain"
-        if ek in ("anomaly",):
-            return "L2", "anomaly"
-        if ek == "character" or "faction" in data:
+        # entity_kind IS the entity type at L2 — return it directly rather than
+        # enumerating a subset.
+        #
+        # This used to be an if-chain over nine kinds ending in
+        # `return "L2", "location"  # default L2`. That default silently
+        # misclassified every kind the chain did not name — event, organization,
+        # mobile_asset, ship_class, equipment, place, conflict, report — as a
+        # LOCATION. Two consequences, both bad and both invisible:
+        #
+        #   * location-only checks fired on non-locations. A four-phase battle
+        #     record was told its subtype "fleet_engagement_..." was not a valid
+        #     *location* subtype, against the vocabulary [anomaly, moon, planet,
+        #     region, route, station, ...];
+        #   * the per-kind REQUIRED_FIELDS entries for those kinds — which exist,
+        #     right down to "event": [] and "mobile_asset": [] — were unreachable,
+        #     so those records were checked against the location requirements
+        #     instead of their own.
+        #
+        # This is the same defect class as the flat STATUS_VOCAB fixed on
+        # 2026-08-09: one kind's vocabulary applied to every kind. Falling back to
+        # a concrete kind is what makes it silent, so there is no fallback now —
+        # an unknown kind returns itself and is caught by the INVALID_ENTITY_KIND
+        # block check, which is the check that exists to catch it.
+        if ek == "character" or (not ek and "faction" in data):
             return "L2", "character"
+        if not ek and "mechanic_id" in data:
+            return "L2", "mechanic"
+        if ek:
+            return "L2", ek
         if "mechanic_id" in data:
             return "L2", "mechanic"
-        return "L2", "location"  # default L2
+        return "L2", "location"  # canonical_id present but no entity_kind
 
     # L1 signatures
     if "rank_position" in data or "clearance_level" in data:

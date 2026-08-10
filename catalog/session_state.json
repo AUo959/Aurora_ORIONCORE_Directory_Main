@@ -343,9 +343,9 @@
       "detail": "RESOLVED 2026-08-09 by evidence, not assumption. Early prose attests Sovereign Nexus as a place three independent ways (strategically vital region; hyperlane chokepoint with Separatist force concentration; setting of the Sovereign Nexus Crisis). Created loc_sovereign_nexus for the region; org_sovereign_nexus remains the rogue AI. Both cross-linked with disambiguation blocks. Neither merged; relationship between them explicitly UNDETERMINED. Surfaced 'the Sovereign Nexus Crisis' as a further unminted event."
     }
   ],
-  "last_updated": "2026-08-10T22:53:15Z",
+  "last_updated": "2026-08-10T23:04:53Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Resolved the Sovereign Nexus collision (two distinct referents, neither merged) and began working the 1,044-claim prose ledger \u2014 recovered the Galactic Union's constitutional basis (federal multi-species democracy, the Union Charter, legal framework), the Judicial Council's composition, and the Marshals' mandate. None of it existed in canon.",
+  "last_session_summary": "chore(catalog): sync CanonRec pin + session state; queue pri",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -367,6 +367,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "24913e7",
+      "date": "2026-08-10",
+      "platform": "claude-code",
+      "summary": "chore(catalog): sync CanonRec pin + session state; queue prime-construct doctrine question"
+    },
     {
       "sha": "d14b5c8",
       "date": "2026-08-10",
@@ -420,12 +426,6 @@
       "date": "2026-08-10",
       "platform": "claude-code",
       "summary": "docs(recovery): archive triage phase 2 \u2014 the .md tier is largely exhausted"
-    },
-    {
-      "sha": "7dde2c8",
-      "date": "2026-08-10",
-      "platform": "claude-code",
-      "summary": "chore: sync CanonRec pin -> 95464b9; close archive-ship-profiles-reconcile; queue new-referent naming"
     }
   ],
   "security_events": [
@@ -590,10 +590,22 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Early prose asserts both that AI cannot hold political power in the Union and that Prime Construct is sovereign with political/legal rights. Canon settles neither \u2014 no committed record states Union doctrine on AI political power. Recorded as polity_prime_construct.open_doctrinal_question; resolve via aurora-canon-reconciler conflict scan against org_galactic_union / conflict_ai_sovereignty_crisis."
+    },
+    {
+      "id": "kaelors-rift-order-of-battle-vessels",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Battle of Kaelor's Rift order of battle names three Union vessels (G.U.S. Warspite, G.U.S. Indomitable, G.U.S. Reliant) and Vice Admiral Rho, none with canon records. Naming gate. CAUTION: canon holds cls_reliant (Reliant-Class) \u2014 a SHIP CLASS, not this vessel; do not bind on the shared name fragment."
+    },
+    {
+      "id": "kaelors-rift-sentinel-command-overlap",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Canon lists Elias Radek as the Judicator Prime's Sentinel-Commander while the Kaelor's Rift log gives Colonel Idris Vale as Sentinel strike lead. Not a contradiction on its face (ship's company vs Marshal Intelligence Directorate strike lead) but the relationship is unstated. Route through aurora-canon-reconciler conflict scan."
     }
   ],
   "known_state": {
-    "main_sha": "d14b5c8",
+    "main_sha": "24913e7",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -708,7 +720,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-10T22:53:15Z",
+    "checked_at": "2026-08-10T23:04:53Z",
     "entries": [
       {
         "repo": "root",
