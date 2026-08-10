@@ -343,9 +343,9 @@
       "detail": "RESOLVED 2026-08-09 by evidence, not assumption. Early prose attests Sovereign Nexus as a place three independent ways (strategically vital region; hyperlane chokepoint with Separatist force concentration; setting of the Sovereign Nexus Crisis). Created loc_sovereign_nexus for the region; org_sovereign_nexus remains the rogue AI. Both cross-linked with disambiguation blocks. Neither merged; relationship between them explicitly UNDETERMINED. Surfaced 'the Sovereign Nexus Crisis' as a further unminted event."
     }
   ],
-  "last_updated": "2026-08-10T23:10:06Z",
+  "last_updated": "2026-08-10T23:25:52Z",
   "last_platform": "claude-code",
-  "last_session_summary": "fix(reconciler): stop misclassifying every unmapped entity k",
+  "last_session_summary": "reports: executive decision brief 2026-08-10 (closes brief_f",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -367,6 +367,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "18e92bb",
+      "date": "2026-08-10",
+      "platform": "claude-code",
+      "summary": "reports: executive decision brief 2026-08-10 (closes brief_freshness at 73 commits)"
+    },
     {
       "sha": "caa6480",
       "date": "2026-08-10",
@@ -420,12 +426,6 @@
       "date": "2026-08-10",
       "platform": "claude-code",
       "summary": "chore: sync CanonRec pin -> f6559b6; close capsule-only-entity-records"
-    },
-    {
-      "sha": "372bb54",
-      "date": "2026-08-10",
-      "platform": "claude-code",
-      "summary": "docs(recovery): archive triage phase 3 \u2014 29 characters have capsules but no entity record"
     }
   ],
   "security_events": [
@@ -620,10 +620,22 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "No workflow/cron/launchd generates briefs; cadence has been human-triggered across the whole series (7d,14d,7d,9d,17d,16d). The Stop-hook pattern already solved this class for session state. Add a weekly GitHub Actions workflow running 'make brief'. See executive_brief__2026-08-10.md Risk 4."
+    },
+    {
+      "id": "velar-neutral-houses-referent",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "The 'Foundations of the Velar Imperium' blueprint lists a fourth Velar grouping beyond the three canonical internal factions: 'Neutral Houses' \u2014 hesitant or opportunistic factions watching for leverage or safety. No entity record exists. Naming gate / referent closure. Recorded on polity_velar_imperium.political_spectrum_note."
+    },
+    {
+      "id": "velar-talyx-name-variant",
+      "priority": "low",
+      "assigned_to": "either",
+      "description": "Early prose names a Velar noble 'Talyx Varneth'; canon holds 'Talyx Velkonn' (Exiled Grand Duke, Velar Imperial restorationist). Same given name, different house element. Under the now-recorded lineage-prefix system Vel- is noble and Varn- is a military bloodline, and canon's Velkonn is internally consistent with his ducal rank \u2014 so the prose form is most likely a superseded draft name. NOT merged or renamed: recorded as an observation. Route through aurora-canon-reconciler if it recurs."
     }
   ],
   "known_state": {
-    "main_sha": "caa6480",
+    "main_sha": "18e92bb",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -738,7 +750,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-10T23:10:06Z",
+    "checked_at": "2026-08-10T23:25:52Z",
     "entries": [
       {
         "repo": "root",
@@ -1145,6 +1157,12 @@
         "branch": "codex/public-vulnerability-reporting-2026-07-29",
         "detail": "pushed, 2 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
         "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "CanonRec",
+        "class": "unpushed_main",
+        "detail": "main is 1 commit(s) ahead of origin/main",
+        "remediation": "Push main (or PR it if the repo requires review)."
       },
       {
         "repo": "qgia-knowledge-library-main",
