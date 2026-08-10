@@ -177,3 +177,66 @@ than assumed.
 3. If the Sentinel roster is considered part of the *setting* rather than per-run state,
    `Omega-9` routes through the reconciler as an evidentiary question — but that is an
    owner framing call, not a reconciliation.
+
+---
+
+# Phase 3 — the `.json` tier (partial: structured lists done, mega-blobs pending)
+
+## Shape of the tier
+
+133 blobs, 294.7 MB — but **6 blobs hold 293.5 MB of it**. `conversations.json` alone is
+263 MB. The remaining 127 blobs are small and structured, and that is where the
+value-per-byte is.
+
+| Blob | Size | Note |
+|---|---|---|
+| `conversations.json` | 263.3 MB | full chat export |
+| `conversations (1) (1).json` | 15.1 MB | 8 copies |
+| `deep_filtered_galactic_union_simulation_conversations` | 9.3 MB | **pre-filtered GU sim content — best mega-blob target** |
+| `formatted_new_memory_index` / `merged_` / `formatted_galactic_union_memory_index` | ~1.9 MB each | memory indexes |
+
+## Headline finding: 29 characters have capsules but no entity record
+
+Working the three small `galactic_union_character*` master lists (17/17/10 entries) turned
+up something structural rather than new lore. Every name in them is already canon — but
+matching them required stripping rank prefixes, and doing that exposed the real issue.
+
+**Canon holds two disjoint-ish character populations:**
+
+| Population | Count |
+|---|---|
+| Have a charforge capsule **and** an entity record | 11 |
+| **Capsule only — no entity record** | **29** |
+| Entity record only — no capsule | 29 |
+
+The 29 capsule-only characters are the most important people in the setting: the entire
+Judicator Prime command crew (Alric Tann, Lyra Voss, Elias Radek, Adrienne Kovas, Nia
+Veran, Rhen Kailo, Arin Tavos, Elias Drayen) and Union leadership (Zylox Rhaegos, Vael
+Saros, Kael Durn, Selene Arcturus, Renn Valcor, Anaya Ral-Seyr, Callan Deyrus, Varek
+Norr, Lirian Vael-Torin), plus the faction leaders (Nemesis Core, Prime Construct Leader,
+Malrik Voska, Qellan Vyss, Drenn Korvath, Virex Talvaren and others).
+
+**Why it matters.** Entity records and capsules are meant to coexist — 11 characters have
+both, so this is not a design choice. And the capsule-only ids **are referenced by entity
+records**: `vessel_gu_001.commanding_officer_id = alric_tann`, and its `crew_ids` list
+eight of them. From the entity graph's perspective those references dangle — the same
+defect class as the Velar Imperium referent closed earlier today, and the same reason the
+`entity_id`/`canonical_id` split mattered. Every tool that walks entity records silently
+omits these 29, including the validation sweeps that reported "189 records clean".
+
+**The archive supplies the data to fix it.** The master lists carry `name`, `role`,
+`allegiance`, `traits`, `reputation`, `relationships`, `recent_actions`, `decision_style`,
+`faction` and `personality_insight` per character — enough to build proper entity records
+without invention.
+
+*Method note:* the first comparison reported "zero overlap", which was an artifact of
+inconsistent capsule directory naming (some bare — `alric_tann`; some prefixed —
+`char_cross`). Normalising both sides gave the correct 11/29 split. Worth recording
+because the same trap will catch the next indexer.
+
+## Still pending in this tier
+
+- The 6 mega-blobs (293.5 MB), best entry point being
+  `deep_filtered_galactic_union_simulation_conversations` (9.3 MB, already filtered to GU
+  simulation content) rather than the raw 263 MB export.
+- The ~120 remaining small structured blobs.
