@@ -273,6 +273,89 @@ def test_p4_requires_event_context_not_just_a_phrase():
 
 # ── linter parity ─────────────────────────────────────────────────────────
 
+def test_every_committed_canon_record_validates_clean():
+    """The validator must not report well-formed canon as BLOCKED.
+
+    Field finding 2026-08-09: it reported 100% of canon blocked. REQUIRED_FIELDS
+    demanded 'canonical_id' and 'canonical_name' — fields present in 0 of 166
+    records — plus 'subtype' on locations (which use location_type) and species
+    (which have none), 'faction' on characters (which use faction_bindings), and
+    'government_type' (which never appears). SUPERSEDED was missing from the
+    certainty vocabulary, so every alias-forward record failed too.
+
+    A validator that rejects valid canon gets bypassed, and then it protects
+    nothing. This test is the guard.
+    """
+    import json
+    from validate_entity import validate_entity
+
+    canon_dir = REPO_ROOT / "GUMAS_SIM_2.5" / "CanonRec" / "canon" / "L2"
+    if not canon_dir.exists():
+        return
+
+    kind_to_type = {
+        "polity": "polity", "species": "species", "character": "character",
+        "location": "location", "organization": "organization",
+        "mobile_asset": "mobile_asset", "ship_class": "ship_class",
+        "event": "event", "conflict": "conflict", "equipment": "equipment",
+        "place": "place", "anomaly": "anomaly", "report": "report",
+    }
+    context = {"context_root": str(canon_dir)}
+    blocked = []
+    for path in canon_dir.rglob("*.json"):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if not isinstance(data, dict) or "entity_id" not in data:
+            continue
+        entity_type = kind_to_type.get(data.get("entity_kind"), "character")
+        report = validate_entity(data, "L2", entity_type, context)
+        if report.blocks:
+            blocked.append((data["entity_id"], [b["code"] for b in report.blocks]))
+
+    assert not blocked, f"committed canon must validate clean; blocked: {blocked[:8]}"
+
+
+def test_certainty_vocabulary_matches_canonrec():
+    """CERTAINTY_TAGS.md is the authoritative vocabulary; stay in sync with it."""
+    import re
+    from validate_entity import VALID_CERTAINTY_TAGS
+
+    tags_file = REPO_ROOT / "GUMAS_SIM_2.5" / "CanonRec" / "CERTAINTY_TAGS.md"
+    if not tags_file.exists():
+        return
+    known = set(re.findall(
+        r"\b(CANON_PROMOTE|CANON|STAGING|UNCONFIRMED|LEGEND_CONTESTED|"
+        r"SUPERSEDED|LOCKED_POSITION|PLACED|APPROX)\b",
+        tags_file.read_text(encoding="utf-8"),
+    ))
+    missing = sorted(known - VALID_CERTAINTY_TAGS)
+    assert not missing, f"certainty tags in CERTAINTY_TAGS.md but not accepted: {missing}"
+
+
+def test_empty_list_counts_as_an_explicit_answer():
+    """`faction_bindings: []` states 'unaffiliated' — it is not an omission."""
+    from validate_entity import _field_satisfied
+    assert _field_satisfied({"faction_bindings": []}, "faction_bindings") is True
+    assert _field_satisfied({}, "faction_bindings") is False
+    assert _field_satisfied({"faction_bindings": None}, "faction_bindings") is False
+    assert _field_satisfied({"name": "   "}, "name") is False
+
+
+def test_precursor_polities_are_not_required_to_have_a_government():
+    """A vanished civilization has no known government; demanding one invites invention."""
+    from validate_entity import validate_entity
+    data = {
+        "entity_id": "polity_test_precursor", "name": "Test Precursors",
+        "aliases": [], "entity_kind": "polity", "certainty": "CANON",
+        "doc_sources": ["codex"], "subtype": "precursor_civilization",
+    }
+    report = validate_entity(data, "L2", "polity", None)
+    codes = [b["code"] for b in report.blocks]
+    assert "MISSING_REQUIRED" not in codes, report.blocks
+
+
 def test_entity_kind_vocabulary_covers_committed_canon():
     """The validator must accept every entity_kind canon actually uses.
 

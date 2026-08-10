@@ -29,7 +29,12 @@ from typing import Any, Optional
 
 VALID_CERTAINTY_TAGS = {
     "CANON", "CANON_PROMOTE", "LOCKED_POSITION", "PLACED",
-    "STAGING", "UNCONFIRMED", "LEGEND_CONTESTED", "APPROX"
+    "STAGING", "UNCONFIRMED", "LEGEND_CONTESTED", "APPROX",
+    # Synced to CanonRec/CERTAINTY_TAGS.md (the authoritative vocabulary) 2026-08-09.
+    # SUPERSEDED was admitted as the terminal retired-record state in the 2026-07-21
+    # ruling batch but never added here, so every alias-forward record — the correct
+    # outcome of a duplicate resolution — validated as INVALID_CERTAINTY.
+    "SUPERSEDED",
 }
 
 VALID_ENTITY_KINDS = {
@@ -78,6 +83,13 @@ VALID_L1_SYSTEM_STATUSES = {
 # under canon/L2/entities/mobile_assets/); it was missing here, so P2 was silently
 # unenforced for every real moving entity in canon. Added 2026-08-09.
 MOVING_ENTITY_KINDS = {"ship", "fleet", "megafauna", "mobile_asset", "vessel"}
+
+# Polity subtypes for which a governance field is NOT required. A vanished precursor
+# civilization has no known government; demanding one would push toward invention,
+# which is the failure mode canon reconciliation exists to prevent.
+POLITY_GOVERNANCE_EXEMPT_SUBTYPES = {
+    "precursor_civilization", "precursor_remnant", "remnant_network",
+}
 
 L1_CHARACTER_ID_PREFIXES = {
     "CMD_", "ENG_", "SCI_", "MED_", "OPS_", "SEC_", "AI_"
@@ -138,22 +150,51 @@ REQUIRED_FIELDS = {
             "event_id", "timestamp", "description", "participants", "outcome"
         ],
     },
+    # L2 requirements reconciled against committed canon 2026-08-09 (166 records).
+    #
+    # They had drifted badly: 'canonical_id' and 'canonical_name' appear in ZERO of
+    # 166 canonical records (canon uses entity_id / name), locations carry
+    # 'location_type' not 'subtype' (44/44 vs 2/44), no species carries a subtype,
+    # characters use 'faction_bindings' not 'faction', and 'government_type' never
+    # appears. The result was that every well-formed canonical record validated as
+    # BLOCKED, which teaches people to ignore the validator.
+    #
+    # A tuple means "any one of these satisfies the requirement".
     "L2": {
         "_base": [
-            "canonical_id", "canonical_name", "aliases",
-            "entity_kind", "certainty", "doc_sources", "notes"
+            ("entity_id", "canonical_id"),
+            ("name", "canonical_name"),
+            "aliases",
+            "entity_kind",
+            "certainty",
+            ("doc_sources", "source_refs"),   # provenance via either surface
+            # 'notes' demoted: present in only 91/166: it is optional commentary,
+            # and provenance is already covered above.
         ],
-        "location": ["subtype"],
-        "polity": ["subtype", "government_type"],
-        "species": ["subtype"],
-        "character": ["role", "faction", "sources"],
-        "ship": ["type"],
+        "location": [("location_type", "subtype")],
+        # Governance is not required of precursor/legend polities — see
+        # POLITY_GOVERNANCE_EXEMPT_SUBTYPES below. A vanished precursor civilization
+        # has no known government, and demanding one invites invention.
+        "polity": ["subtype", ("government", "government_type", "org_type")],
+        # species carry no subtype anywhere in canon (0/10) — do not invent one.
+        "species": [],
+        "character": ["role", ("faction_bindings", "faction"),
+                      ("source_refs", "doc_sources", "sources")],
+        "ship": [("type", "subtype", "class_entity_id")],
+        "mobile_asset": [("class_entity_id", "type", "subtype")],
         "mechanic": ["mechanic_id", "category", "description"],
-        "anomaly": ["subtype"],
+        "anomaly": [],
         "facility": [],
-        "domain": ["subtype"],  # v1.1: domain now requires subtype (precursor_site, etc.)
+        "domain": [("subtype", "location_type")],
         "fleet": [],
         "megafauna": [],
+        "organization": [],
+        "ship_class": [],
+        "equipment": [],
+        "place": [],
+        "conflict": [],
+        "event": [],
+        "report": [],
     },
     "L3": {
         "protocol_update": [
@@ -512,6 +553,24 @@ def load_map_authority_rows(context: Optional[dict]) -> Optional[dict]:
     return rows or None
 
 
+def _field_satisfied(data: dict, field: str) -> bool:
+    """True when *field* has been addressed on the record.
+
+    An empty list or dict COUNTS as satisfied: it is an explicit statement, not an
+    omission. char_calder_vey carries `faction_bindings: []` precisely because he is
+    unaffiliated — treating that as missing would demand a falsehood. Only an absent
+    key or a blank string is unsatisfied.
+    """
+    if field not in data:
+        return False
+    val = data.get(field)
+    if val is None:
+        return False
+    if isinstance(val, str) and val.strip() == "":
+        return False
+    return True
+
+
 def route_registry_exists(context: Optional[dict]) -> bool:
     """True when canon contains anything a P4 route/drive citation could point at.
 
@@ -749,6 +808,14 @@ def validate_entity(
     if layer == "L2":
         required = REQUIRED_FIELDS["L2"]["_base"] + required
 
+    # Precursor/legend polities are exempt from the governance requirement.
+    if (layer == "L2" and entity_type == "polity"
+            and str(data.get("subtype") or "") in POLITY_GOVERNANCE_EXEMPT_SUBTYPES):
+        required = [
+            f for f in required
+            if not (isinstance(f, tuple) and "government" in f)
+        ]
+
     report.required_fields_total = len(required)
     report.required_fields = required
 
@@ -756,6 +823,21 @@ def validate_entity(
     ALLOW_EMPTY = {"notes", "aliases"}
 
     for field in required:
+        # A tuple entry means "any one of these spellings satisfies the requirement".
+        # Canon and this validator grew apart on field names (entity_id vs
+        # canonical_id, location_type vs subtype, faction_bindings vs faction);
+        # accepting either keeps well-formed canon from validating as BLOCKED.
+        if isinstance(field, tuple):
+            if any(_field_satisfied(data, alt) for alt in field):
+                continue
+            primary = field[0]
+            report.add(
+                "BLOCK", "MISSING_REQUIRED",
+                f"Required field missing: expected one of {list(field)}.",
+                primary,
+            )
+            continue
+
         val = data.get(field)
         if val is None:
             report.add("BLOCK", "MISSING_REQUIRED", f"Required field '{field}' is missing.", field)
@@ -1133,6 +1215,17 @@ def generate_fill_template(entity_type: str, layer: str, existing: dict) -> str:
     lines.append("Fill in the missing fields marked with `# TODO`:\n")
     lines.append("```yaml")
     for field in required:
+        if isinstance(field, tuple):
+            # "any of" requirement — satisfied if any spelling is already present.
+            satisfied = next((alt for alt in field if _field_satisfied(existing, alt)), None)
+            if satisfied:
+                val = existing.get(satisfied)
+                rendered = json.dumps(val) if isinstance(val, list) else val
+                lines.append(f"{satisfied}: {rendered}")
+            else:
+                lines.append(f"{field[0]}: # TODO — required (or one of: {', '.join(field[1:])})")
+            continue
+
         val = existing.get(field)
         if val is None or (isinstance(val, str) and val.strip() == ""):
             lines.append(f"{field}: # TODO — required")

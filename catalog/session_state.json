@@ -257,6 +257,13 @@
       "completed_at": "2026-08-10T16:26:23Z",
       "platform": "claude-code",
       "detail": "Resolved 2026-08-09: 19 P1 violations downgraded per the RULING-VELAR-P1 precedent (16 to 'staging' against STAGING map rows, 3 to 'unplaced' with no map row). Placement claim only; all entities remain CANON. Gate now reports zero blocks across 158 entities. Also fixed P4 being unsatisfiable \u2014 no route registry exists in canon, so it now warns and self-escalates; queued l2-route-registry as the unblocking work."
+    },
+    {
+      "id": "reconciler-required-fields-schema-drift",
+      "status": "completed",
+      "completed_at": "2026-08-10T16:33:11Z",
+      "platform": "claude-code",
+      "detail": "Resolved 2026-08-09. REQUIRED_FIELDS reconciled against 166 committed records: canonical_id/canonical_name (present in ZERO records) now accept entity_id/name; locations accept location_type; species no longer require a subtype they never carry; characters accept faction_bindings; provenance accepts doc_sources OR source_refs; notes demoted. Added SUPERSEDED to VALID_CERTAINTY_TAGS per CanonRec/CERTAINTY_TAGS.md. Empty list now counts as an explicit answer. Precursor polities exempt from the governance requirement. Canon validation went 0% -> 100% clean."
     }
   ],
   "last_updated": "2026-08-10T02:14:30Z",
@@ -464,12 +471,6 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "warrant-lens/ is planned for intake/ but MUST NOT be moved as-is: it is an editable pip install (.venv/.../warrant_lens-1.1.0.dist-info/direct_url.json points at file:///\u2026/warrant-lens) and is referenced by root SPEC__WARRANT_LENS__v1.md. Relocating breaks the venv. Resolve by either adding a classification override to keep it root-anchored, or moving it AND reinstalling (pip install -e new/path) + updating the spec reference."
-    },
-    {
-      "id": "reconciler-required-fields-schema-drift",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "aurora-canon-reconciler REQUIRED_FIELDS expects a schema CanonRec does not use: it demands 'canonical_name' and 'type' while committed records carry 'name' and 'subtype'. Consequence: every real canon record validates as BLOCKED on missing-required-field grounds even when it is perfectly well-formed, which trains users to ignore the validator. Found 2026-08-09 while wiring the FABRIC P1/P2/P4 checks (VALID_ENTITY_KINDS had the same drift and was fixed then; REQUIRED_FIELDS is the remaining half). Fix: reconcile REQUIRED_FIELDS against the field names canon actually uses, or accept either spelling."
     },
     {
       "id": "l2-route-registry",
