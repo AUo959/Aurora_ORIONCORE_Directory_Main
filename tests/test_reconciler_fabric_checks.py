@@ -213,13 +213,73 @@ def test_p4_warns_instead_of_blocking_when_no_route_registry_exists():
         ve.route_registry_exists = original
 
 
-def test_p4_real_canon_has_no_route_registry_yet():
-    """Pins the precondition. When this starts failing, P4 has become enforceable."""
+def test_p4_is_now_enforceable_against_real_canon():
+    """P4 went live on 2026-08-09.
+
+    The Hollow Expanse is typed "region / lawless corridor" — a genuine corridor
+    referent that the original subtype-only detector missed. Once location_type is
+    considered, a registry exists and P4 escalates from WARN to BLOCK.
+    """
     from validate_entity import route_registry_exists
     canon_dir = REPO_ROOT / "GUMAS_SIM_2.5" / "CanonRec" / "canon" / "L2"
     if not canon_dir.exists():
         return
-    assert route_registry_exists({"context_root": str(canon_dir)}) is False
+    assert route_registry_exists({"context_root": str(canon_dir)}) is True
+
+
+def test_corridor_typed_location_counts_as_a_route_registry(tmp_path=None):
+    """A corridor expressed via location_type must register."""
+    import json as _json
+    import tempfile
+    from pathlib import Path as _Path
+    from validate_entity import route_registry_exists
+
+    tmp = _Path(tempfile.mkdtemp())
+    (tmp / "loc.json").write_text(_json.dumps({
+        "entity_id": "loc_x", "location_type": "region / lawless corridor",
+    }))
+    assert route_registry_exists({"context_root": str(tmp)}) is True
+
+
+def test_p4_satisfied_by_an_explicit_route_exemption():
+    """Answering the route question honestly satisfies P4; inventing is not required.
+
+    Canon attests transits between named places without ever naming the corridor
+    between them. Demanding a route name there would force invention — the exact
+    failure canon reconciliation exists to prevent.
+    """
+    import validate_entity as ve
+    original = ve.route_registry_exists
+    try:
+        _with_route_registry(True)
+        r = _run({
+            "name": "Dark Star Incident",
+            "certainty": "CANON",
+            "canonical_sequence": ["The Shadow Fleet withdrew from the Lethan system."],
+            "route_exemption": {
+                "status": "no_canonical_route_established",
+                "endpoints": ["place_kharis_sector", "place_lethan_system"],
+            },
+        }, "event")
+        assert not r.blocks
+    finally:
+        ve.route_registry_exists = original
+
+
+def test_p4_exemption_must_be_present_not_empty():
+    import validate_entity as ve
+    original = ve.route_registry_exists
+    try:
+        _with_route_registry(True)
+        r = _run({
+            "name": "Dark Star Incident",
+            "certainty": "CANON",
+            "canonical_sequence": ["The Shadow Fleet withdrew from the Lethan system."],
+            "route_exemption": {},
+        }, "event")
+        assert "FABRIC_P4_MOVEMENT_WITHOUT_ROUTE" in _blocks(r)
+    finally:
+        ve.route_registry_exists = original
 
 
 def test_p4_satisfied_by_a_route_citation():

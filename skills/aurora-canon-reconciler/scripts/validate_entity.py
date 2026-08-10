@@ -501,6 +501,17 @@ ROUTE_CITATION_FIELDS = (
     "propulsion_ref", "transit_route", "route",
 )
 
+# P4 may also be satisfied by explicitly recording that no canonical route is
+# established for a transit, with the canonical endpoints that DO define it.
+#
+# Canon attests movements between named places (Kharis Sector -> Lethan system)
+# without ever naming the corridor between them. Demanding a route name in that
+# situation would force invention — the exact failure canon reconciliation exists
+# to prevent. So the gate requires the route question to be ANSWERED, not that an
+# answer be fabricated. Same pattern as naming_exemption, and as
+# canonical_position_status: unplaced being a placement fact rather than a hedge.
+ROUTE_EXEMPTION_FIELDS = ("route_exemption", "route_undetermined")
+
 # Certainty values that mean "this is being made canon now".
 PROMOTION_CERTAINTIES = {"CANON", "CANON_PROMOTE"}
 
@@ -593,7 +604,13 @@ def route_registry_exists(context: Optional[dict]) -> bool:
             continue
         subtype = str(data.get("subtype") or "").lower()
         kind = str(data.get("entity_kind") or "").lower()
+        # Corridors are also expressed through location_type, e.g. the Hollow
+        # Expanse is typed "region / lawless corridor" — a genuine corridor
+        # referent that a subtype-only check would miss.
+        loc_type = str(data.get("location_type") or "").lower()
         if subtype in ("route", "corridor", "lane", "transit_route") or kind in ("route", "drive"):
+            return True
+        if any(word in loc_type for word in ("corridor", "route", "lane")):
             return True
     return False
 
@@ -687,7 +704,9 @@ def check_fabric_invariants(data: dict, ek: Optional[str], report: "ValidationRe
         )
         text = _movement_claim_text(data)
         hit = next((m for m in MOVEMENT_MARKERS if m in text), None)
-        if has_event_context and hit and not any(data.get(f) for f in ROUTE_CITATION_FIELDS):
+        answered = (any(data.get(f) for f in ROUTE_CITATION_FIELDS)
+                    or any(data.get(f) for f in ROUTE_EXEMPTION_FIELDS))
+        if has_event_context and hit and not answered:
             if route_registry_exists(context):
                 report.add(
                     "BLOCK", "FABRIC_P4_MOVEMENT_WITHOUT_ROUTE",

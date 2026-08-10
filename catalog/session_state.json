@@ -264,11 +264,18 @@
       "completed_at": "2026-08-10T16:33:11Z",
       "platform": "claude-code",
       "detail": "Resolved 2026-08-09. REQUIRED_FIELDS reconciled against 166 committed records: canonical_id/canonical_name (present in ZERO records) now accept entity_id/name; locations accept location_type; species no longer require a subtype they never carry; characters accept faction_bindings; provenance accepts doc_sources OR source_refs; notes demoted. Added SUPERSEDED to VALID_CERTAINTY_TAGS per CanonRec/CERTAINTY_TAGS.md. Empty list now counts as an explicit answer. Precursor polities exempt from the governance requirement. Canon validation went 0% -> 100% clean."
+    },
+    {
+      "id": "l2-route-registry",
+      "status": "completed",
+      "completed_at": "2026-08-10T16:36:36Z",
+      "platform": "claude-code",
+      "detail": "Resolved 2026-08-09. Canon names no corridor; it attests movements between named places. Widened the registry detector to see location_type (the Hollow Expanse is typed 'region / lawless corridor'), so P4 escalated from WARN to a live BLOCK. Made P4 satisfiable without invention via route_exemption (canonical endpoints + basis + resolution path), mirroring naming_exemption. Both waiting records carry exemptions. No route name minted \u2014 that belongs to NameService. ROUTE_REGISTRY v0.1 documents the state."
     }
   ],
-  "last_updated": "2026-08-10T02:14:30Z",
+  "last_updated": "2026-08-10T16:36:36Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Old-prose canon sweep + fixed two systemic traps: active_task had no exit path (added complete-active/reroute-active); workspace scan surfaces churned on timestamps (extended write_json idempotence to YAML/Markdown). Unblocked the frozen wave4 relocation batch by root-anchoring CLAUDE.md and .gitleaks.toml, then filed 5 loose docs into intake/.",
+  "last_session_summary": "Closed the reconciler gate work: fixed REQUIRED_FIELDS/certainty-vocabulary drift (canon validation 0% -> 100% clean across 166 records), then made FABRIC P4 enforceable and satisfiable via the route registry + route_exemption mechanism. 29 tests.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -471,12 +478,6 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "warrant-lens/ is planned for intake/ but MUST NOT be moved as-is: it is an editable pip install (.venv/.../warrant_lens-1.1.0.dist-info/direct_url.json points at file:///\u2026/warrant-lens) and is referenced by root SPEC__WARRANT_LENS__v1.md. Relocating breaks the venv. Resolve by either adding a classification override to keep it root-anchored, or moving it AND reinstalling (pip install -e new/path) + updating the spec reference."
-    },
-    {
-      "id": "l2-route-registry",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Build the L2 canonical route/corridor registry. P4 (RULING-ENGINE-P4) requires canon promotions citing movement/cross-region events to cite a canonical route or drive, but canon contains no route, corridor, lane or drive entity, so the requirement is currently unsatisfiable \u2014 the reconciler reports it as WARN and escalates to BLOCK automatically once a registry exists (see FABRIC_P4_NO_ROUTE_REGISTRY). Two records already waiting on it: event_dark_star_incident_4718_224 and fleet_shadow_fleet. Derive routes from established canon (Kharis sector transits, the Velar Crescent corridor, Union trade routes referenced in the Obsidian Dawn briefing) rather than minting them."
     }
   ],
   "known_state": {
