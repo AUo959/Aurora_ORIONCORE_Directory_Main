@@ -343,7 +343,7 @@
       "detail": "RESOLVED 2026-08-09 by evidence, not assumption. Early prose attests Sovereign Nexus as a place three independent ways (strategically vital region; hyperlane chokepoint with Separatist force concentration; setting of the Sovereign Nexus Crisis). Created loc_sovereign_nexus for the region; org_sovereign_nexus remains the rogue AI. Both cross-linked with disambiguation blocks. Neither merged; relationship between them explicitly UNDETERMINED. Surfaced 'the Sovereign Nexus Crisis' as a further unminted event."
     }
   ],
-  "last_updated": "2026-08-10T22:46:45Z",
+  "last_updated": "2026-08-10T22:53:15Z",
   "last_platform": "claude-code",
   "last_session_summary": "Resolved the Sovereign Nexus collision (two distinct referents, neither merged) and began working the 1,044-claim prose ledger \u2014 recovered the Galactic Union's constitutional basis (federal multi-species democracy, the Union Charter, legal framework), the Judicial Council's composition, and the Marshals' mandate. None of it existed in canon.",
   "tool_versions": {
@@ -368,64 +368,64 @@
   },
   "recent_commits": [
     {
-      "sha": "181b768",
+      "sha": "d14b5c8",
       "date": "2026-08-10",
-      "platform": "codex",
-      "summary": "state: record ordered CloudBank issue drafts"
+      "platform": "claude-code",
+      "summary": "chore: sync CanonRec pin; queue prose-ledger open identity questions"
     },
     {
-      "sha": "6d35c35",
+      "sha": "a73b24b",
       "date": "2026-08-10",
-      "platform": "codex",
-      "summary": "state: refresh final hygiene receipt"
+      "platform": "claude-code",
+      "summary": "chore: sync CanonRec pin; close sovereign-nexus-name-collision; queue the Crisis event"
     },
     {
-      "sha": "4aa7cd9",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "state: finalize CloudBank hygiene phase"
+      "sha": "e09030b",
+      "date": "2026-08-10",
+      "platform": "claude-code",
+      "summary": "feat(recovery): claim-extract all major prose corpora \u2014 1,044 claims across 108 entities"
     },
     {
-      "sha": "58157f7",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "state: refresh 42-issue handoff receipt"
+      "sha": "f471d43",
+      "date": "2026-08-10",
+      "platform": "claude-code",
+      "summary": "docs(recovery): supersede the '.md tier exhausted' finding; record corrected method"
     },
     {
-      "sha": "d90fe8e",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "state: queue 42-issue CloudBank continuation"
+      "sha": "3552184",
+      "date": "2026-08-10",
+      "platform": "claude-code",
+      "summary": "feat(recovery): prose claim extractor; retract the 'stop mining prose' recommendation"
     },
     {
-      "sha": "05ca24a",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "state: refresh root commit receipt"
+      "sha": "3a218e6",
+      "date": "2026-08-10",
+      "platform": "claude-code",
+      "summary": "docs(recovery): mega-blob pass \u2014 prose exhausted, reference-integrity is what finds things"
     },
     {
-      "sha": "b7d84e2",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "state: record CloudBank hygiene wave progress"
+      "sha": "539c433",
+      "date": "2026-08-10",
+      "platform": "claude-code",
+      "summary": "chore: sync CanonRec pin -> f6559b6; close capsule-only-entity-records"
     },
     {
-      "sha": "7c5cc45",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "state: queue CloudBank issue hygiene wave"
+      "sha": "372bb54",
+      "date": "2026-08-10",
+      "platform": "claude-code",
+      "summary": "docs(recovery): archive triage phase 3 \u2014 29 characters have capsules but no entity record"
     },
     {
-      "sha": "59a24bd",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "fix(ci): scope session-state freshness to authoritative PR base (#61)"
+      "sha": "245127b",
+      "date": "2026-08-10",
+      "platform": "claude-code",
+      "summary": "docs(recovery): archive triage phase 2 \u2014 the .md tier is largely exhausted"
     },
     {
-      "sha": "185c15f",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "fix: restore lint setup step"
+      "sha": "7dde2c8",
+      "date": "2026-08-10",
+      "platform": "claude-code",
+      "summary": "chore: sync CanonRec pin -> 95464b9; close archive-ship-profiles-reconcile; queue new-referent naming"
     }
   ],
   "security_events": [
@@ -584,10 +584,16 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "Two identity questions raised by the prose claim ledger, recorded as open notes and NOT asserted: (1) 'Galactic Constitution' vs 'Galactic Union Charter' \u2014 same instrument under two names, or distinct documents? Both appear in early prose. (2) 'Director of the Galactic Marshals' vs canon's Chief Marshal Vael Saros, 'Leader of the Union Marshals' \u2014 same office retitled, or two offices? Route through the reconciler; do not merge on similarity alone."
+    },
+    {
+      "id": "prime-construct-ai-political-rights-doctrine",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Early prose asserts both that AI cannot hold political power in the Union and that Prime Construct is sovereign with political/legal rights. Canon settles neither \u2014 no committed record states Union doctrine on AI political power. Recorded as polity_prime_construct.open_doctrinal_question; resolve via aurora-canon-reconciler conflict scan against org_galactic_union / conflict_ai_sovereignty_crisis."
     }
   ],
   "known_state": {
-    "main_sha": "181b768abb92bccc4d91117d44bfc8094e9c19d1",
+    "main_sha": "d14b5c8",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -702,210 +708,419 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-07-25T04:29:26Z",
+    "checked_at": "2026-08-10T22:53:15Z",
     "entries": [
       {
         "repo": "root",
         "class": "unpublished_branch",
         "branch": "agent/github-auth-context-hardening",
-        "detail": "pushed, 3 commit(s) ahead, no open PR",
-        "remediation": "gh pr create --head agent/github-auth-context-hardening (or retire the branch deliberately)"
+        "detail": "pushed, 3 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "root",
+        "class": "unpublished_branch",
+        "branch": "agent/root-license-session-closeout",
+        "detail": "pushed, 1 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "root",
+        "class": "unpublished_branch",
+        "branch": "agent/root-mit-community-profile",
+        "detail": "pushed, 1 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "root",
+        "class": "unpublished_branch",
+        "branch": "codex/aurora-state-model-specs-v0-1",
+        "detail": "pushed, 9 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
       },
       {
         "repo": "root",
         "class": "stranded_branch",
         "branch": "codex/charforge-capsule-implementation-2026-06-14-rebased",
-        "detail": "2 commit(s) exist only on this machine",
+        "detail": "2 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/charforge-capsule-implementation-2026-06-14-rebased && gh pr create"
+      },
+      {
+        "repo": "root",
+        "class": "stranded_branch",
+        "branch": "codex/cloudbank-backlog-handoff-20260810",
+        "detail": "4 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-backlog-handoff-20260810 && gh pr create"
+      },
+      {
+        "repo": "root",
+        "class": "unpublished_branch",
+        "branch": "codex/public-readiness-closeout-2026-08-01",
+        "detail": "pushed, 1 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "root",
+        "class": "unpublished_branch",
+        "branch": "codex/root-cloudbank-pin-refresh-2026-07-29",
+        "detail": "pushed, 5 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "root",
+        "class": "unpublished_branch",
+        "branch": "codex/root-public-metadata-2026-07-29",
+        "detail": "pushed, 3 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "root",
+        "class": "unpublished_branch",
+        "branch": "codex/session-queue-lifecycle-2026-08-01",
+        "detail": "pushed, 7 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
       },
       {
         "repo": "root",
         "class": "unpublished_branch",
         "branch": "fix/ci-dynamic-registry-pins",
-        "detail": "pushed, 1 commit(s) ahead, no open PR",
-        "remediation": "gh pr create --head fix/ci-dynamic-registry-pins (or retire the branch deliberately)"
+        "detail": "pushed, 1 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
+        "branch": "agent/aurora-bridge-review-blurb",
+        "detail": "pushed, 3 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "claude/architecture-advancements-review-v2cxi0",
-        "detail": "11 commit(s) exist only on this machine",
+        "detail": "11 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin claude/architecture-advancements-review-v2cxi0 && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
+        "branch": "codex/cloudbank-canonrec-provenance-2026-07-29",
+        "detail": "2 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-canonrec-provenance-2026-07-29 && gh pr create"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "stranded_branch",
+        "branch": "codex/cloudbank-codeql-backlog-2026-07-29",
+        "detail": "2 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-codeql-backlog-2026-07-29 && gh pr create"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "stranded_branch",
+        "branch": "codex/cloudbank-high-dependabot-2026-07-29",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-high-dependabot-2026-07-29 && gh pr create"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1020-mesh-router-contract",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1020-mesh-router-contract && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1024-instance-bridge-role-closure",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1024-instance-bridge-role-closure && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1056-opal2-standalone-topology",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1056-opal2-standalone-topology && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1131-reconcile-closed-queue-items",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1131-reconcile-closed-queue-items && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1139-ethics-readme-index",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1139-ethics-readme-index && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1140-topology-qgia-reconcile",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1140-topology-qgia-reconcile && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1142-api-catalog-snapshot-regeneration",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1142-api-catalog-snapshot-regeneration && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1143-scaling-topology-reconcile",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1143-scaling-topology-reconcile && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1144-api-surface-inventory-reconcile",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1144-api-surface-inventory-reconcile && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1145-rd-api-reference-refresh",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1145-rd-api-reference-refresh && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1146-governance-self-audit",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1146-governance-self-audit && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1161-coordination-spine-reconcile",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1161-coordination-spine-reconcile && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1231-qgia-axiom-reconcile",
-        "detail": "4 commit(s) exist only on this machine",
+        "detail": "4 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1231-qgia-axiom-reconcile && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1231-qgia-docs-surface",
-        "detail": "3 commit(s) exist only on this machine",
+        "detail": "3 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1231-qgia-docs-surface && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1231-qgia-index-wiring",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1231-qgia-index-wiring && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1231-qgia-roadmap",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1231-qgia-roadmap && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1232-docs-cross-reference-module-coverage",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1232-docs-cross-reference-module-coverage && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1235-repo-structural-naming-cleanup",
-        "detail": "6 commit(s) exist only on this machine",
+        "detail": "6 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1235-repo-structural-naming-cleanup && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1247-halo-residual-canon",
-        "detail": "2 commit(s) exist only on this machine",
+        "detail": "2 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1247-halo-residual-canon && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1247-halo-system-activation",
-        "detail": "3 commit(s) exist only on this machine",
+        "detail": "3 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1247-halo-system-activation && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1255-src-structure-audit",
-        "detail": "3 commit(s) exist only on this machine",
+        "detail": "3 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1255-src-structure-audit && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1257-onboarding-module",
-        "detail": "5 commit(s) exist only on this machine",
+        "detail": "5 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1257-onboarding-module && gh pr create"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
+        "branch": "codex/cloudbank-issue-1329-catalog-routing-alerts",
+        "detail": "pushed, 3 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
+        "branch": "codex/cloudbank-issue-1342-pr-evaluation-blocking",
+        "detail": "pushed, 1 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
+        "branch": "codex/cloudbank-issue-1362-root-test-contract",
+        "detail": "pushed, 2 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "stranded_branch",
+        "branch": "codex/cloudbank-issue-1384-mcp-server-compat",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1384-mcp-server-compat && gh pr create"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "stranded_branch",
+        "branch": "codex/cloudbank-issue-1393-native-vsa-correctness",
+        "detail": "2 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1393-native-vsa-correctness && gh pr create"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
+        "branch": "codex/cloudbank-issue-1403-diagnostics-test-hygiene",
+        "detail": "pushed, 4 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
+        "branch": "codex/cloudbank-issue-1424-qgia-casefold-hygiene",
+        "detail": "pushed, 9 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
+        "branch": "codex/cloudbank-issue-1446-gate-registry-coherence",
+        "detail": "pushed, 9 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
+        "branch": "codex/cloudbank-issue-1460-opal2-codacy-table-spacing",
+        "detail": "pushed, 1 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
+        "branch": "codex/cloudbank-issue-1481-l1-fleet-runtime",
+        "detail": "pushed, 7 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/ga-ethics-hub-integration-2026-07-08",
-        "detail": "2 commit(s) exist only on this machine",
+        "detail": "2 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/ga-ethics-hub-integration-2026-07-08 && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "codex/l2-scenario-seed-simulation-initializer",
-        "detail": "6 commit(s) exist only on this machine",
+        "detail": "6 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/l2-scenario-seed-simulation-initializer && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
+        "branch": "codex/mesh-security-lint-hardening-2026-07-22",
+        "detail": "3 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/mesh-security-lint-hardening-2026-07-22 && gh pr create"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "stranded_branch",
         "branch": "codex/narrative-phase2-evidence-2026-07-04",
-        "detail": "1 commit(s) exist only on this machine",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/narrative-phase2-evidence-2026-07-04 && gh pr create"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "stranded_branch",
+        "branch": "codex/public-readiness-debt-2026-07-29",
+        "detail": "3 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/public-readiness-debt-2026-07-29 && gh pr create"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
+        "branch": "feat/1377-utb-neutral-schema",
+        "detail": "pushed, 32 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "CanonRec",
+        "class": "unpublished_branch",
+        "branch": "agent/canonrec-mit-license",
+        "detail": "pushed, 1 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "CanonRec",
+        "class": "unpublished_branch",
+        "branch": "codex/canonrec-public-readiness-2026-07-29",
+        "detail": "pushed, 2 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "CanonRec",
+        "class": "stranded_branch",
+        "branch": "codex/canonrec-strict-integrity-recovery-2026-07-29",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/canonrec-strict-integrity-recovery-2026-07-29 && gh pr create"
+      },
+      {
+        "repo": "CanonRec",
+        "class": "unpublished_branch",
+        "branch": "codex/public-vulnerability-reporting-2026-07-29",
+        "detail": "pushed, 2 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "CanonRec",
+        "class": "unpushed_main",
+        "detail": "main is 1 commit(s) ahead of origin/main",
+        "remediation": "Push main (or PR it if the repo requires review)."
       },
       {
         "repo": "qgia-knowledge-library-main",
@@ -915,6 +1130,5 @@
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
-  },
-  "_summary_set_manually": true
+  }
 }
