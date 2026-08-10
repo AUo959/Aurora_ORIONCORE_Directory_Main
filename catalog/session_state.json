@@ -348,11 +348,18 @@
       "completed_at": "2026-08-10T23:34:36Z",
       "platform": "claude-code",
       "detail": "Promoted as org_neutral_houses under the owner directive (promote Velari detail unless there is a direct reason not to). Fourth pole of the Velar political spectrum; opportunists/hedgers."
+    },
+    {
+      "id": "tkaras-host-identity",
+      "status": "completed",
+      "completed_at": "2026-08-10T23:47:09Z",
+      "platform": "claude-code",
+      "detail": "RESOLVED. A full Sira Velkonn character profile recovered from the same archive states her Imperial Loyalist allegiance three ways (role, allegiance, reputation) with restorationist core directives, and corroborates at five independent points against committed canon (Talyx Velkonn as mentor, Jaxx Tyren as rival, Renn Valcor alias, Thalen Rynn opposition, and loc_nyros_expanse already recording the fleet reactivation her profile claims). Canon position confirmed; the Reformist-host framing is a mis-attribution. The debate's host is left unestablished rather than reassigned."
     }
   ],
-  "last_updated": "2026-08-10T23:34:44Z",
+  "last_updated": "2026-08-10T23:47:18Z",
   "last_platform": "claude-code",
-  "last_session_summary": "chore(catalog): sync CanonRec pin; queue Velar Neutral House",
+  "last_session_summary": "chore(catalog): sync CanonRec pin; close Neutral Houses refe",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -374,6 +381,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "c8f6368",
+      "date": "2026-08-10",
+      "platform": "claude-code",
+      "summary": "chore(catalog): sync CanonRec pin; close Neutral Houses referent, queue T'karas host identity"
+    },
     {
       "sha": "cc29c74",
       "date": "2026-08-10",
@@ -427,12 +440,6 @@
       "date": "2026-08-10",
       "platform": "claude-code",
       "summary": "feat(recovery): prose claim extractor; retract the 'stop mining prose' recommendation"
-    },
-    {
-      "sha": "3a218e6",
-      "date": "2026-08-10",
-      "platform": "claude-code",
-      "summary": "docs(recovery): mega-blob pass \u2014 prose exhausted, reference-integrity is what finds things"
     }
   ],
   "security_events": [
@@ -633,16 +640,10 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "Early prose names a Velar noble 'Talyx Varneth'; canon holds 'Talyx Velkonn' (Exiled Grand Duke, Velar Imperial restorationist). Same given name, different house element. Under the now-recorded lineage-prefix system Vel- is noble and Varn- is a military bloodline, and canon's Velkonn is internally consistent with his ducal rank \u2014 so the prose form is most likely a superseded draft name. NOT merged or renamed: recorded as an observation. Route through aurora-canon-reconciler if it recurs."
-    },
-    {
-      "id": "tkaras-host-identity",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Sira Velkonn's alignment: the 'Debate at T'karas' prose frames her as the Reformist leader hosting Union envoys, while canon (and the same archive message's own faction table) places her with the Imperial Loyalists as Thalen Rynn's fixed rival pole. Canon position retained; recorded as char_sira_velkonn.alignment_conflict and event_debate_at_tkaras.actor_role_conflict. Resolve via aurora-canon-reconciler conflict scan; note that inverting her also inverts Thalen Rynn's definition."
     }
   ],
   "known_state": {
-    "main_sha": "cc29c74",
+    "main_sha": "c8f6368",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -757,7 +758,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-10T23:34:44Z",
+    "checked_at": "2026-08-10T23:47:18Z",
     "entries": [
       {
         "repo": "root",
