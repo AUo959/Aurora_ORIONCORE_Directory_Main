@@ -299,11 +299,18 @@
       "completed_at": "2026-08-10T17:59:29Z",
       "platform": "claude-code",
       "detail": "Resolved 2026-08-09, generalised beyond the single record. Root cause: STATUS_VOCAB was one flat body-oriented set applied to every entity kind, leaving 25 of 189 records outside it and C2 unenforced. Fixed with STATUS_VOCAB_BY_KIND (species extant/extinct, events concluded/ongoing, reports submitted, characters active/deceased) plus a loud generic fallback. 11 composite statuses split: status=lifecycle, status_detail=situational canon verbatim, prev_status=original. No canon detail lost \u2014 char_selene_ark reads 'active' with medical custody preserved. 8 tests."
+    },
+    {
+      "id": "archive-ship-profiles-reconcile",
+      "status": "completed",
+      "completed_at": "2026-08-10T18:24:44Z",
+      "platform": "claude-code",
+      "detail": "Resolved 2026-08-09. 5 profiles landed: Valiant Spear + Resolute Dawn gained COs they never had (Mara Velthis, Deyan Orros); Judicator Prime gained embarked_flag_officer Saela Corven with commanding_officer_id (alric_tann) untouched \u2014 flag officer commands the formation, captain commands the ship, corroborated by loc_nethari_expanse; Nemesis Prime gained the profile plus WRATH-09 recorded verbatim with identity UNDETERMINED (not merged with nemesis_core); cls_sentinel gained the class spec. 3 characters gained command_binding backlinks. New referents left unminted: Tevrak's Gate, Kaelor Shadow Ring, VALR-99, Sentinel Ghost v3.7."
     }
   ],
-  "last_updated": "2026-08-10T17:54:11Z",
+  "last_updated": "2026-08-10T18:24:44Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Unified the canon identity key: 23 vessels gained entity_id (canonical_id retained), fixing silent partial-corpus coverage in 6 of 7 canon-walking tools. Guard tests added. Earlier in session: closed the 2026-07-21 fabric ruling batch across all three repos.",
+  "last_session_summary": "Archive triage (450 rows -> 214 distinct blobs, all still unlive) then reconciled the 5 recovered ship profiles into canon, resolving the Judicator Prime CO question by flag-officer/ship-captain distinction rather than overwrite. Earlier: per-kind C2 status vocabularies + composite status splits.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -496,12 +503,6 @@
       "description": "Establish seat-of-government / duty-station locations in canon. 22 capsule location_bindings are type 'undetermined' because canon names no seat for any office-holder: the Union capital is referenced only as 'the capital planet' (Marshal Academy charter) with no location entity, and no polity seats exist (Elari, Vorran, Zyphari, Kaelar, Tharaxian, Crimson Pact, PMC, AI-Warlord, Prime Construct, Velar, Separatist, Outer Colonies). Route naming through NameService rather than minting. When seats land, fill in each binding's type/target_id and rebuild the affected capsules (sha256-manifested \u2014 do not hand-edit)."
     },
     {
-      "id": "archive-ship-profiles-reconcile",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Reconcile the 5 ship profiles recovered from archives/unzipped/Complete Archive 4_19 copy/galactic_union_core_ships_module (1).py into canon vessel records (traits, reputation, crew complement, weapons, defence, propulsion, embarked craft, cyberwarfare, recent actions, directives). Characters already exist (char_saela_corven, char_mara_velthis, char_deyan_orros) but the ship<->officer linkage and specs were never landed. MUST route through the conflict scan: canon sets vessel_gu_001.commanding_officer_id=alric_tann (a Captain) while the archive names Fleet Admiral Saela Corven \u2014 likely embarked flag officer vs ship's captain (both true), but that is a reconciliation, not an assumption. Express as two fields if it holds; do not overwrite. See reports/analysis/archive_content_triage__2026-08-09.md."
-    },
-    {
       "id": "archive-md-blob-read",
       "priority": "medium",
       "assigned_to": "either",
@@ -512,6 +513,12 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "WRATH-09 (Prime AI Core) commands the AI-Warlord Leviathan Dreadnought, which is already canon as a vessel, but WRATH-09 has no canon record and is a new named referent. Route through the L2 Naming Admission gate (recovered_source: the name is verbatim from the archived galactic_union_core_ships_module). Recovered 2026-08-09."
+    },
+    {
+      "id": "archive-new-referents-naming",
+      "priority": "low",
+      "assigned_to": "either",
+      "description": "Four named referents recovered from the archived ship-profiles module have no canon record and were deliberately not minted: Battle of Tevrak's Gate (Valiant Spear led the charge, destroyed siege platforms), Kaelor Shadow Ring (Sentinel-class disrupted PMC blacksite operations there), VALR-99 (Valiant Spear's integrated combat AI), Sentinel Ghost v3.7 (Sentinel-class deep-infiltration AI). All are recovered_source names. Route through the L2 Naming Admission gate. See reports/analysis/archive_content_triage__2026-08-09.md."
     }
   ],
   "known_state": {
