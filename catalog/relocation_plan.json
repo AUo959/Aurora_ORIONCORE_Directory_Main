@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-07-22T13:02:12Z",
+  "generated_at": "2026-08-01T04:27:58Z",
   "root": ".",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-07-22T13:02:05Z",
+  "manifest_generated_at": "2026-08-01T04:27:47Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
@@ -405,8 +405,8 @@
           "source": "CLAUDE.md",
           "destination": "intake/CLAUDE.md",
           "operation": "move",
-          "pre_hash": "ca721118380948b27f2db95b61602dc5f755655ba4d893e595b6519458632d83",
-          "post_hash": "ca721118380948b27f2db95b61602dc5f755655ba4d893e595b6519458632d83",
+          "pre_hash": "137a841eac1642d6b4ad8583b9a177e8f9f374d7030454fa41c5562e63e9525b",
+          "post_hash": "137a841eac1642d6b4ad8583b9a177e8f9f374d7030454fa41c5562e63e9525b",
           "rollback_source": "CLAUDE.md",
           "reason": "Relocate CLAUDE.md into intake/CLAUDE.md.",
           "approved": false,
@@ -474,6 +474,19 @@
           "post_hash": "5f3394828319e13e76b9278729af71d53d5d91c537cd7f6f992dd68853386c1d",
           "rollback_source": "aurora-cloudbank-symbolic_outside_review.md",
           "reason": "Relocate aurora-cloudbank-symbolic_outside_review.md into intake/aurora-cloudbank-symbolic_outside_review.md.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave4_root_intake_cleanup_initial",
+          "source": "aurora-cloudbank-symbolic_presentation_plan.md",
+          "destination": "intake/aurora-cloudbank-symbolic_presentation_plan.md",
+          "operation": "move",
+          "pre_hash": "b6be6c8f31ddf562a40ebabbfa26cf235cc7f6bf4803c52c65748be873a6b149",
+          "post_hash": "b6be6c8f31ddf562a40ebabbfa26cf235cc7f6bf4803c52c65748be873a6b149",
+          "rollback_source": "aurora-cloudbank-symbolic_presentation_plan.md",
+          "reason": "Relocate aurora-cloudbank-symbolic_presentation_plan.md into intake/aurora-cloudbank-symbolic_presentation_plan.md.",
           "approved": false,
           "applied_at": null,
           "path_kind": "file"
