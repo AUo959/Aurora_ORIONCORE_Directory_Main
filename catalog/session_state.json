@@ -343,9 +343,9 @@
       "detail": "RESOLVED 2026-08-09 by evidence, not assumption. Early prose attests Sovereign Nexus as a place three independent ways (strategically vital region; hyperlane chokepoint with Separatist force concentration; setting of the Sovereign Nexus Crisis). Created loc_sovereign_nexus for the region; org_sovereign_nexus remains the rogue AI. Both cross-linked with disambiguation blocks. Neither merged; relationship between them explicitly UNDETERMINED. Surfaced 'the Sovereign Nexus Crisis' as a further unminted event."
     }
   ],
-  "last_updated": "2026-08-10T19:05:53Z",
+  "last_updated": "2026-08-10T22:46:45Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Corrected a wrong call: prose is not exhausted. Built tools/prose_claim_extractor.py (claims about entities, not new names) \u2014 951 claims across 85 entities in the .md tier I had written off, 469 in the conversation blob. Caught a Sovereign Nexus name collision in canon landed hours earlier, and salvaged the Velar Imperium's full history.",
+  "last_session_summary": "Resolved the Sovereign Nexus collision (two distinct referents, neither merged) and began working the 1,044-claim prose ledger \u2014 recovered the Galactic Union's constitutional basis (federal multi-species democracy, the Union Charter, legal framework), the Judicial Council's composition, and the Marshals' mandate. None of it existed in canon.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -578,6 +578,12 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "The Sovereign Nexus Crisis \u2014 a high-stakes multi-faction standoff over the strategically vital Sovereign Nexus region, with Separatist hardliners massing forces per Union Intelligence intercepts. Named event attested in early-project prose with no canon record. Recovered_source name; route through the naming gate and the event-promotion pattern used for Operation Obsidian Dawn."
+    },
+    {
+      "id": "prose-ledger-open-identity-questions",
+      "priority": "low",
+      "assigned_to": "either",
+      "description": "Two identity questions raised by the prose claim ledger, recorded as open notes and NOT asserted: (1) 'Galactic Constitution' vs 'Galactic Union Charter' \u2014 same instrument under two names, or distinct documents? Both appear in early prose. (2) 'Director of the Galactic Marshals' vs canon's Chief Marshal Vael Saros, 'Leader of the Union Marshals' \u2014 same office retitled, or two offices? Route through the reconciler; do not merge on similarity alone."
     }
   ],
   "known_state": {
