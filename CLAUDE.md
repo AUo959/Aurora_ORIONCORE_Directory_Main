@@ -51,6 +51,11 @@ anything that fails the queue contract:
 
 1. If mid-task:
    `python3 tools/session_state_io.py suspend-active --next-step ... [--next-step-detail ...]`
+   If the task is **finished**, do NOT suspend it — retire it:
+   `python3 tools/session_state_io.py --platform ... complete-active [--detail "..."]`
+   If it is unfinished but should not hold the active slot (e.g. it is waiting
+   on a process, not on this session):
+   `python3 tools/session_state_io.py --platform ... reroute-active [--description "..."]`
 2. If the session did meaningful work:
    `python3 tools/session_state_io.py set-summary "..."`
    (sets a one-shot flag so the hook won't overwrite it with commit subjects)
@@ -103,7 +108,17 @@ discipline. Key invariants:
 
 - Root repo is the control plane; never assume a root request applies to a
   nested repo unless it is explicitly named.
-- Never silently promote draft/recovered/staged material into canon.
+- Never silently promote draft/recovered/staged material into canon — but
+  "not silently" means **run the process**, not "ask the owner to adjudicate."
+  Discovered detail that survives a conflict check against canon **is** canon.
+  The owner gates the **commit**; the owner does not decide what is true.
+  Route resolvable questions to their process (aurora-canon-reconciler conflict
+  scan + certainty advisor, NameService, map authority / Reconciliation Workflow
+  §4.5, deterministic rebuild tooling) — see
+  `GUMAS_SIM_2.5/CanonRec/canon/L2/RESOLUTION_ROUTING__2026-07-21.md`. Writing a
+  task's exit condition as "owner review before X" is a defect: it produces
+  items that can never close. Legitimate owner actions are narrow — commit/merge
+  approval, and things only the owner can physically do (e.g. console access).
 - Evidence over assumption; do not claim something is validated without
   repo evidence.
 - Skills are edited in `skills/` and pushed with `make skills-install` —

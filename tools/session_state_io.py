@@ -73,20 +73,26 @@ def detect_platform() -> str:
     return "claude-code"
 
 
-def load(path: Path = STATE_PATH) -> dict:
-    return json.loads(path.read_text(encoding="utf-8"))
+def load(path: Path | None = None) -> dict:
+    # Resolved at call time, not bound as a def-time default, so STATE_PATH can be
+    # redirected (tests, alternate checkouts). A def-time default silently ignores
+    # any reassignment of STATE_PATH and writes to the real state file.
+    return json.loads((path or STATE_PATH).read_text(encoding="utf-8"))
 
 
 def dumps_canonical(state: dict) -> str:
     return json.dumps(state, indent=2, ensure_ascii=True) + "\n"
 
 
-def save(state: dict, path: Path = STATE_PATH, *, validate: bool = True) -> list[str]:
-    """Validate then write canonically. Returns findings; writes only if none."""
+def save(state: dict, path: Path | None = None, *, validate: bool = True) -> list[str]:
+    """Validate then write canonically. Returns findings; writes only if none.
+
+    `path` resolves at call time (see load) so STATE_PATH stays redirectable.
+    """
     findings = session_state_check.validate(state) if validate else []
     if findings:
         return findings
-    path.write_text(dumps_canonical(state), encoding="utf-8")
+    (path or STATE_PATH).write_text(dumps_canonical(state), encoding="utf-8")
     return []
 
 
@@ -257,6 +263,68 @@ def op_suspend_active(args: argparse.Namespace) -> int:
     return 0
 
 
+def op_complete_active(args: argparse.Namespace) -> int:
+    """Retire active_task: log it into completed_tasks and clear the slot.
+
+    Counterpart to suspend-active. Without this, an active_task can only ever be
+    moved *into* 'suspended' (complete-item searches only task_queue and
+    pending_for_next_session), so a finished task resurfaces at every session
+    start forever. active_task is in REQUIRED_TOP_LEVEL so it cannot be deleted;
+    the contract does allow null, which is what we set.
+    """
+    state = load()
+    active = state.get("active_task")
+    if not isinstance(active, dict):
+        print("session-state-io: no active_task object to complete", file=sys.stderr)
+        return 1
+    completed = {
+        "id": active.get("id"),
+        "status": "completed",
+        "completed_at": _now(),
+        "platform": args.platform,
+    }
+    detail = args.detail or active.get("description")
+    if detail:
+        completed["detail"] = detail
+    state.setdefault("completed_tasks", []).append(completed)
+    state["active_task"] = None
+    findings = save(state)
+    if findings:
+        return _refuse(findings)
+    print(f"session-state-io: active_task '{completed['id']}' completed and cleared")
+    return 0
+
+
+def op_reroute_active(args: argparse.Namespace) -> int:
+    """Move active_task into task_queue (where complete-item works) and clear the slot.
+
+    For work that is NOT finished but should not occupy the active slot — e.g. an
+    item blocked on a gate that belongs to a process rather than to this session.
+    """
+    state = load()
+    active = state.get("active_task")
+    if not isinstance(active, dict):
+        print("session-state-io: no active_task object to reroute", file=sys.stderr)
+        return 1
+    item = {
+        "id": active.get("id"),
+        "status": "queued",
+        "priority": active.get("priority", "medium"),
+        "assigned_to": active.get("assigned_to", "either"),
+        "description": args.description or active.get("description"),
+    }
+    for key in ("repo", "context_files", "next_step", "next_step_detail"):
+        if active.get(key) is not None:
+            item[key] = active[key]
+    state.setdefault("task_queue", []).append(item)
+    state["active_task"] = None
+    findings = save(state)
+    if findings:
+        return _refuse(findings)
+    print(f"session-state-io: active_task '{item['id']}' rerouted to task_queue and cleared")
+    return 0
+
+
 def op_record_commits(args: argparse.Namespace) -> int:
     """Mechanically refresh recent_commits + known_state.main_sha from git."""
     import subprocess
@@ -355,6 +423,15 @@ def main() -> int:
     p.add_argument("--next-step", required=True)
     p.add_argument("--next-step-detail")
 
+    p = sub.add_parser("complete-active",
+                       help="Retire active_task into completed_tasks and clear the slot")
+    p.add_argument("--detail", help="Completion detail (defaults to the task's description)")
+
+    p = sub.add_parser("reroute-active",
+                       help="Move active_task into task_queue and clear the slot "
+                            "(for unfinished work that shouldn't hold the active slot)")
+    p.add_argument("--description", help="Override the description carried to the queue item")
+
     sub.add_parser("record-commits",
                    help="Refresh recent_commits + known_state.main_sha from git log")
 
@@ -371,6 +448,8 @@ def main() -> int:
         "set-summary": op_set_summary,
         "set-tool-version": op_set_tool_version,
         "suspend-active": op_suspend_active,
+        "complete-active": op_complete_active,
+        "reroute-active": op_reroute_active,
         "record-commits": op_record_commits,
         "archive-completed": op_archive_completed,
     }
