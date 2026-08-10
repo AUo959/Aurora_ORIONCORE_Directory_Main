@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25T03:55:05Z",
+  "generated_at": "2026-08-10T23:06:08Z",
   "root": ".",
   "mode": "manual",
   "status": "warn",
@@ -17,11 +17,11 @@
       "suggested_fix": "Run from the canonical workspace path or update `catalog/repo_registry.yaml` if the repo locations changed."
     },
     {
-      "check": "session_state_freshness",
+      "check": "brief_freshness",
       "severity": "warning",
       "blocking": false,
-      "details": "catalog/session_state.json is 8 commit(s) behind HEAD (last recorded: 790a599). The other platform may be operating on stale workspace context.",
-      "suggested_fix": "Run `python3 tools/session_stop_hook.py` to auto-update, or update catalog/session_state.json manually and commit."
+      "details": "73 commit(s) have landed since the newest brief (executive_brief__2026-07-25.md) was committed. Findings in it are unverified against current state, and closures since then are unrecorded.",
+      "suggested_fix": "Run `make brief` to regenerate the governance artifacts and open the brief scaffold, or record a documented exemption in catalog/brief_freshness_exemption.yaml."
     }
   ]
 }

@@ -1,39 +1,37 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T03:55:17Z",
+  "generated_at": "2026-08-10T23:06:29Z",
   "root": ".",
   "tool": "aurora_mission_control",
   "run_mode": "read_only",
   "mutation_posture": "advisory_only",
   "nested_repo_mutation": false,
   "manifest_path": "catalog/mission_control_manifest.json",
-  "status": "attention",
+  "status": "blocked",
   "summary": {
     "source_count": 7,
     "source_error_count": 0,
     "operator_inbox_count": 12,
-    "blocking_count": 0,
-    "approval_required_count": 8,
+    "blocking_count": 4,
+    "approval_required_count": 10,
     "by_priority": {
-      "P1": 3,
-      "P2": 9
+      "P1": 7,
+      "P2": 5
     },
     "by_category": {
       "boundary": 1,
-      "developer_tooling": 2,
-      "git_state": 1,
-      "project_focus": 1,
-      "recovery_review": 6,
+      "developer_tooling": 9,
+      "recovery_review": 1,
       "validation": 1
     },
     "by_status": {
-      "informational": 1,
-      "open": 11
+      "blocked": 5,
+      "open": 7
     },
     "build_lanes": {
-      "ready": 6,
+      "ready": 0,
       "attention": 0,
-      "blocked": 0
+      "blocked": 6
     }
   },
   "source_reports": {
@@ -55,33 +53,33 @@
     "recovery_index": {
       "status": "READY",
       "candidate_count": 100,
-      "discovered_candidate_count": 1078,
-      "restricted_candidate_count": 32
+      "discovered_candidate_count": 1081,
+      "restricted_candidate_count": 33
     },
     "devkit": {
-      "status": "WARN",
-      "tools_ok": 21,
+      "status": "BLOCKED",
+      "tools_ok": 8,
       "tools_total": 21,
-      "finding_count": 2,
-      "install_plan_items": 0
+      "finding_count": 15,
+      "install_plan_items": 13
     },
     "recommendations": {
       "status": "open",
-      "recommendation_count": 11,
-      "blocking_count": 0,
-      "approval_required_count": 8
+      "recommendation_count": 24,
+      "blocking_count": 4,
+      "approval_required_count": 21
     },
     "git_status": {
       "status": "dirty",
-      "changed_path_count": 5,
-      "branch": "main...origin/main [ahead 10]"
+      "changed_path_count": 7,
+      "branch": "main...origin/main"
     }
   },
   "build_lanes": [
     {
       "lane_id": "root-python-control-tools",
       "title": "Root Python control-plane tooling",
-      "status": "ready",
+      "status": "blocked",
       "required_tools": [
         "python3",
         "uv",
@@ -92,8 +90,14 @@
         "ruff",
         "mypy"
       ],
-      "missing_required_tools": [],
-      "missing_recommended_tools": [],
+      "missing_required_tools": [
+        "sqlite3"
+      ],
+      "missing_recommended_tools": [
+        "pre-commit",
+        "ruff",
+        "mypy"
+      ],
       "next_action": "Use this lane for root CLIs, report generators, validators, and receipt tooling.",
       "evidence_refs": [
         "reports/analysis/aurora_devkit_latest.json"
@@ -103,7 +107,7 @@
     {
       "lane_id": "frontend-dashboard",
       "title": "Local frontend dashboard",
-      "status": "ready",
+      "status": "blocked",
       "required_tools": [
         "node",
         "npm",
@@ -111,7 +115,9 @@
         "pnpm"
       ],
       "recommended_tools": [],
-      "missing_required_tools": [],
+      "missing_required_tools": [
+        "pnpm"
+      ],
       "missing_recommended_tools": [],
       "next_action": "Use this lane for a localhost-only Vite dashboard after a CLI/report contract is stable.",
       "evidence_refs": [
@@ -122,12 +128,14 @@
     {
       "lane_id": "containerized-services",
       "title": "Containerized local services",
-      "status": "ready",
+      "status": "blocked",
       "required_tools": [
         "docker"
       ],
       "recommended_tools": [],
-      "missing_required_tools": [],
+      "missing_required_tools": [
+        "docker"
+      ],
       "missing_recommended_tools": [],
       "next_action": "Use this lane for devcontainers and reproducible local service stacks.",
       "evidence_refs": [
@@ -138,12 +146,14 @@
     {
       "lane_id": "apple-platforms",
       "title": "Apple platform build checks",
-      "status": "ready",
+      "status": "blocked",
       "required_tools": [
         "xcodebuild"
       ],
       "recommended_tools": [],
-      "missing_required_tools": [],
+      "missing_required_tools": [
+        "xcodebuild"
+      ],
       "missing_recommended_tools": [],
       "next_action": "Use this lane for macOS/iOS feasibility checks and simulator-backed validation.",
       "evidence_refs": [
@@ -154,13 +164,16 @@
     {
       "lane_id": "systems-tools",
       "title": "Systems helper tooling",
-      "status": "ready",
+      "status": "blocked",
       "required_tools": [
         "rust",
         "go"
       ],
       "recommended_tools": [],
-      "missing_required_tools": [],
+      "missing_required_tools": [
+        "rust",
+        "go"
+      ],
       "missing_recommended_tools": [],
       "next_action": "Use this lane for high-performance local helpers only after a root contract exists.",
       "evidence_refs": [
@@ -171,13 +184,15 @@
     {
       "lane_id": "github-maintenance",
       "title": "GitHub maintenance and CI triage",
-      "status": "ready",
+      "status": "blocked",
       "required_tools": [
         "git",
         "gh"
       ],
       "recommended_tools": [],
-      "missing_required_tools": [],
+      "missing_required_tools": [
+        "gh"
+      ],
       "missing_recommended_tools": [],
       "next_action": "Use this lane for root or explicitly named nested-repo PR/issue/CI workflows.",
       "evidence_refs": [
@@ -187,6 +202,88 @@
     }
   ],
   "operator_inbox": [
+    {
+      "item_id": "mission-p1-devkit-developer_tooling-gh-is-missing",
+      "title": "gh is missing.",
+      "category": "developer_tooling",
+      "priority": "P1",
+      "source": "devkit",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_gh_missing"
+      ],
+      "recommended_next_action": "Required for GitHub PR, issue, and CI maintenance.",
+      "suggested_commands": [
+        "brew install gh",
+        "brew upgrade gh"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": true,
+      "status": "blocked"
+    },
+    {
+      "item_id": "mission-p1-devkit-developer_tooling-sqlite3-is-missing",
+      "title": "sqlite3 is missing.",
+      "category": "developer_tooling",
+      "priority": "P1",
+      "source": "devkit",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_sqlite3_missing"
+      ],
+      "recommended_next_action": "Useful for local indexes, receipts, and lightweight metadata stores.",
+      "suggested_commands": [
+        "brew install sqlite",
+        "brew upgrade sqlite"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": true,
+      "status": "blocked"
+    },
+    {
+      "item_id": "mission-p1-devkit-developer_tooling-aurora-cloudbank-symbolic-main-python-environment-is-blocked",
+      "title": "aurora-cloudbank-symbolic-main Python environment is blocked.",
+      "category": "developer_tooling",
+      "priority": "P1",
+      "source": "devkit",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::repo_python_env_aurora-cloudbank-symbolic-main_blocked"
+      ],
+      "recommended_next_action": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
+      "suggested_commands": [
+        "python3 tools/aurora_devkit.py --install-plan"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": true,
+      "status": "open"
+    },
+    {
+      "item_id": "mission-p1-devkit-developer_tooling-python3-12-is-missing",
+      "title": "python3.12 is missing.",
+      "category": "developer_tooling",
+      "priority": "P1",
+      "source": "devkit",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_python3.12_missing"
+      ],
+      "recommended_next_action": "Canonical Python floor (declared in .python-version). Required for CloudBank venv compatibility and CI parity. CI gates merges on 3.12. Install via: uv python install 3.12",
+      "suggested_commands": [
+        "python3 tools/aurora_devkit.py --install-plan"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": true,
+      "status": "open"
+    },
     {
       "item_id": "mission-p1-workspace_verify-boundary-resolve-workspace-verifier-finding-repo-registry-coverage",
       "title": "Resolve workspace verifier finding: repo_registry_coverage",
@@ -208,8 +305,8 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p1-recovery_index-recovery_review-review-2-restricted-recovery-candidates-carefully",
-      "title": "Review 2 restricted recovery candidates carefully",
+      "item_id": "mission-p1-recovery_index-recovery_review-review-3-restricted-recovery-candidates-carefully",
+      "title": "Review 3 restricted recovery candidates carefully",
       "category": "recovery_review",
       "priority": "P1",
       "source": "recovery_index",
@@ -228,17 +325,17 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p1-workspace_verify-validation-resolve-workspace-verifier-finding-session-state-freshness",
-      "title": "Resolve workspace verifier finding: session_state_freshness",
+      "item_id": "mission-p1-workspace_verify-validation-resolve-workspace-verifier-finding-brief-freshness",
+      "title": "Resolve workspace verifier finding: brief_freshness",
       "category": "validation",
       "priority": "P1",
       "source": "workspace_verify",
       "target_repo": "root",
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
-        "tools/workspace_verify.py::session_state_freshness"
+        "tools/workspace_verify.py::brief_freshness"
       ],
-      "recommended_next_action": "Run `python3 tools/session_stop_hook.py` to auto-update, or update catalog/session_state.json manually and commit.",
+      "recommended_next_action": "Run `make brief` to regenerate the governance artifacts and open the brief scaffold, or record a documented exemption in catalog/brief_freshness_exemption.yaml.",
       "suggested_commands": [
         "python3 tools/workspace_verify.py"
       ],
@@ -248,17 +345,100 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p2-devkit-developer_tooling-aurora-cloudbank-symbolic-main-python-environment-is-warn",
-      "title": "aurora-cloudbank-symbolic-main Python environment is warn.",
+      "item_id": "mission-p2-devkit-developer_tooling-docker-is-missing",
+      "title": "docker is missing.",
       "category": "developer_tooling",
       "priority": "P2",
       "source": "devkit",
       "target_repo": "root",
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::repo_python_env_aurora-cloudbank-symbolic-main_warn"
+        "catalog/dev_toolkit_manifest.json::tool_docker_missing"
       ],
-      "recommended_next_action": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
+      "recommended_next_action": "Recommended for devcontainers, service stacks, and reproducible app builds.",
+      "suggested_commands": [
+        "brew install --cask docker",
+        "brew upgrade --cask docker"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "blocked"
+    },
+    {
+      "item_id": "mission-p2-devkit-developer_tooling-go-is-missing",
+      "title": "go is missing.",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "source": "devkit",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_go_missing"
+      ],
+      "recommended_next_action": "Optional for portable developer services and CLIs.",
+      "suggested_commands": [
+        "brew install go",
+        "brew upgrade go"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "blocked"
+    },
+    {
+      "item_id": "mission-p2-devkit-developer_tooling-rust-is-missing",
+      "title": "rust is missing.",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "source": "devkit",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_rust_missing"
+      ],
+      "recommended_next_action": "Optional for high-performance local tools and native extensions.",
+      "suggested_commands": [
+        "brew install rust",
+        "brew upgrade rust"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "blocked"
+    },
+    {
+      "item_id": "mission-p2-devkit-developer_tooling-brew-is-missing",
+      "title": "brew is missing.",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "source": "devkit",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_brew_missing"
+      ],
+      "recommended_next_action": "Recommended Mac system package manager if machine-level automatic updates are desired.",
+      "suggested_commands": [
+        "brew update"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "item_id": "mission-p2-devkit-developer_tooling-gitleaks-is-missing",
+      "title": "gitleaks is missing.",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "source": "devkit",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_gitleaks_missing"
+      ],
+      "recommended_next_action": "Secret-scanning gate for all pushes and PRs. Config: .gitleaks.toml. CI: .github/workflows/secret-scan.yml. Added 2026-05-30.",
       "suggested_commands": [
         "python3 tools/aurora_devkit.py --install-plan"
       ],
@@ -266,210 +446,6 @@
       "mutation_posture": "advisory_only",
       "blocking": false,
       "status": "open"
-    },
-    {
-      "item_id": "mission-p2-devkit-developer_tooling-aurora-dev-toolkit-watch-exists-but-is-not-active",
-      "title": "aurora-dev-toolkit-watch exists but is not active.",
-      "category": "developer_tooling",
-      "priority": "P2",
-      "source": "devkit",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::automation_aurora_dev_toolkit_watch_paused"
-      ],
-      "recommended_next_action": "Use a devkit watch lane for read-only drift detection, then apply package changes with explicit approval.",
-      "suggested_commands": [
-        "python3 tools/aurora_devkit.py --install-plan"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "item_id": "mission-p2-project-focus-public-demo-focus-2026-07-08",
-      "title": "Current project focus: workable public demos",
-      "category": "project_focus",
-      "priority": "P2",
-      "source": "project_focus",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo plus explicitly named demo owner repos",
-      "evidence_refs": [
-        "reports/analysis/aurora_demo_readiness_latest.json",
-        "reports/analysis/aurora_mission_control_latest.json",
-        "reports/analysis/aurora_operator_snapshot_latest.json",
-        "README.md::Current Docker demo readiness"
-      ],
-      "recommended_next_action": "Every agent working on the project should keep public-demo readiness in mind and surface concrete demo proposals when relevant.",
-      "suggested_commands": [
-        "python3 tools/project_focus_announcement.py --summary",
-        "make demo-readiness",
-        "make mission-control"
-      ],
-      "approval_required": false,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "item_id": "mission-p2-recovery_index-recovery_review-review-2-recovery-candidates-routed-to-qgia-knowledge-library-main",
-      "title": "Review 2 recovery candidates routed to qgia-knowledge-library-main",
-      "category": "recovery_review",
-      "priority": "P2",
-      "source": "recovery_index",
-      "target_repo": "qgia-knowledge-library-main",
-      "owner_surface": "canonical nested repo",
-      "evidence_refs": [
-        "QGIA_Axiom_Doctrine_Narrative.md",
-        "intake/QGIA_SPACE_NAVAGATION_GUIDE.md"
-      ],
-      "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
-      "suggested_commands": [
-        "python3 tools/workspace_recovery_index.py --summary",
-        "python3 tools/workspace_recovery_index.py --persist-report"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "item_id": "mission-p2-recovery_index-recovery_review-review-34-recovery-candidates-routed-to-root",
-      "title": "Review 34 recovery candidates routed to root",
-      "category": "recovery_review",
-      "priority": "P2",
-      "source": "recovery_index",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "intake/text_conversation_PDK001.txt",
-        "intake/TOBIAS_QIN_CHARACTER_PROFILE.md",
-        "Prplexity_Observation_6_14.md",
-        "_staging/apple_notes_recovery__2026-03-16/L1/ord_drone_fleet_v1.0.py",
-        "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Please provide a comprehensive report outlining th 1.md",
-        "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Please provide a comprehensive report outlining th.md",
-        "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs1/Please provide a comprehensive report outlining th.md",
-        "intake/threadcore_symbiosis_delta_manifest.md",
-        "archives/unzipped/ZipWiz_Chamber_6_28/aurora_bridge_output/relay_handshake.py",
-        "intake/ORION__POLICY__CANON_PROTOCOL__v2.0__2026-04-08.md",
-        "CLAUDE.md",
-        "_staging/apple_notes_recovery__2026-03-16/L2/MULTILINGUAL_BEAMFORMING_ARRAY_SEED.md"
-      ],
-      "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
-      "suggested_commands": [
-        "python3 tools/workspace_recovery_index.py --summary",
-        "python3 tools/workspace_recovery_index.py --persist-report"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "item_id": "mission-p2-recovery_index-recovery_review-review-4-recovery-candidates-routed-to-review-required",
-      "title": "Review 4 recovery candidates routed to review-required",
-      "category": "recovery_review",
-      "priority": "P2",
-      "source": "recovery_index",
-      "target_repo": "review-required",
-      "owner_surface": "manual recovery review",
-      "evidence_refs": [
-        "_staging/recovered_textAu__2026-03-13/L1/04_aurora_simulation_steward_report.md",
-        "_staging/recovered_textAu__2026-03-13/L2/03_galactic_union_mechanics_and_models.md",
-        "_staging/orion_ord_review_fix/package/tests/test_ord_threshold_registry.py",
-        "intake/text_44.txt"
-      ],
-      "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
-      "suggested_commands": [
-        "python3 tools/workspace_recovery_index.py --summary",
-        "python3 tools/workspace_recovery_index.py --persist-report"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "item_id": "mission-p2-recovery_index-recovery_review-review-5-recovery-candidates-routed-to-qgia-knowledge-spine-main",
-      "title": "Review 5 recovery candidates routed to qgia-knowledge-spine-main",
-      "category": "recovery_review",
-      "priority": "P2",
-      "source": "recovery_index",
-      "target_repo": "qgia-knowledge-spine-main",
-      "owner_surface": "canonical nested repo",
-      "evidence_refs": [
-        "intake/text_43.txt",
-        "SPEC__WARRANT_LENS__v1.md",
-        "intake/text_Au_Steward.txt",
-        "intake/deep-research-report.md",
-        "_staging/recovered_textAu__2026-03-13/L2/dossiers/l2_mechanic_registry__recovered_textAu.md"
-      ],
-      "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
-      "suggested_commands": [
-        "python3 tools/workspace_recovery_index.py --summary",
-        "python3 tools/workspace_recovery_index.py --persist-report"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "item_id": "mission-p2-recovery_index-recovery_review-review-55-recovery-candidates-routed-to-aurora-cloudbank-symbolic-main",
-      "title": "Review 55 recovery candidates routed to aurora-cloudbank-symbolic-main",
-      "category": "recovery_review",
-      "priority": "P2",
-      "source": "recovery_index",
-      "target_repo": "aurora-cloudbank-symbolic-main",
-      "owner_surface": "canonical nested repo",
-      "evidence_refs": [
-        "intake/Aurora_CloudBank_Review_R1_R10.md",
-        "intake/b794f5eb-0115-48bb-ac1c-28a2c6c85a95.md",
-        "intake/aurora_scaffold_nexus_meta_narrative.md",
-        "QGIA_Runtime_OnePager.md",
-        "_staging/orion_ord_review_fix/package/tests/test_ord_policy_engine.py",
-        "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/QuantumSymbolic_Index.txt",
-        "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs1/QuantumSymbolic_Index.txt",
-        "intake/ORION__NAV__PERPLEXITY_SPACE_FRONT_DOOR__v2.0__2026-04-08.md",
-        "intake/Thread_The_Station_is_Well.md",
-        "intake/text_25.txt",
-        "_staging/codex_wip/test_mesh_router_v1__codex_wip_preserved_2026-06-13.py",
-        "aurora-cloudbank-symbolic_README_DRAFT.md"
-      ],
-      "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
-      "suggested_commands": [
-        "python3 tools/workspace_recovery_index.py --summary",
-        "python3 tools/workspace_recovery_index.py --persist-report"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "open"
-    },
-    {
-      "item_id": "mission-p2-git_status-git_state-root-worktree-has-5-in-progress-paths",
-      "title": "Root worktree has 5 in-progress paths",
-      "category": "git_state",
-      "priority": "P2",
-      "source": "git_status",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "archives/recovered_prototypes/biological_pneumatic_engine/Biological_Pneumatic_Engine_Whitepaper.docx",
-        "reports/analysis/aurora_mission_control_latest.json",
-        "reports/analysis/aurora_recommendations_latest.json",
-        "reports/analysis/workspace_verify_latest.json",
-        "reports/simulation/hour_aboard_v1__2026-07-25/"
-      ],
-      "recommended_next_action": "Review ownership before staging or committing. Treat existing command-grammar, integration-gate, and recommendation-engine edits as separate root-control-plane work unless intentionally combined.",
-      "suggested_commands": [
-        "git status --short --branch"
-      ],
-      "approval_required": false,
-      "mutation_posture": "advisory_only",
-      "blocking": false,
-      "status": "informational"
     }
   ],
   "validation_commands": [

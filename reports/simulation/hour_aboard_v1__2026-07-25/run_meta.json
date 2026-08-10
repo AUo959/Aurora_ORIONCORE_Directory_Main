@@ -1,0 +1,23 @@
+{
+  "schema": "aurora.sim.run_meta/v1",
+  "tool": "tools/hour_aboard.py",
+  "written_at": "2026-07-25T04:29:05Z",
+  "output_dir": "reports/simulation/hour_aboard_v1__2026-07-25",
+  "scenario": "hour_aboard_v1",
+  "seed": 808,
+  "anchor_seed": "EOS_SEED_ORION",
+  "process": {
+    "pid": 33343,
+    "ppid": "33239",
+    "parent_command": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python -m pytest tests/ -q",
+    "argv": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/tools/hour_aboard.py --scenario hour_aboard_scenario --no-mesh",
+    "cwd": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
+    "user": "travisstreets"
+  },
+  "environment": {
+    "claude_code": true,
+    "codex": false,
+    "ci": false,
+    "sim_report_root_override": null
+  }
+}
