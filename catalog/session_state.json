@@ -256,6 +256,18 @@
   },
   "recent_commits": [
     {
+      "sha": "9b53654",
+      "date": "2026-08-10",
+      "platform": "codex",
+      "summary": "state: record CloudBank draft backlog handoff"
+    },
+    {
+      "sha": "d073c42",
+      "date": "2026-08-10",
+      "platform": "codex",
+      "summary": "state: refresh CloudBank hygiene receipt"
+    },
+    {
       "sha": "181b768",
       "date": "2026-08-10",
       "platform": "codex",
@@ -302,18 +314,6 @@
       "date": "2026-08-09",
       "platform": "codex",
       "summary": "state: queue CloudBank issue hygiene wave"
-    },
-    {
-      "sha": "59a24bd",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "fix(ci): scope session-state freshness to authoritative PR base (#61)"
-    },
-    {
-      "sha": "185c15f",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "fix: restore lint setup step"
     }
   ],
   "security_events": [
@@ -457,7 +457,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "181b768abb92bccc4d91117d44bfc8094e9c19d1",
+    "main_sha": "9b53654c6c967c775b634cb19357eebf1704ed90",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
