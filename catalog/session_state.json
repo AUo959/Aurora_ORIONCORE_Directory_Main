@@ -256,6 +256,18 @@
   },
   "recent_commits": [
     {
+      "sha": "d9782ae",
+      "date": "2026-08-10",
+      "platform": "codex",
+      "summary": "state: finalize CloudBank PR stabilization receipt"
+    },
+    {
+      "sha": "b6eb10f",
+      "date": "2026-08-10",
+      "platform": "codex",
+      "summary": "state: refresh root commit receipt"
+    },
+    {
       "sha": "9b53654",
       "date": "2026-08-10",
       "platform": "codex",
@@ -302,18 +314,6 @@
       "date": "2026-08-09",
       "platform": "codex",
       "summary": "state: refresh root commit receipt"
-    },
-    {
-      "sha": "b7d84e2",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "state: record CloudBank hygiene wave progress"
-    },
-    {
-      "sha": "7c5cc45",
-      "date": "2026-08-09",
-      "platform": "codex",
-      "summary": "state: queue CloudBank issue hygiene wave"
     }
   ],
   "security_events": [
@@ -457,7 +457,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "9b53654c6c967c775b634cb19357eebf1704ed90",
+    "main_sha": "d9782ae36b6098634635b0c2d3e1d1fa49293933",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
