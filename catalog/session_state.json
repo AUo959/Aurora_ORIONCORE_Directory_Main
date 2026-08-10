@@ -329,9 +329,9 @@
       "detail": "Completed 2026-08-09. Mined deep_filtered_galactic_union_simulation_conversations (9.3MB, 1.8MB text, 6 conversations). Prose extraction was almost entirely noise \u2014 name fragments of existing canon, profile field labels, reputation metrics \u2014 consistent with the .md finding that this material family is already heavily mined (its sibling is cited by 8 canon records). BUT cross-checking references produced 3 real closures: polity_outer_colonies (faction binding used by 5 records with no entity record), org_trade_coalition and org_ai_vanguard (the alliance that elected Zylox, attested in committed canon). Dangling faction referents now zero; canon 218 -> 221. Recommendation recorded: stop mining this tier for prose; run reference-integrity sweeps instead, which is what actually finds things."
     }
   ],
-  "last_updated": "2026-08-10T18:47:05Z",
+  "last_updated": "2026-08-10T19:05:53Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Closed the capsule-only gap: created 29 character entity records (Judicator crew + Union leadership + faction leaders) that existed only as capsules while being referenced by vessel crew_ids. Canon 189 -> 218 records, all references now resolve.",
+  "last_session_summary": "Corrected a wrong call: prose is not exhausted. Built tools/prose_claim_extractor.py (claims about entities, not new names) \u2014 951 claims across 85 entities in the .md tier I had written off, 469 in the conversation blob. Caught a Sovereign Nexus name collision in canon landed hours earlier, and salvaged the Velar Imperium's full history.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",

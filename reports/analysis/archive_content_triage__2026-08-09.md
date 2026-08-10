@@ -336,3 +336,45 @@ Prose salvage is not a one-off sweep to be declared finished. It is a **standing
 obligation**: run the claim extractor over each prose corpus, route the claim ledger
 through the reconciler's conflict scan, and promote what survives. Claims are *evidence*,
 never canon by themselves. The extractor prints that reminder on every run.
+
+## The `.md` tier, re-run with the claim extractor
+
+The Phase-2 finding above ("largely exhausted") was reached with proper-noun extraction
+and is **superseded**. The same 52 files, run through `prose_claim_extractor.py`:
+
+**951 claims across 85 canon entities** — roughly double the yield of the 9.3 MB
+conversation blob, from files I had already written off.
+
+### First salvage from it
+
+Prose asserted the Velar Imperium's full historical arc: unification under a technocratic
+monarchy (**Sahn'Darith Accord**), expansion during the **Celestial Surge**, collapse in
+the **Fracture War**, then the three-way split. Checking those names showed all three were
+**already canon in the timeline files**, while `polity_velar_imperium` — created earlier
+the same day — carried none of it.
+
+That is the pattern worth naming: **prose claims are often pointers to canon that exists
+but was never wired into the entity graph.** The history was reconciled from the timeline
+(authoritative), not from the prose paraphrase.
+
+Also landed: Republican Reformists favour Union integration; Imperial Loyalists are
+restorationists. Both tie to the Fracture War outcome.
+
+### And one thing deliberately left unasserted
+
+Prose lists the Imperial Loyalists as "Led by Tal'Varen" — very likely `virex_talvaren`.
+Recorded as a **claim with UNCONFIRMED linkage**, not written into a leadership field. A
+surname is not identity evidence; the Aelindra Voss-Aurai / Lyra Voss contamination caught
+earlier the same day is what that restraint is for.
+
+## Corrected standing method
+
+1. Run `prose_claim_extractor.py` over each prose corpus → claim ledger.
+2. For each claim, check whether canon **already holds the fact somewhere else**
+   (timeline, operations, narratives). Very often it does, and the real gap is that the
+   entity record never carried it. Reconcile from the authoritative canon source.
+3. Where canon does not hold it, conflict-scan and promote per the standing rule.
+4. Where a claim implies an identity link on partial evidence (a surname, a shared name
+   fragment), record it as a claim — do not assert it.
+
+Prose salvage is a standing obligation, not a sweep that gets declared finished.
