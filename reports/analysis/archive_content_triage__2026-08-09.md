@@ -277,3 +277,62 @@ exports of the same material; the memory-index blobs (~1.9 MB each) were examine
 and are dev-session logs. Recommendation: **stop mining this tier for prose** and instead
 run reference-integrity sweeps (faction bindings, org ids, crew ids, location refs)
 against canon, which is what actually produced findings today.
+
+---
+
+# CORRECTION — the "stop mining prose" recommendation was wrong
+
+The previous section recommended abandoning prose extraction in favour of
+reference-integrity sweeps. **That recommendation is retracted.**
+
+The early project lived almost entirely in prose. Claims made there are canon material
+and must be salvaged per protocol. The "exhausted" conclusion came from a **bad tool**,
+not from the material: the extractor looked for **new proper nouns**, which in this
+corpus returns fragments of names already in canon, profile-template field labels and
+reputation metrics. Of course that looked like noise.
+
+**The value in prose is claims about entities that already exist.** That is how the Trade
+Coalition was found — inside a sentence about Zylox's chancellorship, by accident.
+
+## What a claim-oriented extractor finds instead
+
+`tools/prose_claim_extractor.py` extracts *assertions about canon entities* rather than
+names. On the same 9.3 MB blob that "looked exhausted":
+
+**469 claims across 72 canon entities.**
+
+Matching is deliberately strict, because two loose-matching errors were made earlier the
+same day and both would have corrupted canon silently: a surname fallback gave Aelindra
+Voss-Aurai the profile of Lyra Voss, and a bare-word match on "diplomacy" attributed a
+discussion of embedding similarity to the Office of Strategic Diplomacy. Word-boundary
+matches on full names and aliases only, with a stoplist for entity names that are also
+common nouns.
+
+## It immediately caught a conflict in canon landed hours earlier
+
+`org_sovereign_nexus` was created earlier today from the Operation Obsidian Dawn outcome
+file, as a **rogue AI intelligence**. The early prose says:
+
+> "Union Intelligence intercepts communications revealing that Separatist hardliners are
+> amassing forces in **Sovereign Nexus**, a hyperlane chokepoint."
+
+That is a **place**. Two readings are possible (two referents sharing a name; or the AI
+named for / operating from the chokepoint), and canon settles neither. The record is now
+flagged `name_collision_sovereign_nexus` with both readings recorded and **nothing
+merged** — the same restraint applied to WRATH-09 / nemesis_core.
+
+Had prose mining stopped, this collision would have sat undetected inside canon.
+
+## Named referents surfaced by claims, absent from canon
+
+`Jasrek Tyr` (Velar warlord who seized a Precursor vault), `Arkelon Theta` (the vault
+site), `Iron Fang Mercenaries` (operate in the Outer Colonies, hired for planetary
+defence), `Varnak` (Zylox's electoral rival). All recovered_source names for the naming
+gate — none minted here.
+
+## Standing method
+
+Prose salvage is not a one-off sweep to be declared finished. It is a **standing
+obligation**: run the claim extractor over each prose corpus, route the claim ledger
+through the reconciler's conflict scan, and promote what survives. Claims are *evidence*,
+never canon by themselves. The extractor prints that reminder on every run.
