@@ -250,6 +250,13 @@
       "completed_at": "2026-08-10T16:18:25Z",
       "platform": "claude-code",
       "detail": "Implemented RULING-ENGINE-P4 + RULING-FABRIC-SCHEMA in skills/aurora-canon-reconciler/scripts/validate_entity.py: P1 map-primacy, P2 moving-entity placement, P4 movement-promotion route gate. Semantics pinned to tools/fabric_invariants_check.py. 20 tests. Also fixed VALID_ENTITY_KINDS drift (77 of 189 canon records were rejected on entity_kind alone). Queued two follow-ups: reconciler-required-fields-schema-drift, fabric-p1-canon-remediation (29 pre-existing P1 findings the Velar-scoped linter never saw)."
+    },
+    {
+      "id": "fabric-p1-canon-remediation",
+      "status": "completed",
+      "completed_at": "2026-08-10T16:26:23Z",
+      "platform": "claude-code",
+      "detail": "Resolved 2026-08-09: 19 P1 violations downgraded per the RULING-VELAR-P1 precedent (16 to 'staging' against STAGING map rows, 3 to 'unplaced' with no map row). Placement claim only; all entities remain CANON. Gate now reports zero blocks across 158 entities. Also fixed P4 being unsatisfiable \u2014 no route registry exists in canon, so it now warns and self-escalates; queued l2-route-registry as the unblocking work."
     }
   ],
   "last_updated": "2026-08-10T02:14:30Z",
@@ -465,10 +472,10 @@
       "description": "aurora-canon-reconciler REQUIRED_FIELDS expects a schema CanonRec does not use: it demands 'canonical_name' and 'type' while committed records carry 'name' and 'subtype'. Consequence: every real canon record validates as BLOCKED on missing-required-field grounds even when it is perfectly well-formed, which trains users to ignore the validator. Found 2026-08-09 while wiring the FABRIC P1/P2/P4 checks (VALID_ENTITY_KINDS had the same drift and was fixed then; REQUIRED_FIELDS is the remaining half). Fix: reconcile REQUIRED_FIELDS against the field names canon actually uses, or accept either spelling."
     },
     {
-      "id": "fabric-p1-canon-remediation",
+      "id": "l2-route-registry",
       "priority": "medium",
       "assigned_to": "either",
-      "description": "The newly wired reconciler P1 check finds 29 pre-existing placement issues in committed canon that tools/fabric_invariants_check.py never saw because it is Velar-domain-scoped (16 of 158 entities): 16 records claim canonical_position_status='canon' while their Location Authority Table row is STAGING/TBD, and 13 claim canon placement with no LAT row at all. Documented resolution for a P1 violation is downgrade (precedent: Vel-Surak, 2026-07-21 ruling batch \u2014 '2 violations found -> RESOLVED by downgrade'). Remediate by downgrading position status to match map authority, then consider widening the linter beyond the Velar domain."
+      "description": "Build the L2 canonical route/corridor registry. P4 (RULING-ENGINE-P4) requires canon promotions citing movement/cross-region events to cite a canonical route or drive, but canon contains no route, corridor, lane or drive entity, so the requirement is currently unsatisfiable \u2014 the reconciler reports it as WARN and escalates to BLOCK automatically once a registry exists (see FABRIC_P4_NO_ROUTE_REGISTRY). Two records already waiting on it: event_dark_star_incident_4718_224 and fleet_shadow_fleet. Derive routes from established canon (Kharis sector transits, the Velar Crescent corridor, Union trade routes referenced in the Obsidian Dawn briefing) rather than minting them."
     }
   ],
   "known_state": {

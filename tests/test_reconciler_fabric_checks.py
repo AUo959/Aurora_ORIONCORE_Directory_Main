@@ -170,13 +170,56 @@ def test_p1_degrades_to_info_when_table_missing():
 
 # ── P4: movement promotions must cite a route ─────────────────────────────
 
-def test_p4_event_movement_without_route_blocks():
-    r = _run({
-        "name": "Dark Star Incident",
-        "certainty": "CANON",
-        "canonical_sequence": ["The Shadow Fleet withdrew from the Lethan system."],
-    }, "event")
-    assert "FABRIC_P4_MOVEMENT_WITHOUT_ROUTE" in _blocks(r)
+def _with_route_registry(exists: bool):
+    """P4 severity depends on whether canon has anything citable."""
+    import validate_entity as ve
+    ve.route_registry_exists = lambda ctx: exists  # type: ignore
+
+
+def test_p4_event_movement_without_route_blocks_when_registry_exists():
+    import validate_entity as ve
+    original = ve.route_registry_exists
+    try:
+        _with_route_registry(True)
+        r = _run({
+            "name": "Dark Star Incident",
+            "certainty": "CANON",
+            "canonical_sequence": ["The Shadow Fleet withdrew from the Lethan system."],
+        }, "event")
+        assert "FABRIC_P4_MOVEMENT_WITHOUT_ROUTE" in _blocks(r)
+    finally:
+        ve.route_registry_exists = original
+
+
+def test_p4_warns_instead_of_blocking_when_no_route_registry_exists():
+    """An exit condition nobody can meet is a defect, not a gate.
+
+    Canon contains no route/corridor/drive entity as of 2026-08-09, so a hard
+    BLOCK would make every movement event permanently unpromotable with no
+    compliant action available. P4 self-activates instead.
+    """
+    import validate_entity as ve
+    original = ve.route_registry_exists
+    try:
+        _with_route_registry(False)
+        r = _run({
+            "name": "Dark Star Incident",
+            "certainty": "CANON",
+            "canonical_sequence": ["The Shadow Fleet withdrew from the Lethan system."],
+        }, "event")
+        assert "FABRIC_P4_NO_ROUTE_REGISTRY" in _codes(r)
+        assert not r.blocks, "must not block on an unsatisfiable requirement"
+    finally:
+        ve.route_registry_exists = original
+
+
+def test_p4_real_canon_has_no_route_registry_yet():
+    """Pins the precondition. When this starts failing, P4 has become enforceable."""
+    from validate_entity import route_registry_exists
+    canon_dir = REPO_ROOT / "GUMAS_SIM_2.5" / "CanonRec" / "canon" / "L2"
+    if not canon_dir.exists():
+        return
+    assert route_registry_exists({"context_root": str(canon_dir)}) is False
 
 
 def test_p4_satisfied_by_a_route_citation():

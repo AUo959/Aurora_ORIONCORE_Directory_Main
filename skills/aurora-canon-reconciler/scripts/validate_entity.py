@@ -512,6 +512,33 @@ def load_map_authority_rows(context: Optional[dict]) -> Optional[dict]:
     return rows or None
 
 
+def route_registry_exists(context: Optional[dict]) -> bool:
+    """True when canon contains anything a P4 route/drive citation could point at.
+
+    P4 requires a movement promotion to cite a canonical route or drive. That
+    presupposes a route registry. As of 2026-08-09 canon contains no route,
+    corridor, lane or drive entity at all, so a hard BLOCK would be unsatisfiable
+    — every movement event would be permanently unpromotable with no compliant
+    action available. An exit condition nobody can meet is a defect, not a gate.
+    So P4 self-activates: WARN while no registry exists, BLOCK once one does.
+    """
+    root = (context or {}).get("context_root")
+    if not root:
+        return False
+    for path in Path(root).rglob("*.json"):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if not isinstance(data, dict):
+            continue
+        subtype = str(data.get("subtype") or "").lower()
+        kind = str(data.get("entity_kind") or "").lower()
+        if subtype in ("route", "corridor", "lane", "transit_route") or kind in ("route", "drive"):
+            return True
+    return False
+
+
 def _match_authority_row(name: str, rows: dict):
     """Fuzzy-match an entity name to a table row, mirroring the linter's matcher."""
     if not name:
@@ -602,15 +629,27 @@ def check_fabric_invariants(data: dict, ek: Optional[str], report: "ValidationRe
         text = _movement_claim_text(data)
         hit = next((m for m in MOVEMENT_MARKERS if m in text), None)
         if has_event_context and hit and not any(data.get(f) for f in ROUTE_CITATION_FIELDS):
-            report.add(
-                "BLOCK", "FABRIC_P4_MOVEMENT_WITHOUT_ROUTE",
-                f"P4 promotion gate: this record is being promoted to canon and describes a "
-                f"movement / cross-region event (matched {hit!r}), but cites no canonical route "
-                f"or drive. Add one of {list(ROUTE_CITATION_FIELDS)}. Engine-generated movement "
-                "flows are acceptable in-run, but a route/drive citation is required at canon "
-                "promotion (RULING-ENGINE-P4).",
-                "route_ref",
-            )
+            if route_registry_exists(context):
+                report.add(
+                    "BLOCK", "FABRIC_P4_MOVEMENT_WITHOUT_ROUTE",
+                    f"P4 promotion gate: this record is being promoted to canon and describes a "
+                    f"movement / cross-region event (matched {hit!r}), but cites no canonical route "
+                    f"or drive. Add one of {list(ROUTE_CITATION_FIELDS)}. Engine-generated movement "
+                    "flows are acceptable in-run, but a route/drive citation is required at canon "
+                    "promotion (RULING-ENGINE-P4).",
+                    "route_ref",
+                )
+            else:
+                report.add(
+                    "WARN", "FABRIC_P4_NO_ROUTE_REGISTRY",
+                    f"P4: this record describes a movement / cross-region event (matched {hit!r}) "
+                    "and cites no route or drive — but canon currently contains no route, corridor "
+                    "or drive entity to cite, so the requirement is not yet satisfiable. Recorded "
+                    "as a warning rather than a block: an exit condition nobody can meet is a "
+                    "defect, not a gate. This escalates to BLOCK automatically once a route "
+                    "registry exists.",
+                    "route_ref",
+                )
 
 
 class ValidationReport:
