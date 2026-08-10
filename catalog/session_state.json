@@ -229,6 +229,20 @@
       "completed_at": "2026-08-10T00:59:34Z",
       "platform": "codex",
       "detail": "Completed the ordered #1362 -> #1342 -> #1329 phase as stabilized draft PRs #1489, #1490, and #1491. Local validation passed for each; #1489/#1490 checks are green. #1491 is cleanly mergeable and every repository check is green except Model Catalog Validation, which now fails closed because ANTHROPIC_API_KEY is not configured. No merge, issue closure, comment/reply, manual thread resolution, ready transition, canon promotion, or INIT occurred. Remaining L1 child re-triage is carried into the 2026-08-10 continuation item."
+    },
+    {
+      "id": "snpm-canon-promote-review",
+      "status": "completed",
+      "completed_at": "2026-08-10T16:01:23Z",
+      "platform": "claude-code",
+      "detail": "Superseded by the 2026-08-09 STAGING closure reconciliation: the whole STAGING backlog was run through the reconciler process (conflict scan + advisor) rather than held for owner review. STAGING count is now 0."
+    },
+    {
+      "id": "haden-korr-affirmation",
+      "status": "completed",
+      "completed_at": "2026-08-10T16:01:23Z",
+      "platform": "claude-code",
+      "detail": "Resolved by process 2026-08-09: conflict scan CLEAN but held at UNCONFIRMED on evidentiary grounds \u2014 the source block is explicitly headed 'AI-Generated Character', a demonstration of on-demand generation, i.e. tooling meta-content rather than in-world fact. Reason recorded on the record as certainty_hold."
     }
   ],
   "last_updated": "2026-08-10T02:14:30Z",
@@ -366,13 +380,6 @@
       "description": "Reconcile intake/TOBIAS_QIN_CHARACTER_PROFILE.md (546 ln L1 staging draft) against existing canon entity ORION.ENTITY.0039__tobias-qin.md via aurora-canon-reconciler; determine drift/supplementary-detail/duplication; owner decides folding. Likely canon supersedes."
     },
     {
-      "id": "snpm-canon-promote-review",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "SNPM (Scalable Narrative Probability Model) at CanonRec canon/L2/mechanics/ \u2014 PROCESS-ROUTED: run through aurora-canon-reconciler (conflict scan vs committed mechanics + advisor scoring). If the conflict scan is clean it is canon and lands at commit. This is not an owner adjudication of whether the model is true; it is a conflict check against canon.",
-      "gate_reframed": "2026-08-09: owner-adjudication framing replaced with a process route (owner gates the commit, not the truth determination)."
-    },
-    {
       "id": "archive-content-triage-450",
       "priority": "medium",
       "assigned_to": "either",
@@ -407,13 +414,6 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "Pre-existing branch fix/ci-dynamic-registry-pins (commit b3bb45c 'ci: read nested-repo pins dynamically from catalog/repo_registry.yaml') is unpublished and overlaps the registry-sync tooling added 2026-07-21 (tools/registry_sync_heads.py + make registry-sync + Stop-hook advisory). Review whether that branch is superseded, complementary (CI-side vs local-side), or should be merged/retired. Flagged by the landing ledger as unpublished_branch."
-    },
-    {
-      "id": "haden-korr-affirmation",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "Haden Korr certainty resolution \u2014 PROCESS-ROUTED: run the reconciler certainty advisor against available evidence. His profile traces to an archive AI-Generated Character demonstration, so the question is an evidentiary one (does a source-of-truth artifact exist?), resolved by the advisor + conflict scan \u2014 not an owner fiat to affirm or deny. Rises above UNCONFIRMED only when evidence supports it.",
-      "gate_reframed": "2026-08-09: owner-adjudication framing replaced with a process route (owner gates the commit, not the truth determination)."
     },
     {
       "id": "selene-ark-status-vocab",
