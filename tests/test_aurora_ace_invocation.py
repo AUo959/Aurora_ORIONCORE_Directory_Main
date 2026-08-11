@@ -48,6 +48,14 @@ def character_context() -> dict[str, object]:
     }
 
 
+def minimal_query(*, specialist_first: bool = True) -> dict[str, object]:
+    return {
+        "schema_version": core.SCHEMA_VERSION,
+        "record_type": "ace_query_envelope",
+        "generation_policy": {"prefer_existing_specialists": specialist_first},
+    }
+
+
 def _compile(monkeypatch: pytest.MonkeyPatch, **kwargs: object) -> dict[str, object]:
     monkeypatch.setattr(core, "repository_baselines", lambda _root: BASELINES)
     return invocation.compile_character_invocation(
@@ -128,10 +136,14 @@ def test_autonomic_invocation_fails_closed_without_seam_and_policy(
 
 
 def test_invocation_rejects_synthesis_around_specialist_tooling() -> None:
-    query = {
-        "generation_policy": {"prefer_existing_specialists": False},
-    }
     with pytest.raises(core.ACEError, match="specialist-first"):
+        invocation.build_invocation_envelope(minimal_query(specialist_first=False))
+
+
+def test_invocation_rejects_private_non_ace_query() -> None:
+    query = minimal_query()
+    query["record_type"] = "private_resolver_query"
+    with pytest.raises(core.ACEError, match="normal supported ACE query envelope"):
         invocation.build_invocation_envelope(query)
 
 
@@ -139,15 +151,14 @@ def test_resolve_links_invocation_to_shared_determination_and_sidecar(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
 ) -> None:
-    query = {
-        "record_type": "ace_query_envelope",
-        "generation_policy": {"prefer_existing_specialists": True},
-    }
+    query = minimal_query()
     envelope = invocation.build_invocation_envelope(query)
 
     calls: list[dict[str, object]] = []
 
-    def fake_resolve(payload: dict[str, object], output_dir: Path, *, root: Path = core.ROOT) -> dict[str, object]:
+    def fake_resolve(
+        payload: dict[str, object], output_dir: Path, *, root: Path = core.ROOT
+    ) -> dict[str, object]:
         calls.append({"payload": payload, "output_dir": output_dir, "root": root})
         return {
             "determination_id": "ace.determination.example.001",
@@ -165,6 +176,13 @@ def test_resolve_links_invocation_to_shared_determination_and_sidecar(
     assert persisted["invocation_id"] == envelope["invocation_id"]
     assert persisted["determination_ref"] == "ace.determination.example.001"
     assert persisted["visibility"] == "inspectable"
+
+    report = core.validate_json_schema(
+        sidecar,
+        REPO_ROOT / "catalog/schemas/aurora_ace_invocation_envelope.schema.json",
+        REPO_ROOT,
+    )
+    assert report["ok"] is True
 
 
 def test_contract_declares_automatic_not_invisible() -> None:
