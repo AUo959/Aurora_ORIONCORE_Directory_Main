@@ -397,11 +397,18 @@
       "completed_at": "2026-08-11T00:20:17Z",
       "platform": "claude-code",
       "detail": "Built tools/canon_reference_integrity.py (namespace-aware, repeatable) + tests/test_canon_reference_integrity.py (7 tests). Result: 0 dangling references across 243 records, 0 alias collisions, 103 orphans (mostly legitimate leaf records). Structural findings fixed: all 40 capsules now declare capsule_id, bridging the capsule<->entity namespaces that were previously connected only by prefix-stripping; faction<->entity mapping is now READ from polity faction_bindings because separatist_confed -> polity_separatist_confederation is not derivable by any prefix rule; 4 species records gained origin_polity_entity_id alongside the faction-form origin_polity_id."
+    },
+    {
+      "id": "validator-vocabulary-sync-guard",
+      "status": "completed",
+      "completed_at": "2026-08-11T00:33:50Z",
+      "platform": "claude-code",
+      "detail": "Added tests/test_validator_vocabulary_sync.py (6 tests). Guards every controlled vocabulary against committed canon: VALID_ENTITY_KINDS, VALID_CERTAINTY_TAGS, VALID_L2_POLITY_SUBTYPES, VALID_L2_SPECIES_SUBTYPES, and STATUS_VOCAB_BY_KIND per kind. All currently clean. Location subtypes are deliberately NOT asserted clean \u2014 canon uses 6 descriptive values the validator does not list, capped at 8 with a failure message that forces the classification decision rather than raising the ceiling again."
     }
   ],
-  "last_updated": "2026-08-11T00:20:21Z",
+  "last_updated": "2026-08-11T00:33:54Z",
   "last_platform": "claude-code",
-  "last_session_summary": "chore(catalog): sync CanonRec pin; close all 5 naming-gate q",
+  "last_session_summary": "Prose-claim ledger reconciliation + naming-gate closure + reference integrity. Canon: Galactic Union constitutional basis, Prime Construct legal architecture (SIE designation) + Nexus Citadel, Battle of Kaelor's Rift promoted from a recovered Captain's Log, Velar cultural/political foundations including a lineage-prefix naming system that predicts independently-written canon, T'karas Prime + the Debate at T'karas + Neutral Houses + House Velkonn, the full Sira Velkonn profile (which resolved the T'karas alignment conflict), and 15 recovered-source referents clearing the entire naming-gate backlog. Tooling: fixed detect_layer_and_type silently classifying 8 entity kinds as locations; synced polity subtype vocabulary to canon; built tools/canon_reference_integrity.py (0 dangling refs across 243 records) and made the capsule/faction/entity namespace bridges explicit; added vocabulary-sync guards. Wrote executive_brief__2026-08-10.md, whose headline finding is that Mission Control reports 'blocked' on execution-context artifacts rather than real workspace state.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -423,6 +430,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "a88401a",
+      "date": "2026-08-11",
+      "platform": "claude-code",
+      "summary": "feat(canon): reference-integrity sweep \u2014 namespace-aware checker + tests"
+    },
     {
       "sha": "84bc494",
       "date": "2026-08-11",
@@ -476,12 +489,6 @@
       "date": "2026-08-10",
       "platform": "claude-code",
       "summary": "chore: sync CanonRec pin; close sovereign-nexus-name-collision; queue the Crisis event"
-    },
-    {
-      "sha": "e09030b",
-      "date": "2026-08-10",
-      "platform": "claude-code",
-      "summary": "feat(recovery): claim-extract all major prose corpora \u2014 1,044 claims across 108 entities"
     }
   ],
   "security_events": [
@@ -636,12 +643,6 @@
       "description": "Mission Control and publication_debt cannot distinguish 'tool absent in this execution context' from 'tool absent'. Four P1 developer_tooling items (gh, sqlite3, python3.12, docker) describe the sandboxed Linux workspace, not the owner's Mac, and 5 of 7 publication-debt items are 'PR state UNVERIFIED (gh unavailable)' rather than real debt. Label findings with the detected environment; downgrade UNVERIFIED from blocking. Removes 4 false P1s. See executive_brief__2026-08-10.md Risk 2."
     },
     {
-      "id": "validator-vocabulary-sync-guard",
-      "priority": "medium",
-      "assigned_to": "claude-code",
-      "description": "Generalize tests/test_entity_type_detection.py::test_polity_subtype_vocabulary_covers_committed_canon to every controlled vocabulary in validate_entity.py (location subtypes, species subtypes, domain subtypes, certainty tags, status vocab), so canon drift fails a test rather than producing noise or silence. Three drift instances found in one session. See executive_brief__2026-08-10.md Risk 5."
-    },
-    {
       "id": "automate-executive-brief",
       "priority": "medium",
       "assigned_to": "either",
@@ -652,10 +653,16 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "tests/test_live_watch_link.py fails in the sandboxed workspace with ModuleNotFoundError: No module named 'fastapi' (tools/live_watch.py clone driver). Not a code regression \u2014 a missing dependency in the execution context, the same class as the Mission Control 'gh is missing' false P1. Either add fastapi to the dev toolkit/test extras or mark the test to skip when the dep is absent, so a green suite means the same thing everywhere."
+    },
+    {
+      "id": "l2-location-subtype-classification",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Canon uses 6 descriptive location subtypes the validator does not list (ai_polity_interface_node, neutral_velari_world, precursor_vault_site, secure_union_facility, shadow_ring, union_core_military_industrial_world) against a structural list (planet, moon, region, station...). Both schemes are defensible; canon's is in use. Decide: widen the vocabulary to descriptive values, or add a separate descriptive field and keep subtype structural. tests/test_validator_vocabulary_sync.py caps drift at 8 so this cannot quietly grow."
     }
   ],
   "known_state": {
-    "main_sha": "84bc494",
+    "main_sha": "a88401a",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -770,7 +777,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-11T00:20:21Z",
+    "checked_at": "2026-08-11T00:33:54Z",
     "entries": [
       {
         "repo": "root",
@@ -1177,12 +1184,6 @@
         "branch": "codex/public-vulnerability-reporting-2026-07-29",
         "detail": "pushed, 2 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
         "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
-      },
-      {
-        "repo": "CanonRec",
-        "class": "unpushed_main",
-        "detail": "main is 1 commit(s) ahead of origin/main",
-        "remediation": "Push main (or PR it if the repo requires review)."
       },
       {
         "repo": "qgia-knowledge-library-main",
