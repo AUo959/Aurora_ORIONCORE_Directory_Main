@@ -61,6 +61,7 @@ licenses and release decisions.
 - Current recovery index report: [reports/analysis/workspace_recovery_index_latest.json](reports/analysis/workspace_recovery_index_latest.json)
 - Cross-platform session claims workflow: [docs/SESSION_CLAIMS_WORKFLOW_v1.md](docs/SESSION_CLAIMS_WORKFLOW_v1.md)
 - CloudBank issue broker workflow: [docs/CLOUDBANK_ISSUE_BROKER_WORKFLOW_v1.md](docs/CLOUDBANK_ISSUE_BROKER_WORKFLOW_v1.md)
+- Aurora Canon Engine specification: [docs/AURORA_ACE__SPEC__CANON_ENGINE__v0.1__2026-08-10.md](docs/AURORA_ACE__SPEC__CANON_ENGINE__v0.1__2026-08-10.md)
 
 ## Logical Zones
 
@@ -74,6 +75,34 @@ licenses and release decisions.
 - `tools/`: the only supported workspace reorganization surface
 - `intake/`: ambiguous loose items pending review
 - `_staging/`: rehearsals and rollback-safe staging
+
+## Aurora Canon Engine MVP
+
+ACE is the root-control-plane capability router for Aurora questions that need
+live repository evidence plus deterministic canonical completion. The current
+MVP implements the unobserved-character name-and-operational-background flow:
+it compiles the question, routes to NameService and CharForge, validates the
+candidate with CanonRec, and emits an atomic commit-ready packet without
+mutating a nested repository.
+
+```bash
+python3 tools/aurora_ace.py capabilities
+python3 tools/aurora_ace.py plan \
+  --question "What is this character's name and background?" \
+  --context /path/to/character-context.json
+python3 tools/aurora_ace.py resolve \
+  --question "What is this character's name and background?" \
+  --context /path/to/character-context.json \
+  --out /private/tmp/ace-character-packet
+make ace-check
+make ace-live-check
+```
+
+The packet contains the query, selected capability index, raw and projected
+name evidence, transaction receipts, verified capsule, CanonRec candidate,
+validation receipts, artifact index, and determination receipt. Existing-canon
+retrieval, ledgering, materialization, MCP exposure, and non-character entity
+classes remain subsequent phases.
 
 ## Repo-Local Codex Plugins
 

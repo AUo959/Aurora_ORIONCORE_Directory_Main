@@ -1,0 +1,476 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/aurora_ace_query_envelope.schema.json",
+  "title": "Aurora Canon Engine Query Envelope",
+  "description": "Normalized question, context, generation policy, repository baseline, requested outputs, and execution budget for one ACE inquiry.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "nonempty_string": {
+      "type": "string",
+      "minLength": 1
+    },
+    "string_array": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nonempty_string"
+      }
+    },
+    "repo_baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "path": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "commit_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "authority_role": {
+          "type": "string",
+          "enum": [
+            "control_plane",
+            "canon",
+            "runtime",
+            "simulation",
+            "knowledge",
+            "supporting"
+          ]
+        }
+      },
+      "required": [
+        "repository",
+        "path",
+        "commit_sha",
+        "authority_role"
+      ]
+    },
+    "requested_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "field_path": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.\\[\\]-]+$"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "preferred_capability_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ace\\.capability\\.[A-Za-z0-9_.:-]+$"
+          }
+        },
+        "description": {
+          "$ref": "#/$defs/nonempty_string"
+        }
+      },
+      "required": [
+        "field_path",
+        "required",
+        "preferred_capability_refs",
+        "description"
+      ]
+    },
+    "semantic_requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requirement_id": {
+          "type": "string",
+          "pattern": "^ace\\.semantic\\.[A-Za-z0-9_.:-]+$"
+        },
+        "semantic_type": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "description": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "accepts_state_derived": {
+          "type": "boolean"
+        },
+        "accepts_connective_rendering": {
+          "type": "boolean"
+        },
+        "acceptable_origins": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "retrieved",
+              "deterministic_derivation",
+              "specialist_tool_output",
+              "connective_synthesis"
+            ]
+          }
+        },
+        "minimum_evidence": {
+          "$ref": "#/$defs/string_array"
+        }
+      },
+      "required": [
+        "requirement_id",
+        "semantic_type",
+        "description",
+        "required",
+        "accepts_state_derived",
+        "accepts_connective_rendering",
+        "acceptable_origins",
+        "minimum_evidence"
+      ]
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "0.1.1"
+    },
+    "record_type": {
+      "const": "ace_query_envelope"
+    },
+    "query_id": {
+      "type": "string",
+      "pattern": "^ace\\.query\\.[A-Za-z0-9_.:-]+$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "requester": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "user",
+            "operations",
+            "agent",
+            "system"
+          ]
+        },
+        "requester_id": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "session_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "requester_id",
+        "session_ref"
+      ]
+    },
+    "question": {
+      "$ref": "#/$defs/nonempty_string"
+    },
+    "query_kind": {
+      "type": "string",
+      "enum": [
+        "retrieve",
+        "derive",
+        "complete",
+        "revise",
+        "validate",
+        "explain"
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repositories": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/nonempty_string"
+          }
+        },
+        "layers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "root",
+              "L1",
+              "L2",
+              "L3",
+              "cross_layer"
+            ]
+          }
+        },
+        "target_repository": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "target_paths": {
+          "$ref": "#/$defs/string_array"
+        },
+        "temporal_basis": {
+          "type": "string",
+          "enum": [
+            "current_committed_state",
+            "named_simulation_state",
+            "historical_baseline",
+            "explicit_commit_set"
+          ]
+        }
+      },
+      "required": [
+        "repositories",
+        "layers",
+        "target_repository",
+        "target_paths",
+        "temporal_basis"
+      ]
+    },
+    "baselines": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/repo_baseline"
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "subject_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "entity_type": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "existence_status": {
+          "type": "string",
+          "enum": [
+            "known",
+            "unknown",
+            "contextual_unresolved",
+            "confirmed_unrecorded"
+          ]
+        },
+        "contextual_refs": {
+          "$ref": "#/$defs/string_array"
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "subject_ref",
+        "entity_type",
+        "existence_status",
+        "contextual_refs",
+        "context"
+      ]
+    },
+    "requested_outputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/requested_output"
+      }
+    },
+    "answer_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "compiler_version": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "interpretation_basis": {
+          "$ref": "#/$defs/string_array"
+        },
+        "coverage_policy": {
+          "const": "all_mandatory_semantics_satisfied"
+        },
+        "requirements": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/semantic_requirement"
+          }
+        }
+      },
+      "required": [
+        "compiler_version",
+        "interpretation_basis",
+        "coverage_policy",
+        "requirements"
+      ]
+    },
+    "generation_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canonical_completion_allowed": {
+          "type": "boolean"
+        },
+        "constitutive_simulation_allowed": {
+          "type": "boolean"
+        },
+        "analytical_simulation_allowed": {
+          "type": "boolean"
+        },
+        "prefer_existing_specialists": {
+          "const": true
+        },
+        "connective_synthesis_policy": {
+          "type": "string",
+          "enum": [
+            "disabled",
+            "connective_only",
+            "bounded_completion"
+          ]
+        },
+        "deterministic_required": {
+          "type": "boolean"
+        },
+        "stable_seed": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        },
+        "reserved_decision_policy_ref": {
+          "$ref": "#/$defs/nonempty_string"
+        }
+      },
+      "required": [
+        "canonical_completion_allowed",
+        "constitutive_simulation_allowed",
+        "analytical_simulation_allowed",
+        "prefer_existing_specialists",
+        "connective_synthesis_policy",
+        "deterministic_required",
+        "stable_seed",
+        "reserved_decision_policy_ref"
+      ]
+    },
+    "execution_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "plan_only",
+            "read_only",
+            "commit_ready",
+            "delegated_materialize",
+            "owner_gated_materialize"
+          ]
+        },
+        "delegation_policy_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "allowed_side_effects": {
+          "$ref": "#/$defs/string_array"
+        },
+        "budgets": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "max_tool_calls": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "max_new_entities": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max_wall_seconds": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "max_output_bytes": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "max_tool_calls",
+            "max_new_entities",
+            "max_wall_seconds",
+            "max_output_bytes"
+          ]
+        }
+      },
+      "required": [
+        "mode",
+        "delegation_policy_ref",
+        "allowed_side_effects",
+        "budgets"
+      ]
+    },
+    "response_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "include_human_answer": {
+          "type": "boolean"
+        },
+        "include_execution_plan": {
+          "type": "boolean"
+        },
+        "include_field_provenance": {
+          "const": true
+        },
+        "include_replay_command": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "include_human_answer",
+        "include_execution_plan",
+        "include_field_provenance",
+        "include_replay_command"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_type",
+    "query_id",
+    "created_at",
+    "requester",
+    "question",
+    "query_kind",
+    "scope",
+    "baselines",
+    "subject",
+    "requested_outputs",
+    "answer_contract",
+    "generation_policy",
+    "execution_policy",
+    "response_policy"
+  ]
+}
