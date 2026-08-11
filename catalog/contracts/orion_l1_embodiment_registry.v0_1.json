@@ -1,0 +1,553 @@
+{
+  "contract_id": "ORION-L1-EMBODIMENT-RECOVERY-AUDIT-0.1",
+  "contract_version": "0.1.0",
+  "status": "audit_only_noncanonical",
+  "activation_authority": false,
+  "generated_at": "2026-08-10T23:50:00-04:00",
+  "purpose": "Record evidence-bounded mappings between Aurora architectural components, Orion L1 embodiments, L2 control surfaces, and L3 governance interfaces without activating providers or promoting staging material.",
+  "invariants": [
+    "Orion L1 is the physical chassis and control plane that operates and observes the L2 GUMAS payload under L3 law.",
+    "A physical embodiment mapping does not by itself prove a runtime provider, spatial geometry, or action authority.",
+    "The five relay agents and HALO are L1-resident and monitor L2; they are not inhabitants of L2.",
+    "HALO is a continuity system-entity, not a sixth communications relay.",
+    "Relay verification is not L1 human consent.",
+    "Staging and recovered sources cannot be silently promoted into canon.",
+    "Unresolved physical geometry cannot cause movement, timing, occupancy, resource, or access-control effects.",
+    "This contract cannot start, resume, migrate, or advance an experiment."
+  ],
+  "audit_revisions": {
+    "root_control_plane": "a3da11061878782eda3db78fe17aeb61b96b042e",
+    "aurora_cloudbank_symbolic": "836a604d0ae4efeaa77b381171d69fef62ea36da",
+    "canonrec": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a"
+  },
+  "evidence_register": {
+    "CB_LAYER_ARCHITECTURE": {
+      "source": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/architecture/LAYER_ARCHITECTURE.md",
+      "revision": "836a604d0ae4efeaa77b381171d69fef62ea36da",
+      "classification": "explicit_canon"
+    },
+    "CB_L1_RUNTIME_CONTRACT": {
+      "source": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/architecture/AURORA_L1_RUNTIME_CONTRACT.md",
+      "revision": "836a604d0ae4efeaa77b381171d69fef62ea36da",
+      "classification": "explicit_canon"
+    },
+    "CB_L1_RUNTIME_TYPES": {
+      "source": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/simulation/l1_runtime_types.py",
+      "revision": "836a604d0ae4efeaa77b381171d69fef62ea36da",
+      "classification": "current_implementation"
+    },
+    "CB_RELAY_BRIDGE_AND_MESH": {
+      "source": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/bridges/l1_relay_bridge.py and src/mesh/runtime.py",
+      "revision": "836a604d0ae4efeaa77b381171d69fef62ea36da",
+      "classification": "current_implementation"
+    },
+    "CB_TRIPLEX_CURRENT": {
+      "source": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora_orchestrator/triplex_handshake.py",
+      "revision": "836a604d0ae4efeaa77b381171d69fef62ea36da",
+      "classification": "current_implementation"
+    },
+    "CB_TRIPLEX_HISTORY": {
+      "source": "CloudBank history before and after CommandBridge replacement",
+      "revision": "d44ed3d9 and 3236b6f",
+      "classification": "recoverable_historical_implementation"
+    },
+    "CB_HISTORICAL_MCP": {
+      "source": "CloudBank salvage/stash-reconcile-snapshot-2026-03-13 MCP Shuttle Bay files",
+      "revision": "4f17e6c3",
+      "classification": "recoverable_historical_implementation"
+    },
+    "CR_STATION_PURPOSE": {
+      "source": "GUMAS_SIM_2.5/CanonRec/canon/L1/station/STATION_PURPOSE_DEFINITION.md",
+      "revision": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+      "classification": "explicit_canon"
+    },
+    "CR_GROUND_SEGMENT": {
+      "source": "GUMAS_SIM_2.5/CanonRec/canon/L1/station/POWERED_WATCH_AND_GROUND_SEGMENT.md",
+      "revision": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+      "classification": "explicit_canon"
+    },
+    "CR_CREW_LIFE": {
+      "source": "GUMAS_SIM_2.5/CanonRec/canon/L1/station/CREW_LIFE_FIDELITY.md",
+      "revision": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+      "classification": "explicit_canon"
+    },
+    "CR_OPERATIONAL_LIBRARY": {
+      "source": "GUMAS_SIM_2.5/CanonRec/canon/L1/station/operational_library_v2_2/",
+      "revision": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+      "classification": "staging"
+    },
+    "CR_PHYSICAL_SPACE": {
+      "source": "GUMAS_SIM_2.5/CanonRec/canon/L1/station/physical_space/ and staging_2026-04/",
+      "revision": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+      "classification": "staging"
+    },
+    "OWNER_MCP_EMBODIMENT": {
+      "source": "owner direction in Simulated Orion Station Run continuation",
+      "revision": "conversation 6a769104-e078-83ea-a212-890ec9189159",
+      "classification": "explicit_canon"
+    },
+    "RECOVERED_TICK7_LEDGER": {
+      "source": "sealed external recovery receipt for run 0d67389f-c444-421d-89cb-f6f7673c347b",
+      "revision": "state sha256 1349f58389c93a18b96eb9d7460ba35c3273a85e743db86127b491c705eb1fa4",
+      "classification": "recoverable_historical_implementation"
+    }
+  },
+  "paused_experiment": {
+    "run_id": "0d67389f-c444-421d-89cb-f6f7673c347b",
+    "status": "PAUSED",
+    "tick": 7,
+    "station_cycle_minute": 21,
+    "source_contract_version": "1.1.0",
+    "seed": 1337,
+    "cloudbank_revision": "660d56656ef30daeaf5cf5e2f977a3181e26e0ac",
+    "canonrec_revision": "1fc35f08a2937b10a2a3c15abe4b7ed39245b64e",
+    "elapsed_minutes_by_step": [1, 1, 1, 1, 1, 1, 15],
+    "event_rolls": [
+      0.3260240882665417,
+      0.9164458980745646,
+      0.33478896085146626,
+      0.569004301624333,
+      0.5408785209426247,
+      0.8468546936552912,
+      0.7181459335220168
+    ],
+    "recovered_state_sha256": "1349f58389c93a18b96eb9d7460ba35c3273a85e743db86127b491c705eb1fa4",
+    "advance_permitted": false
+  },
+  "evidence_classes": {
+    "explicit_canon": "Committed canonical source or recorded owner ruling supports the mapping directly.",
+    "current_implementation": "Behavior exists in the current audited checkout but is not automatically canonical or active in L1.",
+    "recoverable_historical_implementation": "Behavior exists only in history or recovered material and requires review before reuse.",
+    "staging": "Material is preserved for reconciliation but lacks canonical promotion.",
+    "bounded_inference": "Relationship is strongly constrained by explicit roles but cannot be used causally.",
+    "unresolved": "No sufficiently authoritative evidence fixes the value or behavior."
+  },
+  "authority_model": {
+    "triplex_sequence": [
+      "l3_glyph_arbitration",
+      "l1_continuity_and_relay_verification",
+      "l1_human_or_valid_delegated_authority_decision"
+    ],
+    "relay_boundary": "ARCHY and the other relays may assess and verify; none is the human principal.",
+    "routine_path": {
+      "status": "design_required",
+      "rule": "Routine work may proceed only under a machine-checkable standing-authority policy whose action scope, issuer, effective interval, revocation state, and run binding cover the event."
+    },
+    "exceptional_path": {
+      "status": "provider_missing",
+      "rule": "Exceptional actionable state changes require an actor-bound human Command Bridge decision after L3 and relay assessments."
+    },
+    "current_divergence": {
+      "triplex_handshake": "Current code assigns ARCHYEntity to both relay feasibility and L1 oversight and exposes no human pending-approval queue.",
+      "runtime_receipt": "Current GovernanceReceipt uses static booleans and cannot prove actor, scope, decision, delegation, time, or evidence."
+    }
+  },
+  "embodiments": [
+    {
+      "id": "L1-EMB-MCP-SHUTTLE-BAY",
+      "component": "MCP Security / Shuttle Bay",
+      "mapping_status": "owner_confirmed_concept_implementation_unresolved",
+      "l1": {
+        "embodiment": "controlled physical admission, quarantine, inspection, and security facility for software and tool arrivals",
+        "location": "unresolved",
+        "evidence_class": "explicit_canon"
+      },
+      "l2": {
+        "control_surfaces": ["tool discovery", "intake manifest", "quarantine", "routing proposal", "staged execution", "approval hold"],
+        "evidence_class": "recoverable_historical_implementation"
+      },
+      "l3": {
+        "interfaces": ["ethics evaluation", "anchor verification", "drift evaluation", "provenance validation", "human decision gate"],
+        "evidence_class": "bounded_inference"
+      },
+      "implementation": "Historical controller and routing artifacts exist outside current main; the review-required path did not fail closed.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["OWNER_MCP_EMBODIMENT", "CB_HISTORICAL_MCP"],
+      "gaps": ["canonical location", "reviewed tool-to-facility registry", "quarantine state machine", "actor-bound approvals", "fail-closed review hold"]
+    },
+    {
+      "id": "L1-EMB-COMMAND-BRIDGE",
+      "component": "Aurora command/control and human Command Bridge",
+      "mapping_status": "explicit_function_provider_unresolved",
+      "l1": {
+        "embodiment": "Aurora station command intelligence plus a distinct human command authority interface",
+        "location": "command facility exact location unresolved; do not infer from staging deck plans",
+        "evidence_class": "explicit_canon"
+      },
+      "l2": {
+        "control_surfaces": ["tasking", "experiment control", "simulation change proposal", "station disposition", "ground uplink review"],
+        "evidence_class": "explicit_canon"
+      },
+      "l3": {
+        "interfaces": ["Triplex decision envelope", "Picard Delta 3 constraints", "relay assessments"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "Current Triplex code substitutes ARCHYEntity for the human authority step.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["CB_LAYER_ARCHITECTURE", "CB_TRIPLEX_CURRENT", "CB_TRIPLEX_HISTORY", "CR_GROUND_SEGMENT"],
+      "gaps": ["human principal registry", "standing-authority scope registry", "pending decision queue", "signed decision receipts"]
+    },
+    {
+      "id": "L1-EMB-RELAY-001",
+      "component": "ARCHY",
+      "mapping_status": "explicit_cloudbank_canon_canonrec_reconciliation_pending",
+      "l1": {
+        "embodiment": "RELAY_001 architecture and feasibility verifier",
+        "location": "Bridge Chamber, Deck C",
+        "evidence_class": "explicit_canon"
+      },
+      "l2": {
+        "canonical_scope": ["L2 architecture monitoring", "technical feasibility verification"],
+        "canonical_scope_evidence_class": "explicit_canon",
+        "recovered_capabilities": ["dependency visibility", "schema management", "structural compliance"],
+        "recovered_capabilities_evidence_class": "staging"
+      },
+      "l3": {
+        "interfaces": ["Caelion", "Triplex relay verification"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "Current L1 relay bridge can route messages but does not publish physical location, liaison, L3 binding, or world-state provider.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["CB_LAYER_ARCHITECTURE", "CB_RELAY_BRIDGE_AND_MESH", "CR_OPERATIONAL_LIBRARY"],
+      "prohibited_authority": ["human consent", "self-approval of architecture changes"]
+    },
+    {
+      "id": "L1-EMB-RELAY-002",
+      "component": "OPPY",
+      "mapping_status": "explicit_cloudbank_canon_canonrec_reconciliation_pending",
+      "l1": {
+        "embodiment": "RELAY_002 operational continuity and telemetry verifier",
+        "location": "Reactor Bay, Deck H",
+        "evidence_class": "explicit_canon"
+      },
+      "l2": {
+        "canonical_scope": ["L2 telemetry and runtime monitoring", "operational continuity verification"],
+        "canonical_scope_evidence_class": "explicit_canon",
+        "recovered_capabilities": ["process health", "backup", "recovery", "failover"],
+        "recovered_capabilities_evidence_class": "staging"
+      },
+      "l3": {
+        "interfaces": ["general L3 framework", "Triplex relay verification"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "Current mesh and bridge provide deterministic routing, not a physical reactor or telemetry provider.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["CB_LAYER_ARCHITECTURE", "CB_RELAY_BRIDGE_AND_MESH", "CR_OPERATIONAL_LIBRARY"],
+      "prohibited_authority": ["retention-violating deletion", "unreceipted failover"]
+    },
+    {
+      "id": "L1-EMB-RELAY-003",
+      "component": "LIORA",
+      "mapping_status": "explicit_cloudbank_canon_canonrec_reconciliation_pending",
+      "l1": {
+        "embodiment": "RELAY_003 communications integrity and mediation verifier",
+        "location": "Communications Hub, Deck B",
+        "evidence_class": "explicit_canon"
+      },
+      "l2": {
+        "canonical_scope": ["L2 communications integrity monitoring"],
+        "canonical_scope_evidence_class": "explicit_canon",
+        "recovered_capabilities": ["secure routing", "human-AI translation", "sentiment aggregation", "mediation"],
+        "recovered_capabilities_evidence_class": "staging"
+      },
+      "l3": {
+        "interfaces": ["Sentari", "Triplex relay verification"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "Current message transport does not bind LIORA to station communications state or privacy decisions.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["CB_LAYER_ARCHITECTURE", "CB_RELAY_BRIDGE_AND_MESH", "CR_OPERATIONAL_LIBRARY"],
+      "prohibited_authority": ["private communication analysis without consent", "unreceipted message release"]
+    },
+    {
+      "id": "L1-EMB-RELAY-004",
+      "component": "STARLING_AU",
+      "mapping_status": "explicit_cloudbank_canon_canonrec_reconciliation_pending",
+      "l1": {
+        "embodiment": "RELAY_004 simulation continuity, reflection, and records verifier",
+        "location": "Operations Hub, Deck G",
+        "evidence_class": "explicit_canon"
+      },
+      "l2": {
+        "canonical_scope": ["L2 simulation-state and continuity monitoring"],
+        "canonical_scope_evidence_class": "explicit_canon",
+        "recovered_capabilities": ["versioned records", "post-event reflection", "mission reporting", "transparency"],
+        "recovered_capabilities_evidence_class": "staging"
+      },
+      "l3": {
+        "interfaces": ["general L3 framework", "Triplex relay verification"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "Historical node can execute simulation commands; that behavior exceeds the recovered verifier role and is not activation authority.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["CB_LAYER_ARCHITECTURE", "CB_RELAY_BRIDGE_AND_MESH", "CR_OPERATIONAL_LIBRARY"],
+      "prohibited_authority": ["unapproved simulation mutation", "omission of negative outcomes"]
+    },
+    {
+      "id": "L1-EMB-RELAY-005",
+      "component": "RIVERTHREAD_808",
+      "mapping_status": "explicit_cloudbank_canon_canonrec_reconciliation_pending",
+      "l1": {
+        "embodiment": "RELAY_005 temporal, logistics, and data-flow verifier",
+        "location": "Logistics Distribution, all decks",
+        "evidence_class": "explicit_canon"
+      },
+      "l2": {
+        "canonical_scope": ["L2 temporal flow and state monitoring"],
+        "canonical_scope_evidence_class": "explicit_canon",
+        "recovered_capabilities": ["data pipelines", "archive replication", "retention", "distributed data movement"],
+        "recovered_capabilities_evidence_class": "staging"
+      },
+      "l3": {
+        "interfaces": ["Harmion", "Triplex relay verification"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "Historical node may auto-correct memory flow from static consent flags; current mesh does not provide embodied storage state.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["CB_LAYER_ARCHITECTURE", "CB_RELAY_BRIDGE_AND_MESH", "CR_OPERATIONAL_LIBRARY"],
+      "prohibited_authority": ["static-boolean consent", "unreceipted memory mutation", "preferential routing"]
+    },
+    {
+      "id": "L1-EMB-HALO",
+      "component": "HALO continuity system-entity / HALO-PAS",
+      "mapping_status": "explicit_cloudbank_canon_canonrec_reconciliation_pending",
+      "l1": {
+        "embodiment": "HALO continuity graft, HALO/PAS drift controller, ring infrastructure, and HALOEntity interface",
+        "location": "Aurora Core Chamber, Deck B",
+        "evidence_class": "explicit_canon"
+      },
+      "l2": {
+        "control_surfaces": ["drift observation", "continuity verification", "state-alignment assessment"],
+        "evidence_class": "explicit_canon"
+      },
+      "l3": {
+        "interfaces": ["Axiomera", "Triplex relay verification"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "HALO components exist but are not bound as an authoritative provider in the modern L1 run state.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["CB_LAYER_ARCHITECTURE", "CB_L1_RUNTIME_TYPES"],
+      "gaps": ["provider registration", "observation provenance", "threshold authority", "hold and release receipts"]
+    },
+    {
+      "id": "L1-EMB-GUMAS-LABS",
+      "component": "GUMAS payload / Observatory / simulation laboratories",
+      "mapping_status": "mission_relationship_explicit_topology_staging",
+      "l1": {
+        "embodiment": "station compute, Observatory, and laboratory chassis that operates and observes the L2 payload",
+        "location": "exact facility topology unresolved; candidate deck assignments remain staging",
+        "evidence_class": "explicit_canon"
+      },
+      "l2": {
+        "control_surfaces": ["seeded run creation", "state delta production", "experiment control", "observation", "checkpoint and replay"],
+        "evidence_class": "explicit_canon"
+      },
+      "l3": {
+        "interfaces": ["layer boundary rules", "ethics constraints", "continuity constraints", "release gates"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "GUMAS engines exist outside the modern L1 state model; no laboratory provider is bound.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["CR_STATION_PURPOSE", "CR_GROUND_SEGMENT", "CR_OPERATIONAL_LIBRARY", "CR_PHYSICAL_SPACE"],
+      "gaps": ["engine adapter", "experiment-to-facility binding", "resource loads", "observation and checkpoint receipts"]
+    },
+    {
+      "id": "L1-EMB-FLEET-DOCKING",
+      "component": "Fleet and docking complex",
+      "mapping_status": "fleet_projection_current_spatial_model_staging",
+      "l1": {
+        "embodiment": "physical station craft, primary bays, auxiliary ports, and docking operations",
+        "location": "macro docking concept supported; exact geometry, bay assignment, and occupancy unresolved",
+        "evidence_class": "staging"
+      },
+      "l2": {
+        "control_surfaces": ["fleet identity and provenance", "readiness", "tasking", "dispatch", "docking occupancy", "recovery"],
+        "evidence_class": "current_implementation"
+      },
+      "l3": {
+        "interfaces": ["action policy", "custody", "provenance", "Triplex for exceptional action"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "The v1.2 runtime binds fleet projection, but not exact bay occupancy, trajectory, or navigation providers.",
+      "causal_use_permitted": true,
+      "causal_scope": "limited_to_existing_nonspatial_fleet_projection",
+      "evidence_refs": ["CB_L1_RUNTIME_CONTRACT", "CB_L1_RUNTIME_TYPES", "CR_PHYSICAL_SPACE"],
+      "gaps": ["promoted docking topology", "occupancy provider", "trajectory provider", "launch and recovery authority"]
+    },
+    {
+      "id": "L1-EMB-ORD-DISPATCH",
+      "component": "ORD drone dispatch",
+      "mapping_status": "policy_and_fleet_projection_current_dispatch_blocked",
+      "l1": {
+        "embodiment": "onboard autonomous validation/security and physical drone fleet operations",
+        "location": "craft custody and bay assignment unresolved",
+        "evidence_class": "explicit_canon"
+      },
+      "l2": {
+        "control_surfaces": ["task queue", "validation", "dispatch", "telemetry", "recovery", "custody state"],
+        "evidence_class": "current_implementation"
+      },
+      "l3": {
+        "interfaces": ["ORD policy", "Picard Delta 3", "provenance", "action-scoped authority"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "Fleet adapter exists; current boolean GovernanceReceipt is insufficient for physical dispatch and ORD-3 custody remains quarantined.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["CR_GROUND_SEGMENT", "CB_L1_RUNTIME_TYPES"],
+      "gaps": ["custody authority", "bay binding", "dispatch receipt", "telemetry provider", "abort and recovery state machine"]
+    },
+    {
+      "id": "L1-EMB-MEMORY-STORAGE",
+      "component": "Memory, storage, chronicle, and data vaults",
+      "mapping_status": "roles_recovered_physical_provider_unresolved",
+      "l1": {
+        "embodiment": "data vaults and storage infrastructure operated through OPPY, STARLING_AU, and RIVERTHREAD_808 responsibilities",
+        "location": "exact vault topology unresolved",
+        "evidence_class": "bounded_inference"
+      },
+      "l2": {
+        "control_surfaces": ["run persistence", "chronicle", "backup", "archive", "replication", "retention", "replay"],
+        "evidence_class": "explicit_canon"
+      },
+      "l3": {
+        "interfaces": ["provenance", "retention policy", "continuity", "non-deletion constraints"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "Persistence exists in several subsystems, but no shared L1 storage provider or physical vault state is registered.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["CB_LAYER_ARCHITECTURE", "CR_OPERATIONAL_LIBRARY", "CR_PHYSICAL_SPACE"],
+      "gaps": ["authoritative storage inventory", "vault topology", "retention and deletion receipts", "replication provider health"]
+    },
+    {
+      "id": "L1-EMB-COMMUNICATIONS",
+      "component": "Station and ground communications",
+      "mapping_status": "limited_link_current_relay_integration_missing",
+      "l1": {
+        "embodiment": "LIORA Communications Hub plus onboard transceivers and ground-segment link",
+        "location": "Communications Hub, Deck B for LIORA; antenna and relay topology unresolved",
+        "evidence_class": "explicit_canon"
+      },
+      "l2": {
+        "control_surfaces": ["message queue", "delayed delivery", "secure routing", "translation", "telemetry downlink", "change uplink"],
+        "evidence_class": "current_implementation"
+      },
+      "l3": {
+        "interfaces": ["privacy and consent", "Sentari mediation", "release policy", "station-final authority"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "The modern L1 runtime has a limited positive-delay Earth/Orion message link; LIORA and physical communications providers are unbound.",
+      "causal_use_permitted": true,
+      "causal_scope": "limited_to_existing_message_queue_contract",
+      "evidence_refs": ["CB_L1_RUNTIME_CONTRACT", "CB_L1_RUNTIME_TYPES", "CB_LAYER_ARCHITECTURE", "CR_GROUND_SEGMENT"],
+      "gaps": ["LIORA adapter", "link provider provenance", "privacy decisions", "antenna and relay state"]
+    },
+    {
+      "id": "L1-EMB-CREW-LIFE",
+      "component": "Crew life and habitation",
+      "mapping_status": "owner_ruling_required_runtime_unbound",
+      "l1": {
+        "embodiment": "quarters, bunks, galley, hygiene and sanitation, recreation, medical, and life-support facilities",
+        "location": "exact room and deck topology remains staging",
+        "evidence_class": "explicit_canon"
+      },
+      "l2": {
+        "control_surfaces": ["shift and location state", "sleep debt", "meals", "hygiene", "recreation", "bathroom events", "morale", "life-support load"],
+        "evidence_class": "explicit_canon"
+      },
+      "l3": {
+        "interfaces": ["human welfare constraints", "privacy", "crew consent", "operational fitness limits"],
+        "evidence_class": "bounded_inference"
+      },
+      "implementation": "Root crew-life tooling exists separately and is not bound to the CloudBank L1 runtime or authoritative station topology.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["CR_CREW_LIFE", "CR_PHYSICAL_SPACE"],
+      "gaps": ["crew roster binding", "promoted habitation topology", "needs engine adapter", "life-support coupling", "privacy policy"]
+    },
+    {
+      "id": "L1-EMB-ETHICS-TRIPLEX",
+      "component": "Ethics, Noor practice, and Triplex governance",
+      "mapping_status": "sequence_explicit_authority_provider_missing",
+      "l1": {
+        "embodiment": "human command authority, Noor ethics practice, and HALO continuity infrastructure",
+        "location": "HALO at Aurora Core Chamber, Deck B; exact human decision facility and Noor Chamber status unresolved",
+        "evidence_class": "explicit_canon"
+      },
+      "l2": {
+        "control_surfaces": ["decision envelope", "ethical assessment", "feasibility assessment", "continuity assessment", "hold", "consent or denial receipt"],
+        "evidence_class": "explicit_canon"
+      },
+      "l3": {
+        "interfaces": ["Picard Delta 3", "glyph arbitration", "Axiomera", "Caelion", "Sentari", "Harmion"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "Triplex sequence exists, but ARCHY occupies the human slot and runtime receipts are static booleans.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["CB_LAYER_ARCHITECTURE", "CB_L1_RUNTIME_CONTRACT", "CB_L1_RUNTIME_TYPES", "CB_TRIPLEX_CURRENT", "CB_TRIPLEX_HISTORY"],
+      "gaps": ["human Command Bridge adapter", "delegation policy", "actor-bound receipt schema", "pending and denied decisions", "expiry and revocation"]
+    },
+    {
+      "id": "L1-EMB-SENSORS-OBSERVATORY",
+      "component": "Sensors and Observatory instrumentation",
+      "mapping_status": "source_defined_provider_unbound",
+      "l1": {
+        "embodiment": "environmental, structural, biometric, astronomical, docking, and communications instrumentation",
+        "location": "instrument-specific locations unresolved",
+        "evidence_class": "staging"
+      },
+      "l2": {
+        "control_surfaces": ["typed observations", "uncertainty", "calibration", "provider health", "event attribution"],
+        "evidence_class": "bounded_inference"
+      },
+      "l3": {
+        "interfaces": ["privacy", "release policy", "action policy", "provenance"],
+        "evidence_class": "explicit_canon"
+      },
+      "implementation": "No authoritative sensor provider registry is bound into the modern L1 runtime.",
+      "causal_use_permitted": false,
+      "evidence_refs": ["CR_OPERATIONAL_LIBRARY", "CR_PHYSICAL_SPACE"],
+      "gaps": ["sensor registry", "provider adapters", "calibration state", "privacy classification", "observation-to-event provenance"]
+    }
+  ],
+  "resume_blockers": [
+    {
+      "id": "L1-BLOCK-001",
+      "name": "canonrec_relay_and_halo_reconciliation",
+      "required_outcome": "CanonRec authoritative registries and validation surfaces identify the five relays and HALO as L1-resident while preserving superseded L2 labels as history."
+    },
+    {
+      "id": "L1-BLOCK-002",
+      "name": "actor_bound_authority_receipts",
+      "required_outcome": "Routine standing authority and exceptional human decisions are separately represented with actor, decision, action scope, run/event binding, policy or delegation, timestamp, evidence, expiry, and revocation."
+    },
+    {
+      "id": "L1-BLOCK-003",
+      "name": "promoted_embodiment_registry",
+      "required_outcome": "A reviewed registry binds components to physical embodiments, L2 surfaces, L3 interfaces, providers, and authority classes; unresolved geometry remains non-causal."
+    },
+    {
+      "id": "L1-BLOCK-004",
+      "name": "mcp_shuttle_bay_fail_closed_admission",
+      "required_outcome": "MCP intake has manifests, provenance, quarantine, real review holds, and reviewed routing without arbitrary shuttle-to-tool equivalence."
+    },
+    {
+      "id": "L1-BLOCK-005",
+      "name": "l1_provider_bindings",
+      "required_outcome": "HALO/PAS, GUMAS, relay state, communications, memory/storage, crew life, sensors, and docking providers are registered and tested or explicitly unavailable."
+    },
+    {
+      "id": "L1-BLOCK-006",
+      "name": "fleet_and_ord_action_authority",
+      "required_outcome": "Custody, dispatch, launch, abort, recovery, and docking mutations require action-scoped receipts and use only promoted spatial data."
+    },
+    {
+      "id": "L1-BLOCK-007",
+      "name": "nonadvancing_tick7_migration",
+      "required_outcome": "A deterministic migration preserves the run ID, PAUSED state, tick 7, minute 21, source pins, elapsed sequence, event rolls, and process position without provider observation or event execution."
+    },
+    {
+      "id": "L1-BLOCK-008",
+      "name": "governed_preflight",
+      "required_outcome": "Fail-closed tests and root preflight pass; a separate owner decision authorizes resume."
+    }
+  ]
+}
