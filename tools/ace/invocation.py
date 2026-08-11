@@ -1,8 +1,9 @@
 """First-class invocation facade for the Aurora Canon Engine (ACE).
 
-This module keeps interactive, embedded, and autonomic entry paths on the same
-ACE engine. It adds invocation provenance without changing the normalized ACE
-query or allowing automatic invocation to become invisible background logic.
+Interactive, embedded, and autonomic entry paths all terminate in the same ACE
+query/invocation contracts. Subject-specific compilers and resolvers are
+selected behind that common facade; automatic invocation never becomes hidden
+background logic.
 """
 
 from __future__ import annotations
@@ -19,6 +20,11 @@ from .core import (
     write_json,
 )
 from .engine import resolve_character_query
+from .facility import (
+    compile_facility_query,
+    resolve_facility_query,
+    validate_coherence_seam,
+)
 
 INVOCATION_SCHEMA_VERSION = "0.2.0"
 INVOCATION_MODES = frozenset({"interactive", "embedded", "autonomic"})
@@ -216,13 +222,90 @@ def compile_character_invocation(
     )
 
 
+def compile_facility_invocation(
+    question: str,
+    context: Mapping[str, Any],
+    *,
+    subject_ref: str | None = None,
+    seed: int | str = 808,
+    mode: str = "commit_ready",
+    invocation_mode: str = "interactive",
+    caller_kind: str = "user",
+    caller_ref: str = "ORION.ROLE.PILOT",
+    parent_invocation_ref: str | None = None,
+    trigger_kind: str | None = None,
+    trigger_reason: str | None = None,
+    seam_ref: str | None = None,
+    trigger_policy_ref: str | None = None,
+    session_ref: str | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    """Compile a facility/topology query into the same first-class ACE invocation surface."""
+
+    requester_kind = caller_kind if caller_kind in {"user", "operations", "agent", "system"} else "system"
+    kwargs: dict[str, Any] = {
+        "subject_ref": subject_ref,
+        "seed": seed,
+        "mode": mode,
+        "requester_kind": requester_kind,
+        "requester_id": caller_ref,
+        "session_ref": session_ref,
+    }
+    if root is not None:
+        kwargs["root"] = root
+    query = compile_facility_query(question, context, **kwargs)
+    return build_invocation_envelope(
+        query,
+        invocation_mode=invocation_mode,
+        caller_kind=caller_kind,
+        caller_ref=caller_ref,
+        parent_invocation_ref=parent_invocation_ref,
+        trigger_kind=trigger_kind,
+        trigger_reason=trigger_reason,
+        seam_ref=seam_ref,
+        trigger_policy_ref=trigger_policy_ref,
+    )
+
+
+def compile_facility_invocation_from_seam(
+    seam: Mapping[str, Any],
+    *,
+    seed: int | str = 808,
+    mode: str = "commit_ready",
+    session_ref: str | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    """Translate a CloudBank seam producer record into the shared autonomic ACE envelope."""
+
+    validate_coherence_seam(seam)
+    caller = seam["caller"]
+    trigger = seam["trigger"]
+    subject = seam["subject"]
+    return compile_facility_invocation(
+        str(seam["question"]),
+        subject["context"],
+        subject_ref=str(subject["subject_ref"]),
+        seed=seed,
+        mode=mode,
+        invocation_mode="autonomic",
+        caller_kind=str(caller["kind"]),
+        caller_ref=str(caller["caller_ref"]),
+        trigger_kind="coherence_seam",
+        trigger_reason=str(trigger.get("reason") or "L1 embodiment registry coherence seam."),
+        seam_ref=str(trigger["seam_ref"]),
+        trigger_policy_ref=str(trigger["trigger_policy_ref"]),
+        session_ref=session_ref,
+        root=root,
+    )
+
+
 def resolve_invocation(
     invocation: Mapping[str, Any],
     output_dir: Path,
     *,
     root: Path | None = None,
 ) -> dict[str, Any]:
-    """Execute one invocation with the normal ACE engine and persist an inspectable sidecar."""
+    """Execute one invocation with ACE and persist an inspectable invocation sidecar."""
 
     validate_invocation_envelope(invocation)
     query = dict(invocation["query"])
@@ -231,10 +314,22 @@ def resolve_invocation(
     if sidecar.exists():
         raise ACEError(f"invocation sidecar already exists: {sidecar}", code="target_unavailable")
 
-    if root is None:
-        determination = resolve_character_query(query, output_dir)
+    entity_type = query.get("subject", {}).get("entity_type")
+    if entity_type == "character":
+        if root is None:
+            determination = resolve_character_query(query, output_dir)
+        else:
+            determination = resolve_character_query(query, output_dir, root=root)
+    elif entity_type == "facility":
+        if root is None:
+            determination = resolve_facility_query(query, output_dir)
+        else:
+            determination = resolve_facility_query(query, output_dir, root=root)
     else:
-        determination = resolve_character_query(query, output_dir, root=root)
+        raise ACEError(
+            f"no ACE resolver is registered for subject entity_type={entity_type!r}",
+            code="input_validation_failed",
+        )
 
     payload = dict(invocation)
     payload["determination_ref"] = determination["determination_id"]
