@@ -672,6 +672,18 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "ACE v0.1 MVP landed (5383d83) covering the unobserved-character name-and-background flow. Unimplemented and explicitly scoped out of v0.1: existing-character retrieval, relation-evidence enrichment, the materialization/determination ledger, MCP exposure, and non-character entity classes (locations, vessels, organizations, events). The determination-receipt schema already models the ledger, so materialization is the natural next slice."
+    },
+    {
+      "id": "ace-v0-2-materialization",
+      "priority": "high",
+      "assigned_to": "either",
+      "description": "ACE v0.1 reaches exactly ONE of the spec's six determination states (EXECUTION_BLOCKED); RETRIEVED_CANON, DERIVED_CANON, GENERATED_CANON, CANON_REVISION and TRUE_CONFLICT appear nowhere in tools/ace/. So ACE cannot yet satisfy its own Completion invariant (4.1) in the affirmative \u2014 it is a commit-ready packet builder, not yet a canon engine. Implement 6.12 materializer + 6.13 determination ledger so a run can end GENERATED_CANON with a real commit SHA. tests/test_aurora_ace_invariants.py::test_reachable_determination_states_are_recorded is pinned to the current single state and will fail when this lands, forcing a deliberate update."
+    },
+    {
+      "id": "ace-capability-manifest-discovery",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing. Registering a capability therefore means editing engine source, and spec 6.5 (capability indexer) is unimplemented in substance. Load capabilities from manifest files validated against the existing schema. tests/test_aurora_ace_invariants.py::test_declared_producers_exist_in_the_capability_index already guards the field->index consistency this would need."
     }
   ],
   "known_state": {
