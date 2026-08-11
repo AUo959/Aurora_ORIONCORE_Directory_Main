@@ -2,11 +2,14 @@
 
 from .core import ACEError, ENGINE_VERSION, build_capability_index, compile_character_query
 from .engine import resolve_character_query
+from .facility import compile_facility_query, resolve_facility_query, validate_coherence_seam
 from .invocation import (
     INVOCATION_MODES,
     INVOCATION_SCHEMA_VERSION,
     build_invocation_envelope,
     compile_character_invocation,
+    compile_facility_invocation,
+    compile_facility_invocation_from_seam,
     resolve_invocation,
     validate_invocation_envelope,
 )
@@ -20,7 +23,12 @@ __all__ = [
     "build_invocation_envelope",
     "compile_character_invocation",
     "compile_character_query",
+    "compile_facility_invocation",
+    "compile_facility_invocation_from_seam",
+    "compile_facility_query",
     "resolve_character_query",
+    "resolve_facility_query",
     "resolve_invocation",
+    "validate_coherence_seam",
     "validate_invocation_envelope",
 ]
