@@ -413,9 +413,9 @@
       "detail": "Completed ordered local CloudBank pass: audited merged PR 1482 and prepared hardening commit cb8da9bc behind a persisted-run compatibility gate; synchronized canonical CloudBank main and root registry pin in 7a3a39f; refreshed PR 1381 locally at merge 9d59340f; fixed PR 1343 in d677fccc; triaged all 17 open PRs including 6 Dependabot PRs and blocked PR 1492; implemented issue 1453 in 2cd6741b, issue 1457 in 58285cc0, and issue 1456 validation hardening in 4f53486c. All CloudBank work remains in isolated local worktrees with no push, merge, comments, closures, ready transitions, workflow dispatch, canon promotion, or INIT. Separate live L1 experiment was not touched."
     }
   ],
-  "last_updated": "2026-08-11T04:33:31Z",
+  "last_updated": "2026-08-11T04:58:03Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Implemented the first runnable Aurora Canon Engine character-completion vertical slice in the root control plane. Added a warm exact-path capability index, semantic character query compiler, deterministic ID/state adapters, referent-preserving CanonRec name occupancy projection, isolated NameService transaction with pre/post digests and live revalidation, verified CharForge generation, CanonRec entity and naming gates, atomic commit-ready packet assembly, schema and artifact integrity receipts, CLI commands for capabilities/plan/resolve/validate, focused tests, Make targets, and operator documentation. Live seed-808 runs generated Jorenon Morrowen from the 287-row CanonRec baseline projected into 237 occupancy components; two full executions matched semantic answer and capsule digests. Validation: 518 root tests passed with 26 skipped; ACE live suite 6/6; catalog lint healthy; workspace verification warn-only for unavailable ~remote~. Existing-character retrieval, relation-evidence enrichment, materialization/ledger, MCP, and non-character classes remain unimplemented. No nested-repo writes, canon materialization, commit, push, or publication occurred; all ACE changes remain local and uncommitted.",
+  "last_session_summary": "Landed the Aurora Canon Engine (ACE) v0.1 MVP in commit 5383d83 \u2014 spec, engine, CLI, 3 JSON schemas, 2 worked templates, tests and make targets (6,414 insertions). ACE encodes the project's anti-gating principles as normative invariants: no-parking (4.2), owner-role (4.4), canon-at-commit (4.5), specialist-first (4.3). Fixed a portability defect while landing: validate_json_schema fell back across runtimes only when jsonschema was ABSENT, so a runtime with jsonschema 3.x died on Draft202012Validator instead of deferring to the CloudBank venv; it survived because this Mac's system python has no jsonschema at all. Also fast-forwarded and pushed the L1 embodiment recovery audit (c165e9b). Validation: 518 root tests passed / 25 skipped; ACE live 6/6 on both macOS and Linux runtimes. Scope remains deliberately partial \u2014 existing-character retrieval, relation-evidence enrichment, materialization/ledger, MCP and non-character classes are unimplemented; no nested-repo writes or canon materialization occurred.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -437,6 +437,18 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "5383d83",
+      "date": "2026-08-11",
+      "platform": "claude-code",
+      "summary": "feat(ace): land the Aurora Canon Engine v0.1 MVP"
+    },
+    {
+      "sha": "c165e9b",
+      "date": "2026-08-11",
+      "platform": "claude-code",
+      "summary": "docs(l1): record embodiment recovery audit"
+    },
     {
       "sha": "a3da110",
       "date": "2026-08-11",
@@ -484,18 +496,6 @@
       "date": "2026-08-10",
       "platform": "claude-code",
       "summary": "chore(catalog): sync CanonRec pin; queue Velar Neutral Houses + Talyx name-variant observations"
-    },
-    {
-      "sha": "18e92bb",
-      "date": "2026-08-10",
-      "platform": "claude-code",
-      "summary": "reports: executive decision brief 2026-08-10 (closes brief_freshness at 73 commits)"
-    },
-    {
-      "sha": "caa6480",
-      "date": "2026-08-10",
-      "platform": "claude-code",
-      "summary": "fix(reconciler): stop misclassifying every unmapped entity kind as a location"
     }
   ],
   "security_events": [
@@ -666,10 +666,16 @@
       "priority": "high",
       "assigned_to": "owner",
       "description": "Review and authorize the next CloudBank publication pass from isolated local branches: 1482 hardening cb8da9bc requires a compatibility decision for pre-hardening runtime 1.2 persisted runs; 1381 local merge 9d59340f and 1343 fix d677fccc need push and CI refresh; issue implementations 1453 at 2cd6741b, 1457 at 58285cc0, and 1456 at 4f53486c are locally validated and should be published draft-only if authorized. PR 1492 remains blocked by a missing required CI Check and needs an authorized check rerun or a new event. Keep the live L1 experiment isolated and do not merge, close, comment, resolve threads, mark ready, dispatch workflows, promote canon, or INIT without explicit authorization."
+    },
+    {
+      "id": "ace-v0-2-scope",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "ACE v0.1 MVP landed (5383d83) covering the unobserved-character name-and-background flow. Unimplemented and explicitly scoped out of v0.1: existing-character retrieval, relation-evidence enrichment, the materialization/determination ledger, MCP exposure, and non-character entity classes (locations, vessels, organizations, events). The determination-receipt schema already models the ledger, so materialization is the natural next slice."
     }
   ],
   "known_state": {
-    "main_sha": "a3da11061878782eda3db78fe17aeb61b96b042e",
+    "main_sha": "5383d83",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -784,7 +790,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-11T00:33:54Z",
+    "checked_at": "2026-08-11T04:58:03Z",
     "entries": [
       {
         "repo": "root",
@@ -864,10 +870,23 @@
         "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
       },
       {
+        "repo": "root",
+        "class": "unpushed_main",
+        "detail": "main is 1 commit(s) ahead of origin/main",
+        "remediation": "Push main (or PR it if the repo requires review)."
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "stranded_branch",
+        "branch": "agent/aurora-bridge-review-blurb",
+        "detail": "3 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin agent/aurora-bridge-review-blurb && gh pr create"
+      },
+      {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "unpublished_branch",
-        "branch": "agent/aurora-bridge-review-blurb",
-        "detail": "pushed, 3 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "branch": "agent/narrative-river-adapter-spec",
+        "detail": "pushed, 39 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
         "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
       },
       {
@@ -1061,17 +1080,17 @@
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
-        "class": "unpublished_branch",
+        "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1342-pr-evaluation-blocking",
-        "detail": "pushed, 1 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
-        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1342-pr-evaluation-blocking && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
-        "class": "unpublished_branch",
+        "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1362-root-test-contract",
-        "detail": "pushed, 2 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
-        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+        "detail": "2 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1362-root-test-contract && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
@@ -1089,38 +1108,45 @@
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
-        "class": "unpublished_branch",
+        "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1403-diagnostics-test-hygiene",
-        "detail": "pushed, 4 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
-        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+        "detail": "4 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1403-diagnostics-test-hygiene && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
-        "class": "unpublished_branch",
+        "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1424-qgia-casefold-hygiene",
-        "detail": "pushed, 9 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
-        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+        "detail": "9 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1424-qgia-casefold-hygiene && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
-        "class": "unpublished_branch",
+        "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1446-gate-registry-coherence",
-        "detail": "pushed, 9 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
-        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+        "detail": "9 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1446-gate-registry-coherence && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "unpublished_branch",
+        "branch": "codex/cloudbank-issue-1453-l1-staffing-runtime",
+        "detail": "pushed, 6 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "stranded_branch",
         "branch": "codex/cloudbank-issue-1460-opal2-codacy-table-spacing",
-        "detail": "pushed, 1 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
-        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1460-opal2-codacy-table-spacing && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
-        "class": "unpublished_branch",
-        "branch": "codex/cloudbank-issue-1481-l1-fleet-runtime",
-        "detail": "pushed, 7 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
-        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+        "class": "stranded_branch",
+        "branch": "codex/cloudbank-issue-1481-postmerge-1482-hardening",
+        "detail": "2 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1481-postmerge-1482-hardening && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
@@ -1161,7 +1187,7 @@
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "unpublished_branch",
         "branch": "feat/1377-utb-neutral-schema",
-        "detail": "pushed, 32 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "detail": "pushed, 35 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
         "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
       },
       {
@@ -1200,6 +1226,5 @@
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
-  },
-  "_summary_set_manually": true
+  }
 }
