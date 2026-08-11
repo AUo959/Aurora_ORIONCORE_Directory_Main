@@ -700,7 +700,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "eb097efa61a968ad691c96316278ffb6f5bacbe4",
+    "main_sha": "4ca4e7ee74bbdf1fdac9e5d2bb688a22859b53c4",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -739,8 +739,7 @@
       "catalog/workflows/pr-lifecycle.md",
       "catalog/workflows/governance-fix-loop.md",
       "docs/SESSION_CLAIMS_WORKFLOW_v1.md",
-      "docs/CLOUDBANK_ISSUE_BROKER_WORKFLOW_v1.md",
-      "docs/COHERENCE_CHECKLIST.md"
+      "docs/CLOUDBANK_ISSUE_BROKER_WORKFLOW_v1.md"
     ],
     "skills_canonical": "skills/ (16 project-owned skills). make skills-check / make skills-install to sync to ~/.codex/skills/",
     "coordination_surfaces": [
