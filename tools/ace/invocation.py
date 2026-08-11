@@ -1,7 +1,7 @@
 """First-class invocation facade for the Aurora Canon Engine (ACE).
 
 This module keeps interactive, embedded, and autonomic entry paths on the same
-ACE engine.  It adds invocation provenance without changing the normalized ACE
+ACE engine. It adds invocation provenance without changing the normalized ACE
 query or allowing automatic invocation to become invisible background logic.
 """
 
@@ -10,7 +10,14 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Mapping
 
-from .core import ACEError, compile_character_query, semantic_sha256, utc_now, write_json
+from .core import (
+    ACEError,
+    SCHEMA_VERSION,
+    compile_character_query,
+    semantic_sha256,
+    utc_now,
+    write_json,
+)
 from .engine import resolve_character_query
 
 INVOCATION_SCHEMA_VERSION = "0.2.0"
@@ -78,6 +85,11 @@ def validate_invocation_envelope(payload: Mapping[str, Any]) -> None:
     query = payload.get("query")
     if not isinstance(query, Mapping):
         raise ACEError("invocation query must be an ACE query object", code="input_validation_failed")
+    if query.get("record_type") != "ace_query_envelope" or query.get("schema_version") != SCHEMA_VERSION:
+        raise ACEError(
+            "invocation must wrap the normal supported ACE query envelope",
+            code="input_validation_failed",
+        )
     expected_query_digest = semantic_sha256(query)
     if payload.get("query_sha256") != expected_query_digest:
         raise ACEError("invocation query digest does not match query", code="input_validation_failed")
@@ -214,15 +226,16 @@ def resolve_invocation(
 
     validate_invocation_envelope(invocation)
     query = dict(invocation["query"])
+    output = output_dir.expanduser().resolve()
+    sidecar = output.parent / f"{output.name}.ace-invocation.json"
+    if sidecar.exists():
+        raise ACEError(f"invocation sidecar already exists: {sidecar}", code="target_unavailable")
+
     if root is None:
         determination = resolve_character_query(query, output_dir)
     else:
         determination = resolve_character_query(query, output_dir, root=root)
 
-    output = output_dir.expanduser().resolve()
-    sidecar = output.parent / f"{output.name}.ace-invocation.json"
-    if sidecar.exists():
-        raise ACEError(f"invocation sidecar already exists: {sidecar}", code="target_unavailable")
     payload = dict(invocation)
     payload["determination_ref"] = determination["determination_id"]
     payload["packet_ref"] = str(output)
