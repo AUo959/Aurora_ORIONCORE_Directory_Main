@@ -413,9 +413,9 @@
       "detail": "Completed ordered local CloudBank pass: audited merged PR 1482 and prepared hardening commit cb8da9bc behind a persisted-run compatibility gate; synchronized canonical CloudBank main and root registry pin in 7a3a39f; refreshed PR 1381 locally at merge 9d59340f; fixed PR 1343 in d677fccc; triaged all 17 open PRs including 6 Dependabot PRs and blocked PR 1492; implemented issue 1453 in 2cd6741b, issue 1457 in 58285cc0, and issue 1456 validation hardening in 4f53486c. All CloudBank work remains in isolated local worktrees with no push, merge, comments, closures, ready transitions, workflow dispatch, canon promotion, or INIT. Separate live L1 experiment was not touched."
     }
   ],
-  "last_updated": "2026-08-11T04:58:03Z",
+  "last_updated": "2026-08-11T05:13:32Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Landed the Aurora Canon Engine (ACE) v0.1 MVP in commit 5383d83 \u2014 spec, engine, CLI, 3 JSON schemas, 2 worked templates, tests and make targets (6,414 insertions). ACE encodes the project's anti-gating principles as normative invariants: no-parking (4.2), owner-role (4.4), canon-at-commit (4.5), specialist-first (4.3). Fixed a portability defect while landing: validate_json_schema fell back across runtimes only when jsonschema was ABSENT, so a runtime with jsonschema 3.x died on Draft202012Validator instead of deferring to the CloudBank venv; it survived because this Mac's system python has no jsonschema at all. Also fast-forwarded and pushed the L1 embodiment recovery audit (c165e9b). Validation: 518 root tests passed / 25 skipped; ACE live 6/6 on both macOS and Linux runtimes. Scope remains deliberately partial \u2014 existing-character retrieval, relation-evidence enrichment, materialization/ledger, MCP and non-character classes are unimplemented; no nested-repo writes or canon materialization occurred.",
+  "last_session_summary": "test(ace): enforce the ACE core invariants in code, not only; chore(session): record ACE v0.1 landing; queue the v0.2 scop",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -437,6 +437,18 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "bca1111",
+      "date": "2026-08-11",
+      "platform": "claude-code",
+      "summary": "test(ace): enforce the ACE core invariants in code, not only in prose"
+    },
+    {
+      "sha": "92e3bc4",
+      "date": "2026-08-11",
+      "platform": "claude-code",
+      "summary": "chore(session): record ACE v0.1 landing; queue the v0.2 scope"
+    },
     {
       "sha": "5383d83",
       "date": "2026-08-11",
@@ -484,18 +496,6 @@
       "date": "2026-08-11",
       "platform": "claude-code",
       "summary": "chore(catalog): sync CanonRec pin; close tkaras-host-identity (resolved, not deferred)"
-    },
-    {
-      "sha": "c8f6368",
-      "date": "2026-08-10",
-      "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin; close Neutral Houses referent, queue T'karas host identity"
-    },
-    {
-      "sha": "cc29c74",
-      "date": "2026-08-10",
-      "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin; queue Velar Neutral Houses + Talyx name-variant observations"
     }
   ],
   "security_events": [
@@ -684,10 +684,22 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing. Registering a capability therefore means editing engine source, and spec 6.5 (capability indexer) is unimplemented in substance. Load capabilities from manifest files validated against the existing schema. tests/test_aurora_ace_invariants.py::test_declared_producers_exist_in_the_capability_index already guards the field->index consistency this would need."
+    },
+    {
+      "id": "l1-embodiment-recovery-finish",
+      "priority": "high",
+      "assigned_to": "either",
+      "description": "CloudBank branch codex/cloudbank-issue-1449-l1-embodiment-recovery, worktree /private/tmp/cloudbank-codex-issue-1449-l1-embodiment-recovery, rescue commit 6333feb8 (1 ahead of origin/main, NOT pushed). Was uncommitted with zero commits on the branch \u2014 a /private/tmp cleanup would have destroyed it. Adds simulation/l1_embodiment.py + a 15K registry of 15+ embodiment ids + 206 lines of runtime types wired through l1_runtime/instrumentation/baseline. Two distinct problems: (1) INCOMPLETE \u2014 test_l1_embodiment_runtime.py fails with KeyError 'embodiments' x2 plus a PreflightError that DID NOT RAISE; tests were written ahead of runtime integration. (2) REGRESSION \u2014 test_l1_fleet_runtime.py has 5 failures VERIFIED as introduced (origin/main is 36 passed/0 failed for that file): bound fleet proximity/docking/drone providers, persisted ORD adapter linked evidence, persisted fleet replay position, pre-digest v1.2 digest binding, PR1480 tick-seven migration. Finish the integration AND repair the regressions."
+    },
+    {
+      "id": "worktree-uncommitted-sweep",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Uncommitted work in /private/tmp worktrees is invisible to every status check that looks at the main tree, and /private/tmp is subject to OS cleanup. The L1 embodiment work sat there with zero commits on its branch and was nearly lost. Add a check (Stop hook or make target) that walks 'git worktree list' for every registered repo and reports dirty worktrees plus branches with zero commits, so fragile work surfaces automatically instead of by chance."
     }
   ],
   "known_state": {
-    "main_sha": "5383d83",
+    "main_sha": "bca1111",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -802,7 +814,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-11T04:58:03Z",
+    "checked_at": "2026-08-11T05:13:32Z",
     "entries": [
       {
         "repo": "root",
@@ -880,12 +892,6 @@
         "branch": "fix/ci-dynamic-registry-pins",
         "detail": "pushed, 1 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
         "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
-      },
-      {
-        "repo": "root",
-        "class": "unpushed_main",
-        "detail": "main is 1 commit(s) ahead of origin/main",
-        "remediation": "Push main (or PR it if the repo requires review)."
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
@@ -1141,6 +1147,13 @@
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
+        "class": "stranded_branch",
+        "branch": "codex/cloudbank-issue-1449-l1-embodiment-recovery",
+        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
+        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1449-l1-embodiment-recovery && gh pr create"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
         "class": "unpublished_branch",
         "branch": "codex/cloudbank-issue-1453-l1-staffing-runtime",
         "detail": "pushed, 6 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
@@ -1194,13 +1207,6 @@
         "branch": "codex/public-readiness-debt-2026-07-29",
         "detail": "3 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/public-readiness-debt-2026-07-29 && gh pr create"
-      },
-      {
-        "repo": "aurora-cloudbank-symbolic-main",
-        "class": "unpublished_branch",
-        "branch": "feat/1377-utb-neutral-schema",
-        "detail": "pushed, 35 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
-        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
       },
       {
         "repo": "CanonRec",
