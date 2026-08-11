@@ -411,11 +411,18 @@
       "completed_at": "2026-08-11T03:27:01Z",
       "platform": "codex",
       "detail": "Completed ordered local CloudBank pass: audited merged PR 1482 and prepared hardening commit cb8da9bc behind a persisted-run compatibility gate; synchronized canonical CloudBank main and root registry pin in 7a3a39f; refreshed PR 1381 locally at merge 9d59340f; fixed PR 1343 in d677fccc; triaged all 17 open PRs including 6 Dependabot PRs and blocked PR 1492; implemented issue 1453 in 2cd6741b, issue 1457 in 58285cc0, and issue 1456 validation hardening in 4f53486c. All CloudBank work remains in isolated local worktrees with no push, merge, comments, closures, ready transitions, workflow dispatch, canon promotion, or INIT. Separate live L1 experiment was not touched."
+    },
+    {
+      "id": "l1-embodiment-recovery-finish",
+      "status": "completed",
+      "completed_at": "2026-08-11T05:55:32Z",
+      "platform": "claude-code",
+      "detail": "MERGED TO CLOUDBANK MAIN via PR #1505, merge commit 8347724308f8. Rescued from an uncommitted /private/tmp worktree (zero commits on the branch), completed, and landed. Four defects fixed: (1) export_run_state never emitted 'embodiments' so the projection never round-tripped \u2014 root cause, in l1_runtime_support.py which the original work never touched; (2) embodiment_observation answered EVERY focus when the registry was unbound, shadowing the fleet provider \u2014 regression; (3) focus 'fleet' substring-matched L1-EMB-FLEET-DOCKING's component, so added RESERVED_FOCI \u2014 regression, same fragment-match trap as the canon work; (4) a current-contract payload missing embodiments was silently rebuilt, now rejected at parse time. Plus config/canon_provenance.json cloudbank_sha256 refreshed for the changed l1_runtime_baseline.json (authoritative CanonRec digests untouched). Validation: L1 suites 56/56 local, CI Check green. NOTE: I initially misdiagnosed the canon_provenance failure as pre-existing because I tested with git stash, which reverts to HEAD \u2014 and HEAD was the rescue commit already containing the WIP. A pristine origin/main worktree showed it passing 5/5."
     }
   ],
-  "last_updated": "2026-08-11T05:13:32Z",
+  "last_updated": "2026-08-11T05:55:38Z",
   "last_platform": "claude-code",
-  "last_session_summary": "test(ace): enforce the ACE core invariants in code, not only; chore(session): record ACE v0.1 landing; queue the v0.2 scop",
+  "last_session_summary": "chore(session): record the L1 embodiment rescue and queue a ",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -437,6 +444,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "9670ff1",
+      "date": "2026-08-11",
+      "platform": "claude-code",
+      "summary": "chore(session): record the L1 embodiment rescue and queue a worktree sweep"
+    },
     {
       "sha": "bca1111",
       "date": "2026-08-11",
@@ -490,12 +503,6 @@
       "date": "2026-08-11",
       "platform": "claude-code",
       "summary": "chore(catalog): sync CanonRec pin; close all 5 naming-gate queue items"
-    },
-    {
-      "sha": "ab7f583",
-      "date": "2026-08-11",
-      "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin; close tkaras-host-identity (resolved, not deferred)"
     }
   ],
   "security_events": [
@@ -686,12 +693,6 @@
       "description": "tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing. Registering a capability therefore means editing engine source, and spec 6.5 (capability indexer) is unimplemented in substance. Load capabilities from manifest files validated against the existing schema. tests/test_aurora_ace_invariants.py::test_declared_producers_exist_in_the_capability_index already guards the field->index consistency this would need."
     },
     {
-      "id": "l1-embodiment-recovery-finish",
-      "priority": "high",
-      "assigned_to": "either",
-      "description": "CloudBank branch codex/cloudbank-issue-1449-l1-embodiment-recovery, worktree /private/tmp/cloudbank-codex-issue-1449-l1-embodiment-recovery, rescue commit 6333feb8 (1 ahead of origin/main, NOT pushed). Was uncommitted with zero commits on the branch \u2014 a /private/tmp cleanup would have destroyed it. Adds simulation/l1_embodiment.py + a 15K registry of 15+ embodiment ids + 206 lines of runtime types wired through l1_runtime/instrumentation/baseline. Two distinct problems: (1) INCOMPLETE \u2014 test_l1_embodiment_runtime.py fails with KeyError 'embodiments' x2 plus a PreflightError that DID NOT RAISE; tests were written ahead of runtime integration. (2) REGRESSION \u2014 test_l1_fleet_runtime.py has 5 failures VERIFIED as introduced (origin/main is 36 passed/0 failed for that file): bound fleet proximity/docking/drone providers, persisted ORD adapter linked evidence, persisted fleet replay position, pre-digest v1.2 digest binding, PR1480 tick-seven migration. Finish the integration AND repair the regressions."
-    },
-    {
       "id": "worktree-uncommitted-sweep",
       "priority": "medium",
       "assigned_to": "either",
@@ -699,7 +700,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "bca1111",
+    "main_sha": "9670ff1",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -814,7 +815,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-11T05:13:32Z",
+    "checked_at": "2026-08-11T05:55:38Z",
     "entries": [
       {
         "repo": "root",
@@ -1144,13 +1145,6 @@
         "branch": "codex/cloudbank-issue-1446-gate-registry-coherence",
         "detail": "9 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1446-gate-registry-coherence && gh pr create"
-      },
-      {
-        "repo": "aurora-cloudbank-symbolic-main",
-        "class": "stranded_branch",
-        "branch": "codex/cloudbank-issue-1449-l1-embodiment-recovery",
-        "detail": "1 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
-        "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1449-l1-embodiment-recovery && gh pr create"
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
