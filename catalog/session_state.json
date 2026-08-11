@@ -404,11 +404,18 @@
       "completed_at": "2026-08-11T00:33:50Z",
       "platform": "claude-code",
       "detail": "Added tests/test_validator_vocabulary_sync.py (6 tests). Guards every controlled vocabulary against committed canon: VALID_ENTITY_KINDS, VALID_CERTAINTY_TAGS, VALID_L2_POLITY_SUBTYPES, VALID_L2_SPECIES_SUBTYPES, and STATUS_VOCAB_BY_KIND per kind. All currently clean. Location subtypes are deliberately NOT asserted clean \u2014 canon uses 6 descriptive values the validator does not list, capped at 8 with a failure message that forces the classification decision rather than raising the ceiling again."
+    },
+    {
+      "id": "cloudbank-open-issue-hygiene-continuation-2026-08-10",
+      "status": "completed",
+      "completed_at": "2026-08-11T03:27:01Z",
+      "platform": "codex",
+      "detail": "Completed ordered local CloudBank pass: audited merged PR 1482 and prepared hardening commit cb8da9bc behind a persisted-run compatibility gate; synchronized canonical CloudBank main and root registry pin in 7a3a39f; refreshed PR 1381 locally at merge 9d59340f; fixed PR 1343 in d677fccc; triaged all 17 open PRs including 6 Dependabot PRs and blocked PR 1492; implemented issue 1453 in 2cd6741b, issue 1457 in 58285cc0, and issue 1456 validation hardening in 4f53486c. All CloudBank work remains in isolated local worktrees with no push, merge, comments, closures, ready transitions, workflow dispatch, canon promotion, or INIT. Separate live L1 experiment was not touched."
     }
   ],
-  "last_updated": "2026-08-11T00:33:54Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "Prose-claim ledger reconciliation + naming-gate closure + reference integrity. Canon: Galactic Union constitutional basis, Prime Construct legal architecture (SIE designation) + Nexus Citadel, Battle of Kaelor's Rift promoted from a recovered Captain's Log, Velar cultural/political foundations including a lineage-prefix naming system that predicts independently-written canon, T'karas Prime + the Debate at T'karas + Neutral Houses + House Velkonn, the full Sira Velkonn profile (which resolved the T'karas alignment conflict), and 15 recovered-source referents clearing the entire naming-gate backlog. Tooling: fixed detect_layer_and_type silently classifying 8 entity kinds as locations; synced polity subtype vocabulary to canon; built tools/canon_reference_integrity.py (0 dangling refs across 243 records) and made the capsule/faction/entity namespace bridges explicit; added vocabulary-sync guards. Wrote executive_brief__2026-08-10.md, whose headline finding is that Mission Control reports 'blocked' on execution-context artifacts rather than real workspace state.",
+  "last_updated": "2026-08-11T03:27:20Z",
+  "last_platform": "codex",
+  "last_session_summary": "Completed the ordered CloudBank backlog pass through issues 1453, 1457, and 1456 using isolated worktrees. Produced locally validated commits cb8da9bc, d677fccc, 2cd6741b, 58285cc0, and 4f53486c; refreshed PR 1381 locally at 9d59340f; synchronized canonical CloudBank and the root registry pin at root commit 7a3a39f. Live refresh: 17 open PRs, 10 drafts, 42 open issues. No CloudBank branches were pushed and no GitHub state, human decision gate, live L1 experiment, workflow, canon authority, or INIT state was mutated.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -430,6 +437,18 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "7a3a39f",
+      "date": "2026-08-11",
+      "platform": "codex",
+      "summary": "chore(catalog): sync CloudBank pin after PR 1482"
+    },
+    {
+      "sha": "4ee5dab",
+      "date": "2026-08-11",
+      "platform": "codex",
+      "summary": "test(canon): guard every validator vocabulary against committed canon"
+    },
     {
       "sha": "a88401a",
       "date": "2026-08-11",
@@ -477,18 +496,6 @@
       "date": "2026-08-10",
       "platform": "claude-code",
       "summary": "chore(catalog): sync CanonRec pin + session state; queue prime-construct doctrine question"
-    },
-    {
-      "sha": "d14b5c8",
-      "date": "2026-08-10",
-      "platform": "claude-code",
-      "summary": "chore: sync CanonRec pin; queue prose-ledger open identity questions"
-    },
-    {
-      "sha": "a73b24b",
-      "date": "2026-08-10",
-      "platform": "claude-code",
-      "summary": "chore: sync CanonRec pin; close sovereign-nexus-name-collision; queue the Crisis event"
     }
   ],
   "security_events": [
@@ -583,12 +590,6 @@
       "description": "Migrate connector/server.py and connector tests from the MCP v1 Server API to MCP v2, then remove the temporary mcp<2.0.0 compatibility ceiling added in CloudBank PR #1385. Evidence: base CI with mcp 1.28.1 passed; an unconstrained install resolved mcp 2.0.0 and failed six Server.list_tools tests."
     },
     {
-      "id": "cloudbank-open-issue-hygiene-continuation-2026-08-10",
-      "priority": "high",
-      "assigned_to": "codex",
-      "description": "Continue from the live 42 open CloudBank issues after draft PRs #1489/#1490/#1491. Re-triage #1453 first, then #1457, then #1456 against current main and merged PR #1461; preserve only substantive unmet acceptance deltas and do not duplicate landed work. Monitor owner-gated drafts #1482/#1487/#1488/#1489/#1490/#1491. Before #1491 readiness, the owner must configure ANTHROPIC_API_KEY and rerun Model Catalog Validation. Use exact-path broker claims and clean /private/tmp worktrees; publish draft-only and do not merge, close, comment/reply, manually resolve review threads, mark ready, promote canon, or INIT without explicit authorization."
-    },
-    {
       "id": "warrant-lens-root-relocation",
       "priority": "low",
       "assigned_to": "either",
@@ -659,10 +660,16 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Canon uses 6 descriptive location subtypes the validator does not list (ai_polity_interface_node, neutral_velari_world, precursor_vault_site, secure_union_facility, shadow_ring, union_core_military_industrial_world) against a structural list (planet, moon, region, station...). Both schemes are defensible; canon's is in use. Decide: widen the vocabulary to descriptive values, or add a separate descriptive field and keep subtype structural. tests/test_validator_vocabulary_sync.py caps drift at 8 so this cannot quietly grow."
+    },
+    {
+      "id": "cloudbank-local-backlog-publication-2026-08-11",
+      "priority": "high",
+      "assigned_to": "owner",
+      "description": "Review and authorize the next CloudBank publication pass from isolated local branches: 1482 hardening cb8da9bc requires a compatibility decision for pre-hardening runtime 1.2 persisted runs; 1381 local merge 9d59340f and 1343 fix d677fccc need push and CI refresh; issue implementations 1453 at 2cd6741b, 1457 at 58285cc0, and 1456 at 4f53486c are locally validated and should be published draft-only if authorized. PR 1492 remains blocked by a missing required CI Check and needs an authorized check rerun or a new event. Keep the live L1 experiment isolated and do not merge, close, comment, resolve threads, mark ready, dispatch workflows, promote canon, or INIT without explicit authorization."
     }
   ],
   "known_state": {
-    "main_sha": "a88401a",
+    "main_sha": "7a3a39f8708a9f5b480518cfcb633c15720c891a",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -1193,5 +1200,6 @@
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
-  }
+  },
+  "_summary_set_manually": true
 }
