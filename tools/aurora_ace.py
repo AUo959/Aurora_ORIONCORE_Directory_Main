@@ -9,7 +9,13 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from ace import ACEError, build_capability_index, compile_character_query, resolve_character_query
+from ace import (
+    ACEError,
+    build_capability_index,
+    build_invocation_envelope,
+    compile_character_invocation,
+    resolve_invocation,
+)
 from ace.core import ROOT, load_json, validate_json_schema
 
 
@@ -20,23 +26,71 @@ def _context(path: str) -> dict[str, Any]:
     return payload
 
 
-def _compiled(args: argparse.Namespace, mode: str) -> dict[str, Any]:
+def _caller(args: argparse.Namespace) -> tuple[str, str]:
+    return (
+        args.caller_kind or args.requester_kind,
+        args.caller_ref or args.requester_id,
+    )
+
+
+def _invocation(args: argparse.Namespace, mode: str) -> dict[str, Any]:
+    caller_kind, caller_ref = _caller(args)
     if args.query:
-        payload = load_json(Path(args.query).expanduser().resolve())
-        if not isinstance(payload, dict):
+        query = load_json(Path(args.query).expanduser().resolve())
+        if not isinstance(query, dict):
             raise ACEError("query envelope must contain an object", code="input_validation_failed")
-        return payload
+        return build_invocation_envelope(
+            query,
+            invocation_mode=args.invocation_mode,
+            caller_kind=caller_kind,
+            caller_ref=caller_ref,
+            parent_invocation_ref=args.parent_invocation_ref,
+            trigger_kind=args.trigger_kind,
+            trigger_reason=args.trigger_reason,
+            seam_ref=args.seam_ref,
+            trigger_policy_ref=args.trigger_policy_ref,
+        )
     if not args.question or not args.context:
         raise ACEError("provide --query or both --question and --context", code="input_validation_failed")
-    return compile_character_query(
+    return compile_character_invocation(
         args.question,
         _context(args.context),
         seed=args.seed,
         mode=mode,
-        requester_kind=args.requester_kind,
-        requester_id=args.requester_id,
+        invocation_mode=args.invocation_mode,
+        caller_kind=caller_kind,
+        caller_ref=caller_ref,
+        parent_invocation_ref=args.parent_invocation_ref,
+        trigger_kind=args.trigger_kind,
+        trigger_reason=args.trigger_reason,
+        seam_ref=args.seam_ref,
+        trigger_policy_ref=args.trigger_policy_ref,
         session_ref=args.session_ref,
     )
+
+
+def _add_invocation_arguments(sub: argparse.ArgumentParser) -> None:
+    sub.add_argument(
+        "--invocation-mode",
+        choices=["interactive", "embedded", "autonomic"],
+        default="interactive",
+        help="How ACE was invoked. Automatic invocation remains inspectable.",
+    )
+    sub.add_argument(
+        "--caller-kind",
+        choices=["user", "operations", "agent", "system", "capability"],
+        help="First-class caller class. Defaults to --requester-kind.",
+    )
+    sub.add_argument("--caller-ref", help="First-class caller identity. Defaults to --requester-id.")
+    sub.add_argument("--parent-invocation-ref", help="Parent ACE/Aurora workflow invocation reference.")
+    sub.add_argument(
+        "--trigger-kind",
+        choices=["direct_query", "capability_call", "coherence_seam", "policy_event"],
+        help="Reason class that caused ACE to run.",
+    )
+    sub.add_argument("--trigger-reason", help="Human-readable reason ACE was invoked.")
+    sub.add_argument("--seam-ref", help="Required coherence-seam reference for autonomic invocation.")
+    sub.add_argument("--trigger-policy-ref", help="Required trigger-policy reference for autonomic invocation.")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -57,12 +111,13 @@ def build_parser() -> argparse.ArgumentParser:
         sub.add_argument("--requester-kind", choices=["user", "operations", "agent", "system"], default="user")
         sub.add_argument("--requester-id", default="ORION.ROLE.PILOT")
         sub.add_argument("--session-ref")
+        _add_invocation_arguments(sub)
         if command == "resolve":
             sub.add_argument("--out", required=True, help="New packet directory outside nested repositories.")
 
-    validate = subparsers.add_parser("validate", help="Validate an ACE query or determination receipt.")
+    validate = subparsers.add_parser("validate", help="Validate an ACE query, invocation, or determination receipt.")
     validate.add_argument("artifact")
-    validate.add_argument("--kind", choices=["query", "determination"], required=True)
+    validate.add_argument("--kind", choices=["query", "invocation", "determination"], required=True)
     return parser
 
 
@@ -73,7 +128,8 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(build_capability_index(), indent=2, sort_keys=True))
             return 0
         if args.command == "plan":
-            query = _compiled(args, "plan_only")
+            invocation = _invocation(args, "plan_only")
+            query = invocation["query"]
             index = build_capability_index()
             route = [
                 item for item in index["capabilities"]
@@ -90,24 +146,28 @@ def main(argv: list[str] | None = None) -> int:
                     "ace.capability.canonrec.validate.naming_receipt",
                 }
             ]
-            print(json.dumps({"query_envelope": query, "selected_capabilities": route}, indent=2, sort_keys=True))
+            print(json.dumps({"invocation": invocation, "selected_capabilities": route}, indent=2, sort_keys=True))
             return 0
         if args.command == "resolve":
-            query = _compiled(args, "commit_ready")
-            receipt = resolve_character_query(query, Path(args.out))
+            invocation = _invocation(args, "commit_ready")
+            result = resolve_invocation(invocation, Path(args.out))
+            receipt = result["determination"]
             print(json.dumps({
                 "ok": True,
+                "invocation_id": invocation["invocation_id"],
+                "invocation_mode": invocation["invocation_mode"],
+                "invocation_sidecar": result["invocation_sidecar"],
                 "packet": str(Path(args.out).expanduser().resolve()),
                 "status": receipt["status"],
                 "materialization": receipt["materialization"]["status"],
                 "answer": receipt["answer"]["summary"],
             }, indent=2, sort_keys=True))
             return 0
-        schema_name = (
-            "aurora_ace_query_envelope.schema.json"
-            if args.kind == "query"
-            else "aurora_ace_determination_receipt.schema.json"
-        )
+        schema_name = {
+            "query": "aurora_ace_query_envelope.schema.json",
+            "invocation": "aurora_ace_invocation_envelope.schema.json",
+            "determination": "aurora_ace_determination_receipt.schema.json",
+        }[args.kind]
         report = validate_json_schema(
             Path(args.artifact).expanduser().resolve(),
             ROOT / "catalog/schemas" / schema_name,
