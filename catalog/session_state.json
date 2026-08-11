@@ -390,11 +390,18 @@
       "completed_at": "2026-08-11T00:07:14Z",
       "platform": "claude-code",
       "detail": "Closed as an observation, not a mint. Canon's Talyx Velkonn stands; the prose 'Talyx Varneth' is a superseded draft form. The lineage-prefix system now in canon supports this: Vel- is noble and matches his ducal rank, Varn- is a military bloodline. No merge, no rename, no new record \u2014 recording the variant would create a phantom referent."
+    },
+    {
+      "id": "reference-integrity-sweep",
+      "status": "completed",
+      "completed_at": "2026-08-11T00:20:17Z",
+      "platform": "claude-code",
+      "detail": "Built tools/canon_reference_integrity.py (namespace-aware, repeatable) + tests/test_canon_reference_integrity.py (7 tests). Result: 0 dangling references across 243 records, 0 alias collisions, 103 orphans (mostly legitimate leaf records). Structural findings fixed: all 40 capsules now declare capsule_id, bridging the capsule<->entity namespaces that were previously connected only by prefix-stripping; faction<->entity mapping is now READ from polity faction_bindings because separatist_confed -> polity_separatist_confederation is not derivable by any prefix rule; 4 species records gained origin_polity_entity_id alongside the faction-form origin_polity_id."
     }
   ],
-  "last_updated": "2026-08-11T00:07:39Z",
+  "last_updated": "2026-08-11T00:20:21Z",
   "last_platform": "claude-code",
-  "last_session_summary": "chore(catalog): sync CanonRec pin; close tkaras-host-identit",
+  "last_session_summary": "chore(catalog): sync CanonRec pin; close all 5 naming-gate q",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -416,6 +423,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "84bc494",
+      "date": "2026-08-11",
+      "platform": "claude-code",
+      "summary": "chore(catalog): sync CanonRec pin; close all 5 naming-gate queue items"
+    },
     {
       "sha": "ab7f583",
       "date": "2026-08-11",
@@ -469,12 +482,6 @@
       "date": "2026-08-10",
       "platform": "claude-code",
       "summary": "feat(recovery): claim-extract all major prose corpora \u2014 1,044 claims across 108 entities"
-    },
-    {
-      "sha": "f471d43",
-      "date": "2026-08-10",
-      "platform": "claude-code",
-      "summary": "docs(recovery): supersede the '.md tier exhausted' finding; record corrected method"
     }
   ],
   "security_events": [
@@ -593,12 +600,6 @@
       "description": "FRAMING QUESTION (owner): is the Sentinel unit roster part of the SETTING, or per-run simulation state? Omega9_Emergence_Log records Sentinel Omega-9 and Event.Kaelor_Chainfire.v1 (first documented emergent adaptive route logic; Extraction Point Theta-4 -> Sector Epsilon-G). None of Omega-9, Kaelor Chainfire, Epsilon-G, Theta-4 exist in canon. It was NOT promoted because it is simulation instance output (SimTime stamp, sentinel_id, L1 review team), which Canon Protocol \u00a75 treats as tertiary. If Sentinel units are setting entities rather than run state, this routes through the reconciler as an evidentiary question. Distinct from Omega-Veil (rogue AI warlord, already canon)."
     },
     {
-      "id": "reference-integrity-sweep",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Build a standing reference-integrity sweep over canon: verify every faction_binding, organization_ids, crew_ids, commanding_officer_id, location_refs, participant_refs, event_refs and *_id field resolves to an existing entity record. This technique \u2014 not prose mining \u2014 produced every structural finding of 2026-08-09: the Velar Imperium referent, the 29 capsule-only characters, and the Outer Colonies/Trade Coalition/AI Vanguard blocs. Make it a test so new dangling referents fail CI rather than waiting to be discovered by an archive sweep."
-    },
-    {
       "id": "prose-claim-ledger-reconciliation",
       "priority": "high",
       "assigned_to": "either",
@@ -645,10 +646,16 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "No workflow/cron/launchd generates briefs; cadence has been human-triggered across the whole series (7d,14d,7d,9d,17d,16d). The Stop-hook pattern already solved this class for session state. Add a weekly GitHub Actions workflow running 'make brief'. See executive_brief__2026-08-10.md Risk 4."
+    },
+    {
+      "id": "sandbox-missing-test-deps",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "tests/test_live_watch_link.py fails in the sandboxed workspace with ModuleNotFoundError: No module named 'fastapi' (tools/live_watch.py clone driver). Not a code regression \u2014 a missing dependency in the execution context, the same class as the Mission Control 'gh is missing' false P1. Either add fastapi to the dev toolkit/test extras or mark the test to skip when the dep is absent, so a green suite means the same thing everywhere."
     }
   ],
   "known_state": {
-    "main_sha": "ab7f583",
+    "main_sha": "84bc494",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -763,7 +770,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-11T00:07:39Z",
+    "checked_at": "2026-08-11T00:20:21Z",
     "entries": [
       {
         "repo": "root",
