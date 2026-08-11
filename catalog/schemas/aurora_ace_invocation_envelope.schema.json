@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/aurora_ace_invocation_envelope.schema.json",
+  "title": "Aurora Canon Engine Invocation Envelope",
+  "description": "First-class invocation provenance for interactive, embedded, and autonomic ACE entry paths.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "nonempty_string": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "0.2.0"
+    },
+    "record_type": {
+      "const": "ace_invocation_envelope"
+    },
+    "invocation_id": {
+      "type": "string",
+      "pattern": "^ace\\.invocation\\.[A-Za-z0-9_.:-]+$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "invocation_mode": {
+      "type": "string",
+      "enum": ["interactive", "embedded", "autonomic"]
+    },
+    "visibility": {
+      "const": "inspectable"
+    },
+    "automatic": {
+      "type": "boolean"
+    },
+    "caller": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["user", "operations", "agent", "system", "capability"]
+        },
+        "caller_ref": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "parent_invocation_ref": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["kind", "caller_ref", "parent_invocation_ref"]
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["direct_query", "capability_call", "coherence_seam", "policy_event"]
+        },
+        "reason": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "seam_ref": {
+          "type": ["string", "null"]
+        },
+        "trigger_policy_ref": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["kind", "reason", "seam_ref", "trigger_policy_ref"]
+    },
+    "query_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "query": {
+      "type": "object"
+    },
+    "determination_ref": {
+      "type": "string",
+      "pattern": "^ace\\.determination\\.[A-Za-z0-9_.:-]+$"
+    },
+    "packet_ref": {
+      "$ref": "#/$defs/nonempty_string"
+    },
+    "determination_status": {
+      "type": "string",
+      "enum": [
+        "RETRIEVED_CANON",
+        "DERIVED_CANON",
+        "GENERATED_CANON",
+        "CANON_REVISION",
+        "TRUE_CONFLICT",
+        "EXECUTION_BLOCKED"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_type",
+    "invocation_id",
+    "created_at",
+    "invocation_mode",
+    "visibility",
+    "automatic",
+    "caller",
+    "trigger",
+    "query_sha256",
+    "query"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {"invocation_mode": {"const": "interactive"}},
+        "required": ["invocation_mode"]
+      },
+      "then": {
+        "properties": {"automatic": {"const": false}}
+      }
+    },
+    {
+      "if": {
+        "properties": {"invocation_mode": {"const": "embedded"}},
+        "required": ["invocation_mode"]
+      },
+      "then": {
+        "properties": {"automatic": {"const": false}}
+      }
+    },
+    {
+      "if": {
+        "properties": {"invocation_mode": {"const": "autonomic"}},
+        "required": ["invocation_mode"]
+      },
+      "then": {
+        "properties": {
+          "automatic": {"const": true},
+          "trigger": {
+            "properties": {
+              "kind": {"enum": ["coherence_seam", "policy_event"]},
+              "seam_ref": {"type": "string", "minLength": 1},
+              "trigger_policy_ref": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    }
+  ]
+}
