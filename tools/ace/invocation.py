@@ -314,7 +314,10 @@ def resolve_invocation(
     if sidecar.exists():
         raise ACEError(f"invocation sidecar already exists: {sidecar}", code="target_unavailable")
 
-    entity_type = query.get("subject", {}).get("entity_type")
+    # Character was the only resolver before subject dispatch existed. Preserve
+    # that default for legacy/minimal query envelopes while explicit facility
+    # queries still route to their dedicated supported slice.
+    entity_type = query.get("subject", {}).get("entity_type") or "character"
     if entity_type == "character":
         if root is None:
             determination = resolve_character_query(query, output_dir)
