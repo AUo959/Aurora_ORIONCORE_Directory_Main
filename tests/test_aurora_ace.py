@@ -130,6 +130,10 @@ def test_safe_output_rejects_nested_repository_targets(tmp_path: Path) -> None:
 
 
 def test_warm_index_uses_registered_heads() -> None:
+    nested_repos = [REPO_ROOT / core.CANONREC_REL, REPO_ROOT / core.CLOUDBANK_REL]
+    if not all((path / ".git").exists() for path in nested_repos):
+        pytest.skip("requires the CI lane to provision registered CanonRec and CloudBank repositories")
+
     index = core.build_capability_index(REPO_ROOT)
     active = {item["capability_id"] for item in index["capabilities"] if item["lifecycle"] == "active"}
     assert "ace.capability.gumas.naming.resolve" in active
