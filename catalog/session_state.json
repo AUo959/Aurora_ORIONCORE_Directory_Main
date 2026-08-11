@@ -700,7 +700,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "9670ff1",
+    "main_sha": "4ca4e7ee74bbdf1fdac9e5d2bb688a22859b53c4",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
