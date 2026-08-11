@@ -155,7 +155,6 @@ def _fake_capability_index() -> dict[str, object]:
     }
 
 
-@pytest.mark.unit
 def test_compile_facility_query_preserves_specialist_first_and_l1_boundary(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -183,7 +182,6 @@ def test_compile_facility_query_preserves_specialist_first_and_l1_boundary(
     assert location_output["preferred_capability_refs"] == []
 
 
-@pytest.mark.unit
 def test_cloudbank_seam_becomes_the_same_inspectable_autonomic_ace_envelope(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -204,7 +202,6 @@ def test_cloudbank_seam_becomes_the_same_inspectable_autonomic_ace_envelope(
     assert envelope["query"]["subject"]["entity_type"] == "facility"
 
 
-@pytest.mark.unit
 def test_cloudbank_seam_fails_closed_if_it_attempts_to_widen_authority() -> None:
     seam = coherence_seam()
     seam["constraints"]["runtime_mutation_allowed"] = True
@@ -213,7 +210,6 @@ def test_cloudbank_seam_fails_closed_if_it_attempts_to_widen_authority() -> None
         facility.validate_coherence_seam(seam)
 
 
-@pytest.mark.unit
 def test_facility_resolution_returns_complete_commit_ready_noncausal_packet(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
@@ -260,7 +256,6 @@ def test_facility_resolution_returns_complete_commit_ready_noncausal_packet(
     assert sidecar["determination_ref"] == receipt["determination_id"]
 
 
-@pytest.mark.unit
 def test_facility_policy_rejects_unowned_l1_kind_instead_of_free_synthesis(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
