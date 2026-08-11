@@ -79,6 +79,24 @@
     },
     "query": {
       "type": "object"
+    },
+    "determination_ref": {
+      "type": "string",
+      "pattern": "^ace\\.determination\\.[A-Za-z0-9_.:-]+$"
+    },
+    "packet_ref": {
+      "$ref": "#/$defs/nonempty_string"
+    },
+    "determination_status": {
+      "type": "string",
+      "enum": [
+        "RETRIEVED_CANON",
+        "DERIVED_CANON",
+        "GENERATED_CANON",
+        "CANON_REVISION",
+        "TRUE_CONFLICT",
+        "EXECUTION_BLOCKED"
+      ]
     }
   },
   "required": [
