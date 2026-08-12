@@ -37,10 +37,6 @@ jobs:
           base_sha = os.environ["BASE_MAIN_SHA"]
 
           pending = state.get("pending_for_next_session", [])
-          materialization = next(
-              (item for item in pending if item.get("id") == "ace-v0-2-materialization"),
-              None,
-          )
           state["pending_for_next_session"] = [
               item for item in pending if item.get("id") != "ace-v0-2-materialization"
           ]
@@ -104,7 +100,7 @@ jobs:
           Path(os.environ["WORKFLOW_PATH"]).unlink()
           PY
 
-          python tools/session_state_check.py catalog/session_state.json
+          python tools/session_state_check.py --path catalog/session_state.json
           git diff --check
           git diff -- catalog/session_state.json
 
