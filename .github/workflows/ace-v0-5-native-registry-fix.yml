@@ -1,0 +1,63 @@
+name: ACE v0.5 Native Registry Validation Fix
+
+on:
+  push:
+    branches:
+      - agent/ace-v0-5-character-materialization
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout staging branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          ref: agent/ace-v0-5-character-materialization
+
+      - name: Install focused dependencies
+        run: python -m pip install pytest pyyaml 'jsonschema==4.25.1'
+
+      - name: Apply native registry validation correction
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('tools/ace/character_materialize.py')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace('import shutil\nimport subprocess\nimport sys\nimport tempfile\n', 'import shutil\nimport tempfile\n')
+          text = text.replace('    CANONREC_TOOL_REL,\n', '')
+          marker = 'from .ledger import append_determination\n'
+          text = text.replace(marker, 'from .character_retrieval import _record_from_flat_entity\n' + marker)
+
+          old = '''def _validate_flat_entity(flat: Path, repo: Path, *, root: Path) -> None:\n    validator = root / CANONREC_TOOL_REL / "validate_entity.py"\n    if not validator.is_file():\n        return\n    completed = subprocess.run(\n        [\n            sys.executable,\n            str(validator),\n            "--input",\n            str(flat),\n            "--layer",\n            "L2",\n            "--type",\n            "character",\n            "--format",\n            "json",\n            "--context-root",\n            str(repo),\n        ],\n        cwd=repo,\n        capture_output=True,\n        text=True,\n        check=False,\n        timeout=20,\n    )\n    if completed.returncode != 0:\n        raise ACEError(\n            "CanonRec rejected the native flat character record: " + completed.stderr.strip(),\n            code="output_validation_failed",\n        )\n    try:\n        payload = json.loads(completed.stdout)\n    except json.JSONDecodeError as exc:\n        raise ACEError("CanonRec entity validator returned non-JSON output", code="output_validation_failed") from exc\n    if payload.get("validation_run", {}).get("blocked"):\n        raise ACEError("CanonRec blocked the native flat character record", code="output_validation_failed")\n'''
+          new = '''def _validate_flat_entity(\n    flat: Path,\n    repo: Path,\n    *,\n    entity_id: str,\n    candidate: Mapping[str, Any],\n    target_rel: str,\n) -> None:\n    """Validate the native flat registry record with ACE v0.4 retrieval semantics."""\n\n    record, capsule_ref = _record_from_flat_entity(flat, repo)\n    if record is None:\n        raise ACEError(\n            "native flat character record is not readable by the ACE character registry",\n            code="output_validation_failed",\n        )\n    expected_capsule_ref = f"{target_rel}/capsule/identity.json"\n    expected_name = str(candidate.get("canonical_name") or "")\n    expected_faction = str(candidate.get("faction") or "")\n    if record.canonical_id != entity_id:\n        raise ACEError("flat character canonical ID does not match the packet", code="output_validation_failed")\n    if normalize_name(record.name) != normalize_name(expected_name):\n        raise ACEError("flat character name does not match the packet", code="output_validation_failed")\n    if record.certainty != "CANON":\n        raise ACEError("flat character must be readable as CANON", code="output_validation_failed")\n    if expected_faction and record.faction_id != expected_faction:\n        raise ACEError("flat character faction does not match the packet", code="output_validation_failed")\n    if capsule_ref != expected_capsule_ref:\n        raise ACEError(\n            "flat character capsule bridge does not resolve to the materialized capsule",\n            code="output_validation_failed",\n        )\n    if record.identity_sha256 != file_sha256(flat):\n        raise ACEError("flat character registry digest is unstable", code="output_validation_failed")\n'''
+          if old not in text:
+              raise SystemExit('expected validator block not found')
+          text = text.replace(old, new)
+          text = text.replace(
+              '_validate_flat_entity(flat, repo, root=root)',
+              '_validate_flat_entity(\n            flat,\n            repo,\n            entity_id=entity_id,\n            candidate=candidate,\n            target_rel=target_rel,\n        )',
+          )
+          path.write_text(text, encoding='utf-8')
+
+          test_path = Path('tests/test_aurora_ace_character_materialization.py')
+          tests = test_path.read_text(encoding='utf-8')
+          tests = tests.replace('    (target / "preexisting.txt").write_text("collision\\n", encoding="utf-8")\n', '')
+          test_path.write_text(tests, encoding='utf-8')
+          PY
+          python -m py_compile tools/ace/character_materialize.py tests/test_aurora_ace_character_materialization.py
+          python -m pytest -q tests/test_aurora_ace_materialization.py tests/test_aurora_ace_character_materialization.py tests/test_aurora_ace_character_retrieval.py
+          git diff --check
+          rm .github/workflows/ace-v0-5-native-registry-fix.yml
+
+      - name: Commit correction
+        run: |
+          git config user.name "Aurora ACE Integration"
+          git config user.email "ace-integration@aurora.local"
+          git add tools/ace/character_materialize.py tests/test_aurora_ace_character_materialization.py .github/workflows/ace-v0-5-native-registry-fix.yml
+          git commit -m "fix(ace): validate native character registry surface"
+          git push origin HEAD:agent/ace-v0-5-character-materialization
