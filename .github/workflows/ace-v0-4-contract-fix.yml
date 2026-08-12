@@ -1,0 +1,72 @@
+name: ACE v0.4 Retrieval Contract Fix
+
+on:
+  push:
+    branches:
+      - agent/ace-v0-4-character-retrieval
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          ref: agent/ace-v0-4-character-retrieval
+
+      - name: Install focused dependencies
+        run: python -m pip install pytest pyyaml 'jsonschema==4.25.1'
+
+      - name: Repair controlled vocabulary and validate receipts
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tools/ace/character_retrieval.py')
+          s = p.read_text(encoding='utf-8')
+          replacements = {
+              '"existence_status": "candidate_existing",': '"existence_status": "contextual_unresolved",',
+              '"kind": "referent_ambiguous",': '"kind": "semantic_coverage_incomplete",',
+              '"kind": "possible_existing_referent",': '"kind": "semantic_coverage_incomplete",',
+          }
+          for old, new in replacements.items():
+              if s.count(old) != 1:
+                  raise SystemExit(f'expected one {old!r}, found {s.count(old)}')
+              s = s.replace(old, new)
+
+          needle = '''        answer = {\n            "summary": summary,\n            "fields": answer_fields,\n            "no_prior_record": not bool(direct or relation_only),\n            "supersedes_determination_refs": [],\n        }\n'''
+          replacement = '''        if not answer_fields:\n            unresolved_sources = [\n                str(item["source_ref"])\n                for item in [*direct, *relation_only]\n                if isinstance(item.get("source_ref"), str)\n            ]\n            answer_fields = [\n                {\n                    "field_path": "character.identity",\n                    "value": None,\n                    "origin": "retrieved",\n                    "producer_refs": [RETRIEVAL_CAPABILITY, RELATION_CAPABILITY],\n                    "source_refs": list(dict.fromkeys(unresolved_sources)),\n                    "run_receipt_refs": ["evidence/character_retrieval.json"],\n                    "constraint_refs": [RETRIEVAL_POLICY_REF, RELATION_POLICY_REF],\n                    "canon_target_ref": None,\n                }\n            ]\n\n        answer = {\n            "summary": summary,\n            "fields": answer_fields,\n            "no_prior_record": not bool(direct or relation_only),\n            "supersedes_determination_refs": [],\n        }\n'''
+          if s.count(needle) != 1:
+              raise SystemExit('answer block not found exactly once')
+          p.write_text(s.replace(needle, replacement), encoding='utf-8')
+
+          t = Path('tests/test_aurora_ace_character_retrieval.py')
+          body = t.read_text(encoding='utf-8')
+          body = body.replace(
+              'assert receipt["blockers"][0]["kind"] == "referent_ambiguous"',
+              'assert receipt["blockers"][0]["kind"] == "semantic_coverage_incomplete"\n    assert "multiple canonical characters" in receipt["blockers"][0]["reason"]',
+          )
+          body = body.replace(
+              'assert receipt["blockers"][0]["kind"] == "possible_existing_referent"',
+              'assert receipt["blockers"][0]["kind"] == "semantic_coverage_incomplete"\n    assert "strongly overlaps" in receipt["blockers"][0]["reason"]',
+          )
+          schema_test = '''\n\ndef test_retrieval_query_and_receipt_validate_against_committed_schemas(\n    tmp_path: Path, monkeypatch: pytest.MonkeyPatch\n) -> None:\n    import jsonschema\n\n    _write_character(tmp_path, "char_ada_north", "Ada North")\n    _patch(monkeypatch)\n    query = character_retrieval.compile_existing_character_query_if_applicable(\n        "Who is Ada North?",\n        {"name": "Ada North", "existence_status": "known"},\n        seed=808,\n        mode="commit_ready",\n        requester_kind="user",\n        requester_id="pilot",\n        session_ref=None,\n        root=tmp_path,\n    )\n    assert query is not None\n    query_schema = json.loads(\n        (REPO_ROOT / "catalog/schemas/aurora_ace_query_envelope.schema.json").read_text(encoding="utf-8")\n    )\n    jsonschema.Draft202012Validator(query_schema).validate(query)\n\n    receipt = character_retrieval.resolve_existing_character_query(\n        query, tmp_path / "packet", root=tmp_path\n    )\n    receipt_schema = json.loads(\n        (REPO_ROOT / "catalog/schemas/aurora_ace_determination_receipt.schema.json").read_text(encoding="utf-8")\n    )\n    jsonschema.Draft202012Validator(receipt_schema).validate(receipt)\n\n    # Blocked ambiguity receipts must also remain schema-valid.\n    second_root = tmp_path / "ambiguous"\n    _write_character(second_root, "char_one", "Morgan Vale", faction_id="galactic_union")\n    _write_character(second_root, "char_two", "Morgan Vale", faction_id="vorran")\n    monkeypatch.setattr(character_retrieval, "repository_baselines", lambda _root: BASELINES)\n    ambiguous_query = character_retrieval.compile_existing_character_query_if_applicable(\n        "Who is Morgan Vale?",\n        {"name": "Morgan Vale", "existence_status": "known"},\n        seed=808,\n        mode="commit_ready",\n        requester_kind="user",\n        requester_id="pilot",\n        session_ref=None,\n        root=second_root,\n    )\n    assert ambiguous_query is not None\n    jsonschema.Draft202012Validator(query_schema).validate(ambiguous_query)\n    ambiguous_receipt = character_retrieval.resolve_existing_character_query(\n        ambiguous_query, second_root / "packet", root=second_root\n    )\n    jsonschema.Draft202012Validator(receipt_schema).validate(ambiguous_receipt)\n'''
+          if 'test_retrieval_query_and_receipt_validate_against_committed_schemas' not in body:
+              body += schema_test
+          t.write_text(body, encoding='utf-8')
+          PY
+          python -m py_compile tools/ace/character_retrieval.py tests/test_aurora_ace_character_retrieval.py
+          python -m pytest -q tests/test_aurora_ace_character_retrieval.py tests/test_aurora_ace_invocation.py tests/test_aurora_ace_invariants.py
+          git diff --check
+          rm .github/workflows/ace-v0-4-contract-fix.yml
+
+      - name: Commit contract correction
+        run: |
+          git config user.name "Aurora ACE Integration"
+          git config user.email "ace-integration@aurora.local"
+          git add tools/ace/character_retrieval.py tests/test_aurora_ace_character_retrieval.py .github/workflows/ace-v0-4-contract-fix.yml
+          git commit -m "fix(ace): validate retrieval receipts against controlled schema"
+          git push origin HEAD:agent/ace-v0-4-character-retrieval
