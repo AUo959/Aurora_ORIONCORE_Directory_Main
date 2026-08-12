@@ -46,48 +46,10 @@ def _preview() -> dict[str, object]:
     }
 
 
-def test_prepare_persists_awaiting_confirmation_receipt_and_is_idempotent(
-    monkeypatch: pytest.MonkeyPatch,
-    tmp_path: Path,
-) -> None:
+def _prepare(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> dict[str, object]:
     monkeypatch.setattr(operator, "ace_resolve", lambda *args, **kwargs: _resolution())
     monkeypatch.setattr(operator, "ace_materialize_preview", lambda *args, **kwargs: _preview())
-
-    kwargs = {
-        "root": tmp_path,
-        "runtime_root": tmp_path / "runtime",
-        "transaction_root": tmp_path / "transactions",
-        "target_repo": tmp_path / "CanonRec",
-    }
-    first = operator.prepare_operator_transaction(
-        {"record_type": "ace_invocation_envelope"},
-        "packet-001",
-        "owner-approval-009",
-        **kwargs,
-    )
-    second = operator.prepare_operator_transaction(
-        {"record_type": "ace_invocation_envelope"},
-        "packet-001",
-        "owner-approval-009",
-        **kwargs,
-    )
-
-    assert first == second
-    assert first["status"] == "awaiting_confirmation"
-    assert first["transaction_id"].startswith("ace.mcp.operator.")
-    assert first["authorization"]["side_effects_acknowledged"] is False
-    assert first["replay_guard"]["closed"] is False
-    receipt_path = tmp_path / "transactions" / f"{first['transaction_id']}.json"
-    assert receipt_path.is_file()
-
-
-def test_commit_requires_exact_token_and_acknowledgement(
-    monkeypatch: pytest.MonkeyPatch,
-    tmp_path: Path,
-) -> None:
-    monkeypatch.setattr(operator, "ace_resolve", lambda *args, **kwargs: _resolution())
-    monkeypatch.setattr(operator, "ace_materialize_preview", lambda *args, **kwargs: _preview())
-    prepared = operator.prepare_operator_transaction(
+    return operator.prepare_operator_transaction(
         {"record_type": "ace_invocation_envelope"},
         "packet-001",
         "owner-approval-009",
@@ -95,17 +57,40 @@ def test_commit_requires_exact_token_and_acknowledgement(
         transaction_root=tmp_path / "transactions",
     )
 
+
+def test_prepare_persists_awaiting_confirmation_receipt_and_is_idempotent(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    first = _prepare(monkeypatch, tmp_path)
+    second = _prepare(monkeypatch, tmp_path)
+    assert first == second
+    assert first["status"] == "awaiting_confirmation"
+    assert first["transaction_id"].startswith("ace.mcp.operator.")
+    assert first["authorization"]["side_effects_acknowledged"] is False
+    assert first["replay_guard"]["closed"] is False
+    assert (tmp_path / "transactions" / f"{first['transaction_id']}.json").is_file()
+
+
+def test_commit_requires_exact_token_and_acknowledgement(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    prepared = _prepare(monkeypatch, tmp_path)
+    transaction_id = str(prepared["transaction_id"])
+    token = str(prepared["preview"]["authorization_token"])
+
     with pytest.raises(core.ACEError, match="acknowledgement"):
         operator.commit_operator_transaction(
-            prepared["transaction_id"],
-            prepared["preview"]["authorization_token"],
+            transaction_id,
+            token,
             False,
             root=tmp_path,
             transaction_root=tmp_path / "transactions",
         )
     with pytest.raises(core.ACEError, match="does not match"):
         operator.commit_operator_transaction(
-            prepared["transaction_id"],
+            transaction_id,
             "ace-mcp-auth:wrong",
             True,
             root=tmp_path,
@@ -113,7 +98,7 @@ def test_commit_requires_exact_token_and_acknowledgement(
         )
 
     unchanged = operator.inspect_operator_transaction(
-        prepared["transaction_id"],
+        transaction_id,
         root=tmp_path,
         transaction_root=tmp_path / "transactions",
     )
@@ -124,8 +109,9 @@ def test_commit_records_post_commit_inspection_and_closes_replay(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
 ) -> None:
-    monkeypatch.setattr(operator, "ace_resolve", lambda *args, **kwargs: _resolution())
-    monkeypatch.setattr(operator, "ace_materialize_preview", lambda *args, **kwargs: _preview())
+    prepared = _prepare(monkeypatch, tmp_path)
+    transaction_id = str(prepared["transaction_id"])
+    token = str(prepared["preview"]["authorization_token"])
     calls: list[str] = []
 
     def fake_commit(*args: object, **kwargs: object) -> dict[str, object]:
@@ -141,27 +127,21 @@ def test_commit_records_post_commit_inspection_and_closes_replay(
         }
 
     monkeypatch.setattr(operator, "ace_materialize_commit", fake_commit)
-    monkeypatch.setattr(
-        operator,
-        "ace_inspect",
-        lambda **kwargs: {
+
+    def fake_inspect(**kwargs: object) -> dict[str, object]:
+        return {
             "record_type": "ace_mcp_inspection",
             "found": True,
             "match_count": 1,
-            "lookup": kwargs,
-        },
-    )
+            "lookup": {
+                "determination_id": str(kwargs["determination_id"]),
+            },
+        }
 
-    prepared = operator.prepare_operator_transaction(
-        {"record_type": "ace_invocation_envelope"},
-        "packet-001",
-        "owner-approval-009",
-        root=tmp_path,
-        transaction_root=tmp_path / "transactions",
-    )
+    monkeypatch.setattr(operator, "ace_inspect", fake_inspect)
     committed = operator.commit_operator_transaction(
-        prepared["transaction_id"],
-        prepared["preview"]["authorization_token"],
+        transaction_id,
+        token,
         True,
         root=tmp_path,
         transaction_root=tmp_path / "transactions",
@@ -174,8 +154,8 @@ def test_commit_records_post_commit_inspection_and_closes_replay(
 
     with pytest.raises(core.ACEError, match="not awaiting confirmation"):
         operator.commit_operator_transaction(
-            prepared["transaction_id"],
-            prepared["preview"]["authorization_token"],
+            transaction_id,
+            token,
             True,
             root=tmp_path,
             transaction_root=tmp_path / "transactions",
@@ -187,32 +167,25 @@ def test_native_refusal_is_durable_and_closes_transaction(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
 ) -> None:
-    monkeypatch.setattr(operator, "ace_resolve", lambda *args, **kwargs: _resolution())
-    monkeypatch.setattr(operator, "ace_materialize_preview", lambda *args, **kwargs: _preview())
+    prepared = _prepare(monkeypatch, tmp_path)
+    transaction_id = str(prepared["transaction_id"])
+    token = str(prepared["preview"]["authorization_token"])
 
     def refused(*args: object, **kwargs: object) -> dict[str, object]:
         raise core.ACEError("baseline advanced", code="registry_baseline_advanced")
 
     monkeypatch.setattr(operator, "ace_materialize_commit", refused)
-    prepared = operator.prepare_operator_transaction(
-        {"record_type": "ace_invocation_envelope"},
-        "packet-001",
-        "owner-approval-009",
-        root=tmp_path,
-        transaction_root=tmp_path / "transactions",
-    )
-
     with pytest.raises(core.ACEError, match="baseline advanced"):
         operator.commit_operator_transaction(
-            prepared["transaction_id"],
-            prepared["preview"]["authorization_token"],
+            transaction_id,
+            token,
             True,
             root=tmp_path,
             transaction_root=tmp_path / "transactions",
         )
 
     refused_receipt = operator.inspect_operator_transaction(
-        prepared["transaction_id"],
+        transaction_id,
         root=tmp_path,
         transaction_root=tmp_path / "transactions",
     )
@@ -292,9 +265,9 @@ def test_end_to_end_operator_transaction_materializes_inspects_and_refuses_repla
         assert prepared["preview"]["target_head"] == baseline
         assert prepared["preview"]["target_branch"] == "validation/ace-mcp-v0-9"
 
-        token = prepared["preview"]["authorization_token"]
+        token = str(prepared["preview"]["authorization_token"])
         committed = operator.commit_operator_transaction(
-            prepared["transaction_id"],
+            str(prepared["transaction_id"]),
             token,
             True,
             "test(canon): ACE v0.9 operator e2e validation",
@@ -320,7 +293,7 @@ def test_end_to_end_operator_transaction_materializes_inspects_and_refuses_repla
 
         with pytest.raises(core.ACEError, match="not awaiting confirmation"):
             operator.commit_operator_transaction(
-                prepared["transaction_id"],
+                str(prepared["transaction_id"]),
                 token,
                 True,
                 root=REPO_ROOT,
