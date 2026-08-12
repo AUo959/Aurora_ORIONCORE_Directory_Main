@@ -1,0 +1,52 @@
+name: ACE v0.3 True Conflict Completion Fix
+
+on:
+  push:
+    branches:
+      - agent/ace-v0-3-canon-determination
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          ref: agent/ace-v0-3-canon-determination
+
+      - name: Align and verify true-conflict contract
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tools/ace/canon_resolution.py')
+          s = p.read_text(encoding='utf-8')
+          old = '''            else:\n                status = "TRUE_CONFLICT"\n                overall_status = "incomplete"\n                selection_basis.append("fail_closed_on_mutually_exclusive_committed_claims")'''
+          new = '''            else:\n                status = "TRUE_CONFLICT"\n                overall_status = "complete"\n                selection_basis.append("fail_closed_on_mutually_exclusive_committed_claims")'''
+          if s.count(old) != 1:
+              raise SystemExit(f'expected one TRUE_CONFLICT block, found {s.count(old)}')
+          p.write_text(s.replace(old, new), encoding='utf-8')
+
+          t = Path('tests/test_aurora_ace_canon_resolution.py')
+          body = t.read_text(encoding='utf-8')
+          needle = '''    assert receipt["status"] == "TRUE_CONFLICT"\n    assert receipt["answer"]["fields"][0]["value"] is None\n'''
+          replacement = '''    assert receipt["status"] == "TRUE_CONFLICT"\n    assert receipt["answer_contract"]["overall_status"] == "complete"\n    assert receipt["answer"]["fields"][0]["value"] is None\n'''
+          if body.count(needle) != 1:
+              raise SystemExit('TRUE_CONFLICT test needle not found exactly once')
+          t.write_text(body.replace(needle, replacement), encoding='utf-8')
+          PY
+          python -m pip install pytest pyyaml 'jsonschema==4.25.1'
+          python -m pytest -q tests/test_aurora_ace_canon_resolution.py tests/test_aurora_ace_invocation.py tests/test_aurora_ace_invariants.py
+          git diff --check
+          rm .github/workflows/ace-v0-3-conflict-fix.yml
+
+      - name: Commit semantic correction
+        run: |
+          git config user.name "Aurora ACE Integration"
+          git config user.email "ace-integration@aurora.local"
+          git add tools/ace/canon_resolution.py tests/test_aurora_ace_canon_resolution.py .github/workflows/ace-v0-3-conflict-fix.yml
+          git commit -m "fix(ace): treat true conflict as complete determination"
+          git push origin HEAD:agent/ace-v0-3-canon-determination
