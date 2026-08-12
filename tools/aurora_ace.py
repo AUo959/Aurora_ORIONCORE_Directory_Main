@@ -18,7 +18,7 @@ from ace import (
     compile_canon_invocation,
     compile_facility_invocation,
     compile_facility_invocation_from_seam,
-    materialize_facility_packet,
+    materialize_packet,
     query_ledger,
     resolve_invocation,
 )
@@ -174,9 +174,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     materialize = subparsers.add_parser(
         "materialize",
-        help="Materialize a validated ACE facility packet into a CanonRec feature-branch commit.",
+        help="Materialize a validated ACE packet into its native CanonRec feature-branch artifact set.",
     )
-    materialize.add_argument("--packet", required=True, help="Commit-ready ACE facility packet directory.")
+    materialize.add_argument("--packet", required=True, help="Commit-ready ACE packet directory.")
     materialize.add_argument("--target-repo", required=True, help="Clean CanonRec checkout on a non-protected feature branch.")
     materialize.add_argument("--authority-mode", choices=sorted(AUTHORITY_MODES), required=True)
     materialize.add_argument("--authority-ref", required=True, help="Inspectable owner/delegation authority receipt or policy reference.")
@@ -273,7 +273,7 @@ def main(argv: list[str] | None = None) -> int:
             )
             return 0
         if args.command == "materialize":
-            final = materialize_facility_packet(
+            final = materialize_packet(
                 Path(args.packet),
                 Path(args.target_repo),
                 authority_mode=args.authority_mode,

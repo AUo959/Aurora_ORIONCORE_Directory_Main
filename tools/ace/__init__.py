@@ -28,12 +28,18 @@ from .invocation import (
 )
 from .ledger import DEFAULT_LEDGER_REL, LEDGER_VERSION, append_determination, query_ledger
 from .materialize import AUTHORITY_MODES, MATERIALIZER_VERSION, materialize_facility_packet
+from .character_materialize import (
+    CHARACTER_MATERIALIZER_VERSION,
+    materialize_character_packet,
+    materialize_packet,
+)
 
 __all__ = [
     "ACEError",
     "ALLOWED_DERIVATION_RULES",
     "AUTHORITY_MODES",
     "CANON_RESOLUTION_VERSION",
+    "CHARACTER_MATERIALIZER_VERSION",
     "CHARACTER_RETRIEVAL_VERSION",
     "DEFAULT_LEDGER_REL",
     "ENGINE_VERSION",
@@ -53,7 +59,9 @@ __all__ = [
     "compile_facility_invocation",
     "compile_facility_invocation_from_seam",
     "compile_facility_query",
+    "materialize_character_packet",
     "materialize_facility_packet",
+    "materialize_packet",
     "query_ledger",
     "resolve_canon_query",
     "resolve_existing_character_query",
