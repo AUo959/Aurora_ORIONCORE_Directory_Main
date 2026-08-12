@@ -25,13 +25,13 @@ not an enforcement mechanism.
 Note the deliberate asymmetry in `test_determination_vocabulary_is_not_exceeded`
 and `test_reachable_determination_states_are_recorded`: the first forbids the
 code from inventing states the spec does not define, the second records how many
-of the spec's states the engine can currently reach. v0.1 reaches exactly one.
-That is a real limitation, tracked with a number rather than left implicit.
+of the spec's states the engine can currently reach. The v0.2 materialization
+slice deliberately adds GENERATED_CANON and CANON_REVISION while retrieval,
+derivation, and true-conflict execution remain separate future slices.
 """
 
 from __future__ import annotations
 
-import json
 import os
 import re
 import sys
@@ -275,15 +275,11 @@ def test_missing_authority_blocks_without_downgrading(determination):
 def test_reachable_determination_states_are_recorded():
     """Records how much of the spec's vocabulary the engine can actually reach.
 
-    Not a pass/fail on quality — a tracked number, the same device used for
-    location-subtype drift. v0.1 reaches exactly ONE of six terminal states
-    (EXECUTION_BLOCKED), because materialization is unimplemented. The engine
-    therefore cannot yet satisfy §4.1 in the affirmative: it never returns a
-    canonical determination.
-
-    When v0.2 lands materialization this test SHOULD fail, and the fix is to
-    raise the count deliberately — which forces someone to notice that ACE
-    started making canon.
+    The v0.2 materialization slice makes GENERATED_CANON and CANON_REVISION
+    reachable while preserving EXECUTION_BLOCKED for complete packets lacking
+    persistence authority. RETRIEVED_CANON, DERIVED_CANON, and TRUE_CONFLICT are
+    still not executable end states in this implementation and remain explicit
+    future slices rather than implied capabilities.
     """
     source = (REPO_ROOT / "tools" / "ace").rglob("*.py")
     emitted = set()
@@ -292,8 +288,7 @@ def test_reachable_determination_states_are_recorded():
         for term in spec_determination_vocabulary():
             if re.search(rf'["\']{term}["\']', body):
                 emitted.add(term)
-    assert emitted == {"EXECUTION_BLOCKED"}, (
-        f"Reachable determination states changed to {sorted(emitted)}. If "
-        f"materialization has landed, update this expectation deliberately and "
-        f"note it in the spec's implementation status."
+    assert emitted == {"EXECUTION_BLOCKED", "GENERATED_CANON", "CANON_REVISION"}, (
+        f"Reachable determination states changed to {sorted(emitted)}. Update this "
+        f"expectation deliberately whenever ACE gains another terminal-state path."
     )
