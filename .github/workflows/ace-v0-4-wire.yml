@@ -21,8 +21,18 @@ jobs:
       - name: Install focused dependencies
         run: python -m pip install pytest pyyaml 'jsonschema==4.25.1'
 
-      - name: Wire and test retrieval-first character path
+      - name: Repair, wire, and test retrieval-first character path
         run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('tools/ace/character_retrieval.py')
+          text = path.read_text(encoding='utf-8')
+          old = '''    contextual_refs = list(dict.fromkeys(\n        [\n            *[str(item) for item in context.get("contextual_refs", []) if str(item)]\n            if isinstance(context.get("contextual_refs", []), list)\n            else [],\n            *[str(item["canonical_id"]) for item in discovery["direct_candidates"]],\n            *[str(item["canonical_id"]) for item in discovery["relation_only_candidates"]],\n        ]\n    ))\n'''
+          new = '''    raw_contextual_refs = context.get("contextual_refs", [])\n    base_contextual_refs = (\n        [str(item) for item in raw_contextual_refs if str(item)]\n        if isinstance(raw_contextual_refs, list)\n        else []\n    )\n    contextual_refs = list(dict.fromkeys(\n        [\n            *base_contextual_refs,\n            *[str(item["canonical_id"]) for item in discovery["direct_candidates"]],\n            *[str(item["canonical_id"]) for item in discovery["relation_only_candidates"]],\n        ]\n    ))\n'''
+          if text.count(old) != 1:
+              raise SystemExit(f'expected one contextual_refs block, found {text.count(old)}')
+          path.write_text(text.replace(old, new), encoding='utf-8')
+          PY
           python -m py_compile tools/ace/character_retrieval.py tests/test_aurora_ace_character_retrieval.py
           python tools/ace/_wire_v04.py
           python -m py_compile tools/ace/core.py tools/ace/invocation.py tools/ace/__init__.py tools/aurora_ace.py
@@ -34,6 +44,6 @@ jobs:
         run: |
           git config user.name "Aurora ACE Integration"
           git config user.email "ace-integration@aurora.local"
-          git add tools/ace/core.py tools/ace/invocation.py tools/ace/__init__.py tools/aurora_ace.py tools/ace/_wire_v04.py .github/workflows/ace-v0-4-wire.yml
+          git add tools/ace/character_retrieval.py tools/ace/core.py tools/ace/invocation.py tools/ace/__init__.py tools/aurora_ace.py tools/ace/_wire_v04.py .github/workflows/ace-v0-4-wire.yml
           git commit -m "feat(ace): enforce retrieval before character generation"
           git push origin HEAD:agent/ace-v0-4-character-retrieval
