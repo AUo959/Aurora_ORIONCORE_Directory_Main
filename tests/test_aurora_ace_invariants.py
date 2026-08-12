@@ -275,11 +275,10 @@ def test_missing_authority_blocks_without_downgrading(determination):
 def test_reachable_determination_states_are_recorded():
     """Records how much of the spec's vocabulary the engine can actually reach.
 
-    The v0.2 materialization slice makes GENERATED_CANON and CANON_REVISION
-    reachable while preserving EXECUTION_BLOCKED for complete packets lacking
-    persistence authority. RETRIEVED_CANON, DERIVED_CANON, and TRUE_CONFLICT are
-    still not executable end states in this implementation and remain explicit
-    future slices rather than implied capabilities.
+    The v0.3 canon-determination slice adds read-only RETRIEVED_CANON,
+    DERIVED_CANON, and TRUE_CONFLICT paths. Together with v0.2 materialization,
+    every determination state in the ACE contract is now executable and must
+    remain deliberate rather than vocabulary-only.
     """
     source = (REPO_ROOT / "tools" / "ace").rglob("*.py")
     emitted = set()
@@ -288,7 +287,14 @@ def test_reachable_determination_states_are_recorded():
         for term in spec_determination_vocabulary():
             if re.search(rf'["\']{term}["\']', body):
                 emitted.add(term)
-    assert emitted == {"EXECUTION_BLOCKED", "GENERATED_CANON", "CANON_REVISION"}, (
+    assert emitted == {
+        "RETRIEVED_CANON",
+        "DERIVED_CANON",
+        "GENERATED_CANON",
+        "CANON_REVISION",
+        "TRUE_CONFLICT",
+        "EXECUTION_BLOCKED",
+    }, (
         f"Reachable determination states changed to {sorted(emitted)}. Update this "
         f"expectation deliberately whenever ACE gains another terminal-state path."
     )
