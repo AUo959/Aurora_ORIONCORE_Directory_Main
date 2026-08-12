@@ -13,12 +13,19 @@ from .invocation import (
     resolve_invocation,
     validate_invocation_envelope,
 )
+from .ledger import DEFAULT_LEDGER_REL, LEDGER_VERSION, append_determination, query_ledger
+from .materialize import AUTHORITY_MODES, MATERIALIZER_VERSION, materialize_facility_packet
 
 __all__ = [
     "ACEError",
+    "AUTHORITY_MODES",
+    "DEFAULT_LEDGER_REL",
     "ENGINE_VERSION",
     "INVOCATION_MODES",
     "INVOCATION_SCHEMA_VERSION",
+    "LEDGER_VERSION",
+    "MATERIALIZER_VERSION",
+    "append_determination",
     "build_capability_index",
     "build_invocation_envelope",
     "compile_character_invocation",
@@ -26,6 +33,8 @@ __all__ = [
     "compile_facility_invocation",
     "compile_facility_invocation_from_seam",
     "compile_facility_query",
+    "materialize_facility_packet",
+    "query_ledger",
     "resolve_character_query",
     "resolve_facility_query",
     "resolve_invocation",
