@@ -54,7 +54,7 @@ jobs:
               'id': 'ace-v0-3-canon-determination',
               'status': 'completed',
               'completed_at': now,
-              'platform': 'chatgpt-github',
+              'platform': 'codex',
               'detail': (
                   'Completed via OrionCore PR #66, squash merge '
                   '24ce40f63fa06758728fe246c447d1110709a69e. ACE now executes all six '
@@ -68,7 +68,7 @@ jobs:
           })
 
           state['last_updated'] = now
-          state['last_platform'] = 'chatgpt-github'
+          state['last_platform'] = 'codex'
           state['last_session_summary'] = (
               'ACE v0.3 canon retrieval, deterministic derivation, and true-conflict semantics merged; '
               'all six ACE determination states are now executable.'
@@ -80,7 +80,7 @@ jobs:
           recent.insert(0, {
               'sha': base_sha[:7],
               'date': '2026-08-11',
-              'platform': 'chatgpt-github',
+              'platform': 'codex',
               'summary': 'feat(ace): executable canon retrieval, derivation, and true conflict v0.3',
           })
           state['recent_commits'] = recent[:10]
