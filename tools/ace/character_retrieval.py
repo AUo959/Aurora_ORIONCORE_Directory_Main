@@ -393,7 +393,7 @@ def compile_existing_character_query_if_applicable(
         "subject": {
             "subject_ref": context.get("subject_ref"),
             "entity_type": "character",
-            "existence_status": "candidate_existing",
+            "existence_status": "contextual_unresolved",
             "contextual_refs": contextual_refs,
             "context": {
                 **dict(context),
@@ -649,7 +649,7 @@ def resolve_existing_character_query(
             blockers.append(
                 {
                     "blocker_id": f"ace.blocker.character.referent-ambiguous.{semantic_sha256(candidate_refs)[:12]}",
-                    "kind": "referent_ambiguous",
+                    "kind": "semantic_coverage_incomplete",
                     "capability_ref": RELATION_CAPABILITY,
                     "reason": f"Identity/name evidence matches multiple canonical characters: {', '.join(candidate_refs)}.",
                     "recovery_action": "Gather additional committed relation evidence (faction, role, location, relation, or explicit canonical ID) before generation or identity selection.",
@@ -662,7 +662,7 @@ def resolve_existing_character_query(
             blockers.append(
                 {
                     "blocker_id": f"ace.blocker.character.possible-existing.{semantic_sha256(candidate_refs)[:12]}",
-                    "kind": "possible_existing_referent",
+                    "kind": "semantic_coverage_incomplete",
                     "capability_ref": RELATION_CAPABILITY,
                     "reason": f"Role/faction/location evidence strongly overlaps existing character(s): {', '.join(candidate_refs)}.",
                     "recovery_action": "Acquire an identity anchor or invoke a registered reconciliation capability before treating the encountered person as unrecorded.",
@@ -681,6 +681,25 @@ def resolve_existing_character_query(
                 }
             )
             answer_semantic = {"no_existing_record": True}
+
+        if not answer_fields:
+            unresolved_sources = [
+                str(item["source_ref"])
+                for item in [*direct, *relation_only]
+                if isinstance(item.get("source_ref"), str)
+            ]
+            answer_fields = [
+                {
+                    "field_path": "character.identity",
+                    "value": None,
+                    "origin": "retrieved",
+                    "producer_refs": [RETRIEVAL_CAPABILITY, RELATION_CAPABILITY],
+                    "source_refs": list(dict.fromkeys(unresolved_sources)),
+                    "run_receipt_refs": ["evidence/character_retrieval.json"],
+                    "constraint_refs": [RETRIEVAL_POLICY_REF, RELATION_POLICY_REF],
+                    "canon_target_ref": None,
+                }
+            ]
 
         answer = {
             "summary": summary,

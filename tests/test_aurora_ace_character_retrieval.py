@@ -181,7 +181,8 @@ def test_unresolved_same_name_blocks_instead_of_declaring_true_conflict_or_gener
     )
     receipt = character_retrieval.resolve_existing_character_query(query, tmp_path / "packet", root=tmp_path)
     assert receipt["status"] == "EXECUTION_BLOCKED"
-    assert receipt["blockers"][0]["kind"] == "referent_ambiguous"
+    assert receipt["blockers"][0]["kind"] == "semantic_coverage_incomplete"
+    assert "multiple canonical characters" in receipt["blockers"][0]["reason"]
     assert receipt["conflicts"] == []
 
 
@@ -228,7 +229,8 @@ def test_relation_only_candidate_blocks_duplicate_generation(
     assert query is not None
     receipt = character_retrieval.resolve_existing_character_query(query, tmp_path / "packet", root=tmp_path)
     assert receipt["status"] == "EXECUTION_BLOCKED"
-    assert receipt["blockers"][0]["kind"] == "possible_existing_referent"
+    assert receipt["blockers"][0]["kind"] == "semantic_coverage_incomplete"
+    assert "strongly overlaps" in receipt["blockers"][0]["reason"]
 
 
 def test_no_existing_match_allows_normal_generation_compiler(
@@ -291,3 +293,57 @@ def test_explicit_unknown_name_does_not_silently_generate_different_person(
     receipt = character_retrieval.resolve_existing_character_query(query, tmp_path / "packet", root=tmp_path)
     assert receipt["status"] == "EXECUTION_BLOCKED"
     assert receipt["blockers"][0]["kind"] == "semantic_coverage_incomplete"
+
+
+def test_retrieval_query_and_receipt_validate_against_committed_schemas(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import jsonschema
+
+    _write_character(tmp_path, "char_ada_north", "Ada North")
+    _patch(monkeypatch)
+    query = character_retrieval.compile_existing_character_query_if_applicable(
+        "Who is Ada North?",
+        {"name": "Ada North", "existence_status": "known"},
+        seed=808,
+        mode="commit_ready",
+        requester_kind="user",
+        requester_id="pilot",
+        session_ref=None,
+        root=tmp_path,
+    )
+    assert query is not None
+    query_schema = json.loads(
+        (REPO_ROOT / "catalog/schemas/aurora_ace_query_envelope.schema.json").read_text(encoding="utf-8")
+    )
+    jsonschema.Draft202012Validator(query_schema).validate(query)
+
+    receipt = character_retrieval.resolve_existing_character_query(
+        query, tmp_path / "packet", root=tmp_path
+    )
+    receipt_schema = json.loads(
+        (REPO_ROOT / "catalog/schemas/aurora_ace_determination_receipt.schema.json").read_text(encoding="utf-8")
+    )
+    jsonschema.Draft202012Validator(receipt_schema).validate(receipt)
+
+    # Blocked ambiguity receipts must also remain schema-valid.
+    second_root = tmp_path / "ambiguous"
+    _write_character(second_root, "char_one", "Morgan Vale", faction_id="galactic_union")
+    _write_character(second_root, "char_two", "Morgan Vale", faction_id="vorran")
+    monkeypatch.setattr(character_retrieval, "repository_baselines", lambda _root: BASELINES)
+    ambiguous_query = character_retrieval.compile_existing_character_query_if_applicable(
+        "Who is Morgan Vale?",
+        {"name": "Morgan Vale", "existence_status": "known"},
+        seed=808,
+        mode="commit_ready",
+        requester_kind="user",
+        requester_id="pilot",
+        session_ref=None,
+        root=second_root,
+    )
+    assert ambiguous_query is not None
+    jsonschema.Draft202012Validator(query_schema).validate(ambiguous_query)
+    ambiguous_receipt = character_retrieval.resolve_existing_character_query(
+        ambiguous_query, second_root / "packet", root=second_root
+    )
+    jsonschema.Draft202012Validator(receipt_schema).validate(ambiguous_receipt)
