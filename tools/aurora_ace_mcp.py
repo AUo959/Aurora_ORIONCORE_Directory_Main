@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""stdio MCP server for the Aurora Canon Engine (ACE) v0.7 surface."""
+"""stdio MCP server for the Aurora Canon Engine (ACE) v0.8 surface."""
 
 from __future__ import annotations
 
@@ -11,6 +11,8 @@ from ace.mcp_adapter import (
     MCP_TOOL_NAMES,
     ace_capabilities as _ace_capabilities,
     ace_inspect as _ace_inspect,
+    ace_materialize_commit as _ace_materialize_commit,
+    ace_materialize_preview as _ace_materialize_preview,
     ace_plan as _ace_plan,
     ace_resolve as _ace_resolve,
 )
@@ -18,9 +20,12 @@ from ace.mcp_adapter import (
 mcp = MCPServer(
     "Aurora ACE",
     instructions=(
-        "Aurora Canon Engine transport surface. MCP is an adapter over the existing "
-        "ACE invocation, manifest-routing, determination, and provenance contracts. "
-        "This server does not expose canonical materialization."
+        "Aurora Canon Engine transport surface. MCP delegates to the existing ACE "
+        "invocation, manifest-routing, determination, provenance, and native materializer "
+        "contracts. Canonical materialization is available only through the two-phase "
+        "owner-gated preview/commit tools against the registered CanonRec checkout; "
+        "arbitrary repository paths, protected-branch writes, and dynamic runtime binding "
+        "are not exposed."
     ),
 )
 
@@ -52,6 +57,30 @@ def ace_inspect(
     return _ace_inspect(
         invocation_id=invocation_id,
         determination_id=determination_id,
+    )
+
+
+@mcp.tool()
+def ace_materialize_preview(output_name: str, authority_ref: str) -> dict[str, Any]:
+    """Preview one owner-gated CanonRec materialization and return its state-bound token."""
+    return _ace_materialize_preview(output_name, authority_ref)
+
+
+@mcp.tool()
+def ace_materialize_commit(
+    output_name: str,
+    authority_ref: str,
+    authorization_token: str,
+    side_effects_acknowledged: bool,
+    commit_message: str | None = None,
+) -> dict[str, Any]:
+    """Commit one previewed native materialization after explicit side-effect acknowledgement."""
+    return _ace_materialize_commit(
+        output_name,
+        authority_ref,
+        authorization_token,
+        side_effects_acknowledged,
+        commit_message,
     )
 
 

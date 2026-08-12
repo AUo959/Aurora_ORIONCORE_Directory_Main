@@ -9,7 +9,9 @@ on:
       - "tests/test_aurora_ace_mcp.py"
       - "requirements-ace-mcp.txt"
       - "catalog/contracts/aurora_ace_mcp_contract_v0_7.json"
+      - "catalog/contracts/aurora_ace_mcp_contract_v0_8.json"
       - "docs/AURORA_ACE__ADDENDUM__MCP_EXPOSURE__v0.7__2026-08-12.md"
+      - "docs/AURORA_ACE__ADDENDUM__MCP_MATERIALIZATION__v0.8__2026-08-12.md"
       - ".github/workflows/ace-mcp.yml"
   push:
     branches: [main]
@@ -19,7 +21,9 @@ on:
       - "tests/test_aurora_ace_mcp.py"
       - "requirements-ace-mcp.txt"
       - "catalog/contracts/aurora_ace_mcp_contract_v0_7.json"
+      - "catalog/contracts/aurora_ace_mcp_contract_v0_8.json"
       - "docs/AURORA_ACE__ADDENDUM__MCP_EXPOSURE__v0.7__2026-08-12.md"
+      - "docs/AURORA_ACE__ADDENDUM__MCP_MATERIALIZATION__v0.8__2026-08-12.md"
       - ".github/workflows/ace-mcp.yml"
 
 permissions:
@@ -67,6 +71,7 @@ jobs:
                   names = tuple(tool.name for tool in response.tools)
                   assert len(names) == len(MCP_TOOL_NAMES), (names, MCP_TOOL_NAMES)
                   assert set(names) == set(MCP_TOOL_NAMES), (names, MCP_TOOL_NAMES)
+                  assert {"ace_materialize_preview", "ace_materialize_commit"}.issubset(names)
 
           asyncio.run(check())
           PY
