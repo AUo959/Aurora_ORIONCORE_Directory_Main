@@ -15,6 +15,7 @@ from ace import (
     build_capability_index,
     build_invocation_envelope,
     compile_character_invocation,
+    compile_canon_invocation,
     compile_facility_invocation,
     compile_facility_invocation_from_seam,
     materialize_facility_packet,
@@ -67,6 +68,30 @@ def _invocation(args: argparse.Namespace, mode: str) -> dict[str, Any]:
     if not args.question or not args.context:
         raise ACEError("provide --seam, --query, or both --question and --context", code="input_validation_failed")
     context = _object(args.context, "context")
+    if args.subject_kind == "canon":
+        if not args.field_path:
+            raise ACEError("--subject-kind canon requires --field-path", code="input_validation_failed")
+        subject_ref = str(context.get("subject_ref") or "").strip()
+        if not subject_ref:
+            raise ACEError("canon context requires subject_ref", code="input_validation_failed")
+        return compile_canon_invocation(
+            args.question,
+            context,
+            subject_ref=subject_ref,
+            field_path=args.field_path,
+            claim_path=args.claim_path,
+            certainty_path=args.certainty_path,
+            derivation_rule=args.derivation_rule,
+            invocation_mode=args.invocation_mode,
+            caller_kind=caller_kind,
+            caller_ref=caller_ref,
+            parent_invocation_ref=args.parent_invocation_ref,
+            trigger_kind=args.trigger_kind,
+            trigger_reason=args.trigger_reason,
+            seam_ref=args.seam_ref,
+            trigger_policy_ref=args.trigger_policy_ref,
+            session_ref=args.session_ref,
+        )
     common = {
         "seed": args.seed,
         "mode": mode,
@@ -131,10 +156,14 @@ def build_parser() -> argparse.ArgumentParser:
         sub.add_argument("--context", help="Structured subject context JSON object.")
         sub.add_argument(
             "--subject-kind",
-            choices=["character", "facility"],
+            choices=["character", "facility", "canon"],
             default="character",
             help="Compiler used for direct --question/--context input.",
         )
+        sub.add_argument("--field-path", help="Requested output field for --subject-kind canon.")
+        sub.add_argument("--claim-path", help="Dotted CanonRec JSON claim path; defaults to --field-path.")
+        sub.add_argument("--certainty-path", default="certainty", help="Dotted certainty field path for canon evidence.")
+        sub.add_argument("--derivation-rule", choices=["sorted_unique_union"], help="Explicit deterministic canon derivation rule.")
         sub.add_argument("--seed", type=int, default=808)
         sub.add_argument("--requester-kind", choices=["user", "operations", "agent", "system"], default="user")
         sub.add_argument("--requester-id", default="ORION.ROLE.PILOT")
@@ -187,6 +216,10 @@ def _selected_capabilities(query: dict[str, Any]) -> list[dict[str, Any]]:
         }
     elif entity_type == "facility":
         required.add("ace.capability.canonrec.materialize.entity")
+    elif entity_type == "canon_fact":
+        required.add("ace.capability.canonrec.retrieve.claims")
+        if query.get("query_kind") == "derive":
+            required.add("ace.capability.canonrec.derive.claims")
     return [
         item
         for item in index["capabilities"]

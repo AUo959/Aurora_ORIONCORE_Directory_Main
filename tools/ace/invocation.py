@@ -20,6 +20,7 @@ from .core import (
     write_json,
 )
 from .engine import resolve_character_query
+from .canon_resolution import compile_canon_query, resolve_canon_query
 from .facility import (
     compile_facility_query,
     resolve_facility_query,
@@ -222,6 +223,56 @@ def compile_character_invocation(
     )
 
 
+def compile_canon_invocation(
+    question: str,
+    context: Mapping[str, Any],
+    *,
+    subject_ref: str,
+    field_path: str,
+    claim_path: str | None = None,
+    certainty_path: str = "certainty",
+    derivation_rule: str | None = None,
+    invocation_mode: str = "interactive",
+    caller_kind: str = "user",
+    caller_ref: str = "ORION.ROLE.PILOT",
+    parent_invocation_ref: str | None = None,
+    trigger_kind: str | None = None,
+    trigger_reason: str | None = None,
+    seam_ref: str | None = None,
+    trigger_policy_ref: str | None = None,
+    session_ref: str | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    """Compile read-only canon determination through the shared first-class facade."""
+
+    requester_kind = caller_kind if caller_kind in {"user", "operations", "agent", "system"} else "system"
+    kwargs: dict[str, Any] = {
+        "subject_ref": subject_ref,
+        "field_path": field_path,
+        "claim_path": claim_path,
+        "certainty_path": certainty_path,
+        "derivation_rule": derivation_rule,
+        "mode": "read_only",
+        "requester_kind": requester_kind,
+        "requester_id": caller_ref,
+        "session_ref": session_ref,
+    }
+    if root is not None:
+        kwargs["root"] = root
+    query = compile_canon_query(question, context, **kwargs)
+    return build_invocation_envelope(
+        query,
+        invocation_mode=invocation_mode,
+        caller_kind=caller_kind,
+        caller_ref=caller_ref,
+        parent_invocation_ref=parent_invocation_ref,
+        trigger_kind=trigger_kind,
+        trigger_reason=trigger_reason,
+        seam_ref=seam_ref,
+        trigger_policy_ref=trigger_policy_ref,
+    )
+
+
 def compile_facility_invocation(
     question: str,
     context: Mapping[str, Any],
@@ -328,6 +379,11 @@ def resolve_invocation(
             determination = resolve_facility_query(query, output_dir)
         else:
             determination = resolve_facility_query(query, output_dir, root=root)
+    elif entity_type == "canon_fact":
+        if root is None:
+            determination = resolve_canon_query(query, output_dir)
+        else:
+            determination = resolve_canon_query(query, output_dir, root=root)
     else:
         raise ACEError(
             f"no ACE resolver is registered for subject entity_type={entity_type!r}",
