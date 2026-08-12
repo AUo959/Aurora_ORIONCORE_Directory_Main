@@ -129,6 +129,7 @@ def test_true_conflict_never_selects_winner(
     receipt = canon_resolution.resolve_canon_query(query, tmp_path / "packet", root=tmp_path)
 
     assert receipt["status"] == "TRUE_CONFLICT"
+    assert receipt["answer_contract"]["overall_status"] == "complete"
     assert receipt["answer"]["fields"][0]["value"] is None
     assert len(receipt["conflicts"]) == 1
     assert receipt["conflicts"][0]["kind"] == "mutually_exclusive_committed_claims"

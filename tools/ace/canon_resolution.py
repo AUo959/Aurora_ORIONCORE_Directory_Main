@@ -474,7 +474,7 @@ def resolve_canon_query(
                 )
             else:
                 status = "TRUE_CONFLICT"
-                overall_status = "incomplete"
+                overall_status = "complete"
                 selection_basis.append("fail_closed_on_mutually_exclusive_committed_claims")
                 conflict_id = f"ace.conflict.canon.{semantic_sha256({'query': query['query_id'], 'claims': canonical_claims})[:16]}"
                 conflicts.append(
