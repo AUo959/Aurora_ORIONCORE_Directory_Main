@@ -1,0 +1,39 @@
+name: ACE v0.4 Character Retrieval Wiring
+
+on:
+  push:
+    branches:
+      - agent/ace-v0-4-character-retrieval
+
+permissions:
+  contents: write
+
+jobs:
+  wire:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          ref: agent/ace-v0-4-character-retrieval
+
+      - name: Install focused dependencies
+        run: python -m pip install pytest pyyaml 'jsonschema==4.25.1'
+
+      - name: Wire and test retrieval-first character path
+        run: |
+          python -m py_compile tools/ace/character_retrieval.py tests/test_aurora_ace_character_retrieval.py
+          python tools/ace/_wire_v04.py
+          python -m py_compile tools/ace/core.py tools/ace/invocation.py tools/ace/__init__.py tools/aurora_ace.py
+          python -m pytest -q tests/test_aurora_ace_character_retrieval.py tests/test_aurora_ace_invocation.py tests/test_aurora_ace_invariants.py
+          git diff --check
+          rm tools/ace/_wire_v04.py .github/workflows/ace-v0-4-wire.yml
+
+      - name: Commit wired retrieval slice
+        run: |
+          git config user.name "Aurora ACE Integration"
+          git config user.email "ace-integration@aurora.local"
+          git add tools/ace/core.py tools/ace/invocation.py tools/ace/__init__.py tools/aurora_ace.py tools/ace/_wire_v04.py .github/workflows/ace-v0-4-wire.yml
+          git commit -m "feat(ace): enforce retrieval before character generation"
+          git push origin HEAD:agent/ace-v0-4-character-retrieval
