@@ -1,0 +1,459 @@
+name: ACE v0.4 Character Registry Completeness Fix
+
+on:
+  push:
+    branches:
+      - agent/ace-v0-4-character-retrieval
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          ref: agent/ace-v0-4-character-retrieval
+
+      - name: Install focused dependencies
+        run: python -m pip install pytest pyyaml 'jsonschema==4.25.1'
+
+      - name: Expand retrieval to entity registry plus capsule bridge
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('tools/ace/character_retrieval.py')
+          text = path.read_text(encoding='utf-8')
+          start = text.index('@dataclass(frozen=True)\nclass CharacterRecord:')
+          end = text.index('\ndef _norm_text', start)
+          replacement = r'''@dataclass(frozen=True)
+          class CharacterRecord:
+              canonical_id: str
+              capsule_id: str | None
+              name: str
+              aliases: tuple[str, ...]
+              role: str | None
+              faction_ids: tuple[str, ...]
+              status: str | None
+              certainty: str
+              location_type: str | None
+              location_ref: str | None
+              location_basis: str | None
+              entity_ref: str | None
+              entity_sha256: str | None
+              capsule_identity_ref: str | None
+              capsule_identity_sha256: str | None
+              traits_ref: str | None
+              traits_sha256: str | None
+              knowledge_ref: str | None
+              knowledge_sha256: str | None
+
+              @property
+              def faction_id(self) -> str | None:
+                  return self.faction_ids[0] if self.faction_ids else None
+
+              @property
+              def identity_ref(self) -> str:
+                  return self.entity_ref or self.capsule_identity_ref or self.canonical_id
+
+              @property
+              def identity_sha256(self) -> str:
+                  return self.entity_sha256 or self.capsule_identity_sha256 or semantic_sha256(self.canonical_id)
+
+              def public_identity(self) -> dict[str, Any]:
+                  sources = [
+                      ref
+                      for ref in (self.entity_ref, self.capsule_identity_ref)
+                      if ref
+                  ]
+                  return {
+                      "canonical_id": self.canonical_id,
+                      "capsule_id": self.capsule_id,
+                      "name": self.name,
+                      "aliases": list(self.aliases),
+                      "role": self.role,
+                      "faction_id": self.faction_id,
+                      "faction_ids": list(self.faction_ids),
+                      "status": self.status,
+                      "certainty": self.certainty,
+                      "location_binding": {
+                          "type": self.location_type,
+                          "target_id": self.location_ref,
+                          "basis": self.location_basis,
+                      },
+                      "source_ref": self.identity_ref,
+                      "source_refs": sources,
+                      "source_sha256": self.identity_sha256,
+                  }
+
+
+          def _safe_string(value: Any) -> str | None:
+              if isinstance(value, str) and value.strip():
+                  return value.strip()
+              return None
+
+
+          def _string_tuple(value: Any) -> tuple[str, ...]:
+              if not isinstance(value, list):
+                  return ()
+              return tuple(dict.fromkeys(item.strip() for item in value if isinstance(item, str) and item.strip()))
+
+
+          def _load_json(path: Path) -> Any:
+              try:
+                  return json.loads(path.read_text(encoding="utf-8"))
+              except (OSError, json.JSONDecodeError) as exc:
+                  raise ACEError(f"canonical character evidence is unreadable JSON: {path}", code="input_validation_failed") from exc
+
+
+          def _relative_to_canonrec(path: Path, canon_root: Path) -> str:
+              return path.resolve().relative_to(canon_root.resolve()).as_posix()
+
+
+          def _capsule_identity_path(
+              entity: Mapping[str, Any],
+              entity_path: Path,
+              canon_root: Path,
+          ) -> Path | None:
+              capsule_ref = _safe_string(entity.get("capsule_ref"))
+              if capsule_ref:
+                  candidate = (canon_root / capsule_ref / "identity.json").resolve()
+                  if candidate.is_file() and (candidate == canon_root or canon_root in candidate.parents):
+                      return candidate
+              capsule_id = _safe_string(entity.get("capsule_id"))
+              if capsule_id:
+                  candidate = canon_root / "canon/L2/entities" / capsule_id / "capsule/identity.json"
+                  if candidate.is_file():
+                      return candidate
+              # Newer entity records may use a directory matching entity_id.
+              entity_id = _safe_string(entity.get("entity_id"))
+              if entity_id:
+                  candidate = canon_root / "canon/L2/entities" / entity_id / "capsule/identity.json"
+                  if candidate.is_file():
+                      return candidate
+              return None
+
+
+          def _character_from_entity_record(
+              entity_path: Path,
+              canon_root: Path,
+          ) -> CharacterRecord | None:
+              entity = _load_json(entity_path)
+              if not isinstance(entity, Mapping) or entity.get("entity_kind") != "character":
+                  return None
+              canonical_id = _safe_string(entity.get("entity_id"))
+              base_name = _safe_string(entity.get("name"))
+              certainty = _safe_string(entity.get("certainty"))
+              if not canonical_id or not base_name or certainty not in ACCEPTED_CERTAINTIES:
+                  return None
+
+              capsule_path = _capsule_identity_path(entity, entity_path, canon_root)
+              capsule: Mapping[str, Any] = {}
+              if capsule_path is not None:
+                  payload = _load_json(capsule_path)
+                  if isinstance(payload, Mapping) and _safe_string(payload.get("certainty")) in ACCEPTED_CERTAINTIES:
+                      capsule = payload
+
+              capsule_id = (
+                  _safe_string(entity.get("capsule_id"))
+                  or _safe_string(capsule.get("capsule_id"))
+                  or _safe_string(capsule.get("canonical_id"))
+              )
+              name = (
+                  _safe_string(capsule.get("name"))
+                  or _safe_string(capsule.get("character_name"))
+                  or base_name
+              )
+              aliases = tuple(dict.fromkeys([
+                  *_string_tuple(entity.get("aliases")),
+                  *_string_tuple(capsule.get("aliases")),
+              ]))
+              role = (
+                  _safe_string(capsule.get("role"))
+                  or _safe_string(capsule.get("character_role"))
+                  or _safe_string(entity.get("role"))
+              )
+              factions = list(_string_tuple(entity.get("faction_bindings")))
+              capsule_faction = _safe_string(capsule.get("faction_id"))
+              if capsule_faction and capsule_faction not in factions:
+                  factions.insert(0, capsule_faction)
+
+              binding = capsule.get("location_binding", {}) if isinstance(capsule.get("location_binding", {}), Mapping) else {}
+              location_type = _safe_string(binding.get("type")) or _safe_string(entity.get("location_type"))
+              location_ref = (
+                  _safe_string(binding.get("target_id"))
+                  or _safe_string(entity.get("region_id"))
+                  or _safe_string(entity.get("parent_org_id"))
+              )
+              location_basis = _safe_string(binding.get("basis"))
+
+              capsule_dir = capsule_path.parent if capsule_path is not None else None
+              traits = capsule_dir / "traits.json" if capsule_dir is not None else None
+              knowledge = capsule_dir / "knowledge.jsonl" if capsule_dir is not None else None
+              return CharacterRecord(
+                  canonical_id=canonical_id,
+                  capsule_id=capsule_id,
+                  name=name,
+                  aliases=aliases,
+                  role=role,
+                  faction_ids=tuple(factions),
+                  status=_safe_string(entity.get("status")) or _safe_string(capsule.get("status")),
+                  certainty=certainty,
+                  location_type=location_type,
+                  location_ref=location_ref,
+                  location_basis=location_basis,
+                  entity_ref=_relative_to_canonrec(entity_path, canon_root),
+                  entity_sha256=file_sha256(entity_path),
+                  capsule_identity_ref=(
+                      _relative_to_canonrec(capsule_path, canon_root)
+                      if capsule_path is not None
+                      else None
+                  ),
+                  capsule_identity_sha256=(file_sha256(capsule_path) if capsule_path is not None else None),
+                  traits_ref=(
+                      _relative_to_canonrec(traits, canon_root)
+                      if traits is not None and traits.is_file()
+                      else None
+                  ),
+                  traits_sha256=(file_sha256(traits) if traits is not None and traits.is_file() else None),
+                  knowledge_ref=(
+                      _relative_to_canonrec(knowledge, canon_root)
+                      if knowledge is not None and knowledge.is_file()
+                      else None
+                  ),
+                  knowledge_sha256=(file_sha256(knowledge) if knowledge is not None and knowledge.is_file() else None),
+              )
+
+
+          def _character_from_capsule_only(
+              identity_path: Path,
+              canon_root: Path,
+          ) -> CharacterRecord | None:
+              payload = _load_json(identity_path)
+              if not isinstance(payload, Mapping):
+                  return None
+              certainty = _safe_string(payload.get("certainty"))
+              if certainty not in ACCEPTED_CERTAINTIES:
+                  return None
+              canonical_id = (
+                  _safe_string(payload.get("canonical_id"))
+                  or _safe_string(payload.get("capsule_id"))
+              )
+              name = _safe_string(payload.get("name")) or _safe_string(payload.get("character_name"))
+              if not canonical_id or not name:
+                  return None
+              binding = payload.get("location_binding", {})
+              if not isinstance(binding, Mapping):
+                  binding = {}
+              capsule_dir = identity_path.parent
+              traits = capsule_dir / "traits.json"
+              knowledge = capsule_dir / "knowledge.jsonl"
+              faction = _safe_string(payload.get("faction_id"))
+              return CharacterRecord(
+                  canonical_id=canonical_id,
+                  capsule_id=_safe_string(payload.get("capsule_id")) or canonical_id,
+                  name=name,
+                  aliases=_string_tuple(payload.get("aliases")),
+                  role=_safe_string(payload.get("role")) or _safe_string(payload.get("character_role")),
+                  faction_ids=(faction,) if faction else (),
+                  status=_safe_string(payload.get("status")),
+                  certainty=certainty,
+                  location_type=_safe_string(binding.get("type")),
+                  location_ref=_safe_string(binding.get("target_id")),
+                  location_basis=_safe_string(binding.get("basis")),
+                  entity_ref=None,
+                  entity_sha256=None,
+                  capsule_identity_ref=_relative_to_canonrec(identity_path, canon_root),
+                  capsule_identity_sha256=file_sha256(identity_path),
+                  traits_ref=_relative_to_canonrec(traits, canon_root) if traits.is_file() else None,
+                  traits_sha256=file_sha256(traits) if traits.is_file() else None,
+                  knowledge_ref=_relative_to_canonrec(knowledge, canon_root) if knowledge.is_file() else None,
+                  knowledge_sha256=file_sha256(knowledge) if knowledge.is_file() else None,
+              )
+
+
+          def _records(root: Path) -> list[CharacterRecord]:
+              canon_root = (root / CANONREC_REL).resolve()
+              entities_root = canon_root / "canon/L2/entities"
+              registry_root = entities_root / "characters"
+              records: list[CharacterRecord] = []
+              consumed_capsules: set[str] = set()
+              seen_ids: set[str] = set()
+
+              if registry_root.is_dir():
+                  for entity_path in sorted(registry_root.glob("*.json")):
+                      record = _character_from_entity_record(entity_path, canon_root)
+                      if record is None:
+                          continue
+                      if record.canonical_id in seen_ids:
+                          raise ACEError(
+                              f"duplicate canonical character entity id in registry: {record.canonical_id}",
+                              code="projection_invalid",
+                          )
+                      records.append(record)
+                      seen_ids.add(record.canonical_id)
+                      if record.capsule_identity_ref:
+                          consumed_capsules.add(record.capsule_identity_ref)
+
+              # Capsule-only fallback preserves older/recovered canon that has not
+              # yet been bridged into the flat entity registry. It is deliberately
+              # secondary so the registry remains the complete discovery surface.
+              if entities_root.is_dir():
+                  for identity_path in sorted(entities_root.glob("*/capsule/identity.json")):
+                      rel = _relative_to_canonrec(identity_path, canon_root)
+                      if rel in consumed_capsules:
+                          continue
+                      record = _character_from_capsule_only(identity_path, canon_root)
+                      if record is None or record.canonical_id in seen_ids:
+                          continue
+                      records.append(record)
+                      seen_ids.add(record.canonical_id)
+
+              return sorted(records, key=lambda item: (item.canonical_id.casefold(), item.name.casefold()))
+
+
+          def build_character_index(root: Path = ROOT) -> dict[str, Any]:
+              """Build the deterministic CanonRec character discovery index.
+
+              The flat character entity registry is the primary discovery surface.
+              Capsule identity records enrich those entities and remain the richer
+              identity source where a bridge exists. Capsule-only characters are
+              retained as a compatibility fallback so retrieval never regresses on
+              older canon while the registry is being normalized.
+              """
+
+              records = _records(root)
+              public = [item.public_identity() for item in records]
+              return {
+                  "schema_version": SCHEMA_VERSION,
+                  "record_type": "ace_character_identity_index",
+                  "index_version": CHARACTER_RETRIEVAL_VERSION,
+                  "record_count": len(public),
+                  "records": public,
+                  "index_sha256": semantic_sha256(public),
+                  "discovery_surfaces": [
+                      "canon/L2/entities/characters/*.json",
+                      "canon/L2/entities/*/capsule/identity.json",
+                  ],
+              }
+
+          '''
+          # Restore normal indentation after embedding a top-level block in this
+          # branch-only patcher.
+          replacement = '\n'.join(
+              line[10:] if line.startswith('          ') else line
+              for line in replacement.splitlines()
+          ) + '\n'
+          path.write_text(text[:start] + replacement + text[end:], encoding='utf-8')
+
+          # Relation matching must consider every canonical faction binding.
+          text = path.read_text(encoding='utf-8')
+          old = '''        "faction": bool(faction and record.faction_id and faction.casefold() == record.faction_id.casefold()),'''
+          new = '''        "faction": bool(
+              faction and any(faction.casefold() == item.casefold() for item in record.faction_ids)
+          ),'''
+          if text.count(old) != 1:
+              raise SystemExit(f'expected one faction matcher, found {text.count(old)}')
+          path.write_text(text.replace(old, new), encoding='utf-8')
+
+          # Add a flat-only registry regression fixture/test.
+          test_path = Path('tests/test_aurora_ace_character_retrieval.py')
+          body = test_path.read_text(encoding='utf-8')
+          helper = r'''
+
+          def _write_flat_character(
+              root: Path,
+              canonical_id: str,
+              name: str,
+              *,
+              role: str = "Fighter Commander",
+              faction_id: str = "galactic_union",
+          ) -> None:
+              path = root / core.CANONREC_REL / "canon/L2/entities/characters" / f"{canonical_id}.json"
+              path.parent.mkdir(parents=True, exist_ok=True)
+              path.write_text(
+                  json.dumps(
+                      {
+                          "entity_kind": "character",
+                          "entity_id": canonical_id,
+                          "name": name,
+                          "aliases": [],
+                          "certainty": "CANON",
+                          "status": "active",
+                          "faction_bindings": [faction_id],
+                          "role": role,
+                          "location_type": None,
+                          "region_id": None,
+                          "parent_org_id": None,
+                      },
+                      indent=2,
+                  )
+                  + "\n",
+                  encoding="utf-8",
+              )
+          '''
+          helper = '\n'.join(line[10:] if line.startswith('          ') else line for line in helper.splitlines())
+          marker = '\n\ndef _capability_index()'
+          if marker not in body:
+              raise SystemExit('test helper insertion marker missing')
+          if '_write_flat_character(' not in body:
+              body = body.replace(marker, helper + marker)
+
+          test = r'''
+
+          def test_flat_entity_registry_character_is_retrieved_without_capsule(
+              tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+          ) -> None:
+              _write_flat_character(tmp_path, "char_aria_lenix", "Aria Lenix")
+              _patch(monkeypatch)
+              index = character_retrieval.build_character_index(tmp_path)
+              assert [item["canonical_id"] for item in index["records"]] == ["char_aria_lenix"]
+              query = character_retrieval.compile_existing_character_query_if_applicable(
+                  "Who is Aria Lenix?",
+                  {"name": "Aria Lenix", "existence_status": "known"},
+                  seed=808,
+                  mode="commit_ready",
+                  requester_kind="user",
+                  requester_id="pilot",
+                  session_ref=None,
+                  root=tmp_path,
+              )
+              assert query is not None
+              receipt = character_retrieval.resolve_existing_character_query(
+                  query, tmp_path / "packet", root=tmp_path
+              )
+              assert receipt["status"] == "RETRIEVED_CANON"
+              identity = receipt["answer"]["fields"][0]["value"]
+              assert identity["canonical_id"] == "char_aria_lenix"
+              assert identity["source_ref"].endswith("characters/char_aria_lenix.json")
+          '''
+          test = '\n'.join(line[10:] if line.startswith('          ') else line for line in test.splitlines())
+          if 'test_flat_entity_registry_character_is_retrieved_without_capsule' not in body:
+              body += test + '\n'
+          test_path.write_text(body, encoding='utf-8')
+
+          # Correct the normative discovery statement.
+          doc = Path('docs/AURORA_ACE__ADDENDUM__CHARACTER_RETRIEVAL__v0.4__2026-08-11.md')
+          d = doc.read_text(encoding='utf-8')
+          old_doc = '''The initial deterministic index reads committed character capsule identities under:\n\n`canon/L2/entities/*/capsule/identity.json`\n\nAn eligible identity record contributes, when present:\n'''
+          new_doc = '''The initial deterministic index uses the flat CanonRec character entity registry as its primary discovery surface:\n\n`canon/L2/entities/characters/*.json`\n\nWhen an entity record carries a `capsule_ref` / `capsule_id`, ACE follows that explicit bridge into `canon/L2/entities/*/capsule/identity.json` and uses the capsule as richer identity evidence. Capsule-only canonical characters remain a compatibility fallback so older recovered canon is not omitted while the entity registry is normalized.\n\nAn eligible character record contributes, when present:\n'''
+          if d.count(old_doc) != 1:
+              raise SystemExit('normative discovery paragraph not found exactly once')
+          doc.write_text(d.replace(old_doc, new_doc), encoding='utf-8')
+          PY
+          python -m py_compile tools/ace/character_retrieval.py tests/test_aurora_ace_character_retrieval.py
+          python -m pytest -q tests/test_aurora_ace_character_retrieval.py tests/test_aurora_ace_invocation.py tests/test_aurora_ace_invariants.py
+          git diff --check
+          rm .github/workflows/ace-v0-4-registry-fix.yml
+
+      - name: Commit registry-complete retrieval
+        run: |
+          git config user.name "Aurora ACE Integration"
+          git config user.email "ace-integration@aurora.local"
+          git add tools/ace/character_retrieval.py tests/test_aurora_ace_character_retrieval.py docs/AURORA_ACE__ADDENDUM__CHARACTER_RETRIEVAL__v0.4__2026-08-11.md .github/workflows/ace-v0-4-registry-fix.yml
+          git commit -m "fix(ace): make character retrieval registry-complete"
+          git push origin HEAD:agent/ace-v0-4-character-retrieval
