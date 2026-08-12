@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import importlib
 import json
 import subprocess
 import sys
@@ -16,6 +17,8 @@ if str(TOOLS) not in sys.path:
 from ace import core, facility  # noqa: E402
 from ace.ledger import append_determination, query_ledger  # noqa: E402
 from ace.materialize import materialize_facility_packet  # noqa: E402
+
+materialize_module = importlib.import_module("ace.materialize")
 
 
 def _git(repo: Path, *args: str) -> str:
@@ -42,6 +45,36 @@ def _canonrec_repo(tmp_path: Path, *, feature_branch: bool = True) -> Path:
     if feature_branch:
         _git(repo, "checkout", "-b", "agent/ace-materialization-test")
     return repo
+
+
+def _facility_target(repo: Path) -> Path:
+    return repo / "canon/L1/station/facility_bindings/l1-emb-mcp-shuttle-bay.json"
+
+
+def _seed_existing_facility_binding(repo: Path) -> Path:
+    target = _facility_target(repo)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(
+        json.dumps(
+            {
+                "schema_version": "0.1.0",
+                "record_type": "l1_facility_binding",
+                "subject_ref": "L1-EMB-MCP-SHUTTLE-BAY",
+                "canonical_location": "legacy unresolved docking area",
+                "certainty": "UNCONFIRMED",
+                "causal_use_permitted": False,
+                "activation_authority": False,
+                "exact_geometry_authorized": False,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    _git(repo, "add", "--", target.relative_to(repo).as_posix())
+    _git(repo, "commit", "-m", "test: seed prior facility binding")
+    return target
 
 
 def _facility_context() -> dict[str, object]:
@@ -181,7 +214,7 @@ def test_materializer_requires_explicit_authority(
             ledger_dir=tmp_path / "ledger",
             root=REPO_ROOT,
         )
-    assert not (canon / "canon/L1/station/facility_bindings/l1-emb-mcp-shuttle-bay.json").exists()
+    assert not _facility_target(canon).exists()
 
 
 def test_materializer_refuses_protected_branch(
@@ -229,7 +262,7 @@ def test_materializer_commits_facility_and_appends_both_determinations(
     assert final["integrity"]["prior_determination_digest"]
     assert final["answer"]["supersedes_determination_refs"]
 
-    target = canon / "canon/L1/station/facility_bindings/l1-emb-mcp-shuttle-bay.json"
+    target = _facility_target(canon)
     canonical = json.loads(target.read_text(encoding="utf-8"))
     assert canonical["record_type"] == "l1_facility_binding"
     assert canonical["certainty"] == "CANON"
@@ -237,6 +270,10 @@ def test_materializer_commits_facility_and_appends_both_determinations(
     assert canonical["activation_authority"] is False
     assert canonical["exact_geometry_authorized"] is False
     assert canonical["ace_provenance"]["materialization_authority_ref"] == "test.owner.approval"
+
+    # The materializer identity is one-shot commit metadata, not persistent repo config.
+    assert _git(canon, "config", "--local", "user.name") == "ACE Test"
+    assert _git(canon, "config", "--local", "user.email") == "ace-test@aurora.local"
 
     original = json.loads((packet / "determination_receipt.json").read_text(encoding="utf-8"))
     assert original["status"] == "EXECUTION_BLOCKED"
@@ -263,6 +300,34 @@ def test_materializer_commits_facility_and_appends_both_determinations(
     assert len(by_target) == 2
 
 
+def test_existing_facility_target_becomes_canon_revision(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    canon = _canonrec_repo(tmp_path)
+    target = _seed_existing_facility_binding(canon)
+    baseline = _git(canon, "rev-parse", "HEAD")
+    packet = _packet(tmp_path, monkeypatch, baseline)
+
+    final = materialize_facility_packet(
+        packet,
+        canon,
+        authority_mode="delegated_materialize",
+        authority_ref="test.delegation.revision",
+        ledger_dir=tmp_path / "ledger",
+        root=REPO_ROOT,
+    )
+
+    assert final["status"] == "CANON_REVISION"
+    assert final["materialization"]["status"] == "committed"
+    assert final["materialization"]["commit_sha"] == _git(canon, "rev-parse", "HEAD")
+    canonical = json.loads(target.read_text(encoding="utf-8"))
+    assert canonical["certainty"] == "CANON"
+    assert canonical["causal_use_permitted"] is False
+    assert canonical["activation_authority"] is False
+    assert canonical["exact_geometry_authorized"] is False
+
+
 def test_materializer_fails_closed_when_canonrec_baseline_advanced(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -284,7 +349,45 @@ def test_materializer_fails_closed_when_canonrec_baseline_advanced(
             root=REPO_ROOT,
         )
     assert _git(canon, "rev-parse", "HEAD") != baseline
-    assert not (canon / "canon/L1/station/facility_bindings/l1-emb-mcp-shuttle-bay.json").exists()
+    assert not _facility_target(canon).exists()
+
+
+def test_post_commit_failure_rolls_back_canon_and_removes_false_sidecar(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    canon = _canonrec_repo(tmp_path)
+    baseline = _git(canon, "rev-parse", "HEAD")
+    packet = _packet(tmp_path, monkeypatch, baseline)
+    ledger = tmp_path / "ledger"
+    real_append = materialize_module.append_determination
+    calls = 0
+
+    def fail_second_append(receipt, ledger_dir=None, *, root=core.ROOT):
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            raise core.ACEError("synthetic final-ledger failure", code="runtime_failure")
+        return real_append(receipt, ledger_dir, root=root)
+
+    monkeypatch.setattr(materialize_module, "append_determination", fail_second_append)
+
+    with pytest.raises(core.ACEError, match="synthetic final-ledger failure"):
+        materialize_module.materialize_facility_packet(
+            packet,
+            canon,
+            authority_mode="owner_gated_materialize",
+            authority_ref="test.owner.rollback",
+            ledger_dir=ledger,
+            root=REPO_ROOT,
+        )
+
+    assert _git(canon, "rev-parse", "HEAD") == baseline
+    assert not _facility_target(canon).exists()
+    assert not (packet / "materialized_determination_receipt.json").exists()
+    remaining = query_ledger(ledger, root=REPO_ROOT)
+    assert len(remaining) == 1
+    assert remaining[0]["status"] == "EXECUTION_BLOCKED"
 
 
 def test_ledger_is_append_only_for_a_determination_id(
