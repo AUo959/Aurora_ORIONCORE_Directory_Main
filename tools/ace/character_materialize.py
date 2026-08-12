@@ -25,8 +25,6 @@ import copy
 import json
 import os
 import shutil
-import subprocess
-import sys
 import tempfile
 import time
 from pathlib import Path
@@ -34,7 +32,6 @@ from typing import Any, Mapping
 
 from .core import (
     ACEError,
-    CANONREC_TOOL_REL,
     ROOT,
     file_sha256,
     load_json,
@@ -43,6 +40,7 @@ from .core import (
     utc_now,
     validate_json_schema,
 )
+from .character_retrieval import _record_from_flat_entity
 from .ledger import append_determination
 from .materialize import (
     AUTHORITY_MODES,
@@ -301,42 +299,40 @@ def _flat_record(
     }
 
 
-def _validate_flat_entity(flat: Path, repo: Path, *, root: Path) -> None:
-    validator = root / CANONREC_TOOL_REL / "validate_entity.py"
-    if not validator.is_file():
-        return
-    completed = subprocess.run(
-        [
-            sys.executable,
-            str(validator),
-            "--input",
-            str(flat),
-            "--layer",
-            "L2",
-            "--type",
-            "character",
-            "--format",
-            "json",
-            "--context-root",
-            str(repo),
-        ],
-        cwd=repo,
-        capture_output=True,
-        text=True,
-        check=False,
-        timeout=20,
-    )
-    if completed.returncode != 0:
+def _validate_flat_entity(
+    flat: Path,
+    repo: Path,
+    *,
+    entity_id: str,
+    candidate: Mapping[str, Any],
+    target_rel: str,
+) -> None:
+    """Validate the native flat registry record with ACE v0.4 retrieval semantics."""
+
+    record, capsule_ref = _record_from_flat_entity(flat, repo)
+    if record is None:
         raise ACEError(
-            "CanonRec rejected the native flat character record: " + completed.stderr.strip(),
+            "native flat character record is not readable by the ACE character registry",
             code="output_validation_failed",
         )
-    try:
-        payload = json.loads(completed.stdout)
-    except json.JSONDecodeError as exc:
-        raise ACEError("CanonRec entity validator returned non-JSON output", code="output_validation_failed") from exc
-    if payload.get("validation_run", {}).get("blocked"):
-        raise ACEError("CanonRec blocked the native flat character record", code="output_validation_failed")
+    expected_capsule_ref = f"{target_rel}/capsule/identity.json"
+    expected_name = str(candidate.get("canonical_name") or "")
+    expected_faction = str(candidate.get("faction") or "")
+    if record.canonical_id != entity_id:
+        raise ACEError("flat character canonical ID does not match the packet", code="output_validation_failed")
+    if normalize_name(record.name) != normalize_name(expected_name):
+        raise ACEError("flat character name does not match the packet", code="output_validation_failed")
+    if record.certainty != "CANON":
+        raise ACEError("flat character must be readable as CANON", code="output_validation_failed")
+    if expected_faction and record.faction_id != expected_faction:
+        raise ACEError("flat character faction does not match the packet", code="output_validation_failed")
+    if capsule_ref != expected_capsule_ref:
+        raise ACEError(
+            "flat character capsule bridge does not resolve to the materialized capsule",
+            code="output_validation_failed",
+        )
+    if record.identity_sha256 != file_sha256(flat):
+        raise ACEError("flat character registry digest is unstable", code="output_validation_failed")
 
 
 def _target_hashes(repo: Path, target_rel: str, flat_rel: str) -> dict[str, str]:
@@ -515,7 +511,13 @@ def materialize_character_packet(
                 authority_ref=authority_ref.strip(),
             ),
         )
-        _validate_flat_entity(flat, repo, root=root)
+        _validate_flat_entity(
+            flat,
+            repo,
+            entity_id=entity_id,
+            candidate=candidate,
+            target_rel=target_rel,
+        )
 
         hashes = _target_hashes(repo, target_rel, flat_rel)
         _git(repo, "add", "--", target_rel, flat_rel)

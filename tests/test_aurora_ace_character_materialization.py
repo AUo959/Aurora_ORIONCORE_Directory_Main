@@ -183,7 +183,6 @@ def test_existing_character_target_fails_closed_before_commit(tmp_path: Path) ->
     baseline = _git(canon, "rev-parse", "HEAD")
     target = canon / "canon/L2/entities" / entity_id
     target.mkdir(parents=True)
-    (target / "preexisting.txt").write_text("collision\n", encoding="utf-8")
 
     with pytest.raises(core.ACEError, match="new-character-only"):
         materialize_character_packet(
