@@ -20,6 +20,7 @@ from .core import (
     write_json,
 )
 from .engine import resolve_character_query
+from .character_retrieval import resolve_existing_character_query
 from .canon_resolution import compile_canon_query, resolve_canon_query
 from .facility import (
     compile_facility_query,
@@ -370,10 +371,11 @@ def resolve_invocation(
     # queries still route to their dedicated supported slice.
     entity_type = query.get("subject", {}).get("entity_type") or "character"
     if entity_type == "character":
+        resolver = resolve_existing_character_query if query.get("query_kind") == "retrieve" else resolve_character_query
         if root is None:
-            determination = resolve_character_query(query, output_dir)
+            determination = resolver(query, output_dir)
         else:
-            determination = resolve_character_query(query, output_dir, root=root)
+            determination = resolver(query, output_dir, root=root)
     elif entity_type == "facility":
         if root is None:
             determination = resolve_facility_query(query, output_dir)

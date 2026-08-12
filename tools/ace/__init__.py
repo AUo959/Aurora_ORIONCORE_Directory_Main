@@ -1,6 +1,12 @@
 """Aurora Canon Engine (ACE) root-control-plane package."""
 
 from .core import ACEError, ENGINE_VERSION, build_capability_index, compile_character_query
+from .character_retrieval import (
+    CHARACTER_RETRIEVAL_VERSION,
+    build_character_index,
+    discover_character_candidates,
+    resolve_existing_character_query,
+)
 from .canon_resolution import (
     ALLOWED_DERIVATION_RULES,
     CANON_RESOLUTION_VERSION,
@@ -28,6 +34,7 @@ __all__ = [
     "ALLOWED_DERIVATION_RULES",
     "AUTHORITY_MODES",
     "CANON_RESOLUTION_VERSION",
+    "CHARACTER_RETRIEVAL_VERSION",
     "DEFAULT_LEDGER_REL",
     "ENGINE_VERSION",
     "INVOCATION_MODES",
@@ -36,10 +43,12 @@ __all__ = [
     "MATERIALIZER_VERSION",
     "append_determination",
     "build_capability_index",
+    "build_character_index",
     "build_invocation_envelope",
     "compile_character_invocation",
     "compile_canon_invocation",
     "compile_canon_query",
+    "discover_character_candidates",
     "compile_character_query",
     "compile_facility_invocation",
     "compile_facility_invocation_from_seam",
@@ -47,6 +56,7 @@ __all__ = [
     "materialize_facility_packet",
     "query_ledger",
     "resolve_canon_query",
+    "resolve_existing_character_query",
     "resolve_character_query",
     "resolve_facility_query",
     "resolve_invocation",
