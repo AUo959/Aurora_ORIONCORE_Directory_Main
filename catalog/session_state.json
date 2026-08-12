@@ -425,11 +425,18 @@
       "completed_at": "2026-08-12T02:04:54Z",
       "platform": "codex",
       "detail": "Completed via OrionCore PR #64, merge 47dcecf76b2299c8b6db76cdc878c446d8da6e1f. ACE now has an explicit-authority, feature-branch-only CanonRec facility materializer with baseline compare-and-swap, declared-target writes, post-commit rollback/sidecar cleanup, and append-only determination lineage/querying. GENERATED_CANON and CANON_REVISION are executable only after a real Git commit; the prior EXECUTION_BLOCKED receipt remains immutable. Mainline Python 3.12 tests passed 539/539 executed tests (36 skipped); the only post-merge red was the expected stale session_state freshness gate, repaired by this closeout. No Orion L1 runtime or experiment state was started, resumed, or advanced."
+    },
+    {
+      "id": "ace-v0-3-canon-determination",
+      "status": "completed",
+      "completed_at": "2026-08-12T03:08:00Z",
+      "platform": "codex",
+      "detail": "Completed via OrionCore PR #66, squash merge 24ce40f63fa06758728fe246c447d1110709a69e. ACE now executes all six determination states. v0.3 adds read-only bounded CanonRec evidence retrieval, allowlisted deterministic derivation, and fail-closed TRUE_CONFLICT with complete claim/source provenance. Final PR and post-merge mainline gates passed Python 3.9, full provisioned Python 3.12, workspace verification, lint/schema, repo sync, and gitleaks. No Orion L1 runtime/provider state was activated and the paused experiment was not started, resumed, or advanced."
     }
   ],
-  "last_updated": "2026-08-12T02:04:54Z",
+  "last_updated": "2026-08-12T03:08:00Z",
   "last_platform": "codex",
-  "last_session_summary": "ACE v0.2 materialization + determination ledger merged via root PR #64; cross-platform handoff refreshed after the post-merge freshness gate.",
+  "last_session_summary": "ACE v0.3 canon retrieval, deterministic derivation, and true-conflict semantics merged; all six ACE determination states are now executable.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -451,6 +458,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "24ce40f",
+      "date": "2026-08-11",
+      "platform": "codex",
+      "summary": "feat(ace): executable canon retrieval, derivation, and true conflict v0.3"
+    },
     {
       "sha": "47dcecf",
       "date": "2026-08-11",
@@ -504,12 +517,6 @@
       "date": "2026-08-11",
       "platform": "codex",
       "summary": "test(canon): guard every validator vocabulary against committed canon"
-    },
-    {
-      "sha": "a88401a",
-      "date": "2026-08-11",
-      "platform": "claude-code",
-      "summary": "feat(canon): reference-integrity sweep \u2014 namespace-aware checker + tests"
     }
   ],
   "security_events": [
@@ -682,10 +689,10 @@
       "description": "Review and authorize the next CloudBank publication pass from isolated local branches: 1482 hardening cb8da9bc requires a compatibility decision for pre-hardening runtime 1.2 persisted runs; 1381 local merge 9d59340f and 1343 fix d677fccc need push and CI refresh; issue implementations 1453 at 2cd6741b, 1457 at 58285cc0, and 1456 at 4f53486c are locally validated and should be published draft-only if authorized. PR 1492 remains blocked by a missing required CI Check and needs an authorized check rerun or a new event. Keep the live L1 experiment isolated and do not merge, close, comment, resolve threads, mark ready, dispatch workflows, promote canon, or INIT without explicit authorization."
     },
     {
-      "id": "ace-v0-2-scope",
+      "id": "ace-next-scope",
       "priority": "medium",
       "assigned_to": "either",
-      "description": "ACE v0.2 now includes facility/topology completion, shared interactive/embedded/autonomic invocation, an authority-gated CanonRec facility materializer, and an append-only determination ledger with executable EXECUTION_BLOCKED / GENERATED_CANON / CANON_REVISION states. Remaining scope is existing-character retrieval, relation-evidence enrichment, MCP exposure, native multi-artifact character materialization, non-character classes beyond the facility slice, and executable RETRIEVED_CANON / DERIVED_CANON / TRUE_CONFLICT paths."
+      "description": "ACE now has executable RETRIEVED_CANON, DERIVED_CANON, GENERATED_CANON, CANON_REVISION, TRUE_CONFLICT, and EXECUTION_BLOCKED semantics; shared interactive/embedded/autonomic invocation; facility/topology completion; authority-gated facility materialization; and an append-only determination ledger. Remaining major scope is existing-character retrieval, relation-evidence enrichment and repository-wide evidence discovery, capability-manifest discovery, MCP exposure, native multi-artifact character materialization, and non-character entity classes beyond the facility/canon-fact slices."
     },
     {
       "id": "ace-capability-manifest-discovery",
@@ -701,7 +708,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "47dcecf76b2299c8b6db76cdc878c446d8da6e1f",
+    "main_sha": "24ce40f63fa06758728fe246c447d1110709a69e",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
