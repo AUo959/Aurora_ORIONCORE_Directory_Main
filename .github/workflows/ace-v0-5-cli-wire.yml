@@ -1,0 +1,53 @@
+name: ACE v0.5 CLI Wiring
+
+on:
+  push:
+    branches:
+      - agent/ace-v0-5-character-materialization
+
+permissions:
+  contents: write
+
+jobs:
+  wire:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          ref: agent/ace-v0-5-character-materialization
+
+      - name: Install focused dependencies
+        run: python -m pip install pytest pyyaml 'jsonschema==4.25.1'
+
+      - name: Wire generic materializer CLI and validate syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tools/aurora_ace.py')
+          text = p.read_text(encoding='utf-8')
+          text = text.replace('    materialize_facility_packet,\n', '    materialize_packet,\n')
+          text = text.replace(
+              'help="Materialize a validated ACE facility packet into a CanonRec feature-branch commit.",',
+              'help="Materialize a validated ACE packet into its native CanonRec feature-branch artifact set.",'
+          )
+          text = text.replace(
+              'materialize.add_argument("--packet", required=True, help="Commit-ready ACE facility packet directory.")',
+              'materialize.add_argument("--packet", required=True, help="Commit-ready ACE packet directory.")'
+          )
+          text = text.replace('            final = materialize_facility_packet(\n', '            final = materialize_packet(\n')
+          p.write_text(text, encoding='utf-8')
+          PY
+          python -m py_compile tools/ace/character_materialize.py tools/aurora_ace.py
+          python -m pytest -q tests/test_aurora_ace_materialization.py tests/test_aurora_ace_character_materialization.py
+          git diff --check
+          rm .github/workflows/ace-v0-5-cli-wire.yml
+
+      - name: Commit CLI wiring
+        run: |
+          git config user.name "Aurora ACE Integration"
+          git config user.email "ace-integration@aurora.local"
+          git add tools/aurora_ace.py .github/workflows/ace-v0-5-cli-wire.yml
+          git commit -m "feat(ace): route materialize through native packet dispatcher"
+          git push origin HEAD:agent/ace-v0-5-character-materialization
