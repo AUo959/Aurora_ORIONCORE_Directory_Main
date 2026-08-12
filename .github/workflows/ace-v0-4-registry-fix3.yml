@@ -1,0 +1,46 @@
+name: ACE v0.4 Character Registry Completeness Fix 3
+
+on:
+  push:
+    branches:
+      - agent/ace-v0-4-character-retrieval
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          ref: agent/ace-v0-4-character-retrieval
+
+      - name: Install focused dependencies
+        run: python -m pip install pytest pyyaml 'jsonschema==4.25.1'
+
+      - name: Apply, normalize, and validate registry-complete retrieval
+        run: |
+          python tools/ace/_registry_fix_v04.py
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tests/test_aurora_ace_character_retrieval.py')
+          p.write_text(p.read_text(encoding='utf-8').rstrip() + '\n', encoding='utf-8')
+          PY
+          python -m py_compile tools/ace/character_retrieval.py tests/test_aurora_ace_character_retrieval.py
+          python -m pytest -q tests/test_aurora_ace_character_retrieval.py tests/test_aurora_ace_invocation.py tests/test_aurora_ace_invariants.py
+          git diff --check
+          rm tools/ace/_registry_fix_v04.py \
+            .github/workflows/ace-v0-4-registry-fix.yml \
+            .github/workflows/ace-v0-4-registry-fix2.yml \
+            .github/workflows/ace-v0-4-registry-fix3.yml
+
+      - name: Commit registry-complete retrieval
+        run: |
+          git config user.name "Aurora ACE Integration"
+          git config user.email "ace-integration@aurora.local"
+          git add tools/ace/character_retrieval.py tests/test_aurora_ace_character_retrieval.py docs/AURORA_ACE__ADDENDUM__CHARACTER_RETRIEVAL__v0.4__2026-08-11.md tools/ace/_registry_fix_v04.py .github/workflows/ace-v0-4-registry-fix.yml .github/workflows/ace-v0-4-registry-fix2.yml .github/workflows/ace-v0-4-registry-fix3.yml
+          git commit -m "fix(ace): make character retrieval registry-complete"
+          git push origin HEAD:agent/ace-v0-4-character-retrieval
