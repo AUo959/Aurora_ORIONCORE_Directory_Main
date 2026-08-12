@@ -1,0 +1,319 @@
+name: ACE v0.3 Canon Determination Wiring
+
+on:
+  push:
+    branches:
+      - agent/ace-v0-3-canon-determination
+
+permissions:
+  contents: write
+
+jobs:
+  wire:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          ref: agent/ace-v0-3-canon-determination
+
+      - name: Wire canon resolver into shared ACE surfaces
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace(path_str: str, old: str, new: str) -> None:
+              path = Path(path_str)
+              text = path.read_text(encoding="utf-8")
+              if old not in text:
+                  raise SystemExit(f"needle not found in {path}: {old[:100]!r}")
+              if text.count(old) != 1:
+                  raise SystemExit(f"needle not unique in {path}: count={text.count(old)}")
+              path.write_text(text.replace(old, new), encoding="utf-8")
+
+          # Register read-only retrieval and deterministic derivation as first-class capabilities.
+          replace(
+              "tools/ace/core.py",
+              '''        {
+              "capability_id": "ace.capability.canonrec.materialize.entity",''',
+              '''        {
+              "capability_id": "ace.capability.canonrec.retrieve.claims",
+              "name": "ACE scoped CanonRec canonical-claim retriever",
+              "repository": "root",
+              "path": "tools/ace/canon_resolution.py",
+              "operations": ["retrieve_scoped_canonical_claims", "detect_true_conflict"],
+              "mutation_model": "read_only",
+              "status": "active",
+          },
+          {
+              "capability_id": "ace.capability.canonrec.derive.claims",
+              "name": "ACE deterministic CanonRec claim derivation",
+              "repository": "root",
+              "path": "tools/ace/canon_resolution.py",
+              "operations": ["derive_canonical_value"],
+              "mutation_model": "read_only",
+              "status": "active",
+          },
+          {
+              "capability_id": "ace.capability.canonrec.materialize.entity",''',
+          )
+
+          # Keep canon-fact calls on the same invocation facade used by characters and facilities.
+          replace(
+              "tools/ace/invocation.py",
+              '''from .engine import resolve_character_query
+from .facility import (''',
+              '''from .engine import resolve_character_query
+from .canon_resolution import compile_canon_query, resolve_canon_query
+from .facility import (''',
+          )
+          replace(
+              "tools/ace/invocation.py",
+              '''def compile_facility_invocation(
+''',
+              '''def compile_canon_invocation(
+    question: str,
+    context: Mapping[str, Any],
+    *,
+    subject_ref: str,
+    field_path: str,
+    claim_path: str | None = None,
+    certainty_path: str = "certainty",
+    derivation_rule: str | None = None,
+    invocation_mode: str = "interactive",
+    caller_kind: str = "user",
+    caller_ref: str = "ORION.ROLE.PILOT",
+    parent_invocation_ref: str | None = None,
+    trigger_kind: str | None = None,
+    trigger_reason: str | None = None,
+    seam_ref: str | None = None,
+    trigger_policy_ref: str | None = None,
+    session_ref: str | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    """Compile read-only canon determination through the shared first-class facade."""
+
+    requester_kind = caller_kind if caller_kind in {"user", "operations", "agent", "system"} else "system"
+    kwargs: dict[str, Any] = {
+        "subject_ref": subject_ref,
+        "field_path": field_path,
+        "claim_path": claim_path,
+        "certainty_path": certainty_path,
+        "derivation_rule": derivation_rule,
+        "mode": "read_only",
+        "requester_kind": requester_kind,
+        "requester_id": caller_ref,
+        "session_ref": session_ref,
+    }
+    if root is not None:
+        kwargs["root"] = root
+    query = compile_canon_query(question, context, **kwargs)
+    return build_invocation_envelope(
+        query,
+        invocation_mode=invocation_mode,
+        caller_kind=caller_kind,
+        caller_ref=caller_ref,
+        parent_invocation_ref=parent_invocation_ref,
+        trigger_kind=trigger_kind,
+        trigger_reason=trigger_reason,
+        seam_ref=seam_ref,
+        trigger_policy_ref=trigger_policy_ref,
+    )
+
+
+def compile_facility_invocation(
+''',
+          )
+          replace(
+              "tools/ace/invocation.py",
+              '''    elif entity_type == "facility":
+        if root is None:
+            determination = resolve_facility_query(query, output_dir)
+        else:
+            determination = resolve_facility_query(query, output_dir, root=root)
+    else:
+''',
+              '''    elif entity_type == "facility":
+        if root is None:
+            determination = resolve_facility_query(query, output_dir)
+        else:
+            determination = resolve_facility_query(query, output_dir, root=root)
+    elif entity_type == "canon_fact":
+        if root is None:
+            determination = resolve_canon_query(query, output_dir)
+        else:
+            determination = resolve_canon_query(query, output_dir, root=root)
+    else:
+''',
+          )
+
+          # Public Python package surface.
+          replace(
+              "tools/ace/__init__.py",
+              '''from .core import ACEError, ENGINE_VERSION, build_capability_index, compile_character_query
+''',
+              '''from .core import ACEError, ENGINE_VERSION, build_capability_index, compile_character_query
+from .canon_resolution import (
+    ALLOWED_DERIVATION_RULES,
+    CANON_RESOLUTION_VERSION,
+    compile_canon_query,
+    resolve_canon_query,
+)
+''',
+          )
+          replace(
+              "tools/ace/__init__.py",
+              '''    compile_character_invocation,
+''',
+              '''    compile_character_invocation,
+    compile_canon_invocation,
+''',
+          )
+          replace(
+              "tools/ace/__init__.py",
+              '''    "AUTHORITY_MODES",
+''',
+              '''    "ALLOWED_DERIVATION_RULES",
+    "AUTHORITY_MODES",
+    "CANON_RESOLUTION_VERSION",
+''',
+          )
+          replace(
+              "tools/ace/__init__.py",
+              '''    "compile_character_invocation",
+''',
+              '''    "compile_character_invocation",
+    "compile_canon_invocation",
+    "compile_canon_query",
+''',
+          )
+          replace(
+              "tools/ace/__init__.py",
+              '''    "resolve_character_query",
+''',
+              '''    "resolve_canon_query",
+    "resolve_character_query",
+''',
+          )
+
+          # CLI: direct humans/agents can invoke the same canon-fact path.
+          replace(
+              "tools/aurora_ace.py",
+              '''    compile_character_invocation,
+''',
+              '''    compile_character_invocation,
+    compile_canon_invocation,
+''',
+          )
+          replace(
+              "tools/aurora_ace.py",
+              '''    context = _object(args.context, "context")
+    common = {
+''',
+              '''    context = _object(args.context, "context")
+    if args.subject_kind == "canon":
+        if not args.field_path:
+            raise ACEError("--subject-kind canon requires --field-path", code="input_validation_failed")
+        subject_ref = str(context.get("subject_ref") or "").strip()
+        if not subject_ref:
+            raise ACEError("canon context requires subject_ref", code="input_validation_failed")
+        return compile_canon_invocation(
+            args.question,
+            context,
+            subject_ref=subject_ref,
+            field_path=args.field_path,
+            claim_path=args.claim_path,
+            certainty_path=args.certainty_path,
+            derivation_rule=args.derivation_rule,
+            invocation_mode=args.invocation_mode,
+            caller_kind=caller_kind,
+            caller_ref=caller_ref,
+            parent_invocation_ref=args.parent_invocation_ref,
+            trigger_kind=args.trigger_kind,
+            trigger_reason=args.trigger_reason,
+            seam_ref=args.seam_ref,
+            trigger_policy_ref=args.trigger_policy_ref,
+            session_ref=args.session_ref,
+        )
+    common = {
+''',
+          )
+          replace(
+              "tools/aurora_ace.py",
+              '''            choices=["character", "facility"],
+''',
+              '''            choices=["character", "facility", "canon"],
+''',
+          )
+          replace(
+              "tools/aurora_ace.py",
+              '''        sub.add_argument("--seed", type=int, default=808)
+''',
+              '''        sub.add_argument("--field-path", help="Requested output field for --subject-kind canon.")
+        sub.add_argument("--claim-path", help="Dotted CanonRec JSON claim path; defaults to --field-path.")
+        sub.add_argument("--certainty-path", default="certainty", help="Dotted certainty field path for canon evidence.")
+        sub.add_argument("--derivation-rule", choices=["sorted_unique_union"], help="Explicit deterministic canon derivation rule.")
+        sub.add_argument("--seed", type=int, default=808)
+''',
+          )
+          replace(
+              "tools/aurora_ace.py",
+              '''    elif entity_type == "facility":
+        required.add("ace.capability.canonrec.materialize.entity")
+''',
+              '''    elif entity_type == "facility":
+        required.add("ace.capability.canonrec.materialize.entity")
+    elif entity_type == "canon_fact":
+        required.add("ace.capability.canonrec.retrieve.claims")
+        if query.get("query_kind") == "derive":
+            required.add("ace.capability.canonrec.derive.claims")
+''',
+          )
+
+          # Deliberately mark all six determination states executable.
+          replace(
+              "tests/test_aurora_ace_invariants.py",
+              '''    The v0.2 materialization slice makes GENERATED_CANON and CANON_REVISION
+    reachable while preserving EXECUTION_BLOCKED for complete packets lacking
+    persistence authority. RETRIEVED_CANON, DERIVED_CANON, and TRUE_CONFLICT are
+    still not executable end states in this implementation and remain explicit
+    future slices rather than implied capabilities.
+''',
+              '''    The v0.3 canon-determination slice adds read-only RETRIEVED_CANON,
+    DERIVED_CANON, and TRUE_CONFLICT paths. Together with v0.2 materialization,
+    every determination state in the ACE contract is now executable and must
+    remain deliberate rather than vocabulary-only.
+''',
+          )
+          replace(
+              "tests/test_aurora_ace_invariants.py",
+              '''    assert emitted == {"EXECUTION_BLOCKED", "GENERATED_CANON", "CANON_REVISION"}, (
+''',
+              '''    assert emitted == {
+        "RETRIEVED_CANON",
+        "DERIVED_CANON",
+        "GENERATED_CANON",
+        "CANON_REVISION",
+        "TRUE_CONFLICT",
+        "EXECUTION_BLOCKED",
+    }, (
+''',
+          )
+
+          Path(".github/workflows/ace-v0-3-wire.yml").unlink()
+          PY
+
+          python -m pytest -q \
+            tests/test_aurora_ace_canon_resolution.py \
+            tests/test_aurora_ace_invocation.py \
+            tests/test_aurora_ace_invariants.py
+          git diff --check
+
+      - name: Commit wired v0.3 slice
+        run: |
+          git config user.name "Aurora ACE Integration"
+          git config user.email "ace-integration@aurora.local"
+          git add tools/ace/core.py tools/ace/invocation.py tools/ace/__init__.py tools/aurora_ace.py tests/test_aurora_ace_invariants.py .github/workflows/ace-v0-3-wire.yml
+          git commit -m "feat(ace): wire canon determination into shared engine"
+          git push origin HEAD:agent/ace-v0-3-canon-determination
