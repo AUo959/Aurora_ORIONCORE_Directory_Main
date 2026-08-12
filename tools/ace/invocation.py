@@ -19,6 +19,7 @@ from .core import (
     utc_now,
     write_json,
 )
+from .capability_discovery import select_invocation_capability
 from .engine import resolve_character_query
 from .character_retrieval import resolve_existing_character_query
 from .canon_resolution import compile_canon_query, resolve_canon_query
@@ -32,6 +33,14 @@ INVOCATION_SCHEMA_VERSION = "0.2.0"
 INVOCATION_MODES = frozenset({"interactive", "embedded", "autonomic"})
 CALLER_KINDS = frozenset({"user", "operations", "agent", "system", "capability"})
 TRIGGER_KINDS = frozenset({"direct_query", "capability_call", "coherence_seam", "policy_event"})
+RUNTIME_BINDING_IDS = frozenset(
+    {
+        "ace.capability.invoke.character.retrieve",
+        "ace.capability.invoke.character.complete",
+        "ace.capability.invoke.facility",
+        "ace.capability.invoke.canon_fact",
+    }
+)
 
 
 def _nonempty(value: str | None, field: str) -> str:
@@ -357,7 +366,7 @@ def resolve_invocation(
     *,
     root: Path | None = None,
 ) -> dict[str, Any]:
-    """Execute one invocation with ACE and persist an inspectable invocation sidecar."""
+    """Execute one invocation through manifest discovery and an explicit runtime allowlist."""
 
     validate_invocation_envelope(invocation)
     query = dict(invocation["query"])
@@ -366,31 +375,28 @@ def resolve_invocation(
     if sidecar.exists():
         raise ACEError(f"invocation sidecar already exists: {sidecar}", code="target_unavailable")
 
-    # Character was the only resolver before subject dispatch existed. Preserve
-    # that default for legacy/minimal query envelopes while explicit facility
-    # queries still route to their dedicated supported slice.
-    entity_type = query.get("subject", {}).get("entity_type") or "character"
-    if entity_type == "character":
-        resolver = resolve_existing_character_query if query.get("query_kind") == "retrieve" else resolve_character_query
-        if root is None:
-            determination = resolver(query, output_dir)
-        else:
-            determination = resolver(query, output_dir, root=root)
-    elif entity_type == "facility":
-        if root is None:
-            determination = resolve_facility_query(query, output_dir)
-        else:
-            determination = resolve_facility_query(query, output_dir, root=root)
-    elif entity_type == "canon_fact":
-        if root is None:
-            determination = resolve_canon_query(query, output_dir)
-        else:
-            determination = resolve_canon_query(query, output_dir, root=root)
-    else:
+    # Capability registration belongs to the ACE control plane. `root` is the
+    # selected resolver's target/runtime root (and may be a synthetic fixture),
+    # so it must never redirect discovery away from the committed ACE catalog.
+    capability = select_invocation_capability(query)
+    runtime_bindings = {
+        "ace.capability.invoke.character.retrieve": resolve_existing_character_query,
+        "ace.capability.invoke.character.complete": resolve_character_query,
+        "ace.capability.invoke.facility": resolve_facility_query,
+        "ace.capability.invoke.canon_fact": resolve_canon_query,
+    }
+    capability_id = str(capability["capability_id"])
+    resolver = runtime_bindings.get(capability_id)
+    if resolver is None or capability_id not in RUNTIME_BINDING_IDS:
         raise ACEError(
-            f"no ACE resolver is registered for subject entity_type={entity_type!r}",
-            code="input_validation_failed",
+            f"no allowlisted ACE runtime binding exists for discovered capability {capability_id!r}",
+            code="tool_unavailable",
         )
+
+    if root is None:
+        determination = resolver(query, output_dir)
+    else:
+        determination = resolver(query, output_dir, root=root)
 
     payload = dict(invocation)
     payload["determination_ref"] = determination["determination_id"]

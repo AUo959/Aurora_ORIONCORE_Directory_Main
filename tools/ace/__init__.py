@@ -1,6 +1,14 @@
 """Aurora Canon Engine (ACE) root-control-plane package."""
 
-from .core import ACEError, ENGINE_VERSION, build_capability_index, compile_character_query
+from .core import ACEError, ENGINE_VERSION, compile_character_query
+from .capability_discovery import (
+    CAPABILITY_MANIFEST_DIR,
+    build_capability_index,
+    load_capability_manifests,
+    manifest_semantic_sha256,
+    select_invocation_capability,
+    validate_capability_manifest,
+)
 from .character_retrieval import (
     CHARACTER_RETRIEVAL_VERSION,
     build_character_index,
@@ -18,6 +26,7 @@ from .facility import compile_facility_query, resolve_facility_query, validate_c
 from .invocation import (
     INVOCATION_MODES,
     INVOCATION_SCHEMA_VERSION,
+    RUNTIME_BINDING_IDS,
     build_invocation_envelope,
     compile_character_invocation,
     compile_canon_invocation,
@@ -39,6 +48,7 @@ __all__ = [
     "ALLOWED_DERIVATION_RULES",
     "AUTHORITY_MODES",
     "CANON_RESOLUTION_VERSION",
+    "CAPABILITY_MANIFEST_DIR",
     "CHARACTER_MATERIALIZER_VERSION",
     "CHARACTER_RETRIEVAL_VERSION",
     "DEFAULT_LEDGER_REL",
@@ -47,6 +57,7 @@ __all__ = [
     "INVOCATION_SCHEMA_VERSION",
     "LEDGER_VERSION",
     "MATERIALIZER_VERSION",
+    "RUNTIME_BINDING_IDS",
     "append_determination",
     "build_capability_index",
     "build_character_index",
@@ -59,6 +70,8 @@ __all__ = [
     "compile_facility_invocation",
     "compile_facility_invocation_from_seam",
     "compile_facility_query",
+    "load_capability_manifests",
+    "manifest_semantic_sha256",
     "materialize_character_packet",
     "materialize_facility_packet",
     "materialize_packet",
@@ -68,6 +81,8 @@ __all__ = [
     "resolve_character_query",
     "resolve_facility_query",
     "resolve_invocation",
+    "select_invocation_capability",
+    "validate_capability_manifest",
     "validate_coherence_seam",
     "validate_invocation_envelope",
 ]
