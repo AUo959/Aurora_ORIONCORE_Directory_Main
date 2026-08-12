@@ -65,8 +65,10 @@ def _git(repo: Path, *args: str, check: bool = True) -> str:
 
 
 def _assert_clean_feature_branch(repo: Path) -> tuple[str, str]:
-    if not (repo / ".git").exists():
-        raise ACEError(f"target is not a Git repository: {repo}", code="target_unavailable")
+    if not repo.is_dir():
+        raise ACEError(f"target repository directory is unavailable: {repo}", code="target_unavailable")
+    if _git(repo, "rev-parse", "--is-inside-work-tree", check=False) != "true":
+        raise ACEError(f"target is not a Git worktree: {repo}", code="target_unavailable")
     status = _git(repo, "status", "--porcelain")
     if status:
         raise ACEError("CanonRec materialization requires a clean target worktree", code="transaction_conflict")
@@ -347,7 +349,7 @@ def materialize_facility_packet(
     append_determination(receipt, ledger_dir, root=root)
 
     started = time.perf_counter()
-    commit_sha: str | None = None
+    materialized_receipt_path: Path | None = None
     try:
         _write_json_atomic(target, canonical)
         target_hash = file_sha256(target)
@@ -355,10 +357,17 @@ def materialize_facility_packet(
         staged = _git(repo, "diff", "--cached", "--name-only")
         if target_rel not in staged.splitlines():
             raise ACEError("declared canonical target was not staged", code="runtime_failure")
-        _git(repo, "config", "user.name", "Aurora ACE Materializer")
-        _git(repo, "config", "user.email", "ace@aurora.local")
         message = commit_message or f"feat(canon): materialize ACE facility binding {candidate['subject_ref']}"
-        _git(repo, "commit", "-m", message)
+        _git(
+            repo,
+            "-c",
+            "user.name=Aurora ACE Materializer",
+            "-c",
+            "user.email=ace@aurora.local",
+            "commit",
+            "-m",
+            message,
+        )
         commit_sha = _git(repo, "rev-parse", "HEAD")
         elapsed_ms = round((time.perf_counter() - started) * 1000, 3)
         final = _final_receipt(
@@ -386,11 +395,18 @@ def materialize_facility_packet(
                 + json.dumps(report["errors"][:3]),
                 code="output_validation_failed",
             )
-        final_path = packet / "materialized_determination_receipt.json"
-        _write_json_atomic(final_path, final)
+        materialized_receipt_path = packet / "materialized_determination_receipt.json"
+        _write_json_atomic(materialized_receipt_path, final)
         append_determination(final, ledger_dir, root=root)
         return final
     except Exception:
+        # A final sidecar must never outlive a transaction that is rolled back.
+        if materialized_receipt_path is not None and materialized_receipt_path.exists():
+            try:
+                materialized_receipt_path.unlink()
+            except OSError:
+                pass
+
         # A clean, baseline-matched worktree was required at entry, so restoring
         # that exact baseline is safe and keeps failed materialization atomic.
         try:
