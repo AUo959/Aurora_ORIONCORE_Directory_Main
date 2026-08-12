@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Query the Aurora Canon Engine (ACE) capability router and supported slices."""
+"""Query, resolve, materialize, and inspect the Aurora Canon Engine (ACE)."""
 
 from __future__ import annotations
 
@@ -11,11 +11,14 @@ from typing import Any
 
 from ace import (
     ACEError,
+    AUTHORITY_MODES,
     build_capability_index,
     build_invocation_envelope,
     compile_character_invocation,
     compile_facility_invocation,
     compile_facility_invocation_from_seam,
+    materialize_facility_packet,
+    query_ledger,
     resolve_invocation,
 )
 from ace.core import ROOT, load_json, validate_json_schema
@@ -140,6 +143,26 @@ def build_parser() -> argparse.ArgumentParser:
         if command == "resolve":
             sub.add_argument("--out", required=True, help="New packet directory outside nested repositories.")
 
+    materialize = subparsers.add_parser(
+        "materialize",
+        help="Materialize a validated ACE facility packet into a CanonRec feature-branch commit.",
+    )
+    materialize.add_argument("--packet", required=True, help="Commit-ready ACE facility packet directory.")
+    materialize.add_argument("--target-repo", required=True, help="Clean CanonRec checkout on a non-protected feature branch.")
+    materialize.add_argument("--authority-mode", choices=sorted(AUTHORITY_MODES), required=True)
+    materialize.add_argument("--authority-ref", required=True, help="Inspectable owner/delegation authority receipt or policy reference.")
+    materialize.add_argument("--ledger-dir", help="Append-only determination-ledger directory; defaults to reports/ace/determinations.")
+    materialize.add_argument("--commit-message")
+
+    ledger = subparsers.add_parser("ledger", help="Query the append-only ACE determination ledger.")
+    ledger.add_argument("--ledger-dir", help="Ledger directory; defaults to reports/ace/determinations.")
+    ledger.add_argument("--subject")
+    ledger.add_argument("--query")
+    ledger.add_argument("--capability")
+    ledger.add_argument("--tool-run")
+    ledger.add_argument("--canonical-target")
+    ledger.add_argument("--commit")
+
     validate = subparsers.add_parser("validate", help="Validate an ACE query, invocation, or determination receipt.")
     validate.add_argument("artifact")
     validate.add_argument("--kind", choices=["query", "invocation", "determination"], required=True)
@@ -210,6 +233,42 @@ def main(argv: list[str] | None = None) -> int:
                 )
             )
             return 0
+        if args.command == "materialize":
+            final = materialize_facility_packet(
+                Path(args.packet),
+                Path(args.target_repo),
+                authority_mode=args.authority_mode,
+                authority_ref=args.authority_ref,
+                ledger_dir=Path(args.ledger_dir) if args.ledger_dir else None,
+                commit_message=args.commit_message,
+            )
+            print(
+                json.dumps(
+                    {
+                        "ok": True,
+                        "determination_id": final["determination_id"],
+                        "status": final["status"],
+                        "commit_sha": final["materialization"]["commit_sha"],
+                        "target_paths": final["materialization"]["target_paths"],
+                    },
+                    indent=2,
+                    sort_keys=True,
+                )
+            )
+            return 0
+        if args.command == "ledger":
+            results = query_ledger(
+                Path(args.ledger_dir) if args.ledger_dir else None,
+                subject=args.subject,
+                query=args.query,
+                capability=args.capability,
+                tool_run=args.tool_run,
+                canonical_target=args.canonical_target,
+                commit=args.commit,
+            )
+            print(json.dumps({"count": len(results), "determinations": results}, indent=2, sort_keys=True))
+            return 0
+
         schema_name = {
             "query": "aurora_ace_query_envelope.schema.json",
             "invocation": "aurora_ace_invocation_envelope.schema.json",
