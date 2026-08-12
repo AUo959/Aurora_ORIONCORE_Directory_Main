@@ -27,18 +27,53 @@ def invocation() -> dict[str, object]:
     }
 
 
-def test_mcp_contract_declares_exact_non_materializing_surface() -> None:
+def _ready_packet(tmp_path: Path) -> tuple[Path, Path, Path]:
+    runtime = tmp_path / "runtime"
+    packet = runtime / "packet-001"
+    packet.mkdir(parents=True)
+    receipt = {
+        "record_type": "ace_determination_receipt",
+        "determination_id": "ace.determination.test",
+        "materialization": {"status": "commit_ready"},
+        "baselines": [{"repository": "CanonRec", "commit_sha": "a" * 40}],
+    }
+    (packet / "determination_receipt.json").write_text(
+        json.dumps(receipt),
+        encoding="utf-8",
+    )
+    repo = tmp_path / "CanonRec"
+    repo.mkdir()
+    return runtime, packet, repo
+
+
+def _clean_feature_git(repo: Path, *args: str) -> str:
+    if args == ("rev-parse", "--is-inside-work-tree"):
+        return "true"
+    if args == ("status", "--porcelain"):
+        return ""
+    if args == ("branch", "--show-current"):
+        return "agent/ace-test"
+    if args == ("rev-parse", "HEAD"):
+        return "a" * 40
+    raise AssertionError(args)
+
+
+def test_mcp_contract_declares_two_phase_bounded_materialization_surface() -> None:
     contract = json.loads(
-        (REPO_ROOT / "catalog/contracts/aurora_ace_mcp_contract_v0_7.json").read_text(
+        (REPO_ROOT / "catalog/contracts/aurora_ace_mcp_contract_v0_8.json").read_text(
             encoding="utf-8"
         )
     )
     assert contract["tool_surface"] == list(mcp_adapter.MCP_TOOL_NAMES)
     assert contract["transport"]["allowed"] == ["stdio"]
     assert contract["transport"]["network_listener_enabled"] is False
-    assert contract["authority"]["canonical_materialization_exposed"] is False
-    assert contract["authority"]["canonrec_git_mutation_exposed"] is False
+    assert contract["authority"]["canonical_materialization_exposed"] is True
+    assert contract["authority"]["canonrec_git_mutation_exposed"] is True
+    assert contract["authority"]["arbitrary_repository_path_exposed"] is False
+    assert contract["authority"]["protected_branch_mutation_exposed"] is False
     assert contract["authority"]["dynamic_python_binding_exposed"] is False
+    assert contract["materialization_gate"]["phases"] == ["preview", "commit"]
+    assert contract["materialization_gate"]["authority_mode"] == "owner_gated_materialize"
 
 
 def test_capabilities_wraps_manifest_index(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
@@ -49,7 +84,8 @@ def test_capabilities_wraps_manifest_index(monkeypatch: pytest.MonkeyPatch, tmp_
 
     assert result["capability_index"] == expected
     assert result["tools"] == list(mcp_adapter.MCP_TOOL_NAMES)
-    assert result["materialization_exposed"] is False
+    assert result["materialization_exposed"] is True
+    assert result["materialization_policy"] == "owner_gated_two_phase_registered_canonrec_only"
 
 
 def test_plan_uses_normal_invocation_validation_and_manifest_router(
@@ -75,7 +111,7 @@ def test_plan_uses_normal_invocation_validation_and_manifest_router(
     assert result["selected_runtime_capability"]["capability_id"] == (
         "ace.capability.invoke.character.retrieve"
     )
-    assert result["materialization_exposed"] is False
+    assert result["side_effect_class"] == "read_only"
 
 
 @pytest.mark.parametrize(
@@ -137,7 +173,167 @@ def test_resolve_is_bounded_and_delegates_to_shared_engine(
     assert calls[0]["output_dir"] == (runtime / "packet-001").resolve()
     assert calls[0]["root"] == tmp_path
     assert result["packet_ref"] == str((runtime / "packet-001").resolve())
-    assert result["materialization_exposed"] is False
+    assert result["side_effect_class"] == "bounded_runtime_artifact_write"
+
+
+def test_registry_rejects_canonrec_path_escape(tmp_path: Path) -> None:
+    catalog = tmp_path / "catalog"
+    catalog.mkdir()
+    (catalog / "repo_registry.yaml").write_text(
+        "repos:\n- name: CanonRec\n  path: ../outside\n  remote_status: configured\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(core.ACEError, match="unsafe"):
+        mcp_adapter._registered_canonrec_repo(tmp_path)
+
+
+def test_materialization_preview_is_state_bound_and_non_mutating(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    runtime, packet, repo = _ready_packet(tmp_path)
+    monkeypatch.setattr(mcp_adapter, "_git_read", _clean_feature_git)
+
+    first = mcp_adapter.ace_materialize_preview(
+        "packet-001",
+        "owner-approval-001",
+        root=tmp_path,
+        runtime_root=runtime,
+        target_repo=repo,
+    )
+    second = mcp_adapter.ace_materialize_preview(
+        "packet-001",
+        "owner-approval-002",
+        root=tmp_path,
+        runtime_root=runtime,
+        target_repo=repo,
+    )
+
+    assert packet.exists()
+    assert first["record_type"] == "ace_mcp_materialization_preview"
+    assert first["confirmation_required"] is True
+    assert first["target_repository"] == "CanonRec"
+    assert first["target_branch"] == "agent/ace-test"
+    assert first["authorization_token"].startswith("ace-mcp-auth:")
+    assert first["authorization_token"] != second["authorization_token"]
+    assert len(first["declared_side_effects"]) == 3
+
+
+def test_materialization_preview_rejects_protected_branch(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    runtime, _, repo = _ready_packet(tmp_path)
+
+    def protected(repo_path: Path, *args: str) -> str:
+        if args == ("branch", "--show-current"):
+            return "main"
+        return _clean_feature_git(repo_path, *args)
+
+    monkeypatch.setattr(mcp_adapter, "_git_read", protected)
+    with pytest.raises(core.ACEError, match="non-protected feature branch"):
+        mcp_adapter.ace_materialize_preview(
+            "packet-001",
+            "owner-approval-001",
+            root=tmp_path,
+            runtime_root=runtime,
+            target_repo=repo,
+        )
+
+
+def test_materialization_commit_requires_explicit_side_effect_acknowledgement() -> None:
+    with pytest.raises(core.ACEError, match="acknowledgement"):
+        mcp_adapter.ace_materialize_commit(
+            "packet-001",
+            "owner-approval-001",
+            "ace-mcp-auth:abc",
+            False,
+        )
+
+
+def test_materialization_commit_rejects_token_mismatch(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    packet = tmp_path / "packet"
+    repo = tmp_path / "CanonRec"
+    packet.mkdir()
+    repo.mkdir()
+    preview = {
+        "authorization_token": "ace-mcp-auth:expected",
+        "authority_ref": "owner-approval-001",
+        "token_binding": "state",
+    }
+    monkeypatch.setattr(
+        mcp_adapter,
+        "_materialization_preview",
+        lambda *args, **kwargs: (preview, packet, repo),
+    )
+    called = False
+
+    def forbidden(*args: object, **kwargs: object) -> dict[str, object]:
+        nonlocal called
+        called = True
+        return {}
+
+    monkeypatch.setattr(mcp_adapter, "materialize_packet", forbidden)
+    with pytest.raises(core.ACEError, match="does not match"):
+        mcp_adapter.ace_materialize_commit(
+            "packet-001",
+            "owner-approval-001",
+            "ace-mcp-auth:wrong",
+            True,
+            root=tmp_path,
+        )
+    assert called is False
+
+
+def test_materialization_commit_delegates_only_to_native_materializer(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    packet = tmp_path / "packet"
+    repo = tmp_path / "CanonRec"
+    packet.mkdir()
+    repo.mkdir()
+    preview = {
+        "authorization_token": "ace-mcp-auth:expected",
+        "authority_ref": "owner-approval-001",
+        "token_binding": "packet+authority+registered-target+feature-branch+baseline",
+    }
+    monkeypatch.setattr(
+        mcp_adapter,
+        "_materialization_preview",
+        lambda *args, **kwargs: (preview, packet, repo),
+    )
+    calls: list[dict[str, object]] = []
+
+    def fake_materialize(packet_dir: Path, target_repo: Path, **kwargs: object) -> dict[str, object]:
+        calls.append({"packet": packet_dir, "repo": target_repo, **kwargs})
+        return {"record_type": "ace_determination_receipt", "status": "GENERATED_CANON"}
+
+    monkeypatch.setattr(mcp_adapter, "materialize_packet", fake_materialize)
+    result = mcp_adapter.ace_materialize_commit(
+        "packet-001",
+        "owner-approval-001",
+        "ace-mcp-auth:expected",
+        True,
+        "feat(canon): test",
+        root=tmp_path,
+    )
+
+    assert calls == [
+        {
+            "packet": packet,
+            "repo": repo,
+            "authority_mode": "owner_gated_materialize",
+            "authority_ref": "owner-approval-001",
+            "root": tmp_path,
+            "commit_message": "feat(canon): test",
+        }
+    ]
+    assert result["materialized_determination"]["status"] == "GENERATED_CANON"
+    assert result["authorization"]["side_effects_acknowledged"] is True
 
 
 def test_inspect_finds_invocation_and_linked_determination_without_mutation(tmp_path: Path) -> None:
