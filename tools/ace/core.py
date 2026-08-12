@@ -173,6 +173,24 @@ def _capability_specs() -> list[dict[str, Any]]:
             "status": "active",
         },
         {
+            "capability_id": "ace.capability.canonrec.retrieve.character",
+            "name": "ACE CanonRec existing-character retriever",
+            "repository": "root",
+            "path": "tools/ace/character_retrieval.py",
+            "operations": ["build_character_index", "retrieve_existing_character"],
+            "mutation_model": "read_only",
+            "status": "active",
+        },
+        {
+            "capability_id": "ace.capability.canonrec.enrich.character_relations",
+            "name": "ACE committed character relation evidence enricher",
+            "repository": "root",
+            "path": "tools/ace/character_retrieval.py",
+            "operations": ["match_role", "match_faction", "match_location", "disambiguate_referent"],
+            "mutation_model": "read_only",
+            "status": "active",
+        },
+        {
             "capability_id": "ace.capability.canonrec.project.name_reservations",
             "name": "CanonRec referent-preserving name occupancy projection",
             "repository": "root",
@@ -330,12 +348,31 @@ def compile_character_query(
         raise ACEError("question must not be empty", code="input_validation_failed")
     if mode not in {"plan_only", "commit_ready"}:
         raise ACEError("ACE MVP supports plan_only and commit_ready modes", code="input_validation_failed")
-    for field in ("role", "faction_id", "location_type"):
-        if not isinstance(context.get(field), str) or not str(context[field]).strip():
-            raise ACEError(f"character context requires non-empty {field}", code="input_validation_failed")
     observed = context.get("observed_behavior", [])
     if not isinstance(observed, list) or any(not isinstance(item, str) for item in observed):
         raise ACEError("observed_behavior must be an array of strings", code="input_validation_failed")
+
+    # Retrieval is constitutive precedence, not an optional optimization. An
+    # existing canonical referent must be resolved (or explicitly blocked as
+    # ambiguous) before identity allocation, NameService, or CharForge can run.
+    from .character_retrieval import compile_existing_character_query_if_applicable
+
+    retrieval_query = compile_existing_character_query_if_applicable(
+        question,
+        context,
+        seed=seed,
+        mode=mode,
+        requester_kind=requester_kind,
+        requester_id=requester_id,
+        session_ref=session_ref,
+        root=root,
+    )
+    if retrieval_query is not None:
+        return retrieval_query
+
+    for field in ("role", "faction_id", "location_type"):
+        if not isinstance(context.get(field), str) or not str(context[field]).strip():
+            raise ACEError(f"character context requires non-empty {field}", code="input_validation_failed")
 
     baselines = repository_baselines(root)
     entity_id = allocate_character_id(question, context, seed)

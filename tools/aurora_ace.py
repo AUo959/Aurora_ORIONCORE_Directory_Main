@@ -208,12 +208,18 @@ def _selected_capabilities(query: dict[str, Any]) -> list[dict[str, Any]]:
     entity_type = query.get("subject", {}).get("entity_type")
     required = {"ace.capability.context.resolve"}
     if entity_type == "character":
-        required |= {
-            "ace.capability.canonrec.project.name_reservations",
-            "ace.capability.gumas.state.build_character",
-            "ace.capability.canonrec.validate.entity",
-            "ace.capability.canonrec.validate.naming_receipt",
-        }
+        if query.get("query_kind") == "retrieve":
+            required |= {
+                "ace.capability.canonrec.retrieve.character",
+                "ace.capability.canonrec.enrich.character_relations",
+            }
+        else:
+            required |= {
+                "ace.capability.canonrec.project.name_reservations",
+                "ace.capability.gumas.state.build_character",
+                "ace.capability.canonrec.validate.entity",
+                "ace.capability.canonrec.validate.naming_receipt",
+            }
     elif entity_type == "facility":
         required.add("ace.capability.canonrec.materialize.entity")
     elif entity_type == "canon_fact":

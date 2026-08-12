@@ -357,11 +357,15 @@ def compile_existing_character_query_if_applicable(
         "baselines": baselines,
     }
     suffix = semantic_sha256(material)[:20]
+    raw_contextual_refs = context.get("contextual_refs", [])
+    base_contextual_refs = (
+        [str(item) for item in raw_contextual_refs if str(item)]
+        if isinstance(raw_contextual_refs, list)
+        else []
+    )
     contextual_refs = list(dict.fromkeys(
         [
-            *[str(item) for item in context.get("contextual_refs", []) if str(item)]
-            if isinstance(context.get("contextual_refs", []), list)
-            else [],
+            *base_contextual_refs,
             *[str(item["canonical_id"]) for item in discovery["direct_candidates"]],
             *[str(item["canonical_id"]) for item in discovery["relation_only_candidates"]],
         ]
