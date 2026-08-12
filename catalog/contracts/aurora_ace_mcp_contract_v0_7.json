@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.7.0",
+  "record_type": "aurora_ace_mcp_contract",
+  "status": "owner_directed_implementation",
+  "transport": {
+    "allowed": ["stdio"],
+    "http_enabled": false,
+    "network_listener_enabled": false
+  },
+  "tool_surface": [
+    "ace_capabilities",
+    "ace_plan",
+    "ace_resolve",
+    "ace_inspect"
+  ],
+  "authority": {
+    "canonical_materialization_exposed": false,
+    "canonrec_git_mutation_exposed": false,
+    "generic_entity_publication_exposed": false,
+    "dynamic_python_binding_exposed": false,
+    "runtime_binding_source": "tools/ace/invocation.py:RUNTIME_BINDING_IDS"
+  },
+  "execution": {
+    "shared_ace_engine_required": true,
+    "invocation_envelope_required_for_plan": true,
+    "invocation_envelope_required_for_resolve": true,
+    "manifest_router_required": true,
+    "packet_runtime_root": "reports/ace/mcp_runtime",
+    "caller_supplied_absolute_paths_allowed": false,
+    "path_traversal_allowed": false
+  },
+  "inspectability": {
+    "invocation_and_determination_provenance_addressable": true,
+    "bounded_json_scan_limit": 2048,
+    "materialization_receipts_may_be_read": true,
+    "materialization_may_be_triggered": false
+  },
+  "runtime": {
+    "mcp_python_sdk": ">=2.0,<3",
+    "python_minimum": "3.10",
+    "protocol_validation_python": "3.12",
+    "normal_ace_python39_dependency": false
+  },
+  "runtime_invariant": {
+    "orion_init": false,
+    "simulation_resume": false,
+    "provider_activation": false,
+    "l1_advancement": false
+  }
+}
