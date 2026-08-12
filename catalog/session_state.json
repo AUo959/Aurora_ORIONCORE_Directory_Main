@@ -418,11 +418,18 @@
       "completed_at": "2026-08-11T05:55:32Z",
       "platform": "claude-code",
       "detail": "MERGED TO CLOUDBANK MAIN via PR #1505, merge commit 8347724308f8. Rescued from an uncommitted /private/tmp worktree (zero commits on the branch), completed, and landed. Four defects fixed: (1) export_run_state never emitted 'embodiments' so the projection never round-tripped \u2014 root cause, in l1_runtime_support.py which the original work never touched; (2) embodiment_observation answered EVERY focus when the registry was unbound, shadowing the fleet provider \u2014 regression; (3) focus 'fleet' substring-matched L1-EMB-FLEET-DOCKING's component, so added RESERVED_FOCI \u2014 regression, same fragment-match trap as the canon work; (4) a current-contract payload missing embodiments was silently rebuilt, now rejected at parse time. Plus config/canon_provenance.json cloudbank_sha256 refreshed for the changed l1_runtime_baseline.json (authoritative CanonRec digests untouched). Validation: L1 suites 56/56 local, CI Check green. NOTE: I initially misdiagnosed the canon_provenance failure as pre-existing because I tested with git stash, which reverts to HEAD \u2014 and HEAD was the rescue commit already containing the WIP. A pristine origin/main worktree showed it passing 5/5."
+    },
+    {
+      "id": "ace-v0-2-materialization",
+      "status": "completed",
+      "completed_at": "2026-08-12T02:04:54Z",
+      "platform": "codex",
+      "detail": "Completed via OrionCore PR #64, merge 47dcecf76b2299c8b6db76cdc878c446d8da6e1f. ACE now has an explicit-authority, feature-branch-only CanonRec facility materializer with baseline compare-and-swap, declared-target writes, post-commit rollback/sidecar cleanup, and append-only determination lineage/querying. GENERATED_CANON and CANON_REVISION are executable only after a real Git commit; the prior EXECUTION_BLOCKED receipt remains immutable. Mainline Python 3.12 tests passed 539/539 executed tests (36 skipped); the only post-merge red was the expected stale session_state freshness gate, repaired by this closeout. No Orion L1 runtime or experiment state was started, resumed, or advanced."
     }
   ],
-  "last_updated": "2026-08-11T05:55:38Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "chore(session): record the L1 embodiment rescue and queue a ",
+  "last_updated": "2026-08-12T02:04:54Z",
+  "last_platform": "codex",
+  "last_session_summary": "ACE v0.2 materialization + determination ledger merged via root PR #64; cross-platform handoff refreshed after the post-merge freshness gate.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -444,6 +451,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "47dcecf",
+      "date": "2026-08-11",
+      "platform": "codex",
+      "summary": "feat(ace): merge materialization + determination ledger v0.2"
+    },
     {
       "sha": "9670ff1",
       "date": "2026-08-11",
@@ -497,12 +510,6 @@
       "date": "2026-08-11",
       "platform": "claude-code",
       "summary": "feat(canon): reference-integrity sweep \u2014 namespace-aware checker + tests"
-    },
-    {
-      "sha": "84bc494",
-      "date": "2026-08-11",
-      "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin; close all 5 naming-gate queue items"
     }
   ],
   "security_events": [
@@ -678,13 +685,7 @@
       "id": "ace-v0-2-scope",
       "priority": "medium",
       "assigned_to": "either",
-      "description": "ACE v0.1 MVP landed (5383d83) covering the unobserved-character name-and-background flow. Unimplemented and explicitly scoped out of v0.1: existing-character retrieval, relation-evidence enrichment, the materialization/determination ledger, MCP exposure, and non-character entity classes (locations, vessels, organizations, events). The determination-receipt schema already models the ledger, so materialization is the natural next slice."
-    },
-    {
-      "id": "ace-v0-2-materialization",
-      "priority": "high",
-      "assigned_to": "either",
-      "description": "ACE v0.1 reaches exactly ONE of the spec's six determination states (EXECUTION_BLOCKED); RETRIEVED_CANON, DERIVED_CANON, GENERATED_CANON, CANON_REVISION and TRUE_CONFLICT appear nowhere in tools/ace/. So ACE cannot yet satisfy its own Completion invariant (4.1) in the affirmative \u2014 it is a commit-ready packet builder, not yet a canon engine. Implement 6.12 materializer + 6.13 determination ledger so a run can end GENERATED_CANON with a real commit SHA. tests/test_aurora_ace_invariants.py::test_reachable_determination_states_are_recorded is pinned to the current single state and will fail when this lands, forcing a deliberate update."
+      "description": "ACE v0.2 now includes facility/topology completion, shared interactive/embedded/autonomic invocation, an authority-gated CanonRec facility materializer, and an append-only determination ledger with executable EXECUTION_BLOCKED / GENERATED_CANON / CANON_REVISION states. Remaining scope is existing-character retrieval, relation-evidence enrichment, MCP exposure, native multi-artifact character materialization, non-character classes beyond the facility slice, and executable RETRIEVED_CANON / DERIVED_CANON / TRUE_CONFLICT paths."
     },
     {
       "id": "ace-capability-manifest-discovery",
@@ -700,7 +701,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "4ca4e7ee74bbdf1fdac9e5d2bb688a22859b53c4",
+    "main_sha": "47dcecf76b2299c8b6db76cdc878c446d8da6e1f",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
