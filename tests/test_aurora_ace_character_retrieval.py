@@ -65,6 +65,38 @@ def _write_character(
     )
 
 
+def _write_flat_character(
+    root: Path,
+    canonical_id: str,
+    name: str,
+    *,
+    role: str = "Fighter Commander",
+    faction_id: str = "galactic_union",
+) -> None:
+    path = root / core.CANONREC_REL / "canon/L2/entities/characters" / f"{canonical_id}.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(
+            {
+                "entity_kind": "character",
+                "entity_id": canonical_id,
+                "name": name,
+                "aliases": [],
+                "certainty": "CANON",
+                "status": "active",
+                "faction_bindings": [faction_id],
+                "role": role,
+                "location_type": None,
+                "region_id": None,
+                "parent_org_id": None,
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+
 def _capability_index() -> dict[str, object]:
     return {
         "schema_version": core.SCHEMA_VERSION,
@@ -347,3 +379,30 @@ def test_retrieval_query_and_receipt_validate_against_committed_schemas(
         ambiguous_query, second_root / "packet", root=second_root
     )
     jsonschema.Draft202012Validator(receipt_schema).validate(ambiguous_receipt)
+
+
+def test_flat_entity_registry_character_is_retrieved_without_capsule(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _write_flat_character(tmp_path, "char_aria_lenix", "Aria Lenix")
+    _patch(monkeypatch)
+    index = character_retrieval.build_character_index(tmp_path)
+    assert [item["canonical_id"] for item in index["records"]] == ["char_aria_lenix"]
+    query = character_retrieval.compile_existing_character_query_if_applicable(
+        "Who is Aria Lenix?",
+        {"name": "Aria Lenix", "existence_status": "known"},
+        seed=808,
+        mode="commit_ready",
+        requester_kind="user",
+        requester_id="pilot",
+        session_ref=None,
+        root=tmp_path,
+    )
+    assert query is not None
+    receipt = character_retrieval.resolve_existing_character_query(
+        query, tmp_path / "packet", root=tmp_path
+    )
+    assert receipt["status"] == "RETRIEVED_CANON"
+    identity = receipt["answer"]["fields"][0]["value"]
+    assert identity["canonical_id"] == "char_aria_lenix"
+    assert identity["source_ref"].endswith("characters/char_aria_lenix.json")

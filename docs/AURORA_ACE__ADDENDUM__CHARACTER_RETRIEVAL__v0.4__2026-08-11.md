@@ -31,11 +31,13 @@ Generation MUST NOT be used as a shortcut around unresolved retrieval.
 
 ## 3. Initial canonical retrieval surface
 
-The initial deterministic index reads committed character capsule identities under:
+The initial deterministic index uses the flat CanonRec character entity registry as its primary discovery surface:
 
-`canon/L2/entities/*/capsule/identity.json`
+`canon/L2/entities/characters/*.json`
 
-An eligible identity record contributes, when present:
+When an entity record carries a `capsule_ref` / `capsule_id`, ACE follows that explicit bridge into `canon/L2/entities/*/capsule/identity.json` and uses the capsule as richer identity evidence. Capsule-only canonical characters remain a compatibility fallback so older recovered canon is not omitted while the entity registry is normalized.
+
+An eligible character record contributes, when present:
 
 - canonical ID;
 - canonical name;
