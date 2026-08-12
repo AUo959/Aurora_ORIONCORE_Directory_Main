@@ -136,14 +136,19 @@ def test_warm_index_uses_registered_heads() -> None:
 
     index = core.build_capability_index(REPO_ROOT)
     active = {item["capability_id"] for item in index["capabilities"] if item["lifecycle"] == "active"}
+    assert index["manifest_catalog_ref"] == "catalog/ace/capability_manifests"
     assert "ace.capability.gumas.naming.resolve" in active
     assert "ace.capability.quantum_forge.charforge.generate_capsule" in active
+    assert "ace.capability.invoke.character.complete" in active
     materializer = next(
         item
         for item in index["capabilities"]
         if item["capability_id"] == "ace.capability.canonrec.materialize.entity"
     )
-    assert materializer["lifecycle"] == "blocked"
+    assert materializer["lifecycle"] == "active"
+    assert materializer["path"] == "tools/ace/character_materialize.py"
+    assert materializer["entity_types"] == ["character"]
+    assert materializer["allowlisted"] is True
 
 
 @pytest.mark.skipif(
