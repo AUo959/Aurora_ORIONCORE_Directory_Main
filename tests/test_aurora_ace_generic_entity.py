@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import os
-import subprocess
 import sys
 from pathlib import Path
 
@@ -22,6 +21,12 @@ from ace.generic_entity_validation import (  # noqa: E402
     payload_validator_binding,
     validate_json_payload,
 )
+from ace.materialize import _git as ace_git  # noqa: E402
+
+
+def _expect(condition: bool, message: str) -> None:
+    if not condition:
+        pytest.fail(message)
 
 
 def test_generic_entity_kinds_match_native_l2_vocab_without_character() -> None:
@@ -85,9 +90,9 @@ def test_generated_native_candidates_pass_existing_canon_reconciler(kind: str) -
 @pytest.mark.skipif(os.environ.get("ACE_GENERIC_E2E") != "1", reason="requires registry-pinned CanonRec checkout")
 def test_generic_entity_end_to_end_commit_and_replay_refusal(tmp_path: Path) -> None:
     canonrec = REPO_ROOT / generic_entity.CANONREC_REL
-    baseline = subprocess.run(["git", "rev-parse", "HEAD"], cwd=canonrec, check=True, capture_output=True, text=True).stdout.strip()
-    branch = "validation/ace-generic-v0-11"
-    subprocess.run(["git", "checkout", "-B", branch], cwd=canonrec, check=True, capture_output=True, text=True)
+    baseline = ace_git(canonrec, "rev-parse", "HEAD")
+    branch = "validation/ace-generic-v0-12"
+    ace_git(canonrec, "checkout", "-B", branch)
     runtime = tmp_path / "runtime"
     runtime.mkdir()
     try:
@@ -96,35 +101,43 @@ def test_generic_entity_end_to_end_commit_and_replay_refusal(tmp_path: Path) -> 
             "organization",
             {
                 "name": "ACE E2E Validation Organization",
-                "entity_id": "organization_ace_e2e_validation_v011",
-                "source_refs": ["ACE:E2E:v0.11"],
+                "entity_id": "organization_ace_e2e_validation_v012",
+                "source_refs": ["ACE:E2E:v0.12"],
                 "canonical_fields": {},
             },
-            seed=1100,
+            seed=1200,
             root=REPO_ROOT,
         )
         output = runtime / "generic-e2e"
         from ace.generic_entity_runtime import resolve_generic_entity_query
         receipt = resolve_generic_entity_query(query, output, root=REPO_ROOT)
-        assert receipt["status"] == "EXECUTION_BLOCKED"
-        authority = "owner:e2e:ace-v0.11"
+        _expect(receipt["status"] == "EXECUTION_BLOCKED", "generic resolution must remain commit-ready before authority")
+        candidate = json.loads((output / "candidate_entity.json").read_text(encoding="utf-8"))
+        _expect(candidate["naming_receipt"]["protocol"] == "GUMAS_NAMING_PROTOCOL_v0.1", "candidate must carry native naming protocol")
+        _expect(candidate["naming_receipt"]["request"]["entity_id"] == candidate["entity_id"], "naming receipt must bind entity identity")
+        _expect(candidate["naming_receipt"]["canonical_name"] == candidate["name"], "naming receipt must bind selected name")
+        authority = "owner:e2e:ace-v0.12"
         preview = generic_entity_gate.generic_entity_preview(
             "generic-e2e", authority, root=REPO_ROOT, runtime_root=runtime, target_repo=canonrec
         )
+        _expect(preview["naming_admission"]["status"] == "pass", "preview must pass CanonRec naming admission")
         result = generic_entity_gate.generic_entity_commit(
             "generic-e2e", authority, preview["authorization_token"], True,
             root=REPO_ROOT, runtime_root=runtime, target_repo=canonrec,
         )
         final = result["materialized_determination"]
-        assert final["status"] == "GENERATED_CANON"
-        assert final["materialization"]["commit_sha"] == subprocess.run(["git", "rev-parse", "HEAD"], cwd=canonrec, check=True, capture_output=True, text=True).stdout.strip()
-        assert subprocess.run(["git", "status", "--porcelain"], cwd=canonrec, check=True, capture_output=True, text=True).stdout.strip() == ""
+        _expect(final["status"] == "GENERATED_CANON", "generic commit must produce GENERATED_CANON")
+        _expect(result["naming_admission"]["status"] == "pass", "generic commit must revalidate naming admission")
+        observed_head = ace_git(canonrec, "rev-parse", "HEAD")
+        _expect(final["materialization"]["commit_sha"] == observed_head, "materialization receipt must bind the actual CanonRec commit")
+        observed_status = ace_git(canonrec, "status", "--porcelain")
+        _expect(observed_status == "", "successful generic materialization must leave CanonRec clean")
         with pytest.raises(ACEError):
             generic_entity_gate.generic_entity_commit(
                 "generic-e2e", authority, preview["authorization_token"], True,
                 root=REPO_ROOT, runtime_root=runtime, target_repo=canonrec,
             )
     finally:
-        subprocess.run(["git", "reset", "--hard", baseline], cwd=canonrec, check=True, capture_output=True, text=True)
-        subprocess.run(["git", "clean", "-fd"], cwd=canonrec, check=True, capture_output=True, text=True)
-        subprocess.run(["git", "checkout", "-B", "main"], cwd=canonrec, check=True, capture_output=True, text=True)
+        ace_git(canonrec, "reset", "--hard", baseline)
+        ace_git(canonrec, "clean", "-fd")
+        ace_git(canonrec, "checkout", "-B", "main")

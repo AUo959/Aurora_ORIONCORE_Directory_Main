@@ -21,7 +21,7 @@ from ace.remote_auth import RemoteAuthError, load_remote_principals  # noqa: E40
 
 TOKEN = "ace-test-token-not-a-secret"
 TOKEN_SHA = hashlib.sha256(TOKEN.encode()).hexdigest()
-AUTHORITY_REF = "owner:test:ace-v0.10"
+AUTHORITY_REF = "owner:test:ace-v0.12"
 
 
 def principal_env(*, scopes: list[str] | None = None, authority_refs: list[str] | None = None) -> dict[str, str]:
@@ -41,6 +41,11 @@ def principal_env(*, scopes: list[str] | None = None, authority_refs: list[str] 
 
 def auth_header(token: str = TOKEN) -> dict[str, str]:
     return {"Authorization": f"Bearer {token}"}
+
+
+def _expect(condition: bool, message: str) -> None:
+    if not condition:
+        pytest.fail(message)
 
 
 def test_remote_auth_requires_hash_only_configuration() -> None:
@@ -118,6 +123,53 @@ def test_remote_autonomic_mode_requires_explicit_scope(monkeypatch: pytest.Monke
         )
 
 
+def test_remote_delegated_publication_requires_scope_intersection_and_authority(monkeypatch: pytest.MonkeyPatch) -> None:
+    def fake_publisher(output_name: str, authority_ref: str, principal: dict, **kwargs):
+        return {
+            "record_type": "ace_delegated_publication_receipt",
+            "status": "review_pending",
+            "output_name": output_name,
+            "authority_ref": authority_ref,
+            "authenticated_principal": principal["principal"],
+            "mainline_canon_advanced": False,
+        }
+
+    monkeypatch.setattr(remote_service, "_delegated_publisher", lambda root: fake_publisher)
+
+    partial = remote_service.create_app(
+        environ=principal_env(scopes=["ace:publish"], authority_refs=[AUTHORITY_REF])
+    )
+    denied_scopes = TestClient(partial).post(
+        "/v1/publish/delegated",
+        headers=auth_header(),
+        json={"output_name": "packet", "authority_ref": AUTHORITY_REF},
+    )
+    _expect(denied_scopes.status_code == 403, "ace:publish alone must not authorize delegated publication")
+
+    full_scopes = ["ace:publish", "ace:autonomic", "ace:materialize"]
+    bound = remote_service.create_app(
+        environ=principal_env(scopes=full_scopes, authority_refs=[AUTHORITY_REF])
+    )
+    denied_authority = TestClient(bound).post(
+        "/v1/publish/delegated",
+        headers=auth_header(),
+        json={"output_name": "packet", "authority_ref": "owner:other"},
+    )
+    _expect(denied_authority.status_code == 403, "unbound authority_ref must be refused")
+
+    allowed = TestClient(bound).post(
+        "/v1/publish/delegated",
+        headers=auth_header(),
+        json={"output_name": "packet", "authority_ref": AUTHORITY_REF},
+    )
+    body = allowed.json()
+    _expect(allowed.status_code == 200, "fully authorized publication call should reach verified publisher")
+    _expect(body["status"] == "review_pending", "delegated publication must remain review pending")
+    _expect(body["authenticated_principal"] == "test-agent", "publication receipt must bind authenticated principal")
+    _expect(body["mainline_canon_advanced"] is False, "remote publication must not advance main")
+    _expect(body["transport"] == "https_json", "remote publication must identify transport")
+
+
 def test_runtime_binding_registry_pins_exact_source_blobs() -> None:
     registry = runtime_binding.load_runtime_binding_registry(root=REPO_ROOT)
     assert set(registry) == {
@@ -126,6 +178,7 @@ def test_runtime_binding_registry_pins_exact_source_blobs() -> None:
         "ace.capability.invoke.facility",
         "ace.capability.invoke.canon_fact",
         "ace.capability.invoke.entity.complete",
+        "ace.capability.canonrec.publish.delegated_pr",
     }
     for binding in registry.values():
         source = REPO_ROOT / binding["path"]
