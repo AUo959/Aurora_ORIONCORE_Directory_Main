@@ -44,18 +44,10 @@ def test_parse_pull_request_requires_expected_open_draft_state() -> None:
 def test_github_transport_loss_after_post_is_state_uncertain(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    class BrokenConnection:
-        def __init__(self, host: str, timeout: int) -> None:
-            self.host = host
-            self.timeout = timeout
-
-        def request(self, method: str, path: str, *, body: bytes, headers: dict[str, str]) -> None:
-            raise OSError("synthetic transport loss")
-
-        def close(self) -> None:
-            return None
+    def broken_post(*args: object, **kwargs: object) -> object:
+        raise github_client.httpx.TransportError("synthetic transport loss")
 
     monkeypatch.setenv("ACE_GITHUB_TOKEN", "synthetic-test-token")
-    monkeypatch.setattr(github_client.http.client, "HTTPSConnection", BrokenConnection)
+    monkeypatch.setattr(github_client.httpx, "post", broken_post)
     with pytest.raises(github_client.PublicationStateUncertain, match="lost transport certainty"):
         github_client._github_create_pr(b"{}")
