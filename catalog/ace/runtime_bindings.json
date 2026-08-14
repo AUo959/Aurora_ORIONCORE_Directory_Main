@@ -55,7 +55,7 @@
       "path": "tools/ace/delegated_publication.py",
       "module": "ace.delegated_publication",
       "callable": "publish_delegated_packet",
-      "git_blob_sha": "938b793130dc61b6550e9bf0d8d191af093c7485"
+      "git_blob_sha": "6b349686242d10f48f2c9ab0933efcd7892578dd"
     }
   ]
 }
