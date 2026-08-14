@@ -47,7 +47,15 @@
       "path": "tools/ace/generic_entity_runtime.py",
       "module": "ace.generic_entity_runtime",
       "callable": "resolve_generic_entity_query",
-      "git_blob_sha": "c66a93dcc694d17e5bec9f6606079ec525681a23"
+      "git_blob_sha": "683ee5af3239ae34af372751055fe13c53953e70"
+    },
+    {
+      "capability_id": "ace.capability.canonrec.publish.delegated_pr",
+      "repository": "root",
+      "path": "tools/ace/delegated_publication.py",
+      "module": "ace.delegated_publication",
+      "callable": "publish_delegated_packet",
+      "git_blob_sha": "2bbbb587c54e333ecacc37dc115c526a8c1dd0c6"
     }
   ]
 }

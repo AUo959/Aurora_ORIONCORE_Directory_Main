@@ -1,0 +1,111 @@
+name: ACE Delegated Publication Validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "tools/ace/delegated_publication.py"
+      - "tools/ace/delegated_github.py"
+      - "tools/ace/generic_naming.py"
+      - "tools/ace/generic_entity_runtime.py"
+      - "tools/ace/generic_entity_gate.py"
+      - "tools/ace/remote_auth.py"
+      - "tools/ace/remote_service.py"
+      - "catalog/ace/policies/delegated_publication_v0_12.json"
+      - "catalog/ace/capability_manifests/delegated_publication.jsonl"
+      - "catalog/ace/runtime_bindings.json"
+      - "tests/test_aurora_ace_delegated_publication.py"
+      - "tests/test_aurora_ace_delegated_github.py"
+      - "tests/test_aurora_ace_remote.py"
+      - "tests/test_aurora_ace_generic_entity.py"
+      - "tests/test_aurora_ace_capability_discovery.py"
+      - ".github/workflows/ace-publication.yml"
+  push:
+    branches: [main]
+    paths:
+      - "tools/ace/delegated_publication.py"
+      - "tools/ace/delegated_github.py"
+      - "tools/ace/generic_naming.py"
+      - "tools/ace/generic_entity_runtime.py"
+      - "tools/ace/generic_entity_gate.py"
+      - "tools/ace/remote_auth.py"
+      - "tools/ace/remote_service.py"
+      - "catalog/ace/policies/delegated_publication_v0_12.json"
+      - "catalog/ace/capability_manifests/delegated_publication.jsonl"
+      - "catalog/ace/runtime_bindings.json"
+      - "tests/test_aurora_ace_delegated_publication.py"
+      - "tests/test_aurora_ace_delegated_github.py"
+      - "tests/test_aurora_ace_remote.py"
+      - "tests/test_aurora_ace_generic_entity.py"
+      - "tests/test_aurora_ace_capability_discovery.py"
+      - ".github/workflows/ace-publication.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  policy-and-transport:
+    name: Publication policy + remote authority (py3.12)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.12"
+      - run: |
+          python -m pip install --only-binary=:all: \
+            pytest==8.4.2 jsonschema==4.25.1 -r requirements-ace-mcp.txt
+      - env:
+          PYTHONPATH: tools
+        run: |
+          pytest \
+            tests/test_aurora_ace_delegated_publication.py \
+            tests/test_aurora_ace_delegated_github.py \
+            tests/test_aurora_ace_remote.py \
+            tests/test_aurora_ace_capability_discovery.py \
+            -v --tb=short
+
+  generic-naming-e2e:
+    name: Generic naming admission + CanonRec E2E (py3.12)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.12"
+      - run: |
+          python -m pip install --only-binary=:all: \
+            pytest==8.4.2 pyyaml==6.0.3 jsonschema==4.25.1
+      - name: Read registered nested repository pins
+        id: pins
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import yaml
+          rows = {r["name"]: r for r in yaml.safe_load(open("catalog/repo_registry.yaml"))["repos"]}
+          for key, name in (("cloudbank", "aurora-cloudbank-symbolic-main"), ("canonrec", "CanonRec")):
+              print(f"{key}_sha={rows[name]['head_sha']}")
+              print(f"{key}_branch={rows[name]['branch']}")
+          PY
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: AUo959/aurora-cloudbank-symbolic
+          ref: ${{ steps.pins.outputs.cloudbank_sha }}
+          path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: AUo959/CanonRec
+          ref: ${{ steps.pins.outputs.canonrec_sha }}
+          path: GUMAS_SIM_2.5/CanonRec
+      - name: Place provisioned repositories on registered branches
+        run: |
+          git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main checkout -B "${{ steps.pins.outputs.cloudbank_branch }}"
+          git -C GUMAS_SIM_2.5/CanonRec checkout -B "${{ steps.pins.outputs.canonrec_branch }}"
+      - env:
+          PYTHONPATH: tools
+          ACE_GENERIC_E2E: "1"
+        run: |
+          pytest tests/test_aurora_ace_generic_entity.py \
+            -k end_to_end_commit_and_replay_refusal \
+            -v --tb=short

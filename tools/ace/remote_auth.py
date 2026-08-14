@@ -17,7 +17,16 @@ from typing import Any, Mapping
 from .core import ACEError
 
 REMOTE_PRINCIPALS_ENV = "ACE_REMOTE_PRINCIPALS_JSON"
-KNOWN_SCOPES = frozenset({"ace:read", "ace:resolve", "ace:materialize", "ace:autonomic", "ace:runtime"})
+KNOWN_SCOPES = frozenset(
+    {
+        "ace:read",
+        "ace:resolve",
+        "ace:materialize",
+        "ace:autonomic",
+        "ace:runtime",
+        "ace:publish",
+    }
+)
 _PRINCIPAL = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:@/-]{0,127}$")
 _SHA256 = re.compile(r"^[a-f0-9]{64}$")
 

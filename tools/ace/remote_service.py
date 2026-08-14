@@ -1,8 +1,8 @@
 """Authenticated HTTP transport for the Aurora Canon Engine (ACE).
 
 This module is a transport adapter. It does not implement a second resolver,
-truth model, materializer, or runtime. Every request is authenticated, rebound
-to the authenticated principal, and delegated to existing ACE contracts.
+truth model, materializer, publisher, or runtime. Every request is authenticated,
+rebound to the authenticated principal, and delegated to existing ACE contracts.
 """
 
 from __future__ import annotations
@@ -12,6 +12,7 @@ from typing import Any, Mapping
 
 from fastapi import FastAPI, HTTPException, Request
 
+from .capability_discovery import build_capability_index
 from .core import ACEError, ROOT
 from .invocation import build_invocation_envelope, validate_invocation_envelope
 from .mcp_adapter import (
@@ -23,10 +24,11 @@ from .mcp_adapter import (
     ace_plan as _ace_plan,
 )
 from .remote_auth import RemoteAuthError, authenticate_bearer, load_remote_principals
-from .runtime_binding import resolve_verified_invocation
+from .runtime_binding import load_verified_runtime_binding, resolve_verified_invocation
 
-REMOTE_SERVICE_VERSION = "0.10.0"
+REMOTE_SERVICE_VERSION = "0.12.0"
 REMOTE_RUNTIME_REL = Path("reports/ace/remote_runtime")
+DELEGATED_PUBLICATION_CAPABILITY = "ace.capability.canonrec.publish.delegated_pr"
 MAX_REQUEST_BYTES = 1_048_576
 
 
@@ -72,6 +74,29 @@ def _authority_allowed(principal: Mapping[str, Any], authority_ref: str) -> None
         )
 
 
+def _require_scopes(principal: Mapping[str, Any], *scopes: str) -> None:
+    available = set(principal.get("scopes", []))
+    missing = [scope for scope in scopes if scope not in available]
+    if missing:
+        raise RemoteAuthError(
+            "ACE remote principal lacks required delegated-publication scopes: " + ", ".join(missing),
+            code="remote_scope_denied",
+            status_code=403,
+        )
+
+
+def _delegated_publisher(root: Path):  # type: ignore[no-untyped-def]
+    index = build_capability_index(root)
+    matches = [
+        item
+        for item in index.get("capabilities", [])
+        if item.get("capability_id") == DELEGATED_PUBLICATION_CAPABILITY
+    ]
+    if len(matches) != 1:
+        raise ACEError("delegated publication capability is not uniquely discoverable", code="invalid_manifest")
+    return load_verified_runtime_binding(matches[0], root=root)
+
+
 def _http_error(exc: Exception) -> HTTPException:
     if isinstance(exc, RemoteAuthError):
         return HTTPException(status_code=exc.status_code, detail={"code": exc.code, "message": str(exc)})
@@ -98,7 +123,8 @@ def create_app(*, environ: Mapping[str, str] | None = None, root: Path = ROOT) -
             try:
                 length = int(raw_length)
             except ValueError:
-                return HTTPException(status_code=400, detail="invalid content-length")
+                from fastapi.responses import JSONResponse
+                return JSONResponse(status_code=400, content={"detail": {"code": "invalid_content_length", "message": "invalid content-length"}})
             if length > MAX_REQUEST_BYTES:
                 from fastapi.responses import JSONResponse
                 return JSONResponse(status_code=413, content={"detail": {"code": "request_too_large", "message": "ACE remote request exceeds 1 MiB"}})
@@ -114,7 +140,7 @@ def create_app(*, environ: Mapping[str, str] | None = None, root: Path = ROOT) -
             "service": "aurora-ace",
             "version": REMOTE_SERVICE_VERSION,
             "authentication": "required_for_v1",
-            "canonical_authority": "unchanged",
+            "canonical_authority": "review_gated",
         }
 
     @app.get("/v1/capabilities")
@@ -211,6 +237,26 @@ def create_app(*, environ: Mapping[str, str] | None = None, root: Path = ROOT) -
                 runtime_root=runtime_root,
             )
             result["remote_principal"] = principal["principal"]
+            result["transport"] = "https_json"
+            return result
+        except Exception as exc:
+            raise _http_error(exc) from exc
+
+    @app.post("/v1/publish/delegated")
+    def publish_delegated(payload: dict[str, Any], request: Request) -> dict[str, Any]:
+        try:
+            principal = auth(request, "ace:publish")
+            _require_scopes(principal, "ace:autonomic", "ace:materialize")
+            authority_ref = str(payload["authority_ref"])
+            _authority_allowed(principal, authority_ref)
+            publisher = _delegated_publisher(root)
+            result = publisher(
+                str(payload["output_name"]),
+                authority_ref,
+                principal,
+                root=root,
+                runtime_root=runtime_root,
+            )
             result["transport"] = "https_json"
             return result
         except Exception as exc:
