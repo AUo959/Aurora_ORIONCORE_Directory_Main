@@ -7,15 +7,20 @@ on:
       - "tools/ace/**"
       - "tools/aurora_ace_mcp.py"
       - "tools/aurora_ace_mcp_operator.py"
+      - "tools/aurora_ace_remote.py"
       - "tests/test_aurora_ace_mcp.py"
       - "tests/test_aurora_ace_mcp_operator_transaction.py"
+      - "tests/test_aurora_ace_remote.py"
       - "requirements-ace-mcp.txt"
+      - "catalog/ace/runtime_bindings.json"
       - "catalog/contracts/aurora_ace_mcp_contract_v0_7.json"
       - "catalog/contracts/aurora_ace_mcp_contract_v0_8.json"
       - "catalog/contracts/aurora_ace_mcp_operator_transaction_v0_9.json"
+      - "catalog/contracts/aurora_ace_remote_service_v0_10.json"
       - "docs/AURORA_ACE__ADDENDUM__MCP_EXPOSURE__v0.7__2026-08-12.md"
       - "docs/AURORA_ACE__ADDENDUM__MCP_MATERIALIZATION__v0.8__2026-08-12.md"
       - "docs/AURORA_ACE__ADDENDUM__MCP_OPERATOR_TRANSACTIONS__v0.9__2026-08-12.md"
+      - "docs/AURORA_ACE__ADDENDUM__REMOTE_SERVICE__v0.10__2026-08-13.md"
       - ".github/workflows/ace-mcp.yml"
   push:
     branches: [main]
@@ -23,15 +28,20 @@ on:
       - "tools/ace/**"
       - "tools/aurora_ace_mcp.py"
       - "tools/aurora_ace_mcp_operator.py"
+      - "tools/aurora_ace_remote.py"
       - "tests/test_aurora_ace_mcp.py"
       - "tests/test_aurora_ace_mcp_operator_transaction.py"
+      - "tests/test_aurora_ace_remote.py"
       - "requirements-ace-mcp.txt"
+      - "catalog/ace/runtime_bindings.json"
       - "catalog/contracts/aurora_ace_mcp_contract_v0_7.json"
       - "catalog/contracts/aurora_ace_mcp_contract_v0_8.json"
       - "catalog/contracts/aurora_ace_mcp_operator_transaction_v0_9.json"
+      - "catalog/contracts/aurora_ace_remote_service_v0_10.json"
       - "docs/AURORA_ACE__ADDENDUM__MCP_EXPOSURE__v0.7__2026-08-12.md"
       - "docs/AURORA_ACE__ADDENDUM__MCP_MATERIALIZATION__v0.8__2026-08-12.md"
       - "docs/AURORA_ACE__ADDENDUM__MCP_OPERATOR_TRANSACTIONS__v0.9__2026-08-12.md"
+      - "docs/AURORA_ACE__ADDENDUM__REMOTE_SERVICE__v0.10__2026-08-13.md"
       - ".github/workflows/ace-mcp.yml"
 
 permissions:
@@ -39,7 +49,7 @@ permissions:
 
 jobs:
   protocol:
-    name: MCP v2 stdio surface (py3.12)
+    name: MCP v2 + authenticated remote surface (py3.12)
     runs-on: ubuntu-latest
 
     steps:
@@ -51,19 +61,20 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install ACE MCP dependencies
+      - name: Install ACE transport dependencies
         run: |
           python -m pip install --only-binary=:all: \
             pytest==8.4.2 \
             -r requirements-ace-mcp.txt
 
-      - name: Run adapter and operator transaction tests
+      - name: Run adapter, operator, remote, and verified-binding tests
         env:
           PYTHONPATH: tools
         run: |
           pytest \
             tests/test_aurora_ace_mcp.py \
             tests/test_aurora_ace_mcp_operator_transaction.py \
+            tests/test_aurora_ace_remote.py \
             -v --tb=short
 
       - name: Enumerate registered MCP tools through official client
