@@ -29,12 +29,14 @@ def test_committed_manifest_catalog_is_valid_unique_and_deterministic() -> None:
 
     assert first_ids == sorted(first_ids)
     assert first_ids == second_ids
-    assert len(first_ids) == len(set(first_ids)) == 17
+    assert len(first_ids) == len(set(first_ids)) == 19
     assert {
         "ace.capability.invoke.character.retrieve",
         "ace.capability.invoke.character.complete",
         "ace.capability.invoke.facility",
         "ace.capability.invoke.canon_fact",
+        "ace.capability.invoke.entity.complete",
+        "ace.capability.canonrec.materialize.generic_entity",
     } <= set(first_ids)
 
 

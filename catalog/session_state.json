@@ -434,9 +434,9 @@
       "detail": "Completed via OrionCore PR #66, squash merge 24ce40f63fa06758728fe246c447d1110709a69e. ACE now executes all six determination states. v0.3 adds read-only bounded CanonRec evidence retrieval, allowlisted deterministic derivation, and fail-closed TRUE_CONFLICT with complete claim/source provenance. Final PR and post-merge mainline gates passed Python 3.9, full provisioned Python 3.12, workspace verification, lint/schema, repo sync, and gitleaks. No Orion L1 runtime/provider state was activated and the paused experiment was not started, resumed, or advanced."
     }
   ],
-  "last_updated": "2026-08-12T03:08:00Z",
+  "last_updated": "2026-08-14T01:42:21Z",
   "last_platform": "codex",
-  "last_session_summary": "ACE v0.3 canon retrieval, deterministic derivation, and true-conflict semantics merged; all six ACE determination states are now executable.",
+  "last_session_summary": "ACE v0.10 authenticated remote service and verified runtime bindings merged to main; ACE v0.11 generic native L2 entity completion/publication is in PR #76 with native-kind validation and isolated CanonRec commit/replay E2E green; handoff freshness refreshed before final merge validation.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -459,6 +459,48 @@
   },
   "recent_commits": [
     {
+      "sha": "318bbaa",
+      "date": "2026-08-13",
+      "platform": "codex",
+      "summary": "feat(ace): authenticated remote service and verified runtime bindings v0.10"
+    },
+    {
+      "sha": "6f1756d",
+      "date": "2026-08-12",
+      "platform": "codex",
+      "summary": "feat(ace): durable local operator transaction choreography v0.9"
+    },
+    {
+      "sha": "ad6fcb4",
+      "date": "2026-08-12",
+      "platform": "codex",
+      "summary": "feat(ace): owner-gated MCP materialization v0.8"
+    },
+    {
+      "sha": "4fbacae",
+      "date": "2026-08-12",
+      "platform": "codex",
+      "summary": "feat(ace): bounded stdio MCP surface v0.7"
+    },
+    {
+      "sha": "9d78bf9",
+      "date": "2026-08-12",
+      "platform": "codex",
+      "summary": "feat(ace): validated capability-manifest discovery v0.6"
+    },
+    {
+      "sha": "4444914",
+      "date": "2026-08-12",
+      "platform": "codex",
+      "summary": "feat(ace): atomic native character materialization v0.5"
+    },
+    {
+      "sha": "fdf1276",
+      "date": "2026-08-12",
+      "platform": "codex",
+      "summary": "feat(ace): retrieve existing characters before generation v0.4"
+    },
+    {
       "sha": "24ce40f",
       "date": "2026-08-11",
       "platform": "codex",
@@ -471,52 +513,10 @@
       "summary": "feat(ace): merge materialization + determination ledger v0.2"
     },
     {
-      "sha": "9670ff1",
-      "date": "2026-08-11",
-      "platform": "claude-code",
-      "summary": "chore(session): record the L1 embodiment rescue and queue a worktree sweep"
-    },
-    {
-      "sha": "bca1111",
-      "date": "2026-08-11",
-      "platform": "claude-code",
-      "summary": "test(ace): enforce the ACE core invariants in code, not only in prose"
-    },
-    {
-      "sha": "92e3bc4",
-      "date": "2026-08-11",
-      "platform": "claude-code",
-      "summary": "chore(session): record ACE v0.1 landing; queue the v0.2 scope"
-    },
-    {
       "sha": "5383d83",
       "date": "2026-08-11",
       "platform": "claude-code",
       "summary": "feat(ace): land the Aurora Canon Engine v0.1 MVP"
-    },
-    {
-      "sha": "c165e9b",
-      "date": "2026-08-11",
-      "platform": "claude-code",
-      "summary": "docs(l1): record embodiment recovery audit"
-    },
-    {
-      "sha": "a3da110",
-      "date": "2026-08-11",
-      "platform": "codex",
-      "summary": "chore(session): record CloudBank backlog pass"
-    },
-    {
-      "sha": "7a3a39f",
-      "date": "2026-08-11",
-      "platform": "codex",
-      "summary": "chore(catalog): sync CloudBank pin after PR 1482"
-    },
-    {
-      "sha": "4ee5dab",
-      "date": "2026-08-11",
-      "platform": "codex",
-      "summary": "test(canon): guard every validator vocabulary against committed canon"
     }
   ],
   "security_events": [
@@ -708,7 +708,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "24ce40f63fa06758728fe246c447d1110709a69e",
+    "main_sha": "318bbaa35fd09bcf76b8710b41f2127781588aa0",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",

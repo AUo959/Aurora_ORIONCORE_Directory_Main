@@ -40,6 +40,14 @@
       "module": "ace.canon_resolution",
       "callable": "resolve_canon_query",
       "git_blob_sha": "3c395bb6d4fb5b7ae98a7f5988960d129539b327"
+    },
+    {
+      "capability_id": "ace.capability.invoke.entity.complete",
+      "repository": "root",
+      "path": "tools/ace/generic_entity_runtime.py",
+      "module": "ace.generic_entity_runtime",
+      "callable": "resolve_generic_entity_query",
+      "git_blob_sha": "c66a93dcc694d17e5bec9f6606079ec525681a23"
     }
   ]
 }

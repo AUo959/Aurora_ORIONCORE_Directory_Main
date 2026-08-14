@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.11.0",
+  "record_type": "aurora_ace_generic_native_entity_contract",
+  "native_l2_entity_kinds": [
+    "location", "ship", "fleet", "anomaly", "megafauna", "facility", "domain",
+    "polity", "species", "organization", "mobile_asset", "ship_class", "equipment",
+    "place", "conflict", "event", "report"
+  ],
+  "specialist_exclusions": {
+    "character": "CharForge multi-artifact character transaction",
+    "L1_facility_binding": "dedicated ACE L1 facility-binding transaction"
+  },
+  "target_surface": "canon/L2/entities/<entity_id>.json",
+  "validation_owner": "skills/aurora-canon-reconciler/scripts/validate_entity.py",
+  "publication": {
+    "new_entity_only": true,
+    "target_repository": "CanonRec",
+    "feature_branch_required": true,
+    "exact_registered_baseline_required": true,
+    "identity_collision_recheck_required": true,
+    "canonical_certainty": "CANON",
+    "git_commits_per_transaction": 1,
+    "rollback_on_failure": true
+  },
+  "authority": {
+    "preview_commit_handshake": true,
+    "authorization_token_state_bound": true,
+    "supported_modes": ["owner_gated_materialize", "delegated_materialize"],
+    "generic_record_path_may_replace_specialist_character_format": false
+  }
+}

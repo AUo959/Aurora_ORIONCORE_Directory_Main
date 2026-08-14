@@ -125,6 +125,7 @@ def test_runtime_binding_registry_pins_exact_source_blobs() -> None:
         "ace.capability.invoke.character.complete",
         "ace.capability.invoke.facility",
         "ace.capability.invoke.canon_fact",
+        "ace.capability.invoke.entity.complete",
     }
     for binding in registry.values():
         source = REPO_ROOT / binding["path"]
