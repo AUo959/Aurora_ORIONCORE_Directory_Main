@@ -22,7 +22,7 @@ from .generic_naming import mint_generic_naming_receipt
 from .runtime_binding import _git_blob_sha
 
 _GENERIC_NAMING_REL = Path("tools/ace/generic_naming.py")
-_GENERIC_NAMING_BLOB = "3059542cfd051427464f3ef88c127c8bb463e8e9"
+_GENERIC_NAMING_BLOB = "adb19b47f1c4e5c31b74bd40fb92de04e307e28d"
 
 
 def _manifest_digest(capability_id: str, *, root: Path) -> str:
