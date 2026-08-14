@@ -6,8 +6,6 @@ import json
 import os
 from typing import Any, Mapping
 
-import httpx
-
 from .core import ACEError
 
 _GITHUB_PULL_URL = "https://api.github.com/repos/AUo959/CanonRec/pulls"
@@ -18,6 +16,18 @@ _MAX_RESPONSE_BYTES = 1_048_576
 
 class PublicationStateUncertain(ACEError):
     """A remote PR may exist, so automatic branch deletion is unsafe."""
+
+
+def _httpx_module() -> Any:
+    """Load the optional remote transport only when publication is invoked."""
+    try:
+        import httpx
+    except ImportError as exc:
+        raise ACEError(
+            "delegated publication requires the httpx runtime dependency",
+            code="tool_unavailable",
+        ) from exc
+    return httpx
 
 
 def _github_token() -> str:
@@ -83,6 +93,7 @@ def _request_payload(
 
 
 def _github_create_pr(body: bytes) -> dict[str, Any]:
+    httpx = _httpx_module()
     headers = {
         "Accept": "application/vnd.github+json",
         "Authorization": f"Bearer {_github_token()}",
