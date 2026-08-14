@@ -48,7 +48,7 @@ _AUTHORITY_REF = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:@/-]{0,255}$")
 _GENERIC_NAMING_REL = Path("tools/ace/generic_naming.py")
 _GENERIC_NAMING_BLOB = "adb19b47f1c4e5c31b74bd40fb92de04e307e28d"
 _GITHUB_HELPER_REL = Path("tools/ace/delegated_github.py")
-_GITHUB_HELPER_BLOB = "a82f75c431291622e86d56724112d37575f84b7d"
+_GITHUB_HELPER_BLOB = "902eaecdb89e5a94f1e0ff00470bc99856b96bd9"
 
 
 def _git(repo: Path, *args: str, check: bool = True) -> str:
