@@ -1,4 +1,4 @@
-generated_at: '2026-08-10T02:14:03Z'
+generated_at: '2026-08-15T05:26:07Z'
 root: .
 logical_taxonomy:
 - repos
@@ -405,6 +405,17 @@ entries:
   retention_policy: preserve
   owner: repository-owner
   status: protected
+- id: recovery
+  kind: intake_collection
+  current_path: recovery
+  logical_zone: intake
+  planned_path: intake/recovery
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: reports
   kind: report_zone
   current_path: reports

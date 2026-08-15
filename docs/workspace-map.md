@@ -1,12 +1,12 @@
 # Workspace Map
 
-- Generated: `2026-08-10T02:14:03Z`
+- Generated: `2026-08-15T05:26:07Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `43`
+- Top-level entries cataloged: `44`
 - Nested repos registered: `9`
-- Archive or binary artifacts inventoried: `601`
+- Archive or binary artifacts inventoried: `602`
 - Classification overrides loaded: `10` from `catalog/classification_overrides.yaml`
-- Top-level paths excluded by privacy screen: `10`
+- Top-level paths excluded by privacy screen: `11`
 
 ## Zones
 
@@ -14,7 +14,7 @@
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `11` top-level entries
-- `intake`: `6` top-level entries
+- `intake`: `7` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
@@ -38,11 +38,12 @@
 - `Aurora_Sim_Architecture` -> `intake/Aurora_Sim_Architecture` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 - `QGIA_Axiom_Doctrine_Narrative.md` -> `intake/QGIA_Axiom_Doctrine_Narrative.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `QGIA_Runtime_OnePager.md` -> `intake/QGIA_Runtime_OnePager.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `recovery` -> `intake/recovery` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 - `warrant-lens` -> `intake/warrant-lens` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 
 ## Privacy Screen
 
-- `auto_scope_unknown`: `10` top-level paths excluded
+- `auto_scope_unknown`: `11` top-level paths excluded
 
 ## Largest Archive/Binary Artifacts
 
