@@ -459,6 +459,12 @@
   },
   "recent_commits": [
     {
+      "sha": "5a0a349",
+      "date": "2026-08-15",
+      "platform": "codex",
+      "summary": "feat(ace): add repository-grounded v1 acceptance harness"
+    },
+    {
       "sha": "e628706",
       "date": "2026-08-15",
       "platform": "codex",
@@ -511,12 +517,6 @@
       "date": "2026-08-15",
       "platform": "codex",
       "summary": "fix(ace): restore v0.12 post-merge acceptance"
-    },
-    {
-      "sha": "d87114e",
-      "date": "2026-08-15",
-      "platform": "codex",
-      "summary": "feat(ace): add v0.12 policy-gated delegated canon publication (#77)"
     }
   ],
   "security_events": [
@@ -720,7 +720,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "e628706717a7454f0408d3918764957d6df5308f",
+    "main_sha": "5a0a349a23536e5be8ff84fe5d7ac34871632ef7",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
