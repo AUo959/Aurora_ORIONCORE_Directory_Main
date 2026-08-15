@@ -1,4 +1,4 @@
-.PHONY: help setup test verify scan sync-audit sync-audit-all gh-auth-check pr-packet lint health devkit-check devkit-report devkit-install-plan skills-check skills-install session-claims session-claim-check session-state-check project-focus cloudbank-broker cloudbank-broker-check recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report stack-validation stack-validation-report command-intent-snapshot command-intent-snapshot-report simulation-readiness simulation-readiness-report simulation-smoke-report demo-readiness demo-readiness-report kubernetes-readiness kubernetes-readiness-report operator-snapshot operator-snapshot-report confidence-audit confidence-audit-report integration-gate l2-scenario-uptake ace-check ace-live-check clean
+.PHONY: help setup test verify scan sync-audit sync-audit-all gh-auth-check pr-packet lint health devkit-check devkit-report devkit-install-plan skills-check skills-install session-claims session-claim-check session-state-check project-focus cloudbank-broker cloudbank-broker-check recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report stack-validation stack-validation-report command-intent-snapshot command-intent-snapshot-report simulation-readiness simulation-readiness-report simulation-smoke-report demo-readiness demo-readiness-report kubernetes-readiness kubernetes-readiness-report operator-snapshot operator-snapshot-report confidence-audit confidence-audit-report integration-gate l2-scenario-uptake ace-check ace-live-check ace-acceptance ace-acceptance-report clean
 
 PYTHON ?= python3
 PYTEST ?= pytest
@@ -29,6 +29,12 @@ ace-check: ## Run focused Aurora Canon Engine unit checks
 
 ace-live-check: ## Run ACE checks including the registered-repository vertical slice
 	AURORA_ACE_LIVE_TESTS=1 $(PYTEST) tests/test_aurora_ace.py -q
+
+ace-acceptance: ## Validate the ACE v1 matrix and run local-safe practical checks
+	$(PYTHON) tools/aurora_ace_acceptance.py --run-practical --summary
+
+ace-acceptance-report: ## Persist the current local-safe ACE v1 acceptance receipt
+	$(PYTHON) tools/aurora_ace_acceptance.py --run-practical --persist-report --summary
 
 # ── Workspace Operations ─────────────────────────────────────────────────
 

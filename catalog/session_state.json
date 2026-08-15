@@ -434,9 +434,9 @@
       "detail": "Completed via OrionCore PR #66, squash merge 24ce40f63fa06758728fe246c447d1110709a69e. ACE now executes all six determination states. v0.3 adds read-only bounded CanonRec evidence retrieval, allowlisted deterministic derivation, and fail-closed TRUE_CONFLICT with complete claim/source provenance. Final PR and post-merge mainline gates passed Python 3.9, full provisioned Python 3.12, workspace verification, lint/schema, repo sync, and gitleaks. No Orion L1 runtime/provider state was activated and the paused experiment was not started, resumed, or advanced."
     }
   ],
-  "last_updated": "2026-08-15T06:33:01Z",
+  "last_updated": "2026-08-15T06:42:47Z",
   "last_platform": "codex",
-  "last_session_summary": "CloudBank PR #1506 takeover completed through accepted and sealed GUMAS Phase 9. Deterministic live-observation orchestrator and hash-linked ledger are green at accepted head 689eb440; seal head f61ea28c leaves the draft open. Phase 10 reporter contract is queued next; Control A/B/C and Run 0 remain blocked.",
+  "last_session_summary": "Implemented repository-grounded ACE v1 acceptance: corrected v1.1 handoff, 13-row matrix/schema, evaluator with temporary-clone safety, CI receipt lane, tests, README/spec/Make targets, and NameService manifest refresh after source-identical CloudBank re-pin. Latest isolated receipt: 10 ready, 2 attention (missing MCP/httpx in local venv), 1 blocked (Orion owner source changed; policy intentionally not re-pinned). Canonical nested repos remained unchanged.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -458,6 +458,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "e628706",
+      "date": "2026-08-15",
+      "platform": "codex",
+      "summary": "chore(session): hand off GUMAS Phase 10 reporter"
+    },
     {
       "sha": "a72d315",
       "date": "2026-08-15",
@@ -511,12 +517,6 @@
       "date": "2026-08-15",
       "platform": "codex",
       "summary": "feat(ace): add v0.12 policy-gated delegated canon publication (#77)"
-    },
-    {
-      "sha": "b460811",
-      "date": "2026-08-15",
-      "platform": "codex",
-      "summary": "feat(ace): add v0.11 generic native L2 entity completion"
     }
   ],
   "security_events": [
@@ -711,10 +711,16 @@
       "priority": "high",
       "assigned_to": "either",
       "description": "Continue CloudBank PR #1506 from DTER v2.0: write the Phase 10 contract first, then implement the deterministic factual reporter and evidence exporter as a pure projection over validated Phase 9 artifacts. Keep Control A/B/C and Run 0 blocked."
+    },
+    {
+      "id": "ace-v1-orion-owner-compatibility",
+      "priority": "high",
+      "assigned_to": "either",
+      "description": "Reconcile ACE v0.13 Orion progression with registered CloudBank 64d5bca20551a557c59db905189576664c0251d4. The owner source changed from blob dd3ae6f7 to 5b6d9351 with governed staffing runtime additions; do not hash-repin blindly, load or advance the paused run, or weaken exact-owner checks. Validate persisted-state compatibility and preflight-only behavior, then issue a versioned policy/contract/test update before sealing ACE v1."
     }
   ],
   "known_state": {
-    "main_sha": "a72d315bc6b01e93c786b12e5db65e445a3a5676",
+    "main_sha": "e628706717a7454f0408d3918764957d6df5308f",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",

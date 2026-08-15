@@ -76,14 +76,16 @@ licenses and release decisions.
 - `intake/`: ambiguous loose items pending review
 - `_staging/`: rehearsals and rollback-safe staging
 
-## Aurora Canon Engine MVP
+## Aurora Canon Engine
 
 ACE is the root-control-plane capability router for Aurora questions that need
-live repository evidence plus deterministic canonical completion. The current
-MVP implements the unobserved-character name-and-operational-background flow:
-it compiles the question, routes to NameService and CharForge, validates the
-candidate with CanonRec, and emits an atomic commit-ready packet without
-mutating a nested repository.
+live repository evidence plus deterministic canonical completion. The engine
+is implemented through v0.13: retrieval-first character and canon-fact
+resolution, constitutive character/facility/generic-entity completion,
+manifest-derived capability discovery, shared invocation modes, authority-gated
+materialization and ledgering, MCP and authenticated remote surfaces, delegated
+publication, and governed single-tick Orion progression through its native
+CloudBank owner.
 
 ```bash
 python3 tools/aurora_ace.py capabilities
@@ -96,13 +98,21 @@ python3 tools/aurora_ace.py resolve \
   --out /private/tmp/ace-character-packet
 make ace-check
 make ace-live-check
+make ace-acceptance
+make ace-acceptance-report
 ```
 
-The packet contains the query, selected capability index, raw and projected
-name evidence, transaction receipts, verified capsule, CanonRec candidate,
-validation receipts, artifact index, and determination receipt. Existing-canon
-retrieval, ledgering, materialization, MCP exposure, and non-character entity
-classes remain subsequent phases.
+The original character packet still contains the query, selected capability
+index, raw and projected name evidence, transaction receipts, verified capsule,
+CanonRec candidate, validation receipts, artifact index, and determination
+receipt. Advanced operator surfaces remain in their owning entry points under
+`tools/aurora_ace_*.py`; they are not collapsed into a fictional monolithic API.
+
+The repository-grounded v1 composition matrix is
+`catalog/contracts/aurora_ace_v1_acceptance_matrix.json`. Its evaluator reports
+missing dependencies or unrun isolated checks as `attention`, distinct from an
+executed product failure. Transactional end-to-end rows use temporary clones and
+do not mutate canonical nested repositories.
 
 ## Repo-Local Codex Plugins
 

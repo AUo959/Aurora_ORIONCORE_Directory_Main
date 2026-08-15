@@ -8,10 +8,17 @@ refined_at: 2026-08-11
 refinement_basis: practical_tool_composition_pass_1
 owner_repo: AUo959/Aurora_ORIONCORE_Directory_Main
 short_name: ACE
-implementation_status: local_character_completion_mvp
+implementation_status: implemented_through_v0_13_v1_acceptance_candidate
+current_state_ref: docs/AURORA_ACE__HANDOFF__CURRENT_STATE_AND_V1_ACCEPTANCE__v1.1__2026-08-15.md
 ---
 
 # Aurora Canon Engine (ACE)
+
+> **Current implementation note (2026-08-15):** This document remains the
+> foundational v0.1 specification. ACE is implemented through the governed
+> v0.13 Orion progression boundary. The current implementation inventory and
+> machine-checkable v1 composition criteria are maintained in the linked v1.1
+> handoff rather than being backfilled into this historical design baseline.
 
 ## 1. Purpose
 
