@@ -434,9 +434,9 @@
       "detail": "Completed via OrionCore PR #66, squash merge 24ce40f63fa06758728fe246c447d1110709a69e. ACE now executes all six determination states. v0.3 adds read-only bounded CanonRec evidence retrieval, allowlisted deterministic derivation, and fail-closed TRUE_CONFLICT with complete claim/source provenance. Final PR and post-merge mainline gates passed Python 3.9, full provisioned Python 3.12, workspace verification, lint/schema, repo sync, and gitleaks. No Orion L1 runtime/provider state was activated and the paused experiment was not started, resumed, or advanced."
     }
   ],
-  "last_updated": "2026-08-14T01:42:21Z",
+  "last_updated": "2026-08-15T06:33:01Z",
   "last_platform": "codex",
-  "last_session_summary": "ACE v0.10 authenticated remote service and verified runtime bindings merged to main; ACE v0.11 generic native L2 entity completion/publication is in PR #76 with native-kind validation and isolated CanonRec commit/replay E2E green; handoff freshness refreshed before final merge validation.",
+  "last_session_summary": "CloudBank PR #1506 takeover completed through accepted and sealed GUMAS Phase 9. Deterministic live-observation orchestrator and hash-linked ledger are green at accepted head 689eb440; seal head f61ea28c leaves the draft open. Phase 10 reporter contract is queued next; Control A/B/C and Run 0 remain blocked.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -459,64 +459,64 @@
   },
   "recent_commits": [
     {
-      "sha": "318bbaa",
-      "date": "2026-08-13",
+      "sha": "a72d315",
+      "date": "2026-08-15",
       "platform": "codex",
-      "summary": "feat(ace): authenticated remote service and verified runtime bindings v0.10"
+      "summary": "chore(catalog): sync CloudBank backlog merges"
     },
     {
-      "sha": "6f1756d",
-      "date": "2026-08-12",
+      "sha": "9df49a3",
+      "date": "2026-08-15",
       "platform": "codex",
-      "summary": "feat(ace): durable local operator transaction choreography v0.9"
+      "summary": "chore(catalog): re-sync qgia pin after the CI knowledge-index auto-update"
     },
     {
-      "sha": "ad6fcb4",
-      "date": "2026-08-12",
+      "sha": "b397323",
+      "date": "2026-08-15",
       "platform": "codex",
-      "summary": "feat(ace): owner-gated MCP materialization v0.8"
+      "summary": "chore(catalog): sync qgia-knowledge-library pin after landing the domain-structure guard"
     },
     {
-      "sha": "4fbacae",
-      "date": "2026-08-12",
+      "sha": "4db4ab8",
+      "date": "2026-08-15",
       "platform": "codex",
-      "summary": "feat(ace): bounded stdio MCP surface v0.7"
+      "summary": "reports: executive decision brief 2026-08-15 (closes brief_freshness at 70 commits)"
     },
     {
-      "sha": "9d78bf9",
-      "date": "2026-08-12",
+      "sha": "a0eabc7",
+      "date": "2026-08-15",
       "platform": "codex",
-      "summary": "feat(ace): validated capability-manifest discovery v0.6"
+      "summary": "fix(devkit): distinguish 'missing here' from 'missing'"
     },
     {
-      "sha": "4444914",
-      "date": "2026-08-12",
+      "sha": "a31b9bb",
+      "date": "2026-08-15",
       "platform": "codex",
-      "summary": "feat(ace): atomic native character materialization v0.5"
+      "summary": "chore(catalog): inventory the recovery/ top-level directory"
     },
     {
-      "sha": "fdf1276",
-      "date": "2026-08-12",
+      "sha": "31fb413",
+      "date": "2026-08-15",
       "platform": "codex",
-      "summary": "feat(ace): retrieve existing characters before generation v0.4"
+      "summary": "feat(ace): add v0.13 governed Orion L1 progression"
     },
     {
-      "sha": "24ce40f",
-      "date": "2026-08-11",
+      "sha": "a3bf27f",
+      "date": "2026-08-15",
       "platform": "codex",
-      "summary": "feat(ace): executable canon retrieval, derivation, and true conflict v0.3"
+      "summary": "fix(ace): restore v0.12 post-merge acceptance"
     },
     {
-      "sha": "47dcecf",
-      "date": "2026-08-11",
+      "sha": "d87114e",
+      "date": "2026-08-15",
       "platform": "codex",
-      "summary": "feat(ace): merge materialization + determination ledger v0.2"
+      "summary": "feat(ace): add v0.12 policy-gated delegated canon publication (#77)"
     },
     {
-      "sha": "5383d83",
-      "date": "2026-08-11",
-      "platform": "claude-code",
-      "summary": "feat(ace): land the Aurora Canon Engine v0.1 MVP"
+      "sha": "b460811",
+      "date": "2026-08-15",
+      "platform": "codex",
+      "summary": "feat(ace): add v0.11 generic native L2 entity completion"
     }
   ],
   "security_events": [
@@ -705,10 +705,16 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Uncommitted work in /private/tmp worktrees is invisible to every status check that looks at the main tree, and /private/tmp is subject to OS cleanup. The L1 embodiment work sat there with zero commits on its branch and was nearly lost. Add a check (Stop hook or make target) that walks 'git worktree list' for every registered repo and reports dirty worktrees plus branches with zero commits, so fragile work surfaces automatically instead of by chance."
+    },
+    {
+      "id": "gumas-phase10-reporter",
+      "priority": "high",
+      "assigned_to": "either",
+      "description": "Continue CloudBank PR #1506 from DTER v2.0: write the Phase 10 contract first, then implement the deterministic factual reporter and evidence exporter as a pure projection over validated Phase 9 artifacts. Keep Control A/B/C and Run 0 blocked."
     }
   ],
   "known_state": {
-    "main_sha": "318bbaa35fd09bcf76b8710b41f2127781588aa0",
+    "main_sha": "a72d315bc6b01e93c786b12e5db65e445a3a5676",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -1246,5 +1252,6 @@
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
-  }
+  },
+  "_summary_set_manually": true
 }
