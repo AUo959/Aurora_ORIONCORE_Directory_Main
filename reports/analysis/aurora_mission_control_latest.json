@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-10T23:06:29Z",
+  "generated_at": "2026-08-15T05:30:37Z",
   "root": ".",
   "tool": "aurora_mission_control",
   "run_mode": "read_only",
@@ -12,17 +12,17 @@
     "source_count": 7,
     "source_error_count": 0,
     "operator_inbox_count": 12,
-    "blocking_count": 4,
-    "approval_required_count": 10,
+    "blocking_count": 0,
+    "approval_required_count": 9,
     "by_priority": {
-      "P1": 7,
-      "P2": 5
+      "P1": 4,
+      "P2": 8
     },
     "by_category": {
       "boundary": 1,
-      "developer_tooling": 9,
+      "developer_tooling": 8,
       "recovery_review": 1,
-      "validation": 1
+      "validation": 2
     },
     "by_status": {
       "blocked": 5,
@@ -42,7 +42,7 @@
     },
     "workspace_verify": {
       "status": "warn",
-      "finding_count": 2,
+      "finding_count": 3,
       "blocking_count": 0
     },
     "integration_gate": {
@@ -57,7 +57,7 @@
       "restricted_candidate_count": 33
     },
     "devkit": {
-      "status": "BLOCKED",
+      "status": "WARN",
       "tools_ok": 8,
       "tools_total": 21,
       "finding_count": 15,
@@ -65,14 +65,14 @@
     },
     "recommendations": {
       "status": "open",
-      "recommendation_count": 24,
-      "blocking_count": 4,
+      "recommendation_count": 25,
+      "blocking_count": 0,
       "approval_required_count": 21
     },
     "git_status": {
       "status": "dirty",
-      "changed_path_count": 7,
-      "branch": "main...origin/main"
+      "changed_path_count": 10,
+      "branch": "main...origin/main [ahead 1]"
     }
   },
   "build_lanes": [
@@ -203,88 +203,6 @@
   ],
   "operator_inbox": [
     {
-      "item_id": "mission-p1-devkit-developer_tooling-gh-is-missing",
-      "title": "gh is missing.",
-      "category": "developer_tooling",
-      "priority": "P1",
-      "source": "devkit",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::tool_gh_missing"
-      ],
-      "recommended_next_action": "Required for GitHub PR, issue, and CI maintenance.",
-      "suggested_commands": [
-        "brew install gh",
-        "brew upgrade gh"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": true,
-      "status": "blocked"
-    },
-    {
-      "item_id": "mission-p1-devkit-developer_tooling-sqlite3-is-missing",
-      "title": "sqlite3 is missing.",
-      "category": "developer_tooling",
-      "priority": "P1",
-      "source": "devkit",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::tool_sqlite3_missing"
-      ],
-      "recommended_next_action": "Useful for local indexes, receipts, and lightweight metadata stores.",
-      "suggested_commands": [
-        "brew install sqlite",
-        "brew upgrade sqlite"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": true,
-      "status": "blocked"
-    },
-    {
-      "item_id": "mission-p1-devkit-developer_tooling-aurora-cloudbank-symbolic-main-python-environment-is-blocked",
-      "title": "aurora-cloudbank-symbolic-main Python environment is blocked.",
-      "category": "developer_tooling",
-      "priority": "P1",
-      "source": "devkit",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::repo_python_env_aurora-cloudbank-symbolic-main_blocked"
-      ],
-      "recommended_next_action": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
-      "suggested_commands": [
-        "python3 tools/aurora_devkit.py --install-plan"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": true,
-      "status": "open"
-    },
-    {
-      "item_id": "mission-p1-devkit-developer_tooling-python3-12-is-missing",
-      "title": "python3.12 is missing.",
-      "category": "developer_tooling",
-      "priority": "P1",
-      "source": "devkit",
-      "target_repo": "root",
-      "owner_surface": "root control-plane repo",
-      "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::tool_python3.12_missing"
-      ],
-      "recommended_next_action": "Canonical Python floor (declared in .python-version). Required for CloudBank venv compatibility and CI parity. CI gates merges on 3.12. Install via: uv python install 3.12",
-      "suggested_commands": [
-        "python3 tools/aurora_devkit.py --install-plan"
-      ],
-      "approval_required": true,
-      "mutation_posture": "advisory_only",
-      "blocking": true,
-      "status": "open"
-    },
-    {
       "item_id": "mission-p1-workspace_verify-boundary-resolve-workspace-verifier-finding-repo-registry-coverage",
       "title": "Resolve workspace verifier finding: repo_registry_coverage",
       "category": "boundary",
@@ -345,8 +263,28 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p2-devkit-developer_tooling-docker-is-missing",
-      "title": "docker is missing.",
+      "item_id": "mission-p1-workspace_verify-validation-resolve-workspace-verifier-finding-session-state-freshness",
+      "title": "Resolve workspace verifier finding: session_state_freshness",
+      "category": "validation",
+      "priority": "P1",
+      "source": "workspace_verify",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "tools/workspace_verify.py::session_state_freshness"
+      ],
+      "recommended_next_action": "Run `python3 tools/session_stop_hook.py` to auto-update, or update catalog/session_state.json manually and commit.",
+      "suggested_commands": [
+        "python3 tools/workspace_verify.py"
+      ],
+      "approval_required": false,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "item_id": "mission-p2-devkit-developer_tooling-docker-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "docker is missing in this execution context (non-canonical workspace path).",
       "category": "developer_tooling",
       "priority": "P2",
       "source": "devkit",
@@ -355,7 +293,7 @@
       "evidence_refs": [
         "catalog/dev_toolkit_manifest.json::tool_docker_missing"
       ],
-      "recommended_next_action": "Recommended for devcontainers, service stacks, and reproducible app builds.",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended for devcontainers, service stacks, and reproducible app builds.",
       "suggested_commands": [
         "brew install --cask docker",
         "brew upgrade --cask docker"
@@ -366,8 +304,29 @@
       "status": "blocked"
     },
     {
-      "item_id": "mission-p2-devkit-developer_tooling-go-is-missing",
-      "title": "go is missing.",
+      "item_id": "mission-p2-devkit-developer_tooling-gh-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "gh is missing in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "source": "devkit",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_gh_missing"
+      ],
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Required for GitHub PR, issue, and CI maintenance.",
+      "suggested_commands": [
+        "brew install gh",
+        "brew upgrade gh"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "blocked"
+    },
+    {
+      "item_id": "mission-p2-devkit-developer_tooling-go-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "go is missing in this execution context (non-canonical workspace path).",
       "category": "developer_tooling",
       "priority": "P2",
       "source": "devkit",
@@ -376,7 +335,7 @@
       "evidence_refs": [
         "catalog/dev_toolkit_manifest.json::tool_go_missing"
       ],
-      "recommended_next_action": "Optional for portable developer services and CLIs.",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Optional for portable developer services and CLIs.",
       "suggested_commands": [
         "brew install go",
         "brew upgrade go"
@@ -387,8 +346,8 @@
       "status": "blocked"
     },
     {
-      "item_id": "mission-p2-devkit-developer_tooling-rust-is-missing",
-      "title": "rust is missing.",
+      "item_id": "mission-p2-devkit-developer_tooling-rust-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "rust is missing in this execution context (non-canonical workspace path).",
       "category": "developer_tooling",
       "priority": "P2",
       "source": "devkit",
@@ -397,7 +356,7 @@
       "evidence_refs": [
         "catalog/dev_toolkit_manifest.json::tool_rust_missing"
       ],
-      "recommended_next_action": "Optional for high-performance local tools and native extensions.",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Optional for high-performance local tools and native extensions.",
       "suggested_commands": [
         "brew install rust",
         "brew upgrade rust"
@@ -408,8 +367,49 @@
       "status": "blocked"
     },
     {
-      "item_id": "mission-p2-devkit-developer_tooling-brew-is-missing",
-      "title": "brew is missing.",
+      "item_id": "mission-p2-devkit-developer_tooling-sqlite3-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "sqlite3 is missing in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "source": "devkit",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_sqlite3_missing"
+      ],
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Useful for local indexes, receipts, and lightweight metadata stores.",
+      "suggested_commands": [
+        "brew install sqlite",
+        "brew upgrade sqlite"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "blocked"
+    },
+    {
+      "item_id": "mission-p2-devkit-developer_tooling-aurora-cloudbank-symbolic-main-python-environment-is-blocked-in-this-execution-c",
+      "title": "aurora-cloudbank-symbolic-main Python environment is blocked in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "source": "devkit",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::repo_python_env_aurora-cloudbank-symbolic-main_blocked"
+      ],
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real environment failure. CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
+      "suggested_commands": [
+        "python3 tools/aurora_devkit.py --install-plan"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "item_id": "mission-p2-devkit-developer_tooling-brew-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "brew is missing in this execution context (non-canonical workspace path).",
       "category": "developer_tooling",
       "priority": "P2",
       "source": "devkit",
@@ -418,7 +418,7 @@
       "evidence_refs": [
         "catalog/dev_toolkit_manifest.json::tool_brew_missing"
       ],
-      "recommended_next_action": "Recommended Mac system package manager if machine-level automatic updates are desired.",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended Mac system package manager if machine-level automatic updates are desired.",
       "suggested_commands": [
         "brew update"
       ],
@@ -428,8 +428,8 @@
       "status": "open"
     },
     {
-      "item_id": "mission-p2-devkit-developer_tooling-gitleaks-is-missing",
-      "title": "gitleaks is missing.",
+      "item_id": "mission-p2-devkit-developer_tooling-gitleaks-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "gitleaks is missing in this execution context (non-canonical workspace path).",
       "category": "developer_tooling",
       "priority": "P2",
       "source": "devkit",
@@ -438,7 +438,7 @@
       "evidence_refs": [
         "catalog/dev_toolkit_manifest.json::tool_gitleaks_missing"
       ],
-      "recommended_next_action": "Secret-scanning gate for all pushes and PRs. Config: .gitleaks.toml. CI: .github/workflows/secret-scan.yml. Added 2026-05-30.",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Secret-scanning gate for all pushes and PRs. Config: .gitleaks.toml. CI: .github/workflows/secret-scan.yml. Added 2026-05-30.",
       "suggested_commands": [
         "python3 tools/aurora_devkit.py --install-plan"
       ],

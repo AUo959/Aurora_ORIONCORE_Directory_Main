@@ -597,6 +597,35 @@ def collect_dependency_update_surfaces(
     return surfaces
 
 
+def is_canonical_workspace_context(root: Path | None = None) -> bool:
+    """Is this the owner's workspace, or a sandbox mounting it?
+
+    Devkit findings describe the machine the scan RAN ON. When an agent runs it
+    from a sandboxed container, "gh is missing" is a fact about the container,
+    not about the workspace — but the report cannot tell the two apart, so those
+    findings were emitted as blockers and surfaced as P1s on every run. The
+    2026-08-10 executive brief traced four of Mission Control's P1s to exactly
+    this, and `gh` answered instantly when the same check ran on the Mac.
+
+    The canonical workspace is ``~/dev/Aurora_ORIONCORE_Directory_Main``, the
+    datum recorded in CLAUDE.md and AGENTS.md. It is anchored to the home
+    directory rather than matched as a path suffix: a suffix test also accepts
+    ``/tmp/dev/Aurora_ORIONCORE_Directory_Main``, and a throwaway clone should
+    not be able to claim canonical status.
+
+    Detection is deliberately STRICT — a context that is not provably canonical
+    is treated as possibly-sandboxed. That asymmetry is chosen so the failure
+    mode is a demoted severity on a real problem (visible, still reported) rather
+    than a real blocker suppressed because a lookalike path passed the check.
+    """
+    resolved = (root or Path(__file__).resolve().parent.parent).resolve()
+    try:
+        canonical_root = (Path.home() / "dev" / "Aurora_ORIONCORE_Directory_Main").resolve()
+    except (OSError, RuntimeError):
+        return False
+    return resolved == canonical_root
+
+
 def build_findings(
     toolchain: list[dict[str, Any]],
     automations: list[dict[str, Any]],
@@ -605,18 +634,37 @@ def build_findings(
     dependency_update_surfaces: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, str]]:
     findings: list[dict[str, str]] = []
+    canonical = is_canonical_workspace_context()
 
     for tool in toolchain:
         if tool["status"] == "ok":
             continue
-        severity = "blocker" if tool["required"] else "warning"
+        # A tool absent from a sandbox says nothing about the workspace. Outside
+        # the canonical path these are reported, but never as blockers — the same
+        # distinction workspace_verify already draws for repo_registry_coverage,
+        # where "unavailable in this execution context" is a warning while "exists
+        # on disk but unregistered" is an error.
+        severity = "blocker" if (tool["required"] and canonical) else "warning"
+        message = f"{tool['id']} is {tool['status']}."
+        next_step = tool.get("impact", "")
+        if not canonical and tool["status"] in {"missing", "blocked"}:
+            message = (
+                f"{tool['id']} is {tool['status']} in this execution context "
+                f"(non-canonical workspace path)."
+            )
+            next_step = (
+                "Re-check from the canonical workspace path before treating this "
+                "as a real toolchain gap; a sandbox missing a tool is not a "
+                "workspace defect. " + next_step
+            ).strip()
         findings.append(
             {
                 "severity": severity,
                 "id": f"tool_{tool['id']}_{tool['status']}",
-                "message": f"{tool['id']} is {tool['status']}.",
+                "message": message,
                 "evidence": tool.get("output") or "command not found",
-                "next_step": tool.get("impact", ""),
+                "next_step": next_step,
+                "execution_context": "canonical" if canonical else "non_canonical",
             }
         )
 
@@ -657,14 +705,32 @@ def build_findings(
     for env in python_envs or []:
         if env.get("status") == "ok":
             continue
-        severity = "blocker" if env.get("required") and env.get("status") == "blocked" else "warning"
+        # Same execution-context rule as the toolchain loop above: a repo venv
+        # that cannot be exercised from a sandbox is not a blocked workspace.
+        # The CloudBank venv is a macOS build, so a Linux sandbox can see the
+        # path and still be unable to run it.
+        blocked = env.get("required") and env.get("status") == "blocked"
+        severity = "blocker" if (blocked and canonical) else "warning"
+        message = f"{env['repo_name']} Python environment is {env.get('status', 'unknown')}."
+        next_step = env.get("notes") or "Use the repo-local virtual environment for validation."
+        if not canonical and blocked:
+            message = (
+                f"{env['repo_name']} Python environment is "
+                f"{env.get('status', 'unknown')} in this execution context "
+                f"(non-canonical workspace path)."
+            )
+            next_step = (
+                "Re-check from the canonical workspace path before treating this "
+                "as a real environment failure. " + next_step
+            )
         findings.append(
             {
                 "severity": severity,
                 "id": f"repo_python_env_{env['repo_name']}_{env.get('status', 'unknown')}",
-                "message": f"{env['repo_name']} Python environment is {env.get('status', 'unknown')}.",
+                "message": message,
                 "evidence": env.get("evidence", ""),
-                "next_step": env.get("notes") or "Use the repo-local virtual environment for validation.",
+                "next_step": next_step,
+                "execution_context": "canonical" if canonical else "non_canonical",
             }
         )
 

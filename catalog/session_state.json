@@ -434,9 +434,9 @@
       "detail": "Completed via OrionCore PR #66, squash merge 24ce40f63fa06758728fe246c447d1110709a69e. ACE now executes all six determination states. v0.3 adds read-only bounded CanonRec evidence retrieval, allowlisted deterministic derivation, and fail-closed TRUE_CONFLICT with complete claim/source provenance. Final PR and post-merge mainline gates passed Python 3.9, full provisioned Python 3.12, workspace verification, lint/schema, repo sync, and gitleaks. No Orion L1 runtime/provider state was activated and the paused experiment was not started, resumed, or advanced."
     }
   ],
-  "last_updated": "2026-08-14T01:42:21Z",
-  "last_platform": "codex",
-  "last_session_summary": "ACE v0.10 authenticated remote service and verified runtime bindings merged to main; ACE v0.11 generic native L2 entity completion/publication is in PR #76 with native-kind validation and isolated CanonRec commit/replay E2E green; handoff freshness refreshed before final merge validation.",
+  "last_updated": "2026-08-15T05:31:11Z",
+  "last_platform": "claude-code",
+  "last_session_summary": "chore(catalog): inventory the recovery/ top-level directory; feat(ace): add v0.13 governed Orion L1 progression; fix(ace): restore v0.12 post-merge acceptance",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -458,6 +458,36 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "a31b9bb",
+      "date": "2026-08-15",
+      "platform": "claude-code",
+      "summary": "chore(catalog): inventory the recovery/ top-level directory"
+    },
+    {
+      "sha": "31fb413",
+      "date": "2026-08-15",
+      "platform": "claude-code",
+      "summary": "feat(ace): add v0.13 governed Orion L1 progression"
+    },
+    {
+      "sha": "a3bf27f",
+      "date": "2026-08-15",
+      "platform": "claude-code",
+      "summary": "fix(ace): restore v0.12 post-merge acceptance"
+    },
+    {
+      "sha": "d87114e",
+      "date": "2026-08-15",
+      "platform": "claude-code",
+      "summary": "feat(ace): add v0.12 policy-gated delegated canon publication (#77)"
+    },
+    {
+      "sha": "b460811",
+      "date": "2026-08-15",
+      "platform": "claude-code",
+      "summary": "feat(ace): add v0.11 generic native L2 entity completion"
+    },
     {
       "sha": "318bbaa",
       "date": "2026-08-13",
@@ -487,36 +517,6 @@
       "date": "2026-08-12",
       "platform": "codex",
       "summary": "feat(ace): validated capability-manifest discovery v0.6"
-    },
-    {
-      "sha": "4444914",
-      "date": "2026-08-12",
-      "platform": "codex",
-      "summary": "feat(ace): atomic native character materialization v0.5"
-    },
-    {
-      "sha": "fdf1276",
-      "date": "2026-08-12",
-      "platform": "codex",
-      "summary": "feat(ace): retrieve existing characters before generation v0.4"
-    },
-    {
-      "sha": "24ce40f",
-      "date": "2026-08-11",
-      "platform": "codex",
-      "summary": "feat(ace): executable canon retrieval, derivation, and true conflict v0.3"
-    },
-    {
-      "sha": "47dcecf",
-      "date": "2026-08-11",
-      "platform": "codex",
-      "summary": "feat(ace): merge materialization + determination ledger v0.2"
-    },
-    {
-      "sha": "5383d83",
-      "date": "2026-08-11",
-      "platform": "claude-code",
-      "summary": "feat(ace): land the Aurora Canon Engine v0.1 MVP"
     }
   ],
   "security_events": [
@@ -708,7 +708,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "318bbaa35fd09bcf76b8710b41f2127781588aa0",
+    "main_sha": "a31b9bb",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -823,7 +823,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-11T05:55:38Z",
+    "checked_at": "2026-08-15T05:31:11Z",
     "entries": [
       {
         "repo": "root",
@@ -903,6 +903,12 @@
         "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
       },
       {
+        "repo": "root",
+        "class": "unpushed_main",
+        "detail": "main is 1 commit(s) ahead of origin/main",
+        "remediation": "Push main (or PR it if the repo requires review)."
+      },
+      {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "stranded_branch",
         "branch": "agent/aurora-bridge-review-blurb",
@@ -912,8 +918,15 @@
       {
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "unpublished_branch",
+        "branch": "agent/gumas-flash-rebellion-battle-baseline",
+        "detail": "pushed, 108 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
         "branch": "agent/narrative-river-adapter-spec",
-        "detail": "pushed, 39 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "detail": "pushed, 41 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
         "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
       },
       {
@@ -1158,7 +1171,7 @@
         "repo": "aurora-cloudbank-symbolic-main",
         "class": "unpublished_branch",
         "branch": "codex/cloudbank-issue-1453-l1-staffing-runtime",
-        "detail": "pushed, 6 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "detail": "pushed, 8 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
         "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
       },
       {
@@ -1174,6 +1187,20 @@
         "branch": "codex/cloudbank-issue-1481-postmerge-1482-hardening",
         "detail": "2 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/cloudbank-issue-1481-postmerge-1482-hardening && gh pr create"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
+        "branch": "codex/cloudbank-issue-1504-declaration-gates",
+        "detail": "pushed, 2 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
+        "branch": "codex/cloudbank-issue-1510-shipment-manifest",
+        "detail": "pushed, 2 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
       },
       {
         "repo": "aurora-cloudbank-symbolic-main",
@@ -1209,6 +1236,13 @@
         "branch": "codex/public-readiness-debt-2026-07-29",
         "detail": "3 commit(s) exist only on this machine (remote UNVERIFIED \u2014 offline; classification from local tracking refs)",
         "remediation": "Push and open a PR: git push -u origin codex/public-readiness-debt-2026-07-29 && gh pr create"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic-main",
+        "class": "unpublished_branch",
+        "branch": "docs/durable-task-execution-sop",
+        "detail": "pushed, 6 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
+        "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
       },
       {
         "repo": "CanonRec",
