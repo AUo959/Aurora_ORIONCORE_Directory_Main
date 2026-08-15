@@ -1,0 +1,19 @@
+{
+  "generated_at_utc": "2026-08-15T05:30:01Z",
+  "scenario": "hour_aboard_v1",
+  "operations": [],
+  "ord_dispatch": {
+    "mission_id": "hour-aboard-H5",
+    "drones_required": [
+      "ORD-2 Delta Scout",
+      "ORD-3 Shadowfax"
+    ],
+    "receipt_sha256": "dd68e544f1d795d9ca9a6b617572d832b49f1c8429a6133eb0f1453aaa60df42"
+  },
+  "l3_receipt": {
+    "narrative_audit_verdict": "supported",
+    "ethics_protocol": "Picard_Delta_3",
+    "anchor_seed": "EOS_SEED_ORION",
+    "threadcore": "capsule + registry PASS/READY (registry substructures merged #1022)"
+  }
+}
