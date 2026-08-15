@@ -34,7 +34,7 @@ repos:
 - name: qgia-knowledge-library-main
   path: qgia-knowledge-library-main
   branch: main
-  head_sha: 3f05a2ae5c1b659c9fd2322bd47f660bc81df931
+  head_sha: f2e9fb93f1f957224061269afc75759b9a21b316
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C qgia-knowledge-library-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE
