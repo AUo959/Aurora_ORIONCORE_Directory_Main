@@ -735,6 +735,12 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "Early prose names a frontier world 'Varnak's Rest' \u2014 self-sustaining agrarian planet, home to displaced refugees from war-torn regions seeking asylum, with lush forests and farmlands supplying frontier settlements. No canon record. Recorded as polity_outer_colonies.open_referent. CAUTION: NOT the same referent as char_varnak, the chancellorship candidate who ran on military defence \u2014 a person and a world sharing a name element, already disambiguated on char_varnak.name_disambiguation."
+    },
+    {
+      "id": "zharis-corridor-referent",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "Early prose: 'The Union Marshals receive decrypted intelligence from the Judicator Prime confirming that Separatist smugglers in the Zharis Corridor are using PMC-modified stealth drives.' Zharis Corridor has no canon record \u2014 a named route/region tying Separatists, PMC technology and Marshal counter-smuggling. Recovered-source name; route through the naming gate. Note the route-registry angle: a corridor is the kind of referent FABRIC P4 wants citable."
     }
   ],
   "known_state": {
