@@ -717,6 +717,12 @@
       "priority": "high",
       "assigned_to": "either",
       "description": "Reconcile ACE v0.13 Orion progression with registered CloudBank 64d5bca20551a557c59db905189576664c0251d4. The owner source changed from blob dd3ae6f7 to 5b6d9351 with governed staffing runtime additions; do not hash-repin blindly, load or advance the paused run, or weaken exact-owner checks. Validate persisted-state compatibility and preflight-only behavior, then issue a versioned policy/contract/test update before sealing ACE v1."
+    },
+    {
+      "id": "trade-coalition-gtc-identity",
+      "priority": "low",
+      "assigned_to": "either",
+      "description": "Early prose names a 'Galactic Trade Coalition (GTC)' that oversees fair trade laws, tariffs and corporate accountability \u2014 a regulator's mandate \u2014 while everything else attested about the Trade Coalition describes a private power bloc that lobbies, funds hyperlane infrastructure, controls market share via the Union Stock Exchange, and holds Senate backing. Not merged: a body that writes tariff law and a bloc that profits from it are not obviously the same institution, and the shared name root is not evidence. Recorded as org_trade_coalition.open_identity_question. Route through aurora-canon-reconciler."
     }
   ],
   "known_state": {
