@@ -741,6 +741,18 @@
       "priority": "medium",
       "assigned_to": "either",
       "description": "Early prose: 'The Union Marshals receive decrypted intelligence from the Judicator Prime confirming that Separatist smugglers in the Zharis Corridor are using PMC-modified stealth drives.' Zharis Corridor has no canon record \u2014 a named route/region tying Separatists, PMC technology and Marshal counter-smuggling. Recovered-source name; route through the naming gate. Note the route-registry angle: a corridor is the kind of referent FABRIC P4 wants citable."
+    },
+    {
+      "id": "gsb-uib-directorship-conflict",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "char_sarina_vael is 'Director of the Galactic Security Bureau (GSB)' while char_callan_deyrus is 'Head of Union Intelligence Bureau (UIB)', and canon rules GSB a superseded draft name for the UIB \u2014 two records heading one agency. Sarina Vael was promoted 2026-07-21 with a conflict scan recording 'zero name/office collisions'; the GSB->UIB ruling is dated 2026-07-20, one day earlier, and was not consulted. Readings: sequence (earlier-era director, parallel to Durn->Saros), duplication across salvage generations, or genuinely distinct bodies. NOT decided \u2014 the Durn/Saros case had an explicit owner retcon ruling and this has none. Recorded on both records with conflict_flags gsb_uib_directorship."
+    },
+    {
+      "id": "conflict-scan-consults-rulings",
+      "priority": "medium",
+      "assigned_to": "claude-code",
+      "description": "Process gap exposed by gsb-uib-directorship-conflict: a promotion pass on 2026-07-21 recorded 'zero name/office collisions' while a superseded-name ruling issued 2026-07-20 sat unread in canon/L2/marshals_sentinels/ARCHIVE_MINING_ADDENDUM. Conflict scans check name/alias collisions against ENTITY RECORDS but do not appear to read superseded-draft and retcon rulings held in ledger/addendum documents. Extend the reconciler's conflict scan to index those rulings (superseded names, retitled offices, aliases) so renames are caught, not just duplicate strings."
     }
   ],
   "known_state": {
