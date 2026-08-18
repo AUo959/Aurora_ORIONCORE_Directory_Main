@@ -432,11 +432,32 @@
       "completed_at": "2026-08-12T03:08:00Z",
       "platform": "codex",
       "detail": "Completed via OrionCore PR #66, squash merge 24ce40f63fa06758728fe246c447d1110709a69e. ACE now executes all six determination states. v0.3 adds read-only bounded CanonRec evidence retrieval, allowlisted deterministic derivation, and fail-closed TRUE_CONFLICT with complete claim/source provenance. Final PR and post-merge mainline gates passed Python 3.9, full provisioned Python 3.12, workspace verification, lint/schema, repo sync, and gitleaks. No Orion L1 runtime/provider state was activated and the paused experiment was not started, resumed, or advanced."
+    },
+    {
+      "id": "reporting-tools-execution-context",
+      "status": "completed",
+      "completed_at": "2026-08-18T11:23:57Z",
+      "platform": "claude-code",
+      "detail": "Fixed in a0eabc7 (tools/aurora_devkit.py): findings carry execution_context and are demoted from blocker to warning outside the canonical workspace. Mission Control blocking 5 -> 0 from a sandbox; on the Mac the same scan reports canonical with no blockers because the tools genuinely exist. Detection anchored to $HOME rather than a path suffix. 9 tests in tests/test_devkit_execution_context.py. Was left open only because session_state_io was blocked by a concurrent codex claim when the fix landed."
+    },
+    {
+      "id": "ace-v013-orion-policy-pin-drift",
+      "status": "completed",
+      "completed_at": "2026-08-18T11:23:57Z",
+      "platform": "claude-code",
+      "detail": "SUPERSEDED BY ace-v1-orion-owner-compatibility, which codex had already queued for the same drift (blob dd3ae6f7 -> 5b6d9351, governed staffing runtime). That item is better scoped: it names the required compatibility work and states explicitly 'do not hash-repin blindly, load or advance the paused run, or weaken exact-owner checks'. Filed as a duplicate because I queued before re-reading the pending list. Evidence gathered here and worth carrying over: OrionL1Runtime and all four bound methods (preflight/load_run/advance/export_state) still exist, and CloudBank PR #1501 was purely additive to simulation/l1_runtime.py (+272/-0), so the binding is likely still valid but must be confirmed rather than assumed."
+    },
+    {
+      "id": "conflict-scan-consults-rulings",
+      "status": "completed",
+      "completed_at": "2026-08-18T11:27:37Z",
+      "platform": "claude-code",
+      "detail": "Built tools/canon_superseded_names.py + tests/test_canon_superseded_names.py (7 tests). Indexes superseded-name rulings from canon markdown and flags records ASSERTING a superseded form in an identity field (name/role/title), while treating the same string in aliases, conflict blocks and history notes as correct \u2014 canon recording its own drift. Catches the live case (char_sarina_vael.role, 'Director of the Galactic Security Bureau'), and does NOT flag char_zylox_rhaegos, which keeps 'Zylox Verrin' as an alias deliberately and is exactly what a naive substring check would punish. Note the parser normalises whitespace first: canon wraps these declarations mid-sentence, and the regex still matches wrapped text but captures names containing a newline, which would compare equal to nothing and make the checker silently report zero findings."
     }
   ],
-  "last_updated": "2026-08-18T03:30:53Z",
+  "last_updated": "2026-08-18T11:27:43Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Prose-claim ledger reconciliation: five seams landed (Trade Coalition, AI Vanguard, Outer Colonies, Union Marshals, Velari). Recovered the Union's economic and enforcement power structure \u2014 the Coalition's four instruments (TZDF, hyperlane funding, Union Stock Exchange, Senate backing) plus the Executive Board seat held by the sitting Chancellor; the AI Vanguard's audit-and-funding mandate under Mek'thor; the Outer Colonies' three-tier frontier with contracted defence; and the Marshals as constitutional counterweight to corporate capture. Resolved a long-open identity question by finding the answer already in canon: 'Director of the Galactic Marshals' vs 'Chief Marshal Vael Saros' was never a conflict \u2014 an owner retcon ruling of 2026-07-20 records Kael Durn as Director before the office was retitled and passed to Saros. Also fixed the devkit execution-context defect (Mission Control blocking 5->0), cleared the recovery/ manifest blocker, wrote executive_brief__2026-08-15.md, and landed the 59-day qgia-knowledge-library domain-structure guard. Canon: 247 records, 0 dangling references, 0 alias collisions, fabric linter clean throughout.",
+  "last_session_summary": "fix(ace): honour refresh_on_paths so canon commits stop faki; chore(catalog): sync CanonRec pin; queue the GSB/UIB conflic; chore(catalog): sync CanonRec pin and record the prose-ledge",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -458,6 +479,24 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "b735cde",
+      "date": "2026-08-18",
+      "platform": "claude-code",
+      "summary": "fix(ace): honour refresh_on_paths so canon commits stop faking staleness"
+    },
+    {
+      "sha": "adcc051",
+      "date": "2026-08-18",
+      "platform": "claude-code",
+      "summary": "chore(catalog): sync CanonRec pin; queue the GSB/UIB conflict and the conflict-scan process gap"
+    },
+    {
+      "sha": "c36cfe6",
+      "date": "2026-08-18",
+      "platform": "claude-code",
+      "summary": "chore(catalog): sync CanonRec pin and record the prose-ledger session"
+    },
     {
       "sha": "519fb74",
       "date": "2026-08-18",
@@ -499,24 +538,6 @@
       "date": "2026-08-15",
       "platform": "codex",
       "summary": "feat(ace): add repository-grounded v1 acceptance harness"
-    },
-    {
-      "sha": "e628706",
-      "date": "2026-08-15",
-      "platform": "codex",
-      "summary": "chore(session): hand off GUMAS Phase 10 reporter"
-    },
-    {
-      "sha": "a72d315",
-      "date": "2026-08-15",
-      "platform": "codex",
-      "summary": "chore(catalog): sync CloudBank backlog merges"
-    },
-    {
-      "sha": "9df49a3",
-      "date": "2026-08-15",
-      "platform": "codex",
-      "summary": "chore(catalog): re-sync qgia pin after the CI knowledge-index auto-update"
     }
   ],
   "security_events": [
@@ -659,12 +680,6 @@
       "description": "Canon lists Elias Radek as the Judicator Prime's Sentinel-Commander while the Kaelor's Rift log gives Colonel Idris Vale as Sentinel strike lead. Not a contradiction on its face (ship's company vs Marshal Intelligence Directorate strike lead) but the relationship is unstated. Route through aurora-canon-reconciler conflict scan."
     },
     {
-      "id": "reporting-tools-execution-context",
-      "priority": "high",
-      "assigned_to": "claude-code",
-      "description": "Mission Control and publication_debt cannot distinguish 'tool absent in this execution context' from 'tool absent'. Four P1 developer_tooling items (gh, sqlite3, python3.12, docker) describe the sandboxed Linux workspace, not the owner's Mac, and 5 of 7 publication-debt items are 'PR state UNVERIFIED (gh unavailable)' rather than real debt. Label findings with the detected environment; downgrade UNVERIFIED from blocking. Removes 4 false P1s. See executive_brief__2026-08-10.md Risk 2."
-    },
-    {
       "id": "automate-executive-brief",
       "priority": "medium",
       "assigned_to": "either",
@@ -749,26 +764,20 @@
       "description": "char_sarina_vael is 'Director of the Galactic Security Bureau (GSB)' while char_callan_deyrus is 'Head of Union Intelligence Bureau (UIB)', and canon rules GSB a superseded draft name for the UIB \u2014 two records heading one agency. Sarina Vael was promoted 2026-07-21 with a conflict scan recording 'zero name/office collisions'; the GSB->UIB ruling is dated 2026-07-20, one day earlier, and was not consulted. Readings: sequence (earlier-era director, parallel to Durn->Saros), duplication across salvage generations, or genuinely distinct bodies. NOT decided \u2014 the Durn/Saros case had an explicit owner retcon ruling and this has none. Recorded on both records with conflict_flags gsb_uib_directorship."
     },
     {
-      "id": "conflict-scan-consults-rulings",
-      "priority": "medium",
-      "assigned_to": "claude-code",
-      "description": "Process gap exposed by gsb-uib-directorship-conflict: a promotion pass on 2026-07-21 recorded 'zero name/office collisions' while a superseded-name ruling issued 2026-07-20 sat unread in canon/L2/marshals_sentinels/ARCHIVE_MINING_ADDENDUM. Conflict scans check name/alias collisions against ENTITY RECORDS but do not appear to read superseded-draft and retcon rulings held in ledger/addendum documents. Extend the reconciler's conflict scan to index those rulings (superseded names, retitled offices, aliases) so renames are caught, not just duplicate strings."
-    },
-    {
-      "id": "ace-v013-orion-policy-pin-drift",
-      "priority": "high",
-      "assigned_to": "codex",
-      "description": "ACE v0.13 Orion progression binding is stale against CloudBank. catalog/ace/policies/orion_progression_v0_13.json pins cloudbank_repository_sha=9c34d8e9 and tools/ace/orion_runtime_owner.py::_OWNER_FIELDS pins git_blob_sha=dd3ae6f7 for simulation/l1_runtime.py. CloudBank has since advanced to a19870a5 via five merged PRs, and #1501 'feat(l1): add governed staffing runtime' added 272 lines to l1_runtime.py, changing its blob to 5b6d9351. Test test_registered_owner_binding_calls_preflight_only fails as a result \u2014 correctly. NOT re-pinned here: the blob pin exists so ACE knows the exact runtime it binds to, and updating it without verifying the binding is what the check is designed to prevent. Mitigating evidence for whoever picks this up: OrionL1Runtime and all four bound methods (preflight/load_run/advance/export_state) still exist, and #1501 was purely additive (+272/-0), so the binding is likely still valid \u2014 but that must be confirmed, not assumed. Owner: the ACE v0.13 author."
-    },
-    {
       "id": "ace-manifest-freshness-follow-up",
       "priority": "medium",
       "assigned_to": "either",
       "description": "tools/ace/capability_discovery.py had TWO duplicate staleness checks applying the same rule; fixing one changed nothing observable until the second was found. Both now consult freshness.refresh_on_paths via _refresh_paths_unchanged. Follow-ups: (1) the duplication itself is a hazard \u2014 consider collapsing to a single checked path; (2) capability manifests carry trust.manifest_sha256 and are single-line JSONL, so they cannot be hand-edited safely (a reformatting edit during this session took failures from 6 to 23 and was reverted) \u2014 if manifests ever need re-pinning there should be a generator, as none exists."
+    },
+    {
+      "id": "superseded-name-check-wiring",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "tools/canon_superseded_names.py exists and passes but is not wired into any gate. Options: call it from the aurora-canon-reconciler conflict scan so promotions consult rename rulings at the point of decision (the original gap), and/or add it to workspace_verify as a warning-level check. Also currently parses only the 'early X name \"A\" -> canonical **B**' form; the Durn/Saros retitling ('under the earlier title ... subsequently retitled') is a second, unparsed shape worth adding."
     }
   ],
   "known_state": {
-    "main_sha": "519fb74",
+    "main_sha": "b735cde",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -883,7 +892,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-18T03:30:53Z",
+    "checked_at": "2026-08-18T11:27:43Z",
     "entries": [
       {
         "repo": "root",
@@ -1297,12 +1306,6 @@
         "branch": "codex/public-vulnerability-reporting-2026-07-29",
         "detail": "pushed, 2 commit(s) ahead, PR state UNVERIFIED (gh failed or is unavailable in the current execution context)",
         "remediation": "Run `make gh-auth-check` with Codex escalated/unsandboxed execution before treating the token as broken; then verify or create the PR."
-      },
-      {
-        "repo": "CanonRec",
-        "class": "unpushed_main",
-        "detail": "main is 1 commit(s) ahead of origin/main",
-        "remediation": "Push main (or PR it if the repo requires review)."
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
