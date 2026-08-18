@@ -753,6 +753,18 @@
       "priority": "medium",
       "assigned_to": "claude-code",
       "description": "Process gap exposed by gsb-uib-directorship-conflict: a promotion pass on 2026-07-21 recorded 'zero name/office collisions' while a superseded-name ruling issued 2026-07-20 sat unread in canon/L2/marshals_sentinels/ARCHIVE_MINING_ADDENDUM. Conflict scans check name/alias collisions against ENTITY RECORDS but do not appear to read superseded-draft and retcon rulings held in ledger/addendum documents. Extend the reconciler's conflict scan to index those rulings (superseded names, retitled offices, aliases) so renames are caught, not just duplicate strings."
+    },
+    {
+      "id": "ace-v013-orion-policy-pin-drift",
+      "priority": "high",
+      "assigned_to": "codex",
+      "description": "ACE v0.13 Orion progression binding is stale against CloudBank. catalog/ace/policies/orion_progression_v0_13.json pins cloudbank_repository_sha=9c34d8e9 and tools/ace/orion_runtime_owner.py::_OWNER_FIELDS pins git_blob_sha=dd3ae6f7 for simulation/l1_runtime.py. CloudBank has since advanced to a19870a5 via five merged PRs, and #1501 'feat(l1): add governed staffing runtime' added 272 lines to l1_runtime.py, changing its blob to 5b6d9351. Test test_registered_owner_binding_calls_preflight_only fails as a result \u2014 correctly. NOT re-pinned here: the blob pin exists so ACE knows the exact runtime it binds to, and updating it without verifying the binding is what the check is designed to prevent. Mitigating evidence for whoever picks this up: OrionL1Runtime and all four bound methods (preflight/load_run/advance/export_state) still exist, and #1501 was purely additive (+272/-0), so the binding is likely still valid \u2014 but that must be confirmed, not assumed. Owner: the ACE v0.13 author."
+    },
+    {
+      "id": "ace-manifest-freshness-follow-up",
+      "priority": "medium",
+      "assigned_to": "either",
+      "description": "tools/ace/capability_discovery.py had TWO duplicate staleness checks applying the same rule; fixing one changed nothing observable until the second was found. Both now consult freshness.refresh_on_paths via _refresh_paths_unchanged. Follow-ups: (1) the duplication itself is a hazard \u2014 consider collapsing to a single checked path; (2) capability manifests carry trust.manifest_sha256 and are single-line JSONL, so they cannot be hand-edited safely (a reformatting edit during this session took failures from 6 to 23 and was reverted) \u2014 if manifests ever need re-pinning there should be a generator, as none exists."
     }
   ],
   "known_state": {

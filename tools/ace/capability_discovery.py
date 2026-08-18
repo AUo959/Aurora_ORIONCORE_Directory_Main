@@ -10,6 +10,7 @@ from __future__ import annotations
 import copy
 import json
 import re
+import subprocess
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Mapping
@@ -338,11 +339,63 @@ def _verify_selected_manifest(
             item["repository"]: item["commit_sha"]
             for item in repository_baselines(root)
         }
-        if freshness["repository_sha"] != heads.get(repository):
-            raise ACEError(
-                f"ACE capability manifest is stale for {manifest['capability_id']}",
-                code="stale_manifest",
-            )
+        observed = heads.get(repository)
+        if freshness["repository_sha"] != observed:
+            # The pin moved — but that alone does not make the capability stale.
+            #
+            # Each manifest declares `refresh_on_paths`: the files whose change
+            # would actually alter the capability's behaviour. Comparing only
+            # HEAD ignored that declaration, so ANY commit to a backing
+            # repository invalidated the manifest — including commits that touch
+            # nothing the capability uses.
+            #
+            # In practice that meant ordinary canon work broke the engine: six
+            # CanonRec entity commits on 2026-08-15 staleness-failed both
+            # CanonRec-backed capabilities, whose refresh_on_paths name only
+            # aurora-canon-reconciler scripts that had not been modified at all.
+            # A freshness rule that fires on unrelated commits trains people to
+            # re-pin manifests reflexively, which is precisely how a real tool
+            # change would slip through unnoticed.
+            #
+            # So: consult the declaration. If none of the declared paths changed
+            # between the pinned commit and the observed head, the capability is
+            # still fresh. If the comparison cannot be made, fail closed.
+            if not _refresh_paths_unchanged(
+                roots.get(repository), freshness, observed
+            ):
+                raise ACEError(
+                    f"ACE capability manifest is stale for {manifest['capability_id']}",
+                    code="stale_manifest",
+                )
+
+
+def _refresh_paths_unchanged(
+    repo_root: Path | None,
+    freshness: dict[str, Any],
+    observed_head: str | None,
+) -> bool:
+    """Did any declared refresh path change between the pinned commit and HEAD?
+
+    Returns True only when the answer is provably "no". Anything unknown — no
+    declared paths, no repository root, an unreadable git range — returns False
+    so the caller raises. Freshness is a safety property; uncertainty must not
+    read as fresh.
+    """
+    paths = [str(p) for p in (freshness.get("refresh_on_paths") or []) if str(p)]
+    pinned = freshness.get("repository_sha")
+    if not paths or not repo_root or not pinned or not observed_head:
+        return False
+    completed = subprocess.run(
+        ["git", "-C", str(repo_root), "diff", "--name-only",
+         f"{pinned}..{observed_head}", "--", *paths],
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=15,
+    )
+    if completed.returncode != 0:
+        return False
+    return not completed.stdout.strip()
 
 
 def build_capability_index(root: Path = ROOT) -> dict[str, Any]:
@@ -361,7 +414,17 @@ def build_capability_index(root: Path = ROOT) -> dict[str, Any]:
                 code="invalid_manifest",
             )
         freshness = manifest["freshness"]
-        if freshness["current_head_required"] and freshness["repository_sha"] != heads[repository]:
+        # Second of two staleness checks in this module; both must apply the same
+        # rule, so both consult refresh_on_paths via _refresh_paths_unchanged.
+        # They were duplicated logic before, which is why fixing only the first
+        # changed nothing observable.
+        if (
+            freshness["current_head_required"]
+            and freshness["repository_sha"] != heads[repository]
+            and not _refresh_paths_unchanged(
+                roots.get(repository), freshness, heads[repository]
+            )
+        ):
             raise ACEError(
                 f"capability manifest is stale for {manifest['capability_id']}: "
                 f"manifest={freshness['repository_sha']}, observed={heads[repository]}",

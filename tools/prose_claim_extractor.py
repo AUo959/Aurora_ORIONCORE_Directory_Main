@@ -63,6 +63,22 @@ COMMON_NOUN_NAMES = {
     "diplomacy", "senate", "marshals", "sentinels", "union", "navy", "judiciary",
     "military", "cross", "prime", "core", "vanguard", "collective", "compact",
     "pact", "order", "orders", "clans", "nomads", "empire", "republic",
+    # "human" is the hardest case and the reason this list exists.
+    #
+    # Matching the bare word gave species_human 562 claims in one corpus. The
+    # case-sensitive rule below cut that to 57 — and a 2026-08-15 triage of those
+    # 57 found only THREE in-world (5%). The rest were real-world news (Musk/DOGE,
+    # the UN Human Rights Chief, the Universal Declaration, AP Human Geography)
+    # and project engineering prose ("human-in-the-loop", "human interface",
+    # "human resources"). Capitalisation cannot separate them: "Human Rights" and
+    # "Human Services" are proper nouns in the real world, and title-case headings
+    # capitalise everything.
+    #
+    # The three genuine claims were reconciled by hand on 2026-08-15 (Separatists
+    # as "Human Dissidents", the Varlithian Paradox's origin, and the "right to
+    # rule" reaction to AI ascendancy). Claims about humans must be reached by
+    # DISTINCTIVE multi-word phrases, not by the species name.
+    "human", "humans", "humanity",
 }
 
 #: A sentence only counts as a claim if it asserts something.
