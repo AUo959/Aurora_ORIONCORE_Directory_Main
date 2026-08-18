@@ -723,6 +723,12 @@
       "priority": "low",
       "assigned_to": "either",
       "description": "Early prose names a 'Galactic Trade Coalition (GTC)' that oversees fair trade laws, tariffs and corporate accountability \u2014 a regulator's mandate \u2014 while everything else attested about the Trade Coalition describes a private power bloc that lobbies, funds hyperlane infrastructure, controls market share via the Union Stock Exchange, and holds Senate backing. Not merged: a body that writes tariff law and a bloc that profits from it are not obviously the same institution, and the shared name root is not evidence. Recorded as org_trade_coalition.open_identity_question. Route through aurora-canon-reconciler."
+    },
+    {
+      "id": "mekthor-nature-undetermined",
+      "priority": "low",
+      "assigned_to": "either",
+      "description": "char_mekthor leads the AI Vanguard but whether he is an artificial intelligence or an organic official is not established. The source applies 'a government official, not an AI entity' to a different figure who works with Vanguard auditors, so it settles nothing. For a bloc whose politics are about AI governance this is consequential \u2014 resolve from source rather than inferring. Recorded as char_mekthor.nature_undetermined and org_ai_vanguard.leadership.nature_undetermined."
     }
   ],
   "known_state": {
