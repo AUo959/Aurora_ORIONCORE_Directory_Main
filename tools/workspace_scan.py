@@ -239,26 +239,60 @@ def main() -> int:
         "entries": entries,
     }
 
-    # Remote-only registry entries (spokes, registered-but-uncloned repos)
-    # cannot be discovered locally, so regeneration must carry them over —
-    # including any owner notes (e.g. security flags) they hold.
-    preserved_remote_entries: list[dict[str, object]] = []
+    # Registry regeneration must not destroy owner-authored state. Three kinds
+    # of entry survive a scan:
+    #
+    #   1. remote_only entries (spokes, registered-but-uncloned repos) — not
+    #      discoverable locally, carried over whole, including security notes.
+    #   2. Entries for paths this scan cannot walk as a nested git repo: the
+    #      root itself (path "."), sibling directories (~sibling~/...), and
+    #      anything not yet initialised as a repo. Registering an unmanaged
+    #      surface is the point of those entries; dropping them re-blinds the
+    #      control plane.
+    #   3. Owner-authored KEYS on entries that ARE regenerated — notably the
+    #      `constellation` block that ties registry membership to node identity.
+    #      Before this merge, any hand-added field on a local repo entry was
+    #      silently erased by the next scan, which is why "registered" and
+    #      "connected" were free to drift apart. (2026-08-19 connectivity pass.)
+    GENERATED_KEYS = {
+        "name", "path", "branch", "head_sha", "remote_status",
+        "validation_command", "move_policy",
+    }
+    preserved_entries: list[dict[str, object]] = []
+    preserved_annotations: dict[str, dict[str, object]] = {}
     existing_registry_path = root / "catalog" / "repo_registry.yaml"
     if existing_registry_path.exists():
         try:
             existing_registry = load_yaml_like(existing_registry_path) or {}
-            preserved_remote_entries = [
-                entry for entry in existing_registry.get("repos", [])
-                if isinstance(entry, dict) and entry.get("remote_status") == "remote_only"
-            ]
+            discovered_paths = set(nested_repo_roots)
+            for entry in existing_registry.get("repos", []):
+                if not isinstance(entry, dict):
+                    continue
+                name = entry.get("name")
+                if entry.get("remote_status") == "remote_only":
+                    preserved_entries.append(entry)
+                elif entry.get("path") not in discovered_paths:
+                    preserved_entries.append(entry)
+                elif name:
+                    extra = {k: v for k, v in entry.items() if k not in GENERATED_KEYS}
+                    if extra:
+                        preserved_annotations[name] = extra
         except Exception:
-            preserved_remote_entries = []
+            preserved_entries = []
+            preserved_annotations = {}
+
+    def _regenerated(repo_rel: str) -> dict[str, object]:
+        entry = repo_registry_entry(root, repo_rel)
+        annotations = preserved_annotations.get(entry["name"])
+        if annotations:
+            entry.update(annotations)
+        return entry
 
     repo_registry = {
         "generated_at": now_iso_utc(),
         "root": serialized_root(root),
-        "repos": [repo_registry_entry(root, repo_rel) for repo_rel in nested_repo_roots]
-        + preserved_remote_entries,
+        "repos": [_regenerated(repo_rel) for repo_rel in nested_repo_roots]
+        + preserved_entries,
     }
 
     archive_inventory, archive_stats = build_archive_inventory(

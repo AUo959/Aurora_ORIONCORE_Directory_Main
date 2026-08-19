@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T02:15:46Z",
+  "generated_at": "2026-08-19T02:19:41Z",
   "root": ".",
   "top_level_entry_count": 46,
   "logical_zone_counts": {
@@ -13,7 +13,7 @@
     "projects": 1,
     "reports": 1
   },
-  "nested_repo_count": 9,
+  "nested_repo_count": 11,
   "archive_artifact_count": 613,
   "archive_artifact_bytes": 7804234519,
   "planned_move_count": 7,

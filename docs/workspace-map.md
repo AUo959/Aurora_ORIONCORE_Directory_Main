@@ -1,9 +1,9 @@
 # Workspace Map
 
-- Generated: `2026-08-19T02:15:38Z`
+- Generated: `2026-08-19T02:19:33Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
 - Top-level entries cataloged: `46`
-- Nested repos registered: `9`
+- Nested repos registered: `11`
 - Archive or binary artifacts inventoried: `613`
 - Classification overrides loaded: `11` from `catalog/classification_overrides.yaml`
 - Top-level paths excluded by privacy screen: `11`
@@ -31,6 +31,8 @@
 - `aurora-cloudbank-symbolic1` at `~remote~` (branch `main`, remote `remote_only`)
 - `AuroraOS` at `~remote~` (branch `main`, remote `remote_only`)
 - `cloudbank-quantum-en` at `~remote~` (branch `main`, remote `remote_only`)
+- `Aurora_ORIONCORE_Directory_Main` at `.` (branch `main`, remote `configured`)
+- `aurora_exhibit_site` at `~sibling~/aurora_exhibit_site` (branch `~none~`, remote `not_a_git_repository`)
 
 ## Planned Move Candidates
 

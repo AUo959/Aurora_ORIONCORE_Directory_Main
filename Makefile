@@ -183,6 +183,12 @@ registry-sync: ## Refresh nested-repo head_sha pins in catalog/repo_registry.yam
 registry-sync-check: ## Report stale nested-repo pins without writing (exit 1 on drift)
 	$(PYTHON) tools/registry_sync_heads.py --check
 
+registry-bootstrap: ## Clone every registered nested repo to its pinned head_sha
+	$(PYTHON) tools/registry_bootstrap.py
+
+registry-bootstrap-check: ## Report nested repos missing or off-pin (exit 1 on drift)
+	$(PYTHON) tools/registry_bootstrap.py --check
+
 sync-audit: ## Run sync audit for root repo
 	$(PYTHON) skills/gitwiz-github-manager/scripts/gitwiz_sync_audit.py --repo root --check-gh-auth
 

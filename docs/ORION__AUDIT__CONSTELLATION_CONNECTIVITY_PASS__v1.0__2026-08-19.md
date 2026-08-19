@@ -219,6 +219,46 @@ route.
 recorded in the override's `notes`. Any node manifest added to this repo in
 future needs the same treatment.
 
+### F-12 — the registry erased its own annotations on every scan  *(severity: high)*
+
+`catalog/repo_registry.yaml` is **generated** by `tools/workspace_scan.py`. The
+generator rebuilt each locally-discovered entry from scratch and carried over only
+entries marked `remote_status: remote_only`. Any owner-authored field on a local
+repo's entry — and any entry for a path the scanner cannot walk as a nested git
+repo, such as the root itself or a sibling directory — was silently dropped on
+the next scan.
+
+This was found the hard way: the F-10 `constellation` blocks and both new registry
+entries were written, committed, and then destroyed by a routine
+`workspace_scan.py` run in the same session. It is also the mechanical reason the
+registry never carried topology linkage in the first place. Anyone who has ever
+hand-edited this file has lost the edit without being told.
+
+**Patched**: `workspace_scan.py` now merges three classes of surviving state —
+`remote_only` entries (as before), entries whose `path` is not a discovered nested
+repo (the root, `~sibling~/…`, anything not yet a repo), and owner-authored *keys*
+on entries that are regenerated. Generated keys stay generated, so `branch` and
+`head_sha` still track reality automatically; everything else is preserved.
+Verified by re-running the scan and confirming all 11 entries and their
+`constellation` blocks survive.
+
+### F-13 — the nested workspace was not reconstructible  *(severity: medium)*
+
+The five nested repos are ordinary working clones excluded by the root
+`.gitignore` (`/*`, `/GUMAS_SIM_2.5/*`). Nothing in the tree recorded how to
+recreate them: registry entries carried `remote_status: configured` but no
+`remote_url`. A fresh clone of the control plane therefore produced a workspace
+where five registry paths do not exist and the `repo_head_match` /
+`repo_branch_match` gates cannot run at all.
+
+**Patched**: `remote_url` added to all five local entries, and
+`tools/registry_bootstrap.py` added (`make registry-bootstrap` /
+`registry-bootstrap-check`) to clone each registered repo and check it out at its
+pinned `head_sha`. The registry is now the operative link rather than a
+description of one — and the pins it reads are the same pins
+`tools/registry_sync_heads.py` writes, so this stays compatible with a later move
+to submodules.
+
 ---
 
 ## 3. What was NOT verified
@@ -259,7 +299,7 @@ Outstanding, all requiring a browser or a `gh`-authenticated shell:
 | D-2 | `SENTINEL-COORDINATOR` has a manifest declaring `repo: aurora-cloudbank-symbolic` — the hub's own repo. Two designations, one repo. Give it a repo, fold it into CONSTELLATION-PRIME, or retire the manifest? |
 | D-3 | `aurora_exhibit_site`: `git init` and publish under `AUo959`, or fold into an existing repo? It is currently the only Aurora surface with published content and zero history. |
 | D-4 | `aurora-cloudbank-symbolic1` — single "Initial commit" Node skeleton, untouched since 2025-09-23, name-collides with the hub. Archive or delete. |
-| D-5 | Spine/library are vendored as sibling clones ignored by the root `.gitignore` (`/*` and `/GUMAS_SIM_2.5/*`). They are working clones, not submodules — the root records no pin to their SHAs beyond `repo_registry.yaml`. Adopt submodules for a real pin, or keep the registry as the pinning mechanism and add a CI check that the recorded `head_sha` matches `origin/main`? |
+| D-5 | Nested repos are working clones, not submodules; `repo_registry.yaml` is the only pin. This pass made that pin operative (F-13) rather than replacing it. Adopt submodules for a git-native pin, or keep the registry mechanism and add a CI check that each recorded `head_sha` matches `origin/main`? The latter needs network access CI has and this audit did not. |
 | D-6 | Pin `checkout` / `setup-python` to SHAs in spine and library to match hub policy — mechanical, but it touches workflows outside this pass's blast radius. |
 | D-7 | `constellation_version` is `1.0.0-alpha` in every node manifest and the health auditor compares them for equality. Contracts were bumped to `1.1.0-alpha` (separate `VERSION` file) deliberately, so this pass does **not** trip the drift alarm. A real node-version bump needs to land in all nodes at once. |
 
