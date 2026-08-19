@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-15T05:26:16Z",
+  "generated_at": "2026-08-19T22:14:45Z",
   "root": ".",
   "top_level_entry_count": 44,
   "logical_zone_counts": {
@@ -14,8 +14,8 @@
     "reports": 1
   },
   "nested_repo_count": 9,
-  "archive_artifact_count": 602,
-  "archive_artifact_bytes": 7802258166,
+  "archive_artifact_count": 613,
+  "archive_artifact_bytes": 7804236424,
   "planned_move_count": 6,
   "override_count": 10,
   "privacy_exclusion_count": 11,

@@ -1,10 +1,10 @@
 # Workspace Map
 
-- Generated: `2026-08-15T05:26:07Z`
+- Generated: `2026-08-19T22:14:41Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
 - Top-level entries cataloged: `44`
 - Nested repos registered: `9`
-- Archive or binary artifacts inventoried: `602`
+- Archive or binary artifacts inventoried: `613`
 - Classification overrides loaded: `10` from `catalog/classification_overrides.yaml`
 - Top-level paths excluded by privacy screen: `11`
 
@@ -22,11 +22,11 @@
 
 ## Active Nested Repos
 
-- `aurora-cloudbank-symbolic-main` at `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `main`, remote `configured`)
+- `aurora-cloudbank-symbolic-main` at `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `integration/connectivity-pass-2026-08-19`, remote `configured`)
 - `CanonRec` at `GUMAS_SIM_2.5/CanonRec` (branch `main`, remote `configured`)
 - `DuelSim_v2.0` at `GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0` (branch `main`, remote `configured`)
-- `qgia-knowledge-library-main` at `qgia-knowledge-library-main` (branch `main`, remote `configured`)
-- `qgia-knowledge-spine-main` at `qgia-knowledge-spine-main` (branch `main`, remote `configured`)
+- `qgia-knowledge-library-main` at `qgia-knowledge-library-main` (branch `integration/connectivity-pass-2026-08-19`, remote `configured`)
+- `qgia-knowledge-spine-main` at `qgia-knowledge-spine-main` (branch `integration/connectivity-pass-2026-08-19`, remote `configured`)
 - `zip_wizard` at `~remote~` (branch `main`, remote `remote_only`)
 - `aurora-cloudbank-symbolic1` at `~remote~` (branch `main`, remote `remote_only`)
 - `AuroraOS` at `~remote~` (branch `main`, remote `remote_only`)
