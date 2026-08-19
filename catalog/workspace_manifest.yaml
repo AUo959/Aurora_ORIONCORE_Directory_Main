@@ -1,4 +1,4 @@
-generated_at: '2026-08-15T05:26:07Z'
+generated_at: '2026-08-19T02:15:57Z'
 root: .
 logical_taxonomy:
 - repos
@@ -34,6 +34,22 @@ entries:
   status: managed
   batch_id: ''
   notes: Codex plugin marketplace metadata for repo-local plugin scaffolds.
+- id: dot-aurora
+  kind: control_surface
+  current_path: .aurora
+  logical_zone: tools
+  planned_path: .aurora
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+  batch_id: ''
+  notes: 'Constellation node identity for ORIONCORE-CONTROL. The hub''s constellation-health-audit.yml
+    fetches .aurora/constellation.json by exact path from every node, so this directory
+    is position-critical: the default scan classified it as an intake_collection with
+    planned_path intake/.aurora, which would have silently un-noded the control plane
+    on the next move wave. Pinned managed and immovable 2026-08-19.'
 - id: codacy-local
   kind: cache_or_local_artifact
   current_path: .codacy
@@ -233,6 +249,17 @@ entries:
   retention_policy: preserve
   owner: repository-owner
   status: protected
+- id: gumas-patch-v3-binding-provenance-2026-08-18
+  kind: intake_file
+  current_path: GUMAS__PATCH__V3_BINDING_PROVENANCE__2026-08-18.patch
+  logical_zone: intake
+  planned_path: intake/GUMAS__PATCH__V3_BINDING_PROVENANCE__2026-08-18.patch
+  git_boundary: none
+  storage_tier: review
+  retention_policy: review
+  owner: intake-review
+  status: planned_move
+  batch_id: wave4_root_intake_cleanup_initial
 - id: license
   kind: policy_file
   current_path: LICENSE

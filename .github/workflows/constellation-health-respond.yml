@@ -1,0 +1,87 @@
+name: "Constellation Health Respond"
+
+# Control-plane receiver for the constellation health protocol.
+#
+# CONNECTIVITY PASS 2026-08-19: this repository is declared the control plane in
+# catalog/repo_authority_policy.yaml and is registered as the ORIONCORE-CODESPACE
+# runtime surface in catalog/constellation-config.json, yet it had NO
+# repository_dispatch surface of any kind — it could neither receive constellation
+# events nor answer a health check. The hub's constellation-health-audit.yml did
+# not even list it. This workflow closes the receive half; the hub side is patched
+# in the same pass (health-audit REPOS list + router health.check fan-out).
+
+on:
+  repository_dispatch:
+    types:
+      - constellation.health.check
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  respond:
+    name: Answer constellation.health.check
+    runs-on: ubuntu-latest
+    env:
+      HAS_TOKEN: ${{ secrets.CONSTELLATION_TOKEN != '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+
+      - name: Build health response
+        id: health
+        env:
+          CORRELATION_ID: ${{ github.event.client_payload.correlation_id }}
+          HOP: ${{ github.event.client_payload.hop }}
+        run: |
+          MANIFEST=.aurora/constellation.json
+          if [ ! -f "$MANIFEST" ]; then
+            echo "::error::$MANIFEST missing — the control plane has no node identity to report."
+            exit 1
+          fi
+          VERSION=$(jq -r '.constellation_version' "$MANIFEST")
+          DESIGNATION=$(jq -r '.node.designation' "$MANIFEST")
+          REGISTERED=$(python3 -c "import yaml,sys; print(len(yaml.safe_load(open('catalog/repo_registry.yaml'))['repos']))")
+
+          jq -nc \
+            --arg ver "$VERSION" \
+            --arg node "$DESIGNATION" \
+            --arg cid "${CORRELATION_ID:-none}" \
+            --arg ts "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --arg sha "$GITHUB_SHA" \
+            --argjson hop "$(( ${HOP:-0} + 1 ))" \
+            --argjson registered "$REGISTERED" \
+            '{event_type: "constellation.health.response",
+              source_node: "ORIONCORE-CONTROL",
+              timestamp: $ts,
+              correlation_id: $cid,
+              hop: $hop,
+              provenance: {charter: "Picard_Delta_3", l3_compliance: true},
+              payload: {constellation_version: $ver,
+                        node: $node,
+                        repo: "AUo959/Aurora_ORIONCORE_Directory_Main",
+                        commit_sha: $sha,
+                        registered_repos: $registered,
+                        status: "active"}}' > health_response.json
+
+          {
+            echo "response<<CONSTELLATION_RESPONSE_EOF"
+            cat health_response.json
+            echo ""
+            echo "CONSTELLATION_RESPONSE_EOF"
+          } >> "$GITHUB_OUTPUT"
+          cat health_response.json
+
+      - name: Warn when the hub link is unconfigured
+        if: env.HAS_TOKEN != 'true'
+        run: echo "::warning::CONSTELLATION_TOKEN is not set — health response computed but NOT returned to the hub."
+
+      - name: Return response to hub
+        if: env.HAS_TOKEN == 'true'
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697  # v4.0.1
+        with:
+          token: ${{ secrets.CONSTELLATION_TOKEN }}
+          repository: AUo959/aurora-cloudbank-symbolic
+          event-type: constellation.health.response
+          client-payload: ${{ steps.health.outputs.response }}

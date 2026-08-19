@@ -17,6 +17,11 @@
 !/.devcontainer/**
 !/.github/
 !/.github/**
+# Constellation node identity. The hub's constellation-health-audit.yml reads
+# .aurora/constellation.json from every node; the root allowlist pattern (/*)
+# was silently excluding this repo's manifest. Added 2026-08-19 connectivity pass.
+!/.aurora/
+!/.aurora/**
 !/.codacy/
 !/.codacy/**
 !/.codacy.yaml

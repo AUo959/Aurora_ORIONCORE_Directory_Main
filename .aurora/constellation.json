@@ -1,0 +1,48 @@
+{
+  "constellation_version": "1.0.0-alpha",
+  "node": {
+    "designation": "ORIONCORE-CONTROL",
+    "symbolic_tag": "s.tag::orioncore.control",
+    "repo": "Aurora_ORIONCORE_Directory_Main",
+    "role": "control_plane",
+    "stack": ["python", "markdown", "json"],
+    "description": "Root control plane — repo registration, routing policy, audit posture, GUMAS v3.0 simulation runtime and workspace tooling. Governs policy for all project repos per catalog/repo_authority_policy.yaml."
+  },
+  "upstream": [
+    "s.tag::constellation.prime"
+  ],
+  "downstream": [
+    "s.tag::constellation.prime"
+  ],
+  "governance": {
+    "charter": "Picard_Delta_3",
+    "l3_modules": ["Axiomera", "Velatrix", "Glyphon", "Caelion", "Harmion"],
+    "ethics_protocol": true,
+    "authority_policy": "catalog/repo_authority_policy.yaml",
+    "repo_registry": "catalog/repo_registry.yaml"
+  },
+  "contracts": {
+    "published": [
+      "constellation-health",
+      "repo-registry",
+      "simulation-scenario-exports"
+    ],
+    "consumed": [
+      "constellation-event",
+      "constellation-health",
+      "knowledge-index"
+    ]
+  },
+  "health": {
+    "last_sync": null,
+    "status": "wired-pending-hub-verification",
+    "responds_to": ["constellation.health.check"],
+    "responder_workflow": ".github/workflows/constellation-health-respond.yml"
+  },
+  "meta": {
+    "created": "2026-08-19T00:00:00Z",
+    "created_by": "connectivity-and-integration-pass-2026-08-19",
+    "proposal_ref": "Aurora Constellation Architecture Proposal v1.0.0",
+    "note": "The control plane previously had NO node manifest at .aurora/constellation.json. catalog/constellation-config.json is the QGIA-SPACE-NODE (Perplexity) manifest that happens to live in this repo; it is not this repo's own node identity and is not read by the hub's constellation-health-audit workflow."
+  }
+}
