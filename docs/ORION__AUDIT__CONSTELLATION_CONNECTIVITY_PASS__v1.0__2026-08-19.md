@@ -324,3 +324,43 @@ Outstanding, all requiring a browser or a `gh`-authenticated shell:
 Step 6's ordering matters: the spoke emitters now validate against the hub's
 published schema at dispatch time, so the widened `source_node` enum must be on
 the hub's `main` before the spokes rely on it.
+
+---
+
+## 6. Verification evidence
+
+Run offline against the patched schema, so these results hold regardless of what
+GitHub Actions later reports.
+
+**Schema conformance** — every emitter payload replayed against the real
+`constellation-event.schema.json` with `jsonschema`:
+
+| Payload | Result |
+|---|---|
+| Old publisher output (the raw-payload fallthrough of F-4) | **FAIL** — `'event_type' is a required property` |
+| Old `spine-notify-hub.yml` payload (F-2) | **FAIL** — `'event_type' is a required property` |
+| Patched publisher envelope | PASS |
+| Patched `spine-notify-hub.yml` payload | PASS |
+| Patched library knowledge-index payload | PASS |
+| New ORIONCORE `constellation.health.response` | PASS |
+
+The two failures are the reproduction: they are what the hub's `validate-event`
+job has been receiving. The publisher case was produced by running the workflow's
+own `jq` pipeline, not by hand-writing the expected output.
+
+**Workflow lint** — `actionlint 1.7.7` over all seven touched workflows
+(root health-respond; hub publisher, router, health-audit; spine notify and
+knowledge-index; library knowledge-index): **0 findings**.
+
+**Repo gates** — `tools/workspace_verify.py`: `blocking_count: 0`. Three
+pre-existing warnings remain and are untouched by this pass (`skill_sync` stale
+codex target, `repo_registry_coverage` for placeholder paths, and
+`session_state_freshness`).
+
+**Registry durability** — `catalog/repo_registry.yaml` re-checked after a full
+`tools/workspace_scan.py` run: 11 entries, all `constellation` blocks intact,
+`branch` and `head_sha` correctly regenerated. This is the regression test for
+F-12; before the fix, the same run destroyed them.
+
+**Workspace reconstructibility** — `tools/registry_bootstrap.py --check`:
+5 in sync, 6 skipped (placeholder paths and pins), exit 0.
