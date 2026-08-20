@@ -3,8 +3,8 @@ root: .
 repos:
 - name: aurora-cloudbank-symbolic-main
   path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
-  branch: integration/connectivity-pass-2026-08-19
-  head_sha: cb35bfc5e13d727006c701228b54aabb1ba45fe6
+  branch: main
+  head_sha: a19870a576a4136fc7ee8c30a2a8d869f36156d9
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse
@@ -33,8 +33,8 @@ repos:
   move_policy: frozen_until_registry_adoption
 - name: qgia-knowledge-library-main
   path: qgia-knowledge-library-main
-  branch: integration/connectivity-pass-2026-08-19
-  head_sha: 4f3a8bd16fcae8388d393370b7c9bfb35f05e5dd
+  branch: main
+  head_sha: b38f2838950b69b693cd79442d522374e492f027
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C qgia-knowledge-library-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE
@@ -43,8 +43,8 @@ repos:
   move_policy: frozen_until_registry_adoption
 - name: qgia-knowledge-spine-main
   path: qgia-knowledge-spine-main
-  branch: integration/connectivity-pass-2026-08-19
-  head_sha: 7856e43ae9386c62733e004d2a1f649bf92c5c7c
+  branch: main
+  head_sha: c98c4592e82ebd09b8882f2b148714b8bd60e84c
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C qgia-knowledge-spine-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE

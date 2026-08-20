@@ -44,6 +44,16 @@ yaml = pytest.importorskip("yaml")
 REPO_ROOT = Path(__file__).resolve().parents[1]
 WORKFLOWS = REPO_ROOT / ".github" / "workflows"
 
+#: Repositories that back a capability with ``current_head_required: true``.
+#: Only these need full history — their manifests are the ones whose freshness
+#: is decided by a git range. Keep this list derived from the manifests rather
+#: than guessed: a capability flipping to current_head_required silently adds a
+#: repository here, and test_backing_repositories_are_covered() catches that.
+PINNED_REPOS = {
+    "AUo959/CanonRec": "CanonRec",
+    "AUo959/aurora-cloudbank-symbolic": "aurora-cloudbank-symbolic-main",
+}
+
 CANONREC = "AUo959/CanonRec"
 
 pytestmark = pytest.mark.skipif(
@@ -51,8 +61,60 @@ pytestmark = pytest.mark.skipif(
 )
 
 
+def backing_repositories_needing_head() -> set[str]:
+    """Repositories named by manifests with current_head_required: true.
+
+    Read from the manifests so the list cannot drift silently.
+    """
+    import json
+
+    # Read EVERY manifest file, not just specialists.jsonl. The first version of
+    # this helper read only specialists.jsonl and so never saw
+    # ace.capability.gumas.naming.resolve, which lives in core.jsonl and is the
+    # CloudBank-backed capability this test most needed to cover — it passed by
+    # checking nothing, which is the failure this module's docstring warns about.
+    manifest_dir = REPO_ROOT / "catalog" / "ace" / "capability_manifests"
+    manifest_files = sorted(manifest_dir.glob("*.jsonl"))
+    if not manifest_files:
+        pytest.skip("capability manifests not present")
+    repos: set[str] = set()
+    for path in manifest_files:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                record = json.loads(line)
+            except Exception:
+                continue
+            manifest = record.get("manifest", record)
+            if (manifest.get("freshness") or {}).get("current_head_required"):
+                repos.add(str((manifest.get("tool") or {}).get("repository") or ""))
+    return {r for r in repos if r and r != "root"}
+
+
+def test_backing_repositories_are_covered():
+    """Every current_head_required repository must appear in PINNED_REPOS.
+
+    If a capability starts requiring current head for a repository CI clones
+    shallowly, the freshness rule breaks for it exactly the way it broke for
+    CanonRec — silently, and only in CI.
+    """
+    covered = set(PINNED_REPOS.values())
+    missing = backing_repositories_needing_head() - covered
+    assert not missing, (
+        f"capability manifests require current head for {sorted(missing)}, which "
+        f"PINNED_REPOS does not cover. Add the repository and ensure its CI "
+        f"checkout sets fetch-depth: 0."
+    )
+
+
 def canonrec_checkout_steps() -> list[tuple[str, str, dict]]:
-    """Every actions/checkout step in any workflow that provisions CanonRec."""
+    """Every actions/checkout step provisioning a current-head-backed repo.
+
+    Covers both CanonRec and CloudBank: the depth requirement follows from
+    current_head_required, not from which repository it happens to be.
+    """
     found: list[tuple[str, str, dict]] = []
     for path in sorted(WORKFLOWS.glob("*.yml")):
         try:
@@ -71,7 +133,7 @@ def canonrec_checkout_steps() -> list[tuple[str, str, dict]]:
                 params = step.get("with") or {}
                 if not using.startswith("actions/checkout"):
                     continue
-                if str(params.get("repository") or "") != CANONREC:
+                if str(params.get("repository") or "") not in PINNED_REPOS:
                     continue
                 found.append((path.name, str(job_name), params))
     return found

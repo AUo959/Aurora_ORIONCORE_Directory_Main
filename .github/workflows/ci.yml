@@ -96,6 +96,10 @@ jobs:
           repository: AUo959/aurora-cloudbank-symbolic
           ref: ${{ steps.registry_pins.outputs.cloudbank_sha }}
           path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
+          # Same coupling as CanonRec below: ace.capability.gumas.naming.resolve
+          # is CloudBank-backed and current_head_required, so its refresh_on_paths
+          # diff needs the pinned commit present.
+          fetch-depth: 0
 
       # fetch-depth: 0 is load-bearing, not hygiene. ACE capability manifests
       # declare `refresh_on_paths`, and _refresh_paths_unchanged() decides
