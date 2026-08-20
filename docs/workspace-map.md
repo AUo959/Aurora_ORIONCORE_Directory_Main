@@ -1,8 +1,8 @@
 # Workspace Map
 
-- Generated: `2026-08-20T05:07:20Z`
+- Generated: `2026-08-20T05:08:21Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `45`
+- Top-level entries cataloged: `44`
 - Nested repos registered: `9`
 - Archive or binary artifacts inventoried: `613`
 - Classification overrides loaded: `10` from `catalog/classification_overrides.yaml`
@@ -14,7 +14,7 @@
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `11` top-level entries
-- `intake`: `8` top-level entries
+- `intake`: `7` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
@@ -36,7 +36,6 @@
 
 - `# QGIA Operational Axiom v3.xml` -> `intake/# QGIA Operational Axiom v3.xml` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `Aurora_Sim_Architecture` -> `intake/Aurora_Sim_Architecture` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
-- `PR_BODY__main__2026-08-19.md` -> `intake/PR_BODY__main__2026-08-19.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `QGIA_Axiom_Doctrine_Narrative.md` -> `intake/QGIA_Axiom_Doctrine_Narrative.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `QGIA_Runtime_OnePager.md` -> `intake/QGIA_Runtime_OnePager.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `recovery` -> `intake/recovery` (intake_collection, batch `wave4_root_intake_cleanup_initial`)

@@ -1,4 +1,4 @@
-generated_at: '2026-08-20T05:07:20Z'
+generated_at: '2026-08-20T05:08:21Z'
 root: .
 logical_taxonomy:
 - repos
@@ -255,17 +255,6 @@ entries:
   retention_policy: versioned
   owner: workspace-admin
   status: managed
-- id: pr-body-main-2026-08-19
-  kind: intake_file
-  current_path: PR_BODY__main__2026-08-19.md
-  logical_zone: intake
-  planned_path: intake/PR_BODY__main__2026-08-19.md
-  git_boundary: none
-  storage_tier: review
-  retention_policy: review
-  owner: intake-review
-  status: planned_move
-  batch_id: wave4_root_intake_cleanup_initial
 - id: qgia-axiom-doctrine-narrative
   kind: intake_file
   current_path: QGIA_Axiom_Doctrine_Narrative.md
