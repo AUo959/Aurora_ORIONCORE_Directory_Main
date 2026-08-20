@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import tempfile
 import time
@@ -15,6 +16,7 @@ from _workspace_common import (
     TRACKED_FILE_SIZE_LIMIT_BYTES,
     discover_nested_repos,
     git,
+    is_canonical_workspace_context,
     load_yaml_like,
     manifest_enforced_current_paths,
     now_iso_utc,
@@ -1147,7 +1149,126 @@ def verify_git_locks(root: Path) -> list[Finding]:
     return findings
 
 
-def run_checks(root: Path, include_determinism: bool, include_relocation_rehearsal: bool) -> list[Finding]:
+# ── Execution-context contamination ──────────────────────────────────────
+#
+# A generated report records the machine the tool RAN ON. When that machine is
+# a sandbox — a Cowork device-bridge mount or a cloud container — the recorded
+# root, tool paths, and tool versions describe the container rather than this
+# workspace. tests/test_devkit_execution_context.py carries the full analysis:
+# four of Mission Control's five P1s on 2026-08-10 traced to exactly this, and
+# `gh is missing` was surfaced as a blocker about a workspace that has gh.
+#
+# aurora_devkit demotes the severity of findings produced in a non-canonical
+# context. That keeps a false blocker from shouting. It does not stop the
+# contaminated artifact from being committed and then read back as input —
+# reports/analysis/aurora_devkit_latest.json carried a /sessions/ root as the
+# tracked record of the workspace toolchain from 2026-08-15 to 2026-08-19.
+# This check closes that half.
+#
+# The asymmetry mirrors the devkit's, for the same reason:
+#   pre_commit → blocking, and only over files staged in THIS commit.
+#   manual     → warning, over everything tracked under the scanned roots.
+# Blocking on already-committed contamination would block every commit until
+# someone rewrote history. Warning on it keeps the debt visible and countable
+# while leaving the gate useful.
+#
+# Scoped to generated-artifact roots on purpose. docs/ and tests/ are excluded
+# because prose and fixtures quote these paths legitimately — the audit record
+# that motivated this check is itself full of them.
+EXECUTION_CONTEXT_SCANNED_ROOTS = ("reports/", "catalog/")
+EXECUTION_CONTEXT_EXEMPT_FILE = Path("catalog/execution_context_exemption.yaml")
+EXECUTION_CONTEXT_REPORTED_LIMIT = 5
+EXECUTION_CONTEXT_PATTERNS = (
+    # Cowork device-bridge mount: /sessions/<session-id>/mnt/...
+    re.compile(r"/sessions/[A-Za-z0-9._-]+/mnt/"),
+    # Home directory of the cloud container the agent runtime executes in.
+    re.compile(r"/home/claude/"),
+)
+
+
+def execution_context_exemptions(root: Path) -> set[str]:
+    """Documented escape hatch, matching the brief-freshness exemption convention."""
+    path = root / EXECUTION_CONTEXT_EXEMPT_FILE
+    if not path.exists():
+        return set()
+    try:
+        data = load_yaml_like(path)
+    except Exception:
+        return set()
+    if not isinstance(data, dict):
+        return set()
+    entries = data.get("exempt_paths") or []
+    if not isinstance(entries, list):
+        return set()
+    return {str(entry) for entry in entries}
+
+
+def execution_context_candidates(root: Path, mode: str) -> list[str]:
+    args = (
+        ["diff", "--cached", "--name-only", "--diff-filter=ACM"]
+        if mode == "pre_commit"
+        else ["ls-files"]
+    )
+    result = git(args, cwd=root, check=False)
+    if result.returncode != 0:
+        return []
+    return [line.strip() for line in result.stdout.splitlines() if line.strip()]
+
+
+def verify_execution_context_paths(root: Path, mode: str = "manual") -> list[Finding]:
+    """Keep a sandbox's view of itself out of tracked generated artifacts."""
+    exempt = execution_context_exemptions(root)
+    hits: dict[str, str] = {}
+
+    for relative in execution_context_candidates(root, mode):
+        if relative in exempt:
+            continue
+        if not relative.startswith(EXECUTION_CONTEXT_SCANNED_ROOTS):
+            continue
+        path = root / relative
+        if not path.is_file():
+            continue
+        try:
+            text = path.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        for pattern in EXECUTION_CONTEXT_PATTERNS:
+            match = pattern.search(text)
+            if match:
+                hits[relative] = match.group(0)
+                break
+
+    if not hits:
+        return []
+
+    ordered = sorted(hits.items())
+    listed = ", ".join(f"{name} ({value})" for name, value in ordered[:EXECUTION_CONTEXT_REPORTED_LIMIT])
+    overflow = len(ordered) - EXECUTION_CONTEXT_REPORTED_LIMIT
+    if overflow > 0:
+        listed = f"{listed} (+{overflow} more)"
+
+    details = (
+        f"{len(hits)} generated artifact(s) record an execution-context path instead of a "
+        f"workspace path: {listed}. The recorded root, tool paths, and tool versions "
+        "describe the sandbox the tool ran in, not this workspace."
+    )
+    fix = (
+        "Regenerate the artifact from the canonical workspace, or add the path to "
+        f"{EXECUTION_CONTEXT_EXEMPT_FILE} under `exempt_paths:` with a comment saying why "
+        "the reference is intentional."
+    )
+
+    if mode == "pre_commit":
+        return [error("execution_context_paths", details, fix)]
+    return [warning("execution_context_paths", details, fix)]
+
+
+def run_checks(
+    root: Path,
+    include_determinism: bool,
+    include_relocation_rehearsal: bool,
+    mode: str = "manual",
+) -> list[Finding]:
     findings: list[Finding] = []
     findings.extend(verify_root_git_repo(root))
     findings.extend(verify_git_locks(root))
@@ -1156,6 +1277,7 @@ def run_checks(root: Path, include_determinism: bool, include_relocation_rehears
     findings.extend(verify_canon_propagation(root))
     findings.extend(verify_manifest(root))
     findings.extend(verify_privacy_redaction(root))
+    findings.extend(verify_execution_context_paths(root, mode))
     findings.extend(verify_repo_registry(root))
     findings.extend(verify_gitignore(root))
     findings.extend(verify_relocation_plan(root))
@@ -1182,6 +1304,10 @@ def build_report(root: Path, mode: str, findings: list[Finding]) -> dict[str, An
         "generated_at": now_iso_utc(),
         "root": serialized_root(root),
         "mode": mode,
+        # Which machine produced this report. Without it, a reader cannot tell a
+        # finding about the workspace from a finding about the sandbox that
+        # scanned it — see docs/ORION__AUDIT__EXECUTION_CONTEXT_CONTAMINATION.
+        "execution_context": {"canonical": is_canonical_workspace_context(root)},
         "status": summarize_status(findings),
         "summary": {
             "finding_count": len(findings),
@@ -1241,6 +1367,7 @@ def main() -> int:
         root,
         include_determinism=args.check_determinism,
         include_relocation_rehearsal=args.exercise_relocation,
+        mode=mode,
     )
     report = build_report(root, mode, findings)
     report_path = resolve_report_path(root, args.report_out, args.persist_report)
