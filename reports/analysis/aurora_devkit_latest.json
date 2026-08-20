@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-15T05:30:19Z",
-  "root": "/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main",
-  "manifest_path": "/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
+  "generated_at": "2026-08-15T05:32:26Z",
+  "root": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
+  "manifest_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
   "toolkit_id": "aurora-dev-toolkit",
   "status": "WARN",
   "toolchain": [
@@ -18,21 +18,21 @@
       ],
       "path": "/usr/bin/git",
       "returncode": 0,
-      "output": "git version 2.34.1"
+      "output": "git version 2.50.1 (Apple Git-155)"
     },
     {
       "id": "gh",
       "category": "source-control",
       "required": true,
       "impact": "Required for GitHub PR, issue, and CI maintenance.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "gh",
         "--version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/Users/travisstreets/.local/bin/gh",
+      "returncode": 0,
+      "output": "gh version 2.88.0 (2026-03-10)\nhttps://github.com/cli/cli/releases/tag/v2.88.0"
     },
     {
       "id": "python3",
@@ -46,21 +46,21 @@
       ],
       "path": "/usr/bin/python3",
       "returncode": 0,
-      "output": "Python 3.10.12"
+      "output": "Python 3.9.6"
     },
     {
       "id": "python3.12",
       "category": "python",
       "required": true,
       "impact": "Canonical Python floor (declared in .python-version). Required for CloudBank venv compatibility and CI parity. CI gates merges on 3.12. Install via: uv python install 3.12",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "python3.12",
         "--version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/Users/travisstreets/.local/bin/python3.12",
+      "returncode": 0,
+      "output": "Python 3.12.13"
     },
     {
       "id": "pip",
@@ -76,7 +76,7 @@
       ],
       "path": "/usr/bin/python3",
       "returncode": 0,
-      "output": "pip 25.3 from /usr/local/lib/python3.10/dist-packages/pip (python 3.10)"
+      "output": "pip 21.2.4 from /Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)"
     },
     {
       "id": "uv",
@@ -88,9 +88,9 @@
         "uv",
         "--version"
       ],
-      "path": "/usr/local/bin/uv",
+      "path": "/Users/travisstreets/.local/bin/uv",
       "returncode": 0,
-      "output": "uv 0.11.19 (aarch64-unknown-linux-gnu)"
+      "output": "uv 0.10.9 (f675560f3 2026-03-06)"
     },
     {
       "id": "node",
@@ -102,9 +102,9 @@
         "node",
         "--version"
       ],
-      "path": "/usr/bin/node",
+      "path": "/opt/homebrew/bin/node",
       "returncode": 0,
-      "output": "v22.22.3"
+      "output": "v26.5.0"
     },
     {
       "id": "npm",
@@ -116,9 +116,9 @@
         "npm",
         "--version"
       ],
-      "path": "/usr/bin/npm",
+      "path": "/opt/homebrew/bin/npm",
       "returncode": 0,
-      "output": "10.9.8"
+      "output": "11.17.0"
     },
     {
       "id": "corepack",
@@ -130,79 +130,79 @@
         "corepack",
         "--version"
       ],
-      "path": "/usr/bin/corepack",
+      "path": "/opt/homebrew/bin/corepack",
       "returncode": 0,
-      "output": "0.34.6"
+      "output": "0.35.0"
     },
     {
       "id": "sqlite3",
       "category": "local-data",
       "required": true,
       "impact": "Useful for local indexes, receipts, and lightweight metadata stores.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "sqlite3",
         "--version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/usr/bin/sqlite3",
+      "returncode": 0,
+      "output": "3.51.0 2025-06-12 13:14:41 f0ca7bba1c5e232e5d279fad6338121ab55af0c8c68c84cdfb18ba5114dcaapl (64-bit)"
     },
     {
       "id": "pre-commit",
       "category": "quality",
       "required": false,
       "impact": "Recommended for running root hook checks outside Git commit flow.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "pre-commit",
         "--version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/Users/travisstreets/.local/bin/pre-commit",
+      "returncode": 0,
+      "output": "pre-commit 4.6.0"
     },
     {
       "id": "ruff",
       "category": "quality",
       "required": false,
       "impact": "Recommended Python lint and formatting baseline for future code-heavy packages.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "ruff",
         "--version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/Users/travisstreets/.local/bin/ruff",
+      "returncode": 0,
+      "output": "ruff 0.15.20"
     },
     {
       "id": "mypy",
       "category": "quality",
       "required": false,
       "impact": "Recommended static type check lane for larger Python modules.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "mypy",
         "--version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/Users/travisstreets/.local/bin/mypy",
+      "returncode": 0,
+      "output": "mypy 2.1.0 (compiled: yes)"
     },
     {
       "id": "gitleaks",
       "category": "quality",
       "required": false,
       "impact": "Secret-scanning gate for all pushes and PRs. Config: .gitleaks.toml. CI: .github/workflows/secret-scan.yml. Added 2026-05-30.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "gitleaks",
         "version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/opt/homebrew/bin/gitleaks",
+      "returncode": 0,
+      "output": "8.30.1"
     },
     {
       "id": "pipx",
@@ -214,93 +214,93 @@
         "pipx",
         "--version"
       ],
-      "path": "/usr/bin/pipx",
+      "path": "/Users/travisstreets/.local/bin/pipx",
       "returncode": 0,
-      "output": "1.0.0"
+      "output": "1.15.0"
     },
     {
       "id": "pnpm",
       "category": "javascript",
       "required": false,
       "impact": "Recommended package manager for large JS workspaces when activated through corepack.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "pnpm",
         "--version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/opt/homebrew/bin/pnpm",
+      "returncode": 0,
+      "output": "11.9.0"
     },
     {
       "id": "docker",
       "category": "container",
       "required": false,
       "impact": "Recommended for devcontainers, service stacks, and reproducible app builds.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "docker",
         "--version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/usr/local/bin/docker",
+      "returncode": 0,
+      "output": "Docker version 29.5.3, build d1c06ef"
     },
     {
       "id": "brew",
       "category": "macos-package-manager",
       "required": false,
       "impact": "Recommended Mac system package manager if machine-level automatic updates are desired.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "brew",
         "--version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/opt/homebrew/bin/brew",
+      "returncode": 0,
+      "output": "Homebrew 6.0.9"
     },
     {
       "id": "xcodebuild",
       "category": "apple-platforms",
       "required": false,
       "impact": "Recommended for iOS and full macOS app build automation.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "xcodebuild",
         "-version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/usr/bin/xcodebuild",
+      "returncode": 0,
+      "output": "Xcode 26.6\nBuild version 17F113"
     },
     {
       "id": "rust",
       "category": "systems",
       "required": false,
       "impact": "Optional for high-performance local tools and native extensions.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "rustc",
         "--version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/Users/travisstreets/.local/bin/rustc",
+      "returncode": 0,
+      "output": "rustc 1.95.0 (59807616e 2026-04-14)"
     },
     {
       "id": "go",
       "category": "systems",
       "required": false,
       "impact": "Optional for portable developer services and CLIs.",
-      "status": "missing",
+      "status": "ok",
       "command": [
         "go",
         "version"
       ],
-      "path": null,
-      "returncode": null,
-      "output": ""
+      "path": "/Users/travisstreets/.local/bin/go",
+      "returncode": 0,
+      "output": "go version go1.26.3 darwin/arm64"
     }
   ],
   "package_manifests": [
@@ -600,7 +600,7 @@
       "python_command": [
         ".venv/bin/python"
       ],
-      "resolved_path": "/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "resolved_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
       "path_resolution": "root",
       "required_imports": [
         "fastapi",
@@ -635,68 +635,66 @@
       ],
       "auto_update_lane": "aurora-dev-toolkit-user-space-update",
       "status_file": ".env_status.json",
-      "status": "blocked",
+      "status": "warn",
       "checks": {
         "python_version": {
-          "status": "missing",
+          "status": "ok",
           "command": [
             ".venv/bin/python",
             "--version"
           ],
-          "path": "/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
-          "returncode": null,
-          "output": "command not found"
+          "path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "returncode": 0,
+          "output": "Python 3.12.13"
         },
         "pip_version": {
-          "status": "missing",
+          "status": "ok",
           "command": [
             ".venv/bin/python",
             "-m",
             "pip",
             "--version"
           ],
-          "path": "/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
-          "returncode": null,
-          "output": "command not found"
+          "path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "returncode": 0,
+          "output": "pip 25.0.1 from /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/lib/python3.12/site-packages/pip (python 3.12)"
         },
         "required_imports": {
-          "status": "missing",
+          "status": "ok",
           "command": [
             ".venv/bin/python",
             "-c",
             "import importlib, json; names=['fastapi', 'httpx', 'slowapi']; versions={}; missing=[]; \nfor name in names:\n    try:\n        module = importlib.import_module(name)\n        versions[name] = getattr(module, '__version__', 'unknown')\n    except Exception as exc:\n        missing.append({'name': name, 'error': f'{type(exc).__name__}: {exc}'})\nprint(json.dumps({'versions': versions, 'missing': missing}, sort_keys=True))"
           ],
-          "path": "/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
-          "returncode": null,
-          "output": "command not found"
+          "path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "returncode": 0,
+          "output": "{\"missing\": [], \"versions\": {\"fastapi\": \"0.139.0\", \"httpx\": \"0.28.1\", \"slowapi\": \"unknown\"}}"
         },
         "pip_check": {
-          "status": "missing",
+          "status": "ok",
           "command": [
             ".venv/bin/python",
             "-m",
             "pip",
             "check"
           ],
-          "path": "/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
-          "returncode": null,
-          "output": "command not found"
+          "path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "returncode": 0,
+          "output": "No broken requirements found."
         }
       },
       "notes": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
-      "import_versions": {},
-      "missing_imports": [
-        {
-          "name": "parse",
-          "error": "invalid import probe output"
-        }
-      ],
+      "import_versions": {
+        "fastapi": "0.139.0",
+        "httpx": "0.28.1",
+        "slowapi": "unknown"
+      },
+      "missing_imports": [],
       "status_file_state": "stale",
       "status_file_stale_fields": [
-        "python_version",
         "pip_version"
       ],
-      "evidence": "pip_check, pip_version, python_version, required_imports"
+      "evidence": ".env_status.json is stale"
     }
   ],
   "dependency_update_surfaces": [
@@ -737,7 +735,7 @@
       ],
       "missing_updates": [],
       "notes": "Root dependency automation should open PRs for GitHub Actions, pre-commit hook revisions, and devcontainer features.",
-      "resolved_path": "/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main",
+      "resolved_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
       "path_resolution": "root"
     },
     {
@@ -825,7 +823,7 @@
       ],
       "missing_updates": [],
       "notes": "CloudBank dependency automation should open PRs for active Python, JavaScript, GitHub Actions, and pre-commit manifests. Archived docs and dependency caches remain excluded.",
-      "resolved_path": "/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "resolved_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
       "path_resolution": "root"
     }
   ],
@@ -861,403 +859,144 @@
       "aurora-script-governor",
       "aurora-selective-integration",
       "aurora-skill-finder",
+      "chatgpt-apps",
+      "develop-web-game",
+      "gh-address-comments",
+      "gh-fix-ci",
       "gitwiz-github-manager",
       "gumas-simulation-engine",
+      "imagegen",
+      "jupyter-notebook",
+      "pdf",
+      "playwright",
+      "security-best-practices",
+      "security-threat-model",
       "threadcore-governor",
       "zipwiz-governor"
     ],
     "repo_local_count": 16,
-    "installed_count": 16,
+    "installed_count": 26,
     "missing_installed_for_repo_source": [],
-    "skills_root": "/sessions/clever-ecstatic-meitner/.codex/skills"
+    "skills_root": "/Users/travisstreets/.codex/skills"
   },
-  "automations": [],
+  "automations": [
+    {
+      "id": "archive-entropy-guard",
+      "name": "Archive Entropy Guard",
+      "status": "PAUSED",
+      "rrule": "FREQ=WEEKLY;BYDAY=SA;BYHOUR=12;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/archive-entropy-guard/automation.toml"
+    },
+    {
+      "id": "archive-entropy-guard-2",
+      "name": "Archive Entropy Guard",
+      "status": "PAUSED",
+      "rrule": "FREQ=WEEKLY;BYDAY=SA;BYHOUR=12;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/archive-entropy-guard-2/automation.toml"
+    },
+    {
+      "id": "aurora-dev-toolkit-user-space-update",
+      "name": "Aurora Dev Toolkit User-Space Update",
+      "status": "PAUSED",
+      "rrule": "FREQ=WEEKLY;BYDAY=SU;BYHOUR=9;BYMINUTE=15",
+      "path": "/Users/travisstreets/.codex/automations/aurora-dev-toolkit-user-space-update/automation.toml"
+    },
+    {
+      "id": "aurora-dev-toolkit-watch",
+      "name": "Aurora Dev Toolkit Watch",
+      "status": "PAUSED",
+      "rrule": "FREQ=WEEKLY;BYDAY=SU;BYHOUR=9;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/aurora-dev-toolkit-watch/automation.toml"
+    },
+    {
+      "id": "aurora-multi-repo-git-health",
+      "name": "Aurora Multi-Repo Git Health",
+      "status": "ACTIVE",
+      "rrule": "FREQ=WEEKLY;BYDAY=FR;BYHOUR=9;BYMINUTE=30",
+      "path": "/Users/travisstreets/.codex/automations/aurora-multi-repo-git-health/automation.toml"
+    },
+    {
+      "id": "aurora-package-watch",
+      "name": "Aurora Package Watch",
+      "status": "PAUSED",
+      "rrule": "FREQ=HOURLY;INTERVAL=4",
+      "path": "/Users/travisstreets/.codex/automations/aurora-package-watch/automation.toml"
+    },
+    {
+      "id": "aurora-package-watch-bb49e52dcc54",
+      "name": "Aurora Package Watch",
+      "status": "PAUSED",
+      "rrule": "FREQ=HOURLY;INTERVAL=4",
+      "path": "/Users/travisstreets/.codex/automations/aurora-package-watch-bb49e52dcc54/automation.toml"
+    },
+    {
+      "id": "aurora-root-workspace-health",
+      "name": "Aurora Root Workspace Health",
+      "status": "ACTIVE",
+      "rrule": "FREQ=WEEKLY;BYDAY=WE;BYHOUR=9;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/aurora-root-workspace-health/automation.toml"
+    },
+    {
+      "id": "cloudbank-pr-sentinel",
+      "name": "CloudBank PR Sentinel",
+      "status": "ACTIVE",
+      "rrule": "FREQ=DAILY;BYHOUR=9;BYMINUTE=20",
+      "path": "/Users/travisstreets/.codex/automations/cloudbank-pr-sentinel/automation.toml"
+    },
+    {
+      "id": "cloudbank-script-drift-audit",
+      "name": "CloudBank Script Drift Audit",
+      "status": "PAUSED",
+      "rrule": "FREQ=WEEKLY;BYDAY=MO,TH;BYHOUR=9;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/cloudbank-script-drift-audit/automation.toml"
+    },
+    {
+      "id": "cloudbank-script-drift-audit-2",
+      "name": "CloudBank Script Drift Audit",
+      "status": "PAUSED",
+      "rrule": "FREQ=WEEKLY;BYDAY=MO,TH;BYHOUR=9;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/cloudbank-script-drift-audit-2/automation.toml"
+    },
+    {
+      "id": "hourly-sim-retro",
+      "name": "Hourly Sim Retro",
+      "status": "PAUSED",
+      "rrule": "FREQ=HOURLY;INTERVAL=1",
+      "path": "/Users/travisstreets/.codex/automations/hourly-sim-retro/automation.toml"
+    },
+    {
+      "id": "qgia-closed-loop-validation",
+      "name": "QGIA Closed-Loop Validation",
+      "status": "PAUSED",
+      "rrule": "FREQ=WEEKLY;BYDAY=TH;BYHOUR=9;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/qgia-closed-loop-validation/automation.toml"
+    },
+    {
+      "id": "weekly-skill-audit",
+      "name": "Weekly Skill Audit",
+      "status": "PAUSED",
+      "rrule": "FREQ=WEEKLY;BYDAY=MO;BYHOUR=9;BYMINUTE=0",
+      "path": "/Users/travisstreets/.codex/automations/weekly-skill-audit/automation.toml"
+    }
+  ],
   "findings": [
     {
       "severity": "warning",
-      "id": "tool_gh_missing",
-      "message": "gh is missing in this execution context (non-canonical workspace path).",
-      "evidence": "command not found",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Required for GitHub PR, issue, and CI maintenance.",
-      "execution_context": "non_canonical"
+      "id": "automation_aurora_dev_toolkit_watch_paused",
+      "message": "aurora-dev-toolkit-watch exists but is not active.",
+      "evidence": "status=PAUSED",
+      "next_step": "Use a devkit watch lane for read-only drift detection, then apply package changes with explicit approval."
     },
     {
       "severity": "warning",
-      "id": "tool_python3.12_missing",
-      "message": "python3.12 is missing in this execution context (non-canonical workspace path).",
-      "evidence": "command not found",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Canonical Python floor (declared in .python-version). Required for CloudBank venv compatibility and CI parity. CI gates merges on 3.12. Install via: uv python install 3.12",
-      "execution_context": "non_canonical"
-    },
-    {
-      "severity": "warning",
-      "id": "tool_sqlite3_missing",
-      "message": "sqlite3 is missing in this execution context (non-canonical workspace path).",
-      "evidence": "command not found",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Useful for local indexes, receipts, and lightweight metadata stores.",
-      "execution_context": "non_canonical"
-    },
-    {
-      "severity": "warning",
-      "id": "tool_pre-commit_missing",
-      "message": "pre-commit is missing in this execution context (non-canonical workspace path).",
-      "evidence": "command not found",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended for running root hook checks outside Git commit flow.",
-      "execution_context": "non_canonical"
-    },
-    {
-      "severity": "warning",
-      "id": "tool_ruff_missing",
-      "message": "ruff is missing in this execution context (non-canonical workspace path).",
-      "evidence": "command not found",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended Python lint and formatting baseline for future code-heavy packages.",
-      "execution_context": "non_canonical"
-    },
-    {
-      "severity": "warning",
-      "id": "tool_mypy_missing",
-      "message": "mypy is missing in this execution context (non-canonical workspace path).",
-      "evidence": "command not found",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended static type check lane for larger Python modules.",
-      "execution_context": "non_canonical"
-    },
-    {
-      "severity": "warning",
-      "id": "tool_gitleaks_missing",
-      "message": "gitleaks is missing in this execution context (non-canonical workspace path).",
-      "evidence": "command not found",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Secret-scanning gate for all pushes and PRs. Config: .gitleaks.toml. CI: .github/workflows/secret-scan.yml. Added 2026-05-30.",
-      "execution_context": "non_canonical"
-    },
-    {
-      "severity": "warning",
-      "id": "tool_pnpm_missing",
-      "message": "pnpm is missing in this execution context (non-canonical workspace path).",
-      "evidence": "command not found",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended package manager for large JS workspaces when activated through corepack.",
-      "execution_context": "non_canonical"
-    },
-    {
-      "severity": "warning",
-      "id": "tool_docker_missing",
-      "message": "docker is missing in this execution context (non-canonical workspace path).",
-      "evidence": "command not found",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended for devcontainers, service stacks, and reproducible app builds.",
-      "execution_context": "non_canonical"
-    },
-    {
-      "severity": "warning",
-      "id": "tool_brew_missing",
-      "message": "brew is missing in this execution context (non-canonical workspace path).",
-      "evidence": "command not found",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended Mac system package manager if machine-level automatic updates are desired.",
-      "execution_context": "non_canonical"
-    },
-    {
-      "severity": "warning",
-      "id": "tool_xcodebuild_missing",
-      "message": "xcodebuild is missing in this execution context (non-canonical workspace path).",
-      "evidence": "command not found",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended for iOS and full macOS app build automation.",
-      "execution_context": "non_canonical"
-    },
-    {
-      "severity": "warning",
-      "id": "tool_rust_missing",
-      "message": "rust is missing in this execution context (non-canonical workspace path).",
-      "evidence": "command not found",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Optional for high-performance local tools and native extensions.",
-      "execution_context": "non_canonical"
-    },
-    {
-      "severity": "warning",
-      "id": "tool_go_missing",
-      "message": "go is missing in this execution context (non-canonical workspace path).",
-      "evidence": "command not found",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Optional for portable developer services and CLIs.",
-      "execution_context": "non_canonical"
-    },
-    {
-      "severity": "warning",
-      "id": "automation_aurora_dev_toolkit_watch_missing",
-      "message": "No aurora-dev-toolkit-watch automation was found.",
-      "evidence": "automation.toml absent under the configured automations root",
-      "next_step": "Create a weekly read-only dev toolkit drift watch before enabling package-mutating updates."
-    },
-    {
-      "severity": "warning",
-      "id": "repo_python_env_aurora-cloudbank-symbolic-main_blocked",
-      "message": "aurora-cloudbank-symbolic-main Python environment is blocked in this execution context (non-canonical workspace path).",
-      "evidence": "pip_check, pip_version, python_version, required_imports",
-      "next_step": "Re-check from the canonical workspace path before treating this as a real environment failure. CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
-      "execution_context": "non_canonical"
+      "id": "repo_python_env_aurora-cloudbank-symbolic-main_warn",
+      "message": "aurora-cloudbank-symbolic-main Python environment is warn.",
+      "evidence": ".env_status.json is stale",
+      "next_step": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
+      "execution_context": "canonical"
     }
   ],
-  "install_plan": [
-    {
-      "tool_id": "gh",
-      "lane": "macos-system",
-      "manager": "brew",
-      "status": "blocked",
-      "approval_required": true,
-      "blocked_by": [
-        "brew"
-      ],
-      "install_command": [
-        "brew",
-        "install",
-        "gh"
-      ],
-      "install_command_text": "brew install gh",
-      "update_command": [
-        "brew",
-        "upgrade",
-        "gh"
-      ],
-      "update_command_text": "brew upgrade gh",
-      "notes": "Installs the GitHub CLI through Homebrew. gh is a required tool for PR, issue, and CI maintenance, so it must have an install recipe."
-    },
-    {
-      "tool_id": "python3.12",
-      "lane": "unplanned",
-      "manager": "unknown",
-      "status": "unplanned",
-      "approval_required": true,
-      "blocked_by": [],
-      "install_command": [],
-      "install_command_text": "",
-      "update_command": [],
-      "update_command_text": "",
-      "notes": "No install recipe is defined in catalog/dev_toolkit_manifest.json."
-    },
-    {
-      "tool_id": "sqlite3",
-      "lane": "macos-system",
-      "manager": "brew",
-      "status": "blocked",
-      "approval_required": true,
-      "blocked_by": [
-        "brew"
-      ],
-      "install_command": [
-        "brew",
-        "install",
-        "sqlite"
-      ],
-      "install_command_text": "brew install sqlite",
-      "update_command": [
-        "brew",
-        "upgrade",
-        "sqlite"
-      ],
-      "update_command_text": "brew upgrade sqlite",
-      "notes": "Installs an up-to-date SQLite through Homebrew; the brew formula name is 'sqlite' and it provides the 'sqlite3' CLI. macOS ships a system sqlite3, so this recipe is the managed fallback."
-    },
-    {
-      "tool_id": "pre-commit",
-      "lane": "python-user",
-      "manager": "uv-tool",
-      "status": "ready",
-      "approval_required": true,
-      "blocked_by": [],
-      "install_command": [
-        "uv",
-        "tool",
-        "install",
-        "pre-commit"
-      ],
-      "install_command_text": "uv tool install pre-commit",
-      "update_command": [
-        "uv",
-        "tool",
-        "upgrade",
-        "pre-commit"
-      ],
-      "update_command_text": "uv tool upgrade pre-commit",
-      "notes": "Installs pre-commit as an isolated user-space CLI."
-    },
-    {
-      "tool_id": "ruff",
-      "lane": "python-user",
-      "manager": "uv-tool",
-      "status": "ready",
-      "approval_required": true,
-      "blocked_by": [],
-      "install_command": [
-        "uv",
-        "tool",
-        "install",
-        "ruff"
-      ],
-      "install_command_text": "uv tool install ruff",
-      "update_command": [
-        "uv",
-        "tool",
-        "upgrade",
-        "ruff"
-      ],
-      "update_command_text": "uv tool upgrade ruff",
-      "notes": "Installs Ruff as an isolated user-space CLI."
-    },
-    {
-      "tool_id": "mypy",
-      "lane": "python-user",
-      "manager": "uv-tool",
-      "status": "ready",
-      "approval_required": true,
-      "blocked_by": [],
-      "install_command": [
-        "uv",
-        "tool",
-        "install",
-        "mypy"
-      ],
-      "install_command_text": "uv tool install mypy",
-      "update_command": [
-        "uv",
-        "tool",
-        "upgrade",
-        "mypy"
-      ],
-      "update_command_text": "uv tool upgrade mypy",
-      "notes": "Installs mypy as an isolated user-space CLI."
-    },
-    {
-      "tool_id": "gitleaks",
-      "lane": "unplanned",
-      "manager": "unknown",
-      "status": "unplanned",
-      "approval_required": true,
-      "blocked_by": [],
-      "install_command": [],
-      "install_command_text": "",
-      "update_command": [],
-      "update_command_text": "",
-      "notes": "No install recipe is defined in catalog/dev_toolkit_manifest.json."
-    },
-    {
-      "tool_id": "pnpm",
-      "lane": "javascript-user",
-      "manager": "corepack",
-      "status": "ready",
-      "approval_required": true,
-      "blocked_by": [],
-      "install_command": [
-        "corepack",
-        "enable",
-        "pnpm"
-      ],
-      "install_command_text": "corepack enable pnpm",
-      "update_command": [
-        "corepack",
-        "prepare",
-        "pnpm@latest",
-        "--activate"
-      ],
-      "update_command_text": "corepack prepare pnpm@latest --activate",
-      "notes": "Enables the pnpm shim through Corepack; update uses corepack prepare pnpm@latest --activate."
-    },
-    {
-      "tool_id": "docker",
-      "lane": "macos-system",
-      "manager": "manual",
-      "status": "blocked",
-      "approval_required": true,
-      "blocked_by": [
-        "brew"
-      ],
-      "install_command": [
-        "brew",
-        "install",
-        "--cask",
-        "docker"
-      ],
-      "install_command_text": "brew install --cask docker",
-      "update_command": [
-        "brew",
-        "upgrade",
-        "--cask",
-        "docker"
-      ],
-      "update_command_text": "brew upgrade --cask docker",
-      "notes": "Docker Desktop requires a system package manager or manual app install."
-    },
-    {
-      "tool_id": "brew",
-      "lane": "macos-system",
-      "manager": "manual",
-      "status": "manual",
-      "approval_required": true,
-      "blocked_by": [],
-      "install_command": [],
-      "install_command_text": "",
-      "update_command": [
-        "brew",
-        "update"
-      ],
-      "update_command_text": "brew update",
-      "notes": "Homebrew install is a system-level operation and should be approved separately before running the official installer."
-    },
-    {
-      "tool_id": "xcodebuild",
-      "lane": "apple-platforms",
-      "manager": "manual",
-      "status": "manual",
-      "approval_required": true,
-      "blocked_by": [],
-      "install_command": [],
-      "install_command_text": "",
-      "update_command": [],
-      "update_command_text": "",
-      "notes": "Full Xcode must be installed and selected with xcode-select before iOS or full macOS build automation is complete."
-    },
-    {
-      "tool_id": "rust",
-      "lane": "systems",
-      "manager": "brew",
-      "status": "blocked",
-      "approval_required": true,
-      "blocked_by": [
-        "brew"
-      ],
-      "install_command": [
-        "brew",
-        "install",
-        "rust"
-      ],
-      "install_command_text": "brew install rust",
-      "update_command": [
-        "brew",
-        "upgrade",
-        "rust"
-      ],
-      "update_command_text": "brew upgrade rust",
-      "notes": "Installs Rust through Homebrew once Homebrew exists."
-    },
-    {
-      "tool_id": "go",
-      "lane": "systems",
-      "manager": "brew",
-      "status": "blocked",
-      "approval_required": true,
-      "blocked_by": [
-        "brew"
-      ],
-      "install_command": [
-        "brew",
-        "install",
-        "go"
-      ],
-      "install_command_text": "brew install go",
-      "update_command": [
-        "brew",
-        "upgrade",
-        "go"
-      ],
-      "update_command_text": "brew upgrade go",
-      "notes": "Installs Go through Homebrew once Homebrew exists."
-    }
-  ],
+  "install_plan": [],
   "validation_commands": [
     "python3 tools/aurora_devkit.py --persist-report",
     "python3 tools/aurora_devkit.py --install-plan --persist-install-plan",

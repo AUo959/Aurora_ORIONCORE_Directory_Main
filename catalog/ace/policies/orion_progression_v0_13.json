@@ -3,10 +3,10 @@
   "version": "0.13.0",
   "capability_id": "ace.runtime.orion.l1.advance.governed",
   "cloudbank_repository": "aurora-cloudbank-symbolic-main",
-  "cloudbank_repository_sha": "9c34d8e9768c6dfb1afe18f96d42e3c743e2a4e9",
+  "cloudbank_repository_sha": "a19870a576a4136fc7ee8c30a2a8d869f36156d9",
   "owner": {
     "path": "simulation/l1_runtime.py",
-    "git_blob_sha": "dd3ae6f73bb2d2130981011a7c2443c0e39b8210",
+    "git_blob_sha": "5b6d93515fb219cb26d267db6c6df6c052413ae1",
     "class": "OrionL1Runtime",
     "preflight_method": "preflight",
     "load_method": "load_run",
