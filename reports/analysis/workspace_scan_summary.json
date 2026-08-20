@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-08-20T05:08:26Z",
+  "generated_at": "2026-08-20T21:58:36Z",
   "root": ".",
-  "top_level_entry_count": 44,
+  "top_level_entry_count": 45,
   "logical_zone_counts": {
-    "intake": 7,
+    "intake": 8,
     "tools": 11,
     "_staging": 7,
     "docs": 11,
@@ -16,10 +16,10 @@
   "nested_repo_count": 9,
   "archive_artifact_count": 613,
   "archive_artifact_bytes": 7804236424,
-  "planned_move_count": 6,
+  "planned_move_count": 7,
   "override_count": 10,
-  "privacy_exclusion_count": 11,
+  "privacy_exclusion_count": 12,
   "privacy_exclusion_reasons": {
-    "auto_scope_unknown": 11
+    "auto_scope_unknown": 12
   }
 }

@@ -1,12 +1,12 @@
 # Workspace Map
 
-- Generated: `2026-08-20T05:08:21Z`
+- Generated: `2026-08-20T21:58:31Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `44`
+- Top-level entries cataloged: `45`
 - Nested repos registered: `9`
 - Archive or binary artifacts inventoried: `613`
 - Classification overrides loaded: `10` from `catalog/classification_overrides.yaml`
-- Top-level paths excluded by privacy screen: `11`
+- Top-level paths excluded by privacy screen: `12`
 
 ## Zones
 
@@ -14,7 +14,7 @@
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `11` top-level entries
-- `intake`: `7` top-level entries
+- `intake`: `8` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
@@ -22,11 +22,11 @@
 
 ## Active Nested Repos
 
-- `aurora-cloudbank-symbolic-main` at `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `integration/connectivity-pass-2026-08-19`, remote `configured`)
+- `aurora-cloudbank-symbolic-main` at `GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main` (branch `main`, remote `configured`)
 - `CanonRec` at `GUMAS_SIM_2.5/CanonRec` (branch `main`, remote `configured`)
 - `DuelSim_v2.0` at `GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0` (branch `main`, remote `configured`)
-- `qgia-knowledge-library-main` at `qgia-knowledge-library-main` (branch `integration/connectivity-pass-2026-08-19`, remote `configured`)
-- `qgia-knowledge-spine-main` at `qgia-knowledge-spine-main` (branch `integration/connectivity-pass-2026-08-19`, remote `configured`)
+- `qgia-knowledge-library-main` at `qgia-knowledge-library-main` (branch `main`, remote `configured`)
+- `qgia-knowledge-spine-main` at `qgia-knowledge-spine-main` (branch `main`, remote `configured`)
 - `zip_wizard` at `~remote~` (branch `main`, remote `remote_only`)
 - `aurora-cloudbank-symbolic1` at `~remote~` (branch `main`, remote `remote_only`)
 - `AuroraOS` at `~remote~` (branch `main`, remote `remote_only`)
@@ -38,12 +38,13 @@
 - `Aurora_Sim_Architecture` -> `intake/Aurora_Sim_Architecture` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 - `QGIA_Axiom_Doctrine_Narrative.md` -> `intake/QGIA_Axiom_Doctrine_Narrative.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `QGIA_Runtime_OnePager.md` -> `intake/QGIA_Runtime_OnePager.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `ecguard_pr_body.md` -> `intake/ecguard_pr_body.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `recovery` -> `intake/recovery` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 - `warrant-lens` -> `intake/warrant-lens` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 
 ## Privacy Screen
 
-- `auto_scope_unknown`: `11` top-level paths excluded
+- `auto_scope_unknown`: `12` top-level paths excluded
 
 ## Largest Archive/Binary Artifacts
 
