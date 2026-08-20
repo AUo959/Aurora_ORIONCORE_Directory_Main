@@ -151,6 +151,8 @@ jobs:
           repository: AUo959/CanonRec
           ref: ${{ steps.registry_pins.outputs.canonrec_sha }}
           path: GUMAS_SIM_2.5/CanonRec
+          # Required so ACE refresh_on_paths staleness can be evaluated; see ci.yml.
+          fetch-depth: 0
 
       - name: Place provisioned repositories on registered branches
         run: |

@@ -97,6 +97,14 @@ jobs:
           ref: ${{ steps.registry_pins.outputs.cloudbank_sha }}
           path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
 
+      # fetch-depth: 0 is load-bearing, not hygiene. ACE capability manifests
+      # declare `refresh_on_paths`, and _refresh_paths_unchanged() decides
+      # staleness by diffing pinned_sha..observed_head over those paths. That
+      # diff needs both commits present. A shallow clone has only one, the diff
+      # errors, and the helper fails closed by design — so every manifest whose
+      # pin trails the registry reads as stale no matter what actually changed.
+      # That silently defeated the refresh_on_paths rule in CI: 7 CanonRec
+      # commits, 0 touching either declared path, 5 tests failing.
       - name: Provision CanonRec L1 ledger (public)
         if: matrix.python-version == '3.12'
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
@@ -104,6 +112,7 @@ jobs:
           repository: AUo959/CanonRec
           ref: ${{ steps.registry_pins.outputs.canonrec_sha }}
           path: GUMAS_SIM_2.5/CanonRec
+          fetch-depth: 0
 
       # actions/checkout at a pinned SHA leaves the repo in detached HEAD; the
       # workspace-verification repo_branch_match check expects the branch
