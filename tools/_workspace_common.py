@@ -1402,3 +1402,37 @@ def write_csv(path: Path, rows: list[dict[str, str]], fieldnames: list[str]) -> 
         writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
+
+
+# Moved here from aurora_devkit.py 2026-08-20. It was correct analysis trapped in
+# one module: every tool that reports execution-context-dependent findings needs
+# the same question answered the same way, and three of them were answering it
+# ad hoc or not at all. aurora_devkit re-exports it, so its own tests and their
+# monkeypatching keep working unchanged.
+def is_canonical_workspace_context(root: Path | None = None) -> bool:
+    """Is this the owner's workspace, or a sandbox mounting it?
+
+    Devkit findings describe the machine the scan RAN ON. When an agent runs it
+    from a sandboxed container, "gh is missing" is a fact about the container,
+    not about the workspace — but the report cannot tell the two apart, so those
+    findings were emitted as blockers and surfaced as P1s on every run. The
+    2026-08-10 executive brief traced four of Mission Control's P1s to exactly
+    this, and `gh` answered instantly when the same check ran on the Mac.
+
+    The canonical workspace is ``~/dev/Aurora_ORIONCORE_Directory_Main``, the
+    datum recorded in CLAUDE.md and AGENTS.md. It is anchored to the home
+    directory rather than matched as a path suffix: a suffix test also accepts
+    ``/tmp/dev/Aurora_ORIONCORE_Directory_Main``, and a throwaway clone should
+    not be able to claim canonical status.
+
+    Detection is deliberately STRICT — a context that is not provably canonical
+    is treated as possibly-sandboxed. That asymmetry is chosen so the failure
+    mode is a demoted severity on a real problem (visible, still reported) rather
+    than a real blocker suppressed because a lookalike path passed the check.
+    """
+    resolved = (root or Path(__file__).resolve().parent.parent).resolve()
+    try:
+        canonical_root = (Path.home() / "dev" / "Aurora_ORIONCORE_Directory_Main").resolve()
+    except (OSError, RuntimeError):
+        return False
+    return resolved == canonical_root

@@ -9,8 +9,16 @@ import os
 import shlex
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any, Callable
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+# Re-exported, not redefined: callers and tests that monkeypatch
+# `aurora_devkit.is_canonical_workspace_context` keep working, and the single
+# definition lives with the other shared workspace helpers.
+from _workspace_common import is_canonical_workspace_context  # noqa: E402,F401
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -595,35 +603,6 @@ def collect_dependency_update_surfaces(
         surfaces.append(record)
 
     return surfaces
-
-
-def is_canonical_workspace_context(root: Path | None = None) -> bool:
-    """Is this the owner's workspace, or a sandbox mounting it?
-
-    Devkit findings describe the machine the scan RAN ON. When an agent runs it
-    from a sandboxed container, "gh is missing" is a fact about the container,
-    not about the workspace — but the report cannot tell the two apart, so those
-    findings were emitted as blockers and surfaced as P1s on every run. The
-    2026-08-10 executive brief traced four of Mission Control's P1s to exactly
-    this, and `gh` answered instantly when the same check ran on the Mac.
-
-    The canonical workspace is ``~/dev/Aurora_ORIONCORE_Directory_Main``, the
-    datum recorded in CLAUDE.md and AGENTS.md. It is anchored to the home
-    directory rather than matched as a path suffix: a suffix test also accepts
-    ``/tmp/dev/Aurora_ORIONCORE_Directory_Main``, and a throwaway clone should
-    not be able to claim canonical status.
-
-    Detection is deliberately STRICT — a context that is not provably canonical
-    is treated as possibly-sandboxed. That asymmetry is chosen so the failure
-    mode is a demoted severity on a real problem (visible, still reported) rather
-    than a real blocker suppressed because a lookalike path passed the check.
-    """
-    resolved = (root or Path(__file__).resolve().parent.parent).resolve()
-    try:
-        canonical_root = (Path.home() / "dev" / "Aurora_ORIONCORE_Directory_Main").resolve()
-    except (OSError, RuntimeError):
-        return False
-    return resolved == canonical_root
 
 
 def build_findings(
