@@ -245,9 +245,9 @@
       "detail": "Resolved by the CI clone-depth fix: the staleness it tracked was actions/checkout defaulting to fetch-depth 1, which made refresh_on_paths unevaluable so every trailing pin read as stale. Fixed across six workflows with tests/test_ci_canonrec_clone_depth.py."
     }
   ],
-  "last_updated": "2026-08-26T22:51:25Z",
+  "last_updated": "2026-08-26T23:14:44Z",
   "last_platform": "codex",
-  "last_session_summary": "Refreshed canonical root after six idle days: live GitHub refs and publication debt updated; removed five stale nested Git index locks, two prunable worktree records, and eleven resolved orphan markers; root .venv tests pass 670/40; PR #81 awaits Codacy action, PR #82 awaits #81 rebase; generated relocation plan and four untracked artifact groups remain review-only.",
+  "last_session_summary": "Reconciled fleet publication debt live: 53 retained branches matched merged PR history and one stale state-only root handoff was retired in place. Published root PR #83 at 9a5e202 with the exemption ledger and evidence receipt; all checks pass, GitHub mergeability remains uncomputed. Proposed ledger reduces 58 non-exempt entries to four coordinated integration/connectivity-pass-2026-08-19 branches. CloudBank, QGIA library, QGIA spine, and root tips are current or conflict-free; nested publication awaits explicit named-repo scope. No nested branch was pushed, no PR was merged/closed/commented, and no branch was deleted.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -269,6 +269,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "b69e8c6",
+      "date": "2026-08-26",
+      "platform": "codex",
+      "summary": "chore(session): refresh root context and archive completed work"
+    },
     {
       "sha": "ddc08b8",
       "date": "2026-08-26",
@@ -322,12 +328,6 @@
       "date": "2026-08-20",
       "platform": "claude-code",
       "summary": "fix(governance): do not report PASS on zero coverage"
-    },
-    {
-      "sha": "eb3dfa2",
-      "date": "2026-08-20",
-      "platform": "claude-code",
-      "summary": "feat(qforge): record which base engine produced each ops report"
     }
   ],
   "security_events": [
@@ -570,10 +570,16 @@
       "priority": "high",
       "assigned_to": "owner",
       "description": "PR 81 (recovery/gumas-v2-tactical-consolidation) is open, pushed at 63dca10, MERGEABLE/UNSTABLE, and awaits owner merge: gh pr merge 81 --merge. Agent could not merge: the auto-mode classifier denied gh pr merge across three attempts and then broadened to deny gh pr view and git check-ignore session-wide. Editing .claude/settings.local.json to allow Bash(gh pr merge:*) was also denied, correctly - an agent must not widen its own permissions. Owner action: add the allow rule by hand if agent-merge is wanted, but note an allowlist entry would not cover the broader session-wide tightening."
+    },
+    {
+      "id": "constellation-connectivity-publication-2026-08-19",
+      "priority": "high",
+      "assigned_to": "codex",
+      "description": "Publish the coordinated integration/connectivity-pass-2026-08-19 stack after explicit nested-repo scope is confirmed: CloudBank cb35bfc5, qgia-knowledge-library 4f3a8bd1, qgia-knowledge-spine 7856e43a, then root 6349b1f8. Live 2026-08-26 audit found all branches current or cleanly mergeable. Open PRs without merging; validate and later merge in order hub, spokes, root. Root publication-debt reconciliation PR #83 records the 54 settled historical decisions and reduces the non-exempt ledger to this four-branch stack after merge."
     }
   ],
   "known_state": {
-    "main_sha": "ddc08b89178435cd9815f1395bd195e1fae8dd04",
+    "main_sha": "b69e8c66842cf7345496c69e48f43497c927f022",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
