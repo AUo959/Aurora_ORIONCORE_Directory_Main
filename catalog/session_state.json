@@ -140,230 +140,6 @@
   ],
   "completed_tasks": [
     {
-      "id": "spatha-canon-promotion",
-      "status": "completed",
-      "completed_at": "2026-07-21T05:14:06Z",
-      "platform": "claude-code",
-      "detail": "Promotion pass executed (owner-directed): SPATHA_MODERNA kit-detail CANON (naming/physical/doctrine from 2026-02 design thread); sim capture landed in CanonRec canon/L2/operations/; roster closure \u2014 char_cross, char_vorn (female), char_roake (logistics/pilot), char_kade (Sentinel) CANON with do-not-invent guards; marshals_sentinels kit copy SUPERSEDED pointer. Validator clean. CanonRec 8b7de64. Open optional: equipment-class records (G5), character capsule builds."
-    },
-    {
-      "id": "aric-thal-entity-record",
-      "status": "completed",
-      "completed_at": "2026-07-21T05:37:00Z",
-      "platform": "claude-code",
-      "detail": "Closed by the Roster Closure Pass, which also found a second gap class: the complete Operation Silent Dagger Sentinel team. Five records created (char_aric_thal with dual-role career, char_lior_serath, char_veyna_koris, char_kael_voss, char_darek_voss KIA/deceased per C2). Report: reports/analysis/roster_closure_audit__2026-07-21.md. Verification: 0 true roster gaps canon-wide; fabric linter union 0 violations/78 entities, velar clean. CanonRec b181742."
-    },
-    {
-      "id": "sentinel-team-capsules",
-      "status": "completed",
-      "completed_at": "2026-07-21T05:40:55Z",
-      "platform": "claude-code",
-      "detail": "Five capsules built (charforge-capsule-v1.0), adapter-verified clean; workspace now 38 capsules. Living four bind to org_sentinel_high_command (no vessel \u2014 Silent Dagger's Phantom-Class hull is unnamed in canon, not invented). Darek Voss carries a TERMINAL binding to loc_blackreach_station, marked historical-record/not-for-live-instantiation across capsule, runtime stub, cns lifecycle_status and BUILD_RECEIPT. Linter gained a C2 cross-check (active assets may not roster deceased personnel). CanonRec fcd908a."
-    },
-    {
-      "id": "selene-ark-status-vocab",
-      "status": "completed",
-      "completed_at": "2026-07-23T00:17:51Z",
-      "platform": "claude-code",
-      "detail": "Left for owner (still queued as a finding) \u2014 no change; my supplement pass added 14 records without touching char_selene_ark."
-    },
-    {
-      "id": "v226b-prose-sweep-widen",
-      "status": "completed",
-      "completed_at": "2026-07-23T01:22:26Z",
-      "platform": "claude-code",
-      "detail": "Widened prose sweep run: rebuilt roster (329 names), swept 30 mixed-content exports. Found 2 genuine new L2 chars (Colonel Idris Vale, Dr. Syrr Velkonn) + Selia Tren-Voss alias->Selia Trask. Heavy noise (real-world news + L1 dev-persona expert panel) correctly excluded. CanonRec 79738ee."
-    },
-    {
-      "id": "fs-artifact-mining-continue",
-      "status": "completed",
-      "completed_at": "2026-07-27T15:52:54Z",
-      "platform": "claude-code",
-      "detail": "Continued mining: found+filled the 4 active engine factions + 4 secondary peoples (Elari/Vorran/Kaelar/Tharaxian) + landed the Cultural Tapestry \u2014 ALL 13 engine factions now recorded. Staff Registry SSOT confirmed L1 (not L2) and complete. Species records added for the 4 peoples. CanonRec c1f25e5. L2 salvage seams substantially exhausted."
-    },
-    {
-      "id": "canonrec-public-license-selection",
-      "status": "completed",
-      "completed_at": "2026-07-29T07:53:34Z",
-      "platform": "codex",
-      "detail": "Owner selected MIT. CanonRec PR #8 merged as 6c07b442; LICENSE matches CloudBank's MIT grant (Copyright 2025 Aurora), GitHub integrity and secret checks passed, and the root CanonRec pin was refreshed."
-    },
-    {
-      "id": "root-public-license-selection",
-      "status": "completed",
-      "completed_at": "2026-08-01T05:44:28Z",
-      "platform": "codex",
-      "detail": "Completed 2026-08-01: owner selected MIT; root PR #57 merged as ebe18b62. GitHub detects SPDX MIT and a 100% community profile."
-    },
-    {
-      "id": "anaya-capsule-state-defect",
-      "status": "completed",
-      "completed_at": "2026-08-01T05:44:28Z",
-      "platform": "codex",
-      "detail": "Resolved by CanonRec PR #9 on 2026-08-01: the Anaya capsule state defect was repaired and the refreshed strict integrity baseline passed all 838 tracked files with zero mismatches."
-    },
-    {
-      "id": "canonrec-empty-organization-record",
-      "status": "completed",
-      "completed_at": "2026-08-01T05:44:28Z",
-      "platform": "codex",
-      "detail": "Resolved by CanonRec PR #9 on 2026-08-01: the empty tactical-enforcement organization record was recovered without invented content and the refreshed strict integrity baseline passed all 838 tracked files with zero mismatches."
-    },
-    {
-      "id": "cloudbank-open-issue-resolution-workshop-pass3",
-      "status": "completed",
-      "completed_at": "2026-08-09T16:46:39Z",
-      "platform": "codex",
-      "detail": "Superseded by the 2026-08-09 live CloudBank inventory: the prior named PR lanes are no longer open, and the current 47-issue triage plus draft PR #1486 are recorded in a fresh continuation item."
-    },
-    {
-      "id": "cloudbank-open-issue-hygiene-wave-2026-08-09",
-      "status": "completed",
-      "completed_at": "2026-08-09T22:40:09Z",
-      "platform": "codex",
-      "detail": "Completed the first brokered hygiene phase: draft PR #1486 addresses #1403, draft PR #1487 addresses #1446, and draft PR #1488 addresses #1424. During final refresh, another actor closed #1475, #1451, #1450, #1410, and #1352 at about 22:30 UTC, reducing the live open-issue count from 47 to 42. No issue closures, merges, review replies/resolutions, ready transitions, canon promotion, or INIT were performed by Codex."
-    },
-    {
-      "id": "cloudbank-open-issue-hygiene-continuation-2026-08-09",
-      "status": "completed",
-      "completed_at": "2026-08-10T00:59:34Z",
-      "platform": "codex",
-      "detail": "Completed the ordered #1362 -> #1342 -> #1329 phase as stabilized draft PRs #1489, #1490, and #1491. Local validation passed for each; #1489/#1490 checks are green. #1491 is cleanly mergeable and every repository check is green except Model Catalog Validation, which now fails closed because ANTHROPIC_API_KEY is not configured. No merge, issue closure, comment/reply, manual thread resolution, ready transition, canon promotion, or INIT occurred. Remaining L1 child re-triage is carried into the 2026-08-10 continuation item."
-    },
-    {
-      "id": "snpm-canon-promote-review",
-      "status": "completed",
-      "completed_at": "2026-08-10T16:01:23Z",
-      "platform": "claude-code",
-      "detail": "Superseded by the 2026-08-09 STAGING closure reconciliation: the whole STAGING backlog was run through the reconciler process (conflict scan + advisor) rather than held for owner review. STAGING count is now 0."
-    },
-    {
-      "id": "haden-korr-affirmation",
-      "status": "completed",
-      "completed_at": "2026-08-10T16:01:23Z",
-      "platform": "claude-code",
-      "detail": "Resolved by process 2026-08-09: conflict scan CLEAN but held at UNCONFIRMED on evidentiary grounds \u2014 the source block is explicitly headed 'AI-Generated Character', a demonstration of on-demand generation, i.e. tooling meta-content rather than in-world fact. Reason recorded on the record as certainty_hold."
-    },
-    {
-      "id": "reconciler-fabric-checks",
-      "status": "completed",
-      "completed_at": "2026-08-10T16:18:25Z",
-      "platform": "claude-code",
-      "detail": "Implemented RULING-ENGINE-P4 + RULING-FABRIC-SCHEMA in skills/aurora-canon-reconciler/scripts/validate_entity.py: P1 map-primacy, P2 moving-entity placement, P4 movement-promotion route gate. Semantics pinned to tools/fabric_invariants_check.py. 20 tests. Also fixed VALID_ENTITY_KINDS drift (77 of 189 canon records were rejected on entity_kind alone). Queued two follow-ups: reconciler-required-fields-schema-drift, fabric-p1-canon-remediation (29 pre-existing P1 findings the Velar-scoped linter never saw)."
-    },
-    {
-      "id": "fabric-p1-canon-remediation",
-      "status": "completed",
-      "completed_at": "2026-08-10T16:26:23Z",
-      "platform": "claude-code",
-      "detail": "Resolved 2026-08-09: 19 P1 violations downgraded per the RULING-VELAR-P1 precedent (16 to 'staging' against STAGING map rows, 3 to 'unplaced' with no map row). Placement claim only; all entities remain CANON. Gate now reports zero blocks across 158 entities. Also fixed P4 being unsatisfiable \u2014 no route registry exists in canon, so it now warns and self-escalates; queued l2-route-registry as the unblocking work."
-    },
-    {
-      "id": "reconciler-required-fields-schema-drift",
-      "status": "completed",
-      "completed_at": "2026-08-10T16:33:11Z",
-      "platform": "claude-code",
-      "detail": "Resolved 2026-08-09. REQUIRED_FIELDS reconciled against 166 committed records: canonical_id/canonical_name (present in ZERO records) now accept entity_id/name; locations accept location_type; species no longer require a subtype they never carry; characters accept faction_bindings; provenance accepts doc_sources OR source_refs; notes demoted. Added SUPERSEDED to VALID_CERTAINTY_TAGS per CanonRec/CERTAINTY_TAGS.md. Empty list now counts as an explicit answer. Precursor polities exempt from the governance requirement. Canon validation went 0% -> 100% clean."
-    },
-    {
-      "id": "l2-route-registry",
-      "status": "completed",
-      "completed_at": "2026-08-10T16:36:36Z",
-      "platform": "claude-code",
-      "detail": "Resolved 2026-08-09. Canon names no corridor; it attests movements between named places. Widened the registry detector to see location_type (the Hollow Expanse is typed 'region / lawless corridor'), so P4 escalated from WARN to a live BLOCK. Made P4 satisfiable without invention via route_exemption (canonical endpoints + basis + resolution path), mirroring naming_exemption. Both waiting records carry exemptions. No route name minted \u2014 that belongs to NameService. ROUTE_REGISTRY v0.1 documents the state."
-    },
-    {
-      "id": "capsule-location-binding-rebuild",
-      "status": "completed",
-      "completed_at": "2026-08-10T17:20:15Z",
-      "platform": "claude-code",
-      "detail": "Resolved 2026-08-09. All 40 capsules now carry location_binding; the 22 unbound ones are explicitly 'undetermined' with basis, since canon names no seat for any office-holder. Capsules rebuilt (sha256 manifests re-derived, all 40 verify). C1 check extended to distinguish an answered-undetermined binding (INFO) from a missing one (GAP), rejecting baseless undetermined. Queued l2-seat-of-government-locations and canon-identity-key-unification."
-    },
-    {
-      "id": "cloudbank-fabric-drift-wiring",
-      "status": "completed",
-      "completed_at": "2026-08-10T17:25:34Z",
-      "platform": "claude-code",
-      "detail": "Resolved 2026-08-09. src/monitoring/fabric_invariant_bridge.py converts fabric_invariants_check findings to DriftAlerts (VIOLATION->alert/escalate, GAP->log/notify, INFO non-actionable). Fabric findings get dedicated runbooks rather than the statistical levels \u2014 the stock critical runbook suspends+rebaselines, which is wrong for a corpus-integrity finding; a test enforces no suspend/throttle/rebaseline. DriftResponder honours metadata['runbook'] with loud fallback. Verified end-to-end on real canon findings. 14 tests. CLOSES the 2026-07-21 fabric ruling batch."
-    },
-    {
-      "id": "canon-identity-key-unification",
-      "status": "completed",
-      "completed_at": "2026-08-10T17:54:11Z",
-      "platform": "claude-code",
-      "detail": "Resolved 2026-08-09 additively: all 23 mobile_asset records gained entity_id (same value) and kept canonical_id for back-compat. entity_id index now covers 189/189; canonical_id readers still work. Guard tests in tests/test_canon_identity_keys.py pin the invariant (verified to catch a simulated regression). Root cause of two wrong results earlier in the session: validation reporting 166/189 as clean coverage, and vessel_gu_001 binding targets appearing to be ghosts."
-    },
-    {
-      "id": "selene-ark-status-vocab",
-      "status": "completed",
-      "completed_at": "2026-08-10T17:59:29Z",
-      "platform": "claude-code",
-      "detail": "Resolved 2026-08-09, generalised beyond the single record. Root cause: STATUS_VOCAB was one flat body-oriented set applied to every entity kind, leaving 25 of 189 records outside it and C2 unenforced. Fixed with STATUS_VOCAB_BY_KIND (species extant/extinct, events concluded/ongoing, reports submitted, characters active/deceased) plus a loud generic fallback. 11 composite statuses split: status=lifecycle, status_detail=situational canon verbatim, prev_status=original. No canon detail lost \u2014 char_selene_ark reads 'active' with medical custody preserved. 8 tests."
-    },
-    {
-      "id": "archive-ship-profiles-reconcile",
-      "status": "completed",
-      "completed_at": "2026-08-10T18:24:44Z",
-      "platform": "claude-code",
-      "detail": "Resolved 2026-08-09. 5 profiles landed: Valiant Spear + Resolute Dawn gained COs they never had (Mara Velthis, Deyan Orros); Judicator Prime gained embarked_flag_officer Saela Corven with commanding_officer_id (alric_tann) untouched \u2014 flag officer commands the formation, captain commands the ship, corroborated by loc_nethari_expanse; Nemesis Prime gained the profile plus WRATH-09 recorded verbatim with identity UNDETERMINED (not merged with nemesis_core); cls_sentinel gained the class spec. 3 characters gained command_binding backlinks. New referents left unminted: Tevrak's Gate, Kaelor Shadow Ring, VALR-99, Sentinel Ghost v3.7."
-    },
-    {
-      "id": "archive-md-blob-read",
-      "status": "completed",
-      "completed_at": "2026-08-10T18:29:13Z",
-      "platform": "claude-code",
-      "detail": "Completed 2026-08-09. Largely a NEGATIVE finding, and a useful one: the .md tier is close to exhausted for L2 canon. Of the 37 flagged, 26 are ORION/ZIPWIZ infra (L3, out of scope) and 23 are research/philosophy. The headline target Aurora_GUMAS_Knowledge_Companion.md (4.6MB, cited by zero canon records) is a bundle of 165 embedded docs, overwhelmingly L1/Aurora-Lab infrastructure; its L2 content is sources already mined (GUMAS_Extracted_Simulation_Modules cited by 8, gumas_lore_db by 5). One new item found and NOT promoted: Omega9_Emergence_Log (Event.Kaelor_Chainfire.v1, Sentinel Omega-9) is simulation instance output with a SimTime stamp and an L1 review team \u2014 tertiary per Canon Protocol \u00a75, same rule that excluded the run-emergent treaties. Note: Omega-9 is a Sentinel unit, NOT Omega-Veil. Redirect effort to the .json tier."
-    },
-    {
-      "id": "capsule-only-entity-records",
-      "status": "completed",
-      "completed_at": "2026-08-10T18:47:04Z",
-      "platform": "claude-code",
-      "detail": "Resolved 2026-08-09. 29 entity records created from capsules (authoritative canon) with capsule_ref backlinks; 15 enriched from archived master lists. Canon 189 -> 218 records, capsule-only 29 -> 0, all 8 Judicator crew refs + CO ref now resolve. 218/218 validate clean, linter clean, 47 guards green. Caught and removed a surname-fallback matching error that had given Aelindra Voss-Aurai the profile of Lyra Voss and matched Lirian Vael-Torin to Vael Saros \u2014 enrichment is exact-match only."
-    },
-    {
-      "id": "archive-json-tier-extract",
-      "status": "completed",
-      "completed_at": "2026-08-10T18:52:35Z",
-      "platform": "claude-code",
-      "detail": "Completed 2026-08-09. Mined deep_filtered_galactic_union_simulation_conversations (9.3MB, 1.8MB text, 6 conversations). Prose extraction was almost entirely noise \u2014 name fragments of existing canon, profile field labels, reputation metrics \u2014 consistent with the .md finding that this material family is already heavily mined (its sibling is cited by 8 canon records). BUT cross-checking references produced 3 real closures: polity_outer_colonies (faction binding used by 5 records with no entity record), org_trade_coalition and org_ai_vanguard (the alliance that elected Zylox, attested in committed canon). Dangling faction referents now zero; canon 218 -> 221. Recommendation recorded: stop mining this tier for prose; run reference-integrity sweeps instead, which is what actually finds things."
-    },
-    {
-      "id": "prose-claim-salvage-rollout",
-      "status": "completed",
-      "completed_at": "2026-08-10T19:13:23Z",
-      "platform": "claude-code",
-      "detail": "Rolled out across all four major prose corpora 2026-08-09: .md tier (838), deep_filtered (416), conversations 15MB (361), conversations.json 252MB (1198). Consolidated to 1,044 unique claims across 108 canon entities; ledger committed at reports/recovery/data/prose_claim_ledger__2026-08-09.json. Also made a third precision fix structurally: single-word entity names now match case-sensitively (species_human was matching bare 'human' 562 times, sweeping in AI-architecture prose). Salvage from the ledger is ongoing work, queued separately."
-    },
-    {
-      "id": "sovereign-nexus-name-collision",
-      "status": "completed",
-      "completed_at": "2026-08-10T22:41:22Z",
-      "platform": "claude-code",
-      "detail": "RESOLVED 2026-08-09 by evidence, not assumption. Early prose attests Sovereign Nexus as a place three independent ways (strategically vital region; hyperlane chokepoint with Separatist force concentration; setting of the Sovereign Nexus Crisis). Created loc_sovereign_nexus for the region; org_sovereign_nexus remains the rogue AI. Both cross-linked with disambiguation blocks. Neither merged; relationship between them explicitly UNDETERMINED. Surfaced 'the Sovereign Nexus Crisis' as a further unminted event."
-    },
-    {
-      "id": "velar-neutral-houses-referent",
-      "status": "completed",
-      "completed_at": "2026-08-10T23:34:36Z",
-      "platform": "claude-code",
-      "detail": "Promoted as org_neutral_houses under the owner directive (promote Velari detail unless there is a direct reason not to). Fourth pole of the Velar political spectrum; opportunists/hedgers."
-    },
-    {
-      "id": "tkaras-host-identity",
-      "status": "completed",
-      "completed_at": "2026-08-10T23:47:09Z",
-      "platform": "claude-code",
-      "detail": "RESOLVED. A full Sira Velkonn character profile recovered from the same archive states her Imperial Loyalist allegiance three ways (role, allegiance, reputation) with restorationist core directives, and corroborates at five independent points against committed canon (Talyx Velkonn as mentor, Jaxx Tyren as rival, Renn Valcor alias, Thalen Rynn opposition, and loc_nyros_expanse already recording the fleet reactivation her profile claims). Canon position confirmed; the Reformist-host framing is a mis-attribution. The debate's host is left unestablished rather than reassigned."
-    },
-    {
-      "id": "wrath-09-naming-gate",
-      "status": "completed",
-      "completed_at": "2026-08-11T00:07:14Z",
-      "platform": "claude-code",
-      "detail": "Minted char_wrath_09 (recovered_source). Modelled as a character because it holds a commanding-officer role over the AI-Warlord Leviathan Dreadnought, unlike Omega-Veil and Sovereign Nexus which canon models as organizations. Explicitly NOT bound to nemesis_core, org_omega_veil or org_sovereign_nexus."
-    },
-    {
       "id": "archive-new-referents-naming",
       "status": "completed",
       "completed_at": "2026-08-11T00:07:14Z",
@@ -469,9 +245,9 @@
       "detail": "Resolved by the CI clone-depth fix: the staleness it tracked was actions/checkout defaulting to fetch-depth 1, which made refresh_on_paths unevaluable so every trailing pin read as stale. Fixed across six workflows with tests/test_ci_canonrec_clone_depth.py."
     }
   ],
-  "last_updated": "2026-08-20T22:02:24Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "fix(ace): re-baseline the Orion v0.13 owner binding on Cloud; chore(session): record the CI freshness investigation",
+  "last_updated": "2026-08-26T22:51:25Z",
+  "last_platform": "codex",
+  "last_session_summary": "Refreshed canonical root after six idle days: live GitHub refs and publication debt updated; removed five stale nested Git index locks, two prunable worktree records, and eleven resolved orphan markers; root .venv tests pass 670/40; PR #81 awaits Codacy action, PR #82 awaits #81 rebase; generated relocation plan and four untracked artifact groups remain review-only.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -493,6 +269,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "ddc08b8",
+      "date": "2026-08-26",
+      "platform": "codex",
+      "summary": "chore(session): close the Orion re-baseline and manifest freshness items"
+    },
     {
       "sha": "faa4cc1",
       "date": "2026-08-20",
@@ -546,12 +328,6 @@
       "date": "2026-08-20",
       "platform": "claude-code",
       "summary": "feat(qforge): record which base engine produced each ops report"
-    },
-    {
-      "sha": "307c86d",
-      "date": "2026-08-20",
-      "platform": "claude-code",
-      "summary": "docs(gumas): audit records for lineage, dedup re-audit, remote surface, v3 binding, excluded lanes"
     }
   ],
   "security_events": [
@@ -797,7 +573,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "faa4cc1",
+    "main_sha": "ddc08b89178435cd9815f1395bd195e1fae8dd04",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -912,7 +688,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-20T22:02:24Z",
+    "checked_at": "2026-08-26T22:51:10Z",
     "entries": [
       {
         "repo": "root",
@@ -1322,5 +1098,6 @@
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
-  }
+  },
+  "_summary_set_manually": true
 }
