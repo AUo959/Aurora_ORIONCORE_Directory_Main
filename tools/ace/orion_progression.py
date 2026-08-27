@@ -17,7 +17,10 @@ ORION_PROGRESSION_CAPABILITY_ID = "ace.runtime.orion.l1.advance.governed"
 ORION_PROGRESSION_POLICY_REL = Path("catalog/ace/policies/orion_progression_v0_13.json")
 _AUTHORITY_REF = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:@/-]{0,255}$")
 _OWNER_HELPER_REL = Path("tools/ace/orion_runtime_owner.py")
-_OWNER_HELPER_BLOB = "6e0f897097105de27b0421f17053b3e0ca69f9a6"
+# Tamper-evidence over the helper itself: any edit to orion_runtime_owner.py,
+# comments included, must be acknowledged here. Re-recorded 2026-08-20 for the
+# CloudBank a19870a5 re-baseline (was 6e0f8970).
+_OWNER_HELPER_BLOB = "061a5aa3355f48d4e897615cfc318e43d9d8872c"
 _STATE_HELPER_REL = Path("tools/ace/orion_progression_state.py")
 _STATE_HELPER_BLOB = "4d090dbe55b56be8211da10498ddabea029bc521"
 
