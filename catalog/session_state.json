@@ -259,9 +259,9 @@
       "detail": "Phase 10 is PASS, not outstanding. Direct evidence on agent/gumas-flash-rebellion-battle-baseline (draft PR CloudBank #1506): spec GUMAS__SPEC__DETERMINISTIC_FACTUAL_REPORTER_EVIDENCE_EXPORT v1.0, runtime package simulation/runtime/gumas_factual_reporter/ (projection, exporter, validation, rendering, identity), two test modules, receipt PHASE10 v1.0, and workflow gumas-factual-reporter.yml. Task record DTER v2.1 records Phase 10 accepted on head 635e97e0 after validation. The blocking half of this item remains correct and is carried forward: Control A/B/C and Run 0 stay BLOCKED. Superseded by gumas-phase11-controls-contract."
     }
   ],
-  "last_updated": "2026-08-27T19:20:50Z",
+  "last_updated": "2026-08-27T19:21:28Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Merge c65bff7d3d2675b7f9189ad0d396751831e5af3b into 59a24bdb; merge: integrate PR-aware workspace verifier; merge: carry PR freshness regression tests",
+  "last_session_summary": "Merge remote-tracking branch 'origin/main' into codex/aurora; chore(queue): supersede the Phase 10 item with the Phase 11 ; Merge pull request #82 from AUo959/fix/execution-context-gua",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -284,64 +284,64 @@
   },
   "recent_commits": [
     {
-      "sha": "4ae19da",
-      "date": "2026-08-27",
-      "platform": "claude-code",
-      "summary": "Merge c65bff7d3d2675b7f9189ad0d396751831e5af3b into 59a24bdb48d7d8e2be497c3219c9d6590f786db2"
-    },
-    {
-      "sha": "c65bff7",
-      "date": "2026-08-27",
-      "platform": "claude-code",
-      "summary": "merge: integrate PR-aware workspace verifier"
-    },
-    {
-      "sha": "8d13f02",
-      "date": "2026-08-27",
-      "platform": "claude-code",
-      "summary": "merge: carry PR freshness regression tests"
-    },
-    {
-      "sha": "d793b2f",
-      "date": "2026-08-27",
-      "platform": "claude-code",
-      "summary": "merge: carry PR-aware workspace verification"
-    },
-    {
-      "sha": "ee8e9c7",
-      "date": "2026-08-27",
-      "platform": "claude-code",
-      "summary": "chore(asm): keep ephemeral session state off design PR"
-    },
-    {
-      "sha": "8beb97b",
-      "date": "2026-08-27",
-      "platform": "claude-code",
-      "summary": "docs(asm): make small specialized first learner normative"
-    },
-    {
-      "sha": "4a31d89",
-      "date": "2026-08-27",
-      "platform": "claude-code",
-      "summary": "ci: keep JSON Schema validation on Python 3.9"
-    },
-    {
-      "sha": "8152035",
-      "date": "2026-08-27",
-      "platform": "claude-code",
-      "summary": "state: record Aurora state model review resolution"
-    },
-    {
-      "sha": "7d9ea17",
+      "sha": "10767f6",
       "date": "2026-08-27",
       "platform": "claude-code",
       "summary": "Merge remote-tracking branch 'origin/main' into codex/aurora-state-model-specs-v0-1"
     },
     {
-      "sha": "0cfc9ab",
+      "sha": "4f0b109",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "docs: harden Aurora state model teacher gates"
+      "summary": "chore(queue): supersede the Phase 10 item with the Phase 11 controls contract"
+    },
+    {
+      "sha": "2c78aaf",
+      "date": "2026-08-27",
+      "platform": "claude-code",
+      "summary": "Merge pull request #82 from AUo959/fix/execution-context-guard"
+    },
+    {
+      "sha": "74f7dfb",
+      "date": "2026-08-27",
+      "platform": "claude-code",
+      "summary": "chore(session): publication debt reduced to the connectivity stack"
+    },
+    {
+      "sha": "dfe3d7e",
+      "date": "2026-08-27",
+      "platform": "claude-code",
+      "summary": "Merge pull request #83 from AUo959/codex/publication-debt-reconciliation-20260826"
+    },
+    {
+      "sha": "b62c71d",
+      "date": "2026-08-27",
+      "platform": "claude-code",
+      "summary": "Merge branch 'main' into fix/execution-context-guard"
+    },
+    {
+      "sha": "39b4d2e",
+      "date": "2026-08-27",
+      "platform": "claude-code",
+      "summary": "Merge branch 'main' into codex/publication-debt-reconciliation-20260826"
+    },
+    {
+      "sha": "8be47bf",
+      "date": "2026-08-27",
+      "platform": "claude-code",
+      "summary": "chore(session): record the PR #81 merge"
+    },
+    {
+      "sha": "d3c47a1",
+      "date": "2026-08-27",
+      "platform": "claude-code",
+      "summary": "Merge pull request #81 from AUo959/recovery/gumas-v2-tactical-consolidation"
+    },
+    {
+      "sha": "83b20d2",
+      "date": "2026-08-27",
+      "platform": "claude-code",
+      "summary": "chore(publication): back up every local-only branch to its remote"
     }
   ],
   "security_events": [
@@ -587,7 +587,7 @@
     }
   ],
   "known_state": {
-    "main_sha": "4ae19da",
+    "main_sha": "10767f6",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -702,7 +702,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-27T19:20:50Z",
+    "checked_at": "2026-08-27T19:21:28Z",
     "entries": [
       {
         "repo": "root",
