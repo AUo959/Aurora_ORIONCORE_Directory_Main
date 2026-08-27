@@ -199,5 +199,70 @@ class TestOrphanAutoResolve(unittest.TestCase):
             self.assertTrue(live.exists(), "marker with dirty files must remain")
 
 
+class TestActiveTaskRetirement(unittest.TestCase):
+    """active_task must have an exit path, not only suspend-active.
+
+    Regression guard for the stuck-active_task trap: complete-item searches only
+    task_queue and pending_for_next_session, so before complete-active/reroute-active
+    existed an active_task could never be retired and resurfaced at every session
+    start forever.
+    """
+
+    def _run(self, command, state, **kwargs):
+        import argparse
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "session_state.json"
+            path.write_text(json.dumps(state, indent=2) + "\n")
+            saved = sio.STATE_PATH
+            sio.STATE_PATH = path
+            try:
+                args = argparse.Namespace(platform="claude-code", force=True, **kwargs)
+                rc = getattr(sio, command)(args)
+                return rc, json.loads(path.read_text())
+            finally:
+                sio.STATE_PATH = saved
+
+    def test_complete_item_does_not_reach_active_task(self):
+        """The original trap: complete-item cannot see active_task."""
+        state = _valid_state()
+        rc, _ = self._run("op_complete_item", state, item_id="task-1", detail=None)
+        self.assertEqual(rc, 1, "complete-item must not resolve an active_task id")
+
+    def test_complete_active_clears_slot_and_logs(self):
+        state = _valid_state()
+        rc, out = self._run("op_complete_active", state, detail="finished")
+        self.assertEqual(rc, 0)
+        self.assertIsNone(out["active_task"], "slot must be cleared")
+        self.assertIn("task-1", [t.get("id") for t in out["completed_tasks"]])
+        self.assertEqual(out["completed_tasks"][-1]["detail"], "finished")
+
+    def test_reroute_active_moves_to_queue_and_clears_slot(self):
+        state = _valid_state()
+        rc, out = self._run("op_reroute_active", state, description=None)
+        self.assertEqual(rc, 0)
+        self.assertIsNone(out["active_task"])
+        self.assertIn("task-1", [t.get("id") for t in out["task_queue"]])
+
+    def test_rerouted_item_is_then_completable(self):
+        """After rerouting, the normal complete-item path works on it."""
+        state = _valid_state()
+        _, out = self._run("op_reroute_active", state, description=None)
+        rc, out2 = self._run("op_complete_item", out, item_id="task-1", detail=None)
+        self.assertEqual(rc, 0)
+        self.assertIn("task-1", [t.get("id") for t in out2["completed_tasks"]])
+
+    def test_null_active_task_passes_contract(self):
+        """active_task is REQUIRED_TOP_LEVEL but null is contract-valid."""
+        state = _valid_state()
+        _, out = self._run("op_complete_active", state, detail=None)
+        self.assertEqual(sio.save(out, path=Path(tempfile.mkdtemp()) / "s.json"), [])
+
+    def test_no_active_task_object_is_an_error(self):
+        state = _valid_state()
+        state["active_task"] = None
+        rc, _ = self._run("op_complete_active", state, detail=None)
+        self.assertEqual(rc, 1)
+
+
 if __name__ == "__main__":
     unittest.main()

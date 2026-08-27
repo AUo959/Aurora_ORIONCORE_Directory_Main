@@ -1,0 +1,70 @@
+{
+  "schema_version": "0.6.0",
+  "record_type": "ace_capability_discovery_contract",
+  "contract_id": "aurora.ace.capability-discovery.v0.6",
+  "purpose": "Make ACE capability registration discoverable from validated committed manifests without making manifests executable code.",
+  "manifest": {
+    "schema_ref": "catalog/schemas/aurora_ace_capability_manifest.schema.json",
+    "catalog_ref": "catalog/ace/capability_manifests",
+    "record_format": "jsonl",
+    "deterministic_order": "capability_id",
+    "duplicate_capability_ids": "fail_closed",
+    "malformed_records": "fail_closed",
+    "semantic_digest": {
+      "algorithm": "sha256",
+      "canonicalization": "sorted compact UTF-8 JSON",
+      "self_field_policy": "trust.manifest_sha256 is replaced with 64 zeroes before hashing",
+      "mismatch_policy": "fail_closed"
+    }
+  },
+  "trust": {
+    "manifest_is_executable": false,
+    "manifest_may_import_code": false,
+    "manifest_may_create_runtime_binding": false,
+    "runtime_binding_policy": "explicit_code_allowlist",
+    "selected_source_must_exist": true,
+    "allowlisted_flag_required": true,
+    "freshness_required_when_declared": true
+  },
+  "routing": {
+    "source": "validated_manifest_index",
+    "selection": [
+      "active lifecycle",
+      "allowlisted trust",
+      "invocation_resolver tag",
+      "resolve_query operation",
+      "entity_type match",
+      "query_kind exact match before wildcard",
+      "selection_priority",
+      "deterministic capability_id ordering"
+    ],
+    "best_rank_tie": "fail_closed",
+    "runtime_bindings": [
+      "ace.capability.invoke.character.retrieve",
+      "ace.capability.invoke.character.complete",
+      "ace.capability.invoke.facility",
+      "ace.capability.invoke.canon_fact"
+    ]
+  },
+  "materialization_boundary": {
+    "capability_id": "ace.capability.canonrec.materialize.entity",
+    "lifecycle": "active",
+    "scope": "genuinely new character publication only",
+    "generic_arbitrary_entity_authority": false,
+    "transaction_required": true,
+    "native_owner": "tools/ace/character_materialize.py"
+  },
+  "compatibility": {
+    "character_invocation": "behavioral_parity_required",
+    "facility_invocation": "behavioral_parity_required",
+    "canon_fact_invocation": "behavioral_parity_required",
+    "v0_5_atomic_character_transaction": "unchanged"
+  },
+  "non_goals": {
+    "mcp_transport": false,
+    "dynamic_python_plugin_loading": false,
+    "generic_entity_materialization": false,
+    "orion_runtime_activation": false,
+    "l1_advancement": false
+  }
+}

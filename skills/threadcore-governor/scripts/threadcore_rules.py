@@ -649,7 +649,18 @@ def _status_for_file(file_findings: list[dict[str, Any]]) -> str:
     return "ok"
 
 
-def _governance_outcome(severity_counts: Counter[str]) -> tuple[str, str]:
+def _governance_outcome(
+    severity_counts: Counter[str], roots_resolved: int = -1
+) -> tuple[str, str]:
+    """Findings-based verdict, gated on having inspected anything at all.
+
+    A scan whose roots do not exist inspects zero files and would otherwise
+    report PASS/READY -- indistinguishable from a genuinely clean repository.
+    Several default roots live under gitignored lanes, so a fresh clone
+    reproduces exactly that state. Coverage is not compliance.
+    """
+    if roots_resolved == 0:
+        return ("NO_COVERAGE", "UNKNOWN")
     if severity_counts.get("BLOCK", 0) > 0:
         return ("BLOCK", "NOT_READY")
     if severity_counts.get("WARN", 0) > 0:
@@ -821,6 +832,13 @@ def scan_repo(repo_root: str, roots: list[str], strictness: str = "balanced") ->
             "repo": repo_path.as_posix(),
             "roots": [p.as_posix() for p in resolved_roots],
             "strictness": strictness,
+            "coverage": {
+                "roots_configured": len(resolved_roots),
+                "roots_resolved": len([p for p in resolved_roots if p.exists()]),
+                "roots_missing": [
+                    p.as_posix() for p in resolved_roots if not p.exists()
+                ],
+            },
         },
         "summary": {
             "total_artifacts": len(artifacts),
@@ -836,7 +854,10 @@ def scan_repo(repo_root: str, roots: list[str], strictness: str = "balanced") ->
         "findings": findings,
     }
 
-    verdict, promotion_readiness = _governance_outcome(severity_counts)
+    verdict, promotion_readiness = _governance_outcome(
+        severity_counts,
+        roots_resolved=report["scan_meta"]["coverage"]["roots_resolved"],
+    )
     report["verdict"] = verdict
     report["promotion_readiness"] = promotion_readiness
     report["l3_bridge"] = _build_l3_bridge(report)

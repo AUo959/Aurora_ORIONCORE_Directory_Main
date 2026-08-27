@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0.0",
+  "record_type": "ace_verified_runtime_binding_registry",
+  "policy": {
+    "manifest_alone_may_execute": false,
+    "binding_registry_required": true,
+    "source_git_blob_must_match": true,
+    "module_namespace_prefix": "ace.",
+    "registered_repository_required": true
+  },
+  "bindings": [
+    {
+      "capability_id": "ace.capability.invoke.character.retrieve",
+      "repository": "root",
+      "path": "tools/ace/character_retrieval.py",
+      "module": "ace.character_retrieval",
+      "callable": "resolve_existing_character_query",
+      "git_blob_sha": "8af6b331577e9fc5ec0f25ba2446e7b74fee70e0"
+    },
+    {
+      "capability_id": "ace.capability.invoke.character.complete",
+      "repository": "root",
+      "path": "tools/ace/engine.py",
+      "module": "ace.engine",
+      "callable": "resolve_character_query",
+      "git_blob_sha": "2526c88b21b8698f54155d6acfa52ede6dda55dd"
+    },
+    {
+      "capability_id": "ace.capability.invoke.facility",
+      "repository": "root",
+      "path": "tools/ace/facility.py",
+      "module": "ace.facility",
+      "callable": "resolve_facility_query",
+      "git_blob_sha": "c1554f1697bff6b1ac6e2e1aaede29cbd62950dc"
+    },
+    {
+      "capability_id": "ace.capability.invoke.canon_fact",
+      "repository": "root",
+      "path": "tools/ace/canon_resolution.py",
+      "module": "ace.canon_resolution",
+      "callable": "resolve_canon_query",
+      "git_blob_sha": "3c395bb6d4fb5b7ae98a7f5988960d129539b327"
+    },
+    {
+      "capability_id": "ace.capability.invoke.entity.complete",
+      "repository": "root",
+      "path": "tools/ace/generic_entity_runtime.py",
+      "module": "ace.generic_entity_runtime",
+      "callable": "resolve_generic_entity_query",
+      "git_blob_sha": "9cab74523f2c3f04391e8fce0ff0a724f95173ce"
+    },
+    {
+      "capability_id": "ace.capability.canonrec.publish.delegated_pr",
+      "repository": "root",
+      "path": "tools/ace/delegated_publication.py",
+      "module": "ace.delegated_publication",
+      "callable": "publish_delegated_packet",
+      "git_blob_sha": "6b349686242d10f48f2c9ab0933efcd7892578dd"
+    }
+  ]
+}

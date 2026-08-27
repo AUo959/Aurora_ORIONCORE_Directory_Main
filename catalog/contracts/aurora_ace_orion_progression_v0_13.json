@@ -1,0 +1,68 @@
+{
+  "contract_id": "aurora.ace.orion-progression.v0.13",
+  "version": "0.13.0",
+  "status": "candidate",
+  "purpose": "Govern exactly one existing Orion L1 runtime tick through an explicit, state-bound local operator authorization while preserving CloudBank runtime ownership.",
+  "owner": {
+    "repository": "aurora-cloudbank-symbolic-main",
+    "repository_sha": "9c34d8e9768c6dfb1afe18f96d42e3c743e2a4e9",
+    "path": "simulation/l1_runtime.py",
+    "git_blob_sha": "dd3ae6f73bb2d2130981011a7c2443c0e39b8210",
+    "class": "OrionL1Runtime"
+  },
+  "authorization": {
+    "required_principal": "ORION.ROLE.PILOT",
+    "authority_ref_required": true,
+    "explicit_side_effect_acknowledgement_required": true,
+    "token_role": "state_bound_confirmation_receipt_not_authentication_credential",
+    "token_binds": [
+      "run_id",
+      "tick",
+      "station_cycle_minute",
+      "state_file_sha256",
+      "state_semantic_sha256",
+      "seed",
+      "replay_position",
+      "rng_fingerprint",
+      "run_cloudbank_revision",
+      "run_canonrec_revision",
+      "registered_cloudbank_sha",
+      "owner_source_git_blob",
+      "principal_id",
+      "authority_ref",
+      "elapsed_minutes",
+      "ticks_authorized"
+    ]
+  },
+  "execution": {
+    "existing_run_only": true,
+    "preflight_ready_required": true,
+    "resume_ready_required": true,
+    "ticks_per_authorization": 1,
+    "elapsed_minutes": 15,
+    "native_owner_method": "advance",
+    "automatic_retry_allowed": false,
+    "post_mutation_ambiguity": "state_uncertain"
+  },
+  "forbidden": [
+    "init_run",
+    "provider_activation",
+    "automatic_resume",
+    "remote_http_exposure",
+    "mcp_exposure",
+    "canon_mutation",
+    "automatic_retry_after_uncertain_state",
+    "parallel_or_alternate_tick_engine"
+  ],
+  "receipts": {
+    "storage": "external_to_repository",
+    "canon_status": "non_canonical_control_plane_provenance",
+    "overwrite_allowed": false
+  },
+  "ci_boundary": {
+    "registered_owner_preflight_allowed": true,
+    "registered_run_load_allowed": false,
+    "registered_run_advance_allowed": false,
+    "synthetic_fake_runtime_transaction_tests_allowed": true
+  }
+}

@@ -1,0 +1,378 @@
+{
+  "$schema": "../schemas/aurora_ace_v1_acceptance_matrix.schema.json",
+  "schema_version": "1.0.0",
+  "record_type": "aurora_ace_v1_acceptance_matrix",
+  "engine": {
+    "engine_id": "aurora_ace",
+    "canonical_name": "Aurora Canon Engine",
+    "implemented_through": "0.13.0",
+    "acceptance_target": "1.0.0"
+  },
+  "authority": {
+    "scope": "root_control_plane",
+    "mutation_posture": "verification_only",
+    "canon_effect": "none_without_authoritative_materialization_commit"
+  },
+  "seal_policy": {
+    "required_row_status": "ready",
+    "component_contracts_survive_unsealed_v1": true,
+    "isolated_execution_uses_temporary_clones": true,
+    "missing_environment_is_not_product_failure": true
+  },
+  "rows": [
+    {
+      "id": "ACE-V1-001",
+      "title": "Retrieval precedes generation",
+      "requirement": "An existing or relation-identifiable character is returned from committed CanonRec evidence without invoking generation, while an absent character continues into completion.",
+      "required": true,
+      "boundaries": ["CanonRec evidence", "character router", "generation fallback"],
+      "execution_class": "local_safe",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/character_retrieval.py",
+          "symbols": ["build_character_index", "discover_character_candidates", "compile_existing_character_query_if_applicable", "resolve_existing_character_query"]
+        },
+        {"path": "tools/ace/engine.py", "symbols": ["resolve_character_query"]}
+      ],
+      "contract_refs": [
+        "docs/AURORA_ACE__ADDENDUM__CHARACTER_RETRIEVAL__v0.4__2026-08-11.md",
+        "catalog/contracts/aurora_ace_contract_v0_1.json"
+      ],
+      "practical": {
+        "test_refs": [
+          "tests/test_aurora_ace_character_retrieval.py::test_name_lookup_returns_existing_character_without_generation",
+          "tests/test_aurora_ace_character_retrieval.py::test_relation_only_candidate_blocks_duplicate_generation",
+          "tests/test_aurora_ace_character_retrieval.py::test_no_existing_match_allows_normal_generation_compiler"
+        ],
+        "dependencies": [],
+        "environment": {}
+      },
+      "acceptance": "All three retrieval/generation routing cases pass and retain explicit provenance."
+    },
+    {
+      "id": "ACE-V1-002",
+      "title": "Constitutive character completion is replayable",
+      "requirement": "A previously unrecorded character is completed through the registered naming and character-forging capabilities into a validated, commit-ready packet without being parked as unknown or staging.",
+      "required": true,
+      "boundaries": ["NameService", "CharForge", "CanonRec validation", "determination receipt"],
+      "execution_class": "isolated_ci",
+      "implementation_evidence": [
+        {"path": "tools/ace/core.py", "symbols": ["compile_character_query"]},
+        {"path": "tools/ace/engine.py", "symbols": ["resolve_character_query"]}
+      ],
+      "contract_refs": [
+        "docs/AURORA_ACE__SPEC__CANON_ENGINE__v0.1__2026-08-10.md",
+        "catalog/schemas/aurora_ace_determination_receipt.schema.json"
+      ],
+      "practical": {
+        "test_refs": ["tests/test_aurora_ace.py::test_live_character_resolution_is_semantically_replayable"],
+        "dependencies": ["jsonschema", "yaml"],
+        "environment": {"AURORA_ACE_LIVE_TESTS": "1"}
+      },
+      "acceptance": "Two executions at registered repository baselines have identical semantic outputs and a complete validated packet."
+    },
+    {
+      "id": "ACE-V1-003",
+      "title": "Canonical determination semantics are complete",
+      "requirement": "ACE exposes exactly the six defined determination states, treats EXECUTION_BLOCKED as operational, and never uses missing evidence or authority to park otherwise complete canon.",
+      "required": true,
+      "boundaries": ["canonical specification", "determination engine", "receipt schema"],
+      "execution_class": "local_safe",
+      "implementation_evidence": [
+        {"path": "tools/ace/canon_resolution.py", "symbols": ["compile_canon_query", "resolve_canon_query"]},
+        {"path": "tools/ace/core.py", "symbols": ["ACEError"]}
+      ],
+      "contract_refs": [
+        "docs/AURORA_ACE__SPEC__CANON_ENGINE__v0.1__2026-08-10.md",
+        "catalog/contracts/aurora_ace_contract_v0_1.json",
+        "catalog/schemas/aurora_ace_determination_receipt.schema.json"
+      ],
+      "practical": {
+        "test_refs": [
+          "tests/test_aurora_ace_invariants.py::test_determination_vocabulary_is_defined_in_the_spec",
+          "tests/test_aurora_ace_canon_resolution.py::test_retrieved_canon_returns_existing_value_without_mutation",
+          "tests/test_aurora_ace_canon_resolution.py::test_derived_canon_uses_only_allowlisted_deterministic_rule",
+          "tests/test_aurora_ace_canon_resolution.py::test_true_conflict_never_selects_winner",
+          "tests/test_aurora_ace_canon_resolution.py::test_missing_authoritative_claim_routes_to_completion_instead_of_fake_retrieval",
+          "tests/test_aurora_ace_materialization.py::test_materializer_commits_facility_and_appends_both_determinations",
+          "tests/test_aurora_ace_materialization.py::test_existing_facility_target_becomes_canon_revision"
+        ],
+        "dependencies": [],
+        "environment": {}
+      },
+      "acceptance": "The specification, contract, receipt schema, and reachable implementation vocabulary agree."
+    },
+    {
+      "id": "ACE-V1-004",
+      "title": "Capability discovery is manifest-derived and runtime-bound",
+      "requirement": "Capability manifests are schema-valid, digest-bound, deterministic, and unable to introduce arbitrary runtime code outside the explicit binding registry.",
+      "required": true,
+      "boundaries": ["capability manifests", "schema validation", "runtime allowlist", "registered repositories"],
+      "execution_class": "local_safe",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/capability_discovery.py",
+          "symbols": ["load_capability_manifests", "validate_capability_manifest", "build_capability_index", "select_invocation_capability"]
+        },
+        {"path": "tools/ace/runtime_binding.py", "symbols": ["load_runtime_binding_registry", "load_verified_runtime_binding", "resolve_verified_invocation"]}
+      ],
+      "contract_refs": [
+        "docs/AURORA_ACE__CAPABILITY_DISCOVERY__v0.6__2026-08-12.md",
+        "catalog/contracts/aurora_ace_capability_discovery_contract_v0_6.json",
+        "catalog/schemas/aurora_ace_capability_manifest.schema.json",
+        "catalog/ace/runtime_bindings.json"
+      ],
+      "practical": {
+        "test_refs": [
+          "tests/test_aurora_ace_capability_discovery.py::test_committed_manifest_catalog_is_valid_unique_and_deterministic",
+          "tests/test_aurora_ace_capability_discovery.py::test_committed_manifests_conform_to_draft_2020_12_schema",
+          "tests/test_aurora_ace_capability_discovery.py::test_manifest_metadata_cannot_create_runtime_binding"
+        ],
+        "dependencies": ["jsonschema"],
+        "environment": {}
+      },
+      "acceptance": "The discovered index is deterministic and only verified binding IDs can execute."
+    },
+    {
+      "id": "ACE-V1-005",
+      "title": "Interactive, embedded, and autonomic invocation share one engine",
+      "requirement": "All invocation modes produce inspectable envelopes, preserve caller and parent provenance, and route through the same manifest-backed resolver without widening specialist or authority boundaries.",
+      "required": true,
+      "boundaries": ["caller", "invocation envelope", "manifest router", "shared resolver"],
+      "execution_class": "local_safe",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/invocation.py",
+          "symbols": ["build_invocation_envelope", "compile_character_invocation", "compile_canon_invocation", "compile_facility_invocation", "resolve_invocation", "validate_invocation_envelope"]
+        }
+      ],
+      "contract_refs": [
+        "docs/AURORA_ACE__ADDENDUM__FIRST_CLASS_INVOCATION__v0.2__2026-08-11.md",
+        "catalog/contracts/aurora_ace_invocation_contract_v0_2.json",
+        "catalog/schemas/aurora_ace_invocation_envelope.schema.json"
+      ],
+      "practical": {
+        "test_refs": [
+          "tests/test_aurora_ace_invocation.py::test_interactive_invocation_is_first_class_and_inspectable",
+          "tests/test_aurora_ace_invocation.py::test_embedded_invocation_uses_the_same_query_engine_and_preserves_parent",
+          "tests/test_aurora_ace_invocation.py::test_autonomic_invocation_is_automatic_but_never_invisible",
+          "tests/test_aurora_ace_invocation.py::test_invocation_rejects_synthesis_around_specialist_tooling"
+        ],
+        "dependencies": [],
+        "environment": {}
+      },
+      "acceptance": "All three modes retain identical authority and routing semantics with explicit provenance."
+    },
+    {
+      "id": "ACE-V1-006",
+      "title": "Materialization and ledgering are atomic and replay-safe",
+      "requirement": "Commit-ready packets require explicit authority, materialize only through native handlers on feature branches, append pre/post determinations, and remove false canon claims after post-commit failure.",
+      "required": true,
+      "boundaries": ["commit-ready packet", "authority gate", "CanonRec transaction", "determination ledger"],
+      "execution_class": "local_safe",
+      "implementation_evidence": [
+        {"path": "tools/ace/materialize.py", "symbols": ["materialize_facility_packet"]},
+        {"path": "tools/ace/character_materialize.py", "symbols": ["materialize_character_packet", "materialize_packet"]},
+        {"path": "tools/ace/ledger.py", "symbols": ["append_determination", "query_ledger"]}
+      ],
+      "contract_refs": [
+        "docs/AURORA_ACE__ADDENDUM__MATERIALIZATION_LEDGER__v0.2__2026-08-11.md",
+        "docs/AURORA_ACE__ADDENDUM__CHARACTER_MATERIALIZATION__v0.5__2026-08-12.md"
+      ],
+      "practical": {
+        "test_refs": [
+          "tests/test_aurora_ace_materialization.py::test_materializer_requires_explicit_authority",
+          "tests/test_aurora_ace_materialization.py::test_materializer_commits_facility_and_appends_both_determinations",
+          "tests/test_aurora_ace_materialization.py::test_post_commit_failure_rolls_back_canon_and_removes_false_sidecar",
+          "tests/test_aurora_ace_materialization.py::test_ledger_is_append_only_for_a_determination_id"
+        ],
+        "dependencies": [],
+        "environment": {}
+      },
+      "acceptance": "Temporary-repository transactions prove authority gating, one-commit behavior, append-only provenance, rollback, and replay refusal."
+    },
+    {
+      "id": "ACE-V1-007",
+      "title": "MCP is a bounded transport over the shared engine",
+      "requirement": "The official MCP client enumerates the six declared tools, while resolve and two-phase materialization delegate to the shared invocation engine and native materializer without accepting arbitrary paths or repositories.",
+      "required": true,
+      "boundaries": ["MCP client", "MCP adapter", "shared invocation", "native materializer"],
+      "execution_class": "local_safe",
+      "implementation_evidence": [
+        {"path": "tools/ace/mcp_adapter.py", "symbols": ["MCP_TOOL_NAMES", "ace_capabilities", "ace_plan", "ace_resolve", "ace_inspect", "ace_materialize_preview", "ace_materialize_commit"]},
+        {"path": "tools/aurora_ace_mcp.py", "symbols": ["mcp"]}
+      ],
+      "contract_refs": [
+        "docs/AURORA_ACE__ADDENDUM__MCP_EXPOSURE__v0.7__2026-08-12.md",
+        "docs/AURORA_ACE__ADDENDUM__MCP_MATERIALIZATION__v0.8__2026-08-12.md",
+        "catalog/contracts/aurora_ace_mcp_contract_v0_8.json"
+      ],
+      "practical": {
+        "test_refs": [
+          "tests/test_aurora_ace_acceptance.py::test_official_mcp_client_enumerates_registered_surface",
+          "tests/test_aurora_ace_mcp.py::test_resolve_is_bounded_and_delegates_to_shared_engine",
+          "tests/test_aurora_ace_mcp.py::test_materialization_preview_is_state_bound_and_non_mutating",
+          "tests/test_aurora_ace_mcp.py::test_materialization_commit_delegates_only_to_native_materializer"
+        ],
+        "dependencies": ["mcp"],
+        "environment": {}
+      },
+      "acceptance": "The SDK-observed tool set and adapter contract agree, and all state-changing calls remain two-phase and native."
+    },
+    {
+      "id": "ACE-V1-008",
+      "title": "Operator transactions compose resolve through inspection",
+      "requirement": "The operator lifecycle persists resolve, preview, exact-token authorization, one canonical commit, post-commit inspection, and replay refusal as one auditable transaction.",
+      "required": true,
+      "boundaries": ["operator receipt", "MCP adapter", "CanonRec commit", "post-commit inspection"],
+      "execution_class": "isolated_ci",
+      "implementation_evidence": [
+        {"path": "tools/ace/mcp_operator_transaction.py", "symbols": ["prepare_operator_transaction", "commit_operator_transaction", "inspect_operator_transaction"]},
+        {"path": "tools/ace/mcp_adapter.py", "symbols": ["ace_resolve", "ace_materialize_preview", "ace_materialize_commit", "ace_inspect"]}
+      ],
+      "contract_refs": [
+        "docs/AURORA_ACE__ADDENDUM__MCP_OPERATOR_TRANSACTIONS__v0.9__2026-08-12.md",
+        "catalog/contracts/aurora_ace_mcp_operator_transaction_v0_9.json"
+      ],
+      "practical": {
+        "test_refs": ["tests/test_aurora_ace_mcp_operator_transaction.py::test_end_to_end_operator_transaction_materializes_inspects_and_refuses_replay"],
+        "dependencies": ["jsonschema", "yaml"],
+        "environment": {"ACE_MCP_E2E": "1"}
+      },
+      "acceptance": "The end-to-end transaction passes against temporary clones of the registered repositories and refuses a second commit."
+    },
+    {
+      "id": "ACE-V1-009",
+      "title": "Remote identity and delegated authority remain explicit",
+      "requirement": "Authenticated remote requests bind principal, scopes, invocation mode, and allowed authority references; metadata alone cannot widen runtime bindings or materialization/publication authority.",
+      "required": true,
+      "boundaries": ["bearer authentication", "remote service", "runtime binding", "delegated authority"],
+      "execution_class": "local_safe",
+      "implementation_evidence": [
+        {"path": "tools/ace/remote_auth.py", "symbols": ["load_remote_principals", "authenticate_bearer"]},
+        {"path": "tools/ace/remote_service.py", "symbols": ["create_app"]},
+        {"path": "tools/ace/runtime_binding.py", "symbols": ["load_verified_runtime_binding", "resolve_verified_invocation"]}
+      ],
+      "contract_refs": [
+        "docs/AURORA_ACE__ADDENDUM__REMOTE_SERVICE__v0.10__2026-08-13.md",
+        "catalog/contracts/aurora_ace_remote_service_v0_10.json"
+      ],
+      "practical": {
+        "test_refs": [
+          "tests/test_aurora_ace_remote.py::test_remote_auth_requires_hash_only_configuration",
+          "tests/test_aurora_ace_remote.py::test_remote_service_requires_auth_and_binds_identity",
+          "tests/test_aurora_ace_remote.py::test_remote_materialization_requires_scope_and_bound_authority",
+          "tests/test_aurora_ace_remote.py::test_runtime_binding_rejects_catalog_only_arbitrary_python"
+        ],
+        "dependencies": ["fastapi", "httpx"],
+        "environment": {}
+      },
+      "acceptance": "Unauthenticated, under-scoped, unbound, or metadata-injected execution is refused without mutation."
+    },
+    {
+      "id": "ACE-V1-010",
+      "title": "Generic native entities pass naming and CanonRec admission",
+      "requirement": "Non-character L2 entities use specialist-first naming, native CanonRec validation, atomic materialization, and replay refusal without weakening the character-specific path.",
+      "required": true,
+      "boundaries": ["generic resolver", "NameService", "canon reconciler", "CanonRec materializer"],
+      "execution_class": "isolated_ci",
+      "implementation_evidence": [
+        {"path": "tools/ace/generic_entity.py", "symbols": ["compile_generic_entity_query", "resolve_generic_entity_query", "materialize_generic_entity_packet"]},
+        {"path": "tools/ace/generic_naming.py", "symbols": ["mint_generic_naming_receipt", "validate_generic_naming_receipt"]},
+        {"path": "tools/ace/generic_entity_gate.py", "symbols": ["generic_entity_preview", "generic_entity_commit"]}
+      ],
+      "contract_refs": [
+        "docs/AURORA_ACE__ADDENDUM__GENERIC_NATIVE_ENTITIES__v0.11__2026-08-13.md",
+        "catalog/contracts/aurora_ace_generic_native_entity_v0_11.json"
+      ],
+      "practical": {
+        "test_refs": ["tests/test_aurora_ace_generic_entity.py::test_generic_entity_end_to_end_commit_and_replay_refusal"],
+        "dependencies": ["jsonschema", "yaml"],
+        "environment": {"ACE_GENERIC_E2E": "1"}
+      },
+      "acceptance": "A native generic entity commits once in a temporary CanonRec clone with naming and schema receipts, then rejects replay."
+    },
+    {
+      "id": "ACE-V1-011",
+      "title": "Delegated publication is review-gated and ambiguity-safe",
+      "requirement": "Delegated publication creates a proposal branch and review-pending receipt, refuses remote drift or collisions, cleans up only proven orphan branches, and preserves uncertain state for reconciliation rather than retrying.",
+      "required": true,
+      "boundaries": ["materialization", "Git remote", "pull request adapter", "publication receipt"],
+      "execution_class": "local_safe",
+      "implementation_evidence": [
+        {"path": "tools/ace/delegated_publication.py", "symbols": ["publish_delegated_packet"]},
+        {"path": "tools/ace/delegated_github.py", "symbols": ["PublicationStateUncertain", "open_pull_request"]}
+      ],
+      "contract_refs": [
+        "docs/AURORA_ACE__ADDENDUM__DELEGATED_PUBLICATION__v0.12__2026-08-13.md",
+        "catalog/contracts/aurora_ace_delegated_publication_v0_12.json"
+      ],
+      "practical": {
+        "test_refs": [
+          "tests/test_aurora_ace_delegated_publication.py::test_delegated_publication_creates_review_pending_receipt_and_restores_main",
+          "tests/test_aurora_ace_delegated_publication.py::test_delegated_publication_deletes_orphan_remote_branch_when_pr_open_fails",
+          "tests/test_aurora_ace_delegated_publication.py::test_uncertain_pr_state_preserves_remote_branch_for_reconciliation",
+          "tests/test_aurora_ace_delegated_publication.py::test_delegated_publication_refuses_remote_main_drift"
+        ],
+        "dependencies": [],
+        "environment": {}
+      },
+      "acceptance": "All definitive and ambiguous publication outcomes preserve review and retry boundaries with durable receipts."
+    },
+    {
+      "id": "ACE-V1-012",
+      "title": "Orion progression preserves the L1 owner and one-tick boundary",
+      "requirement": "ACE may preview and authorize exactly one native owner tick only after readiness and resume gates, never exposes progression remotely, and reports post-write ambiguity as state uncertain with no automatic retry.",
+      "required": true,
+      "boundaries": ["ACE operator", "registered CloudBank owner", "persisted Orion run", "external receipt"],
+      "execution_class": "local_safe",
+      "implementation_evidence": [
+        {"path": "tools/ace/orion_progression.py", "symbols": ["preview_orion_advance", "commit_orion_advance", "inspect_orion_progression", "registered_owner_preflight"]},
+        {"path": "tools/ace/orion_runtime_owner.py", "symbols": ["registered_cloudbank", "load_owner_runtime"]}
+      ],
+      "contract_refs": [
+        "docs/AURORA_ACE__ADDENDUM__ORION_PROGRESSION__v0.13__2026-08-14.md",
+        "catalog/contracts/aurora_ace_orion_progression_v0_13.json"
+      ],
+      "practical": {
+        "test_refs": [
+          "tests/test_aurora_ace_orion_progression.py::test_preview_is_non_mutating_and_state_bound",
+          "tests/test_aurora_ace_orion_progression.py::test_commit_advances_exactly_one_tick",
+          "tests/test_aurora_ace_orion_progression.py::test_old_token_replay_refuses_before_second_tick",
+          "tests/test_aurora_ace_orion_progression.py::test_post_write_owner_failure_is_state_uncertain_and_not_retried",
+          "tests/test_aurora_ace_orion_progression.py::test_runtime_progression_is_not_exposed_through_remote_or_mcp",
+          "tests/test_aurora_ace_orion_progression.py::test_registered_owner_binding_calls_preflight_only"
+        ],
+        "dependencies": ["yaml"],
+        "environment": {}
+      },
+      "acceptance": "Synthetic transaction tests and registered-owner preflight pass without loading or advancing a real Orion run."
+    },
+    {
+      "id": "ACE-V1-013",
+      "title": "Acceptance evidence is repository-grounded and non-promotional",
+      "requirement": "The v1 decision is derived from committed paths, real Python symbols, executable pytest nodes, dependency availability, and explicit safe/isolated execution classes; evaluating the matrix cannot itself promote canon.",
+      "required": true,
+      "boundaries": ["acceptance contract", "repository evidence", "practical test runner", "v1 seal decision"],
+      "execution_class": "local_safe",
+      "implementation_evidence": [
+        {"path": "tools/aurora_ace_acceptance.py", "symbols": ["validate_matrix", "isolated_workspace", "build_report", "write_report"]},
+        {"path": "catalog/contracts/aurora_ace_v1_acceptance_matrix.json"}
+      ],
+      "contract_refs": [
+        "catalog/schemas/aurora_ace_v1_acceptance_matrix.schema.json",
+        "docs/AURORA_ACE__HANDOFF__CURRENT_STATE_AND_V1_ACCEPTANCE__v1.1__2026-08-15.md"
+      ],
+      "practical": {
+        "test_refs": [
+          "tests/test_aurora_ace_acceptance.py::test_committed_matrix_is_repository_grounded",
+          "tests/test_aurora_ace_acceptance.py::test_committed_matrix_conforms_to_json_schema",
+          "tests/test_aurora_ace_acceptance.py::test_unexecuted_report_is_attention_not_failure"
+        ],
+        "dependencies": ["jsonschema"],
+        "environment": {}
+      },
+      "acceptance": "The matrix validates structurally and semantically, all evidence resolves, and an unexecuted environment is reported as attention rather than a false failure."
+    }
+  ]
+}

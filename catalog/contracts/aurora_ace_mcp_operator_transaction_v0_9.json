@@ -1,0 +1,67 @@
+{
+  "schema_version": "0.9.0",
+  "record_type": "aurora_ace_mcp_operator_transaction_contract",
+  "inherits_mcp_surface": "0.8.0",
+  "mcp_tool_surface_unchanged": true,
+  "operator_layer": {
+    "transport": "local",
+    "network_listener_enabled": false,
+    "remote_auth_model": null,
+    "canonical_authority_owned_by": "existing ACE native materializer",
+    "transaction_receipt_is_canon": false,
+    "authorization_token_is_identity_credential": false
+  },
+  "lifecycle": [
+    "resolve",
+    "preview",
+    "awaiting_confirmation",
+    "commit_in_progress",
+    "committed_or_refused",
+    "inspect"
+  ],
+  "durable_receipt": {
+    "default_root": "reports/ace/mcp_transactions",
+    "record_type": "ace_mcp_operator_transaction",
+    "prepared_state_binding": [
+      "invocation_id",
+      "determination_id",
+      "output_name",
+      "packet_digest",
+      "authority_mode",
+      "authority_ref",
+      "target_repository",
+      "target_branch",
+      "target_head",
+      "expected_baseline"
+    ],
+    "commit_requires": [
+      "transaction_status_awaiting_confirmation",
+      "exact_preview_authorization_token",
+      "explicit_side_effect_acknowledgement"
+    ],
+    "terminal_states": ["committed", "refused"],
+    "authorization_token_reuse_permitted": false
+  },
+  "failure_semantics": {
+    "wrong_token_before_commit_mutates_receipt": false,
+    "missing_acknowledgement_before_commit_mutates_receipt": false,
+    "native_commit_failure_records_refusal": true,
+    "native_commit_failure_rollback_owned_by": "existing ACE materializer",
+    "post_commit_inspection_failure_reverses_canon": false
+  },
+  "e2e_validation": {
+    "required_chain": ["resolve", "preview", "authorize", "commit", "inspect", "replay_refusal"],
+    "target": "ephemeral local CanonRec feature branch at registered baseline",
+    "remote_push_permitted": false,
+    "simulation_advance_permitted": false
+  },
+  "invariants": [
+    "ACE v0.9 does not add a seventh MCP mutation tool.",
+    "The operator layer cannot supply an arbitrary CanonRec repository or target path through its CLI.",
+    "Prepare is non-canonical and persists an awaiting-confirmation receipt.",
+    "Commit enters commit_in_progress before native dispatch so ambiguous interruption is externally visible.",
+    "A successful native materialization is recorded as committed even if post-commit inspection reports an error.",
+    "Committed and refused transaction receipts are closed against authorization-token replay.",
+    "MCP remains stdio-only and does not gain remote authentication, runtime activation, or simulation progression authority."
+  ]
+}

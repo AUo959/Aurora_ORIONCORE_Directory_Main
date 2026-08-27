@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.10.0",
+  "record_type": "aurora_ace_remote_service_contract",
+  "transport": {
+    "protocol": "HTTPS JSON",
+    "default_bind": "127.0.0.1:8765",
+    "non_loopback_requires_tls": true,
+    "authentication_required": true,
+    "max_request_bytes": 1048576,
+    "cors_enabled": false
+  },
+  "authentication": {
+    "configuration_env": "ACE_REMOTE_PRINCIPALS_JSON",
+    "plaintext_tokens_in_config_permitted": false,
+    "token_storage": "sha256_digest_only",
+    "identity_binding": "remote:<principal>",
+    "scopes": ["ace:read", "ace:resolve", "ace:materialize", "ace:autonomic", "ace:runtime"],
+    "materialization_authority_ref_must_be_principal_bound": true
+  },
+  "routes": [
+    "GET /healthz",
+    "GET /v1/capabilities",
+    "POST /v1/plan",
+    "POST /v1/resolve",
+    "POST /v1/inspect",
+    "POST /v1/materialize/preview",
+    "POST /v1/materialize/commit"
+  ],
+  "runtime_binding": {
+    "mode": "verified_dynamic",
+    "registry": "catalog/ace/runtime_bindings.json",
+    "capability_manifest_alone_may_execute": false,
+    "exact_git_blob_pin_required": true,
+    "module_namespace": "ace.*",
+    "manifest_repository_path_entrypoint_must_match_binding": true
+  },
+  "authority": {
+    "canonical_truth_model_changed": false,
+    "native_materializers_changed": false,
+    "orion_runtime_authority_added": false,
+    "autonomous_publication_added": false,
+    "arbitrary_python_execution_added": false
+  }
+}

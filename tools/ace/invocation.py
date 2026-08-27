@@ -1,0 +1,410 @@
+"""First-class invocation facade for the Aurora Canon Engine (ACE).
+
+Interactive, embedded, and autonomic entry paths all terminate in the same ACE
+query/invocation contracts. Subject-specific compilers and resolvers are
+selected behind that common facade; automatic invocation never becomes hidden
+background logic.
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Any, Mapping
+
+from .core import (
+    ACEError,
+    SCHEMA_VERSION,
+    compile_character_query,
+    semantic_sha256,
+    utc_now,
+    write_json,
+)
+from .capability_discovery import select_invocation_capability
+from .engine import resolve_character_query
+from .character_retrieval import resolve_existing_character_query
+from .canon_resolution import compile_canon_query, resolve_canon_query
+from .facility import (
+    compile_facility_query,
+    resolve_facility_query,
+    validate_coherence_seam,
+)
+
+INVOCATION_SCHEMA_VERSION = "0.2.0"
+INVOCATION_MODES = frozenset({"interactive", "embedded", "autonomic"})
+CALLER_KINDS = frozenset({"user", "operations", "agent", "system", "capability"})
+TRIGGER_KINDS = frozenset({"direct_query", "capability_call", "coherence_seam", "policy_event"})
+RUNTIME_BINDING_IDS = frozenset(
+    {
+        "ace.capability.invoke.character.retrieve",
+        "ace.capability.invoke.character.complete",
+        "ace.capability.invoke.facility",
+        "ace.capability.invoke.canon_fact",
+    }
+)
+
+
+def _nonempty(value: str | None, field: str) -> str:
+    if not isinstance(value, str) or not value.strip():
+        raise ACEError(f"{field} must be a non-empty string", code="input_validation_failed")
+    return value.strip()
+
+
+def validate_invocation_envelope(payload: Mapping[str, Any]) -> None:
+    """Fail closed on invocation provenance that could hide or blur an ACE call."""
+
+    if payload.get("schema_version") != INVOCATION_SCHEMA_VERSION:
+        raise ACEError("unsupported ACE invocation schema version", code="input_validation_failed")
+    if payload.get("record_type") != "ace_invocation_envelope":
+        raise ACEError("record_type must be ace_invocation_envelope", code="input_validation_failed")
+
+    mode = payload.get("invocation_mode")
+    if mode not in INVOCATION_MODES:
+        raise ACEError(f"unsupported ACE invocation mode: {mode!r}", code="input_validation_failed")
+    if payload.get("visibility") != "inspectable":
+        raise ACEError("ACE invocation visibility must remain inspectable", code="input_validation_failed")
+    if payload.get("automatic") is not (mode == "autonomic"):
+        raise ACEError("automatic flag must match invocation mode", code="input_validation_failed")
+
+    caller = payload.get("caller")
+    if not isinstance(caller, Mapping):
+        raise ACEError("caller must be an object", code="input_validation_failed")
+    if caller.get("kind") not in CALLER_KINDS:
+        raise ACEError("caller.kind is not recognized", code="input_validation_failed")
+    _nonempty(caller.get("caller_ref"), "caller.caller_ref")
+
+    trigger = payload.get("trigger")
+    if not isinstance(trigger, Mapping):
+        raise ACEError("trigger must be an object", code="input_validation_failed")
+    if trigger.get("kind") not in TRIGGER_KINDS:
+        raise ACEError("trigger.kind is not recognized", code="input_validation_failed")
+    _nonempty(trigger.get("reason"), "trigger.reason")
+
+    if mode == "embedded" and caller.get("kind") not in {"agent", "system", "capability", "operations"}:
+        raise ACEError(
+            "embedded ACE invocation requires an agent, operations, system, or capability caller",
+            code="input_validation_failed",
+        )
+
+    if mode == "autonomic":
+        if caller.get("kind") not in {"system", "capability", "agent"}:
+            raise ACEError(
+                "autonomic ACE invocation requires a system, capability, or agent caller",
+                code="input_validation_failed",
+            )
+        _nonempty(trigger.get("seam_ref"), "trigger.seam_ref")
+        _nonempty(trigger.get("trigger_policy_ref"), "trigger.trigger_policy_ref")
+        if trigger.get("kind") not in {"coherence_seam", "policy_event"}:
+            raise ACEError(
+                "autonomic invocation must be triggered by a coherence_seam or policy_event",
+                code="input_validation_failed",
+            )
+
+    query = payload.get("query")
+    if not isinstance(query, Mapping):
+        raise ACEError("invocation query must be an ACE query object", code="input_validation_failed")
+    if query.get("record_type") != "ace_query_envelope" or query.get("schema_version") != SCHEMA_VERSION:
+        raise ACEError(
+            "invocation must wrap the normal supported ACE query envelope",
+            code="input_validation_failed",
+        )
+    expected_query_digest = semantic_sha256(query)
+    if payload.get("query_sha256") != expected_query_digest:
+        raise ACEError("invocation query digest does not match query", code="input_validation_failed")
+    if query.get("generation_policy", {}).get("prefer_existing_specialists") is not True:
+        raise ACEError(
+            "first-class ACE invocation requires specialist-first routing",
+            code="input_validation_failed",
+        )
+
+
+def build_invocation_envelope(
+    query: Mapping[str, Any],
+    *,
+    invocation_mode: str = "interactive",
+    caller_kind: str = "user",
+    caller_ref: str = "ORION.ROLE.PILOT",
+    parent_invocation_ref: str | None = None,
+    trigger_kind: str | None = None,
+    trigger_reason: str | None = None,
+    seam_ref: str | None = None,
+    trigger_policy_ref: str | None = None,
+) -> dict[str, Any]:
+    """Wrap one normalized ACE query in inspectable invocation provenance."""
+
+    if invocation_mode not in INVOCATION_MODES:
+        raise ACEError(
+            f"unsupported ACE invocation mode: {invocation_mode}",
+            code="input_validation_failed",
+        )
+    if caller_kind not in CALLER_KINDS:
+        raise ACEError(f"unsupported caller kind: {caller_kind}", code="input_validation_failed")
+
+    default_trigger = {
+        "interactive": "direct_query",
+        "embedded": "capability_call",
+        "autonomic": "coherence_seam",
+    }[invocation_mode]
+    default_reason = {
+        "interactive": "Direct human or agent ACE query.",
+        "embedded": "Registered Aurora workflow invoked ACE as a service.",
+        "autonomic": "Registered Aurora policy detected a coherence seam requiring ACE determination.",
+    }[invocation_mode]
+    trigger_kind = trigger_kind or default_trigger
+    trigger_reason = trigger_reason or default_reason
+
+    query_dict = dict(query)
+    query_sha256 = semantic_sha256(query_dict)
+    caller = {
+        "kind": caller_kind,
+        "caller_ref": _nonempty(caller_ref, "caller_ref"),
+        "parent_invocation_ref": parent_invocation_ref,
+    }
+    trigger = {
+        "kind": trigger_kind,
+        "reason": trigger_reason,
+        "seam_ref": seam_ref,
+        "trigger_policy_ref": trigger_policy_ref,
+    }
+    invocation_suffix = semantic_sha256(
+        {
+            "invocation_mode": invocation_mode,
+            "caller": caller,
+            "trigger": trigger,
+            "query_sha256": query_sha256,
+        }
+    )[:20]
+    envelope = {
+        "schema_version": INVOCATION_SCHEMA_VERSION,
+        "record_type": "ace_invocation_envelope",
+        "invocation_id": f"ace.invocation.{invocation_mode}.{invocation_suffix}",
+        "created_at": utc_now(),
+        "invocation_mode": invocation_mode,
+        "visibility": "inspectable",
+        "automatic": invocation_mode == "autonomic",
+        "caller": caller,
+        "trigger": trigger,
+        "query_sha256": query_sha256,
+        "query": query_dict,
+    }
+    validate_invocation_envelope(envelope)
+    return envelope
+
+
+def compile_character_invocation(
+    question: str,
+    context: Mapping[str, Any],
+    *,
+    seed: int | str = 808,
+    mode: str = "commit_ready",
+    invocation_mode: str = "interactive",
+    caller_kind: str = "user",
+    caller_ref: str = "ORION.ROLE.PILOT",
+    parent_invocation_ref: str | None = None,
+    trigger_kind: str | None = None,
+    trigger_reason: str | None = None,
+    seam_ref: str | None = None,
+    trigger_policy_ref: str | None = None,
+    session_ref: str | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    """Compile a character query through the shared ACE engine and wrap its invocation."""
+
+    requester_kind = caller_kind if caller_kind in {"user", "operations", "agent", "system"} else "system"
+    kwargs: dict[str, Any] = {
+        "seed": seed,
+        "mode": mode,
+        "requester_kind": requester_kind,
+        "requester_id": caller_ref,
+        "session_ref": session_ref,
+    }
+    if root is not None:
+        kwargs["root"] = root
+    query = compile_character_query(question, context, **kwargs)
+    return build_invocation_envelope(
+        query,
+        invocation_mode=invocation_mode,
+        caller_kind=caller_kind,
+        caller_ref=caller_ref,
+        parent_invocation_ref=parent_invocation_ref,
+        trigger_kind=trigger_kind,
+        trigger_reason=trigger_reason,
+        seam_ref=seam_ref,
+        trigger_policy_ref=trigger_policy_ref,
+    )
+
+
+def compile_canon_invocation(
+    question: str,
+    context: Mapping[str, Any],
+    *,
+    subject_ref: str,
+    field_path: str,
+    claim_path: str | None = None,
+    certainty_path: str = "certainty",
+    derivation_rule: str | None = None,
+    invocation_mode: str = "interactive",
+    caller_kind: str = "user",
+    caller_ref: str = "ORION.ROLE.PILOT",
+    parent_invocation_ref: str | None = None,
+    trigger_kind: str | None = None,
+    trigger_reason: str | None = None,
+    seam_ref: str | None = None,
+    trigger_policy_ref: str | None = None,
+    session_ref: str | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    """Compile read-only canon determination through the shared first-class facade."""
+
+    requester_kind = caller_kind if caller_kind in {"user", "operations", "agent", "system"} else "system"
+    kwargs: dict[str, Any] = {
+        "subject_ref": subject_ref,
+        "field_path": field_path,
+        "claim_path": claim_path,
+        "certainty_path": certainty_path,
+        "derivation_rule": derivation_rule,
+        "mode": "read_only",
+        "requester_kind": requester_kind,
+        "requester_id": caller_ref,
+        "session_ref": session_ref,
+    }
+    if root is not None:
+        kwargs["root"] = root
+    query = compile_canon_query(question, context, **kwargs)
+    return build_invocation_envelope(
+        query,
+        invocation_mode=invocation_mode,
+        caller_kind=caller_kind,
+        caller_ref=caller_ref,
+        parent_invocation_ref=parent_invocation_ref,
+        trigger_kind=trigger_kind,
+        trigger_reason=trigger_reason,
+        seam_ref=seam_ref,
+        trigger_policy_ref=trigger_policy_ref,
+    )
+
+
+def compile_facility_invocation(
+    question: str,
+    context: Mapping[str, Any],
+    *,
+    subject_ref: str | None = None,
+    seed: int | str = 808,
+    mode: str = "commit_ready",
+    invocation_mode: str = "interactive",
+    caller_kind: str = "user",
+    caller_ref: str = "ORION.ROLE.PILOT",
+    parent_invocation_ref: str | None = None,
+    trigger_kind: str | None = None,
+    trigger_reason: str | None = None,
+    seam_ref: str | None = None,
+    trigger_policy_ref: str | None = None,
+    session_ref: str | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    """Compile a facility/topology query into the same first-class ACE invocation surface."""
+
+    requester_kind = caller_kind if caller_kind in {"user", "operations", "agent", "system"} else "system"
+    kwargs: dict[str, Any] = {
+        "subject_ref": subject_ref,
+        "seed": seed,
+        "mode": mode,
+        "requester_kind": requester_kind,
+        "requester_id": caller_ref,
+        "session_ref": session_ref,
+    }
+    if root is not None:
+        kwargs["root"] = root
+    query = compile_facility_query(question, context, **kwargs)
+    return build_invocation_envelope(
+        query,
+        invocation_mode=invocation_mode,
+        caller_kind=caller_kind,
+        caller_ref=caller_ref,
+        parent_invocation_ref=parent_invocation_ref,
+        trigger_kind=trigger_kind,
+        trigger_reason=trigger_reason,
+        seam_ref=seam_ref,
+        trigger_policy_ref=trigger_policy_ref,
+    )
+
+
+def compile_facility_invocation_from_seam(
+    seam: Mapping[str, Any],
+    *,
+    seed: int | str = 808,
+    mode: str = "commit_ready",
+    session_ref: str | None = None,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    """Translate a CloudBank seam producer record into the shared autonomic ACE envelope."""
+
+    validate_coherence_seam(seam)
+    caller = seam["caller"]
+    trigger = seam["trigger"]
+    subject = seam["subject"]
+    return compile_facility_invocation(
+        str(seam["question"]),
+        subject["context"],
+        subject_ref=str(subject["subject_ref"]),
+        seed=seed,
+        mode=mode,
+        invocation_mode="autonomic",
+        caller_kind=str(caller["kind"]),
+        caller_ref=str(caller["caller_ref"]),
+        trigger_kind="coherence_seam",
+        trigger_reason=str(trigger.get("reason") or "L1 embodiment registry coherence seam."),
+        seam_ref=str(trigger["seam_ref"]),
+        trigger_policy_ref=str(trigger["trigger_policy_ref"]),
+        session_ref=session_ref,
+        root=root,
+    )
+
+
+def resolve_invocation(
+    invocation: Mapping[str, Any],
+    output_dir: Path,
+    *,
+    root: Path | None = None,
+) -> dict[str, Any]:
+    """Execute one invocation through manifest discovery and an explicit runtime allowlist."""
+
+    validate_invocation_envelope(invocation)
+    query = dict(invocation["query"])
+    output = output_dir.expanduser().resolve()
+    sidecar = output.parent / f"{output.name}.ace-invocation.json"
+    if sidecar.exists():
+        raise ACEError(f"invocation sidecar already exists: {sidecar}", code="target_unavailable")
+
+    # Capability registration belongs to the ACE control plane. `root` is the
+    # selected resolver's target/runtime root (and may be a synthetic fixture),
+    # so it must never redirect discovery away from the committed ACE catalog.
+    capability = select_invocation_capability(query)
+    runtime_bindings = {
+        "ace.capability.invoke.character.retrieve": resolve_existing_character_query,
+        "ace.capability.invoke.character.complete": resolve_character_query,
+        "ace.capability.invoke.facility": resolve_facility_query,
+        "ace.capability.invoke.canon_fact": resolve_canon_query,
+    }
+    capability_id = str(capability["capability_id"])
+    resolver = runtime_bindings.get(capability_id)
+    if resolver is None or capability_id not in RUNTIME_BINDING_IDS:
+        raise ACEError(
+            f"no allowlisted ACE runtime binding exists for discovered capability {capability_id!r}",
+            code="tool_unavailable",
+        )
+
+    if root is None:
+        determination = resolver(query, output_dir)
+    else:
+        determination = resolver(query, output_dir, root=root)
+
+    payload = dict(invocation)
+    payload["determination_ref"] = determination["determination_id"]
+    payload["packet_ref"] = str(output)
+    payload["determination_status"] = determination["status"]
+    write_json(sidecar, payload)
+    return {
+        "invocation": payload,
+        "determination": determination,
+        "invocation_sidecar": str(sidecar),
+    }

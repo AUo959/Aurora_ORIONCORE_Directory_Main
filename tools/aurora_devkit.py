@@ -9,8 +9,16 @@ import os
 import shlex
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any, Callable
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+# Re-exported, not redefined: callers and tests that monkeypatch
+# `aurora_devkit.is_canonical_workspace_context` keep working, and the single
+# definition lives with the other shared workspace helpers.
+from _workspace_common import is_canonical_workspace_context  # noqa: E402,F401
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -605,18 +613,37 @@ def build_findings(
     dependency_update_surfaces: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, str]]:
     findings: list[dict[str, str]] = []
+    canonical = is_canonical_workspace_context()
 
     for tool in toolchain:
         if tool["status"] == "ok":
             continue
-        severity = "blocker" if tool["required"] else "warning"
+        # A tool absent from a sandbox says nothing about the workspace. Outside
+        # the canonical path these are reported, but never as blockers — the same
+        # distinction workspace_verify already draws for repo_registry_coverage,
+        # where "unavailable in this execution context" is a warning while "exists
+        # on disk but unregistered" is an error.
+        severity = "blocker" if (tool["required"] and canonical) else "warning"
+        message = f"{tool['id']} is {tool['status']}."
+        next_step = tool.get("impact", "")
+        if not canonical and tool["status"] in {"missing", "blocked"}:
+            message = (
+                f"{tool['id']} is {tool['status']} in this execution context "
+                f"(non-canonical workspace path)."
+            )
+            next_step = (
+                "Re-check from the canonical workspace path before treating this "
+                "as a real toolchain gap; a sandbox missing a tool is not a "
+                "workspace defect. " + next_step
+            ).strip()
         findings.append(
             {
                 "severity": severity,
                 "id": f"tool_{tool['id']}_{tool['status']}",
-                "message": f"{tool['id']} is {tool['status']}.",
+                "message": message,
                 "evidence": tool.get("output") or "command not found",
-                "next_step": tool.get("impact", ""),
+                "next_step": next_step,
+                "execution_context": "canonical" if canonical else "non_canonical",
             }
         )
 
@@ -657,14 +684,32 @@ def build_findings(
     for env in python_envs or []:
         if env.get("status") == "ok":
             continue
-        severity = "blocker" if env.get("required") and env.get("status") == "blocked" else "warning"
+        # Same execution-context rule as the toolchain loop above: a repo venv
+        # that cannot be exercised from a sandbox is not a blocked workspace.
+        # The CloudBank venv is a macOS build, so a Linux sandbox can see the
+        # path and still be unable to run it.
+        blocked = env.get("required") and env.get("status") == "blocked"
+        severity = "blocker" if (blocked and canonical) else "warning"
+        message = f"{env['repo_name']} Python environment is {env.get('status', 'unknown')}."
+        next_step = env.get("notes") or "Use the repo-local virtual environment for validation."
+        if not canonical and blocked:
+            message = (
+                f"{env['repo_name']} Python environment is "
+                f"{env.get('status', 'unknown')} in this execution context "
+                f"(non-canonical workspace path)."
+            )
+            next_step = (
+                "Re-check from the canonical workspace path before treating this "
+                "as a real environment failure. " + next_step
+            )
         findings.append(
             {
                 "severity": severity,
                 "id": f"repo_python_env_{env['repo_name']}_{env.get('status', 'unknown')}",
-                "message": f"{env['repo_name']} Python environment is {env.get('status', 'unknown')}.",
+                "message": message,
                 "evidence": env.get("evidence", ""),
-                "next_step": env.get("notes") or "Use the repo-local virtual environment for validation.",
+                "next_step": next_step,
+                "execution_context": "canonical" if canonical else "non_canonical",
             }
         )
 

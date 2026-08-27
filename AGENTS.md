@@ -489,7 +489,20 @@ This repo is worked on by both **Claude Code** and **Codex**. Either platform ma
 
 ### On session end (do this before closing, unless the session made no meaningful changes)
 
-1. Check whether work is mid-task (i.e. `active_task` was set and not yet marked `complete`). If yes: set `active_task.status = "suspended"`. Write `next_step_detail` clearly enough for a cold start on the other platform.
+1. Check whether work is mid-task (i.e. `active_task` was set and not yet marked `complete`). If yes: set `active_task.status = "suspended"` (`session_state_io.py suspend-active`). Write `next_step_detail` clearly enough for a cold start on the other platform.
+   - If the task is **done**, retire it — do not suspend it:
+     `session_state_io.py --platform <p> complete-active [--detail "..."]`
+     (logs it to `completed_tasks` and sets `active_task` to null).
+   - If it is unfinished but waiting on a **process** rather than on this
+     session, move it off the active slot:
+     `session_state_io.py --platform <p> reroute-active` (appends it to
+     `task_queue`, where `complete-item` can close it later).
+   - Why this matters: `complete-item` searches only `task_queue` and
+     `pending_for_next_session`. Before these verbs existed, an `active_task`
+     could only ever be moved *into* `suspended`, so a finished task resurfaced
+     at the top of every session start indefinitely. Do not write a task's exit
+     condition as "owner review before X" — that is the same trap in prose form.
+     Route it to a process; the owner gates the commit, not the truth.
 2. Update `last_platform` to your platform name.
 3. Update `last_updated` to the current UTC timestamp.
 4. Update `last_session_summary` with a one-sentence description.

@@ -1,0 +1,28 @@
+{
+  "policy_id": "ace.policy.orion.l1.governed-single-tick.v1",
+  "version": "0.13.0",
+  "capability_id": "ace.runtime.orion.l1.advance.governed",
+  "cloudbank_repository": "aurora-cloudbank-symbolic-main",
+  "cloudbank_repository_sha": "a19870a576a4136fc7ee8c30a2a8d869f36156d9",
+  "owner": {
+    "path": "simulation/l1_runtime.py",
+    "git_blob_sha": "5b6d93515fb219cb26d267db6c6df6c052413ae1",
+    "class": "OrionL1Runtime",
+    "preflight_method": "preflight",
+    "load_method": "load_run",
+    "advance_method": "advance",
+    "export_method": "export_state"
+  },
+  "required_principal": "ORION.ROLE.PILOT",
+  "require_existing_run": true,
+  "require_preflight_ready": true,
+  "require_resume_ready": true,
+  "elapsed_minutes": 15,
+  "ticks_per_authorization": 1,
+  "init_allowed": false,
+  "provider_activation_allowed": false,
+  "remote_exposure_allowed": false,
+  "mcp_exposure_allowed": false,
+  "automatic_retry_allowed": false,
+  "state_uncertain_requires_operator_reconciliation": true
+}

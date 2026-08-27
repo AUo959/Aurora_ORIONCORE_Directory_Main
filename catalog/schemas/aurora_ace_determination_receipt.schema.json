@@ -1,0 +1,991 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/aurora_ace_determination_receipt.schema.json",
+  "title": "Aurora Canon Engine Determination Receipt",
+  "description": "Append-only ACE answer, capability plan, field provenance, validation, conflict, materialization, and replay receipt.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "nonempty_string": {
+      "type": "string",
+      "minLength": 1
+    },
+    "string_array": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nonempty_string"
+      }
+    },
+    "repo_baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "commit_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "authority_role": {
+          "type": "string",
+          "enum": [
+            "control_plane",
+            "canon",
+            "runtime",
+            "simulation",
+            "knowledge",
+            "supporting"
+          ]
+        }
+      },
+      "required": [
+        "repository",
+        "commit_sha",
+        "authority_role"
+      ]
+    },
+    "answer_field": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "field_path": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.\\[\\]-]+$"
+        },
+        "value": true,
+        "origin": {
+          "type": "string",
+          "enum": [
+            "retrieved",
+            "deterministic_derivation",
+            "specialist_tool_output",
+            "connective_synthesis"
+          ]
+        },
+        "producer_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/nonempty_string"
+          }
+        },
+        "source_refs": {
+          "$ref": "#/$defs/string_array"
+        },
+        "run_receipt_refs": {
+          "$ref": "#/$defs/string_array"
+        },
+        "constraint_refs": {
+          "$ref": "#/$defs/string_array"
+        },
+        "canon_target_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "field_path",
+        "value",
+        "origin",
+        "producer_refs",
+        "source_refs",
+        "run_receipt_refs",
+        "constraint_refs",
+        "canon_target_ref"
+      ]
+    },
+    "plan_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "step_id": {
+          "type": "string",
+          "pattern": "^ace\\.step\\.[A-Za-z0-9_.:-]+$"
+        },
+        "capability_id": {
+          "type": "string",
+          "pattern": "^ace\\.capability\\.[A-Za-z0-9_.:-]+$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "planned",
+            "running",
+            "succeeded",
+            "skipped",
+            "failed",
+            "blocked"
+          ]
+        },
+        "depends_on": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^ace\\.step\\.[A-Za-z0-9_.:-]+$"
+          }
+        },
+        "consumes": {
+          "$ref": "#/$defs/string_array"
+        },
+        "produces": {
+          "$ref": "#/$defs/string_array"
+        },
+        "tool_run_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "run_receipt_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "manifest_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "repository_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "seed": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        },
+        "duration_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "output_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "semantic_output_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "artifact_output_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "volatile_output_fields": {
+          "$ref": "#/$defs/string_array"
+        },
+        "tool_native_statuses": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "side_effects_observed": {
+          "$ref": "#/$defs/string_array"
+        }
+      },
+      "required": [
+        "step_id",
+        "capability_id",
+        "status",
+        "depends_on",
+        "consumes",
+        "produces",
+        "tool_run_id",
+        "run_receipt_ref",
+        "manifest_sha256",
+        "repository_sha",
+        "seed",
+        "duration_ms",
+        "output_sha256"
+      ]
+    },
+    "validation_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "gate_id": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "not_applicable",
+            "blocked"
+          ]
+        },
+        "validator_ref": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "receipt_refs": {
+          "$ref": "#/$defs/string_array"
+        },
+        "finding_codes": {
+          "$ref": "#/$defs/string_array"
+        },
+        "summary": {
+          "$ref": "#/$defs/nonempty_string"
+        }
+      },
+      "required": [
+        "gate_id",
+        "status",
+        "validator_ref",
+        "receipt_refs",
+        "finding_codes",
+        "summary"
+      ]
+    },
+    "semantic_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requirement_id": {
+          "type": "string",
+          "pattern": "^ace\\.semantic\\.[A-Za-z0-9_.:-]+$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "satisfied",
+            "partial",
+            "missing",
+            "not_applicable"
+          ]
+        },
+        "field_refs": {
+          "$ref": "#/$defs/string_array"
+        },
+        "producer_refs": {
+          "$ref": "#/$defs/string_array"
+        },
+        "reason": {
+          "$ref": "#/$defs/nonempty_string"
+        }
+      },
+      "required": [
+        "requirement_id",
+        "status",
+        "field_refs",
+        "producer_refs",
+        "reason"
+      ]
+    },
+    "projection_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "projection_id": {
+          "type": "string",
+          "pattern": "^ace\\.projection\\.[A-Za-z0-9_.:-]+$"
+        },
+        "projection_type": {
+          "type": "string",
+          "enum": [
+            "raw_evidence_index",
+            "referent_graph",
+            "name_reservation_occupancy",
+            "capability_index",
+            "tool_input"
+          ]
+        },
+        "source_repository": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "source_commit_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "source_semantic_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "transform_id": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "transform_version": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "projection_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_member_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "projected_member_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "collapsed_row_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unresolved_relation_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "membership_receipt_ref": {
+          "$ref": "#/$defs/nonempty_string"
+        }
+      },
+      "required": [
+        "projection_id",
+        "projection_type",
+        "source_repository",
+        "source_commit_sha",
+        "source_semantic_sha256",
+        "transform_id",
+        "transform_version",
+        "projection_sha256",
+        "source_member_count",
+        "projected_member_count",
+        "collapsed_row_count",
+        "unresolved_relation_count",
+        "membership_receipt_ref"
+      ]
+    },
+    "transaction_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "transaction_id": {
+          "type": "string",
+          "pattern": "^ace\\.transaction\\.[A-Za-z0-9_.:-]+$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "naming_reservation",
+            "tool_working_state",
+            "materialization"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "baseline_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "result_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "concurrency_policy": {
+          "type": "string",
+          "enum": [
+            "exclusive_scope",
+            "sequential_working_state",
+            "optimistic_compare_and_swap"
+          ]
+        },
+        "revalidation_status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "replanned",
+            "failed",
+            "not_required"
+          ]
+        },
+        "side_effects": {
+          "$ref": "#/$defs/string_array"
+        },
+        "receipt_ref": {
+          "$ref": "#/$defs/nonempty_string"
+        }
+      },
+      "required": [
+        "transaction_id",
+        "kind",
+        "scope",
+        "baseline_sha256",
+        "result_sha256",
+        "concurrency_policy",
+        "revalidation_status",
+        "side_effects",
+        "receipt_ref"
+      ]
+    },
+    "conflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "conflict_id": {
+          "type": "string",
+          "pattern": "^ace\\.conflict\\.[A-Za-z0-9_.:-]+$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "mutually_exclusive_committed_claims",
+            "protected_invariant_change_required",
+            "unauthorized_cross_layer_bridge",
+            "owner_reserved_branch",
+            "major_direction_fork_without_selection_policy"
+          ]
+        },
+        "claim_refs": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/$defs/nonempty_string"
+          }
+        },
+        "source_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/nonempty_string"
+          }
+        },
+        "reason": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "minimal_decision": {
+          "$ref": "#/$defs/nonempty_string"
+        }
+      },
+      "required": [
+        "conflict_id",
+        "kind",
+        "claim_refs",
+        "source_refs",
+        "reason",
+        "minimal_decision"
+      ]
+    },
+    "blocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "blocker_id": {
+          "type": "string",
+          "pattern": "^ace\\.blocker\\.[A-Za-z0-9_.:-]+$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "missing_tool",
+            "tool_unavailable",
+            "invalid_manifest",
+            "stale_manifest",
+            "input_validation_failed",
+            "output_validation_failed",
+            "target_unavailable",
+            "materialization_authority_missing",
+            "budget_exhausted",
+            "runtime_failure",
+            "projection_invalid",
+            "registry_baseline_advanced",
+            "semantic_coverage_incomplete",
+            "transaction_conflict",
+            "tool_status_crosswalk_missing"
+          ]
+        },
+        "capability_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reason": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "recovery_action": {
+          "$ref": "#/$defs/nonempty_string"
+        }
+      },
+      "required": [
+        "blocker_id",
+        "kind",
+        "capability_ref",
+        "reason",
+        "recovery_action"
+      ]
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "0.1.1"
+    },
+    "record_type": {
+      "const": "ace_determination_receipt"
+    },
+    "determination_id": {
+      "type": "string",
+      "pattern": "^ace\\.determination\\.[A-Za-z0-9_.:-]+$"
+    },
+    "query_id": {
+      "type": "string",
+      "pattern": "^ace\\.query\\.[A-Za-z0-9_.:-]+$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "engine_id": {
+          "const": "aurora_ace"
+        },
+        "engine_version": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "contract_ref": {
+          "const": "catalog/contracts/aurora_ace_contract_v0_1.json"
+        },
+        "execution_mode": {
+          "type": "string",
+          "enum": [
+            "plan_only",
+            "read_only",
+            "commit_ready",
+            "delegated_materialize",
+            "owner_gated_materialize"
+          ]
+        }
+      },
+      "required": [
+        "engine_id",
+        "engine_version",
+        "contract_ref",
+        "execution_mode"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "RETRIEVED_CANON",
+        "DERIVED_CANON",
+        "GENERATED_CANON",
+        "CANON_REVISION",
+        "TRUE_CONFLICT",
+        "EXECUTION_BLOCKED"
+      ]
+    },
+    "simulation_mode": {
+      "type": "string",
+      "enum": [
+        "not_applicable",
+        "constitutive_generation",
+        "analytical_simulation"
+      ]
+    },
+    "baselines": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/repo_baseline"
+      }
+    },
+    "subject_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/nonempty_string"
+      }
+    },
+    "answer_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "compiler_version": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "overall_status": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "incomplete"
+          ]
+        },
+        "coverage": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/semantic_coverage"
+          }
+        }
+      },
+      "required": [
+        "compiler_version",
+        "overall_status",
+        "coverage"
+      ]
+    },
+    "projections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/projection_receipt"
+      }
+    },
+    "transactions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/transaction_receipt"
+      }
+    },
+    "answer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "summary": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/answer_field"
+          }
+        },
+        "no_prior_record": {
+          "type": "boolean"
+        },
+        "supersedes_determination_refs": {
+          "$ref": "#/$defs/string_array"
+        }
+      },
+      "required": [
+        "summary",
+        "fields",
+        "no_prior_record",
+        "supersedes_determination_refs"
+      ]
+    },
+    "plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "plan_id": {
+          "type": "string",
+          "pattern": "^ace\\.plan\\.[A-Za-z0-9_.:-]+$"
+        },
+        "selection_basis": {
+          "$ref": "#/$defs/string_array"
+        },
+        "rejected_capability_refs": {
+          "$ref": "#/$defs/string_array"
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/plan_step"
+          }
+        }
+      },
+      "required": [
+        "plan_id",
+        "selection_basis",
+        "rejected_capability_refs",
+        "steps"
+      ]
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "overall_status": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "blocked"
+          ]
+        },
+        "gates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/validation_gate"
+          }
+        }
+      },
+      "required": [
+        "overall_status",
+        "gates"
+      ]
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/conflict"
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/blocker"
+      }
+    },
+    "materialization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_required",
+            "committed",
+            "commit_ready",
+            "blocked"
+          ]
+        },
+        "target_repository": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "target_paths": {
+          "$ref": "#/$defs/string_array"
+        },
+        "commit_sha": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "gate_policy_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "commit_ready_packet_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "target_repository",
+        "target_paths",
+        "commit_sha",
+        "gate_policy_ref",
+        "commit_ready_packet_ref"
+      ]
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "query_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "capability_manifest_sha256s": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "answer_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "semantic_answer_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "artifact_sha256s": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "semantic_digest_policy_ref": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "prior_determination_digest": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "query_sha256",
+        "capability_manifest_sha256s",
+        "answer_sha256",
+        "semantic_answer_sha256",
+        "artifact_sha256s",
+        "semantic_digest_policy_ref",
+        "prior_determination_digest"
+      ]
+    },
+    "replay": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "replayable": {
+          "type": "boolean"
+        },
+        "deterministic": {
+          "type": "boolean"
+        },
+        "replay_command": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "required_artifact_refs": {
+          "$ref": "#/$defs/string_array"
+        },
+        "non_replayable_reasons": {
+          "$ref": "#/$defs/string_array"
+        }
+      },
+      "required": [
+        "replayable",
+        "deterministic",
+        "replay_command",
+        "required_artifact_refs",
+        "non_replayable_reasons"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_type",
+    "determination_id",
+    "query_id",
+    "created_at",
+    "engine",
+    "status",
+    "simulation_mode",
+    "baselines",
+    "subject_refs",
+    "answer_contract",
+    "projections",
+    "transactions",
+    "answer",
+    "plan",
+    "validation",
+    "conflicts",
+    "blockers",
+    "materialization",
+    "integrity",
+    "replay"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "GENERATED_CANON",
+              "CANON_REVISION"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "materialization": {
+            "properties": {
+              "status": {
+                "const": "committed"
+              },
+              "commit_sha": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{40}$"
+              }
+            },
+            "required": [
+              "status",
+              "commit_sha"
+            ]
+          },
+          "validation": {
+            "properties": {
+              "overall_status": {
+                "const": "pass"
+              }
+            }
+          },
+          "answer_contract": {
+            "properties": {
+              "overall_status": {
+                "const": "complete"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "TRUE_CONFLICT"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "conflicts": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "EXECUTION_BLOCKED"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "blockers": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

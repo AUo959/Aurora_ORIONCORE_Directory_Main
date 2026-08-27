@@ -1,0 +1,1221 @@
+{
+  "canonical_nested_repositories_mutated": false,
+  "canonical_nested_repository_snapshot": {
+    "after": {
+      "CanonRec": {
+        "branch": "main",
+        "head": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+        "path": "GUMAS_SIM_2.5/CanonRec",
+        "status_porcelain": ""
+      },
+      "aurora-cloudbank-symbolic-main": {
+        "branch": "main",
+        "head": "64d5bca20551a557c59db905189576664c0251d4",
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+        "status_porcelain": ""
+      }
+    },
+    "before": {
+      "CanonRec": {
+        "branch": "main",
+        "head": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+        "path": "GUMAS_SIM_2.5/CanonRec",
+        "status_porcelain": ""
+      },
+      "aurora-cloudbank-symbolic-main": {
+        "branch": "main",
+        "head": "64d5bca20551a557c59db905189576664c0251d4",
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+        "status_porcelain": ""
+      }
+    },
+    "captured": true,
+    "unchanged": true
+  },
+  "engine": {
+    "acceptance_target": "1.0.0",
+    "canonical_name": "Aurora Canon Engine",
+    "engine_id": "aurora_ace",
+    "implemented_through": "0.13.0"
+  },
+  "execution_environment": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "python_executable": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+    "python_version": "3.12.13"
+  },
+  "generated_at": "2026-08-15T06:42:10Z",
+  "interpretation": {
+    "attention": "verification incomplete or unavailable in this execution environment; existing component contracts are not downgraded",
+    "blocked": "repository evidence or an executed required check failed",
+    "ready": "repository evidence exists and the row's practical checks passed"
+  },
+  "isolated_execution_used": true,
+  "matrix": {
+    "path": "catalog/contracts/aurora_ace_v1_acceptance_matrix.json",
+    "sha256": "42fb146920b3d478c1a8bd3d3cc9a9dd989764008f2b9f01a5d34ca6cdb4b278"
+  },
+  "mutation_posture": "verification_only",
+  "record_type": "aurora_ace_v1_acceptance_report",
+  "root_commit": "e628706717a7454f0408d3918764957d6df5308f",
+  "rows": [
+    {
+      "boundaries": [
+        "CanonRec evidence",
+        "character router",
+        "generation fallback"
+      ],
+      "contract_evidence": [
+        {
+          "path": "docs/AURORA_ACE__ADDENDUM__CHARACTER_RETRIEVAL__v0.4__2026-08-11.md",
+          "sha256": "041bee0e707d5b8fbcca14f56112f4830f8023fee0613b2c562b1cddf52a9930"
+        },
+        {
+          "path": "catalog/contracts/aurora_ace_contract_v0_1.json",
+          "sha256": "0c43345fd62ec1aabf07eeef4c1527ccbdef76d38d997de6ac02dd8ab51ed373"
+        }
+      ],
+      "dependencies": [],
+      "environment": {},
+      "execution_class": "local_safe",
+      "id": "ACE-V1-001",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/character_retrieval.py",
+          "sha256": "34750b4af3c860eea6397c1a0b94c13552c6499877a86dbeaa97a616dd7027eb",
+          "symbols": [
+            "build_character_index",
+            "discover_character_candidates",
+            "compile_existing_character_query_if_applicable",
+            "resolve_existing_character_query"
+          ]
+        },
+        {
+          "path": "tools/ace/engine.py",
+          "sha256": "6c9e0f7d314d1fc4c4a2bb1800e4ddc1e74f503c2de161c8a2cd6076bbd2786b",
+          "symbols": [
+            "resolve_character_query"
+          ]
+        }
+      ],
+      "missing_dependencies": [],
+      "practical": {
+        "command": [
+          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_aurora_ace_character_retrieval.py::test_name_lookup_returns_existing_character_without_generation",
+          "tests/test_aurora_ace_character_retrieval.py::test_relation_only_candidate_blocks_duplicate_generation",
+          "tests/test_aurora_ace_character_retrieval.py::test_no_existing_match_allows_normal_generation_compiler",
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-xylcw6nc/pytest.xml"
+        ],
+        "counts": {
+          "errors": 0,
+          "failed": 0,
+          "passed": 3,
+          "skipped": 0,
+          "tests": 3
+        },
+        "elapsed_ms": 215.979,
+        "output_tail": "...                                                                      [100%]\n3 passed in 0.04s",
+        "returncode": 0,
+        "status": "ready",
+        "working_tree": "canonical_root_read_only"
+      },
+      "required": true,
+      "static_status": "ready",
+      "status": "ready",
+      "test_evidence": [
+        {
+          "file_sha256": "01e80ccb78b4f53ce60061711f587a5f08ea9b896784bd43b903a44c9fc9fade",
+          "node_id": "tests/test_aurora_ace_character_retrieval.py::test_name_lookup_returns_existing_character_without_generation"
+        },
+        {
+          "file_sha256": "01e80ccb78b4f53ce60061711f587a5f08ea9b896784bd43b903a44c9fc9fade",
+          "node_id": "tests/test_aurora_ace_character_retrieval.py::test_relation_only_candidate_blocks_duplicate_generation"
+        },
+        {
+          "file_sha256": "01e80ccb78b4f53ce60061711f587a5f08ea9b896784bd43b903a44c9fc9fade",
+          "node_id": "tests/test_aurora_ace_character_retrieval.py::test_no_existing_match_allows_normal_generation_compiler"
+        }
+      ],
+      "title": "Retrieval precedes generation"
+    },
+    {
+      "boundaries": [
+        "NameService",
+        "CharForge",
+        "CanonRec validation",
+        "determination receipt"
+      ],
+      "contract_evidence": [
+        {
+          "path": "docs/AURORA_ACE__SPEC__CANON_ENGINE__v0.1__2026-08-10.md",
+          "sha256": "95d4cbf3dc09102227b6fba3f2bc79e6aa483697239f6e2a60145900ce61ec95"
+        },
+        {
+          "path": "catalog/schemas/aurora_ace_determination_receipt.schema.json",
+          "sha256": "34e0978f37eb0d425fd15e6447ea27225f3f0cbe987626f22761417d87e281b1"
+        }
+      ],
+      "dependencies": [
+        "jsonschema",
+        "yaml"
+      ],
+      "environment": {
+        "AURORA_ACE_LIVE_TESTS": "1"
+      },
+      "execution_class": "isolated_ci",
+      "id": "ACE-V1-002",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/core.py",
+          "sha256": "ad1440f4aa7a63cbddca7d15a14f81577a683b0641e4b27aa06bfebc28993393",
+          "symbols": [
+            "compile_character_query"
+          ]
+        },
+        {
+          "path": "tools/ace/engine.py",
+          "sha256": "6c9e0f7d314d1fc4c4a2bb1800e4ddc1e74f503c2de161c8a2cd6076bbd2786b",
+          "symbols": [
+            "resolve_character_query"
+          ]
+        }
+      ],
+      "missing_dependencies": [],
+      "practical": {
+        "command": [
+          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_aurora_ace.py::test_live_character_resolution_is_semantically_replayable",
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-zx2br_38/pytest.xml"
+        ],
+        "counts": {
+          "errors": 0,
+          "failed": 0,
+          "passed": 1,
+          "skipped": 0,
+          "tests": 1
+        },
+        "elapsed_ms": 2458.771,
+        "output_tail": ".                                                                        [100%]\n1 passed in 2.32s",
+        "returncode": 0,
+        "status": "ready",
+        "working_tree": "temporary_clone"
+      },
+      "required": true,
+      "static_status": "ready",
+      "status": "ready",
+      "test_evidence": [
+        {
+          "file_sha256": "41d033af947bb253f4ed21e042c3021a38639ec6e751138d9a609540ec4e606d",
+          "node_id": "tests/test_aurora_ace.py::test_live_character_resolution_is_semantically_replayable"
+        }
+      ],
+      "title": "Constitutive character completion is replayable"
+    },
+    {
+      "boundaries": [
+        "canonical specification",
+        "determination engine",
+        "receipt schema"
+      ],
+      "contract_evidence": [
+        {
+          "path": "docs/AURORA_ACE__SPEC__CANON_ENGINE__v0.1__2026-08-10.md",
+          "sha256": "95d4cbf3dc09102227b6fba3f2bc79e6aa483697239f6e2a60145900ce61ec95"
+        },
+        {
+          "path": "catalog/contracts/aurora_ace_contract_v0_1.json",
+          "sha256": "0c43345fd62ec1aabf07eeef4c1527ccbdef76d38d997de6ac02dd8ab51ed373"
+        },
+        {
+          "path": "catalog/schemas/aurora_ace_determination_receipt.schema.json",
+          "sha256": "34e0978f37eb0d425fd15e6447ea27225f3f0cbe987626f22761417d87e281b1"
+        }
+      ],
+      "dependencies": [],
+      "environment": {},
+      "execution_class": "local_safe",
+      "id": "ACE-V1-003",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/canon_resolution.py",
+          "sha256": "36e4296f94ebde91762b59d35a005c661f3cf582432b2f7d009aafb54fdeee17",
+          "symbols": [
+            "compile_canon_query",
+            "resolve_canon_query"
+          ]
+        },
+        {
+          "path": "tools/ace/core.py",
+          "sha256": "ad1440f4aa7a63cbddca7d15a14f81577a683b0641e4b27aa06bfebc28993393",
+          "symbols": [
+            "ACEError"
+          ]
+        }
+      ],
+      "missing_dependencies": [],
+      "practical": {
+        "command": [
+          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_aurora_ace_invariants.py::test_determination_vocabulary_is_defined_in_the_spec",
+          "tests/test_aurora_ace_canon_resolution.py::test_retrieved_canon_returns_existing_value_without_mutation",
+          "tests/test_aurora_ace_canon_resolution.py::test_derived_canon_uses_only_allowlisted_deterministic_rule",
+          "tests/test_aurora_ace_canon_resolution.py::test_true_conflict_never_selects_winner",
+          "tests/test_aurora_ace_canon_resolution.py::test_missing_authoritative_claim_routes_to_completion_instead_of_fake_retrieval",
+          "tests/test_aurora_ace_materialization.py::test_materializer_commits_facility_and_appends_both_determinations",
+          "tests/test_aurora_ace_materialization.py::test_existing_facility_target_becomes_canon_revision",
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-esrmyw9q/pytest.xml"
+        ],
+        "counts": {
+          "errors": 0,
+          "failed": 0,
+          "passed": 7,
+          "skipped": 0,
+          "tests": 7
+        },
+        "elapsed_ms": 1508.439,
+        "output_tail": ".......                                                                  [100%]\n7 passed in 1.36s",
+        "returncode": 0,
+        "status": "ready",
+        "working_tree": "canonical_root_read_only"
+      },
+      "required": true,
+      "static_status": "ready",
+      "status": "ready",
+      "test_evidence": [
+        {
+          "file_sha256": "e489424d61d7c093e36b310f607f2385a0f92908ca04f97efaadfff2387e856f",
+          "node_id": "tests/test_aurora_ace_invariants.py::test_determination_vocabulary_is_defined_in_the_spec"
+        },
+        {
+          "file_sha256": "8c0abad813a14693d543669b834794b04b3c2783bb396f48a6be9569dd409a21",
+          "node_id": "tests/test_aurora_ace_canon_resolution.py::test_retrieved_canon_returns_existing_value_without_mutation"
+        },
+        {
+          "file_sha256": "8c0abad813a14693d543669b834794b04b3c2783bb396f48a6be9569dd409a21",
+          "node_id": "tests/test_aurora_ace_canon_resolution.py::test_derived_canon_uses_only_allowlisted_deterministic_rule"
+        },
+        {
+          "file_sha256": "8c0abad813a14693d543669b834794b04b3c2783bb396f48a6be9569dd409a21",
+          "node_id": "tests/test_aurora_ace_canon_resolution.py::test_true_conflict_never_selects_winner"
+        },
+        {
+          "file_sha256": "8c0abad813a14693d543669b834794b04b3c2783bb396f48a6be9569dd409a21",
+          "node_id": "tests/test_aurora_ace_canon_resolution.py::test_missing_authoritative_claim_routes_to_completion_instead_of_fake_retrieval"
+        },
+        {
+          "file_sha256": "4f49d3537f061c284ebd1792a4f8725bd7c5219cb49b4a5cad83cd0b0662ce1c",
+          "node_id": "tests/test_aurora_ace_materialization.py::test_materializer_commits_facility_and_appends_both_determinations"
+        },
+        {
+          "file_sha256": "4f49d3537f061c284ebd1792a4f8725bd7c5219cb49b4a5cad83cd0b0662ce1c",
+          "node_id": "tests/test_aurora_ace_materialization.py::test_existing_facility_target_becomes_canon_revision"
+        }
+      ],
+      "title": "Canonical determination semantics are complete"
+    },
+    {
+      "boundaries": [
+        "capability manifests",
+        "schema validation",
+        "runtime allowlist",
+        "registered repositories"
+      ],
+      "contract_evidence": [
+        {
+          "path": "docs/AURORA_ACE__CAPABILITY_DISCOVERY__v0.6__2026-08-12.md",
+          "sha256": "423e364b0c6e9b10bbd20a40cdae008e4cf4ef5567e96bc9df8ed9d87b657d9b"
+        },
+        {
+          "path": "catalog/contracts/aurora_ace_capability_discovery_contract_v0_6.json",
+          "sha256": "c332a25855c5b698b0cf730c6fe155090ae53926e750dbf23a5b16b551d01191"
+        },
+        {
+          "path": "catalog/schemas/aurora_ace_capability_manifest.schema.json",
+          "sha256": "163944db494e264793058a37bc0776bc4e36994e80b3645a6c00832abe35551f"
+        },
+        {
+          "path": "catalog/ace/runtime_bindings.json",
+          "sha256": "98d7c4d6ec5db858d02b298c91e04a364d89f0cb8be46e849395c56869c22490"
+        }
+      ],
+      "dependencies": [
+        "jsonschema"
+      ],
+      "environment": {},
+      "execution_class": "local_safe",
+      "id": "ACE-V1-004",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/capability_discovery.py",
+          "sha256": "a6ee31310742a1a73659ce2a85af1363429d0a1da92dc3d0f3b4027941c156a5",
+          "symbols": [
+            "load_capability_manifests",
+            "validate_capability_manifest",
+            "build_capability_index",
+            "select_invocation_capability"
+          ]
+        },
+        {
+          "path": "tools/ace/runtime_binding.py",
+          "sha256": "93c5cdc844e646d0f7f50d551f4cabe4ab6a2ab1bcc6c0bf1490d8c7bbe28299",
+          "symbols": [
+            "load_runtime_binding_registry",
+            "load_verified_runtime_binding",
+            "resolve_verified_invocation"
+          ]
+        }
+      ],
+      "missing_dependencies": [],
+      "practical": {
+        "command": [
+          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_aurora_ace_capability_discovery.py::test_committed_manifest_catalog_is_valid_unique_and_deterministic",
+          "tests/test_aurora_ace_capability_discovery.py::test_committed_manifests_conform_to_draft_2020_12_schema",
+          "tests/test_aurora_ace_capability_discovery.py::test_manifest_metadata_cannot_create_runtime_binding",
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-rtg_oirc/pytest.xml"
+        ],
+        "counts": {
+          "errors": 0,
+          "failed": 0,
+          "passed": 3,
+          "skipped": 0,
+          "tests": 3
+        },
+        "elapsed_ms": 240.408,
+        "output_tail": "...                                                                      [100%]\n3 passed in 0.09s",
+        "returncode": 0,
+        "status": "ready",
+        "working_tree": "canonical_root_read_only"
+      },
+      "required": true,
+      "static_status": "ready",
+      "status": "ready",
+      "test_evidence": [
+        {
+          "file_sha256": "5f74303986b2dea1d338aa077de9e61013a9fb96c379c3bae623ebaecb4633c5",
+          "node_id": "tests/test_aurora_ace_capability_discovery.py::test_committed_manifest_catalog_is_valid_unique_and_deterministic"
+        },
+        {
+          "file_sha256": "5f74303986b2dea1d338aa077de9e61013a9fb96c379c3bae623ebaecb4633c5",
+          "node_id": "tests/test_aurora_ace_capability_discovery.py::test_committed_manifests_conform_to_draft_2020_12_schema"
+        },
+        {
+          "file_sha256": "5f74303986b2dea1d338aa077de9e61013a9fb96c379c3bae623ebaecb4633c5",
+          "node_id": "tests/test_aurora_ace_capability_discovery.py::test_manifest_metadata_cannot_create_runtime_binding"
+        }
+      ],
+      "title": "Capability discovery is manifest-derived and runtime-bound"
+    },
+    {
+      "boundaries": [
+        "caller",
+        "invocation envelope",
+        "manifest router",
+        "shared resolver"
+      ],
+      "contract_evidence": [
+        {
+          "path": "docs/AURORA_ACE__ADDENDUM__FIRST_CLASS_INVOCATION__v0.2__2026-08-11.md",
+          "sha256": "c0f87b21121d1b849baf3ba838f67b330be691338d9267821ce7a38ce4e62efa"
+        },
+        {
+          "path": "catalog/contracts/aurora_ace_invocation_contract_v0_2.json",
+          "sha256": "282494a26c499b16d43e4cde775a0bd2a0035e8c4cc366007672f310ff78050b"
+        },
+        {
+          "path": "catalog/schemas/aurora_ace_invocation_envelope.schema.json",
+          "sha256": "00fa16f5f1e3dfea0e11b9b3a1ed339e71e30c7d816207c193288b4d3fb3e06f"
+        }
+      ],
+      "dependencies": [],
+      "environment": {},
+      "execution_class": "local_safe",
+      "id": "ACE-V1-005",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/invocation.py",
+          "sha256": "365cdea4d810eba3af1d9a6b9060207fe2e50019a9953ac7de03bf7ee632dfe4",
+          "symbols": [
+            "build_invocation_envelope",
+            "compile_character_invocation",
+            "compile_canon_invocation",
+            "compile_facility_invocation",
+            "resolve_invocation",
+            "validate_invocation_envelope"
+          ]
+        }
+      ],
+      "missing_dependencies": [],
+      "practical": {
+        "command": [
+          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_aurora_ace_invocation.py::test_interactive_invocation_is_first_class_and_inspectable",
+          "tests/test_aurora_ace_invocation.py::test_embedded_invocation_uses_the_same_query_engine_and_preserves_parent",
+          "tests/test_aurora_ace_invocation.py::test_autonomic_invocation_is_automatic_but_never_invisible",
+          "tests/test_aurora_ace_invocation.py::test_invocation_rejects_synthesis_around_specialist_tooling",
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-bqvd6n08/pytest.xml"
+        ],
+        "counts": {
+          "errors": 0,
+          "failed": 0,
+          "passed": 4,
+          "skipped": 0,
+          "tests": 4
+        },
+        "elapsed_ms": 277.844,
+        "output_tail": "....                                                                     [100%]\n4 passed in 0.12s",
+        "returncode": 0,
+        "status": "ready",
+        "working_tree": "canonical_root_read_only"
+      },
+      "required": true,
+      "static_status": "ready",
+      "status": "ready",
+      "test_evidence": [
+        {
+          "file_sha256": "065797e8a00bbf2ba8327f17bdbaed1f0bed03b078946cb4201e80cfb56623af",
+          "node_id": "tests/test_aurora_ace_invocation.py::test_interactive_invocation_is_first_class_and_inspectable"
+        },
+        {
+          "file_sha256": "065797e8a00bbf2ba8327f17bdbaed1f0bed03b078946cb4201e80cfb56623af",
+          "node_id": "tests/test_aurora_ace_invocation.py::test_embedded_invocation_uses_the_same_query_engine_and_preserves_parent"
+        },
+        {
+          "file_sha256": "065797e8a00bbf2ba8327f17bdbaed1f0bed03b078946cb4201e80cfb56623af",
+          "node_id": "tests/test_aurora_ace_invocation.py::test_autonomic_invocation_is_automatic_but_never_invisible"
+        },
+        {
+          "file_sha256": "065797e8a00bbf2ba8327f17bdbaed1f0bed03b078946cb4201e80cfb56623af",
+          "node_id": "tests/test_aurora_ace_invocation.py::test_invocation_rejects_synthesis_around_specialist_tooling"
+        }
+      ],
+      "title": "Interactive, embedded, and autonomic invocation share one engine"
+    },
+    {
+      "boundaries": [
+        "commit-ready packet",
+        "authority gate",
+        "CanonRec transaction",
+        "determination ledger"
+      ],
+      "contract_evidence": [
+        {
+          "path": "docs/AURORA_ACE__ADDENDUM__MATERIALIZATION_LEDGER__v0.2__2026-08-11.md",
+          "sha256": "1b5e3e402b0db7f865b559cc427051087ab4fd6bdaf5a7d366e8b9d43ceaaabf"
+        },
+        {
+          "path": "docs/AURORA_ACE__ADDENDUM__CHARACTER_MATERIALIZATION__v0.5__2026-08-12.md",
+          "sha256": "db64b2760a10517c3b9f9ab3c1ac5db56a347b2793d81254d37064685c4ac43c"
+        }
+      ],
+      "dependencies": [],
+      "environment": {},
+      "execution_class": "local_safe",
+      "id": "ACE-V1-006",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/materialize.py",
+          "sha256": "42b8535e472f3498ccdd3be33d9c10c12fd512abe1b984700e9a731268415e8c",
+          "symbols": [
+            "materialize_facility_packet"
+          ]
+        },
+        {
+          "path": "tools/ace/character_materialize.py",
+          "sha256": "f9eade98a5598bef2e122a6c02da2100c65224bda51b26befc5c92743f88d8fe",
+          "symbols": [
+            "materialize_character_packet",
+            "materialize_packet"
+          ]
+        },
+        {
+          "path": "tools/ace/ledger.py",
+          "sha256": "cf53895f2f2fa1fa190eb57f058ff1af78f15bcae29ef509a35ea18a1a5991a8",
+          "symbols": [
+            "append_determination",
+            "query_ledger"
+          ]
+        }
+      ],
+      "missing_dependencies": [],
+      "practical": {
+        "command": [
+          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_aurora_ace_materialization.py::test_materializer_requires_explicit_authority",
+          "tests/test_aurora_ace_materialization.py::test_materializer_commits_facility_and_appends_both_determinations",
+          "tests/test_aurora_ace_materialization.py::test_post_commit_failure_rolls_back_canon_and_removes_false_sidecar",
+          "tests/test_aurora_ace_materialization.py::test_ledger_is_append_only_for_a_determination_id",
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-31bacy8g/pytest.xml"
+        ],
+        "counts": {
+          "errors": 0,
+          "failed": 0,
+          "passed": 4,
+          "skipped": 0,
+          "tests": 4
+        },
+        "elapsed_ms": 1853.641,
+        "output_tail": "....                                                                     [100%]\n4 passed in 1.72s",
+        "returncode": 0,
+        "status": "ready",
+        "working_tree": "canonical_root_read_only"
+      },
+      "required": true,
+      "static_status": "ready",
+      "status": "ready",
+      "test_evidence": [
+        {
+          "file_sha256": "4f49d3537f061c284ebd1792a4f8725bd7c5219cb49b4a5cad83cd0b0662ce1c",
+          "node_id": "tests/test_aurora_ace_materialization.py::test_materializer_requires_explicit_authority"
+        },
+        {
+          "file_sha256": "4f49d3537f061c284ebd1792a4f8725bd7c5219cb49b4a5cad83cd0b0662ce1c",
+          "node_id": "tests/test_aurora_ace_materialization.py::test_materializer_commits_facility_and_appends_both_determinations"
+        },
+        {
+          "file_sha256": "4f49d3537f061c284ebd1792a4f8725bd7c5219cb49b4a5cad83cd0b0662ce1c",
+          "node_id": "tests/test_aurora_ace_materialization.py::test_post_commit_failure_rolls_back_canon_and_removes_false_sidecar"
+        },
+        {
+          "file_sha256": "4f49d3537f061c284ebd1792a4f8725bd7c5219cb49b4a5cad83cd0b0662ce1c",
+          "node_id": "tests/test_aurora_ace_materialization.py::test_ledger_is_append_only_for_a_determination_id"
+        }
+      ],
+      "title": "Materialization and ledgering are atomic and replay-safe"
+    },
+    {
+      "boundaries": [
+        "MCP client",
+        "MCP adapter",
+        "shared invocation",
+        "native materializer"
+      ],
+      "contract_evidence": [
+        {
+          "path": "docs/AURORA_ACE__ADDENDUM__MCP_EXPOSURE__v0.7__2026-08-12.md",
+          "sha256": "540981c633fae2fe7bc929da1e459e84dc7a7bf0c503844b7dd2d2d81b138efe"
+        },
+        {
+          "path": "docs/AURORA_ACE__ADDENDUM__MCP_MATERIALIZATION__v0.8__2026-08-12.md",
+          "sha256": "63ce519c58ce0dde64305217bc18691709fb6ec04f042cb92d7f109fe6ec6155"
+        },
+        {
+          "path": "catalog/contracts/aurora_ace_mcp_contract_v0_8.json",
+          "sha256": "19fcc5e22d7efaab34ce5c774e0d35e8b34d59935dc2167dca024eec4904e6d2"
+        }
+      ],
+      "dependencies": [
+        "mcp"
+      ],
+      "environment": {},
+      "execution_class": "local_safe",
+      "id": "ACE-V1-007",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/mcp_adapter.py",
+          "sha256": "2d6cbf1738268ac2a1ba437c7bbb8d4eebdbe355bf79688584a0e9c2204c2cf2",
+          "symbols": [
+            "MCP_TOOL_NAMES",
+            "ace_capabilities",
+            "ace_plan",
+            "ace_resolve",
+            "ace_inspect",
+            "ace_materialize_preview",
+            "ace_materialize_commit"
+          ]
+        },
+        {
+          "path": "tools/aurora_ace_mcp.py",
+          "sha256": "88462b4269e2b47ff4222280c95640331b84be64a5ce8f2c66d9f63f9bc074cd",
+          "symbols": [
+            "mcp"
+          ]
+        }
+      ],
+      "missing_dependencies": [
+        "mcp"
+      ],
+      "practical": {
+        "missing_dependencies": [
+          "mcp"
+        ],
+        "reason": "missing_dependencies",
+        "status": "not_run"
+      },
+      "required": true,
+      "static_status": "ready",
+      "status": "attention",
+      "test_evidence": [
+        {
+          "file_sha256": "741bfed8027d7886004ca245a758e6be3de8c1688c0356a00605b44fac00bcb5",
+          "node_id": "tests/test_aurora_ace_acceptance.py::test_official_mcp_client_enumerates_registered_surface"
+        },
+        {
+          "file_sha256": "1119a3cfb0ff17c88f9403c2b7751e91de98e3857256d92d05f1fa6722db371e",
+          "node_id": "tests/test_aurora_ace_mcp.py::test_resolve_is_bounded_and_delegates_to_shared_engine"
+        },
+        {
+          "file_sha256": "1119a3cfb0ff17c88f9403c2b7751e91de98e3857256d92d05f1fa6722db371e",
+          "node_id": "tests/test_aurora_ace_mcp.py::test_materialization_preview_is_state_bound_and_non_mutating"
+        },
+        {
+          "file_sha256": "1119a3cfb0ff17c88f9403c2b7751e91de98e3857256d92d05f1fa6722db371e",
+          "node_id": "tests/test_aurora_ace_mcp.py::test_materialization_commit_delegates_only_to_native_materializer"
+        }
+      ],
+      "title": "MCP is a bounded transport over the shared engine"
+    },
+    {
+      "boundaries": [
+        "operator receipt",
+        "MCP adapter",
+        "CanonRec commit",
+        "post-commit inspection"
+      ],
+      "contract_evidence": [
+        {
+          "path": "docs/AURORA_ACE__ADDENDUM__MCP_OPERATOR_TRANSACTIONS__v0.9__2026-08-12.md",
+          "sha256": "2a2e6694137cd835fc5ec79241a6d13120c940c295ff145541c3b29a96035e87"
+        },
+        {
+          "path": "catalog/contracts/aurora_ace_mcp_operator_transaction_v0_9.json",
+          "sha256": "3414a363776335062bdadf165e3ee761a0be2425d1c5408f7c98359c85bc7da4"
+        }
+      ],
+      "dependencies": [
+        "jsonschema",
+        "yaml"
+      ],
+      "environment": {
+        "ACE_MCP_E2E": "1"
+      },
+      "execution_class": "isolated_ci",
+      "id": "ACE-V1-008",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/mcp_operator_transaction.py",
+          "sha256": "86ed3d27bcce42a5fea6facc0da8caeb9b5027dd8913b79c58ab9330adb4c81f",
+          "symbols": [
+            "prepare_operator_transaction",
+            "commit_operator_transaction",
+            "inspect_operator_transaction"
+          ]
+        },
+        {
+          "path": "tools/ace/mcp_adapter.py",
+          "sha256": "2d6cbf1738268ac2a1ba437c7bbb8d4eebdbe355bf79688584a0e9c2204c2cf2",
+          "symbols": [
+            "ace_resolve",
+            "ace_materialize_preview",
+            "ace_materialize_commit",
+            "ace_inspect"
+          ]
+        }
+      ],
+      "missing_dependencies": [],
+      "practical": {
+        "command": [
+          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_aurora_ace_mcp_operator_transaction.py::test_end_to_end_operator_transaction_materializes_inspects_and_refuses_replay",
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-w5ri_s57/pytest.xml"
+        ],
+        "counts": {
+          "errors": 0,
+          "failed": 0,
+          "passed": 1,
+          "skipped": 0,
+          "tests": 1
+        },
+        "elapsed_ms": 1251.671,
+        "output_tail": ".                                                                        [100%]\n1 passed in 1.10s",
+        "returncode": 0,
+        "status": "ready",
+        "working_tree": "temporary_clone"
+      },
+      "required": true,
+      "static_status": "ready",
+      "status": "ready",
+      "test_evidence": [
+        {
+          "file_sha256": "d8592d03d9f67c1514427fb9b9c5040ce1cebde4daf006652350f58674571345",
+          "node_id": "tests/test_aurora_ace_mcp_operator_transaction.py::test_end_to_end_operator_transaction_materializes_inspects_and_refuses_replay"
+        }
+      ],
+      "title": "Operator transactions compose resolve through inspection"
+    },
+    {
+      "boundaries": [
+        "bearer authentication",
+        "remote service",
+        "runtime binding",
+        "delegated authority"
+      ],
+      "contract_evidence": [
+        {
+          "path": "docs/AURORA_ACE__ADDENDUM__REMOTE_SERVICE__v0.10__2026-08-13.md",
+          "sha256": "4ce625a0636f4e6b5cc347b1c42395a0520bbe30497d26ccd0c532cc6601acbf"
+        },
+        {
+          "path": "catalog/contracts/aurora_ace_remote_service_v0_10.json",
+          "sha256": "3e6cec88a24b8acd632da107e3431fcb190a2f299f250eb0ede8efcab90ac931"
+        }
+      ],
+      "dependencies": [
+        "fastapi",
+        "httpx"
+      ],
+      "environment": {},
+      "execution_class": "local_safe",
+      "id": "ACE-V1-009",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/remote_auth.py",
+          "sha256": "0a0b675d98d16612c0c00f49bdc96a91bee6a78c052cb5f26553786f625ff0a9",
+          "symbols": [
+            "load_remote_principals",
+            "authenticate_bearer"
+          ]
+        },
+        {
+          "path": "tools/ace/remote_service.py",
+          "sha256": "e3863568b236149cce7b5a5b587eab84fd9e414a40d63cae643c31466e769833",
+          "symbols": [
+            "create_app"
+          ]
+        },
+        {
+          "path": "tools/ace/runtime_binding.py",
+          "sha256": "93c5cdc844e646d0f7f50d551f4cabe4ab6a2ab1bcc6c0bf1490d8c7bbe28299",
+          "symbols": [
+            "load_verified_runtime_binding",
+            "resolve_verified_invocation"
+          ]
+        }
+      ],
+      "missing_dependencies": [
+        "httpx"
+      ],
+      "practical": {
+        "missing_dependencies": [
+          "httpx"
+        ],
+        "reason": "missing_dependencies",
+        "status": "not_run"
+      },
+      "required": true,
+      "static_status": "ready",
+      "status": "attention",
+      "test_evidence": [
+        {
+          "file_sha256": "df3733f83660def7a48e1e03fedf772b07757721d48bfef8cc1052e12fc4c2fa",
+          "node_id": "tests/test_aurora_ace_remote.py::test_remote_auth_requires_hash_only_configuration"
+        },
+        {
+          "file_sha256": "df3733f83660def7a48e1e03fedf772b07757721d48bfef8cc1052e12fc4c2fa",
+          "node_id": "tests/test_aurora_ace_remote.py::test_remote_service_requires_auth_and_binds_identity"
+        },
+        {
+          "file_sha256": "df3733f83660def7a48e1e03fedf772b07757721d48bfef8cc1052e12fc4c2fa",
+          "node_id": "tests/test_aurora_ace_remote.py::test_remote_materialization_requires_scope_and_bound_authority"
+        },
+        {
+          "file_sha256": "df3733f83660def7a48e1e03fedf772b07757721d48bfef8cc1052e12fc4c2fa",
+          "node_id": "tests/test_aurora_ace_remote.py::test_runtime_binding_rejects_catalog_only_arbitrary_python"
+        }
+      ],
+      "title": "Remote identity and delegated authority remain explicit"
+    },
+    {
+      "boundaries": [
+        "generic resolver",
+        "NameService",
+        "canon reconciler",
+        "CanonRec materializer"
+      ],
+      "contract_evidence": [
+        {
+          "path": "docs/AURORA_ACE__ADDENDUM__GENERIC_NATIVE_ENTITIES__v0.11__2026-08-13.md",
+          "sha256": "eff9afcc5c9a26b88bdc4c942088f28a03f9d10e56c48b86bce0447e3f0629fc"
+        },
+        {
+          "path": "catalog/contracts/aurora_ace_generic_native_entity_v0_11.json",
+          "sha256": "89061dc7a02a26c587944c83198c0345c7a34c86a60b77266fda8c1280f97364"
+        }
+      ],
+      "dependencies": [
+        "jsonschema",
+        "yaml"
+      ],
+      "environment": {
+        "ACE_GENERIC_E2E": "1"
+      },
+      "execution_class": "isolated_ci",
+      "id": "ACE-V1-010",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/generic_entity.py",
+          "sha256": "f8e8dd1b933cb9cabd565bd56b126bd84f3892105a6718b5e460f5b375b17b7f",
+          "symbols": [
+            "compile_generic_entity_query",
+            "resolve_generic_entity_query",
+            "materialize_generic_entity_packet"
+          ]
+        },
+        {
+          "path": "tools/ace/generic_naming.py",
+          "sha256": "a35c6337297651fb6112de17fa71565a2d3132972f081c2d4839789df2284c06",
+          "symbols": [
+            "mint_generic_naming_receipt",
+            "validate_generic_naming_receipt"
+          ]
+        },
+        {
+          "path": "tools/ace/generic_entity_gate.py",
+          "sha256": "a8ae0234da72f451faab7597ebcd17a65bb1cb72a03485deec18843905893644",
+          "symbols": [
+            "generic_entity_preview",
+            "generic_entity_commit"
+          ]
+        }
+      ],
+      "missing_dependencies": [],
+      "practical": {
+        "command": [
+          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_aurora_ace_generic_entity.py::test_generic_entity_end_to_end_commit_and_replay_refusal",
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-2oduo9hm/pytest.xml"
+        ],
+        "counts": {
+          "errors": 0,
+          "failed": 0,
+          "passed": 1,
+          "skipped": 0,
+          "tests": 1
+        },
+        "elapsed_ms": 1447.842,
+        "output_tail": ".                                                                        [100%]\n1 passed in 1.31s",
+        "returncode": 0,
+        "status": "ready",
+        "working_tree": "temporary_clone"
+      },
+      "required": true,
+      "static_status": "ready",
+      "status": "ready",
+      "test_evidence": [
+        {
+          "file_sha256": "16dda4c5b9c65ffd5b6d7134785dc324cb0abaf6ab0c1fbbff0946209c438fd3",
+          "node_id": "tests/test_aurora_ace_generic_entity.py::test_generic_entity_end_to_end_commit_and_replay_refusal"
+        }
+      ],
+      "title": "Generic native entities pass naming and CanonRec admission"
+    },
+    {
+      "boundaries": [
+        "materialization",
+        "Git remote",
+        "pull request adapter",
+        "publication receipt"
+      ],
+      "contract_evidence": [
+        {
+          "path": "docs/AURORA_ACE__ADDENDUM__DELEGATED_PUBLICATION__v0.12__2026-08-13.md",
+          "sha256": "3d74ae7662aabaf25b510e47733afc0bca2a400bfaf19a24719aafbcce3a7d4a"
+        },
+        {
+          "path": "catalog/contracts/aurora_ace_delegated_publication_v0_12.json",
+          "sha256": "e57ea69b880e9aea70be6a41a74434a7f7b3a985aed31c224fb5b5cd16d178c8"
+        }
+      ],
+      "dependencies": [],
+      "environment": {},
+      "execution_class": "local_safe",
+      "id": "ACE-V1-011",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/delegated_publication.py",
+          "sha256": "c6f30633fc2f6c979856701ab7e98bac00fa9c147d341045a0e760c275d4be6a",
+          "symbols": [
+            "publish_delegated_packet"
+          ]
+        },
+        {
+          "path": "tools/ace/delegated_github.py",
+          "sha256": "dcf279d5c40ee82cddec08078496e13457062d7fef2540d7101f7d63111ab5be",
+          "symbols": [
+            "PublicationStateUncertain",
+            "open_pull_request"
+          ]
+        }
+      ],
+      "missing_dependencies": [],
+      "practical": {
+        "command": [
+          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_aurora_ace_delegated_publication.py::test_delegated_publication_creates_review_pending_receipt_and_restores_main",
+          "tests/test_aurora_ace_delegated_publication.py::test_delegated_publication_deletes_orphan_remote_branch_when_pr_open_fails",
+          "tests/test_aurora_ace_delegated_publication.py::test_uncertain_pr_state_preserves_remote_branch_for_reconciliation",
+          "tests/test_aurora_ace_delegated_publication.py::test_delegated_publication_refuses_remote_main_drift",
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-61wwkp10/pytest.xml"
+        ],
+        "counts": {
+          "errors": 0,
+          "failed": 0,
+          "passed": 4,
+          "skipped": 0,
+          "tests": 4
+        },
+        "elapsed_ms": 1462.887,
+        "output_tail": "....                                                                     [100%]\n4 passed in 1.31s",
+        "returncode": 0,
+        "status": "ready",
+        "working_tree": "canonical_root_read_only"
+      },
+      "required": true,
+      "static_status": "ready",
+      "status": "ready",
+      "test_evidence": [
+        {
+          "file_sha256": "33594a0ad7cf398b1b8aea30f31bd933db6f7909c22c86041f0f5d78f9b4e64d",
+          "node_id": "tests/test_aurora_ace_delegated_publication.py::test_delegated_publication_creates_review_pending_receipt_and_restores_main"
+        },
+        {
+          "file_sha256": "33594a0ad7cf398b1b8aea30f31bd933db6f7909c22c86041f0f5d78f9b4e64d",
+          "node_id": "tests/test_aurora_ace_delegated_publication.py::test_delegated_publication_deletes_orphan_remote_branch_when_pr_open_fails"
+        },
+        {
+          "file_sha256": "33594a0ad7cf398b1b8aea30f31bd933db6f7909c22c86041f0f5d78f9b4e64d",
+          "node_id": "tests/test_aurora_ace_delegated_publication.py::test_uncertain_pr_state_preserves_remote_branch_for_reconciliation"
+        },
+        {
+          "file_sha256": "33594a0ad7cf398b1b8aea30f31bd933db6f7909c22c86041f0f5d78f9b4e64d",
+          "node_id": "tests/test_aurora_ace_delegated_publication.py::test_delegated_publication_refuses_remote_main_drift"
+        }
+      ],
+      "title": "Delegated publication is review-gated and ambiguity-safe"
+    },
+    {
+      "boundaries": [
+        "ACE operator",
+        "registered CloudBank owner",
+        "persisted Orion run",
+        "external receipt"
+      ],
+      "contract_evidence": [
+        {
+          "path": "docs/AURORA_ACE__ADDENDUM__ORION_PROGRESSION__v0.13__2026-08-14.md",
+          "sha256": "e93f41269b30737687e7dd26d9309792aa2dedd876e0f1515dbe4fb59e25242b"
+        },
+        {
+          "path": "catalog/contracts/aurora_ace_orion_progression_v0_13.json",
+          "sha256": "23d31160afa36c4c8f65c2d354931076a2b39fe72af0e2242e84b746eac75e56"
+        }
+      ],
+      "dependencies": [
+        "yaml"
+      ],
+      "environment": {},
+      "execution_class": "local_safe",
+      "id": "ACE-V1-012",
+      "implementation_evidence": [
+        {
+          "path": "tools/ace/orion_progression.py",
+          "sha256": "a5fee5cf1a4ddd99ec1f038ca33481d0cb5a8d3575edc76cf357621629df145f",
+          "symbols": [
+            "preview_orion_advance",
+            "commit_orion_advance",
+            "inspect_orion_progression",
+            "registered_owner_preflight"
+          ]
+        },
+        {
+          "path": "tools/ace/orion_runtime_owner.py",
+          "sha256": "e5b20e36196430b2d77a4aa95ef1052980804490f95bf930bd574f04c3dbf0aa",
+          "symbols": [
+            "registered_cloudbank",
+            "load_owner_runtime"
+          ]
+        }
+      ],
+      "missing_dependencies": [],
+      "practical": {
+        "command": [
+          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_aurora_ace_orion_progression.py::test_preview_is_non_mutating_and_state_bound",
+          "tests/test_aurora_ace_orion_progression.py::test_commit_advances_exactly_one_tick",
+          "tests/test_aurora_ace_orion_progression.py::test_old_token_replay_refuses_before_second_tick",
+          "tests/test_aurora_ace_orion_progression.py::test_post_write_owner_failure_is_state_uncertain_and_not_retried",
+          "tests/test_aurora_ace_orion_progression.py::test_runtime_progression_is_not_exposed_through_remote_or_mcp",
+          "tests/test_aurora_ace_orion_progression.py::test_registered_owner_binding_calls_preflight_only",
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-l4qr89v_/pytest.xml"
+        ],
+        "counts": {
+          "errors": 0,
+          "failed": 1,
+          "passed": 5,
+          "skipped": 0,
+          "tests": 6
+        },
+        "elapsed_ms": 206.965,
+        "output_tail": ".....F                                                                   [100%]\n=================================== FAILURES ===================================\n______________ test_registered_owner_binding_calls_preflight_only ______________\n\n    @pytest.mark.simulation\n    def test_registered_owner_binding_calls_preflight_only() -> None:\n>       result = progression.registered_owner_preflight(root=REPO_ROOT)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_aurora_ace_orion_progression.py:496: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntools/ace/orion_progression.py:517: in registered_owner_preflight\n    owner = _load_owner_runtime(root)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^\ntools/ace/orion_progression.py:57: in _load_owner_runtime\n    return owner.load_owner_runtime(root)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools/ace/orion_runtime_owner.py:335: in load_owner_runtime\n    repo, registered_sha = registered_cloudbank(root, policy)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools/ace/orion_runtime_owner.py:149: in registered_cloudbank\n    _expect_fields(row, expected, \"registered CloudBank\")\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\npayload = {'name': 'aurora-cloudbank-symbolic-main', 'path': 'GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main', 'branch': 'main', 'head_sha': '64d5bca20551a557c59db905189576664c0251d4', ...}\nexpected = {'path': 'GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main', 'branch': 'main', 'head_sha': '9c34d8e9768c6dfb1afe18f96d42e3c743e2a4e9'}\nlabel = 'registered CloudBank'\n\n    def _expect_fields(\n        payload: Mapping[str, Any],\n        expected: Mapping[str, Any],\n        label: str,\n    ) -> None:\n        mismatches = [key for key, value in expected.items() if payload.get(key) != value]\n        if mismatches:\n>           raise ACEError(\n                f\"{label} has invalid field(s): {', '.join(sorted(mismatches))}\",\n                code=\"invalid_manifest\",\n            )\nE           ace.core.ACEError: registered CloudBank has invalid field(s): head_sha\n\ntools/ace/orion_runtime_owner.py:58: ACEError\n=========================== short test summary info ============================\nFAILED tests/test_aurora_ace_orion_progression.py::test_registered_owner_binding_calls_preflight_only\n1 failed, 5 passed in 0.07s",
+        "returncode": 1,
+        "status": "blocked",
+        "working_tree": "canonical_root_read_only"
+      },
+      "required": true,
+      "static_status": "ready",
+      "status": "blocked",
+      "test_evidence": [
+        {
+          "file_sha256": "7c867a78ff950dbf87f5166b32cd977dcc8f035a0a525a180f91b083236c8c4f",
+          "node_id": "tests/test_aurora_ace_orion_progression.py::test_preview_is_non_mutating_and_state_bound"
+        },
+        {
+          "file_sha256": "7c867a78ff950dbf87f5166b32cd977dcc8f035a0a525a180f91b083236c8c4f",
+          "node_id": "tests/test_aurora_ace_orion_progression.py::test_commit_advances_exactly_one_tick"
+        },
+        {
+          "file_sha256": "7c867a78ff950dbf87f5166b32cd977dcc8f035a0a525a180f91b083236c8c4f",
+          "node_id": "tests/test_aurora_ace_orion_progression.py::test_old_token_replay_refuses_before_second_tick"
+        },
+        {
+          "file_sha256": "7c867a78ff950dbf87f5166b32cd977dcc8f035a0a525a180f91b083236c8c4f",
+          "node_id": "tests/test_aurora_ace_orion_progression.py::test_post_write_owner_failure_is_state_uncertain_and_not_retried"
+        },
+        {
+          "file_sha256": "7c867a78ff950dbf87f5166b32cd977dcc8f035a0a525a180f91b083236c8c4f",
+          "node_id": "tests/test_aurora_ace_orion_progression.py::test_runtime_progression_is_not_exposed_through_remote_or_mcp"
+        },
+        {
+          "file_sha256": "7c867a78ff950dbf87f5166b32cd977dcc8f035a0a525a180f91b083236c8c4f",
+          "node_id": "tests/test_aurora_ace_orion_progression.py::test_registered_owner_binding_calls_preflight_only"
+        }
+      ],
+      "title": "Orion progression preserves the L1 owner and one-tick boundary"
+    },
+    {
+      "boundaries": [
+        "acceptance contract",
+        "repository evidence",
+        "practical test runner",
+        "v1 seal decision"
+      ],
+      "contract_evidence": [
+        {
+          "path": "catalog/schemas/aurora_ace_v1_acceptance_matrix.schema.json",
+          "sha256": "5d487d4ab4e28845292b31859380a5b0e86255bcebbfa0756be56f7c6c9ade8a"
+        },
+        {
+          "path": "docs/AURORA_ACE__HANDOFF__CURRENT_STATE_AND_V1_ACCEPTANCE__v1.1__2026-08-15.md",
+          "sha256": "1445635c202e6cdd133c5891c3041a53884be742ee820820732c5421762cde55"
+        }
+      ],
+      "dependencies": [
+        "jsonschema"
+      ],
+      "environment": {},
+      "execution_class": "local_safe",
+      "id": "ACE-V1-013",
+      "implementation_evidence": [
+        {
+          "path": "tools/aurora_ace_acceptance.py",
+          "sha256": "d25ebf220bbae99e24f144b7010855bda0bd5697d78c086adeae977957d2e201",
+          "symbols": [
+            "validate_matrix",
+            "isolated_workspace",
+            "build_report",
+            "write_report"
+          ]
+        },
+        {
+          "path": "catalog/contracts/aurora_ace_v1_acceptance_matrix.json",
+          "sha256": "42fb146920b3d478c1a8bd3d3cc9a9dd989764008f2b9f01a5d34ca6cdb4b278",
+          "symbols": []
+        }
+      ],
+      "missing_dependencies": [],
+      "practical": {
+        "command": [
+          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_aurora_ace_acceptance.py::test_committed_matrix_is_repository_grounded",
+          "tests/test_aurora_ace_acceptance.py::test_committed_matrix_conforms_to_json_schema",
+          "tests/test_aurora_ace_acceptance.py::test_unexecuted_report_is_attention_not_failure",
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-9l8oylvj/pytest.xml"
+        ],
+        "counts": {
+          "errors": 0,
+          "failed": 0,
+          "passed": 3,
+          "skipped": 0,
+          "tests": 3
+        },
+        "elapsed_ms": 404.007,
+        "output_tail": "...                                                                      [100%]\n3 passed in 0.25s",
+        "returncode": 0,
+        "status": "ready",
+        "working_tree": "canonical_root_read_only"
+      },
+      "required": true,
+      "static_status": "ready",
+      "status": "ready",
+      "test_evidence": [
+        {
+          "file_sha256": "741bfed8027d7886004ca245a758e6be3de8c1688c0356a00605b44fac00bcb5",
+          "node_id": "tests/test_aurora_ace_acceptance.py::test_committed_matrix_is_repository_grounded"
+        },
+        {
+          "file_sha256": "741bfed8027d7886004ca245a758e6be3de8c1688c0356a00605b44fac00bcb5",
+          "node_id": "tests/test_aurora_ace_acceptance.py::test_committed_matrix_conforms_to_json_schema"
+        },
+        {
+          "file_sha256": "741bfed8027d7886004ca245a758e6be3de8c1688c0356a00605b44fac00bcb5",
+          "node_id": "tests/test_aurora_ace_acceptance.py::test_unexecuted_report_is_attention_not_failure"
+        }
+      ],
+      "title": "Acceptance evidence is repository-grounded and non-promotional"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "seal_eligible": false,
+  "status": "blocked",
+  "summary": {
+    "attention": 2,
+    "blocked": 1,
+    "ready": 10,
+    "required": 13,
+    "total": 13
+  },
+  "tool": "aurora_ace_acceptance"
+}
