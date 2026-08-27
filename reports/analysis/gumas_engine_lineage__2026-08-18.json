@@ -1,0 +1,159 @@
+{
+  "schema": "gumas.engine_lineage/v1",
+  "generated": "2026-08-18",
+  "method": "content-derived: pairwise difflib line similarity, function-set Jaccard, declared tick-phase structure. No version label used as evidence.",
+  "finding": "GUMAS_SIM_2.5 derives from 26_Engine_1.3 (line similarity 0.997, Jaccard 1.00). 26_engine_2.0 has no descendants; nearest relative v1.0 at 0.081.",
+  "engines": [
+    {
+      "id": "v1.0",
+      "path": "GUMAS_26_Engine.zip :: engine.py",
+      "bytes": 37128,
+      "loc": 969,
+      "phases": "6",
+      "defs": 27,
+      "banner_version": "1.0.0",
+      "anchor": "GUMAS-ENGINE-CORE-V1",
+      "mtime": "2026-02-05T23:37",
+      "sha256": "2c9f4ffb36ec9cd6380011170fb3d1d6e65828420ee0d9b8307ac0c3afe57528"
+    },
+    {
+      "id": "v1.1",
+      "path": "26_Engine1.1.zip :: engine.py",
+      "bytes": 44546,
+      "loc": 1120,
+      "phases": "6",
+      "defs": 27,
+      "banner_version": "1.0.0",
+      "anchor": "GUMAS-ENGINE-CORE-V1",
+      "mtime": "2026-02-05T23:50",
+      "sha256": "fe0bb570821eaac5d02348372ee451412f18adaf94603b08b655d2aeade8dbcc"
+    },
+    {
+      "id": "v1.2",
+      "path": "26_Engine_1.2/engine.py",
+      "bytes": 54786,
+      "loc": 1329,
+      "phases": "6",
+      "defs": 28,
+      "banner_version": "1.0.0",
+      "anchor": "GUMAS-ENGINE-CORE-V1",
+      "mtime": "2026-02-06T00:03",
+      "sha256": "e1531aa243b9c41a8d1a6e47f586d4481af4981fead5b1111583d8715a26f0fd"
+    },
+    {
+      "id": "v1.3",
+      "path": "26_Engine_1.3.zip :: engine.py  == L2_GUMAS_ENGINE v1.0.0",
+      "bytes": 63012,
+      "loc": 1541,
+      "phases": "6",
+      "defs": 33,
+      "banner_version": "1.0.0",
+      "anchor": "GUMAS-ENGINE-CORE-V1",
+      "mtime": "2026-02-06T04:33",
+      "sha256": "761ed8c2877eec7f6a28181942265cd7f683c5766207d84102f4bbfaf7192b7b"
+    },
+    {
+      "id": "v1.4",
+      "path": "26_engine_1.4/engine.py",
+      "bytes": 99134,
+      "loc": 2417,
+      "phases": "6",
+      "defs": 43,
+      "banner_version": "1.0.0",
+      "anchor": "GUMAS-ENGINE-CORE-V1",
+      "mtime": "2026-02-06T14:02",
+      "sha256": "d0be3ae2429fec988edb111efcae016396fdaa943e19cfcecff07b3b892c8176"
+    },
+    {
+      "id": "v2.0",
+      "path": "26_engine_2.0/modules/gumas/engine.py",
+      "bytes": 64942,
+      "loc": 1620,
+      "phases": "15",
+      "defs": 69,
+      "banner_version": "2.0.0",
+      "anchor": "GUMAS-ENGINE-CORE-V2",
+      "mtime": "2026-02-07T22:50",
+      "sha256": "5a0517646285fcfc1dd54c229361c69110d13a468e3ac6aa2561ac0f14258598"
+    },
+    {
+      "id": "v2.5",
+      "path": "GUMAS_SIM_2.5.zip :: engine.py",
+      "bytes": 62909,
+      "loc": 1539,
+      "phases": "6",
+      "defs": 33,
+      "banner_version": "1.0.0",
+      "anchor": "GUMAS-ENGINE-CORE-V1",
+      "mtime": "2026-02-16T21:30",
+      "sha256": "7c807c1e3b3ed4d1d2f9cc6c6203384723e29e313de9db27b50fb79f48b1a73e"
+    },
+    {
+      "id": "v3.0-patch",
+      "path": "FORGE__GUMAS_v3.0__2026-02-19/engine_v3_patch.py",
+      "bytes": 20799,
+      "loc": 499,
+      "phases": "16-20",
+      "defs": 10,
+      "banner_version": "3.0.0",
+      "anchor": "GUMAS-ENGINE-V3-PATCH",
+      "mtime": "2026-02-19T19:38",
+      "sha256": "500bec252ac017c7258cf2fbee9775abafaa92c222fffd1335ccab276c8773d7"
+    },
+    {
+      "id": "v2.5-shim",
+      "path": "SIM_ENGINE_OUTPUTS/engine.py",
+      "bytes": 950,
+      "loc": 38,
+      "phases": null,
+      "defs": 1,
+      "banner_version": null,
+      "anchor": null,
+      "mtime": "2026-03-05T07:46",
+      "sha256": "145733ebbc1af7395b71601b40d328944d24abcc3343b99d73b25dc5d01ee68e"
+    },
+    {
+      "id": "v2.5-base",
+      "path": "SIM_ENGINE_OUTPUTS/engine_base.py",
+      "bytes": 63835,
+      "loc": 1554,
+      "phases": "6",
+      "defs": 33,
+      "banner_version": "1.0.0",
+      "anchor": "GUMAS-ENGINE-CORE-V1",
+      "mtime": "2026-03-15T04:21",
+      "sha256": "6ba1c21337b060579df50e80a52c74c2d3cbde714af6a7b5f1782a997029eaa4"
+    },
+    {
+      "id": "v2.5-adv",
+      "path": "SIM_ENGINE_OUTPUTS/engine_advanced.py",
+      "bytes": 45562,
+      "loc": 1175,
+      "phases": null,
+      "defs": 33,
+      "banner_version": null,
+      "anchor": null,
+      "mtime": "2026-03-15T04:22",
+      "sha256": "3917d25311f157ae3c21d7259323b4d2180aeca7319bed0570f5e3aadd9a57e3"
+    }
+  ],
+  "source_archives": {
+    "GUMAS_26_Engine.zip": "063a2bc1af3f51ba",
+    "26_Engine1.1.zip": "31016c53af4301ce",
+    "26_Engine_1.2.zip": "2c99c7d52c114f9b",
+    "26_Engine_1.3.zip": "a7eda7248b009dae",
+    "26_engine_1.4.zip": "63c29679f6095932",
+    "New_Engine_Archive.zip": "58af1ed63718feb2",
+    "L2_GUMAS_ENGINE__v1.0.0__2026-02-06.zip": "23c066ef90baa83f55d65fc1435923dd3892813099d06504f3f018fe2bad6532",
+    "GUMAS_SIM_2.5.zip": "6d91d36104b2da89d66e37f6b9b97691470762d4793763784988fb8db84db8c5"
+  },
+  "identity_collisions": {
+    "26_Engine_1.3 == L2_GUMAS_ENGINE v1.0.0 == L2_GUMAS_ENGINE CLEAN_PACKAGE v1.0.1": "761ed8c2877eec7f\u2026",
+    "Version: 1.0.0 / GUMAS-ENGINE-CORE-V1": "declared by 7 distinct engines; identifies none"
+  },
+  "recovery_package_sha256": "039c0f48341aa9847b8400e45a29e41fef734a2b2e80b78bfe3de1abc165ec07",
+  "witnesses": {
+    "A": "1f9dae31d916e8d3815ca465177007f5359544bf9ade6e23a5bd8a123ff7ed23",
+    "B": "606314440661ed9ddd17d0dc1b794595e9c2bdaccd12c4bbe61899a8a4d0166f"
+  }
+}
