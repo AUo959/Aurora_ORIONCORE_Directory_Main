@@ -250,6 +250,13 @@
       "completed_at": "2026-08-27T18:19:54Z",
       "platform": "claude-code",
       "detail": "PR 81 merged 2026-08-27 as d3c47a14. origin/main advanced off 9b80c5b for the first time in 7 days; local main fast-forwarded. Aurora CI green on main."
+    },
+    {
+      "id": "gumas-phase10-reporter",
+      "status": "completed",
+      "completed_at": "2026-08-27T19:15:22Z",
+      "platform": "claude-code",
+      "detail": "Phase 10 is PASS, not outstanding. Direct evidence on agent/gumas-flash-rebellion-battle-baseline (draft PR CloudBank #1506): spec GUMAS__SPEC__DETERMINISTIC_FACTUAL_REPORTER_EVIDENCE_EXPORT v1.0, runtime package simulation/runtime/gumas_factual_reporter/ (projection, exporter, validation, rendering, identity), two test modules, receipt PHASE10 v1.0, and workflow gumas-factual-reporter.yml. Task record DTER v2.1 records Phase 10 accepted on head 635e97e0 after validation. The blocking half of this item remains correct and is carried forward: Control A/B/C and Run 0 stay BLOCKED. Superseded by gumas-phase11-controls-contract."
     }
   ],
   "last_updated": "2026-08-27T18:48:58Z",
@@ -519,12 +526,6 @@
       "description": "Uncommitted work in /private/tmp worktrees is invisible to every status check that looks at the main tree, and /private/tmp is subject to OS cleanup. The L1 embodiment work sat there with zero commits on its branch and was nearly lost. Add a check (Stop hook or make target) that walks 'git worktree list' for every registered repo and reports dirty worktrees plus branches with zero commits, so fragile work surfaces automatically instead of by chance."
     },
     {
-      "id": "gumas-phase10-reporter",
-      "priority": "high",
-      "assigned_to": "either",
-      "description": "Continue CloudBank PR #1506 from DTER v2.0: write the Phase 10 contract first, then implement the deterministic factual reporter and evidence exporter as a pure projection over validated Phase 9 artifacts. Keep Control A/B/C and Run 0 blocked."
-    },
-    {
       "id": "trade-coalition-gtc-identity",
       "priority": "low",
       "assigned_to": "either",
@@ -577,6 +578,12 @@
       "priority": "high",
       "assigned_to": "codex",
       "description": "Publish the coordinated integration/connectivity-pass-2026-08-19 stack after explicit nested-repo scope is confirmed: CloudBank cb35bfc5, qgia-knowledge-library 4f3a8bd1, qgia-knowledge-spine 7856e43a, then root 6349b1f8. Live 2026-08-26 audit found all branches current or cleanly mergeable. Open PRs without merging; validate and later merge in order hub, spokes, root. Root publication-debt reconciliation PR #83 records the 54 settled historical decisions and reduces the non-exempt ledger to this four-branch stack after merge."
+    },
+    {
+      "id": "gumas-phase11-controls-contract",
+      "priority": "high",
+      "assigned_to": "either",
+      "description": "Successor to gumas-phase10-reporter. Per DTER v2.1 on agent/gumas-flash-rebellion-battle-baseline (draft PR CloudBank #1506), current phase is Phase 11: authority-safe determinism/substitution controls contract plus a refusing preflight. DEFINE ONLY, do not execute. Three controls: A same-input exact replay (byte-identical ledger, termination, report, exporter identities); B class substitution (change only the versioned CanonRec class input, prove permitted resolved physical deltas, unchanged generic engine must propagate); C polity substitution (same for polity input, doctrine/command/resource deltas). The contract must separate four identities per control: source/CanonRec input, resolved tactical-input, T0/run/ledger, and report/export. Preflight must fail closed and refuse execution unless the owner separately opens the execution gate. Control A/B/C execution and Run 0 remain BLOCKED pending the committed contract and explicit owner execution authority."
     }
   ],
   "known_state": {
