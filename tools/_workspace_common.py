@@ -55,9 +55,17 @@ TEXT_LIKE_EXTENSIONS = {
 
 MANAGED_ROOT_PATHS = {
     "AGENTS.md",
+    # CLAUDE.md is the Claude Code counterpart of AGENTS.md and is read at every
+    # session start. It postdates this allowlist, so the planner kept proposing a
+    # move to intake/ — an operation nobody could approve, which froze the whole
+    # wave4 batch (found 2026-08-09). Root-anchored by function, like AGENTS.md.
+    "CLAUDE.md",
     "README.md",
     ".gitignore",
     ".gitattributes",
+    # Pinned to root by .github/workflows/secret-scan.yml (GITLEAKS_CONFIG:
+    # .gitleaks.toml). Relocating it silently disables secret scanning.
+    ".gitleaks.toml",
     ".githooks",
     "docs",
     "catalog",
@@ -548,6 +556,86 @@ def write_json(
             return False
 
     path.write_text(payload, encoding="utf-8")
+    _record_lastrun(path)
+    return True
+
+
+def write_yaml(
+    path: Path,
+    data: Any,
+    *,
+    volatile_keys: frozenset[str] | None = None,
+    always_write: bool = False,
+) -> bool:
+    """YAML counterpart of write_json — skip the write on timestamp-only change.
+
+    Uses the same dumper as dump_yaml_like, so formatting is unchanged; this only
+    gates *whether* the write happens. Without this, a no-op scan rewrites
+    `generated_at` and leaves the manifest permanently dirty, which trains
+    everyone to treat these files as noise (see VOLATILE_JSON_KEYS note above).
+    """
+    ensure_parent(path)
+
+    if not always_write and path.exists():
+        keys = VOLATILE_JSON_KEYS if volatile_keys is None else volatile_keys
+        try:
+            existing = load_yaml_like(path)
+        except Exception:
+            existing = None  # unreadable/unparseable — fall through and rewrite
+        if existing is not None and _strip_volatile(existing, keys) == _strip_volatile(
+            data, keys
+        ):
+            _record_lastrun(path)
+            return False
+
+    dump_yaml_like(data, path)
+    _record_lastrun(path)
+    return True
+
+
+# Lines whose only content is a regenerated timestamp. Markdown has no schema to
+# strip keys from, so volatility is matched line-wise instead.
+VOLATILE_TEXT_PATTERNS: tuple[str, ...] = (
+    r"^\s*[-*]?\s*Generated:\s*`?[^`]*`?\s*$",
+    r"^\s*[-*]?\s*Last updated:\s*`?[^`]*`?\s*$",
+)
+
+
+def _strip_volatile_lines(text: str, patterns: tuple[str, ...]) -> str:
+    compiled = [re.compile(p) for p in patterns]
+    return "\n".join(
+        line for line in text.splitlines()
+        if not any(rx.match(line) for rx in compiled)
+    )
+
+
+def write_text(
+    path: Path,
+    text: str,
+    *,
+    volatile_patterns: tuple[str, ...] | None = None,
+    always_write: bool = False,
+) -> bool:
+    """Text counterpart of write_json — skip the write on timestamp-only change.
+
+    Returns True when written, False when left alone because only volatile lines
+    (e.g. a regenerated "- Generated: `<ts>`" header) differed.
+    """
+    ensure_parent(path)
+
+    if not always_write and path.exists():
+        patterns = VOLATILE_TEXT_PATTERNS if volatile_patterns is None else volatile_patterns
+        try:
+            existing = path.read_text(encoding="utf-8")
+        except Exception:
+            existing = None
+        if existing is not None and _strip_volatile_lines(
+            existing, patterns
+        ) == _strip_volatile_lines(text, patterns):
+            _record_lastrun(path)
+            return False
+
+    path.write_text(text, encoding="utf-8")
     _record_lastrun(path)
     return True
 
@@ -1104,7 +1192,7 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             owner="workspace-admin",
             status="managed",
         )
-    if name in {".gitignore", ".gitattributes"}:
+    if name in {".gitignore", ".gitattributes", ".gitleaks.toml", ".gitleaksignore"}:
         return base_record(
             kind="policy_file",
             logical_zone="docs",
@@ -1137,7 +1225,7 @@ def classify_top_level(entry: Path, root: Path, nested_repo_roots: set[str]) -> 
             owner="workspace-admin",
             status="managed",
         )
-    if name in {"README.md", "AGENTS.md"}:
+    if name in {"README.md", "AGENTS.md", "CLAUDE.md"}:
         return base_record(
             kind="workspace_doc",
             logical_zone="docs",
@@ -1314,3 +1402,37 @@ def write_csv(path: Path, rows: list[dict[str, str]], fieldnames: list[str]) -> 
         writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
+
+
+# Moved here from aurora_devkit.py 2026-08-20. It was correct analysis trapped in
+# one module: every tool that reports execution-context-dependent findings needs
+# the same question answered the same way, and three of them were answering it
+# ad hoc or not at all. aurora_devkit re-exports it, so its own tests and their
+# monkeypatching keep working unchanged.
+def is_canonical_workspace_context(root: Path | None = None) -> bool:
+    """Is this the owner's workspace, or a sandbox mounting it?
+
+    Devkit findings describe the machine the scan RAN ON. When an agent runs it
+    from a sandboxed container, "gh is missing" is a fact about the container,
+    not about the workspace — but the report cannot tell the two apart, so those
+    findings were emitted as blockers and surfaced as P1s on every run. The
+    2026-08-10 executive brief traced four of Mission Control's P1s to exactly
+    this, and `gh` answered instantly when the same check ran on the Mac.
+
+    The canonical workspace is ``~/dev/Aurora_ORIONCORE_Directory_Main``, the
+    datum recorded in CLAUDE.md and AGENTS.md. It is anchored to the home
+    directory rather than matched as a path suffix: a suffix test also accepts
+    ``/tmp/dev/Aurora_ORIONCORE_Directory_Main``, and a throwaway clone should
+    not be able to claim canonical status.
+
+    Detection is deliberately STRICT — a context that is not provably canonical
+    is treated as possibly-sandboxed. That asymmetry is chosen so the failure
+    mode is a demoted severity on a real problem (visible, still reported) rather
+    than a real blocker suppressed because a lookalike path passed the check.
+    """
+    resolved = (root or Path(__file__).resolve().parent.parent).resolve()
+    try:
+        canonical_root = (Path.home() / "dev" / "Aurora_ORIONCORE_Directory_Main").resolve()
+    except (OSError, RuntimeError):
+        return False
+    return resolved == canonical_root

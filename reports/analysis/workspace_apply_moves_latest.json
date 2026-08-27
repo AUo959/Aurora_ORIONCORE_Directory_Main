@@ -1,46 +1,36 @@
 {
-  "generated_at": "2026-03-11T00:25:06Z",
+  "generated_at": "2026-08-10T02:13:47Z",
   "root": ".",
   "dry_run": false,
   "moved": [
     {
-      "source": "Image.png",
-      "destination": "intake/Image.png",
+      "source": "Prplexity_Observation_6_14.md",
+      "destination": "intake/Prplexity_Observation_6_14.md",
       "path_kind": "file"
     },
     {
-      "source": "Threadcore Library",
-      "destination": "intake/Threadcore Library",
-      "path_kind": "tree"
-    },
-    {
-      "source": "text.txt",
-      "destination": "intake/text.txt",
+      "source": "aurora-cloudbank-symbolic_README_DRAFT.md",
+      "destination": "intake/aurora-cloudbank-symbolic_README_DRAFT.md",
       "path_kind": "file"
     },
     {
-      "source": "textAu.txt",
-      "destination": "intake/textAu.txt",
+      "source": "aurora-cloudbank-symbolic_outside_review.md",
+      "destination": "intake/aurora-cloudbank-symbolic_outside_review.md",
       "path_kind": "file"
     },
     {
-      "source": "textAu2.txt",
-      "destination": "intake/textAu2.txt",
+      "source": "aurora-cloudbank-symbolic_presentation_plan.md",
+      "destination": "intake/aurora-cloudbank-symbolic_presentation_plan.md",
       "path_kind": "file"
     },
     {
-      "source": "textAu3.txt",
-      "destination": "intake/textAu3.txt",
-      "path_kind": "file"
-    },
-    {
-      "source": "textAu4.txt",
-      "destination": "intake/textAu4.txt",
+      "source": "aurora-cloudbank-symbolic_review_v2.md",
+      "destination": "intake/aurora-cloudbank-symbolic_review_v2.md",
       "path_kind": "file"
     }
   ],
   "skipped": [],
   "errors": [],
   "mode": "forward",
-  "batch_id": "wave4_root_intake_cleanup_initial"
+  "batch_id": "wave4_intake_docs_safe_subset"
 }

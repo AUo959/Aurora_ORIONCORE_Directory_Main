@@ -1,0 +1,58 @@
+{
+  "schema_version": "0.8.0",
+  "record_type": "aurora_ace_mcp_contract",
+  "transport": {
+    "allowed": ["stdio"],
+    "network_listener_enabled": false,
+    "remote_auth_model": null
+  },
+  "tool_surface": [
+    "ace_capabilities",
+    "ace_plan",
+    "ace_resolve",
+    "ace_inspect",
+    "ace_materialize_preview",
+    "ace_materialize_commit"
+  ],
+  "authority": {
+    "mcp_is_transport_only": true,
+    "canonical_materialization_exposed": true,
+    "canonrec_git_mutation_exposed": true,
+    "arbitrary_repository_path_exposed": false,
+    "protected_branch_mutation_exposed": false,
+    "generic_publication_exposed": false,
+    "dynamic_python_binding_exposed": false,
+    "runtime_activation_exposed": false,
+    "simulation_advance_exposed": false
+  },
+  "materialization_gate": {
+    "phases": ["preview", "commit"],
+    "authority_mode": "owner_gated_materialize",
+    "target_repository": "CanonRec",
+    "target_resolution": "catalog/repo_registry.yaml",
+    "feature_branch_required": true,
+    "clean_worktree_required": true,
+    "receipt_baseline_match_required": true,
+    "side_effect_acknowledgement_required": true,
+    "authorization_token_required": true,
+    "authorization_token_binding": [
+      "packet_digest",
+      "authority_ref",
+      "target_repository",
+      "target_branch",
+      "target_head",
+      "expected_baseline"
+    ],
+    "native_materializer_only": true,
+    "rollback_semantics_owned_by": "existing ACE materializer"
+  },
+  "invariants": [
+    "MCP does not decide canon truth.",
+    "MCP does not accept an arbitrary repository or target path for materialization.",
+    "Preview is non-canonical and non-materializing.",
+    "Commit recomputes the preview state and fails closed if any bound state changed.",
+    "A successful commit delegates to the existing ACE materialize_packet dispatcher.",
+    "Existing ACE materializer branch, baseline, target, validation, and rollback checks remain authoritative.",
+    "No Orion runtime initialization, resume, activation, or tick advancement is introduced."
+  ]
+}

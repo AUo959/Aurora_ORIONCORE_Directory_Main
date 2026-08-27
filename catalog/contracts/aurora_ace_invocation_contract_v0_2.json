@@ -1,0 +1,65 @@
+{
+  "contract_id": "aurora_ace_invocation_contract",
+  "version": "0.2.0",
+  "status": "owner_directed_draft",
+  "engine": "aurora_ace",
+  "augments_contract": "catalog/contracts/aurora_ace_contract_v0_1.json",
+  "specification": "docs/AURORA_ACE__ADDENDUM__FIRST_CLASS_INVOCATION__v0.2__2026-08-11.md",
+  "schema": "catalog/schemas/aurora_ace_invocation_envelope.schema.json",
+  "purpose": "Keep ACE directly addressable to humans and agents while allowing the same inspectable engine to be invoked embedded or autonomically during Aurora operation.",
+  "invocation_modes": {
+    "interactive": {
+      "automatic": false,
+      "description": "A human, operator, or agent deliberately queries ACE."
+    },
+    "embedded": {
+      "automatic": false,
+      "description": "A registered Aurora capability or agent calls ACE inside a larger workflow.",
+      "caller_ref_required": true
+    },
+    "autonomic": {
+      "automatic": true,
+      "description": "A registered policy or subsystem detects a qualifying coherence seam and invokes ACE.",
+      "caller_ref_required": true,
+      "seam_ref_required": true,
+      "trigger_policy_ref_required": true
+    }
+  },
+  "hard_rules": [
+    "ACE remains a first-class named tool and MUST remain directly addressable by humans and agents.",
+    "Interactive, embedded, and autonomic invocations MUST use the same ACE engine and determination contracts.",
+    "Automatic invocation MUST NOT become invisible latent capability; substantive invocations remain inspectable and attributable.",
+    "ACE MUST prefer and compose eligible registered Aurora capabilities before bounded synthesis.",
+    "ACE MUST NOT synthesize around an available eligible specialist or authoritative procedure.",
+    "Invocation mode does not grant side-effect, materialization, canon, or cross-layer authority.",
+    "Autonomic invocation requires an upstream seam reference and trigger-policy reference.",
+    "The subsystem that detects a seam owns detection; ACE owns capability composition and determination after invocation.",
+    "Every successful execution MUST preserve a link from invocation envelope to ACE query and determination."
+  ],
+  "inspectability": {
+    "visibility": "inspectable",
+    "required_fields": [
+      "invocation_id",
+      "invocation_mode",
+      "caller",
+      "trigger",
+      "query_sha256",
+      "query"
+    ],
+    "automatic_invocation_may_hide_provenance": false,
+    "automatic_invocation_may_suppress_receipts": false
+  },
+  "tooling_first": {
+    "registered_specialist_precedence": true,
+    "free_synthesis_as_shortcut": false,
+    "connective_synthesis_only_when_permitted_by_ace_query_policy": true
+  },
+  "implementation_boundary": {
+    "invocation_envelope": "implemented_in_v0.2_slice",
+    "interactive_entry": "implemented_in_v0.2_slice",
+    "embedded_entry": "implemented_in_v0.2_slice",
+    "autonomic_entry_contract": "implemented_in_v0.2_slice",
+    "subsystem_specific_seam_detectors": "owned_by_calling_subsystems",
+    "global_background_scanner": "not_authorized_by_this_contract"
+  }
+}

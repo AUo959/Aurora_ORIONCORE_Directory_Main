@@ -960,7 +960,19 @@ def scan_repo(
             }
         )
 
-    def _governance_outcome(severity_counts: Counter[str]) -> tuple[str, str]:
+    def _governance_outcome(
+        severity_counts: Counter[str], canonical_resolved: int = -1
+    ) -> tuple[str, str]:
+        """Findings-based verdict, gated on having inspected anything at all.
+
+        A scan whose canonical roots do not exist inspects zero files and would
+        otherwise report PASS/READY -- indistinguishable from a genuinely clean
+        repository. Several canonical roots live under gitignored lanes
+        (projects/, archives/), so a fresh clone reproduces exactly that state.
+        Coverage is not compliance: report it separately.
+        """
+        if canonical_resolved == 0:
+            return ("NO_COVERAGE", "UNKNOWN")
         if severity_counts.get("BLOCK", 0) > 0:
             return ("BLOCK", "NOT_READY")
         if severity_counts.get("WARN", 0) > 0:
@@ -1271,7 +1283,24 @@ def scan_repo(
 
     l3_bridge = _build_l3_bridge(artifacts=artifacts, findings=findings, evolution_map=evolution_map)
 
-    verdict, promotion_readiness = _governance_outcome(severity_counts)
+    canonical_resolved = [path for path in canonical_paths if path.exists()]
+    reference_resolved = [path for path in reference_paths if path.exists()]
+    coverage = {
+        "canonical_roots_configured": len(canonical_paths),
+        "canonical_roots_resolved": len(canonical_resolved),
+        "canonical_roots_missing": [
+            str(path) for path in canonical_paths if not path.exists()
+        ],
+        "reference_roots_configured": len(reference_paths),
+        "reference_roots_resolved": len(reference_resolved),
+        "reference_roots_missing": [
+            str(path) for path in reference_paths if not path.exists()
+        ],
+    }
+
+    verdict, promotion_readiness = _governance_outcome(
+        severity_counts, canonical_resolved=len(canonical_resolved)
+    )
 
     return {
         "domain": REPORT_DOMAIN,
@@ -1285,6 +1314,7 @@ def scan_repo(
             "strictness": strictness,
             "include_evolution": include_evolution,
             "exclusions": exclusions,
+            "coverage": coverage,
         },
         "summary": {
             "total_artifacts": len(artifacts),

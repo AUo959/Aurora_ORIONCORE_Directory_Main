@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T03:55:10Z",
+  "generated_at": "2026-08-15T05:30:25Z",
   "root": ".",
   "tool": "aurora_recommendation_engine",
   "run_mode": "read_only",
@@ -9,29 +9,30 @@
   "manifest_path": "catalog/recommendation_engine_manifest.json",
   "status": "open",
   "summary": {
-    "recommendation_count": 11,
+    "recommendation_count": 25,
     "blocking_count": 0,
-    "approval_required_count": 8,
+    "approval_required_count": 21,
     "by_priority": {
-      "P1": 3,
-      "P2": 8
+      "P1": 4,
+      "P2": 21
     },
     "by_category": {
       "boundary": 1,
-      "developer_tooling": 2,
+      "developer_tooling": 15,
       "git_state": 1,
       "recovery_review": 6,
-      "validation": 1
+      "validation": 2
     },
     "by_status": {
+      "blocked": 5,
       "informational": 1,
-      "open": 10
+      "open": 19
     }
   },
   "source_reports": {
     "workspace_verify": {
       "status": "warn",
-      "finding_count": 2,
+      "finding_count": 3,
       "blocking_count": 0
     },
     "integration_gate": {
@@ -42,17 +43,17 @@
     "recovery_index": {
       "status": "READY",
       "candidate_count": 100,
-      "discovered_candidate_count": 1078
+      "discovered_candidate_count": 1081
     },
     "devkit": {
       "status": "WARN",
-      "finding_count": 2,
-      "install_plan_items": 0
+      "finding_count": 15,
+      "install_plan_items": 13
     },
     "git_status": {
       "status": "dirty",
-      "changed_path_count": 5,
-      "branch": "main...origin/main [ahead 10]"
+      "changed_path_count": 10,
+      "branch": "main...origin/main [ahead 1]"
     }
   },
   "recommendations": [
@@ -78,15 +79,16 @@
       "status": "open"
     },
     {
-      "recommendation_id": "aurora-rec-p1-recovery_index-recovery_review-review-2-restricted-recovery-candidates-carefully",
-      "title": "Review 2 restricted recovery candidates carefully",
+      "recommendation_id": "aurora-rec-p1-recovery_index-recovery_review-review-3-restricted-recovery-candidates-carefully",
+      "title": "Review 3 restricted recovery candidates carefully",
       "category": "recovery_review",
       "priority": "P1",
       "confidence": "medium",
       "target_repo": "root",
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
-        "aurora-cloudbank-symbolic_presentation_plan.md",
+        "SECURITY.md",
+        "intake/aurora-cloudbank-symbolic_presentation_plan.md",
         ".gitleaks.toml"
       ],
       "source": "recovery_index",
@@ -95,6 +97,27 @@
         "python3 tools/workspace_recovery_index.py --summary"
       ],
       "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p1-workspace_verify-validation-resolve-workspace-verifier-finding-brief-freshness",
+      "title": "Resolve workspace verifier finding: brief_freshness",
+      "category": "validation",
+      "priority": "P1",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "tools/workspace_verify.py::brief_freshness"
+      ],
+      "source": "workspace_verify",
+      "recommended_next_action": "Run `make brief` to regenerate the governance artifacts and open the brief scaffold, or record a documented exemption in catalog/brief_freshness_exemption.yaml.",
+      "suggested_commands": [
+        "python3 tools/workspace_verify.py"
+      ],
+      "approval_required": false,
       "mutation_posture": "advisory_only",
       "blocking": false,
       "status": "open"
@@ -121,18 +144,128 @@
       "status": "open"
     },
     {
-      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-aurora-cloudbank-symbolic-main-python-environment-is-warn",
-      "title": "aurora-cloudbank-symbolic-main Python environment is warn.",
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-docker-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "docker is missing in this execution context (non-canonical workspace path).",
       "category": "developer_tooling",
       "priority": "P2",
       "confidence": "high",
       "target_repo": "root",
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::repo_python_env_aurora-cloudbank-symbolic-main_warn"
+        "catalog/dev_toolkit_manifest.json::tool_docker_missing"
       ],
       "source": "devkit",
-      "recommended_next_action": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended for devcontainers, service stacks, and reproducible app builds.",
+      "suggested_commands": [
+        "brew install --cask docker",
+        "brew upgrade --cask docker"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "blocked"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-gh-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "gh is missing in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_gh_missing"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Required for GitHub PR, issue, and CI maintenance.",
+      "suggested_commands": [
+        "brew install gh",
+        "brew upgrade gh"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "blocked"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-go-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "go is missing in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_go_missing"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Optional for portable developer services and CLIs.",
+      "suggested_commands": [
+        "brew install go",
+        "brew upgrade go"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "blocked"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-rust-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "rust is missing in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_rust_missing"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Optional for high-performance local tools and native extensions.",
+      "suggested_commands": [
+        "brew install rust",
+        "brew upgrade rust"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "blocked"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-sqlite3-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "sqlite3 is missing in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_sqlite3_missing"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Useful for local indexes, receipts, and lightweight metadata stores.",
+      "suggested_commands": [
+        "brew install sqlite",
+        "brew upgrade sqlite"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "blocked"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-aurora-cloudbank-symbolic-main-python-environment-is-blocked-in-this-execution-c",
+      "title": "aurora-cloudbank-symbolic-main Python environment is blocked in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::repo_python_env_aurora-cloudbank-symbolic-main_blocked"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real environment failure. CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
       "suggested_commands": [
         "python3 tools/aurora_devkit.py --install-plan"
       ],
@@ -142,18 +275,190 @@
       "status": "open"
     },
     {
-      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-aurora-dev-toolkit-watch-exists-but-is-not-active",
-      "title": "aurora-dev-toolkit-watch exists but is not active.",
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-brew-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "brew is missing in this execution context (non-canonical workspace path).",
       "category": "developer_tooling",
       "priority": "P2",
       "confidence": "high",
       "target_repo": "root",
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
-        "catalog/dev_toolkit_manifest.json::automation_aurora_dev_toolkit_watch_paused"
+        "catalog/dev_toolkit_manifest.json::tool_brew_missing"
       ],
       "source": "devkit",
-      "recommended_next_action": "Use a devkit watch lane for read-only drift detection, then apply package changes with explicit approval.",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended Mac system package manager if machine-level automatic updates are desired.",
+      "suggested_commands": [
+        "brew update"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-gitleaks-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "gitleaks is missing in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_gitleaks_missing"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Secret-scanning gate for all pushes and PRs. Config: .gitleaks.toml. CI: .github/workflows/secret-scan.yml. Added 2026-05-30.",
+      "suggested_commands": [
+        "python3 tools/aurora_devkit.py --install-plan"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-mypy-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "mypy is missing in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_mypy_missing"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended static type check lane for larger Python modules.",
+      "suggested_commands": [
+        "uv tool install mypy",
+        "uv tool upgrade mypy"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-no-aurora-dev-toolkit-watch-automation-was-found",
+      "title": "No aurora-dev-toolkit-watch automation was found.",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::automation_aurora_dev_toolkit_watch_missing"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Create a weekly read-only dev toolkit drift watch before enabling package-mutating updates.",
+      "suggested_commands": [
+        "python3 tools/aurora_devkit.py --install-plan"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-pnpm-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "pnpm is missing in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_pnpm_missing"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended package manager for large JS workspaces when activated through corepack.",
+      "suggested_commands": [
+        "corepack enable pnpm",
+        "corepack prepare pnpm@latest --activate"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-pre-commit-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "pre-commit is missing in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_pre-commit_missing"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended for running root hook checks outside Git commit flow.",
+      "suggested_commands": [
+        "uv tool install pre-commit",
+        "uv tool upgrade pre-commit"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-python3-12-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "python3.12 is missing in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_python3.12_missing"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Canonical Python floor (declared in .python-version). Required for CloudBank venv compatibility and CI parity. CI gates merges on 3.12. Install via: uv python install 3.12",
+      "suggested_commands": [
+        "python3 tools/aurora_devkit.py --install-plan"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-ruff-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "ruff is missing in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_ruff_missing"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended Python lint and formatting baseline for future code-heavy packages.",
+      "suggested_commands": [
+        "uv tool install ruff",
+        "uv tool upgrade ruff"
+      ],
+      "approval_required": true,
+      "mutation_posture": "advisory_only",
+      "blocking": false,
+      "status": "open"
+    },
+    {
+      "recommendation_id": "aurora-rec-p2-devkit-developer_tooling-xcodebuild-is-missing-in-this-execution-context-non-canonical-workspace-path",
+      "title": "xcodebuild is missing in this execution context (non-canonical workspace path).",
+      "category": "developer_tooling",
+      "priority": "P2",
+      "confidence": "high",
+      "target_repo": "root",
+      "owner_surface": "root control-plane repo",
+      "evidence_refs": [
+        "catalog/dev_toolkit_manifest.json::tool_xcodebuild_missing"
+      ],
+      "source": "devkit",
+      "recommended_next_action": "Re-check from the canonical workspace path before treating this as a real toolchain gap; a sandbox missing a tool is not a workspace defect. Recommended for iOS and full macOS app build automation.",
       "suggested_commands": [
         "python3 tools/aurora_devkit.py --install-plan"
       ],
@@ -196,15 +501,15 @@
       "evidence_refs": [
         "intake/text_conversation_PDK001.txt",
         "intake/TOBIAS_QIN_CHARACTER_PROFILE.md",
-        "Prplexity_Observation_6_14.md",
         "_staging/apple_notes_recovery__2026-03-16/L1/ord_drone_fleet_v1.0.py",
+        "intake/Prplexity_Observation_6_14.md",
         "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Please provide a comprehensive report outlining th 1.md",
         "archives/unzipped/Unzipped Archives/Extra_Folders_Sort/GUMAS/080_Au_GUMAS_StAc/Please provide a comprehensive report outlining th.md",
         "archives/unzipped/ZipWiz_Chamber_6_28/ZIPWIZ_Documents/ZIPWIZ Docs1/Please provide a comprehensive report outlining th.md",
         "intake/threadcore_symbiosis_delta_manifest.md",
         "archives/unzipped/ZipWiz_Chamber_6_28/aurora_bridge_output/relay_handshake.py",
-        "intake/ORION__POLICY__CANON_PROTOCOL__v2.0__2026-04-08.md",
         "CLAUDE.md",
+        "intake/ORION__POLICY__CANON_PROTOCOL__v2.0__2026-04-08.md",
         "_staging/apple_notes_recovery__2026-03-16/L2/MULTILINGUAL_BEAMFORMING_ARRAY_SEED.md"
       ],
       "source": "recovery_index",
@@ -289,7 +594,7 @@
         "intake/Thread_The_Station_is_Well.md",
         "intake/text_25.txt",
         "_staging/codex_wip/test_mesh_router_v1__codex_wip_preserved_2026-06-13.py",
-        "aurora-cloudbank-symbolic_README_DRAFT.md"
+        "intake/aurora-cloudbank-symbolic_README_DRAFT.md"
       ],
       "source": "recovery_index",
       "recommended_next_action": "Review candidates as routing evidence only. Do not promote until an owner-surface decision compares canonical state, validates behavior, and leaves a receipt or PR.",
@@ -303,19 +608,24 @@
       "status": "open"
     },
     {
-      "recommendation_id": "aurora-rec-p2-git_status-git_state-root-worktree-has-5-in-progress-paths",
-      "title": "Root worktree has 5 in-progress paths",
+      "recommendation_id": "aurora-rec-p2-git_status-git_state-root-worktree-has-10-in-progress-paths",
+      "title": "Root worktree has 10 in-progress paths",
       "category": "git_state",
       "priority": "P2",
       "confidence": "high",
       "target_repo": "root",
       "owner_surface": "root control-plane repo",
       "evidence_refs": [
+        ".claude/settings.local.json",
         "archives/recovered_prototypes/biological_pneumatic_engine/Biological_Pneumatic_Engine_Whitepaper.docx",
+        "reports/analysis/aurora_devkit_latest.json",
         "reports/analysis/aurora_mission_control_latest.json",
         "reports/analysis/aurora_recommendations_latest.json",
         "reports/analysis/workspace_verify_latest.json",
-        "reports/simulation/hour_aboard_v1__2026-07-25/"
+        "reports/simulation/hour_aboard_v1__2026-08-11/",
+        "reports/simulation/hour_aboard_v1__2026-08-15/",
+        "tests/test_devkit_execution_context.py",
+        "tools/aurora_devkit.py"
       ],
       "source": "git_status",
       "recommended_next_action": "Review ownership before staging or committing. Treat existing command-grammar, integration-gate, and recommendation-engine edits as separate root-control-plane work unless intentionally combined.",

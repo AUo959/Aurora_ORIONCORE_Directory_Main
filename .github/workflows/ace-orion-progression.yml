@@ -1,0 +1,115 @@
+name: ACE Orion Progression Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tools/ace/orion_progression.py"
+      - "tools/ace/orion_runtime_owner.py"
+      - "tools/ace/orion_progression_state.py"
+      - "tools/aurora_ace_orion_operator.py"
+      - "catalog/ace/policies/orion_progression_v0_13.json"
+      - "catalog/contracts/aurora_ace_orion_progression_v0_13.json"
+      - "catalog/repo_registry.yaml"
+      - "docs/AURORA_ACE__ADDENDUM__ORION_PROGRESSION__v0.13__2026-08-14.md"
+      - "tests/test_aurora_ace_orion_progression.py"
+      - ".github/workflows/ace-orion-progression.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "tools/ace/orion_progression.py"
+      - "tools/ace/orion_runtime_owner.py"
+      - "tools/ace/orion_progression_state.py"
+      - "tools/aurora_ace_orion_operator.py"
+      - "catalog/ace/policies/orion_progression_v0_13.json"
+      - "catalog/contracts/aurora_ace_orion_progression_v0_13.json"
+      - "catalog/repo_registry.yaml"
+      - "docs/AURORA_ACE__ADDENDUM__ORION_PROGRESSION__v0.13__2026-08-14.md"
+      - "tests/test_aurora_ace_orion_progression.py"
+      - ".github/workflows/ace-orion-progression.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  governed-progression:
+    name: Governed Orion owner + transaction boundary (py3.12)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout OrionCore
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.12"
+
+      - name: Install OrionCore test dependencies
+        run: |
+          python -m pip install --only-binary=:all: \
+            pytest==8.4.2 \
+            pyyaml==6.0.3
+
+      - name: Read registered CloudBank pin
+        id: registry_pin
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import yaml
+
+          registry = yaml.safe_load(open("catalog/repo_registry.yaml"))
+          row = next(
+              item
+              for item in registry["repos"]
+              if item["name"] == "aurora-cloudbank-symbolic-main"
+          )
+          print(f"branch={row['branch']}")
+          print(f"sha={row['head_sha']}")
+          PY
+
+      - name: Provision registered CloudBank owner
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: AUo959/aurora-cloudbank-symbolic
+          ref: ${{ steps.registry_pin.outputs.sha }}
+          path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
+          # Required so ACE refresh_on_paths staleness can be evaluated; see ci.yml.
+          fetch-depth: 0
+
+      - name: Place CloudBank on registered branch
+        run: |
+          git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main \
+            checkout -B "${{ steps.registry_pin.outputs.branch }}"
+
+      - name: Install CloudBank runtime dependencies
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: \
+            -r GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/requirements-hashed.txt
+
+      - name: Validate governed progression boundary
+        env:
+          PYTHONPATH: tools
+        run: |
+          pytest tests/test_aurora_ace_orion_progression.py -v --tb=short
+
+      - name: Prove CI does not call real Orion advancement
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          text = Path("tests/test_aurora_ace_orion_progression.py").read_text(
+              encoding="utf-8"
+          )
+          marker = "def test_registered_owner_binding_calls_preflight_only"
+          assert marker in text
+          body = text.split(marker, 1)[1]
+          body = body.split("\ndef ", 1)[0]
+          assert ".advance(" not in body
+          assert "commit_orion_advance(" not in body
+          print(
+              "Registered-owner integration test is preflight-only; "
+              "no real run load/advance call is present."
+          )
+          PY

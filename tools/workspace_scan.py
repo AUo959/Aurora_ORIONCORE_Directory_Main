@@ -24,6 +24,8 @@ from _workspace_common import (
     sha256_file,
     write_json,
     write_jsonl,
+    write_text,
+    write_yaml,
 )
 
 
@@ -180,7 +182,7 @@ def write_workspace_map(
             "5. `catalog/relocation_plan.json` before any move execution.",
         ]
     )
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    write_text(path, "\n".join(lines) + "\n")
 
 
 def main() -> int:
@@ -284,8 +286,8 @@ def main() -> int:
     workspace_map_out = Path(args.workspace_map_out) if args.workspace_map_out else root / "docs" / "workspace-map.md"
     summary_out = Path(args.summary_out) if args.summary_out else root / "reports" / "analysis" / "workspace_scan_summary.json"
 
-    dump_yaml_like(manifest, manifest_out)
-    dump_yaml_like(repo_registry, repo_registry_out)
+    write_yaml(manifest_out, manifest)
+    write_yaml(repo_registry_out, repo_registry)
     write_jsonl(inventory_out, archive_inventory)
     write_json(summary_out, summary)
     write_workspace_map(

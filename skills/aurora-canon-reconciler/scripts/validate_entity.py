@@ -29,12 +29,30 @@ from typing import Any, Optional
 
 VALID_CERTAINTY_TAGS = {
     "CANON", "CANON_PROMOTE", "LOCKED_POSITION", "PLACED",
-    "STAGING", "UNCONFIRMED", "LEGEND_CONTESTED", "APPROX"
+    "STAGING", "UNCONFIRMED", "LEGEND_CONTESTED", "APPROX",
+    # Synced to CanonRec/CERTAINTY_TAGS.md (the authoritative vocabulary) 2026-08-09.
+    # SUPERSEDED was admitted as the terminal retired-record state in the 2026-07-21
+    # ruling batch but never added here, so every alias-forward record — the correct
+    # outcome of a duplicate resolution — validated as INVALID_CERTAINTY.
+    "SUPERSEDED",
 }
 
 VALID_ENTITY_KINDS = {
     "location", "ship", "fleet", "anomaly", "megafauna", "facility",
-    "domain", "polity", "species", "character"
+    "domain", "polity", "species", "character",
+    # Synced to committed canon 2026-08-09. These eight kinds are in active use in
+    # CanonRec but were absent from this vocabulary, so the validator rejected 77 of
+    # 189 canonical records on entity_kind alone — including every mobile_asset,
+    # which is the kind P2 exists to police. Canon is the source of truth for the
+    # vocabulary, not the other way round.
+    "organization",   # 25 records
+    "mobile_asset",   # 23 — vessels/fleets; the moving-entity kind P2 governs
+    "ship_class",     # 14 — class specs that vessels derive capabilities from
+    "equipment",      #  5
+    "place",          #  3 — coarser sibling of "location" (Dark Star arc)
+    "conflict",       #  3 — scenario-defined canonical tension points
+    "event",          #  2 — event hub records
+    "report",         #  1 — in-canon documentation artifact
 }
 
 VALID_L2_LOCATION_SUBTYPES = {
@@ -47,6 +65,30 @@ VALID_L2_POLITY_SUBTYPES = {
     "pmc", "pact", "confederation",
     # v1.1: Added for entities that blur the polity/domain boundary
     "remnant_network", "precursor_remnant",
+    # Synced to committed canon 2026-08-09, on the same principle already applied
+    # to VALID_ENTITY_KINDS: canon is the source of truth for the vocabulary, not
+    # the other way round.
+    #
+    # The two sets had ZERO overlap. Every one of the 19 canonical polity records
+    # raised INVALID_POLITY_SUBTYPE — the warning fired on 19 of 19, which makes it
+    # noise rather than a signal and teaches people to ignore the validator (the
+    # failure mode already documented on REQUIRED_FIELDS).
+    #
+    # The cause is that the original list enumerates *structural forms* of a state
+    # (federation, confederation, nation_state) while canon classifies polities by
+    # their *condition and role* — whether the state is intact, fractured, external,
+    # or coextensive with a people. Both are legitimate; canon's is the one in use.
+    "major_civilization",       # e.g. polity_prime_construct
+    "fragmented_former_empire",  # e.g. polity_velar_imperium — a failed/fractured state
+    "external_militant_empire",  # e.g. polity_xarlok_empire — outside-the-Union power
+    "frontier_polity_bloc",      # e.g. polity_outer_colonies
+    "people_and_polity",         # where the state is coextensive with a people
+    "active_faction",
+    # The four precursor civilizations (polity_vorthan_imperium, polity_shroudborn,
+    # polity_orak_thuun, polity_sythrex_conclave) live under entities/precursors/,
+    # not entities/polities/, and were missed by a first sync that scanned only the
+    # polities directory. Entity KIND, not directory, is what the validator keys on.
+    "precursor_civilization",
 }
 
 VALID_L2_SPECIES_SUBTYPES = {
@@ -61,7 +103,17 @@ VALID_L1_SYSTEM_STATUSES = {
     "NOMINAL", "DEGRADED", "OFFLINE", "MAINTENANCE"
 }
 
-MOVING_ENTITY_KINDS = {"ship", "fleet", "megafauna"}
+# "mobile_asset" is the kind CanonRec actually uses for vessels/fleets (23 records
+# under canon/L2/entities/mobile_assets/); it was missing here, so P2 was silently
+# unenforced for every real moving entity in canon. Added 2026-08-09.
+MOVING_ENTITY_KINDS = {"ship", "fleet", "megafauna", "mobile_asset", "vessel"}
+
+# Polity subtypes for which a governance field is NOT required. A vanished precursor
+# civilization has no known government; demanding one would push toward invention,
+# which is the failure mode canon reconciliation exists to prevent.
+POLITY_GOVERNANCE_EXEMPT_SUBTYPES = {
+    "precursor_civilization", "precursor_remnant", "remnant_network",
+}
 
 L1_CHARACTER_ID_PREFIXES = {
     "CMD_", "ENG_", "SCI_", "MED_", "OPS_", "SEC_", "AI_"
@@ -122,22 +174,55 @@ REQUIRED_FIELDS = {
             "event_id", "timestamp", "description", "participants", "outcome"
         ],
     },
+    # L2 requirements reconciled against committed canon 2026-08-09 (166 records).
+    #
+    # They had drifted badly: 'canonical_id' and 'canonical_name' appear in ZERO of
+    # 166 canonical records (canon uses entity_id / name), locations carry
+    # 'location_type' not 'subtype' (44/44 vs 2/44), no species carries a subtype,
+    # characters use 'faction_bindings' not 'faction', and 'government_type' never
+    # appears. The result was that every well-formed canonical record validated as
+    # BLOCKED, which teaches people to ignore the validator.
+    #
+    # A tuple means "any one of these satisfies the requirement".
     "L2": {
         "_base": [
-            "canonical_id", "canonical_name", "aliases",
-            "entity_kind", "certainty", "doc_sources", "notes"
+            ("entity_id", "canonical_id"),
+            ("name", "canonical_name"),
+            "aliases",
+            "entity_kind",
+            "certainty",
+            ("doc_sources", "source_refs"),   # provenance via either surface
+            # 'notes' demoted: present in only 91/166: it is optional commentary,
+            # and provenance is already covered above.
         ],
-        "location": ["subtype"],
-        "polity": ["subtype", "government_type"],
-        "species": ["subtype"],
-        "character": ["role", "faction", "sources"],
-        "ship": ["type"],
+        "location": [("location_type", "subtype")],
+        # Governance is not required of precursor/legend polities — see
+        # POLITY_GOVERNANCE_EXEMPT_SUBTYPES below. A vanished precursor civilization
+        # has no known government, and demanding one invites invention.
+        "polity": ["subtype", ("government", "government_type", "org_type")],
+        # species carry no subtype anywhere in canon (0/10) — do not invent one.
+        "species": [],
+        "character": ["role", ("faction_bindings", "faction"),
+                      ("source_refs", "doc_sources", "sources")],
+        "ship": [],
+        # A class link is valuable but is NOT an identity requirement: some vessels
+        # are unidentified by construction (vessel_unknown_dark_star_001 is *the*
+        # unknown derelict; vessel_shadow_001 is a hostile ship whose class the Union
+        # never determined). Requiring a class there would demand invention.
+        "mobile_asset": [],
         "mechanic": ["mechanic_id", "category", "description"],
-        "anomaly": ["subtype"],
+        "anomaly": [],
         "facility": [],
-        "domain": ["subtype"],  # v1.1: domain now requires subtype (precursor_site, etc.)
+        "domain": [("subtype", "location_type")],
         "fleet": [],
         "megafauna": [],
+        "organization": [],
+        "ship_class": [],
+        "equipment": [],
+        "place": [],
+        "conflict": [],
+        "event": [],
+        "report": [],
     },
     "L3": {
         "protocol_update": [
@@ -406,6 +491,273 @@ def apply_context_identity_scan(data: dict, report: "ValidationReport", context:
 # Validation engine
 # ---------------------------------------------------------------------------
 
+# ── FABRIC_INVARIANTS v0.1 — P1/P2/P4 ─────────────────────────────────────
+#
+# Spec: canon/L2/mechanics/FABRIC_INVARIANTS__v0.1__2026-07-21.md (verification
+# table, 2026-07-21 ruling batch). The static linter tools/fabric_invariants_check.py
+# enforces T/P/C over committed canon; these are the three invariants the owner
+# rulings assigned to the *reconciler*, i.e. checked before content becomes canon:
+#
+#   P1  entity canonical_position_status must not exceed its map authority row
+#   P2  moving entities never hold fixed coordinates; placement_rule required
+#   P4  canon promotions citing movement/cross-region events must cite a route/drive
+#
+# Field names and severities mirror the linter deliberately.
+
+# Placement fields that pin an entity to a fixed point (linter parity).
+FIXED_PLACEMENT_FIELDS = ("region_id", "coordinates", "position", "fixed_position")
+
+# Phrases that assert a movement / cross-region EVENT occurred.
+#
+# Deliberately narrow. An earlier draft matched bare "deploy"/"ftl"/"jump", which
+# fired on capability and property text — a ship class listing "rapid sentinel
+# deployment", a court described as "deployed", a region described as an
+# "FTL-disruption anomaly". None of those cite a movement event, and P4 is a
+# promotion gate: a gate that cries wolf gets switched off. Markers must read as
+# something that happened, and P4 additionally requires event context (below).
+MOVEMENT_MARKERS = (
+    "migrated", "migration of", "transited", "in transit to", "relocated",
+    "voyage to", "crossed into", "crossing into", "traversed", "withdrew from",
+    "withdrew to", "evacuated to", "evacuated from", "arrived from", "arrived at",
+    "departed for", "departed from", "convoyed", "incursion into", "expedition to",
+    "jumped to", "ftl transit", "made the crossing",
+)
+
+# Fields that satisfy the P4 route/drive citation requirement.
+ROUTE_CITATION_FIELDS = (
+    "route_ref", "route_citation", "route_id", "drive_ref", "drive_citation",
+    "propulsion_ref", "transit_route", "route",
+)
+
+# P4 may also be satisfied by explicitly recording that no canonical route is
+# established for a transit, with the canonical endpoints that DO define it.
+#
+# Canon attests movements between named places (Kharis Sector -> Lethan system)
+# without ever naming the corridor between them. Demanding a route name in that
+# situation would force invention — the exact failure canon reconciliation exists
+# to prevent. So the gate requires the route question to be ANSWERED, not that an
+# answer be fabricated. Same pattern as naming_exemption, and as
+# canonical_position_status: unplaced being a placement fact rather than a hedge.
+ROUTE_EXEMPTION_FIELDS = ("route_exemption", "route_undetermined")
+
+# Certainty values that mean "this is being made canon now".
+PROMOTION_CERTAINTIES = {"CANON", "CANON_PROMOTE"}
+
+
+def _movement_claim_text(data: dict) -> str:
+    """Concatenate the free-text surfaces where a movement claim would appear."""
+    parts = []
+    for key in ("description", "notes", "nature", "operational_summary",
+                "role", "fate", "promotion_note", "status_note"):
+        v = data.get(key)
+        if isinstance(v, str):
+            parts.append(v)
+    for key in ("canonical_sequence", "event_refs", "canon_observations"):
+        v = data.get(key)
+        if isinstance(v, list):
+            parts.extend(x for x in v if isinstance(x, str))
+    return " ".join(parts).lower()
+
+
+def load_map_authority_rows(context: Optional[dict]) -> Optional[dict]:
+    """Best-effort load of the L2 Location Authority Table.
+
+    Returns {row_name_lower: {"status":…, "notes":…}} or None when the table
+    cannot be located. P1 degrades to INFO rather than failing closed: the skill
+    must stay usable outside a full CanonRec checkout.
+    """
+    root = (context or {}).get("context_root")
+    if not root:
+        return None
+    candidates = list(Path(root).rglob("*LOCATION_AUTHORITY_TABLE*.md"))
+    if not candidates:
+        return None
+    rows: dict = {}
+    try:
+        text = candidates[0].read_text(encoding="utf-8", errors="ignore")
+    except Exception:
+        return None
+    for line in text.splitlines():
+        if not line.startswith("|"):
+            continue
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if len(cells) < 4 or cells[0].lower() in ("name", "location", "---"):
+            continue
+        if set(cells[0]) <= set("-: "):
+            continue
+        name = cells[0].replace("‑", "-")
+        status = cells[3] if len(cells) > 3 else ""
+        notes = cells[-1] if len(cells) > 4 else ""
+        rows[name.lower()] = {"status": status, "notes": notes, "name": name}
+    return rows or None
+
+
+def _field_satisfied(data: dict, field: str) -> bool:
+    """True when *field* has been addressed on the record.
+
+    An empty list or dict COUNTS as satisfied: it is an explicit statement, not an
+    omission. char_calder_vey carries `faction_bindings: []` precisely because he is
+    unaffiliated — treating that as missing would demand a falsehood. Only an absent
+    key or a blank string is unsatisfied.
+    """
+    if field not in data:
+        return False
+    val = data.get(field)
+    if val is None:
+        return False
+    if isinstance(val, str) and val.strip() == "":
+        return False
+    return True
+
+
+def route_registry_exists(context: Optional[dict]) -> bool:
+    """True when canon contains anything a P4 route/drive citation could point at.
+
+    P4 requires a movement promotion to cite a canonical route or drive. That
+    presupposes a route registry. As of 2026-08-09 canon contains no route,
+    corridor, lane or drive entity at all, so a hard BLOCK would be unsatisfiable
+    — every movement event would be permanently unpromotable with no compliant
+    action available. An exit condition nobody can meet is a defect, not a gate.
+    So P4 self-activates: WARN while no registry exists, BLOCK once one does.
+    """
+    root = (context or {}).get("context_root")
+    if not root:
+        return False
+    for path in Path(root).rglob("*.json"):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if not isinstance(data, dict):
+            continue
+        subtype = str(data.get("subtype") or "").lower()
+        kind = str(data.get("entity_kind") or "").lower()
+        # Corridors are also expressed through location_type, e.g. the Hollow
+        # Expanse is typed "region / lawless corridor" — a genuine corridor
+        # referent that a subtype-only check would miss.
+        loc_type = str(data.get("location_type") or "").lower()
+        if subtype in ("route", "corridor", "lane", "transit_route") or kind in ("route", "drive"):
+            return True
+        if any(word in loc_type for word in ("corridor", "route", "lane")):
+            return True
+    return False
+
+
+def _match_authority_row(name: str, rows: dict):
+    """Fuzzy-match an entity name to a table row, mirroring the linter's matcher."""
+    if not name:
+        return None, None
+    norm = name.replace("‑", "-").lower()
+    for key, row in rows.items():
+        head = norm[: max(len(norm) // 2, 8)]
+        if key.startswith(head) or norm in key:
+            return row.get("name", key), row
+    return None, None
+
+
+def check_fabric_invariants(data: dict, ek: Optional[str], report: "ValidationReport",
+                            context: Optional[dict] = None) -> None:
+    """Enforce FABRIC_INVARIANTS P1, P2 and P4 at validation time."""
+    certainty = str(data.get("certainty") or "").upper()
+
+    # ── P2: moving entities carry no fixed placement ──────────────────────
+    if ek in MOVING_ENTITY_KINDS:
+        for field in FIXED_PLACEMENT_FIELDS:
+            if data.get(field):
+                report.add(
+                    "BLOCK", "FABRIC_P2_MOVING_ENTITY_FIXED_PLACEMENT",
+                    f"P2: entity kind '{ek}' is a moving entity and must NOT hold a fixed "
+                    f"placement field '{field}'. Express movement via 'placement_rule'.",
+                    field,
+                )
+        if not data.get("placement_rule"):
+            report.add(
+                "WARN", "FABRIC_P2_NO_PLACEMENT_RULE",
+                f"P2: moving entity '{ek}' has no 'placement_rule' describing its movement pattern.",
+                "placement_rule",
+            )
+
+    # ── P1: position status must not exceed the map authority row ─────────
+    if ek == "location" and certainty != "SUPERSEDED":
+        ent_status = str(data.get("canonical_position_status") or "").lower()
+        rows = load_map_authority_rows(context)
+        if rows is None:
+            if ent_status == "canon":
+                report.add(
+                    "INFO", "FABRIC_P1_MAP_UNVERIFIED",
+                    "P1: entity claims canonical placement but the Location Authority Table "
+                    "could not be located, so map primacy is unverified here. Run "
+                    "tools/fabric_invariants_check.py against CanonRec for authoritative P1.",
+                    "canonical_position_status",
+                )
+        else:
+            key, row = _match_authority_row(data.get("name", ""), rows)
+            if row is None:
+                if ent_status == "canon":
+                    report.add(
+                        "BLOCK", "FABRIC_P1_NO_MAP_ROW",
+                        "P1: entity claims canonical placement but has no row in the Location "
+                        "Authority Table. The map is the source of truth for placement.",
+                        "canonical_position_status",
+                    )
+                else:
+                    report.add(
+                        "INFO", "FABRIC_P1_NO_MAP_ROW",
+                        "P1: no Location Authority Table row for this location; placement remains "
+                        "unresolved (route via the map-authority / Reconciliation Workflow process).",
+                        "canonical_position_status",
+                    )
+            else:
+                unresolved = ("TBD" in (row.get("notes") or "").upper()
+                              or "TBD" in (row.get("status") or "").upper())
+                staging = (row.get("status") or "").strip().upper() == "STAGING"
+                if ent_status == "canon" and (unresolved or staging):
+                    report.add(
+                        "BLOCK", "FABRIC_P1_POSITION_EXCEEDS_MAP",
+                        f"P1: entity claims canonical placement but map authority row {key!r} is "
+                        f"'{row.get('status')}' (notes: {row.get('notes')!r}). The map is the source "
+                        "of truth; entity position status must not exceed its map row.",
+                        "canonical_position_status",
+                    )
+
+    # ── P4: movement claims promoted to canon must cite a route/drive ─────
+    # Requires BOTH event context and an event-shaped movement phrase. The ruling
+    # gates promotions "citing movement/cross-region EVENTS" — a capability spec or
+    # a place description is neither, and must not trip the gate.
+    if certainty in PROMOTION_CERTAINTIES:
+        has_event_context = (
+            ek == "event"
+            or bool(data.get("event_refs"))
+            or bool(data.get("canonical_sequence"))
+        )
+        text = _movement_claim_text(data)
+        hit = next((m for m in MOVEMENT_MARKERS if m in text), None)
+        answered = (any(data.get(f) for f in ROUTE_CITATION_FIELDS)
+                    or any(data.get(f) for f in ROUTE_EXEMPTION_FIELDS))
+        if has_event_context and hit and not answered:
+            if route_registry_exists(context):
+                report.add(
+                    "BLOCK", "FABRIC_P4_MOVEMENT_WITHOUT_ROUTE",
+                    f"P4 promotion gate: this record is being promoted to canon and describes a "
+                    f"movement / cross-region event (matched {hit!r}), but cites no canonical route "
+                    f"or drive. Add one of {list(ROUTE_CITATION_FIELDS)}. Engine-generated movement "
+                    "flows are acceptable in-run, but a route/drive citation is required at canon "
+                    "promotion (RULING-ENGINE-P4).",
+                    "route_ref",
+                )
+            else:
+                report.add(
+                    "WARN", "FABRIC_P4_NO_ROUTE_REGISTRY",
+                    f"P4: this record describes a movement / cross-region event (matched {hit!r}) "
+                    "and cites no route or drive — but canon currently contains no route, corridor "
+                    "or drive entity to cite, so the requirement is not yet satisfiable. Recorded "
+                    "as a warning rather than a block: an exit condition nobody can meet is a "
+                    "defect, not a gate. This escalates to BLOCK automatically once a route "
+                    "registry exists.",
+                    "route_ref",
+                )
+
+
 class ValidationReport:
     """Collects validation findings at BLOCK/WARN/INFO severity."""
 
@@ -503,6 +855,14 @@ def validate_entity(
     if layer == "L2":
         required = REQUIRED_FIELDS["L2"]["_base"] + required
 
+    # Precursor/legend polities are exempt from the governance requirement.
+    if (layer == "L2" and entity_type == "polity"
+            and str(data.get("subtype") or "") in POLITY_GOVERNANCE_EXEMPT_SUBTYPES):
+        required = [
+            f for f in required
+            if not (isinstance(f, tuple) and "government" in f)
+        ]
+
     report.required_fields_total = len(required)
     report.required_fields = required
 
@@ -510,6 +870,21 @@ def validate_entity(
     ALLOW_EMPTY = {"notes", "aliases"}
 
     for field in required:
+        # A tuple entry means "any one of these spellings satisfies the requirement".
+        # Canon and this validator grew apart on field names (entity_id vs
+        # canonical_id, location_type vs subtype, faction_bindings vs faction);
+        # accepting either keeps well-formed canon from validating as BLOCKED.
+        if isinstance(field, tuple):
+            if any(_field_satisfied(data, alt) for alt in field):
+                continue
+            primary = field[0]
+            report.add(
+                "BLOCK", "MISSING_REQUIRED",
+                f"Required field missing: expected one of {list(field)}.",
+                primary,
+            )
+            continue
+
         val = data.get(field)
         if val is None:
             report.add("BLOCK", "MISSING_REQUIRED", f"Required field '{field}' is missing.", field)
@@ -563,17 +938,12 @@ def validate_entity(
                             f"Polity subtype '{st}' is not standard. Expected: {sorted(VALID_L2_POLITY_SUBTYPES)}",
                             "subtype")
 
-        # Moving entity coordinate check
-        if ek in MOVING_ENTITY_KINDS:
-            if data.get("coordinates") is not None:
-                report.add("BLOCK", "MOVING_ENTITY_FIXED_COORDS",
-                            f"Entity kind '{ek}' is a moving entity and must NOT have fixed coordinates. "
-                            "Use 'placement_rule' for movement patterns instead.",
-                            "coordinates")
-            if not data.get("placement_rule"):
-                report.add("WARN", "MOVING_ENTITY_NO_RULE",
-                            f"Moving entity '{ek}' should have a 'placement_rule' describing movement patterns.",
-                            "placement_rule")
+        # FABRIC_INVARIANTS v0.1 — P1/P2/P4 enforcement at validation time.
+        # Implements RULING-ENGINE-P4 + RULING-FABRIC-SCHEMA (verification table,
+        # canon/L2/mechanics/FABRIC_INVARIANTS__v0.1__2026-07-21.md). Semantics are
+        # kept identical to tools/fabric_invariants_check.py so the static linter and
+        # this gate cannot disagree — one rule, two enforcement points.
+        check_fabric_invariants(data, ek, report, context)
 
         # Canonical ID format check
         cid = data.get("canonical_id")
@@ -765,25 +1135,38 @@ def detect_layer_and_type(data: dict) -> tuple[str, str]:
     # L2 signatures
     if "canonical_id" in data or "entity_kind" in data:
         ek = data.get("entity_kind", "")
-        if ek in ("polity",):
-            return "L2", "polity"
-        if ek in ("species",):
-            return "L2", "species"
-        if ek in ("ship",):
-            return "L2", "ship"
-        if ek in ("location",):
-            return "L2", "location"
-        if ek in ("facility",):
-            return "L2", "facility"
-        if ek in ("domain",):
-            return "L2", "domain"
-        if ek in ("anomaly",):
-            return "L2", "anomaly"
-        if ek == "character" or "faction" in data:
+        # entity_kind IS the entity type at L2 — return it directly rather than
+        # enumerating a subset.
+        #
+        # This used to be an if-chain over nine kinds ending in
+        # `return "L2", "location"  # default L2`. That default silently
+        # misclassified every kind the chain did not name — event, organization,
+        # mobile_asset, ship_class, equipment, place, conflict, report — as a
+        # LOCATION. Two consequences, both bad and both invisible:
+        #
+        #   * location-only checks fired on non-locations. A four-phase battle
+        #     record was told its subtype "fleet_engagement_..." was not a valid
+        #     *location* subtype, against the vocabulary [anomaly, moon, planet,
+        #     region, route, station, ...];
+        #   * the per-kind REQUIRED_FIELDS entries for those kinds — which exist,
+        #     right down to "event": [] and "mobile_asset": [] — were unreachable,
+        #     so those records were checked against the location requirements
+        #     instead of their own.
+        #
+        # This is the same defect class as the flat STATUS_VOCAB fixed on
+        # 2026-08-09: one kind's vocabulary applied to every kind. Falling back to
+        # a concrete kind is what makes it silent, so there is no fallback now —
+        # an unknown kind returns itself and is caught by the INVALID_ENTITY_KIND
+        # block check, which is the check that exists to catch it.
+        if ek == "character" or (not ek and "faction" in data):
             return "L2", "character"
+        if not ek and "mechanic_id" in data:
+            return "L2", "mechanic"
+        if ek:
+            return "L2", ek
         if "mechanic_id" in data:
             return "L2", "mechanic"
-        return "L2", "location"  # default L2
+        return "L2", "location"  # canonical_id present but no entity_kind
 
     # L1 signatures
     if "rank_position" in data or "clearance_level" in data:
@@ -892,6 +1275,17 @@ def generate_fill_template(entity_type: str, layer: str, existing: dict) -> str:
     lines.append("Fill in the missing fields marked with `# TODO`:\n")
     lines.append("```yaml")
     for field in required:
+        if isinstance(field, tuple):
+            # "any of" requirement — satisfied if any spelling is already present.
+            satisfied = next((alt for alt in field if _field_satisfied(existing, alt)), None)
+            if satisfied:
+                val = existing.get(satisfied)
+                rendered = json.dumps(val) if isinstance(val, list) else val
+                lines.append(f"{satisfied}: {rendered}")
+            else:
+                lines.append(f"{field[0]}: # TODO — required (or one of: {', '.join(field[1:])})")
+            continue
+
         val = existing.get(field)
         if val is None or (isinstance(val, str) and val.strip() == ""):
             lines.append(f"{field}: # TODO — required")

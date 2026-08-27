@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/aurora_ace_v1_acceptance_matrix.schema.json",
+  "title": "Aurora Canon Engine v1 Acceptance Matrix",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_type",
+    "engine",
+    "authority",
+    "seal_policy",
+    "rows"
+  ],
+  "properties": {
+    "$schema": {"type": "string", "minLength": 1},
+    "schema_version": {"const": "1.0.0"},
+    "record_type": {"const": "aurora_ace_v1_acceptance_matrix"},
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine_id", "canonical_name", "implemented_through", "acceptance_target"],
+      "properties": {
+        "engine_id": {"const": "aurora_ace"},
+        "canonical_name": {"const": "Aurora Canon Engine"},
+        "implemented_through": {"type": "string", "pattern": "^0\\.[0-9]+\\.[0-9]+$"},
+        "acceptance_target": {"const": "1.0.0"}
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "mutation_posture", "canon_effect"],
+      "properties": {
+        "scope": {"const": "root_control_plane"},
+        "mutation_posture": {"const": "verification_only"},
+        "canon_effect": {"const": "none_without_authoritative_materialization_commit"}
+      }
+    },
+    "seal_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_row_status",
+        "component_contracts_survive_unsealed_v1",
+        "isolated_execution_uses_temporary_clones",
+        "missing_environment_is_not_product_failure"
+      ],
+      "properties": {
+        "required_row_status": {"const": "ready"},
+        "component_contracts_survive_unsealed_v1": {"const": true},
+        "isolated_execution_uses_temporary_clones": {"const": true},
+        "missing_environment_is_not_product_failure": {"const": true}
+      }
+    },
+    "rows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/row"}
+    }
+  },
+  "$defs": {
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path"],
+      "properties": {
+        "path": {"$ref": "#/$defs/relativePath"},
+        "symbols": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"}
+        }
+      }
+    },
+    "practical": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["test_refs", "dependencies", "environment"],
+      "properties": {
+        "test_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^tests/[^:]+\\.py::test_[A-Za-z0-9_]+$"}
+        },
+        "dependencies": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_.]*$"}
+        },
+        "environment": {
+          "type": "object",
+          "additionalProperties": {"const": "1"},
+          "propertyNames": {
+            "enum": ["AURORA_ACE_LIVE_TESTS", "ACE_MCP_E2E", "ACE_GENERIC_E2E"]
+          }
+        }
+      }
+    },
+    "row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "requirement",
+        "required",
+        "boundaries",
+        "execution_class",
+        "implementation_evidence",
+        "contract_refs",
+        "practical",
+        "acceptance"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^ACE-V1-[0-9]{3}$"},
+        "title": {"type": "string", "minLength": 1},
+        "requirement": {"type": "string", "minLength": 1},
+        "required": {"type": "boolean"},
+        "boundaries": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "execution_class": {"enum": ["local_safe", "isolated_ci"]},
+        "implementation_evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/evidence"}
+        },
+        "contract_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/relativePath"}
+        },
+        "practical": {"$ref": "#/$defs/practical"},
+        "acceptance": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

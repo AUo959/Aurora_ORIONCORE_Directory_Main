@@ -1,0 +1,513 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/aurora_ace_capability_manifest.schema.json",
+  "title": "Aurora Canon Engine Capability Manifest",
+  "description": "Machine-readable identity, execution, composition, authority, validation, and freshness contract for one ACE capability node.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "nonempty_string": {
+      "type": "string",
+      "minLength": 1
+    },
+    "string_array": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/nonempty_string"
+      }
+    },
+    "field_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "field_path": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.\\[\\]-]+$"
+        },
+        "schema_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "description": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "semantic_type": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "semantic_coverage": {
+          "type": "string",
+          "enum": [
+            "full",
+            "partial",
+            "adapter_required",
+            "metadata_only"
+          ]
+        }
+      },
+      "required": [
+        "field_path",
+        "required",
+        "description",
+        "semantic_type",
+        "semantic_coverage"
+      ]
+    },
+    "capability_edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "edge_type": {
+          "type": "string",
+          "enum": [
+            "requires",
+            "produces",
+            "validates_with",
+            "materializes_with",
+            "precedes",
+            "follows",
+            "fallback_to",
+            "conflicts_with",
+            "supersedes"
+          ]
+        },
+        "target": {
+          "type": "string",
+          "pattern": "^ace\\.capability\\.[A-Za-z0-9_.:-]+$"
+        },
+        "condition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "edge_type",
+        "target",
+        "priority"
+      ]
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "0.1.1"
+    },
+    "record_type": {
+      "const": "ace_capability_manifest"
+    },
+    "capability_id": {
+      "type": "string",
+      "pattern": "^ace\\.capability\\.[A-Za-z0-9_.:-]+$"
+    },
+    "name": {
+      "$ref": "#/$defs/nonempty_string"
+    },
+    "description": {
+      "$ref": "#/$defs/nonempty_string"
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "discovered",
+            "active",
+            "unavailable",
+            "blocked",
+            "deprecated",
+            "superseded"
+          ]
+        },
+        "status_reason": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "superseded_by": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^ace\\.capability\\.[A-Za-z0-9_.:-]+$"
+        }
+      },
+      "required": [
+        "status",
+        "status_reason",
+        "superseded_by"
+      ]
+    },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tool_id": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "tool_version": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "repository": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "path": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "entrypoint": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "runtime": {
+          "$ref": "#/$defs/nonempty_string"
+        }
+      },
+      "required": [
+        "tool_id",
+        "tool_version",
+        "repository",
+        "path",
+        "entrypoint",
+        "runtime"
+      ]
+    },
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operations": {
+          "$ref": "#/$defs/string_array"
+        },
+        "layers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "root",
+              "L1",
+              "L2",
+              "L3",
+              "cross_layer"
+            ]
+          }
+        },
+        "entity_types": {
+          "$ref": "#/$defs/string_array"
+        },
+        "capability_tags": {
+          "$ref": "#/$defs/string_array"
+        }
+      },
+      "required": [
+        "operations",
+        "layers",
+        "entity_types",
+        "capability_tags"
+      ]
+    },
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input_schema_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "output_schema_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/field_contract"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/field_contract"
+          }
+        },
+        "artifacts": {
+          "$ref": "#/$defs/string_array"
+        },
+        "side_effects": {
+          "$ref": "#/$defs/string_array"
+        },
+        "mutation_model": {
+          "type": "string",
+          "enum": [
+            "read_only",
+            "in_memory_mutation",
+            "filesystem_mutation",
+            "repository_mutation",
+            "external_mutation"
+          ]
+        },
+        "adapter_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "input_projection_refs": {
+          "$ref": "#/$defs/string_array"
+        },
+        "tool_native_status_fields": {
+          "$ref": "#/$defs/string_array"
+        },
+        "status_crosswalk_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "semantic_digest_excludes": {
+          "$ref": "#/$defs/string_array"
+        }
+      },
+      "required": [
+        "input_schema_ref",
+        "output_schema_ref",
+        "inputs",
+        "outputs",
+        "artifacts",
+        "side_effects",
+        "mutation_model",
+        "adapter_ref",
+        "input_projection_refs",
+        "tool_native_status_fields",
+        "status_crosswalk_ref",
+        "semantic_digest_excludes"
+      ]
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "deterministic": {
+          "type": "boolean"
+        },
+        "seed_field": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "idempotent": {
+          "type": "boolean"
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_output_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "mutates_inputs": {
+          "type": "boolean"
+        },
+        "transaction_required": {
+          "type": "boolean"
+        },
+        "concurrency_scope": {
+          "$ref": "#/$defs/nonempty_string"
+        },
+        "concurrency_policy": {
+          "type": "string",
+          "enum": [
+            "parallel_safe",
+            "exclusive_scope",
+            "sequential_working_state",
+            "optimistic_compare_and_swap"
+          ]
+        },
+        "supported_modes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "plan_only",
+              "read_only",
+              "commit_ready",
+              "delegated_materialize",
+              "owner_gated_materialize"
+            ]
+          }
+        }
+      },
+      "required": [
+        "deterministic",
+        "seed_field",
+        "idempotent",
+        "timeout_seconds",
+        "max_output_bytes",
+        "mutates_inputs",
+        "transaction_required",
+        "concurrency_scope",
+        "concurrency_policy",
+        "supported_modes"
+      ]
+    },
+    "composition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/capability_edge"
+          }
+        },
+        "required_context_fields": {
+          "$ref": "#/$defs/string_array"
+        },
+        "selection_priority": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "edges",
+        "required_context_fields",
+        "selection_priority"
+      ]
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "simulation_mode": {
+          "type": "string",
+          "enum": [
+            "not_applicable",
+            "constitutive_generation",
+            "analytical_simulation"
+          ]
+        },
+        "can_select_values": {
+          "type": "boolean"
+        },
+        "supported_determinations": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "RETRIEVED_CANON",
+              "DERIVED_CANON",
+              "GENERATED_CANON",
+              "CANON_REVISION",
+              "TRUE_CONFLICT",
+              "EXECUTION_BLOCKED"
+            ]
+          }
+        },
+        "materialization_scopes": {
+          "$ref": "#/$defs/string_array"
+        },
+        "required_policy_refs": {
+          "$ref": "#/$defs/string_array"
+        }
+      },
+      "required": [
+        "simulation_mode",
+        "can_select_values",
+        "supported_determinations",
+        "materialization_scopes",
+        "required_policy_refs"
+      ]
+    },
+    "trust": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "allowlisted": {
+          "type": "boolean"
+        },
+        "manifest_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "discovery_sources": {
+          "$ref": "#/$defs/string_array"
+        },
+        "validation_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/nonempty_string"
+          }
+        }
+      },
+      "required": [
+        "allowlisted",
+        "manifest_sha256",
+        "discovery_sources",
+        "validation_refs"
+      ]
+    },
+    "freshness": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "repository_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "current_head_required": {
+          "type": "boolean"
+        },
+        "refresh_on_paths": {
+          "$ref": "#/$defs/string_array"
+        }
+      },
+      "required": [
+        "observed_at",
+        "repository_sha",
+        "current_head_required",
+        "refresh_on_paths"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_type",
+    "capability_id",
+    "name",
+    "description",
+    "lifecycle",
+    "tool",
+    "domain",
+    "contract",
+    "execution",
+    "composition",
+    "authority",
+    "trust",
+    "freshness"
+  ]
+}

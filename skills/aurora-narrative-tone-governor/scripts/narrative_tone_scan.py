@@ -140,7 +140,19 @@ def severity_for_warning(strictness: str) -> str:
     return "INFO" if strictness == "lenient" else "WARN"
 
 
-def governance_outcome(severity_counts: Counter[str]) -> tuple[str, str]:
+def governance_outcome(
+    severity_counts: Counter[str], roots_resolved: int = -1
+) -> tuple[str, str]:
+    """Findings-based verdict, gated on having inspected anything at all.
+
+    resolve_targets() silently skips roots that do not exist, so a scan with no
+    resolvable roots inspects zero files and would otherwise report PASS/READY
+    -- indistinguishable from a clean corpus. Several default roots live under
+    gitignored lanes, so a fresh clone reproduces that state. Coverage is not
+    compliance.
+    """
+    if roots_resolved == 0:
+        return ("NO_COVERAGE", "UNKNOWN")
     if severity_counts.get("BLOCK", 0) > 0:
         return ("BLOCK", "NOT_READY")
     if severity_counts.get("WARN", 0) > 0:
@@ -291,8 +303,18 @@ def build_report(repo_root: Path, roots: list[str], paths: list[str], strictness
         scanned_files += 1
         findings.extend(scan_file(repo_root, path, strictness))
 
+    raw_targets = paths if paths else roots
+    resolved_roots = [
+        raw
+        for raw in raw_targets
+        if (Path(raw) if Path(raw).expanduser().is_absolute() else (repo_root / raw)).exists()
+    ]
+    missing_roots = [raw for raw in raw_targets if raw not in resolved_roots]
+
     severity_counts = Counter(str(item.get("severity", "INFO")) for item in findings)
-    verdict, promotion_readiness = governance_outcome(severity_counts)
+    verdict, promotion_readiness = governance_outcome(
+        severity_counts, roots_resolved=len(resolved_roots)
+    )
     return {
         "domain": "narrative_tone",
         "verdict": verdict,
@@ -303,6 +325,11 @@ def build_report(repo_root: Path, roots: list[str], paths: list[str], strictness
             "strictness": strictness,
             "roots": roots,
             "paths": paths,
+            "coverage": {
+                "roots_configured": len(raw_targets),
+                "roots_resolved": len(resolved_roots),
+                "roots_missing": missing_roots,
+            },
         },
         "summary": {
             "scanned_files": scanned_files,

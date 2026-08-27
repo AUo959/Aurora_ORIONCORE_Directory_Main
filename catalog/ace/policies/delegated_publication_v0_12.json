@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.12.0",
+  "record_type": "ace_delegated_publication_policy",
+  "policy_id": "ace.policy.publication.delegated-pr.v1",
+  "target_repository": "CanonRec",
+  "github_repository": "AUo959/CanonRec",
+  "base_branch": "main",
+  "branch_prefix": "ace/canon/",
+  "authority_mode": "delegated_materialize",
+  "required_remote_scopes": [
+    "ace:materialize",
+    "ace:autonomic",
+    "ace:publish"
+  ],
+  "allowed_packet_kinds": [
+    "character",
+    "facility",
+    "generic_entity"
+  ],
+  "registered_baseline_required": true,
+  "remote_main_must_match_registered_baseline": true,
+  "clean_local_checkout_required": true,
+  "one_materialization_commit_required": true,
+  "new_l2_naming_admission_required": true,
+  "max_naming_warnings": 0,
+  "push_feature_branch": true,
+  "pull_request_required": true,
+  "pull_request_draft": true,
+  "auto_merge_allowed": false,
+  "delete_orphan_remote_branch_on_pr_failure": true,
+  "restore_local_checkout_after_attempt": true
+}

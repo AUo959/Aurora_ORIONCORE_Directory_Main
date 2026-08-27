@@ -1,0 +1,23 @@
+{
+  "schema": "aurora.sim.run_meta/v1",
+  "tool": "tools/hour_aboard.py",
+  "written_at": "2026-08-11T05:07:08Z",
+  "output_dir": "reports/simulation/hour_aboard_v1__2026-08-11",
+  "scenario": "hour_aboard_v1",
+  "seed": 808,
+  "anchor_seed": "EOS_SEED_ORION",
+  "process": {
+    "pid": 410,
+    "ppid": "6",
+    "parent_command": "python3 -m pytest tests/ -q --deselect tests/test_live_watch_link.py",
+    "argv": "/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main/tools/hour_aboard.py --scenario hour_aboard_scenario --no-mesh",
+    "cwd": "/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main",
+    "user": "clever-ecstatic-meitner"
+  },
+  "environment": {
+    "claude_code": false,
+    "codex": false,
+    "ci": false,
+    "sim_report_root_override": null
+  }
+}

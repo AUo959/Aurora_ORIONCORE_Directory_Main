@@ -1,0 +1,895 @@
+{
+  "example_id": "ace.example.character_name_background.v0_1",
+  "example_only": true,
+  "canonical_status": "NON_CANONICAL_FIXTURE",
+  "notice": "Illustrative contract fixture only. The character, target commit, run receipts, and placeholder digests are not canonical records or evidence of an executed ACE run.",
+  "query_envelope": {
+    "schema_version": "0.1.1",
+    "record_type": "ace_query_envelope",
+    "query_id": "ace.query.example.character-logistics-officer-001",
+    "created_at": "2026-08-11T03:24:44Z",
+    "requester": {
+      "kind": "user",
+      "requester_id": "ORION.ROLE.PILOT",
+      "session_ref": "ace-spec-v0-1"
+    },
+    "question": "What is this character's name and background?",
+    "query_kind": "complete",
+    "scope": {
+      "repositories": [
+        "root",
+        "CanonRec",
+        "aurora-cloudbank-symbolic-main"
+      ],
+      "layers": [
+        "L2"
+      ],
+      "target_repository": "CanonRec",
+      "target_paths": [
+        "canon/L2/entities/char_example_logistics_officer_001"
+      ],
+      "temporal_basis": "explicit_commit_set"
+    },
+    "baselines": [
+      {
+        "repository": "root",
+        "path": ".",
+        "commit_sha": "a3da11061878782eda3db78fe17aeb61b96b042e",
+        "authority_role": "control_plane"
+      },
+      {
+        "repository": "CanonRec",
+        "path": "GUMAS_SIM_2.5/CanonRec",
+        "commit_sha": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+        "authority_role": "canon"
+      },
+      {
+        "repository": "aurora-cloudbank-symbolic-main",
+        "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+        "commit_sha": "836a604d0ae4efeaa77b381171d69fef62ea36da",
+        "authority_role": "runtime"
+      }
+    ],
+    "subject": {
+      "subject_ref": null,
+      "entity_type": "character",
+      "existence_status": "confirmed_unrecorded",
+      "contextual_refs": [
+        "scenario.example.current",
+        "vessel_class.judicator",
+        "org_galactic_union"
+      ],
+      "context": {
+        "role": "logistics_officer",
+        "faction_id": "org_galactic_union",
+        "location_type": "judicator_class_vessel",
+        "observed_behavior": [
+          "coordinated emergency supply allocation",
+          "deferred correctly to the ship chain of command"
+        ]
+      }
+    },
+    "requested_outputs": [
+      {
+        "field_path": "character.canonical_id",
+        "required": true,
+        "preferred_capability_refs": [
+          "ace.capability.identity.allocate"
+        ],
+        "description": "Stable character identity for repeat resolution."
+      },
+      {
+        "field_path": "character.canonical_name",
+        "required": true,
+        "preferred_capability_refs": [
+          "ace.capability.gumas.naming.resolve"
+        ],
+        "description": "Collision-safe canonical person name."
+      },
+      {
+        "field_path": "character.background",
+        "required": true,
+        "preferred_capability_refs": [
+          "ace.capability.quantum_forge.charforge.generate_capsule"
+        ],
+        "description": "Background synthesized from identity, role, faction state, stressors, and relationships."
+      },
+      {
+        "field_path": "character.traits",
+        "required": true,
+        "preferred_capability_refs": [
+          "ace.capability.quantum_forge.charforge.generate_capsule"
+        ],
+        "description": "Character voice, values, bias, and behavioral constraints."
+      },
+      {
+        "field_path": "character.naming_receipt",
+        "required": true,
+        "preferred_capability_refs": [
+          "ace.capability.gumas.naming.resolve"
+        ],
+        "description": "Naming protocol and collision-check receipt."
+      },
+      {
+        "field_path": "character.canonical_target",
+        "required": true,
+        "preferred_capability_refs": [
+          "ace.capability.canonrec.materialize.entity"
+        ],
+        "description": "Committed canonical entity location."
+      }
+    ],
+    "answer_contract": {
+      "compiler_version": "ace-answer-contract-0.1.1",
+      "interpretation_basis": [
+        "question:name_and_background",
+        "subject:confirmed_unrecorded_character",
+        "context:operational_encounter"
+      ],
+      "coverage_policy": "all_mandatory_semantics_satisfied",
+      "requirements": [
+        {
+          "requirement_id": "ace.semantic.character.identity",
+          "semantic_type": "stable_character_identity",
+          "description": "Return a stable character ID and collision-safe canonical name.",
+          "required": true,
+          "accepts_state_derived": false,
+          "accepts_connective_rendering": false,
+          "acceptable_origins": [
+            "deterministic_derivation",
+            "specialist_tool_output"
+          ],
+          "minimum_evidence": [
+            "identity_allocation_receipt",
+            "naming_receipt"
+          ]
+        },
+        {
+          "requirement_id": "ace.semantic.character.current_context",
+          "semantic_type": "current_role_and_faction_context",
+          "description": "State the character's current role, faction, and duty context.",
+          "required": true,
+          "accepts_state_derived": true,
+          "accepts_connective_rendering": true,
+          "acceptable_origins": [
+            "retrieved",
+            "specialist_tool_output",
+            "connective_synthesis"
+          ],
+          "minimum_evidence": [
+            "resolved_context",
+            "leader_state",
+            "faction_state"
+          ]
+        },
+        {
+          "requirement_id": "ace.semantic.character.operational_background",
+          "semantic_type": "state_derived_operational_background",
+          "description": "Describe role formation, decision profile, stressors, and relationships supported by the generated state.",
+          "required": true,
+          "accepts_state_derived": true,
+          "accepts_connective_rendering": true,
+          "acceptable_origins": [
+            "specialist_tool_output",
+            "connective_synthesis"
+          ],
+          "minimum_evidence": [
+            "charforge_identity_synopsis",
+            "charforge_bias_pattern",
+            "charforge_stressor_or_relationship_records"
+          ]
+        },
+        {
+          "requirement_id": "ace.semantic.character.behavioral_profile",
+          "semantic_type": "traits_and_decision_profile",
+          "description": "Return tool-produced traits, values, and decision tendencies.",
+          "required": true,
+          "accepts_state_derived": true,
+          "accepts_connective_rendering": false,
+          "acceptable_origins": [
+            "specialist_tool_output"
+          ],
+          "minimum_evidence": [
+            "charforge_traits",
+            "charforge_state_vector"
+          ]
+        },
+        {
+          "requirement_id": "ace.semantic.character.formative_biography",
+          "semantic_type": "origin_education_and_formative_events",
+          "description": "A fuller formative biography, if explicitly requested beyond operational background.",
+          "required": false,
+          "accepts_state_derived": false,
+          "accepts_connective_rendering": false,
+          "acceptable_origins": [
+            "retrieved",
+            "specialist_tool_output"
+          ],
+          "minimum_evidence": [
+            "history_producer_receipt"
+          ]
+        }
+      ]
+    },
+    "generation_policy": {
+      "canonical_completion_allowed": true,
+      "constitutive_simulation_allowed": true,
+      "analytical_simulation_allowed": true,
+      "prefer_existing_specialists": true,
+      "connective_synthesis_policy": "connective_only",
+      "deterministic_required": true,
+      "stable_seed": 808,
+      "reserved_decision_policy_ref": "ace.policy.reserved-decisions.v1"
+    },
+    "execution_policy": {
+      "mode": "delegated_materialize",
+      "delegation_policy_ref": "ace.policy.delegated-routine-character-completion.v1",
+      "allowed_side_effects": [
+        "write_canonrec_character_entity",
+        "write_determination_receipt",
+        "commit_exact_target_paths"
+      ],
+      "budgets": {
+        "max_tool_calls": 12,
+        "max_new_entities": 1,
+        "max_wall_seconds": 30,
+        "max_output_bytes": 262144
+      }
+    },
+    "response_policy": {
+      "include_human_answer": true,
+      "include_execution_plan": true,
+      "include_field_provenance": true,
+      "include_replay_command": true
+    }
+  },
+  "expected_determination_receipt": {
+    "schema_version": "0.1.1",
+    "record_type": "ace_determination_receipt",
+    "determination_id": "ace.determination.example.character-logistics-officer-001",
+    "query_id": "ace.query.example.character-logistics-officer-001",
+    "created_at": "2026-08-11T03:25:30Z",
+    "engine": {
+      "engine_id": "aurora_ace",
+      "engine_version": "0.1.1-example",
+      "contract_ref": "catalog/contracts/aurora_ace_contract_v0_1.json",
+      "execution_mode": "delegated_materialize"
+    },
+    "status": "GENERATED_CANON",
+    "simulation_mode": "constitutive_generation",
+    "baselines": [
+      {
+        "repository": "root",
+        "commit_sha": "a3da11061878782eda3db78fe17aeb61b96b042e",
+        "authority_role": "control_plane"
+      },
+      {
+        "repository": "CanonRec",
+        "commit_sha": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+        "authority_role": "canon"
+      },
+      {
+        "repository": "aurora-cloudbank-symbolic-main",
+        "commit_sha": "836a604d0ae4efeaa77b381171d69fef62ea36da",
+        "authority_role": "runtime"
+      }
+    ],
+    "subject_refs": [
+      "char_example_logistics_officer_001"
+    ],
+    "answer_contract": {
+      "compiler_version": "ace-answer-contract-0.1.1",
+      "overall_status": "complete",
+      "coverage": [
+        {
+          "requirement_id": "ace.semantic.character.identity",
+          "status": "satisfied",
+          "field_refs": [
+            "character.canonical_id",
+            "character.canonical_name"
+          ],
+          "producer_refs": [
+            "ace.capability.identity.allocate",
+            "ace.capability.gumas.naming.resolve"
+          ],
+          "reason": "Stable ID allocation and the naming receipt cover identity."
+        },
+        {
+          "requirement_id": "ace.semantic.character.current_context",
+          "status": "satisfied",
+          "field_refs": [
+            "character.role",
+            "character.background"
+          ],
+          "producer_refs": [
+            "ace.capability.context.resolve",
+            "ace.capability.quantum_forge.charforge.generate_capsule"
+          ],
+          "reason": "Resolved scenario context and CharForge identity synopsis cover role, faction, and duty context."
+        },
+        {
+          "requirement_id": "ace.semantic.character.operational_background",
+          "status": "satisfied",
+          "field_refs": [
+            "character.background"
+          ],
+          "producer_refs": [
+            "ace.capability.quantum_forge.charforge.generate_capsule",
+            "ace.capability.narrative.render.character_background"
+          ],
+          "reason": "The answer is explicitly scoped to state-derived operational background, stressors, and relationships."
+        },
+        {
+          "requirement_id": "ace.semantic.character.behavioral_profile",
+          "status": "satisfied",
+          "field_refs": [
+            "character.traits"
+          ],
+          "producer_refs": [
+            "ace.capability.quantum_forge.charforge.generate_capsule"
+          ],
+          "reason": "CharForge traits and state vector cover values and decision tendencies."
+        },
+        {
+          "requirement_id": "ace.semantic.character.formative_biography",
+          "status": "not_applicable",
+          "field_refs": [],
+          "producer_refs": [],
+          "reason": "The query was normalized to operational background and did not require origin, education, or formative-event generation."
+        }
+      ]
+    },
+    "projections": [
+      {
+        "projection_id": "ace.projection.example.character-referents",
+        "projection_type": "referent_graph",
+        "source_repository": "CanonRec",
+        "source_commit_sha": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+        "source_semantic_sha256": "e68bc945fbfa60da2ba5223de2704c8754cf188ca3c9538f012f499c1ae8a0dd",
+        "transform_id": "ace.referent_graph.v1",
+        "transform_version": "0.1.1",
+        "projection_sha256": "b100000000000000000000000000000000000000000000000000000000000001",
+        "source_member_count": 287,
+        "projected_member_count": 287,
+        "collapsed_row_count": 0,
+        "unresolved_relation_count": 8,
+        "membership_receipt_ref": "receipt://ace/example/referent-membership"
+      },
+      {
+        "projection_id": "ace.projection.example.name-occupancy",
+        "projection_type": "name_reservation_occupancy",
+        "source_repository": "CanonRec",
+        "source_commit_sha": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+        "source_semantic_sha256": "e68bc945fbfa60da2ba5223de2704c8754cf188ca3c9538f012f499c1ae8a0dd",
+        "transform_id": "ace.name_occupancy.connected_components",
+        "transform_version": "0.1.1",
+        "projection_sha256": "88c42e8cb70ccf0833a33b8b4bc187dc67bbbb05da6f75df01756ce22cee98a6",
+        "source_member_count": 287,
+        "projected_member_count": 237,
+        "collapsed_row_count": 50,
+        "unresolved_relation_count": 8,
+        "membership_receipt_ref": "receipt://ace/example/name-occupancy-membership"
+      }
+    ],
+    "transactions": [
+      {
+        "transaction_id": "ace.transaction.example.naming",
+        "kind": "naming_reservation",
+        "scope": "CanonRec:L2:canonical_name_reservations",
+        "baseline_sha256": "88c42e8cb70ccf0833a33b8b4bc187dc67bbbb05da6f75df01756ce22cee98a6",
+        "result_sha256": "f775f579ed960f4df824ec6d04536fc410dfadf9f5595099ee9ada52ae1fa839",
+        "concurrency_policy": "sequential_working_state",
+        "revalidation_status": "pass",
+        "side_effects": [
+          "reserved_generated_name_in_working_registry"
+        ],
+        "receipt_ref": "receipt://ace/example/naming-transaction"
+      },
+      {
+        "transaction_id": "ace.transaction.example.materialization",
+        "kind": "materialization",
+        "scope": "CanonRec:canon/L2/entities/char_example_logistics_officer_001",
+        "baseline_sha256": "c100000000000000000000000000000000000000000000000000000000000001",
+        "result_sha256": "c200000000000000000000000000000000000000000000000000000000000002",
+        "concurrency_policy": "optimistic_compare_and_swap",
+        "revalidation_status": "pass",
+        "side_effects": [
+          "wrote_canonical_entity",
+          "wrote_determination_receipt",
+          "committed_exact_target_paths"
+        ],
+        "receipt_ref": "receipt://ace/example/materialization"
+      }
+    ],
+    "answer": {
+      "summary": "No prior character record existed. ACE instantiated Jorenon Morrowen as a Galactic Union logistics officer serving aboard a Judicator-class vessel, generated the character capsule, validated continuity and references, and committed the canonical entity record.",
+      "fields": [
+        {
+          "field_path": "character.canonical_id",
+          "value": "char_example_logistics_officer_001",
+          "origin": "deterministic_derivation",
+          "producer_refs": [
+            "ace.capability.identity.allocate"
+          ],
+          "source_refs": [
+            "scenario.example.current",
+            "ace.query.example.character-logistics-officer-001"
+          ],
+          "run_receipt_refs": [
+            "receipt://ace/example/id-allocation"
+          ],
+          "constraint_refs": [
+            "ace.policy.contextual-referent-id.v1"
+          ],
+          "canon_target_ref": "CanonRec:canon/L2/entities/char_example_logistics_officer_001"
+        },
+        {
+          "field_path": "character.canonical_name",
+          "value": "Jorenon Morrowen",
+          "origin": "specialist_tool_output",
+          "producer_refs": [
+            "ace.capability.gumas.naming.resolve"
+          ],
+          "source_refs": [
+            "org_galactic_union",
+            "vessel_class.judicator"
+          ],
+          "run_receipt_refs": [
+            "receipt://ace/example/naming"
+          ],
+          "constraint_refs": [
+            "GUMAS_NAMING_PROTOCOL_v0.1"
+          ],
+          "canon_target_ref": "CanonRec:canon/L2/entities/char_example_logistics_officer_001"
+        },
+        {
+          "field_path": "character.role",
+          "value": "Logistics Officer",
+          "origin": "retrieved",
+          "producer_refs": [
+            "ace.capability.context.resolve"
+          ],
+          "source_refs": [
+            "scenario.example.current"
+          ],
+          "run_receipt_refs": [
+            "receipt://ace/example/context"
+          ],
+          "constraint_refs": [
+            "org_galactic_union"
+          ],
+          "canon_target_ref": "CanonRec:canon/L2/entities/char_example_logistics_officer_001"
+        },
+        {
+          "field_path": "character.background",
+          "value": "Jorenon Morrowen is a Galactic Union logistics officer assigned to a Judicator-class vessel. Their professional identity formed around constrained supply routing, emergency allocation, and strict respect for the ship's chain of command. The completed capsule ties their decision profile to the active Galactic Union faction state and records scenario-derived stressors and trust relationships.",
+          "origin": "connective_synthesis",
+          "producer_refs": [
+            "ace.capability.quantum_forge.charforge.generate_capsule",
+            "ace.capability.narrative.render.character_background"
+          ],
+          "source_refs": [
+            "scenario.example.current",
+            "org_galactic_union",
+            "vessel_class.judicator"
+          ],
+          "run_receipt_refs": [
+            "receipt://ace/example/charforge",
+            "receipt://ace/example/background-render"
+          ],
+          "constraint_refs": [
+            "charforge-capsule-v1.0",
+            "ace.policy.connective-synthesis.v1"
+          ],
+          "canon_target_ref": "CanonRec:canon/L2/entities/char_example_logistics_officer_001"
+        },
+        {
+          "field_path": "character.traits",
+          "value": {
+            "decision_style": "constraint-aware resource coordinator",
+            "values": [
+              "continuity",
+              "accountability",
+              "crew survival"
+            ],
+            "style_control": true
+          },
+          "origin": "specialist_tool_output",
+          "producer_refs": [
+            "ace.capability.quantum_forge.charforge.generate_capsule"
+          ],
+          "source_refs": [
+            "receipt://ace/example/leader-state",
+            "receipt://ace/example/faction-state"
+          ],
+          "run_receipt_refs": [
+            "receipt://ace/example/charforge"
+          ],
+          "constraint_refs": [
+            "charforge-traits-v1.0"
+          ],
+          "canon_target_ref": "CanonRec:canon/L2/entities/char_example_logistics_officer_001/capsule/traits.json"
+        },
+        {
+          "field_path": "character.naming_receipt",
+          "value": {
+            "protocol": "GUMAS_NAMING_PROTOCOL_v0.1",
+            "seed": 808,
+            "canonical_name": "Jorenon Morrowen",
+            "normalized": "jorenonmorrowen",
+            "phonetic_key": "jrnmrwn",
+            "collision_safe": true
+          },
+          "origin": "specialist_tool_output",
+          "producer_refs": [
+            "ace.capability.gumas.naming.resolve"
+          ],
+          "source_refs": [
+            "receipt://ace/example/name-registry"
+          ],
+          "run_receipt_refs": [
+            "receipt://ace/example/naming"
+          ],
+          "constraint_refs": [
+            "GUMAS_NAMING_PROTOCOL_v0.1"
+          ],
+          "canon_target_ref": "CanonRec:canon/L2/entities/char_example_logistics_officer_001/naming_receipt.json"
+        }
+      ],
+      "no_prior_record": true,
+      "supersedes_determination_refs": []
+    },
+    "plan": {
+      "plan_id": "ace.plan.example.character-logistics-officer-001",
+      "selection_basis": [
+        "specialist_first",
+        "complete_output_coverage",
+        "deterministic_replay",
+        "minimal_connective_synthesis"
+      ],
+      "rejected_capability_refs": [],
+      "steps": [
+        {
+          "step_id": "ace.step.example.context",
+          "capability_id": "ace.capability.context.resolve",
+          "status": "succeeded",
+          "depends_on": [],
+          "consumes": [
+            "query.question",
+            "query.subject.context"
+          ],
+          "produces": [
+            "resolved_context",
+            "existing_entity_matches"
+          ],
+          "tool_run_id": "ace-run-example-context",
+          "run_receipt_ref": "receipt://ace/example/context",
+          "manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "repository_sha": "a3da11061878782eda3db78fe17aeb61b96b042e",
+          "seed": null,
+          "duration_ms": 12.0,
+          "output_sha256": "1000000000000000000000000000000000000000000000000000000000000001"
+        },
+        {
+          "step_id": "ace.step.example.identity",
+          "capability_id": "ace.capability.identity.allocate",
+          "status": "succeeded",
+          "depends_on": [
+            "ace.step.example.context"
+          ],
+          "consumes": [
+            "resolved_context"
+          ],
+          "produces": [
+            "character.canonical_id"
+          ],
+          "tool_run_id": "ace-run-example-identity",
+          "run_receipt_ref": "receipt://ace/example/id-allocation",
+          "manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "repository_sha": "a3da11061878782eda3db78fe17aeb61b96b042e",
+          "seed": 808,
+          "duration_ms": 1.0,
+          "output_sha256": "2000000000000000000000000000000000000000000000000000000000000002"
+        },
+        {
+          "step_id": "ace.step.example.state",
+          "capability_id": "ace.capability.gumas.state.build_character",
+          "status": "succeeded",
+          "depends_on": [
+            "ace.step.example.identity"
+          ],
+          "consumes": [
+            "resolved_context",
+            "character.canonical_id"
+          ],
+          "produces": [
+            "leader_state",
+            "faction_state"
+          ],
+          "tool_run_id": "ace-run-example-state",
+          "run_receipt_ref": "receipt://ace/example/leader-state",
+          "manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "repository_sha": "836a604d0ae4efeaa77b381171d69fef62ea36da",
+          "seed": 808,
+          "duration_ms": 18.0,
+          "output_sha256": "3000000000000000000000000000000000000000000000000000000000000003"
+        },
+        {
+          "step_id": "ace.step.example.name-projection",
+          "capability_id": "ace.capability.canonrec.project.name_reservations",
+          "status": "succeeded",
+          "depends_on": [
+            "ace.step.example.context"
+          ],
+          "consumes": [
+            "canonrec_raw_name_registry",
+            "referent_graph"
+          ],
+          "produces": [
+            "name_reservation_projection",
+            "projection_membership_map",
+            "projection_lineage_receipt"
+          ],
+          "tool_run_id": "ace-run-example-name-projection",
+          "run_receipt_ref": "receipt://ace/example/name-occupancy-membership",
+          "manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "repository_sha": "a3da11061878782eda3db78fe17aeb61b96b042e",
+          "seed": null,
+          "duration_ms": 8.0,
+          "output_sha256": "3500000000000000000000000000000000000000000000000000000000000003"
+        },
+        {
+          "step_id": "ace.step.example.name",
+          "capability_id": "ace.capability.gumas.naming.resolve",
+          "status": "succeeded",
+          "depends_on": [
+            "ace.step.example.identity",
+            "ace.step.example.state",
+            "ace.step.example.name-projection"
+          ],
+          "consumes": [
+            "character.canonical_id",
+            "leader_state",
+            "name_reservation_projection"
+          ],
+          "produces": [
+            "character.canonical_name",
+            "character.naming_receipt"
+          ],
+          "tool_run_id": "ace-run-example-naming",
+          "run_receipt_ref": "receipt://ace/example/naming",
+          "manifest_sha256": "c10ca788854be6a35710ad1c612b6590de1e434231ab4780e913696f78c06776",
+          "repository_sha": "836a604d0ae4efeaa77b381171d69fef62ea36da",
+          "seed": 808,
+          "duration_ms": 4.0,
+          "output_sha256": "4000000000000000000000000000000000000000000000000000000000000004",
+          "semantic_output_sha256": "88c42e8cb70ccf0833a33b8b4bc187dc67bbbb05da6f75df01756ce22cee98a6",
+          "artifact_output_sha256": "4000000000000000000000000000000000000000000000000000000000000004",
+          "volatile_output_fields": [],
+          "tool_native_statuses": {},
+          "side_effects_observed": [
+            "reserved_generated_name_in_working_registry"
+          ]
+        },
+        {
+          "step_id": "ace.step.example.charforge",
+          "capability_id": "ace.capability.quantum_forge.charforge.generate_capsule",
+          "status": "succeeded",
+          "depends_on": [
+            "ace.step.example.state",
+            "ace.step.example.name"
+          ],
+          "consumes": [
+            "leader_state",
+            "faction_state",
+            "character.canonical_name"
+          ],
+          "produces": [
+            "character.identity",
+            "character.traits",
+            "character.background_knowledge",
+            "character.capsule",
+            "character.build_receipt"
+          ],
+          "tool_run_id": "ace-run-example-charforge",
+          "run_receipt_ref": "receipt://ace/example/charforge",
+          "manifest_sha256": "c8f84b8272ac415e7f955dc5dbbd3c04a114e67441f94ba0817d44eb9d541c7b",
+          "repository_sha": "a3da11061878782eda3db78fe17aeb61b96b042e",
+          "seed": 808,
+          "duration_ms": 44.0,
+          "output_sha256": "5000000000000000000000000000000000000000000000000000000000000005",
+          "semantic_output_sha256": "5100000000000000000000000000000000000000000000000000000000000005",
+          "artifact_output_sha256": "5000000000000000000000000000000000000000000000000000000000000005",
+          "volatile_output_fields": [
+            "capsule.manifest.generated_at",
+            "bundle.manifest.generated_at",
+            "BUILD_RECEIPT.generated_at"
+          ],
+          "tool_native_statuses": {
+            "identity.certainty": "CANON_PROMOTE"
+          },
+          "side_effects_observed": [
+            "wrote_capsule_bundle_to_transaction_workspace"
+          ]
+        },
+        {
+          "step_id": "ace.step.example.validate",
+          "capability_id": "ace.capability.canonrec.validate.entity",
+          "status": "succeeded",
+          "depends_on": [
+            "ace.step.example.charforge"
+          ],
+          "consumes": [
+            "character.identity",
+            "character.traits",
+            "character.background_knowledge"
+          ],
+          "produces": [
+            "entity_validation_receipt"
+          ],
+          "tool_run_id": "ace-run-example-validation",
+          "run_receipt_ref": "receipt://ace/example/entity-validation",
+          "manifest_sha256": "6bdab77ee7ada37f2d12a36cfc32169ef63df01490723ba74d44034da2815e0a",
+          "repository_sha": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+          "seed": null,
+          "duration_ms": 26.0,
+          "output_sha256": "6000000000000000000000000000000000000000000000000000000000000006"
+        },
+        {
+          "step_id": "ace.step.example.references",
+          "capability_id": "ace.capability.root.references.check",
+          "status": "succeeded",
+          "depends_on": [
+            "ace.step.example.validate"
+          ],
+          "consumes": [
+            "canonical_entity_candidate"
+          ],
+          "produces": [
+            "reference_integrity_receipt"
+          ],
+          "tool_run_id": "ace-run-example-references",
+          "run_receipt_ref": "receipt://ace/example/reference-integrity",
+          "manifest_sha256": "40adf123dc7cf66eae85b4f01f5d4d9e6188903d8c83ea143359f9e189569edd",
+          "repository_sha": "a3da11061878782eda3db78fe17aeb61b96b042e",
+          "seed": null,
+          "duration_ms": 31.0,
+          "output_sha256": "7000000000000000000000000000000000000000000000000000000000000007"
+        },
+        {
+          "step_id": "ace.step.example.materialize",
+          "capability_id": "ace.capability.canonrec.materialize.entity",
+          "status": "succeeded",
+          "depends_on": [
+            "ace.step.example.validate",
+            "ace.step.example.references"
+          ],
+          "consumes": [
+            "canonical_entity_candidate",
+            "entity_validation_receipt",
+            "reference_integrity_receipt"
+          ],
+          "produces": [
+            "committed_entity",
+            "determination_receipt"
+          ],
+          "tool_run_id": "ace-run-example-materialize",
+          "run_receipt_ref": "receipt://ace/example/materialization",
+          "manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "repository_sha": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+          "seed": null,
+          "duration_ms": 52.0,
+          "output_sha256": "8000000000000000000000000000000000000000000000000000000000000008"
+        }
+      ]
+    },
+    "validation": {
+      "overall_status": "pass",
+      "gates": [
+        {
+          "gate_id": "schema",
+          "status": "pass",
+          "validator_ref": "ace.capability.canonrec.validate.entity",
+          "receipt_refs": [
+            "receipt://ace/example/entity-validation"
+          ],
+          "finding_codes": [],
+          "summary": "Entity and capsule structures satisfy their declared schemas."
+        },
+        {
+          "gate_id": "projection_lineage",
+          "status": "pass",
+          "validator_ref": "ace.capability.canonrec.project.name_reservations",
+          "receipt_refs": [
+            "receipt://ace/example/referent-membership",
+            "receipt://ace/example/name-occupancy-membership"
+          ],
+          "finding_codes": [],
+          "summary": "All 287 raw members remain traceable while 237 occupancy components provide a valid NameService input."
+        },
+        {
+          "gate_id": "naming_protocol",
+          "status": "pass",
+          "validator_ref": "ace.capability.gumas.naming.resolve",
+          "receipt_refs": [
+            "receipt://ace/example/naming"
+          ],
+          "finding_codes": [],
+          "summary": "The selected name is collision-safe under the projected registry and passed live raw-registry revalidation before materialization."
+        },
+        {
+          "gate_id": "semantic_coverage",
+          "status": "pass",
+          "validator_ref": "ace.answer_contract.coverage.v0.1.1",
+          "receipt_refs": [
+            "receipt://ace/example/background-render",
+            "receipt://ace/example/charforge"
+          ],
+          "finding_codes": [],
+          "summary": "All mandatory name and operational-background semantics are satisfied; formative biography was not requested."
+        },
+        {
+          "gate_id": "reference_integrity",
+          "status": "pass",
+          "validator_ref": "ace.capability.root.references.check",
+          "receipt_refs": [
+            "receipt://ace/example/reference-integrity"
+          ],
+          "finding_codes": [],
+          "summary": "The candidate contains no dangling canonical references."
+        },
+        {
+          "gate_id": "layer_integrity",
+          "status": "pass",
+          "validator_ref": "ace.capability.canonrec.validate.entity",
+          "receipt_refs": [
+            "receipt://ace/example/entity-validation"
+          ],
+          "finding_codes": [],
+          "summary": "The generated character remains within L2."
+        }
+      ]
+    },
+    "conflicts": [],
+    "blockers": [],
+    "materialization": {
+      "status": "committed",
+      "target_repository": "CanonRec",
+      "target_paths": [
+        "canon/L2/entities/char_example_logistics_officer_001"
+      ],
+      "commit_sha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "gate_policy_ref": "ace.policy.delegated-routine-character-completion.v1",
+      "commit_ready_packet_ref": null
+    },
+    "integrity": {
+      "query_sha256": "9000000000000000000000000000000000000000000000000000000000000009",
+      "capability_manifest_sha256s": [
+        "c10ca788854be6a35710ad1c612b6590de1e434231ab4780e913696f78c06776",
+        "c8f84b8272ac415e7f955dc5dbbd3c04a114e67441f94ba0817d44eb9d541c7b",
+        "6bdab77ee7ada37f2d12a36cfc32169ef63df01490723ba74d44034da2815e0a",
+        "40adf123dc7cf66eae85b4f01f5d4d9e6188903d8c83ea143359f9e189569edd"
+      ],
+      "answer_sha256": "a00000000000000000000000000000000000000000000000000000000000000a",
+      "semantic_answer_sha256": "a10000000000000000000000000000000000000000000000000000000000001a",
+      "artifact_sha256s": [
+        "5000000000000000000000000000000000000000000000000000000000000005",
+        "8000000000000000000000000000000000000000000000000000000000000008"
+      ],
+      "semantic_digest_policy_ref": "ace.policy.semantic-digest.v1",
+      "prior_determination_digest": null
+    },
+    "replay": {
+      "replayable": true,
+      "deterministic": true,
+      "replay_command": "aurora-ace replay --determination-id ace.determination.example.character-logistics-officer-001",
+      "required_artifact_refs": [
+        "ace.query.example.character-logistics-officer-001",
+        "receipt://ace/example/name-registry",
+        "receipt://ace/example/leader-state",
+        "receipt://ace/example/faction-state"
+      ],
+      "non_replayable_reasons": []
+    }
+  }
+}

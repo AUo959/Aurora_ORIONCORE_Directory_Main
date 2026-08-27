@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.12.0",
+  "record_type": "aurora_ace_delegated_publication_contract",
+  "capability_id": "ace.capability.canonrec.publish.delegated_pr",
+  "target_repository": "CanonRec",
+  "transport": "authenticated_https_json",
+  "authority": {
+    "required_remote_scopes": [
+      "ace:publish",
+      "ace:autonomic",
+      "ace:materialize"
+    ],
+    "authority_ref_binding_required": true,
+    "committed_policy_required": true,
+    "verified_runtime_binding_required": true
+  },
+  "publication": {
+    "registered_baseline_required": true,
+    "remote_main_must_equal_registered_baseline": true,
+    "feature_branch_only": true,
+    "branch_prefix": "ace/canon/",
+    "one_materialization_commit_required": true,
+    "draft_pull_request_required": true,
+    "auto_merge_allowed": false,
+    "caller_selected_repository_allowed": false,
+    "caller_selected_branch_allowed": false
+  },
+  "naming": {
+    "new_generic_l2_referent_receipt_required": true,
+    "owner_names_still_pass_through_nameservice": true,
+    "autonomous_naming_warning_budget": 0
+  },
+  "failure_semantics": {
+    "orphan_remote_branch_deleted_if_pr_open_fails": true,
+    "local_canonrec_checkout_restored": true,
+    "publication_replay_refused": true,
+    "mainline_canon_advanced_on_success": false
+  },
+  "simulation_authority": {
+    "orion_init_allowed": false,
+    "orion_resume_allowed": false,
+    "orion_tick_advance_allowed": false
+  }
+}

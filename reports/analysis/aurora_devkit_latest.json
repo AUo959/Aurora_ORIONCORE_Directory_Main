@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-09T07:16:14Z",
+  "generated_at": "2026-08-15T05:32:26Z",
   "root": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
   "manifest_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
   "toolkit_id": "aurora-dev-toolkit",
@@ -272,7 +272,7 @@
       ],
       "path": "/usr/bin/xcodebuild",
       "returncode": 0,
-      "output": "Xcode 26.5\nBuild version 17F42"
+      "output": "Xcode 26.6\nBuild version 17F113"
     },
     {
       "id": "rust",
@@ -400,17 +400,17 @@
       "kind": "python"
     },
     {
-      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/archived/requirements.txt",
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/archive/operational/archived/requirements.txt",
       "name": "requirements.txt",
       "kind": "python"
     },
     {
-      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/reports/package-lock.json",
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/archive/operational/reports/package-lock.json",
       "name": "package-lock.json",
       "kind": "javascript"
     },
     {
-      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/operational/reports/package.json",
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docs/archive/operational/reports/package.json",
       "name": "package.json",
       "kind": "javascript"
     },
@@ -452,6 +452,16 @@
     {
       "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/services/nemo_service/requirements.txt",
       "name": "requirements.txt",
+      "kind": "python"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/CanonRec/Makefile",
+      "name": "Makefile",
+      "kind": "workflow"
+    },
+    {
+      "path": "GUMAS_SIM_2.5/CanonRec/requirements-dev.txt",
+      "name": "requirements-dev.txt",
       "kind": "python"
     },
     {
@@ -529,7 +539,7 @@
     {
       "name": "aurora-cloudbank-symbolic-main",
       "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
-      "branch": "codex/cloudbank-pat-terminal-compat-2026-06-16",
+      "branch": "main",
       "remote_status": "configured"
     },
     {
@@ -851,7 +861,6 @@
       "aurora-skill-finder",
       "chatgpt-apps",
       "develop-web-game",
-      "doc",
       "gh-address-comments",
       "gh-fix-ci",
       "gitwiz-github-manager",
@@ -866,7 +875,7 @@
       "zipwiz-governor"
     ],
     "repo_local_count": 16,
-    "installed_count": 27,
+    "installed_count": 26,
     "missing_installed_for_repo_source": [],
     "skills_root": "/Users/travisstreets/.codex/skills"
   },
@@ -912,6 +921,13 @@
       "status": "PAUSED",
       "rrule": "FREQ=HOURLY;INTERVAL=4",
       "path": "/Users/travisstreets/.codex/automations/aurora-package-watch/automation.toml"
+    },
+    {
+      "id": "aurora-package-watch-bb49e52dcc54",
+      "name": "Aurora Package Watch",
+      "status": "PAUSED",
+      "rrule": "FREQ=HOURLY;INTERVAL=4",
+      "path": "/Users/travisstreets/.codex/automations/aurora-package-watch-bb49e52dcc54/automation.toml"
     },
     {
       "id": "aurora-root-workspace-health",
@@ -976,7 +992,8 @@
       "id": "repo_python_env_aurora-cloudbank-symbolic-main_warn",
       "message": "aurora-cloudbank-symbolic-main Python environment is warn.",
       "evidence": ".env_status.json is stale",
-      "next_step": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment."
+      "next_step": "CloudBank validation must use the repo-local .venv interpreter. Plain root/system python3 is not the CloudBank runtime environment.",
+      "execution_context": "canonical"
     }
   ],
   "install_plan": [],

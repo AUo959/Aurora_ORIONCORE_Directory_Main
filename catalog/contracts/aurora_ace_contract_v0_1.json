@@ -1,0 +1,560 @@
+{
+  "contract_id": "aurora_ace_contract",
+  "version": "0.1.1",
+  "status": "owner_directed_draft",
+  "implementation_status": "local_character_completion_mvp",
+  "created_at_utc": "2026-08-11T03:24:44Z",
+  "refined_at_utc": "2026-08-11T03:55:27Z",
+  "refinement_basis": "practical_tool_composition_pass_1",
+  "implementation": {
+    "engine_version": "0.1.0",
+    "cli_path": "tools/aurora_ace.py",
+    "package_path": "tools/ace",
+    "test_path": "tests/test_aurora_ace.py",
+    "implemented_modes": [
+      "plan_only",
+      "commit_ready"
+    ],
+    "implemented_query_classes": [
+      "confirmed_unrecorded_character_name_and_operational_background"
+    ],
+    "implemented_capabilities": [
+      "ace.capability.context.resolve",
+      "ace.capability.identity.allocate",
+      "ace.capability.canonrec.project.name_reservations",
+      "ace.capability.gumas.naming.resolve",
+      "ace.capability.gumas.state.build_character",
+      "ace.capability.quantum_forge.charforge.generate_capsule",
+      "ace.capability.canonrec.validate.entity",
+      "ace.capability.canonrec.validate.naming_receipt"
+    ],
+    "blocked_capabilities": [
+      "ace.capability.canonrec.materialize.entity"
+    ],
+    "not_yet_implemented": [
+      "existing_character_retrieval",
+      "canon_revision_routing",
+      "delegated_materialization",
+      "owner_gated_materialization",
+      "append_only_determination_ledger",
+      "mcp_interface",
+      "non_character_entity_completion",
+      "explicit_canon_relation_enrichment_for_occupancy_members",
+      "fleet_scan_manifest_ingestion"
+    ]
+  },
+  "short_name": "ACE",
+  "title": "Aurora Canon Engine",
+  "specification_path": "docs/AURORA_ACE__SPEC__CANON_ENGINE__v0.1__2026-08-10.md",
+  "purpose": "Discover, select, compose, and operate trusted Aurora capabilities across the registered repository fleet to retrieve existing canon or generate conflict-free canonical completions on demand.",
+  "scope": [
+    "root_control_plane_capability_index",
+    "registered_repository_search",
+    "contextual_referent_resolution",
+    "semantic_answer_contract_compilation",
+    "referent_preserving_canon_graph",
+    "tool_specific_canon_projections",
+    "capability_plan_compilation",
+    "bounded_specialist_tool_execution",
+    "field_level_provenance",
+    "canonical_determination",
+    "policy_gated_materialization",
+    "agent_and_operations_consumption"
+  ],
+  "non_goals": [
+    "arbitrary_code_discovery_or_execution",
+    "general_unbounded_chat",
+    "silent_cross_layer_mapping",
+    "owner_as_routine_detail_generator",
+    "staging_as_a_final_determination",
+    "rewriting_committed_history",
+    "treating_tool_failure_as_canon_uncertainty"
+  ],
+  "repositories": {
+    "control_plane": "AUo959/Aurora_ORIONCORE_Directory_Main",
+    "registry_path": "catalog/repo_registry.yaml",
+    "canon_repository": "CanonRec",
+    "primary_runtime_repository": "aurora-cloudbank-symbolic-main",
+    "registered_fleet_only": true
+  },
+  "schemas": {
+    "capability_manifest": "catalog/schemas/aurora_ace_capability_manifest.schema.json",
+    "query_envelope": "catalog/schemas/aurora_ace_query_envelope.schema.json",
+    "determination_receipt": "catalog/schemas/aurora_ace_determination_receipt.schema.json"
+  },
+  "worked_examples": [
+    "catalog/templates/aurora_ace_character_resolution.example.json",
+    "catalog/templates/aurora_ace_nameservice_capability.example.json"
+  ],
+  "practical_test_receipt": {
+    "disposition": "design_input_not_canon_determination",
+    "storage": "disposable_private_tmp",
+    "fleet_discovery": {
+      "candidate_files": 12340,
+      "matched_modules": 2789,
+      "ambiguity_count": 1198,
+      "report_bytes_approx": 4512926,
+      "design_conclusion": "bootstrap_or_refresh_only_not_query_hot_path"
+    },
+    "forge": {
+      "seed": 808,
+      "turns": 3,
+      "events": 184,
+      "validation": "45_of_45_passed",
+      "capsules": "21_of_21_generated_and_verified",
+      "risk_flags": 0
+    },
+    "naming": {
+      "cloudbank_tests": "6_passed",
+      "canonrec_gate_tests": "3_passed",
+      "raw_registry_entries": 287,
+      "duplicate_normalized_canonical_name_groups": 36,
+      "duplicate_groups_cross_id": 36,
+      "explicitly_related_groups": 28,
+      "unresolved_or_distinct_groups": 8,
+      "occupancy_components": 237,
+      "multi_occupant_components": 40,
+      "generated_probe_name": "Jorenon Morrowen",
+      "working_registry_mutated": true
+    },
+    "charforge": {
+      "capsule_verified": true,
+      "stable_semantic_payload_files": 6,
+      "stable_manifest_record_hashes": true,
+      "stable_manifest_bytes": false,
+      "volatile_field": "generated_at"
+    },
+    "canonrec_candidate_validation": {
+      "entity_blocks": 0,
+      "entity_warnings": 0,
+      "naming_blocks": 0,
+      "naming_warning": "NAMING_REGISTRY_ADVANCED"
+    }
+  },
+  "hard_rules": [
+    "Every valid inquiry ends in a canonical determination or a precisely identified TRUE_CONFLICT.",
+    "No prior record is a canonical-completion trigger, not a reason to stop.",
+    "STAGING and UNKNOWN are not valid final ACE determination statuses.",
+    "ACE searches for and prefers registered specialist capabilities before connective synthesis.",
+    "Every answer field records its producer, source references, and run receipts.",
+    "Operational failure is EXECUTION_BLOCKED and must not be misreported as canon uncertainty.",
+    "The owner establishes invariants, reserved decisions, and delegation policy rather than selecting routine values.",
+    "A new result is not labeled GENERATED_CANON or CANON_REVISION until its authoritative commit is recorded.",
+    "Commit approval persists a determination; it does not reopen routine value selection.",
+    "Root, nested-repository, and L1/L2/L3 boundaries remain explicit.",
+    "A tool-specific projection never replaces the referent-preserving canon graph.",
+    "Mutable capability calls record baseline, post-state, and concurrency policy.",
+    "Semantic reproducibility is evaluated separately from byte-level artifact identity.",
+    "A tool-native STAGING status is adapter input or provenance, never a final ACE determination."
+  ],
+  "simulation_modes": {
+    "constitutive_generation": {
+      "purpose": "Create a previously unspecified entity, attribute, relationship, or event inside the Aurora universe.",
+      "eligible_determinations": [
+        "GENERATED_CANON",
+        "CANON_REVISION"
+      ]
+    },
+    "analytical_simulation": {
+      "purpose": "Evaluate alternatives, sensitivities, forecasts, or real-world claims without selecting canonical state by itself.",
+      "eligible_determinations": [
+        "DERIVED_CANON",
+        "TRUE_CONFLICT",
+        "EXECUTION_BLOCKED"
+      ]
+    }
+  },
+  "determination_vocabulary": [
+    "RETRIEVED_CANON",
+    "DERIVED_CANON",
+    "GENERATED_CANON",
+    "CANON_REVISION",
+    "TRUE_CONFLICT",
+    "EXECUTION_BLOCKED"
+  ],
+  "final_canonical_determinations": [
+    "RETRIEVED_CANON",
+    "DERIVED_CANON",
+    "GENERATED_CANON",
+    "CANON_REVISION"
+  ],
+  "non_canonical_terminal_states": [
+    "TRUE_CONFLICT",
+    "EXECUTION_BLOCKED"
+  ],
+  "prohibited_final_states": [
+    "STAGING",
+    "UNKNOWN",
+    "UNCONFIRMED",
+    "PROMOTION_CANDIDATE",
+    "OWNER_DECISION_REQUIRED_WITHOUT_EXACT_CONFLICT"
+  ],
+  "answer_contract_policy": {
+    "compile_before_capability_selection": true,
+    "selection_unit": "semantic_requirement_not_field_label",
+    "required_coverage_states": [
+      "satisfied",
+      "partial",
+      "missing",
+      "not_applicable"
+    ],
+    "canonical_determination_requires": "all_mandatory_semantics_satisfied",
+    "character_background_default": [
+      "current_role_and_faction_context",
+      "decision_profile",
+      "operational_history_or_stressors",
+      "explicit_scope_limit"
+    ],
+    "formative_biography_requires_distinct_producer": true
+  },
+  "canon_projection_policy": {
+    "raw_evidence_index": "preserve_every_source_record",
+    "referent_graph": "preserve_distinct_equivalent_superseded_and_unresolved_relations",
+    "tool_input_projection": "shape_inputs_without_replacing_referent_identity",
+    "name_reservation_projection": {
+      "algorithm": "connected_components_over_normalized_canonical_names_and_aliases",
+      "output": "one_reservation_entry_per_occupancy_component",
+      "membership_map_required": true,
+      "identity_relation_states": [
+        "proven_equivalent",
+        "proven_distinct",
+        "unresolved"
+      ]
+    },
+    "required_lineage": [
+      "source_repository_and_commit",
+      "source_semantic_digest",
+      "transform_id_and_version",
+      "projection_digest",
+      "source_member_count",
+      "collapsed_row_count",
+      "unresolved_relation_count"
+    ]
+  },
+  "transaction_policy": {
+    "mutable_scope_strategies": [
+      "exclusive_scope",
+      "sequential_working_state",
+      "optimistic_compare_and_swap"
+    ],
+    "name_allocation": {
+      "pre_resolution_digest_required": true,
+      "post_resolution_digest_required": true,
+      "live_registry_revalidation_before_materialization": true,
+      "parallel_same_baseline_allocation": "prohibited_without_atomic_batch_contract"
+    },
+    "baseline_advanced_action": "deterministic_revalidation_or_replan"
+  },
+  "digest_policy": {
+    "semantic_digest": "canonicalized_content_excluding_declared_volatile_fields",
+    "artifact_digest": "exact_emitted_bytes",
+    "reproducibility_basis": "semantic_digest",
+    "volatile_fields_must_be_declared": true,
+    "existing_canonrec_analogy": [
+      "content_hash",
+      "output_hash"
+    ]
+  },
+  "tool_status_policy": {
+    "preserve_tool_native_status": true,
+    "require_status_crosswalk": true,
+    "ace_status_is_computed_by_ace": true,
+    "prohibited_default_leak": "STAGING",
+    "charforge_commit_ready_input": "CANON_PROMOTE"
+  },
+  "capability_source_precedence": [
+    "committed_ace_capability_manifest",
+    "trusted_opal2_tool_manifest",
+    "committed_module_api_and_schema",
+    "executable_cli_or_mcp_discovery",
+    "validation_test_or_deterministic_fixture",
+    "specialist_skill_metadata",
+    "human_facing_documentation"
+  ],
+  "capability_lifecycle": [
+    "discovered",
+    "active",
+    "unavailable",
+    "blocked",
+    "deprecated",
+    "superseded"
+  ],
+  "activation_requirements": [
+    "allowlisted_entrypoint",
+    "input_and_output_contract",
+    "repository_and_path_identity",
+    "observed_repository_sha",
+    "side_effect_declaration",
+    "at_least_one_validation_reference",
+    "freshness_policy"
+  ],
+  "capability_edge_types": [
+    "requires",
+    "produces",
+    "validates_with",
+    "materializes_with",
+    "precedes",
+    "follows",
+    "fallback_to",
+    "conflicts_with",
+    "supersedes"
+  ],
+  "plan_selection_priority": [
+    "canonical_compatibility",
+    "authority_and_trust",
+    "complete_output_coverage",
+    "determinism_and_replayability",
+    "minimal_mutation_scope",
+    "minimal_connective_synthesis",
+    "execution_cost_and_latency"
+  ],
+  "field_origins": [
+    "retrieved",
+    "deterministic_derivation",
+    "specialist_tool_output",
+    "connective_synthesis"
+  ],
+  "execution_modes": {
+    "plan_only": "Compile and explain a capability plan without tool execution.",
+    "read_only": "Retrieve, derive, and execute only non-mutating capabilities.",
+    "commit_ready": "Generate and validate canonical artifacts without committing them.",
+    "delegated_materialize": "Write and commit within a pre-approved target and policy class.",
+    "owner_gated_materialize": "Prepare exact artifacts and pass the persistence gate without reopening value selection."
+  },
+  "materialization_states": [
+    "not_required",
+    "committed",
+    "commit_ready",
+    "blocked"
+  ],
+  "true_conflict_criteria": [
+    "mutually_exclusive_committed_claims",
+    "protected_invariant_change_required",
+    "unauthorized_cross_layer_bridge",
+    "owner_reserved_branch",
+    "major_direction_fork_without_selection_policy"
+  ],
+  "not_true_conflicts": [
+    "missing_name",
+    "missing_background",
+    "unobserved_entity",
+    "unrecorded_relationship",
+    "specialist_missing_upstream_input",
+    "multiple_policy_selectable_candidates",
+    "missing_materialization_authority",
+    "tool_unavailability"
+  ],
+  "validation_gates": [
+    "schema",
+    "identity_collision",
+    "naming_protocol",
+    "reference_integrity",
+    "timeline_continuity",
+    "layer_integrity",
+    "protected_invariants",
+    "capability_output_integrity",
+    "target_repository_and_path"
+  ],
+  "initial_interfaces": {
+    "cli": [
+      "resolve",
+      "explain-plan",
+      "capabilities",
+      "replay",
+      "validate-receipt"
+    ],
+    "mcp": [
+      "aurora_ace_resolve",
+      "aurora_ace_explain_plan",
+      "aurora_ace_list_capabilities",
+      "aurora_ace_get_determination",
+      "aurora_ace_replay_determination"
+    ]
+  },
+  "initial_capability_seeds": [
+    {
+      "capability_id": "ace.capability.gumas.naming.resolve",
+      "repository": "aurora-cloudbank-symbolic-main",
+      "path": "modules/gumas/naming.py",
+      "entrypoint": "modules.gumas.naming:NameService.resolve",
+      "produces": [
+        "entity.canonical_name",
+        "entity.aliases",
+        "naming_receipt"
+      ],
+      "deterministic": true,
+      "mutates_supplied_working_state": true,
+      "receipt_registry_digest_state": "pre_reservation",
+      "transaction_scope": "canonical_name_reservations"
+    },
+    {
+      "capability_id": "ace.capability.canonrec.export.name_registry",
+      "repository": "CanonRec",
+      "path": "aurora-canon-reconciler/scripts/export_name_registry.py",
+      "entrypoint": "export_name_registry:build_registry",
+      "produces": [
+        "canonrec_raw_name_registry",
+        "source_registry_semantic_digest"
+      ],
+      "deterministic": "semantic_content_only",
+      "volatile_fields": [
+        "generated_at"
+      ]
+    },
+    {
+      "capability_id": "ace.capability.canonrec.project.name_reservations",
+      "repository": "root",
+      "path": "planned:ace/canon_projections.py",
+      "entrypoint": "planned:build_name_reservation_projection",
+      "requires": [
+        "canonrec_raw_name_registry",
+        "referent_graph"
+      ],
+      "produces": [
+        "name_reservation_projection",
+        "projection_membership_map",
+        "projection_lineage_receipt"
+      ],
+      "algorithm": "connected_components_over_normalized_canonical_names_and_aliases",
+      "deterministic": true
+    },
+    {
+      "capability_id": "ace.capability.canonrec.validate.naming_receipt",
+      "repository": "CanonRec",
+      "path": "aurora-canon-reconciler/scripts/validate_naming_receipts.py",
+      "entrypoint": "validate_naming_receipts:validate_receipt",
+      "requires": [
+        "canonical_entity_candidate",
+        "canonrec_raw_name_registry",
+        "projection_lineage_receipt"
+      ],
+      "produces": [
+        "naming_validation_receipt"
+      ],
+      "current_adapter_requirement": "projection_digest_must_be_reconciled_with_source_registry_digest_to_avoid_false_NAMING_REGISTRY_ADVANCED",
+      "deterministic": true
+    },
+    {
+      "capability_id": "ace.capability.quantum_forge.charforge.generate_capsule",
+      "repository": "root",
+      "path": "GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19/charforge.py",
+      "entrypoint": "charforge:generate_capsule",
+      "requires": [
+        "leader_state",
+        "faction_state"
+      ],
+      "produces": [
+        "character.identity",
+        "character.traits",
+        "character.background_knowledge",
+        "character.state_vector",
+        "character_capsule",
+        "charforge_build_receipt"
+      ],
+      "deterministic": true,
+      "tool_native_status_field": "identity.certainty",
+      "tool_native_default_status": "STAGING",
+      "semantic_digest_excludes": [
+        "capsule.manifest.generated_at",
+        "bundle.manifest.generated_at",
+        "BUILD_RECEIPT.generated_at"
+      ]
+    },
+    {
+      "capability_id": "ace.capability.canonrec.validate.entity",
+      "repository": "CanonRec",
+      "path": "aurora-canon-reconciler/scripts/validate_entity.py",
+      "entrypoint": "validate_entity:validate",
+      "produces": [
+        "entity_validation_receipt"
+      ],
+      "deterministic": true
+    },
+    {
+      "capability_id": "ace.capability.root.references.check",
+      "repository": "root",
+      "path": "tools/canon_reference_integrity.py",
+      "entrypoint": "tools/canon_reference_integrity.py",
+      "produces": [
+        "reference_integrity_receipt"
+      ],
+      "deterministic": true
+    }
+  ],
+  "character_vertical_slice": {
+    "question": "What is this character's name and background?",
+    "required_outputs": [
+      "canonical_character_id",
+      "canonical_name",
+      "aliases",
+      "role",
+      "faction_binding",
+      "background_synopsis",
+      "traits",
+      "decision_profile",
+      "build_receipts",
+      "canonical_target"
+    ],
+    "required_capability_families": [
+      "semantic_answer_contract",
+      "canon_search",
+      "referent_resolution",
+      "canon_projection",
+      "stable_id_allocation",
+      "state_builder",
+      "naming",
+      "naming_transaction",
+      "character_forge",
+      "capsule_verification",
+      "continuity_validation",
+      "reference_integrity",
+      "materialization"
+    ],
+    "successful_status": "GENERATED_CANON"
+  },
+  "security_requirements": [
+    "allowlisted_entrypoints_only",
+    "no_arbitrary_imports",
+    "registered_repository_paths_only",
+    "per_tool_time_and_output_limits",
+    "secret_redaction",
+    "declared_side_effects",
+    "manifest_digest_verification",
+    "untrusted_content_is_data_not_instruction"
+  ],
+  "mvp_acceptance_scenarios": [
+    "existing_character_lookup_without_generation",
+    "unobserved_character_name_and_background_completion",
+    "idempotent_contextual_referent_replay",
+    "name_collision_resolution",
+    "canonrec_name_registry_occupancy_component_projection",
+    "referent_identity_preserved_across_tool_projection",
+    "name_registry_advanced_revalidation",
+    "semantic_background_coverage",
+    "semantic_digest_stable_with_volatile_artifact_fields",
+    "warm_manifest_index_without_per_query_fleet_scan",
+    "automatic_upstream_state_dependency_insertion",
+    "stale_manifest_execution_block",
+    "exact_true_conflict_receipt",
+    "cross_layer_bridge_gate",
+    "commit_ready_packet_when_materialization_is_unavailable",
+    "field_level_producer_coverage",
+    "bounded_connective_synthesis",
+    "deterministic_fallback_routing"
+  ],
+  "implementation_phases": [
+    "phase_0_contracts_and_schema_tests",
+    "phase_1_capability_graph",
+    "phase_2_query_normalization_and_plan_compilation",
+    "phase_3_character_completion_vertical_slice",
+    "phase_4_determination_ledger_and_materialization",
+    "phase_5_broader_canonical_completion"
+  ],
+  "owner_level_decisions": [
+    "determination_ledger_authoritative_location",
+    "delegated_commit_policy_classes",
+    "contextual_referent_stable_id_policy",
+    "cross_repository_capability_manifest_ownership",
+    "reserved_decision_policy"
+  ]
+}

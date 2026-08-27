@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-07-22T13:02:12Z",
+  "generated_at": "2026-08-10T02:14:11Z",
   "root": ".",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-07-22T13:02:05Z",
+  "manifest_generated_at": "2026-08-10T02:14:03Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
@@ -376,19 +376,6 @@
         },
         {
           "batch_id": "wave4_root_intake_cleanup_initial",
-          "source": ".gitleaks.toml",
-          "destination": "intake/.gitleaks.toml",
-          "operation": "move",
-          "pre_hash": "210ec053f1d156dffc5380458b346a313c6aa1b68e82fc7f26a7217f14095d67",
-          "post_hash": "210ec053f1d156dffc5380458b346a313c6aa1b68e82fc7f26a7217f14095d67",
-          "rollback_source": ".gitleaks.toml",
-          "reason": "Relocate .gitleaks.toml into intake/.gitleaks.toml.",
-          "approved": false,
-          "applied_at": null,
-          "path_kind": "file"
-        },
-        {
-          "batch_id": "wave4_root_intake_cleanup_initial",
           "source": "Aurora_Sim_Architecture",
           "destination": "intake/Aurora_Sim_Architecture",
           "operation": "move",
@@ -399,32 +386,6 @@
           "approved": true,
           "applied_at": null,
           "path_kind": "tree"
-        },
-        {
-          "batch_id": "wave4_root_intake_cleanup_initial",
-          "source": "CLAUDE.md",
-          "destination": "intake/CLAUDE.md",
-          "operation": "move",
-          "pre_hash": "ca721118380948b27f2db95b61602dc5f755655ba4d893e595b6519458632d83",
-          "post_hash": "ca721118380948b27f2db95b61602dc5f755655ba4d893e595b6519458632d83",
-          "rollback_source": "CLAUDE.md",
-          "reason": "Relocate CLAUDE.md into intake/CLAUDE.md.",
-          "approved": false,
-          "applied_at": null,
-          "path_kind": "file"
-        },
-        {
-          "batch_id": "wave4_root_intake_cleanup_initial",
-          "source": "Prplexity_Observation_6_14.md",
-          "destination": "intake/Prplexity_Observation_6_14.md",
-          "operation": "move",
-          "pre_hash": "8ff56aaa54f1d049ae5b80f80cff5e2a2118502084cf00f1e27499d824267e7a",
-          "post_hash": "8ff56aaa54f1d049ae5b80f80cff5e2a2118502084cf00f1e27499d824267e7a",
-          "rollback_source": "Prplexity_Observation_6_14.md",
-          "reason": "Relocate Prplexity_Observation_6_14.md into intake/Prplexity_Observation_6_14.md.",
-          "approved": false,
-          "applied_at": null,
-          "path_kind": "file"
         },
         {
           "batch_id": "wave4_root_intake_cleanup_initial",
@@ -448,45 +409,6 @@
           "post_hash": "4712bae35a51e0a8b20da2dfca1796dabf346adc1880e142436d782560922c64",
           "rollback_source": "QGIA_Runtime_OnePager.md",
           "reason": "Relocate QGIA_Runtime_OnePager.md into intake/QGIA_Runtime_OnePager.md.",
-          "approved": false,
-          "applied_at": null,
-          "path_kind": "file"
-        },
-        {
-          "batch_id": "wave4_root_intake_cleanup_initial",
-          "source": "aurora-cloudbank-symbolic_README_DRAFT.md",
-          "destination": "intake/aurora-cloudbank-symbolic_README_DRAFT.md",
-          "operation": "move",
-          "pre_hash": "1c55eaac6121eeff43eb026ed63f4cb730179787ff05357d1cbdaf9b0bcae86d",
-          "post_hash": "1c55eaac6121eeff43eb026ed63f4cb730179787ff05357d1cbdaf9b0bcae86d",
-          "rollback_source": "aurora-cloudbank-symbolic_README_DRAFT.md",
-          "reason": "Relocate aurora-cloudbank-symbolic_README_DRAFT.md into intake/aurora-cloudbank-symbolic_README_DRAFT.md.",
-          "approved": false,
-          "applied_at": null,
-          "path_kind": "file"
-        },
-        {
-          "batch_id": "wave4_root_intake_cleanup_initial",
-          "source": "aurora-cloudbank-symbolic_outside_review.md",
-          "destination": "intake/aurora-cloudbank-symbolic_outside_review.md",
-          "operation": "move",
-          "pre_hash": "5f3394828319e13e76b9278729af71d53d5d91c537cd7f6f992dd68853386c1d",
-          "post_hash": "5f3394828319e13e76b9278729af71d53d5d91c537cd7f6f992dd68853386c1d",
-          "rollback_source": "aurora-cloudbank-symbolic_outside_review.md",
-          "reason": "Relocate aurora-cloudbank-symbolic_outside_review.md into intake/aurora-cloudbank-symbolic_outside_review.md.",
-          "approved": false,
-          "applied_at": null,
-          "path_kind": "file"
-        },
-        {
-          "batch_id": "wave4_root_intake_cleanup_initial",
-          "source": "aurora-cloudbank-symbolic_review_v2.md",
-          "destination": "intake/aurora-cloudbank-symbolic_review_v2.md",
-          "operation": "move",
-          "pre_hash": "f52c8c80600c0be28158ab1e54557b47c2dc6c9b30a11ad316b1f9773521b552",
-          "post_hash": "f52c8c80600c0be28158ab1e54557b47c2dc6c9b30a11ad316b1f9773521b552",
-          "rollback_source": "aurora-cloudbank-symbolic_review_v2.md",
-          "reason": "Relocate aurora-cloudbank-symbolic_review_v2.md into intake/aurora-cloudbank-symbolic_review_v2.md.",
           "approved": false,
           "applied_at": null,
           "path_kind": "file"
