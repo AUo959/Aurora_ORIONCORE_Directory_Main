@@ -1,26 +1,11 @@
 {
-  "generated_at_utc": "2026-08-19T22:29:08Z",
+  "generated_at_utc": "2026-08-27T18:19:24Z",
   "source": "skills/",
   "targets": {
     "codex": {
       "dest": "/Users/travisstreets/.codex/skills",
-      "files_changed": 6,
-      "skills_changed": {
-        "aurora-narrative-tone-governor": [
-          "update: scripts/narrative_tone_scan.py"
-        ],
-        "aurora-quantum-forge-ops": [
-          "update: scripts/build_qforge_ops_report.py"
-        ],
-        "threadcore-governor": [
-          "update: scripts/threadcore_rules.py"
-        ],
-        "zipwiz-governor": [
-          "update: scripts/zipwiz_report.py",
-          "update: scripts/test_zipwiz_governance.py",
-          "update: scripts/zipwiz_rules.py"
-        ]
-      }
+      "files_changed": 0,
+      "skills_changed": {}
     }
   }
 }
