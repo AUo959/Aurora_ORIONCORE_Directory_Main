@@ -18,9 +18,14 @@ from ace import orion_progression as progression  # noqa: E402
 from ace.core import ACEError  # noqa: E402
 
 RUN_ID = "11111111-1111-4111-8111-111111111111"
-CLOUDBANK_SHA = "9c34d8e9768c6dfb1afe18f96d42e3c743e2a4e9"
+# Restated here on purpose rather than read from the policy: this is an
+# independent statement of the attestation, so reading it from the file under
+# test would make the assertion tautological. Re-baselined 2026-08-20 for
+# CloudBank a19870a5 / blob 5b6d9351 (was 9c34d8e9 / dd3ae6f7); see
+# docs/ORION__ADR_LITE__ORION_V013_CLOUDBANK_REBASELINE__v1.0__2026-08-20.md.
+CLOUDBANK_SHA = "a19870a576a4136fc7ee8c30a2a8d869f36156d9"
 CANONREC_SHA = "dc629a566b2f42fa1c652140b9eef72a4fb0d58a"
-OWNER_BLOB = "dd3ae6f73bb2d2130981011a7c2443c0e39b8210"
+OWNER_BLOB = "5b6d93515fb219cb26d267db6c6df6c052413ae1"
 AUTHORITY_REF = "owner:orion-l1:test-authorization"
 
 
