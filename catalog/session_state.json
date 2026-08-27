@@ -882,9 +882,9 @@
       "detail": "Phase 10 is PASS, not outstanding. Direct evidence on agent/gumas-flash-rebellion-battle-baseline (draft PR CloudBank #1506): spec GUMAS__SPEC__DETERMINISTIC_FACTUAL_REPORTER_EVIDENCE_EXPORT v1.0, runtime package simulation/runtime/gumas_factual_reporter/ (projection, exporter, validation, rendering, identity), two test modules, receipt PHASE10 v1.0, and workflow gumas-factual-reporter.yml. Task record DTER v2.1 records Phase 10 accepted on head 635e97e0 after validation. The blocking half of this item remains correct and is carried forward: Control A/B/C and Run 0 stay BLOCKED. Superseded by gumas-phase11-controls-contract."
     }
   ],
-  "last_updated": "2026-08-27T20:07:20Z",
+  "last_updated": "2026-08-27T20:13:04Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Merge pull request #83 from AUo959/codex/publication-debt-re; Merge branch 'main' into codex/publication-debt-reconciliati; chore(session): record the PR #81 merge",
+  "last_session_summary": "feat(session): adopt the queue lifecycle contract on the liv; chore(queue): supersede the Phase 10 item with the Phase 11 ; Merge pull request #82 from AUo959/fix/execution-context-gua",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -907,64 +907,64 @@
   },
   "recent_commits": [
     {
-      "sha": "dfe3d7e",
+      "sha": "f7bb1c3",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "Merge pull request #83 from AUo959/codex/publication-debt-reconciliation-20260826"
+      "summary": "feat(session): adopt the queue lifecycle contract on the live queue"
     },
     {
-      "sha": "39b4d2e",
+      "sha": "4f0b109",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "Merge branch 'main' into codex/publication-debt-reconciliation-20260826"
+      "summary": "chore(queue): supersede the Phase 10 item with the Phase 11 controls contract"
     },
     {
-      "sha": "8be47bf",
+      "sha": "2c78aaf",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "chore(session): record the PR #81 merge"
+      "summary": "Merge pull request #82 from AUo959/fix/execution-context-guard"
     },
     {
-      "sha": "d3c47a1",
+      "sha": "74f7dfb",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "Merge pull request #81 from AUo959/recovery/gumas-v2-tactical-consolidation"
+      "summary": "chore(session): publication debt reduced to the connectivity stack"
     },
     {
-      "sha": "83b20d2",
+      "sha": "b62c71d",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "chore(publication): back up every local-only branch to its remote"
+      "summary": "Merge branch 'main' into fix/execution-context-guard"
     },
     {
-      "sha": "9a5e202",
+      "sha": "28b5969",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "chore(git): reconcile historical publication debt"
+      "summary": "fix(workspace-verify): stop a sandbox's self-view from becoming the tracked record"
     },
     {
-      "sha": "de1d909",
+      "sha": "3f2c1fd",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "chore(session): record publication debt reconciliation"
+      "summary": "chore(session): queue PR 56 provider follow-up"
     },
     {
-      "sha": "b69e8c6",
-      "date": "2026-08-26",
-      "platform": "codex",
-      "summary": "chore(session): refresh root context and archive completed work"
-    },
-    {
-      "sha": "ddc08b8",
-      "date": "2026-08-26",
-      "platform": "codex",
-      "summary": "chore(session): close the Orion re-baseline and manifest freshness items"
-    },
-    {
-      "sha": "faa4cc1",
-      "date": "2026-08-20",
+      "sha": "20ba7c6",
+      "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "fix(ace): re-baseline the Orion v0.13 owner binding on CloudBank a19870a5"
+      "summary": "chore(session): refresh queue receipt after main sync"
+    },
+    {
+      "sha": "e3bb4c9",
+      "date": "2026-08-27",
+      "platform": "claude-code",
+      "summary": "Merge remote-tracking branch 'origin/main' into codex/session-queue-lifecycle-2026-08-01"
+    },
+    {
+      "sha": "939dfe0",
+      "date": "2026-08-27",
+      "platform": "claude-code",
+      "summary": "chore(session): record queue lifecycle receipt"
     }
   ],
   "security_events": [
@@ -981,7 +981,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "dfe3d7e",
+    "main_sha": "f7bb1c3",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -1096,7 +1096,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-27T18:48:58Z",
+    "checked_at": "2026-08-27T20:13:04Z",
     "entries": [
       {
         "repo": "root",
