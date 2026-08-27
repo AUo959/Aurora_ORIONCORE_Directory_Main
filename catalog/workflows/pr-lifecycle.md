@@ -15,7 +15,7 @@
 - Run linter: `ruff check .` and pre-commit if touching Python
 - Commit with conventional message
 
-**Suspend signal:** Set `active_task.status = "suspended"`, `next_step = "open-pr"`, include branch name and last commit SHA.
+**Interrupted-session signal:** Use `suspend-active --next-step "open the PR" --resume-by <timestamp>` only when the continuation is short and immediately executable. Local implementation and PR preparation are not owner-gated.
 
 ---
 
@@ -27,7 +27,7 @@
 **Codex:** Use `gitwiz-github-manager` skill for PR packet drafting.
 **Claude Code:** Use `gh pr create` directly.
 
-**Suspend signal:** `next_step = "await-review"`, `pr_url` set.
+**Wait signal:** Move the task to `waiting_on=external` with the PR URL as evidence, a review trigger, and `review_at`; this clears the active slot while review is genuinely external.
 
 ---
 
@@ -36,36 +36,28 @@
 - **If Codex:** Use `gh-address-comments` skill — reads open review comments and proposes fixes
 - **If Claude Code:** Read comments via `gh pr view --comments`, implement fixes directly in files, commit
 
-**Suspend signal:** `next_step = "merge-ready"` once all review threads resolved and CI green.
+**Ready signal:** When all review threads are resolved and CI is green, return the item to `ready`. Request owner authorization only when the remaining consequential action is merge/publication and that authorization has not already been given.
 
 ---
 
 ### 4 · Merge
 - Verify CI: `gh pr checks <number>`
 - Merge: `gh pr merge <number> --squash --delete-branch`
-- Update `active_task.status = "complete"`, move to `completed_tasks` in session state
+- Run `complete-active --detail "PR merged and post-merge state verified."` so completion and active-slot clearing are atomic.
 
 ---
 
-## Suspend Point Template
+## Lifecycle record
 
-```json
-{
-  "id": "pr-lifecycle-<branch-slug>",
-  "workflow": "pr-lifecycle",
-  "status": "suspended",
-  "created_by": "<platform>",
-  "last_updated_by": "<platform>",
-  "last_updated": "<iso-timestamp>",
-  "branch": "<branch-name>",
-  "pr_number": null,
-  "pr_url": null,
-  "last_commit": "<sha>",
-  "completed_steps": [],
-  "next_step": "implement | open-pr | await-review | merge-ready | complete",
-  "next_step_detail": "<plain-English description of exactly what to do next>",
-  "context_files": ["AGENTS.md", "catalog/session_state.json"],
-  "skills_for_codex": ["gitwiz-github-manager", "gh-address-comments"],
-  "notes": ""
-}
+```bash
+python3 tools/session_state_io.py add-item pr-lifecycle-<branch-slug> \
+  --description "Deliver <scope> through a verified PR." \
+  --next-action "Implement and run the targeted validation." \
+  --definition-of-done "PR is merged and post-merge state is verified." \
+  --review-at <iso-timestamp>
+python3 tools/session_state_io.py start-item pr-lifecycle-<branch-slug>
 ```
+
+Branch, PR URL, last commit, findings, and validation evidence are optional
+record fields or referenced receipts. The lifecycle-required fields remain
+governed by schema v3.

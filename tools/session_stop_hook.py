@@ -9,8 +9,8 @@ Four jobs:
      commit; the hook deliberately never commits or pushes (churn +
      force-push hazard).
   2. Record the landing ledger (publication debt) at session close
-  3. On session start, surface tracked project-focus announcements so agents
-     know the current collaboration focus before selecting work.
+  3. On session start, surface project focus and lifecycle-aware queue health
+     before agents select work.
   4. If there are uncommitted tracked changes, write an orphan marker so
      the next session (either platform) surfaces the abandoned work
      (surfaced via the SessionStart hook running `check-orphans`)
@@ -194,6 +194,20 @@ def surface_project_focus() -> None:
         print(f"[session-start] project focus skipped: {exc}")
 
 
+def surface_queue_health(*, attention_only: bool = False) -> None:
+    """Surface actionable queue state without mutating the shared handoff."""
+    try:
+        import session_queue_health
+
+        report = session_queue_health.build_report(REPO_ROOT)
+        if attention_only and not report.get("findings"):
+            return
+        print(session_queue_health.format_summary(report))
+    except Exception as exc:  # advisory; queue tooling must not break session hooks
+        prefix = "stop-hook" if attention_only else "session-start"
+        print(f"[{prefix}] queue health skipped: {exc}")
+
+
 def check_orphans() -> None:
     """Surface orphan markers from previous sessions; auto-resolve stale ones.
 
@@ -370,12 +384,17 @@ def main() -> int:
         return 0
     if len(sys.argv) > 1 and sys.argv[1] == "session-start":
         surface_project_focus()
+        surface_queue_health()
         check_orphans()
         file_auto_claim()
         return 0
 
     release_auto_claim()
     record_landing_ledger()
+    # Lifecycle time passes even when no commits land. Run before the ahead==0
+    # early return so stale suspension and due reviews cannot disappear during
+    # quiet repository periods.
+    surface_queue_health(attention_only=True)
 
     # Pin drift is reported before any early return below: it is independent of
     # whether new commits landed, and the operator can only act on it cheaply

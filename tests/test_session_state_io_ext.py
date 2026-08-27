@@ -41,7 +41,11 @@ class _TempStateMixin(unittest.TestCase):
         self.addCleanup(lambda: [setattr(sio, n, v) for n, v in self._saved.items()])
 
     def _ns(self, **kw):
-        defaults = {"platform": "claude-code", "force": False}
+        defaults = {
+            "platform": "claude-code",
+            "force": False,
+            "resume_by": "2026-07-09T00:00:00Z",
+        }
         defaults.update(kw)
         return argparse.Namespace(**defaults)
 
@@ -106,7 +110,11 @@ class TestRecordCommits(_TempStateMixin):
     def test_records_new_commits_and_head(self):
         repo = self.root / "gitrepo"
         repo.mkdir()
-        run = lambda *c: subprocess.run(c, cwd=repo, capture_output=True, check=True)
+        def run(*command: str) -> subprocess.CompletedProcess:
+            return subprocess.run(
+                command, cwd=repo, capture_output=True, check=True
+            )
+
         run("git", "init", "-q", "-b", "main")
         run("git", "-c", "user.email=t@t", "-c", "user.name=t",
             "commit", "-q", "--allow-empty", "-m", "first commit")
