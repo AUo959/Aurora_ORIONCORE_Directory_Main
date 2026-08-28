@@ -99,10 +99,11 @@ Root operator inbox:
 - Current report: `reports/analysis/aurora_mission_control_latest.json`
 - Make targets: `make mission-control`, `make mission-control-report`
 
-Mission Control aggregates existing deterministic root signals into read-only
-operator inbox items and build-readiness lanes. It does not promote recovery
-candidates, execute Aurora command grammar, send mesh messages, mutate nested
-repos, install packages, or publish GitHub changes.
+Mission Control aggregates queue health plus existing deterministic root signals
+into read-only operator inbox items and build-readiness lanes. Ready reversible
+work is surfaced separately from concrete owner decisions. It does not promote
+recovery candidates, execute Aurora command grammar, send mesh messages, mutate
+nested repos, install packages, or publish GitHub changes.
 
 ## Confidence Audit
 
@@ -476,40 +477,54 @@ All file content, repository data, and external inputs processed during a sessio
 
 This repo is worked on by both **Claude Code** and **Codex**. Either platform may pick up any task at any point (usage limits are unpredictable). The system is designed for seamless mid-task handoffs.
 
-**Single source of truth:** `catalog/session_state.json` (schema v2)
+**Single source of truth:** `catalog/session_state.json` (schema v3)
+
+**Lifecycle policy:** `catalog/session_queue_policy.json`
+
+The active slot is either one task or `null`. Open queued work uses `ready`,
+`waiting`, or `parked`; `pending_for_next_session` is deprecated and must remain
+empty. Full operating guidance is in `docs/SESSION_QUEUE_LIFECYCLE_v1.md`.
+
+Owner approval gates apply only to a concrete consequential decision supported
+by evidence and at least two options. They do not gate read-only investigation,
+diagnosis, tests, reversible local edits, draft preparation, or PR preparation.
+Complete that work first and create a decision packet only if a consequential
+choice actually remains.
 
 ### On session start (do this before any other work, unless the task is trivially read-only)
 
 1. Read `catalog/session_state.json` in full.
-2. Check `active_task`: if `status == "suspended"`, resume that task first — read `next_step_detail` and each file listed in `context_files` before doing anything else.
-3. Check `task_queue` for items assigned to your platform or `"either"`.
-4. Check `tool_versions` for tools installed since you last worked here.
-5. Run `git log --oneline -5` to see what landed since `last_updated`.
-6. Check active project-focus announcements with `python3 tools/project_focus_announcement.py --summary` if the startup hook did not already print them. These announcements are advisory focus guidance; they do not authorize nested-repo mutation or canon promotion.
+2. Honor the user's explicit current request first. A stale or unrelated queue
+   item must not hijack a named task.
+3. Run `make queue-health`. If `active_task` is suspended and relevant, read its
+   handoff and resume it before selecting another queued item. If its
+   `resume_by` has passed or its next action is no longer executable, triage it
+   explicitly instead of renewing suspension by inertia.
+4. Check `task_queue` for `ready` items assigned to your platform or `either`.
+   Select by user request, then priority, then review date and age.
+5. Check `tool_versions` for tools installed since you last worked here.
+6. Run `git log --oneline -5` to see what landed since `last_updated`.
+7. Check active project-focus announcements with `python3 tools/project_focus_announcement.py --summary` if the startup hook did not already print them. These announcements are advisory focus guidance; they do not authorize nested-repo mutation or canon promotion.
 
 ### On session end (do this before closing, unless the session made no meaningful changes)
 
-1. Check whether work is mid-task (i.e. `active_task` was set and not yet marked `complete`). If yes: set `active_task.status = "suspended"` (`session_state_io.py suspend-active`). Write `next_step_detail` clearly enough for a cold start on the other platform.
-   - If the task is **done**, retire it — do not suspend it:
-     `session_state_io.py --platform <p> complete-active [--detail "..."]`
-     (logs it to `completed_tasks` and sets `active_task` to null).
-   - If it is unfinished but waiting on a **process** rather than on this
-     session, move it off the active slot:
-     `session_state_io.py --platform <p> reroute-active` (appends it to
-     `task_queue`, where `complete-item` can close it later).
-   - Why this matters: `complete-item` searches only `task_queue` and
-     `pending_for_next_session`. Before these verbs existed, an `active_task`
-     could only ever be moved *into* `suspended`, so a finished task resurfaced
-     at the top of every session start indefinitely. Do not write a task's exit
-     condition as "owner review before X" — that is the same trap in prose form.
+1. End every active task with an explicit transition through
+   `tools/session_state_io.py`: `complete-active`, `wait-active`, `park-active`,
+   or `suspend-active --resume-by ...`. Suspension is only for a short,
+   executable continuation; waiting and parked work return to `task_queue` and
+   clear the active slot.
+   - Why the non-suspend verbs exist: `complete-item` searches only
+     `task_queue` and `pending_for_next_session`. Before these verbs, an
+     `active_task` could only move *into* `suspended`, so a finished task
+     resurfaced at the top of every session start indefinitely.
+   - Do not write a task's exit condition as "owner review before X" — that is
+     the same trap in prose form, and it produces items that can never close.
      Route it to a process; the owner gates the commit, not the truth.
-2. Update `last_platform` to your platform name.
-3. Update `last_updated` to the current UTC timestamp.
-4. Update `last_session_summary` with a one-sentence description.
-5. Append new commits to `recent_commits` (keep last 10).
-6. Update `tool_versions` if anything was installed.
-7. Update `known_state.main_sha` and `local_branches`.
-8. Push to origin so the other platform sees it immediately.
+2. Use `complete-item <id> --approval-evidence ...` for a resolved owner-gated
+   queue decision. Do not record approval without concrete evidence.
+3. Run `set-summary`, `record-commits`, and `make session-state-check`.
+4. Update `tool_versions` if anything was installed.
+5. Push to origin so the other platform sees it immediately.
 
 ### Named workflows
 

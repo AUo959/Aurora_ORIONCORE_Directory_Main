@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "purpose": "Cross-platform session handoff and task queue. Read at the start of every session. Update at the end of every session that makes meaningful changes. Either platform can suspend any task mid-flight and the other can resume it.",
   "protocol": {
     "on_session_start": [
@@ -123,19 +123,642 @@
   "task_queue": [
     {
       "id": "narrative-promotion-continuation-2026-06",
-      "status": "queued",
-      "priority": "medium",
+      "status": "ready",
       "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
       "description": "Aurora-first narrative-layer promotion per ADR (docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md). PROCESS-ROUTED: run candidate receipts through aurora-canon-reconciler (conflict scan + advisor); non-conflicting reconciled content is canon at commit. Owner is the commit gate, not the adjudicator of what is true.",
-      "repo": "root + aurora-cloudbank-symbolic-main",
-      "context_files": [
-        "docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md",
-        "reports/recovered_canon/README.md",
-        "reports/analysis/march_2026_reset_forensics__2026-06-10.md",
-        "reports/analysis/unlanded_work_audit__2026-06-10.md"
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] Aurora-first narrative-layer promotion per ADR (docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md).",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "0.1-aws-key",
+      "status": "waiting",
+      "assigned_to": "owner",
+      "priority": "high",
+      "kind": "decision",
+      "repo": "root",
+      "description": "Verify the redacted AWS IAM access-key ID has been deactivated in AWS console; historical catalog/session_state.json references require owner-approved remediation or baseline acceptance.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-08-27T20:06:05Z",
+      "next_action": "[migrated] Verify the redacted AWS IAM access-key ID has been deactivated in AWS console;",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false,
+      "waiting_on": "owner",
+      "trigger": "Owner reviews the queue and rules on this item."
+    },
+    {
+      "id": "roadmap-1.1",
+      "status": "ready",
+      "assigned_to": "codex",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows \u2192 ~8). Prefer Codex (browser + github plugin). See reports/state_briefs/development_roadmap__2026-05-24.md \u00a71.1.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] Phase 1: Collapse CloudBank CI sprawl (33 workflows \u2192 ~8).",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "p7-external-latency-divergence",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "low",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Decide canonical latency model for pneumatic engine: external prototype fails committed targets under default config (~202ms, eff 0.0) while pdp_v2_mvp fallback passes; see archives/recovered_prototypes/biological_pneumatic_engine/BEHAVIOR_INVENTORY__2026-07-10.md item 7. Retune constants or fix flow term before any CloudBank routing.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-26T20:06:05Z",
+      "next_action": "[migrated] Decide canonical latency model for pneumatic engine: external prototype fails committed targets under default config (~202ms, eff 0.0) while pdp_v2_mvp fallback passes;",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "cloudbank-review-r1r10-residual-hardening",
+      "status": "ready",
+      "assigned_to": "codex",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "CloudBank R1-R10 review (intake/Aurora_CloudBank_Review_R1_R10.md): all 7 P0 deployment-blockers verified fixed as of CloudBank HEAD 2026-07-08; residual P1/P3 hardening still open (spot-verified P3-2 provenance hash still 'pass', P3-4 _detect_unauthorized_access still 'return False'). Audit remaining P1/P2/P3/stub items line-by-line and fix in CloudBank nested repo.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] CloudBank R1-R10 review (intake/Aurora_CloudBank_Review_R1_R10.md): all 7 P0 deployment-blockers verified fixed as of CloudBank HEAD 2026-07-08;",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "qgia-runtime-onepager-route",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "CanonRec",
+      "description": "Route QGIA_Runtime_OnePager.md (root loose, 406 ln, v4.2.1) into the QGIA knowledge domain. Genuine unrecovered artifact: portable LLM-executable analytic process export (identity/checklist/axioms/math toolkit/SATs). Not in qgia repos or CanonRec. Owner picks target repo (qgia-knowledge-library-main or -spine-main) + path. Dependency: resolve R13 (qgia-knowledge-library dirty tree) first.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] Route QGIA_Runtime_OnePager.md (root loose, 406 ln, v4.2.1) into the QGIA knowledge domain.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "tobias-qin-draft-reconcile",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "low",
+      "kind": "work",
+      "repo": "root",
+      "description": "Reconcile intake/TOBIAS_QIN_CHARACTER_PROFILE.md (546 ln L1 staging draft) against existing canon entity ORION.ENTITY.0039__tobias-qin.md via aurora-canon-reconciler; determine drift/supplementary-detail/duplication; owner decides folding. Likely canon supersedes.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-26T20:06:05Z",
+      "next_action": "[migrated] Reconcile intake/TOBIAS_QIN_CHARACTER_PROFILE.md (546 ln L1 staging draft) against existing canon entity ORION.ENTITY.0039__tobias-qin.md via aurora-canon-reconciler;",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "archive-content-triage-450",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Systematic CONTENT-based triage of the 450 archive files whose content is not present in the live repos (reports/recovery/data/archive_content_not_live__2026-07-10.tsv). Prior filename-based sweep undercounted (found 5). Start with the 21 distinct Python modules (runtime loader, gumas memory core, loom git-bridge, anchor validator, ZipWiz optimizer/bridge, etc.); assess each for supersession against current CloudBank/CanonRec by symbol/behavior not name. 450 is an upper bound (reformatted landings + superseded early-gen designs included).",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] Systematic CONTENT-based triage of the 450 archive files whose content is not present in the live repos (reports/recovery/data/archive_content_not_live__2026-07-10.tsv).",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "kharon-sablewake-class-assignment",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "low",
+      "kind": "work",
+      "repo": "root",
+      "description": "Ship Registry v1.0 sec.5.1 open item (P2), now carried into canon: G.U.S. Kharon (vessel_gu_013) and G.U.S. Sablewake (vessel_gu_014) have no ship class. Both records now carry class_open_item markers. Assign to one of the 12 canonical classes (cls_* records exist) or create new class records if the sources support it.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-26T20:06:05Z",
+      "next_action": "[migrated] Ship Registry v1.0 sec.5.1 open item (P2), now carried into canon: G.U.S.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "ci-dynamic-registry-pins-branch",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "low",
+      "kind": "work",
+      "repo": "root",
+      "description": "Pre-existing branch fix/ci-dynamic-registry-pins (commit b3bb45c 'ci: read nested-repo pins dynamically from catalog/repo_registry.yaml') is unpublished and overlaps the registry-sync tooling added 2026-07-21 (tools/registry_sync_heads.py + make registry-sync + Stop-hook advisory). Review whether that branch is superseded, complementary (CI-side vs local-side), or should be merged/retired. Flagged by the landing ledger as unpublished_branch.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-26T20:06:05Z",
+      "next_action": "[migrated] Pre-existing branch fix/ci-dynamic-registry-pins (commit b3bb45c 'ci: read nested-repo pins dynamically from catalog/repo_registry.yaml') is unpublished and overlaps the registry-sync tooling added 2026-07-21 (tools/registry_sync_heads.py + make registry-sync + Stop-hook advisory).",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "naming-gate-owner-records",
+      "status": "waiting",
+      "assigned_to": "owner",
+      "priority": "medium",
+      "kind": "decision",
+      "repo": "root",
+      "description": "Your L2 naming-admission gate (a242f3e, effective 2026-07-22) flags 10 char records from your parallel buildout as lacking naming_receipt/naming_exemption: char_aveline_soryn, char_calder_vey, char_corin_hale, char_eira_valkyrie, char_iven_raal, char_maelin_saye, char_mara_venn, char_selene_ark, char_sera_thalen, char_tessa_korr. All predate the gate (grandfathered; CI only checks PR-diff files so they won't block unless re-touched). NOT modified by me \u2014 your records: add naming_receipt (if minted via NameService) or naming_exemption (owner_locked/recovered_source) as appropriate. All 26 of my salvage/capsule character records now carry recovered_source exemptions and pass the gate.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-08-27T20:06:05Z",
+      "next_action": "[migrated] Your L2 naming-admission gate (a242f3e, effective 2026-07-22) flags 10 char records from your parallel buildout as lacking naming_receipt/naming_exemption: char_aveline_soryn, char_calder_vey, char_corin_hale, char_eira_valkyrie, char_iven_raal, char_maelin_saye, char_mara_venn, char_selene_ark, char_sera_thalen, char_tessa_korr.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false,
+      "waiting_on": "owner",
+      "trigger": "Owner reviews the queue and rules on this item."
+    },
+    {
+      "id": "amelia-rivers-l1-check",
+      "status": "waiting",
+      "assigned_to": "owner",
+      "priority": "low",
+      "kind": "decision",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "L1 (not L2): AURORA_GUMAS_STAFF_REGISTRY_SSOT profile amelia-rivers has no matching canon/L1/characters record. Previously identified as an L1 dev/expert-panel persona (Simulation Architect reviewer) rather than an in-world Orion Station crew member. Owner: confirm whether she is a station crew member needing an L1 record, or a meta/dev persona to leave out.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-08-27T20:06:05Z",
+      "next_action": "[migrated] L1 (not L2): AURORA_GUMAS_STAFF_REGISTRY_SSOT profile amelia-rivers has no matching canon/L1/characters record.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false,
+      "waiting_on": "owner",
+      "trigger": "Owner reviews the queue and rules on this item."
+    },
+    {
+      "id": "canonrec-staff-registry-authority",
+      "status": "waiting",
+      "assigned_to": "owner",
+      "priority": "high",
+      "kind": "decision",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Choose the authoritative staff-registry contract or approve a deterministic merge between CanonRec canon/L1/station/ORION_STATION_CANONICAL_STAFF_REGISTRY.json and CloudBank ORION_STATION_CANONICAL_STAFF_REGISTRY.json. CloudBank PR #1385 records hashes and blocks sole-SSOT claims.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-08-27T20:06:05Z",
+      "next_action": "[migrated] Choose the authoritative staff-registry contract or approve a deterministic merge between CanonRec canon/L1/station/ORION_STATION_CANONICAL_STAFF_REGISTRY.json and CloudBank ORION_STATION_CANONICAL_STAFF_REGISTRY.json.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false,
+      "waiting_on": "owner",
+      "trigger": "Owner reviews the queue and rules on this item."
+    },
+    {
+      "id": "cloudbank-mcp-v2-migration",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Migrate connector/server.py and connector tests from the MCP v1 Server API to MCP v2, then remove the temporary mcp<2.0.0 compatibility ceiling added in CloudBank PR #1385. Evidence: base CI with mcp 1.28.1 passed; an unconstrained install resolved mcp 2.0.0 and failed six Server.list_tools tests.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] Migrate connector/server.py and connector tests from the MCP v1 Server API to MCP v2, then remove the temporary mcp<2.0.0 compatibility ceiling added in CloudBank PR #1385.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "warrant-lens-root-relocation",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "low",
+      "kind": "work",
+      "repo": "root",
+      "description": "warrant-lens/ is planned for intake/ but MUST NOT be moved as-is: it is an editable pip install (.venv/.../warrant_lens-1.1.0.dist-info/direct_url.json points at file:///\u2026/warrant-lens) and is referenced by root SPEC__WARRANT_LENS__v1.md. Relocating breaks the venv. Resolve by either adding a classification override to keep it root-anchored, or moving it AND reinstalling (pip install -e new/path) + updating the spec reference.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-26T20:06:05Z",
+      "next_action": "[migrated] warrant-lens/ is planned for intake/ but MUST NOT be moved as-is: it is an editable pip install (.venv/.../warrant_lens-1.1.0.dist-info/direct_url.json points at file:///\u2026/warrant-lens) and is referenced by root SPEC__WARRANT_LENS__v1.md.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "l2-seat-of-government-locations",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
+      "description": "Establish seat-of-government / duty-station locations in canon. 22 capsule location_bindings are type 'undetermined' because canon names no seat for any office-holder: the Union capital is referenced only as 'the capital planet' (Marshal Academy charter) with no location entity, and no polity seats exist (Elari, Vorran, Zyphari, Kaelar, Tharaxian, Crimson Pact, PMC, AI-Warlord, Prime Construct, Velar, Separatist, Outer Colonies). Route naming through NameService rather than minting. When seats land, fill in each binding's type/target_id and rebuild the affected capsules (sha256-manifested \u2014 do not hand-edit).",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] Establish seat-of-government / duty-station locations in canon.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "omega9-sentinel-roster-framing",
+      "status": "waiting",
+      "assigned_to": "owner",
+      "priority": "low",
+      "kind": "decision",
+      "repo": "root",
+      "description": "FRAMING QUESTION (owner): is the Sentinel unit roster part of the SETTING, or per-run simulation state? Omega9_Emergence_Log records Sentinel Omega-9 and Event.Kaelor_Chainfire.v1 (first documented emergent adaptive route logic; Extraction Point Theta-4 -> Sector Epsilon-G). None of Omega-9, Kaelor Chainfire, Epsilon-G, Theta-4 exist in canon. It was NOT promoted because it is simulation instance output (SimTime stamp, sentinel_id, L1 review team), which Canon Protocol \u00a75 treats as tertiary. If Sentinel units are setting entities rather than run state, this routes through the reconciler as an evidentiary question. Distinct from Omega-Veil (rogue AI warlord, already canon).",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-08-27T20:06:05Z",
+      "next_action": "[migrated] FRAMING QUESTION (owner): is the Sentinel unit roster part of the SETTING, or per-run simulation state? Omega9_Emergence_Log records Sentinel Omega-9 and Event.Kaelor_Chainfire.v1 (first documented emergent adaptive route logic;",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false,
+      "waiting_on": "owner",
+      "trigger": "Owner reviews the queue and rules on this item."
+    },
+    {
+      "id": "prose-claim-ledger-reconciliation",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "high",
+      "kind": "work",
+      "repo": "root",
+      "description": "Work the consolidated prose claim ledger (reports/recovery/data/prose_claim_ledger__2026-08-09.json): 1,044 unique claims across 108 canon entities, from 284MB of early-project prose. Per the corrected method: for each claim, first check whether canon already holds the fact elsewhere (timeline/operations/narratives) \u2014 very often it does and the entity record simply never carried it, as with the Velar Imperium history; reconcile from the authoritative source. Where canon is silent, conflict-scan and promote per the standing rule. Never assert identity on partial evidence. Highest-claim entities: org_galactic_union (230), org_prime_construct_polity (152), polity_velar_imperium (63), vessel_gu_001 (47), org_trade_coalition (35), org_ai_vanguard (33).",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-08-27T20:06:05Z",
+      "next_action": "[migrated] Work the consolidated prose claim ledger (reports/recovery/data/prose_claim_ledger__2026-08-09.json): 1,044 unique claims across 108 canon entities, from 284MB of early-project prose.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "sovereign-nexus-crisis-event",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "low",
+      "kind": "work",
+      "repo": "root",
+      "description": "The Sovereign Nexus Crisis \u2014 a high-stakes multi-faction standoff over the strategically vital Sovereign Nexus region, with Separatist hardliners massing forces per Union Intelligence intercepts. Named event attested in early-project prose with no canon record. Recovered_source name; route through the naming gate and the event-promotion pattern used for Operation Obsidian Dawn.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-26T20:06:05Z",
+      "next_action": "[migrated] The Sovereign Nexus Crisis \u2014 a high-stakes multi-faction standoff over the strategically vital Sovereign Nexus region, with Separatist hardliners massing forces per Union Intelligence intercepts.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "prose-ledger-open-identity-questions",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "low",
+      "kind": "work",
+      "repo": "root",
+      "description": "Two identity questions raised by the prose claim ledger, recorded as open notes and NOT asserted: (1) 'Galactic Constitution' vs 'Galactic Union Charter' \u2014 same instrument under two names, or distinct documents? Both appear in early prose. (2) 'Director of the Galactic Marshals' vs canon's Chief Marshal Vael Saros, 'Leader of the Union Marshals' \u2014 same office retitled, or two offices? Route through the reconciler; do not merge on similarity alone.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-26T20:06:05Z",
+      "next_action": "[migrated] Two identity questions raised by the prose claim ledger, recorded as open notes and NOT asserted: (1) 'Galactic Constitution' vs 'Galactic Union Charter' \u2014 same instrument under two names, or distinct documents? Both appear in early prose.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "prime-construct-ai-political-rights-doctrine",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
+      "description": "Early prose asserts both that AI cannot hold political power in the Union and that Prime Construct is sovereign with political/legal rights. Canon settles neither \u2014 no committed record states Union doctrine on AI political power. Recorded as polity_prime_construct.open_doctrinal_question; resolve via aurora-canon-reconciler conflict scan against org_galactic_union / conflict_ai_sovereignty_crisis.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] Early prose asserts both that AI cannot hold political power in the Union and that Prime Construct is sovereign with political/legal rights.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "kaelors-rift-sentinel-command-overlap",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
+      "description": "Canon lists Elias Radek as the Judicator Prime's Sentinel-Commander while the Kaelor's Rift log gives Colonel Idris Vale as Sentinel strike lead. Not a contradiction on its face (ship's company vs Marshal Intelligence Directorate strike lead) but the relationship is unstated. Route through aurora-canon-reconciler conflict scan.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] Canon lists Elias Radek as the Judicator Prime's Sentinel-Commander while the Kaelor's Rift log gives Colonel Idris Vale as Sentinel strike lead.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "automate-executive-brief",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
+      "description": "No workflow/cron/launchd generates briefs; cadence has been human-triggered across the whole series (7d,14d,7d,9d,17d,16d). The Stop-hook pattern already solved this class for session state. Add a weekly GitHub Actions workflow running 'make brief'. See executive_brief__2026-08-10.md Risk 4.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] No workflow/cron/launchd generates briefs;",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "sandbox-missing-test-deps",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
+      "description": "tests/test_live_watch_link.py fails in the sandboxed workspace with ModuleNotFoundError: No module named 'fastapi' (tools/live_watch.py clone driver). Not a code regression \u2014 a missing dependency in the execution context, the same class as the Mission Control 'gh is missing' false P1. Either add fastapi to the dev toolkit/test extras or mark the test to skip when the dep is absent, so a green suite means the same thing everywhere.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] tests/test_live_watch_link.py fails in the sandboxed workspace with ModuleNotFoundError: No module named 'fastapi' (tools/live_watch.py clone driver).",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "l2-location-subtype-classification",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
+      "description": "Canon uses 6 descriptive location subtypes the validator does not list (ai_polity_interface_node, neutral_velari_world, precursor_vault_site, secure_union_facility, shadow_ring, union_core_military_industrial_world) against a structural list (planet, moon, region, station...). Both schemes are defensible; canon's is in use. Decide: widen the vocabulary to descriptive values, or add a separate descriptive field and keep subtype structural. tests/test_validator_vocabulary_sync.py caps drift at 8 so this cannot quietly grow.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] Canon uses 6 descriptive location subtypes the validator does not list (ai_polity_interface_node, neutral_velari_world, precursor_vault_site, secure_union_facility, shadow_ring, union_core_military_industrial_world) against a structural list (planet, moon, region, station...).",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "cloudbank-local-backlog-publication-2026-08-11",
+      "status": "waiting",
+      "assigned_to": "owner",
+      "priority": "high",
+      "kind": "decision",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Review and authorize the next CloudBank publication pass from isolated local branches: 1482 hardening cb8da9bc requires a compatibility decision for pre-hardening runtime 1.2 persisted runs; 1381 local merge 9d59340f and 1343 fix d677fccc need push and CI refresh; issue implementations 1453 at 2cd6741b, 1457 at 58285cc0, and 1456 at 4f53486c are locally validated and should be published draft-only if authorized. PR 1492 remains blocked by a missing required CI Check and needs an authorized check rerun or a new event. Keep the live L1 experiment isolated and do not merge, close, comment, resolve threads, mark ready, dispatch workflows, promote canon, or INIT without explicit authorization.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-08-27T20:06:05Z",
+      "next_action": "[migrated] Review and authorize the next CloudBank publication pass from isolated local branches: 1482 hardening cb8da9bc requires a compatibility decision for pre-hardening runtime 1.2 persisted runs;",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false,
+      "waiting_on": "owner",
+      "trigger": "Owner reviews the queue and rules on this item."
+    },
+    {
+      "id": "ace-next-scope",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
+      "description": "ACE now has executable RETRIEVED_CANON, DERIVED_CANON, GENERATED_CANON, CANON_REVISION, TRUE_CONFLICT, and EXECUTION_BLOCKED semantics; shared interactive/embedded/autonomic invocation; facility/topology completion; authority-gated facility materialization; and an append-only determination ledger. Remaining major scope is existing-character retrieval, relation-evidence enrichment and repository-wide evidence discovery, capability-manifest discovery, MCP exposure, native multi-artifact character materialization, and non-character entity classes beyond the facility/canon-fact slices.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] ACE now has executable RETRIEVED_CANON, DERIVED_CANON, GENERATED_CANON, CANON_REVISION, TRUE_CONFLICT, and EXECUTION_BLOCKED semantics;",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "ace-capability-manifest-discovery",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
+      "description": "tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing. Registering a capability therefore means editing engine source, and spec 6.5 (capability indexer) is unimplemented in substance. Load capabilities from manifest files validated against the existing schema. tests/test_aurora_ace_invariants.py::test_declared_producers_exist_in_the_capability_index already guards the field->index consistency this would need.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "worktree-uncommitted-sweep",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
+      "description": "Uncommitted work in /private/tmp worktrees is invisible to every status check that looks at the main tree, and /private/tmp is subject to OS cleanup. The L1 embodiment work sat there with zero commits on its branch and was nearly lost. Add a check (Stop hook or make target) that walks 'git worktree list' for every registered repo and reports dirty worktrees plus branches with zero commits, so fragile work surfaces automatically instead of by chance.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] Uncommitted work in /private/tmp worktrees is invisible to every status check that looks at the main tree, and /private/tmp is subject to OS cleanup.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "trade-coalition-gtc-identity",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "low",
+      "kind": "work",
+      "repo": "root",
+      "description": "Early prose names a 'Galactic Trade Coalition (GTC)' that oversees fair trade laws, tariffs and corporate accountability \u2014 a regulator's mandate \u2014 while everything else attested about the Trade Coalition describes a private power bloc that lobbies, funds hyperlane infrastructure, controls market share via the Union Stock Exchange, and holds Senate backing. Not merged: a body that writes tariff law and a bloc that profits from it are not obviously the same institution, and the shared name root is not evidence. Recorded as org_trade_coalition.open_identity_question. Route through aurora-canon-reconciler.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-26T20:06:05Z",
+      "next_action": "[migrated] Early prose names a 'Galactic Trade Coalition (GTC)' that oversees fair trade laws, tariffs and corporate accountability \u2014 a regulator's mandate \u2014 while everything else attested about the Trade Coalition describes a private power bloc that lobbies, funds hyperlane infrastructure, controls market share via the Union Stock Exchange, and holds Senate backing.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "mekthor-nature-undetermined",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "low",
+      "kind": "work",
+      "repo": "root",
+      "description": "char_mekthor leads the AI Vanguard but whether he is an artificial intelligence or an organic official is not established. The source applies 'a government official, not an AI entity' to a different figure who works with Vanguard auditors, so it settles nothing. For a bloc whose politics are about AI governance this is consequential \u2014 resolve from source rather than inferring. Recorded as char_mekthor.nature_undetermined and org_ai_vanguard.leadership.nature_undetermined.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-26T20:06:05Z",
+      "next_action": "[migrated] char_mekthor leads the AI Vanguard but whether he is an artificial intelligence or an organic official is not established.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "varnaks-rest-referent",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "low",
+      "kind": "work",
+      "repo": "root",
+      "description": "Early prose names a frontier world 'Varnak's Rest' \u2014 self-sustaining agrarian planet, home to displaced refugees from war-torn regions seeking asylum, with lush forests and farmlands supplying frontier settlements. No canon record. Recorded as polity_outer_colonies.open_referent. CAUTION: NOT the same referent as char_varnak, the chancellorship candidate who ran on military defence \u2014 a person and a world sharing a name element, already disambiguated on char_varnak.name_disambiguation.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-26T20:06:05Z",
+      "next_action": "[migrated] Early prose names a frontier world 'Varnak's Rest' \u2014 self-sustaining agrarian planet, home to displaced refugees from war-torn regions seeking asylum, with lush forests and farmlands supplying frontier settlements.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "zharis-corridor-referent",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
+      "description": "Early prose: 'The Union Marshals receive decrypted intelligence from the Judicator Prime confirming that Separatist smugglers in the Zharis Corridor are using PMC-modified stealth drives.' Zharis Corridor has no canon record \u2014 a named route/region tying Separatists, PMC technology and Marshal counter-smuggling. Recovered-source name; route through the naming gate. Note the route-registry angle: a corridor is the kind of referent FABRIC P4 wants citable.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] Early prose: 'The Union Marshals receive decrypted intelligence from the Judicator Prime confirming that Separatist smugglers in the Zharis Corridor are using PMC-modified stealth drives.' Zharis Corridor has no canon record \u2014 a named route/region tying Separatists, PMC technology and Marshal counter-smuggling.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "gsb-uib-directorship-conflict",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
+      "description": "char_sarina_vael is 'Director of the Galactic Security Bureau (GSB)' while char_callan_deyrus is 'Head of Union Intelligence Bureau (UIB)', and canon rules GSB a superseded draft name for the UIB \u2014 two records heading one agency. Sarina Vael was promoted 2026-07-21 with a conflict scan recording 'zero name/office collisions'; the GSB->UIB ruling is dated 2026-07-20, one day earlier, and was not consulted. Readings: sequence (earlier-era director, parallel to Durn->Saros), duplication across salvage generations, or genuinely distinct bodies. NOT decided \u2014 the Durn/Saros case had an explicit owner retcon ruling and this has none. Recorded on both records with conflict_flags gsb_uib_directorship.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] char_sarina_vael is 'Director of the Galactic Security Bureau (GSB)' while char_callan_deyrus is 'Head of Union Intelligence Bureau (UIB)', and canon rules GSB a superseded draft name for the UIB \u2014 two records heading one agency.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "superseded-name-check-wiring",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
+      "description": "tools/canon_superseded_names.py exists and passes but is not wired into any gate. Options: call it from the aurora-canon-reconciler conflict scan so promotions consult rename rulings at the point of decision (the original gap), and/or add it to workspace_verify as a warning-level check. Also currently parses only the 'early X name \"A\" -> canonical **B**' form; the Durn/Saros retitling ('under the earlier title ... subsequently retitled') is a second, unparsed shape worth adding.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] tools/canon_superseded_names.py exists and passes but is not wired into any gate.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "registry-sync-branch-field",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "registry-sync rewrites head_sha but never branch, so switching a nested repo leaves repo_registry.yaml internally inconsistent (head_sha from one branch, branch name from another). orion_runtime_owner.registered_cloudbank hardcodes branch main, so the mismatch fails closed in a confusing place. Make registry-sync sync branch too, or refuse when branch and head_sha disagree.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] registry-sync rewrites head_sha but never branch, so switching a nested repo leaves repo_registry.yaml internally inconsistent (head_sha from one branch, branch name from another).",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "registry-pin-vs-selfheal-hook",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "kind": "work",
+      "repo": "root",
+      "description": "The self-healing pre-commit hook regenerates catalog/repo_registry.yaml from local HEAD and re-stages it, so a commit that edits pins is silently reverted while still reporting success (see 5c41ad2, whose message and content disagree). Effect: a registry pin cannot be committed unless local checkouts already match it. Either exempt repo_registry.yaml from self-heal when it is explicitly staged, or make the hook fail loudly instead of overwriting.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-10T20:06:05Z",
+      "next_action": "[migrated] The self-healing pre-commit hook regenerates catalog/repo_registry.yaml from local HEAD and re-stages it, so a commit that edits pins is silently reverted while still reporting success (see 5c41ad2, whose message and content disagree).",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "constellation-connectivity-publication-2026-08-19",
+      "status": "ready",
+      "assigned_to": "codex",
+      "priority": "high",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Publish the coordinated integration/connectivity-pass-2026-08-19 stack after explicit nested-repo scope is confirmed: CloudBank cb35bfc5, qgia-knowledge-library 4f3a8bd1, qgia-knowledge-spine 7856e43a, then root 6349b1f8. Live 2026-08-26 audit found all branches current or cleanly mergeable. Open PRs without merging; validate and later merge in order hub, spokes, root. Root publication-debt reconciliation PR #83 records the 54 settled historical decisions and reduces the non-exempt ledger to this four-branch stack after merge.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-08-27T20:06:05Z",
+      "next_action": "[migrated] Publish the coordinated integration/connectivity-pass-2026-08-19 stack after explicit nested-repo scope is confirmed: CloudBank cb35bfc5, qgia-knowledge-library 4f3a8bd1, qgia-knowledge-spine 7856e43a, then root 6349b1f8.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "gumas-phase11-controls-contract",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "high",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Successor to gumas-phase10-reporter. Per DTER v2.1 on agent/gumas-flash-rebellion-battle-baseline (draft PR CloudBank #1506), current phase is Phase 11: authority-safe determinism/substitution controls contract plus a refusing preflight. DEFINE ONLY, do not execute. Three controls: A same-input exact replay (byte-identical ledger, termination, report, exporter identities); B class substitution (change only the versioned CanonRec class input, prove permitted resolved physical deltas, unchanged generic engine must propagate); C polity substitution (same for polity input, doctrine/command/resource deltas). The contract must separate four identities per control: source/CanonRec input, resolved tactical-input, T0/run/ledger, and report/export. Preflight must fail closed and refuse execution unless the owner separately opens the execution gate. Control A/B/C execution and Run 0 remain BLOCKED pending the committed contract and explicit owner execution authority.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-08-27T20:06:05Z",
+      "next_action": "[migrated] Successor to gumas-phase10-reporter.",
+      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
+      "approval_required": false
+    },
+    {
+      "id": "connectivity-branch-email-privacy",
+      "status": "waiting",
+      "priority": "high",
+      "assigned_to": "owner",
+      "kind": "decision",
+      "repo": "root",
+      "description": "root integration/connectivity-pass-2026-08-19 is the only branch in any repo with no remote copy. Its three commits (7a50e0a, 62dc466, 6349b1f) carry a private email in both author and committer, so GitHub rejects the push with GH007.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-08-27T20:06:05Z",
+      "review_at": "2026-09-03T00:00:00Z",
+      "next_action": "Owner picks one of the two options below; either unblocks the backup immediately.",
+      "definition_of_done": "integration/connectivity-pass-2026-08-19 exists on origin and publication_debt reports zero entries.",
+      "approval_required": true,
+      "waiting_on": "owner",
+      "trigger": "Before the connectivity pass is resumed or backed up.",
+      "evidence_refs": [
+        "GH007 push rejection on root integration/connectivity-pass-2026-08-19, 2026-08-27",
+        "git push --dry-run passes; GH007 is enforced server-side on real push only",
+        "the same branch in CloudBank, qgia-library and qgia-spine pushed cleanly; those commits use the noreply address"
       ],
-      "next_step": "run_candidate_receipts_through_reconciler_process",
-      "next_step_detail": "Phase-two contract items 4-7 are implemented and merged via CloudBank PR #1195 (merge 5dd18d36). Root flight is registered and current; latest receipt 93ac4c44e8680206 produced gate=candidate using fresh prior flight status. This validates the path only; there are no proposed CanonRec files and no promotion was executed. Any future canon-reconciler packet still requires a concrete candidate receipt plus explicit owner approval before CANON_PROMOTE. | GATE REFRAMED 2026-08-09: the prior next_step read \"owner_review_...before_any_canon_promote\", which mis-specified the owner as the adjudicator of canon. Correct routing: run any candidate receipt through aurora-canon-reconciler (conflict scan + advisor). Non-conflicting reconciled content IS canon and lands at commit; the owner gates the commit, not the truth determination."
+      "gate_scope": "credential_or_external_account_action",
+      "decision_options": [
+        "Change the GitHub email-privacy setting at github.com/settings/emails. No history rewrite, no SHA churn, no re-broken registry pins; makes that address public.",
+        "Rewrite author and committer email on the three commits. Content stays byte-identical and the address stays private, but SHAs change on a branch intended to be resumed."
+      ]
+    },
+    {
+      "id": "queue-health-due-count-parity",
+      "status": "ready",
+      "priority": "low",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "root",
+      "description": "workspace_verify reports 9 items due for review while session_queue_health JSON due_review lists 8, minutes apart with no item crossing its review_at between runs. The presentation bug (id list capped at 8 without saying so) is fixed; this is the remaining question of whether the two surfaces compute due_review over different sets, e.g. one including active_task or suspended items.",
+      "created_at": "2026-08-27T20:07:20Z",
+      "updated_at": "2026-08-27T20:07:20Z",
+      "review_at": "2026-09-26T00:00:00Z",
+      "next_action": "Diff how workspace_verify and session_queue_health each build due_review and reconcile to one definition.",
+      "definition_of_done": "Both surfaces report the same count for the same state file, with a test pinning the agreement.",
+      "approval_required": false
     }
   ],
   "completed_tasks": [
@@ -259,9 +882,9 @@
       "detail": "Phase 10 is PASS, not outstanding. Direct evidence on agent/gumas-flash-rebellion-battle-baseline (draft PR CloudBank #1506): spec GUMAS__SPEC__DETERMINISTIC_FACTUAL_REPORTER_EVIDENCE_EXPORT v1.0, runtime package simulation/runtime/gumas_factual_reporter/ (projection, exporter, validation, rendering, identity), two test modules, receipt PHASE10 v1.0, and workflow gumas-factual-reporter.yml. Task record DTER v2.1 records Phase 10 accepted on head 635e97e0 after validation. The blocking half of this item remains correct and is carried forward: Control A/B/C and Run 0 stay BLOCKED. Superseded by gumas-phase11-controls-contract."
     }
   ],
-  "last_updated": "2026-08-27T18:48:58Z",
+  "last_updated": "2026-08-27T20:13:04Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Merge pull request #83 from AUo959/codex/publication-debt-re; Merge branch 'main' into codex/publication-debt-reconciliati; chore(session): record the PR #81 merge",
+  "last_session_summary": "feat(session): adopt the queue lifecycle contract on the liv; chore(queue): supersede the Phase 10 item with the Phase 11 ; Merge pull request #82 from AUo959/fix/execution-context-gua",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -284,64 +907,64 @@
   },
   "recent_commits": [
     {
-      "sha": "dfe3d7e",
+      "sha": "f7bb1c3",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "Merge pull request #83 from AUo959/codex/publication-debt-reconciliation-20260826"
+      "summary": "feat(session): adopt the queue lifecycle contract on the live queue"
     },
     {
-      "sha": "39b4d2e",
+      "sha": "4f0b109",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "Merge branch 'main' into codex/publication-debt-reconciliation-20260826"
+      "summary": "chore(queue): supersede the Phase 10 item with the Phase 11 controls contract"
     },
     {
-      "sha": "8be47bf",
+      "sha": "2c78aaf",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "chore(session): record the PR #81 merge"
+      "summary": "Merge pull request #82 from AUo959/fix/execution-context-guard"
     },
     {
-      "sha": "d3c47a1",
+      "sha": "74f7dfb",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "Merge pull request #81 from AUo959/recovery/gumas-v2-tactical-consolidation"
+      "summary": "chore(session): publication debt reduced to the connectivity stack"
     },
     {
-      "sha": "83b20d2",
+      "sha": "b62c71d",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "chore(publication): back up every local-only branch to its remote"
+      "summary": "Merge branch 'main' into fix/execution-context-guard"
     },
     {
-      "sha": "9a5e202",
+      "sha": "28b5969",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "chore(git): reconcile historical publication debt"
+      "summary": "fix(workspace-verify): stop a sandbox's self-view from becoming the tracked record"
     },
     {
-      "sha": "de1d909",
+      "sha": "3f2c1fd",
       "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "chore(session): record publication debt reconciliation"
+      "summary": "chore(session): queue PR 56 provider follow-up"
     },
     {
-      "sha": "b69e8c6",
-      "date": "2026-08-26",
-      "platform": "codex",
-      "summary": "chore(session): refresh root context and archive completed work"
-    },
-    {
-      "sha": "ddc08b8",
-      "date": "2026-08-26",
-      "platform": "codex",
-      "summary": "chore(session): close the Orion re-baseline and manifest freshness items"
-    },
-    {
-      "sha": "faa4cc1",
-      "date": "2026-08-20",
+      "sha": "20ba7c6",
+      "date": "2026-08-27",
       "platform": "claude-code",
-      "summary": "fix(ace): re-baseline the Orion v0.13 owner binding on CloudBank a19870a5"
+      "summary": "chore(session): refresh queue receipt after main sync"
+    },
+    {
+      "sha": "e3bb4c9",
+      "date": "2026-08-27",
+      "platform": "claude-code",
+      "summary": "Merge remote-tracking branch 'origin/main' into codex/session-queue-lifecycle-2026-08-01"
+    },
+    {
+      "sha": "939dfe0",
+      "date": "2026-08-27",
+      "platform": "claude-code",
+      "summary": "chore(session): record queue lifecycle receipt"
     }
   ],
   "security_events": [
@@ -356,238 +979,9 @@
       "status": "pending_owner_action"
     }
   ],
-  "pending_for_next_session": [
-    {
-      "id": "0.1-aws-key",
-      "priority": "high",
-      "description": "Verify the redacted AWS IAM access-key ID has been deactivated in AWS console; historical catalog/session_state.json references require owner-approved remediation or baseline acceptance.",
-      "assigned_to": "owner"
-    },
-    {
-      "id": "roadmap-1.1",
-      "priority": "medium",
-      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows \u2192 ~8). Prefer Codex (browser + github plugin). See reports/state_briefs/development_roadmap__2026-05-24.md \u00a71.1.",
-      "assigned_to": "codex"
-    },
-    {
-      "id": "p7-external-latency-divergence",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "Decide canonical latency model for pneumatic engine: external prototype fails committed targets under default config (~202ms, eff 0.0) while pdp_v2_mvp fallback passes; see archives/recovered_prototypes/biological_pneumatic_engine/BEHAVIOR_INVENTORY__2026-07-10.md item 7. Retune constants or fix flow term before any CloudBank routing."
-    },
-    {
-      "id": "cloudbank-review-r1r10-residual-hardening",
-      "priority": "medium",
-      "assigned_to": "codex",
-      "description": "CloudBank R1-R10 review (intake/Aurora_CloudBank_Review_R1_R10.md): all 7 P0 deployment-blockers verified fixed as of CloudBank HEAD 2026-07-08; residual P1/P3 hardening still open (spot-verified P3-2 provenance hash still 'pass', P3-4 _detect_unauthorized_access still 'return False'). Audit remaining P1/P2/P3/stub items line-by-line and fix in CloudBank nested repo."
-    },
-    {
-      "id": "qgia-runtime-onepager-route",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Route QGIA_Runtime_OnePager.md (root loose, 406 ln, v4.2.1) into the QGIA knowledge domain. Genuine unrecovered artifact: portable LLM-executable analytic process export (identity/checklist/axioms/math toolkit/SATs). Not in qgia repos or CanonRec. Owner picks target repo (qgia-knowledge-library-main or -spine-main) + path. Dependency: resolve R13 (qgia-knowledge-library dirty tree) first."
-    },
-    {
-      "id": "tobias-qin-draft-reconcile",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "Reconcile intake/TOBIAS_QIN_CHARACTER_PROFILE.md (546 ln L1 staging draft) against existing canon entity ORION.ENTITY.0039__tobias-qin.md via aurora-canon-reconciler; determine drift/supplementary-detail/duplication; owner decides folding. Likely canon supersedes."
-    },
-    {
-      "id": "archive-content-triage-450",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Systematic CONTENT-based triage of the 450 archive files whose content is not present in the live repos (reports/recovery/data/archive_content_not_live__2026-07-10.tsv). Prior filename-based sweep undercounted (found 5). Start with the 21 distinct Python modules (runtime loader, gumas memory core, loom git-bridge, anchor validator, ZipWiz optimizer/bridge, etc.); assess each for supersession against current CloudBank/CanonRec by symbol/behavior not name. 450 is an upper bound (reformatted landings + superseded early-gen designs included)."
-    },
-    {
-      "id": "kharon-sablewake-class-assignment",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "Ship Registry v1.0 sec.5.1 open item (P2), now carried into canon: G.U.S. Kharon (vessel_gu_013) and G.U.S. Sablewake (vessel_gu_014) have no ship class. Both records now carry class_open_item markers. Assign to one of the 12 canonical classes (cls_* records exist) or create new class records if the sources support it."
-    },
-    {
-      "id": "ci-dynamic-registry-pins-branch",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "Pre-existing branch fix/ci-dynamic-registry-pins (commit b3bb45c 'ci: read nested-repo pins dynamically from catalog/repo_registry.yaml') is unpublished and overlaps the registry-sync tooling added 2026-07-21 (tools/registry_sync_heads.py + make registry-sync + Stop-hook advisory). Review whether that branch is superseded, complementary (CI-side vs local-side), or should be merged/retired. Flagged by the landing ledger as unpublished_branch."
-    },
-    {
-      "id": "naming-gate-owner-records",
-      "priority": "medium",
-      "assigned_to": "owner",
-      "description": "Your L2 naming-admission gate (a242f3e, effective 2026-07-22) flags 10 char records from your parallel buildout as lacking naming_receipt/naming_exemption: char_aveline_soryn, char_calder_vey, char_corin_hale, char_eira_valkyrie, char_iven_raal, char_maelin_saye, char_mara_venn, char_selene_ark, char_sera_thalen, char_tessa_korr. All predate the gate (grandfathered; CI only checks PR-diff files so they won't block unless re-touched). NOT modified by me \u2014 your records: add naming_receipt (if minted via NameService) or naming_exemption (owner_locked/recovered_source) as appropriate. All 26 of my salvage/capsule character records now carry recovered_source exemptions and pass the gate."
-    },
-    {
-      "id": "amelia-rivers-l1-check",
-      "priority": "low",
-      "assigned_to": "owner",
-      "description": "L1 (not L2): AURORA_GUMAS_STAFF_REGISTRY_SSOT profile amelia-rivers has no matching canon/L1/characters record. Previously identified as an L1 dev/expert-panel persona (Simulation Architect reviewer) rather than an in-world Orion Station crew member. Owner: confirm whether she is a station crew member needing an L1 record, or a meta/dev persona to leave out."
-    },
-    {
-      "id": "canonrec-staff-registry-authority",
-      "priority": "high",
-      "assigned_to": "owner",
-      "description": "Choose the authoritative staff-registry contract or approve a deterministic merge between CanonRec canon/L1/station/ORION_STATION_CANONICAL_STAFF_REGISTRY.json and CloudBank ORION_STATION_CANONICAL_STAFF_REGISTRY.json. CloudBank PR #1385 records hashes and blocks sole-SSOT claims."
-    },
-    {
-      "id": "cloudbank-mcp-v2-migration",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Migrate connector/server.py and connector tests from the MCP v1 Server API to MCP v2, then remove the temporary mcp<2.0.0 compatibility ceiling added in CloudBank PR #1385. Evidence: base CI with mcp 1.28.1 passed; an unconstrained install resolved mcp 2.0.0 and failed six Server.list_tools tests."
-    },
-    {
-      "id": "warrant-lens-root-relocation",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "warrant-lens/ is planned for intake/ but MUST NOT be moved as-is: it is an editable pip install (.venv/.../warrant_lens-1.1.0.dist-info/direct_url.json points at file:///\u2026/warrant-lens) and is referenced by root SPEC__WARRANT_LENS__v1.md. Relocating breaks the venv. Resolve by either adding a classification override to keep it root-anchored, or moving it AND reinstalling (pip install -e new/path) + updating the spec reference."
-    },
-    {
-      "id": "l2-seat-of-government-locations",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Establish seat-of-government / duty-station locations in canon. 22 capsule location_bindings are type 'undetermined' because canon names no seat for any office-holder: the Union capital is referenced only as 'the capital planet' (Marshal Academy charter) with no location entity, and no polity seats exist (Elari, Vorran, Zyphari, Kaelar, Tharaxian, Crimson Pact, PMC, AI-Warlord, Prime Construct, Velar, Separatist, Outer Colonies). Route naming through NameService rather than minting. When seats land, fill in each binding's type/target_id and rebuild the affected capsules (sha256-manifested \u2014 do not hand-edit)."
-    },
-    {
-      "id": "omega9-sentinel-roster-framing",
-      "priority": "low",
-      "assigned_to": "owner",
-      "description": "FRAMING QUESTION (owner): is the Sentinel unit roster part of the SETTING, or per-run simulation state? Omega9_Emergence_Log records Sentinel Omega-9 and Event.Kaelor_Chainfire.v1 (first documented emergent adaptive route logic; Extraction Point Theta-4 -> Sector Epsilon-G). None of Omega-9, Kaelor Chainfire, Epsilon-G, Theta-4 exist in canon. It was NOT promoted because it is simulation instance output (SimTime stamp, sentinel_id, L1 review team), which Canon Protocol \u00a75 treats as tertiary. If Sentinel units are setting entities rather than run state, this routes through the reconciler as an evidentiary question. Distinct from Omega-Veil (rogue AI warlord, already canon)."
-    },
-    {
-      "id": "prose-claim-ledger-reconciliation",
-      "priority": "high",
-      "assigned_to": "either",
-      "description": "Work the consolidated prose claim ledger (reports/recovery/data/prose_claim_ledger__2026-08-09.json): 1,044 unique claims across 108 canon entities, from 284MB of early-project prose. Per the corrected method: for each claim, first check whether canon already holds the fact elsewhere (timeline/operations/narratives) \u2014 very often it does and the entity record simply never carried it, as with the Velar Imperium history; reconcile from the authoritative source. Where canon is silent, conflict-scan and promote per the standing rule. Never assert identity on partial evidence. Highest-claim entities: org_galactic_union (230), org_prime_construct_polity (152), polity_velar_imperium (63), vessel_gu_001 (47), org_trade_coalition (35), org_ai_vanguard (33)."
-    },
-    {
-      "id": "sovereign-nexus-crisis-event",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "The Sovereign Nexus Crisis \u2014 a high-stakes multi-faction standoff over the strategically vital Sovereign Nexus region, with Separatist hardliners massing forces per Union Intelligence intercepts. Named event attested in early-project prose with no canon record. Recovered_source name; route through the naming gate and the event-promotion pattern used for Operation Obsidian Dawn."
-    },
-    {
-      "id": "prose-ledger-open-identity-questions",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "Two identity questions raised by the prose claim ledger, recorded as open notes and NOT asserted: (1) 'Galactic Constitution' vs 'Galactic Union Charter' \u2014 same instrument under two names, or distinct documents? Both appear in early prose. (2) 'Director of the Galactic Marshals' vs canon's Chief Marshal Vael Saros, 'Leader of the Union Marshals' \u2014 same office retitled, or two offices? Route through the reconciler; do not merge on similarity alone."
-    },
-    {
-      "id": "prime-construct-ai-political-rights-doctrine",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Early prose asserts both that AI cannot hold political power in the Union and that Prime Construct is sovereign with political/legal rights. Canon settles neither \u2014 no committed record states Union doctrine on AI political power. Recorded as polity_prime_construct.open_doctrinal_question; resolve via aurora-canon-reconciler conflict scan against org_galactic_union / conflict_ai_sovereignty_crisis."
-    },
-    {
-      "id": "kaelors-rift-sentinel-command-overlap",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Canon lists Elias Radek as the Judicator Prime's Sentinel-Commander while the Kaelor's Rift log gives Colonel Idris Vale as Sentinel strike lead. Not a contradiction on its face (ship's company vs Marshal Intelligence Directorate strike lead) but the relationship is unstated. Route through aurora-canon-reconciler conflict scan."
-    },
-    {
-      "id": "automate-executive-brief",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "No workflow/cron/launchd generates briefs; cadence has been human-triggered across the whole series (7d,14d,7d,9d,17d,16d). The Stop-hook pattern already solved this class for session state. Add a weekly GitHub Actions workflow running 'make brief'. See executive_brief__2026-08-10.md Risk 4."
-    },
-    {
-      "id": "sandbox-missing-test-deps",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "tests/test_live_watch_link.py fails in the sandboxed workspace with ModuleNotFoundError: No module named 'fastapi' (tools/live_watch.py clone driver). Not a code regression \u2014 a missing dependency in the execution context, the same class as the Mission Control 'gh is missing' false P1. Either add fastapi to the dev toolkit/test extras or mark the test to skip when the dep is absent, so a green suite means the same thing everywhere."
-    },
-    {
-      "id": "l2-location-subtype-classification",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Canon uses 6 descriptive location subtypes the validator does not list (ai_polity_interface_node, neutral_velari_world, precursor_vault_site, secure_union_facility, shadow_ring, union_core_military_industrial_world) against a structural list (planet, moon, region, station...). Both schemes are defensible; canon's is in use. Decide: widen the vocabulary to descriptive values, or add a separate descriptive field and keep subtype structural. tests/test_validator_vocabulary_sync.py caps drift at 8 so this cannot quietly grow."
-    },
-    {
-      "id": "cloudbank-local-backlog-publication-2026-08-11",
-      "priority": "high",
-      "assigned_to": "owner",
-      "description": "Review and authorize the next CloudBank publication pass from isolated local branches: 1482 hardening cb8da9bc requires a compatibility decision for pre-hardening runtime 1.2 persisted runs; 1381 local merge 9d59340f and 1343 fix d677fccc need push and CI refresh; issue implementations 1453 at 2cd6741b, 1457 at 58285cc0, and 1456 at 4f53486c are locally validated and should be published draft-only if authorized. PR 1492 remains blocked by a missing required CI Check and needs an authorized check rerun or a new event. Keep the live L1 experiment isolated and do not merge, close, comment, resolve threads, mark ready, dispatch workflows, promote canon, or INIT without explicit authorization."
-    },
-    {
-      "id": "ace-next-scope",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "ACE now has executable RETRIEVED_CANON, DERIVED_CANON, GENERATED_CANON, CANON_REVISION, TRUE_CONFLICT, and EXECUTION_BLOCKED semantics; shared interactive/embedded/autonomic invocation; facility/topology completion; authority-gated facility materialization; and an append-only determination ledger. Remaining major scope is existing-character retrieval, relation-evidence enrichment and repository-wide evidence discovery, capability-manifest discovery, MCP exposure, native multi-artifact character materialization, and non-character entity classes beyond the facility/canon-fact slices."
-    },
-    {
-      "id": "ace-capability-manifest-discovery",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing. Registering a capability therefore means editing engine source, and spec 6.5 (capability indexer) is unimplemented in substance. Load capabilities from manifest files validated against the existing schema. tests/test_aurora_ace_invariants.py::test_declared_producers_exist_in_the_capability_index already guards the field->index consistency this would need."
-    },
-    {
-      "id": "worktree-uncommitted-sweep",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Uncommitted work in /private/tmp worktrees is invisible to every status check that looks at the main tree, and /private/tmp is subject to OS cleanup. The L1 embodiment work sat there with zero commits on its branch and was nearly lost. Add a check (Stop hook or make target) that walks 'git worktree list' for every registered repo and reports dirty worktrees plus branches with zero commits, so fragile work surfaces automatically instead of by chance."
-    },
-    {
-      "id": "trade-coalition-gtc-identity",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "Early prose names a 'Galactic Trade Coalition (GTC)' that oversees fair trade laws, tariffs and corporate accountability \u2014 a regulator's mandate \u2014 while everything else attested about the Trade Coalition describes a private power bloc that lobbies, funds hyperlane infrastructure, controls market share via the Union Stock Exchange, and holds Senate backing. Not merged: a body that writes tariff law and a bloc that profits from it are not obviously the same institution, and the shared name root is not evidence. Recorded as org_trade_coalition.open_identity_question. Route through aurora-canon-reconciler."
-    },
-    {
-      "id": "mekthor-nature-undetermined",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "char_mekthor leads the AI Vanguard but whether he is an artificial intelligence or an organic official is not established. The source applies 'a government official, not an AI entity' to a different figure who works with Vanguard auditors, so it settles nothing. For a bloc whose politics are about AI governance this is consequential \u2014 resolve from source rather than inferring. Recorded as char_mekthor.nature_undetermined and org_ai_vanguard.leadership.nature_undetermined."
-    },
-    {
-      "id": "varnaks-rest-referent",
-      "priority": "low",
-      "assigned_to": "either",
-      "description": "Early prose names a frontier world 'Varnak's Rest' \u2014 self-sustaining agrarian planet, home to displaced refugees from war-torn regions seeking asylum, with lush forests and farmlands supplying frontier settlements. No canon record. Recorded as polity_outer_colonies.open_referent. CAUTION: NOT the same referent as char_varnak, the chancellorship candidate who ran on military defence \u2014 a person and a world sharing a name element, already disambiguated on char_varnak.name_disambiguation."
-    },
-    {
-      "id": "zharis-corridor-referent",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "Early prose: 'The Union Marshals receive decrypted intelligence from the Judicator Prime confirming that Separatist smugglers in the Zharis Corridor are using PMC-modified stealth drives.' Zharis Corridor has no canon record \u2014 a named route/region tying Separatists, PMC technology and Marshal counter-smuggling. Recovered-source name; route through the naming gate. Note the route-registry angle: a corridor is the kind of referent FABRIC P4 wants citable."
-    },
-    {
-      "id": "gsb-uib-directorship-conflict",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "char_sarina_vael is 'Director of the Galactic Security Bureau (GSB)' while char_callan_deyrus is 'Head of Union Intelligence Bureau (UIB)', and canon rules GSB a superseded draft name for the UIB \u2014 two records heading one agency. Sarina Vael was promoted 2026-07-21 with a conflict scan recording 'zero name/office collisions'; the GSB->UIB ruling is dated 2026-07-20, one day earlier, and was not consulted. Readings: sequence (earlier-era director, parallel to Durn->Saros), duplication across salvage generations, or genuinely distinct bodies. NOT decided \u2014 the Durn/Saros case had an explicit owner retcon ruling and this has none. Recorded on both records with conflict_flags gsb_uib_directorship."
-    },
-    {
-      "id": "superseded-name-check-wiring",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "tools/canon_superseded_names.py exists and passes but is not wired into any gate. Options: call it from the aurora-canon-reconciler conflict scan so promotions consult rename rulings at the point of decision (the original gap), and/or add it to workspace_verify as a warning-level check. Also currently parses only the 'early X name \"A\" -> canonical **B**' form; the Durn/Saros retitling ('under the earlier title ... subsequently retitled') is a second, unparsed shape worth adding."
-    },
-    {
-      "id": "registry-sync-branch-field",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "registry-sync rewrites head_sha but never branch, so switching a nested repo leaves repo_registry.yaml internally inconsistent (head_sha from one branch, branch name from another). orion_runtime_owner.registered_cloudbank hardcodes branch main, so the mismatch fails closed in a confusing place. Make registry-sync sync branch too, or refuse when branch and head_sha disagree."
-    },
-    {
-      "id": "registry-pin-vs-selfheal-hook",
-      "priority": "medium",
-      "assigned_to": "either",
-      "description": "The self-healing pre-commit hook regenerates catalog/repo_registry.yaml from local HEAD and re-stages it, so a commit that edits pins is silently reverted while still reporting success (see 5c41ad2, whose message and content disagree). Effect: a registry pin cannot be committed unless local checkouts already match it. Either exempt repo_registry.yaml from self-heal when it is explicitly staged, or make the hook fail loudly instead of overwriting."
-    },
-    {
-      "id": "constellation-connectivity-publication-2026-08-19",
-      "priority": "high",
-      "assigned_to": "codex",
-      "description": "Publish the coordinated integration/connectivity-pass-2026-08-19 stack after explicit nested-repo scope is confirmed: CloudBank cb35bfc5, qgia-knowledge-library 4f3a8bd1, qgia-knowledge-spine 7856e43a, then root 6349b1f8. Live 2026-08-26 audit found all branches current or cleanly mergeable. Open PRs without merging; validate and later merge in order hub, spokes, root. Root publication-debt reconciliation PR #83 records the 54 settled historical decisions and reduces the non-exempt ledger to this four-branch stack after merge."
-    },
-    {
-      "id": "gumas-phase11-controls-contract",
-      "priority": "high",
-      "assigned_to": "either",
-      "description": "Successor to gumas-phase10-reporter. Per DTER v2.1 on agent/gumas-flash-rebellion-battle-baseline (draft PR CloudBank #1506), current phase is Phase 11: authority-safe determinism/substitution controls contract plus a refusing preflight. DEFINE ONLY, do not execute. Three controls: A same-input exact replay (byte-identical ledger, termination, report, exporter identities); B class substitution (change only the versioned CanonRec class input, prove permitted resolved physical deltas, unchanged generic engine must propagate); C polity substitution (same for polity input, doctrine/command/resource deltas). The contract must separate four identities per control: source/CanonRec input, resolved tactical-input, T0/run/ledger, and report/export. Preflight must fail closed and refuse execution unless the owner separately opens the execution gate. Control A/B/C execution and Run 0 remain BLOCKED pending the committed contract and explicit owner execution authority."
-    }
-  ],
+  "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "dfe3d7e",
+    "main_sha": "f7bb1c3",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -702,7 +1096,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-27T18:48:58Z",
+    "checked_at": "2026-08-27T20:13:04Z",
     "entries": [
       {
         "repo": "root",
