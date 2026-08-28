@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/aurora_teacher_sufficiency_report_v1.schema.json",
+  "title": "Aurora Teacher Sufficiency Report v1",
+  "description": "Evidence record for deciding whether generated Aurora state contains enough conditional information and scenario diversity to justify adapter expansion or training.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "record_type": {"const": "aurora_teacher_sufficiency_report"},
+    "report_id": {
+      "type": "string",
+      "pattern": "^asm\\.teacher-sufficiency\\.[A-Za-z0-9_.:-]+$"
+    },
+    "authority": {
+      "enum": ["simulation", "evaluation", "synthetic_fixture"]
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "dataset_id": {
+          "type": "string",
+          "pattern": "^asm\\.dataset\\.[A-Za-z0-9_.:-]+$"
+        },
+        "generator_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "measurement_window": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "turn_start": {"type": "integer", "minimum": 0},
+            "turn_end": {"type": "integer", "minimum": 1}
+          },
+          "required": ["turn_start", "turn_end"]
+        }
+      },
+      "required": ["dataset_id", "generator_refs", "measurement_window"]
+    },
+    "planned_generation_grid": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "world_seeds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "integer", "minimum": 0}
+        },
+        "scenario_parameter_sets": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "horizons": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "integer", "minimum": 1}
+        }
+      },
+      "required": ["world_seeds", "scenario_parameter_sets", "horizons"]
+    },
+    "event_information": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "atom_count": {"type": ["integer", "null"], "minimum": 1},
+        "distinct_event_type_count": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "joint_entropy_bits_per_atom": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "conditional_entropy_bits_per_atom": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "conditioning": {"const": "previous_turn"},
+        "baseline": {"const": "copy_previous_turn"},
+        "minimum_conditional_entropy_bits": {
+          "type": ["number", "null"],
+          "exclusiveMinimum": 0
+        },
+        "status": {"enum": ["passed", "failed", "not_evaluated"]}
+      },
+      "required": [
+        "atom_count",
+        "distinct_event_type_count",
+        "joint_entropy_bits_per_atom",
+        "conditional_entropy_bits_per_atom",
+        "conditioning",
+        "baseline",
+        "minimum_conditional_entropy_bits",
+        "status"
+      ]
+    },
+    "trajectory_spread": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "metric": {"type": "string", "minLength": 1},
+        "observations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "turn": {"type": "integer", "minimum": 1},
+              "spread": {"type": "number", "minimum": 0}
+            },
+            "required": ["turn", "spread"]
+          }
+        },
+        "minimum_meaningful_spread": {
+          "type": ["number", "null"],
+          "exclusiveMinimum": 0
+        },
+        "status": {"enum": ["passed", "failed", "not_evaluated"]}
+      },
+      "required": [
+        "metric",
+        "observations",
+        "minimum_meaningful_spread",
+        "status"
+      ]
+    },
+    "scenario_diversity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "declared_family_count": {"type": "integer", "minimum": 1},
+        "effective_family_count": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "dedup_method": {"type": "string", "minLength": 1},
+        "minimum_effective_family_count": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "status": {"enum": ["passed", "failed", "not_evaluated"]}
+      },
+      "required": [
+        "declared_family_count",
+        "effective_family_count",
+        "dedup_method",
+        "minimum_effective_family_count",
+        "status"
+      ]
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {"const": "G1.5"},
+        "name": {"const": "teacher_sufficiency"},
+        "status": {"enum": ["passed", "failed", "not_evaluated"]},
+        "required_before": {"const": "repo_local_adapter_expansion_or_training"},
+        "evidence_refs": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "required": ["id", "name", "status", "required_before", "evidence_refs"]
+    },
+    "known_limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "promotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "eligible": {"const": false},
+        "reason": {"type": "string", "minLength": 1}
+      },
+      "required": ["eligible", "reason"]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "gate": {
+            "properties": {"status": {"const": "passed"}},
+            "required": ["status"]
+          }
+        },
+        "required": ["gate"]
+      },
+      "then": {
+        "properties": {
+          "event_information": {
+            "properties": {
+              "joint_entropy_bits_per_atom": {"type": "number"},
+              "conditional_entropy_bits_per_atom": {"type": "number"},
+              "minimum_conditional_entropy_bits": {"type": "number"},
+              "status": {"const": "passed"}
+            }
+          },
+          "trajectory_spread": {
+            "properties": {
+              "observations": {"minItems": 1},
+              "minimum_meaningful_spread": {"type": "number"},
+              "status": {"const": "passed"}
+            }
+          },
+          "scenario_diversity": {
+            "properties": {
+              "effective_family_count": {"type": "integer", "minimum": 2},
+              "status": {"const": "passed"}
+            }
+          }
+        }
+      }
+    }
+  ],
+  "required": [
+    "schema_version",
+    "record_type",
+    "report_id",
+    "authority",
+    "created_at",
+    "source",
+    "planned_generation_grid",
+    "event_information",
+    "trajectory_spread",
+    "scenario_diversity",
+    "gate",
+    "known_limitations",
+    "promotion"
+  ]
+}
