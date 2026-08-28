@@ -55,13 +55,35 @@ LEDGER_MARKERS = (
 )
 
 
+#: Sidecar artifacts that carry a canonical_id but are not the entity record.
+#: They live beside capsules rather than inside them, so a `/capsule/` skip
+#: does not catch them.
+NON_ENTITY_FILENAMES = {
+    "bundle.manifest.json",
+    "manifest.json",
+    "BUILD_RECEIPT.json",
+}
+
+
 def load_records() -> dict[str, dict]:
-    """entity_id -> record, for every L2 entity record."""
+    """entity_id -> record, preferring the real entity record on collision.
+
+    Several ids are claimed by more than one file. `entities/char_roake/` holds
+    a bundle manifest and a build receipt carrying `canonical_id: char_roake`,
+    outside the capsule directory — so a naive last-write-wins scan replaced the
+    actual entity record with a sidecar that has no `entity_id` and none of the
+    record's content. char_roake then reported as unreconciled with 12 open
+    claims immediately after being reconciled, because the tool was reading the
+    wrong file.
+
+    Two guards: skip known sidecar filenames, and let a record that declares
+    `entity_id` win over one that only declares `canonical_id`.
+    """
     records: dict[str, dict] = {}
     if not CANON_L2.is_dir():
         return records
     for path in CANON_L2.rglob("*.json"):
-        if "/capsule/" in path.as_posix():
+        if "/capsule/" in path.as_posix() or path.name in NON_ENTITY_FILENAMES:
             continue
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
@@ -69,9 +91,15 @@ def load_records() -> dict[str, dict]:
             continue
         if not isinstance(data, dict):
             continue
-        eid = data.get("entity_id") or data.get("canonical_id")
-        if eid:
-            records[str(eid)] = data
+        declared = data.get("entity_id")
+        eid = declared or data.get("canonical_id")
+        if not eid:
+            continue
+        eid = str(eid)
+        incumbent = records.get(eid)
+        if incumbent is not None and not declared and incumbent.get("entity_id"):
+            continue  # keep the real entity record
+        records[eid] = data
     return records
 
 
