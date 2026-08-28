@@ -79,6 +79,15 @@ COMMON_NOUN_NAMES = {
     # rule" reaction to AI ascendancy). Claims about humans must be reached by
     # DISTINCTIVE multi-word phrases, not by the species name.
     "human", "humans", "humanity",
+    # Multi-word forms need to be here too — see the stoplist bug noted below.
+    #
+    # "The Prime" is a legitimate canon alias of char_prime_construct_leader,
+    # and it produced 7 claims of which 7 were noise: the prime meridian at
+    # Greenwich, "the prime example" of Spanish surnames, "the prime candidate",
+    # "the prime thread" of Aurora's continuum, an AI "prime directive", and the
+    # Prime Video channel. A generic article-plus-adjective alias cannot be
+    # matched as a name.
+    "the prime",
 }
 
 #: A sentence only counts as a claim if it asserts something.
@@ -123,7 +132,15 @@ def load_entity_forms() -> dict[str, str]:
             form = form.strip()
             if len(form) < 5:
                 continue
-            if " " not in form and form.lower() in COMMON_NOUN_NAMES:
+            # The stoplist applies to EVERY form, not just single words.
+            #
+            # It used to be gated on `" " not in form`, on the reasoning that
+            # multi-word names are distinctive enough to be safe. "The Prime" is
+            # the counterexample: two words, entirely generic, and matched
+            # case-insensitively against lowercased text, so it caught every
+            # occurrence of "the prime <noun>" in the corpus — 7 claims, 7 noise.
+            # Distinctiveness comes from the words, not from how many there are.
+            if form.lower() in COMMON_NOUN_NAMES:
                 continue
             forms.setdefault(form.lower(), eid)
     return forms
