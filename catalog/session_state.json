@@ -882,9 +882,9 @@
       "detail": "Phase 10 is PASS, not outstanding. Direct evidence on agent/gumas-flash-rebellion-battle-baseline (draft PR CloudBank #1506): spec GUMAS__SPEC__DETERMINISTIC_FACTUAL_REPORTER_EVIDENCE_EXPORT v1.0, runtime package simulation/runtime/gumas_factual_reporter/ (projection, exporter, validation, rendering, identity), two test modules, receipt PHASE10 v1.0, and workflow gumas-factual-reporter.yml. Task record DTER v2.1 records Phase 10 accepted on head 635e97e0 after validation. The blocking half of this item remains correct and is carried forward: Control A/B/C and Run 0 stay BLOCKED. Superseded by gumas-phase11-controls-contract."
     }
   ],
-  "last_updated": "2026-08-28T02:10:18Z",
+  "last_updated": "2026-08-28T02:13:39Z",
   "last_platform": "claude-code",
-  "last_session_summary": "chore: refresh generated surfaces after merging main; Merge remote-tracking branch 'origin/main' into codex/aurora; Merge c65bff7d3d2675b7f9189ad0d396751831e5af3b into 59a24bdb",
+  "last_session_summary": "Merge remote-tracking branch 'origin/main' into codex/aurora; Merge pull request #84 from AUo959/integration/session-queue; chore(session): refresh mechanical state after the lifecycle",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -907,64 +907,64 @@
   },
   "recent_commits": [
     {
-      "sha": "67b07b3",
-      "date": "2026-08-28",
-      "platform": "claude-code",
-      "summary": "chore: refresh generated surfaces after merging main"
-    },
-    {
-      "sha": "10767f6",
+      "sha": "d668524",
       "date": "2026-08-28",
       "platform": "claude-code",
       "summary": "Merge remote-tracking branch 'origin/main' into codex/aurora-state-model-specs-v0-1"
     },
     {
-      "sha": "4ae19da",
+      "sha": "ac6b14b",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "Merge c65bff7d3d2675b7f9189ad0d396751831e5af3b into 59a24bdb48d7d8e2be497c3219c9d6590f786db2"
+      "summary": "Merge pull request #84 from AUo959/integration/session-queue-lifecycle-rework"
     },
     {
-      "sha": "c65bff7",
+      "sha": "298b7b1",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "merge: integrate PR-aware workspace verifier"
+      "summary": "chore(session): refresh mechanical state after the lifecycle migration"
     },
     {
-      "sha": "8d13f02",
+      "sha": "f7bb1c3",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "merge: carry PR freshness regression tests"
+      "summary": "feat(session): adopt the queue lifecycle contract on the live queue"
     },
     {
-      "sha": "d793b2f",
+      "sha": "3f2c1fd",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "merge: carry PR-aware workspace verification"
+      "summary": "chore(session): queue PR 56 provider follow-up"
     },
     {
-      "sha": "ee8e9c7",
+      "sha": "20ba7c6",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "chore(asm): keep ephemeral session state off design PR"
+      "summary": "chore(session): refresh queue receipt after main sync"
     },
     {
-      "sha": "8beb97b",
+      "sha": "e3bb4c9",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "docs(asm): make small specialized first learner normative"
+      "summary": "Merge remote-tracking branch 'origin/main' into codex/session-queue-lifecycle-2026-08-01"
     },
     {
-      "sha": "4a31d89",
+      "sha": "939dfe0",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "ci: keep JSON Schema validation on Python 3.9"
+      "summary": "chore(session): record queue lifecycle receipt"
     },
     {
-      "sha": "8152035",
+      "sha": "f91c8ac",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "state: record Aurora state model review resolution"
+      "summary": "Merge branch 'main' into codex/session-queue-lifecycle-2026-08-01"
+    },
+    {
+      "sha": "4bd25b8",
+      "date": "2026-08-28",
+      "platform": "claude-code",
+      "summary": "feat(session): enforce actionable queue lifecycle"
     }
   ],
   "security_events": [
@@ -981,7 +981,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "67b07b3",
+    "main_sha": "d668524",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -1096,7 +1096,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-28T02:10:18Z",
+    "checked_at": "2026-08-28T02:13:39Z",
     "entries": [
       {
         "repo": "root",
