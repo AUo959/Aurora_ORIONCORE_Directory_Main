@@ -759,6 +759,21 @@
       "next_action": "Diff how workspace_verify and session_queue_health each build due_review and reconcile to one definition.",
       "definition_of_done": "Both surfaces report the same count for the same state file, with a test pinning the agreement.",
       "approval_required": false
+    },
+    {
+      "id": "union-military-command-referent",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "CanonRec",
+      "description": "Union Military Command (UMC) is attested across four independent prose claims as the Union military command with its primary HQ on Kaelor Prime, but has no entity record and no mention anywhere in canon. Canon does hold org_sentinel_high_command, org_union_naval_forces and org_union_marshals. UMC may be an overarching command above them, an alternate name for one, or a superseded draft form.",
+      "created_at": "2026-08-28T02:42:39Z",
+      "updated_at": "2026-08-28T02:42:39Z",
+      "review_at": "2026-09-10T00:00:00Z",
+      "next_action": "Compare the UMC attestations against org_sentinel_high_command, org_union_naval_forces and org_union_marshals across all sources; mint, alias or retire accordingly.",
+      "definition_of_done": "UMC either has an entity record, or is recorded as an alias/superseded form of an existing body, with the loc_kaelor_prime open_referent closed.",
+      "approval_required": false
     }
   ],
   "completed_tasks": [
@@ -882,7 +897,7 @@
       "detail": "Phase 10 is PASS, not outstanding. Direct evidence on agent/gumas-flash-rebellion-battle-baseline (draft PR CloudBank #1506): spec GUMAS__SPEC__DETERMINISTIC_FACTUAL_REPORTER_EVIDENCE_EXPORT v1.0, runtime package simulation/runtime/gumas_factual_reporter/ (projection, exporter, validation, rendering, identity), two test modules, receipt PHASE10 v1.0, and workflow gumas-factual-reporter.yml. Task record DTER v2.1 records Phase 10 accepted on head 635e97e0 after validation. The blocking half of this item remains correct and is carried forward: Control A/B/C and Run 0 stay BLOCKED. Superseded by gumas-phase11-controls-contract."
     }
   ],
-  "last_updated": "2026-08-28T02:13:39Z",
+  "last_updated": "2026-08-28T02:42:39Z",
   "last_platform": "claude-code",
   "last_session_summary": "Merge remote-tracking branch 'origin/main' into codex/aurora; Merge pull request #84 from AUo959/integration/session-queue; chore(session): refresh mechanical state after the lifecycle",
   "tool_versions": {
