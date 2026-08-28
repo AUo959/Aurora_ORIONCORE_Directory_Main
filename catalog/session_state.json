@@ -897,9 +897,9 @@
       "detail": "Phase 10 is PASS, not outstanding. Direct evidence on agent/gumas-flash-rebellion-battle-baseline (draft PR CloudBank #1506): spec GUMAS__SPEC__DETERMINISTIC_FACTUAL_REPORTER_EVIDENCE_EXPORT v1.0, runtime package simulation/runtime/gumas_factual_reporter/ (projection, exporter, validation, rendering, identity), two test modules, receipt PHASE10 v1.0, and workflow gumas-factual-reporter.yml. Task record DTER v2.1 records Phase 10 accepted on head 635e97e0 after validation. The blocking half of this item remains correct and is carried forward: Control A/B/C and Run 0 stay BLOCKED. Superseded by gumas-phase11-controls-contract."
     }
   ],
-  "last_updated": "2026-08-28T02:42:39Z",
+  "last_updated": "2026-08-28T03:09:05Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Merge remote-tracking branch 'origin/main' into codex/aurora; Merge pull request #84 from AUo959/integration/session-queue; chore(session): refresh mechanical state after the lifecycle",
+  "last_session_summary": "chore(catalog): sync CanonRec pin after the ledger tail pass; fix(extractor): apply the common-noun stoplist to every form; fix(recovery): read the entity record, not its sidecars",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -922,64 +922,64 @@
   },
   "recent_commits": [
     {
-      "sha": "d668524",
+      "sha": "8bb6d77",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "Merge remote-tracking branch 'origin/main' into codex/aurora-state-model-specs-v0-1"
+      "summary": "chore(catalog): sync CanonRec pin after the ledger tail passes"
     },
     {
-      "sha": "ac6b14b",
+      "sha": "0114191",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "Merge pull request #84 from AUo959/integration/session-queue-lifecycle-rework"
+      "summary": "fix(extractor): apply the common-noun stoplist to every form, not just single words"
     },
     {
-      "sha": "298b7b1",
+      "sha": "719b079",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "chore(session): refresh mechanical state after the lifecycle migration"
+      "summary": "fix(recovery): read the entity record, not its sidecars"
     },
     {
-      "sha": "f7bb1c3",
+      "sha": "96f42bd",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "feat(session): adopt the queue lifecycle contract on the live queue"
+      "summary": "chore(catalog): sync CanonRec pin after the Nythran pass"
     },
     {
-      "sha": "3f2c1fd",
+      "sha": "ccabd9e",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "chore(session): queue PR 56 provider follow-up"
+      "summary": "chore(catalog): sync CanonRec pin and queue the UMC referent question"
     },
     {
-      "sha": "20ba7c6",
+      "sha": "0bcce10",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "chore(session): refresh queue receipt after main sync"
+      "summary": "chore(catalog): sync CanonRec pin after the UIB reconciliation"
     },
     {
-      "sha": "e3bb4c9",
+      "sha": "74cc296",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "Merge remote-tracking branch 'origin/main' into codex/session-queue-lifecycle-2026-08-01"
+      "summary": "chore(catalog): sync CanonRec pin after the Zyphari Compact reconciliation"
     },
     {
-      "sha": "939dfe0",
+      "sha": "fdc76f9",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "chore(session): record queue lifecycle receipt"
+      "summary": "feat(recovery): derive prose-ledger coverage from canon instead of memory"
     },
     {
-      "sha": "f91c8ac",
+      "sha": "9285514",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "Merge branch 'main' into codex/session-queue-lifecycle-2026-08-01"
+      "summary": "Merge pull request #54 from AUo959/codex/aurora-state-model-specs-v0-1"
     },
     {
-      "sha": "4bd25b8",
+      "sha": "c8dee78",
       "date": "2026-08-28",
       "platform": "claude-code",
-      "summary": "feat(session): enforce actionable queue lifecycle"
+      "summary": "chore(session): refresh mechanical state for the state-model branch"
     }
   ],
   "security_events": [
@@ -996,7 +996,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "d668524",
+    "main_sha": "8bb6d77",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -1111,7 +1111,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-28T02:13:39Z",
+    "checked_at": "2026-08-28T03:09:05Z",
     "entries": [
       {
         "repo": "root",
