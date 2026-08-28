@@ -13,7 +13,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "tools"))
 
 import session_state_merge as ssm  # noqa: E402
-from test_session_state_check import _valid_state  # noqa: E402
+from test_session_state_check import _lifecycle_item, _valid_state  # noqa: E402
 
 
 def _fork(base: dict) -> tuple[dict, dict]:
@@ -46,42 +46,40 @@ class TestMergeStates(unittest.TestCase):
         self.assertIn("theirs-done", ids)
         self.assertEqual(len(ids), len(set(ids)))
 
-    def test_pending_removal_wins_over_stale_presence(self):
+    def test_queue_removal_wins_over_stale_presence(self):
         """One side completes (removes) an item; the other still carries it."""
         base = _valid_state()
         ours, theirs = _fork(base)
-        # ours completes note-1: removes from pending, records completion
-        ours["pending_for_next_session"] = []
-        ours["completed_tasks"].append({"id": "note-1", "status": "completed"})
+        # ours completes task-2: removes it from the queue and records completion
+        ours["task_queue"] = []
+        ours["completed_tasks"].append({"id": "task-2", "status": "completed"})
         ours["last_updated"] = "2026-07-04T03:00:00Z"
         # theirs merely touches something else
         theirs["last_session_summary"] = "Unrelated."
         theirs["last_updated"] = "2026-07-04T02:00:00Z"
         merged = ssm.merge_states(base, ours, theirs)
-        self.assertEqual(merged["pending_for_next_session"], [])
-        self.assertIn("note-1", [t["id"] for t in merged["completed_tasks"]])
+        self.assertEqual(merged["task_queue"], [])
+        self.assertIn("task-2", [t["id"] for t in merged["completed_tasks"]])
 
-    def test_pending_additions_from_both_sides_kept(self):
+    def test_queue_additions_from_both_sides_kept(self):
         base = _valid_state()
         ours, theirs = _fork(base)
-        ours["pending_for_next_session"].append(
-            {"id": "ours-new", "description": "From ours."})
-        theirs["pending_for_next_session"].append(
-            {"id": "theirs-new", "description": "From theirs."})
+        ours["task_queue"].append(_lifecycle_item("ours-new"))
+        theirs["task_queue"].append(_lifecycle_item("theirs-new"))
         merged = ssm.merge_states(base, ours, theirs)
-        ids = [p["id"] for p in merged["pending_for_next_session"]]
+        ids = [p["id"] for p in merged["task_queue"]]
         self.assertIn("ours-new", ids)
         self.assertIn("theirs-new", ids)
 
     def test_both_modified_item_takes_newer_side(self):
         base = _valid_state()
         ours, theirs = _fork(base)
-        ours["pending_for_next_session"][0]["description"] = "Ours edit."
+        ours["task_queue"][0]["description"] = "Ours edit."
         ours["last_updated"] = "2026-07-04T01:00:00Z"
-        theirs["pending_for_next_session"][0]["description"] = "Theirs edit."
+        theirs["task_queue"][0]["description"] = "Theirs edit."
         theirs["last_updated"] = "2026-07-04T02:00:00Z"
         merged = ssm.merge_states(base, ours, theirs)
-        self.assertEqual(merged["pending_for_next_session"][0]["description"],
+        self.assertEqual(merged["task_queue"][0]["description"],
                          "Theirs edit.")
 
     def test_recent_commits_union_capped_newest_first(self):
@@ -113,6 +111,23 @@ class TestMergeStates(unittest.TestCase):
         self.assertIn("Theirs continuation.", detail)
         self.assertTrue(detail.startswith("Base narrative."))
 
+    def test_clearing_inherited_active_task_wins_over_stale_continuation(self):
+        base = _valid_state()
+        ours, theirs = _fork(base)
+        ours["active_task"] = None
+        theirs["active_task"]["next_step_detail"] = "Continued from a stale checkout."
+        merged = ssm.merge_states(base, ours, theirs)
+        self.assertIsNone(merged["active_task"])
+
+    def test_concurrent_distinct_active_selections_conflict(self):
+        base = _valid_state()
+        base["active_task"] = None
+        ours, theirs = _fork(base)
+        ours["active_task"] = _lifecycle_item("ours-active", status="active")
+        theirs["active_task"] = _lifecycle_item("theirs-active", status="active")
+        with self.assertRaises(ssm.ActiveTaskConflict):
+            ssm.merge_states(base, ours, theirs)
+
     def test_snapshot_block_takes_newer_side(self):
         base = _valid_state()
         ours, theirs = _fork(base)
@@ -133,18 +148,18 @@ class TestMergeStates(unittest.TestCase):
         codex["last_updated"] = "2026-07-04T01:55:03Z"
         codex["completed_tasks"].append({"id": "codex-hygiene", "status": "completed"})
 
-        claude["pending_for_next_session"] = []  # completed note-1
-        claude["completed_tasks"].append({"id": "note-1", "status": "completed"})
-        claude["pending_for_next_session"].append(
-            {"id": "publish-retry", "priority": "high", "assigned_to": "codex",
-             "description": "Retry the publish."})
+        claude["task_queue"] = []  # completed task-2
+        claude["completed_tasks"].append({"id": "task-2", "status": "completed"})
+        publish_retry = _lifecycle_item("publish-retry")
+        publish_retry.update({"priority": "high", "assigned_to": "codex"})
+        claude["task_queue"].append(publish_retry)
         claude["last_updated"] = "2026-07-04T03:12:00Z"
 
         merged = ssm.merge_states(base, codex, claude)
         completed = {t["id"] for t in merged["completed_tasks"]}
-        self.assertLessEqual({"codex-hygiene", "note-1", "task-0"}, completed)
-        pending_ids = [p["id"] for p in merged["pending_for_next_session"]]
-        self.assertEqual(pending_ids, ["publish-retry"])
+        self.assertLessEqual({"codex-hygiene", "task-2", "task-0"}, completed)
+        queue_ids = [p["id"] for p in merged["task_queue"]]
+        self.assertEqual(queue_ids, ["publish-retry"])
         self.assertEqual(merged["active_task"]["next_step_detail"], "Adapter PR opened.")
         self.assertEqual(merged["last_updated"], "2026-07-04T03:12:00Z")
 
@@ -181,7 +196,7 @@ class TestDriverCli(unittest.TestCase):
     def test_contract_violating_merge_falls_back_to_conflict(self):
         base = _valid_state()
         ours, theirs = _fork(base)
-        # theirs introduces a malformed pending entry; merged result must be refused
+        # theirs introduces a deprecated pending entry; merged result must be refused
         theirs["pending_for_next_session"].append({"item": "legacy", "detail": "bad"})
         theirs["last_updated"] = "2026-07-04T09:00:00Z"
         o_path = self._write(ours)

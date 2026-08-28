@@ -5,6 +5,8 @@
 Aurora Mission Control is the root-control-plane operator inbox. It aggregates
 existing deterministic root signals into one read-only report:
 
+- session queue health, actionable work, review dates, and concrete owner decisions
+- active project-focus announcements
 - workspace verification
 - integration gate posture
 - recovery-index review pressure
@@ -14,6 +16,10 @@ existing deterministic root signals into one read-only report:
 
 It does not promote recovery material, mutate nested repos, execute runtime
 commands, send mesh messages, install packages, or publish GitHub changes.
+
+Queue signals preserve the lifecycle distinction: ready reversible work is an
+actionable non-approval item, while only evidence-backed consequential decisions
+are marked `approval_required`.
 
 ## Files
 
