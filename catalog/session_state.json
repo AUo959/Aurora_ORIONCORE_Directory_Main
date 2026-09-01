@@ -881,9 +881,9 @@
       "detail": "Ledger closed: 1044/1044 claims, 108/108 entities, 0 open. Final tail was 96 claims across 59 entities. Outcomes recorded per record: 44 enriched, 8 corroborated, 3 no_content (production metadata only), 1 misresolved (char_eira_valkyrie claim describes Valkyrie Sentinels as a unit, filed as a referent gap rather than written onto the person). Four questions recorded OPEN, not answered. CanonRec 02d6a40."
     }
   ],
-  "last_updated": "2026-09-01T16:32:54Z",
+  "last_updated": "2026-09-01T16:36:19Z",
   "last_platform": "claude-code",
-  "last_session_summary": "chore(catalog): sync CanonRec pin after the ledger tail pass; fix(extractor): apply the common-noun stoplist to every form; fix(recovery): read the entity record, not its sidecars",
+  "last_session_summary": "Closed the prose claim ledger (1044/1044, 0 open) and shipped brief-cadence automation: a weekly workflow that raises/closes a tracking issue, plus --exit-on-warn so it alerts at the warn threshold rather than once commits are already blocked.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -906,64 +906,64 @@
   },
   "recent_commits": [
     {
-      "sha": "8bb6d77",
-      "date": "2026-08-28",
+      "sha": "2f106be",
+      "date": "2026-09-01",
       "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin after the ledger tail passes"
+      "summary": "Close prose-claim-ledger-reconciliation; pin CanonRec 02d6a40"
     },
     {
-      "sha": "0114191",
-      "date": "2026-08-28",
+      "sha": "334fdd6",
+      "date": "2026-09-01",
       "platform": "claude-code",
-      "summary": "fix(extractor): apply the common-noun stoplist to every form, not just single words"
+      "summary": "Schedule the brief freshness check, and fix the tier it alerts on"
     },
     {
-      "sha": "719b079",
-      "date": "2026-08-28",
+      "sha": "e37790d",
+      "date": "2026-09-01",
       "platform": "claude-code",
-      "summary": "fix(recovery): read the entity record, not its sidecars"
+      "summary": "docs(brief): executive decision brief 2026-08-28"
     },
     {
-      "sha": "96f42bd",
-      "date": "2026-08-28",
+      "sha": "1676fd8",
+      "date": "2026-09-01",
       "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin after the Nythran pass"
+      "summary": "fix(tests): skip the state-model module without jsonschema instead of aborting collection"
     },
     {
-      "sha": "ccabd9e",
-      "date": "2026-08-28",
+      "sha": "0419324",
+      "date": "2026-09-01",
       "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin and queue the UMC referent question"
+      "summary": "chore(catalog): sync CanonRec pin after the tail batch"
     },
     {
-      "sha": "0bcce10",
-      "date": "2026-08-28",
+      "sha": "8bfb2cf",
+      "date": "2026-09-01",
       "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin after the UIB reconciliation"
+      "summary": "chore(catalog): sync CanonRec pin after the UMC recovery"
     },
     {
-      "sha": "74cc296",
-      "date": "2026-08-28",
+      "sha": "6e48bae",
+      "date": "2026-09-01",
       "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin after the Zyphari Compact reconciliation"
+      "summary": "chore(catalog): sync CanonRec pin after the referent recovery pass"
     },
     {
-      "sha": "fdc76f9",
-      "date": "2026-08-28",
+      "sha": "5f54504",
+      "date": "2026-09-01",
       "platform": "claude-code",
-      "summary": "feat(recovery): derive prose-ledger coverage from canon instead of memory"
+      "summary": "feat(canon): collect the referents canon names but has no record for"
     },
     {
-      "sha": "9285514",
-      "date": "2026-08-28",
+      "sha": "870373c",
+      "date": "2026-09-01",
       "platform": "claude-code",
-      "summary": "Merge pull request #54 from AUo959/codex/aurora-state-model-specs-v0-1"
+      "summary": "chore(catalog): sync CanonRec pin after the 5-claim tier"
     },
     {
-      "sha": "c8dee78",
-      "date": "2026-08-28",
+      "sha": "6a25d91",
+      "date": "2026-09-01",
       "platform": "claude-code",
-      "summary": "chore(session): refresh mechanical state for the state-model branch"
+      "summary": "chore(catalog): sync CanonRec pin after the OSD/Radek pass"
     }
   ],
   "security_events": [
@@ -980,7 +980,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "8bb6d77",
+    "main_sha": "2f106be",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -1095,7 +1095,7 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-08-28T03:09:05Z",
+    "checked_at": "2026-09-01T16:36:19Z",
     "entries": [
       {
         "repo": "root",
