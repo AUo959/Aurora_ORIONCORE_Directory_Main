@@ -194,6 +194,11 @@ def main() -> int:
         help="Report freshness only; exit 1 when a brief is overdue.",
     )
     parser.add_argument(
+        "--exit-on-warn", action="store_true",
+        help=("With --check, also exit 1 at the warn threshold, not just the "
+              "blocking one. For schedulers that alert on exit status."),
+    )
+    parser.add_argument(
         "--write", action="store_true",
         help="Write the scaffold to reports/state_briefs/ instead of stdout.",
     )
@@ -216,7 +221,11 @@ def main() -> int:
         if ahead >= WARN_COMMITS:
             print(f"brief freshness: due — {ahead} commits since {brief.name} "
                   f"(warns at {WARN_COMMITS}, blocks at {BLOCKING_COMMITS}).")
-            return 0
+            # A scheduler that alerts only on the blocking tier alerts at the
+            # moment commits start failing — which is not a warning, it is the
+            # incident. --exit-on-warn moves the alert to the warn tier without
+            # changing what `make brief-check` means for existing callers.
+            return 1 if args.exit_on_warn else 0
         print(f"brief freshness: ok — {ahead} commits since {brief.name} "
               f"(warns at {WARN_COMMITS}).")
         return 0

@@ -1,0 +1,106 @@
+name: Brief Freshness
+
+# The reporting layer has never had a scheduler. Brief cadence across the whole
+# series has been human-triggered — 7d, 14d, 7d, 9d, 17d, 16d, 13d — and the
+# 2026-07-25 brief showed the cost: two P1s had been resolved weeks earlier and
+# were still carried as open, because no brief had run to notice. Closure is
+# signal, and an unrun brief suppresses it.
+#
+# This schedules the CHECK, not the write. `make brief` regenerates governance
+# artifacts and would leave uncommitted changes in CI; the Stop hook set the
+# precedent for this class by being advisory-only — it updates state on disk and
+# deliberately never commits or pushes. So this reports, and a human decides.
+#
+# It raises an issue rather than only failing a job, because a red run in the
+# Actions tab is not a place anyone looks. An issue is.
+
+on:
+  schedule:
+    # 09:00 UTC every Monday. Weekly is well inside the 60-commit warn
+    # threshold at this repo's commit rate, so overdue is caught early rather
+    # than at the point the gate turns blocking.
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: brief-freshness
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: Report executive brief freshness
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          # brief_scaffold counts commits landed since the newest brief, so it
+          # needs the history to count.
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Check brief freshness
+        id: freshness
+        run: |
+          set +e
+          # --exit-on-warn, not bare --check. Bare --check returns 0 at the warn
+          # tier and only fails at the blocking tier (150), so a scheduler keyed
+          # on exit status would first speak up at the point commits are already
+          # being blocked. The flag moves the alert to 60.
+          output="$(python tools/brief_scaffold.py --check --exit-on-warn 2>&1)"
+          status=$?
+          set -e
+          echo "$output"
+          {
+            echo "report<<EOF"
+            echo "$output"
+            echo "EOF"
+            echo "overdue=$([ $status -ne 0 ] && echo true || echo false)"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Open or update the tracking issue
+        if: steps.freshness.outputs.overdue == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPORT: ${{ steps.freshness.outputs.report }}
+        run: |
+          TITLE="Executive brief overdue"
+          # Update the existing issue rather than opening a new one each week —
+          # a weekly duplicate would train people to close it unread, which is
+          # the same failure as an alarm that is always on.
+          NUMBER="$(gh issue list --state open --search "$TITLE in:title" \
+                     --json number,title \
+                     --jq "map(select(.title == \"$TITLE\")) | .[0].number // empty")"
+          BODY="$(printf '%s\n\n---\n\nRun `make brief` to scaffold the next one; it does the mechanical half and leaves the synthesis.\n\nChecked by `.github/workflows/brief-freshness.yml` on %s.\n' "$REPORT" "$(date -u +%Y-%m-%d)")"
+          if [ -n "$NUMBER" ]; then
+            gh issue comment "$NUMBER" --body "$BODY"
+            echo "commented on existing issue #$NUMBER"
+          else
+            gh issue create --title "$TITLE" --body "$BODY"
+          fi
+
+      - name: Close the tracking issue when a brief has landed
+        if: steps.freshness.outputs.overdue != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="Executive brief overdue"
+          NUMBER="$(gh issue list --state open --search "$TITLE in:title" \
+                     --json number,title \
+                     --jq "map(select(.title == \"$TITLE\")) | .[0].number // empty")"
+          if [ -n "$NUMBER" ]; then
+            gh issue close "$NUMBER" \
+              --comment "A brief has landed; freshness is back within threshold. Closed by the scheduled check."
+            echo "closed issue #$NUMBER"
+          else
+            echo "brief freshness ok; no open tracking issue"
+          fi
