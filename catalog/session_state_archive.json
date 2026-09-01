@@ -527,6 +527,69 @@
       "completed_at": "2026-08-11T00:07:14Z",
       "platform": "claude-code",
       "detail": "Minted char_wrath_09 (recovered_source). Modelled as a character because it holds a commanding-officer role over the AI-Warlord Leviathan Dreadnought, unlike Omega-Veil and Sovereign Nexus which canon models as organizations. Explicitly NOT bound to nemesis_core, org_omega_veil or org_sovereign_nexus."
+    },
+    {
+      "id": "archive-new-referents-naming",
+      "status": "completed",
+      "completed_at": "2026-08-11T00:07:14Z",
+      "platform": "claude-code",
+      "detail": "Minted all four: event_battle_of_tevraks_gate, loc_kaelor_shadow_ring, eq_valr_99, eq_sentinel_ghost_v37. All were already asserted inside committed canon records (vessel_gu_011.recent_actions, cls_sentinel.recent_actions) without having referents; both parents now cross-link. loc_kaelor_shadow_ring carries explicit disambiguation from loc_kaelor_prime and loc_kaelor_s_rift."
+    },
+    {
+      "id": "archive-new-referents-naming-batch2",
+      "status": "completed",
+      "completed_at": "2026-08-11T00:07:14Z",
+      "platform": "claude-code",
+      "detail": "Minted char_jasrek_tyr, loc_arkelon_theta, org_iron_fang_mercenaries, char_varnak \u2014 plus two guild siblings from the same source block, org_orion_guard and org_void_watchers. char_varnak carries disambiguation from Varnak's Rest (an agricultural/refugee world attested separately in the same corpus). Jasrek Tyr's Ty- prefix independently matches the Velar lineage system as an outworld warlord."
+    },
+    {
+      "id": "kaelors-rift-order-of-battle-vessels",
+      "status": "completed",
+      "completed_at": "2026-08-11T00:07:14Z",
+      "platform": "claude-code",
+      "detail": "Minted vessel_gu_warspite, vessel_gu_indomitable, vessel_gu_reliant and char_vice_admiral_rho; event_battle_of_kaelors_rift open questions marked resolved. G.U.S. Reliant explicitly NOT bound to cls_reliant \u2014 class left undetermined. Rho recorded by surname with rank, given name undetermined."
+    },
+    {
+      "id": "velar-talyx-name-variant",
+      "status": "completed",
+      "completed_at": "2026-08-11T00:07:14Z",
+      "platform": "claude-code",
+      "detail": "Closed as an observation, not a mint. Canon's Talyx Velkonn stands; the prose 'Talyx Varneth' is a superseded draft form. The lineage-prefix system now in canon supports this: Vel- is noble and matches his ducal rank, Varn- is a military bloodline. No merge, no rename, no new record \u2014 recording the variant would create a phantom referent."
+    },
+    {
+      "id": "reference-integrity-sweep",
+      "status": "completed",
+      "completed_at": "2026-08-11T00:20:17Z",
+      "platform": "claude-code",
+      "detail": "Built tools/canon_reference_integrity.py (namespace-aware, repeatable) + tests/test_canon_reference_integrity.py (7 tests). Result: 0 dangling references across 243 records, 0 alias collisions, 103 orphans (mostly legitimate leaf records). Structural findings fixed: all 40 capsules now declare capsule_id, bridging the capsule<->entity namespaces that were previously connected only by prefix-stripping; faction<->entity mapping is now READ from polity faction_bindings because separatist_confed -> polity_separatist_confederation is not derivable by any prefix rule; 4 species records gained origin_polity_entity_id alongside the faction-form origin_polity_id."
+    },
+    {
+      "id": "validator-vocabulary-sync-guard",
+      "status": "completed",
+      "completed_at": "2026-08-11T00:33:50Z",
+      "platform": "claude-code",
+      "detail": "Added tests/test_validator_vocabulary_sync.py (6 tests). Guards every controlled vocabulary against committed canon: VALID_ENTITY_KINDS, VALID_CERTAINTY_TAGS, VALID_L2_POLITY_SUBTYPES, VALID_L2_SPECIES_SUBTYPES, and STATUS_VOCAB_BY_KIND per kind. All currently clean. Location subtypes are deliberately NOT asserted clean \u2014 canon uses 6 descriptive values the validator does not list, capped at 8 with a failure message that forces the classification decision rather than raising the ceiling again."
+    },
+    {
+      "id": "cloudbank-open-issue-hygiene-continuation-2026-08-10",
+      "status": "completed",
+      "completed_at": "2026-08-11T03:27:01Z",
+      "platform": "codex",
+      "detail": "Completed ordered local CloudBank pass: audited merged PR 1482 and prepared hardening commit cb8da9bc behind a persisted-run compatibility gate; synchronized canonical CloudBank main and root registry pin in 7a3a39f; refreshed PR 1381 locally at merge 9d59340f; fixed PR 1343 in d677fccc; triaged all 17 open PRs including 6 Dependabot PRs and blocked PR 1492; implemented issue 1453 in 2cd6741b, issue 1457 in 58285cc0, and issue 1456 validation hardening in 4f53486c. All CloudBank work remains in isolated local worktrees with no push, merge, comments, closures, ready transitions, workflow dispatch, canon promotion, or INIT. Separate live L1 experiment was not touched."
+    },
+    {
+      "id": "l1-embodiment-recovery-finish",
+      "status": "completed",
+      "completed_at": "2026-08-11T05:55:32Z",
+      "platform": "claude-code",
+      "detail": "MERGED TO CLOUDBANK MAIN via PR #1505, merge commit 8347724308f8. Rescued from an uncommitted /private/tmp worktree (zero commits on the branch), completed, and landed. Four defects fixed: (1) export_run_state never emitted 'embodiments' so the projection never round-tripped \u2014 root cause, in l1_runtime_support.py which the original work never touched; (2) embodiment_observation answered EVERY focus when the registry was unbound, shadowing the fleet provider \u2014 regression; (3) focus 'fleet' substring-matched L1-EMB-FLEET-DOCKING's component, so added RESERVED_FOCI \u2014 regression, same fragment-match trap as the canon work; (4) a current-contract payload missing embodiments was silently rebuilt, now rejected at parse time. Plus config/canon_provenance.json cloudbank_sha256 refreshed for the changed l1_runtime_baseline.json (authoritative CanonRec digests untouched). Validation: L1 suites 56/56 local, CI Check green. NOTE: I initially misdiagnosed the canon_provenance failure as pre-existing because I tested with git stash, which reverts to HEAD \u2014 and HEAD was the rescue commit already containing the WIP. A pristine origin/main worktree showed it passing 5/5."
+    },
+    {
+      "id": "ace-v0-2-materialization",
+      "status": "completed",
+      "completed_at": "2026-08-12T02:04:54Z",
+      "platform": "codex",
+      "detail": "Completed via OrionCore PR #64, merge 47dcecf76b2299c8b6db76cdc878c446d8da6e1f. ACE now has an explicit-authority, feature-branch-only CanonRec facility materializer with baseline compare-and-swap, declared-target writes, post-commit rollback/sidecar cleanup, and append-only determination lineage/querying. GENERATED_CANON and CANON_REVISION are executable only after a real Git commit; the prior EXECUTION_BLOCKED receipt remains immutable. Mainline Python 3.12 tests passed 539/539 executed tests (36 skipped); the only post-merge red was the expected stale session_state freshness gate, repaired by this closeout. No Orion L1 runtime or experiment state was started, resumed, or advanced."
     }
   ]
 }
