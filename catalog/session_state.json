@@ -387,21 +387,6 @@
       "trigger": "Owner reviews the queue and rules on this item."
     },
     {
-      "id": "prose-claim-ledger-reconciliation",
-      "status": "ready",
-      "assigned_to": "either",
-      "priority": "high",
-      "kind": "work",
-      "repo": "root",
-      "description": "Work the consolidated prose claim ledger (reports/recovery/data/prose_claim_ledger__2026-08-09.json): 1,044 unique claims across 108 canon entities, from 284MB of early-project prose. Per the corrected method: for each claim, first check whether canon already holds the fact elsewhere (timeline/operations/narratives) \u2014 very often it does and the entity record simply never carried it, as with the Velar Imperium history; reconcile from the authoritative source. Where canon is silent, conflict-scan and promote per the standing rule. Never assert identity on partial evidence. Highest-claim entities: org_galactic_union (230), org_prime_construct_polity (152), polity_velar_imperium (63), vessel_gu_001 (47), org_trade_coalition (35), org_ai_vanguard (33).",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-08-27T20:06:05Z",
-      "next_action": "[migrated] Work the consolidated prose claim ledger (reports/recovery/data/prose_claim_ledger__2026-08-09.json): 1,044 unique claims across 108 canon entities, from 284MB of early-project prose.",
-      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
-      "approval_required": false
-    },
-    {
       "id": "sovereign-nexus-crisis-event",
       "status": "ready",
       "assigned_to": "either",
@@ -458,21 +443,6 @@
       "updated_at": "2026-08-27T20:06:05Z",
       "review_at": "2026-09-10T20:06:05Z",
       "next_action": "[migrated] Canon lists Elias Radek as the Judicator Prime's Sentinel-Commander while the Kaelor's Rift log gives Colonel Idris Vale as Sentinel strike lead.",
-      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
-      "approval_required": false
-    },
-    {
-      "id": "automate-executive-brief",
-      "status": "ready",
-      "assigned_to": "either",
-      "priority": "medium",
-      "kind": "work",
-      "repo": "root",
-      "description": "No workflow/cron/launchd generates briefs; cadence has been human-triggered across the whole series (7d,14d,7d,9d,17d,16d). The Stop-hook pattern already solved this class for session state. Add a weekly GitHub Actions workflow running 'make brief'. See executive_brief__2026-08-10.md Risk 4.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-09-10T20:06:05Z",
-      "next_action": "[migrated] No workflow/cron/launchd generates briefs;",
       "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
       "approval_required": false
     },
@@ -895,9 +865,23 @@
       "completed_at": "2026-08-27T19:15:22Z",
       "platform": "claude-code",
       "detail": "Phase 10 is PASS, not outstanding. Direct evidence on agent/gumas-flash-rebellion-battle-baseline (draft PR CloudBank #1506): spec GUMAS__SPEC__DETERMINISTIC_FACTUAL_REPORTER_EVIDENCE_EXPORT v1.0, runtime package simulation/runtime/gumas_factual_reporter/ (projection, exporter, validation, rendering, identity), two test modules, receipt PHASE10 v1.0, and workflow gumas-factual-reporter.yml. Task record DTER v2.1 records Phase 10 accepted on head 635e97e0 after validation. The blocking half of this item remains correct and is carried forward: Control A/B/C and Run 0 stay BLOCKED. Superseded by gumas-phase11-controls-contract."
+    },
+    {
+      "id": "automate-executive-brief",
+      "status": "completed",
+      "completed_at": "2026-09-01T16:22:54Z",
+      "platform": "claude-code",
+      "detail": "Weekly .github/workflows/brief-freshness.yml runs the check and raises/closes a tracking issue. Generation already existed; the gap was the scheduler. Also fixed the alert tier: --check exited 1 only at the blocking threshold (150), so a scheduled alert would have fired only once commits were blocked; added --exit-on-warn (60) without changing make brief-check semantics. Landed 334fdd6."
+    },
+    {
+      "id": "prose-claim-ledger-reconciliation",
+      "status": "completed",
+      "completed_at": "2026-09-01T16:32:54Z",
+      "platform": "claude-code",
+      "detail": "Ledger closed: 1044/1044 claims, 108/108 entities, 0 open. Final tail was 96 claims across 59 entities. Outcomes recorded per record: 44 enriched, 8 corroborated, 3 no_content (production metadata only), 1 misresolved (char_eira_valkyrie claim describes Valkyrie Sentinels as a unit, filed as a referent gap rather than written onto the person). Four questions recorded OPEN, not answered. CanonRec 02d6a40."
     }
   ],
-  "last_updated": "2026-08-28T03:09:05Z",
+  "last_updated": "2026-09-01T16:32:54Z",
   "last_platform": "claude-code",
   "last_session_summary": "chore(catalog): sync CanonRec pin after the ledger tail pass; fix(extractor): apply the common-noun stoplist to every form; fix(recovery): read the entity record, not its sidecars",
   "tool_versions": {
