@@ -5,7 +5,21 @@ import unittest
 from copy import deepcopy
 from pathlib import Path
 
-from jsonschema import Draft202012Validator, FormatChecker, ValidationError
+import pytest
+
+# importorskip, not a bare import. jsonschema is installed by CI and present in
+# the repo venv, but not in the macOS system Python people also run the suite
+# with. A module-level bare import turns that absence into a COLLECTION error,
+# which aborts the entire run — 0 tests instead of 699, from one optional
+# dependency. Skipping this module leaves the other 699 reporting.
+#
+# This matches how the repo already handles it: test_aurora_ace_character_retrieval
+# imports jsonschema inside its test, and test_ci_canonrec_clone_depth uses
+# importorskip for yaml.
+jsonschema = pytest.importorskip("jsonschema")
+Draft202012Validator = jsonschema.Draft202012Validator
+FormatChecker = jsonschema.FormatChecker
+ValidationError = jsonschema.ValidationError
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "catalog/contracts/aurora_state_model_contract_v0_1.json"
