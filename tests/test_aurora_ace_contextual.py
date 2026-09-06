@@ -340,3 +340,37 @@ def test_queue_symlink_escape_refused(world, tmp_path):
         assert outside.read_text() == "{}"
     finally:
         link.unlink()
+
+
+def test_l1_completed_resolution_recovers_after_worker_exit(world, monkeypatch):
+    queue = ContextQueue(world)
+    queue.authorize(
+        "l1-recovery",
+        "Read the isolated L1 fixture.",
+        "L1",
+        {
+            "subject_ref": "test.fact",
+            "evidence_refs": ["canon/L1/context_test_one.json"],
+            "field_paths": ["fact.value"],
+        },
+        "test:L1-recovery",
+    )
+    job = queue.submit(
+        "l1-recovery", "one", "What value was recorded?", {"field_path": "fact.value"}
+    )
+    original = queue._execute
+    captured = {}
+
+    def interrupt(*args):
+        captured.update(original(*args))
+        raise SystemExit("Worker exited after L1 resolution")
+
+    monkeypatch.setattr(queue, "_execute", interrupt)
+    with pytest.raises(SystemExit):
+        queue.work_once()
+    before = git(queue.world.canon, "rev-parse", "HEAD")
+    recovered = ContextQueue(world).work_once()
+    assert recovered["job_id"] == job["job_id"]
+    assert recovered["status"] == "complete", recovered
+    assert recovered["result"] == captured
+    assert git(queue.world.canon, "rev-parse", "HEAD") == before

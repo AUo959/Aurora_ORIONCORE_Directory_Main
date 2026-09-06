@@ -12,6 +12,7 @@ from typing import Any
 from .core import ROOT, ACEError, semantic_sha256
 from .invocation import compile_canon_invocation
 from .mcp_adapter import ace_resolve
+from .materialize import _validate_receipt
 from .sandbox import REQUEST_ID, World, atomic_json, fail, read_json
 
 POLICY_REL = Path("catalog/ace/policies/contextual_truth_v1.json")
@@ -383,8 +384,25 @@ class ContextQueue:
             session_ref=job_id,
             **options,
         )
-        result = ace_resolve(invocation, "context-" + job_id, root=self.world.root)
-        determination = result["determination"]
+        output_name = "context-" + job_id
+        packet = self.world.runtime / output_name
+        sidecar = self.world.runtime / f"{output_name}.ace-invocation.json"
+        if sidecar.exists():
+            recorded = read_json(sidecar)
+            determination = _validate_receipt(
+                packet / "determination_receipt.json", root=self.world.root
+            )
+            if (
+                recorded["invocation_id"] != job.get("l1_invocation_id")
+                or recorded["determination_ref"] != determination["determination_id"]
+            ):
+                fail("Recorded L1 invocation does not match this need")
+            invocation = recorded
+        else:
+            job["l1_invocation_id"] = invocation["invocation_id"]
+            atomic_json(self.jobs / f"{job_id}.json", job)
+            result = ace_resolve(invocation, output_name, root=self.world.root)
+            determination = result["determination"]
         return {
             "world_id": spec["world_id"],
             "status": determination["status"],
