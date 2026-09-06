@@ -88,3 +88,19 @@ MCP processes and keep all generated state in temporary independent clones.
 The original 13-row ACE composition gate and the new sandbox tests are separate
 acceptance evidence. Neither grants source-world canon promotion, publication,
 autonomous completion, relationship editing, or Orion runtime progression.
+
+## Verified installation (2026-09-06)
+
+The persistent world is `/Users/travisstreets/dev/aurora-ace-sandbox`, using
+`/Users/travisstreets/dev/aurora-ace-runtime/bin/python`. Two actual Codex tasks
+created and recalled Jorenon Morrowen with identical identity, background, and
+creation commit after the first process exited. The complete receipt is
+[continuity acceptance](../reports/analysis/aurora_ace_continuity_acceptance_2026-09-06.json).
+The independent composition gate passed all 13 rows; all 15 sandbox tests and
+the root integration gate passed. Canonical repositories and protected runtime
+files matched their pre-implementation snapshots.
+
+For noninteractive Codex CLI demonstrations, use `--approve-for-me` to retain
+automatic approval review. The default noninteractive approval-never policy
+can refuse project MCP calls, including reads. This host setting is separate
+from the sandbox's bounded creation authority.

@@ -833,9 +833,9 @@
       "detail": "Ledger closed: 1044/1044 claims, 108/108 entities, 0 open. Final tail was 96 claims across 59 entities. Outcomes recorded per record: 44 enriched, 8 corroborated, 3 no_content (production metadata only), 1 misresolved (char_eira_valkyrie claim describes Valkyrie Sentinels as a unit, filed as a referent gap rather than written onto the person). Four questions recorded OPEN, not answered. CanonRec 02d6a40."
     }
   ],
-  "last_updated": "2026-09-01T16:51:54Z",
+  "last_updated": "2026-09-06T03:55:16Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Refresh session state after ledger closure and brief automat",
+  "last_session_summary": "Completed persistent Aurora character continuity on codex/ace-persistent-continuity-20260906: composition acceptance 13/13, sandbox tests 15 passed, integration gate passed, and two real Astra Codex tasks created then recalled Jorenon Morrowen with identical durable identity/background/history. Persistent world: /Users/travisstreets/dev/aurora-ace-sandbox. Canonical repository heads, tracked changes, and seven protected runtime files unchanged. Full receipt reports/analysis/aurora_ace_continuity_acceptance_2026-09-06.json.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -857,6 +857,36 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "9f4400b",
+      "date": "2026-09-06",
+      "platform": "claude-code",
+      "summary": "docs(ace): record accepted composition and persistent Codex world workflow"
+    },
+    {
+      "sha": "f0484a1",
+      "date": "2026-09-06",
+      "platform": "claude-code",
+      "summary": "fix(ace): preserve unresolved lookups and enforce sandbox retry boundaries"
+    },
+    {
+      "sha": "c82a858",
+      "date": "2026-09-06",
+      "platform": "claude-code",
+      "summary": "test(ace): verify character continuity and recover interrupted sandbox saves"
+    },
+    {
+      "sha": "3c8639b",
+      "date": "2026-09-06",
+      "platform": "claude-code",
+      "summary": "feat(ace): add persistent isolated character world and MCP transport"
+    },
+    {
+      "sha": "e3d9dc1",
+      "date": "2026-09-06",
+      "platform": "claude-code",
+      "summary": "Audit of the 2026-09-01 session; correct two reported figures"
+    },
     {
       "sha": "38a0608",
       "date": "2026-09-01",
@@ -886,36 +916,6 @@
       "date": "2026-09-01",
       "platform": "claude-code",
       "summary": "fix(tests): skip the state-model module without jsonschema instead of aborting collection"
-    },
-    {
-      "sha": "0419324",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin after the tail batch"
-    },
-    {
-      "sha": "8bfb2cf",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin after the UMC recovery"
-    },
-    {
-      "sha": "6e48bae",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin after the referent recovery pass"
-    },
-    {
-      "sha": "5f54504",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "feat(canon): collect the referents canon names but has no record for"
-    },
-    {
-      "sha": "870373c",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin after the 5-claim tier"
     }
   ],
   "security_events": [
@@ -932,7 +932,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "38a0608",
+    "main_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -1058,5 +1058,6 @@
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
-  }
+  },
+  "_summary_set_manually": true
 }
