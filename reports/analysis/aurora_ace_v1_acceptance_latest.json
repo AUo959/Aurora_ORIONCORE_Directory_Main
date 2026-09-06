@@ -4,13 +4,13 @@
     "after": {
       "CanonRec": {
         "branch": "main",
-        "head": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+        "head": "971e78b672ba85ff4360580718499b46d9a7714a",
         "path": "GUMAS_SIM_2.5/CanonRec",
         "status_porcelain": ""
       },
       "aurora-cloudbank-symbolic-main": {
         "branch": "main",
-        "head": "64d5bca20551a557c59db905189576664c0251d4",
+        "head": "a19870a576a4136fc7ee8c30a2a8d869f36156d9",
         "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
         "status_porcelain": ""
       }
@@ -18,13 +18,13 @@
     "before": {
       "CanonRec": {
         "branch": "main",
-        "head": "dc629a566b2f42fa1c652140b9eef72a4fb0d58a",
+        "head": "971e78b672ba85ff4360580718499b46d9a7714a",
         "path": "GUMAS_SIM_2.5/CanonRec",
         "status_porcelain": ""
       },
       "aurora-cloudbank-symbolic-main": {
         "branch": "main",
-        "head": "64d5bca20551a557c59db905189576664c0251d4",
+        "head": "a19870a576a4136fc7ee8c30a2a8d869f36156d9",
         "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
         "status_porcelain": ""
       }
@@ -40,10 +40,10 @@
   },
   "execution_environment": {
     "platform": "macOS-26.5.2-arm64-arm-64bit",
-    "python_executable": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+    "python_executable": "/private/tmp/ace-continuity-venv/bin/python",
     "python_version": "3.12.13"
   },
-  "generated_at": "2026-08-15T06:42:10Z",
+  "generated_at": "2026-09-06T03:46:15Z",
   "interpretation": {
     "attention": "verification incomplete or unavailable in this execution environment; existing component contracts are not downgraded",
     "blocked": "repository evidence or an executed required check failed",
@@ -56,7 +56,7 @@
   },
   "mutation_posture": "verification_only",
   "record_type": "aurora_ace_v1_acceptance_report",
-  "root_commit": "e628706717a7454f0408d3918764957d6df5308f",
+  "root_commit": "f0484a10d0a6c06d1b6f3a0af8c8fabbc9b99754",
   "rows": [
     {
       "boundaries": [
@@ -100,14 +100,14 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "/private/tmp/ace-continuity-venv/bin/python",
           "-m",
           "pytest",
           "-q",
           "tests/test_aurora_ace_character_retrieval.py::test_name_lookup_returns_existing_character_without_generation",
           "tests/test_aurora_ace_character_retrieval.py::test_relation_only_candidate_blocks_duplicate_generation",
           "tests/test_aurora_ace_character_retrieval.py::test_no_existing_match_allows_normal_generation_compiler",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-xylcw6nc/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-db_6npt0/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -116,8 +116,8 @@
           "skipped": 0,
           "tests": 3
         },
-        "elapsed_ms": 215.979,
-        "output_tail": "...                                                                      [100%]\n3 passed in 0.04s",
+        "elapsed_ms": 1499.004,
+        "output_tail": "...                                                                      [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-db_6npt0/pytest.xml -\n3 passed in 0.04s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -186,12 +186,12 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "/private/tmp/ace-continuity-venv/bin/python",
           "-m",
           "pytest",
           "-q",
           "tests/test_aurora_ace.py::test_live_character_resolution_is_semantically_replayable",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-zx2br_38/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-7_0vv7_8/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -200,8 +200,8 @@
           "skipped": 0,
           "tests": 1
         },
-        "elapsed_ms": 2458.771,
-        "output_tail": ".                                                                        [100%]\n1 passed in 2.32s",
+        "elapsed_ms": 3977.858,
+        "output_tail": ".                                                                        [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-7_0vv7_8/pytest.xml -\n1 passed in 2.52s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "temporary_clone"
@@ -261,7 +261,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "/private/tmp/ace-continuity-venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -272,7 +272,7 @@
           "tests/test_aurora_ace_canon_resolution.py::test_missing_authoritative_claim_routes_to_completion_instead_of_fake_retrieval",
           "tests/test_aurora_ace_materialization.py::test_materializer_commits_facility_and_appends_both_determinations",
           "tests/test_aurora_ace_materialization.py::test_existing_facility_target_becomes_canon_revision",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-esrmyw9q/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-a6br_ti2/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -281,8 +281,8 @@
           "skipped": 0,
           "tests": 7
         },
-        "elapsed_ms": 1508.439,
-        "output_tail": ".......                                                                  [100%]\n7 passed in 1.36s",
+        "elapsed_ms": 1614.687,
+        "output_tail": ".......                                                                  [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-a6br_ti2/pytest.xml -\n7 passed in 1.46s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -356,7 +356,7 @@
       "implementation_evidence": [
         {
           "path": "tools/ace/capability_discovery.py",
-          "sha256": "a6ee31310742a1a73659ce2a85af1363429d0a1da92dc3d0f3b4027941c156a5",
+          "sha256": "7c6c56db2b56a7ed793ec886e2c8d189c73a47cd6f150237cb5ac4a7b7ac5501",
           "symbols": [
             "load_capability_manifests",
             "validate_capability_manifest",
@@ -377,14 +377,14 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "/private/tmp/ace-continuity-venv/bin/python",
           "-m",
           "pytest",
           "-q",
           "tests/test_aurora_ace_capability_discovery.py::test_committed_manifest_catalog_is_valid_unique_and_deterministic",
           "tests/test_aurora_ace_capability_discovery.py::test_committed_manifests_conform_to_draft_2020_12_schema",
           "tests/test_aurora_ace_capability_discovery.py::test_manifest_metadata_cannot_create_runtime_binding",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-rtg_oirc/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-smxixj_g/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -393,8 +393,8 @@
           "skipped": 0,
           "tests": 3
         },
-        "elapsed_ms": 240.408,
-        "output_tail": "...                                                                      [100%]\n3 passed in 0.09s",
+        "elapsed_ms": 265.484,
+        "output_tail": "...                                                                      [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-smxixj_g/pytest.xml -\n3 passed in 0.09s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -460,7 +460,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "/private/tmp/ace-continuity-venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -468,7 +468,7 @@
           "tests/test_aurora_ace_invocation.py::test_embedded_invocation_uses_the_same_query_engine_and_preserves_parent",
           "tests/test_aurora_ace_invocation.py::test_autonomic_invocation_is_automatic_but_never_invisible",
           "tests/test_aurora_ace_invocation.py::test_invocation_rejects_synthesis_around_specialist_tooling",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-bqvd6n08/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-c5brztu0/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -477,8 +477,8 @@
           "skipped": 0,
           "tests": 4
         },
-        "elapsed_ms": 277.844,
-        "output_tail": "....                                                                     [100%]\n4 passed in 0.12s",
+        "elapsed_ms": 293.26,
+        "output_tail": "....                                                                     [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-c5brztu0/pytest.xml -\n4 passed in 0.14s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -555,7 +555,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "/private/tmp/ace-continuity-venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -563,7 +563,7 @@
           "tests/test_aurora_ace_materialization.py::test_materializer_commits_facility_and_appends_both_determinations",
           "tests/test_aurora_ace_materialization.py::test_post_commit_failure_rolls_back_canon_and_removes_false_sidecar",
           "tests/test_aurora_ace_materialization.py::test_ledger_is_append_only_for_a_determination_id",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-31bacy8g/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-3y4gvu6u/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -572,8 +572,8 @@
           "skipped": 0,
           "tests": 4
         },
-        "elapsed_ms": 1853.641,
-        "output_tail": "....                                                                     [100%]\n4 passed in 1.72s",
+        "elapsed_ms": 1814.584,
+        "output_tail": "....                                                                     [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-3y4gvu6u/pytest.xml -\n4 passed in 1.65s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -650,19 +650,35 @@
           ]
         }
       ],
-      "missing_dependencies": [
-        "mcp"
-      ],
+      "missing_dependencies": [],
       "practical": {
-        "missing_dependencies": [
-          "mcp"
+        "command": [
+          "/private/tmp/ace-continuity-venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_aurora_ace_acceptance.py::test_official_mcp_client_enumerates_registered_surface",
+          "tests/test_aurora_ace_mcp.py::test_resolve_is_bounded_and_delegates_to_shared_engine",
+          "tests/test_aurora_ace_mcp.py::test_materialization_preview_is_state_bound_and_non_mutating",
+          "tests/test_aurora_ace_mcp.py::test_materialization_commit_delegates_only_to_native_materializer",
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-qqb74u9u/pytest.xml"
         ],
-        "reason": "missing_dependencies",
-        "status": "not_run"
+        "counts": {
+          "errors": 0,
+          "failed": 0,
+          "passed": 4,
+          "skipped": 0,
+          "tests": 4
+        },
+        "elapsed_ms": 631.163,
+        "output_tail": "....                                                                     [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-qqb74u9u/pytest.xml -\n4 passed in 0.34s",
+        "returncode": 0,
+        "status": "ready",
+        "working_tree": "canonical_root_read_only"
       },
       "required": true,
       "static_status": "ready",
-      "status": "attention",
+      "status": "ready",
       "test_evidence": [
         {
           "file_sha256": "741bfed8027d7886004ca245a758e6be3de8c1688c0356a00605b44fac00bcb5",
@@ -733,12 +749,12 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "/private/tmp/ace-continuity-venv/bin/python",
           "-m",
           "pytest",
           "-q",
           "tests/test_aurora_ace_mcp_operator_transaction.py::test_end_to_end_operator_transaction_materializes_inspects_and_refuses_replay",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-w5ri_s57/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-b_w8wami/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -747,8 +763,8 @@
           "skipped": 0,
           "tests": 1
         },
-        "elapsed_ms": 1251.671,
-        "output_tail": ".                                                                        [100%]\n1 passed in 1.10s",
+        "elapsed_ms": 1276.512,
+        "output_tail": ".                                                                        [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-b_w8wami/pytest.xml -\n1 passed in 1.13s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "temporary_clone"
@@ -813,19 +829,35 @@
           ]
         }
       ],
-      "missing_dependencies": [
-        "httpx"
-      ],
+      "missing_dependencies": [],
       "practical": {
-        "missing_dependencies": [
-          "httpx"
+        "command": [
+          "/private/tmp/ace-continuity-venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_aurora_ace_remote.py::test_remote_auth_requires_hash_only_configuration",
+          "tests/test_aurora_ace_remote.py::test_remote_service_requires_auth_and_binds_identity",
+          "tests/test_aurora_ace_remote.py::test_remote_materialization_requires_scope_and_bound_authority",
+          "tests/test_aurora_ace_remote.py::test_runtime_binding_rejects_catalog_only_arbitrary_python",
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-jou548cp/pytest.xml"
         ],
-        "reason": "missing_dependencies",
-        "status": "not_run"
+        "counts": {
+          "errors": 0,
+          "failed": 0,
+          "passed": 4,
+          "skipped": 0,
+          "tests": 4
+        },
+        "elapsed_ms": 438.646,
+        "output_tail": "....                                                                     [100%]\n=============================== warnings summary ===============================\n../ace-continuity-venv/lib/python3.12/site-packages/starlette/testclient.py:53\n  /private/tmp/ace-continuity-venv/lib/python3.12/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.\n    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-jou548cp/pytest.xml -\n4 passed, 1 warning in 0.20s",
+        "returncode": 0,
+        "status": "ready",
+        "working_tree": "canonical_root_read_only"
       },
       "required": true,
       "static_status": "ready",
-      "status": "attention",
+      "status": "ready",
       "test_evidence": [
         {
           "file_sha256": "df3733f83660def7a48e1e03fedf772b07757721d48bfef8cc1052e12fc4c2fa",
@@ -902,12 +934,12 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "/private/tmp/ace-continuity-venv/bin/python",
           "-m",
           "pytest",
           "-q",
           "tests/test_aurora_ace_generic_entity.py::test_generic_entity_end_to_end_commit_and_replay_refusal",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-2oduo9hm/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-ndwlp_2u/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -916,8 +948,8 @@
           "skipped": 0,
           "tests": 1
         },
-        "elapsed_ms": 1447.842,
-        "output_tail": ".                                                                        [100%]\n1 passed in 1.31s",
+        "elapsed_ms": 1550.526,
+        "output_tail": ".                                                                        [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-ndwlp_2u/pytest.xml -\n1 passed in 1.39s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "temporary_clone"
@@ -974,7 +1006,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "/private/tmp/ace-continuity-venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -982,7 +1014,7 @@
           "tests/test_aurora_ace_delegated_publication.py::test_delegated_publication_deletes_orphan_remote_branch_when_pr_open_fails",
           "tests/test_aurora_ace_delegated_publication.py::test_uncertain_pr_state_preserves_remote_branch_for_reconciliation",
           "tests/test_aurora_ace_delegated_publication.py::test_delegated_publication_refuses_remote_main_drift",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-61wwkp10/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-_zp57fd7/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -991,8 +1023,8 @@
           "skipped": 0,
           "tests": 4
         },
-        "elapsed_ms": 1462.887,
-        "output_tail": "....                                                                     [100%]\n4 passed in 1.31s",
+        "elapsed_ms": 1319.444,
+        "output_tail": "....                                                                     [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-_zp57fd7/pytest.xml -\n4 passed in 1.16s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -1046,7 +1078,7 @@
       "implementation_evidence": [
         {
           "path": "tools/ace/orion_progression.py",
-          "sha256": "a5fee5cf1a4ddd99ec1f038ca33481d0cb5a8d3575edc76cf357621629df145f",
+          "sha256": "ad5f4b76d3c7c7d5f4a4f64bedc7f46f3b30fe62351b31979d32c774282f6601",
           "symbols": [
             "preview_orion_advance",
             "commit_orion_advance",
@@ -1056,7 +1088,7 @@
         },
         {
           "path": "tools/ace/orion_runtime_owner.py",
-          "sha256": "e5b20e36196430b2d77a4aa95ef1052980804490f95bf930bd574f04c3dbf0aa",
+          "sha256": "98217d48ed025be385a7f197a3660af18634828bed3032a1922b0ed6156f323d",
           "symbols": [
             "registered_cloudbank",
             "load_owner_runtime"
@@ -1066,7 +1098,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "/private/tmp/ace-continuity-venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -1076,47 +1108,47 @@
           "tests/test_aurora_ace_orion_progression.py::test_post_write_owner_failure_is_state_uncertain_and_not_retried",
           "tests/test_aurora_ace_orion_progression.py::test_runtime_progression_is_not_exposed_through_remote_or_mcp",
           "tests/test_aurora_ace_orion_progression.py::test_registered_owner_binding_calls_preflight_only",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-l4qr89v_/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-qdx_p_21/pytest.xml"
         ],
         "counts": {
           "errors": 0,
-          "failed": 1,
-          "passed": 5,
+          "failed": 0,
+          "passed": 6,
           "skipped": 0,
           "tests": 6
         },
-        "elapsed_ms": 206.965,
-        "output_tail": ".....F                                                                   [100%]\n=================================== FAILURES ===================================\n______________ test_registered_owner_binding_calls_preflight_only ______________\n\n    @pytest.mark.simulation\n    def test_registered_owner_binding_calls_preflight_only() -> None:\n>       result = progression.registered_owner_preflight(root=REPO_ROOT)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_aurora_ace_orion_progression.py:496: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntools/ace/orion_progression.py:517: in registered_owner_preflight\n    owner = _load_owner_runtime(root)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^\ntools/ace/orion_progression.py:57: in _load_owner_runtime\n    return owner.load_owner_runtime(root)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools/ace/orion_runtime_owner.py:335: in load_owner_runtime\n    repo, registered_sha = registered_cloudbank(root, policy)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools/ace/orion_runtime_owner.py:149: in registered_cloudbank\n    _expect_fields(row, expected, \"registered CloudBank\")\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\npayload = {'name': 'aurora-cloudbank-symbolic-main', 'path': 'GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main', 'branch': 'main', 'head_sha': '64d5bca20551a557c59db905189576664c0251d4', ...}\nexpected = {'path': 'GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main', 'branch': 'main', 'head_sha': '9c34d8e9768c6dfb1afe18f96d42e3c743e2a4e9'}\nlabel = 'registered CloudBank'\n\n    def _expect_fields(\n        payload: Mapping[str, Any],\n        expected: Mapping[str, Any],\n        label: str,\n    ) -> None:\n        mismatches = [key for key, value in expected.items() if payload.get(key) != value]\n        if mismatches:\n>           raise ACEError(\n                f\"{label} has invalid field(s): {', '.join(sorted(mismatches))}\",\n                code=\"invalid_manifest\",\n            )\nE           ace.core.ACEError: registered CloudBank has invalid field(s): head_sha\n\ntools/ace/orion_runtime_owner.py:58: ACEError\n=========================== short test summary info ============================\nFAILED tests/test_aurora_ace_orion_progression.py::test_registered_owner_binding_calls_preflight_only\n1 failed, 5 passed in 0.07s",
-        "returncode": 1,
-        "status": "blocked",
+        "elapsed_ms": 240.021,
+        "output_tail": "......                                                                   [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-qdx_p_21/pytest.xml -\n6 passed in 0.09s",
+        "returncode": 0,
+        "status": "ready",
         "working_tree": "canonical_root_read_only"
       },
       "required": true,
       "static_status": "ready",
-      "status": "blocked",
+      "status": "ready",
       "test_evidence": [
         {
-          "file_sha256": "7c867a78ff950dbf87f5166b32cd977dcc8f035a0a525a180f91b083236c8c4f",
+          "file_sha256": "569e49817df3bdde0cbd821d5fa45ff43e19d164e5e27784c5b81ac780502aaf",
           "node_id": "tests/test_aurora_ace_orion_progression.py::test_preview_is_non_mutating_and_state_bound"
         },
         {
-          "file_sha256": "7c867a78ff950dbf87f5166b32cd977dcc8f035a0a525a180f91b083236c8c4f",
+          "file_sha256": "569e49817df3bdde0cbd821d5fa45ff43e19d164e5e27784c5b81ac780502aaf",
           "node_id": "tests/test_aurora_ace_orion_progression.py::test_commit_advances_exactly_one_tick"
         },
         {
-          "file_sha256": "7c867a78ff950dbf87f5166b32cd977dcc8f035a0a525a180f91b083236c8c4f",
+          "file_sha256": "569e49817df3bdde0cbd821d5fa45ff43e19d164e5e27784c5b81ac780502aaf",
           "node_id": "tests/test_aurora_ace_orion_progression.py::test_old_token_replay_refuses_before_second_tick"
         },
         {
-          "file_sha256": "7c867a78ff950dbf87f5166b32cd977dcc8f035a0a525a180f91b083236c8c4f",
+          "file_sha256": "569e49817df3bdde0cbd821d5fa45ff43e19d164e5e27784c5b81ac780502aaf",
           "node_id": "tests/test_aurora_ace_orion_progression.py::test_post_write_owner_failure_is_state_uncertain_and_not_retried"
         },
         {
-          "file_sha256": "7c867a78ff950dbf87f5166b32cd977dcc8f035a0a525a180f91b083236c8c4f",
+          "file_sha256": "569e49817df3bdde0cbd821d5fa45ff43e19d164e5e27784c5b81ac780502aaf",
           "node_id": "tests/test_aurora_ace_orion_progression.py::test_runtime_progression_is_not_exposed_through_remote_or_mcp"
         },
         {
-          "file_sha256": "7c867a78ff950dbf87f5166b32cd977dcc8f035a0a525a180f91b083236c8c4f",
+          "file_sha256": "569e49817df3bdde0cbd821d5fa45ff43e19d164e5e27784c5b81ac780502aaf",
           "node_id": "tests/test_aurora_ace_orion_progression.py::test_registered_owner_binding_calls_preflight_only"
         }
       ],
@@ -1165,14 +1197,14 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "/private/tmp/ace-continuity-venv/bin/python",
           "-m",
           "pytest",
           "-q",
           "tests/test_aurora_ace_acceptance.py::test_committed_matrix_is_repository_grounded",
           "tests/test_aurora_ace_acceptance.py::test_committed_matrix_conforms_to_json_schema",
           "tests/test_aurora_ace_acceptance.py::test_unexecuted_report_is_attention_not_failure",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-9l8oylvj/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-0cp3ssaj/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -1181,8 +1213,8 @@
           "skipped": 0,
           "tests": 3
         },
-        "elapsed_ms": 404.007,
-        "output_tail": "...                                                                      [100%]\n3 passed in 0.25s",
+        "elapsed_ms": 405.231,
+        "output_tail": "...                                                                      [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-0cp3ssaj/pytest.xml -\n3 passed in 0.25s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -1208,12 +1240,12 @@
     }
   ],
   "schema_version": "1.0.0",
-  "seal_eligible": false,
-  "status": "blocked",
+  "seal_eligible": true,
+  "status": "ready",
   "summary": {
-    "attention": 2,
-    "blocked": 1,
-    "ready": 10,
+    "attention": 0,
+    "blocked": 0,
+    "ready": 13,
     "required": 13,
     "total": 13
   },
