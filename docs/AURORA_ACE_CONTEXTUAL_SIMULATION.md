@@ -146,3 +146,25 @@ conflicts, native-commit interruption, concurrent workers, settings tampering,
 duplicate prevention, unexpected edits, and path escapes. L1 fixture facts exist
 only in disposable test worlds and are not physical evidence or canonical-workspace
 changes.
+
+## Verified installation, 2026-09-06
+
+Controller `b4fef21aac14ee5403a4ca08c9ad5588238b9472` is installed in
+`/Users/travisstreets/dev/aurora-ace-context-runtime` and registered alongside
+`aurora_world` in `/Users/travisstreets/dev/aurora-ace-sandbox`. The authorized
+`orion-archive-survey` assignment has a 20-need budget.
+
+A simulation need generated Nerisia Orlanor
+(`char_archive_duty_coordinator_35ae7aaccb7f`) through an autonomic invocation and
+one native commit. A new server process recalled identical identity/background
+and creation history. Duplicate submission produced no additional commit.
+Both configured servers reported the same world ready.
+
+Sixteen contextual tests, 23 sandbox/promotion regression tests, the integration
+gate, and all 13 ACE composition acceptance rows passed. Canonical repository
+heads and working-tree changes, seven protected Orion files, and the original
+Jorenon character artifacts remained unchanged.
+
+The [acceptance receipt](../reports/analysis/aurora_ace_contextual_acceptance_2026-09-06.json)
+records the assignment, policy/settings binding, native commit, and preservation
+snapshot. A copy is stored with the world at `state/contexts/acceptance_receipt.json`.

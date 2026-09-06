@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "status": "accepted",
+  "date": "2026-09-06",
+  "controller_revision": "b4fef21aac14ee5403a4ca08c9ad5588238b9472",
+  "controller_path": "/Users/travisstreets/dev/aurora-ace-context-runtime",
+  "world_id": "aurora-world-a64638e56af946f4a9f14af1c8f4f80a",
+  "world_directory": "/Users/travisstreets/dev/aurora-ace-sandbox",
+  "assignment": {
+    "digest": "eafc680cc13d54ecfec73417c660f717c081cf798f9f4ad7f63a895733e939e7",
+    "spec": {
+      "assignment_id": "orion-archive-survey",
+      "authority_ref": "user-request:2026-09-06:bring-layered-simulation-vision-into-reality",
+      "max_jobs": 20,
+      "operator_layer": "L1",
+      "policy_digest": "8fb03a3ac64e794e36937057a598ee2e8e3fbe8bf16009b92ce7e1afbf150cc3",
+      "policy_id": "ace.policy.l3.contextual-truth.v1",
+      "purpose": "Supply the archive coordination personnel needed by the bounded expedition survey. Resolve routine needs through existing Aurora tools and persist coherent L2 results within this world.",
+      "runtime_activation_authority": false,
+      "settings": {
+        "faction_id": "galactic_union",
+        "location_type": "archive_outpost",
+        "roles": [
+          "archive_duty_coordinator",
+          "expedition_logistics_liaison"
+        ]
+      },
+      "target_layer": "L2",
+      "world_id": "aurora-world-a64638e56af946f4a9f14af1c8f4f80a"
+    }
+  },
+  "verification": {
+    "contextual_tests_passed": 16,
+    "sandbox_regression_tests_passed": 15,
+    "promotion_regression_tests_passed": 8,
+    "composition_rows_ready": 13,
+    "composition_rows_total": 13,
+    "integration_gate": "pass",
+    "configured_MCP_servers_ready": [
+      "aurora_world",
+      "aurora_context"
+    ],
+    "fresh_process_recall": true,
+    "duplicate_need_reused": true,
+    "native_commits_created": 1,
+    "post_upgrade_recorded_job_verified": true,
+    "L1_completed_query_restart_recovery": true
+  },
+  "demonstration": {
+    "question": "The expedition archive survey needs someone to coordinate incoming field logs and maintain a coherent handover.",
+    "job_id": "need-105d3c7f6d4e1d988721084c",
+    "recall_job_id": "need-97c81c9e3a98e7c1c46b0479",
+    "invocation_id": "ace.invocation.autonomic.0f56cb917b66eda2e643",
+    "entity_id": "char_archive_duty_coordinator_35ae7aaccb7f",
+    "character": {
+      "background": "Nerisia Orlanor holds the role of Archive Duty Coordinator within Galactic Union (federation). Dominant cognitive profile: hyper_rationalism_bias (intensity 0.51, plasticity 0.69). Legitimacy: 0.51; elite support: 0.73; institutional control: 0.54. Decision-making archetype: hyper_rationalism_bias. Tone: analytical; cadence: precise. Risk tolerance: 0.65; diplomacy openness: 0.61; escalation threshold: 0.59; oversight resistance: 0.32. In the observed encounter aboard the archive outpost, Nerisia Orlanor Cross-checks incoming field logs before assigning archive work.",
+      "background_and_traits": null,
+      "canonical_id": "char_archive_duty_coordinator_35ae7aaccb7f",
+      "name": "Nerisia Orlanor"
+    },
+    "determination_id": "ace.determination.character.7937296584c56a839647.materialized.6ff232d73aa9",
+    "canon_commit": "6ff232d73aa9230f03fe718af87adad6c164854d",
+    "l3_receipt": {
+      "assignment_digest": "eafc680cc13d54ecfec73417c660f717c081cf798f9f4ad7f63a895733e939e7",
+      "assignment_id": "orion-archive-survey",
+      "authority_ref": "ace.policy.l3.contextual-truth.v1:aurora-world-a64638e56af946f4a9f14af1c8f4f80a:eafc680cc13d54ecfec73417c660f717c081cf798f9f4ad7f63a895733e939e7:need-105d3c7f6d4e1d988721084c",
+      "cross_layer_authority": false,
+      "policy_digest": "8fb03a3ac64e794e36937057a598ee2e8e3fbe8bf16009b92ce7e1afbf150cc3",
+      "policy_id": "ace.policy.l3.contextual-truth.v1",
+      "reality_verified": false,
+      "settings_digest": "a3e93f9f49b423a91644abc0abb414c430be4eb19d4d6192097424583871a9c0",
+      "target_layer": "L2",
+      "truth_basis": "world_scoped_generative_canon",
+      "world_id": "aurora-world-a64638e56af946f4a9f14af1c8f4f80a"
+    },
+    "world_head_before": "c5a69e9466189356314f81c0dde42365825f7f88",
+    "world_head_after": "6ff232d73aa9230f03fe718af87adad6c164854d"
+  },
+  "preservation": {
+    "canonical_and_protected_unchanged": true,
+    "original_jorenon_artifacts_unchanged": true,
+    "snapshot": {
+      "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main": {
+        "head": "e3d9dc107749baabf5b9b66d928c40712a1b6086",
+        "status": " M catalog/path_aliases.csv\n M catalog/relocation_plan.json\n M catalog/rollback_wave4_root_intake_cleanup_initial.json\n?? archives/recovered_prototypes/biological_pneumatic_engine/Biological_Pneumatic_Engine_Whitepaper.docx\n?? reports/simulation/hour_aboard_v1__2026-08-18/\n?? reports/simulation/hour_aboard_v1__2026-08-19/\n?? reports/simulation/hour_aboard_v1__2026-08-20/\n?? reports/simulation/hour_aboard_v1__2026-08-27/\n?? reports/simulation/hour_aboard_v1__2026-09-01/\n",
+        "diff_sha256": "8c0601cdc1996dd361d3e8ef84da6b67dad89dbbd3e10fd2c96119e0587d3ce4"
+      },
+      "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/CanonRec": {
+        "head": "971e78b672ba85ff4360580718499b46d9a7714a",
+        "status": "",
+        "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main": {
+        "head": "a19870a576a4136fc7ee8c30a2a8d869f36156d9",
+        "status": "",
+        "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "protected_runs": {
+        "/Users/travisstreets/.aurora/l1-runs/9f906aa3-a16d-4495-9398-fb141b40c6df/state.json": "f9549d6ed12e8e4aa72ca59a11fe75108dd292af5a7d44ecd3fb34e41c66db55",
+        "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/migration_projection_v1_2.json": "0bb0ec98cba862aabce77f0d5ca70b9c63e8c53b7d50da49b91c88939bb38f2b",
+        "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/state.json": "1349f58389c93a18b96eb9d7460ba35c3273a85e743db86127b491c705eb1fa4",
+        "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/migration_receipt.json": "625ad896b32a1a3471c70d6359cb3e46d0dd007b81291ec27e347002b0a36190",
+        "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/recovery_receipt.json": "5e8a4369d0aadf7ba7f974636012de76dd51f1bcf929585987cca2380c38e1e0",
+        "/Users/travisstreets/.aurora/l1-runs/59da8a1c-df89-4203-bdd9-5e5ad89090e6/state.json": "36111a123af65ca7905ece92556a2895a0641d49ce35c1f941f6f06bfd359e7d",
+        "/Users/travisstreets/.aurora/l1-runs/c1503ce5-d6e8-4c84-b91d-63b55d1b38f0/state.json": "6c7755b2c8ea62f07f00a93967aace20b12b024641af73b0c3fed30ffe45d98a"
+      }
+    }
+  },
+  "scope": {
+    "L1": "read-only committed L1 JSON evidence; no independent reality verification",
+    "L2": "context-authorized character completion and world-scoped persistence",
+    "L3": "assignment, layer, settings, policy, budget, and cross-layer admission rules",
+    "arbitrary_geometry_or_physics_implemented": false,
+    "runtime_progression_authorized": false,
+    "publication_authorized": false,
+    "worker_lifetime": "connected stdio server; queue persists between processes"
+  },
+  "artifact_sha256s": {
+    ".codex/config.toml": "5cf89f8c1531707827769e82b65abaadce7bc59072e3d59b6f49de02b81a7ba9",
+    "state/contexts/assignments/orion-archive-survey.json": "a8cc26826617b46467ed86636ca84b993abc92db8a66e4f00d782baa24946c40",
+    "state/contexts/jobs/need-105d3c7f6d4e1d988721084c.json": "1035aae3f773e50a936c1898bddcd266970ced47213cf90c26e4cb386dad9bd5",
+    "state/contexts/jobs/need-97c81c9e3a98e7c1c46b0479.json": "fa9f61db57cb01bd6b2852e8eca9f9d77f446d7dbd39261f5808bddd693e8bd4"
+  },
+  "demonstration_controller_revision": "a77cabcccb6a4b0a4f7552c7821bab7daafca766"
+}

@@ -43,7 +43,7 @@
     "python_executable": "/private/tmp/ace-continuity-venv/bin/python",
     "python_version": "3.12.13"
   },
-  "generated_at": "2026-09-06T03:46:15Z",
+  "generated_at": "2026-09-06T05:08:34Z",
   "interpretation": {
     "attention": "verification incomplete or unavailable in this execution environment; existing component contracts are not downgraded",
     "blocked": "repository evidence or an executed required check failed",
@@ -56,7 +56,7 @@
   },
   "mutation_posture": "verification_only",
   "record_type": "aurora_ace_v1_acceptance_report",
-  "root_commit": "f0484a10d0a6c06d1b6f3a0af8c8fabbc9b99754",
+  "root_commit": "a77cabcccb6a4b0a4f7552c7821bab7daafca766",
   "rows": [
     {
       "boundaries": [
@@ -107,7 +107,7 @@
           "tests/test_aurora_ace_character_retrieval.py::test_name_lookup_returns_existing_character_without_generation",
           "tests/test_aurora_ace_character_retrieval.py::test_relation_only_candidate_blocks_duplicate_generation",
           "tests/test_aurora_ace_character_retrieval.py::test_no_existing_match_allows_normal_generation_compiler",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-db_6npt0/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-48xehcf5/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -116,8 +116,8 @@
           "skipped": 0,
           "tests": 3
         },
-        "elapsed_ms": 1499.004,
-        "output_tail": "...                                                                      [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-db_6npt0/pytest.xml -\n3 passed in 0.04s",
+        "elapsed_ms": 1353.587,
+        "output_tail": "...                                                                      [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-48xehcf5/pytest.xml -\n3 passed in 0.04s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -191,7 +191,7 @@
           "pytest",
           "-q",
           "tests/test_aurora_ace.py::test_live_character_resolution_is_semantically_replayable",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-7_0vv7_8/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-ebfr__zx/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -200,8 +200,8 @@
           "skipped": 0,
           "tests": 1
         },
-        "elapsed_ms": 3977.858,
-        "output_tail": ".                                                                        [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-7_0vv7_8/pytest.xml -\n1 passed in 2.52s",
+        "elapsed_ms": 2407.502,
+        "output_tail": ".                                                                        [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-ebfr__zx/pytest.xml -\n1 passed in 2.26s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "temporary_clone"
@@ -272,7 +272,7 @@
           "tests/test_aurora_ace_canon_resolution.py::test_missing_authoritative_claim_routes_to_completion_instead_of_fake_retrieval",
           "tests/test_aurora_ace_materialization.py::test_materializer_commits_facility_and_appends_both_determinations",
           "tests/test_aurora_ace_materialization.py::test_existing_facility_target_becomes_canon_revision",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-a6br_ti2/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-jg7j5qq2/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -281,8 +281,8 @@
           "skipped": 0,
           "tests": 7
         },
-        "elapsed_ms": 1614.687,
-        "output_tail": ".......                                                                  [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-a6br_ti2/pytest.xml -\n7 passed in 1.46s",
+        "elapsed_ms": 5934.133,
+        "output_tail": ".......                                                                  [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-jg7j5qq2/pytest.xml -\n7 passed in 1.42s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -384,7 +384,7 @@
           "tests/test_aurora_ace_capability_discovery.py::test_committed_manifest_catalog_is_valid_unique_and_deterministic",
           "tests/test_aurora_ace_capability_discovery.py::test_committed_manifests_conform_to_draft_2020_12_schema",
           "tests/test_aurora_ace_capability_discovery.py::test_manifest_metadata_cannot_create_runtime_binding",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-smxixj_g/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-u4hjh5xf/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -393,8 +393,8 @@
           "skipped": 0,
           "tests": 3
         },
-        "elapsed_ms": 265.484,
-        "output_tail": "...                                                                      [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-smxixj_g/pytest.xml -\n3 passed in 0.09s",
+        "elapsed_ms": 207.214,
+        "output_tail": "...                                                                      [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-u4hjh5xf/pytest.xml -\n3 passed in 0.07s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -468,7 +468,7 @@
           "tests/test_aurora_ace_invocation.py::test_embedded_invocation_uses_the_same_query_engine_and_preserves_parent",
           "tests/test_aurora_ace_invocation.py::test_autonomic_invocation_is_automatic_but_never_invisible",
           "tests/test_aurora_ace_invocation.py::test_invocation_rejects_synthesis_around_specialist_tooling",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-c5brztu0/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-tkt4n7bv/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -477,8 +477,8 @@
           "skipped": 0,
           "tests": 4
         },
-        "elapsed_ms": 293.26,
-        "output_tail": "....                                                                     [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-c5brztu0/pytest.xml -\n4 passed in 0.14s",
+        "elapsed_ms": 261.179,
+        "output_tail": "....                                                                     [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-tkt4n7bv/pytest.xml -\n4 passed in 0.13s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -563,7 +563,7 @@
           "tests/test_aurora_ace_materialization.py::test_materializer_commits_facility_and_appends_both_determinations",
           "tests/test_aurora_ace_materialization.py::test_post_commit_failure_rolls_back_canon_and_removes_false_sidecar",
           "tests/test_aurora_ace_materialization.py::test_ledger_is_append_only_for_a_determination_id",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-3y4gvu6u/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-2hngek9o/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -572,8 +572,8 @@
           "skipped": 0,
           "tests": 4
         },
-        "elapsed_ms": 1814.584,
-        "output_tail": "....                                                                     [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-3y4gvu6u/pytest.xml -\n4 passed in 1.65s",
+        "elapsed_ms": 1830.971,
+        "output_tail": "....                                                                     [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-2hngek9o/pytest.xml -\n4 passed in 1.70s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -661,7 +661,7 @@
           "tests/test_aurora_ace_mcp.py::test_resolve_is_bounded_and_delegates_to_shared_engine",
           "tests/test_aurora_ace_mcp.py::test_materialization_preview_is_state_bound_and_non_mutating",
           "tests/test_aurora_ace_mcp.py::test_materialization_commit_delegates_only_to_native_materializer",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-qqb74u9u/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-g3u4mglz/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -670,8 +670,8 @@
           "skipped": 0,
           "tests": 4
         },
-        "elapsed_ms": 631.163,
-        "output_tail": "....                                                                     [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-qqb74u9u/pytest.xml -\n4 passed in 0.34s",
+        "elapsed_ms": 636.353,
+        "output_tail": "....                                                                     [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-g3u4mglz/pytest.xml -\n4 passed in 0.39s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -754,7 +754,7 @@
           "pytest",
           "-q",
           "tests/test_aurora_ace_mcp_operator_transaction.py::test_end_to_end_operator_transaction_materializes_inspects_and_refuses_replay",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-b_w8wami/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-585bdoj4/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -763,8 +763,8 @@
           "skipped": 0,
           "tests": 1
         },
-        "elapsed_ms": 1276.512,
-        "output_tail": ".                                                                        [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-b_w8wami/pytest.xml -\n1 passed in 1.13s",
+        "elapsed_ms": 1248.884,
+        "output_tail": ".                                                                        [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-585bdoj4/pytest.xml -\n1 passed in 1.10s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "temporary_clone"
@@ -840,7 +840,7 @@
           "tests/test_aurora_ace_remote.py::test_remote_service_requires_auth_and_binds_identity",
           "tests/test_aurora_ace_remote.py::test_remote_materialization_requires_scope_and_bound_authority",
           "tests/test_aurora_ace_remote.py::test_runtime_binding_rejects_catalog_only_arbitrary_python",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-jou548cp/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-pobj8b38/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -849,8 +849,8 @@
           "skipped": 0,
           "tests": 4
         },
-        "elapsed_ms": 438.646,
-        "output_tail": "....                                                                     [100%]\n=============================== warnings summary ===============================\n../ace-continuity-venv/lib/python3.12/site-packages/starlette/testclient.py:53\n  /private/tmp/ace-continuity-venv/lib/python3.12/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.\n    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-jou548cp/pytest.xml -\n4 passed, 1 warning in 0.20s",
+        "elapsed_ms": 387.891,
+        "output_tail": "....                                                                     [100%]\n=============================== warnings summary ===============================\n../ace-continuity-venv/lib/python3.12/site-packages/starlette/testclient.py:53\n  /private/tmp/ace-continuity-venv/lib/python3.12/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.\n    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-pobj8b38/pytest.xml -\n4 passed, 1 warning in 0.17s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -939,7 +939,7 @@
           "pytest",
           "-q",
           "tests/test_aurora_ace_generic_entity.py::test_generic_entity_end_to_end_commit_and_replay_refusal",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-ndwlp_2u/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-fj1mgp0y/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -948,8 +948,8 @@
           "skipped": 0,
           "tests": 1
         },
-        "elapsed_ms": 1550.526,
-        "output_tail": ".                                                                        [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-ndwlp_2u/pytest.xml -\n1 passed in 1.39s",
+        "elapsed_ms": 1453.183,
+        "output_tail": ".                                                                        [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-fj1mgp0y/pytest.xml -\n1 passed in 1.31s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "temporary_clone"
@@ -1014,7 +1014,7 @@
           "tests/test_aurora_ace_delegated_publication.py::test_delegated_publication_deletes_orphan_remote_branch_when_pr_open_fails",
           "tests/test_aurora_ace_delegated_publication.py::test_uncertain_pr_state_preserves_remote_branch_for_reconciliation",
           "tests/test_aurora_ace_delegated_publication.py::test_delegated_publication_refuses_remote_main_drift",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-_zp57fd7/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-ay0sdwcp/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -1023,8 +1023,8 @@
           "skipped": 0,
           "tests": 4
         },
-        "elapsed_ms": 1319.444,
-        "output_tail": "....                                                                     [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-_zp57fd7/pytest.xml -\n4 passed in 1.16s",
+        "elapsed_ms": 1369.575,
+        "output_tail": "....                                                                     [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-ay0sdwcp/pytest.xml -\n4 passed in 1.23s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -1108,7 +1108,7 @@
           "tests/test_aurora_ace_orion_progression.py::test_post_write_owner_failure_is_state_uncertain_and_not_retried",
           "tests/test_aurora_ace_orion_progression.py::test_runtime_progression_is_not_exposed_through_remote_or_mcp",
           "tests/test_aurora_ace_orion_progression.py::test_registered_owner_binding_calls_preflight_only",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-qdx_p_21/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-bg4l4niv/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -1117,8 +1117,8 @@
           "skipped": 0,
           "tests": 6
         },
-        "elapsed_ms": 240.021,
-        "output_tail": "......                                                                   [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-qdx_p_21/pytest.xml -\n6 passed in 0.09s",
+        "elapsed_ms": 208.013,
+        "output_tail": "......                                                                   [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-bg4l4niv/pytest.xml -\n6 passed in 0.06s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"
@@ -1168,7 +1168,7 @@
         },
         {
           "path": "docs/AURORA_ACE__HANDOFF__CURRENT_STATE_AND_V1_ACCEPTANCE__v1.1__2026-08-15.md",
-          "sha256": "1445635c202e6cdd133c5891c3041a53884be742ee820820732c5421762cde55"
+          "sha256": "fee7700aa5565dd8088d940389838a8ba65a114c707a7fad1862af2b1c070027"
         }
       ],
       "dependencies": [
@@ -1204,7 +1204,7 @@
           "tests/test_aurora_ace_acceptance.py::test_committed_matrix_is_repository_grounded",
           "tests/test_aurora_ace_acceptance.py::test_committed_matrix_conforms_to_json_schema",
           "tests/test_aurora_ace_acceptance.py::test_unexecuted_report_is_attention_not_failure",
-          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-0cp3ssaj/pytest.xml"
+          "--junitxml=/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-83seymjv/pytest.xml"
         ],
         "counts": {
           "errors": 0,
@@ -1213,8 +1213,8 @@
           "skipped": 0,
           "tests": 3
         },
-        "elapsed_ms": 405.231,
-        "output_tail": "...                                                                      [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-0cp3ssaj/pytest.xml -\n3 passed in 0.25s",
+        "elapsed_ms": 385.421,
+        "output_tail": "...                                                                      [100%]\n- generated xml file: /var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/ace-v1-junit-83seymjv/pytest.xml -\n3 passed in 0.24s",
         "returncode": 0,
         "status": "ready",
         "working_tree": "canonical_root_read_only"

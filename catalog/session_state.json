@@ -833,9 +833,9 @@
       "detail": "Ledger closed: 1044/1044 claims, 108/108 entities, 0 open. Final tail was 96 claims across 59 entities. Outcomes recorded per record: 44 enriched, 8 corroborated, 3 no_content (production metadata only), 1 misresolved (char_eira_valkyrie claim describes Valkyrie Sentinels as a unit, filed as a referent gap rather than written onto the person). Four questions recorded OPEN, not answered. CanonRec 02d6a40."
     }
   ],
-  "last_updated": "2026-09-06T04:14:13Z",
+  "last_updated": "2026-09-06T05:17:02Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Added offline sandbox-character promotion review by composing existing ACE retrieval/materialization and CanonRec name registry, entity/naming validators, reconciliation advisor, and evidence emitter. Jorenon Morrowen review_ready at /Users/travisstreets/dev/aurora-ace-reviews/jorenon-morrowen-20260906; native patch verified, eight handoff tests and integration gate passed. Canonical repositories and protected Orion runtime unchanged. Existing delegated publisher retained as publication owner; no canonical publication performed.",
+  "last_session_summary": "Implemented and installed L3-governed contextual simulation needs. Authorized assignments bind world/layer/settings/budget; background worker uses existing ACE autonomic character completion for L2 and evidence-bound canon resolution for L1. Live archive-survey need created Nerisia Orlanor once and fresh process recalled unchanged identity/background/history. Controller b4fef21 pinned at /Users/travisstreets/dev/aurora-ace-context-runtime; both MCP servers configured in persistent sandbox. 16 contextual tests, 23 sandbox/promotion regressions, integration gate, and 13/13 composition rows passed. Canonical repos, protected Orion state, and Jorenon artifacts unchanged. No general geometry/physics, cross-layer promotion, or Orion activation added. Receipt: reports/analysis/aurora_ace_contextual_acceptance_2026-09-06.json.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -854,9 +854,28 @@
     "go": "1.26.3",
     "corepack": "0.35.0",
     "npm": "11.17.0",
-    "pnpm": "11.9.0"
+    "pnpm": "11.9.0",
+    "aurora-ace-context-controller": "b4fef21; pinned local stdio controller at /Users/travisstreets/dev/aurora-ace-context-runtime"
   },
   "recent_commits": [
+    {
+      "sha": "b4fef21",
+      "date": "2026-09-06",
+      "platform": "claude-code",
+      "summary": "fix(ace): recover completed L1 evidence needs after worker interruption"
+    },
+    {
+      "sha": "a77cabc",
+      "date": "2026-09-06",
+      "platform": "claude-code",
+      "summary": "feat(ace): govern background simulation needs with durable layer-scoped assignments"
+    },
+    {
+      "sha": "8759dc7",
+      "date": "2026-09-06",
+      "platform": "claude-code",
+      "summary": "feat(ace): compose existing canon tools into offline character promotion review"
+    },
     {
       "sha": "ce49dfd",
       "date": "2026-09-06",
@@ -898,24 +917,6 @@
       "date": "2026-09-01",
       "platform": "claude-code",
       "summary": "Refresh session state after ledger closure and brief automation"
-    },
-    {
-      "sha": "2f106be",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "Close prose-claim-ledger-reconciliation; pin CanonRec 02d6a40"
-    },
-    {
-      "sha": "334fdd6",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "Schedule the brief freshness check, and fix the tier it alerts on"
-    },
-    {
-      "sha": "e37790d",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "docs(brief): executive decision brief 2026-08-28"
     }
   ],
   "security_events": [
@@ -932,7 +933,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "ce49dfd389304d4b7648152141a71bc80554d599",
+    "main_sha": "b4fef21aac14ee5403a4ca08c9ad5588238b9472",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
