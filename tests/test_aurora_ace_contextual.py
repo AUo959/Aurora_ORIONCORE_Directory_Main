@@ -132,15 +132,15 @@ def test_missing_authority_and_scope_overrides_refused(world):
 def test_assignment_budget_revocation_and_duplicate_need(world):
     queue = grant(world, "budget", max_jobs=1)
     job = queue.submit("budget", "one", "We need a coordinator.", {})
-    assert queue.submit("budget", "one", "We need a coordinator.", {}) == job
+    assert queue.submit("budget", "one", "We need a coordinator.", {}) == job  # nosec B101
     with pytest.raises(ACEError, match="different input"):
         queue.submit("budget", "one", "Different need", {})
     with pytest.raises(ACEError, match="budget"):
         queue.submit("budget", "two", "Another coordinator.", {})
     queue.revoke("budget", "Test canceled assignment")
     result = queue.work_once()
-    assert result["status"] == "blocked"
-    assert "revoked" in result["error"]
+    assert result["status"] == "blocked"  # nosec B101
+    assert "revoked" in result["error"]  # nosec B101
 
 
 def test_background_stdio_need_without_explicit_create_and_restart(world):
@@ -153,7 +153,7 @@ def test_background_stdio_need_without_explicit_create_and_restart(world):
             args=[str(ROOT / "tools/aurora_ace_context_mcp.py"), "--world", str(world)],
         )
         async with Client(params, read_timeout_seconds=180) as client:
-            assert sorted(t.name for t in (await client.list_tools()).tools) == [
+            assert sorted(t.name for t in (await client.list_tools()).tools) == [  # nosec B101
                 "aurora_context_status",
                 "aurora_need_inspect",
                 "aurora_simulation_need",
@@ -167,32 +167,32 @@ def test_background_stdio_need_without_explicit_create_and_restart(world):
                     "context": {},
                 },
             )
-            assert not submitted.is_error, submitted
+            assert not submitted.is_error, submitted  # nosec B101
             job_id = submitted.structured_content["job_id"]
             for _ in range(160):
                 inspected = await client.call_tool(
                     "aurora_need_inspect", {"job_id": job_id}
                 )
-                assert not inspected.is_error, inspected
+                assert not inspected.is_error, inspected  # nosec B101
                 job = inspected.structured_content
                 if job["status"] in {"complete", "blocked", "conflict"}:
                     break
                 await asyncio.sleep(0.25)
-            assert job["status"] == "complete", job
-            assert job["result"]["status"] == "GENERATED_CANON"
-            assert job["result"]["invocation_id"].startswith(
+            assert job["status"] == "complete", job  # nosec B101
+            assert job["result"]["status"] == "GENERATED_CANON"  # nosec B101
+            assert job["result"]["invocation_id"].startswith(  # nosec B101
                 "ace.invocation.autonomic."
             )
-            assert not job["needs_attention"]
-            assert job["l3_receipt"]["target_layer"] == "L2"
-            assert not job["l3_receipt"]["cross_layer_authority"]
-            assert (
+            assert not job["needs_attention"]  # nosec B101
+            assert job["l3_receipt"]["target_layer"] == "L2"  # nosec B101
+            assert not job["l3_receipt"]["cross_layer_authority"]  # nosec B101
+            assert (  # nosec B101
                 job["l3_receipt"]["authority_ref"]
                 in job["result"]["materialization"]["gate_policy_ref"]
             )
         async with Client(params, read_timeout_seconds=180) as client:
             recalled = await client.call_tool("aurora_need_inspect", {"job_id": job_id})
-            assert recalled.structured_content == job
+            assert recalled.structured_content == job  # nosec B101
         return job
 
     job = asyncio.run(run())
@@ -203,8 +203,8 @@ def test_background_stdio_need_without_explicit_create_and_restart(world):
         "retrieve",
     )
     for field in ("canonical_id", "name", "background"):
-        assert recalled["character"][field] == job["result"]["character"][field]
-    assert recalled["character"]["background_and_traits"]["knowledge"]
+        assert recalled["character"][field] == job["result"]["character"][field]  # nosec B101
+    assert recalled["character"]["background_and_traits"]["knowledge"]  # nosec B101
 
 
 def test_native_commit_recovered_after_worker_interruption(world, monkeypatch):
@@ -214,7 +214,7 @@ def test_native_commit_recovered_after_worker_interruption(world, monkeypatch):
 
     def interrupt(*args):
         result = original(*args)
-        assert result["status"] == "GENERATED_CANON", result
+        assert result["status"] == "GENERATED_CANON", result  # nosec B101
         raise SystemExit("Simulated worker exit after native outcome")
 
     monkeypatch.setattr(queue, "_execute", interrupt)
@@ -222,9 +222,9 @@ def test_native_commit_recovered_after_worker_interruption(world, monkeypatch):
         queue.work_once()
     before = git(queue.world.canon, "rev-parse", "HEAD")
     recovered = ContextQueue(world).work_once()
-    assert recovered["job_id"] == job["job_id"]
-    assert recovered["status"] == "complete"
-    assert git(queue.world.canon, "rev-parse", "HEAD") == before
+    assert recovered["job_id"] == job["job_id"]  # nosec B101
+    assert recovered["status"] == "complete"  # nosec B101
+    assert git(queue.world.canon, "rev-parse", "HEAD") == before  # nosec B101
 
 
 def test_concurrent_workers_serialize(world):
@@ -232,8 +232,8 @@ def test_concurrent_workers_serialize(world):
     job = queue.submit("concurrency", "one", "We need the archive coordinator.", {})
     with ThreadPoolExecutor(max_workers=2) as pool:
         results = list(pool.map(lambda _: ContextQueue(world).work_once(), range(2)))
-    assert sum(r is not None for r in results) == 1
-    assert queue.inspect(job["job_id"])["status"] == "complete"
+    assert sum(r is not None for r in results) == 1  # nosec B101
+    assert queue.inspect(job["job_id"])["status"] == "complete"  # nosec B101
 
 
 def test_l1_evidence_resolution_and_conflict_never_generate(world):
@@ -258,14 +258,14 @@ def test_l1_evidence_resolution_and_conflict_never_generate(world):
             name, "read", "What value is supported?", {"field_path": "fact.value"}
         )
         result = queue.work_once()
-        assert result["status"] == expected, result
-        assert result["l3_receipt"]["truth_basis"] == "committed_L1_evidence"
-        assert not result["l3_receipt"]["reality_verified"]
+        assert result["status"] == expected, result  # nosec B101
+        assert result["l3_receipt"]["truth_basis"] == "committed_L1_evidence"  # nosec B101
+        assert not result["l3_receipt"]["reality_verified"]  # nosec B101
     with pytest.raises(ACEError, match="generation is not evidence"):
         queue.submit(
             "l1-fact", "invent", "Supply a missing person", {"role": "engineer"}
         )
-    assert git(queue.world.canon, "rev-parse", "HEAD") == before
+    assert git(queue.world.canon, "rev-parse", "HEAD") == before  # nosec B101
 
 
 def test_settings_tampering_invalidates_authority(world):
@@ -295,12 +295,12 @@ def test_interrupted_baseline_transition_recovers_once(world, monkeypatch):
     with pytest.raises(SystemExit):
         queue.work_once()
     committed = git(queue.world.canon, "rev-parse", "HEAD")
-    assert committed != queue.world.metadata["canon_head"]
+    assert committed != queue.world.metadata["canon_head"]  # nosec B101
     recovered = ContextQueue(world).work_once()
-    assert recovered["job_id"] == job["job_id"]
-    assert recovered["status"] == "complete", recovered
-    assert recovered["result"]["materialization"]["commit_sha"] == committed
-    assert World(world).status()["canon_head"] == committed
+    assert recovered["job_id"] == job["job_id"]  # nosec B101
+    assert recovered["status"] == "complete", recovered  # nosec B101
+    assert recovered["result"]["materialization"]["commit_sha"] == committed  # nosec B101
+    assert World(world).status()["canon_head"] == committed  # nosec B101
 
 
 def test_unexpected_canon_edit_blocks_work(world):
@@ -311,9 +311,9 @@ def test_unexpected_canon_edit_blocks_work(world):
     unexpected.write_text("Test concurrent edit")
     try:
         result = queue.work_once()
-        assert result["job_id"] == job["job_id"]
-        assert result["status"] == "blocked"
-        assert git(queue.world.canon, "rev-parse", "HEAD") == before
+        assert result["job_id"] == job["job_id"]  # nosec B101
+        assert result["status"] == "blocked"  # nosec B101
+        assert git(queue.world.canon, "rev-parse", "HEAD") == before  # nosec B101
     finally:
         unexpected.unlink()
 
@@ -323,9 +323,9 @@ def test_ambiguous_existing_character_is_not_duplicated(world):
     before = git(queue.world.canon, "rev-parse", "HEAD")
     queue.submit("ambiguity", "one", "We need a coordinator for the same archive.", {})
     result = queue.work_once()
-    assert result["status"] == "blocked"
-    assert result["result"]["blockers"]
-    assert git(queue.world.canon, "rev-parse", "HEAD") == before
+    assert result["status"] == "blocked"  # nosec B101
+    assert result["result"]["blockers"]  # nosec B101
+    assert git(queue.world.canon, "rev-parse", "HEAD") == before  # nosec B101
 
 
 def test_queue_symlink_escape_refused(world, tmp_path):
@@ -337,7 +337,7 @@ def test_queue_symlink_escape_refused(world, tmp_path):
     try:
         with pytest.raises(ACEError, match="symlink"):
             queue.submit("symlink", "one", "Need a person", {})
-        assert outside.read_text() == "{}"
+        assert outside.read_text() == "{}"  # nosec B101
     finally:
         link.unlink()
 
@@ -370,7 +370,7 @@ def test_l1_completed_resolution_recovers_after_worker_exit(world, monkeypatch):
         queue.work_once()
     before = git(queue.world.canon, "rev-parse", "HEAD")
     recovered = ContextQueue(world).work_once()
-    assert recovered["job_id"] == job["job_id"]
-    assert recovered["status"] == "complete", recovered
-    assert recovered["result"] == captured
-    assert git(queue.world.canon, "rev-parse", "HEAD") == before
+    assert recovered["job_id"] == job["job_id"]  # nosec B101
+    assert recovered["status"] == "complete", recovered  # nosec B101
+    assert recovered["result"] == captured  # nosec B101
+    assert git(queue.world.canon, "rev-parse", "HEAD") == before  # nosec B101

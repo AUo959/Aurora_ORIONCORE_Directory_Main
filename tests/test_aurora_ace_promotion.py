@@ -58,13 +58,13 @@ def review(tmp_path_factory):
     _clone(source, target_root / CANONREC_REL, git(source, "rev-parse", "HEAD"))
     output = temp / "review"
     result = prepare(world, request, target_root, output, root=ROOT)
-    assert result["status"] == "review_ready", result["blockers"]
+    assert result["status"] == "review_ready", result["blockers"]  # nosec B101
     return world, request, target_root, output, result
 
 
 def test_native_patch_and_recorded_background(review, tmp_path):
     _, _, target_root, output, result = review
-    assert verify(output)["artifacts_verified"]
+    assert verify(output)["artifacts_verified"]  # nosec B101
     clone = tmp_path / "apply"
     _clone(target_root / CANONREC_REL, clone, result["target_baseline"])
     git(clone, "apply", "--check", str(output / "proposal.patch"))
@@ -77,13 +77,13 @@ def test_native_patch_and_recorded_background(review, tmp_path):
     )
     before = {f["field_path"]: f["value"] for f in original["answer"]["fields"]}
     after = {f["field_path"]: f["value"] for f in final["answer"]["fields"]}
-    assert before == after
+    assert before == after  # nosec B101
     for path in final["materialization"]["target_paths"]:
-        assert (clone / path).read_bytes() == (
+        assert (clone / path).read_bytes() == (  # nosec B101
             output / "rehearsal" / CANONREC_REL / path
         ).read_bytes()
-    assert result["sources_unchanged"]
-    assert not result["publication_performed"]
+    assert result["sources_unchanged"]  # nosec B101
+    assert not result["publication_performed"]  # nosec B101
 
 
 def test_duplicate_output_refused(review):
@@ -133,11 +133,11 @@ def test_advanced_target_and_identity_collision_block(review, tmp_path):
     blocked = prepare(
         world, request, tmp_path / "target", tmp_path / "blocked", root=ROOT
     )
-    assert blocked["status"] == "blocked"
-    assert blocked["checks"]["identity_discovery"]["direct_candidates"]
-    assert any("baseline" in b for b in blocked["blockers"])
-    assert "rehearsal_commit" not in blocked
-    assert not (tmp_path / "blocked/proposal.patch").exists()
+    assert blocked["status"] == "blocked"  # nosec B101
+    assert blocked["checks"]["identity_discovery"]["direct_candidates"]  # nosec B101
+    assert any("baseline" in b for b in blocked["blockers"])  # nosec B101
+    assert "rehearsal_commit" not in blocked  # nosec B101
+    assert not (tmp_path / "blocked/proposal.patch").exists()  # nosec B101
 
 
 def test_dirty_target_refused(review, tmp_path):
@@ -160,7 +160,7 @@ def test_review_verification_refuses_stale_target(review, tmp_path):
     data = json.loads((copied / "promotion_review.json").read_text())
     data["target_root"] = str(tmp_path / "target")
     (copied / "promotion_review.json").write_text(json.dumps(data))
-    assert verify(copied)["target_baseline_current"]
+    assert verify(copied)["target_baseline_current"]  # nosec B101
     git(
         target,
         "-c",

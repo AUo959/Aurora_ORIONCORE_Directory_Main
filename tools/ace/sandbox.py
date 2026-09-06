@@ -6,7 +6,8 @@ import fcntl
 import json
 import os
 import re
-import subprocess
+import shutil
+import subprocess  # nosec B404
 import tempfile
 from contextlib import contextmanager
 from pathlib import Path
@@ -30,14 +31,14 @@ def fail(message: str, code: str = "sandbox_integrity_failed") -> None:
 def git(repo: Path, *args: str) -> str:
     env = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
     env["GIT_LFS_SKIP_SMUDGE"] = "1"
-    result = subprocess.run(  # noqa: S603 -- fixed Git argv, no shell; callers validate repository boundaries.
-        ["git", "-C", str(repo), *args],  # noqa: S607 -- installed Git, fixed argv without shell.
+    result = subprocess.run(  # noqa: S603 -- fixed Git argv, no shell; callers validate repository boundaries. # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit.dangerous-subprocess-use-audit # nosec B603, B607
+        [shutil.which("git") or "/usr/bin/git", "-C", str(repo), *args],  # noqa: S607 -- installed Git, fixed argv without shell.
         capture_output=True,
         text=True,  # noqa: S607 -- use the operator's installed Git.
         check=False,
         timeout=120,
         env=env,
-    )
+    )  # nosec B603, B607
     if result.returncode:
         fail(f"Git operation failed: {result.stderr.strip()}")
     return result.stdout.strip()
@@ -76,6 +77,7 @@ def atomic_text(path: Path, data: str) -> None:
 
 class World:
     def __init__(self, directory: Path):
+        """Open and validate the identity of an existing isolated world."""
         directory = directory.expanduser().absolute()
         if directory.resolve() != directory:
             fail("World path must be an absolute real path without symlinks")
@@ -87,30 +89,14 @@ class World:
         self.requests = self.state / "requests"
         self.runtime = self.root / "reports/ace/mcp_runtime"
         self.metadata = read_json(directory / WORLD_FILE)
-        if (
-            self.metadata.get("record_type") != "aurora_ace_sandbox_world"
-            or self.metadata.get("schema_version") != 1
-            or self.metadata.get("directory") != str(directory)
-            or self.metadata.get("policy") != POLICY
-        ):
-            fail("Not a provisioned ACE sandbox world")
-        for source in self.metadata["sources"].values():
-            source_path = Path(source["path"]).resolve()
-            if directory == source_path or source_path in directory.parents:
-                fail("Sandbox cannot live inside a source repository")
+        self._validate_metadata(directory)
         for path in (self.root, self.state, self.requests, self.runtime):
             self._inside(path)
 
     def _inside(self, path: Path) -> None:
         if path.resolve() != path or self.directory not in path.parents:
             fail("Sandbox path escaped its isolated world")
-        # Relevant trees must contain no links that a native resolver could follow.
-        if path.exists():
-            for base, dirs, files in os.walk(path, followlinks=False):
-                dirs[:] = [d for d in dirs if d not in {".git", ".venv", "__pycache__"}]
-                for name in dirs + files:
-                    if (Path(base) / name).is_symlink():
-                        fail(f"Sandbox tree contains a symlink: {Path(base) / name}")
+        self._reject_tree_links(path)
 
     @contextmanager
     def locked(self) -> Iterator[None]:
@@ -162,16 +148,7 @@ class World:
         self, name: str, repo: Path, pending: dict[str, Any] | None
     ) -> None:
         self._inside(repo)
-        dotgit = repo / ".git"
-        if not dotgit.is_dir() or dotgit.is_symlink():
-            fail("Sandbox requires independent Git clones")
-        common = Path(
-            git(repo, "rev-parse", "--path-format=absolute", "--git-common-dir")
-        ).resolve()
-        if common != dotgit.resolve() or (dotgit / "objects/info/alternates").exists():
-            fail("Sandbox Git storage must not be shared")
-        if git(repo, "remote"):
-            fail("Sandbox repository has a remote")
+        self._verify_git_storage(repo)
         expected = (
             self.metadata["canon_head"]
             if name == "CanonRec"
@@ -184,15 +161,7 @@ class World:
             and self._committed_receipt(pending, observed)
         ):
             fail(f"Unexpected repository HEAD: {name}", "sandbox_baseline_changed")
-        changes = git(repo, "diff", "HEAD", "--name-only").splitlines()
-        unknown = git(repo, "ls-files", "--others", "--exclude-standard").splitlines()
-        if name == "root":
-            if set(changes) - {REGISTRY} or any(
-                not p.startswith("reports/ace/") for p in unknown
-            ):
-                fail("Unexpected sandbox control-plane changes")
-        elif changes or unknown:
-            fail(f"Unexpected sandbox repository changes: {name}")
+        self._verify_worktree(name, repo)
 
     def _committed_receipt(
         self, record: dict[str, Any], head: str
@@ -283,26 +252,12 @@ class World:
         }
         identity = fields.get("character.identity") or {}
         entity_id = fields.get("character.canonical_id") or identity.get("canonical_id")
-        creation = receipt if created else None
-        for path in self.requests.glob("*.json"):
-            previous = read_json(path).get("result", {})
-            if (
-                previous.get("entity_id") == entity_id
-                and previous.get("status") == "GENERATED_CANON"
-            ):
-                creation = previous
-                break
+        creation = self._creation_history(receipt, entity_id, created)
         creation_fields = {
             f["field_path"]: f["value"]
             for f in (creation or {}).get("answer", {}).get("fields", [])
         }
-        character = {
-            "canonical_id": entity_id,
-            "name": fields.get("character.canonical_name") or identity.get("name"),
-            "background": fields.get("character.background")
-            or creation_fields.get("character.background"),
-            "background_and_traits": fields.get("character.background_and_traits"),
-        }
+        character = self._character_fields(fields, identity, entity_id, creation_fields)
         return {
             "world_id": self.metadata["world_id"],
             "world_scope": "isolated_aurora_world",
@@ -318,13 +273,7 @@ class World:
             "answer": receipt.get("answer"),
             "blockers": receipt.get("blockers", []),
             "materialization": receipt.get("materialization"),
-            "origin": "sandbox_created"
-            if creation
-            else (
-                "inherited_canon"
-                if receipt["status"] == "RETRIEVED_CANON"
-                else "prepared_or_unresolved"
-            ),
+            "origin": self._origin(receipt, creation),
             "creation_determination_id": creation.get("determination_id")
             if creation
             else None,
@@ -383,64 +332,18 @@ class World:
         context_authority: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         path = self.requests / (request_id + ".json")
-        if path.exists():
-            record = read_json(path)
-            if record["fingerprint"] != fingerprint:
-                fail(
-                    "Request ID already belongs to different input",
-                    "transaction_conflict",
-                )
-            if record["phase"] == "complete":
-                return record["result"]
-            if record["baseline"] != self.metadata["canon_head"]:
-                fail(
-                    "Pending request baseline changed; use a new request ID",
-                    "sandbox_baseline_changed",
-                )
-        else:
-            record = {
-                "request_id": request_id,
-                "fingerprint": fingerprint,
-                "operation": operation,
-                "phase": "prepared",
-                "output_name": "sandbox-" + request_id,
-                "baseline": self.metadata["canon_head"],
-                "context_authority": context_authority,
-            }
-            atomic_json(path, record)
-        from .invocation import compile_character_invocation
+        record = self._request_record(
+            request_id, operation, fingerprint, context_authority
+        )
+        if record["phase"] == "complete":
+            return record["result"]
         from .mcp_adapter import (
-            ace_resolve,
             ace_materialize_preview,
             ace_materialize_commit,
         )
 
-        effective = dict(context)
-        if "canonical_id" in effective:
-            if (
-                effective.get("subject_ref", effective["canonical_id"])
-                != effective["canonical_id"]
-            ):
-                fail("Character identity anchors disagree", "input_validation_failed")
-            effective["subject_ref"] = effective.pop("canonical_id")
-        if operation == "retrieve":
-            effective["existence_status"] = "existing"
-        if "receipt" not in record:
-            invocation_options = {
-                "caller_ref": f"sandbox:{self.metadata['world_id']}",
-                **(record.get("context_authority") or {}).get("invocation_options", {}),
-            }
-            invocation = compile_character_invocation(
-                question,
-                effective,
-                root=self.root,
-                session_ref=request_id,
-                **invocation_options,
-            )
-            record["invocation_id"] = invocation["invocation_id"]
-            resolution = ace_resolve(invocation, record["output_name"], root=self.root)
-            record.update(receipt=resolution["determination"], phase="resolved")
-            atomic_json(path, record)
+        effective = self._lookup_context(context, operation)
+        self._resolve_character(record, effective, question, request_id, path)
         receipt = record["receipt"]
         if (
             operation == "create"
@@ -484,3 +387,155 @@ class World:
                     root=self.root,
                 ),
             }
+
+    def _validate_metadata(self, directory: Path) -> None:
+        if (
+            self.metadata.get("record_type") != "aurora_ace_sandbox_world"
+            or self.metadata.get("schema_version") != 1
+            or self.metadata.get("directory") != str(directory)
+            or self.metadata.get("policy") != POLICY
+        ):
+            fail("Not a provisioned ACE sandbox world")
+        for source in self.metadata["sources"].values():
+            source_path = Path(source["path"]).resolve()
+            if directory == source_path or source_path in directory.parents:
+                fail("Sandbox cannot live inside a source repository")
+
+    def _reject_tree_links(self, path: Path) -> None:
+        # Relevant trees must contain no links that a native resolver could follow.
+        if path.exists():
+            for base, dirs, files in os.walk(path, followlinks=False):
+                dirs[:] = [d for d in dirs if d not in {".git", ".venv", "__pycache__"}]
+                for name in dirs + files:
+                    if (Path(base) / name).is_symlink():
+                        fail(f"Sandbox tree contains a symlink: {Path(base) / name}")
+
+    def _verify_git_storage(self, repo: Path) -> None:
+        dotgit = repo / ".git"
+        if not dotgit.is_dir() or dotgit.is_symlink():
+            fail("Sandbox requires independent Git clones")
+        common = Path(
+            git(repo, "rev-parse", "--path-format=absolute", "--git-common-dir")
+        ).resolve()
+        if common != dotgit.resolve() or (dotgit / "objects/info/alternates").exists():
+            fail("Sandbox Git storage must not be shared")
+        if git(repo, "remote"):
+            fail("Sandbox repository has a remote")
+
+    def _verify_worktree(self, name: str, repo: Path) -> None:
+        changes = git(repo, "diff", "HEAD", "--name-only").splitlines()
+        unknown = git(repo, "ls-files", "--others", "--exclude-standard").splitlines()
+        if name == "root":
+            if set(changes) - {REGISTRY} or any(
+                not p.startswith("reports/ace/") for p in unknown
+            ):
+                fail("Unexpected sandbox control-plane changes")
+        elif changes or unknown:
+            fail(f"Unexpected sandbox repository changes: {name}")
+
+    def _creation_history(
+        self, receipt: dict, entity_id: str, created: bool
+    ) -> dict | None:
+        creation = receipt if created else None
+        for path in self.requests.glob("*.json"):
+            previous = read_json(path).get("result", {})
+            if (
+                previous.get("entity_id") == entity_id
+                and previous.get("status") == "GENERATED_CANON"
+            ):
+                creation = previous
+                break
+        return creation
+
+    @staticmethod
+    def _character_fields(
+        fields: dict, identity: dict, entity_id: str, creation_fields: dict
+    ) -> dict:
+        return {
+            "canonical_id": entity_id,
+            "name": fields.get("character.canonical_name") or identity.get("name"),
+            "background": fields.get("character.background")
+            or creation_fields.get("character.background"),
+            "background_and_traits": fields.get("character.background_and_traits"),
+        }
+
+    @staticmethod
+    def _origin(receipt: dict, creation: dict | None) -> str:
+        if creation:
+            return "sandbox_created"
+        if receipt["status"] == "RETRIEVED_CANON":
+            return "inherited_canon"
+        return "prepared_or_unresolved"
+
+    def _request_record(
+        self,
+        request_id: str,
+        operation: str,
+        fingerprint: str,
+        context_authority: dict | None,
+    ) -> dict:
+        path = self.requests / (request_id + ".json")
+        if path.exists():
+            record = read_json(path)
+            if record["fingerprint"] != fingerprint:
+                fail(
+                    "Request ID already belongs to different input",
+                    "transaction_conflict",
+                )
+            if (
+                record["phase"] != "complete"
+                and record["baseline"] != self.metadata["canon_head"]
+            ):
+                fail(
+                    "Pending request baseline changed; use a new request ID",
+                    "sandbox_baseline_changed",
+                )
+        else:
+            record = {
+                "request_id": request_id,
+                "fingerprint": fingerprint,
+                "operation": operation,
+                "phase": "prepared",
+                "output_name": "sandbox-" + request_id,
+                "baseline": self.metadata["canon_head"],
+                "context_authority": context_authority,
+            }
+            atomic_json(path, record)
+        return record
+
+    @staticmethod
+    def _lookup_context(context: dict, operation: str) -> dict:
+        effective = dict(context)
+        if "canonical_id" in effective:
+            if (
+                effective.get("subject_ref", effective["canonical_id"])
+                != effective["canonical_id"]
+            ):
+                fail("Character identity anchors disagree", "input_validation_failed")
+            effective["subject_ref"] = effective.pop("canonical_id")
+        if operation == "retrieve":
+            effective["existence_status"] = "existing"
+        return effective
+
+    def _resolve_character(
+        self, record: dict, effective: dict, question: str, request_id: str, path: Path
+    ) -> None:
+        from .invocation import compile_character_invocation
+        from .mcp_adapter import ace_resolve
+
+        if "receipt" not in record:
+            invocation_options = {
+                "caller_ref": f"sandbox:{self.metadata['world_id']}",
+                **(record.get("context_authority") or {}).get("invocation_options", {}),
+            }
+            invocation = compile_character_invocation(
+                question,
+                effective,
+                root=self.root,
+                session_ref=request_id,
+                **invocation_options,
+            )
+            record["invocation_id"] = invocation["invocation_id"]
+            resolution = ace_resolve(invocation, record["output_name"], root=self.root)
+            record.update(receipt=resolution["determination"], phase="resolved")
+            atomic_json(path, record)

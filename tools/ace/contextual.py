@@ -1,4 +1,5 @@
-"""L3-governed assignments and durable background needs for isolated ACE worlds.
+"""
+L3-governed assignments and durable background needs for isolated ACE worlds.
 
 Assignments are granted by the local operator CLI, never by model-supplied tool
 arguments. The queue reuses ACE autonomic invocations and native transactions.
@@ -55,28 +56,7 @@ def validate_settings(layer: str, settings: dict) -> None:
         for key in ("faction_id", "location_type"):
             identifier(settings[key])
     elif layer == "L1":
-        if set(settings) != {"subject_ref", "evidence_refs", "field_paths"}:
-            fail(
-                "L1 settings require subject_ref, evidence_refs, and field_paths",
-                "input_validation_failed",
-            )
-        if (
-            not isinstance(settings["subject_ref"], str)
-            or not settings["subject_ref"].strip()
-        ):
-            fail("L1 subject_ref is required", "input_validation_failed")
-        _strings(settings["field_paths"], "field_paths")
-        for ref in _strings(settings["evidence_refs"], "evidence_refs"):
-            path = Path(ref)
-            if (
-                path.parts[:2] != ("canon", "L1")
-                or ".." in path.parts
-                or path.suffix != ".json"
-            ):
-                fail(
-                    "L1 evidence must be explicit canon/L1 JSON records; L2 evidence cannot become L1 truth",
-                    "input_validation_failed",
-                )
+        _validate_l1_settings(settings)
     else:
         fail(
             "Assignments target L1 or L2; L3 supplies governance",
@@ -91,6 +71,7 @@ def world_settings(settings: dict) -> dict:
 
 class ContextQueue:
     def __init__(self, directory: Path, *, policy_root: Path = ROOT):
+        """Bind the durable queue to its world and controller policy."""
         self.world = World(directory)
         self.base = self.world.state / "contexts"
         self.assignments = self.base / "assignments"
@@ -138,18 +119,7 @@ class ContextQueue:
         """Operator-only grant; deliberately absent from the MCP interface."""
         identifier(assignment_id)
         validate_settings(target_layer, settings)
-        if not all(
-            isinstance(v, str) and v.strip() and len(v) < 4096
-            for v in (purpose, authority_ref)
-        ):
-            fail(
-                "A bounded purpose and explicit operator authority reference are required"
-            )
-        if (
-            type(max_jobs) is not int
-            or not 1 <= max_jobs <= self.policy["max_jobs_per_assignment"]
-        ):
-            fail("Assignment job budget is out of bounds")
+        self._validate_grant(purpose, authority_ref, max_jobs)
         with self.world.locked():
             self.world.verify()
             self._initialize()
@@ -176,18 +146,7 @@ class ContextQueue:
                     )
                 self._assignment(assignment_id)
                 return record
-            if target_layer == "L2":
-                binding_path = self.base / "l2_settings.json"
-                binding = {
-                    "world_id": spec["world_id"],
-                    "settings_digest": semantic_sha256(world_settings(settings)),
-                    "settings": world_settings(settings),
-                }
-                if binding_path.exists() and read_json(binding_path) != binding:
-                    fail(
-                        "Different L2 settings require a separate world; existing facts keep their original context"
-                    )
-                atomic_json(binding_path, binding)
+            self._bind_l2_settings(spec, settings)
             atomic_json(path, record)
             return record
 
@@ -217,31 +176,7 @@ class ContextQueue:
                     "input_validation_failed",
                 )
             return dict(context)
-        allowed = {
-            "role",
-            "name",
-            "canonical_id",
-            "observed_behavior",
-            "faction_id",
-            "location_type",
-        }
-        if set(context) - allowed:
-            fail(
-                "Need attempts an unsupported setting or authority override",
-                "input_validation_failed",
-            )
-        for key in ("faction_id", "location_type"):
-            if key in context and context[key] != settings[key]:
-                fail(
-                    f"Need {key} disagrees with authorized settings",
-                    "input_validation_failed",
-                )
-        effective = {
-            **context,
-            "faction_id": settings["faction_id"],
-            "location_type": settings["location_type"],
-        }
-        return ContextQueue._role_context(settings, effective)
+        return ContextQueue._l2_context(settings, context)
 
     @staticmethod
     def _role_context(settings: dict, effective: dict) -> dict:
@@ -339,21 +274,7 @@ class ContextQueue:
             "trigger_policy_ref": POLICY_ID,
         }
         authority_ref = f"{POLICY_ID}:{spec['world_id']}:{record['digest']}:{job_id}"
-        job["l3_receipt"] = {
-            "policy_id": POLICY_ID,
-            "policy_digest": self.policy_digest,
-            "assignment_id": spec["assignment_id"],
-            "assignment_digest": record["digest"],
-            "world_id": spec["world_id"],
-            "target_layer": spec["target_layer"],
-            "settings_digest": semantic_sha256(spec["settings"]),
-            "authority_ref": authority_ref,
-            "cross_layer_authority": False,
-            "reality_verified": False,
-            "truth_basis": "world_scoped_generative_canon"
-            if spec["target_layer"] == "L2"
-            else "committed_L1_evidence",
-        }
+        job["l3_receipt"] = self._l3_receipt(spec, record, authority_ref)
         # Save the decision before any native transaction. A crashed worker reuses this job ID.
         atomic_json(self.jobs / f"{job_id}.json", job)
         if spec["target_layer"] == "L2":
@@ -374,6 +295,82 @@ class ContextQueue:
                     "l3_receipt": job["l3_receipt"],
                 },
             )
+        return self._execute_l1(job, spec, options)
+
+    def work_once(self) -> dict | None:
+        with self.world.locked():
+            candidates = [read_json(p) for p in sorted(self.jobs.glob("*.json"))]
+            job = next((j for j in candidates if j["status"] not in TERMINAL), None)
+            if job is None:
+                return None
+            path = self.jobs / f"{identifier(job['job_id'])}.json"
+            try:
+                record = self._validate_job(job)
+                self.world._recover()
+                self.world.verify()
+                job["status"] = "running"
+                atomic_json(path, job)
+                result = self._execute(job, record)
+                status = result["status"]
+                job.update(
+                    result=result,
+                    status="conflict"
+                    if status == "TRUE_CONFLICT"
+                    else "blocked"
+                    if status == "EXECUTION_BLOCKED"
+                    else "complete",
+                )
+                job["needs_attention"] = job["status"] != "complete"
+            except (ACEError, ValueError, KeyError, OSError) as exc:
+                job.update(status="blocked", needs_attention=True, error=str(exc))
+            atomic_json(path, job)
+            return job
+
+    def _bind_l2_settings(self, spec: dict, settings: dict) -> None:
+        if spec["target_layer"] == "L2":
+            binding_path = self.base / "l2_settings.json"
+            binding = {
+                "world_id": spec["world_id"],
+                "settings_digest": semantic_sha256(world_settings(settings)),
+                "settings": world_settings(settings),
+            }
+            if binding_path.exists() and read_json(binding_path) != binding:
+                fail(
+                    "Different L2 settings require a separate world; existing facts keep their original context"
+                )
+            atomic_json(binding_path, binding)
+
+    @staticmethod
+    def _l2_context(settings: dict, context: dict) -> dict:
+        allowed = {
+            "role",
+            "name",
+            "canonical_id",
+            "observed_behavior",
+            "faction_id",
+            "location_type",
+        }
+        if set(context) - allowed:
+            fail(
+                "Need attempts an unsupported setting or authority override",
+                "input_validation_failed",
+            )
+        for key in ("faction_id", "location_type"):
+            if key in context and context[key] != settings[key]:
+                fail(
+                    f"Need {key} disagrees with authorized settings",
+                    "input_validation_failed",
+                )
+        effective = {
+            **context,
+            "faction_id": settings["faction_id"],
+            "location_type": settings["location_type"],
+        }
+        return ContextQueue._role_context(settings, effective)
+
+    def _execute_l1(self, job: dict, spec: dict, options: dict) -> dict:
+        payload = job["input"]
+        job_id = job["job_id"]
         settings = spec["settings"]
         invocation = compile_canon_invocation(
             payload["question"],
@@ -412,36 +409,68 @@ class ContextQueue:
             "notice": "Committed L1 evidence in this world; not independent verification of external reality.",
         }
 
-    def work_once(self) -> dict | None:
-        with self.world.locked():
-            candidates = [read_json(p) for p in sorted(self.jobs.glob("*.json"))]
-            job = next((j for j in candidates if j["status"] not in TERMINAL), None)
-            if job is None:
-                return None
-            path = self.jobs / f"{identifier(job['job_id'])}.json"
-            try:
-                if job["input_digest"] != semantic_sha256(job["input"]):
-                    fail("Queued need input changed")
-                record = self._assignment(job["input"]["assignment_id"])
-                if job["input"]["assignment_digest"] != record["digest"]:
-                    fail("Queued assignment authorization changed")
-                self._effective(record["spec"], job["input"]["context"])
-                self.world._recover()
-                self.world.verify()
-                job["status"] = "running"
-                atomic_json(path, job)
-                result = self._execute(job, record)
-                status = result["status"]
-                job.update(
-                    result=result,
-                    status="conflict"
-                    if status == "TRUE_CONFLICT"
-                    else "blocked"
-                    if status == "EXECUTION_BLOCKED"
-                    else "complete",
-                )
-                job["needs_attention"] = job["status"] != "complete"
-            except (ACEError, ValueError, KeyError, OSError) as exc:
-                job.update(status="blocked", needs_attention=True, error=str(exc))
-            atomic_json(path, job)
-            return job
+    def _l3_receipt(self, spec: dict, record: dict, authority_ref: str) -> dict:
+        return {
+            "policy_id": POLICY_ID,
+            "policy_digest": self.policy_digest,
+            "assignment_id": spec["assignment_id"],
+            "assignment_digest": record["digest"],
+            "world_id": spec["world_id"],
+            "target_layer": spec["target_layer"],
+            "settings_digest": semantic_sha256(spec["settings"]),
+            "authority_ref": authority_ref,
+            "cross_layer_authority": False,
+            "reality_verified": False,
+            "truth_basis": "world_scoped_generative_canon"
+            if spec["target_layer"] == "L2"
+            else "committed_L1_evidence",
+        }
+
+    def _validate_job(self, job: dict) -> dict:
+        if job["input_digest"] != semantic_sha256(job["input"]):
+            fail("Queued need input changed")
+        record = self._assignment(job["input"]["assignment_id"])
+        if job["input"]["assignment_digest"] != record["digest"]:
+            fail("Queued assignment authorization changed")
+        self._effective(record["spec"], job["input"]["context"])
+        return record
+
+    def _validate_grant(self, purpose: str, authority_ref: str, max_jobs: int) -> None:
+        if not all(
+            isinstance(v, str) and v.strip() and len(v) < 4096
+            for v in (purpose, authority_ref)
+        ):
+            fail(
+                "A bounded purpose and explicit operator authority reference are required"
+            )
+        if (
+            not isinstance(max_jobs, int)
+            or isinstance(max_jobs, bool)
+            or not 1 <= max_jobs <= self.policy["max_jobs_per_assignment"]
+        ):
+            fail("Assignment job budget is out of bounds")
+
+
+def _validate_l1_settings(settings: dict) -> None:
+    if set(settings) != {"subject_ref", "evidence_refs", "field_paths"}:
+        fail(
+            "L1 settings require subject_ref, evidence_refs, and field_paths",
+            "input_validation_failed",
+        )
+    if (
+        not isinstance(settings["subject_ref"], str)
+        or not settings["subject_ref"].strip()
+    ):
+        fail("L1 subject_ref is required", "input_validation_failed")
+    _strings(settings["field_paths"], "field_paths")
+    for ref in _strings(settings["evidence_refs"], "evidence_refs"):
+        path = Path(ref)
+        if (
+            path.parts[:2] != ("canon", "L1")
+            or ".." in path.parts
+            or path.suffix != ".json"
+        ):
+            fail(
+                "L1 evidence must be explicit canon/L1 JSON records; L2 evidence cannot become L1 truth",
+                "input_validation_failed",
+            )

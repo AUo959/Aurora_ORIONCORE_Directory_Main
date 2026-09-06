@@ -8,7 +8,7 @@ import asyncio
 import json
 import os
 from pathlib import Path
-import subprocess
+import subprocess  # nosec B404
 import sys
 from concurrent.futures import ThreadPoolExecutor
 
@@ -35,13 +35,13 @@ def test_non_world_and_canonical_target_are_refused(tmp_path):
     "value", ["../outside", "/outside/escape", "a/b", "a\\b", "", ".", "x" * 97]
 )
 def test_request_ids_are_identifiers(value):
-    assert not REQUEST_ID.fullmatch(value)
+    assert not REQUEST_ID.fullmatch(value)  # nosec B101
 
 
 def test_acceptance_ci_requires_ready_and_tracks_registry():
     text = (ROOT / ".github/workflows/ace-v1-acceptance.yml").read_text()
-    assert "--require-ready" in text
-    assert text.count('"catalog/repo_registry.yaml"') >= 2
+    assert "--require-ready" in text  # nosec B101
+    assert text.count('"catalog/repo_registry.yaml"') >= 2  # nosec B101
 
 
 @pytest.fixture(scope="module")
@@ -76,9 +76,9 @@ def rpc(world, tool, arguments=None, *, error=False):
                 return sorted(item.name for item in (await client.list_tools()).tools)
             result = await client.call_tool(tool, arguments or {})
             if error:
-                assert result.is_error, result
+                assert result.is_error, result  # nosec B101
                 return str(result)
-            assert not result.is_error, result
+            assert not result.is_error, result  # nosec B101
             return result.structured_content or json.loads(result.content[0].text)
 
     return asyncio.run(run())
@@ -110,7 +110,7 @@ def context(role="continuity_expedition_archivist"):
 
 
 def head(world):
-    return subprocess.check_output(
+    return subprocess.check_output(  # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit.dangerous-subprocess-use-audit # nosec B603, B607
         [
             "git",
             "-C",
@@ -119,65 +119,54 @@ def head(world):
             "HEAD",
         ],
         text=True,
-    ).strip()
+    ).strip()  # nosec B603, B607
 
 
 def test_real_mcp_create_restart_retrieve_and_second_creation(world):
-    assert rpc(world, "list") == [
+    assert rpc(world, "list") == [  # nosec B101
         "aurora_character",
         "aurora_inspect",
         "aurora_world_status",
     ]
     before = head(world)
-    # Discover a committed character through the native index, never generate fixture canon.
-    script = "from ace.character_retrieval import build_character_index; import json; print(json.dumps(build_character_index()))"
-    result = subprocess.check_output(
-        [sys.executable, "-c", script], cwd=world / "workspace/tools", text=True
-    )
-    index = json.loads(result)
-    identities = index["records"]
-    existing = character(
-        world, "existing", "retrieve", {"canonical_id": identities[0]["canonical_id"]}
-    )
-    assert existing["status"] == "RETRIEVED_CANON"
-    assert head(world) == before
+    _assert_existing_retrieval(world, before)
     missing = character(
         world, "missing", "retrieve", {"name": "No Such Continuity Person"}
     )
-    assert missing["status"] == "EXECUTION_BLOCKED"
+    assert missing["status"] == "EXECUTION_BLOCKED"  # nosec B101
     preview = character(world, "preview", "preview", context())
-    assert preview["materialization"]["status"] == "commit_ready"
-    assert head(world) == before
+    assert preview["materialization"]["status"] == "commit_ready"  # nosec B101
+    assert head(world) == before  # nosec B101
     created = character(world, "create-one", "create", context())
-    assert created["status"] == "GENERATED_CANON"
-    assert created["origin"] == "sandbox_created"
-    assert created["entity_id"]
+    assert created["status"] == "GENERATED_CANON"  # nosec B101
+    assert created["origin"] == "sandbox_created"  # nosec B101
+    assert created["entity_id"]  # nosec B101
     after = head(world)
-    assert after != before
-    assert character(world, "create-one", "create", context()) == created
-    assert head(world) == after
+    assert after != before  # nosec B101
+    assert character(world, "create-one", "create", context()) == created  # nosec B101
+    assert head(world) == after  # nosec B101
     # Every rpc starts a new OS process. Recall cannot use an in-process cache.
     recalled = character(
         world, "recall", "retrieve", {"canonical_id": created["entity_id"]}
     )
-    assert recalled["status"] == "RETRIEVED_CANON"
-    assert recalled["entity_id"] == created["entity_id"]
-    assert recalled["origin"] == "sandbox_created"
-    assert recalled["character"]["background"] == created["character"]["background"]
+    assert recalled["status"] == "RETRIEVED_CANON"  # nosec B101
+    assert recalled["entity_id"] == created["entity_id"]  # nosec B101
+    assert recalled["origin"] == "sandbox_created"  # nosec B101
+    assert recalled["character"]["background"] == created["character"]["background"]  # nosec B101
     by_name = character(
         world, "recall-name", "retrieve", {"name": created["character"]["name"]}
     )
-    assert by_name["entity_id"] == created["entity_id"]
-    assert by_name["character"]["background"] == created["character"]["background"]
+    assert by_name["entity_id"] == created["entity_id"]  # nosec B101
+    assert by_name["character"]["background"] == created["character"]["background"]  # nosec B101
     inspected = rpc(
         world, "aurora_inspect", {"determination_id": created["determination_id"]}
     )
-    assert inspected["found"] is True
+    assert inspected["found"] is True  # nosec B101
     second = character(
         world, "create-two", "create", context("continuity_orbital_cartographer")
     )
-    assert second["status"] == "GENERATED_CANON"
-    assert second["entity_id"] != created["entity_id"]
+    assert second["status"] == "GENERATED_CANON"  # nosec B101
+    assert second["entity_id"] != created["entity_id"]  # nosec B101
 
 
 def test_duplicate_input_path_escape_and_dirty_tree_refuse(world):
@@ -191,7 +180,7 @@ def test_duplicate_input_path_escape_and_dirty_tree_refuse(world):
         character(world, "dirty", "create", context(), error=True)
     finally:
         dirty.unlink()
-    assert head(world) == before
+    assert head(world) == before  # nosec B101
 
 
 def test_stale_preview_and_conflicting_identity_cannot_commit(world):
@@ -213,7 +202,7 @@ except ACEError:
  assert w.status()['canon_head']==before
 else: raise AssertionError('Stale preview committed')
 """
-    subprocess.run(
+    subprocess.run(  # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit.dangerous-subprocess-use-audit # nosec B603, B607
         [
             sys.executable,
             "-c",
@@ -224,7 +213,7 @@ else: raise AssertionError('Stale preview committed')
         ],
         cwd=world / "workspace/tools",
         check=True,
-    )
+    )  # nosec B603, B607
     before = head(world)
     character(
         world,
@@ -233,7 +222,7 @@ else: raise AssertionError('Stale preview committed')
         {"canonical_id": "char_adrienne_kovas", "subject_ref": "char_alric_tann"},
         error=True,
     )
-    assert head(world) == before
+    assert head(world) == before  # nosec B101
 
 
 def test_journal_recovers_commit_before_baseline_update(world):
@@ -248,7 +237,7 @@ w._finish=stop
 try: w.character('Create recovery character', json.loads(sys.argv[2]), 'recover', 'create')
 except RuntimeError: pass
 """
-    subprocess.run(
+    subprocess.run(  # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit.dangerous-subprocess-use-audit # nosec B603, B607
         [
             sys.executable,
             "-c",
@@ -258,9 +247,9 @@ except RuntimeError: pass
         ],
         cwd=world / "workspace/tools",
         check=True,
-    )
+    )  # nosec B603, B607
     committed = head(world)
-    assert rpc(world, "aurora_world_status")["status"] == "recovery_pending"
+    assert rpc(world, "aurora_world_status")["status"] == "recovery_pending"  # nosec B101
     result = character(
         world,
         "recover",
@@ -268,9 +257,9 @@ except RuntimeError: pass
         context("continuity_recovery_historian"),
         question="Create recovery character",
     )
-    assert result["status"] == "GENERATED_CANON"
-    assert head(world) == committed
-    assert rpc(world, "aurora_world_status")["status"] == "ready"
+    assert result["status"] == "GENERATED_CANON"  # nosec B101
+    assert head(world) == committed  # nosec B101
+    assert rpc(world, "aurora_world_status")["status"] == "ready"  # nosec B101
 
 
 def test_concurrent_duplicate_creation_is_one_commit(world):
@@ -283,8 +272,8 @@ def test_concurrent_duplicate_creation_is_one_commit(world):
 
     with ThreadPoolExecutor(max_workers=2) as pool:
         a, b = list(pool.map(lambda _: create(), range(2)))
-    assert a == b
-    count = subprocess.check_output(
+    assert a == b  # nosec B101
+    count = subprocess.check_output(  # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit.dangerous-subprocess-use-audit # nosec B603, B607
         [
             "git",
             "-C",
@@ -294,8 +283,8 @@ def test_concurrent_duplicate_creation_is_one_commit(world):
             f"{before}..HEAD",
         ],
         text=True,
-    ).strip()
-    assert count == "1"
+    ).strip()  # nosec B603, B607
+    assert count == "1"  # nosec B101
 
 
 def test_symlink_world_and_runtime_escape_refused(world, tmp_path):
@@ -310,3 +299,18 @@ def test_symlink_world_and_runtime_escape_refused(world, tmp_path):
             World(world)
     finally:
         escape.unlink()
+
+
+def _assert_existing_retrieval(world, before):
+    # Discover a committed character through the native index, never generate fixture canon.
+    script = "from ace.character_retrieval import build_character_index; import json; print(json.dumps(build_character_index()))"
+    result = subprocess.check_output(  # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit.dangerous-subprocess-use-audit # nosec B603, B607
+        [sys.executable, "-c", script], cwd=world / "workspace/tools", text=True
+    )  # nosec B603, B607
+    index = json.loads(result)
+    identities = index["records"]
+    existing = character(
+        world, "existing", "retrieve", {"canonical_id": identities[0]["canonical_id"]}
+    )
+    assert existing["status"] == "RETRIEVED_CANON"  # nosec B101
+    assert head(world) == before  # nosec B101

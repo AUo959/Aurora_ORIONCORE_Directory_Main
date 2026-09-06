@@ -1,4 +1,5 @@
-"""Prepare an offline character promotion review using existing ACE owners.
+"""
+Prepare an offline character promotion review using existing ACE owners.
 
 Only a new output directory and its independent rehearsal clone are writable.
 This module neither publishes a branch nor grants source-world canon authority.
@@ -10,7 +11,7 @@ import json
 import os
 import re
 import shutil
-import subprocess
+import subprocess  # nosec B404
 import sys
 from pathlib import Path
 
@@ -75,7 +76,7 @@ def _clone(source: Path, destination: Path, head: str) -> None:
 
 def _run(script: Path, args: list[str], cwd: Path, output: Path) -> tuple[dict, int]:
     env = dict(os.environ, PYTHONPYCACHEPREFIX=str(output / "python-cache"))
-    result = subprocess.run(  # noqa: S603 -- pinned local validator, fixed argv, no shell.
+    result = subprocess.run(  # noqa: S603 -- pinned local validator, fixed argv, no shell. # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit.dangerous-subprocess-use-audit # nosec B603, B607
         [sys.executable, str(script), *args],
         cwd=cwd,
         env=env,
@@ -83,7 +84,7 @@ def _run(script: Path, args: list[str], cwd: Path, output: Path) -> tuple[dict, 
         text=True,
         check=False,
         timeout=120,
-    )
+    )  # nosec B603, B607
     try:
         return json.loads(result.stdout), result.returncode
     except ValueError as exc:
@@ -119,19 +120,7 @@ def _source(world: World, request_id: str, root: Path) -> tuple[Path, dict, dict
     ]["prior_determination_digest"] != semantic_sha256(original):
         fail("Creation history does not match the original packet")
     _assert_packet_integrity(packet, result["entity_id"], original)
-    # Read the native committed evidence, never use working-tree candidates as canon.
-    git(world.canon, "merge-base", "--is-ancestor", commit, "HEAD")
-    paths = final["materialization"]["target_paths"]
-    hashes = {}
-    for rel in paths:
-        path = world.canon / rel
-        world._inside(path)
-        if not path.is_file():
-            fail("Committed creation artifact is missing")
-        hashes[rel] = file_sha256(path)
-    transactions = [t for t in final["transactions"] if t["kind"] == "materialization"]
-    if not transactions or transactions[-1]["result_sha256"] != semantic_sha256(hashes):
-        fail("Creation artifacts no longer match the native transaction receipt")
+    _verify_committed_artifacts(world, final, commit)
     return packet, original, final
 
 
@@ -170,6 +159,142 @@ def _validate_candidate(packet: Path, view: Path, output: Path, entity: str) -> 
     if rc:
         fail("CanonRec name registry export failed")
     atomic_json(output / "name_registry.json", registry)
+    validation, entity_rc, naming, naming_rc = _candidate_validators(
+        scripts, candidate_path, repo, output
+    )
+    atomic_json(output / "validation_run.json", validation)
+    atomic_json(output / "naming_validation.json", naming)
+    _candidate_advice(scripts, output, candidate, validation, discovery, entity)
+    return {
+        "identity_discovery": discovery,
+        "entity_passed": entity_rc == 0 and not validation["validation_run"]["blocked"],
+        "naming_passed": naming_rc == 0 and not naming["blocks"],
+        "advisor_ref": "reconciliation_advice.json",
+        "evidence_ref": "evidence_receipt.json",
+    }
+
+
+def prepare(
+    world_directory: Path,
+    request_id: str,
+    target_root: Path,
+    output: Path,
+    *,
+    root: Path = ROOT,
+) -> dict:
+    """Revalidate and rehearse one original creation; preserve source baselines."""
+    world = World(world_directory)
+    target_root = target_root.resolve()
+    target = target_root / CANONREC_REL
+    output = _review_output(output, world, target_root, root)
+    with world.locked():
+        world.verify()
+        source_before = _snapshot(world.canon)
+        target_before = _snapshot(target)
+        if target_before["status"]:
+            fail(
+                "Target CanonRec must be clean; uncommitted content cannot be promoted against"
+            )
+        packet, original, final = _source(world, request_id, root)
+        output.mkdir(parents=True)
+        review = _review_metadata(
+            world, request_id, final, target_root, target_before, original, root
+        )
+        try:
+            _rehearse(
+                world,
+                target,
+                target_before,
+                packet,
+                output,
+                final,
+                original,
+                review,
+                request_id,
+                root,
+            )
+        except (ACEError, OSError, ValueError, KeyError) as exc:
+            review["status"] = "blocked"
+            review["blockers"].append(str(exc))
+        finally:
+            _verify_review_sources(review, world, target, source_before, target_before)
+            _write_review(output, review)
+        return review
+
+
+def verify(output: Path) -> dict:
+    output = output.expanduser().absolute()
+    if output.resolve() != output:
+        fail("Review path must not contain symlinks")
+    review = read_json(output / "promotion_review.json")
+    _verify_review_artifacts(output, review)
+    target = Path(review["target_root"]) / CANONREC_REL
+    if git(target, "rev-parse", "HEAD") != review["target_baseline"] or git(
+        target, "status", "--porcelain"
+    ):
+        fail("Target CanonRec changed; prepare a fresh review")
+    return {
+        "status": review["status"],
+        "artifacts_verified": True,
+        "target_baseline_current": True,
+        "authority": "offline_review_only",
+    }
+
+
+def _verify_committed_artifacts(world: World, final: dict, commit: str) -> None:
+    # Read the native committed evidence, never use working-tree candidates as canon.
+    git(world.canon, "merge-base", "--is-ancestor", commit, "HEAD")
+    paths = final["materialization"]["target_paths"]
+    hashes = {}
+    for rel in paths:
+        path = world.canon / rel
+        world._inside(path)
+        if not path.is_file():
+            fail("Committed creation artifact is missing")
+        hashes[rel] = file_sha256(path)
+    transactions = [t for t in final["transactions"] if t["kind"] == "materialization"]
+    if not transactions or transactions[-1]["result_sha256"] != semantic_sha256(hashes):
+        fail("Creation artifacts no longer match the native transaction receipt")
+
+
+def _candidate_advice(
+    scripts: Path,
+    output: Path,
+    candidate: dict,
+    validation: dict,
+    discovery: dict,
+    entity: str,
+) -> None:
+    advisor = load_module(
+        scripts / "reconciliation_advisor.py", "ace_promotion_advisor"
+    )
+    reports = validation.get("reports", [])
+    advice = advisor.recommend_from_validation(
+        candidate,
+        [finding for report in reports for finding in report.get("findings", [])],
+        "L2",
+        "character",
+        entity_name=candidate["canonical_name"],
+        has_conflicts=bool(discovery["direct_candidates"]),
+        user_reviewed=False,
+    )
+    atomic_json(output / "reconciliation_advice.json", advice)
+    emitter = load_module(
+        scripts / "emit_evidence_receipt.py", "ace_promotion_evidence"
+    )
+    atomic_json(
+        output / "evidence_receipt.json",
+        emitter.build_evidence_receipt(
+            validation,
+            output / "validation_run.json",
+            canon_targets=[f"CanonRec:canon/L2/entities/{entity}"],
+        ),
+    )
+
+
+def _candidate_validators(
+    scripts: Path, candidate_path: Path, repo: Path, output: Path
+) -> tuple:
     validation, entity_rc = _run(
         scripts / "validate_entity.py",
         [
@@ -199,190 +324,153 @@ def _validate_candidate(packet: Path, view: Path, output: Path, entity: str) -> 
         repo,
         output,
     )
-    atomic_json(output / "validation_run.json", validation)
-    atomic_json(output / "naming_validation.json", naming)
-    advisor = load_module(
-        scripts / "reconciliation_advisor.py", "ace_promotion_advisor"
-    )
-    reports = validation.get("reports", [])
-    advice = advisor.recommend_from_validation(
-        candidate,
-        [finding for report in reports for finding in report.get("findings", [])],
-        "L2",
-        "character",
-        entity_name=candidate["canonical_name"],
-        has_conflicts=bool(discovery["direct_candidates"]),
-        user_reviewed=False,
-    )
-    atomic_json(output / "reconciliation_advice.json", advice)
-    emitter = load_module(
-        scripts / "emit_evidence_receipt.py", "ace_promotion_evidence"
-    )
-    atomic_json(
-        output / "evidence_receipt.json",
-        emitter.build_evidence_receipt(
-            validation,
-            output / "validation_run.json",
-            canon_targets=[f"CanonRec:canon/L2/entities/{entity}"],
-        ),
-    )
+    return validation, entity_rc, naming, naming_rc
+
+
+def _review_metadata(
+    world: World,
+    request_id: str,
+    final: dict,
+    target_root: Path,
+    target_before: dict,
+    original: dict,
+    root: Path,
+) -> dict:
     return {
-        "identity_discovery": discovery,
-        "entity_passed": entity_rc == 0 and not validation["validation_run"]["blocked"],
-        "naming_passed": naming_rc == 0 and not naming["blocks"],
-        "advisor_ref": "reconciliation_advice.json",
-        "evidence_ref": "evidence_receipt.json",
+        "schema_version": 1,
+        "record_type": "ace_character_promotion_review",
+        "status": "preparing",
+        "world_id": world.metadata["world_id"],
+        "request_id": request_id,
+        "source_determination_id": final["determination_id"],
+        "source_commit": final["materialization"]["commit_sha"],
+        "target_root": str(target_root),
+        "target_baseline": target_before["head"],
+        "packet_baseline": _canonrec_baseline(original),
+        "authority": "offline_review_only",
+        "canonical_workspace_mutated": False,
+        "publication_performed": False,
+        "blockers": [],
+        "implementation_sha256s": {
+            str(rel): file_sha256(root / rel)
+            for rel in (
+                Path("tools/ace/promotion.py"),
+                Path("tools/ace/character_materialize.py"),
+                Path("tools/ace/character_retrieval.py"),
+            )
+        },
     }
 
 
-def prepare(
-    world_directory: Path,
-    request_id: str,
-    target_root: Path,
+def _rehearse(
+    world: World,
+    target: Path,
+    target_before: dict,
+    packet: Path,
     output: Path,
-    *,
-    root: Path = ROOT,
-) -> dict:
-    """Revalidate and rehearse one original creation; preserve source baselines."""
-    world = World(world_directory)
-    target_root = target_root.resolve()
-    target = target_root / CANONREC_REL
-    output = _separate_output(
-        output,
-        [
-            world.directory,
-            target_root,
-            root,
-            Path.home() / "dev/Aurora_ORIONCORE_Directory_Main",
-        ],
+    final: dict,
+    original: dict,
+    review: dict,
+    request_id: str,
+    root: Path,
+) -> None:
+    view = output / "rehearsal"
+    repo = view / CANONREC_REL
+    _clone(target, repo, target_before["head"])
+    copied = output / "packet"
+    shutil.copytree(packet, copied)
+    (copied / "materialized_determination_receipt.json").unlink()
+    atomic_json(output / "source_materialized_determination.json", final)
+    entity = original["materialization"]["target_paths"][0].split("/")[-1]
+    if not re.fullmatch(r"char_[A-Za-z0-9_-]+", entity):
+        fail("Unsafe character identity")
+    review["entity_id"] = entity
+    checks = _validate_candidate(copied, view, output, entity)
+    review["checks"] = checks
+    _review_blockers(review, checks)
+    if not review["blockers"]:
+        _materialize_rehearsal(
+            copied, repo, world, request_id, root, output, entity, review
+        )
+    else:
+        review["status"] = "blocked"
+
+
+def _write_review(output: Path, review: dict) -> None:
+    # Pin review artifacts for later inspection without trusting a stale ready flag.
+    review["artifact_sha256s"] = {
+        p.relative_to(output).as_posix(): file_sha256(p)
+        for p in sorted(output.rglob("*"))
+        if p.is_file()
+        and "rehearsal" not in p.relative_to(output).parts
+        and "python-cache" not in p.relative_to(output).parts
+        and "__pycache__" not in p.parts
+    }
+    atomic_text(
+        output / "REVIEW.md",
+        "# Character promotion review\n\n"
+        f"Status: **{review['status']}**. Scope: offline review only.\n\n"
+        f"Source world: `{review['world_id']}`. Creation: `{review['source_commit']}`.\n\n"
+        f"Target CanonRec baseline: `{review['target_baseline']}` (local committed state).\n\n"
+        "Read `promotion_review.json`, `validation_run.json`, `naming_validation.json`, "
+        "`reconciliation_advice.json`, and `evidence_receipt.json` for findings. "
+        "When present, `proposal.patch` is the exact native-materializer rehearsal diff.\n\n"
+        "The existing ACE delegated-publication path remains the publication owner. "
+        "A review receipt is not publication authority; target freshness and the "
+        "publisher's authenticated authority checks must pass at publication time.\n\n"
+        + "\n".join(f"- {b}" for b in review["blockers"])
+        + "\n",
     )
-    with world.locked():
-        world.verify()
-        source_before = _snapshot(world.canon)
-        target_before = _snapshot(target)
-        if target_before["status"]:
-            fail(
-                "Target CanonRec must be clean; uncommitted content cannot be promoted against"
-            )
-        packet, original, final = _source(world, request_id, root)
-        output.mkdir(parents=True)
-        review = {
-            "schema_version": 1,
-            "record_type": "ace_character_promotion_review",
-            "status": "preparing",
-            "world_id": world.metadata["world_id"],
-            "request_id": request_id,
-            "source_determination_id": final["determination_id"],
-            "source_commit": final["materialization"]["commit_sha"],
-            "target_root": str(target_root),
-            "target_baseline": target_before["head"],
-            "packet_baseline": _canonrec_baseline(original),
-            "authority": "offline_review_only",
-            "canonical_workspace_mutated": False,
-            "publication_performed": False,
-            "blockers": [],
-            "implementation_sha256s": {
-                str(rel): file_sha256(root / rel)
-                for rel in (
-                    Path("tools/ace/promotion.py"),
-                    Path("tools/ace/character_materialize.py"),
-                    Path("tools/ace/character_retrieval.py"),
-                )
-            },
-        }
-        try:
-            view = output / "rehearsal"
-            repo = view / CANONREC_REL
-            _clone(target, repo, target_before["head"])
-            copied = output / "packet"
-            shutil.copytree(packet, copied)
-            (copied / "materialized_determination_receipt.json").unlink()
-            atomic_json(output / "source_materialized_determination.json", final)
-            entity = original["materialization"]["target_paths"][0].split("/")[-1]
-            if not re.fullmatch(r"char_[A-Za-z0-9_-]+", entity):
-                fail("Unsafe character identity")
-            review["entity_id"] = entity
-            checks = _validate_candidate(copied, view, output, entity)
-            review["checks"] = checks
-            if checks["identity_discovery"]["direct_candidates"]:
-                review["blockers"].append(
-                    "Existing target identity/name requires ACE retrieval and reconciliation"
-                )
-            if not checks["entity_passed"] or not checks["naming_passed"]:
-                review["blockers"].append("CanonRec validation refused the candidate")
-            if review["packet_baseline"] != review["target_baseline"]:
-                review["blockers"].append(
-                    "Target baseline differs from creation packet; ACE revalidation must issue a new determination"
-                )
-            if not review["blockers"]:
-                rehearsal = materialize_character_packet(
-                    copied,
-                    repo,
-                    authority_mode="delegated_materialize",
-                    authority_ref=f"offline-review:{world.metadata['world_id']}:{request_id}",
-                    root=root,
-                    ledger_dir=output / "ledger",
-                    commit_message=f"review(character): rehearse {entity}",
-                )
-                review["rehearsal_commit"] = rehearsal["materialization"]["commit_sha"]
-                review["rehearsal_determination_id"] = rehearsal["determination_id"]
-                git(
-                    repo,
-                    "diff",
-                    "--binary",
-                    f"--output={output / 'proposal.patch'}",
-                    review["target_baseline"],
-                    "HEAD",
-                )
-                review["patch_ref"] = "proposal.patch"
-                review["status"] = "review_ready"
-            else:
-                review["status"] = "blocked"
-        except (ACEError, OSError, ValueError, KeyError) as exc:
-            review["status"] = "blocked"
-            review["blockers"].append(str(exc))
-        finally:
-            review["sources_unchanged"] = source_before == _snapshot(
-                world.canon
-            ) and target_before == _snapshot(target)
-            if not review["sources_unchanged"]:
-                review["status"] = "blocked"
-                review["blockers"].append(
-                    "Source or target changed during review; discard this proposal"
-                )
-            # Pin review artifacts for later inspection without trusting a stale ready flag.
-            review["artifact_sha256s"] = {
-                p.relative_to(output).as_posix(): file_sha256(p)
-                for p in sorted(output.rglob("*"))
-                if p.is_file()
-                and "rehearsal" not in p.relative_to(output).parts
-                and "python-cache" not in p.relative_to(output).parts
-                and "__pycache__" not in p.parts
-            }
-            atomic_text(
-                output / "REVIEW.md",
-                "# Character promotion review\n\n"
-                f"Status: **{review['status']}**. Scope: offline review only.\n\n"
-                f"Source world: `{review['world_id']}`. Creation: `{review['source_commit']}`.\n\n"
-                f"Target CanonRec baseline: `{review['target_baseline']}` (local committed state).\n\n"
-                "Read `promotion_review.json`, `validation_run.json`, `naming_validation.json`, "
-                "`reconciliation_advice.json`, and `evidence_receipt.json` for findings. "
-                "When present, `proposal.patch` is the exact native-materializer rehearsal diff.\n\n"
-                "The existing ACE delegated-publication path remains the publication owner. "
-                "A review receipt is not publication authority; target freshness and the "
-                "publisher's authenticated authority checks must pass at publication time.\n\n"
-                + "\n".join(f"- {b}" for b in review["blockers"])
-                + "\n",
-            )
-            atomic_json(output / "promotion_review.json", review)
-        return review
+    atomic_json(output / "promotion_review.json", review)
 
 
-def verify(output: Path) -> dict:
-    output = output.expanduser().absolute()
-    if output.resolve() != output:
-        fail("Review path must not contain symlinks")
-    review = read_json(output / "promotion_review.json")
+def _review_blockers(review: dict, checks: dict) -> None:
+    if checks["identity_discovery"]["direct_candidates"]:
+        review["blockers"].append(
+            "Existing target identity/name requires ACE retrieval and reconciliation"
+        )
+    if not checks["entity_passed"] or not checks["naming_passed"]:
+        review["blockers"].append("CanonRec validation refused the candidate")
+    if review["packet_baseline"] != review["target_baseline"]:
+        review["blockers"].append(
+            "Target baseline differs from creation packet; ACE revalidation must issue a new determination"
+        )
+
+
+def _materialize_rehearsal(
+    copied: Path,
+    repo: Path,
+    world: World,
+    request_id: str,
+    root: Path,
+    output: Path,
+    entity: str,
+    review: dict,
+) -> None:
+    rehearsal = materialize_character_packet(
+        copied,
+        repo,
+        authority_mode="delegated_materialize",
+        authority_ref=f"offline-review:{world.metadata['world_id']}:{request_id}",
+        root=root,
+        ledger_dir=output / "ledger",
+        commit_message=f"review(character): rehearse {entity}",
+    )
+    review["rehearsal_commit"] = rehearsal["materialization"]["commit_sha"]
+    review["rehearsal_determination_id"] = rehearsal["determination_id"]
+    git(
+        repo,
+        "diff",
+        "--binary",
+        f"--output={output / 'proposal.patch'}",
+        review["target_baseline"],
+        "HEAD",
+    )
+    review["patch_ref"] = "proposal.patch"
+    review["status"] = "review_ready"
+
+
+def _verify_review_artifacts(output: Path, review: dict) -> None:
     for rel, expected in review["artifact_sha256s"].items():
         path = output / rel
         if (
@@ -393,14 +481,28 @@ def verify(output: Path) -> dict:
             fail("Unsafe review artifact path")
         if not path.is_file() or file_sha256(path) != expected:
             fail(f"Review artifact changed: {rel}")
-    target = Path(review["target_root"]) / CANONREC_REL
-    if git(target, "rev-parse", "HEAD") != review["target_baseline"] or git(
-        target, "status", "--porcelain"
-    ):
-        fail("Target CanonRec changed; prepare a fresh review")
-    return {
-        "status": review["status"],
-        "artifacts_verified": True,
-        "target_baseline_current": True,
-        "authority": "offline_review_only",
-    }
+
+
+def _verify_review_sources(
+    review: dict, world: World, target: Path, source_before: dict, target_before: dict
+) -> None:
+    review["sources_unchanged"] = source_before == _snapshot(
+        world.canon
+    ) and target_before == _snapshot(target)
+    if not review["sources_unchanged"]:
+        review["status"] = "blocked"
+        review["blockers"].append(
+            "Source or target changed during review; discard this proposal"
+        )
+
+
+def _review_output(output: Path, world: World, target_root: Path, root: Path) -> Path:
+    return _separate_output(
+        output,
+        [
+            world.directory,
+            target_root,
+            root,
+            Path.home() / "dev/Aurora_ORIONCORE_Directory_Main",
+        ],
+    )

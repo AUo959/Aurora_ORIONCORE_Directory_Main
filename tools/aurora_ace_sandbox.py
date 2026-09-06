@@ -7,8 +7,7 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
-import subprocess
+import subprocess  # nosec B404
 import sys
 import uuid
 from pathlib import Path
@@ -43,8 +42,8 @@ def _sources(source: Path, repositories_root: Path) -> tuple[dict, dict]:
 
 
 def _check_python(python: Path) -> None:
-    check = subprocess.run(
-        [
+    check = subprocess.run(  # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit.dangerous-subprocess-use-audit # nosec B603, B607
+        [  # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-tainted-env-args.dangerous-subprocess-use-tainted-env-args
             str(python),
             "-c",
             "import sys,mcp,yaml,jsonschema,httpx; assert sys.version_info[:2] == (3,12)",
@@ -52,7 +51,7 @@ def _check_python(python: Path) -> None:
         capture_output=True,
         text=True,
         check=False,
-    )
+    )  # nosec B603, B607
     if check.returncode:
         fail("Provide a Python 3.12 environment with the declared ACE dependencies")
 
@@ -60,61 +59,14 @@ def _check_python(python: Path) -> None:
 def provision(
     destination: Path, source: Path, repositories_root: Path, python: Path
 ) -> dict:
-    destination = destination.expanduser().absolute()
+    destination = _check_destination(destination, source, repositories_root)
     source, repositories_root = source.resolve(), repositories_root.resolve()
-    if destination.resolve() != destination:
-        fail("Destination must not contain symlinks")
-    for protected in (source, repositories_root, CANONICAL_ROOT.resolve()):
-        if (
-            destination == protected
-            or protected in destination.parents
-            or destination in protected.parents
-        ):
-            fail("Destination must be separate from source and canonical workspaces")
-    if destination.exists():
-        fail(
-            "Destination already exists; refusing to overwrite", "transaction_conflict"
-        )
     sources, registry = _sources(source, repositories_root)
     _check_python(python)
     # No cleanup on error: retain evidence; never delete an existing world.
     destination.mkdir(parents=True)
     workspace = destination / "workspace"
-    env = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
-    env["GIT_LFS_SKIP_SMUDGE"] = "1"
-    for name, record in sources.items():
-        target = workspace if name == "root" else workspace / record["relative_path"]
-        target.parent.mkdir(parents=True, exist_ok=True)
-        result = subprocess.run(
-            [
-                "git",
-                "clone",
-                "--no-hardlinks",
-                "--no-checkout",
-                "--quiet",  # noqa: S603, S607 -- fixed clone argv over validated local sources.
-                record["path"],
-                str(target),
-            ],
-            env=env,
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        if result.returncode:
-            fail(f"Could not clone committed source: {result.stderr}")
-        git(
-            target,
-            "checkout",
-            "-B",
-            BRANCH if name == "CanonRec" else "sandbox/source",
-            record["commit"],
-        )
-        for remote in git(target, "remote").splitlines():
-            git(target, "remote", "remove", remote)
-        hooks = target / ".git/sandbox-empty-hooks"
-        hooks.mkdir()
-        git(target, "config", "core.hooksPath", str(hooks))
-        git(target, "config", "commit.gpgsign", "false")
+    _clone_sources(sources, workspace)
     (workspace / "reports/ace/mcp_runtime").mkdir(parents=True, exist_ok=True)
     (destination / "state/requests").mkdir(parents=True)
     world_id = "aurora-world-" + uuid.uuid4().hex
@@ -136,6 +88,86 @@ def provision(
         if row["name"] == "CanonRec":
             row["branch"] = BRANCH
     (workspace / REGISTRY).write_text(yaml.safe_dump(updated, sort_keys=False))
+    _write_project_instructions(destination, workspace, python)
+    return World(destination).status()
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("command", choices=["provision", "status", "verify"])
+    parser.add_argument("--world", type=Path, default=DEFAULT_WORLD)
+    parser.add_argument("--source", type=Path, default=ROOT)
+    parser.add_argument("--repositories-root", type=Path, default=CANONICAL_ROOT)
+    parser.add_argument("--python", type=Path, default=Path(sys.executable))
+    args = parser.parse_args()
+    try:
+        result = (
+            provision(args.world, args.source, args.repositories_root, args.python)
+            if args.command == "provision"
+            else World(args.world).status()
+        )
+        print(json.dumps(result, indent=2))
+    except ACEError as exc:
+        print(json.dumps({"status": "blocked", "code": exc.code, "message": str(exc)}))
+        raise SystemExit(1) from None
+
+
+if __name__ == "__main__":
+    main()
+
+
+def _check_destination(
+    destination: Path, source: Path, repositories_root: Path
+) -> Path:
+    destination = destination.expanduser().absolute()
+    source, repositories_root = source.resolve(), repositories_root.resolve()
+    if destination.resolve() != destination:
+        fail("Destination must not contain symlinks")
+    for protected in (source, repositories_root, CANONICAL_ROOT.resolve()):
+        if (
+            destination == protected
+            or protected in destination.parents
+            or destination in protected.parents
+        ):
+            fail("Destination must be separate from source and canonical workspaces")
+    if destination.exists():
+        fail(
+            "Destination already exists; refusing to overwrite", "transaction_conflict"
+        )
+    return destination
+
+
+def _clone_sources(sources: dict, workspace: Path) -> None:
+    for name, record in sources.items():
+        target = workspace if name == "root" else workspace / record["relative_path"]
+        target.parent.mkdir(parents=True, exist_ok=True)
+        git(
+            Path(record["path"]),
+            "clone",
+            "--no-hardlinks",
+            "--no-checkout",
+            "--quiet",
+            record["path"],
+            str(target),
+        )
+        git(
+            target,
+            "checkout",
+            "-B",
+            BRANCH if name == "CanonRec" else "sandbox/source",
+            record["commit"],
+        )
+        for remote in git(target, "remote").splitlines():
+            git(target, "remote", "remove", remote)
+        hooks = target / ".git/sandbox-empty-hooks"
+        hooks.mkdir()
+        git(target, "config", "core.hooksPath", str(hooks))
+        git(target, "config", "commit.gpgsign", "false")
+
+
+def _write_project_instructions(
+    destination: Path, workspace: Path, python: Path
+) -> None:
     config_dir = destination / ".codex"
     config_dir.mkdir()
     # JSON strings are also valid TOML basic strings for these absolute paths.
@@ -174,28 +206,3 @@ def provision(
         "No source-world changes occur. The copied canon is inherited evidence; new commits belong "
         "only to this world. Keep this directory to keep its history.\n"
     )
-    return World(destination).status()
-
-
-def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["provision", "status", "verify"])
-    parser.add_argument("--world", type=Path, default=DEFAULT_WORLD)
-    parser.add_argument("--source", type=Path, default=ROOT)
-    parser.add_argument("--repositories-root", type=Path, default=CANONICAL_ROOT)
-    parser.add_argument("--python", type=Path, default=Path(sys.executable))
-    args = parser.parse_args()
-    try:
-        result = (
-            provision(args.world, args.source, args.repositories_root, args.python)
-            if args.command == "provision"
-            else World(args.world).status()
-        )
-        print(json.dumps(result, indent=2))
-    except ACEError as exc:
-        print(json.dumps({"status": "blocked", "code": exc.code, "message": str(exc)}))
-        raise SystemExit(1) from None
-
-
-if __name__ == "__main__":
-    main()
