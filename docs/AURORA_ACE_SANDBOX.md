@@ -94,6 +94,11 @@ Completed characters can now be passed to the root-owned
 reconciliation and ACE native materialization in a separate rehearsal clone,
 preserving the sandbox character and producing a reviewable patch.
 
+For routine detail required by an authorized simulation assignment, the separate
+[contextual simulation interface](AURORA_ACE_CONTEXTUAL_SIMULATION.md) now runs a
+durable background worker. Its L3 policy distinguishes L1 evidence-bound queries
+from L2 generative completion and carries assignment authority into ACE.
+
 ## Verified installation (2026-09-06)
 
 The persistent world is `/Users/travisstreets/dev/aurora-ace-sandbox`, using

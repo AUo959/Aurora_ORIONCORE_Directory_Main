@@ -379,6 +379,8 @@ class World:
         request_id: str,
         operation: str,
         fingerprint: str,
+        *,
+        context_authority: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         path = self.requests / (request_id + ".json")
         if path.exists():
@@ -403,6 +405,7 @@ class World:
                 "phase": "prepared",
                 "output_name": "sandbox-" + request_id,
                 "baseline": self.metadata["canon_head"],
+                "context_authority": context_authority,
             }
             atomic_json(path, record)
         from .invocation import compile_character_invocation
@@ -423,12 +426,16 @@ class World:
         if operation == "retrieve":
             effective["existence_status"] = "existing"
         if "receipt" not in record:
+            invocation_options = {
+                "caller_ref": f"sandbox:{self.metadata['world_id']}",
+                **(record.get("context_authority") or {}).get("invocation_options", {}),
+            }
             invocation = compile_character_invocation(
                 question,
                 effective,
                 root=self.root,
                 session_ref=request_id,
-                caller_ref=f"sandbox:{self.metadata['world_id']}",
+                **invocation_options,
             )
             record["invocation_id"] = invocation["invocation_id"]
             resolution = ace_resolve(invocation, record["output_name"], root=self.root)
@@ -439,7 +446,9 @@ class World:
             operation == "create"
             and receipt.get("materialization", {}).get("status") == "commit_ready"
         ):
-            authority = f"{POLICY}:{self.metadata['world_id']}:{request_id}"
+            authority = (record.get("context_authority") or {}).get(
+                "authority_ref", f"{POLICY}:{self.metadata['world_id']}:{request_id}"
+            )
             preview = ace_materialize_preview(
                 record["output_name"], authority, root=self.root
             )

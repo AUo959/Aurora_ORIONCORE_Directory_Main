@@ -124,3 +124,8 @@ jobs:
         env:
           ACE_PROMOTION_E2E: "1"
         run: python -m pytest tests/test_aurora_ace_promotion.py -q
+
+      - name: Verify L3-governed background simulation needs
+        env:
+          ACE_CONTEXT_E2E: "1"
+        run: python -m pytest tests/test_aurora_ace_contextual.py -q
