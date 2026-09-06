@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Provision or inspect a persistent ACE world made from committed local sources."""
+# ruff: noqa: S603, S607
+# Fixed Git/Python argv without a shell; local source and interpreter are explicit operator inputs.
 
 from __future__ import annotations
 
@@ -20,31 +22,61 @@ DEFAULT_WORLD = Path.home() / "dev/aurora-ace-sandbox"
 CANONICAL_ROOT = Path.home() / "dev/Aurora_ORIONCORE_Directory_Main"
 
 
-def provision(destination: Path, source: Path, repositories_root: Path, python: Path) -> dict:
-    destination = destination.expanduser().absolute()
-    source, repositories_root = source.resolve(), repositories_root.resolve()
-    if destination.resolve() != destination:
-        fail("Destination must not contain symlinks")
-    for protected in (source, repositories_root, CANONICAL_ROOT.resolve()):
-        if destination == protected or protected in destination.parents or destination in protected.parents:
-            fail("Destination must be separate from source and canonical workspaces")
-    if destination.exists():
-        fail("Destination already exists; refusing to overwrite", "transaction_conflict")
+def _sources(source: Path, repositories_root: Path) -> tuple[dict, dict]:
     root_commit = git(source, "rev-parse", "HEAD")
     registry = yaml.safe_load(git(source, "show", f"{root_commit}:{REGISTRY}"))
     rows = {row["name"]: row for row in registry["repos"]}
-    sources = {"root": {"path": str(source), "commit": root_commit, "relative_path": "."}}
-    for name, rel in (("CanonRec", CANONREC_REL), ("aurora-cloudbank-symbolic-main", CLOUDBANK_REL)):
+    sources = {
+        "root": {"path": str(source), "commit": root_commit, "relative_path": "."}
+    }
+    for name, rel in (
+        ("CanonRec", CANONREC_REL),
+        ("aurora-cloudbank-symbolic-main", CLOUDBANK_REL),
+    ):
         row = rows[name]
         if row["path"] != rel.as_posix():
             fail("Registered repository path is not allowlisted")
         repo = repositories_root / rel
         sha = git(repo, "rev-parse", row["head_sha"] + "^{commit}")
         sources[name] = {"path": str(repo), "commit": sha, "relative_path": str(rel)}
-    check = subprocess.run([str(python), "-c", "import sys,mcp,yaml,jsonschema,httpx; assert sys.version_info[:2] == (3,12)"],
-                           capture_output=True, text=True, check=False)
+    return sources, registry
+
+
+def _check_python(python: Path) -> None:
+    check = subprocess.run(
+        [
+            str(python),
+            "-c",
+            "import sys,mcp,yaml,jsonschema,httpx; assert sys.version_info[:2] == (3,12)",
+        ],  # noqa: S603 -- explicit operator-supplied interpreter, fixed probe.
+        capture_output=True,
+        text=True,
+        check=False,
+    )
     if check.returncode:
         fail("Provide a Python 3.12 environment with the declared ACE dependencies")
+
+
+def provision(
+    destination: Path, source: Path, repositories_root: Path, python: Path
+) -> dict:
+    destination = destination.expanduser().absolute()
+    source, repositories_root = source.resolve(), repositories_root.resolve()
+    if destination.resolve() != destination:
+        fail("Destination must not contain symlinks")
+    for protected in (source, repositories_root, CANONICAL_ROOT.resolve()):
+        if (
+            destination == protected
+            or protected in destination.parents
+            or destination in protected.parents
+        ):
+            fail("Destination must be separate from source and canonical workspaces")
+    if destination.exists():
+        fail(
+            "Destination already exists; refusing to overwrite", "transaction_conflict"
+        )
+    sources, registry = _sources(source, repositories_root)
+    _check_python(python)
     # No cleanup on error: retain evidence; never delete an existing world.
     destination.mkdir(parents=True)
     workspace = destination / "workspace"
@@ -53,12 +85,30 @@ def provision(destination: Path, source: Path, repositories_root: Path, python: 
     for name, record in sources.items():
         target = workspace if name == "root" else workspace / record["relative_path"]
         target.parent.mkdir(parents=True, exist_ok=True)
-        result = subprocess.run(["git", "clone", "--no-hardlinks", "--no-checkout", "--quiet",
-                                 record["path"], str(target)], env=env,
-                                capture_output=True, text=True, check=False)
+        result = subprocess.run(
+            [
+                "git",
+                "clone",
+                "--no-hardlinks",
+                "--no-checkout",
+                "--quiet",  # noqa: S603, S607 -- fixed clone argv over validated local sources.
+                record["path"],
+                str(target),
+            ],
+            env=env,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
         if result.returncode:
             fail(f"Could not clone committed source: {result.stderr}")
-        git(target, "checkout", "-B", BRANCH if name == "CanonRec" else "sandbox/source", record["commit"])
+        git(
+            target,
+            "checkout",
+            "-B",
+            BRANCH if name == "CanonRec" else "sandbox/source",
+            record["commit"],
+        )
         for remote in git(target, "remote").splitlines():
             git(target, "remote", "remove", remote)
         hooks = target / ".git/sandbox-empty-hooks"
@@ -68,11 +118,18 @@ def provision(destination: Path, source: Path, repositories_root: Path, python: 
     (workspace / "reports/ace/mcp_runtime").mkdir(parents=True, exist_ok=True)
     (destination / "state/requests").mkdir(parents=True)
     world_id = "aurora-world-" + uuid.uuid4().hex
-    metadata = {"schema_version": 1, "record_type": "aurora_ace_sandbox_world",
-                "world_id": world_id, "directory": str(destination), "policy": POLICY,
-                "sources": sources, "source_registry": registry,
-                "canon_head": sources["CanonRec"]["commit"],
-                "python": str(python.absolute()), "authority": "isolated_world_only"}
+    metadata = {
+        "schema_version": 1,
+        "record_type": "aurora_ace_sandbox_world",
+        "world_id": world_id,
+        "directory": str(destination),
+        "policy": POLICY,
+        "sources": sources,
+        "source_registry": registry,
+        "canon_head": sources["CanonRec"]["commit"],
+        "python": str(python.absolute()),
+        "authority": "isolated_world_only",
+    }
     atomic_json(destination / "world.json", metadata)
     updated = json.loads(json.dumps(registry))
     for row in updated["repos"]:
@@ -129,12 +186,15 @@ def main() -> None:
     parser.add_argument("--python", type=Path, default=Path(sys.executable))
     args = parser.parse_args()
     try:
-        result = (provision(args.world, args.source, args.repositories_root, args.python)
-                  if args.command == "provision" else World(args.world).status())
+        result = (
+            provision(args.world, args.source, args.repositories_root, args.python)
+            if args.command == "provision"
+            else World(args.world).status()
+        )
         print(json.dumps(result, indent=2))
     except ACEError as exc:
         print(json.dumps({"status": "blocked", "code": exc.code, "message": str(exc)}))
-        raise SystemExit(1)
+        raise SystemExit(1) from None
 
 
 if __name__ == "__main__":

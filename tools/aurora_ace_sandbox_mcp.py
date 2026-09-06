@@ -14,13 +14,16 @@ from ace.sandbox import World
 
 def create_server(directory: Path) -> MCPServer:
     world = World(directory)
-    server = MCPServer("Aurora isolated world", instructions=(
-        "Persistent isolated Aurora character world. Call aurora_world_status first. "
-        "Use retrieve for questions, preview for exploration, create only for explicit creation "
-        "requests. Supply character names/IDs in context. Reuse request IDs only for identical retries. "
-        "Ground answers in returned fields. Saved canon belongs to this world only. "
-        "No source-world, publication, or Orion runtime authority."
-    ))
+    server = MCPServer(
+        "Aurora isolated world",
+        instructions=(
+            "Persistent isolated Aurora character world. Call aurora_world_status first. "
+            "Use retrieve for questions, preview for exploration, create only for explicit creation "
+            "requests. Supply character names/IDs in context. Reuse request IDs only for identical retries. "
+            "Ground answers in returned fields. Saved canon belongs to this world only. "
+            "No source-world, publication, or Orion runtime authority."
+        ),
+    )
 
     @server.tool()
     def aurora_world_status() -> dict[str, Any]:
@@ -28,8 +31,12 @@ def create_server(directory: Path) -> MCPServer:
         return world.status()
 
     @server.tool()
-    def aurora_character(question: str, context: dict[str, Any], request_id: str,
-                         operation: str = "retrieve") -> dict[str, Any]:
+    def aurora_character(
+        question: str,
+        context: dict[str, Any],
+        request_id: str,
+        operation: str = "retrieve",
+    ) -> dict[str, Any]:
         """Retrieve, preview, or explicitly create a character in this isolated world.
 
         Lookups use context.name or context.canonical_id. Creation requires role,
@@ -40,8 +47,9 @@ def create_server(directory: Path) -> MCPServer:
         return world.character(question, context, request_id, operation)
 
     @server.tool()
-    def aurora_inspect(invocation_id: str | None = None,
-                       determination_id: str | None = None) -> dict[str, Any]:
+    def aurora_inspect(
+        invocation_id: str | None = None, determination_id: str | None = None
+    ) -> dict[str, Any]:
         """Inspect exactly one invocation or determination in this world's history."""
         return world.inspect(invocation_id, determination_id)
 
