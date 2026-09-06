@@ -833,9 +833,9 @@
       "detail": "Ledger closed: 1044/1044 claims, 108/108 entities, 0 open. Final tail was 96 claims across 59 entities. Outcomes recorded per record: 44 enriched, 8 corroborated, 3 no_content (production metadata only), 1 misresolved (char_eira_valkyrie claim describes Valkyrie Sentinels as a unit, filed as a referent gap rather than written onto the person). Four questions recorded OPEN, not answered. CanonRec 02d6a40."
     }
   ],
-  "last_updated": "2026-09-06T05:17:02Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "Implemented and installed L3-governed contextual simulation needs. Authorized assignments bind world/layer/settings/budget; background worker uses existing ACE autonomic character completion for L2 and evidence-bound canon resolution for L1. Live archive-survey need created Nerisia Orlanor once and fresh process recalled unchanged identity/background/history. Controller b4fef21 pinned at /Users/travisstreets/dev/aurora-ace-context-runtime; both MCP servers configured in persistent sandbox. 16 contextual tests, 23 sandbox/promotion regressions, integration gate, and 13/13 composition rows passed. Canonical repos, protected Orion state, and Jorenon artifacts unchanged. No general geometry/physics, cross-layer promotion, or Orion activation added. Receipt: reports/analysis/aurora_ace_contextual_acceptance_2026-09-06.json.",
+  "last_updated": "2026-09-06T15:38:29Z",
+  "last_platform": "codex",
+  "last_session_summary": "ACE persistent worlds and L3-governed contextual simulation are implemented, installed, and locally accepted. PR #85 is ready for review and landing, explicitly authorized by the owner. 39 focused tests and 13 composition rows passed locally; live CI is verifying the published head. Receipts: reports/analysis/aurora_ace_contextual_acceptance_2026-09-06.json and related continuity/promotion receipts. Canonical working changes and protected Orion state remain preserved.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -858,6 +858,12 @@
     "aurora-ace-context-controller": "b4fef21; pinned local stdio controller at /Users/travisstreets/dev/aurora-ace-context-runtime"
   },
   "recent_commits": [
+    {
+      "sha": "c4f2332",
+      "date": "2026-09-06",
+      "platform": "codex",
+      "summary": "docs(ace): record installed contextual simulation acceptance"
+    },
     {
       "sha": "b4fef21",
       "date": "2026-09-06",
@@ -911,12 +917,6 @@
       "date": "2026-09-06",
       "platform": "claude-code",
       "summary": "Audit of the 2026-09-01 session; correct two reported figures"
-    },
-    {
-      "sha": "38a0608",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "Refresh session state after ledger closure and brief automation"
     }
   ],
   "security_events": [
@@ -933,7 +933,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "b4fef21aac14ee5403a4ca08c9ad5588238b9472",
+    "main_sha": "c4f2332918a6c14038d3ff4b5d19a6ff45c9f646",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
