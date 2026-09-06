@@ -1,9 +1,4 @@
-"""
-Prepare an offline character promotion review using existing ACE owners.
-
-Only a new output directory and its independent rehearsal clone are writable.
-This module neither publishes a branch nor grants source-world canon authority.
-"""
+"""Prepare an offline character promotion review using existing ACE owners. Only a new output directory and its independent rehearsal clone are writable. This module neither publishes a branch nor grants source-world canon authority."""
 
 from __future__ import annotations
 
@@ -204,13 +199,11 @@ def prepare(
             _rehearse(
                 world,
                 target,
-                target_before,
                 packet,
                 output,
                 final,
                 original,
                 review,
-                request_id,
                 root,
             )
         except (ACEError, OSError, ValueError, KeyError) as exc:
@@ -365,18 +358,16 @@ def _review_metadata(
 def _rehearse(
     world: World,
     target: Path,
-    target_before: dict,
     packet: Path,
     output: Path,
     final: dict,
     original: dict,
     review: dict,
-    request_id: str,
     root: Path,
 ) -> None:
     view = output / "rehearsal"
     repo = view / CANONREC_REL
-    _clone(target, repo, target_before["head"])
+    _clone(target, repo, review["target_baseline"])
     copied = output / "packet"
     shutil.copytree(packet, copied)
     (copied / "materialized_determination_receipt.json").unlink()
@@ -390,7 +381,7 @@ def _rehearse(
     _review_blockers(review, checks)
     if not review["blockers"]:
         _materialize_rehearsal(
-            copied, repo, world, request_id, root, output, entity, review
+            copied, repo, world, review["request_id"], root, output, entity, review
         )
     else:
         review["status"] = "blocked"

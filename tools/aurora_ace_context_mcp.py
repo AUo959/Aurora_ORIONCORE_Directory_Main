@@ -72,13 +72,7 @@ def create_server(directory: Path) -> MCPServer:
     def aurora_simulation_need(
         assignment_id: str, need_id: str, question: str, context: dict[str, Any]
     ) -> dict[str, Any]:
-        """
-        Queue detail required by an authorized assignment; not a new authority grant.
-
-        L2 context accepts role, name/canonical_id, and observed_behavior; faction
-        and location are grounded in assignment settings. L1 selects field_path
-        from the assignment's permitted evidence fields. Reuse need IDs on retry.
-        """
+        """Queue detail required by an authorized assignment; not a new authority grant. L2 context accepts role, name/canonical_id, and observed_behavior; faction and location are grounded in assignment settings. L1 selects field_path from the assignment's permitted evidence fields. Reuse need IDs on retry."""
         return queue.submit(assignment_id, need_id, question, context)
 
     @server.tool()
