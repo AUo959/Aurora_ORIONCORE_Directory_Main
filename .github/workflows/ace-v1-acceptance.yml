@@ -8,6 +8,7 @@ on:
       - "tools/aurora_ace*.py"
       - "tests/test_aurora_ace*.py"
       - "catalog/ace/**"
+      - "catalog/repo_registry.yaml"
       - "catalog/contracts/aurora_ace*.json"
       - "catalog/schemas/aurora_ace*.json"
       - "docs/AURORA_ACE*.md"
@@ -20,6 +21,7 @@ on:
       - "tools/aurora_ace*.py"
       - "tests/test_aurora_ace*.py"
       - "catalog/ace/**"
+      - "catalog/repo_registry.yaml"
       - "catalog/contracts/aurora_ace*.json"
       - "catalog/schemas/aurora_ace*.json"
       - "docs/AURORA_ACE*.md"
@@ -102,6 +104,7 @@ jobs:
           python tools/aurora_ace_acceptance.py \
             --run-practical \
             --include-isolated \
+            --require-ready \
             --report-out reports/ci/aurora-ace-v1-acceptance.json \
             --summary
 
