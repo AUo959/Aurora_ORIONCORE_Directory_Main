@@ -114,6 +114,7 @@ class World:
 
     @contextmanager
     def locked(self) -> Iterator[None]:
+        self._inside(self.state)
         path = self.state / "world.lock"
         fd = os.open(path, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
         with os.fdopen(fd, "a+") as stream:
@@ -280,7 +281,7 @@ class World:
             f["field_path"]: f["value"]
             for f in receipt.get("answer", {}).get("fields", [])
         }
-        identity = fields.get("character.identity", {})
+        identity = fields.get("character.identity") or {}
         entity_id = fields.get("character.canonical_id") or identity.get("canonical_id")
         creation = receipt if created else None
         for path in self.requests.glob("*.json"):

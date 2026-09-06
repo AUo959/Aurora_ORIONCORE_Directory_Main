@@ -168,6 +168,7 @@ def test_real_mcp_create_restart_retrieve_and_second_creation(world):
         world, "recall-name", "retrieve", {"name": created["character"]["name"]}
     )
     assert by_name["entity_id"] == created["entity_id"]
+    assert by_name["character"]["background"] == created["character"]["background"]
     inspected = rpc(
         world, "aurora_inspect", {"determination_id": created["determination_id"]}
     )
@@ -190,6 +191,48 @@ def test_duplicate_input_path_escape_and_dirty_tree_refuse(world):
         character(world, "dirty", "create", context(), error=True)
     finally:
         dirty.unlink()
+    assert head(world) == before
+
+
+def test_stale_preview_and_conflicting_identity_cannot_commit(world):
+    code = """
+import json,sys
+from pathlib import Path
+from ace.sandbox import World
+from ace.mcp_adapter import ace_materialize_preview,ace_materialize_commit
+from ace.core import ACEError
+w=World(Path(sys.argv[1]))
+ctx=json.loads(sys.argv[2])
+w.character('Preview stale candidate',ctx,'stale-preview','preview')
+p=ace_materialize_preview('sandbox-stale-preview','sandbox-test',root=w.root)
+w.character('Advance world',json.loads(sys.argv[3]),'advance-stale-test','create')
+before=w.status()['canon_head']
+try:
+ ace_materialize_commit('sandbox-stale-preview','sandbox-test',p['authorization_token'],True,root=w.root)
+except ACEError:
+ assert w.status()['canon_head']==before
+else: raise AssertionError('Stale preview committed')
+"""
+    subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            code,
+            str(world),
+            json.dumps(context("continuity_stale_candidate")),
+            json.dumps(context("continuity_world_cartographer")),
+        ],
+        cwd=world / "workspace/tools",
+        check=True,
+    )
+    before = head(world)
+    character(
+        world,
+        "conflicting-anchors",
+        "create",
+        {"canonical_id": "char_adrienne_kovas", "subject_ref": "char_alric_tann"},
+        error=True,
+    )
     assert head(world) == before
 
 
