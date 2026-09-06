@@ -1,4 +1,6 @@
-"""L3-governed assignments and durable background needs for isolated ACE worlds. Assignments are granted by the local operator CLI, never by model-supplied tool arguments. The queue reuses ACE autonomic invocations and native transactions."""
+"""L3-governed assignments and durable background needs for isolated ACE worlds."""
+# Assignments are granted by the local operator CLI, never by model-supplied tool
+# arguments. The queue reuses ACE autonomic invocations and native transactions.
 
 from __future__ import annotations
 

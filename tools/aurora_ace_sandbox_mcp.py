@@ -37,7 +37,11 @@ def create_server(directory: Path) -> MCPServer:
         request_id: str,
         operation: str = "retrieve",
     ) -> dict[str, Any]:
-        """Retrieve, preview, or explicitly create a character in this isolated world. Lookups use context.name or context.canonical_id. Creation requires role, faction_id, location_type and optional observed_behavior. Only an explicit creation request authorizes operation=create. Returns durable identity, determination and provenance; missing facts are never invented for retrieval."""
+        """Retrieve, preview, or explicitly create a character in this isolated world."""
+        # Lookups use context.name or context.canonical_id. Creation requires role, faction_id,
+        # location_type and optional observed_behavior. Only an explicit creation request
+        # authorizes operation=create. Returns durable identity, determination and provenance;
+        # missing facts are never invented for retrieval.
         return world.character(question, context, request_id, operation)
 
     @server.tool()

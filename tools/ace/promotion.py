@@ -1,4 +1,6 @@
-"""Prepare an offline character promotion review using existing ACE owners. Only a new output directory and its independent rehearsal clone are writable. This module neither publishes a branch nor grants source-world canon authority."""
+"""Prepare an offline character promotion review using existing ACE owners."""
+# Only a new output directory and its independent rehearsal clone are writable. This
+# module neither publishes a branch nor grants source-world canon authority.
 
 from __future__ import annotations
 
