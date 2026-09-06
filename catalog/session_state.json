@@ -833,9 +833,9 @@
       "detail": "Ledger closed: 1044/1044 claims, 108/108 entities, 0 open. Final tail was 96 claims across 59 entities. Outcomes recorded per record: 44 enriched, 8 corroborated, 3 no_content (production metadata only), 1 misresolved (char_eira_valkyrie claim describes Valkyrie Sentinels as a unit, filed as a referent gap rather than written onto the person). Four questions recorded OPEN, not answered. CanonRec 02d6a40."
     }
   ],
-  "last_updated": "2026-09-06T03:55:16Z",
+  "last_updated": "2026-09-06T04:14:13Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Completed persistent Aurora character continuity on codex/ace-persistent-continuity-20260906: composition acceptance 13/13, sandbox tests 15 passed, integration gate passed, and two real Astra Codex tasks created then recalled Jorenon Morrowen with identical durable identity/background/history. Persistent world: /Users/travisstreets/dev/aurora-ace-sandbox. Canonical repository heads, tracked changes, and seven protected runtime files unchanged. Full receipt reports/analysis/aurora_ace_continuity_acceptance_2026-09-06.json.",
+  "last_session_summary": "Added offline sandbox-character promotion review by composing existing ACE retrieval/materialization and CanonRec name registry, entity/naming validators, reconciliation advisor, and evidence emitter. Jorenon Morrowen review_ready at /Users/travisstreets/dev/aurora-ace-reviews/jorenon-morrowen-20260906; native patch verified, eight handoff tests and integration gate passed. Canonical repositories and protected Orion runtime unchanged. Existing delegated publisher retained as publication owner; no canonical publication performed.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -857,6 +857,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "ce49dfd",
+      "date": "2026-09-06",
+      "platform": "claude-code",
+      "summary": "docs(ace): record successful two-task persistent character demonstration"
+    },
     {
       "sha": "9f4400b",
       "date": "2026-09-06",
@@ -910,12 +916,6 @@
       "date": "2026-09-01",
       "platform": "claude-code",
       "summary": "docs(brief): executive decision brief 2026-08-28"
-    },
-    {
-      "sha": "1676fd8",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "fix(tests): skip the state-model module without jsonschema instead of aborting collection"
     }
   ],
   "security_events": [
@@ -932,7 +932,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+    "main_sha": "ce49dfd389304d4b7648152141a71bc80554d599",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",

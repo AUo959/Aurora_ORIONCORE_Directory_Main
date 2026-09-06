@@ -119,3 +119,8 @@ jobs:
         env:
           ACE_SANDBOX_E2E: "1"
         run: python -m pytest tests/test_aurora_ace_sandbox.py -q
+
+      - name: Verify offline character promotion handoff
+        env:
+          ACE_PROMOTION_E2E: "1"
+        run: python -m pytest tests/test_aurora_ace_promotion.py -q

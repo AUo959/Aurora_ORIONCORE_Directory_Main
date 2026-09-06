@@ -89,6 +89,11 @@ The original 13-row ACE composition gate and the new sandbox tests are separate
 acceptance evidence. Neither grants source-world canon promotion, publication,
 autonomous completion, relationship editing, or Orion runtime progression.
 
+Completed characters can now be passed to the root-owned
+[offline promotion review](AURORA_ACE_PROMOTION_REVIEW.md). It reuses CanonRec
+reconciliation and ACE native materialization in a separate rehearsal clone,
+preserving the sandbox character and producing a reviewable patch.
+
 ## Verified installation (2026-09-06)
 
 The persistent world is `/Users/travisstreets/dev/aurora-ace-sandbox`, using
