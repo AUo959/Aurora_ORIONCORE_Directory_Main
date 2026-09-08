@@ -689,33 +689,6 @@
       "approval_required": false
     },
     {
-      "id": "connectivity-branch-email-privacy",
-      "status": "waiting",
-      "priority": "high",
-      "assigned_to": "owner",
-      "kind": "decision",
-      "repo": "root",
-      "description": "root integration/connectivity-pass-2026-08-19 is the only branch in any repo with no remote copy. Its three commits (7a50e0a, 62dc466, 6349b1f) carry a private email in both author and committer, so GitHub rejects the push with GH007.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-09-03T00:00:00Z",
-      "next_action": "Owner picks one of the two options below; either unblocks the backup immediately.",
-      "definition_of_done": "integration/connectivity-pass-2026-08-19 exists on origin and publication_debt reports zero entries.",
-      "approval_required": true,
-      "waiting_on": "owner",
-      "trigger": "Before the connectivity pass is resumed or backed up.",
-      "evidence_refs": [
-        "GH007 push rejection on root integration/connectivity-pass-2026-08-19, 2026-08-27",
-        "git push --dry-run passes; GH007 is enforced server-side on real push only",
-        "the same branch in CloudBank, qgia-library and qgia-spine pushed cleanly; those commits use the noreply address"
-      ],
-      "gate_scope": "credential_or_external_account_action",
-      "decision_options": [
-        "Change the GitHub email-privacy setting at github.com/settings/emails. No history rewrite, no SHA churn, no re-broken registry pins; makes that address public.",
-        "Rewrite author and committer email on the three commits. Content stays byte-identical and the address stays private, but SHAs change on a branch intended to be resumed."
-      ]
-    },
-    {
       "id": "queue-health-due-count-parity",
       "status": "ready",
       "priority": "low",
@@ -759,6 +732,25 @@
       "next_action": "Normalize prose_ledger_triage.outcome across the 25 records triaged before the vocabulary existed: 23 carry no outcome key and 2 carry prose sentences instead of a term. Derive each from the content already in the record (enriched / corroborated / no_content / misresolved); do not re-triage. Found by the 2026-09-01 audit of 02d6a40, which backfilled the 8 same-shaped records from that commit. Exit condition: every record with a triage block has an outcome drawn from the vocabulary, and a test asserts it.",
       "definition_of_done": "The described work is completed and validated.",
       "approval_required": false
+    },
+    {
+      "id": "connectivity-pass-pr-or-retire",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "root",
+      "description": "publication_debt reports 3 unpublished_branch entries, all now pushed with no open PR: root integration/connectivity-pass-2026-08-19 (3 commits ahead), aurora-cloudbank-symbolic-main integration/connectivity-pass-2026-08-19 (1 ahead), and aurora-cloudbank-symbolic-main codex/cloudbank-issue-1504-root-declaration-precommit (1 ahead). The GH007 block that kept the root branch off origin is resolved; what remains is whether each branch lands or is retired.",
+      "created_at": "2026-09-08T04:12:16Z",
+      "updated_at": "2026-09-08T04:12:16Z",
+      "review_at": "2026-09-22T00:00:00Z",
+      "next_action": "Open a PR per branch, or retire the branch deliberately and record the exemption.",
+      "definition_of_done": "publication_debt scan reports zero non-exempt entries.",
+      "approval_required": false,
+      "evidence_refs": [
+        "publication_debt scan, 2026-09-08: 3 entries, +65 exempted",
+        "reports/analysis/ORION__AUDIT__L3_SALVAGE_PASS__v1.2__2026-09-08.md"
+      ]
     }
   ],
   "completed_tasks": [
@@ -831,6 +823,13 @@
       "completed_at": "2026-09-01T16:32:54Z",
       "platform": "claude-code",
       "detail": "Ledger closed: 1044/1044 claims, 108/108 entities, 0 open. Final tail was 96 claims across 59 entities. Outcomes recorded per record: 44 enriched, 8 corroborated, 3 no_content (production metadata only), 1 misresolved (char_eira_valkyrie claim describes Valkyrie Sentinels as a unit, filed as a referent gap rather than written onto the person). Four questions recorded OPEN, not answered. CanonRec 02d6a40."
+    },
+    {
+      "id": "connectivity-branch-email-privacy",
+      "status": "completed",
+      "completed_at": "2026-09-08T04:12:16Z",
+      "platform": "claude-code",
+      "detail": "Owner chose option 2 (rewrite author and committer email). Scope was larger than recorded: 12 commits carried the private address, not 3 \u2014 the 3 connectivity commits plus a 9-commit Velar ruling chain behind the five 2026-07-21 salvage tags (two parallel lineages plus 63349bfe). All 12 rewritten to 206913296+AUo959@users.noreply.github.com via filter-branch; branch tree hash identical before and after (776f3430), pre-rewrite tips preserved locally under refs/backup/pre-email-rewrite/* and refs/original/*. SHAs changed: 7a50e0a->bd690f76, 62dc466->e8abece0, 6349b1f->80e3d40b; registry pins referencing the old SHAs need a refresh. root integration/connectivity-pass-2026-08-19 now exists on origin, closing the GH007 block. Half of the definition of done is NOT met: publication_debt still reports 3 entries, now 'pushed, no open PR' rather than 'no remote copy' \u2014 carried forward as connectivity-pass-pr-or-retire."
     }
   ],
   "last_updated": "2026-09-01T16:51:54Z",
