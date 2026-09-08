@@ -1,0 +1,639 @@
+{
+  "baselines": [
+    {
+      "authority_role": "control_plane",
+      "commit_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "path": ".",
+      "repository": "root"
+    },
+    {
+      "authority_role": "canon",
+      "commit_sha": "971e78b672ba85ff4360580718499b46d9a7714a",
+      "path": "GUMAS_SIM_2.5/CanonRec",
+      "repository": "CanonRec"
+    },
+    {
+      "authority_role": "runtime",
+      "commit_sha": "a19870a576a4136fc7ee8c30a2a8d869f36156d9",
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "repository": "aurora-cloudbank-symbolic-main"
+    }
+  ],
+  "capabilities": [
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.canonrec.derive.claims",
+      "capability_tags": [
+        "derivation",
+        "canon_fact"
+      ],
+      "entity_types": [
+        "canon_fact"
+      ],
+      "entrypoint": "derive_canonical_value",
+      "lifecycle": "active",
+      "manifest_line": 6,
+      "manifest_sha256": "0fbe3e4e8227de5a447e1ca00c9f3ae802893c19d3f35465508ae556a5b116fa",
+      "manifest_source": "catalog/ace/capability_manifests/specialists.jsonl",
+      "mutation_model": "read_only",
+      "name": "ACE deterministic CanonRec claim derivation",
+      "operations": [
+        "derive_canonical_value"
+      ],
+      "path": "tools/ace/canon_resolution.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 40,
+      "source_sha256": "36e4296f94ebde91762b59d35a005c661f3cf582432b2f7d009aafb54fdeee17",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.canonrec.enrich.character_relations",
+      "capability_tags": [
+        "retrieval",
+        "enrichment"
+      ],
+      "entity_types": [
+        "character"
+      ],
+      "entrypoint": "discover_character_candidates",
+      "lifecycle": "active",
+      "manifest_line": 4,
+      "manifest_sha256": "77971951e6ca2cf626bae701049eae208629f559896b3d0613a265e8dbf7f02c",
+      "manifest_source": "catalog/ace/capability_manifests/core.jsonl",
+      "mutation_model": "read_only",
+      "name": "ACE committed character relation evidence enricher",
+      "operations": [
+        "match_role",
+        "match_faction",
+        "match_location",
+        "disambiguate_referent"
+      ],
+      "path": "tools/ace/character_retrieval.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 30,
+      "source_sha256": "34750b4af3c860eea6397c1a0b94c13552c6499877a86dbeaa97a616dd7027eb",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.canonrec.materialize.entity",
+      "capability_tags": [
+        "materialization",
+        "transaction",
+        "character"
+      ],
+      "entity_types": [
+        "character"
+      ],
+      "entrypoint": "materialize_character_packet",
+      "lifecycle": "active",
+      "manifest_line": 7,
+      "manifest_sha256": "f5527b39da79ca31387cd7203e60f7936c390a183d06f544c1baa08a4b974be8",
+      "manifest_source": "catalog/ace/capability_manifests/specialists.jsonl",
+      "mutation_model": "repository_mutation",
+      "name": "ACE CanonRec atomic new-character publisher",
+      "operations": [
+        "materialize_character_packet"
+      ],
+      "path": "tools/ace/character_materialize.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 70,
+      "source_sha256": "f9eade98a5598bef2e122a6c02da2100c65224bda51b26befc5c92743f88d8fe",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.canonrec.materialize.generic_entity",
+      "capability_tags": [
+        "materialization",
+        "canonrec",
+        "generic_native_entity"
+      ],
+      "entity_types": [
+        "location",
+        "ship",
+        "fleet",
+        "anomaly",
+        "megafauna",
+        "facility",
+        "domain",
+        "polity",
+        "species",
+        "organization",
+        "mobile_asset",
+        "ship_class",
+        "equipment",
+        "place",
+        "conflict",
+        "event",
+        "report"
+      ],
+      "entrypoint": "materialize_generic_entity_packet",
+      "lifecycle": "active",
+      "manifest_line": 2,
+      "manifest_sha256": "0cb48c541d88d4be6ee0596a5c5a5f22d6a39d6c5fc1401a169fc968dbe4bacb",
+      "manifest_source": "catalog/ace/capability_manifests/generic_entities.jsonl",
+      "mutation_model": "repository_mutation",
+      "name": "ACE generic native L2 entity materializer",
+      "operations": [
+        "materialize_generic_entity"
+      ],
+      "path": "tools/ace/generic_entity.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 65,
+      "source_sha256": "f8e8dd1b933cb9cabd565bd56b126bd84f3892105a6718b5e460f5b375b17b7f",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.canonrec.project.name_reservations",
+      "capability_tags": [
+        "naming",
+        "projection"
+      ],
+      "entity_types": [
+        "character"
+      ],
+      "entrypoint": "build_name_reservation_projection",
+      "lifecycle": "active",
+      "manifest_line": 5,
+      "manifest_sha256": "6d520291d91626b8df5dc043c34d46a2b423d7e413e0e303cb1f2db50ba2ee43",
+      "manifest_source": "catalog/ace/capability_manifests/core.jsonl",
+      "mutation_model": "read_only",
+      "name": "CanonRec referent-preserving name occupancy projection",
+      "operations": [
+        "build_referent_graph",
+        "project_name_reservations"
+      ],
+      "path": "tools/ace/core.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 30,
+      "source_sha256": "ad1440f4aa7a63cbddca7d15a14f81577a683b0641e4b27aa06bfebc28993393",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.canonrec.publish.delegated_pr",
+      "capability_tags": [
+        "publication",
+        "canonrec",
+        "delegated",
+        "review_gated"
+      ],
+      "entity_types": [
+        "character",
+        "facility",
+        "location",
+        "ship",
+        "fleet",
+        "anomaly",
+        "megafauna",
+        "domain",
+        "polity",
+        "species",
+        "organization",
+        "mobile_asset",
+        "ship_class",
+        "equipment",
+        "place",
+        "conflict",
+        "event",
+        "report"
+      ],
+      "entrypoint": "publish_delegated_packet",
+      "lifecycle": "active",
+      "manifest_line": 1,
+      "manifest_sha256": "fc0b470b82d9921a76198d2225529dcabcf2b507c45ef13e5dc7e054439ca2ab",
+      "manifest_source": "catalog/ace/capability_manifests/delegated_publication.jsonl",
+      "mutation_model": "repository_mutation",
+      "name": "ACE delegated CanonRec draft-PR publisher",
+      "operations": [
+        "publish_delegated_pr"
+      ],
+      "path": "tools/ace/delegated_publication.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 80,
+      "source_sha256": "c6f30633fc2f6c979856701ab7e98bac00fa9c147d341045a0e760c275d4be6a",
+      "status_reason": "Policy-gated delegated publication capability; mainline promotion remains external review authority."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.canonrec.retrieve.character",
+      "capability_tags": [
+        "retrieval",
+        "specialist"
+      ],
+      "entity_types": [
+        "character"
+      ],
+      "entrypoint": "retrieve_existing_character",
+      "lifecycle": "active",
+      "manifest_line": 3,
+      "manifest_sha256": "3ec7bdcf38c840e187b7ae44162cf75d6e0c8f9e28dbe35e72c661911604e424",
+      "manifest_source": "catalog/ace/capability_manifests/core.jsonl",
+      "mutation_model": "read_only",
+      "name": "ACE CanonRec existing-character retriever",
+      "operations": [
+        "build_character_index",
+        "retrieve_existing_character"
+      ],
+      "path": "tools/ace/character_retrieval.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 40,
+      "source_sha256": "34750b4af3c860eea6397c1a0b94c13552c6499877a86dbeaa97a616dd7027eb",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.canonrec.retrieve.claims",
+      "capability_tags": [
+        "retrieval",
+        "canon_fact"
+      ],
+      "entity_types": [
+        "canon_fact"
+      ],
+      "entrypoint": "retrieve_scoped_canonical_claims",
+      "lifecycle": "active",
+      "manifest_line": 5,
+      "manifest_sha256": "a40cdc885d5f589007b726ae826fb1f1e63e9b31ed00982f299f2d5d1c870f50",
+      "manifest_source": "catalog/ace/capability_manifests/specialists.jsonl",
+      "mutation_model": "read_only",
+      "name": "ACE scoped CanonRec canonical-claim retriever",
+      "operations": [
+        "retrieve_scoped_canonical_claims",
+        "detect_true_conflict"
+      ],
+      "path": "tools/ace/canon_resolution.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 40,
+      "source_sha256": "36e4296f94ebde91762b59d35a005c661f3cf582432b2f7d009aafb54fdeee17",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.canonrec.validate.entity",
+      "capability_tags": [
+        "validation",
+        "canonrec"
+      ],
+      "entity_types": [
+        "character"
+      ],
+      "entrypoint": "validate_l2_character",
+      "lifecycle": "active",
+      "manifest_line": 3,
+      "manifest_sha256": "9190e7674c44fa62317a8edf4069bf5c23de529e90dc6ce38277329e528ef6e3",
+      "manifest_source": "catalog/ace/capability_manifests/specialists.jsonl",
+      "mutation_model": "read_only",
+      "name": "CanonRec L2 entity validator",
+      "operations": [
+        "validate_l2_character"
+      ],
+      "path": "aurora-canon-reconciler/scripts/validate_entity.py",
+      "repository": "CanonRec",
+      "repository_sha": "971e78b672ba85ff4360580718499b46d9a7714a",
+      "selection_priority": 50,
+      "source_sha256": "6bdab77ee7ada37f2d12a36cfc32169ef63df01490723ba74d44034da2815e0a",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.canonrec.validate.naming_receipt",
+      "capability_tags": [
+        "validation",
+        "naming",
+        "canonrec"
+      ],
+      "entity_types": [
+        "character"
+      ],
+      "entrypoint": "validate_naming_receipt",
+      "lifecycle": "active",
+      "manifest_line": 4,
+      "manifest_sha256": "bb627019d96d28dec2ec008269b65a7b840f5c457bc35a5e10257cf3cab86eee",
+      "manifest_source": "catalog/ace/capability_manifests/specialists.jsonl",
+      "mutation_model": "read_only",
+      "name": "CanonRec naming receipt gate",
+      "operations": [
+        "validate_name_collision",
+        "validate_naming_receipt"
+      ],
+      "path": "aurora-canon-reconciler/scripts/validate_naming_receipts.py",
+      "repository": "CanonRec",
+      "repository_sha": "971e78b672ba85ff4360580718499b46d9a7714a",
+      "selection_priority": 50,
+      "source_sha256": "91423968772287ee104599a085bded27cb11183c293c106a22785f1c30dfc08b",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.context.resolve",
+      "capability_tags": [
+        "compiler",
+        "context"
+      ],
+      "entity_types": [
+        "character"
+      ],
+      "entrypoint": "compile_character_query",
+      "lifecycle": "active",
+      "manifest_line": 1,
+      "manifest_sha256": "10451879ca498967da2029e22d00d8784c2af7cec0624ccd7364aaf5432e5d06",
+      "manifest_source": "catalog/ace/capability_manifests/core.jsonl",
+      "mutation_model": "read_only",
+      "name": "ACE contextual referent resolver",
+      "operations": [
+        "resolve_context",
+        "compile_semantic_answer_contract"
+      ],
+      "path": "tools/ace/core.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 20,
+      "source_sha256": "ad1440f4aa7a63cbddca7d15a14f81577a683b0641e4b27aa06bfebc28993393",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.gumas.naming.resolve",
+      "capability_tags": [
+        "naming",
+        "specialist"
+      ],
+      "entity_types": [
+        "character"
+      ],
+      "entrypoint": "generate_canonical_name",
+      "lifecycle": "active",
+      "manifest_line": 6,
+      "manifest_sha256": "0bd5b56d47b70a720e7f2fbb41af52c2ea3ec1094a2903f7fa5f4882c7765854",
+      "manifest_source": "catalog/ace/capability_manifests/core.jsonl",
+      "mutation_model": "in_memory_mutation",
+      "name": "GUMAS NameService deterministic resolver",
+      "operations": [
+        "generate_canonical_name",
+        "emit_naming_receipt"
+      ],
+      "path": "modules/gumas/naming.py",
+      "repository": "aurora-cloudbank-symbolic-main",
+      "repository_sha": "a19870a576a4136fc7ee8c30a2a8d869f36156d9",
+      "selection_priority": 50,
+      "source_sha256": "c10ca788854be6a35710ad1c612b6590de1e434231ab4780e913696f78c06776",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.gumas.state.build_character",
+      "capability_tags": [
+        "state",
+        "adapter"
+      ],
+      "entity_types": [
+        "character"
+      ],
+      "entrypoint": "_build_character_state",
+      "lifecycle": "active",
+      "manifest_line": 1,
+      "manifest_sha256": "6c9ca8a2f6e7fcef1e1105d1e5b6d779f5b55d40721feed6dedbf07b63bcc64d",
+      "manifest_source": "catalog/ace/capability_manifests/specialists.jsonl",
+      "mutation_model": "read_only",
+      "name": "ACE deterministic CharForge state adapter",
+      "operations": [
+        "derive_leader_state",
+        "derive_faction_state"
+      ],
+      "path": "tools/ace/engine.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 40,
+      "source_sha256": "6c9e0f7d314d1fc4c4a2bb1800e4ddc1e74f503c2de161c8a2cd6076bbd2786b",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.identity.allocate",
+      "capability_tags": [
+        "identity",
+        "deterministic"
+      ],
+      "entity_types": [
+        "character"
+      ],
+      "entrypoint": "allocate_character_id",
+      "lifecycle": "active",
+      "manifest_line": 2,
+      "manifest_sha256": "641db16ad86c6a4173ef6a76bb7221b934906e6be953bc620395a4a460385d57",
+      "manifest_source": "catalog/ace/capability_manifests/core.jsonl",
+      "mutation_model": "read_only",
+      "name": "ACE deterministic referent identity allocator",
+      "operations": [
+        "allocate_contextual_character_id"
+      ],
+      "path": "tools/ace/core.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 20,
+      "source_sha256": "ad1440f4aa7a63cbddca7d15a14f81577a683b0641e4b27aa06bfebc28993393",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.invoke.canon_fact",
+      "capability_tags": [
+        "invocation_resolver",
+        "query_kind:*"
+      ],
+      "entity_types": [
+        "canon_fact"
+      ],
+      "entrypoint": "resolve_canon_query",
+      "lifecycle": "active",
+      "manifest_line": 4,
+      "manifest_sha256": "51a86665cea6cd5f0c0f5dd9e6b8b7ea88b78c357e844675ab74f790b3c37d3a",
+      "manifest_source": "catalog/ace/capability_manifests/routing.jsonl",
+      "mutation_model": "read_only",
+      "name": "ACE canonical-fact invocation resolver",
+      "operations": [
+        "resolve_query"
+      ],
+      "path": "tools/ace/canon_resolution.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 90,
+      "source_sha256": "36e4296f94ebde91762b59d35a005c661f3cf582432b2f7d009aafb54fdeee17",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.invoke.character.complete",
+      "capability_tags": [
+        "invocation_resolver",
+        "query_kind:complete",
+        "query_kind:*"
+      ],
+      "entity_types": [
+        "character"
+      ],
+      "entrypoint": "resolve_character_query",
+      "lifecycle": "active",
+      "manifest_line": 2,
+      "manifest_sha256": "4156d402e059a779fa72f775b74cfd8ab0f62a7e25437e04db56670771080c41",
+      "manifest_source": "catalog/ace/capability_manifests/routing.jsonl",
+      "mutation_model": "read_only",
+      "name": "ACE character completion invocation resolver",
+      "operations": [
+        "resolve_query"
+      ],
+      "path": "tools/ace/engine.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 90,
+      "source_sha256": "6c9e0f7d314d1fc4c4a2bb1800e4ddc1e74f503c2de161c8a2cd6076bbd2786b",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.invoke.character.retrieve",
+      "capability_tags": [
+        "invocation_resolver",
+        "query_kind:retrieve"
+      ],
+      "entity_types": [
+        "character"
+      ],
+      "entrypoint": "resolve_existing_character_query",
+      "lifecycle": "active",
+      "manifest_line": 1,
+      "manifest_sha256": "f0e50d6da3d2d20d0d3fc7f39f9d95a41a630a0b91f8a702041f9e702bfa41b5",
+      "manifest_source": "catalog/ace/capability_manifests/routing.jsonl",
+      "mutation_model": "read_only",
+      "name": "ACE existing-character invocation resolver",
+      "operations": [
+        "resolve_query"
+      ],
+      "path": "tools/ace/character_retrieval.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 100,
+      "source_sha256": "34750b4af3c860eea6397c1a0b94c13552c6499877a86dbeaa97a616dd7027eb",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.invoke.entity.complete",
+      "capability_tags": [
+        "invocation_resolver",
+        "query_kind:*",
+        "generic_native_entity"
+      ],
+      "entity_types": [
+        "location",
+        "ship",
+        "fleet",
+        "anomaly",
+        "megafauna",
+        "facility",
+        "domain",
+        "polity",
+        "species",
+        "organization",
+        "mobile_asset",
+        "ship_class",
+        "equipment",
+        "place",
+        "conflict",
+        "event",
+        "report",
+        "character"
+      ],
+      "entrypoint": "resolve_generic_entity_query",
+      "lifecycle": "active",
+      "manifest_line": 1,
+      "manifest_sha256": "383eb106419f020eadd8c335a6b9a3769746d8ce6c461b0ae237423efbaaedc1",
+      "manifest_source": "catalog/ace/capability_manifests/generic_entities.jsonl",
+      "mutation_model": "read_only",
+      "name": "ACE generic native L2 entity completion resolver",
+      "operations": [
+        "resolve_query"
+      ],
+      "path": "tools/ace/generic_entity_runtime.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 20,
+      "source_sha256": "64f26a098fc2d34b1dfff9bd123a63aece11a12f075645e89346313722fdc53f",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.invoke.facility",
+      "capability_tags": [
+        "invocation_resolver",
+        "query_kind:*"
+      ],
+      "entity_types": [
+        "facility"
+      ],
+      "entrypoint": "resolve_facility_query",
+      "lifecycle": "active",
+      "manifest_line": 3,
+      "manifest_sha256": "6ecc260336c21f90c90c4ad7ad08185b7cc3a03aa8ff5ed7073082614319302a",
+      "manifest_source": "catalog/ace/capability_manifests/routing.jsonl",
+      "mutation_model": "read_only",
+      "name": "ACE facility invocation resolver",
+      "operations": [
+        "resolve_query"
+      ],
+      "path": "tools/ace/facility.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 90,
+      "source_sha256": "1baf9bc2caeaa13b88e06271cd77b9cf94bb0f688b72591835a8e2a3cfecfc01",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    },
+    {
+      "allowlisted": true,
+      "capability_id": "ace.capability.quantum_forge.charforge.generate_capsule",
+      "capability_tags": [
+        "generation",
+        "specialist",
+        "charforge"
+      ],
+      "entity_types": [
+        "character"
+      ],
+      "entrypoint": "generate_character_capsule",
+      "lifecycle": "active",
+      "manifest_line": 2,
+      "manifest_sha256": "69e16a2a91447903343bbd9058c452206a8bdba27813c6a5ac3edcbd009b2040",
+      "manifest_source": "catalog/ace/capability_manifests/specialists.jsonl",
+      "mutation_model": "filesystem_mutation",
+      "name": "Quantum Forge CharForge capsule generator",
+      "operations": [
+        "generate_character_capsule",
+        "verify_character_capsule"
+      ],
+      "path": "GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19/charforge.py",
+      "repository": "root",
+      "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "selection_priority": 60,
+      "source_sha256": "c8f84b8272ac415e7f955dc5dbbd3c04a114e67441f94ba0817d44eb9d541c7b",
+      "status_reason": "Validated allowlisted capability at the registered repository baseline."
+    }
+  ],
+  "engine_version": "0.1.0",
+  "generated_at": "2026-09-06T03:50:38.408560Z",
+  "manifest_catalog_ref": "catalog/ace/capability_manifests",
+  "manifest_schema_ref": "catalog/schemas/aurora_ace_capability_manifest.schema.json",
+  "record_type": "ace_warm_capability_index",
+  "schema_version": "0.1.1"
+}

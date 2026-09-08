@@ -1,0 +1,37 @@
+{
+  "adapter": "ace.adapter.charforge_state.v0.1.0",
+  "explicit_stressors": {
+    "betrayals": 0,
+    "scandals": 0,
+    "war_losses": 0
+  },
+  "faction": {
+    "coalition_invite_weight": 0.5028,
+    "deal_discount": 0.1035,
+    "economic_potential": 0.7388,
+    "economic_strength": 0.6144,
+    "faction_type": "federation",
+    "military_strength": 0.3519,
+    "population_stability": 0.8482,
+    "reputation": 0.559,
+    "technology_level": 0.4588,
+    "verification_demand": 0.6964
+  },
+  "leader": {
+    "bias_intensity": 0.4228,
+    "diplomacy_openness": 0.8038,
+    "dominant_bias": "hyper_rationalism_bias",
+    "economic_shock": 0.1309,
+    "elite_support": 0.6106,
+    "escalation_threshold": 0.5681,
+    "evidence_gain_multiplier": 0.8075,
+    "institutional_control": 0.601,
+    "oversight_resistance": 0.2154,
+    "plasticity": 0.5445,
+    "public_legitimacy": 0.6197,
+    "risk_tolerance": 0.4729,
+    "war_pressure": 0.0812
+  },
+  "policy": "deterministic_context_to_state",
+  "seed": 808
+}

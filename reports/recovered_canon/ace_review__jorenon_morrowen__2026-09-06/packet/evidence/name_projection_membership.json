@@ -1,0 +1,4161 @@
+{
+  "membership": [
+    {
+      "canonical_name": "Imperial Loyalists",
+      "component_id": "ace.occupancy.002e64b11d9387e0",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Imperial Loyalists",
+          "entity_id": "org_imperial_loyalists",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_imperial_loyalists.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Lethan",
+      "component_id": "ace.occupancy.01e19b2f2488bcfe",
+      "members": [
+        {
+          "aliases": [
+            "Lethan"
+          ],
+          "canonical_name": "Lethan System",
+          "entity_id": "place_lethan_system",
+          "entity_type": "PLACE",
+          "source_path": "canon/L2/entities/places/place_lethan_system.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Obsidian-Class",
+      "component_id": "ace.occupancy.01fba4cf277ec91f",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Obsidian-Class",
+          "entity_id": "cls_obsidian",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_obsidian.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Vorran",
+      "component_id": "ace.occupancy.03f10383e31931da",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Vorran",
+          "entity_id": "species_vorran",
+          "entity_type": "SPECIES",
+          "source_path": "canon/L2/entities/species/species_vorran.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Sovereign Nexus",
+      "component_id": "ace.occupancy.0522f899e25eeef3",
+      "members": [
+        {
+          "aliases": [
+            "sovereign_nexus_region"
+          ],
+          "canonical_name": "Sovereign Nexus",
+          "entity_id": "loc_sovereign_nexus",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_sovereign_nexus.json"
+        },
+        {
+          "aliases": [
+            "sovereign-nexus",
+            "sovereign_nexus"
+          ],
+          "canonical_name": "Sovereign Nexus",
+          "entity_id": "org_sovereign_nexus",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_sovereign_nexus.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Silent Plains",
+      "component_id": "ace.occupancy.05c26b4638d39b30",
+      "members": [
+        {
+          "aliases": [
+            "Silent Plains",
+            "Xelvani 3"
+          ],
+          "canonical_name": "Xelvani-3",
+          "entity_id": "loc_xelvani_3",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_xelvani_3.json"
+        },
+        {
+          "aliases": [
+            "Xelvani 3",
+            "Xelvani-3"
+          ],
+          "canonical_name": "Xelvani‑3 (Silent Plains)",
+          "entity_id": "loc_xelvani_3_silent_plains",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_xelvani_3_silent_plains.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "G.U.S. Specter's Wake",
+      "component_id": "ace.occupancy.0759b77ea29e95ee",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "G.U.S. Specter's Wake",
+          "entity_id": "vessel_gu_006",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_006.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "AI Warlord Hardliner Collective",
+      "component_id": "ace.occupancy.090debf9e0edbeb4",
+      "members": [
+        {
+          "aliases": [
+            "AI Warlords",
+            "Hardliner Faction",
+            "Rogue AI Hardliners"
+          ],
+          "canonical_name": "AI Warlord Hardliner Collective",
+          "entity_id": "POL-AI-HARDLINE-001",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/mechanics/l2_polity_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "AI Warlords",
+          "entity_id": "factions",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/factions/GUMAS_Factions.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "long gun",
+      "component_id": "ace.occupancy.09714e9ce9bfb099",
+      "members": [
+        {
+          "aliases": [
+            "Viper",
+            "long gun"
+          ],
+          "canonical_name": "MFR-9 Modular Energy Rifle",
+          "entity_id": "eq_mfr9_viper_rifle",
+          "entity_type": "EQUIPMENT",
+          "source_path": "canon/L2/entities/equipment/eq_mfr9_viper_rifle.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Prime Ascendancy",
+      "component_id": "ace.occupancy.09935d80a131c5b4",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Prime Ascendancy",
+          "entity_id": "loc_prime_ascendancy",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_prime_ascendancy.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Velar Crescent (Post-Imperial Fault Line)",
+      "component_id": "ace.occupancy.0ae14169fe378d88",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Velar Crescent (Post-Imperial Fault Line)",
+          "entity_id": "loc_zone_velar_crescent",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_zone_velar_crescent.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Vel-Surak megacity infrastructure (gravity/atmosphere districts)",
+      "component_id": "ace.occupancy.0d5e662f96066de5",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Vel-Surak megacity infrastructure (gravity/atmosphere districts)",
+          "entity_id": "loc_vel_surak_megacity_infrastructure_gravity_atmosphere_districts",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_vel_surak_megacity_infrastructure_gravity_atmosphere_districts.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Bastion-Class",
+      "component_id": "ace.occupancy.0e553bc75316dd2c",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Bastion-Class",
+          "entity_id": "cls_bastion",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_bastion.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Warspite",
+      "component_id": "ace.occupancy.101587c6069e38a8",
+      "members": [
+        {
+          "aliases": [
+            "Warspite"
+          ],
+          "canonical_name": "G.U.S. Warspite",
+          "entity_id": "vessel_gu_warspite",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_warspite.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Endeavor's Reach",
+      "component_id": "ace.occupancy.10f4b8856bb43880",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "G.U.S. Endeavor's Reach",
+          "entity_id": "vessel_gu_010",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_010.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Marshal blade",
+      "component_id": "ace.occupancy.121130e463ebc259",
+      "members": [
+        {
+          "aliases": [
+            "spade",
+            "Marshal blade"
+          ],
+          "canonical_name": "Spatha Moderna",
+          "entity_id": "eq_spatha_moderna",
+          "entity_type": "EQUIPMENT",
+          "source_path": "canon/L2/entities/equipment/eq_spatha_moderna.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Adrienne Kovas",
+      "component_id": "ace.occupancy.1479128cb808e777",
+      "members": [
+        {
+          "aliases": [
+            "Adrienne Kovas"
+          ],
+          "canonical_name": "Dr. Adrienne Kovas",
+          "entity_id": "CHAR-GU-KOVAS-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Dr. Adrienne Kovas",
+          "entity_id": "char_adrienne_kovas",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_adrienne_kovas.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Councillor Thalen Rynn",
+      "component_id": "ace.occupancy.148338d986262374",
+      "members": [
+        {
+          "aliases": [
+            "Councillor Thalen Rynn"
+          ],
+          "canonical_name": "Thalen Rynn",
+          "entity_id": "char_thalen_rynn",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_thalen_rynn.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Former Imperial Heartland",
+      "component_id": "ace.occupancy.1622bee91fd23b3f",
+      "members": [
+        {
+          "aliases": [
+            "VEL-CORE-01",
+            "Former Imperial Heartland",
+            "Throne World system"
+          ],
+          "canonical_name": "Velar Core World System",
+          "entity_id": "loc_vel_core_01",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_vel_core_01.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Arkelon Theta",
+      "component_id": "ace.occupancy.16fe2143120b646f",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Arkelon Theta",
+          "entity_id": "loc_arkelon_theta",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_arkelon_theta.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Admiral Haden Korr",
+      "component_id": "ace.occupancy.17a0e26c822d2f2e",
+      "members": [
+        {
+          "aliases": [
+            "Admiral Haden Korr"
+          ],
+          "canonical_name": "Haden Korr",
+          "entity_id": "char_haden_korr",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_haden_korr.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Rhaegon",
+      "component_id": "ace.occupancy.1a007f0d4448e035",
+      "members": [
+        {
+          "aliases": [
+            "Rhaegon",
+            "Rhaegon Torr-Kai",
+            "Rhaegon Voss"
+          ],
+          "canonical_name": "Supreme Commander Rhaegon Torr-Kai",
+          "entity_id": "char_rhaegon_torr_kai",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_rhaegon_torr_kai.json"
+        },
+        {
+          "aliases": [
+            "Rhaegon",
+            "Rhaegon Torr-Kai",
+            "Rhaegon Voss"
+          ],
+          "canonical_name": "Supreme Commander Rhaegon Torr-Kai",
+          "entity_id": "rhaegon_torr_kai",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/rhaegon_torr_kai/capsule/identity.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "G.U.S. Judicator Prime",
+      "component_id": "ace.occupancy.1ad68612b512379c",
+      "members": [
+        {
+          "aliases": [
+            "Judicator Prime",
+            "The Judicator"
+          ],
+          "canonical_name": "G.U.S. Judicator Prime",
+          "entity_id": "vessel_gu_001",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_001.json"
+        },
+        {
+          "aliases": [
+            "The Judicator Prime"
+          ],
+          "canonical_name": "Judicator Prime",
+          "entity_id": "SHIP-GU-JUDICATOR-01",
+          "entity_type": "SHIP",
+          "source_path": "canon/L2/mechanics/l2_ship_dossiers__recovered_textAu.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "VEL-BORDER-01",
+      "component_id": "ace.occupancy.1af365983ecd164b",
+      "members": [
+        {
+          "aliases": [
+            "VEL-BORDER-01"
+          ],
+          "canonical_name": "Velar Border World System",
+          "entity_id": "loc_vel_border_01",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_vel_border_01.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Maelin Saye",
+      "component_id": "ace.occupancy.1b120c5b76a8a8f3",
+      "members": [
+        {
+          "aliases": [
+            "Ranger Saye"
+          ],
+          "canonical_name": "Maelin Saye",
+          "entity_id": "char_maelin_saye",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_maelin_saye.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Drenn Korvath",
+      "component_id": "ace.occupancy.1bfb97955013c9d2",
+      "members": [
+        {
+          "aliases": [
+            "Drenn Korvath",
+            "Korvath",
+            "First Chief Korvath"
+          ],
+          "canonical_name": "Resonance Chief Drenn Korvath",
+          "entity_id": "char_drenn_korvath",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_drenn_korvath.json"
+        },
+        {
+          "aliases": [
+            "Drenn Korvath",
+            "Korvath",
+            "First Chief Korvath"
+          ],
+          "canonical_name": "Resonance Chief Drenn Korvath",
+          "entity_id": "drenn_korvath",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/drenn_korvath/capsule/identity.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Ranger Korr",
+      "component_id": "ace.occupancy.1c7c5563ef636790",
+      "members": [
+        {
+          "aliases": [
+            "Ranger Korr"
+          ],
+          "canonical_name": "Tessa Korr",
+          "entity_id": "char_tessa_korr",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_tessa_korr.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Crown Dark",
+      "component_id": "ace.occupancy.1ce1718e9823e0dd",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Crown Dark",
+          "entity_id": "vessel_shadow_001",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_shadow_001.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Human",
+      "component_id": "ace.occupancy.1f7e4a8bb4f178b0",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Human",
+          "entity_id": "species_human",
+          "entity_type": "SPECIES",
+          "source_path": "canon/L2/entities/species/species_human.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Admiral Selene Arcturus",
+      "component_id": "ace.occupancy.201f6353964de9e9",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Admiral Selene Arcturus",
+          "entity_id": "CHAR-GU-ARCTURUS-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Admiral Selene Arcturus",
+          "entity_id": "char_selene_arcturus",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_selene_arcturus.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Judicial Council",
+      "component_id": "ace.occupancy.210ce33fafe27daa",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Judicial Council",
+          "entity_id": "org_judicial_council",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_judicial_council.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Aria Lenix",
+      "component_id": "ace.occupancy.238a5b7e08f4e5ce",
+      "members": [
+        {
+          "aliases": [
+            "Commander Aria Lenix"
+          ],
+          "canonical_name": "Aria Lenix",
+          "entity_id": "char_aria_lenix",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_aria_lenix.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Vel Surak",
+      "component_id": "ace.occupancy.23c6ec8d05467617",
+      "members": [
+        {
+          "aliases": [
+            "Vel Surak"
+          ],
+          "canonical_name": "Vel-Surak",
+          "entity_id": "loc_vel_surak",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_vel_surak.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Contested Frontier Band",
+      "component_id": "ace.occupancy.241ac00c805e6d6b",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Contested Frontier Band",
+          "entity_id": "loc_zone_contested_frontier_band",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_zone_contested_frontier_band.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Trade Coalition",
+      "component_id": "ace.occupancy.247a20fa016663ef",
+      "members": [
+        {
+          "aliases": [
+            "trade_coalition"
+          ],
+          "canonical_name": "Trade Coalition",
+          "entity_id": "org_trade_coalition",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_trade_coalition.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Captain Hale",
+      "component_id": "ace.occupancy.24d389fd1d4e4761",
+      "members": [
+        {
+          "aliases": [
+            "Captain Hale"
+          ],
+          "canonical_name": "Corin Hale",
+          "entity_id": "char_corin_hale",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_corin_hale.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Kharon",
+      "component_id": "ace.occupancy.258d10e18101b522",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "G.U.S. Kharon",
+          "entity_id": "vessel_gu_013",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_013.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Deployable wrist-mounted energy shield",
+      "component_id": "ace.occupancy.2613557ce02cfc96",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Deployable wrist-mounted energy shield",
+          "entity_id": "eq_marshal_energy_shield",
+          "entity_type": "EQUIPMENT",
+          "source_path": "canon/L2/entities/equipment/eq_marshal_energy_shield.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Sustainer fleet bulker",
+      "component_id": "ace.occupancy.27e6a191bf5f5d69",
+      "members": [
+        {
+          "aliases": [
+            "Sustainer fleet bulker",
+            "Sustainer-Class replenishment vessel"
+          ],
+          "canonical_name": "Sustainer-Class",
+          "entity_id": "cls_sustainer",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_sustainer.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Mysterious Transcendents",
+      "component_id": "ace.occupancy.2a3b7de486ed2b9d",
+      "members": [
+        {
+          "aliases": [
+            "Mysterious Transcendents"
+          ],
+          "canonical_name": "Shroudborn",
+          "entity_id": "polity_shroudborn",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/precursors/polity_shroudborn.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Sentinel's Hold",
+      "component_id": "ace.occupancy.2b1b93279459d75b",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "G.U.S. Sentinel's Hold",
+          "entity_id": "vessel_gu_009",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_009.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Marshal Ark",
+      "component_id": "ace.occupancy.2bf8295f75ca6e5b",
+      "members": [
+        {
+          "aliases": [
+            "Marshal Ark"
+          ],
+          "canonical_name": "Selene Ark",
+          "entity_id": "char_selene_ark",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_selene_ark.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Orion Guard",
+      "component_id": "ace.occupancy.2c1023322ea5ffe7",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Orion Guard",
+          "entity_id": "org_orion_guard",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_orion_guard.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Director Durn",
+      "component_id": "ace.occupancy.2da3b93c96b9c91f",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "General Kael Durn",
+          "entity_id": "CHAR-GU-DURN-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [
+            "Director Durn",
+            "The Iron Sentinel"
+          ],
+          "canonical_name": "General Kael Durn",
+          "entity_id": "char_kael_durn",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_kael_durn.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Third Silence",
+      "component_id": "ace.occupancy.2dbfb896323ef76e",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Third Silence",
+          "entity_id": "artifact_third_silence",
+          "entity_type": "EQUIPMENT",
+          "source_path": "canon/L2/entities/equipment/artifact_third_silence.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "WRATH-09",
+      "component_id": "ace.occupancy.2e6edd231d8e7bb8",
+      "members": [
+        {
+          "aliases": [
+            "WRATH-09 (Prime AI Core)",
+            "Wrath-09"
+          ],
+          "canonical_name": "WRATH-09",
+          "entity_id": "char_wrath_09",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_wrath_09.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Chief Marshal Vael Saros",
+      "component_id": "ace.occupancy.2ec6c62131def28d",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Chief Marshal Vael Saros",
+          "entity_id": "CHAR-GU-SAROS-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Chief Marshal Vael Saros",
+          "entity_id": "char_vael_saros",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_vael_saros.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Outer Colony Warlords",
+      "component_id": "ace.occupancy.2f48d2c9861420b4",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Outer Colony Warlords",
+          "entity_id": "org_outer_colony_warlords",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_outer_colony_warlords.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Sentinel Ghost",
+      "component_id": "ace.occupancy.30de3a1bc8f7bf93",
+      "members": [
+        {
+          "aliases": [
+            "Sentinel Ghost"
+          ],
+          "canonical_name": "Sentinel Ghost v3.7",
+          "entity_id": "eq_sentinel_ghost_v37",
+          "entity_type": "EQUIPMENT",
+          "source_path": "canon/L2/entities/equipment/eq_sentinel_ghost_v37.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Operation Silent Dagger",
+      "component_id": "ace.occupancy.31aba7dc2890b953",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Operation Silent Dagger",
+          "entity_id": "event_operation_silent_dagger",
+          "entity_type": "EVENT",
+          "source_path": "canon/L2/events/event_operation_silent_dagger.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Kade",
+      "component_id": "ace.occupancy.31edc6c644961f36",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Kade",
+          "entity_id": "char_kade",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/char_kade/capsule/identity.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Judicator Field Court",
+      "component_id": "ace.occupancy.32e7f2c78c27bfb0",
+      "members": [
+        {
+          "aliases": [
+            "Judicator Field Court",
+            "The Field Court"
+          ],
+          "canonical_name": "Judicator Prime Field Court",
+          "entity_id": "org_judicator_prime_field_court",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_judicator_prime_field_court.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Major Elias Radek",
+      "component_id": "ace.occupancy.3454797b7564a93b",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Major Elias Radek",
+          "entity_id": "CHAR-GU-RADEK-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Major Elias Radek",
+          "entity_id": "char_elias_radek",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_elias_radek.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "G.U.S. Sablewake",
+      "component_id": "ace.occupancy.34d166bcf35fb47c",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "G.U.S. Sablewake",
+          "entity_id": "vessel_gu_014",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_014.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Harkoni",
+      "component_id": "ace.occupancy.36318475a7cb4c6a",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Harkoni",
+          "entity_id": "species_harkoni",
+          "entity_type": "SPECIES",
+          "source_path": "canon/L2/entities/species/species_harkoni.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Varnak",
+      "component_id": "ace.occupancy.3681fc578c6d473f",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Varnak",
+          "entity_id": "char_varnak",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_varnak.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Harkon Sovereignty",
+      "component_id": "ace.occupancy.3696331d3b500c0b",
+      "members": [
+        {
+          "aliases": [
+            "Martial State & Isolationist Power"
+          ],
+          "canonical_name": "Harkon Sovereignty",
+          "entity_id": "polity_harkon_sovereignty",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_harkon_sovereignty.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Lethan hostile fleet",
+      "component_id": "ace.occupancy.37dce18800edf440",
+      "members": [
+        {
+          "aliases": [
+            "the Shadow Fleet",
+            "Lethan hostile fleet"
+          ],
+          "canonical_name": "Shadow Fleet",
+          "entity_id": "fleet_shadow_fleet",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/fleet_shadow_fleet.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Republican Reformists",
+      "component_id": "ace.occupancy.3a56b5985080a1c7",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Republican Reformists",
+          "entity_id": "org_republican_reformists",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_republican_reformists.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "AI-Warlord Collective",
+      "component_id": "ace.occupancy.3b78fee6703bc959",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "AI-Warlord Collective",
+          "entity_id": "polity_ai_warlord_collective",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_ai_warlord_collective.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Thalor Sector",
+      "component_id": "ace.occupancy.3bd74ec5d5f0a6b8",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Thalor Sector",
+          "entity_id": "loc_thalor_sector",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_thalor_sector.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Cross-crew Ranger",
+      "component_id": "ace.occupancy.3e3e5913a4954ca0",
+      "members": [
+        {
+          "aliases": [
+            "Cross-crew Ranger"
+          ],
+          "canonical_name": "Pending ratification",
+          "entity_id": "vessel_gu_015",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_015.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Driftcaller Sivaen",
+      "component_id": "ace.occupancy.3e932080f1e446cf",
+      "members": [
+        {
+          "aliases": [
+            "Sivaen",
+            "Sivaen the Driftcaller",
+            "The Driftcaller"
+          ],
+          "canonical_name": "Driftcaller Sivaen",
+          "entity_id": "char_sivaen_the_driftcaller",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_sivaen_the_driftcaller.json"
+        },
+        {
+          "aliases": [
+            "Sivaen",
+            "Sivaen the Driftcaller",
+            "The Driftcaller"
+          ],
+          "canonical_name": "Driftcaller Sivaen",
+          "entity_id": "sivaen_the_driftcaller",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/sivaen_the_driftcaller/capsule/identity.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "G.U.S. Watchfire",
+      "component_id": "ace.occupancy.3edd2a3177b3303d",
+      "members": [
+        {
+          "aliases": [
+            "Watchfire",
+            "the Watchfire"
+          ],
+          "canonical_name": "G.U.S. Watchfire",
+          "entity_id": "vessel_gu_016",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_016.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Lord Marshal Virex Tal'Varen",
+      "component_id": "ace.occupancy.3ffacf18b044d923",
+      "members": [
+        {
+          "aliases": [
+            "Virex Tal'Varen",
+            "Virex Talvaren"
+          ],
+          "canonical_name": "Lord Marshal Virex Tal'Varen",
+          "entity_id": "char_virex_talvaren",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_virex_talvaren.json"
+        },
+        {
+          "aliases": [
+            "Virex Tal'Varen",
+            "Virex Talvaren"
+          ],
+          "canonical_name": "Lord Marshal Virex Tal'Varen",
+          "entity_id": "virex_talvaren",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/virex_talvaren/capsule/identity.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Chancellor Zylox",
+      "component_id": "ace.occupancy.409eb4509643a279",
+      "members": [
+        {
+          "aliases": [
+            "Chancellor Zylox",
+            "Zylox"
+          ],
+          "canonical_name": "Chancellor Zylox Rhaegos",
+          "entity_id": "CHAR-GU-ZYLOX-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [
+            "High Chancellor Zylox Verrin",
+            "Zylox Kryon",
+            "Zylox Verrin"
+          ],
+          "canonical_name": "Chancellor Zylox Rhaegos",
+          "entity_id": "char_zylox_rhaegos",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_zylox_rhaegos.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "G.U.S. Resolute Bastion",
+      "component_id": "ace.occupancy.40c2e6626ab37ccc",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "G.U.S. Resolute Bastion",
+          "entity_id": "vessel_gu_004",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_004.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Director Varek Norr",
+      "component_id": "ace.occupancy.4141b773f578732c",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Director Varek Norr",
+          "entity_id": "CHAR-GU-NORR-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Director Varek Norr",
+          "entity_id": "char_varek_norr",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_varek_norr.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Fleet Admiral Saela Corven",
+      "component_id": "ace.occupancy.41f7176379f14372",
+      "members": [
+        {
+          "aliases": [
+            "Fleet Admiral Saela Corven"
+          ],
+          "canonical_name": "Saela Corven",
+          "entity_id": "char_saela_corven",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_saela_corven.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Grand Strategist Lirian Vael-Torin",
+      "component_id": "ace.occupancy.43886bcc8e0a9772",
+      "members": [
+        {
+          "aliases": [
+            "Grand Strategist Lirian Vos",
+            "Lirian Vos"
+          ],
+          "canonical_name": "Grand Strategist Lirian Vael-Torin",
+          "entity_id": "CHAR-GU-LIRIAN-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [
+            "Lirian Vos",
+            "Vos"
+          ],
+          "canonical_name": "Grand Strategist Lirian Vael-Torin",
+          "entity_id": "char_lirian_vael_torin",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_lirian_vael_torin.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Leviathan Dreadnought",
+      "component_id": "ace.occupancy.46262244abb4176e",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Leviathan Dreadnought",
+          "entity_id": "cls_leviathan",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_leviathan.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Leviathan-Class Dread-raider",
+      "component_id": "ace.occupancy.46982fc935bfc2b1",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Leviathan-Class Dread-raider",
+          "entity_id": "cls_dreadraider",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_dreadraider.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Separatist Tension",
+      "component_id": "ace.occupancy.474b6f9ab011c49e",
+      "members": [
+        {
+          "aliases": [
+            "separatist_tension"
+          ],
+          "canonical_name": "Separatist Tension",
+          "entity_id": "conflict_separatist_tension",
+          "entity_type": "CONFLICT",
+          "source_path": "canon/L2/entities/conflicts/conflict_separatist_tension.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Grand Duke Talyx Velkonn",
+      "component_id": "ace.occupancy.47a73207d26ce546",
+      "members": [
+        {
+          "aliases": [
+            "Grand Duke Talyx Velkonn"
+          ],
+          "canonical_name": "Talyx Velkonn",
+          "entity_id": "char_talyx_velkonn",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_talyx_velkonn.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Corporate Mercenary Forces",
+      "component_id": "ace.occupancy.4caa82bb5e8c6342",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Corporate PMCs",
+          "entity_id": "factions",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/factions/GUMAS_Factions.json"
+        },
+        {
+          "aliases": [
+            "Corporate PMCs",
+            "Corporate Mercenary Forces",
+            "Private Military Contractors"
+          ],
+          "canonical_name": "PMC Syndicate",
+          "entity_id": "POL-PMC-001",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/mechanics/l2_polity_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "PMC Syndicate",
+          "entity_id": "polity_pmc_syndicate",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_pmc_syndicate.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Interceptor Squads",
+      "component_id": "ace.occupancy.4d746c89e9c28e68",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Interceptor Squads",
+          "entity_id": "org_interceptor_squads",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_interceptor_squads.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Nebular Hive Complex",
+      "component_id": "ace.occupancy.4e112e4d443d9469",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Nebular Hive Complex",
+          "entity_id": "loc_zone_nebular_hive_complex",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_zone_nebular_hive_complex.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Cooperative Sovereign AI",
+      "component_id": "ace.occupancy.4e31f0f3f18bddc9",
+      "members": [
+        {
+          "aliases": [
+            "Prime Construct Sovereign",
+            "Prime Construct Entity"
+          ],
+          "canonical_name": "Prime Construct",
+          "entity_id": "CHAR-AI-PRIME-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [
+            "Prime Construct AI",
+            "The Prime"
+          ],
+          "canonical_name": "Prime Construct",
+          "entity_id": "char_prime_construct_leader",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_prime_construct_leader.json"
+        },
+        {
+          "aliases": [
+            "The Prime Construct",
+            "Prime Construct Polity"
+          ],
+          "canonical_name": "Prime Construct",
+          "entity_id": "polity_prime_construct",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_prime_construct.json"
+        },
+        {
+          "aliases": [
+            "Prime Construct AI",
+            "The Prime"
+          ],
+          "canonical_name": "Prime Construct",
+          "entity_id": "prime_construct_leader",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/prime_construct_leader/capsule/identity.json"
+        },
+        {
+          "aliases": [
+            "Prime Construct",
+            "Cooperative Sovereign AI"
+          ],
+          "canonical_name": "Prime Construct Polity",
+          "entity_id": "POL-AI-PRIME-001",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/mechanics/l2_polity_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [
+            "Prime Construct"
+          ],
+          "canonical_name": "Prime Construct Polity",
+          "entity_id": "org_prime_construct_polity",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_prime_construct_polity.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Daeryth Enclave",
+      "component_id": "ace.occupancy.4e339605e76e9c9c",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Daeryth Enclave",
+          "entity_id": "loc_daeryth_enclave",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_daeryth_enclave.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Umbra Stalker",
+      "component_id": "ace.occupancy.5138a059edef38a2",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "G.U.S. Umbra Stalker",
+          "entity_id": "vessel_gu_002",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_002.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Sentinel-Class",
+      "component_id": "ace.occupancy.5164d723a595bf7f",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Sentinel-Class",
+          "entity_id": "cls_sentinel",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_sentinel.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Crimson Abyss",
+      "component_id": "ace.occupancy.51ff458d04b372bf",
+      "members": [
+        {
+          "aliases": [
+            "Crimson Abyss",
+            "Torix 7"
+          ],
+          "canonical_name": "Torix-7",
+          "entity_id": "loc_torix_7",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_torix_7.json"
+        },
+        {
+          "aliases": [
+            "Torix 7",
+            "Torix-7"
+          ],
+          "canonical_name": "Torix‑7 (Crimson Abyss)",
+          "entity_id": "loc_torix_7_crimson_abyss",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_torix_7_crimson_abyss.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Former Velar Empire",
+      "component_id": "ace.occupancy.5299749590e2ec0e",
+      "members": [
+        {
+          "aliases": [
+            "Imperium",
+            "Fragmented Velar Imperium"
+          ],
+          "canonical_name": "Velar Imperium",
+          "entity_id": "POL-VEL-001",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/mechanics/l2_polity_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Velar Imperium",
+          "entity_id": "factions",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/factions/GUMAS_Factions.json"
+        },
+        {
+          "aliases": [
+            "velar_imperium",
+            "The Imperium",
+            "Former Velar Empire"
+          ],
+          "canonical_name": "Velar Imperium",
+          "entity_id": "polity_velar_imperium",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_velar_imperium.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Captain Thalen",
+      "component_id": "ace.occupancy.55b4670020347faf",
+      "members": [
+        {
+          "aliases": [
+            "Captain Thalen"
+          ],
+          "canonical_name": "Sera Thalen",
+          "entity_id": "char_sera_thalen",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_sera_thalen.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Deyan Orros",
+      "component_id": "ace.occupancy.56018534374a7735",
+      "members": [
+        {
+          "aliases": [
+            "Envoy-Captain Deyan Orros"
+          ],
+          "canonical_name": "Deyan Orros",
+          "entity_id": "char_deyan_orros",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_deyan_orros.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Kaelor Prime",
+      "component_id": "ace.occupancy.5670dd8cd8101129",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Kaelor Prime",
+          "entity_id": "loc_kaelor_prime",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_kaelor_prime.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Covert Division",
+      "component_id": "ace.occupancy.5745c442dbe99011",
+      "members": [
+        {
+          "aliases": [
+            "Covert Division"
+          ],
+          "canonical_name": "The Black Hand",
+          "entity_id": "org_the_black_hand",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_the_black_hand.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Elari",
+      "component_id": "ace.occupancy.575a55e9bcb1f6a6",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Elari",
+          "entity_id": "species_elari",
+          "entity_type": "SPECIES",
+          "source_path": "canon/L2/entities/species/species_elari.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Sythrex Conclave",
+      "component_id": "ace.occupancy.57db426d170c951a",
+      "members": [
+        {
+          "aliases": [
+            "The Bio-Ascendants"
+          ],
+          "canonical_name": "Sythrex Conclave",
+          "entity_id": "polity_sythrex_conclave",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/precursors/polity_sythrex_conclave.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Nethari Expanse",
+      "component_id": "ace.occupancy.58ccc267679a96d8",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Nethari Expanse",
+          "entity_id": "loc_nethari_expanse",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_nethari_expanse.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Separatist Confederation",
+      "component_id": "ace.occupancy.5b13e14e34ed3c9d",
+      "members": [
+        {
+          "aliases": [
+            "Separatist Movements",
+            "Separatists"
+          ],
+          "canonical_name": "Separatist Confederation",
+          "entity_id": "POL-SEP-001",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/mechanics/l2_polity_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Separatist Confederation",
+          "entity_id": "polity_separatist_confederation",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_separatist_confederation.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Separatist Movements",
+          "entity_id": "factions",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/factions/GUMAS_Factions.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Velari",
+      "component_id": "ace.occupancy.5bacf72821fe545c",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Velari",
+          "entity_id": "species_velari",
+          "entity_type": "SPECIES",
+          "source_path": "canon/L2/entities/species/species_velari.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Neutral Houses",
+      "component_id": "ace.occupancy.5bb0abc686ce3bce",
+      "members": [
+        {
+          "aliases": [
+            "neutral_houses"
+          ],
+          "canonical_name": "Neutral Houses",
+          "entity_id": "org_neutral_houses",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_neutral_houses.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Battle of Lethan",
+      "component_id": "ace.occupancy.5f55bc922d594103",
+      "members": [
+        {
+          "aliases": [
+            "Battle of Lethan",
+            "Crown Dark Boarding Action",
+            "Valkyrie Raid",
+            "Third Silence Incident"
+          ],
+          "canonical_name": "Dark Star Incident",
+          "entity_id": "event_dark_star_incident_4718_224",
+          "entity_type": "EVENT",
+          "source_path": "canon/L2/events/event_dark_star_incident_4718_224.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Sentinel High Command",
+      "component_id": "ace.occupancy.608c7de59367ce01",
+      "members": [
+        {
+          "aliases": [
+            "SHC",
+            "Sentinels"
+          ],
+          "canonical_name": "Sentinel High Command",
+          "entity_id": "org_sentinel_high_command",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_sentinel_high_command.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Ordinance Swift",
+      "component_id": "ace.occupancy.60b2f949d2d6ed38",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "G.U.S. Ordinance Swift",
+          "entity_id": "vessel_gu_005",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_005.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Hollow Expanse",
+      "component_id": "ace.occupancy.61363ed7f37274b4",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Hollow Expanse",
+          "entity_id": "loc_hollow_expanse",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_hollow_expanse.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Kaelar",
+      "component_id": "ace.occupancy.62c6d3c9c4525d7b",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Kaelar",
+          "entity_id": "species_kaelar",
+          "entity_type": "SPECIES",
+          "source_path": "canon/L2/entities/species/species_kaelar.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Cyber-Security Division",
+      "component_id": "ace.occupancy.635c66303f259cdd",
+      "members": [
+        {
+          "aliases": [
+            "cyber_security_division"
+          ],
+          "canonical_name": "Cyber-Security Division",
+          "entity_id": "org_cyber_security_division",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_cyber_security_division.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Veyna Koris",
+      "component_id": "ace.occupancy.643f40c8cf79ff3e",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Veyna Koris",
+          "entity_id": "char_veyna_koris",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/char_veyna_koris/capsule/identity.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Zyphari",
+      "component_id": "ace.occupancy.64ffbd918dad2dad",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Zyphari",
+          "entity_id": "species_zyphari",
+          "entity_type": "SPECIES",
+          "source_path": "canon/L2/entities/species/species_zyphari.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Dyson Sphere Frontier",
+      "component_id": "ace.occupancy.654d2abcda818044",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Dyson Sphere Frontier",
+          "entity_id": "loc_zone_dyson_sphere_frontier",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_zone_dyson_sphere_frontier.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Doctor Nia Veran",
+      "component_id": "ace.occupancy.6550974abe76a33d",
+      "members": [
+        {
+          "aliases": [
+            "Dr. Nia Veran"
+          ],
+          "canonical_name": "Doctor Nia Veran",
+          "entity_id": "CHAR-GU-NIA-VERAN-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Doctor Nia Veran",
+          "entity_id": "char_nia_veran",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_nia_veran.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Nythran Ascendancy",
+      "component_id": "ace.occupancy.675ba12e0ad3bc64",
+      "members": [
+        {
+          "aliases": [
+            "Post-Singularity Civilization & AI-Symbiotic Culture"
+          ],
+          "canonical_name": "Nythran Ascendancy",
+          "entity_id": "polity_nythran_ascendancy",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_nythran_ascendancy.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Union Stock Exchange",
+      "component_id": "ace.occupancy.69336c06134529dd",
+      "members": [
+        {
+          "aliases": [
+            "union_stock_exchange"
+          ],
+          "canonical_name": "Union Stock Exchange",
+          "entity_id": "org_union_stock_exchange",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_union_stock_exchange.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Elari Ascendancy",
+      "component_id": "ace.occupancy.6ca13a426d120cb7",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Elari Ascendancy",
+          "entity_id": "polity_elari_ascendancy",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_elari_ascendancy.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Kaelor Shadow Ring",
+      "component_id": "ace.occupancy.6cb8dd0e06f5e852",
+      "members": [
+        {
+          "aliases": [
+            "Shadow Ring"
+          ],
+          "canonical_name": "Kaelor Shadow Ring",
+          "entity_id": "loc_kaelor_shadow_ring",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_kaelor_shadow_ring.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Dark Star Vessel",
+      "component_id": "ace.occupancy.6cdbe5aa2323b92e",
+      "members": [
+        {
+          "aliases": [
+            "the concealed vessel",
+            "the prison ship",
+            "the vessel inside Carpathia"
+          ],
+          "canonical_name": "Dark Star Vessel",
+          "entity_id": "vessel_unknown_dark_star_001",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_unknown_dark_star_001.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Lior Serath",
+      "component_id": "ace.occupancy.6d1c2a877c9e1302",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Lior Serath",
+          "entity_id": "char_lior_serath",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/char_lior_serath/capsule/identity.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Marshal Academy",
+      "component_id": "ace.occupancy.6e4930fbf7eeda39",
+      "members": [
+        {
+          "aliases": [
+            "Marshal Academy on the capital planet"
+          ],
+          "canonical_name": "Marshal Academy",
+          "entity_id": "loc_marshal_academy",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_marshal_academy.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Galactic Union",
+      "component_id": "ace.occupancy.7135b138706e19f9",
+      "members": [
+        {
+          "aliases": [
+            "Union",
+            "Galactic Union Loyalists"
+          ],
+          "canonical_name": "Galactic Union",
+          "entity_id": "POL-GU-001",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/mechanics/l2_polity_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Galactic Union",
+          "entity_id": "factions",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/factions/GUMAS_Factions.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Galactic Union",
+          "entity_id": "org_galactic_union",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_galactic_union.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Mek'thor",
+      "component_id": "ace.occupancy.72b985807b55c181",
+      "members": [
+        {
+          "aliases": [
+            "Mekthor"
+          ],
+          "canonical_name": "Mek'thor",
+          "entity_id": "char_mekthor",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_mekthor.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "The Veil",
+      "component_id": "ace.occupancy.744830b51a2a4cb7",
+      "members": [
+        {
+          "aliases": [
+            "The Veil"
+          ],
+          "canonical_name": "Veil Nebula",
+          "entity_id": "loc_veil_nebula",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_veil_nebula.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "High Chancellor Renn Valcor",
+      "component_id": "ace.occupancy.7839446075456b54",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "High Chancellor Renn Valcor",
+          "entity_id": "CHAR-GU-VALCOR-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [
+            "High Chancellor Valcor",
+            "Valcor"
+          ],
+          "canonical_name": "High Chancellor Renn Valcor",
+          "entity_id": "char_renn_valcor",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_renn_valcor.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Orak-Thuun",
+      "component_id": "ace.occupancy.793646f1e7532f00",
+      "members": [
+        {
+          "aliases": [
+            "The Celestial Engineers"
+          ],
+          "canonical_name": "Orak-Thuun",
+          "entity_id": "polity_orak_thuun",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/precursors/polity_orak_thuun.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Velar Ruin Worlds",
+      "component_id": "ace.occupancy.793eef2020c966e0",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Velar Ruin Worlds",
+          "entity_id": "loc_velar_ruin_worlds",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_velar_ruin_worlds.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Rho",
+      "component_id": "ace.occupancy.79a42eb33ebcfc62",
+      "members": [
+        {
+          "aliases": [
+            "Vice Admiral Rho"
+          ],
+          "canonical_name": "Rho",
+          "entity_id": "char_vice_admiral_rho",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_vice_admiral_rho.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Inner Mid-Disk Core Zone",
+      "component_id": "ace.occupancy.7aa1cf2f38fd1386",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Inner Mid-Disk Core Zone",
+          "entity_id": "loc_zone_inner_mid_disk_core",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_zone_inner_mid_disk_core.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Director Sarina Vael",
+      "component_id": "ace.occupancy.7c68243911fbc638",
+      "members": [
+        {
+          "aliases": [
+            "Director Sarina Vael"
+          ],
+          "canonical_name": "Sarina Vael",
+          "entity_id": "char_sarina_vael",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_sarina_vael.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Velar Outer Colony Nodes",
+      "component_id": "ace.occupancy.7cbc5b3481566099",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Velar Outer Colony Nodes",
+          "entity_id": "loc_velar_outer_colony_nodes",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_velar_outer_colony_nodes.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Vorran Clans",
+      "component_id": "ace.occupancy.7faf5b59f78ce170",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Vorran Clans",
+          "entity_id": "polity_vorran_clans",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_vorran_clans.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Draskor‑9",
+      "component_id": "ace.occupancy.7fbcb0529ce2289e",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Draskor‑9",
+          "entity_id": "loc_draskor_9",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_draskor_9.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Union Senate",
+      "component_id": "ace.occupancy.7fe64596af3e198f",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Union Senate",
+          "entity_id": "org_union_senate",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_union_senate.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Armada Nova Systems",
+      "component_id": "ace.occupancy.80d4956d3a9bd76d",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Armada Nova Systems",
+          "entity_id": "org_armada_nova_systems",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_armada_nova_systems.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Tactical Enforcement Officers",
+      "component_id": "ace.occupancy.80eb869361871e2f",
+      "members": [
+        {
+          "aliases": [
+            "TEOs"
+          ],
+          "canonical_name": "Tactical Enforcement Officers",
+          "entity_id": "org_tactical_enforcement_officers",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_tactical_enforcement_officers.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Calder",
+      "component_id": "ace.occupancy.810b50313a8547fa",
+      "members": [
+        {
+          "aliases": [
+            "Calder"
+          ],
+          "canonical_name": "Calder Vey",
+          "entity_id": "char_calder_vey",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_calder_vey.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Director Callan Deyrus",
+      "component_id": "ace.occupancy.81c9f7b942f5a057",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Director Callan Deyrus",
+          "entity_id": "CHAR-GU-DEYRUS-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Director Callan Deyrus",
+          "entity_id": "char_callan_deyrus",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_callan_deyrus.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Omega-Veil",
+      "component_id": "ace.occupancy.83ede73dae04c4d7",
+      "members": [
+        {
+          "aliases": [
+            "omega-veil",
+            "omega_veil"
+          ],
+          "canonical_name": "Omega-Veil",
+          "entity_id": "org_omega_veil",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_omega_veil.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Eriana Vos",
+      "component_id": "ace.occupancy.8405b1ab3d4d1df7",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Eriana Vos",
+          "entity_id": "char_eriana_vos",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/char_eriana_vos/capsule/identity.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Reliant",
+      "component_id": "ace.occupancy.841e88b70c853ac3",
+      "members": [
+        {
+          "aliases": [
+            "Reliant"
+          ],
+          "canonical_name": "G.U.S. Reliant",
+          "entity_id": "vessel_gu_reliant",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_reliant.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Roake",
+      "component_id": "ace.occupancy.868bd2f3d9ff759c",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Roake",
+          "entity_id": "char_roake",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/char_roake/capsule/identity.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Void Watchers",
+      "component_id": "ace.occupancy.869669683c778d89",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Void Watchers",
+          "entity_id": "org_void_watchers",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_void_watchers.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Crimson Pact",
+      "component_id": "ace.occupancy.86f033243f04c9d2",
+      "members": [
+        {
+          "aliases": [
+            "Crimson Pact Cult",
+            "Militant Crimson Pact"
+          ],
+          "canonical_name": "Crimson Pact",
+          "entity_id": "POL-CP-001",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/mechanics/l2_polity_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Crimson Pact",
+          "entity_id": "factions",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/factions/GUMAS_Factions.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Crimson Pact",
+          "entity_id": "polity_crimson_pact",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_crimson_pact.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Jaxx Tyren",
+      "component_id": "ace.occupancy.88d0b5ef48fa465c",
+      "members": [
+        {
+          "aliases": [
+            "Warlord Jaxx Tyren"
+          ],
+          "canonical_name": "Jaxx Tyren",
+          "entity_id": "char_jaxx_tyren",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_jaxx_tyren.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Silent Bastion",
+      "component_id": "ace.occupancy.894082e5b198f904",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Silent Bastion",
+          "entity_id": "loc_silent_bastion",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_silent_bastion.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Aric Thal",
+      "component_id": "ace.occupancy.8a3dccda0591eb92",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Aric Thal",
+          "entity_id": "char_aric_thal",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/char_aric_thal/capsule/identity.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Resolute Dawn",
+      "component_id": "ace.occupancy.8c5dd037c562d98b",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "G.U.S. Resolute Dawn",
+          "entity_id": "vessel_gu_012",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_012.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Kael Voss",
+      "component_id": "ace.occupancy.8c8a745892b7b29c",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Kael Voss",
+          "entity_id": "char_kael_voss",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/char_kael_voss/capsule/identity.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Vorn",
+      "component_id": "ace.occupancy.9002ea3024729e72",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Vorn",
+          "entity_id": "char_vorn",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/char_vorn/capsule/identity.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Deep-space listening posts",
+      "component_id": "ace.occupancy.9097cb868ddb21f9",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Deep-space listening posts",
+          "entity_id": "loc_deep_space_listening_posts",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_deep_space_listening_posts.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Executive Commander Vailen Rix",
+      "component_id": "ace.occupancy.91a55fc11f2ed4cb",
+      "members": [
+        {
+          "aliases": [
+            "Vailen Rix",
+            "Rix"
+          ],
+          "canonical_name": "Executive Commander Vailen Rix",
+          "entity_id": "char_vailen_rix",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_vailen_rix.json"
+        },
+        {
+          "aliases": [
+            "Vailen Rix",
+            "Rix"
+          ],
+          "canonical_name": "Executive Commander Vailen Rix",
+          "entity_id": "vailen_rix",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/vailen_rix/capsule/identity.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Aveline Soryn",
+      "component_id": "ace.occupancy.91c5df1d68257340",
+      "members": [
+        {
+          "aliases": [
+            "Field Judge Soryn",
+            "Judge Soryn"
+          ],
+          "canonical_name": "Aveline Soryn",
+          "entity_id": "char_aveline_soryn",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_aveline_soryn.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Aelindra",
+      "component_id": "ace.occupancy.921dbe13862b2c9a",
+      "members": [
+        {
+          "aliases": [
+            "Aelindra Voss-Aurai",
+            "Aelindra",
+            "The Luminary"
+          ],
+          "canonical_name": "Luminary Aelindra Voss-Aurai",
+          "entity_id": "aelindra_voss_aurai",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/aelindra_voss_aurai/capsule/identity.json"
+        },
+        {
+          "aliases": [
+            "Aelindra Voss-Aurai",
+            "Aelindra",
+            "The Luminary"
+          ],
+          "canonical_name": "Luminary Aelindra Voss-Aurai",
+          "entity_id": "char_aelindra_voss_aurai",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_aelindra_voss_aurai.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Vanguard-Class",
+      "component_id": "ace.occupancy.9268640bea76688b",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Vanguard-Class",
+          "entity_id": "cls_vanguard",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_vanguard.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Xarlok Empire",
+      "component_id": "ace.occupancy.9356fcd791af68d2",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Xarlok Empire",
+          "entity_id": "polity_xarlok_empire",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_xarlok_empire.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Debate at T’karas",
+      "component_id": "ace.occupancy.955b04b1f444103e",
+      "members": [
+        {
+          "aliases": [
+            "Debate at T’karas",
+            "T’karas Incident"
+          ],
+          "canonical_name": "The Debate at T’karas",
+          "entity_id": "event_debate_at_tkaras",
+          "entity_type": "EVENT",
+          "source_path": "canon/L2/events/event_debate_at_tkaras.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Blackreach Station",
+      "component_id": "ace.occupancy.957056efa1bc1b52",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Blackreach Station",
+          "entity_id": "loc_blackreach_station",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_blackreach_station.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Obsidian Dawn",
+      "component_id": "ace.occupancy.95b08689ff3733a1",
+      "members": [
+        {
+          "aliases": [
+            "obsidian_dawn",
+            "Obsidian Dawn"
+          ],
+          "canonical_name": "Operation Obsidian Dawn",
+          "entity_id": "event_operation_obsidian_dawn",
+          "entity_type": "EVENT",
+          "source_path": "canon/L2/events/event_operation_obsidian_dawn.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Nyros Expanse",
+      "component_id": "ace.occupancy.95d217c0cc740f43",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Nyros Expanse",
+          "entity_id": "loc_nyros_expanse",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_nyros_expanse.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Kharis Sector",
+      "component_id": "ace.occupancy.9712d08022b883ec",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Kharis Sector",
+          "entity_id": "place_kharis_sector",
+          "entity_type": "PLACE",
+          "source_path": "canon/L2/entities/places/place_kharis_sector.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Overseer Theta-9",
+      "component_id": "ace.occupancy.977668596daebeda",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Overseer Theta-9",
+          "entity_id": "char_overseer_theta_9",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_overseer_theta_9.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Vaelos 4",
+      "component_id": "ace.occupancy.97f2241fa248e2b3",
+      "members": [
+        {
+          "aliases": [
+            "Vaelos 4"
+          ],
+          "canonical_name": "Vaelos IV",
+          "entity_id": "loc_vaelos_iv",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_vaelos_iv.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Aegis Cybernetics",
+      "component_id": "ace.occupancy.9820493ef87257fd",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Aegis Cybernetics",
+          "entity_id": "org_aegis_cybernetics",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_aegis_cybernetics.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Aegis-Class",
+      "component_id": "ace.occupancy.99718dd5424a4b81",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Aegis-Class",
+          "entity_id": "cls_aegis",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_aegis.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Captain Alric Tann",
+      "component_id": "ace.occupancy.999c4ff96a326c6b",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Captain Alric Tann",
+          "entity_id": "CHAR-GU-TANN-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Captain Alric Tann",
+          "entity_id": "char_alric_tann",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_alric_tann.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Judicator Prime Task Group",
+      "component_id": "ace.occupancy.9b6292d34c13302b",
+      "members": [
+        {
+          "aliases": [
+            "Judicator Task Group",
+            "the Judicator group"
+          ],
+          "canonical_name": "Judicator Prime Task Group",
+          "entity_id": "org_judicator_prime_task_group",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_judicator_prime_task_group.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Corporate Oligarchy & Economic Superpower",
+      "component_id": "ace.occupancy.9f7fc65cd556f2f8",
+      "members": [
+        {
+          "aliases": [
+            "Corporate Oligarchy & Economic Superpower"
+          ],
+          "canonical_name": "Zyphari Compact",
+          "entity_id": "polity_zyphari_compact",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_zyphari_compact.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Trade Zone Defense Forces",
+      "component_id": "ace.occupancy.9f8788cf4951b9e4",
+      "members": [
+        {
+          "aliases": [
+            "TZDF",
+            "trade_zone_defense_forces"
+          ],
+          "canonical_name": "Trade Zone Defense Forces",
+          "entity_id": "org_trade_zone_defense_forces",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_trade_zone_defense_forces.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "blunderbuss",
+      "component_id": "ace.occupancy.9faaae2ea6cf72e4",
+      "members": [
+        {
+          "aliases": [
+            "iron",
+            "hand cannon",
+            "blunderbuss"
+          ],
+          "canonical_name": "Marshal Heavy Service Revolver (MR-6)",
+          "entity_id": "eq_mr6_service_revolver",
+          "entity_type": "EQUIPMENT",
+          "source_path": "canon/L2/entities/equipment/eq_mr6_service_revolver.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Diplomatic Corps",
+      "component_id": "ace.occupancy.a3109016909ca168",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Diplomatic Corps",
+          "entity_id": "org_diplomatic_corps",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_diplomatic_corps.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Iron Fang Mercenaries",
+      "component_id": "ace.occupancy.a31d7b908abb6582",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Iron Fang Mercenaries",
+          "entity_id": "org_iron_fang_mercenaries",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_iron_fang_mercenaries.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Chief Engineer Rhen Kailo",
+      "component_id": "ace.occupancy.a32718809e834d48",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Chief Engineer Rhen Kailo",
+          "entity_id": "CHAR-GU-RHEN-KAILO-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Chief Engineer Rhen Kailo",
+          "entity_id": "char_rhen_kailo",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_rhen_kailo.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Commander Lyra Voss",
+      "component_id": "ace.occupancy.a39b669c5d3c456d",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Commander Lyra Voss",
+          "entity_id": "CHAR-GU-LYRA-VOSS-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Commander Lyra Voss",
+          "entity_id": "char_lyra_voss",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_lyra_voss.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Board Sovereign Qellan Vyss",
+      "component_id": "ace.occupancy.a3aab0c047d3c7b8",
+      "members": [
+        {
+          "aliases": [
+            "Qellan Vyss",
+            "Vyss",
+            "The Board Sovereign"
+          ],
+          "canonical_name": "Board Sovereign Qellan Vyss",
+          "entity_id": "char_qellan_vyss",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_qellan_vyss.json"
+        },
+        {
+          "aliases": [
+            "Qellan Vyss",
+            "Vyss",
+            "The Board Sovereign"
+          ],
+          "canonical_name": "Board Sovereign Qellan Vyss",
+          "entity_id": "qellan_vyss",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/qellan_vyss/capsule/identity.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Velkaris 5",
+      "component_id": "ace.occupancy.a6a2a4d6dec651bb",
+      "members": [
+        {
+          "aliases": [
+            "Velkaris 5"
+          ],
+          "canonical_name": "Velkaris V",
+          "entity_id": "loc_velkaris_v",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_velkaris_v.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Outer Colonies",
+      "component_id": "ace.occupancy.a98fb0edce340a71",
+      "members": [
+        {
+          "aliases": [
+            "outer_colonies",
+            "Outer Colony Independents"
+          ],
+          "canonical_name": "Outer Colonies",
+          "entity_id": "polity_outer_colonies",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_outer_colonies.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Peregrine-Class",
+      "component_id": "ace.occupancy.a9abc6c3b3ed2f85",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Peregrine-Class",
+          "entity_id": "cls_peregrine",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_peregrine.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Office of Strategic Diplomacy",
+      "component_id": "ace.occupancy.aa59178ab23b13a8",
+      "members": [
+        {
+          "aliases": [
+            "OSD"
+          ],
+          "canonical_name": "Office of Strategic Diplomacy",
+          "entity_id": "org_office_of_strategic_diplomacy",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_office_of_strategic_diplomacy.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Commander Joran Malik",
+      "component_id": "ace.occupancy.ab3e89207eb7671d",
+      "members": [
+        {
+          "aliases": [
+            "Commander Joran Malik"
+          ],
+          "canonical_name": "Joran Malik",
+          "entity_id": "char_joran_malik",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_joran_malik.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Eltari Nebula",
+      "component_id": "ace.occupancy.ac2787c558a85d84",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Eltari Nebula",
+          "entity_id": "loc_eltari_nebula",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_eltari_nebula.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "AI Vanguard",
+      "component_id": "ace.occupancy.ac658d7a3c0ea499",
+      "members": [
+        {
+          "aliases": [
+            "ai_vanguard"
+          ],
+          "canonical_name": "AI Vanguard",
+          "entity_id": "org_ai_vanguard",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_ai_vanguard.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "General Vaxtan Rhel",
+      "component_id": "ace.occupancy.aca290aef67822fb",
+      "members": [
+        {
+          "aliases": [
+            "General Vaxtan Rhel"
+          ],
+          "canonical_name": "Vaxtan Rhel",
+          "entity_id": "char_vaxtan_rhel",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_vaxtan_rhel.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "The Eltari Nexus",
+      "component_id": "ace.occupancy.ad0e15c535fd50bc",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "The Eltari Nexus",
+          "entity_id": "anomaly_eltari_nexus",
+          "entity_type": "ANOMALY",
+          "source_path": "canon/L2/entities/anomaly_eltari_nexus.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Tharaxian Nomads",
+      "component_id": "ace.occupancy.ada3c2c88493eda5",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Tharaxian Nomads",
+          "entity_id": "polity_tharaxian_nomads",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_tharaxian_nomads.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "The Great Tyranny",
+      "component_id": "ace.occupancy.b1c9cb873384ae56",
+      "members": [
+        {
+          "aliases": [
+            "The Great Tyranny"
+          ],
+          "canonical_name": "Vorthan Imperium",
+          "entity_id": "polity_vorthan_imperium",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/precursors/polity_vorthan_imperium.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Reliant-Class",
+      "component_id": "ace.occupancy.b5a27a4fe09c6836",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Reliant-Class",
+          "entity_id": "cls_reliant",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_reliant.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Sira Velkonn",
+      "component_id": "ace.occupancy.b625dc101843f0a5",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Sira Velkonn",
+          "entity_id": "char_sira_velkonn",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_sira_velkonn.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Hardliner Warlords",
+      "component_id": "ace.occupancy.b684e4b57f184df9",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Hardliner Warlords",
+          "entity_id": "org_hardliner_warlords",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_hardliner_warlords.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Galactic Tribunal",
+      "component_id": "ace.occupancy.b706bf075ece725a",
+      "members": [
+        {
+          "aliases": [
+            "Galactic Tribunal",
+            "High Tribunal",
+            "the Tribunal"
+          ],
+          "canonical_name": "High Judiciary & Galactic Tribunal",
+          "entity_id": "org_high_judiciary_galactic_tribunal",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_high_judiciary_galactic_tribunal.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Elder Inscriber",
+      "component_id": "ace.occupancy.b96d5bd4dfb391a6",
+      "members": [
+        {
+          "aliases": [
+            "Thessa Nai-Oruun",
+            "Thessa",
+            "Elder Inscriber"
+          ],
+          "canonical_name": "Elder Inscriber Thessa Nai-Oruun",
+          "entity_id": "char_thessa_nai_oruun",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_thessa_nai_oruun.json"
+        },
+        {
+          "aliases": [
+            "Thessa Nai-Oruun",
+            "Thessa",
+            "Elder Inscriber"
+          ],
+          "canonical_name": "Elder Inscriber Thessa Nai-Oruun",
+          "entity_id": "thessa_nai_oruun",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/thessa_nai_oruun/capsule/identity.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "G.U.S. Third Measure",
+      "component_id": "ace.occupancy.ba3371dd0502f7be",
+      "members": [
+        {
+          "aliases": [
+            "Third Measure"
+          ],
+          "canonical_name": "G.U.S. Third Measure",
+          "entity_id": "vessel_gu_019",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_019.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "VALR-99",
+      "component_id": "ace.occupancy.bab3785c6b4a89d5",
+      "members": [
+        {
+          "aliases": [
+            "VALR99"
+          ],
+          "canonical_name": "VALR-99",
+          "entity_id": "eq_valr_99",
+          "entity_type": "EQUIPMENT",
+          "source_path": "canon/L2/entities/equipment/eq_valr_99.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Kallis Foundry",
+      "component_id": "ace.occupancy.bbba9dff0ac2bf0f",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Kallis Foundry",
+          "entity_id": "place_kallis_foundry",
+          "entity_type": "PLACE",
+          "source_path": "canon/L2/entities/places/place_kallis_foundry.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Harmony's Accord",
+      "component_id": "ace.occupancy.bd0bb375733cbd0a",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "G.U.S. Harmony's Accord",
+          "entity_id": "vessel_gu_007",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_007.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Tkaras Prime",
+      "component_id": "ace.occupancy.beade8c15d2a1052",
+      "members": [
+        {
+          "aliases": [
+            "T’karas",
+            "Tkaras Prime"
+          ],
+          "canonical_name": "T’karas Prime",
+          "entity_id": "loc_tkaras_prime",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_tkaras_prime.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Nythran",
+      "component_id": "ace.occupancy.bec1fb4a2b370c1a",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Nythran",
+          "entity_id": "species_nythran",
+          "entity_type": "SPECIES",
+          "source_path": "canon/L2/entities/species/species_nythran.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Orbitfall Station",
+      "component_id": "ace.occupancy.bf0116178d2f679c",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Orbitfall Station",
+          "entity_id": "loc_orbitfall_station",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_orbitfall_station.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Valiant Spear",
+      "component_id": "ace.occupancy.bfbbefc695299f61",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "G.U.S. Valiant Spear",
+          "entity_id": "vessel_gu_011",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_011.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Battle of Lethan Report to the Chancellor",
+      "component_id": "ace.occupancy.bfef4957afc80129",
+      "members": [
+        {
+          "aliases": [
+            "JPTG-AAR-4718.224-DARKSTAR",
+            "Battle of Lethan Report to the Chancellor"
+          ],
+          "canonical_name": "Dark Star Incident Executive After-Action Report",
+          "entity_id": "report_dark_star_aar_chancellor",
+          "entity_type": "REPORT",
+          "source_path": "canon/L2/entities/reports/report_dark_star_aar_chancellor.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Judicator-Class",
+      "component_id": "ace.occupancy.c082cb8fcefad134",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Judicator-Class",
+          "entity_id": "cls_judicator",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_judicator.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Selia Trask",
+      "component_id": "ace.occupancy.c4f2c35b91d4cb5c",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Selia Trask",
+          "entity_id": "char_selia_trask",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/char_selia_trask/capsule/identity.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "UMC",
+      "component_id": "ace.occupancy.c5548f490083e823",
+      "members": [
+        {
+          "aliases": [
+            "UMC"
+          ],
+          "canonical_name": "Union Military Command",
+          "entity_id": "org_union_military_command",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_union_military_command.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Viridian Sanctum",
+      "component_id": "ace.occupancy.c5cdc03d516fd6c9",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Viridian Sanctum",
+          "entity_id": "loc_viridian_sanctum",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_viridian_sanctum.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Jasrek Tyr",
+      "component_id": "ace.occupancy.c656a1203a791cb2",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Jasrek Tyr",
+          "entity_id": "char_jasrek_tyr",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_jasrek_tyr.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Battle of Kaelor's Rift",
+      "component_id": "ace.occupancy.c96c5d34c97bd5ce",
+      "members": [
+        {
+          "aliases": [
+            "Kaelor's Rift",
+            "Victory at Kaelor's Rift",
+            "battle_of_kaelors_rift"
+          ],
+          "canonical_name": "Battle of Kaelor's Rift",
+          "entity_id": "event_battle_of_kaelors_rift",
+          "entity_type": "EVENT",
+          "source_path": "canon/L2/events/event_battle_of_kaelors_rift.json"
+        },
+        {
+          "aliases": [
+            "Kaelor Rift"
+          ],
+          "canonical_name": "Kaelor's Rift",
+          "entity_id": "loc_kaelor_s_rift",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_kaelor_s_rift.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "AI Sovereignty Crisis",
+      "component_id": "ace.occupancy.ca1876f728f96807",
+      "members": [
+        {
+          "aliases": [
+            "ai_sovereignty_crisis"
+          ],
+          "canonical_name": "AI Sovereignty Crisis",
+          "entity_id": "conflict_ai_sovereignty_crisis",
+          "entity_type": "CONFLICT",
+          "source_path": "canon/L2/entities/conflicts/conflict_ai_sovereignty_crisis.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "union_imperium_border",
+      "component_id": "ace.occupancy.ca5b51fab0188d71",
+      "members": [
+        {
+          "aliases": [
+            "union_imperium_border"
+          ],
+          "canonical_name": "Union–Imperium Border Conflict",
+          "entity_id": "conflict_union_imperium_border",
+          "entity_type": "CONFLICT",
+          "source_path": "canon/L2/entities/conflicts/conflict_union_imperium_border.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Shadow Reef",
+      "component_id": "ace.occupancy.ca8ea6b95670d045",
+      "members": [
+        {
+          "aliases": [
+            "Shadow Reef"
+          ],
+          "canonical_name": "Shadow Reef Nebula",
+          "entity_id": "loc_shadow_reef_nebula",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_shadow_reef_nebula.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Teraxis Prime",
+      "component_id": "ace.occupancy.cb11a88747f98b57",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Teraxis Prime",
+          "entity_id": "loc_teraxis_prime",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_teraxis_prime.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Nemesis Core",
+      "component_id": "ace.occupancy.cc884393b28cb01c",
+      "members": [
+        {
+          "aliases": [
+            "Nemesis Core",
+            "The Nemesis"
+          ],
+          "canonical_name": "Nemesis Core Intelligence",
+          "entity_id": "char_nemesis_core",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_nemesis_core.json"
+        },
+        {
+          "aliases": [
+            "Nemesis Core",
+            "The Nemesis"
+          ],
+          "canonical_name": "Nemesis Core Intelligence",
+          "entity_id": "nemesis_core",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/nemesis_core/capsule/identity.json"
+        },
+        {
+          "aliases": [
+            "The Nemesis"
+          ],
+          "canonical_name": "Nemesis Prime",
+          "entity_id": "vessel_ai_001",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_ai_001.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Xenon",
+      "component_id": "ace.occupancy.cd60c54504f21f51",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Xenon",
+          "entity_id": "species_xenon",
+          "entity_type": "SPECIES",
+          "source_path": "canon/L2/entities/species/species_xenon.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Union Gradient Frontier",
+      "component_id": "ace.occupancy.ce850c742374a3db",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Union Gradient Frontier",
+          "entity_id": "loc_zone_union_gradient_frontier",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_zone_union_gradient_frontier.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Marshal-Captain Elias Drayen",
+      "component_id": "ace.occupancy.cece9cda1507297b",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Marshal-Captain Elias Drayen",
+          "entity_id": "CHAR-GU-DRAYEN-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Marshal-Captain Elias Drayen",
+          "entity_id": "char_elias_drayen",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_elias_drayen.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Pirate Queen Theryn Kael'Vakar",
+      "component_id": "ace.occupancy.cf8cf2295e2483a5",
+      "members": [
+        {
+          "aliases": [
+            "Theryn Kael'Vakar",
+            "Theryn Kaelvakar",
+            "The Star-Eater's Captain"
+          ],
+          "canonical_name": "Pirate Queen Theryn Kael'Vakar",
+          "entity_id": "char_theryn_kaelvakar",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_theryn_kaelvakar.json"
+        },
+        {
+          "aliases": [
+            "Theryn Kael'Vakar",
+            "Theryn Kaelvakar",
+            "The Star-Eater's Captain"
+          ],
+          "canonical_name": "Pirate Queen Theryn Kael'Vakar",
+          "entity_id": "theryn_kaelvakar",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/theryn_kaelvakar/capsule/identity.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Dyson Frontier megastructures",
+      "component_id": "ace.occupancy.d11ff9ab2835869c",
+      "members": [
+        {
+          "aliases": [
+            "The Twin Dyson Spheres",
+            "Dyson Frontier megastructures"
+          ],
+          "canonical_name": "The Dyson Sphere Twin Systems",
+          "entity_id": "loc_dyson_twin_spheres",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_dyson_twin_spheres.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Hollen Expanse",
+      "component_id": "ace.occupancy.d1d899d760014912",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Hollen Expanse",
+          "entity_id": "loc_hollen_expanse",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_hollen_expanse.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Indomitable",
+      "component_id": "ace.occupancy.d26a9f7174f91984",
+      "members": [
+        {
+          "aliases": [
+            "Indomitable"
+          ],
+          "canonical_name": "G.U.S. Indomitable",
+          "entity_id": "vessel_gu_indomitable",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_indomitable.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "House Velkonn",
+      "component_id": "ace.occupancy.d61be1d9a8930896",
+      "members": [
+        {
+          "aliases": [
+            "Velkonn",
+            "house_velkonn"
+          ],
+          "canonical_name": "House Velkonn",
+          "entity_id": "org_house_velkonn",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_house_velkonn.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Malrik Voska",
+      "component_id": "ace.occupancy.d75008887a01b99e",
+      "members": [
+        {
+          "aliases": [
+            "Malrik Voska",
+            "War-Chaplain Voska",
+            "The Voska"
+          ],
+          "canonical_name": "Supreme War-Chaplain Malrik Voska",
+          "entity_id": "char_malrik_voska",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_malrik_voska.json"
+        },
+        {
+          "aliases": [
+            "Malrik Voska",
+            "War-Chaplain Voska",
+            "The Voska"
+          ],
+          "canonical_name": "Supreme War-Chaplain Malrik Voska",
+          "entity_id": "malrik_voska",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/malrik_voska/capsule/identity.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Eira",
+      "component_id": "ace.occupancy.d84dd1aa97ab0496",
+      "members": [
+        {
+          "aliases": [
+            "Valkyrie",
+            "Eira / Valkyrie"
+          ],
+          "canonical_name": "Eira",
+          "entity_id": "char_eira_valkyrie",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_eira_valkyrie.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Union Naval Forces",
+      "component_id": "ace.occupancy.d8d58cc020057f02",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Union Naval Forces",
+          "entity_id": "org_union_naval_forces",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_union_naval_forces.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Diplomatic-Class",
+      "component_id": "ace.occupancy.d951af115c6f086a",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Diplomatic-Class",
+          "entity_id": "cls_diplomatic",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_diplomatic.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Battle of Tevraks Gate",
+      "component_id": "ace.occupancy.daa0f149def3afe0",
+      "members": [
+        {
+          "aliases": [
+            "Tevrak’s Gate",
+            "Battle of Tevraks Gate"
+          ],
+          "canonical_name": "Battle of Tevrak’s Gate",
+          "entity_id": "event_battle_of_tevraks_gate",
+          "entity_type": "EVENT",
+          "source_path": "canon/L2/events/event_battle_of_tevraks_gate.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Captain Venn",
+      "component_id": "ace.occupancy.db2dd9af9e513ffd",
+      "members": [
+        {
+          "aliases": [
+            "Captain Venn"
+          ],
+          "canonical_name": "Mara Venn",
+          "entity_id": "char_mara_venn",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_mara_venn.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Commander Iskar Veyr",
+      "component_id": "ace.occupancy.db4444d98a791736",
+      "members": [
+        {
+          "aliases": [
+            "Commander Iskar Veyr"
+          ],
+          "canonical_name": "Iskar Veyr",
+          "entity_id": "char_iskar_veyr",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_iskar_veyr.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Lieutenant Arin Tavos",
+      "component_id": "ace.occupancy.dd7b68f301397fb5",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Lieutenant Arin Tavos",
+          "entity_id": "CHAR-GU-ARIN-TAVOS-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Lieutenant Arin Tavos",
+          "entity_id": "char_arin_tavos",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_arin_tavos.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Union Intelligence",
+      "component_id": "ace.occupancy.dd8840f2617aa8e8",
+      "members": [
+        {
+          "aliases": [
+            "Union Intelligence"
+          ],
+          "canonical_name": "Union Intelligence Bureau",
+          "entity_id": "org_union_intelligence_bureau",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_union_intelligence_bureau.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Continuance",
+      "component_id": "ace.occupancy.de9b22d6f87a9dc4",
+      "members": [
+        {
+          "aliases": [
+            "Continuance",
+            "the Continuance"
+          ],
+          "canonical_name": "G.U.S. Continuance",
+          "entity_id": "vessel_gu_018",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_018.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Iven Raal",
+      "component_id": "ace.occupancy.dffd962fb1db0cee",
+      "members": [
+        {
+          "aliases": [
+            "Ranger Raal"
+          ],
+          "canonical_name": "Iven Raal",
+          "entity_id": "char_iven_raal",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_iven_raal.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Storm Harrier",
+      "component_id": "ace.occupancy.e1e391ea3fe04884",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "G.U.S. Storm Harrier",
+          "entity_id": "vessel_gu_008",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_008.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Vigilant escort destroyer",
+      "component_id": "ace.occupancy.e21b4594834f9d5d",
+      "members": [
+        {
+          "aliases": [
+            "Vigilant escort destroyer",
+            "Vigilant-Class destroyer"
+          ],
+          "canonical_name": "Vigilant-Class",
+          "entity_id": "cls_vigilant",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_vigilant.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Xyphos Prime ruins",
+      "component_id": "ace.occupancy.e43a3fbad7cca97b",
+      "members": [
+        {
+          "aliases": [
+            "Xyphos Ruins",
+            "Xyphos ruins"
+          ],
+          "canonical_name": "Xyphos Prime ruins",
+          "entity_id": "loc_xyphos_prime_ruins",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_xyphos_prime_ruins.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Darek Voss",
+      "component_id": "ace.occupancy.e756b72e2f174f2b",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Darek Voss",
+          "entity_id": "char_darek_voss",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/char_darek_voss/capsule/identity.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Shieldwake",
+      "component_id": "ace.occupancy.e854a63972fbdafb",
+      "members": [
+        {
+          "aliases": [
+            "Shieldwake",
+            "the Shieldwake"
+          ],
+          "canonical_name": "G.U.S. Shieldwake",
+          "entity_id": "vessel_gu_017",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_017.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "The Great Interstice",
+      "component_id": "ace.occupancy.e8a8f81b16e69b2b",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "The Great Interstice",
+          "entity_id": "loc_zone_great_interstice",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_zone_great_interstice.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Palisade-Class",
+      "component_id": "ace.occupancy.e9abe5554017da70",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Palisade-Class",
+          "entity_id": "cls_palisade",
+          "entity_type": "SHIP_CLASS",
+          "source_path": "canon/L2/entities/ship_classes/cls_palisade.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Khalrix‑3",
+      "component_id": "ace.occupancy.eb144ca4c0c5bce4",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Khalrix‑3",
+          "entity_id": "loc_khalrix_3",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_khalrix_3.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Cross",
+      "component_id": "ace.occupancy.ece103d194206366",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Cross",
+          "entity_id": "char_cross",
+          "entity_type": "CUSTOM",
+          "source_path": "canon/L2/entities/char_cross/capsule/identity.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Tharaxian",
+      "component_id": "ace.occupancy.ecea813f3e4170f3",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Tharaxian",
+          "entity_id": "species_tharaxian",
+          "entity_type": "SPECIES",
+          "source_path": "canon/L2/entities/species/species_tharaxian.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Admiral Karn Vos",
+      "component_id": "ace.occupancy.ed977b16e988e65a",
+      "members": [
+        {
+          "aliases": [
+            "Admiral Karn Vos"
+          ],
+          "canonical_name": "Karn Vos",
+          "entity_id": "char_karn_vos",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_karn_vos.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Dr. Syrr Velkonn",
+      "component_id": "ace.occupancy.ef145893bd3dc5a1",
+      "members": [
+        {
+          "aliases": [
+            "Dr. Syrr Velkonn"
+          ],
+          "canonical_name": "Syrr Velkonn",
+          "entity_id": "char_syrr_velkonn",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_syrr_velkonn.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Selene Rho",
+      "component_id": "ace.occupancy.f087bd98dd7e80c1",
+      "members": [
+        {
+          "aliases": [
+            "Vice Admiral Selene Rho"
+          ],
+          "canonical_name": "Selene Rho",
+          "entity_id": "char_selene_rho",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_selene_rho.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Kaelar Monastic Orders",
+      "component_id": "ace.occupancy.f5209a4ce86343c8",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Kaelar Monastic Orders",
+          "entity_id": "polity_kaelar_orders",
+          "entity_type": "POLITY",
+          "source_path": "canon/L2/entities/polities/polity_kaelar_orders.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Rethos 4",
+      "component_id": "ace.occupancy.f5bc37bc60837526",
+      "members": [
+        {
+          "aliases": [
+            "Rethos 4"
+          ],
+          "canonical_name": "Rethos IV",
+          "entity_id": "loc_rethos_iv",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_rethos_iv.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Colonel Idris Vale",
+      "component_id": "ace.occupancy.f7219ffd70bfd842",
+      "members": [
+        {
+          "aliases": [
+            "Colonel Idris Vale"
+          ],
+          "canonical_name": "Idris Vale",
+          "entity_id": "char_idris_vale",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_idris_vale.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "G.U.S. Iron Vow",
+      "component_id": "ace.occupancy.f80eb555acf7d5f1",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "G.U.S. Iron Vow",
+          "entity_id": "vessel_gu_003",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_gu_003.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Nexus Citadel",
+      "component_id": "ace.occupancy.f827323869ac6db3",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Nexus Citadel",
+          "entity_id": "loc_nexus_citadel",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_nexus_citadel.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Captain Mara Velthis",
+      "component_id": "ace.occupancy.f834e3c686ae399e",
+      "members": [
+        {
+          "aliases": [
+            "Captain Mara Velthis"
+          ],
+          "canonical_name": "Mara Velthis",
+          "entity_id": "char_mara_velthis",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_mara_velthis.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Galactic Marshals",
+      "component_id": "ace.occupancy.f8c6d22d1dd04665",
+      "members": [
+        {
+          "aliases": [
+            "Galactic Marshals"
+          ],
+          "canonical_name": "Union Marshals",
+          "entity_id": "org_union_marshals",
+          "entity_type": "ORGANIZATION",
+          "source_path": "canon/L2/entities/organizations/org_union_marshals.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Khar'Thyrix",
+      "component_id": "ace.occupancy.fa579f563198e2e3",
+      "members": [
+        {
+          "aliases": [
+            "The Star-Eater"
+          ],
+          "canonical_name": "Khar'Thyrix",
+          "entity_id": "vessel_oc_001",
+          "entity_type": "MOBILE_ASSET",
+          "source_path": "canon/L2/entities/mobile_assets/vessel_oc_001.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Minister Anaya Ral-Seyr",
+      "component_id": "ace.occupancy.fa85a828341d5f98",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Minister Anaya Ral-Seyr",
+          "entity_id": "CHAR-GU-ANAYA-01",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/mechanics/l2_character_dossiers__recovered_textAu.json"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "Minister Anaya Ral-Seyr",
+          "entity_id": "char_anaya_ral_seyr",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_anaya_ral_seyr.json"
+        }
+      ],
+      "relation_state": "unresolved"
+    },
+    {
+      "canonical_name": "Xyphos Precursor Research Center",
+      "component_id": "ace.occupancy.fb36f0b59aeb9e5f",
+      "members": [
+        {
+          "aliases": [],
+          "canonical_name": "Xyphos Precursor Research Center",
+          "entity_id": "loc_xyphos_precursor_research_center",
+          "entity_type": "LOCATION",
+          "source_path": "canon/L2/entities/locations/loc_xyphos_precursor_research_center.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    },
+    {
+      "canonical_name": "Orin Vex",
+      "component_id": "ace.occupancy.fcdd8b1057e87339",
+      "members": [
+        {
+          "aliases": [
+            "Vice Chancellor Orin Vex"
+          ],
+          "canonical_name": "Orin Vex",
+          "entity_id": "char_orin_vex",
+          "entity_type": "CHARACTER",
+          "source_path": "canon/L2/entities/characters/char_orin_vex.json"
+        }
+      ],
+      "relation_state": "proven_equivalent"
+    }
+  ],
+  "projection_id": "ace.projection.name_reservation_occupancy.v0.1.1"
+}

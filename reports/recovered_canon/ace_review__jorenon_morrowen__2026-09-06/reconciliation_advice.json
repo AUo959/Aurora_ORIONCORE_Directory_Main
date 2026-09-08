@@ -1,0 +1,60 @@
+{
+  "alternatives": [
+    {
+      "score": 7.7,
+      "tag": "STAGING"
+    },
+    {
+      "score": 5.05,
+      "tag": "APPROX"
+    },
+    {
+      "score": 2.75,
+      "tag": "UNCONFIRMED"
+    }
+  ],
+  "audit_entry": {
+    "all_scores": {
+      "APPROX": 5.05,
+      "CANON_PROMOTE": 7.7,
+      "LEGEND_CONTESTED": 2.7,
+      "STAGING": 7.7,
+      "UNCONFIRMED": 2.75
+    },
+    "calibration_ref": "HDE_GAP_HEURISTIC_V1",
+    "confidence": 0.05,
+    "confidence_kind": "HEURISTIC_GAP",
+    "constraints": {
+      "forbid": [
+        "map"
+      ],
+      "require": []
+    },
+    "context": null,
+    "entity_name": "Jorenon Morrowen",
+    "entity_profile": {
+      "conflict_freedom": 1.0,
+      "field_completeness": 1.0,
+      "layer_integrity": 1.0,
+      "provenance_strength": 0.8,
+      "review_status": 0.0,
+      "schema_compliance": 1.0
+    },
+    "recommended_tag": "CANON_PROMOTE",
+    "timestamp": "2026-09-06T04:12:29.873230+00:00",
+    "timestamp_source": "WALL_CLOCK_UTC",
+    "uncertainty_band": "HIGH"
+  },
+  "calibration_ref": "HDE_GAP_HEURISTIC_V1",
+  "confidence": 0.05,
+  "confidence_kind": "HEURISTIC_GAP",
+  "constraints_applied": {
+    "forbid": [
+      "map"
+    ],
+    "require": []
+  },
+  "explanation": "Recommending 'CANON_PROMOTE' for 'Jorenon Morrowen' (score: 7.70). Gaps: review_status (0.00 < 0.80). Close alternative: 'STAGING' (score: 7.70, \u0394=0.00). Consider reviewing if the gap is narrow. Excluded tags: ['map'].",
+  "recommended_tag": "CANON_PROMOTE",
+  "uncertainty_band": "HIGH"
+}

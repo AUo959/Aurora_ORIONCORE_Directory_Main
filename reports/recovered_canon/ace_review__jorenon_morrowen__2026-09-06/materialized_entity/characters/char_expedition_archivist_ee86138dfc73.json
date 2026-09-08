@@ -1,0 +1,79 @@
+{
+  "ace_provenance": {
+    "materialization_authority_ref": "offline-review:aurora-world-a64638e56af946f4a9f14af1c8f4f80a:demo-create-one",
+    "materializer_version": "0.5.0",
+    "query_id": "ace.query.character.c0a1b8640fd932dfdc86",
+    "source_determination_id": "ace.determination.character.c0a1b8640fd932dfdc86"
+  },
+  "aliases": [],
+  "canonical_position_status": null,
+  "capsule_binding_note": "ACE v0.5 explicit bridge between the flat character discovery record and the native CharForge capsule.",
+  "capsule_id": "char_expedition_archivist_ee86138dfc73",
+  "capsule_ref": "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/",
+  "certainty": "CANON",
+  "conflict_flags": [],
+  "doc_sources": [
+    "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/identity.json (ACE materialized canonical capsule)",
+    "ACE determination ace.determination.character.c0a1b8640fd932dfdc86"
+  ],
+  "entity_id": "char_expedition_archivist_ee86138dfc73",
+  "entity_kind": "character",
+  "faction_bindings": [
+    "galactic_union"
+  ],
+  "location_type": "archive_outpost",
+  "locked_at": "2026-09-06T04:12:30.174471Z",
+  "name": "Jorenon Morrowen",
+  "naming_receipt": {
+    "aliases": [],
+    "candidate_set": [
+      "Jorenon Morrowen"
+    ],
+    "canonical_name": "Jorenon Morrowen",
+    "collisions_checked": 243,
+    "protocol": "GUMAS_NAMING_PROTOCOL_v0.1",
+    "receipt_version": "1.0",
+    "registry_digest": "968131b19d93c63f34b4723b7bdee9597df9ce586f932f17acc35ff5f63c66b2",
+    "rejected_candidates": [],
+    "request": {
+      "constraints": {},
+      "entity_id": "char_expedition_archivist_ee86138dfc73",
+      "entity_type": "PERSON",
+      "faction_context": "galactic_union",
+      "region_context": "archive_outpost",
+      "register": "FORMAL",
+      "seed_hint": 808
+    },
+    "selection_mode": "generated",
+    "signature": {
+      "cadence": {
+        "initials": "jm",
+        "terminal": "en",
+        "token_count": 2,
+        "token_lengths": [
+          7,
+          8
+        ],
+        "vowel_groups": [
+          3,
+          3
+        ]
+      },
+      "normalized": "jorenonmorrowen",
+      "phonetic_key": "jrnmrwn",
+      "root": "morrow",
+      "seed": 808,
+      "warnings": []
+    }
+  },
+  "naming_receipt_ref": "canon/L2/entities/char_expedition_archivist_ee86138dfc73/naming_receipt.json",
+  "notes": "Generated only after ACE retrieval-first preflight established no plausible existing canonical referent; published atomically with the complete capsule and naming receipt.",
+  "org_type": null,
+  "organization_ids": [],
+  "parent_org_id": null,
+  "promotion_pass": "ACE Native Character Materialization v0.5",
+  "region_id": null,
+  "role": "Expedition Archivist",
+  "status": "active",
+  "updated_at": "2026-09-06"
+}

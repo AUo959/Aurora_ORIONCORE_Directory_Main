@@ -1,0 +1,7 @@
+{
+  "artifact": "./determination_receipt.json",
+  "errors": [],
+  "ok": true,
+  "schema": "/Users/travisstreets/dev/aurora-ace-sandbox/workspace/catalog/schemas/aurora_ace_determination_receipt.schema.json",
+  "validator_python": "/Users/travisstreets/dev/aurora-ace-runtime/bin/python"
+}

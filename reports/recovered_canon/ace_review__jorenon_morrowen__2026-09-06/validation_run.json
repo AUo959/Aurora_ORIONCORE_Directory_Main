@@ -1,0 +1,63 @@
+{
+  "reports": [
+    {
+      "entity_name": "Jorenon Morrowen",
+      "entity_type": "character",
+      "findings": [
+        {
+          "code": "CONTEXT_SCAN_APPLIED",
+          "message": "Context scan enabled for 'CanonRec' across 1 preferred canonical roots.",
+          "severity": "INFO"
+        },
+        {
+          "code": "CLEAN_ENTITY",
+          "message": "Entity passes all validation checks.",
+          "severity": "INFO"
+        }
+      ],
+      "layer": "L2",
+      "passed": true,
+      "required_fields": [
+        "canonical_id",
+        "canonical_name",
+        "aliases",
+        "entity_kind",
+        "certainty",
+        "doc_sources",
+        "notes",
+        "role",
+        "faction",
+        "sources"
+      ],
+      "required_fields_total": 10,
+      "summary": {
+        "blocks": 0,
+        "infos": 2,
+        "warnings": 0
+      },
+      "timestamp": "2026-09-06T04:12:29.288656Z",
+      "timestamp_source": "WALL_CLOCK_UTC"
+    }
+  ],
+  "validation_run": {
+    "blocked": 0,
+    "content_hash": "538609111637579b0a820741ab9a468fac615eaecb2c3b4428a2979941e0e875",
+    "content_hash_alg": "SHA256",
+    "content_hash_excluded_fields": [
+      "timestamp",
+      "timestamp_source"
+    ],
+    "content_hash_scope": "SEMANTIC_OUTPUT_EXCLUDING_TIMESTAMPS",
+    "entities_checked": 1,
+    "hash_canon_rules_ref": "validate_entity.py::_canonicalize_for_hash",
+    "hash_canon_version": "CANONREC_HASH_CANON_V1",
+    "output_hash": "d19d5bb4d3a9460047631c99146b7615cadedaca034d5e2324c842c13c371798",
+    "output_hash_alg": "SHA256",
+    "output_hash_scope": "RUN_ARTIFACT_INCLUDING_TIMESTAMPS",
+    "passed": 1,
+    "receipt_id": "538609111637579b0a820741ab9a468fac615eaecb2c3b4428a2979941e0e875",
+    "receipt_id_policy": "receipt_id = content_hash",
+    "timestamp": "2026-09-06T04:12:29.834179Z",
+    "timestamp_source": "WALL_CLOCK_UTC"
+  }
+}

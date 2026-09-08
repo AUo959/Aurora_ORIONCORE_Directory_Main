@@ -1,0 +1,773 @@
+{
+  "answer": {
+    "fields": [
+      {
+        "canon_target_ref": "CanonRec:canon/L2/entities/char_expedition_archivist_ee86138dfc73",
+        "constraint_refs": [
+          "ace.policy.contextual-referent-id.v1"
+        ],
+        "field_path": "character.canonical_id",
+        "origin": "deterministic_derivation",
+        "producer_refs": [
+          "ace.capability.identity.allocate"
+        ],
+        "run_receipt_refs": [
+          "receipts/character_state.json"
+        ],
+        "source_refs": [
+          "ace.query.character.c0a1b8640fd932dfdc86"
+        ],
+        "value": "char_expedition_archivist_ee86138dfc73"
+      },
+      {
+        "canon_target_ref": "CanonRec:canon/L2/entities/char_expedition_archivist_ee86138dfc73",
+        "constraint_refs": [
+          "GUMAS_NAMING_PROTOCOL_v0.1"
+        ],
+        "field_path": "character.canonical_name",
+        "origin": "specialist_tool_output",
+        "producer_refs": [
+          "ace.capability.gumas.naming.resolve"
+        ],
+        "run_receipt_refs": [
+          "receipts/naming_receipt.json"
+        ],
+        "source_refs": [
+          "galactic_union",
+          "archive_outpost"
+        ],
+        "value": "Jorenon Morrowen"
+      },
+      {
+        "canon_target_ref": "CanonRec:canon/L2/entities/char_expedition_archivist_ee86138dfc73",
+        "constraint_refs": [
+          "galactic_union"
+        ],
+        "field_path": "character.role",
+        "origin": "retrieved",
+        "producer_refs": [
+          "ace.capability.context.resolve"
+        ],
+        "run_receipt_refs": [
+          "query_envelope.json"
+        ],
+        "source_refs": [
+          "galactic_union",
+          "archive_outpost"
+        ],
+        "value": "Expedition Archivist"
+      },
+      {
+        "canon_target_ref": "CanonRec:canon/L2/entities/char_expedition_archivist_ee86138dfc73",
+        "constraint_refs": [
+          "ace.policy.connective-synthesis.v1"
+        ],
+        "field_path": "character.background",
+        "origin": "connective_synthesis",
+        "producer_refs": [
+          "ace.capability.quantum_forge.charforge.generate_capsule",
+          "ace.capability.context.resolve"
+        ],
+        "run_receipt_refs": [
+          "receipts/character_state.json"
+        ],
+        "source_refs": [
+          "artifacts/charforge",
+          "galactic_union",
+          "archive_outpost"
+        ],
+        "value": "Jorenon Morrowen holds the role of Expedition Archivist within Galactic Union (federation). Dominant cognitive profile: hyper_rationalism_bias (intensity 0.42, plasticity 0.54). Legitimacy: 0.62; elite support: 0.61; institutional control: 0.60. Decision-making archetype: hyper_rationalism_bias. Tone: analytical; cadence: precise. Risk tolerance: 0.47; diplomacy openness: 0.80; escalation threshold: 0.57; oversight resistance: 0.22. In the observed encounter aboard the archive outpost, Jorenon Morrowen Carefully cross-checks conflicting expedition logs."
+      },
+      {
+        "canon_target_ref": "CanonRec:canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/traits.json",
+        "constraint_refs": [
+          "ORION Capsule Bundle Standard v0.2.0"
+        ],
+        "field_path": "character.traits",
+        "origin": "specialist_tool_output",
+        "producer_refs": [
+          "ace.capability.quantum_forge.charforge.generate_capsule"
+        ],
+        "run_receipt_refs": [
+          "artifacts/charforge/char_expedition_archivist_ee86138dfc73/BUILD_RECEIPT.json"
+        ],
+        "source_refs": [
+          "artifacts/charforge/char_expedition_archivist_ee86138dfc73/capsule/traits.json"
+        ],
+        "value": {
+          "bias_intensity": 0.4228,
+          "constraints": {
+            "ethics_gate": "Picard_Delta_3",
+            "no_filesystem_write_except": [
+              "capsule/state.bin"
+            ],
+            "no_internet_by_default": true
+          },
+          "dominant_bias": "hyper_rationalism_bias",
+          "secondary_biases": [],
+          "values": [
+            "consensus",
+            "rule_of_law",
+            "collective_security"
+          ],
+          "voice": {
+            "avoid": [
+              "emotional appeals",
+              "intuitive reasoning",
+              "ambiguous claims"
+            ],
+            "cadence": "precise",
+            "tone": "analytical"
+          }
+        }
+      },
+      {
+        "canon_target_ref": "CanonRec:canon/L2/entities/char_expedition_archivist_ee86138dfc73/naming_receipt.json",
+        "constraint_refs": [
+          "GUMAS_NAMING_PROTOCOL_v0.1"
+        ],
+        "field_path": "character.naming_receipt",
+        "origin": "specialist_tool_output",
+        "producer_refs": [
+          "ace.capability.gumas.naming.resolve"
+        ],
+        "run_receipt_refs": [
+          "receipts/naming_receipt.json"
+        ],
+        "source_refs": [
+          "evidence/name_reservation_projection.json"
+        ],
+        "value": {
+          "aliases": [],
+          "candidate_set": [
+            "Jorenon Morrowen"
+          ],
+          "canonical_name": "Jorenon Morrowen",
+          "collisions_checked": 243,
+          "protocol": "GUMAS_NAMING_PROTOCOL_v0.1",
+          "receipt_version": "1.0",
+          "registry_digest": "968131b19d93c63f34b4723b7bdee9597df9ce586f932f17acc35ff5f63c66b2",
+          "rejected_candidates": [],
+          "request": {
+            "constraints": {},
+            "entity_id": "char_expedition_archivist_ee86138dfc73",
+            "entity_type": "PERSON",
+            "faction_context": "galactic_union",
+            "region_context": "archive_outpost",
+            "register": "FORMAL",
+            "seed_hint": 808
+          },
+          "selection_mode": "generated",
+          "signature": {
+            "cadence": {
+              "initials": "jm",
+              "terminal": "en",
+              "token_count": 2,
+              "token_lengths": [
+                7,
+                8
+              ],
+              "vowel_groups": [
+                3,
+                3
+              ]
+            },
+            "normalized": "jorenonmorrowen",
+            "phonetic_key": "jrnmrwn",
+            "root": "morrow",
+            "seed": 808,
+            "warnings": []
+          }
+        }
+      },
+      {
+        "canon_target_ref": "CanonRec:canon/L2/entities/char_expedition_archivist_ee86138dfc73",
+        "constraint_refs": [
+          "ace.policy.delegated-routine-character-completion.v1"
+        ],
+        "field_path": "character.canonical_target",
+        "origin": "deterministic_derivation",
+        "producer_refs": [
+          "ace.capability.canonrec.materialize.entity"
+        ],
+        "run_receipt_refs": [
+          "candidate/char_expedition_archivist_ee86138dfc73.json"
+        ],
+        "source_refs": [
+          "query_envelope.json"
+        ],
+        "value": "canon/L2/entities/char_expedition_archivist_ee86138dfc73"
+      }
+    ],
+    "no_prior_record": true,
+    "summary": "No prior character record was supplied. ACE instantiated Jorenon Morrowen as Expedition Archivist for Galactic Union, generated a verified CharForge capsule, and produced a CanonRec-valid commit-ready entity packet.",
+    "supersedes_determination_refs": [
+      "ace.determination.character.c0a1b8640fd932dfdc86"
+    ]
+  },
+  "answer_contract": {
+    "compiler_version": "ace-answer-contract-0.1.1",
+    "coverage": [
+      {
+        "field_refs": [
+          "character.canonical_id",
+          "character.canonical_name"
+        ],
+        "producer_refs": [
+          "ace.capability.identity.allocate",
+          "ace.capability.gumas.naming.resolve"
+        ],
+        "reason": "Stable ID allocation and the live naming receipt cover identity.",
+        "requirement_id": "ace.semantic.character.identity",
+        "status": "satisfied"
+      },
+      {
+        "field_refs": [
+          "character.role",
+          "character.background"
+        ],
+        "producer_refs": [
+          "ace.capability.context.resolve",
+          "ace.capability.quantum_forge.charforge.generate_capsule"
+        ],
+        "reason": "Resolved context and the CharForge identity synopsis cover role, faction, and duty context.",
+        "requirement_id": "ace.semantic.character.current_context",
+        "status": "satisfied"
+      },
+      {
+        "field_refs": [
+          "character.background"
+        ],
+        "producer_refs": [
+          "ace.capability.quantum_forge.charforge.generate_capsule"
+        ],
+        "reason": "The background is rendered only from context and CharForge knowledge records.",
+        "requirement_id": "ace.semantic.character.operational_background",
+        "status": "satisfied"
+      },
+      {
+        "field_refs": [
+          "character.traits"
+        ],
+        "producer_refs": [
+          "ace.capability.quantum_forge.charforge.generate_capsule"
+        ],
+        "reason": "CharForge traits and state vector cover values and decision tendencies.",
+        "requirement_id": "ace.semantic.character.behavioral_profile",
+        "status": "satisfied"
+      },
+      {
+        "field_refs": [],
+        "producer_refs": [],
+        "reason": "This MVP query requests operational background, not a separate formative biography.",
+        "requirement_id": "ace.semantic.character.formative_biography",
+        "status": "not_applicable"
+      }
+    ],
+    "overall_status": "complete"
+  },
+  "baselines": [
+    {
+      "authority_role": "control_plane",
+      "commit_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "repository": "root"
+    },
+    {
+      "authority_role": "canon",
+      "commit_sha": "971e78b672ba85ff4360580718499b46d9a7714a",
+      "repository": "CanonRec"
+    },
+    {
+      "authority_role": "runtime",
+      "commit_sha": "a19870a576a4136fc7ee8c30a2a8d869f36156d9",
+      "repository": "aurora-cloudbank-symbolic-main"
+    }
+  ],
+  "blockers": [],
+  "conflicts": [],
+  "created_at": "2026-09-06T04:12:30.242905Z",
+  "determination_id": "ace.determination.character.c0a1b8640fd932dfdc86.materialized.e0ec5c54ebf5",
+  "engine": {
+    "contract_ref": "catalog/contracts/aurora_ace_contract_v0_1.json",
+    "engine_id": "aurora_ace",
+    "engine_version": "0.1.0",
+    "execution_mode": "delegated_materialize"
+  },
+  "integrity": {
+    "answer_sha256": "4c054c735032d74629c74c416f5fcacfa77234c8fa98d074aa66c4807e81ef57",
+    "artifact_sha256s": [
+      "04e6f9ac721b9de072356fe613dc3c2f34de183c666821f0e90d91a10087e481",
+      "09e64a750c6b671fdf24102441165737d971fdbe127c79012f4aecab0efc4896",
+      "13b1610d82d575298fb51bb5d3dd4cc46fcfbe5e36e3773c7f2d66ce72265988",
+      "19a5115e722ae2169bfba313acfedbea8787ff0fdf0a78900a8a17389ef624f7",
+      "1e09a107a3c384b501d1de08bad9672d619682931a09ce839c5529091b7a5f57",
+      "2652074f858168137c5bdaa03f6fb43a4c03d7f793823f63f32c2edeb075c97b",
+      "3e44fadaa63fdd47f67ae2944b8eb2b43695a0d3d900f1ce747cfeb08a69ac71",
+      "406963b450e27ebda169c5743d549f276b80809b1e5c27008055311d7b07a4e6",
+      "4a94b2e7a42f8465ace45e55b50e2df7c5adb099aa055b03de633edd61842f6f",
+      "4bd38280589e39151b45f454f55781c0ac8ca7282f8370ee7c2eb0a08eddf1a9",
+      "501898009faef41ea48dbfce0518ffb3c559b9801ba2ae967b430016206d51eb",
+      "5caa3b9e91b31382eb1d5c739d936c583971fcd5aff4203f0321b22fc1d1b415",
+      "66d44ff50c96d61856e0d7d70a820e3c93dc74fe54788d5984a3e3d0a248839c",
+      "69200559e79c7098fa84c7553f2bc51f453185f64985e232fc84575a3172c584",
+      "6e825da040bc83a40ec6ffc23c27d99b9e12b92e78f5532baf89e95440a10462",
+      "72a6c5c75369cbd85b9a0955b5275592907a86f1c9bf6a758b44d54e09ff5377",
+      "7a77739af9b056b1eee82052acd5e667d16d2b281250c9e9de25867cc6ddcbb7",
+      "932442c76a7c4ab1337bc729d79efb18e1f38652b950fbdc1d97631e637834ed",
+      "ac65eaa048a8cb0b80bbebf7e6d47841274288af79668c1b0ae9c8cf34401394",
+      "bef3ec650174bd0690f10f34b77774f96309a61c5214e2557418c135b28d4b2e",
+      "bf9e8f5bd5172e417768aa03a56bdba042d9f9df96f07f651b49a6b7b5055379",
+      "cdb01e040d99e5fed9bc97b41aefe271e248ae5efabbfbdf3fb21c12fcb5e8eb",
+      "d96153a27e1bcd2d021bbe94bf782b63b2296680a91b77a4737a79949b48a005",
+      "e8c6096f734ec57c9b65353e951077c71742a99cc78a2dedb3e78a5d8d7f936a",
+      "eabbe4ea2be1fc25bd21df64e85b13e3794c1802c57308e2336266cc2dba2581",
+      "fd45ac48a98d512630479427f9aca66ac8512434423f4b623e3b5e6a94c8b8d9"
+    ],
+    "capability_manifest_sha256s": [
+      "0bd5b56d47b70a720e7f2fbb41af52c2ea3ec1094a2903f7fa5f4882c7765854",
+      "10451879ca498967da2029e22d00d8784c2af7cec0624ccd7364aaf5432e5d06",
+      "641db16ad86c6a4173ef6a76bb7221b934906e6be953bc620395a4a460385d57",
+      "69e16a2a91447903343bbd9058c452206a8bdba27813c6a5ac3edcbd009b2040",
+      "6c9ca8a2f6e7fcef1e1105d1e5b6d779f5b55d40721feed6dedbf07b63bcc64d",
+      "6d520291d91626b8df5dc043c34d46a2b423d7e413e0e303cb1f2db50ba2ee43",
+      "9190e7674c44fa62317a8edf4069bf5c23de529e90dc6ce38277329e528ef6e3",
+      "bb627019d96d28dec2ec008269b65a7b840f5c457bc35a5e10257cf3cab86eee"
+    ],
+    "prior_determination_digest": "d0f386c2cafdb64f439c57c2915e6a55e02483257f2b7d2a79b9ab079090edb2",
+    "query_sha256": "291186281c7134ea3acbc4c50f2a987f2ef3d42c2122bd02297a47d7d31096a3",
+    "semantic_answer_sha256": "4c054c735032d74629c74c416f5fcacfa77234c8fa98d074aa66c4807e81ef57",
+    "semantic_digest_policy_ref": "ace.policy.semantic-digest.v1"
+  },
+  "materialization": {
+    "commit_ready_packet_ref": ".",
+    "commit_sha": "e0ec5c54ebf505445db9f3e39ce204cd6975994d",
+    "gate_policy_ref": "ace.policy.delegated-routine-character-completion.v1; authority_ref=offline-review:aurora-world-a64638e56af946f4a9f14af1c8f4f80a:demo-create-one",
+    "status": "committed",
+    "target_paths": [
+      "canon/L2/entities/char_expedition_archivist_ee86138dfc73/BUILD_RECEIPT.json",
+      "canon/L2/entities/char_expedition_archivist_ee86138dfc73/bundle.manifest.json",
+      "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/cns.yaml",
+      "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/identity.json",
+      "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/knowledge.jsonl",
+      "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/manifest.json",
+      "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/runtime.py",
+      "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/state.bin",
+      "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/traits.json",
+      "canon/L2/entities/char_expedition_archivist_ee86138dfc73/naming_receipt.json",
+      "canon/L2/entities/characters/char_expedition_archivist_ee86138dfc73.json"
+    ],
+    "target_repository": "CanonRec"
+  },
+  "plan": {
+    "plan_id": "ace.plan.character.c0a1b8640fd932dfdc86",
+    "rejected_capability_refs": [],
+    "selection_basis": [
+      "specialist_first",
+      "registered_fleet_only",
+      "deterministic_replay",
+      "minimal_connective_synthesis"
+    ],
+    "steps": [
+      {
+        "artifact_output_sha256": "2d7ce3406c314706eb37609cf95588a7d700333370aefbe8c592d365fedcc5bb",
+        "capability_id": "ace.capability.context.resolve",
+        "consumes": [
+          "query.question",
+          "query.subject.context"
+        ],
+        "depends_on": [],
+        "duration_ms": 0.0,
+        "manifest_sha256": "10451879ca498967da2029e22d00d8784c2af7cec0624ccd7364aaf5432e5d06",
+        "output_sha256": "2d7ce3406c314706eb37609cf95588a7d700333370aefbe8c592d365fedcc5bb",
+        "produces": [
+          "resolved_context"
+        ],
+        "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+        "run_receipt_ref": "query_envelope.json",
+        "seed": null,
+        "semantic_output_sha256": "2d7ce3406c314706eb37609cf95588a7d700333370aefbe8c592d365fedcc5bb",
+        "side_effects_observed": [],
+        "status": "succeeded",
+        "step_id": "ace.step.character.context",
+        "tool_native_statuses": {},
+        "tool_run_id": "ace-run-character-context",
+        "volatile_output_fields": []
+      },
+      {
+        "artifact_output_sha256": "4e2b96c7c58089c1f732064cf3126ee4b8d7900546458cac62827b3011a94783",
+        "capability_id": "ace.capability.identity.allocate",
+        "consumes": [
+          "resolved_context"
+        ],
+        "depends_on": [
+          "ace.step.character.context"
+        ],
+        "duration_ms": 0.0,
+        "manifest_sha256": "641db16ad86c6a4173ef6a76bb7221b934906e6be953bc620395a4a460385d57",
+        "output_sha256": "4e2b96c7c58089c1f732064cf3126ee4b8d7900546458cac62827b3011a94783",
+        "produces": [
+          "character.canonical_id"
+        ],
+        "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+        "run_receipt_ref": "receipts/character_state.json",
+        "seed": 808,
+        "semantic_output_sha256": "4e2b96c7c58089c1f732064cf3126ee4b8d7900546458cac62827b3011a94783",
+        "side_effects_observed": [],
+        "status": "succeeded",
+        "step_id": "ace.step.character.identity",
+        "tool_native_statuses": {},
+        "tool_run_id": "ace-run-character-identity",
+        "volatile_output_fields": []
+      },
+      {
+        "artifact_output_sha256": "7d046acf4fce29856b744e6119685f5894a31b4a812571e23a84107f61b354f6",
+        "capability_id": "ace.capability.canonrec.project.name_reservations",
+        "consumes": [
+          "canonrec_raw_name_registry"
+        ],
+        "depends_on": [
+          "ace.step.character.context"
+        ],
+        "duration_ms": 0.0,
+        "manifest_sha256": "6d520291d91626b8df5dc043c34d46a2b423d7e413e0e303cb1f2db50ba2ee43",
+        "output_sha256": "7d046acf4fce29856b744e6119685f5894a31b4a812571e23a84107f61b354f6",
+        "produces": [
+          "name_reservation_projection",
+          "projection_membership_map"
+        ],
+        "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+        "run_receipt_ref": "evidence/name_projection_membership.json",
+        "seed": null,
+        "semantic_output_sha256": "7d046acf4fce29856b744e6119685f5894a31b4a812571e23a84107f61b354f6",
+        "side_effects_observed": [],
+        "status": "succeeded",
+        "step_id": "ace.step.character.name-projection",
+        "tool_native_statuses": {},
+        "tool_run_id": "ace-run-character-name-projection",
+        "volatile_output_fields": []
+      },
+      {
+        "artifact_output_sha256": "0ed7b5488b48aa18455da26b5face8a4553eaec5736a1859d27088727a8b5281",
+        "capability_id": "ace.capability.gumas.naming.resolve",
+        "consumes": [
+          "character.canonical_id",
+          "name_reservation_projection"
+        ],
+        "depends_on": [
+          "ace.step.character.identity",
+          "ace.step.character.name-projection"
+        ],
+        "duration_ms": 0.28,
+        "manifest_sha256": "0bd5b56d47b70a720e7f2fbb41af52c2ea3ec1094a2903f7fa5f4882c7765854",
+        "output_sha256": "0ed7b5488b48aa18455da26b5face8a4553eaec5736a1859d27088727a8b5281",
+        "produces": [
+          "character.canonical_name",
+          "character.naming_receipt"
+        ],
+        "repository_sha": "a19870a576a4136fc7ee8c30a2a8d869f36156d9",
+        "run_receipt_ref": "receipts/naming_receipt.json",
+        "seed": 808,
+        "semantic_output_sha256": "0ed7b5488b48aa18455da26b5face8a4553eaec5736a1859d27088727a8b5281",
+        "side_effects_observed": [
+          "reserved_generated_name_in_isolated_working_registry"
+        ],
+        "status": "succeeded",
+        "step_id": "ace.step.character.name",
+        "tool_native_statuses": {},
+        "tool_run_id": "ace-run-character-name",
+        "volatile_output_fields": []
+      },
+      {
+        "artifact_output_sha256": "c101565743734617209e3d1997de873402cba0fd05575462db15756879525799",
+        "capability_id": "ace.capability.gumas.state.build_character",
+        "consumes": [
+          "resolved_context",
+          "character.canonical_name"
+        ],
+        "depends_on": [
+          "ace.step.character.identity",
+          "ace.step.character.name"
+        ],
+        "duration_ms": 0.1,
+        "manifest_sha256": "6c9ca8a2f6e7fcef1e1105d1e5b6d779f5b55d40721feed6dedbf07b63bcc64d",
+        "output_sha256": "c101565743734617209e3d1997de873402cba0fd05575462db15756879525799",
+        "produces": [
+          "leader_state",
+          "faction_state"
+        ],
+        "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+        "run_receipt_ref": "receipts/character_state.json",
+        "seed": 808,
+        "semantic_output_sha256": "c101565743734617209e3d1997de873402cba0fd05575462db15756879525799",
+        "side_effects_observed": [],
+        "status": "succeeded",
+        "step_id": "ace.step.character.state",
+        "tool_native_statuses": {},
+        "tool_run_id": "ace-run-character-state",
+        "volatile_output_fields": []
+      },
+      {
+        "artifact_output_sha256": "a4804a7400caf1373f9c03679e58335f96785b0f5da51a9e48e211f9d22b9bf5",
+        "capability_id": "ace.capability.quantum_forge.charforge.generate_capsule",
+        "consumes": [
+          "leader_state",
+          "faction_state"
+        ],
+        "depends_on": [
+          "ace.step.character.state"
+        ],
+        "duration_ms": 1.48,
+        "manifest_sha256": "69e16a2a91447903343bbd9058c452206a8bdba27813c6a5ac3edcbd009b2040",
+        "output_sha256": "a4804a7400caf1373f9c03679e58335f96785b0f5da51a9e48e211f9d22b9bf5",
+        "produces": [
+          "character.capsule",
+          "character.traits",
+          "character.background_knowledge"
+        ],
+        "repository_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+        "run_receipt_ref": "artifacts/charforge/char_expedition_archivist_ee86138dfc73/BUILD_RECEIPT.json",
+        "seed": 808,
+        "semantic_output_sha256": "a4804a7400caf1373f9c03679e58335f96785b0f5da51a9e48e211f9d22b9bf5",
+        "side_effects_observed": [
+          "wrote_capsule_bundle_to_transaction_workspace"
+        ],
+        "status": "succeeded",
+        "step_id": "ace.step.character.charforge",
+        "tool_native_statuses": {
+          "identity.certainty": "CANON_PROMOTE"
+        },
+        "tool_run_id": "ace-run-character-charforge",
+        "volatile_output_fields": [
+          "generated_at"
+        ]
+      },
+      {
+        "artifact_output_sha256": "7e171d31a8b4bbe92657d68b8924916a4fd46353113231040438ae8b0cdabf50",
+        "capability_id": "ace.capability.canonrec.validate.entity",
+        "consumes": [
+          "canonical_entity_candidate"
+        ],
+        "depends_on": [
+          "ace.step.character.charforge"
+        ],
+        "duration_ms": 451.968,
+        "manifest_sha256": "9190e7674c44fa62317a8edf4069bf5c23de529e90dc6ce38277329e528ef6e3",
+        "output_sha256": "7e171d31a8b4bbe92657d68b8924916a4fd46353113231040438ae8b0cdabf50",
+        "produces": [
+          "entity_validation_receipt"
+        ],
+        "repository_sha": "971e78b672ba85ff4360580718499b46d9a7714a",
+        "run_receipt_ref": "receipts/entity_validation.json",
+        "seed": null,
+        "semantic_output_sha256": "9316d00d2008732da75d8ec36800b927031abfa34f8e3e3a6c84cf324c8d89a0",
+        "side_effects_observed": [],
+        "status": "succeeded",
+        "step_id": "ace.step.character.validate-entity",
+        "tool_native_statuses": {},
+        "tool_run_id": "ace-run-character-validate-entity",
+        "volatile_output_fields": []
+      },
+      {
+        "artifact_output_sha256": "8a0e326aa6ef823567b547e598f90a61949bfe82668ad73854a2549c116ec622",
+        "capability_id": "ace.capability.canonrec.validate.naming_receipt",
+        "consumes": [
+          "canonical_entity_candidate",
+          "canonrec_raw_name_registry"
+        ],
+        "depends_on": [
+          "ace.step.character.name",
+          "ace.step.character.validate-entity"
+        ],
+        "duration_ms": 25.417,
+        "manifest_sha256": "bb627019d96d28dec2ec008269b65a7b840f5c457bc35a5e10257cf3cab86eee",
+        "output_sha256": "8a0e326aa6ef823567b547e598f90a61949bfe82668ad73854a2549c116ec622",
+        "produces": [
+          "naming_validation_receipt"
+        ],
+        "repository_sha": "971e78b672ba85ff4360580718499b46d9a7714a",
+        "run_receipt_ref": "receipts/naming_validation.json",
+        "seed": null,
+        "semantic_output_sha256": "8a0e326aa6ef823567b547e598f90a61949bfe82668ad73854a2549c116ec622",
+        "side_effects_observed": [],
+        "status": "succeeded",
+        "step_id": "ace.step.character.validate-name",
+        "tool_native_statuses": {},
+        "tool_run_id": "ace-run-character-validate-name",
+        "volatile_output_fields": []
+      },
+      {
+        "artifact_output_sha256": "dc13bf479c26d14aa7e10d04d4152ed5e5ac276035d0e5552101e7dcc988e2c8",
+        "capability_id": "ace.capability.canonrec.materialize.entity",
+        "consumes": [
+          "canonical_entity_candidate",
+          "entity_validation_receipt",
+          "naming_validation_receipt"
+        ],
+        "depends_on": [
+          "ace.step.character.validate-entity",
+          "ace.step.character.validate-name"
+        ],
+        "duration_ms": 71.708,
+        "manifest_sha256": "f5527b39da79ca31387cd7203e60f7936c390a183d06f544c1baa08a4b974be8",
+        "output_sha256": "dc13bf479c26d14aa7e10d04d4152ed5e5ac276035d0e5552101e7dcc988e2c8",
+        "produces": [
+          "canon/L2/entities/char_expedition_archivist_ee86138dfc73/BUILD_RECEIPT.json",
+          "canon/L2/entities/char_expedition_archivist_ee86138dfc73/bundle.manifest.json",
+          "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/cns.yaml",
+          "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/identity.json",
+          "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/knowledge.jsonl",
+          "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/manifest.json",
+          "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/runtime.py",
+          "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/state.bin",
+          "canon/L2/entities/char_expedition_archivist_ee86138dfc73/capsule/traits.json",
+          "canon/L2/entities/char_expedition_archivist_ee86138dfc73/naming_receipt.json",
+          "canon/L2/entities/characters/char_expedition_archivist_ee86138dfc73.json"
+        ],
+        "repository_sha": "971e78b672ba85ff4360580718499b46d9a7714a",
+        "run_receipt_ref": "CanonRec:character:char_expedition_archivist_ee86138dfc73@e0ec5c54ebf505445db9f3e39ce204cd6975994d",
+        "seed": null,
+        "semantic_output_sha256": "dc13bf479c26d14aa7e10d04d4152ed5e5ac276035d0e5552101e7dcc988e2c8",
+        "side_effects_observed": [
+          "wrote_canonical_character_artifact_set",
+          "created_git_commit"
+        ],
+        "status": "succeeded",
+        "step_id": "ace.step.character.materialize",
+        "tool_native_statuses": {},
+        "tool_run_id": "ace-run-character-materialization-e0ec5c54ebf5",
+        "volatile_output_fields": []
+      }
+    ]
+  },
+  "projections": [
+    {
+      "collapsed_row_count": 50,
+      "membership_receipt_ref": "evidence/name_projection_membership.json",
+      "projected_member_count": 243,
+      "projection_id": "ace.projection.name_reservation_occupancy.v0.1.1",
+      "projection_sha256": "d54663f531eed80ccc30beb9792c01c00bd58384605dcdb2ddad9ac83f1b9990",
+      "projection_type": "name_reservation_occupancy",
+      "source_commit_sha": "971e78b672ba85ff4360580718499b46d9a7714a",
+      "source_member_count": 293,
+      "source_repository": "CanonRec",
+      "source_semantic_sha256": "6de5cb1b8faaa468547b4b02e851606e7599ec8181912bd04660ecc85124ff79",
+      "transform_id": "ace.transform.connected_name_occupancy",
+      "transform_version": "0.1.1",
+      "unresolved_relation_count": 40
+    }
+  ],
+  "query_id": "ace.query.character.c0a1b8640fd932dfdc86",
+  "record_type": "ace_determination_receipt",
+  "replay": {
+    "deterministic": true,
+    "non_replayable_reasons": [
+      "Git commit identity and publication timestamp are materialization metadata; replay the semantic source packet instead."
+    ],
+    "replay_command": null,
+    "replayable": false,
+    "required_artifact_refs": [
+      "determination_receipt.json",
+      "candidate/char_expedition_archivist_ee86138dfc73.json",
+      "artifacts/charforge/char_expedition_archivist_ee86138dfc73/BUILD_RECEIPT.json",
+      "artifacts/charforge/char_expedition_archivist_ee86138dfc73/bundle.manifest.json",
+      "artifacts/charforge/char_expedition_archivist_ee86138dfc73/capsule/manifest.json",
+      "receipts/naming_receipt.json"
+    ]
+  },
+  "schema_version": "0.1.1",
+  "simulation_mode": "constitutive_generation",
+  "status": "GENERATED_CANON",
+  "subject_refs": [
+    "char_expedition_archivist_ee86138dfc73",
+    "galactic_union",
+    "archive_outpost"
+  ],
+  "transactions": [
+    {
+      "baseline_sha256": "968131b19d93c63f34b4723b7bdee9597df9ce586f932f17acc35ff5f63c66b2",
+      "concurrency_policy": "sequential_working_state",
+      "kind": "naming_reservation",
+      "receipt_ref": "receipts/naming_transaction.json",
+      "result_sha256": "8baff5addd9aa77fc93bbd41148d152a0d4009bde70d5a71f4c0cd0a90b21c1c",
+      "revalidation_status": "pass",
+      "scope": "CanonRec:L2:canonical_name_reservations",
+      "side_effects": [
+        "reserved_generated_name_in_isolated_working_registry"
+      ],
+      "transaction_id": "ace.transaction.naming.c0a1b8640fd932dfdc86"
+    },
+    {
+      "baseline_sha256": "566c1c600100170f972949218f1d7630a1c8c2df57afc310e19a2dd4499a1e0d",
+      "concurrency_policy": "optimistic_compare_and_swap",
+      "kind": "materialization",
+      "receipt_ref": "CanonRec:character:char_expedition_archivist_ee86138dfc73@e0ec5c54ebf505445db9f3e39ce204cd6975994d",
+      "result_sha256": "dc13bf479c26d14aa7e10d04d4152ed5e5ac276035d0e5552101e7dcc988e2c8",
+      "revalidation_status": "pass",
+      "scope": "CanonRec:character:char_expedition_archivist_ee86138dfc73",
+      "side_effects": [
+        "wrote_canonical_character_artifact_set",
+        "created_git_commit"
+      ],
+      "transaction_id": "ace.transaction.materialization.e0ec5c54ebf50544"
+    }
+  ],
+  "validation": {
+    "gates": [
+      {
+        "finding_codes": [],
+        "gate_id": "query_schema",
+        "receipt_refs": [
+          "receipts/query_schema_validation.json"
+        ],
+        "status": "pass",
+        "summary": "The compiled query satisfies the ACE query-envelope schema.",
+        "validator_ref": "catalog/schemas/aurora_ace_query_envelope.schema.json"
+      },
+      {
+        "finding_codes": [],
+        "gate_id": "entity_schema",
+        "receipt_refs": [
+          "receipts/entity_validation.json"
+        ],
+        "status": "pass",
+        "summary": "CanonRec accepted the L2 character candidate without blocking findings.",
+        "validator_ref": "ace.capability.canonrec.validate.entity"
+      },
+      {
+        "finding_codes": [
+          "NAMING_REGISTRY_ADVANCED"
+        ],
+        "gate_id": "naming_protocol",
+        "receipt_refs": [
+          "receipts/naming_validation.json",
+          "receipts/naming_transaction.json"
+        ],
+        "status": "pass",
+        "summary": "The name passed the live raw-registry collision gate; non-blocking crowding or projection-digest findings remain visible.",
+        "validator_ref": "ace.capability.canonrec.validate.naming_receipt"
+      },
+      {
+        "finding_codes": [],
+        "gate_id": "capsule_integrity",
+        "receipt_refs": [
+          "artifacts/charforge/char_expedition_archivist_ee86138dfc73/BUILD_RECEIPT.json"
+        ],
+        "status": "pass",
+        "summary": "CharForge verified all emitted capsule hashes.",
+        "validator_ref": "ace.capability.quantum_forge.charforge.generate_capsule"
+      },
+      {
+        "finding_codes": [],
+        "gate_id": "semantic_coverage",
+        "receipt_refs": [
+          "receipts/character_state.json",
+          "artifacts/charforge/char_expedition_archivist_ee86138dfc73/capsule/knowledge.jsonl"
+        ],
+        "status": "pass",
+        "summary": "All mandatory identity, context, operational-background, and behavioral semantics are satisfied.",
+        "validator_ref": "ace.answer_contract.coverage.v0.1.1"
+      }
+    ],
+    "overall_status": "pass"
+  }
+}

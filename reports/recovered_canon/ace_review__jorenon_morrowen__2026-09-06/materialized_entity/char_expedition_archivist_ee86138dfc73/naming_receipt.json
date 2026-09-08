@@ -1,0 +1,42 @@
+{
+  "aliases": [],
+  "candidate_set": [
+    "Jorenon Morrowen"
+  ],
+  "canonical_name": "Jorenon Morrowen",
+  "collisions_checked": 243,
+  "protocol": "GUMAS_NAMING_PROTOCOL_v0.1",
+  "receipt_version": "1.0",
+  "registry_digest": "968131b19d93c63f34b4723b7bdee9597df9ce586f932f17acc35ff5f63c66b2",
+  "rejected_candidates": [],
+  "request": {
+    "constraints": {},
+    "entity_id": "char_expedition_archivist_ee86138dfc73",
+    "entity_type": "PERSON",
+    "faction_context": "galactic_union",
+    "region_context": "archive_outpost",
+    "register": "FORMAL",
+    "seed_hint": 808
+  },
+  "selection_mode": "generated",
+  "signature": {
+    "cadence": {
+      "initials": "jm",
+      "terminal": "en",
+      "token_count": 2,
+      "token_lengths": [
+        7,
+        8
+      ],
+      "vowel_groups": [
+        3,
+        3
+      ]
+    },
+    "normalized": "jorenonmorrowen",
+    "phonetic_key": "jrnmrwn",
+    "root": "morrow",
+    "seed": 808,
+    "warnings": []
+  }
+}

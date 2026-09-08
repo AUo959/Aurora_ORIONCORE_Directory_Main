@@ -1,0 +1,32 @@
+{
+  "anchor_seed": "EOS_SEED_ORION",
+  "capsule_version": "0.2.0",
+  "charforge_version": "3.0.0",
+  "generated_at": "2026-09-06T03:50:38.457419+00:00",
+  "records": [
+    {
+      "path": "identity.json",
+      "sha256": "04e6f9ac721b9de072356fe613dc3c2f34de183c666821f0e90d91a10087e481"
+    },
+    {
+      "path": "traits.json",
+      "sha256": "fd45ac48a98d512630479427f9aca66ac8512434423f4b623e3b5e6a94c8b8d9"
+    },
+    {
+      "path": "knowledge.jsonl",
+      "sha256": "932442c76a7c4ab1337bc729d79efb18e1f38652b950fbdc1d97631e637834ed"
+    },
+    {
+      "path": "cns.yaml",
+      "sha256": "ac65eaa048a8cb0b80bbebf7e6d47841274288af79668c1b0ae9c8cf34401394"
+    },
+    {
+      "path": "state.bin",
+      "sha256": "bef3ec650174bd0690f10f34b77774f96309a61c5214e2557418c135b28d4b2e"
+    },
+    {
+      "path": "runtime.py",
+      "sha256": "66d44ff50c96d61856e0d7d70a820e3c93dc74fe54788d5984a3e3d0a248839c"
+    }
+  ]
+}

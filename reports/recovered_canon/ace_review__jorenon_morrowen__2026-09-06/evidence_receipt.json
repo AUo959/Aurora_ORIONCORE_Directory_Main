@@ -1,0 +1,66 @@
+{
+  "claims": [
+    {
+      "claim_id": "CLM-2d90885c70ac",
+      "claim_kind": "ENTITY_VALIDATION_OBSERVED",
+      "claim_text": "Validation observed entity 'Jorenon Morrowen' as L2/character with passed=True.",
+      "entity_name": "Jorenon Morrowen",
+      "entity_type": "character",
+      "layer": "L2",
+      "provenance": [
+        {
+          "ref": "538609111637579b0a820741ab9a468fac615eaecb2c3b4428a2979941e0e875",
+          "ref_type": "validation_run_receipt_id"
+        },
+        {
+          "ref": "cb44a2675b1687848d31bbf8ce6b58b5a6dd6ea7a15aca8fdbb300c3fb154514",
+          "ref_type": "entity_report_fingerprint"
+        }
+      ],
+      "status": "SUPPORTED"
+    }
+  ],
+  "content_hash": "2146bca7bfa3a292009c52940a5d9474ae7b1aa346e8e2243799133b42a1220f",
+  "content_hash_alg": "SHA256",
+  "content_hash_excluded_fields": [
+    "timestamp",
+    "timestamp_source",
+    "inputs.validation_run_file",
+    "inputs.canon_targets_file",
+    "output_hash",
+    "content_hash"
+  ],
+  "content_hash_scope": "EVIDENCE_RECEIPT_SEMANTIC_OUTPUT_EXCLUDING_VOLATILE_FIELDS",
+  "gate": "EVIDENCE",
+  "hash_canon_rules_ref": "emit_evidence_receipt.py::_canonicalize_for_hash",
+  "hash_canon_version": "CANONREC_EVIDENCE_HASH_CANON_V1",
+  "inputs": {
+    "canon_targets": [
+      "CanonRec:canon/L2/entities/char_expedition_archivist_ee86138dfc73"
+    ],
+    "canon_targets_file": null,
+    "validation_run_file": "/Users/travisstreets/dev/aurora-ace-reviews/jorenon-morrowen-20260906/validation_run.json"
+  },
+  "kind": "EG_LITE_PROTO_RECEIPT",
+  "output_hash": "6137588e313844b6fcf6880adc6189ab09fc0b972726c47ebc3c17b665f78a4c",
+  "output_hash_alg": "SHA256",
+  "output_hash_scope": "EVIDENCE_RECEIPT_RUN_ARTIFACT_INCLUDING_TIMESTAMPS",
+  "receipt_id": "2146bca7bfa3a292009c52940a5d9474ae7b1aa346e8e2243799133b42a1220f",
+  "receipt_id_policy": "receipt_id = content_hash",
+  "source_validation_run": {
+    "content_hash": "538609111637579b0a820741ab9a468fac615eaecb2c3b4428a2979941e0e875",
+    "hash_canon_rules_ref": "validate_entity.py::_canonicalize_for_hash",
+    "hash_canon_version": "CANONREC_HASH_CANON_V1",
+    "output_hash": "d19d5bb4d3a9460047631c99146b7615cadedaca034d5e2324c842c13c371798",
+    "receipt_id": "538609111637579b0a820741ab9a468fac615eaecb2c3b4428a2979941e0e875"
+  },
+  "summary": {
+    "assumptions": 0,
+    "supported": 1,
+    "total_claims": 1,
+    "unknown": 0
+  },
+  "timestamp": "2026-09-06T04:12:29.875585Z",
+  "timestamp_source": "WALL_CLOCK_UTC",
+  "verdict": "PASS"
+}

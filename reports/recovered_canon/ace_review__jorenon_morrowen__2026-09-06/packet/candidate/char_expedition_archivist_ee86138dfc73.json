@@ -1,0 +1,90 @@
+{
+  "ace_capsule_ref": "artifacts/charforge/char_expedition_archivist_ee86138dfc73",
+  "ace_query_id": "ace.query.character.c0a1b8640fd932dfdc86",
+  "aliases": [],
+  "background_summary": "Jorenon Morrowen holds the role of Expedition Archivist within Galactic Union (federation). Dominant cognitive profile: hyper_rationalism_bias (intensity 0.42, plasticity 0.54). Legitimacy: 0.62; elite support: 0.61; institutional control: 0.60. Decision-making archetype: hyper_rationalism_bias. Tone: analytical; cadence: precise. Risk tolerance: 0.47; diplomacy openness: 0.80; escalation threshold: 0.57; oversight resistance: 0.22. In the observed encounter aboard the archive outpost, Jorenon Morrowen Carefully cross-checks conflicting expedition logs.",
+  "canonical_id": "char_expedition_archivist_ee86138dfc73",
+  "canonical_name": "Jorenon Morrowen",
+  "certainty": "CANON_PROMOTE",
+  "doc_sources": [
+    "ace.query.character.c0a1b8640fd932dfdc86",
+    "galactic_union",
+    "archive_outpost"
+  ],
+  "entity_kind": "character",
+  "faction": "galactic_union",
+  "naming_receipt": {
+    "aliases": [],
+    "candidate_set": [
+      "Jorenon Morrowen"
+    ],
+    "canonical_name": "Jorenon Morrowen",
+    "collisions_checked": 243,
+    "protocol": "GUMAS_NAMING_PROTOCOL_v0.1",
+    "receipt_version": "1.0",
+    "registry_digest": "968131b19d93c63f34b4723b7bdee9597df9ce586f932f17acc35ff5f63c66b2",
+    "rejected_candidates": [],
+    "request": {
+      "constraints": {},
+      "entity_id": "char_expedition_archivist_ee86138dfc73",
+      "entity_type": "PERSON",
+      "faction_context": "galactic_union",
+      "region_context": "archive_outpost",
+      "register": "FORMAL",
+      "seed_hint": 808
+    },
+    "selection_mode": "generated",
+    "signature": {
+      "cadence": {
+        "initials": "jm",
+        "terminal": "en",
+        "token_count": 2,
+        "token_lengths": [
+          7,
+          8
+        ],
+        "vowel_groups": [
+          3,
+          3
+        ]
+      },
+      "normalized": "jorenonmorrowen",
+      "phonetic_key": "jrnmrwn",
+      "root": "morrow",
+      "seed": 808,
+      "warnings": []
+    }
+  },
+  "notes": "ACE constitutive completion; commit-ready and not yet written to CanonRec.",
+  "role": "Expedition Archivist",
+  "sources": [
+    "galactic_union",
+    "archive_outpost"
+  ],
+  "traits": {
+    "bias_intensity": 0.4228,
+    "constraints": {
+      "ethics_gate": "Picard_Delta_3",
+      "no_filesystem_write_except": [
+        "capsule/state.bin"
+      ],
+      "no_internet_by_default": true
+    },
+    "dominant_bias": "hyper_rationalism_bias",
+    "secondary_biases": [],
+    "values": [
+      "consensus",
+      "rule_of_law",
+      "collective_security"
+    ],
+    "voice": {
+      "avoid": [
+        "emotional appeals",
+        "intuitive reasoning",
+        "ambiguous claims"
+      ],
+      "cadence": "precise",
+      "tone": "analytical"
+    }
+  }
+}

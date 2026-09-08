@@ -1,0 +1,9 @@
+{
+  "bundle_type": "ORION_CAPSULE_BUNDLE",
+  "bundle_version": "0.2.0",
+  "capsule_dir": "capsule/",
+  "capsule_id": "char_expedition_archivist_ee86138dfc73",
+  "charforge": "3.0.0",
+  "generated_at": "2026-09-06T03:50:38.457510+00:00",
+  "schema_ref": "CAPSULE_BUNDLE_STANDARD__v0.2.0.md"
+}

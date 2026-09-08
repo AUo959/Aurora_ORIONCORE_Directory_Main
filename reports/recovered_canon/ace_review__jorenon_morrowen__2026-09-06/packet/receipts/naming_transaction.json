@@ -1,0 +1,13 @@
+{
+  "baseline_sha256": "968131b19d93c63f34b4723b7bdee9597df9ce586f932f17acc35ff5f63c66b2",
+  "concurrency_policy": "sequential_working_state",
+  "kind": "naming_reservation",
+  "receipt_ref": "receipts/naming_transaction.json",
+  "result_sha256": "8baff5addd9aa77fc93bbd41148d152a0d4009bde70d5a71f4c0cd0a90b21c1c",
+  "revalidation_status": "pass",
+  "scope": "CanonRec:L2:canonical_name_reservations",
+  "side_effects": [
+    "reserved_generated_name_in_isolated_working_registry"
+  ],
+  "transaction_id": "ace.transaction.naming.c0a1b8640fd932dfdc86"
+}

@@ -1,0 +1,243 @@
+{
+  "answer_contract": {
+    "compiler_version": "ace-answer-contract-0.1.1",
+    "coverage_policy": "all_mandatory_semantics_satisfied",
+    "interpretation_basis": [
+      "question:name_and_background",
+      "subject:confirmed_unrecorded_character",
+      "context:operational_encounter"
+    ],
+    "requirements": [
+      {
+        "acceptable_origins": [
+          "deterministic_derivation",
+          "specialist_tool_output"
+        ],
+        "accepts_connective_rendering": false,
+        "accepts_state_derived": false,
+        "description": "Return a stable character ID and collision-safe canonical name.",
+        "minimum_evidence": [
+          "identity_allocation_receipt",
+          "naming_receipt"
+        ],
+        "required": true,
+        "requirement_id": "ace.semantic.character.identity",
+        "semantic_type": "stable_character_identity"
+      },
+      {
+        "acceptable_origins": [
+          "retrieved",
+          "specialist_tool_output",
+          "connective_synthesis"
+        ],
+        "accepts_connective_rendering": true,
+        "accepts_state_derived": true,
+        "description": "State the character's current role, faction, and duty context.",
+        "minimum_evidence": [
+          "resolved_context",
+          "leader_state",
+          "faction_state"
+        ],
+        "required": true,
+        "requirement_id": "ace.semantic.character.current_context",
+        "semantic_type": "current_role_and_faction_context"
+      },
+      {
+        "acceptable_origins": [
+          "specialist_tool_output",
+          "connective_synthesis"
+        ],
+        "accepts_connective_rendering": true,
+        "accepts_state_derived": true,
+        "description": "Describe role, decision profile, stressors, and relationships supported by generated state.",
+        "minimum_evidence": [
+          "charforge_identity_synopsis",
+          "charforge_bias_pattern"
+        ],
+        "required": true,
+        "requirement_id": "ace.semantic.character.operational_background",
+        "semantic_type": "state_derived_operational_background"
+      },
+      {
+        "acceptable_origins": [
+          "specialist_tool_output"
+        ],
+        "accepts_connective_rendering": false,
+        "accepts_state_derived": true,
+        "description": "Return tool-produced traits, values, and decision tendencies.",
+        "minimum_evidence": [
+          "charforge_traits",
+          "charforge_state_vector"
+        ],
+        "required": true,
+        "requirement_id": "ace.semantic.character.behavioral_profile",
+        "semantic_type": "traits_and_decision_profile"
+      },
+      {
+        "acceptable_origins": [
+          "retrieved",
+          "specialist_tool_output"
+        ],
+        "accepts_connective_rendering": false,
+        "accepts_state_derived": false,
+        "description": "A fuller formative biography if explicitly requested beyond operational background.",
+        "minimum_evidence": [
+          "history_producer_receipt"
+        ],
+        "required": false,
+        "requirement_id": "ace.semantic.character.formative_biography",
+        "semantic_type": "origin_education_and_formative_events"
+      }
+    ]
+  },
+  "baselines": [
+    {
+      "authority_role": "control_plane",
+      "commit_sha": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+      "path": ".",
+      "repository": "root"
+    },
+    {
+      "authority_role": "canon",
+      "commit_sha": "971e78b672ba85ff4360580718499b46d9a7714a",
+      "path": "GUMAS_SIM_2.5/CanonRec",
+      "repository": "CanonRec"
+    },
+    {
+      "authority_role": "runtime",
+      "commit_sha": "a19870a576a4136fc7ee8c30a2a8d869f36156d9",
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "repository": "aurora-cloudbank-symbolic-main"
+    }
+  ],
+  "created_at": "2026-09-06T03:50:38.313992Z",
+  "execution_policy": {
+    "allowed_side_effects": [
+      "write_transaction_workspace"
+    ],
+    "budgets": {
+      "max_new_entities": 1,
+      "max_output_bytes": 1048576,
+      "max_tool_calls": 12,
+      "max_wall_seconds": 30
+    },
+    "delegation_policy_ref": "ace.policy.delegated-routine-character-completion.v1",
+    "mode": "commit_ready"
+  },
+  "generation_policy": {
+    "analytical_simulation_allowed": true,
+    "canonical_completion_allowed": true,
+    "connective_synthesis_policy": "connective_only",
+    "constitutive_simulation_allowed": true,
+    "deterministic_required": true,
+    "prefer_existing_specialists": true,
+    "reserved_decision_policy_ref": "ace.policy.reserved-decisions.v1",
+    "stable_seed": 808
+  },
+  "query_id": "ace.query.character.c0a1b8640fd932dfdc86",
+  "query_kind": "complete",
+  "question": "Create a new L2 expedition archivist.",
+  "record_type": "ace_query_envelope",
+  "requested_outputs": [
+    {
+      "description": "Stable character identity for repeat resolution.",
+      "field_path": "character.canonical_id",
+      "preferred_capability_refs": [
+        "ace.capability.identity.allocate"
+      ],
+      "required": true
+    },
+    {
+      "description": "Collision-safe canonical person name.",
+      "field_path": "character.canonical_name",
+      "preferred_capability_refs": [
+        "ace.capability.gumas.naming.resolve"
+      ],
+      "required": true
+    },
+    {
+      "description": "Resolved current duty role.",
+      "field_path": "character.role",
+      "preferred_capability_refs": [
+        "ace.capability.context.resolve"
+      ],
+      "required": true
+    },
+    {
+      "description": "State-grounded operational background.",
+      "field_path": "character.background",
+      "preferred_capability_refs": [
+        "ace.capability.quantum_forge.charforge.generate_capsule"
+      ],
+      "required": true
+    },
+    {
+      "description": "Character voice, values, bias, and constraints.",
+      "field_path": "character.traits",
+      "preferred_capability_refs": [
+        "ace.capability.quantum_forge.charforge.generate_capsule"
+      ],
+      "required": true
+    },
+    {
+      "description": "Naming protocol and collision receipt.",
+      "field_path": "character.naming_receipt",
+      "preferred_capability_refs": [
+        "ace.capability.gumas.naming.resolve"
+      ],
+      "required": true
+    },
+    {
+      "description": "Exact commit target for the entity.",
+      "field_path": "character.canonical_target",
+      "preferred_capability_refs": [
+        "ace.capability.canonrec.materialize.entity"
+      ],
+      "required": true
+    }
+  ],
+  "requester": {
+    "kind": "user",
+    "requester_id": "sandbox:aurora-world-a64638e56af946f4a9f14af1c8f4f80a",
+    "session_ref": "demo-create-one"
+  },
+  "response_policy": {
+    "include_execution_plan": true,
+    "include_field_provenance": true,
+    "include_human_answer": true,
+    "include_replay_command": true
+  },
+  "schema_version": "0.1.1",
+  "scope": {
+    "layers": [
+      "L2"
+    ],
+    "repositories": [
+      "root",
+      "CanonRec",
+      "aurora-cloudbank-symbolic-main"
+    ],
+    "target_paths": [
+      "canon/L2/entities/char_expedition_archivist_ee86138dfc73"
+    ],
+    "target_repository": "CanonRec",
+    "temporal_basis": "explicit_commit_set"
+  },
+  "subject": {
+    "context": {
+      "faction_id": "galactic_union",
+      "location_type": "archive_outpost",
+      "observed_behavior": [
+        "Carefully cross-checks conflicting expedition logs."
+      ],
+      "role": "expedition_archivist"
+    },
+    "contextual_refs": [
+      "galactic_union",
+      "archive_outpost"
+    ],
+    "entity_type": "character",
+    "existence_status": "confirmed_unrecorded",
+    "subject_ref": null
+  }
+}
