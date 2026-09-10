@@ -1,0 +1,112 @@
+{
+  "status": "accepted",
+  "tests_passed": 8,
+  "integration_gate": "pass",
+  "canonical_repositories_and_protected_runtime_unchanged": true,
+  "protected_runtime_file_count": 7,
+  "canonical_snapshot": {
+    "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main": {
+      "head": "e3d9dc107749baabf5b9b66d928c40712a1b6086",
+      "status": " M catalog/path_aliases.csv\n M catalog/relocation_plan.json\n M catalog/rollback_wave4_root_intake_cleanup_initial.json\n?? archives/recovered_prototypes/biological_pneumatic_engine/Biological_Pneumatic_Engine_Whitepaper.docx\n?? reports/simulation/hour_aboard_v1__2026-08-18/\n?? reports/simulation/hour_aboard_v1__2026-08-19/\n?? reports/simulation/hour_aboard_v1__2026-08-20/\n?? reports/simulation/hour_aboard_v1__2026-08-27/\n?? reports/simulation/hour_aboard_v1__2026-09-01/\n",
+      "diff_sha256": "8c0601cdc1996dd361d3e8ef84da6b67dad89dbbd3e10fd2c96119e0587d3ce4"
+    },
+    "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/CanonRec": {
+      "head": "971e78b672ba85ff4360580718499b46d9a7714a",
+      "status": "",
+      "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main": {
+      "head": "a19870a576a4136fc7ee8c30a2a8d869f36156d9",
+      "status": "",
+      "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "protected_runs": {
+      "/Users/travisstreets/.aurora/l1-runs/9f906aa3-a16d-4495-9398-fb141b40c6df/state.json": "f9549d6ed12e8e4aa72ca59a11fe75108dd292af5a7d44ecd3fb34e41c66db55",
+      "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/migration_projection_v1_2.json": "0bb0ec98cba862aabce77f0d5ca70b9c63e8c53b7d50da49b91c88939bb38f2b",
+      "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/state.json": "1349f58389c93a18b96eb9d7460ba35c3273a85e743db86127b491c705eb1fa4",
+      "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/migration_receipt.json": "625ad896b32a1a3471c70d6359cb3e46d0dd007b81291ec27e347002b0a36190",
+      "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/recovery_receipt.json": "5e8a4369d0aadf7ba7f974636012de76dd51f1bcf929585987cca2380c38e1e0",
+      "/Users/travisstreets/.aurora/l1-runs/59da8a1c-df89-4203-bdd9-5e5ad89090e6/state.json": "36111a123af65ca7905ece92556a2895a0641d49ce35c1f941f6f06bfd359e7d",
+      "/Users/travisstreets/.aurora/l1-runs/c1503ce5-d6e8-4c84-b91d-63b55d1b38f0/state.json": "6c7755b2c8ea62f07f00a93967aace20b12b024641af73b0c3fed30ffe45d98a"
+    }
+  },
+  "review_directory": "/Users/travisstreets/dev/aurora-ace-reviews/jorenon-morrowen-20260906",
+  "review": {
+    "schema_version": 1,
+    "record_type": "ace_character_promotion_review",
+    "status": "review_ready",
+    "world_id": "aurora-world-a64638e56af946f4a9f14af1c8f4f80a",
+    "request_id": "demo-create-one",
+    "source_determination_id": "ace.determination.character.c0a1b8640fd932dfdc86.materialized.c5a69e946618",
+    "source_commit": "c5a69e9466189356314f81c0dde42365825f7f88",
+    "target_root": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
+    "target_baseline": "971e78b672ba85ff4360580718499b46d9a7714a",
+    "packet_baseline": "971e78b672ba85ff4360580718499b46d9a7714a",
+    "authority": "offline_review_only",
+    "canonical_workspace_mutated": false,
+    "publication_performed": false,
+    "blockers": [],
+    "implementation_sha256s": {
+      "tools/ace/promotion.py": "524af52fe8476ff5393213f31cbed34cdd001eccc761332cbcaf9c6e441a5123",
+      "tools/ace/character_materialize.py": "f9eade98a5598bef2e122a6c02da2100c65224bda51b26befc5c92743f88d8fe",
+      "tools/ace/character_retrieval.py": "34750b4af3c860eea6397c1a0b94c13552c6499877a86dbeaa97a616dd7027eb"
+    },
+    "entity_id": "char_expedition_archivist_ee86138dfc73",
+    "checks": {
+      "identity_discovery": {
+        "identity_anchor_present": true,
+        "subject_ref": "char_expedition_archivist_ee86138dfc73",
+        "normalized_name_anchors": [
+          "jorenonmorrowen"
+        ],
+        "direct_candidates": [],
+        "relation_only_candidates": [],
+        "candidate_digest": "df3e65dc823cc8894d56d6a858eaff56ebfd00a3dd2f207fb3595310f82c95ff"
+      },
+      "entity_passed": true,
+      "naming_passed": true,
+      "advisor_ref": "reconciliation_advice.json",
+      "evidence_ref": "evidence_receipt.json"
+    },
+    "rehearsal_commit": "e0ec5c54ebf505445db9f3e39ce204cd6975994d",
+    "rehearsal_determination_id": "ace.determination.character.c0a1b8640fd932dfdc86.materialized.e0ec5c54ebf5",
+    "patch_ref": "proposal.patch",
+    "sources_unchanged": true,
+    "artifact_sha256s": {
+      "evidence_receipt.json": "2eb19866ea6354582519f59564b45a5e39334dbde319651f441f50fbef8449f9",
+      "ledger/ace.determination.character.c0a1b8640fd932dfdc86.json": "aa2e405147ead282eba73ef14e9707ad3eeb1c4e36e428c03d69f5a4a5991748",
+      "ledger/ace.determination.character.c0a1b8640fd932dfdc86.materialized.e0ec5c54ebf5.json": "263860e142e4368489caf86d30a990dc9bdbb52085e96934c69f4cb14ad5a52c",
+      "name_registry.json": "9cc303a596121b62b70e29ff55185a1951183a494d0f119b608cf305bcbd71bd",
+      "naming_validation.json": "1fcdc2feed96efbf777af8a1ab22a01f1510fa4bb9b993dde12b5abed23e5af6",
+      "packet/artifact_index.json": "406963b450e27ebda169c5743d549f276b80809b1e5c27008055311d7b07a4e6",
+      "packet/artifacts/charforge/char_expedition_archivist_ee86138dfc73/BUILD_RECEIPT.json": "4a94b2e7a42f8465ace45e55b50e2df7c5adb099aa055b03de633edd61842f6f",
+      "packet/artifacts/charforge/char_expedition_archivist_ee86138dfc73/bundle.manifest.json": "19a5115e722ae2169bfba313acfedbea8787ff0fdf0a78900a8a17389ef624f7",
+      "packet/artifacts/charforge/char_expedition_archivist_ee86138dfc73/capsule/cns.yaml": "ac65eaa048a8cb0b80bbebf7e6d47841274288af79668c1b0ae9c8cf34401394",
+      "packet/artifacts/charforge/char_expedition_archivist_ee86138dfc73/capsule/identity.json": "04e6f9ac721b9de072356fe613dc3c2f34de183c666821f0e90d91a10087e481",
+      "packet/artifacts/charforge/char_expedition_archivist_ee86138dfc73/capsule/knowledge.jsonl": "932442c76a7c4ab1337bc729d79efb18e1f38652b950fbdc1d97631e637834ed",
+      "packet/artifacts/charforge/char_expedition_archivist_ee86138dfc73/capsule/manifest.json": "6e825da040bc83a40ec6ffc23c27d99b9e12b92e78f5532baf89e95440a10462",
+      "packet/artifacts/charforge/char_expedition_archivist_ee86138dfc73/capsule/runtime.py": "66d44ff50c96d61856e0d7d70a820e3c93dc74fe54788d5984a3e3d0a248839c",
+      "packet/artifacts/charforge/char_expedition_archivist_ee86138dfc73/capsule/state.bin": "bef3ec650174bd0690f10f34b77774f96309a61c5214e2557418c135b28d4b2e",
+      "packet/artifacts/charforge/char_expedition_archivist_ee86138dfc73/capsule/traits.json": "fd45ac48a98d512630479427f9aca66ac8512434423f4b623e3b5e6a94c8b8d9",
+      "packet/candidate/char_expedition_archivist_ee86138dfc73.json": "1e09a107a3c384b501d1de08bad9672d619682931a09ce839c5529091b7a5f57",
+      "packet/capability_index.json": "bf9e8f5bd5172e417768aa03a56bdba042d9f9df96f07f651b49a6b7b5055379",
+      "packet/determination_receipt.json": "aa2e405147ead282eba73ef14e9707ad3eeb1c4e36e428c03d69f5a4a5991748",
+      "packet/evidence/canonrec_name_registry.json": "5caa3b9e91b31382eb1d5c739d936c583971fcd5aff4203f0321b22fc1d1b415",
+      "packet/evidence/name_projection_membership.json": "3e44fadaa63fdd47f67ae2944b8eb2b43695a0d3d900f1ce747cfeb08a69ac71",
+      "packet/evidence/name_reservation_projection.json": "eabbe4ea2be1fc25bd21df64e85b13e3794c1802c57308e2336266cc2dba2581",
+      "packet/materialized_determination_receipt.json": "263860e142e4368489caf86d30a990dc9bdbb52085e96934c69f4cb14ad5a52c",
+      "packet/query_envelope.json": "4bd38280589e39151b45f454f55781c0ac8ca7282f8370ee7c2eb0a08eddf1a9",
+      "packet/receipts/character_state.json": "e8c6096f734ec57c9b65353e951077c71742a99cc78a2dedb3e78a5d8d7f936a",
+      "packet/receipts/determination_schema_validation.json": "2652074f858168137c5bdaa03f6fb43a4c03d7f793823f63f32c2edeb075c97b",
+      "packet/receipts/entity_validation.json": "13b1610d82d575298fb51bb5d3dd4cc46fcfbe5e36e3773c7f2d66ce72265988",
+      "packet/receipts/naming_receipt.json": "09e64a750c6b671fdf24102441165737d971fdbe127c79012f4aecab0efc4896",
+      "packet/receipts/naming_transaction.json": "501898009faef41ea48dbfce0518ffb3c559b9801ba2ae967b430016206d51eb",
+      "packet/receipts/naming_validation.json": "d96153a27e1bcd2d021bbe94bf782b63b2296680a91b77a4737a79949b48a005",
+      "packet/receipts/query_schema_validation.json": "7a77739af9b056b1eee82052acd5e667d16d2b281250c9e9de25867cc6ddcbb7",
+      "proposal.patch": "38002ed96461c866dd591a6df6d4efe41ab5179eff8fb2bfc6618a419ca28650",
+      "reconciliation_advice.json": "d272184de41751c3ef668aae8ce2c821979c64dc61882619d747c0592693319c",
+      "source_materialized_determination.json": "537ababe5a75779a349a5f642e0e787a734329f77387af45d93d74ecf7446861",
+      "validation_run.json": "1c01c4ac4dd4ee1fa79f7bdbe7c7ef283941f6070904fa385226ae9d2ac7ca3b"
+    }
+  }
+}

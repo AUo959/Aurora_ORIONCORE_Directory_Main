@@ -80,6 +80,11 @@ licenses and release decisions.
 
 ## Aurora Canon Engine
 
+For a persistent character experience inside Codex, see
+[Aurora in Codex: isolated character continuity](docs/AURORA_ACE_SANDBOX.md).
+It provides a separate three-tool MCP surface over ACE and an independent world
+whose canon persists across tasks without modifying the source workspace.
+
 ACE is the root-control-plane capability router for Aurora questions that need
 live repository evidence plus deterministic canonical completion. The engine
 is implemented through v0.13: retrieval-first character and canon-fact

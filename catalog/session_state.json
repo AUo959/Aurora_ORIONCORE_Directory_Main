@@ -832,9 +832,9 @@
       "detail": "Owner chose option 2 (rewrite author and committer email). Scope was larger than recorded: 12 commits carried the private address, not 3 \u2014 the 3 connectivity commits plus a 9-commit Velar ruling chain behind the five 2026-07-21 salvage tags (two parallel lineages plus 63349bfe). All 12 rewritten to 206913296+AUo959@users.noreply.github.com via filter-branch; branch tree hash identical before and after (776f3430), pre-rewrite tips preserved locally under refs/backup/pre-email-rewrite/* and refs/original/*. SHAs changed: 7a50e0a->bd690f76, 62dc466->e8abece0, 6349b1f->80e3d40b; registry pins referencing the old SHAs need a refresh. root integration/connectivity-pass-2026-08-19 now exists on origin, closing the GH007 block. Half of the definition of done is NOT met: publication_debt still reports 3 entries, now 'pushed, no open PR' rather than 'no remote copy' \u2014 carried forward as connectivity-pass-pr-or-retire."
     }
   ],
-  "last_updated": "2026-09-01T16:51:54Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "Refresh session state after ledger closure and brief automat",
+  "last_updated": "2026-09-06T15:38:29Z",
+  "last_platform": "codex",
+  "last_session_summary": "ACE persistent worlds and L3-governed contextual simulation are implemented, installed, and locally accepted. PR #85 is ready for review and landing, explicitly authorized by the owner. 39 focused tests and 13 composition rows passed locally; live CI is verifying the published head. Receipts: reports/analysis/aurora_ace_contextual_acceptance_2026-09-06.json and related continuity/promotion receipts. Canonical working changes and protected Orion state remain preserved.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -853,68 +853,69 @@
     "go": "1.26.3",
     "corepack": "0.35.0",
     "npm": "11.17.0",
-    "pnpm": "11.9.0"
+    "pnpm": "11.9.0",
+    "aurora-ace-context-controller": "b4fef21; pinned local stdio controller at /Users/travisstreets/dev/aurora-ace-context-runtime"
   },
   "recent_commits": [
     {
-      "sha": "38a0608",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "Refresh session state after ledger closure and brief automation"
+      "sha": "c4f2332",
+      "date": "2026-09-06",
+      "platform": "codex",
+      "summary": "docs(ace): record installed contextual simulation acceptance"
     },
     {
-      "sha": "2f106be",
-      "date": "2026-09-01",
+      "sha": "b4fef21",
+      "date": "2026-09-06",
       "platform": "claude-code",
-      "summary": "Close prose-claim-ledger-reconciliation; pin CanonRec 02d6a40"
+      "summary": "fix(ace): recover completed L1 evidence needs after worker interruption"
     },
     {
-      "sha": "334fdd6",
-      "date": "2026-09-01",
+      "sha": "a77cabc",
+      "date": "2026-09-06",
       "platform": "claude-code",
-      "summary": "Schedule the brief freshness check, and fix the tier it alerts on"
+      "summary": "feat(ace): govern background simulation needs with durable layer-scoped assignments"
     },
     {
-      "sha": "e37790d",
-      "date": "2026-09-01",
+      "sha": "8759dc7",
+      "date": "2026-09-06",
       "platform": "claude-code",
-      "summary": "docs(brief): executive decision brief 2026-08-28"
+      "summary": "feat(ace): compose existing canon tools into offline character promotion review"
     },
     {
-      "sha": "1676fd8",
-      "date": "2026-09-01",
+      "sha": "ce49dfd",
+      "date": "2026-09-06",
       "platform": "claude-code",
-      "summary": "fix(tests): skip the state-model module without jsonschema instead of aborting collection"
+      "summary": "docs(ace): record successful two-task persistent character demonstration"
     },
     {
-      "sha": "0419324",
-      "date": "2026-09-01",
+      "sha": "9f4400b",
+      "date": "2026-09-06",
       "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin after the tail batch"
+      "summary": "docs(ace): record accepted composition and persistent Codex world workflow"
     },
     {
-      "sha": "8bfb2cf",
-      "date": "2026-09-01",
+      "sha": "f0484a1",
+      "date": "2026-09-06",
       "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin after the UMC recovery"
+      "summary": "fix(ace): preserve unresolved lookups and enforce sandbox retry boundaries"
     },
     {
-      "sha": "6e48bae",
-      "date": "2026-09-01",
+      "sha": "c82a858",
+      "date": "2026-09-06",
       "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin after the referent recovery pass"
+      "summary": "test(ace): verify character continuity and recover interrupted sandbox saves"
     },
     {
-      "sha": "5f54504",
-      "date": "2026-09-01",
+      "sha": "3c8639b",
+      "date": "2026-09-06",
       "platform": "claude-code",
-      "summary": "feat(canon): collect the referents canon names but has no record for"
+      "summary": "feat(ace): add persistent isolated character world and MCP transport"
     },
     {
-      "sha": "870373c",
-      "date": "2026-09-01",
+      "sha": "e3d9dc1",
+      "date": "2026-09-06",
       "platform": "claude-code",
-      "summary": "chore(catalog): sync CanonRec pin after the 5-claim tier"
+      "summary": "Audit of the 2026-09-01 session; correct two reported figures"
     }
   ],
   "security_events": [
@@ -931,7 +932,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "38a0608",
+    "main_sha": "c4f2332918a6c14038d3ff4b5d19a6ff45c9f646",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -1057,5 +1058,6 @@
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
-  }
+  },
+  "_summary_set_manually": true
 }
