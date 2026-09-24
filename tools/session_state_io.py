@@ -625,6 +625,105 @@ def op_reroute_active(args: argparse.Namespace) -> int:
     return 0
 
 
+# ── Commit provenance ───────────────────────────────────────────────────────
+# A recent_commits entry describes the commit, not the sync that noticed it.
+# Both writers (op_record_commits and the Claude Code Stop hook) used to stamp
+# every newly seen commit with the sync's own UTC date and the platform running
+# the sync. A Codex sync therefore labelled Claude-authored commits "codex", a
+# Claude sync labelled Codex commits "claude-code", and every date collapsed to
+# the day of the sync -- which also defeated the merge driver's newest-date-first
+# ordering. Provenance is now read from the commit itself.
+#
+# Claude commits always carry a Claude attribution trailer (Co-Authored-By
+# naming noreply@anthropic.com, plus Claude-Session). Codex commits carry none.
+CLAUDE_TRAILER_MARKERS = ("claude-session:", "noreply@anthropic.com")
+_FIELD_SEP = "\x1f"
+_RECORD_SEP = "\x1e"
+COMMIT_RECORD_FORMAT = "%h%x1f%cd%x1f%(trailers:only,unfold)%x1f%s%x1e"
+
+
+def platform_from_trailers(trailers: str) -> str:
+    """Platform that produced a commit, decided by the commit alone.
+
+    Deterministic: the answer never depends on which platform runs the sync.
+    """
+    lowered = trailers.lower()
+    if any(marker in lowered for marker in CLAUDE_TRAILER_MARKERS):
+        return "claude-code"
+    return "codex"
+
+
+def commit_records(repo_root: Path, *rev_args: str) -> list[dict]:
+    """``git log <rev_args>`` as [{sha, date, platform, summary}], newest first.
+
+    ``date`` is the committer date normalised to UTC (YYYY-MM-DD), matching the
+    UTC convention of ``last_updated``. An unresolvable revision yields [].
+    """
+    import subprocess
+
+    env = {**os.environ, "TZ": "UTC"}
+    raw = subprocess.run(  # noqa: S603 - fixed git log against the local repo root
+        ["git", "log", "--date=format-local:%Y-%m-%d",  # noqa: S607 - git from PATH, as elsewhere here
+         f"--format={COMMIT_RECORD_FORMAT}", *rev_args],
+        capture_output=True, text=True, cwd=repo_root, env=env,
+    ).stdout
+    records: list[dict] = []
+    for chunk in raw.split(_RECORD_SEP):
+        chunk = chunk.strip("\n")
+        if not chunk.strip():
+            continue
+        parts = chunk.split(_FIELD_SEP)
+        if len(parts) != 4:
+            continue
+        sha, date, trailers, summary = parts
+        records.append({"sha": sha.strip(), "date": date.strip(),
+                        "platform": platform_from_trailers(trailers),
+                        "summary": summary.strip()})
+    return records
+
+
+def merge_recent_commits(existing: list, new_records: list,
+                         cap: int = 10) -> tuple[list, int]:
+    """Prepend unseen records, order newest-date-first (stable), then cap.
+
+    This is the same ordering tools/session_state_merge.py applies, so the cap
+    drops the oldest entries rather than whichever happened to be seen last.
+    """
+    merged = list(existing)
+    seen = {e.get("sha") for e in merged if isinstance(e, dict)}
+    added = 0
+    for record in reversed(new_records):
+        if record["sha"] not in seen:
+            merged.insert(0, record)
+            seen.add(record["sha"])
+            added += 1
+    merged.sort(key=lambda e: str(e.get("date", "")) if isinstance(e, dict) else "",
+                reverse=True)
+    return merged[:cap], added
+
+
+def reattribute_recent_commits(repo_root: Path, existing: list) -> tuple[list, int]:
+    """Re-derive date/platform for recorded commits that still resolve.
+
+    Mechanical repair for entries written before provenance came from the
+    commit. Entries whose sha no longer resolves are kept unchanged.
+    """
+    fixed: list = []
+    changed = 0
+    for entry in existing:
+        if not isinstance(entry, dict) or not entry.get("sha"):
+            fixed.append(entry)
+            continue
+        found = commit_records(repo_root, "-1", str(entry["sha"]))
+        if not found:
+            fixed.append(entry)
+            continue
+        updated = {**entry, "date": found[0]["date"], "platform": found[0]["platform"]}
+        changed += updated != entry
+        fixed.append(updated)
+    return fixed, changed
+
+
 def op_record_commits(args: argparse.Namespace) -> int:
     """Mechanically refresh recent_commits + known_state.main_sha from git."""
     import subprocess
@@ -640,23 +739,19 @@ def op_record_commits(args: argparse.Namespace) -> int:
     # fall back to the last 10 commits rather than silently recording none.
     if known and not _git("rev-parse", "--verify", "--quiet", f"{known}^{{commit}}"):
         known = ""
-    raw = _git("log", "--oneline", f"{known}..HEAD") if known else _git("log", "--oneline", "-10")
+    records = commit_records(REPO_ROOT, f"{known}..HEAD") if known else commit_records(REPO_ROOT, "-10")
     existing = state.get("recent_commits", [])
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    added = 0
-    for line in reversed([entry for entry in raw.splitlines() if entry.strip()]):
-        sha, _, summary = line.partition(" ")
-        if not any(e.get("sha") == sha for e in existing):
-            existing.insert(0, {"sha": sha, "date": today,
-                                "platform": args.platform, "summary": summary})
-            added += 1
-    state["recent_commits"] = existing[:10]
+    reattributed = 0
+    if getattr(args, "reattribute", False):
+        existing, reattributed = reattribute_recent_commits(REPO_ROOT, existing)
+    state["recent_commits"], added = merge_recent_commits(existing, records)
     state.setdefault("known_state", {})["main_sha"] = head
     _touch_state(state, args.platform)
     findings = save(state)
     if findings:
         return _refuse(findings)
-    print(f"session-state-io: recorded {added} commit(s); main_sha={head[:9]}")
+    note = f"; reattributed {reattributed}" if getattr(args, "reattribute", False) else ""
+    print(f"session-state-io: recorded {added} commit(s){note}; main_sha={head[:9]}")
     return 0
 
 
@@ -788,8 +883,10 @@ def main() -> int:
                             "(for unfinished work that shouldn't hold the active slot)")
     p.add_argument("--description", help="Override the description carried to the queue item")
 
-    sub.add_parser("record-commits",
-                   help="Refresh recent_commits + known_state.main_sha from git log")
+    p = sub.add_parser("record-commits",
+                       help="Refresh recent_commits + known_state.main_sha from git log")
+    p.add_argument("--reattribute", action="store_true",
+                   help="Also re-derive date/platform of already-recorded commits from the commits themselves")
 
     p = sub.add_parser("archive-completed",
                        help="Move older completed_tasks to catalog/session_state_archive.json")
