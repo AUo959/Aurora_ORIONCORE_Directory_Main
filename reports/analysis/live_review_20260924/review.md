@@ -61,3 +61,7 @@ CloudBank dependency validation, unit-test job, CodeQL, and SonarCloud checks pa
 ## Approved merge and root pin refresh
 
 The owner explicitly approved CloudBank #1608. After rechecking head 69157ea2 and confirming all non-skipped checks passed, the PR was marked ready and squash-merged on 2026-09-24T23:35:39Z as `0fac980967ac7802a399f091fadf24bcd67b3126`. The clean canonical CloudBank checkout was fast-forwarded and the root registry pin refreshed to this merged commit. Root #86 remains unmerged; its new CI result supersedes the earlier dependency-install failures only once those jobs pass. Root merge approval remains separate.
+
+### Owner-attestation coherence after pin refresh
+
+New CI successfully installed the repaired dependency lock, then refused the stale owner-attestation repository SHA (`registered CloudBank has invalid field(s): head_sha`). Reviewed a19870a5..0fac9809 with `tools/ace_owner_contract_diff.py`: all 92 existing methods, including preflight/load_run/advance/export_state, are identical; no added or removed methods. The entire owner blob remains `5b6d93515fb219cb26d267db6c6df6c052413ae1`. Git diff over simulation/l1*, config, and modules/ord is empty. Updated only the policy repository SHA and matching test attestation; owner hash, helper integrity hash, and all execution/authority gates remain unchanged. This is a reviewed revision refresh, not run activation or a claim that a persisted run is resume-ready.
