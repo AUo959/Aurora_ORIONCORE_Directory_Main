@@ -721,6 +721,24 @@
         "publication_debt scan, 2026-09-08: 3 entries, +65 exempted",
         "reports/analysis/ORION__AUDIT__L3_SALVAGE_PASS__v1.2__2026-09-08.md"
       ]
+    },
+    {
+      "id": "cloudbank-runtime-hash-lock-closure",
+      "status": "ready",
+      "priority": "high",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Root draft PR #86 exposed CloudBank 98abfccf runtime hash-lock incompleteness: anthropic==1.2.0 requires unpinned httpx2. Local repair 69157ea2 on codex/hashed-lock-closure-20260924 at /private/tmp/cloudbank-lock-review-20260924 regenerates the runtime lock constrained to existing CI versions. Linux Python 3.12 hash-enforced pip dry-run and 16 lock tests pass. Nested publication confirmation requested; no push or merge yet.",
+      "created_at": "2026-09-24T00:21:52Z",
+      "updated_at": "2026-09-24T00:21:52Z",
+      "review_at": "2026-09-25T00:00:00Z",
+      "next_action": "After explicit CloudBank push authorization, publish repair branch and open draft PR; obtain separate merge approval, then advance root registry pin and rerun PR #86 checks. Also triage the external Codacy failure on root #86.",
+      "definition_of_done": "CloudBank lock repair reviewed and landed with approval; root pin updated; root PR #86 CI passes.",
+      "approval_required": false,
+      "evidence_refs": [
+        "reports/analysis/live_review_20260924/review.md"
+      ]
     }
   ],
   "completed_tasks": [
@@ -795,9 +813,9 @@
       "detail": "Verified live origin/main contains CanonRec c5ae4f4051106d69733bcd7c1223b0264a8328c7: org_union_military_command exists; loc_kaelor_prime resolved_referents records closure 2026-08-27. Queue was stale; no canon mutation performed."
     }
   ],
-  "last_updated": "2026-09-24T00:14:14Z",
+  "last_updated": "2026-09-24T00:21:52Z",
   "last_platform": "codex",
-  "last_session_summary": "Live review evaluated claim-by-claim: QGIA library fast-forwarded to validated 5d59130; CloudBank fast-forwarded to 98abfccf; root due-review JSON truncation fixed with parity regression; stale UMC/parity queue items closed; CanonRec stale worktree links backed up and pruned. Receipt: reports/analysis/live_review_20260924/review.md. Remaining 29 due items, historical simulation provenance holds, CanonRec unpublished audit commit, and pre-existing root edits preserved. No simulation execution or canon mutation.",
+  "last_session_summary": "Live review phased repairs recorded in root draft PR #86. QGIA library and CloudBank checkouts synced; queue JSON truncation fixed, stale queue entries closed, 4 CanonRec worktree links pruned. Local tests pass, but root CI exposes CloudBank runtime hash-lock incompleteness and external Codacy failure. Isolated CloudBank repair 69157ea2 validates (Linux py3.12 hashed pip dry-run; 16 lock tests); explicit nested push authorization pending. No merges or simulation execution. Receipt: reports/analysis/live_review_20260924/review.md.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -819,6 +837,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "0fec3552",
+      "date": "2026-09-24",
+      "platform": "codex",
+      "summary": "fix(queue): expose complete due-review inventory and record live remediation"
+    },
     {
       "sha": "59d8a5cb",
       "date": "2026-09-24",
@@ -872,12 +896,6 @@
       "date": "2026-09-01",
       "platform": "claude-code",
       "summary": "Close prose-claim-ledger-reconciliation; pin CanonRec 02d6a40"
-    },
-    {
-      "sha": "334fdd6",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "Schedule the brief freshness check, and fix the tier it alerts on"
     }
   ],
   "security_events": [
@@ -894,7 +912,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "59d8a5cb37ec66160995da7d67c1fddbb59064df",
+    "main_sha": "0fec3552125bd45e899607bb0ddee7aed1080761",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
