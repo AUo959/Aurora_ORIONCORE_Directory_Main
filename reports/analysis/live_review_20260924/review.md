@@ -57,3 +57,7 @@ Next phase: explicitly authorize publication to the CloudBank remote, review/mer
 The owner authorized the next steps including the draft PR. CloudBank branch `codex/hashed-lock-closure-20260924` was published at `69157ea2acd63486d8329852081515ab72282e13`; draft PR https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1608 is open. Root PR #86 links this dependency. No merge was performed.
 
 CloudBank dependency validation, unit-test job, CodeQL, and SonarCloud checks passed on the published head. Broader tests, the CI aggregate and Codacy were still running when this handoff was prepared; consult the live PR rather than treating this snapshot as final CI approval. Root #86 remains blocked by its old CloudBank runtime lock; its external Codacy check reports ACTION_REQUIRED. Next gate is explicit per-PR merge approval after satisfactory checks, followed by root pin refresh and rerun.
+
+## Approved merge and root pin refresh
+
+The owner explicitly approved CloudBank #1608. After rechecking head 69157ea2 and confirming all non-skipped checks passed, the PR was marked ready and squash-merged on 2026-09-24T23:35:39Z as `0fac980967ac7802a399f091fadf24bcd67b3126`. The clean canonical CloudBank checkout was fast-forwarded and the root registry pin refreshed to this merged commit. Root #86 remains unmerged; its new CI result supersedes the earlier dependency-install failures only once those jobs pass. Root merge approval remains separate.

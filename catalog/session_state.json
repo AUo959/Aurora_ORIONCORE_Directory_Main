@@ -811,9 +811,9 @@
       "detail": "Verified live origin/main contains CanonRec c5ae4f4051106d69733bcd7c1223b0264a8328c7: org_union_military_command exists; loc_kaelor_prime resolved_referents records closure 2026-08-27. Queue was stale; no canon mutation performed."
     }
   ],
-  "last_updated": "2026-09-24T22:41:14Z",
+  "last_updated": "2026-09-24T23:36:19Z",
   "last_platform": "codex",
-  "last_session_summary": "Published authorized CloudBank draft PR #1608 at 69157ea2 for complete runtime hash-lock closure. Existing Linux py3.12 hashed pip dry-run and 16 lock tests pass; CI being checked. Root draft #86 remains dependent on this repair and has external Codacy action required. No merge or runtime execution authorized/performed.",
+  "last_session_summary": "Owner-approved CloudBank #1608 merged as 0fac9809 after all active checks passed; canonical CloudBank fast-forwarded and root pin refreshed. Root #86 remains unmerged and awaits CI on the new pin; root Codacy external action may remain. Pre-existing dirty root edits preserved; no runtime execution.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -835,6 +835,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "3964d7dd",
+      "date": "2026-09-24",
+      "platform": "codex",
+      "summary": "docs(review): link published CloudBank dependency repair"
+    },
     {
       "sha": "5978a2c8",
       "date": "2026-09-24",
@@ -888,12 +894,6 @@
       "date": "2026-09-24",
       "platform": "codex",
       "summary": "Audit of the 2026-09-01 session; correct two reported figures"
-    },
-    {
-      "sha": "38a0608",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "Refresh session state after ledger closure and brief automation"
     }
   ],
   "security_events": [
@@ -910,7 +910,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "5978a2c899eff8a3394f1ea5bcf3f6a71ce03d8b",
+    "main_sha": "3964d7ddae31fed95e18586718855ff1f4c177a8",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
