@@ -1,0 +1,673 @@
+{
+  "verified_at": "2026-09-24T00:13:57.995957+00:00",
+  "scope": "root and registry-scoped read-only remote verification; repairs limited to root, CloudBank checkout, QGIA-library checkout, CanonRec stale worktree metadata",
+  "repos": {
+    "root": {
+      "path": ".",
+      "head": "59d8a5cb37ec66160995da7d67c1fddbb59064df",
+      "origin_main": "59d8a5cb37ec66160995da7d67c1fddbb59064df",
+      "ahead_behind_origin_main": "0\t0"
+    },
+    "CloudBank": {
+      "path": "GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "head": "98abfccfe440f83aed5d5710bb6745b6da816871",
+      "origin_main": "98abfccfe440f83aed5d5710bb6745b6da816871",
+      "ahead_behind_origin_main": "0\t0"
+    },
+    "CanonRec": {
+      "path": "GUMAS_SIM_2.5/CanonRec",
+      "head": "72f504b397a09cecc5e39250e9ae2cb7ea0f01f5",
+      "origin_main": "4db0c2de8a43007c5950aca236b9211b23e7ad0b",
+      "ahead_behind_origin_main": "1\t0"
+    },
+    "QGIA-library": {
+      "path": "qgia-knowledge-library-main",
+      "head": "5d59130b960e3403aa7944218f5ed6b97f69f6ca",
+      "origin_main": "5d59130b960e3403aa7944218f5ed6b97f69f6ca",
+      "ahead_behind_origin_main": "0\t0"
+    },
+    "QGIA-spine": {
+      "path": "qgia-knowledge-spine-main",
+      "head": "c98c4592e82ebd09b8882f2b148714b8bd60e84c",
+      "origin_main": "1cf04fa61878ce19b4c63b724395747f62a9b006",
+      "ahead_behind_origin_main": "0\t4"
+    },
+    "DuelSim": {
+      "path": "GUMAS_SIM_2.5/DuelSim/DuelSim_v2.0",
+      "head": "0716f36ea5cf84707eba8c6ec16bead04809cf8c",
+      "origin_main": "0716f36ea5cf84707eba8c6ec16bead04809cf8c",
+      "ahead_behind_origin_main": "0\t0"
+    }
+  },
+  "remote_only": {
+    "zip_wizard": {
+      "exit": 0,
+      "stdout": "6acc34ed2e36aec16378db64c54a351028448248\trefs/heads/main\n",
+      "stderr": ""
+    },
+    "aurora-cloudbank-symbolic1": {
+      "exit": 0,
+      "stdout": "3530b82d6d18cf4ab8597d3a2ee627f9399b3e01\trefs/heads/main\n",
+      "stderr": ""
+    },
+    "AuroraOS": {
+      "exit": 0,
+      "stdout": "373603dca02b741c2bd815dfcc2f07faced717f9\trefs/heads/main\n",
+      "stderr": ""
+    },
+    "cloudbank-quantum-en": {
+      "exit": 0,
+      "stdout": "944934b9e0d54b09fb996b39bbd4b2b141ba5624\trefs/heads/main\n",
+      "stderr": ""
+    }
+  },
+  "branch_hygiene_before": {
+    "root": {
+      "count": 26,
+      "gone": 6,
+      "behind": 3,
+      "no_upstream": 5,
+      "branches": [
+        "agent/github-auth-context-hardening|origin/agent/github-auth-context-hardening|",
+        "agent/root-license-session-closeout|origin/agent/root-license-session-closeout|",
+        "agent/root-mit-community-profile|origin/agent/root-mit-community-profile|",
+        "codex/ace-persistent-continuity-20260906|origin/codex/ace-persistent-continuity-20260906|",
+        "codex/aurora-state-model-specs-v0-1|origin/codex/aurora-state-model-specs-v0-1|[gone]",
+        "codex/charforge-capsule-implementation-2026-06-14-rebased|origin/codex/charforge-capsule-implementation-2026-06-14-rebased|",
+        "codex/cloudbank-backlog-handoff-20260810|origin/main|[ahead 4, behind 194]",
+        "codex/l1-embodiment-recovery-audit-20260810||",
+        "codex/public-canonrec-ci-2026-07-29|origin/codex/public-canonrec-ci-2026-07-29|",
+        "codex/public-readiness-closeout-2026-08-01|origin/codex/public-readiness-closeout-2026-08-01|",
+        "codex/publication-debt-reconciliation-20260826|origin/codex/publication-debt-reconciliation-20260826|[gone]",
+        "codex/root-cloudbank-hygiene-session-20260809|origin/main|[behind 194]",
+        "codex/root-cloudbank-pin-refresh-2026-07-29|origin/codex/root-cloudbank-pin-refresh-2026-07-29|",
+        "codex/root-control-plane-sync-2026-04-01-mixed-backup||",
+        "codex/root-public-metadata-2026-07-29|origin/codex/root-public-metadata-2026-07-29|",
+        "codex/root-session-1384-handoff|origin/main|[behind 211]",
+        "codex/session-queue-lifecycle-2026-08-01|origin/codex/session-queue-lifecycle-2026-08-01|[gone]",
+        "fix/ci-dynamic-registry-pins|origin/fix/ci-dynamic-registry-pins|",
+        "fix/execution-context-guard|origin/fix/execution-context-guard|[gone]",
+        "integration/connectivity-pass-2026-08-19|origin/integration/connectivity-pass-2026-08-19|",
+        "integration/session-queue-lifecycle-rework|origin/integration/session-queue-lifecycle-rework|[gone]",
+        "main|origin/main|",
+        "recovery/gumas-v2-tactical-consolidation|origin/recovery/gumas-v2-tactical-consolidation|[gone]",
+        "salvage/stash-gitwiz-pre-sync-2026-04-08||",
+        "salvage/stash-qgia-json-pre-pr9||",
+        "salvage/stash-root-diff-cleanup-2026-04-14||"
+      ],
+      "prune_dry_run": "Removing worktrees/aurora-ace-continuity-20260906: gitdir file points to non-existent location\n"
+    },
+    "cloudbank": {
+      "count": 74,
+      "gone": 0,
+      "behind": 5,
+      "no_upstream": 4,
+      "branches": [
+        "agent/aurora-bridge-review-blurb|origin/agent/aurora-bridge-review-blurb|",
+        "agent/gumas-flash-rebellion-battle-baseline|origin/agent/gumas-flash-rebellion-battle-baseline|",
+        "claude/architecture-advancements-review-v2cxi0|origin/claude/architecture-advancements-review-v2cxi0|",
+        "codex/ci-workflow-repair|origin/codex/ci-workflow-repair|",
+        "codex/cloudbank-canonrec-provenance-2026-07-29|origin/codex/cloudbank-canonrec-provenance-2026-07-29|",
+        "codex/cloudbank-codeql-backlog-2026-07-29|origin/codex/cloudbank-codeql-backlog-2026-07-29|",
+        "codex/cloudbank-command-chain-workflow-repair-2026-04-10|origin/codex/cloudbank-command-chain-workflow-repair-2026-04-10|",
+        "codex/cloudbank-full-workup-pr-2026-03-19|origin/codex/cloudbank-full-workup-pr-2026-03-19|",
+        "codex/cloudbank-high-dependabot-2026-07-29|origin/codex/cloudbank-high-dependabot-2026-07-29|",
+        "codex/cloudbank-issue-1020-mesh-router-contract|origin/codex/cloudbank-issue-1020-mesh-router-contract|",
+        "codex/cloudbank-issue-1024-instance-bridge-role-closure|origin/codex/cloudbank-issue-1024-instance-bridge-role-closure|",
+        "codex/cloudbank-issue-1056-opal2-standalone-topology|origin/codex/cloudbank-issue-1056-opal2-standalone-topology|",
+        "codex/cloudbank-issue-1063-qgia-population|origin/main|[behind 421]",
+        "codex/cloudbank-issue-1131-reconcile-closed-queue-items|origin/codex/cloudbank-issue-1131-reconcile-closed-queue-items|",
+        "codex/cloudbank-issue-1139-ethics-readme-index|origin/codex/cloudbank-issue-1139-ethics-readme-index|",
+        "codex/cloudbank-issue-1140-topology-qgia-reconcile|origin/codex/cloudbank-issue-1140-topology-qgia-reconcile|",
+        "codex/cloudbank-issue-1142-api-catalog-snapshot-regeneration|origin/codex/cloudbank-issue-1142-api-catalog-snapshot-regeneration|",
+        "codex/cloudbank-issue-1143-scaling-topology-reconcile|origin/codex/cloudbank-issue-1143-scaling-topology-reconcile|",
+        "codex/cloudbank-issue-1144-api-surface-inventory-reconcile|origin/codex/cloudbank-issue-1144-api-surface-inventory-reconcile|",
+        "codex/cloudbank-issue-1145-rd-api-reference-refresh|origin/codex/cloudbank-issue-1145-rd-api-reference-refresh|",
+        "codex/cloudbank-issue-1146-governance-self-audit|origin/codex/cloudbank-issue-1146-governance-self-audit|",
+        "codex/cloudbank-issue-1161-coordination-spine-reconcile|origin/codex/cloudbank-issue-1161-coordination-spine-reconcile|",
+        "codex/cloudbank-issue-1231-qgia-axiom-reconcile|origin/codex/cloudbank-issue-1231-qgia-axiom-reconcile|",
+        "codex/cloudbank-issue-1231-qgia-docs-surface|origin/codex/cloudbank-issue-1231-qgia-docs-surface|",
+        "codex/cloudbank-issue-1231-qgia-index-wiring|origin/codex/cloudbank-issue-1231-qgia-index-wiring|",
+        "codex/cloudbank-issue-1231-qgia-roadmap|origin/codex/cloudbank-issue-1231-qgia-roadmap|",
+        "codex/cloudbank-issue-1232-docs-cross-reference-module-coverage|origin/codex/cloudbank-issue-1232-docs-cross-reference-module-coverage|",
+        "codex/cloudbank-issue-1235-repo-structural-naming-cleanup|origin/codex/cloudbank-issue-1235-repo-structural-naming-cleanup|",
+        "codex/cloudbank-issue-1247-halo-residual-canon|origin/codex/cloudbank-issue-1247-halo-residual-canon|",
+        "codex/cloudbank-issue-1247-halo-system-activation|origin/codex/cloudbank-issue-1247-halo-system-activation|",
+        "codex/cloudbank-issue-1255-src-structure-audit|origin/codex/cloudbank-issue-1255-src-structure-audit|",
+        "codex/cloudbank-issue-1257-onboarding-module|origin/codex/cloudbank-issue-1257-onboarding-module|",
+        "codex/cloudbank-issue-1305-work|origin/codex/cloudbank-issue-1305-work|",
+        "codex/cloudbank-issue-1329-catalog-routing-alerts|origin/codex/cloudbank-issue-1329-catalog-routing-alerts|",
+        "codex/cloudbank-issue-1342-pr-evaluation-blocking|origin/codex/cloudbank-issue-1342-pr-evaluation-blocking|",
+        "codex/cloudbank-issue-1362-root-test-contract|origin/codex/cloudbank-issue-1362-root-test-contract|",
+        "codex/cloudbank-issue-1384-mcp-server-compat|origin/codex/cloudbank-issue-1384-mcp-server-compat|",
+        "codex/cloudbank-issue-1393-native-vsa-correctness|origin/codex/cloudbank-issue-1393-native-vsa-correctness|",
+        "codex/cloudbank-issue-1403-diagnostics-test-hygiene|origin/codex/cloudbank-issue-1403-diagnostics-test-hygiene|",
+        "codex/cloudbank-issue-1424-qgia-casefold-hygiene|origin/codex/cloudbank-issue-1424-qgia-casefold-hygiene|",
+        "codex/cloudbank-issue-1446-gate-registry-coherence|origin/codex/cloudbank-issue-1446-gate-registry-coherence|",
+        "codex/cloudbank-issue-1449-l1-embodiment-recovery|origin/codex/cloudbank-issue-1449-l1-embodiment-recovery|",
+        "codex/cloudbank-issue-1449-l1-resume-blockers|origin/main|[behind 30]",
+        "codex/cloudbank-issue-1456-locus-conflict-validation|origin/codex/cloudbank-issue-1456-locus-conflict-validation|",
+        "codex/cloudbank-issue-1457-character-identity-provenance|origin/codex/cloudbank-issue-1457-character-identity-provenance|",
+        "codex/cloudbank-issue-1460-opal2-codacy-table-spacing|origin/codex/cloudbank-issue-1460-opal2-codacy-table-spacing|",
+        "codex/cloudbank-issue-1475-frontend-dependencies|origin/main|[behind 126]",
+        "codex/cloudbank-issue-1481-l1-fleet-runtime|origin/codex/cloudbank-issue-1481-l1-fleet-runtime|",
+        "codex/cloudbank-issue-1481-postmerge-1482-hardening|origin/codex/cloudbank-issue-1481-postmerge-1482-hardening|",
+        "codex/cloudbank-issue-1504-root-declaration-precommit|origin/codex/cloudbank-issue-1504-root-declaration-precommit|",
+        "codex/cloudbank-issue-806-work|origin/codex/cloudbank-issue-806-work|",
+        "codex/cloudbank-issue-830-requirements-inventory|origin/codex/cloudbank-issue-830-requirements-inventory|",
+        "codex/cloudbank-pat-terminal-compat-2026-06-16|origin/codex/cloudbank-pat-terminal-compat-2026-06-16|",
+        "codex/ga-ethics-hub-integration-2026-07-08|origin/codex/ga-ethics-hub-integration-2026-07-08|",
+        "codex/l1-live-continuation|origin/codex/l1-live-continuation|",
+        "codex/l2-scenario-seed-simulation-initializer|origin/codex/l2-scenario-seed-simulation-initializer|",
+        "codex/mesh-security-lint-hardening-2026-07-22|origin/codex/mesh-security-lint-hardening-2026-07-22|",
+        "codex/narrative-phase2-continuity-gate-2026-07-10|origin/codex/narrative-phase2-continuity-gate-2026-07-10|",
+        "codex/narrative-phase2-evidence-2026-07-04|origin/codex/narrative-phase2-evidence-2026-07-04|",
+        "codex/opal2-foundry-phase1-2026-07-17|origin/codex/opal2-foundry-phase1-2026-07-17|",
+        "codex/opal2-foundry-phase2-2026-07-18|origin/codex/opal2-foundry-phase2-2026-07-18|",
+        "codex/opal2-phase2-1-hardening-2026-07-21|origin/codex/opal2-phase2-1-hardening-2026-07-21|",
+        "codex/pages-launchpad-utility||",
+        "codex/pr1174-l1-router-followup-2026-07-05|origin/main|[behind 355]",
+        "codex/public-readiness-debt-2026-07-29|origin/codex/public-readiness-debt-2026-07-29|",
+        "codex/reconcile-origin-main-pre-stash-2026-03-13||",
+        "codex/vercel-deploy-engine-lock-2026-07-05|origin/codex/vercel-deploy-engine-lock-2026-07-05|",
+        "copilot/replace-shallow-assertions-tier1|origin/copilot/replace-shallow-assertions-tier1|",
+        "feat/1377-utb-neutral-schema|origin/feat/1377-utb-neutral-schema|",
+        "integration/connectivity-pass-2026-08-19|origin/integration/connectivity-pass-2026-08-19|",
+        "main|origin/main|[behind 31]",
+        "queue/escalation-surfaced-20260810-0655|origin/queue/escalation-surfaced-20260810-0655|",
+        "salvage/stash-reconcile-snapshot-2026-03-13||",
+        "salvage/stash-workflow-output-2026-05-07||"
+      ],
+      "prune_dry_run": "Removing worktrees/aurora-cloudbank-symbolic-main14: gitdir file points to non-existent location\nRemoving worktrees/cloudbank-connectivity-20260827: gitdir file points to non-existent location\nRemoving worktrees/cloudbank-codex-issue-1449-l1-resume-blockers: gitdir file points to non-existent location\n"
+    },
+    "CanonRec": {
+      "count": 5,
+      "gone": 0,
+      "behind": 0,
+      "no_upstream": 0,
+      "branches": [
+        "agent/canonrec-mit-license|origin/agent/canonrec-mit-license|",
+        "codex/canonrec-public-readiness-2026-07-29|origin/codex/canonrec-public-readiness-2026-07-29|",
+        "codex/canonrec-strict-integrity-recovery-2026-07-29|origin/codex/canonrec-strict-integrity-recovery-2026-07-29|",
+        "codex/public-vulnerability-reporting-2026-07-29|origin/codex/public-vulnerability-reporting-2026-07-29|",
+        "main|origin/main|[ahead 1]"
+      ],
+      "prune_dry_run": "Removing worktrees/canonrec-strict-integrity-recovery: gitdir file points to non-existent location\nRemoving worktrees/canonrec-public-readiness-debt: gitdir file points to non-existent location\nRemoving worktrees/canonrec-mit-license: gitdir file points to non-existent location\nRemoving worktrees/CanonRec: gitdir file points to non-existent location\n"
+    }
+  },
+  "historical_simulation_files": [
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-11/companion_ops.json",
+      "sha256": "e7605aa5ff3514fab0fd04216cf3955ed7be5da3bea4303bcce8ef0fe9ac6708",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-11/crew_logs.md",
+      "sha256": "647d1040534425481ab44925f2dc04d7569271151cd5c5117feaf7bca5fc766b",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-11/interaction_map.json",
+      "sha256": "32e728091e02d293b1ebc6691455276899bb97d2e20426d0fe047287afefa6f9",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-11/interaction_map.md",
+      "sha256": "24a23414645e42c5fb0f14f25c156b5130eed3eb17ac7765cc3268d5980c8aa5",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-11/narrative_reconstruction.json",
+      "sha256": "007fcde3e76a36c0c3f0db3b9bbb61823fd16996d3889c97cbe434410029ede1",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-11/narrative_reconstruction.md",
+      "sha256": "7e0b63502be2d8d499f3799662976bd6c3b4ebbb5a875a41ebd0c581a3aabd02",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-11/run_meta.json",
+      "sha256": "aa6e14b4e2c47b52c94a8b77bd1f1ef43b74f330cfc9c7fe49382d53a481db76",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-11/sim_raw.json",
+      "sha256": "cd775cc3c28748a92ddc4dd6bada5a3b9d2fc796058920d3f46b241e55b7a80d",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-11/souls_accounting.json",
+      "sha256": "b31bd2b6fc486e3614a66a7cc1ddd7b4fdd728fb46fa580d8169025c0ab9f998",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-15/companion_ops.json",
+      "sha256": "57c17faa74aeba2a85d8cb309d64732abf32691d5e2fb43b30f25bdac868c047",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-15/crew_logs.md",
+      "sha256": "647d1040534425481ab44925f2dc04d7569271151cd5c5117feaf7bca5fc766b",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-15/interaction_map.json",
+      "sha256": "b2027ea2e3bfccd30ae9bef6d56b21a7ca81af7427e795accdb3f0561155f81d",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-15/interaction_map.md",
+      "sha256": "24a23414645e42c5fb0f14f25c156b5130eed3eb17ac7765cc3268d5980c8aa5",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-15/narrative_reconstruction.json",
+      "sha256": "1b34363ae05a9286296fe23a8613e56b2a683e48177d0ac14aa8e9adae1e0ae4",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-15/narrative_reconstruction.md",
+      "sha256": "7e0b63502be2d8d499f3799662976bd6c3b4ebbb5a875a41ebd0c581a3aabd02",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-15/run_meta.json",
+      "sha256": "90a58a9c80e2d657b4ffdaeae16eb0538df87450e00ee3e01f4e938fbc8aefbb",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-15/sim_raw.json",
+      "sha256": "cd775cc3c28748a92ddc4dd6bada5a3b9d2fc796058920d3f46b241e55b7a80d",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-15/souls_accounting.json",
+      "sha256": "d9cb7472369fbdaa67ddf1edee023cee392008998637c9e65ee359f9aa9957ab",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-18/companion_ops.json",
+      "sha256": "e8306a6fd277208047306bebed1ba914b1725b51da5ea62854cc7553a2eeb627",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-18/crew_logs.md",
+      "sha256": "647d1040534425481ab44925f2dc04d7569271151cd5c5117feaf7bca5fc766b",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-18/interaction_map.json",
+      "sha256": "4984bf1a7d1869f6b773ce21b63e09d1284727bf0a562f61da9f3591a6a77e9f",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-18/interaction_map.md",
+      "sha256": "24a23414645e42c5fb0f14f25c156b5130eed3eb17ac7765cc3268d5980c8aa5",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-18/narrative_reconstruction.json",
+      "sha256": "c1ea04424024c5374ecaeb35e87e35a29dd7dc7be20eadf074b6cba95630b8e4",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-18/narrative_reconstruction.md",
+      "sha256": "7e0b63502be2d8d499f3799662976bd6c3b4ebbb5a875a41ebd0c581a3aabd02",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-18/run_meta.json",
+      "sha256": "8f310d60403813af62a562ea59bec58f531df3f82ab4e1d7657589c08cc2592f",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-18/sim_raw.json",
+      "sha256": "cd775cc3c28748a92ddc4dd6bada5a3b9d2fc796058920d3f46b241e55b7a80d",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-18/souls_accounting.json",
+      "sha256": "4d09dd54d09fac7b5527c6569d3adc4c1a4b7658aabaefdedd3226a788cddb8c",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-19/companion_ops.json",
+      "sha256": "f67f26dd99f7849560424dc15dfc7a9194ee3cc7c7ba6eb23c9028fcc2c6d37d",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-19/crew_logs.md",
+      "sha256": "647d1040534425481ab44925f2dc04d7569271151cd5c5117feaf7bca5fc766b",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-19/interaction_map.json",
+      "sha256": "346c3b0e671a0bbff4f11e28673694e3c6bdef0d96ce3837f21f077fa105d345",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-19/interaction_map.md",
+      "sha256": "24a23414645e42c5fb0f14f25c156b5130eed3eb17ac7765cc3268d5980c8aa5",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-19/narrative_reconstruction.json",
+      "sha256": "37c39568c408ccece3218690d746e6a1eb029790b7f9df08c3d6fbd2412a2006",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-19/narrative_reconstruction.md",
+      "sha256": "7e0b63502be2d8d499f3799662976bd6c3b4ebbb5a875a41ebd0c581a3aabd02",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-19/run_meta.json",
+      "sha256": "2028a6d8a416fac64ada7968cd5bdb9dc0031891bdc35fe616351b31ac1d215a",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-19/sim_raw.json",
+      "sha256": "cd775cc3c28748a92ddc4dd6bada5a3b9d2fc796058920d3f46b241e55b7a80d",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    },
+    {
+      "path": "reports/simulation/hour_aboard_v1__2026-08-19/souls_accounting.json",
+      "sha256": "5254f1990ba763a490a8706a8584d33155b74d50cd74a4382024edd1fda96fe6",
+      "disposition": "historical test-generated evidence; preserved; not active station evidence"
+    }
+  ],
+  "due_queue_count": 29,
+  "due_queue_inventory": [
+    {
+      "id": "narrative-promotion-continuation-2026-06",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] Aurora-first narrative-layer promotion per ADR (docs/ORION__ADR_LITE__NARRATIVE_LAYER_PROMOTION__v1.0__2026-06-10.md).",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "0.1-aws-key",
+      "repo": "root",
+      "status": "waiting",
+      "assigned_to": "owner",
+      "priority": "high",
+      "next_action": "[migrated] Verify the redacted AWS IAM access-key ID has been deactivated in AWS console;",
+      "waiting_on": "owner",
+      "trigger": "Owner reviews the queue and rules on this item."
+    },
+    {
+      "id": "roadmap-1.1",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "status": "ready",
+      "assigned_to": "codex",
+      "priority": "medium",
+      "next_action": "[migrated] Phase 1: Collapse CloudBank CI sprawl (33 workflows \u2192 ~8).",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "cloudbank-review-r1r10-residual-hardening",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "status": "ready",
+      "assigned_to": "codex",
+      "priority": "medium",
+      "next_action": "[migrated] CloudBank R1-R10 review (intake/Aurora_CloudBank_Review_R1_R10.md): all 7 P0 deployment-blockers verified fixed as of CloudBank HEAD 2026-07-08;",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "qgia-runtime-onepager-route",
+      "repo": "CanonRec",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] Route QGIA_Runtime_OnePager.md (root loose, 406 ln, v4.2.1) into the QGIA knowledge domain.",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "archive-content-triage-450",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] Systematic CONTENT-based triage of the 450 archive files whose content is not present in the live repos (reports/recovery/data/archive_content_not_live__2026-07-10.tsv).",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "naming-gate-owner-records",
+      "repo": "root",
+      "status": "waiting",
+      "assigned_to": "owner",
+      "priority": "medium",
+      "next_action": "[migrated] Your L2 naming-admission gate (a242f3e, effective 2026-07-22) flags 10 char records from your parallel buildout as lacking naming_receipt/naming_exemption: char_aveline_soryn, char_calder_vey, char_corin_hale, char_eira_valkyrie, char_iven_raal, char_maelin_saye, char_mara_venn, char_selene_ark, char_sera_thalen, char_tessa_korr.",
+      "waiting_on": "owner",
+      "trigger": "Owner reviews the queue and rules on this item."
+    },
+    {
+      "id": "amelia-rivers-l1-check",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "status": "waiting",
+      "assigned_to": "owner",
+      "priority": "low",
+      "next_action": "[migrated] L1 (not L2): AURORA_GUMAS_STAFF_REGISTRY_SSOT profile amelia-rivers has no matching canon/L1/characters record.",
+      "waiting_on": "owner",
+      "trigger": "Owner reviews the queue and rules on this item."
+    },
+    {
+      "id": "canonrec-staff-registry-authority",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "status": "waiting",
+      "assigned_to": "owner",
+      "priority": "high",
+      "next_action": "[migrated] Choose the authoritative staff-registry contract or approve a deterministic merge between CanonRec canon/L1/station/ORION_STATION_CANONICAL_STAFF_REGISTRY.json and CloudBank ORION_STATION_CANONICAL_STAFF_REGISTRY.json.",
+      "waiting_on": "owner",
+      "trigger": "Owner reviews the queue and rules on this item."
+    },
+    {
+      "id": "cloudbank-mcp-v2-migration",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] Migrate connector/server.py and connector tests from the MCP v1 Server API to MCP v2, then remove the temporary mcp<2.0.0 compatibility ceiling added in CloudBank PR #1385.",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "l2-seat-of-government-locations",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] Establish seat-of-government / duty-station locations in canon.",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "omega9-sentinel-roster-framing",
+      "repo": "root",
+      "status": "waiting",
+      "assigned_to": "owner",
+      "priority": "low",
+      "next_action": "[migrated] FRAMING QUESTION (owner): is the Sentinel unit roster part of the SETTING, or per-run simulation state? Omega9_Emergence_Log records Sentinel Omega-9 and Event.Kaelor_Chainfire.v1 (first documented emergent adaptive route logic;",
+      "waiting_on": "owner",
+      "trigger": "Owner reviews the queue and rules on this item."
+    },
+    {
+      "id": "prime-construct-ai-political-rights-doctrine",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] Early prose asserts both that AI cannot hold political power in the Union and that Prime Construct is sovereign with political/legal rights.",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "kaelors-rift-sentinel-command-overlap",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] Canon lists Elias Radek as the Judicator Prime's Sentinel-Commander while the Kaelor's Rift log gives Colonel Idris Vale as Sentinel strike lead.",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "sandbox-missing-test-deps",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] tests/test_live_watch_link.py fails in the sandboxed workspace with ModuleNotFoundError: No module named 'fastapi' (tools/live_watch.py clone driver).",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "l2-location-subtype-classification",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] Canon uses 6 descriptive location subtypes the validator does not list (ai_polity_interface_node, neutral_velari_world, precursor_vault_site, secure_union_facility, shadow_ring, union_core_military_industrial_world) against a structural list (planet, moon, region, station...).",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "cloudbank-local-backlog-publication-2026-08-11",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "status": "waiting",
+      "assigned_to": "owner",
+      "priority": "high",
+      "next_action": "[migrated] Review and authorize the next CloudBank publication pass from isolated local branches: 1482 hardening cb8da9bc requires a compatibility decision for pre-hardening runtime 1.2 persisted runs;",
+      "waiting_on": "owner",
+      "trigger": "Owner reviews the queue and rules on this item."
+    },
+    {
+      "id": "ace-next-scope",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] ACE now has executable RETRIEVED_CANON, DERIVED_CANON, GENERATED_CANON, CANON_REVISION, TRUE_CONFLICT, and EXECUTION_BLOCKED semantics;",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "ace-capability-manifest-discovery",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing.",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "worktree-uncommitted-sweep",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] Uncommitted work in /private/tmp worktrees is invisible to every status check that looks at the main tree, and /private/tmp is subject to OS cleanup.",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "zharis-corridor-referent",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] Early prose: 'The Union Marshals receive decrypted intelligence from the Judicator Prime confirming that Separatist smugglers in the Zharis Corridor are using PMC-modified stealth drives.' Zharis Corridor has no canon record \u2014 a named route/region tying Separatists, PMC technology and Marshal counter-smuggling.",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "gsb-uib-directorship-conflict",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] char_sarina_vael is 'Director of the Galactic Security Bureau (GSB)' while char_callan_deyrus is 'Head of Union Intelligence Bureau (UIB)', and canon rules GSB a superseded draft name for the UIB \u2014 two records heading one agency.",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "superseded-name-check-wiring",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] tools/canon_superseded_names.py exists and passes but is not wired into any gate.",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "registry-sync-branch-field",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] registry-sync rewrites head_sha but never branch, so switching a nested repo leaves repo_registry.yaml internally inconsistent (head_sha from one branch, branch name from another).",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "registry-pin-vs-selfheal-hook",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "[migrated] The self-healing pre-commit hook regenerates catalog/repo_registry.yaml from local HEAD and re-stages it, so a commit that edits pins is silently reverted while still reporting success (see 5c41ad2, whose message and content disagree).",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "constellation-connectivity-publication-2026-08-19",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "status": "ready",
+      "assigned_to": "codex",
+      "priority": "high",
+      "next_action": "[migrated] Publish the coordinated integration/connectivity-pass-2026-08-19 stack after explicit nested-repo scope is confirmed: CloudBank cb35bfc5, qgia-knowledge-library 4f3a8bd1, qgia-knowledge-spine 7856e43a, then root 6349b1f8.",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "gumas-phase11-controls-contract",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "high",
+      "next_action": "[migrated] Successor to gumas-phase10-reporter.",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "prose-ledger-outcome-vocabulary-normalization",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "low",
+      "next_action": "Normalize prose_ledger_triage.outcome across the 25 records triaged before the vocabulary existed: 23 carry no outcome key and 2 carry prose sentences instead of a term. Derive each from the content already in the record (enriched / corroborated / no_content / misresolved); do not re-triage. Found by the 2026-09-01 audit of 02d6a40, which backfilled the 8 same-shaped records from that commit. Exit condition: every record with a triage block has an outcome drawn from the vocabulary, and a test asserts it.",
+      "waiting_on": null,
+      "trigger": null
+    },
+    {
+      "id": "connectivity-pass-pr-or-retire",
+      "repo": "root",
+      "status": "ready",
+      "assigned_to": "either",
+      "priority": "medium",
+      "next_action": "Open a PR per branch, or retire the branch deliberately and record the exemption.",
+      "waiting_on": null,
+      "trigger": null
+    }
+  ]
+}

@@ -23,7 +23,7 @@ RUN_ID = "11111111-1111-4111-8111-111111111111"
 # test would make the assertion tautological. Re-baselined 2026-08-20 for
 # CloudBank a19870a5 / blob 5b6d9351 (was 9c34d8e9 / dd3ae6f7); see
 # docs/ORION__ADR_LITE__ORION_V013_CLOUDBANK_REBASELINE__v1.0__2026-08-20.md.
-CLOUDBANK_SHA = "a19870a576a4136fc7ee8c30a2a8d869f36156d9"
+CLOUDBANK_SHA = "0fac980967ac7802a399f091fadf24bcd67b3126"
 CANONREC_SHA = "dc629a566b2f42fa1c652140b9eef72a4fb0d58a"
 OWNER_BLOB = "5b6d93515fb219cb26d267db6c6df6c052413ae1"
 AUTHORITY_REF = "owner:orion-l1:test-authorization"

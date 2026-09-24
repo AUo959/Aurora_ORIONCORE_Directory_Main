@@ -4,7 +4,7 @@ repos:
 - name: aurora-cloudbank-symbolic-main
   path: GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main
   branch: main
-  head_sha: a19870a576a4136fc7ee8c30a2a8d869f36156d9
+  head_sha: 0fac980967ac7802a399f091fadf24bcd67b3126
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main rev-parse
@@ -34,7 +34,7 @@ repos:
 - name: qgia-knowledge-library-main
   path: qgia-knowledge-library-main
   branch: main
-  head_sha: b38f2838950b69b693cd79442d522374e492f027
+  head_sha: 5d59130b960e3403aa7944218f5ed6b97f69f6ca
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C qgia-knowledge-library-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE

@@ -590,6 +590,27 @@
       "completed_at": "2026-08-12T02:04:54Z",
       "platform": "codex",
       "detail": "Completed via OrionCore PR #64, merge 47dcecf76b2299c8b6db76cdc878c446d8da6e1f. ACE now has an explicit-authority, feature-branch-only CanonRec facility materializer with baseline compare-and-swap, declared-target writes, post-commit rollback/sidecar cleanup, and append-only determination lineage/querying. GENERATED_CANON and CANON_REVISION are executable only after a real Git commit; the prior EXECUTION_BLOCKED receipt remains immutable. Mainline Python 3.12 tests passed 539/539 executed tests (36 skipped); the only post-merge red was the expected stale session_state freshness gate, repaired by this closeout. No Orion L1 runtime or experiment state was started, resumed, or advanced."
+    },
+    {
+      "id": "ace-v0-3-canon-determination",
+      "status": "completed",
+      "completed_at": "2026-08-12T03:08:00Z",
+      "platform": "codex",
+      "detail": "Completed via OrionCore PR #66, squash merge 24ce40f63fa06758728fe246c447d1110709a69e. ACE now executes all six determination states. v0.3 adds read-only bounded CanonRec evidence retrieval, allowlisted deterministic derivation, and fail-closed TRUE_CONFLICT with complete claim/source provenance. Final PR and post-merge mainline gates passed Python 3.9, full provisioned Python 3.12, workspace verification, lint/schema, repo sync, and gitleaks. No Orion L1 runtime/provider state was activated and the paused experiment was not started, resumed, or advanced."
+    },
+    {
+      "id": "reporting-tools-execution-context",
+      "status": "completed",
+      "completed_at": "2026-08-18T11:23:57Z",
+      "platform": "claude-code",
+      "detail": "Fixed in a0eabc7 (tools/aurora_devkit.py): findings carry execution_context and are demoted from blocker to warning outside the canonical workspace. Mission Control blocking 5 -> 0 from a sandbox; on the Mac the same scan reports canonical with no blockers because the tools genuinely exist. Detection anchored to $HOME rather than a path suffix. 9 tests in tests/test_devkit_execution_context.py. Was left open only because session_state_io was blocked by a concurrent codex claim when the fix landed."
+    },
+    {
+      "id": "ace-v013-orion-policy-pin-drift",
+      "status": "completed",
+      "completed_at": "2026-08-18T11:23:57Z",
+      "platform": "claude-code",
+      "detail": "SUPERSEDED BY ace-v1-orion-owner-compatibility, which codex had already queued for the same drift (blob dd3ae6f7 -> 5b6d9351, governed staffing runtime). That item is better scoped: it names the required compatibility work and states explicitly 'do not hash-repin blindly, load or advance the paused run, or weaken exact-owner checks'. Filed as a duplicate because I queued before re-reading the pending list. Evidence gathered here and worth carrying over: OrionL1Runtime and all four bound methods (preflight/load_run/advance/export_state) still exist, and CloudBank PR #1501 was purely additive to simulation/l1_runtime.py (+272/-0), so the binding is likely still valid but must be confirmed rather than assumed."
     }
   ]
 }
