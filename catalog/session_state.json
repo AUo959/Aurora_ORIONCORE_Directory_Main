@@ -729,16 +729,14 @@
       "assigned_to": "either",
       "kind": "work",
       "repo": "aurora-cloudbank-symbolic-main",
-      "description": "Root draft PR #86 exposed CloudBank 98abfccf runtime hash-lock incompleteness: anthropic==1.2.0 requires unpinned httpx2. Local repair 69157ea2 on codex/hashed-lock-closure-20260924 at /private/tmp/cloudbank-lock-review-20260924 regenerates the runtime lock constrained to existing CI versions. Linux Python 3.12 hash-enforced pip dry-run and 16 lock tests pass. Nested publication confirmation requested; no push or merge yet.",
+      "description": "CloudBank runtime hash-lock repair published with explicit owner authorization as draft PR #1608 at 69157ea2. Linux Python 3.12 hash-enforced pip dry-run and 16 lock tests passed. Dependency validation, unit-test job, CodeQL, and SonarCloud checks passed; broader tests, CI aggregate, and Codacy still running at handoff preparation. Root draft #86 depends on this separate PR. Publication is complete; merges remain unapproved.",
       "created_at": "2026-09-24T00:21:52Z",
-      "updated_at": "2026-09-24T00:21:52Z",
-      "review_at": "2026-09-25T00:00:00Z",
-      "next_action": "After explicit CloudBank push authorization, publish repair branch and open draft PR; obtain separate merge approval, then advance root registry pin and rerun PR #86 checks. Also triage the external Codacy failure on root #86.",
+      "updated_at": "2026-09-24T22:41:14Z",
+      "review_at": "2026-09-24T22:41:14Z",
+      "next_action": "Review CloudBank draft PR #1608 CI; obtain explicit per-PR merge approval before landing, then refresh root #86 registry pin and rerun dependent checks. Root Codacy requires external action.",
       "definition_of_done": "CloudBank lock repair reviewed and landed with approval; root pin updated; root PR #86 CI passes.",
       "approval_required": false,
-      "evidence_refs": [
-        "reports/analysis/live_review_20260924/review.md"
-      ]
+      "next_step": "Review CloudBank draft PR #1608 CI; obtain explicit per-PR merge approval before landing, then refresh root #86 registry pin and rerun dependent checks. Root Codacy requires external action."
     }
   ],
   "completed_tasks": [
@@ -813,9 +811,9 @@
       "detail": "Verified live origin/main contains CanonRec c5ae4f4051106d69733bcd7c1223b0264a8328c7: org_union_military_command exists; loc_kaelor_prime resolved_referents records closure 2026-08-27. Queue was stale; no canon mutation performed."
     }
   ],
-  "last_updated": "2026-09-24T00:21:52Z",
+  "last_updated": "2026-09-24T22:41:14Z",
   "last_platform": "codex",
-  "last_session_summary": "Live review phased repairs recorded in root draft PR #86. QGIA library and CloudBank checkouts synced; queue JSON truncation fixed, stale queue entries closed, 4 CanonRec worktree links pruned. Local tests pass, but root CI exposes CloudBank runtime hash-lock incompleteness and external Codacy failure. Isolated CloudBank repair 69157ea2 validates (Linux py3.12 hashed pip dry-run; 16 lock tests); explicit nested push authorization pending. No merges or simulation execution. Receipt: reports/analysis/live_review_20260924/review.md.",
+  "last_session_summary": "Published authorized CloudBank draft PR #1608 at 69157ea2 for complete runtime hash-lock closure. Existing Linux py3.12 hashed pip dry-run and 16 lock tests pass; CI being checked. Root draft #86 remains dependent on this repair and has external Codacy action required. No merge or runtime execution authorized/performed.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -837,6 +835,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "5978a2c8",
+      "date": "2026-09-24",
+      "platform": "codex",
+      "summary": "docs(review): record CI lock blocker and validated CloudBank repair"
+    },
     {
       "sha": "0fec3552",
       "date": "2026-09-24",
@@ -890,12 +894,6 @@
       "date": "2026-09-01",
       "platform": "claude-code",
       "summary": "Refresh session state after ledger closure and brief automation"
-    },
-    {
-      "sha": "2f106be",
-      "date": "2026-09-01",
-      "platform": "claude-code",
-      "summary": "Close prose-claim-ledger-reconciliation; pin CanonRec 02d6a40"
     }
   ],
   "security_events": [
@@ -912,7 +910,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "0fec3552125bd45e899607bb0ddee7aed1080761",
+    "main_sha": "5978a2c899eff8a3394f1ea5bcf3f6a71ce03d8b",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
