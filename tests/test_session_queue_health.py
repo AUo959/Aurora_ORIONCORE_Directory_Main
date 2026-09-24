@@ -87,6 +87,31 @@ def test_due_queue_review_is_visible(tmp_path: Path) -> None:
     assert any(item["check"] == "queue_review_due" for item in report["findings"])
 
 
+def test_due_review_inventory_is_complete_beyond_display_cap(tmp_path: Path, monkeypatch) -> None:
+    import workspace_verify
+
+    state = _valid_state()
+    state["active_task"] = None
+    template = state["task_queue"][0]
+    state["task_queue"] = [
+        {**template, "id": f"due-{i}", "review_at": "2026-07-04T00:00:00Z"}
+        for i in range(10)
+    ] + [{**template, "id": "future", "review_at": "2026-07-06T00:00:00Z"}]
+    report = _report(tmp_path, state)
+
+    assert report["summary"]["due_review_count"] == 10
+    assert {item["id"] for item in report["due_review"]} == {
+        f"due-{i}" for i in range(10)
+    }
+    finding = next(item for item in report["findings"] if item["check"] == "queue_review_due")
+    assert "10 queued item(s)" in finding["details"]
+    assert "and 2 more" in finding["details"]
+    monkeypatch.setattr(health, "utc_now", lambda: NOW)
+    workspace_findings = workspace_verify.verify_session_queue_lifecycle(tmp_path / "workspace")
+    workspace_finding = next(item for item in workspace_findings if item.check == "queue_review_due")
+    assert workspace_finding.details == finding["details"]
+
+
 def test_non_policy_owner_gate_scope_blocks_health(tmp_path: Path) -> None:
     state = _valid_state()
     state["active_task"] = None

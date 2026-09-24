@@ -243,7 +243,9 @@ def build_report(
         "active_task": active,
         "next_ready": ready[:5],
         "waiting_decisions": owner_gates[:5],
-        "due_review": sorted(due_review, key=_task_sort_key)[:8],
+        # Machine consumers need every due item; only the human finding above
+        # is capped. Otherwise the advertised count cannot be reconciled.
+        "due_review": sorted(due_review, key=_task_sort_key),
         "findings": findings,
     }
 
