@@ -1,4 +1,5 @@
-"""recent_commits provenance comes from the commit, not from the sync.
+"""
+Check that recent_commits provenance comes from the commit, not from the sync.
 
 Regression guard for the defect found 2026-09-24: record-commits and the Stop
 hook stamped every newly seen commit with the sync's own date and the platform
@@ -9,7 +10,8 @@ from __future__ import annotations
 
 import argparse
 import os
-import subprocess
+import shutil
+import subprocess  # nosec B404 - fixtures build a throwaway git repo
 import sys
 import tempfile
 import unittest
@@ -32,6 +34,9 @@ class _GitRepo(unittest.TestCase):
     """Temp repo with one trailer-less commit and one Claude-attributed commit."""
 
     def setUp(self):
+        self.git = shutil.which("git")
+        if self.git is None:
+            self.skipTest("git is not installed")
         self._dir = tempfile.TemporaryDirectory()
         self.addCleanup(self._dir.cleanup)
         self.repo = Path(self._dir.name) / "repo"
@@ -44,8 +49,10 @@ class _GitRepo(unittest.TestCase):
                      "2026-01-05T23:30:00-04:00")
 
     def _git(self, *args, env=None):
-        return subprocess.run(["git", *args], cwd=self.repo,  # noqa: S603, S607 - fixture git in a temp repo
-                              capture_output=True, text=True, check=True, env=env).stdout.strip()
+        return subprocess.run(  # noqa: S603 # nosec B603 - fixture git in a temp repo
+            [self.git, *args], cwd=self.repo,
+            capture_output=True, text=True, check=True, env=env,
+        ).stdout.strip()
 
     def _commit(self, message, when):
         env = {**os.environ, "GIT_AUTHOR_DATE": when, "GIT_COMMITTER_DATE": when}
