@@ -643,11 +643,8 @@ COMMIT_RECORD_FORMAT = "%h%x1f%cd%x1f%(trailers:only,unfold)%x1f%s%x1e"
 
 
 def platform_from_trailers(trailers: str) -> str:
-    """
-    Return the platform that produced a commit, decided by the commit alone.
-
-    Deterministic: the answer never depends on which platform runs the sync.
-    """
+    """Return the platform that produced a commit, decided by the commit alone."""
+    # Deterministic: the answer never depends on which platform runs the sync.
     lowered = trailers.lower()
     if any(marker in lowered for marker in CLAUDE_TRAILER_MARKERS):
         return "claude-code"
@@ -655,22 +652,18 @@ def platform_from_trailers(trailers: str) -> str:
 
 
 def commit_records(repo_root: Path, *rev_args: str) -> list[dict]:
-    """
-    Return ``git log <rev_args>`` as [{sha, date, platform, summary}], newest first.
-
-    ``date`` is the committer date normalised to UTC (YYYY-MM-DD), matching the
-    UTC convention of ``last_updated``. An unresolvable revision, or no git on
-    PATH, yields [].
-    """
+    """Return ``git log <rev_args>`` as [{sha, date, platform, summary}], newest first."""
+    # ``date`` is the committer date normalised to UTC (YYYY-MM-DD), matching the
+    # UTC convention of ``last_updated``. An unresolvable revision, or no git on
+    # PATH, yields [].
     import shutil
     import subprocess
 
-    git = shutil.which("git")
-    if git is None:
+    if shutil.which("git") is None:
         return []
     env = {**os.environ, "TZ": "UTC"}
-    raw = subprocess.run(  # noqa: S603 # nosec B603 - fixed git log against the local repo root
-        [git, "log", "--date=format-local:%Y-%m-%d",
+    raw = subprocess.run(  # noqa: S603 # nosec B603, B607 - fixed git log against the local repo root
+        ["git", "log", "--date=format-local:%Y-%m-%d",  # noqa: S607 - git from PATH, the repo-wide convention
          f"--format={COMMIT_RECORD_FORMAT}", *rev_args],
         capture_output=True, text=True, cwd=repo_root, env=env,
     ).stdout
@@ -691,12 +684,9 @@ def commit_records(repo_root: Path, *rev_args: str) -> list[dict]:
 
 def merge_recent_commits(existing: list, new_records: list,
                          cap: int = 10) -> tuple[list, int]:
-    """
-    Prepend unseen records, order newest-date-first (stable), then cap.
-
-    This is the same ordering tools/session_state_merge.py applies, so the cap
-    drops the oldest entries rather than whichever happened to be seen last.
-    """
+    """Prepend unseen records, order newest-date-first (stable), then cap."""
+    # Same ordering tools/session_state_merge.py applies, so the cap drops the
+    # oldest entries rather than whichever happened to be seen last.
     merged = list(existing)
     seen = {e.get("sha") for e in merged if isinstance(e, dict)}
     added = 0
@@ -711,12 +701,9 @@ def merge_recent_commits(existing: list, new_records: list,
 
 
 def reattribute_recent_commits(repo_root: Path, existing: list) -> tuple[list, int]:
-    """
-    Re-derive date/platform for recorded commits that still resolve.
-
-    Mechanical repair for entries written before provenance came from the
-    commit. Entries whose sha no longer resolves are kept unchanged.
-    """
+    """Re-derive date/platform for recorded commits that still resolve."""
+    # Mechanical repair for entries written before provenance came from the
+    # commit. Entries whose sha no longer resolves are kept unchanged.
     fixed: list = []
     changed = 0
     for entry in existing:

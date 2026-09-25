@@ -1,11 +1,9 @@
-"""
-Check that recent_commits provenance comes from the commit, not from the sync.
-
-Regression guard for the defect found 2026-09-24: record-commits and the Stop
-hook stamped every newly seen commit with the sync's own date and the platform
-running the sync, so a Codex sync relabelled six Claude-authored commits as
-"codex" and nine of ten entries carried the sync day instead of the commit day.
-"""
+"""Check that recent_commits provenance comes from the commit, not from the sync."""
+# Regression guard for the defect found 2026-09-24: record-commits and the Stop
+# hook stamped every newly seen commit with the sync's own date and the platform
+# running the sync. Measured against live state (UTC dates), 5 of 10 entries were
+# wrong: four Claude commits recorded as "codex" with the sync day, and one Codex
+# commit recorded as "claude-code".
 from __future__ import annotations
 
 import argparse
@@ -49,8 +47,8 @@ class _GitRepo(unittest.TestCase):
                      "2026-01-05T23:30:00-04:00")
 
     def _git(self, *args, env=None):
-        return subprocess.run(  # noqa: S603 # nosec B603 - fixture git in a temp repo
-            [self.git, *args], cwd=self.repo,
+        return subprocess.run(  # noqa: S603 # nosec B603, B607 - fixture git in a temp repo
+            ["git", *args], cwd=self.repo,  # noqa: S607 - git from PATH, the repo-wide convention
             capture_output=True, text=True, check=True, env=env,
         ).stdout.strip()
 
