@@ -737,6 +737,45 @@
       "definition_of_done": "CloudBank lock repair reviewed and landed with approval; root pin updated; root PR #86 CI passes.",
       "approval_required": false,
       "next_step": "Verify latest root PR #86 checks after owner-attestation and Codacy fixes. CloudBank #1608 is merged; root still requires separate explicit per-PR merge approval."
+    },
+    {
+      "id": "stop-hook-platform-attribution",
+      "status": "ready",
+      "priority": "high",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "root",
+      "description": "tools/session_stop_hook.py hardcodes PLATFORM='claude-code'. Per AGENTS.md (session_state_freshness), the pre-commit wrapper runs this hook for every committer and stages catalog/session_state.json, so a Codex commit stamps last_platform=claude-code and names orphan markers .orphan_claude-code_*. Observed live 2026-09-24T23:53:37Z: 4880cae3 carried Codex's own session summary yet left last_platform=claude-code; the same path had labelled Codex commit 989c53ae as claude-code in recent_commits (that half is fixed by PR #87). last_platform is the field the on_session_start handoff relies on.",
+      "created_at": "2026-09-25T00:31:19Z",
+      "updated_at": "2026-09-25T00:31:19Z",
+      "review_at": "2026-10-02T00:00:00Z",
+      "next_action": "Choose a platform-identification contract the hook can trust (for example an environment variable each platform sets, with the hook declining to write last_platform or orphan markers when it is unset), then implement it with a test for the pre-commit wrapper path.",
+      "definition_of_done": "A commit made by Codex through the pre-commit wrapper leaves last_platform and orphan-marker names correct (codex) or untouched, covered by a test.",
+      "approval_required": false,
+      "evidence_refs": [
+        "4880cae3: Codex session summary with last_platform=claude-code",
+        "AGENTS.md session_state_freshness: wrapper runs tools/session_stop_hook.py and stages session_state.json",
+        "tools/session_stop_hook.py: PLATFORM = 'claude-code' (module constant, no override)"
+      ]
+    },
+    {
+      "id": "session-claims-worktree-blind",
+      "status": "ready",
+      "priority": "high",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "root",
+      "description": "Session claims live in each checkout's gitignored catalog/session_claims/, so a linked git worktree has an empty claims directory and session_state_io's write guard (refuse while the other platform holds an active mutating claim overlapping the state file) passes inside a worktree even when the canonical checkout holds a live conflicting claim. Observed 2026-09-24 ~23:57Z: session_claim.py check against the canonical root reported a conflict with codex-root-cleanup-20260924, yet session_state_io add-item succeeded in the worktree for fix/recent-commits-provenance-20260924 (that commit was reverted before push).",
+      "created_at": "2026-09-25T00:31:20Z",
+      "updated_at": "2026-09-25T00:31:20Z",
+      "review_at": "2026-10-02T00:00:00Z",
+      "next_action": "Resolve the claims directory from git's common dir (git rev-parse --git-common-dir, then its parent) so every worktree of a clone shares one claims store; add a test that a worktree mutation refuses on a conflicting canonical claim.",
+      "definition_of_done": "From any linked worktree, session_state_io mutations refuse (exit 3) on a conflicting claim held in the main checkout, covered by a test.",
+      "approval_required": false,
+      "evidence_refs": [
+        "codex-root-cleanup-20260924 conflict reported by session_claim.py check while worktree add-item succeeded",
+        "PR #87 description, section: gap in the claim protocol"
+      ]
     }
   ],
   "completed_tasks": [
@@ -811,8 +850,8 @@
       "detail": "Verified live origin/main contains CanonRec c5ae4f4051106d69733bcd7c1223b0264a8328c7: org_union_military_command exists; loc_kaelor_prime resolved_referents records closure 2026-08-27. Queue was stale; no canon mutation performed."
     }
   ],
-  "last_updated": "2026-09-24T23:46:17Z",
-  "last_platform": "codex",
+  "last_updated": "2026-09-25T00:31:20Z",
+  "last_platform": "claude-code",
   "last_session_summary": "CloudBank #1608 merged with owner approval as 0fac9809. Root #86 updated and owner attestation refreshed after byte-identical contract verification; all GitHub Actions checks passed at 44b09d0c. Codacy annotations diagnosed and fixed (Markdown links; explicit test checks), latest CI pending. Root remains unmerged awaiting separate approval. Pre-existing edits and historical simulation hashes preserved.",
   "tool_versions": {
     "gitleaks": "8.30.1",
