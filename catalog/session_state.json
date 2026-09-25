@@ -802,9 +802,9 @@
       "detail": "Completed: CloudBank PR #1608 merged as 0fac980967ac7802a399f091fadf24bcd67b3126; root PR #86 passed all non-skipped checks at 989c53ae and merged with explicit owner approval as cb52b48a23606a1ddbb773a52f7e99f2adb4b95d on 2026-09-24."
     }
   ],
-  "last_updated": "2026-09-25T00:02:04Z",
+  "last_updated": "2026-09-25T00:30:17Z",
   "last_platform": "codex",
-  "last_session_summary": "Root hygiene branch based on merged main cb52b48a; carried completion receipt forward. Regenerated inventory and unapplied routing proposals for review; no moves executed. Removed backed-up timestamp-only skill report edit after zero-change skill check. Verified 36 historical simulation hashes unchanged. Unpublished CanonRec registry edit and two historical simulation directories remain local holds. Cleanup PR publication follows validation; merge requires separate approval.",
+  "last_session_summary": "Closed the remaining local holds: live fetch confirms CanonRec 72f504b is published on origin/main, so root pin regenerated through registry_sync_heads.py. Moved 18 August 18/19 historical pytest output files into archives/historical_simulation_outputs with original paths, byte counts and SHA-256 manifest; all match prior evidence. No provenance rewrite, simulation execution, or canon promotion. Root draft PR to follow; merge requires separate approval.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -826,6 +826,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "983018c6",
+      "date": "2026-09-25",
+      "platform": "codex",
+      "summary": "chore(workspace): reconcile generated inventory and document local holds (#88)"
+    },
     {
       "sha": "cb52b48a",
       "date": "2026-09-25",
@@ -879,12 +885,6 @@
       "date": "2026-09-24",
       "platform": "codex",
       "summary": "chore(queue): close connectivity-branch-email-privacy, open the PR-or-retire follow-on"
-    },
-    {
-      "sha": "1378b7ef",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "docs(salvage): close the L3 salvage pass (v1.2)"
     }
   ],
   "security_events": [
@@ -901,7 +901,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "cb52b48a23606a1ddbb773a52f7e99f2adb4b95d",
+    "main_sha": "983018c6a383cb816c60b1156ff30a929bde35f5",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
