@@ -1,4 +1,4 @@
-generated_at: '2026-08-20T21:58:31Z'
+generated_at: '2026-09-23T13:01:49Z'
 root: .
 logical_taxonomy:
 - repos
@@ -22,6 +22,16 @@ entries:
   owner: intake-review
   status: planned_move
   batch_id: wave4_root_intake_cleanup_initial
+- id: ds-store
+  kind: cache_or_local_artifact
+  current_path: .DS_Store
+  logical_zone: _staging
+  planned_path: .DS_Store
+  git_boundary: none
+  storage_tier: ephemeral
+  retention_policy: regenerate
+  owner: local-user
+  status: ignored
 - id: dot-agents
   kind: control_surface
   current_path: .agents

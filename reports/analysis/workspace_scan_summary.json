@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-09-08T04:37:48Z",
+  "generated_at": "2026-09-23T13:01:53Z",
   "root": ".",
-  "top_level_entry_count": 45,
+  "top_level_entry_count": 46,
   "logical_zone_counts": {
     "intake": 8,
+    "_staging": 8,
     "tools": 11,
-    "_staging": 7,
     "docs": 11,
     "repos": 4,
     "archives": 1,

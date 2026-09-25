@@ -1,8 +1,8 @@
 # Workspace Map
 
-- Generated: `2026-09-08T04:37:44Z`
+- Generated: `2026-09-23T13:01:49Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `45`
+- Top-level entries cataloged: `46`
 - Nested repos registered: `9`
 - Archive or binary artifacts inventoried: `615`
 - Classification overrides loaded: `10` from `catalog/classification_overrides.yaml`
@@ -10,7 +10,7 @@
 
 ## Zones
 
-- `_staging`: `7` top-level entries
+- `_staging`: `8` top-level entries
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `11` top-level entries

@@ -1,7 +1,7 @@
 {
   "batch_id": "wave4_root_intake_cleanup_initial_rollback",
   "for_batch": "wave4_root_intake_cleanup_initial",
-  "generated_at": "2026-08-10T02:14:11Z",
+  "generated_at": "2026-09-06T03:11:43Z",
   "operations": [
     {
       "batch_id": "wave4_root_intake_cleanup_initial_rollback",
@@ -54,6 +54,32 @@
       "approved": false,
       "applied_at": null,
       "path_kind": "file"
+    },
+    {
+      "batch_id": "wave4_root_intake_cleanup_initial_rollback",
+      "source": "intake/ecguard_pr_body.md",
+      "destination": "ecguard_pr_body.md",
+      "operation": "move",
+      "pre_hash": "5d074c462c794d7475400f726b7c6a3fe3e2dad35307700c341c896d4a27d7bf",
+      "post_hash": "5d074c462c794d7475400f726b7c6a3fe3e2dad35307700c341c896d4a27d7bf",
+      "rollback_source": "intake/ecguard_pr_body.md",
+      "reason": "Rollback for wave4_root_intake_cleanup_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "file"
+    },
+    {
+      "batch_id": "wave4_root_intake_cleanup_initial_rollback",
+      "source": "intake/recovery",
+      "destination": "recovery",
+      "operation": "move",
+      "pre_hash": "8eb414304a3ced79914346bb7b76e85539dc056a9169883a5f45fa982be0bd86",
+      "post_hash": "8eb414304a3ced79914346bb7b76e85539dc056a9169883a5f45fa982be0bd86",
+      "rollback_source": "intake/recovery",
+      "reason": "Rollback for wave4_root_intake_cleanup_initial",
+      "approved": false,
+      "applied_at": null,
+      "path_kind": "tree"
     },
     {
       "batch_id": "wave4_root_intake_cleanup_initial_rollback",

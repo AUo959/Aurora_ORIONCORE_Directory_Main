@@ -721,22 +721,6 @@
         "publication_debt scan, 2026-09-08: 3 entries, +65 exempted",
         "reports/analysis/ORION__AUDIT__L3_SALVAGE_PASS__v1.2__2026-09-08.md"
       ]
-    },
-    {
-      "id": "cloudbank-runtime-hash-lock-closure",
-      "status": "ready",
-      "priority": "high",
-      "assigned_to": "either",
-      "kind": "work",
-      "repo": "aurora-cloudbank-symbolic-main",
-      "description": "CloudBank #1608 owner-approved and merged as 0fac9809. Root #86 now pins the merged repair and reattests the byte-identical Orion owner; all GitHub Actions jobs passed at 44b09d0c. Remaining Codacy annotations identified as two bare URLs plus five test assertions duplicated across scanners; fixes preserve coverage and are being validated in the latest push. No root merge approval yet.",
-      "created_at": "2026-09-24T00:21:52Z",
-      "updated_at": "2026-09-24T23:46:17Z",
-      "review_at": "2026-09-24T23:46:17Z",
-      "next_action": "Verify latest root PR #86 checks after owner-attestation and Codacy fixes. CloudBank #1608 is merged; root still requires separate explicit per-PR merge approval.",
-      "definition_of_done": "CloudBank lock repair reviewed and landed with approval; root pin updated; root PR #86 CI passes.",
-      "approval_required": false,
-      "next_step": "Verify latest root PR #86 checks after owner-attestation and Codacy fixes. CloudBank #1608 is merged; root still requires separate explicit per-PR merge approval."
     }
   ],
   "completed_tasks": [
@@ -809,11 +793,18 @@
       "completed_at": "2026-09-24T00:12:14Z",
       "platform": "codex",
       "detail": "Verified live origin/main contains CanonRec c5ae4f4051106d69733bcd7c1223b0264a8328c7: org_union_military_command exists; loc_kaelor_prime resolved_referents records closure 2026-08-27. Queue was stale; no canon mutation performed."
+    },
+    {
+      "id": "cloudbank-runtime-hash-lock-closure",
+      "status": "completed",
+      "completed_at": "2026-09-24T23:53:36Z",
+      "platform": "claude-code",
+      "detail": "Completed: CloudBank PR #1608 merged as 0fac980967ac7802a399f091fadf24bcd67b3126; root PR #86 passed all non-skipped checks at 989c53ae and merged with explicit owner approval as cb52b48a23606a1ddbb773a52f7e99f2adb4b95d on 2026-09-24."
     }
   ],
-  "last_updated": "2026-09-24T23:46:17Z",
+  "last_updated": "2026-09-25T00:02:04Z",
   "last_platform": "codex",
-  "last_session_summary": "CloudBank #1608 merged with owner approval as 0fac9809. Root #86 updated and owner attestation refreshed after byte-identical contract verification; all GitHub Actions checks passed at 44b09d0c. Codacy annotations diagnosed and fixed (Markdown links; explicit test checks), latest CI pending. Root remains unmerged awaiting separate approval. Pre-existing edits and historical simulation hashes preserved.",
+  "last_session_summary": "Root hygiene branch based on merged main cb52b48a; carried completion receipt forward. Regenerated inventory and unapplied routing proposals for review; no moves executed. Removed backed-up timestamp-only skill report edit after zero-change skill check. Verified 36 historical simulation hashes unchanged. Unpublished CanonRec registry edit and two historical simulation directories remain local holds. Cleanup PR publication follows validation; merge requires separate approval.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -835,6 +826,18 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "cb52b48a",
+      "date": "2026-09-25",
+      "platform": "codex",
+      "summary": "Fix review inventory and refresh validated CloudBank baseline (#86)"
+    },
+    {
+      "sha": "989c53ae",
+      "date": "2026-09-24",
+      "platform": "claude-code",
+      "summary": "fix(review): resolve Codacy annotations without weakening tests"
+    },
     {
       "sha": "44b09d0c",
       "date": "2026-09-24",
@@ -882,18 +885,6 @@
       "date": "2026-09-24",
       "platform": "codex",
       "summary": "docs(salvage): close the L3 salvage pass (v1.2)"
-    },
-    {
-      "sha": "6f4ff6d9",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "docs(salvage): record the salvage pass execution log (v1.1)"
-    },
-    {
-      "sha": "3225b219",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "docs(salvage): record the L3 salvage pass and land the recovered whitepaper"
     }
   ],
   "security_events": [
@@ -910,7 +901,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "44b09d0ce68ed636601d3ecd32d1264cb9f8329a",
+    "main_sha": "cb52b48a23606a1ddbb773a52f7e99f2adb4b95d",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
