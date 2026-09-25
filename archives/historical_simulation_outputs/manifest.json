@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "classification": "historical_test_output",
+  "active_runtime_input": false,
+  "canon_promotion": false,
+  "archived_on": "2026-09-25",
+  "source_evidence": "reports/analysis/live_review_20260924/evidence.json",
+  "files": [
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-18/companion_ops.json",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-18/companion_ops.json",
+      "sha256": "e8306a6fd277208047306bebed1ba914b1725b51da5ea62854cc7553a2eeb627",
+      "bytes": 567
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-18/crew_logs.md",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-18/crew_logs.md",
+      "sha256": "647d1040534425481ab44925f2dc04d7569271151cd5c5117feaf7bca5fc766b",
+      "bytes": 4651
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-18/interaction_map.json",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-18/interaction_map.json",
+      "sha256": "4984bf1a7d1869f6b773ce21b63e09d1284727bf0a562f61da9f3591a6a77e9f",
+      "bytes": 2742
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-18/interaction_map.md",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-18/interaction_map.md",
+      "sha256": "24a23414645e42c5fb0f14f25c156b5130eed3eb17ac7765cc3268d5980c8aa5",
+      "bytes": 516
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-18/narrative_reconstruction.json",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-18/narrative_reconstruction.json",
+      "sha256": "c1ea04424024c5374ecaeb35e87e35a29dd7dc7be20eadf074b6cba95630b8e4",
+      "bytes": 7745
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-18/narrative_reconstruction.md",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-18/narrative_reconstruction.md",
+      "sha256": "7e0b63502be2d8d499f3799662976bd6c3b4ebbb5a875a41ebd0c581a3aabd02",
+      "bytes": 2646
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-18/run_meta.json",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-18/run_meta.json",
+      "sha256": "8f310d60403813af62a562ea59bec58f531df3f82ab4e1d7657589c08cc2592f",
+      "bytes": 803
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-18/sim_raw.json",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-18/sim_raw.json",
+      "sha256": "cd775cc3c28748a92ddc4dd6bada5a3b9d2fc796058920d3f46b241e55b7a80d",
+      "bytes": 7633
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-18/souls_accounting.json",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-18/souls_accounting.json",
+      "sha256": "4d09dd54d09fac7b5527c6569d3adc4c1a4b7658aabaefdedd3226a788cddb8c",
+      "bytes": 364
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-19/companion_ops.json",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-19/companion_ops.json",
+      "sha256": "f67f26dd99f7849560424dc15dfc7a9194ee3cc7c7ba6eb23c9028fcc2c6d37d",
+      "bytes": 567
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-19/crew_logs.md",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-19/crew_logs.md",
+      "sha256": "647d1040534425481ab44925f2dc04d7569271151cd5c5117feaf7bca5fc766b",
+      "bytes": 4651
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-19/interaction_map.json",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-19/interaction_map.json",
+      "sha256": "346c3b0e671a0bbff4f11e28673694e3c6bdef0d96ce3837f21f077fa105d345",
+      "bytes": 2742
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-19/interaction_map.md",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-19/interaction_map.md",
+      "sha256": "24a23414645e42c5fb0f14f25c156b5130eed3eb17ac7765cc3268d5980c8aa5",
+      "bytes": 516
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-19/narrative_reconstruction.json",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-19/narrative_reconstruction.json",
+      "sha256": "37c39568c408ccece3218690d746e6a1eb029790b7f9df08c3d6fbd2412a2006",
+      "bytes": 7745
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-19/narrative_reconstruction.md",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-19/narrative_reconstruction.md",
+      "sha256": "7e0b63502be2d8d499f3799662976bd6c3b4ebbb5a875a41ebd0c581a3aabd02",
+      "bytes": 2646
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-19/run_meta.json",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-19/run_meta.json",
+      "sha256": "2028a6d8a416fac64ada7968cd5bdb9dc0031891bdc35fe616351b31ac1d215a",
+      "bytes": 803
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-19/sim_raw.json",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-19/sim_raw.json",
+      "sha256": "cd775cc3c28748a92ddc4dd6bada5a3b9d2fc796058920d3f46b241e55b7a80d",
+      "bytes": 7633
+    },
+    {
+      "original_path": "reports/simulation/hour_aboard_v1__2026-08-19/souls_accounting.json",
+      "archive_path": "archives/historical_simulation_outputs/hour_aboard_v1__2026-08-19/souls_accounting.json",
+      "sha256": "5254f1990ba763a490a8706a8584d33155b74d50cd74a4382024edd1fda96fe6",
+      "bytes": 364
+    }
+  ]
+}

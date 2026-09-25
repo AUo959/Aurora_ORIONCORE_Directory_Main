@@ -98,6 +98,8 @@
 !/archives/README.md
 # recovered-prototype archive lane: committed provenance (salvage docket P7+)
 !/archives/recovered_prototypes/
+# Byte-preserved historical test outputs with a provenance manifest.
+!/archives/historical_simulation_outputs/
 /intake/*
 !/intake/.gitkeep
 !/intake/README.md
