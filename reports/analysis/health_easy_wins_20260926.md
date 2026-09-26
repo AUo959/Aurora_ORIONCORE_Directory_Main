@@ -69,3 +69,9 @@ Root and nested Git boundaries stayed separate. No remote configuration changes,
 - Registry check: 5 local pins in sync, 4 remote-only entries skipped.
 - Root cleanup draft PR: https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/91. Neither PR is merged by this pass.
 - ZIP Wizard PR CI confirmed typecheck, formatting, tests and lint on Node 22. A path-triggered navigation workflow exposed unsupported `--grep` flags and a coverage-comment 403. Follow-up `29c7aa4` uses Vitest `--testNamePattern`, preserves coverage as an artifact without widening permissions, and adds workflow-self path triggers. Local exact filters pass 4 accessibility, 2 ARIA, and 1 keyboard tests. Final remote CI is pending at receipt update.
+
+### Final ZIP Wizard follow-up
+
+At `29c7aa4`, GitHub confirmed all three navigation jobs pass as well as typecheck, formatting, lint and unit tests. Codacy identified one unused `_handleArchiveProcess` callback after formatting exposed its lines; `ada1d7b` removes that unreferenced console-only callback. TypeScript, formatting and all 39 tests pass again. Latest head is `ada1d7b`; remote rechecks remain pending at this receipt's publication. The earlier `1664a09` / `29c7aa4` references above identify the specific repairs, not the final branch tip.
+
+Root CI at `962b6891`: Python 3.9 tests, lint/schema, secrets and governed Orion transaction-boundary checks passed; Python 3.12 suite was still running. These are head-specific observations; later documentation commits require their own checks.
