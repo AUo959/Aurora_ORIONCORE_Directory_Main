@@ -794,9 +794,9 @@
       "detail": "Verified implemented at root 8569f743: tools/ace/core.py build_capability_index delegates to capability_discovery.py; committed manifest catalog validates 20 capabilities against schema. Existing discovery tests passed in the 670-pass non-simulation root suite on 2026-09-26. Stale queue entry closed; no capability behavior changed."
     }
   ],
-  "last_updated": "2026-09-26T23:32:10Z",
+  "last_updated": "2026-09-26T23:34:38Z",
   "last_platform": "codex",
-  "last_session_summary": "Completed bounded holistic health check across all 10 registered/root repos. Root main updated to 8569f743; QGIA Spine fast-forwarded to 1cf04fa and pin regenerated. CloudBank locked Node install repaired (55+8 JS tests, 45 focused Python tests pass). Root 670 passed/40 skipped/50 simulation tests deselected; CanonRec, DuelSim quick gate and both QGIA suites pass. Closed stale ACE manifest-discovery item, corrected iCloud deletion docs. ZIP Wizard type/format repair published as draft PR #13 at 1664a09; TypeScript/format/39 tests/lint/build pass locally. Root receipt and cleanup PR prepared separately. No merges or live simulation. Evidence: reports/analysis/health_easy_wins_20260926.md.",
+  "last_session_summary": "Holistic easy-wins pass completed: root draft PR #91 and ZIP Wizard draft PR #13 (29c7aa4), no merges. Root/QGIA Spine synchronized; CloudBank locked Node installation repaired; stale ACE discovery task closed; iCloud docs corrected. ZIP Wizard dashboard typing, formatting, and navigation CI repaired. Root 670 passed, CloudBank 45 Python +63 JS passed, CanonRec/DuelSim/QGIA checks passed; ZIP Wizard 39 tests/typecheck/format/lint/build passed plus 4/2/1 filtered tests. Root verifier zero blockers and integration gate passes. Remote CI pending; known warnings, scope and exact repo heads in reports/analysis/health_easy_wins_20260926.md.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -818,6 +818,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "5a23020b",
+      "date": "2026-09-26",
+      "platform": "codex",
+      "summary": "chore(health): sync published spine and close verified housekeeping gaps"
+    },
     {
       "sha": "8569f743",
       "date": "2026-09-26",
@@ -871,12 +877,6 @@
       "date": "2026-09-24",
       "platform": "codex",
       "summary": "fix(queue): expose complete due-review inventory and record live remediation"
-    },
-    {
-      "sha": "59d8a5cb",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "reports(recovered_canon): archive the Jorenon Morrowen ACE review packet"
     }
   ],
   "security_events": [
@@ -893,7 +893,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "8569f7436d6b57829fec6f2004850c9883132d2f",
+    "main_sha": "5a23020b96def831dfb8e62b46fd6cedc79d4c54",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",

@@ -9,7 +9,7 @@ Scope: root control plane, five registered local repositories, and four remote-o
 - CloudBank local Node installation was incomplete: 52/55 tests passed, with missing Express failures. `npm ci --ignore-scripts --no-audit --no-fund` restored the committed lockfile installation without changing source or lockfiles. After allowing ephemeral local test sockets, all 55 Node and 8 web tests passed. No service deployment or live simulation was performed.
 - Closed stale `ace-capability-manifest-discovery`: `tools/ace/core.py:build_capability_index` delegates to schema-validated manifest discovery; existing tests validate the 20-entry catalog. Other broad ACE backlog claims remain for separate evidence review.
 - Corrected AGENTS.md, reviewer orientation, and the migration document introduction: the legacy iCloud tree was deleted on July 4, as already recorded in the migration document section 6. Historical July 1 steps are preserved.
-- ZIP Wizard: repaired the dashboard response type to match the existing server endpoint, including nullable replayability; formatted the eight files identified by failing CI. Temporary checkout `/private/tmp/aurora-health-20260926/zip-wizard`, branch `codex/fix-status-dashboard-types-20260926`, commit `1664a09`. No registry adoption, dependency upgrade, or server behavior change.
+- ZIP Wizard: repaired the dashboard response type to match the existing server endpoint, including nullable replayability; formatted the eight files identified by failing CI. Temporary checkout `/private/tmp/aurora-health-20260926/zip-wizard`, branch `codex/fix-status-dashboard-types-20260926`, commits `1664a09` and `29c7aa4`. No registry adoption, dependency upgrade, or server behavior change.
 
 ## Verified heads
 
@@ -64,7 +64,8 @@ Root and nested Git boundaries stayed separate. No remote configuration changes,
 
 ## Publication and final gates
 
-- ZIP Wizard draft PR: https://github.com/AUo959/zip_wizard/pull/13 (`1664a09`).
+- ZIP Wizard draft PR: https://github.com/AUo959/zip_wizard/pull/13 (`29c7aa4`; original type/format commit `1664a09`).
 - Final integration gate: all five checks and all six commands pass after releasing this session's claims.
 - Registry check: 5 local pins in sync, 4 remote-only entries skipped.
-- Root cleanup is a separate draft PR; neither PR is merged by this pass.
+- Root cleanup draft PR: https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/91. Neither PR is merged by this pass.
+- ZIP Wizard PR CI confirmed typecheck, formatting, tests and lint on Node 22. A path-triggered navigation workflow exposed unsupported `--grep` flags and a coverage-comment 403. Follow-up `29c7aa4` uses Vitest `--testNamePattern`, preserves coverage as an artifact without widening permissions, and adds workflow-self path triggers. Local exact filters pass 4 accessibility, 2 ARIA, and 1 keyboard tests. Final remote CI is pending at receipt update.
