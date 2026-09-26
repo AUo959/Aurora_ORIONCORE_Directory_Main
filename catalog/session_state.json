@@ -509,21 +509,6 @@
       "approval_required": false
     },
     {
-      "id": "ace-capability-manifest-discovery",
-      "status": "ready",
-      "assigned_to": "either",
-      "priority": "medium",
-      "kind": "work",
-      "repo": "root",
-      "description": "tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing. Registering a capability therefore means editing engine source, and spec 6.5 (capability indexer) is unimplemented in substance. Load capabilities from manifest files validated against the existing schema. tests/test_aurora_ace_invariants.py::test_declared_producers_exist_in_the_capability_index already guards the field->index consistency this would need.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-09-10T20:06:05Z",
-      "next_action": "[migrated] tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing.",
-      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
-      "approval_required": false
-    },
-    {
       "id": "worktree-uncommitted-sweep",
       "status": "ready",
       "assigned_to": "either",
@@ -800,11 +785,18 @@
       "completed_at": "2026-09-24T23:53:36Z",
       "platform": "claude-code",
       "detail": "Completed: CloudBank PR #1608 merged as 0fac980967ac7802a399f091fadf24bcd67b3126; root PR #86 passed all non-skipped checks at 989c53ae and merged with explicit owner approval as cb52b48a23606a1ddbb773a52f7e99f2adb4b95d on 2026-09-24."
+    },
+    {
+      "id": "ace-capability-manifest-discovery",
+      "status": "completed",
+      "completed_at": "2026-09-26T23:27:51Z",
+      "platform": "codex",
+      "detail": "Verified implemented at root 8569f743: tools/ace/core.py build_capability_index delegates to capability_discovery.py; committed manifest catalog validates 20 capabilities against schema. Existing discovery tests passed in the 670-pass non-simulation root suite on 2026-09-26. Stale queue entry closed; no capability behavior changed."
     }
   ],
-  "last_updated": "2026-09-25T00:30:17Z",
+  "last_updated": "2026-09-26T23:36:23Z",
   "last_platform": "codex",
-  "last_session_summary": "Closed the remaining local holds: live fetch confirms CanonRec 72f504b is published on origin/main, so root pin regenerated through registry_sync_heads.py. Moved 18 August 18/19 historical pytest output files into archives/historical_simulation_outputs with original paths, byte counts and SHA-256 manifest; all match prior evidence. No provenance rewrite, simulation execution, or canon promotion. Root draft PR to follow; merge requires separate approval.",
+  "last_session_summary": "Completed all-repo bounded health pass. Draft PRs: root #91, ZIP Wizard #13 (ada1d7b). Root and QGIA Spine synchronized; CloudBank locked Node install repaired; stale ACE task closed; migration docs corrected; ZIP Wizard type/format/navigation CI and unused callback fixed. Local checks pass: root 670, CloudBank 45 Python +63 JS, CanonRec/QGIA suites, DuelSim quick gate, ZIP Wizard 39 plus type/format/lint/build. ZIP navigation CI confirmed passing at 29c7aa4; latest remote checks pending. No merges or live simulation. Full scope, remaining warnings and evidence: reports/analysis/health_easy_wins_20260926.md.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -826,6 +818,24 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "962b6891",
+      "date": "2026-09-26",
+      "platform": "codex",
+      "summary": "docs(health): record published repairs and navigation CI validation"
+    },
+    {
+      "sha": "5a23020b",
+      "date": "2026-09-26",
+      "platform": "codex",
+      "summary": "chore(health): sync published spine and close verified housekeeping gaps"
+    },
+    {
+      "sha": "8569f743",
+      "date": "2026-09-26",
+      "platform": "codex",
+      "summary": "chore(workspace): archive historical test outputs and sync published CanonRec pin (#89)"
+    },
     {
       "sha": "983018c6",
       "date": "2026-09-25",
@@ -867,24 +877,6 @@
       "date": "2026-09-24",
       "platform": "codex",
       "summary": "docs(review): record CI lock blocker and validated CloudBank repair"
-    },
-    {
-      "sha": "0fec3552",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "fix(queue): expose complete due-review inventory and record live remediation"
-    },
-    {
-      "sha": "59d8a5cb",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "reports(recovered_canon): archive the Jorenon Morrowen ACE review packet"
-    },
-    {
-      "sha": "e9f1906e",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "chore(queue): close connectivity-branch-email-privacy, open the PR-or-retire follow-on"
     }
   ],
   "security_events": [
@@ -901,7 +893,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "983018c6a383cb816c60b1156ff30a929bde35f5",
+    "main_sha": "962b689131ff2c84399aa16b8ee9a97af12c5f39",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
