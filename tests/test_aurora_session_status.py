@@ -46,6 +46,8 @@ def test_missing_checkout_is_not_a_match_and_does_not_write(tmp_path):
 def test_plain_directory_is_not_nested_git_checkout(tmp_path):
     root = workspace(tmp_path)
     # Fixed fixture argv, temporary checkout only; shell=False.
+    # Reviewed argv boundary: fixed verbs, resolved executable, separate path, no shell.
+    # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit
     subprocess.run([GIT, "init", str(root)], check=True, capture_output=True)  # noqa: S603  # nosec B603
     (root / "nested").mkdir()
     CHECK.assertTrue(STATUS.build_report(root, NOW)["cloudbank"]["observed_head"] is None)
@@ -96,11 +98,17 @@ def test_real_checkout_pin_match_and_drift_ignore_git_environment(tmp_path, monk
     root = workspace(tmp_path)
     nested = root / "nested"
     # Fixed fixture argv, temporary checkout only; shell=False.
+    # Reviewed argv boundary: fixed verbs, resolved executable, separate path, no shell.
+    # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit
     subprocess.run([GIT, "init", str(nested)], check=True, capture_output=True)  # noqa: S603  # nosec B603
     # Fixed fixture argv, temporary checkout only; shell=False.
+    # Reviewed argv boundary: fixed verbs, resolved executable, separate path, no shell.
+    # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit
     subprocess.run([GIT, "-C", str(nested), "-c", "user.name=Test",  # noqa: S603  # nosec B603
                     "-c", "user.email=test@example.invalid", "commit", "--allow-empty", "-m", "fixture"],
                    check=True, capture_output=True)
+    # Reviewed argv boundary: fixed verbs, resolved executable, separate path, no shell.
+    # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit
     sha = subprocess.check_output([GIT, "-C", str(nested), "rev-parse", "HEAD"], text=True).strip()  # noqa: S603  # nosec B603
     registry = root / "catalog/repo_registry.yaml"
     registry.write_text(f"repos:\n- name: aurora-cloudbank-symbolic-main\n  path: nested\n  head_sha: {sha}\n")
@@ -118,5 +126,12 @@ def test_mod_host_contract():
     if not node:
         pytest.skip("Node is required for the Claude mod host contract")
     # Fixed fixture argv, temporary checkout only; shell=False.
+    # Reviewed argv boundary: fixed verbs, resolved executable, separate path, no shell.
+    # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit
     subprocess.run([node, str(ROOT / "plugins/aurora-session-status/tests/"  # noqa: S603  # nosec B603
                     "AURORA__TEST__MOD_HOST__v0.1__2026-10-02.mjs")], check=True)
+
+
+def test_git_reader_rejects_mutating_verbs(tmp_path):
+    with CHECK.assertRaises(ValueError):
+        STATUS.git_value(tmp_path, "checkout", "main")

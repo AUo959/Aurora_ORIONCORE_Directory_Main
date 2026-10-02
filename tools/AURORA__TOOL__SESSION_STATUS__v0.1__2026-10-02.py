@@ -14,6 +14,9 @@ from session_claim import list_claims, parse_time
 
 
 def git_value(root: Path, *args: str) -> str | None:
+    if args not in {("rev-parse", "HEAD"), ("rev-parse", "--show-toplevel"),
+                    ("branch", "--show-current")}:
+        raise ValueError("unsupported read-only Git query")
     env = {k: v for k, v in os.environ.items() if k not in
            {"GIT_DIR", "GIT_WORK_TREE", "GIT_INDEX_FILE", "GIT_PREFIX"}}
     env["GIT_OPTIONAL_LOCKS"] = "0"
@@ -22,6 +25,8 @@ def git_value(root: Path, *args: str) -> str | None:
         return None
     try:
         # No shell; callers supply fixed Git query verbs and a separate path argument.
+        # Reviewed argv boundary: fixed verbs, resolved executable, separate path, no shell.
+        # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit, python.lang.security.dangerous-subprocess-use
         result = subprocess.run([executable, "-C", str(root), *args], env=env,  # noqa: S603  # nosec B603
                                 capture_output=True, text=True, timeout=3, check=False)
         return result.stdout.strip() if result.returncode == 0 else None
@@ -37,10 +42,7 @@ def active_task(state: dict, warnings: list) -> dict:
     return active
 
 
-def cloudbank_status(root: Path, entries: list, warnings: list) -> dict:
-    cloudbank = next((r for r in entries if isinstance(r, dict) and
-                      r.get("name") == "aurora-cloudbank-symbolic-main"), {})
-    path = cloudbank.get("path")
+def nested_checkout(root: Path, path: object) -> Path | None:
     checkout = None
     if isinstance(path, str) and path != "~remote~":
         candidate = (root / path).resolve()
@@ -49,6 +51,13 @@ def cloudbank_status(root: Path, entries: list, warnings: list) -> dict:
             top = git_value(candidate, "rev-parse", "--show-toplevel") if candidate.is_dir() else None
             if top and Path(top).resolve() == candidate:
                 checkout = candidate
+    return checkout
+
+
+def cloudbank_status(root: Path, entries: list, warnings: list) -> dict:
+    cloudbank = next((r for r in entries if isinstance(r, dict) and
+                      r.get("name") == "aurora-cloudbank-symbolic-main"), {})
+    checkout = nested_checkout(root, cloudbank.get("path"))
     observed = git_value(checkout, "rev-parse", "HEAD") if checkout else None
     pin = cloudbank.get("head_sha")
     pin_status = "unavailable"
@@ -57,6 +66,18 @@ def cloudbank_status(root: Path, entries: list, warnings: list) -> dict:
     if pin_status != "match":
         warnings.append("CloudBank checkout missing or unreadable" if observed is None else "CloudBank pin drift")
     return {"pin": pin, "observed_head": observed, "status": pin_status}
+
+
+def read_registry(root: Path, warnings: list) -> list:
+    try:
+        registry = load_yaml_like(root / "catalog/repo_registry.yaml")
+        entries = registry["repos"]
+        if not isinstance(entries, list):
+            raise ValueError("invalid registry")
+    except Exception:  # A corrupt YAML source is an unavailable status, never a stale success.
+        entries = []
+        warnings.append("Repository registry unavailable")
+    return entries
 
 
 def read_sources(root: Path, now: datetime, warnings: list) -> tuple:
@@ -70,15 +91,21 @@ def read_sources(root: Path, now: datetime, warnings: list) -> tuple:
     updated = parse_time(str(state.get("last_updated") or ""))
     if updated is None or (now - updated).total_seconds() > 86400:
         warnings.append("Session record older than 24h or undated; refresh before relying on it")
-    try:
-        registry = load_yaml_like(root / "catalog/repo_registry.yaml")
-        entries = registry["repos"]
-        if not isinstance(entries, list):
-            raise ValueError("invalid registry")
-    except Exception:  # A corrupt YAML source is an unavailable status, never a stale success.
-        entries = []
-        warnings.append("Repository registry unavailable")
+    entries = read_registry(root, warnings)
     return state, entries
+
+
+def waiting_items(state: dict, target: str, warnings: list) -> list:
+    queue = state.get("task_queue", [])
+    if not isinstance(queue, list):
+        queue = []
+        warnings.append("Task queue malformed")
+    return [item for item in queue if isinstance(item, dict)
+             and item.get("status") == "waiting" and item.get("repo") == target]
+
+
+def next_action(active: dict) -> str:
+    return active.get("next_step") or active.get("next_action") or "No active continuation recorded"
 
 
 def build_report(root: Path, now: datetime | None = None) -> dict:
@@ -92,19 +119,14 @@ def build_report(root: Path, now: datetime | None = None) -> dict:
     claims = list_claims(root, now)
     if claims["summary"]["invalid"]:
         warnings.append("Invalid local claim records")
-    queue = state.get("task_queue", [])
-    if not isinstance(queue, list):
-        queue = []
-        warnings.append("Task queue malformed")
-    waits = [item for item in queue if isinstance(item, dict)
-             and item.get("status") == "waiting" and item.get("repo") == target]
+    waits = waiting_items(state, target, warnings)
     return {
         "schema_version": 1, "mode": "read_only", "claim_scope": "local_only",
         "checked_at": now.isoformat(), "target_repo": target,
         "target_source": "active_task" if active.get("repo") else "root_default",
         "branch": git_value(root, "branch", "--show-current") or "detached_or_unavailable",
         "active_task": active.get("id") or "none_recorded",
-        "next_action": active.get("next_step") or active.get("next_action") or "No active continuation recorded",
+        "next_action": next_action(active),
         "session_updated_at": state.get("last_updated"),
         "claims": claims["summary"],
         "cloudbank": cloudbank,
