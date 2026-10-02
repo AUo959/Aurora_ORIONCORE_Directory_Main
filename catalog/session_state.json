@@ -721,6 +721,26 @@
         "publication_debt scan, 2026-09-08: 3 entries, +65 exempted",
         "reports/analysis/ORION__AUDIT__L3_SALVAGE_PASS__v1.2__2026-09-08.md"
       ]
+    },
+    {
+      "id": "friday-action-brief-end-to-end-acceptance",
+      "status": "waiting",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "watch",
+      "repo": "root",
+      "description": "Verify the real Friday scheduled Action Brief, fresh-chat recovery and rendered follow-up activation; component checks have passed but these gates remain unverified.",
+      "created_at": "2026-10-02T02:04:21Z",
+      "updated_at": "2026-10-02T02:04:21Z",
+      "review_at": "2026-10-02T13:00:00Z",
+      "next_action": "Observe the actual automation dispatch and validate its generated brief against saved context and live evidence; test fresh-chat recovery and follow-up activation through supported UI.",
+      "definition_of_done": "Actual scheduler run identified with timestamp; generated brief validates source completeness, stable IDs, retained decisions, completed-task recognition and unresolved-action carry-forward; fresh-chat recovery and real follow-up activation evidenced.",
+      "approval_required": false,
+      "waiting_on": "date",
+      "trigger": "Friday 2026-10-02 09:00 America/New_York scheduled dispatch; owner may initiate Run now when available.",
+      "evidence_refs": [
+        "reports/analysis/friday_action_brief_acceptance_20261001.md"
+      ]
     }
   ],
   "completed_tasks": [
@@ -800,9 +820,19 @@
       "completed_at": "2026-09-24T23:53:36Z",
       "platform": "claude-code",
       "detail": "Completed: CloudBank PR #1608 merged as 0fac980967ac7802a399f091fadf24bcd67b3126; root PR #86 passed all non-skipped checks at 989c53ae and merged with explicit owner approval as cb52b48a23606a1ddbb773a52f7e99f2adb4b95d on 2026-09-24."
+    },
+    {
+      "id": "friday-action-brief-component-acceptance-20261001",
+      "status": "completed",
+      "completed_at": "2026-10-02T02:04:21Z",
+      "platform": "codex",
+      "detail": "Component acceptance verified: live root source snapshots, disk continuity reload, controlled transport failure preserving context, and real canonical add/start/complete lifecycle. Receipt: reports/analysis/friday_action_brief_acceptance_20261001.md. Scheduler dispatch, fresh-chat model recovery, UI click and Claude execution remain unverified.",
+      "evidence_refs": [
+        "reports/analysis/friday_action_brief_acceptance_20261001.md"
+      ]
     }
   ],
-  "last_updated": "2026-09-25T00:30:17Z",
+  "last_updated": "2026-10-02T02:04:21Z",
   "last_platform": "codex",
   "last_session_summary": "Closed the remaining local holds: live fetch confirms CanonRec 72f504b is published on origin/main, so root pin regenerated through registry_sync_heads.py. Moved 18 August 18/19 historical pytest output files into archives/historical_simulation_outputs with original paths, byte counts and SHA-256 manifest; all match prior evidence. No provenance rewrite, simulation execution, or canon promotion. Root draft PR to follow; merge requires separate approval.",
   "tool_versions": {
