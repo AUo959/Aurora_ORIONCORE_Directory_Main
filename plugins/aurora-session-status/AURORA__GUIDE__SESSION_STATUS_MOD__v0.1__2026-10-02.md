@@ -48,8 +48,8 @@ clips safely, a missing nested checkout warns, a failed reader replaces stale st
 and relaunching without the plugin removes it. Host mocks verify contracts only.
 
 Official API references:
-- https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/token-weather
-- https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/blast-radius
+- <https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/token-weather>
+- <https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods/blast-radius>
 
 Later changes: model migration belongs in a separate CloudBank PR; Claude packaging
 of command grammar must reuse its existing gateway and incorporate CloudBank #1622's

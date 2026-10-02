@@ -1,7 +1,9 @@
 """Read-only and missing-checkout behavior of the status adapter."""
 import importlib.util
 import json
-import subprocess
+import shutil
+import subprocess  # nosec B404
+import unittest
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -12,6 +14,8 @@ SPEC = importlib.util.spec_from_file_location(
     "aurora_session_status", ROOT / "tools/AURORA__TOOL__SESSION_STATUS__v0.1__2026-10-02.py")
 STATUS = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(STATUS)
+CHECK = unittest.TestCase()
+GIT = shutil.which("git")
 NOW = datetime(2026, 10, 2, 22, tzinfo=timezone.utc)
 
 
@@ -33,17 +37,18 @@ def test_missing_checkout_is_not_a_match_and_does_not_write(tmp_path):
     root = workspace(tmp_path)
     before = snapshot(root)
     data = STATUS.build_report(root, NOW)
-    assert data["cloudbank"]["status"] == "unavailable"
-    assert data["claim_scope"] == "local_only"
-    assert data["target_source"] == "root_default"
-    assert snapshot(root) == before
+    CHECK.assertTrue(data["cloudbank"]["status"] == "unavailable")
+    CHECK.assertTrue(data["claim_scope"] == "local_only")
+    CHECK.assertTrue(data["target_source"] == "root_default")
+    CHECK.assertTrue(snapshot(root) == before)
 
 
 def test_plain_directory_is_not_nested_git_checkout(tmp_path):
     root = workspace(tmp_path)
-    subprocess.run(["git", "init", str(root)], check=True, capture_output=True)
+    # Fixed fixture argv, temporary checkout only; shell=False.
+    subprocess.run([GIT, "init", str(root)], check=True, capture_output=True)  # noqa: S603  # nosec B603
     (root / "nested").mkdir()
-    assert STATUS.build_report(root, NOW)["cloudbank"]["observed_head"] is None
+    CHECK.assertTrue(STATUS.build_report(root, NOW)["cloudbank"]["observed_head"] is None)
 
 
 def test_outside_registry_path_is_never_probed(tmp_path, monkeypatch):
@@ -53,7 +58,7 @@ def test_outside_registry_path_is_never_probed(tmp_path, monkeypatch):
     calls = []
     monkeypatch.setattr(STATUS, "git_value", lambda path, *args: calls.append(path) or None)
     STATUS.build_report(root, NOW)
-    assert calls == [root]
+    CHECK.assertTrue(calls == [root])
 
 
 def test_stale_invalid_claims_and_waits_are_visible(tmp_path):
@@ -71,11 +76,11 @@ def test_stale_invalid_claims_and_waits_are_visible(tmp_path):
         {"id": "other", "repo": "CanonRec", "status": "waiting"}])
     state_path.write_text(json.dumps(state))
     data = STATUS.build_report(root, NOW)
-    assert data["claims"]["stale"] == 1
-    assert data["claims"]["invalid"] == 1
-    assert data["waiting_items"] == ["authority"]
-    assert data["next_action"] == "Inspect receipt"
-    assert any("24h" in w for w in data["warnings"])
+    CHECK.assertTrue(data["claims"]["stale"] == 1)
+    CHECK.assertTrue(data["claims"]["invalid"] == 1)
+    CHECK.assertTrue(data["waiting_items"] == ["authority"])
+    CHECK.assertTrue(data["next_action"] == "Inspect receipt")
+    CHECK.assertTrue(any("24h" in w for w in data["warnings"]))
 
 
 def test_malformed_sources_degrade_to_unknown(tmp_path):
@@ -83,32 +88,35 @@ def test_malformed_sources_degrade_to_unknown(tmp_path):
     (root / "catalog/session_state.json").write_text("[]")
     (root / "catalog/repo_registry.yaml").write_text("[]")
     data = STATUS.build_report(root, NOW)
-    assert data["target_source"] == "root_default"
-    assert len(data["warnings"]) >= 3
+    CHECK.assertTrue(data["target_source"] == "root_default")
+    CHECK.assertTrue(len(data["warnings"]) >= 3)
 
 
 def test_real_checkout_pin_match_and_drift_ignore_git_environment(tmp_path, monkeypatch):
     root = workspace(tmp_path)
     nested = root / "nested"
-    subprocess.run(["git", "init", str(nested)], check=True, capture_output=True)
-    subprocess.run(["git", "-C", str(nested), "-c", "user.name=Test",
+    # Fixed fixture argv, temporary checkout only; shell=False.
+    subprocess.run([GIT, "init", str(nested)], check=True, capture_output=True)  # noqa: S603  # nosec B603
+    # Fixed fixture argv, temporary checkout only; shell=False.
+    subprocess.run([GIT, "-C", str(nested), "-c", "user.name=Test",  # noqa: S603  # nosec B603
                     "-c", "user.email=test@example.invalid", "commit", "--allow-empty", "-m", "fixture"],
                    check=True, capture_output=True)
-    sha = subprocess.check_output(["git", "-C", str(nested), "rev-parse", "HEAD"], text=True).strip()
+    sha = subprocess.check_output([GIT, "-C", str(nested), "rev-parse", "HEAD"], text=True).strip()  # noqa: S603  # nosec B603
     registry = root / "catalog/repo_registry.yaml"
     registry.write_text(f"repos:\n- name: aurora-cloudbank-symbolic-main\n  path: nested\n  head_sha: {sha}\n")
     monkeypatch.setenv("GIT_DIR", "/missing-git-dir")
     before = snapshot(root)
-    assert STATUS.build_report(root, NOW)["cloudbank"]["status"] == "match"
-    assert snapshot(root) == before
+    CHECK.assertTrue(STATUS.build_report(root, NOW)["cloudbank"]["status"] == "match")
+    CHECK.assertTrue(snapshot(root) == before)
     registry.write_text(registry.read_text().replace(sha, "wrong-pin"))
-    assert STATUS.build_report(root, NOW)["cloudbank"]["status"] == "drift"
+    CHECK.assertTrue(STATUS.build_report(root, NOW)["cloudbank"]["status"] == "drift")
 
 
 def test_mod_host_contract():
-    import shutil
     import pytest
-    if not shutil.which("node"):
+    node = shutil.which("node")
+    if not node:
         pytest.skip("Node is required for the Claude mod host contract")
-    subprocess.run(["node", str(ROOT / "plugins/aurora-session-status/tests/"
+    # Fixed fixture argv, temporary checkout only; shell=False.
+    subprocess.run([node, str(ROOT / "plugins/aurora-session-status/tests/"  # noqa: S603  # nosec B603
                     "AURORA__TEST__MOD_HOST__v0.1__2026-10-02.mjs")], check=True)

@@ -4,7 +4,8 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import subprocess
+import shutil
+import subprocess  # nosec B404
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -16,18 +17,49 @@ def git_value(root: Path, *args: str) -> str | None:
     env = {k: v for k, v in os.environ.items() if k not in
            {"GIT_DIR", "GIT_WORK_TREE", "GIT_INDEX_FILE", "GIT_PREFIX"}}
     env["GIT_OPTIONAL_LOCKS"] = "0"
+    executable = shutil.which("git")
+    if executable is None:
+        return None
     try:
-        result = subprocess.run(["git", "-C", str(root), *args], env=env,
+        # No shell; callers supply fixed Git query verbs and a separate path argument.
+        result = subprocess.run([executable, "-C", str(root), *args], env=env,  # noqa: S603  # nosec B603
                                 capture_output=True, text=True, timeout=3, check=False)
         return result.stdout.strip() if result.returncode == 0 else None
     except (OSError, subprocess.TimeoutExpired):
         return None
 
 
-def build_report(root: Path, now: datetime | None = None) -> dict:
-    root = root.resolve()
-    now = now or datetime.now(timezone.utc)
-    warnings = []
+def active_task(state: dict, warnings: list) -> dict:
+    active = state.get("active_task") or {}
+    if not isinstance(active, dict):
+        active = {}
+        warnings.append("Active task malformed")
+    return active
+
+
+def cloudbank_status(root: Path, entries: list, warnings: list) -> dict:
+    cloudbank = next((r for r in entries if isinstance(r, dict) and
+                      r.get("name") == "aurora-cloudbank-symbolic-main"), {})
+    path = cloudbank.get("path")
+    checkout = None
+    if isinstance(path, str) and path != "~remote~":
+        candidate = (root / path).resolve()
+        if candidate != root and root in candidate.parents:
+            # A plain directory inside the parent Git repo is not a nested checkout.
+            top = git_value(candidate, "rev-parse", "--show-toplevel") if candidate.is_dir() else None
+            if top and Path(top).resolve() == candidate:
+                checkout = candidate
+    observed = git_value(checkout, "rev-parse", "HEAD") if checkout else None
+    pin = cloudbank.get("head_sha")
+    pin_status = "unavailable"
+    if observed is not None:
+        pin_status = "match" if observed == pin else "drift"
+    if pin_status != "match":
+        warnings.append("CloudBank checkout missing or unreadable" if observed is None else "CloudBank pin drift")
+    return {"pin": pin, "observed_head": observed, "status": pin_status}
+
+
+def read_sources(root: Path, now: datetime, warnings: list) -> tuple:
     try:
         state = json.loads((root / "catalog/session_state.json").read_text())
         if not isinstance(state, dict) or state.get("schema_version") != 3:
@@ -46,27 +78,17 @@ def build_report(root: Path, now: datetime | None = None) -> dict:
     except Exception:  # A corrupt YAML source is an unavailable status, never a stale success.
         entries = []
         warnings.append("Repository registry unavailable")
-    active = state.get("active_task") or {}
-    if not isinstance(active, dict):
-        active = {}
-        warnings.append("Active task malformed")
+    return state, entries
+
+
+def build_report(root: Path, now: datetime | None = None) -> dict:
+    root = root.resolve()
+    now = now or datetime.now(timezone.utc)
+    warnings = []
+    state, entries = read_sources(root, now, warnings)
+    active = active_task(state, warnings)
     target = active.get("repo") or "root"
-    cloudbank = next((r for r in entries if isinstance(r, dict) and
-                      r.get("name") == "aurora-cloudbank-symbolic-main"), {})
-    path = cloudbank.get("path")
-    checkout = None
-    if isinstance(path, str) and path != "~remote~":
-        candidate = (root / path).resolve()
-        if candidate != root and root in candidate.parents:
-            # A plain directory inside the parent Git repo is not a nested checkout.
-            top = git_value(candidate, "rev-parse", "--show-toplevel") if candidate.is_dir() else None
-            if top and Path(top).resolve() == candidate:
-                checkout = candidate
-    observed = git_value(checkout, "rev-parse", "HEAD") if checkout else None
-    pin = cloudbank.get("head_sha")
-    pin_status = "unavailable" if observed is None else "match" if observed == pin else "drift"
-    if pin_status != "match":
-        warnings.append("CloudBank checkout missing or unreadable" if observed is None else "CloudBank pin drift")
+    cloudbank = cloudbank_status(root, entries, warnings)
     claims = list_claims(root, now)
     if claims["summary"]["invalid"]:
         warnings.append("Invalid local claim records")
@@ -85,7 +107,7 @@ def build_report(root: Path, now: datetime | None = None) -> dict:
         "next_action": active.get("next_step") or active.get("next_action") or "No active continuation recorded",
         "session_updated_at": state.get("last_updated"),
         "claims": claims["summary"],
-        "cloudbank": {"pin": pin, "observed_head": observed, "status": pin_status},
+        "cloudbank": cloudbank,
         "waiting_items": [item.get("id") for item in waits],
         "warnings": warnings,
         "authority": "Status is advisory; it grants no execution or publication permission",

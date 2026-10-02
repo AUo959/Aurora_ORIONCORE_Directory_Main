@@ -50,7 +50,10 @@ async function refresh($) {
 }
 
 function clean(value) {
-  return String(value ?? "unknown").replace(/[\x00-\x1f\x7f-\x9f]/g, " ");
+  return Array.from(String(value ?? "unknown"), character => {
+    const code = character.codePointAt(0);
+    return code < 32 || (code >= 127 && code <= 159) ? " " : character;
+  }).join("");
 }
 
 export function formatLines(data, columns = 80) {
@@ -64,5 +67,5 @@ export function formatLines(data, columns = 80) {
     "Advisory snapshot; local claims only; no execution approval",
     ...(data.warnings ?? []).map(w => `Warning: ${clean(w)}`),
   ];
-  return lines.map(line => line.length > width ? line.slice(0, width - 1) + "…" : line);
+  return lines.map(line => line.length > width ? `${line.slice(0, width - 1)}…` : line);
 }

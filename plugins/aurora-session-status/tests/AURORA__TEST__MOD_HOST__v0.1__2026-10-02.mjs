@@ -23,7 +23,7 @@ assert.equal(rendered.children[0], original);
 assert.equal(handlers.get("ui.render")(host, {hasSurvey: true}, () => original), original);
 await handlers.get("turn.complete")(host, {agentId: "subagent"}, async e => e);
 assert.equal(calls, 2);
-assert(formatLines({...data, next_action: "\u001b[31munsafe\ntext"}, 30).every(x => x.length <= 28 && !/[\x00-\x1f]/.test(x)));
+assert(formatLines({...data, next_action: "\u001b[31munsafe\ntext"}, 30).every(x => x.length <= 28 && Array.from(x).every(character => character.codePointAt(0) >= 32)));
 host.process.run = async () => {throw Error("missing Python");};
 await handlers.get("turn.complete")(host, event, async e => e);
 rendered = handlers.get("ui.render")(host, {}, () => original);
