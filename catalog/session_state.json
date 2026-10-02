@@ -802,9 +802,9 @@
       "detail": "Completed: CloudBank PR #1608 merged as 0fac980967ac7802a399f091fadf24bcd67b3126; root PR #86 passed all non-skipped checks at 989c53ae and merged with explicit owner approval as cb52b48a23606a1ddbb773a52f7e99f2adb4b95d on 2026-09-24."
     }
   ],
-  "last_updated": "2026-09-25T00:30:17Z",
+  "last_updated": "2026-10-02T23:14:24Z",
   "last_platform": "codex",
-  "last_session_summary": "Closed the remaining local holds: live fetch confirms CanonRec 72f504b is published on origin/main, so root pin regenerated through registry_sync_heads.py. Moved 18 August 18/19 historical pytest output files into archives/historical_simulation_outputs with original paths, byte counts and SHA-256 manifest; all match prior evidence. No provenance rewrite, simulation execution, or canon promotion. Root draft PR to follow; merge requires separate approval.",
+  "last_session_summary": "PR94 Codacy remediation published in successive passes: 64 to11 to8 to1; last remaining comment indentation corrected. 34 focused tests pass. Fixed executable resolution, Git query allowlist with mutation rejection, helpers below strict complexity limits, character filtering and links. Final remote gate and actual Claude visual acceptance pending.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
