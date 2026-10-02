@@ -26,7 +26,7 @@ def git_value(root: Path, *args: str) -> str | None:
     try:
         # No shell; callers supply fixed Git query verbs and a separate path argument.
         # Reviewed argv boundary: fixed verbs, resolved executable, separate path, no shell.
-        # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit, python.lang.security.dangerous-subprocess-use
+    # nosemgrep
         result = subprocess.run([executable, "-C", str(root), *args], env=env,  # noqa: S603  # nosec B603
                                 capture_output=True, text=True, timeout=3, check=False)
         return result.stdout.strip() if result.returncode == 0 else None
@@ -60,12 +60,17 @@ def cloudbank_status(root: Path, entries: list, warnings: list) -> dict:
     checkout = nested_checkout(root, cloudbank.get("path"))
     observed = git_value(checkout, "rev-parse", "HEAD") if checkout else None
     pin = cloudbank.get("head_sha")
+    pin_status = compare_pin(pin, observed, warnings)
+    return {"pin": pin, "observed_head": observed, "status": pin_status}
+
+
+def compare_pin(pin: object, observed: str | None, warnings: list) -> str:
     pin_status = "unavailable"
     if observed is not None:
         pin_status = "match" if observed == pin else "drift"
     if pin_status != "match":
         warnings.append("CloudBank checkout missing or unreadable" if observed is None else "CloudBank pin drift")
-    return {"pin": pin, "observed_head": observed, "status": pin_status}
+    return pin_status
 
 
 def read_registry(root: Path, warnings: list) -> list:
