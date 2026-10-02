@@ -26,7 +26,7 @@ def git_value(root: Path, *args: str) -> str | None:
     try:
         # No shell; callers supply fixed Git query verbs and a separate path argument.
         # Reviewed argv boundary: fixed verbs, resolved executable, separate path, no shell.
-    # nosemgrep
+        # nosemgrep
         result = subprocess.run([executable, "-C", str(root), *args], env=env,  # noqa: S603  # nosec B603
                                 capture_output=True, text=True, timeout=3, check=False)
         return result.stdout.strip() if result.returncode == 0 else None
