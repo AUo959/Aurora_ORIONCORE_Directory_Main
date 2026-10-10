@@ -1,0 +1,428 @@
+{
+  "timestamp": "2026-10-10T14:24:54Z",
+  "baseline": "2026-10-05T13:22:07Z",
+  "source": "GitHub connector REST",
+  "open_pr_count": 33,
+  "open_issue_count": 30,
+  "prs": [
+    {
+      "number": 1634,
+      "title": "feat(spike): verify read-only Responses Multi-agent compatibility",
+      "draft": true,
+      "head_sha": "38774f8001cda191a288617e654c2bd2335bf034",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [
+        {
+          "name": "Codacy Static Code Analysis",
+          "status": "completed",
+          "conclusion": "action_required"
+        }
+      ],
+      "check_count": 27
+    },
+    {
+      "number": 1633,
+      "title": "deps: bump the npm-patch-minor group across 1 directory with 13 updates",
+      "draft": false,
+      "head_sha": "e0978ff1e9ea526ee06c12d187160bc61927062e",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 31
+    },
+    {
+      "number": 1632,
+      "title": "deps: bump the nemo-service group across 1 directory with 3 updates",
+      "draft": false,
+      "head_sha": "0e71623c629ac2317b0273bebbc7cb0a757d187c",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 42
+    },
+    {
+      "number": 1631,
+      "title": "deps: bump the cli-python group across 1 directory with 3 updates",
+      "draft": false,
+      "head_sha": "7bd283f38fb067d6e564ca1cb1e2ab95f2230fc9",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 42
+    },
+    {
+      "number": 1630,
+      "title": "deps: bump the python-patch-minor group across 1 directory with 30 updates",
+      "draft": false,
+      "head_sha": "60c9fea390e02e06cb5a8977899f18c4c3ebf06b",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [
+        {
+          "name": "Path checks (windows-latest)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Path checks (macos-latest)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "name": "CI Check",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Run Tests",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ],
+      "check_count": 52
+    },
+    {
+      "number": 1629,
+      "title": "deps: bump the actions group across 1 directory with 5 updates",
+      "draft": false,
+      "head_sha": "027403302e98ae4912cccdd19dfe406cace565d9",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 48
+    },
+    {
+      "number": 1627,
+      "title": "aurora(queue): record gate escalation surfacing",
+      "draft": false,
+      "head_sha": "caf25c864df5f7a9fa3e5d6e25657c61ea0cd118",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 4
+    },
+    {
+      "number": 1626,
+      "title": "aurora(queue): auto-ingest labeled issues",
+      "draft": false,
+      "head_sha": "ce94a1c31e41872657cf17b7106550b773da9441",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 4
+    },
+    {
+      "number": 1624,
+      "title": "fix(playground): refuse execution without isolated sandbox",
+      "draft": true,
+      "head_sha": "3b9df9ed0fe9f2b26ba07a0dc268afa21687e809",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 33
+    },
+    {
+      "number": 1623,
+      "title": "deps: bump urllib3 from 2.7.0 to 2.8.0",
+      "draft": false,
+      "head_sha": "da7679f5705a2dbb829767e73a86cc82f8557285",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 52
+    },
+    {
+      "number": 1622,
+      "title": "docs: reconcile migrated Aurora plug-in constellation",
+      "draft": false,
+      "head_sha": "b60f3c3db3ab96fd770c3a3604b4ee6cbbbc8908",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 30
+    },
+    {
+      "number": 1621,
+      "title": "deps: bump pyjwt from 2.13.0 to 2.15.0",
+      "draft": false,
+      "head_sha": "c23d38df0a14a2efa1d4fec85b56367903215e55",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 44
+    },
+    {
+      "number": 1620,
+      "title": "deps: bump undici from 8.10.0 to 8.11.2 in /frontend",
+      "draft": false,
+      "head_sha": "c67565d9ce897c090cdb5bf232da84889d5e8df1",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 31
+    },
+    {
+      "number": 1619,
+      "title": "chore(deps): bump ip-address from 10.4.0 to 10.7.2 in /docs/archive/operational/reports in the npm_and_yarn group across 1 directory",
+      "draft": false,
+      "head_sha": "09a2f5c2f0a9c0c874a12128a78edbdc316ce223",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 42
+    },
+    {
+      "number": 1618,
+      "title": "deps: bump ip-address from 10.4.0 to 10.7.2",
+      "draft": false,
+      "head_sha": "4f86d728a8021bc38d30d7709b39a644d5561126",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 31
+    },
+    {
+      "number": 1617,
+      "title": "deps: bump the frontend-patch-minor group across 1 directory with 23 updates",
+      "draft": false,
+      "head_sha": "0468685f8834f4d47e076bc55e9824bf09810478",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 31
+    },
+    {
+      "number": 1614,
+      "title": "deps: bump https://github.com/pycqa/flake8 from 7.3.0 to 7.4.1 in the pre-commit group",
+      "draft": false,
+      "head_sha": "e02b1c90ad504498c9a2c3f01d96ad94086e62bd",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 30
+    },
+    {
+      "number": 1612,
+      "title": "aurora(queue): record gate escalation surfacing",
+      "draft": false,
+      "head_sha": "998796631794be6930f5f91c23fc181a1a93c713",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 4
+    },
+    {
+      "number": 1611,
+      "title": "aurora(queue): auto-ingest labeled issues",
+      "draft": false,
+      "head_sha": "6f1fb66564f887707157afbed8e090d1fa016cef",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 4
+    },
+    {
+      "number": 1601,
+      "title": "aurora(queue): record gate escalation surfacing",
+      "draft": false,
+      "head_sha": "4c41935ab1d6c2c732ad447cf5588140de88fde8",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 4
+    },
+    {
+      "number": 1600,
+      "title": "aurora(queue): auto-ingest labeled issues",
+      "draft": false,
+      "head_sha": "eee1d7d35bf9c124f5aa1d4a29233556c006226b",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 4
+    },
+    {
+      "number": 1599,
+      "title": "deps: bump smol-toml from 1.7.0 to 1.7.2",
+      "draft": false,
+      "head_sha": "d2bd9a1bda6e6e2056d8f6ab5a8fb16ee56d5f63",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 31
+    },
+    {
+      "number": 1593,
+      "title": "aurora(queue): record gate escalation surfacing",
+      "draft": false,
+      "head_sha": "cf2ec8fe12d04cd1362eb42a8659e2e45566e98d",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 4
+    },
+    {
+      "number": 1592,
+      "title": "aurora(queue): auto-ingest labeled issues",
+      "draft": false,
+      "head_sha": "63925666199e49b35769bfb41cd321e30cb7d759",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 4
+    },
+    {
+      "number": 1591,
+      "title": "deps: bump the frontend-major group across 1 directory with 3 updates",
+      "draft": false,
+      "head_sha": "f272e66e1b8c7092abb1b2de9bbd60e577db2ccb",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 24
+    },
+    {
+      "number": 1587,
+      "title": "deps: update amazon-braket-sdk requirement from >=1.124.3 to >=1.127.0",
+      "draft": false,
+      "head_sha": "824a50bdaa297db931e619a87def4a97748f45f2",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 50
+    },
+    {
+      "number": 1586,
+      "title": "deps: update pip-audit requirement from >=2.9.0 to >=2.10.1",
+      "draft": false,
+      "head_sha": "8a774a57f75f2f9176acca266b29ce677bc6a3bf",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 50
+    },
+    {
+      "number": 1581,
+      "title": "aurora(queue): record gate escalation surfacing",
+      "draft": false,
+      "head_sha": "1a1844b551bf09e01861528556f7312fa3b7b560",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 4
+    },
+    {
+      "number": 1580,
+      "title": "aurora(queue): auto-ingest labeled issues",
+      "draft": false,
+      "head_sha": "a71ef88de7b4d0cf91e12014ae3db08ea267c245",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 4
+    },
+    {
+      "number": 1548,
+      "title": "aurora(queue): record gate escalation surfacing",
+      "draft": false,
+      "head_sha": "46122079a6416f323ecb7283b31aca278e3529eb",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 4
+    },
+    {
+      "number": 1547,
+      "title": "aurora(queue): auto-ingest labeled issues",
+      "draft": false,
+      "head_sha": "1ae40d53ec9b3c43445c07e4d78b869b987ff7ed",
+      "mergeable": true,
+      "mergeable_state": "blocked",
+      "combined_status": "success",
+      "bad_checks": [],
+      "check_count": 4
+    },
+    {
+      "number": 1506,
+      "title": "sim: restore recovered complete GUMAS v2 tactical lineage for deterministic control run",
+      "draft": true,
+      "head_sha": "40b5866dba2d8ac3a0636736dcf069adaa451c8a",
+      "mergeable": true,
+      "mergeable_state": "unstable",
+      "combined_status": "success",
+      "bad_checks": [
+        {
+          "name": "SonarCloud Code Analysis",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Codacy Static Code Analysis",
+          "status": "completed",
+          "conclusion": "action_required"
+        }
+      ],
+      "check_count": 32
+    },
+    {
+      "number": 1491,
+      "title": "fix(ai): separate catalog availability from routing policy",
+      "draft": true,
+      "head_sha": "48540955ca33cf4e933c230f202e7d9f09302951",
+      "mergeable": true,
+      "mergeable_state": "unstable",
+      "combined_status": "success",
+      "bad_checks": [
+        {
+          "name": "Model catalog vs provider",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ],
+      "check_count": 42
+    }
+  ],
+  "closed_unmerged": [
+    1616,
+    1605
+  ],
+  "root_queue": {
+    "total_before": 38,
+    "ready_before": 32,
+    "waiting_before": 6,
+    "active_before": null,
+    "review_due": 38
+  },
+  "action": "Prepare draft PR for issue1558; resolve confirmed root test dependency blocker"
+}
