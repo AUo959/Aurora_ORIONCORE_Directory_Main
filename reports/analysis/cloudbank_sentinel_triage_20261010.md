@@ -3,7 +3,7 @@
 ## Result
 
 Prepared and published draft [CloudBank PR #1635](https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1635)
-for issue #1558. Head: `16eb667decf98766886aac84a0039181d70293e4`.
+for issue #1558. Head: `40ad23e8e0637c300578a49d07b97cf0bff51b1c`.
 Worktree: `/private/tmp/cloudbank-codex-issue-1558-queue-ci`.
 The canonical CloudBank checkout remains on `main` at
 `0fac980967ac7802a399f091fadf24bcd67b3126` and was not edited.
@@ -14,6 +14,10 @@ and generated-file scope, then explicitly dispatches the existing CI/queue
 validation workflows. Existing dispatches, including failures, are retained
 without automatic weekly retries. A pending escalation proposal defers repeat
 issue pings. Escalation view regeneration is included in new proposals.
+Notification markers derived from each gate's pre-update registry baseline
+also prevent duplicate delivery after partial notification or PR-publication
+failures. Bot-authored matching comments are checked across all pages before
+posting; comment lookup errors fail closed.
 Human PR review and branch protection remain in place.
 
 This is a prepared repair, not a completed live rollout. Existing PRs were not
@@ -62,7 +66,8 @@ action brief was not included in this receipt or repair.
 
 ## Validation
 
-- Final helper: 73 focused queue/lifecycle tests passed; all GitHub commands mocked.
+- Final helper: 79 focused queue/lifecycle tests passed; all GitHub commands mocked,
+  including partial delivery failure and retry without duplicate notifications.
 - Ruff, cyclomatic complexity limit 8, workflow YAML parsing, embedded shell
   syntax, diff checks, and queue-view freshness passed.
 - Repository-wide `make check` on initial repair head: 3705 passed, 4 failed,
@@ -80,6 +85,13 @@ action brief was not included in this receipt or repair.
   complexity checks pass. On this latest head, Codacy, SonarCloud, CodeQL,
   Queue drift check, and ordinary test checks passed. CI Check and Copilot
   review were still running at the final refresh; no failures were reported.
+- Copilot review then identified duplicate notifications after partial failure.
+  Revision `40ad23e8` fixes that path using durable comment markers; all 79
+  focused tests, Ruff, complexity, and workflow syntax checks pass. Remote checks
+  must be re-evaluated on this final head. No issue comments were posted locally.
+
+The adjacent confidence audit is the historical 73-test pre-publication
+assessment, not an assessment of the final revision or live rollout.
 
 ## Remaining action
 
