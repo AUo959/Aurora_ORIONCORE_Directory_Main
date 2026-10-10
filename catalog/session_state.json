@@ -447,21 +447,6 @@
       "approval_required": false
     },
     {
-      "id": "sandbox-missing-test-deps",
-      "status": "ready",
-      "assigned_to": "either",
-      "priority": "medium",
-      "kind": "work",
-      "repo": "root",
-      "description": "tests/test_live_watch_link.py fails in the sandboxed workspace with ModuleNotFoundError: No module named 'fastapi' (tools/live_watch.py clone driver). Not a code regression \u2014 a missing dependency in the execution context, the same class as the Mission Control 'gh is missing' false P1. Either add fastapi to the dev toolkit/test extras or mark the test to skip when the dep is absent, so a green suite means the same thing everywhere.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-09-10T20:06:05Z",
-      "next_action": "[migrated] tests/test_live_watch_link.py fails in the sandboxed workspace with ModuleNotFoundError: No module named 'fastapi' (tools/live_watch.py clone driver).",
-      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
-      "approval_required": false
-    },
-    {
       "id": "l2-location-subtype-classification",
       "status": "ready",
       "assigned_to": "either",
@@ -505,21 +490,6 @@
       "updated_at": "2026-08-27T20:06:05Z",
       "review_at": "2026-09-10T20:06:05Z",
       "next_action": "[migrated] ACE now has executable RETRIEVED_CANON, DERIVED_CANON, GENERATED_CANON, CANON_REVISION, TRUE_CONFLICT, and EXECUTION_BLOCKED semantics;",
-      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
-      "approval_required": false
-    },
-    {
-      "id": "ace-capability-manifest-discovery",
-      "status": "ready",
-      "assigned_to": "either",
-      "priority": "medium",
-      "kind": "work",
-      "repo": "root",
-      "description": "tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing. Registering a capability therefore means editing engine source, and spec 6.5 (capability indexer) is unimplemented in substance. Load capabilities from manifest files validated against the existing schema. tests/test_aurora_ace_invariants.py::test_declared_producers_exist_in_the_capability_index already guards the field->index consistency this would need.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-09-10T20:06:05Z",
-      "next_action": "[migrated] tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing.",
       "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
       "approval_required": false
     },
@@ -800,11 +770,39 @@
       "completed_at": "2026-09-24T23:53:36Z",
       "platform": "claude-code",
       "detail": "Completed: CloudBank PR #1608 merged as 0fac980967ac7802a399f091fadf24bcd67b3126; root PR #86 passed all non-skipped checks at 989c53ae and merged with explicit owner approval as cb52b48a23606a1ddbb773a52f7e99f2adb4b95d on 2026-09-24."
+    },
+    {
+      "id": "ace-capability-manifest-discovery",
+      "status": "completed",
+      "completed_at": "2026-09-26T23:27:51Z",
+      "platform": "codex",
+      "detail": "Verified implemented at root 8569f743: tools/ace/core.py build_capability_index delegates to capability_discovery.py; committed manifest catalog validates 20 capabilities against schema. Existing discovery tests passed in the 670-pass non-simulation root suite on 2026-09-26. Stale queue entry closed; no capability behavior changed."
+    },
+    {
+      "id": "friday-action-brief-component-acceptance-20261001",
+      "status": "completed",
+      "completed_at": "2026-10-02T02:00:48Z",
+      "platform": "codex",
+      "detail": "Component acceptance verified: live root source snapshots, disk continuity reload, controlled transport failure preserving context, and real canonical add/start/complete lifecycle. Receipt: reports/analysis/friday_action_brief_acceptance_20261001.md. Scheduler dispatch, fresh-chat model recovery, UI click and Claude execution remain unverified."
+    },
+    {
+      "id": "sandbox-missing-test-deps",
+      "status": "completed",
+      "completed_at": "2026-10-10T14:32:56Z",
+      "platform": "codex",
+      "detail": "Refreshed 2026-10-10 in the canonical root using its existing .venv: tests/test_live_watch_link.py passed. The prior missing-fastapi environment blocker is resolved in this checkout; no packages installed."
+    },
+    {
+      "id": "cloudbank-queue-ci-1558",
+      "status": "completed",
+      "completed_at": "2026-10-10T14:40:27Z",
+      "platform": "codex",
+      "detail": "Prepared and published draft CloudBank PR #1635 for #1558 at 16eb667decf98766886aac84a0039181d70293e4. 73 focused regressions, syntax, Ruff, complexity and queue-view checks pass. Full-suite environment failures reproduced on main and scoped rerun passed. Latest remote checks and live dispatch rollout remain pending; no merge/cleanup approval. Receipt: reports/analysis/cloudbank_sentinel_triage_20261010.md."
     }
   ],
-  "last_updated": "2026-09-25T00:30:17Z",
+  "last_updated": "2026-10-10T14:46:17Z",
   "last_platform": "codex",
-  "last_session_summary": "Closed the remaining local holds: live fetch confirms CanonRec 72f504b is published on origin/main, so root pin regenerated through registry_sync_heads.py. Moved 18 August 18/19 historical pytest output files into archives/historical_simulation_outputs with original paths, byte counts and SHA-256 manifest; all match prior evidence. No provenance rewrite, simulation execution, or canon promotion. Root draft PR to follow; merge requires separate approval.",
+  "last_session_summary": "Refreshed Sentinel and root queue; draft CloudBank PR #1635 now at 40ad23e8 fixes issue #1558 queue churn, explicit validation dispatch, and partial-notification retry duplicates identified in automated review. Final 79 focused tests, lint/complexity and workflow syntax pass. Broad suite: 3705 passed; four environment failures reproduced on main, all four passed in a scoped permitted run. Stale sandbox-missing-test-deps blocker completed; 37 root items remain. Latest-head remote checks and owner-approved live rollout pending. Receipt: reports/analysis/cloudbank_sentinel_triage_20261010.md.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -826,6 +824,36 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "0c1310b4",
+      "date": "2026-10-10",
+      "platform": "codex",
+      "summary": "docs: record Sentinel triage and queue CI repair handoff"
+    },
+    {
+      "sha": "e7f10560",
+      "date": "2026-10-01",
+      "platform": "codex",
+      "summary": "docs(health): finalize follow-up validation receipt"
+    },
+    {
+      "sha": "962b6891",
+      "date": "2026-09-26",
+      "platform": "codex",
+      "summary": "docs(health): record published repairs and navigation CI validation"
+    },
+    {
+      "sha": "5a23020b",
+      "date": "2026-09-26",
+      "platform": "codex",
+      "summary": "chore(health): sync published spine and close verified housekeeping gaps"
+    },
+    {
+      "sha": "8569f743",
+      "date": "2026-09-26",
+      "platform": "codex",
+      "summary": "chore(workspace): archive historical test outputs and sync published CanonRec pin (#89)"
+    },
     {
       "sha": "983018c6",
       "date": "2026-09-25",
@@ -855,36 +883,6 @@
       "date": "2026-09-24",
       "platform": "codex",
       "summary": "chore(registry): pin approved CloudBank runtime lock repair"
-    },
-    {
-      "sha": "3964d7dd",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "docs(review): link published CloudBank dependency repair"
-    },
-    {
-      "sha": "5978a2c8",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "docs(review): record CI lock blocker and validated CloudBank repair"
-    },
-    {
-      "sha": "0fec3552",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "fix(queue): expose complete due-review inventory and record live remediation"
-    },
-    {
-      "sha": "59d8a5cb",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "reports(recovered_canon): archive the Jorenon Morrowen ACE review packet"
-    },
-    {
-      "sha": "e9f1906e",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "chore(queue): close connectivity-branch-email-privacy, open the PR-or-retire follow-on"
     }
   ],
   "security_events": [
@@ -901,7 +899,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "983018c6a383cb816c60b1156ff30a929bde35f5",
+    "main_sha": "0c1310b4a7e143fa5b0d9edbcd1a0266da9c819d",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
