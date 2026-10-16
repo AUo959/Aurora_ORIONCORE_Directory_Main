@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aurora.local/schemas/aurora_working_group_review_v0_1.schema.json",
+  "title": "Aurora Working Group (Proposed Review Packet Only)",
+  "description": "Design-gate artifacts only; no runtime authorization or canon authority conferred.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "record_type": {
+      "const": "working_group_review_packet"
+    },
+    "review_status": {
+      "const": "pending_review"
+    },
+    "authority": {
+      "const": "none"
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "status": {
+          "const": "proposed"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "member_refs": {
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "$ref": "#/$defs/entity"
+          }
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "policy_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provenance_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "group_id",
+        "name",
+        "purpose",
+        "status",
+        "version",
+        "member_refs",
+        "created_at",
+        "policy_ref",
+        "provenance_ref"
+      ]
+    },
+    "proposed_events": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+          },
+          "group_id": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+          },
+          "event_type": {
+            "enum": [
+              "add_member",
+              "remove_member",
+              "dissolve"
+            ]
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actor_ref": {
+            "$ref": "#/$defs/entity"
+          },
+          "member_ref": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/entity"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "new_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "consent_receipt_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "audit_ref": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "event_id",
+          "group_id",
+          "event_type",
+          "occurred_at",
+          "actor_ref",
+          "member_ref",
+          "expected_version",
+          "new_version",
+          "consent_receipt_ref",
+          "audit_ref"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_type",
+    "review_status",
+    "authority",
+    "snapshot",
+    "proposed_events"
+  ],
+  "$defs": {
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "kind": {
+          "enum": [
+            "human",
+            "relay_agent",
+            "system_entity",
+            "research_agent"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "kind"
+      ]
+    }
+  }
+}
