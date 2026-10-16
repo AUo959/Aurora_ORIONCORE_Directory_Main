@@ -87,7 +87,7 @@ def run_stdio(*, root: Path, missing_report: bool = False):
                 assert item.annotations is not None
                 assert item.annotations.read_only_hint is True
                 assert item.annotations.open_world_hint is False
-                assert not item.inputSchema.get("required")
+                assert not item.input_schema.get("required")
                 result = await session.call_tool(TOOL, arguments={})
                 return result
     return asyncio.run(operation())
