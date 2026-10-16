@@ -19,8 +19,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Mapping
 
-from fastapi import FastAPI, HTTPException, Request, Response
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, HTTPException, Request
 
 import aurora_intelligent_ui_bridge as bridge
 
