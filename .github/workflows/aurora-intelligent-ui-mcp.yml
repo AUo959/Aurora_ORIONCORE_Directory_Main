@@ -1,0 +1,39 @@
+name: Aurora Intelligent UI MCP
+
+on:
+  pull_request:
+    branches:
+      - main
+      - feat/mission-control-authenticated-snapshot-20261015
+    paths:
+      - 'tools/aurora_intelligent_ui_*.py'
+      - 'tests/test_aurora_intelligent_ui_*.py'
+      - 'catalog/schemas/aurora_intelligent_ui_snapshot.schema.json'
+      - '.github/workflows/aurora-intelligent-ui-mcp.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  mcp-protocol-and-boundaries:
+    name: MCP stdio, projection, and HTTP regression
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Install reviewed transport/test dependencies
+        run: |
+          python -m pip install --only-binary=:all: 'mcp>=2.0,<3' 'fastapi==0.141.1' 'uvicorn==0.52.1' 'httpx==0.28.1' 'pytest==8.4.2'
+      - name: Validate all three read-only interfaces
+        run: |
+          python -m pytest -q tests/test_aurora_intelligent_ui_bridge.py tests/test_aurora_intelligent_ui_service.py tests/test_aurora_intelligent_ui_mcp.py
+      - name: Verify single-tool SDK metadata
+        run: |
+          python -c 'import sys;sys.path.insert(0,"tools");import aurora_intelligent_ui_mcp as m;assert m.TOOL_NAME=="get_mission_control_snapshot"'
