@@ -74,6 +74,19 @@ def _file_hash(p: Path) -> str:
     return h.hexdigest()
 
 
+def _sync_file(src: Path, dst: Path, dry_run: bool) -> str | None:
+    if dst.exists():
+        if _file_hash(src) == _file_hash(dst):
+            return None
+        operation = "update"
+    else:
+        operation = "add"
+    if not dry_run:
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, dst)
+    return operation
+
+
 def sync_skill(skill_name: str, dest_root: Path, dry_run: bool = True, *, source_root: Path | None = None) -> dict:
     src = (source_root if source_root is not None else SKILLS_SRC) / skill_name
     dst = dest_root / skill_name
@@ -92,15 +105,9 @@ def sync_skill(skill_name: str, dest_root: Path, dry_run: bool = True, *, source
         rel = src_file.relative_to(src)
         dst_file = dst / rel
 
-        if not dst_file.exists():
-            changes.append(("add", rel))
-            if not dry_run:
-                dst_file.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(src_file, dst_file)
-        elif _file_hash(src_file) != _file_hash(dst_file):
-            changes.append(("update", rel))
-            if not dry_run:
-                shutil.copy2(src_file, dst_file)
+        operation = _sync_file(src_file, dst_file, dry_run)
+        if operation:
+            changes.append((operation, rel))
 
     if not changes:
         return {"skill": skill_name, "status": "up-to-date", "changes": []}
@@ -110,6 +117,21 @@ def sync_skill(skill_name: str, dest_root: Path, dry_run: bool = True, *, source
         "status": "dry-run" if dry_run else "synced",
         "changes": [f"{op}: {path}" for op, path in changes],
     }
+
+
+def _drift_entries(source_root: Path, dest_root: Path, names: list[str]) -> list[str]:
+    entries = []
+    for name in names:
+        result = sync_skill(name, dest_root, dry_run=True, source_root=source_root)
+        if result.get("changes"):
+            entries.append(f"{name}: {len(result['changes'])} file(s)")
+    return entries
+
+
+def _skill_names(source_root: Path, skills: list[str] | None) -> list[str]:
+    if skills is not None:
+        return skills
+    return sorted(p.name for p in source_root.iterdir() if p.is_dir())
 
 
 def collect_drift(
@@ -125,12 +147,7 @@ def collect_drift(
         if not target.get("enabled"):
             continue
         dest_root = Path(str(target["dest"])).expanduser()
-        names = skills if skills is not None else sorted(p.name for p in source_root.iterdir() if p.is_dir())
-        entries: list[str] = []
-        for skill_name in names:
-            result = sync_skill(skill_name, dest_root, dry_run=True, source_root=source_root)
-            if result.get("changes"):
-                entries.append(f"{skill_name}: {len(result['changes'])} file(s)")
+        entries = _drift_entries(source_root, dest_root, _skill_names(source_root, skills))
         if entries:
             drift[str(target["name"])] = entries
     return drift
