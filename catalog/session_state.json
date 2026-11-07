@@ -827,12 +827,6 @@
   },
   "recent_commits": [
     {
-      "sha": "8569f74",
-      "date": "2026-11-07",
-      "platform": "codex",
-      "summary": "chore(workspace): archive historical test outputs and sync published CanonRec pin (#89)"
-    },
-    {
       "sha": "983018c6",
       "date": "2026-09-25",
       "platform": "codex",
@@ -885,6 +879,12 @@
       "date": "2026-09-24",
       "platform": "codex",
       "summary": "reports(recovered_canon): archive the Jorenon Morrowen ACE review packet"
+    },
+    {
+      "sha": "e9f1906e",
+      "date": "2026-09-24",
+      "platform": "codex",
+      "summary": "chore(queue): close connectivity-branch-email-privacy, open the PR-or-retire follow-on"
     }
   ],
   "security_events": [
