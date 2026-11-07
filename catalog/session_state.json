@@ -509,21 +509,6 @@
       "approval_required": false
     },
     {
-      "id": "ace-capability-manifest-discovery",
-      "status": "ready",
-      "assigned_to": "either",
-      "priority": "medium",
-      "kind": "work",
-      "repo": "root",
-      "description": "tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing. Registering a capability therefore means editing engine source, and spec 6.5 (capability indexer) is unimplemented in substance. Load capabilities from manifest files validated against the existing schema. tests/test_aurora_ace_invariants.py::test_declared_producers_exist_in_the_capability_index already guards the field->index consistency this would need.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-09-10T20:06:05Z",
-      "next_action": "[migrated] tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing.",
-      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
-      "approval_required": false
-    },
-    {
       "id": "worktree-uncommitted-sweep",
       "status": "ready",
       "assigned_to": "either",
@@ -721,6 +706,24 @@
         "publication_debt scan, 2026-09-08: 3 entries, +65 exempted",
         "reports/analysis/ORION__AUDIT__L3_SALVAGE_PASS__v1.2__2026-09-08.md"
       ]
+    },
+    {
+      "id": "gpt4o-retirement-2027-01-14",
+      "status": "ready",
+      "priority": "high",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "GPT-4o is deprecated and scheduled for provider shutdown on 2027-01-14. Reconciled 2026-11-07 from official model and deprecation pages; current catalog remains selectable until migration.",
+      "created_at": "2026-11-07T22:43:52Z",
+      "updated_at": "2026-11-07T22:43:52Z",
+      "review_at": "2026-12-01T14:00:00Z",
+      "next_action": "Choose a replacement using workload evidence, test provider fallback, and migrate or disable GPT-4o before shutdown.",
+      "definition_of_done": "GPT-4o is no longer selected before 2027-01-14; any replacement has sourced capabilities/pricing and passing routing tests.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://developers.openai.com/api/docs/deprecations"
+      ]
     }
   ],
   "completed_tasks": [
@@ -800,11 +803,18 @@
       "completed_at": "2026-09-24T23:53:36Z",
       "platform": "claude-code",
       "detail": "Completed: CloudBank PR #1608 merged as 0fac980967ac7802a399f091fadf24bcd67b3126; root PR #86 passed all non-skipped checks at 989c53ae and merged with explicit owner approval as cb52b48a23606a1ddbb773a52f7e99f2adb4b95d on 2026-09-24."
+    },
+    {
+      "id": "ace-capability-manifest-discovery",
+      "status": "completed",
+      "completed_at": "2026-11-07T22:43:52Z",
+      "platform": "codex",
+      "detail": "Verified on root main af72c39: tools/ace/core.py build_capability_index delegates to capability_discovery.build_capability_index; capability_discovery.py loads validated committed manifests. The hardcoded _capability_specs function is absent. This closure is also corroborated by executive_brief__2026-08-15.md and the passing root suite. The queue description is obsolete."
     }
   ],
-  "last_updated": "2026-11-07T22:15:12Z",
+  "last_updated": "2026-11-07T23:37:51Z",
   "last_platform": "codex",
-  "last_session_summary": "Owner authorized landing the five restart fixes. Merged AuroraOS #14 (b80dcaff), dashboard #35 (f81cad38), legacy docs #1 (fe075747). Root #102 is the authorized landing vehicle; latest full local suite 728 passed/41 skipped, review corrections included. CloudBank #1679 remains blocked: mandatory full CI has 3683 passes and one model-catalog freshness failure (four claims 105 days old). No dates fabricated or required checks bypassed. See reports/dev_restart_landing_2026-11-07.md. Unrelated queue retained.",
+  "last_session_summary": "Landed CloudBank #1679 at 81fcd6ea after final CI (3689 passed) and API/dashboard browser smoke. Synced root CloudBank pin; closed implemented ACE discovery task and queued GPT-4o retirement migration. Completion report records triage and limits.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -826,6 +836,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "af72c39",
+      "date": "2026-11-07",
+      "platform": "codex",
+      "summary": "fix(dev): isolate workspace checks and record Aurora restart readiness (#102)"
+    },
     {
       "sha": "983018c6",
       "date": "2026-09-25",
@@ -879,12 +895,6 @@
       "date": "2026-09-24",
       "platform": "codex",
       "summary": "reports(recovered_canon): archive the Jorenon Morrowen ACE review packet"
-    },
-    {
-      "sha": "e9f1906e",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "chore(queue): close connectivity-branch-email-privacy, open the PR-or-retire follow-on"
     }
   ],
   "security_events": [
@@ -901,7 +911,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "8569f7436d6b57829fec6f2004850c9883132d2f",
+    "main_sha": "af72c39c895b4ddd771723f41ad1496923146b95",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
