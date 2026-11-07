@@ -87,6 +87,12 @@ def _sync_file(src: Path, dst: Path, dry_run: bool) -> str | None:
     return operation
 
 
+def _source_files(source: Path):
+    for path in source.rglob("*"):
+        if path.is_file() and not _should_exclude(path):
+            yield path
+
+
 def sync_skill(skill_name: str, dest_root: Path, dry_run: bool = True, *, source_root: Path | None = None) -> dict:
     src = (source_root if source_root is not None else SKILLS_SRC) / skill_name
     dst = dest_root / skill_name
@@ -96,12 +102,7 @@ def sync_skill(skill_name: str, dest_root: Path, dry_run: bool = True, *, source
 
     changes = []
 
-    for src_file in src.rglob("*"):
-        if src_file.is_dir():
-            continue
-        if _should_exclude(src_file):
-            continue
-
+    for src_file in _source_files(src):
         rel = src_file.relative_to(src)
         dst_file = dst / rel
 
