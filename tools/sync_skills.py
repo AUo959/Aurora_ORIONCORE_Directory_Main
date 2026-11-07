@@ -46,13 +46,14 @@ DEFAULT_TARGETS = [
 EXCLUDE_PATTERNS = {"__pycache__", "*.pyc", ".DS_Store", ".git"}
 
 
-def load_targets() -> list[dict]:
-    if not TARGETS_REGISTRY.exists():
+def load_targets(root: Path | None = None) -> list[dict]:
+    registry = root / "catalog" / "skill_sync_targets.yaml" if root is not None else TARGETS_REGISTRY
+    if not registry.exists():
         return [dict(t) for t in DEFAULT_TARGETS]
     sys.path.insert(0, str(REPO_ROOT / "tools"))
     from _workspace_common import load_yaml_like
 
-    payload = load_yaml_like(TARGETS_REGISTRY) or {}
+    payload = load_yaml_like(registry) or {}
     targets = payload.get("targets") or []
     return [t for t in targets if isinstance(t, dict) and t.get("name") and t.get("dest")]
 
@@ -73,8 +74,8 @@ def _file_hash(p: Path) -> str:
     return h.hexdigest()
 
 
-def sync_skill(skill_name: str, dest_root: Path, dry_run: bool = True) -> dict:
-    src = SKILLS_SRC / skill_name
+def sync_skill(skill_name: str, dest_root: Path, dry_run: bool = True, *, source_root: Path | None = None) -> dict:
+    src = (source_root if source_root is not None else SKILLS_SRC) / skill_name
     dst = dest_root / skill_name
 
     if not src.exists():
@@ -111,17 +112,23 @@ def sync_skill(skill_name: str, dest_root: Path, dry_run: bool = True) -> dict:
     }
 
 
-def collect_drift(targets: list[dict] | None = None, skills: list[str] | None = None) -> dict[str, list[str]]:
-    """Return {target_name: [drift summaries]} for enabled targets, without writing."""
+def collect_drift(
+    targets: list[dict] | None = None,
+    skills: list[str] | None = None,
+    *,
+    root: Path | None = None,
+) -> dict[str, list[str]]:
+    """Check the requested workspace's sources and targets without writing."""
     drift: dict[str, list[str]] = {}
-    for target in targets if targets is not None else load_targets():
+    source_root = root / "skills" if root is not None else SKILLS_SRC
+    for target in targets if targets is not None else load_targets(root):
         if not target.get("enabled"):
             continue
         dest_root = Path(str(target["dest"])).expanduser()
-        names = skills or sorted(p.name for p in SKILLS_SRC.iterdir() if p.is_dir())
+        names = skills if skills is not None else sorted(p.name for p in source_root.iterdir() if p.is_dir())
         entries: list[str] = []
         for skill_name in names:
-            result = sync_skill(skill_name, dest_root, dry_run=True)
+            result = sync_skill(skill_name, dest_root, dry_run=True, source_root=source_root)
             if result.get("changes"):
                 entries.append(f"{skill_name}: {len(result['changes'])} file(s)")
         if entries:

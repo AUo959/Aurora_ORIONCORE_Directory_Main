@@ -802,9 +802,9 @@
       "detail": "Completed: CloudBank PR #1608 merged as 0fac980967ac7802a399f091fadf24bcd67b3126; root PR #86 passed all non-skipped checks at 989c53ae and merged with explicit owner approval as cb52b48a23606a1ddbb773a52f7e99f2adb4b95d on 2026-09-24."
     }
   ],
-  "last_updated": "2026-09-25T00:30:17Z",
+  "last_updated": "2026-11-07T22:04:13Z",
   "last_platform": "codex",
-  "last_session_summary": "Closed the remaining local holds: live fetch confirms CanonRec 72f504b is published on origin/main, so root pin regenerated through registry_sync_heads.py. Moved 18 August 18/19 historical pytest output files into archives/historical_simulation_outputs with original paths, byte counts and SHA-256 manifest; all match prior evidence. No provenance rewrite, simulation execution, or canon promotion. Root draft PR to follow; merge requires separate approval.",
+  "last_session_summary": "Development restart across the five selected Aurora/CloudBank repos: repaired clean installs and dashboard lock drift, isolated root skill verification and test identity, and mocked GitHub in automation tests. Root full suite 727 passed/41 skipped; CloudBank unit/smoke 1736 passed plus 5 automation tests. Draft PRs AuroraOS #14, dashboard #35, CloudBank #1679, legacy #1. Legacy prototype preserved by owner decision. Full CloudBank slow/integration suite and live services remain unverified. Receipt: reports/dev_restart_2026-11-07.md. No active task was present; unrelated queue items retained.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -826,6 +826,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "8569f74",
+      "date": "2026-11-07",
+      "platform": "codex",
+      "summary": "chore(workspace): archive historical test outputs and sync published CanonRec pin (#89)"
+    },
     {
       "sha": "983018c6",
       "date": "2026-09-25",
@@ -879,12 +885,6 @@
       "date": "2026-09-24",
       "platform": "codex",
       "summary": "reports(recovered_canon): archive the Jorenon Morrowen ACE review packet"
-    },
-    {
-      "sha": "e9f1906e",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "chore(queue): close connectivity-branch-email-privacy, open the PR-or-retire follow-on"
     }
   ],
   "security_events": [
@@ -901,7 +901,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "983018c6a383cb816c60b1156ff30a929bde35f5",
+    "main_sha": "8569f7436d6b57829fec6f2004850c9883132d2f",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
