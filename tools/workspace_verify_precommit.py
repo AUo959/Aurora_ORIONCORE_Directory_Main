@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -27,14 +28,11 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 # Finding checks whose one-and-only fix is regenerating the surfaces.
 REGENERABLE_CHECKS = {
     "manifest_top_level_coverage",
-    "repo_head_match",
-    "repo_branch_match",
     "session_state_freshness",
 }
 
 GENERATED_SURFACES = [
     "catalog/workspace_manifest.yaml",
-    "catalog/repo_registry.yaml",
     "catalog/archive_inventory.jsonl",
     "docs/workspace-map.md",
     "reports/analysis/workspace_scan_summary.json",
@@ -52,16 +50,9 @@ GENERATED_SURFACES = [
 # wrapper exists to remove — a blocked commit whose only correct response is to
 # run one known command and retry.
 #
-# repo_head_match / repo_branch_match get no dedicated heal command here, but
-# note they are already in REGENERABLE_CHECKS above, so the workspace_scan
-# fallback below *does* refresh nested pins. That contradicts CLAUDE.md, which
-# states the pin gate "is not auto-refreshed" because it exists to catch nested
-# repos moving unnoticed. Observed 2026-07-25: a commit silently advanced
-# CanonRec's pin bacd3e6 -> 527de7a.
-#
-# Left as-is rather than quietly changed: removing those checks would alter
-# enforcement behaviour, which is an owner decision. Documented in AGENTS.md
-# under "Generated Surfaces and Freshness Gates".
+# Nested-repo pin/branch drift requires an explicit operator refresh. Even a
+# manifest-only scan writes its registry output to scratch, preserving the
+# working tree and index version of the deliberate pin surface.
 HEAL_COMMANDS: dict[str, tuple[list[str], list[str]]] = {
     "session_state_freshness": (
         [sys.executable, "tools/session_stop_hook.py"],
@@ -119,10 +110,12 @@ def main() -> int:
 
     if blocking - HEAL_COMMANDS.keys():
         print("[pre-commit]   running workspace_scan...")
-        scan = subprocess.run(
-            [sys.executable, str(REPO_ROOT / "tools" / "workspace_scan.py")],
-            capture_output=True, text=True, cwd=REPO_ROOT,
-        )
+        with tempfile.TemporaryDirectory(prefix="aurora-precommit-") as scratch:
+            scan = subprocess.run(  # nosec B603 B607 - fixed local scanner, explicit scratch output
+                [sys.executable, str(REPO_ROOT / "tools" / "workspace_scan.py"),
+                 "--repo-registry-out", str(Path(scratch) / "repo_registry.yaml")],
+                capture_output=True, text=True, cwd=REPO_ROOT,
+            )
         if scan.returncode != 0:
             print(scan.stdout, scan.stderr)
             return 1
