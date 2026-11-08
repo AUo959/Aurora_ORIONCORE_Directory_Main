@@ -75,3 +75,14 @@ These machine-local advisory leases are not a distributed lock service.
 The remaining CI consolidation pass and MCP v2 migration retain their own queue
 scope. The current OpenAI API/model migration remains a separate completed
 change and is not altered by this coordination repair.
+
+## Complementary review handoff
+
+The adopted `docs/AURORA_PEER_REVIEW_PROTOCOL_v1.md` classifies coordination
+changes as requiring complementary review. Its asynchronous model permits
+landing with a tracked debt. `rd-20261108-session-coordination` records the
+immutable source commits and remains pending for Claude Code. The concrete
+`review-session-coordination-20261108` task calls for independent re-verification,
+a finding/evidence receipt under `reports/analysis/peer_reviews/`, and explicit
+debt clearance. Further changes in the same domain require that review first.
+GitHub CI and automated review results are recorded separately on PR #108.
