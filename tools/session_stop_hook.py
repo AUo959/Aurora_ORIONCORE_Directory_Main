@@ -104,14 +104,24 @@ def _update_state(state: dict, head: str) -> tuple[dict, list[dict]]:
     known_sha = state.get("known_state", {}).get("main_sha", "")
     new_commits = _git_log_since(known_sha)
 
-    # Prepend new commits to recent_commits, keep last MAX_RECENT_COMMITS
+    # Record new commits with provenance read from each commit (its UTC
+    # committer date and attribution trailer), not from this hook's run.
     existing = state.get("recent_commits", [])
-    for c in reversed(new_commits):
-        entry = {"sha": c["sha"], "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-                 "platform": PLATFORM, "summary": c["summary"]}
-        if not any(e.get("sha") == c["sha"] for e in existing):
-            existing.insert(0, entry)
-    state["recent_commits"] = existing[:MAX_RECENT_COMMITS]
+    try:
+        import session_state_io
+
+        rev = f"{known_sha}..HEAD" if known_sha else f"-{MAX_RECENT_COMMITS}"
+        records = session_state_io.commit_records(REPO_ROOT, rev)
+        state["recent_commits"], _ = session_state_io.merge_recent_commits(
+            existing, records, MAX_RECENT_COMMITS)
+    except ImportError:
+        # Same degraded path the save step below takes: keep the hook alive.
+        for c in reversed(new_commits):
+            entry = {"sha": c["sha"], "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+                     "platform": PLATFORM, "summary": c["summary"]}
+            if not any(e.get("sha") == c["sha"] for e in existing):
+                existing.insert(0, entry)
+        state["recent_commits"] = existing[:MAX_RECENT_COMMITS]
 
     # Mechanical fields
     state["last_platform"] = PLATFORM
