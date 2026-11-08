@@ -80,7 +80,15 @@ def slug(value: str) -> str:
 
 
 def claims_dir(root: Path, claims_relative_dir: Path = DEFAULT_CLAIMS_RELATIVE_DIR) -> Path:
-    return root / claims_relative_dir
+    # Git returns the shared administrative directory for every linked worktree.
+    # Preserve the existing canonical checkout store so active leases survive.
+    result = git(["rev-parse", "--git-common-dir"], cwd=root, check=False)
+    if result.returncode != 0:
+        return root / claims_relative_dir  # Standalone/non-Git fixtures.
+    common = Path(result.stdout.strip())
+    if not common.is_absolute():
+        common = root / common
+    return common.resolve().parent / claims_relative_dir
 
 
 def normalize_repo(value: str) -> str:
@@ -125,6 +133,10 @@ def path_overlaps(left: str, right: str) -> bool:
 
 def posture_is_mutating(value: str) -> bool:
     return value not in NON_MUTATING_POSTURES
+
+
+def claim_file_label(path: Path, root: Path) -> str:
+    return path.relative_to(root).as_posix() if path.is_relative_to(root) else str(path)
 
 
 def claim_path_for(root: Path, claim_id: str) -> Path:
@@ -179,7 +191,7 @@ def is_stale_claim(claim: dict[str, Any], now: datetime) -> bool:
 
 def claim_summary(record: dict[str, Any], root: Path, now: datetime) -> dict[str, Any]:
     path = record["path"]
-    rel = path.relative_to(root).as_posix() if path.is_relative_to(root) else str(path)
+    rel = claim_file_label(path, root)
     if not record["valid"]:
         return {
             "claim_file": rel,
@@ -368,7 +380,7 @@ def create_claim(
     }
     path = claim_path_for(root, normalized_claim_id)
     write_json(path, payload)
-    return 0, {"status": "created", "claim_file": path.relative_to(root).as_posix(), "claim": payload}
+    return 0, {"status": "created", "claim_file": claim_file_label(path, root), "claim": payload}
 
 
 def find_claim(root: Path, claim_id: str) -> tuple[Path | None, dict[str, Any] | None]:
@@ -388,7 +400,7 @@ def release_claim(root: Path, claim_id: str, now: datetime | None = None) -> tup
     claim["updated_at"] = format_time(released_at)
     claim["released_at"] = format_time(released_at)
     write_json(path, claim)
-    return 0, {"status": "released", "claim_file": path.relative_to(root).as_posix(), "claim": claim}
+    return 0, {"status": "released", "claim_file": claim_file_label(path, root), "claim": claim}
 
 
 def refresh_claim(root: Path, claim_id: str, ttl_minutes: int, now: datetime | None = None) -> tuple[int, dict[str, Any]]:
@@ -401,7 +413,7 @@ def refresh_claim(root: Path, claim_id: str, ttl_minutes: int, now: datetime | N
     claim["expires_at"] = format_time(refreshed_at + timedelta(minutes=ttl_minutes))
     claim["ttl_minutes"] = ttl_minutes
     write_json(path, claim)
-    return 0, {"status": "refreshed", "claim_file": path.relative_to(root).as_posix(), "claim": claim}
+    return 0, {"status": "refreshed", "claim_file": claim_file_label(path, root), "claim": claim}
 
 
 def list_claims(root: Path, now: datetime | None = None) -> dict[str, Any]:

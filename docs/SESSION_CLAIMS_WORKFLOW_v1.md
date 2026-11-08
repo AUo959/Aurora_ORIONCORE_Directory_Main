@@ -10,7 +10,9 @@ for paths a platform is about to mutate.
 
 ## Storage
 
-- Live claim directory: `catalog/session_claims/`
+- Live claim directory: `catalog/session_claims/` in the canonical checkout,
+  resolved from Git's shared administrative directory (`git rev-parse --git-common-dir`).
+  All linked worktrees use this same store; independent clones remain separate.
 - Live claim files: `catalog/session_claims/*.json`
 - Git posture: live claim JSON files are ignored; the workflow and ignore rules
   are versioned.
@@ -160,3 +162,27 @@ To scale to multiple machines or multiple developers:
 
 4. **The `machine_id` field** lets future backends filter claims by origin machine
    without requiring coordination to assign unique IDs.
+
+## Hook platform and pre-commit contract
+
+Set `AURORA_SESSION_PLATFORM=codex` or `AURORA_SESSION_PLATFORM=claude-code` for
+an explicit hook identity. Claude's checked-in hook commands set it directly.
+Without it, the stop hook accepts unambiguous `CLAUDECODE` or
+`CODEX_HOME`/`CODEX_CLI_PATH` evidence. Conflicting, invalid or absent identity
+preserves `last_platform` and produces no platform-labelled orphan marker.
+Historical commit labels continue to come from commit provenance.
+
+The pre-commit freshness healer invokes `session_stop_hook.py --refresh-only`.
+This refreshes mechanical state without releasing a live session claim,
+recording the session-close ledger or producing orphan markers. A conflicting
+other-platform mutation claim blocks the refresh and the commit; it cannot be
+healed by overwriting the protected state. Read-only claims do not block.
+
+Claim JSON is shared across worktrees, while orphan markers and the Claude
+auto-claim marker stay checkout-local: one checkout must not resolve another
+checkout's dirty files or release its session presence. Existing canonical
+claims remain in place. Before using the updated tooling in an older linked
+checkout, release/recreate any legacy claims previously written in that
+checkout's own `catalog/session_claims/`; these are not silently moved. Separate
+Git administrative directories outside the normal `.git` layout are outside
+this storage convention; inspect the resolved path before using that layout.

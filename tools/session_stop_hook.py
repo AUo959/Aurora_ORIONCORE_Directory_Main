@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """
-session_stop_hook.py — Runs on Claude Code session Stop.
+session_stop_hook.py — Session start/stop and pre-commit state refresh.
 
-Four jobs:
+Use --refresh-only for freshness healing without session-close side effects.
+Platform attribution requires an explicit or unambiguous caller identity.
+
+Jobs:
   1. Auto-write mechanical fields to catalog/session_state.json
      (last_platform, last_updated, known_state.main_sha, recent_commits).
      ADVISORY ONLY — the update rides along with the operator's next real
@@ -23,6 +26,7 @@ Invoked from .claude/settings.json → hooks → Stop.
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -31,8 +35,19 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 STATE_PATH = REPO_ROOT / "catalog" / "session_state.json"
 CLAIMS_DIR = REPO_ROOT / "catalog" / "session_claims"
-PLATFORM = "claude-code"
 MAX_RECENT_COMMITS = 10
+
+
+def session_platform() -> str | None:
+    """Explicit platform wins; ambiguous or missing evidence never implies Claude."""
+    explicit = os.environ.get("AURORA_SESSION_PLATFORM")
+    if explicit is not None:
+        return explicit if explicit in {"codex", "claude-code"} else None
+    claude = bool(os.environ.get("CLAUDECODE"))
+    codex = bool(os.environ.get("CODEX_HOME") or os.environ.get("CODEX_CLI_PATH"))
+    if claude == codex:
+        return None
+    return "claude-code" if claude else "codex"
 
 
 # ── Git helpers ────────────────────────────────────────────────────────────
@@ -115,16 +130,14 @@ def _update_state(state: dict, head: str) -> tuple[dict, list[dict]]:
         state["recent_commits"], _ = session_state_io.merge_recent_commits(
             existing, records, MAX_RECENT_COMMITS)
     except ImportError:
-        # Same degraded path the save step below takes: keep the hook alive.
-        for c in reversed(new_commits):
-            entry = {"sha": c["sha"], "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-                     "platform": PLATFORM, "summary": c["summary"]}
-            if not any(e.get("sha") == c["sha"] for e in existing):
-                existing.insert(0, entry)
-        state["recent_commits"] = existing[:MAX_RECENT_COMMITS]
+        # Without commit provenance tooling, keep existing records intact.
+        # A hook's caller cannot establish authorship of historical commits.
+        state["recent_commits"] = existing
 
-    # Mechanical fields
-    state["last_platform"] = PLATFORM
+    # Mechanical fields; unknown callers preserve the prior platform label.
+    platform = session_platform()
+    if platform is not None:
+        state["last_platform"] = platform
     state["last_updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     # Summary from new commits if no manual summary was set this session.
@@ -144,19 +157,22 @@ def _update_state(state: dict, head: str) -> tuple[dict, list[dict]]:
 
 # ── Orphan marker ─────────────────────────────────────────────────────────
 
-def _write_orphan_marker(changed_files: list[str], head: str) -> Path:
+def _write_orphan_marker(changed_files: list[str], head: str) -> Path | None:
     """Write a machine-local orphan marker for abandoned uncommitted work."""
+    platform = session_platform()
+    if platform is None:
+        return None
     CLAIMS_DIR.mkdir(parents=True, exist_ok=True)
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    marker_path = CLAIMS_DIR / f".orphan_{PLATFORM}_{ts}.json"
+    marker_path = CLAIMS_DIR / f".orphan_{platform}_{ts}.json"
     marker = {
         "schema_version": 1,
-        "platform": PLATFORM,
+        "platform": platform,
         "created_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "head_sha": head,
         "uncommitted_files": changed_files,
         "note": (
-            "Uncommitted changes were present when the Claude Code session ended. "
+            f"Uncommitted changes were present when the {platform} session ended. "
             "Check these files before starting new work on this machine."
         ),
     }
@@ -396,11 +412,20 @@ def main() -> int:
         surface_project_focus()
         surface_queue_health()
         check_orphans()
-        file_auto_claim()
+        if session_platform() == "claude-code":
+            file_auto_claim()
         return 0
 
-    release_auto_claim()
-    record_landing_ledger()
+    refresh_only = "--refresh-only" in sys.argv[1:]
+    import session_state_io
+
+    if not refresh_only and session_platform() == "claude-code":
+        release_auto_claim()
+    if session_state_io.blocking_claims(session_platform() or "unknown", REPO_ROOT):
+        print("[stop-hook] state refresh deferred: conflicting session claim")
+        return 1 if refresh_only else 0
+    if not refresh_only:
+        record_landing_ledger()
     # Lifecycle time passes even when no commits land. Run before the ahead==0
     # early return so stale suspension and due reviews cannot disappear during
     # quiet repository periods.
@@ -479,8 +504,9 @@ def main() -> int:
         STATE_PATH.write_text(json.dumps(state, indent=2) + "\n")
 
     uncommitted = _git_uncommitted_tracked()
-    if uncommitted:
-        _write_orphan_marker(uncommitted, head)
+    marker = None
+    if uncommitted and not refresh_only:
+        marker = _write_orphan_marker(uncommitted, head)
 
     # Concise reminder.
     print()
@@ -491,7 +517,7 @@ def main() -> int:
     print(f"║  Ahead:  {str(ahead) + ' commit(s) since last recorded':<47}║")
     print("║  Action: include catalog/session_state.json in your next ║")
     print("║          commit. The hook does NOT auto-commit or push.  ║")
-    if uncommitted:
+    if marker is not None:
         print("╠══════════════════════════════════════════════════════════╣")
         print(f"║  ⚠  {len(uncommitted)} uncommitted tracked file(s) — orphan marker set ║")
     print("╚══════════════════════════════════════════════════════════╝")

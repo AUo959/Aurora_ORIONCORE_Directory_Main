@@ -158,9 +158,11 @@ def blocking_claims(platform: str, root: Path = REPO_ROOT) -> list[dict]:
             claim = record.get("claim", record)
             if not session_claim.is_active_claim(claim, now):
                 continue
-            if claim.get("platform") == platform:
+            if (claim.get("platform") == platform
+                    or session_claim.normalize_repo(str(claim.get("repo", "root"))) != "root"):
                 continue
-            if not session_claim.posture_is_mutating(str(claim.get("posture", "mutating"))):
+            posture = str(claim.get("mutation_posture", claim.get("posture", "mutating")))
+            if not session_claim.posture_is_mutating(posture):
                 continue
             paths = claim.get("paths") or ["."]
             if any(session_claim.path_overlaps(p, state_rel) for p in paths):
