@@ -811,9 +811,9 @@
       ]
     }
   ],
-  "last_updated": "2026-11-08T23:27:27Z",
+  "last_updated": "2026-11-08T23:31:26Z",
   "last_platform": "codex",
-  "last_session_summary": "Session coordination repair prepared: claims share the canonical store across linked worktrees; root state guard honors repository and read-only scope. Hook platform identity is explicit or unambiguous, unknown callers preserve attribution, and pre-commit refresh-only preserves live session claims and dirty work. Full root suite: 769 passed, 41 skipped; 93 focused checks, including 22 new regressions. Both targeted queue items resolved in this patch; see reports/session_coordination_2026-11-08.md. Remaining CI consolidation and MCP v2 migration stay separate.",
+  "last_session_summary": "Session coordination repair: linked worktrees share canonical claim leases; root state guard respects repository and read-only scope. Hook attribution uses explicit or unambiguous caller identity, while pre-commit refresh-only preserves live sessions and dirty work. Full root suite: 770 passed, 41 skipped; 94 focused checks include 23 new regressions and actual healer subprocesses. Both targeted queue items resolved in this patch. Claude hook configuration is now classified and inventoried as managed in place. See reports/session_coordination_2026-11-08.md; remaining CI consolidation and MCP v2 migration retain separate scope.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",

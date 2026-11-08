@@ -34,9 +34,9 @@ only claim JSON storage is shared.
 
 ## Verification
 
-- Full root test scope: 769 passed, 41 skipped (36.72 seconds).
-- Coordination/provenance/hook/pre-commit focused group: 93 passed.
-- The 22 new regression cases include actual Git linked worktrees, independent
+- Full root test scope: 770 passed, 41 skipped (final local run; see CI for the published revision).
+- Coordination/provenance/hook/pre-commit focused group: 94 passed.
+- The 23 new regression cases include actual Git linked worktrees, independent
   clones, foreign Git environment variables, bidirectional lease lifecycle,
   rejected mutations without file clobber, repository/read-only scoping,
   platform identity, and real pre-commit subprocesses with state staging.
@@ -49,6 +49,15 @@ only claim JSON storage is shared.
 
 Integration-gate and PR results are attached to the change's GitHub checks.
 The integration gate remains read-only; no live runtime advancement is needed.
+
+## Inventory repair
+
+The integration gate exposed a pre-existing inventory gap for tracked `.claude`
+configuration. A scratch scanner classified that folder as intake to be moved.
+An explicit control-surface classification now keeps it at the root; its
+scanner-derived manifest entry and workspace-map counts are synchronized.
+Other canonical inventory entries and deliberate nested-repo pins are retained.
+A regression verifies that future scans keep the hook configuration in place.
 
 ## Queue and follow-up
 

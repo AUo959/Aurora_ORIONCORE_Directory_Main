@@ -218,3 +218,11 @@ sys.exit(1 if stale else 0)
     assert not list(marker.parent.glob('.orphan_*'))
     assert git(worktree, 'diff', '--cached', '--name-only') == 'catalog/session_state.json'
     assert git(worktree, 'diff', '--name-only') == 'tools/session_state_check.py'
+
+
+def test_claude_hook_configuration_is_managed_in_place():
+    import _workspace_common as common
+    record = next(x for x in common.top_level_policy_records(ROOT) if x['current_path'] == '.claude')
+    assert record['kind'] == 'control_surface'
+    assert record['planned_path'] == '.claude'
+    assert record['status'] == 'managed'
