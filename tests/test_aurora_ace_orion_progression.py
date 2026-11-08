@@ -31,7 +31,8 @@ RUN_ID = "11111111-1111-4111-8111-111111111111"
 # See reports/queue_reconciliation_2026-11-08.md.
 # Dependency remediation re-baseline: owner blob and simulation tree unchanged;
 # see reports/dependency_remediation_2026-11-08.md.
-CLOUDBANK_SHA = "149b12450e87b180a88b4de81a66393f44145df6"
+# CI consolidation re-baseline: owner blob and simulation tree unchanged.
+CLOUDBANK_SHA = "28db5950e404ca2ec9fc007a1b5c6c114c3641dd"
 CANONREC_SHA = "dc629a566b2f42fa1c652140b9eef72a4fb0d58a"
 OWNER_BLOB = "5b6d93515fb219cb26d267db6c6df6c052413ae1"
 AUTHORITY_REF = "owner:orion-l1:test-authorization"
