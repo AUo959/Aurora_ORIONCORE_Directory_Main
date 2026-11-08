@@ -24,8 +24,10 @@ RUN_ID = "11111111-1111-4111-8111-111111111111"
 # CloudBank a19870a5 / blob 5b6d9351 (was 9c34d8e9 / dd3ae6f7); see
 # docs/ORION__ADR_LITE__ORION_V013_CLOUDBANK_REBASELINE__v1.0__2026-08-20.md.
 # Restart re-baseline 2026-11-07: unchanged simulation tree and owner blob;
-# see reports/dev_restart_completion_2026-11-07.md.
-CLOUDBANK_SHA = "81fcd6ea5ea4be7f0e8f21067dba6f356e65afa0"
+# See reports/dev_restart_completion_2026-11-07.md.
+# Current-model migration re-baseline 2026-11-08: same owner blob/simulation tree;
+# see reports/openai_current_model_migration_2026-11-08.md.
+CLOUDBANK_SHA = "6defaef0c5304b94ad8d82e30fd66c32975fa1a4"
 CANONREC_SHA = "dc629a566b2f42fa1c652140b9eef72a4fb0d58a"
 OWNER_BLOB = "5b6d93515fb219cb26d267db6c6df6c052413ae1"
 AUTHORITY_REF = "owner:orion-l1:test-authorization"
