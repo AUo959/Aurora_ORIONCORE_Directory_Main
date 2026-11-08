@@ -41,3 +41,18 @@ Original dirty files and both untracked directories were backed up under
 `/private/tmp/aurora-root-cleanup-20260924/original/`, with SHA-256 inventory in
 `original_hashes.json` alongside it. This temporary backup is a local recovery aid;
 the original simulation files remain at their source paths.
+
+## Follow-up — 2026-09-25 UTC
+
+The owner authorized resolving the remaining holds. A fresh CanonRec fetch now
+confirms local HEAD and `origin/main` both equal
+`72f504b397a09cecc5e39250e9ae2cb7ea0f01f5`. The unpublished classification above
+is superseded; the root registry pin was regenerated through
+`tools/registry_sync_heads.py`. No nested push was needed.
+
+The 18 August 18/19 files were moved, byte-for-byte, into
+[the historical simulation archive](../../archives/historical_simulation_outputs/README.md).
+Its manifest maps original paths to current locations and pins every byte count
+and SHA-256. All hashes match the earlier evidence inventory. The two tracked
+August 11/15 directories remain unchanged. No simulation ran, provenance was
+not rewritten, and no execution-context exemption was added.

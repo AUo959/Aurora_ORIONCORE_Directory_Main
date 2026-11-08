@@ -46,13 +46,14 @@ DEFAULT_TARGETS = [
 EXCLUDE_PATTERNS = {"__pycache__", "*.pyc", ".DS_Store", ".git"}
 
 
-def load_targets() -> list[dict]:
-    if not TARGETS_REGISTRY.exists():
+def load_targets(root: Path | None = None) -> list[dict]:
+    registry = root / "catalog" / "skill_sync_targets.yaml" if root is not None else TARGETS_REGISTRY
+    if not registry.exists():
         return [dict(t) for t in DEFAULT_TARGETS]
     sys.path.insert(0, str(REPO_ROOT / "tools"))
     from _workspace_common import load_yaml_like
 
-    payload = load_yaml_like(TARGETS_REGISTRY) or {}
+    payload = load_yaml_like(registry) or {}
     targets = payload.get("targets") or []
     return [t for t in targets if isinstance(t, dict) and t.get("name") and t.get("dest")]
 
@@ -73,8 +74,27 @@ def _file_hash(p: Path) -> str:
     return h.hexdigest()
 
 
-def sync_skill(skill_name: str, dest_root: Path, dry_run: bool = True) -> dict:
-    src = SKILLS_SRC / skill_name
+def _sync_file(src: Path, dst: Path, dry_run: bool) -> str | None:
+    if dst.exists():
+        if _file_hash(src) == _file_hash(dst):
+            return None
+        operation = "update"
+    else:
+        operation = "add"
+    if not dry_run:
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, dst)
+    return operation
+
+
+def _source_files(source: Path):
+    for path in source.rglob("*"):
+        if path.is_file() and not _should_exclude(path):
+            yield path
+
+
+def sync_skill(skill_name: str, dest_root: Path, dry_run: bool = True, *, source_root: Path | None = None) -> dict:
+    src = (source_root if source_root is not None else SKILLS_SRC) / skill_name
     dst = dest_root / skill_name
 
     if not src.exists():
@@ -82,24 +102,13 @@ def sync_skill(skill_name: str, dest_root: Path, dry_run: bool = True) -> dict:
 
     changes = []
 
-    for src_file in src.rglob("*"):
-        if src_file.is_dir():
-            continue
-        if _should_exclude(src_file):
-            continue
-
+    for src_file in _source_files(src):
         rel = src_file.relative_to(src)
         dst_file = dst / rel
 
-        if not dst_file.exists():
-            changes.append(("add", rel))
-            if not dry_run:
-                dst_file.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(src_file, dst_file)
-        elif _file_hash(src_file) != _file_hash(dst_file):
-            changes.append(("update", rel))
-            if not dry_run:
-                shutil.copy2(src_file, dst_file)
+        operation = _sync_file(src_file, dst_file, dry_run)
+        if operation:
+            changes.append((operation, rel))
 
     if not changes:
         return {"skill": skill_name, "status": "up-to-date", "changes": []}
@@ -111,19 +120,35 @@ def sync_skill(skill_name: str, dest_root: Path, dry_run: bool = True) -> dict:
     }
 
 
-def collect_drift(targets: list[dict] | None = None, skills: list[str] | None = None) -> dict[str, list[str]]:
-    """Return {target_name: [drift summaries]} for enabled targets, without writing."""
+def _drift_entries(source_root: Path, dest_root: Path, names: list[str]) -> list[str]:
+    entries = []
+    for name in names:
+        result = sync_skill(name, dest_root, dry_run=True, source_root=source_root)
+        if result.get("changes"):
+            entries.append(f"{name}: {len(result['changes'])} file(s)")
+    return entries
+
+
+def _skill_names(source_root: Path, skills: list[str] | None) -> list[str]:
+    if skills is not None:
+        return skills
+    return sorted(p.name for p in source_root.iterdir() if p.is_dir())
+
+
+def collect_drift(
+    targets: list[dict] | None = None,
+    skills: list[str] | None = None,
+    *,
+    root: Path | None = None,
+) -> dict[str, list[str]]:
+    """Check the requested workspace's sources and targets without writing."""
     drift: dict[str, list[str]] = {}
-    for target in targets if targets is not None else load_targets():
+    source_root = root / "skills" if root is not None else SKILLS_SRC
+    for target in targets if targets is not None else load_targets(root):
         if not target.get("enabled"):
             continue
         dest_root = Path(str(target["dest"])).expanduser()
-        names = skills or sorted(p.name for p in SKILLS_SRC.iterdir() if p.is_dir())
-        entries: list[str] = []
-        for skill_name in names:
-            result = sync_skill(skill_name, dest_root, dry_run=True)
-            if result.get("changes"):
-                entries.append(f"{skill_name}: {len(result['changes'])} file(s)")
+        entries = _drift_entries(source_root, dest_root, _skill_names(source_root, skills))
         if entries:
             drift[str(target["name"])] = entries
     return drift

@@ -509,21 +509,6 @@
       "approval_required": false
     },
     {
-      "id": "ace-capability-manifest-discovery",
-      "status": "ready",
-      "assigned_to": "either",
-      "priority": "medium",
-      "kind": "work",
-      "repo": "root",
-      "description": "tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing. Registering a capability therefore means editing engine source, and spec 6.5 (capability indexer) is unimplemented in substance. Load capabilities from manifest files validated against the existing schema. tests/test_aurora_ace_invariants.py::test_declared_producers_exist_in_the_capability_index already guards the field->index consistency this would need.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-09-10T20:06:05Z",
-      "next_action": "[migrated] tools/ace/core.py::_capability_specs() returns a hardcoded Python list, while catalog/schemas/aurora_ace_capability_manifest.schema.json (513 lines) is read by nothing.",
-      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
-      "approval_required": false
-    },
-    {
       "id": "worktree-uncommitted-sweep",
       "status": "ready",
       "assigned_to": "either",
@@ -839,11 +824,28 @@
       "completed_at": "2026-09-24T23:53:36Z",
       "platform": "claude-code",
       "detail": "Completed: CloudBank PR #1608 merged as 0fac980967ac7802a399f091fadf24bcd67b3126; root PR #86 passed all non-skipped checks at 989c53ae and merged with explicit owner approval as cb52b48a23606a1ddbb773a52f7e99f2adb4b95d on 2026-09-24."
+    },
+    {
+      "id": "ace-capability-manifest-discovery",
+      "status": "completed",
+      "completed_at": "2026-11-07T22:43:52Z",
+      "platform": "codex",
+      "detail": "Verified on root main af72c39: tools/ace/core.py build_capability_index delegates to capability_discovery.build_capability_index; capability_discovery.py loads validated committed manifests. The hardcoded _capability_specs function is absent. This closure is also corroborated by executive_brief__2026-08-15.md and the passing root suite. The queue description is obsolete."
+    },
+    {
+      "id": "gpt4o-retirement-2027-01-14",
+      "status": "completed",
+      "completed_at": "2026-11-08T00:40:24Z",
+      "platform": "codex",
+      "detail": "Completed via CloudBank #1680, merged 6defaef0c5304b94ad8d82e30fd66c32975fa1a4: GPT-4o disabled and removed from direct default/hub fallback routes; sourced GPT-6.1 Sol replacement and explicit GPT-6 Astra supported through Responses. Final CI 3704 passed; routing, actual SDK HTTP-mock, fallback and budget regressions pass. Paid provider access/output quality not exercised.",
+      "evidence_refs": [
+        "https://developers.openai.com/api/docs/deprecations"
+      ]
     }
   ],
-  "last_updated": "2026-09-25T00:31:20Z",
-  "last_platform": "claude-code",
-  "last_session_summary": "Root hygiene branch based on merged main cb52b48a; carried completion receipt forward. Regenerated inventory and unapplied routing proposals for review; no moves executed. Removed backed-up timestamp-only skill report edit after zero-change skill check. Verified 36 historical simulation hashes unchanged. Unpublished CanonRec registry edit and two historical simulation directories remain local holds. Cleanup PR publication follows validation; merge requires separate approval.",
+  "last_updated": "2026-11-08T00:40:24Z",
+  "last_platform": "codex",
+  "last_session_summary": "Migrated direct OpenAI integration in CloudBank #1680 (6defaef0): current GPT-6.1 Sol default and explicit GPT-6 Astra through Responses, GPT-4o disabled. Final CI 3704 passed plus 101 subtests; focused 112 passed and pinned SDK regression tests pass. Synced root registry/Orion attestation; retirement queue item completed. See reports/openai_current_model_migration_2026-11-08.md.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -865,6 +867,24 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "cf27dd4",
+      "date": "2026-11-07",
+      "platform": "codex",
+      "summary": "chore(dev): sync repaired CloudBank baseline and record restart completion (#103)"
+    },
+    {
+      "sha": "af72c39",
+      "date": "2026-11-07",
+      "platform": "codex",
+      "summary": "fix(dev): isolate workspace checks and record Aurora restart readiness (#102)"
+    },
+    {
+      "sha": "983018c6",
+      "date": "2026-09-25",
+      "platform": "codex",
+      "summary": "chore(workspace): reconcile generated inventory and document local holds (#88)"
+    },
     {
       "sha": "cb52b48a",
       "date": "2026-09-25",
@@ -906,24 +926,6 @@
       "date": "2026-09-24",
       "platform": "codex",
       "summary": "fix(queue): expose complete due-review inventory and record live remediation"
-    },
-    {
-      "sha": "59d8a5cb",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "reports(recovered_canon): archive the Jorenon Morrowen ACE review packet"
-    },
-    {
-      "sha": "e9f1906e",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "chore(queue): close connectivity-branch-email-privacy, open the PR-or-retire follow-on"
-    },
-    {
-      "sha": "1378b7ef",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "docs(salvage): close the L3 salvage pass (v1.2)"
     }
   ],
   "security_events": [
@@ -940,7 +942,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "cb52b48a23606a1ddbb773a52f7e99f2adb4b95d",
+    "main_sha": "cf27dd439d34a1c75846daf46462b250486ac3ec",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
