@@ -698,21 +698,6 @@
         "codex-root-cleanup-20260924 conflict reported by session_claim.py check while worktree add-item succeeded",
         "PR #87 description, section: gap in the claim protocol"
       ]
-    },
-    {
-      "id": "cloudbank-dependency-security-refresh-2026-11",
-      "status": "ready",
-      "priority": "high",
-      "assigned_to": "either",
-      "kind": "work",
-      "repo": "aurora-cloudbank-symbolic-main",
-      "description": "Current lockfile audits report four affected Python packages (23 unique advisory IDs) and 39 frontend affected packages including critical DOMPurify GHSA-cg2g-xh64-v4q7. Coordinate existing update PRs #1678 certifi, #1655 MCP v1 patch, #1621 PyJWT, #1623 urllib3 with compatible frontend remediation; assess unfixed PyJWT PYSEC-2026-4146 separately.",
-      "created_at": "2026-11-08T01:05:18Z",
-      "updated_at": "2026-11-08T01:05:18Z",
-      "review_at": "2026-11-09T14:00:00Z",
-      "next_action": "Assess actual affected call paths, consolidate compatible dependency updates against current main, refresh hashed locks, and rerun audits/builds/API/auth/connector tests. Preserve findings without a patched release as explicit residuals.",
-      "definition_of_done": "Fixable runtime/frontend advisory findings have validated compatible updates or documented reachability-based dispositions; unfixed advisories retain evidence and a concrete follow-up; required CI and refreshed audits are recorded.",
-      "approval_required": false
     }
   ],
   "completed_tasks": [
@@ -831,11 +816,18 @@
       "completed_at": "2026-11-08T01:07:09Z",
       "platform": "codex",
       "detail": "Implemented in root #105: explicit registry sync checks symbolic branch identity before any pin writes, refuses mismatches atomically, and accepts an exact detached pinned reference. Both same-commit wrong-branch and changed-head refusal cases pass."
+    },
+    {
+      "id": "cloudbank-dependency-security-refresh-2026-11",
+      "status": "completed",
+      "completed_at": "2026-11-08T02:23:27Z",
+      "platform": "codex",
+      "detail": "Completed through CloudBank #1686 merged 149b12450e87b180a88b4de81a66393f44145df6. Four runtime dependencies and frontend security graph updated; actual Monaco prod/dev sanitizer paths bind DOMPurify3.4.17. Runtime/full frontend audits zero findings; full CI3738 passed plus101subtests, six frontend security checks, browser controls and MCP stdio smoke pass. Nine compared dependency PRs closed as covered. Scope and skips recorded in reports/dependency_remediation_2026-11-08.md; no repository-wide security/deployment claim."
     }
   ],
-  "last_updated": "2026-11-08T01:16:18Z",
+  "last_updated": "2026-11-08T02:23:27Z",
   "last_platform": "codex",
-  "last_session_summary": "Queue recovery: CloudBank #1635 merged (cae69756); rollout producer runs reused pending proposals with no new PRs/pings. Compared all16 bot snapshots, closed14 verified duplicates, merged #1671 and #1672 (final aed9ea85); each fullCI3736 passed. Root #87 merged; #105 implements pin preservation/branch refusal and syncs final CloudBank baseline. Closed 2 registry items and stale staff-authority wait; retained 2 protocol followups and added current dependency advisory maintenance priority. Queue38open:33ready5waiting. Receipt reports/queue_reconciliation_2026-11-08.md.",
+  "last_session_summary": "Dependency security batch landed: CloudBank #1686 at149b1245, four runtime packages patched and frontend audit graph clear, including local Monaco sanitizer in production/development. Required CI3738 passed+101subtests; patched/before JWT and DOM regressions, browser controls, MCPstdio, hash installation verified. Nine overlapping dependency PRs compared and closed; grouped PRs retained. Root pins/attestation and receipt synced; targeted queue item completed. Broader audits/CI consolidation/MCPv2 remain separate.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -858,6 +850,12 @@
     "pip-audit": "2.10.1 (isolated scratch audit helper; application environments unchanged)"
   },
   "recent_commits": [
+    {
+      "sha": "334cfb3",
+      "date": "2026-11-08",
+      "platform": "codex",
+      "summary": "fix(queue): preserve registry pins and record backlog reconciliation (#105)"
+    },
     {
       "sha": "8b677b6",
       "date": "2026-11-08",
@@ -911,12 +909,6 @@
       "date": "2026-09-24",
       "platform": "claude-code",
       "summary": "fix(review): resolve Codacy annotations without weakening tests"
-    },
-    {
-      "sha": "44b09d0c",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "fix(ace): reattest unchanged owner at merged CloudBank revision"
     }
   ],
   "security_events": [
@@ -933,7 +925,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "1801d00d9aa1f32c9f1b84875e8e6b144bd7f2ac",
+    "main_sha": "334cfb3a38c2b6738cf7bb60311d9510185d1010",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
