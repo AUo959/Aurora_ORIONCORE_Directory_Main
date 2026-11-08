@@ -159,7 +159,7 @@ def test_same_commit_on_wrong_branch_is_not_in_sync(workspace, monkeypatch):
 
 def test_exact_detached_reference_is_allowed(workspace, monkeypatch):
     from unittest import TestCase
-    root, registry, _ = workspace
+    root, _, _ = workspace
     monkeypatch.setattr(sys, 'argv', ['registry_sync_heads.py'])
     rsh.main()
     _git(['checkout', '--detach'], root / 'nested/alpha')

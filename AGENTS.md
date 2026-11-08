@@ -391,8 +391,9 @@ for `--no-verify`.
 
 **Nested-repo pins require explicit refresh.** `repo_head_match` and
 `repo_branch_match` block pre-commit without regeneration. Manifest-only healing
-writes the scanner's registry output to scratch and never stages it, preserving
-both intentional pins and the index. This resolves the previously documented
+sends the scanner's registry output to scratch, preserving deliberate pins
+and the index during automatic healing. Intentional registry changes remain
+available through explicit refresh and normal staging. This resolves the previously documented
 self-heal contradiction. Run `make registry-sync-check`, then `make registry-sync`
 only after reviewing an intentional nested-repo change. Registry sync refuses
 symbolic branch mismatches without writing any pin; switch to the registered

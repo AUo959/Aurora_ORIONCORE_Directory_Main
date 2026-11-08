@@ -111,7 +111,10 @@ def main() -> int:
     if blocking - HEAL_COMMANDS.keys():
         print("[pre-commit]   running workspace_scan...")
         with tempfile.TemporaryDirectory(prefix="aurora-precommit-") as scratch:
-            scan = subprocess.run(  # nosec B603 B607 - fixed local scanner, explicit scratch output
+            # Audited: interpreter and scanner are local constants; no shell,
+            # user-supplied executable, or untrusted command text is involved.
+            # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit.dangerous-subprocess-use-audit
+            scan = subprocess.run(  # nosec B603 B607 - trusted interpreter and local scanner
                 [sys.executable, str(REPO_ROOT / "tools" / "workspace_scan.py"),
                  "--repo-registry-out", str(Path(scratch) / "repo_registry.yaml")],
                 capture_output=True, text=True, cwd=REPO_ROOT,
