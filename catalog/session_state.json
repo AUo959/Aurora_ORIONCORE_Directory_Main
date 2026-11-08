@@ -706,24 +706,6 @@
         "publication_debt scan, 2026-09-08: 3 entries, +65 exempted",
         "reports/analysis/ORION__AUDIT__L3_SALVAGE_PASS__v1.2__2026-09-08.md"
       ]
-    },
-    {
-      "id": "gpt4o-retirement-2027-01-14",
-      "status": "ready",
-      "priority": "high",
-      "assigned_to": "either",
-      "kind": "work",
-      "repo": "aurora-cloudbank-symbolic-main",
-      "description": "GPT-4o is deprecated and scheduled for provider shutdown on 2027-01-14. Reconciled 2026-11-07 from official model and deprecation pages; current catalog remains selectable until migration.",
-      "created_at": "2026-11-07T22:43:52Z",
-      "updated_at": "2026-11-07T22:43:52Z",
-      "review_at": "2026-12-01T14:00:00Z",
-      "next_action": "Choose a replacement using workload evidence, test provider fallback, and migrate or disable GPT-4o before shutdown.",
-      "definition_of_done": "GPT-4o is no longer selected before 2027-01-14; any replacement has sourced capabilities/pricing and passing routing tests.",
-      "approval_required": false,
-      "evidence_refs": [
-        "https://developers.openai.com/api/docs/deprecations"
-      ]
     }
   ],
   "completed_tasks": [
@@ -810,11 +792,21 @@
       "completed_at": "2026-11-07T22:43:52Z",
       "platform": "codex",
       "detail": "Verified on root main af72c39: tools/ace/core.py build_capability_index delegates to capability_discovery.build_capability_index; capability_discovery.py loads validated committed manifests. The hardcoded _capability_specs function is absent. This closure is also corroborated by executive_brief__2026-08-15.md and the passing root suite. The queue description is obsolete."
+    },
+    {
+      "id": "gpt4o-retirement-2027-01-14",
+      "status": "completed",
+      "completed_at": "2026-11-08T00:40:24Z",
+      "platform": "codex",
+      "detail": "Completed via CloudBank #1680, merged 6defaef0c5304b94ad8d82e30fd66c32975fa1a4: GPT-4o disabled and removed from direct default/hub fallback routes; sourced GPT-6.1 Sol replacement and explicit GPT-6 Astra supported through Responses. Final CI 3704 passed; routing, actual SDK HTTP-mock, fallback and budget regressions pass. Paid provider access/output quality not exercised.",
+      "evidence_refs": [
+        "https://developers.openai.com/api/docs/deprecations"
+      ]
     }
   ],
-  "last_updated": "2026-11-07T23:37:51Z",
+  "last_updated": "2026-11-08T00:40:24Z",
   "last_platform": "codex",
-  "last_session_summary": "Landed CloudBank #1679 at 81fcd6ea after final CI (3689 passed) and API/dashboard browser smoke. Synced root CloudBank pin; closed implemented ACE discovery task and queued GPT-4o retirement migration. Completion report records triage and limits.",
+  "last_session_summary": "Migrated direct OpenAI integration in CloudBank #1680 (6defaef0): current GPT-6.1 Sol default and explicit GPT-6 Astra through Responses, GPT-4o disabled. Final CI 3704 passed plus 101 subtests; focused 112 passed and pinned SDK regression tests pass. Synced root registry/Orion attestation; retirement queue item completed. See reports/openai_current_model_migration_2026-11-08.md.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -836,6 +828,12 @@
     "pnpm": "11.9.0"
   },
   "recent_commits": [
+    {
+      "sha": "cf27dd4",
+      "date": "2026-11-07",
+      "platform": "codex",
+      "summary": "chore(dev): sync repaired CloudBank baseline and record restart completion (#103)"
+    },
     {
       "sha": "af72c39",
       "date": "2026-11-07",
@@ -889,12 +887,6 @@
       "date": "2026-09-24",
       "platform": "codex",
       "summary": "fix(queue): expose complete due-review inventory and record live remediation"
-    },
-    {
-      "sha": "59d8a5cb",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "reports(recovered_canon): archive the Jorenon Morrowen ACE review packet"
     }
   ],
   "security_events": [
@@ -911,7 +903,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "af72c39c895b4ddd771723f41ad1496923146b95",
+    "main_sha": "cf27dd439d34a1c75846daf46462b250486ac3ec",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
