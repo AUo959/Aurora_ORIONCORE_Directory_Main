@@ -67,7 +67,7 @@ proposal is regenerated using current code before validation.
 | #1672 | escalation | `4f680c8acc7d95c554da93c73f1440e1f0e1943982664ed50afb29c0cc80041c` | Retain and refresh |
 
 Normalization for comparison excludes surfacing/ingestion dates and the closed
-#1329 candidate with its resulting tail-rank offset. It does not discard task
+issue #1329 candidate with its resulting tail-rank offset. It does not discard task
 content, existing rank authority, completed records, or governance decisions.
 
 ## Tracking reliability
