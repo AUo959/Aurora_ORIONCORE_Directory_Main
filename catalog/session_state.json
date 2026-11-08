@@ -154,21 +154,6 @@
       "trigger": "Owner reviews the queue and rules on this item."
     },
     {
-      "id": "roadmap-1.1",
-      "status": "ready",
-      "assigned_to": "codex",
-      "priority": "medium",
-      "kind": "work",
-      "repo": "aurora-cloudbank-symbolic-main",
-      "description": "Phase 1: Collapse CloudBank CI sprawl (33 workflows \u2192 ~8). Prefer Codex (browser + github plugin). See reports/state_briefs/development_roadmap__2026-05-24.md \u00a71.1.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-09-10T20:06:05Z",
-      "next_action": "[migrated] Phase 1: Collapse CloudBank CI sprawl (33 workflows \u2192 ~8).",
-      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
-      "approval_required": false
-    },
-    {
       "id": "p7-external-latency-divergence",
       "status": "ready",
       "assigned_to": "either",
@@ -698,6 +683,27 @@
         "codex-root-cleanup-20260924 conflict reported by session_claim.py check while worktree add-item succeeded",
         "PR #87 description, section: gap in the claim protocol"
       ]
+    },
+    {
+      "id": "roadmap-1.1",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "codex",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Consolidate CloudBank core CI ownership without losing unique validation or breaking required checks; 41 workflow files inventoried on 2026-11-08.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-11-08T03:26:11Z",
+      "review_at": "2026-11-15T00:00:00Z",
+      "next_action": "CI reuse landed in CloudBank #1689/#1690 with PR and main handoffs verified. Next use required CI Check metadata/effective rules to audit and remove redundant compatibility/placeholder lanes after checking consumers; compare constellation and legacy build lanes with docs/operations/CI_WORKFLOW_MAP.md.",
+      "definition_of_done": "About 6-8 core validation lanes have explicit substantive owners, with event/deployment services counted separately; duplicate validation is removed, unique coverage remains, required-check/workflow mapping is verified, and PR plus main-push checks pass with a documented map and synchronized root pins.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1689",
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1690",
+        "reports/ci_consolidation_2026-11-08.md",
+        "reports/state_briefs/development_roadmap__2026-05-24.md"
+      ]
     }
   ],
   "completed_tasks": [
@@ -825,9 +831,9 @@
       "detail": "Completed through CloudBank #1686 merged 149b12450e87b180a88b4de81a66393f44145df6. Four runtime dependencies and frontend security graph updated; actual Monaco prod/dev sanitizer paths bind DOMPurify3.4.17. Runtime/full frontend audits zero findings; full CI3738 passed plus101subtests, six frontend security checks, browser controls and MCP stdio smoke pass. Nine compared dependency PRs closed as covered. Scope and skips recorded in reports/dependency_remediation_2026-11-08.md; no repository-wide security/deployment claim."
     }
   ],
-  "last_updated": "2026-11-08T02:23:27Z",
+  "last_updated": "2026-11-08T03:25:46Z",
   "last_platform": "codex",
-  "last_session_summary": "Dependency security batch landed: CloudBank #1686 at149b1245, four runtime packages patched and frontend audit graph clear, including local Monaco sanitizer in production/development. Required CI3738 passed+101subtests; patched/before JWT and DOM regressions, browser controls, MCPstdio, hash installation verified. Nine overlapping dependency PRs compared and closed; grouped PRs retained. Root pins/attestation and receipt synced; targeted queue item completed. Broader audits/CI consolidation/MCPv2 remain separate.",
+  "last_session_summary": "CI consolidation first tranche landed: CloudBank #1689/#1690 at28db5950. Automatic Kubernetes tests and Code Quality reuse canonical exact-checkout receipts; fork identity and final rerun races covered by47 focused tests. Final PR and main CI3785 passed plus101subtests; both consumers verified exact commits. Root pins/owner attestation synchronized; simulation tree/owner blob unchanged. Root747 passed/41skipped plus10 post-pin tests, zero registry drift; six integration subprocesses pass with existing environment/queue advisories. Broad roadmap-1.1 remains ready with concrete criteria and next cleanup; session coordination and MCPv2 remain separate.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -850,6 +856,12 @@
     "pip-audit": "2.10.1 (isolated scratch audit helper; application environments unchanged)"
   },
   "recent_commits": [
+    {
+      "sha": "d5f15f5",
+      "date": "2026-11-08",
+      "platform": "codex",
+      "summary": "chore(security): sync verified dependency remediation and close targeted queue item (#106)"
+    },
     {
       "sha": "334cfb3",
       "date": "2026-11-08",
@@ -903,12 +915,6 @@
       "date": "2026-09-24",
       "platform": "codex",
       "summary": "Fix review inventory and refresh validated CloudBank baseline (#86)"
-    },
-    {
-      "sha": "989c53ae",
-      "date": "2026-09-24",
-      "platform": "claude-code",
-      "summary": "fix(review): resolve Codacy annotations without weakening tests"
     }
   ],
   "security_events": [
@@ -925,7 +931,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "334cfb3a38c2b6738cf7bb60311d9510185d1010",
+    "main_sha": "d5f15f5b28641c5fa527d4e922793c4629d773eb",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
