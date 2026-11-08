@@ -68,7 +68,7 @@ def workspace(tmp_path, monkeypatch):
     """A miniature workspace: a registry plus one real nested git repo."""
     nested = tmp_path / "nested" / "alpha"
     nested.mkdir(parents=True)
-    _git(["init", "-q"], nested)
+    _git(["init", "-q", "-b", "main"], nested)
     _git(["config", "user.email", "t@example.com"], nested)
     _git(["config", "user.name", "T"], nested)
     (nested / "f.txt").write_text("hello")
@@ -132,3 +132,36 @@ def test_check_passes_once_pins_are_current(workspace, monkeypatch):
     rsh.main()
     monkeypatch.setattr(sys, "argv", ["registry_sync_heads.py", "--check"])
     assert rsh.main() == 0
+
+
+def test_apply_refuses_branch_mismatch_without_writing(workspace, monkeypatch):
+    from unittest import TestCase
+    root, registry, _ = workspace
+    before = registry.read_bytes()
+    _git(['checkout', '-qb', 'feature'], root / 'nested/alpha')
+    monkeypatch.setattr(sys, 'argv', ['registry_sync_heads.py'])
+    TestCase().assertEqual(rsh.main(), 2)
+    TestCase().assertEqual(registry.read_bytes(), before)
+    monkeypatch.setattr(sys, 'argv', ['registry_sync_heads.py', '--check'])
+    TestCase().assertEqual(rsh.main(), 1)
+
+
+def test_same_commit_on_wrong_branch_is_not_in_sync(workspace, monkeypatch):
+    from unittest import TestCase
+    root, registry, _ = workspace
+    monkeypatch.setattr(sys, 'argv', ['registry_sync_heads.py'])
+    rsh.main()
+    before = registry.read_bytes()
+    _git(['checkout', '-qb', 'feature'], root / 'nested/alpha')
+    TestCase().assertEqual(rsh.main(), 2)
+    TestCase().assertEqual(registry.read_bytes(), before)
+
+
+def test_exact_detached_reference_is_allowed(workspace, monkeypatch):
+    from unittest import TestCase
+    root, _, _ = workspace
+    monkeypatch.setattr(sys, 'argv', ['registry_sync_heads.py'])
+    rsh.main()
+    _git(['checkout', '--detach'], root / 'nested/alpha')
+    monkeypatch.setattr(sys, 'argv', ['registry_sync_heads.py', '--check'])
+    TestCase().assertEqual(rsh.main(), 0)

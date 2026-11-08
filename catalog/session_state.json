@@ -308,23 +308,6 @@
       "trigger": "Owner reviews the queue and rules on this item."
     },
     {
-      "id": "canonrec-staff-registry-authority",
-      "status": "waiting",
-      "assigned_to": "owner",
-      "priority": "high",
-      "kind": "decision",
-      "repo": "aurora-cloudbank-symbolic-main",
-      "description": "Choose the authoritative staff-registry contract or approve a deterministic merge between CanonRec canon/L1/station/ORION_STATION_CANONICAL_STAFF_REGISTRY.json and CloudBank ORION_STATION_CANONICAL_STAFF_REGISTRY.json. CloudBank PR #1385 records hashes and blocks sole-SSOT claims.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-08-27T20:06:05Z",
-      "next_action": "[migrated] Choose the authoritative staff-registry contract or approve a deterministic merge between CanonRec canon/L1/station/ORION_STATION_CANONICAL_STAFF_REGISTRY.json and CloudBank ORION_STATION_CANONICAL_STAFF_REGISTRY.json.",
-      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
-      "approval_required": false,
-      "waiting_on": "owner",
-      "trigger": "Owner reviews the queue and rules on this item."
-    },
-    {
       "id": "cloudbank-mcp-v2-migration",
       "status": "ready",
       "assigned_to": "either",
@@ -614,36 +597,6 @@
       "approval_required": false
     },
     {
-      "id": "registry-sync-branch-field",
-      "status": "ready",
-      "assigned_to": "either",
-      "priority": "medium",
-      "kind": "work",
-      "repo": "aurora-cloudbank-symbolic-main",
-      "description": "registry-sync rewrites head_sha but never branch, so switching a nested repo leaves repo_registry.yaml internally inconsistent (head_sha from one branch, branch name from another). orion_runtime_owner.registered_cloudbank hardcodes branch main, so the mismatch fails closed in a confusing place. Make registry-sync sync branch too, or refuse when branch and head_sha disagree.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-09-10T20:06:05Z",
-      "next_action": "[migrated] registry-sync rewrites head_sha but never branch, so switching a nested repo leaves repo_registry.yaml internally inconsistent (head_sha from one branch, branch name from another).",
-      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
-      "approval_required": false
-    },
-    {
-      "id": "registry-pin-vs-selfheal-hook",
-      "status": "ready",
-      "assigned_to": "either",
-      "priority": "medium",
-      "kind": "work",
-      "repo": "root",
-      "description": "The self-healing pre-commit hook regenerates catalog/repo_registry.yaml from local HEAD and re-stages it, so a commit that edits pins is silently reverted while still reporting success (see 5c41ad2, whose message and content disagree). Effect: a registry pin cannot be committed unless local checkouts already match it. Either exempt repo_registry.yaml from self-heal when it is explicitly staged, or make the hook fail loudly instead of overwriting.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-09-10T20:06:05Z",
-      "next_action": "[migrated] The self-healing pre-commit hook regenerates catalog/repo_registry.yaml from local HEAD and re-stages it, so a commit that edits pins is silently reverted while still reporting success (see 5c41ad2, whose message and content disagree).",
-      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
-      "approval_required": false
-    },
-    {
       "id": "constellation-connectivity-publication-2026-08-19",
       "status": "ready",
       "assigned_to": "codex",
@@ -745,6 +698,21 @@
         "codex-root-cleanup-20260924 conflict reported by session_claim.py check while worktree add-item succeeded",
         "PR #87 description, section: gap in the claim protocol"
       ]
+    },
+    {
+      "id": "cloudbank-dependency-security-refresh-2026-11",
+      "status": "ready",
+      "priority": "high",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Current lockfile audits report four affected Python packages (23 unique advisory IDs) and 39 frontend affected packages including critical DOMPurify GHSA-cg2g-xh64-v4q7. Coordinate existing update PRs #1678 certifi, #1655 MCP v1 patch, #1621 PyJWT, #1623 urllib3 with compatible frontend remediation; assess unfixed PyJWT PYSEC-2026-4146 separately.",
+      "created_at": "2026-11-08T01:05:18Z",
+      "updated_at": "2026-11-08T01:05:18Z",
+      "review_at": "2026-11-09T14:00:00Z",
+      "next_action": "Assess actual affected call paths, consolidate compatible dependency updates against current main, refresh hashed locks, and rerun audits/builds/API/auth/connector tests. Preserve findings without a patched release as explicit residuals.",
+      "definition_of_done": "Fixable runtime/frontend advisory findings have validated compatible updates or documented reachability-based dispositions; unfixed advisories retain evidence and a concrete follow-up; required CI and refreshed audits are recorded.",
+      "approval_required": false
     }
   ],
   "completed_tasks": [
@@ -841,11 +809,33 @@
       "evidence_refs": [
         "https://developers.openai.com/api/docs/deprecations"
       ]
+    },
+    {
+      "id": "canonrec-staff-registry-authority",
+      "status": "completed",
+      "completed_at": "2026-11-08T01:05:18Z",
+      "platform": "codex",
+      "detail": "Existing owner authority decision is already committed: CloudBank docs/CANON_PROVENANCE.md, Staff-registry authority decision 2026-08-08, explicitly resolves the authority blocker. config/canon_provenance.json resolved_surfaces[orion_station_staff_registry] has status resolved_authority_boundary, CanonRec authority, CloudBank runtime_projection_non_authoritative. No mechanical merge or new canon ruling is needed; completed as stale queue reconciliation.",
+      "trigger": "Owner reviews the queue and rules on this item."
+    },
+    {
+      "id": "registry-pin-vs-selfheal-hook",
+      "status": "completed",
+      "completed_at": "2026-11-08T01:07:09Z",
+      "platform": "codex",
+      "detail": "Implemented in root #105: pin/head and branch drift fail closed, and manifest healing writes registry output to scratch without staging it. Behavioral preservation/no-generator regressions pass; full root suite 747 passed/41 skipped."
+    },
+    {
+      "id": "registry-sync-branch-field",
+      "status": "completed",
+      "completed_at": "2026-11-08T01:07:09Z",
+      "platform": "codex",
+      "detail": "Implemented in root #105: explicit registry sync checks symbolic branch identity before any pin writes, refuses mismatches atomically, and accepts an exact detached pinned reference. Both same-commit wrong-branch and changed-head refusal cases pass."
     }
   ],
-  "last_updated": "2026-11-08T00:40:24Z",
+  "last_updated": "2026-11-08T01:16:18Z",
   "last_platform": "codex",
-  "last_session_summary": "Migrated direct OpenAI integration in CloudBank #1680 (6defaef0): current GPT-6.1 Sol default and explicit GPT-6 Astra through Responses, GPT-4o disabled. Final CI 3704 passed plus 101 subtests; focused 112 passed and pinned SDK regression tests pass. Synced root registry/Orion attestation; retirement queue item completed. See reports/openai_current_model_migration_2026-11-08.md.",
+  "last_session_summary": "Queue recovery: CloudBank #1635 merged (cae69756); rollout producer runs reused pending proposals with no new PRs/pings. Compared all16 bot snapshots, closed14 verified duplicates, merged #1671 and #1672 (final aed9ea85); each fullCI3736 passed. Root #87 merged; #105 implements pin preservation/branch refusal and syncs final CloudBank baseline. Closed 2 registry items and stale staff-authority wait; retained 2 protocol followups and added current dependency advisory maintenance priority. Queue38open:33ready5waiting. Receipt reports/queue_reconciliation_2026-11-08.md.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -864,9 +854,34 @@
     "go": "1.26.3",
     "corepack": "0.35.0",
     "npm": "11.17.0",
-    "pnpm": "11.9.0"
+    "pnpm": "11.9.0",
+    "pip-audit": "2.10.1 (isolated scratch audit helper; application environments unchanged)"
   },
   "recent_commits": [
+    {
+      "sha": "8b677b6",
+      "date": "2026-11-08",
+      "platform": "codex",
+      "summary": "fix(registry): document audited scanner invocation and update gate guidance"
+    },
+    {
+      "sha": "30d65a2",
+      "date": "2026-11-08",
+      "platform": "codex",
+      "summary": "fix(registry): preserve explicit pins and refuse branch mismatch"
+    },
+    {
+      "sha": "1801d00",
+      "date": "2026-11-08",
+      "platform": "claude-code",
+      "summary": "fix(session-state): record commit provenance from the commit, not the sync (#87)"
+    },
+    {
+      "sha": "083a532",
+      "date": "2026-11-08",
+      "platform": "codex",
+      "summary": "chore(ai): pin current OpenAI migration and close GPT-4o retirement (#104)"
+    },
     {
       "sha": "cf27dd4",
       "date": "2026-11-07",
@@ -887,7 +902,7 @@
     },
     {
       "sha": "cb52b48a",
-      "date": "2026-09-25",
+      "date": "2026-09-24",
       "platform": "codex",
       "summary": "Fix review inventory and refresh validated CloudBank baseline (#86)"
     },
@@ -902,30 +917,6 @@
       "date": "2026-09-24",
       "platform": "codex",
       "summary": "fix(ace): reattest unchanged owner at merged CloudBank revision"
-    },
-    {
-      "sha": "79d5b175",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "chore(registry): pin approved CloudBank runtime lock repair"
-    },
-    {
-      "sha": "3964d7dd",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "docs(review): link published CloudBank dependency repair"
-    },
-    {
-      "sha": "5978a2c8",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "docs(review): record CI lock blocker and validated CloudBank repair"
-    },
-    {
-      "sha": "0fec3552",
-      "date": "2026-09-24",
-      "platform": "codex",
-      "summary": "fix(queue): expose complete due-review inventory and record live remediation"
     }
   ],
   "security_events": [
@@ -942,7 +933,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "cf27dd439d34a1c75846daf46462b250486ac3ec",
+    "main_sha": "1801d00d9aa1f32c9f1b84875e8e6b144bd7f2ac",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",

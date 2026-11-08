@@ -389,22 +389,16 @@ and stages `catalog/session_state.json` — and the block clears on the same
 commit that triggered it. If you see it, let the wrapper work; do not reach
 for `--no-verify`.
 
-**Known contradiction — nested-repo pins.** `repo_head_match` and
-`repo_branch_match` are listed in `REGENERABLE_CHECKS`, so the pre-commit
-wrapper *does* auto-refresh nested pins via `workspace_scan.py`. Observed on
-2026-07-25: a commit silently advanced CanonRec's pin from `bacd3e6` to
-`527de7a`.
-
-CLAUDE.md's nested-pin section states the opposite — "that gate is deliberate
-… so it is not auto-refreshed" — and gives `make registry-sync` as the
-intended path. The stated intent is sound: a gate that catches nested repos
-moving unnoticed does not do its job if it heals itself. The code and the
-doctrine disagree, and the code currently wins.
-
-Until it is settled, do not rely on that gate to notice a nested repo moving.
-Check pins explicitly with `make registry-sync-check`. Resolving it means
-either removing those two checks from `REGENERABLE_CHECKS` or retiring the
-doctrine — an enforcement change, and the owner's call.
+**Nested-repo pins require explicit refresh.** `repo_head_match` and
+`repo_branch_match` block pre-commit without regeneration. Manifest-only healing
+sends the scanner's registry output to scratch, preserving deliberate pins
+and the index during automatic healing. Intentional registry changes remain
+available through explicit refresh and normal staging. This resolves the previously documented
+self-heal contradiction. Run `make registry-sync-check`, then `make registry-sync`
+only after reviewing an intentional nested-repo change. Registry sync refuses
+symbolic branch mismatches without writing any pin; switch to the registered
+branch or explicitly review a registry branch change. A detached checkout at
+its exact pinned commit is permitted as a read-only reference.
 
 **New `brief_freshness` check.** Measured in commits landed since the newest
 brief, never in wall-clock days, so a quiet period produces no nagging.
