@@ -28,8 +28,10 @@ RUN_ID = "11111111-1111-4111-8111-111111111111"
 # Current-model migration re-baseline 2026-11-08: same owner blob/simulation tree;
 # See reports/openai_current_model_migration_2026-11-08.md.
 # Queue reconciliation re-baseline: unchanged runtime owner/simulation tree;
-# see reports/queue_reconciliation_2026-11-08.md.
-CLOUDBANK_SHA = "aed9ea850772c9e483c99afb780032c9e4baa7d3"
+# See reports/queue_reconciliation_2026-11-08.md.
+# Dependency remediation re-baseline: owner blob and simulation tree unchanged;
+# see reports/dependency_remediation_2026-11-08.md.
+CLOUDBANK_SHA = "149b12450e87b180a88b4de81a66393f44145df6"
 CANONREC_SHA = "dc629a566b2f42fa1c652140b9eef72a4fb0d58a"
 OWNER_BLOB = "5b6d93515fb219cb26d267db6c6df6c052413ae1"
 AUTHORITY_REF = "owner:orion-l1:test-authorization"
