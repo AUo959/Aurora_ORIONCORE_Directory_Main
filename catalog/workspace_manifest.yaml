@@ -44,6 +44,18 @@ entries:
   status: managed
   batch_id: ''
   notes: Codex plugin marketplace metadata for repo-local plugin scaffolds.
+- id: dot-claude
+  kind: control_surface
+  current_path: .claude
+  logical_zone: tools
+  planned_path: .claude
+  git_boundary: root
+  storage_tier: workspace-control
+  retention_policy: versioned
+  owner: workspace-admin
+  status: managed
+  batch_id: ''
+  notes: Tracked Claude session hook configuration; keep at the repository root.
 - id: codacy-local
   kind: cache_or_local_artifact
   current_path: .codacy

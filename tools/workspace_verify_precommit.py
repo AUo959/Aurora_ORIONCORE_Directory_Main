@@ -55,7 +55,7 @@ GENERATED_SURFACES = [
 # working tree and index version of the deliberate pin surface.
 HEAL_COMMANDS: dict[str, tuple[list[str], list[str]]] = {
     "session_state_freshness": (
-        [sys.executable, "tools/session_stop_hook.py"],
+        [sys.executable, "tools/session_stop_hook.py", "--refresh-only"],
         ["catalog/session_state.json"],
     ),
 }
