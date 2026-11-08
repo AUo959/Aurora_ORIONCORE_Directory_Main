@@ -186,3 +186,8 @@ checkout, release/recreate any legacy claims previously written in that
 checkout's own `catalog/session_claims/`; these are not silently moved. Separate
 Git administrative directories outside the normal `.git` layout are outside
 this storage convention; inspect the resolved path before using that layout.
+
+Auto-claim IDs include a session-unique suffix, so simultaneous starts in linked
+worktrees cannot share a lease. Claim creation uses exclusive file creation and
+rejects an existing ID even with `--allow-conflict`; renew a lease with `refresh`
+rather than recreating it. Closing one checkout releases only its own lease.

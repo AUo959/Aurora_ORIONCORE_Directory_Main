@@ -8,7 +8,10 @@ store and stop-hook platform attribution fixes.
 Claim lookup now resolves Git's shared administrative directory and retains the
 canonical checkout's existing `catalog/session_claims/` store. Linked worktrees
 create, check, refresh and release the same leases. Independent clones remain
-independent. Existing claim schema, TTLs, canonical claims and non-Git fixtures
+independent. Auto-claim IDs include a unique session suffix, and exclusive
+creation rejects duplicate IDs instead of replacing another session's lease,
+even when overlap is explicitly allowed. A same-second, two-worktree regression
+verifies that closing one session leaves the other lease active. Existing claim schema, TTLs, canonical claims and non-Git fixtures
 are preserved. The command's claim-file label can be absolute when a linked
 worktree's shared store is outside that checkout.
 
@@ -29,14 +32,16 @@ state without releasing a session-presence claim, recording session-close debt
 or generating orphan markers. A conflicting root claim prevents the refresh.
 A genuine Claude session close releases its own checkout-local presence before
 deferring a protected write, avoiding a lease left active merely because another
-platform is working. Orphan/auto-claim marker ownership stays checkout-local;
+platform is working. That real session close still writes local abandoned-work
+evidence when protected state refresh is deferred. Pre-commit refreshes never
+produce this session-close evidence. Orphan/auto-claim marker ownership stays checkout-local;
 only claim JSON storage is shared.
 
 ## Verification
 
-- Full root test scope: 770 passed, 41 skipped (final local run; see CI for the published revision).
-- Coordination/provenance/hook/pre-commit focused group: 94 passed.
-- The 23 new regression cases include actual Git linked worktrees, independent
+- Full root test scope: 773 passed, 41 skipped (final local run; see CI for the published revision).
+- Coordination/provenance/hook/pre-commit focused group: 97 passed.
+- The 26 new regression cases include actual Git linked worktrees, independent
   clones, foreign Git environment variables, bidirectional lease lifecycle,
   rejected mutations without file clobber, repository/read-only scoping,
   platform identity, and real pre-commit subprocesses with state staging.

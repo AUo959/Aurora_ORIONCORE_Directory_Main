@@ -29,6 +29,7 @@ import json
 import os
 import subprocess
 import sys
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -311,7 +312,7 @@ def file_auto_claim() -> None:
     try:
         if AUTO_CLAIM_MARKER.exists():
             return  # a claim from this session (or an unreleased one) exists
-        claim_id = f"claude-auto-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
+        claim_id = f"claude-auto-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}-{uuid.uuid4().hex}"
         result = _run_claim(
             "create", "--platform", "claude-code", "--task-id", "auto-session",
             "--repo", "root", "--paths", "catalog/session_state.json",
@@ -404,6 +405,16 @@ def _stale_registry_pins() -> list:
         return []
 
 
+def _defer_refresh(refresh_only: bool) -> int:
+    """Preserve local abandoned-work evidence without writing protected state."""
+    if not refresh_only:
+        dirty = _git_uncommitted_tracked()
+        if dirty:
+            _write_orphan_marker(dirty, _git_short_sha())
+    print("[stop-hook] state refresh deferred: conflicting session claim")
+    return 1 if refresh_only else 0
+
+
 def main() -> int:
     if len(sys.argv) > 1 and sys.argv[1] == "check-orphans":
         check_orphans()
@@ -422,8 +433,7 @@ def main() -> int:
     if not refresh_only and session_platform() == "claude-code":
         release_auto_claim()
     if session_state_io.blocking_claims(session_platform() or "unknown", REPO_ROOT):
-        print("[stop-hook] state refresh deferred: conflicting session claim")
-        return 1 if refresh_only else 0
+        return _defer_refresh(refresh_only)
     if not refresh_only:
         record_landing_ledger()
     # Lifecycle time passes even when no commits land. Run before the ahead==0

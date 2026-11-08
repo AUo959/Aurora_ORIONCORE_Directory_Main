@@ -379,7 +379,14 @@ def create_claim(
         "notes": notes,
     }
     path = claim_path_for(root, normalized_claim_id)
-    write_json(path, payload)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        # Creation must not replace another session's lease, even when IDs race.
+        # Renewing an existing lease is an explicit refresh operation.
+        with path.open("x", encoding="utf-8") as stream:
+            stream.write(json.dumps(payload, indent=2) + "\n")
+    except FileExistsError:
+        return 1, {"status": "error", "error": "Claim ID already exists; use a unique ID or refresh it."}
     return 0, {"status": "created", "claim_file": claim_file_label(path, root), "claim": payload}
 
 
