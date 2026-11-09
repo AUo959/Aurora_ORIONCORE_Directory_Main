@@ -1075,10 +1075,11 @@
       "domain": "session-coordination",
       "author_platform": "codex",
       "incurred_at": "2026-11-08T23:42:28Z",
-      "status": "pending",
-      "review_receipt": null,
-      "blocks": "next floor-change in the session-coordination domain",
-      "note": "Claude Code must independently re-run the full root suite, linked-worktree and actual pre-commit regressions, and integration gate; record a warrant-grounded receipt before clearing this debt."
+      "status": "cleared",
+      "review_receipt": "reports/analysis/peer_reviews/pr-20261108-session-coordination.json",
+      "blocks": "none (cleared)",
+      "note": "Cleared by Claude Code approve-with-notes receipt. One bounded gap (GIT_COMMON_DIR not scrubbed, f1) queued as session-claim-git-common-dir-scrub; that fix is itself coordination-class and its reviewer is the platform that does not implement it.",
+      "cleared_at": "2026-11-09T00:42:19Z"
     },
     {
       "id": "rd-20261108-mcp-v2-migration",
