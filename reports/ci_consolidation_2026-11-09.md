@@ -77,3 +77,7 @@ Main canonical run: `42566971942`; Constellation `42566971927`; Kubernetes
 file is 118 days old (GAP-010, #1083). The same workflow failed on f289f69c and
 the preceding main commits. This cleanup does not refresh simulation state or
 suppress that guard; this is a documented pre-existing main-only failure.
+
+Claude's independent MCP review landed in root #111 while this branch was in
+flight. The root merge preserves its receipt, completed task and cleared debt.
+Only the new CI-domain complementary review remains pending from this pass.
