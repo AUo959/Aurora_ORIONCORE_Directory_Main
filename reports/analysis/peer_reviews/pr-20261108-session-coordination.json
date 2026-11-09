@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "review_id": "pr-20261108-session-coordination",
+  "reviewed_debt_ids": [
+    "rd-20261108-session-coordination"
+  ],
+  "target": {
+    "pull_request": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/108",
+    "commits": [
+      "e966dd77d87f0f26212709581aa3516e50d57e6f",
+      "e44eb4a580e5215f218ce98ea55cbc6f1cafe24b",
+      "b5016d938c42347b5db5eed897a0847faae2bd0e"
+    ],
+    "merged_commit": "6643b2db27415cb0a5f702d80943c03211f5ab82",
+    "diff_base": "798762038209826a3cfbb247c393dae1bd1f7f14",
+    "change_class": "coordination",
+    "domain": "session-coordination",
+    "paths": [
+      "tools/session_claim.py",
+      "tools/session_state_io.py",
+      "tools/session_stop_hook.py",
+      "tools/workspace_verify_precommit.py",
+      ".claude/settings.json",
+      "tests/test_session_coordination.py",
+      "docs/SESSION_CLAIMS_WORKFLOW_v1.md",
+      "catalog/classification_overrides.yaml",
+      "catalog/workspace_manifest.yaml",
+      "docs/workspace-map.md",
+      "catalog/session_state.json",
+      "reports/session_coordination_2026-11-08.md"
+    ],
+    "notes": "origin/main at review time equalled the merged commit (no later changes). PR head ca42faf7 (fetched via refs/pull/108/head) has an empty tree diff against 6643b2db; the three source commits are the review-debt commits."
+  },
+  "author_platform": "codex",
+  "reviewer_platform": "claude-code",
+  "reviewed_at": "2026-11-09T00:42:08Z",
+  "warrant_level": "artifact",
+  "verdict": "approve-with-notes",
+  "summary": "All behaviours in the review brief were independently reproduced from the diff, in scratch clones and linked worktrees outside the author's tests, and five targeted mutations of the fixes each fail the new regression tests. One brief item is only partly met: git's GIT_COMMON_DIR is not scrubbed, so an inherited value redirects the claim store (f1). It affects best-effort advisory leases and has a one-line fix, so it is queued rather than blocking. The author's full-suite counts could not be reproduced in a worktree without nested repos; the shortfall is environmental and identical on the base commit (f2). Post-review addendum: CI on PR #109 exposed f7, a test that depended on the live handoff's last_platform; it was fixed in the same PR and does not change the verdict.",
+  "reverified_gates": [
+    {
+      "gate": "environment",
+      "command": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python --version; import pytest, yaml, jsonschema",
+      "result": "pass",
+      "evidence": "Python 3.12.13 with pytest/yaml/jsonschema. System python3 is 3.9.6 without jsonschema, so the repo venv was used. ruff is not installed in it, so lint was not re-run."
+    },
+    {
+      "gate": "focused-suite",
+      "command": "python -m pytest tests/test_session_coordination.py tests/test_session_claim.py tests/test_recent_commits_provenance.py tests/test_collab_field_fixes.py tests/test_session_state_io.py tests/test_session_state_io_ext.py tests/test_precommit_registry_protection.py -q",
+      "result": "pass",
+      "evidence": "97 passed in 4.33s (author: 97 passed)."
+    },
+    {
+      "gate": "full-suite-target",
+      "command": "python -m pytest tests/ -q  (clean linked worktree of 6643b2db, nested repos absent)",
+      "result": "fail-environmental",
+      "evidence": "8 failed, 726 passed, 74 skipped. All 8 failures raise ACEError/FileNotFoundError for the absent nested aurora-cloudbank-symbolic-main checkout or empty crew roster (test_aurora_ace_orion_progression, test_crew_life x2, test_live_watch_link, test_narrative_reconstruction x2, test_powered_watch_coupling, test_sim_run_provenance)."
+    },
+    {
+      "gate": "full-suite-base",
+      "command": "python -m pytest tests/ -q  (detached worktree of 7987620, same environment)",
+      "result": "fail-environmental",
+      "evidence": "8 failed, 700 passed, 74 skipped; the failing-test set is byte-identical to the target's (diff of FAILED lines empty). Target minus base = +26 passed, matching the 26 new tests; no new failures and no new skips."
+    },
+    {
+      "gate": "full-suite-with-nested-repos",
+      "command": "python -m pytest tests/ -q  with the five nested repos symlinked into the worktree",
+      "result": "inconclusive",
+      "evidence": "10 failed, 758 passed, 40 skipped. Symlinks resolve outside the worktree, so ACE pin-coherence tests and test_claude_hook_configuration_is_managed_in_place fail on path containment; this is an artefact of my fixture, not a defect, and I discarded the run. The author's 773 passed / 41 skipped was therefore NOT reproduced."
+    },
+    {
+      "gate": "integration-gate",
+      "command": "python tools/aurora_integration_gate.py",
+      "result": "pass-with-advisories",
+      "evidence": "verdict=warn, exit 0, all six subprocesses returned 0. Only advisory: command_gateway_safety parser_unavailable (cloudbank parser absent from this checkout), plus workspace_verify warnings for repos unavailable in this execution context and 34 queue reviews due. First run exited 1 because session_claim_check conflicted with my own active mutation claim; I released it, re-ran, then re-created it."
+    },
+    {
+      "gate": "make-session-state-check",
+      "command": "make PYTHON=<venv> session-state-check",
+      "result": "pass",
+      "evidence": "session-state-check: OK"
+    },
+    {
+      "gate": "make-registry-sync-check",
+      "command": "make PYTHON=<venv> registry-sync-check",
+      "result": "pass",
+      "evidence": "exit 0; nested repo pins skipped as absent from this checkout, none reported stale."
+    },
+    {
+      "gate": "pr-tree-equivalence",
+      "command": "git fetch origin pull/108/head; git diff --stat refs/review/pr108 6643b2db",
+      "result": "pass",
+      "evidence": "empty diff; git log 7987620..pr108 lists exactly the three source commits plus ca42faf7 (review handoff)."
+    },
+    {
+      "gate": "mutation-testing",
+      "command": "revert one fix at a time in the review worktree and run tests/test_session_coordination.py",
+      "result": "pass",
+      "evidence": "M1 healer without --refresh-only: 4 failed. M2 non-exclusive claim create: 1 failed. M3 claims_dir checkout-relative: 4 failed. M4 ambiguous platform falls back to claude-code: 4 failed. M5 other-repo claims no longer ignored: 1 failed. Tree restored with git checkout after each."
+    },
+    {
+      "gate": "shared-claims-probe",
+      "command": "scratch clone A + linked worktree B of 6643b2db; session_claim.py create in B, check/release in A",
+      "result": "pass",
+      "evidence": "claim written to A/catalog/session_claims; seen as conflict from A; release from A cleared it for B. 21 pre-existing canonical leases were listed from my linked worktree. Conflicting codex claim made 'session_state_io.py --platform claude-code set-summary' exit 3 with the file's sha unchanged; read_only codex claim and a codex claim on aurora-cloudbank-symbolic-main did not block (exit 0). Independent clones were not separately re-run beyond reading the test."
+    },
+    {
+      "gate": "duplicate-id-probe",
+      "command": "session_claim.py create --claim-id dup1 (twice, second with --allow-conflict)",
+      "result": "pass",
+      "evidence": "both attempts exit 1 'Claim ID already exists'; dup1.json still platform=codex."
+    },
+    {
+      "gate": "concurrent-session-probe",
+      "command": "session_stop_hook.py session-start launched in A and B simultaneously, then close in B",
+      "result": "pass",
+      "evidence": "two distinct claude-auto-<ts>-<uuid> leases in the same second; closing B released only B's lease, A's stayed active; each checkout kept its own .claude_auto_claim."
+    },
+    {
+      "gate": "platform-resolution-probe",
+      "command": "session_stop_hook.session_platform() under 8 env combinations",
+      "result": "pass",
+      "evidence": "explicit codex beats CLAUDECODE; explicit claude-code beats CODEX_HOME; bogus/empty explicit -> None; CLAUDECODE+CODEX_HOME -> None; single markers resolve; none -> None."
+    },
+    {
+      "gate": "deferred-close-probe",
+      "command": "codex claim created after a claude session started; real close with AURORA_SESSION_PLATFORM=claude-code and an unrelated dirty tracked README",
+      "result": "pass",
+      "evidence": "exit 0, 'state refresh deferred', session_state.json sha unchanged, own auto-claim released, .orphan_claude-code_*.json written, README untouched. --refresh-only under the same block exits 1 and writes no orphan."
+    },
+    {
+      "gate": "refresh-only-heal-probe",
+      "command": "--refresh-only as claude-code with own live auto-claim and dirty README",
+      "result": "pass",
+      "evidence": "exit 0, state refreshed (recent_commits[0].platform=codex from commit provenance), own claim still active, no orphan marker, no landing-ledger output, README unchanged."
+    },
+    {
+      "gate": "git-env-probe",
+      "command": "GIT_DIR / GIT_COMMON_DIR / GIT_CEILING_DIRECTORIES exported while calling session_claim.claims_dir and 'create'",
+      "result": "fail",
+      "evidence": "GIT_DIR and GIT_CEILING_DIRECTORIES do not redirect. GIT_COMMON_DIR=<foreign>/.git makes claims_dir resolve to <foreign>/catalog/session_claims and 'create' writes the lease there (see f1)."
+    },
+    {
+      "gate": "real-precommit-commit",
+      "command": "git commit of this receipt in the linked review worktree (installed pre-commit hooks, incl. workspace-verify self-healing)",
+      "result": "pass",
+      "evidence": "All hooks passed including 'workspace-verify (self-healing for regenerable surfaces)' while my own claude-code mutation claim was active; the commit contained only the 3 staged files and the tree was clean afterwards."
+    }
+  ],
+  "findings": [
+    {
+      "id": "f1",
+      "severity": "note",
+      "disposition": "accepted-with-note",
+      "description": "Inherited GIT_COMMON_DIR redirects claim discovery. _workspace_common.git() scrubs GIT_DIR, GIT_WORK_TREE, GIT_INDEX_FILE and GIT_PREFIX but not GIT_COMMON_DIR, which 'git rev-parse --git-common-dir' honours, so claims_dir() returns the foreign repo's parent. This leaves the brief item 'inherited Git environment variables cannot redirect claim discovery' only partly met. Impact is bounded: the variable is internal to git, and claims are advisory leases; the failure mode is silent loss of cross-session visibility rather than corruption. The new test only covers GIT_DIR.",
+      "evidence": "Repro: cd <worktree> && GIT_COMMON_DIR=/tmp/foreign/.git python tools/session_claim.py create --platform codex --task-id leak --repo root --paths catalog/session_state.json --claim-id leak1 -> claim_file=/tmp/foreign/catalog/session_claims/leak1.json and the file exists there. Code: tools/_workspace_common.py:708 (scrub tuple), tools/session_claim.py:82-91, tests/test_session_coordination.py:171 (GIT_DIR only).",
+      "correction": "Add GIT_COMMON_DIR to the scrubbed names in _workspace_common.git(), and parametrise the env regression test over it. Queued as session-claim-git-common-dir-scrub; its reviewer is the platform that did not implement the fix."
+    },
+    {
+      "id": "f7",
+      "severity": "note",
+      "disposition": "must-fix",
+      "description": "Found after the first receipt, from CI on PR #109. test_precommit_healer_uses_refresh_only_without_session_side_effects[None] copies the live catalog/session_state.json and hardcodes an expected last_platform of 'codex'. It therefore passes only while the live handoff's last writer is codex, and fails in CI on any branch whose state was last written by claude-code, including the normal Stop-hook output. I missed it because my local runs happened while the live state still said codex.",
+      "evidence": "CI run 42541677442, py3.9 and py3.12: AssertionError: 'claude-code' != 'codex' at tests/test_session_coordination.py:163. Locally the test passes before my state update and fails after it; with the fix below it passes with last_platform=claude-code.",
+      "correction": "Seed last_platform='codex' in the copied state so the test is hermetic. Applied in PR #109 (3-line change to tests/test_session_coordination.py); the production code was not affected."
+    },
+    {
+      "id": "f2",
+      "severity": "note",
+      "disposition": "accepted-with-note",
+      "description": "Author's full-suite totals (773 passed, 41 skipped) were not reproducible in a clean worktree because nested repos are untracked there; the same 8 tests fail and 74 skip on the base commit, and the target adds exactly +26 passing tests with no new failure. The receipt's totals are plausible only in the canonical checkout. My total collected count was 808 against an implied 814, a 6-test difference I could not attribute (canonical-only untracked tests are the likely cause).",
+      "evidence": "/private/tmp/claude-501/rv/base.txt vs tgt.txt (8 failed/700 passed/74 skipped base; 8 failed/726 passed/74 skipped target; FAILED sets identical). Failure text: FileNotFoundError .../aurora-cloudbank-symbolic-main.",
+      "correction": "None required for this change. Anyone re-verifying should say which checkout they ran in."
+    },
+    {
+      "id": "f3",
+      "severity": "nit",
+      "disposition": "accepted-with-note",
+      "description": "The state-mutation BLOCKED message prints 'task: ?' for every claim because it reads a task key while claims store task_id. Cosmetic and pre-existing at tools/session_state_io.py:919, but it makes the refusal less actionable.",
+      "evidence": "Observed output: 'BLOCKED - active mutating claim by codex overlaps the state file (claim id: dup2, task: ?)' although the claim has task_id=t1.",
+      "correction": "Read claim.get('task_id')."
+    },
+    {
+      "id": "f4",
+      "severity": "nit",
+      "disposition": "accepted-with-note",
+      "description": "Exclusive creation opens the claim file with 'x' and then writes; the lease is momentarily an empty or partial file. A concurrent check classifies it invalid (non-blocking) and a crash between open and write leaves an invalid file that permanently occupies the ID. Previous write_json had the same non-atomic window for overwrites, so this is not a regression of guarantee, only a narrow window. Not reproduced; from code reading of tools/session_claim.py:382-390.",
+      "evidence": "tools/session_claim.py:382-390 (open 'x' then stream.write).",
+      "correction": "Optional: write and close a temporary file in the claim directory, then publish it with os.link() (atomic, no-clobber) and handle FileExistsError without touching the existing claim. Do not use rename/replace: on POSIX it would overwrite another session's lease."
+    },
+    {
+      "id": "f5",
+      "severity": "nit",
+      "disposition": "accepted-with-note",
+      "description": "main() now does an unguarded 'import session_state_io', where the previous code tolerated ImportError with a degraded path. The Stop hook is advisory and runs from the tools directory, so risk is low, but a missing module now surfaces as a traceback at session close.",
+      "evidence": "tools/session_stop_hook.py main(): 'import session_state_io' with no try/except; the removed ImportError branch in _update_state.",
+      "correction": "Optional: wrap in try/except and fall back to treating blocking_claims as empty."
+    },
+    {
+      "id": "f6",
+      "severity": "note",
+      "disposition": "accepted-with-note",
+      "description": "Claim storage is computed as the parent of git's common dir. For a normal clone and its linked worktrees this is correct. For bare-repo, --separate-git-dir or submodule layouts it points somewhere other than a checkout; the author documents this limit in SESSION_CLAIMS_WORKFLOW_v1.md. No such layout is used by the root repo.",
+      "evidence": "tools/session_claim.py:82-91 and the 'Separate Git administrative directories' sentence in docs/SESSION_CLAIMS_WORKFLOW_v1.md. Not exercised by me.",
+      "correction": "None; limitation is documented."
+    }
+  ],
+  "not_verified": [
+    "make session-state-check and registry-sync-check passed here; ruff was not re-run (not installed in the repo venv).",
+    "Independent clones keeping separate stores was verified by reading the test and by the scratch clone A being independent of the review checkout, not by a dedicated two-clone probe.",
+    "Historical commit attribution from provenance was verified through the refresh-only probe (recent_commits[0].platform=codex) and the passing test_recent_commits_provenance suite, not via a fresh adversarial case.",
+    "The inventory change was verified by reading the manifest/override/map diff and by test_claude_hook_configuration_is_managed_in_place passing in the focused suite; nested-repository pins were not touched by the diff and registry-sync-check reported no stale pin."
+  ],
+  "follow_up_tasks": [
+    "session-claim-git-common-dir-scrub"
+  ],
+  "debt_disposition": {
+    "debt_id": "rd-20261108-session-coordination",
+    "action": "clear",
+    "cleared_at": "2026-11-09T00:42:08Z"
+  }
+}

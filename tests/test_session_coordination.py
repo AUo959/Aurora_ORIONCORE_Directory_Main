@@ -142,6 +142,9 @@ def test_precommit_healer_uses_refresh_only_without_session_side_effects(
     state = tmp_path / 'catalog/session_state.json'
     state.parent.mkdir()
     shutil.copyfile(ROOT / 'catalog/session_state.json', state)
+    seeded = json.loads(state.read_text())
+    seeded['last_platform'] = 'codex'  # hermetic: never depend on the live handoff's last writer
+    state.write_text(json.dumps(seeded))
     monkeypatch.setattr(hook, 'REPO_ROOT', tmp_path)
     monkeypatch.setattr(hook, 'STATE_PATH', state)
     monkeypatch.setattr(hook, '_git_short_sha', lambda: 'abc1234')
