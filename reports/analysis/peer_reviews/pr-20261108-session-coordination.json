@@ -36,7 +36,7 @@
   "reviewed_at": "2026-11-09T00:42:08Z",
   "warrant_level": "artifact",
   "verdict": "approve-with-notes",
-  "summary": "All behaviours in the review brief were independently reproduced from the diff, in scratch clones and linked worktrees outside the author's tests, and five targeted mutations of the fixes each fail the new regression tests. One brief item is only partly met: git's GIT_COMMON_DIR is not scrubbed, so an inherited value redirects the claim store (f1). It affects best-effort advisory leases and has a one-line fix, so it is queued rather than blocking. The author's full-suite counts could not be reproduced in a worktree without nested repos; the shortfall is environmental and identical on the base commit (f2).",
+  "summary": "All behaviours in the review brief were independently reproduced from the diff, in scratch clones and linked worktrees outside the author's tests, and five targeted mutations of the fixes each fail the new regression tests. One brief item is only partly met: git's GIT_COMMON_DIR is not scrubbed, so an inherited value redirects the claim store (f1). It affects best-effort advisory leases and has a one-line fix, so it is queued rather than blocking. The author's full-suite counts could not be reproduced in a worktree without nested repos; the shortfall is environmental and identical on the base commit (f2). Post-review addendum: CI on PR #109 exposed f7, a test that depended on the live handoff's last_platform; it was fixed in the same PR and does not change the verdict.",
   "reverified_gates": [
     {
       "gate": "environment",
@@ -155,6 +155,14 @@
       "description": "Inherited GIT_COMMON_DIR redirects claim discovery. _workspace_common.git() scrubs GIT_DIR, GIT_WORK_TREE, GIT_INDEX_FILE and GIT_PREFIX but not GIT_COMMON_DIR, which 'git rev-parse --git-common-dir' honours, so claims_dir() returns the foreign repo's parent. This leaves the brief item 'inherited Git environment variables cannot redirect claim discovery' only partly met. Impact is bounded: the variable is internal to git, and claims are advisory leases; the failure mode is silent loss of cross-session visibility rather than corruption. The new test only covers GIT_DIR.",
       "evidence": "Repro: cd <worktree> && GIT_COMMON_DIR=/tmp/foreign/.git python tools/session_claim.py create --platform codex --task-id leak --repo root --paths catalog/session_state.json --claim-id leak1 -> claim_file=/tmp/foreign/catalog/session_claims/leak1.json and the file exists there. Code: tools/_workspace_common.py:708 (scrub tuple), tools/session_claim.py:82-91, tests/test_session_coordination.py:171 (GIT_DIR only).",
       "correction": "Add GIT_COMMON_DIR to the scrubbed names in _workspace_common.git(), and parametrise the env regression test over it. Queued as session-claim-git-common-dir-scrub."
+    },
+    {
+      "id": "f7",
+      "severity": "note",
+      "disposition": "must-fix",
+      "description": "Found after the first receipt, from CI on PR #109. test_precommit_healer_uses_refresh_only_without_session_side_effects[None] copies the live catalog/session_state.json and hardcodes an expected last_platform of 'codex'. It therefore passes only while the live handoff's last writer is codex, and fails in CI on any branch whose state was last written by claude-code, including the normal Stop-hook output. I missed it because my local runs happened while the live state still said codex.",
+      "evidence": "CI run 42541677442, py3.9 and py3.12: AssertionError: 'claude-code' != 'codex' at tests/test_session_coordination.py:163. Locally the test passes before my state update and fails after it; with the fix below it passes with last_platform=claude-code.",
+      "correction": "Seed last_platform='codex' in the copied state so the test is hermetic. Applied in PR #109 (3-line change to tests/test_session_coordination.py); the production code was not affected."
     },
     {
       "id": "f2",
