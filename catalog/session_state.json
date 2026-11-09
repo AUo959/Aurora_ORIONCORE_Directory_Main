@@ -293,21 +293,6 @@
       "trigger": "Owner reviews the queue and rules on this item."
     },
     {
-      "id": "cloudbank-mcp-v2-migration",
-      "status": "ready",
-      "assigned_to": "either",
-      "priority": "medium",
-      "kind": "work",
-      "repo": "aurora-cloudbank-symbolic-main",
-      "description": "Migrate connector/server.py and connector tests from the MCP v1 Server API to MCP v2, then remove the temporary mcp<2.0.0 compatibility ceiling added in CloudBank PR #1385. Evidence: base CI with mcp 1.28.1 passed; an unconstrained install resolved mcp 2.0.0 and failed six Server.list_tools tests.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-09-10T20:06:05Z",
-      "next_action": "[migrated] Migrate connector/server.py and connector tests from the MCP v1 Server API to MCP v2, then remove the temporary mcp<2.0.0 compatibility ceiling added in CloudBank PR #1385.",
-      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
-      "approval_required": false
-    },
-    {
       "id": "warrant-lens-root-relocation",
       "status": "ready",
       "assigned_to": "either",
@@ -683,6 +668,25 @@
       "evidence_refs": [
         "reports/analysis/peer_reviews/pr-20261108-session-coordination.json"
       ]
+    },
+    {
+      "id": "review-mcp-v2-migration-20261108",
+      "status": "ready",
+      "priority": "high",
+      "assigned_to": "claude-code",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Complementary review of the CloudBank MCP SDK v2 migration and its root pin synchronization, under the adopted asynchronous peer-review protocol.",
+      "created_at": "2026-11-09T01:41:13Z",
+      "updated_at": "2026-11-09T01:41:13Z",
+      "review_at": "2026-11-10T00:00:00Z",
+      "next_action": "Independently review CloudBank #1691: base28db5950 to f289f69c. Re-run real current/legacy protocol, stdio/SSE, installed-wheel and SDK1.30-client checks; verify mandatory validation, loopback/auth boundary and hashed lock installation. Record a JSON/Markdown receipt under reports/analysis/peer_reviews/pr-20261108-mcp-v2-migration and clear rd-20261108-mcp-v2-migration only after passing independent verification.",
+      "definition_of_done": "Claude Code receipt records independent commands, outcomes, evidence-backed findings and verdict; MCP review debt is explicitly cleared with that receipt, or concrete corrections remain queued.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1691",
+        "reports/mcp_v2_migration_2026-11-08.md"
+      ]
     }
   ],
   "completed_tasks": [
@@ -838,11 +842,18 @@
         "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/108",
         "reports/session_coordination_2026-11-08.md"
       ]
+    },
+    {
+      "id": "cloudbank-mcp-v2-migration",
+      "status": "completed",
+      "completed_at": "2026-11-09T01:41:13Z",
+      "platform": "codex",
+      "detail": "CloudBank #1691 merged f289f69c: SDK 2.3 typed callbacks, preserved five wire schemas, real current/legacy stdio/SSE and SDK 1.30 client compatibility, mandatory validation/sanitized errors, installable wheel and hashed CI lock verified. Local full check 3818 passed/92 skipped; PR CI3818 plus101 subtests. Root pin and independent owner attestation updated with unchanged simulation tree/owner blob; provisioned root suite773 passed/41 skipped. Evidence: reports/mcp_v2_migration_2026-11-08.md. Independent MCP peer review is tracked separately."
     }
   ],
-  "last_updated": "2026-11-09T00:42:19Z",
+  "last_updated": "2026-11-09T01:45:37Z",
   "last_platform": "claude-code",
-  "last_session_summary": "Session coordination repair validated: worktrees share canonical leases; session-unique IDs and exclusive creation prevent lease replacement. Root guards honor repository/read-only scope. Correct hook attribution and refresh-only pre-commit preserve live sessions and dirty work; deferred real Stop retains orphan evidence. Full suite 773 passed/41 skipped; 97 focused checks include 26 regressions. GitHub checks green on source b5016d9. Both fix queue items resolved; mandatory complementary Claude review is tracked as rd-20261108-session-coordination and review-session-coordination-20261108 under the async peer-review protocol. CI cleanup and MCP v2 stay separate.",
+  "last_session_summary": "MCP SDK v2 migration landed in CloudBank #1691 at f289f69c. Typed handlers preserve five schemas across current/legacy clients, stdio/SSE and an actual SDK1.30 client. Mandatory validation, sanitized errors and loopback SSE defaults verified; explicit host supports gateway-backed deployments. Installed wheel, hash-verified install, dependency checks and four-package audit pass. Local and PR CI3818 passed; main canonical CI and both exact-checkout gates passed. Root pins/owner attestation synchronized; simulation tree/blob unchanged; provisioned root773 passed/41 skipped. MCP complementary review is queued independently of coordination PR #109.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -865,6 +876,12 @@
     "pip-audit": "2.10.1 (isolated scratch audit helper; application environments unchanged)"
   },
   "recent_commits": [
+    {
+      "sha": "6643b2d",
+      "date": "2026-11-08",
+      "platform": "codex",
+      "summary": "fix(coordination): share worktree claims and preserve hook platform attribution (#108)"
+    },
     {
       "sha": "7987620",
       "date": "2026-11-08",
@@ -918,12 +935,6 @@
       "date": "2026-11-07",
       "platform": "codex",
       "summary": "fix(dev): isolate workspace checks and record Aurora restart readiness (#102)"
-    },
-    {
-      "sha": "983018c6",
-      "date": "2026-09-25",
-      "platform": "codex",
-      "summary": "chore(workspace): reconcile generated inventory and document local holds (#88)"
     }
   ],
   "security_events": [
@@ -940,7 +951,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "798762038209826a3cfbb247c393dae1bd1f7f14",
+    "main_sha": "6643b2db27415cb0a5f702d80943c03211f5ab82",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -1064,11 +1075,26 @@
       "domain": "session-coordination",
       "author_platform": "codex",
       "incurred_at": "2026-11-08T23:42:28Z",
-      "status": "cleared",
-      "review_receipt": "reports/analysis/peer_reviews/pr-20261108-session-coordination.json",
-      "blocks": "none (cleared)",
-      "note": "Cleared by Claude Code approve-with-notes receipt. One bounded gap (GIT_COMMON_DIR not scrubbed, f1) queued as session-claim-git-common-dir-scrub; that fix is itself coordination-class and needs its own complementary review.",
-      "cleared_at": "2026-11-09T00:42:19Z"
+      "status": "pending",
+      "review_receipt": null,
+      "blocks": "next floor-change in the session-coordination domain",
+      "note": "Claude Code must independently re-run the full root suite, linked-worktree and actual pre-commit regressions, and integration gate; record a warrant-grounded receipt before clearing this debt."
+    },
+    {
+      "id": "rd-20261108-mcp-v2-migration",
+      "commits": [
+        "f289f69c7e843678ae0d882f25862d38c0883084"
+      ],
+      "repository": "AUo959/aurora-cloudbank-symbolic",
+      "diff_base": "28db5950e404ca2ec9fc007a1b5c6c114c3641dd",
+      "change_class": "cross-repo",
+      "domain": "mcp-connector",
+      "author_platform": "codex",
+      "incurred_at": "2026-11-09T01:41:13Z",
+      "status": "pending",
+      "review_receipt": null,
+      "blocks": "next floor-change in the mcp-connector domain",
+      "note": "Complementary Claude re-verification of SDK v2 handlers, wire compatibility, mandatory validation, loopback listener boundary, installed wheel and dependency locks; independent of session-coordination review PR #109."
     }
   ],
   "publication_debt": {
