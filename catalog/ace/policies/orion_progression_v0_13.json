@@ -3,7 +3,7 @@
   "version": "0.13.0",
   "capability_id": "ace.runtime.orion.l1.advance.governed",
   "cloudbank_repository": "aurora-cloudbank-symbolic-main",
-  "cloudbank_repository_sha": "f289f69c7e843678ae0d882f25862d38c0883084",
+  "cloudbank_repository_sha": "fe99f3e5a300ecdc21c9fdf86563834d9e782568",
   "owner": {
     "path": "simulation/l1_runtime.py",
     "git_blob_sha": "5b6d93515fb219cb26d267db6c6df6c052413ae1",
