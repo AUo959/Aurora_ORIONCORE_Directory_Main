@@ -32,7 +32,8 @@ RUN_ID = "11111111-1111-4111-8111-111111111111"
 # Dependency remediation re-baseline: owner blob and simulation tree unchanged;
 # see reports/dependency_remediation_2026-11-08.md.
 # CI consolidation re-baseline: owner blob and simulation tree unchanged.
-CLOUDBANK_SHA = "28db5950e404ca2ec9fc007a1b5c6c114c3641dd"
+# MCP SDK v2 re-baseline: unchanged simulation tree and runtime owner blob.
+CLOUDBANK_SHA = "f289f69c7e843678ae0d882f25862d38c0883084"
 CANONREC_SHA = "dc629a566b2f42fa1c652140b9eef72a4fb0d58a"
 OWNER_BLOB = "5b6d93515fb219cb26d267db6c6df6c052413ae1"
 AUTHORITY_REF = "owner:orion-l1:test-authorization"
