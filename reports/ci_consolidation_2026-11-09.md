@@ -81,3 +81,15 @@ suppress that guard; this is a documented pre-existing main-only failure.
 Claude's independent MCP review landed in root #111 while this branch was in
 flight. The root merge preserves its receipt, completed task and cleared debt.
 Only the new CI-domain complementary review remains pending from this pass.
+
+Main canonical run `42566971942` passed: 3,818 tests, 92 skips, nine expected
+failures, two existing expected-test passes and 101 subtests (415.01 seconds).
+Kubernetes **Run Tests** job `128995482009` verified exact checkout
+`fe99f3e5a300ecdc21c9fdf86563834d9e782568` from that run; manifest validation
+and main Constellation CI passed. This verifies both the PR merge checkout and
+the resulting main commit. The pre-existing freshness guard remains separate.
+
+After reconciling landed MCP review #111, the root full suite again passed:
+773 passed, 41 skipped (37.21 seconds). Registry drift is zero; session state
+validates; all six final integration-gate subprocesses return zero with the
+existing warning verdict. Root receipt publication: PR #112.
