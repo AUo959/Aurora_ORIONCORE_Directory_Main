@@ -9,7 +9,7 @@ Debt cleared: `rd-20261108-session-coordination`
 
 ## Scope
 
-- PR: https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/108
+- PR: <https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/108>
 - Base `798762038209826a3cfbb247c393dae1bd1f7f14`, merged `6643b2db27415cb0a5f702d80943c03211f5ab82` (origin/main had not moved).
 - Source commits: `e966dd77`, `e44eb4a5`, `b5016d93`. The PR head `ca42faf7` has an empty tree diff against the merged commit.
 - Re-derived from the diff in tools/session_claim.py, session_state_io.py, session_stop_hook.py, workspace_verify_precommit.py, .claude/settings.json, the inventory files and the new tests. The author's receipt and green CI were treated as evidence to check, not as approval.
