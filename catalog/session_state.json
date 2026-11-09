@@ -677,7 +677,7 @@
       "created_at": "2026-11-09T00:42:19Z",
       "updated_at": "2026-11-09T00:42:19Z",
       "review_at": "2026-11-16T00:00:00Z",
-      "next_action": "Add GIT_COMMON_DIR to the scrubbed env names in tools/_workspace_common.py git(); parametrise the GIT_DIR regression in tests/test_session_coordination.py over GIT_COMMON_DIR; re-run focused suite and integration gate. This is a coordination-class change: record review debt for complementary Codex review.",
+      "next_action": "Add GIT_COMMON_DIR to the scrubbed env names in tools/_workspace_common.py git(); parametrise the GIT_DIR regression in tests/test_session_coordination.py over GIT_COMMON_DIR; re-run focused suite and integration gate. This is a coordination-class change: record review debt; the complementary reviewer is whichever of codex/claude-code did NOT implement the fix (per AURORA_PEER_REVIEW_PROTOCOL_v1 \u00a76.3).",
       "definition_of_done": "Repro 'GIT_COMMON_DIR=<foreign>/.git session_claim.py create' writes into the canonical store; new test fails without the fix; focused suite and integration gate pass; review debt recorded.",
       "approval_required": false,
       "evidence_refs": [

@@ -63,4 +63,4 @@ Run in scratch clones and worktrees of 6643b2db, not by re-reading the author's 
 
 ## Decision
 
-Approve with notes. Every behaviour in the brief was reproduced except the `GIT_COMMON_DIR` case, which is a small, bounded gap rather than a regression of the shipped guarantees. Clear `rd-20261108-session-coordination` and complete `review-session-coordination-20261108`. Follow-up `session-claim-git-common-dir-scrub` carries f1; f3 and f5 can ride along. Because the repair is in the coordination domain, that follow-up is itself a floor change and will need its own complementary review.
+Approve with notes. Every behaviour in the brief was reproduced except the `GIT_COMMON_DIR` case, which is a small, bounded gap rather than a regression of the shipped guarantees. Clear `rd-20261108-session-coordination` and complete `review-session-coordination-20261108`. Follow-up `session-claim-git-common-dir-scrub` carries f1; f3 and f5 can ride along. Because the repair is in the coordination domain, that follow-up is itself a floor change and will need its own complementary review from whichever platform does not implement it.

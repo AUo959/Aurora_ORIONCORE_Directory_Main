@@ -154,7 +154,7 @@
       "disposition": "accepted-with-note",
       "description": "Inherited GIT_COMMON_DIR redirects claim discovery. _workspace_common.git() scrubs GIT_DIR, GIT_WORK_TREE, GIT_INDEX_FILE and GIT_PREFIX but not GIT_COMMON_DIR, which 'git rev-parse --git-common-dir' honours, so claims_dir() returns the foreign repo's parent. This leaves the brief item 'inherited Git environment variables cannot redirect claim discovery' only partly met. Impact is bounded: the variable is internal to git, and claims are advisory leases; the failure mode is silent loss of cross-session visibility rather than corruption. The new test only covers GIT_DIR.",
       "evidence": "Repro: cd <worktree> && GIT_COMMON_DIR=/tmp/foreign/.git python tools/session_claim.py create --platform codex --task-id leak --repo root --paths catalog/session_state.json --claim-id leak1 -> claim_file=/tmp/foreign/catalog/session_claims/leak1.json and the file exists there. Code: tools/_workspace_common.py:708 (scrub tuple), tools/session_claim.py:82-91, tests/test_session_coordination.py:171 (GIT_DIR only).",
-      "correction": "Add GIT_COMMON_DIR to the scrubbed names in _workspace_common.git(), and parametrise the env regression test over it. Queued as session-claim-git-common-dir-scrub."
+      "correction": "Add GIT_COMMON_DIR to the scrubbed names in _workspace_common.git(), and parametrise the env regression test over it. Queued as session-claim-git-common-dir-scrub; its reviewer is the platform that did not implement the fix."
     },
     {
       "id": "f7",
@@ -186,7 +186,7 @@
       "disposition": "accepted-with-note",
       "description": "Exclusive creation opens the claim file with 'x' and then writes; the lease is momentarily an empty or partial file. A concurrent check classifies it invalid (non-blocking) and a crash between open and write leaves an invalid file that permanently occupies the ID. Previous write_json had the same non-atomic window for overwrites, so this is not a regression of guarantee, only a narrow window. Not reproduced; from code reading of tools/session_claim.py:382-390.",
       "evidence": "tools/session_claim.py:382-390 (open 'x' then stream.write).",
-      "correction": "Optional: write to a temp file and os.link/rename into place, or write inside the 'x' open and unlink on exception."
+      "correction": "Optional: write and close a temporary file in the claim directory, then publish it with os.link() (atomic, no-clobber) and handle FileExistsError without touching the existing claim. Do not use rename/replace: on POSIX it would overwrite another session's lease."
     },
     {
       "id": "f5",
