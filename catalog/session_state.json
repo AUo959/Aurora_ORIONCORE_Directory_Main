@@ -670,23 +670,19 @@
       ]
     },
     {
-      "id": "review-mcp-v2-migration-20261108",
+      "id": "connector-sse-dns-rebinding-guard",
       "status": "ready",
-      "priority": "high",
-      "assigned_to": "claude-code",
+      "priority": "medium",
+      "assigned_to": "either",
       "kind": "work",
-      "repo": "aurora-cloudbank-symbolic-main",
-      "description": "Complementary review of the CloudBank MCP SDK v2 migration and its root pin synchronization, under the adopted asynchronous peer-review protocol.",
-      "created_at": "2026-11-09T01:41:13Z",
-      "updated_at": "2026-11-09T01:41:13Z",
-      "review_at": "2026-11-10T00:00:00Z",
-      "next_action": "Independently review CloudBank #1691: base28db5950 to f289f69c. Re-run real current/legacy protocol, stdio/SSE, installed-wheel and SDK1.30-client checks; verify mandatory validation, loopback/auth boundary and hashed lock installation. Record a JSON/Markdown receipt under reports/analysis/peer_reviews/pr-20261108-mcp-v2-migration and clear rd-20261108-mcp-v2-migration only after passing independent verification.",
-      "definition_of_done": "Claude Code receipt records independent commands, outcomes, evidence-backed findings and verdict; MCP review debt is explicitly cleared with that receipt, or concrete corrections remain queued.",
-      "approval_required": false,
-      "evidence_refs": [
-        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1691",
-        "reports/mcp_v2_migration_2026-11-08.md"
-      ]
+      "repo": "root",
+      "description": "Add DNS-rebinding/Origin protection to the CloudBank connector SSE transport (finding f1 of pr-20261108-mcp-v2-migration): pass TransportSecuritySettings to SseServerTransport with a loopback allow-list, let --host deployments extend it explicitly, test that a foreign Host/Origin gets 4xx, document it. Incurs mcp-connector review debt; complementary reviewer is whichever platform does not implement it.",
+      "created_at": "2026-11-09T05:14:41Z",
+      "updated_at": "2026-11-09T05:14:41Z",
+      "review_at": "2026-11-09T05:14:41Z",
+      "next_action": "Add DNS-rebinding/Origin protection to the CloudBank connector SSE transport (finding f1 of pr-20261108-mcp-v2-migration): pass TransportSecuritySettings to SseServerTransport with a loopback allow-list, let --host deployments extend it explicitly, test that a foreign Host/Origin gets 4xx, document it. Incurs mcp-connector review debt; complementary reviewer is whichever platform does not implement it.",
+      "definition_of_done": "The described work is completed and validated.",
+      "approval_required": false
     }
   ],
   "completed_tasks": [
@@ -849,9 +845,20 @@
       "completed_at": "2026-11-09T01:41:13Z",
       "platform": "codex",
       "detail": "CloudBank #1691 merged f289f69c: SDK 2.3 typed callbacks, preserved five wire schemas, real current/legacy stdio/SSE and SDK 1.30 client compatibility, mandatory validation/sanitized errors, installable wheel and hashed CI lock verified. Local full check 3818 passed/92 skipped; PR CI3818 plus101 subtests. Root pin and independent owner attestation updated with unchanged simulation tree/owner blob; provisioned root suite773 passed/41 skipped. Evidence: reports/mcp_v2_migration_2026-11-08.md. Independent MCP peer review is tracked separately."
+    },
+    {
+      "id": "review-mcp-v2-migration-20261108",
+      "status": "completed",
+      "completed_at": "2026-11-09T05:14:41Z",
+      "platform": "claude-code",
+      "detail": "Approve-with-notes; receipt reports/analysis/peer_reviews/pr-20261108-mcp-v2-migration.json; rd-20261108-mcp-v2-migration cleared; follow-up connector-sse-dns-rebinding-guard.",
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1691",
+        "reports/mcp_v2_migration_2026-11-08.md"
+      ]
     }
   ],
-  "last_updated": "2026-11-09T01:45:37Z",
+  "last_updated": "2026-11-09T05:14:41Z",
   "last_platform": "claude-code",
   "last_session_summary": "MCP SDK v2 migration landed in CloudBank #1691 at f289f69c. Typed handlers preserve five schemas across current/legacy clients, stdio/SSE and an actual SDK1.30 client. Mandatory validation, sanitized errors and loopback SSE defaults verified; explicit host supports gateway-backed deployments. Installed wheel, hash-verified install, dependency checks and four-package audit pass. Local and PR CI3818 passed; main canonical CI and both exact-checkout gates passed. Root pins/owner attestation synchronized; simulation tree/blob unchanged; provisioned root773 passed/41 skipped. MCP complementary review is queued independently of coordination PR #109.",
   "tool_versions": {
@@ -1092,10 +1099,11 @@
       "domain": "mcp-connector",
       "author_platform": "codex",
       "incurred_at": "2026-11-09T01:41:13Z",
-      "status": "pending",
-      "review_receipt": null,
-      "blocks": "next floor-change in the mcp-connector domain",
-      "note": "Complementary Claude re-verification of SDK v2 handlers, wire compatibility, mandatory validation, loopback listener boundary, installed wheel and dependency locks; independent of session-coordination review PR #109."
+      "status": "cleared",
+      "review_receipt": "reports/analysis/peer_reviews/pr-20261108-mcp-v2-migration.json",
+      "blocks": "none (cleared)",
+      "note": "Complementary Claude re-verification of SDK v2 handlers, wire compatibility, mandatory validation, loopback listener boundary, installed wheel and dependency locks; independent of session-coordination review PR #109. Cleared approve-with-notes by claude-code; f1 (SSE DNS-rebinding guard) queued as connector-sse-dns-rebinding-guard.",
+      "cleared_at": "2026-11-09T05:14:16Z"
     }
   ],
   "publication_debt": {
