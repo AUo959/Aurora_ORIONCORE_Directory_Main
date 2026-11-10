@@ -892,7 +892,7 @@
   ],
   "last_updated": "2026-11-10T02:43:22Z",
   "last_platform": "codex",
-  "last_session_summary": "Independent SSE guard review approves d01a6853: 3863 source tests pass, real transports and SDK1.30 installed-wheel compatibility verified. CloudBank #1699 merged b68c4717; root #114 includes review receipt, cleared patch debt and synchronized owner pins. Source main checks running. PR #113 still awaits separate Claude coordination review.",
+  "last_session_summary": "Independent SSE guard review approves d01a6853: 3863 source tests pass, real transports and SDK1.30 installed-wheel compatibility verified. CloudBank #1699 merged b68c4717; root #114 includes review receipt, cleared patch debt and synchronized owner pins. Source main canonical run 42744570449 passed: 3863 tests plus 101 subtests. PR #113 still awaits separate Claude coordination review.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",

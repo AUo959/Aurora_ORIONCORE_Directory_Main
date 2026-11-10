@@ -49,7 +49,9 @@ Ten owner-binding tests pass, registry drift is zero and session state validates
 All six integration-gate subprocesses return zero, retaining existing environment,
 installed-skill and overdue-review advisories. CanonRec is unchanged.
 
-Source main canonical run `42744570449` is running. The separate simulation-state
+Source main canonical run `42744570449` passed on the exact merged commit:
+3,863 tests, 92 skips, nine expected failures, two existing expected-test passes
+and 101 subtests in 454.87 seconds. The separate simulation-state
 freshness guard still fails for the previously tracked GAP-010/#1083; no state
 refresh or guard suppression is part of this change. Coordination PR #113 and
 its independent Claude review remain separate and unmerged.

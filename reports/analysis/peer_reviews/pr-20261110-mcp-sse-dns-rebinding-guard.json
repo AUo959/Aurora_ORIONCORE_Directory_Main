@@ -114,7 +114,8 @@
     "registry_drift": 0,
     "root_integration_gate": "all six subprocesses zero; warn for existing environment/skill/queue advisories",
     "source_main_ci_run": 42744570449,
-    "source_main_ci_status": "running",
-    "known_main_only_failure": "simulation-state freshness guard, pre-existing GAP-010/#1083"
+    "source_main_ci_status": "success",
+    "known_main_only_failure": "simulation-state freshness guard, pre-existing GAP-010/#1083",
+    "source_main_result": "3863 passed, 92 skipped, 9 xfailed, 2 existing xpassed, 101 subtests; 454.87 seconds"
   }
 }
