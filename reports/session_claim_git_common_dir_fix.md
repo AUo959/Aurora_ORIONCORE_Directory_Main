@@ -37,3 +37,15 @@ canon change or optional f3/f5 fix is included.
 
 Integration gate: all six subprocesses return zero; verdict warn retains the
 existing environment inventory, installed-skill and overdue-review advisories.
+
+## Base reconciliation after SSE landing
+
+Merged root main `e1b07d38df5aff9d78c0a5c69021ee437584f51b` into this review
+branch after SSE guard PRs #1699/#114 landed. The coordination implementation
+`382d4c5` is unchanged. Reconciliation preserves completed SSE tasks, its
+independent receipt and cleared debt, and this patch's pending coordination
+debt and Claude review task. PR #113 remains unmerged. Session timestamps use
+whole UTC seconds as required by the canonical state validator.
+
+After base reconciliation: 776 tests passed, 41 skipped (36.47 seconds);
+registry drift is zero and session state validates.
