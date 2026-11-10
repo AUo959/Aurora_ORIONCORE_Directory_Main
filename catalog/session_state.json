@@ -631,24 +631,6 @@
       ]
     },
     {
-      "id": "session-claim-git-common-dir-scrub",
-      "status": "ready",
-      "priority": "medium",
-      "assigned_to": "either",
-      "kind": "work",
-      "repo": "root",
-      "description": "Scrub GIT_COMMON_DIR in _workspace_common.git() so an inherited value cannot redirect the shared claim store (review pr-20261108-session-coordination f1); optionally fix the 'task: ?' BLOCKED message (f3) and guard the stop hook's session_state_io import (f5).",
-      "created_at": "2026-11-09T00:42:19Z",
-      "updated_at": "2026-11-09T00:42:19Z",
-      "review_at": "2026-11-16T00:00:00Z",
-      "next_action": "Add GIT_COMMON_DIR to the scrubbed env names in tools/_workspace_common.py git(); parametrise the GIT_DIR regression in tests/test_session_coordination.py over GIT_COMMON_DIR; re-run focused suite and integration gate. This is a coordination-class change: record review debt; the complementary reviewer is whichever of codex/claude-code did NOT implement the fix (per AURORA_PEER_REVIEW_PROTOCOL_v1 \u00a76.3).",
-      "definition_of_done": "Repro 'GIT_COMMON_DIR=<foreign>/.git session_claim.py create' writes into the canonical store; new test fails without the fix; focused suite and integration gate pass; review debt recorded.",
-      "approval_required": false,
-      "evidence_refs": [
-        "reports/analysis/peer_reviews/pr-20261108-session-coordination.json"
-      ]
-    },
-    {
       "id": "connector-sse-dns-rebinding-guard",
       "status": "ready",
       "priority": "medium",
@@ -709,6 +691,47 @@
       "review_at": "2026-11-10T00:00:00Z",
       "waiting_on": "artifact",
       "trigger": "Claude complementary CI review receipt clears rd-20261109-ci-consolidation; then resume remaining specialized/build owner audit."
+    },
+    {
+      "id": "review-git-common-dir-scrub-20261110",
+      "status": "ready",
+      "priority": "high",
+      "assigned_to": "claude-code",
+      "kind": "work",
+      "repo": "root",
+      "description": "Independently review Codex root PR #113 fixing foreign GIT_COMMON_DIR claim-store redirection.",
+      "created_at": "2026-11-10T00:37:30Z",
+      "updated_at": "2026-11-10T00:37:30Z",
+      "review_at": "2026-11-11T00:00:00Z",
+      "next_action": "Review immutable implementation 382d4c5 against base 0e8fc75; independently reproduce pre-fix failures and run focused/full tests plus integration gate. Record JSON/Markdown receipt, resolve findings and clear rd-20261110-git-common-dir-scrub only after verification. PR must remain unmerged until complementary review passes.",
+      "definition_of_done": "Claude receipt records independent commands, results and verdict; findings are resolved and the patch is eligible to merge.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/113"
+      ]
+    },
+    {
+      "id": "session-claim-git-common-dir-scrub",
+      "status": "waiting",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "root",
+      "description": "Scrub GIT_COMMON_DIR in _workspace_common.git() so an inherited value cannot redirect the shared claim store (review pr-20261108-session-coordination f1); optionally fix the 'task: ?' BLOCKED message (f3) and guard the stop hook's session_state_io import (f5).",
+      "created_at": "2026-11-09T00:42:19Z",
+      "updated_at": "2026-11-10T00:37:30Z",
+      "next_action": "Await Claude independent re-verification of root PR #113; resolve findings, then land only after review and passing checks.",
+      "definition_of_done": "Repro 'GIT_COMMON_DIR=<foreign>/.git session_claim.py create' writes into the canonical store; new test fails without the fix; focused suite and integration gate pass; review debt recorded.",
+      "approval_required": false,
+      "evidence_refs": [
+        "reports/analysis/peer_reviews/pr-20261108-session-coordination.json",
+        "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/113"
+      ],
+      "started_at": "2026-11-10T00:35:47Z",
+      "pr_number": 113,
+      "review_at": "2026-11-11T00:00:00Z",
+      "waiting_on": "artifact",
+      "trigger": "Claude independent review receipt for PR #113 and passing hosted checks."
     }
   ],
   "completed_tasks": [
@@ -884,9 +907,9 @@
       ]
     }
   ],
-  "last_updated": "2026-11-09T05:24:24Z",
+  "last_updated": "2026-11-10T00:37:30Z",
   "last_platform": "codex",
-  "last_session_summary": "CloudBank #1693 merged: retired four inert/duplicate workflows, consolidated Constellation installs, preserved required CI and checkout proof. Local full suite 3818 passed; root 773 passed/41 skipped and owner tests 10 passed. Root pins synchronized; independent CI review queued separately from MCP. Remaining CI roadmap waits for complementary CI review; main freshness guard remains a pre-existing GAP-010 failure. Claude MCP review landed independently in root #111; MCP review debt is cleared by its receipt.",
+  "last_session_summary": "Prepared unmerged root PR #113: scrub GIT_COMMON_DIR from shared Git helper. Real worktree regression reproduced before fix; 55 focused and 776 full tests pass (41 skipped). Claude complementary review queued with separate coordination debt; MCP work untouched.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -909,6 +932,12 @@
     "pip-audit": "2.10.1 (isolated scratch audit helper; application environments unchanged)"
   },
   "recent_commits": [
+    {
+      "sha": "0e8fc75",
+      "date": "2026-11-09",
+      "platform": "codex",
+      "summary": "chore(ci): sync verified workflow cleanup and review handoff (#112)"
+    },
     {
       "sha": "1bbc742",
       "date": "2026-11-09",
@@ -962,12 +991,6 @@
       "date": "2026-11-08",
       "platform": "claude-code",
       "summary": "fix(session-state): record commit provenance from the commit, not the sync (#87)"
-    },
-    {
-      "sha": "083a532",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "chore(ai): pin current OpenAI migration and close GPT-4o retirement (#104)"
     }
   ],
   "security_events": [
@@ -984,7 +1007,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "e350488a6ab2eafb0dd75d82e1c4b020d5043755",
+    "main_sha": "0e8fc755acc8758ab0187ce07cd4f1823c4a5eef",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -1146,6 +1169,21 @@
       "review_receipt": null,
       "blocks": "next floor-change in the ci-consolidation domain",
       "note": "Complementary Claude review of required checks, retired workflow consumers, retained unique validation and root pin synchronization; separate from MCP review."
+    },
+    {
+      "id": "rd-20261110-git-common-dir-scrub",
+      "commits": [
+        "382d4c5aa5f6c0fe482f8b307fb4c3877790b359"
+      ],
+      "diff_base": "0e8fc755acc8758ab0187ce07cd4f1823c4a5eef",
+      "change_class": "coordination",
+      "domain": "session-coordination",
+      "author_platform": "codex",
+      "incurred_at": "2026-11-10T00:37:00Z",
+      "status": "pending",
+      "review_receipt": null,
+      "blocks": "next floor-change in the session-coordination domain",
+      "note": "Root PR #113 remains unmerged pending Claude independent regression/full-suite verification. Prior coordination and MCP debts remain cleared."
     }
   ],
   "publication_debt": {
