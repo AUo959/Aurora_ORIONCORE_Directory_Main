@@ -705,7 +705,8 @@ def git(
     text: bool = True,
 ) -> subprocess.CompletedProcess[str]:
     env = os.environ.copy()
-    for key in ("GIT_DIR", "GIT_WORK_TREE", "GIT_INDEX_FILE", "GIT_PREFIX"):
+    # Resolve repository identity from cwd, including linked-worktree common dirs.
+    for key in ("GIT_DIR", "GIT_COMMON_DIR", "GIT_WORK_TREE", "GIT_INDEX_FILE", "GIT_PREFIX"):
         env.pop(key, None)
     return subprocess.run(
         ["git", *args],

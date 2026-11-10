@@ -166,14 +166,24 @@ def test_precommit_healer_uses_refresh_only_without_session_side_effects(
     CHECK.assertEqual(json.loads(state.read_text())['last_platform'], platform or 'codex')
 
 
-def test_foreign_git_environment_does_not_redirect_claims(linked, tmp_path, monkeypatch):
+@pytest.mark.parametrize('git_dir_key', ['GIT_DIR', 'GIT_COMMON_DIR'])
+@pytest.mark.parametrize('checkout', ['canonical', 'linked'])
+def test_foreign_git_environment_does_not_redirect_claims(
+        linked, tmp_path, monkeypatch, git_dir_key, checkout):
     root, worktree = linked
     unrelated = tmp_path / 'other'
     unrelated.mkdir()
     git(unrelated, 'init')
-    monkeypatch.setenv('GIT_DIR', str(unrelated / '.git'))
+    monkeypatch.setenv(git_dir_key, str(unrelated / '.git'))
     monkeypatch.setenv('GIT_WORK_TREE', str(unrelated))
-    CHECK.assertEqual(claims.claims_dir(worktree), root / 'catalog/session_claims')
+    source, peer = (root, worktree) if checkout == 'canonical' else (worktree, root)
+    CHECK.assertEqual(claims.claims_dir(source), root / 'catalog/session_claims')
+    create(source, 'foreign-env')
+    CHECK.assertEqual(claims.check_claims(
+        root=peer, repo='root', paths=['catalog'])['status'], 'conflict')
+    CHECK.assertEqual(claims.refresh_claim(peer, 'foreign-env', 60)[0], 0)
+    CHECK.assertEqual(claims.release_claim(peer, 'foreign-env')[0], 0)
+    CHECK.assertFalse((unrelated / 'catalog/session_claims').exists())
 
 
 @pytest.mark.parametrize('refresh,expected', [(True, 1), (False, 0)])
