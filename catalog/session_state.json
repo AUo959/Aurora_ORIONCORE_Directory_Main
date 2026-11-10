@@ -649,21 +649,6 @@
       ]
     },
     {
-      "id": "connector-sse-dns-rebinding-guard",
-      "status": "ready",
-      "priority": "medium",
-      "assigned_to": "either",
-      "kind": "work",
-      "repo": "root",
-      "description": "Add DNS-rebinding/Origin protection to the CloudBank connector SSE transport (finding f1 of pr-20261108-mcp-v2-migration): pass TransportSecuritySettings to SseServerTransport with a loopback allow-list, let --host deployments extend it explicitly, test that a foreign Host/Origin gets 4xx, document it. Incurs mcp-connector review debt; complementary reviewer is whichever platform does not implement it.",
-      "created_at": "2026-11-09T05:14:41Z",
-      "updated_at": "2026-11-10T01:55:00Z",
-      "review_at": "2026-11-09T05:14:41Z",
-      "next_action": "Implemented in CloudBank PR #1699 (unmerged, awaiting review-mcp-sse-dns-rebinding-guard-20261110); land via sync-cloudbank-pin-sse-guard-20261110.",
-      "definition_of_done": "The described work is completed and validated.",
-      "approval_required": false
-    },
-    {
       "id": "review-ci-consolidation-20261109",
       "status": "ready",
       "priority": "high",
@@ -709,42 +694,6 @@
       "review_at": "2026-11-10T00:00:00Z",
       "waiting_on": "artifact",
       "trigger": "Claude complementary CI review receipt clears rd-20261109-ci-consolidation; then resume remaining specialized/build owner audit."
-    },
-    {
-      "id": "review-mcp-sse-dns-rebinding-guard-20261110",
-      "status": "ready",
-      "priority": "high",
-      "assigned_to": "codex",
-      "kind": "work",
-      "repo": "aurora-cloudbank-symbolic-main",
-      "description": "Independent Codex review of CloudBank PR #1699 (SSE Host/Origin DNS-rebinding guard) under the adopted peer-review protocol.",
-      "created_at": "2026-11-10T01:55:00Z",
-      "updated_at": "2026-11-10T01:55:00Z",
-      "review_at": "2026-11-11T00:00:00Z",
-      "next_action": "Review https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1699 (base fe99f3e5, head d01a6853) using reports/mcp_sse_dns_rebinding_guard_2026-11-10.md. Reproduce the transport tests, make check, SDK 1.30 client stdio/SSE and installed-wheel checks; try hostile Host/Origin values and port/IPv6 edge cases against both /sse and /messages/. Write reports/analysis/peer_reviews/pr-20261110-mcp-sse-dns-rebinding-guard.{json,md}; merge #1699 only if approved.",
-      "definition_of_done": "Codex receipt with independent commands, evidence-backed findings and verdict; rd-20261110-mcp-sse-dns-rebinding-guard cleared with it, or corrections queued. Not merged by the author.",
-      "approval_required": false,
-      "evidence_refs": [
-        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1699",
-        "reports/mcp_sse_dns_rebinding_guard_2026-11-10.md"
-      ]
-    },
-    {
-      "id": "sync-cloudbank-pin-sse-guard-20261110",
-      "status": "waiting",
-      "priority": "medium",
-      "assigned_to": "either",
-      "kind": "work",
-      "repo": "root",
-      "description": "After #1699 is reviewed and merged, move the CloudBank pin, ACE policy cloudbank_repository_sha and progression-test constant to the merged SHA.",
-      "created_at": "2026-11-10T01:55:00Z",
-      "updated_at": "2026-11-10T01:55:00Z",
-      "review_at": "2026-11-12T00:00:00Z",
-      "next_action": "When #1699 is merged: make registry-sync, update orion_progression_v0_13.json and tests/test_aurora_ace_orion_progression.py, verify simulation tree and l1_runtime.py blob 5b6d9351 unchanged, replace the PR-head SHA in rd-20261110-mcp-sse-dns-rebinding-guard with the squash SHA.",
-      "definition_of_done": "Pins, policy attestation and test agree on the merged SHA with unchanged simulation owner source.",
-      "approval_required": false,
-      "waiting_on": "artifact",
-      "trigger": "CloudBank PR #1699 merged after an approving Codex receipt (reports/analysis/peer_reviews/pr-20261110-mcp-sse-dns-rebinding-guard.json)."
     }
   ],
   "completed_tasks": [
@@ -918,11 +867,32 @@
         "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1691",
         "reports/mcp_v2_migration_2026-11-08.md"
       ]
+    },
+    {
+      "id": "review-mcp-sse-dns-rebinding-guard-20261110",
+      "status": "completed",
+      "completed_at": "2026-11-10T02:41:46Z",
+      "platform": "codex",
+      "detail": "Independent Codex review approves immutable d01a6853; 3863 source tests and SDK1.30 checkout/wheel transport checks pass; receipt recorded and SSE patch debt cleared."
+    },
+    {
+      "id": "sync-cloudbank-pin-sse-guard-20261110",
+      "status": "completed",
+      "completed_at": "2026-11-10T02:43:22Z",
+      "platform": "codex",
+      "detail": "CloudBank #1699 merged b68c4717; registry and ACE policy/test SHA synchronized; complete simulation diff empty and owner blob unchanged; ten owner tests pass, registry drift zero."
+    },
+    {
+      "id": "connector-sse-dns-rebinding-guard",
+      "status": "completed",
+      "completed_at": "2026-11-10T02:43:22Z",
+      "platform": "codex",
+      "detail": "Implemented by Claude in #1699, independently approved by Codex and merged b68c4717; root pins synchronized in #114."
     }
   ],
-  "last_updated": "2026-11-09T05:24:24Z",
+  "last_updated": "2026-11-10T02:43:22Z",
   "last_platform": "codex",
-  "last_session_summary": "CloudBank #1693 merged: retired four inert/duplicate workflows, consolidated Constellation installs, preserved required CI and checkout proof. Local full suite 3818 passed; root 773 passed/41 skipped and owner tests 10 passed. Root pins synchronized; independent CI review queued separately from MCP. Remaining CI roadmap waits for complementary CI review; main freshness guard remains a pre-existing GAP-010 failure. Claude MCP review landed independently in root #111; MCP review debt is cleared by its receipt.",
+  "last_session_summary": "Independent SSE guard review approves d01a6853: 3863 source tests pass, real transports and SDK1.30 installed-wheel compatibility verified. CloudBank #1699 merged b68c4717; root #114 includes review receipt, cleared patch debt and synchronized owner pins. Source main checks running. PR #113 still awaits separate Claude coordination review.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -1186,7 +1156,7 @@
     {
       "id": "rd-20261110-mcp-sse-dns-rebinding-guard",
       "commits": [
-        "d01a6853dd3552cd4059f54e87914fe527662e79"
+        "b68c4717332f57b5bca0d07e06b448380ad3b76d"
       ],
       "repository": "AUo959/aurora-cloudbank-symbolic",
       "diff_base": "fe99f3e5a300ecdc21c9fdf86563834d9e782568",
@@ -1194,10 +1164,12 @@
       "domain": "mcp-connector",
       "author_platform": "claude-code",
       "incurred_at": "2026-11-10T01:55:00Z",
-      "status": "pending",
-      "review_receipt": null,
-      "blocks": "next floor-change in the mcp-connector domain",
-      "note": "CloudBank PR #1699 (unmerged; commits is the PR head, replace with the squash SHA at merge). Complementary Codex re-verification of SSE Host/Origin validation on /sse and /messages/, IPv4/IPv6 loopback and port-80 spellings, wildcard-bind refusal, SDK 1.30 client and installed-wheel compatibility. Separate from the cleared rd-20261108-mcp-v2-migration."
+      "status": "cleared",
+      "review_receipt": "reports/analysis/peer_reviews/pr-20261110-mcp-sse-dns-rebinding-guard.json",
+      "blocks": "none (cleared)",
+      "note": "Independent Codex approve receipt verifies d01a6853; CloudBank #1699 squash merged b68c4717 with identical source tree. Pins synchronized; simulation owner unchanged.",
+      "cleared_at": "2026-11-10T02:41:46.517265Z",
+      "reviewed_head_sha": "d01a6853dd3552cd4059f54e87914fe527662e79"
     }
   ],
   "publication_debt": {
