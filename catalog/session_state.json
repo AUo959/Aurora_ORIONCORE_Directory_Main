@@ -676,47 +676,6 @@
       "review_at": "2026-11-10T00:00:00Z",
       "waiting_on": "artifact",
       "trigger": "Claude complementary CI review receipt clears rd-20261109-ci-consolidation; then resume remaining specialized/build owner audit."
-    },
-    {
-      "id": "review-git-common-dir-scrub-20261110",
-      "status": "ready",
-      "priority": "high",
-      "assigned_to": "claude-code",
-      "kind": "work",
-      "repo": "root",
-      "description": "Independently review Codex root PR #113 fixing foreign GIT_COMMON_DIR claim-store redirection.",
-      "created_at": "2026-11-10T00:37:30Z",
-      "updated_at": "2026-11-10T00:37:30Z",
-      "review_at": "2026-11-11T00:00:00Z",
-      "next_action": "Review immutable implementation 382d4c5 against base 0e8fc75; independently reproduce pre-fix failures and run focused/full tests plus integration gate. Record JSON/Markdown receipt, resolve findings and clear rd-20261110-git-common-dir-scrub only after verification. PR must remain unmerged until complementary review passes.",
-      "definition_of_done": "Claude receipt records independent commands, results and verdict; findings are resolved and the patch is eligible to merge.",
-      "approval_required": false,
-      "evidence_refs": [
-        "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/113"
-      ]
-    },
-    {
-      "id": "session-claim-git-common-dir-scrub",
-      "status": "waiting",
-      "priority": "medium",
-      "assigned_to": "either",
-      "kind": "work",
-      "repo": "root",
-      "description": "Scrub GIT_COMMON_DIR in _workspace_common.git() so an inherited value cannot redirect the shared claim store (review pr-20261108-session-coordination f1); optionally fix the 'task: ?' BLOCKED message (f3) and guard the stop hook's session_state_io import (f5).",
-      "created_at": "2026-11-09T00:42:19Z",
-      "updated_at": "2026-11-10T00:37:30Z",
-      "next_action": "Await Claude independent re-verification of root PR #113; resolve findings, then land only after review and passing checks.",
-      "definition_of_done": "Repro 'GIT_COMMON_DIR=<foreign>/.git session_claim.py create' writes into the canonical store; new test fails without the fix; focused suite and integration gate pass; review debt recorded.",
-      "approval_required": false,
-      "evidence_refs": [
-        "reports/analysis/peer_reviews/pr-20261108-session-coordination.json",
-        "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/113"
-      ],
-      "started_at": "2026-11-10T00:35:47Z",
-      "pr_number": 113,
-      "review_at": "2026-11-11T00:00:00Z",
-      "waiting_on": "artifact",
-      "trigger": "Claude independent review receipt for PR #113 and passing hosted checks."
     }
   ],
   "completed_tasks": [
@@ -911,10 +870,32 @@
       "completed_at": "2026-11-10T02:43:22Z",
       "platform": "codex",
       "detail": "Implemented by Claude in #1699, independently approved by Codex and merged b68c4717; root pins synchronized in #114."
+    },
+    {
+      "id": "review-git-common-dir-scrub-20261110",
+      "status": "completed",
+      "completed_at": "2026-11-10T03:39:45Z",
+      "platform": "claude-code",
+      "detail": "Independent receipt pr-20261110-git-common-dir-scrub: approve-with-notes; regression fails without / passes with fix; focused 55, full 770 passed + 1 environmental failure.",
+      "evidence_refs": [
+        "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/113"
+      ]
+    },
+    {
+      "id": "session-claim-git-common-dir-scrub",
+      "status": "completed",
+      "completed_at": "2026-11-10T03:39:45Z",
+      "platform": "claude-code",
+      "detail": "GIT_COMMON_DIR scrub landed via root PR #113 after independent approval (optional f3/f5 not included).",
+      "evidence_refs": [
+        "reports/analysis/peer_reviews/pr-20261108-session-coordination.json",
+        "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/113"
+      ],
+      "trigger": "Claude independent review receipt for PR #113 and passing hosted checks."
     }
   ],
-  "last_updated": "2026-11-10T02:56:33Z",
-  "last_platform": "codex",
+  "last_updated": "2026-11-10T03:39:45Z",
+  "last_platform": "claude-code",
   "last_session_summary": "SSE guard independently approved and landed (#1699/#114); source main 3863 tests plus 101 subtests passed. Reconciled unmerged coordination PR #113 with root main, preserving cleared SSE debt and pending Claude review. Implementation 382d4c5 unchanged; no self-review or merge of #113.",
   "tool_versions": {
     "gitleaks": "8.30.1",
@@ -1204,10 +1185,11 @@
       "domain": "session-coordination",
       "author_platform": "codex",
       "incurred_at": "2026-11-10T00:37:00Z",
-      "status": "pending",
-      "review_receipt": null,
-      "blocks": "next floor-change in the session-coordination domain",
-      "note": "Root PR #113 remains unmerged pending Claude independent regression/full-suite verification. Prior coordination and MCP debts remain cleared."
+      "status": "cleared",
+      "review_receipt": "reports/analysis/peer_reviews/pr-20261110-git-common-dir-scrub.json",
+      "blocks": "none (cleared)",
+      "note": "Cleared by Claude Code approve-with-notes receipt (f1 sibling raw git calls, f2 environment-dependent totals; neither blocks). Prior coordination, MCP and SSE debts remain cleared.",
+      "cleared_at": "2026-11-10T03:39:38Z"
     }
   ],
   "publication_debt": {
