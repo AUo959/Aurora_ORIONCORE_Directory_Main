@@ -1,6 +1,6 @@
 # Session-claim common-directory environment fix
 
-Root PR: https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/113
+Root PR: [#113](https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/113)
 Base: `0e8fc755acc8758ab0187ce07cd4f1823c4a5eef`.
 Implementation: `382d4c5aa5f6c0fe482f8b307fb4c3877790b359`.
 
