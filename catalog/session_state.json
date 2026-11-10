@@ -694,6 +694,26 @@
       "review_at": "2026-11-10T00:00:00Z",
       "waiting_on": "artifact",
       "trigger": "Claude complementary CI review receipt clears rd-20261109-ci-consolidation; then resume remaining specialized/build owner audit."
+    },
+    {
+      "id": "repair-legacy-simulation-authority-surfaces",
+      "status": "waiting",
+      "priority": "high",
+      "assigned_to": "codex",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Align historical simulation-state consumers and CI with the retired snapshot authority; preserve historical bytes and keep live-run liveness separate.",
+      "created_at": "2026-11-10T03:38:46Z",
+      "updated_at": "2026-11-10T03:38:46Z",
+      "review_at": "2026-11-12T00:00:00Z",
+      "next_action": "Use reports/analysis/simulation_state_freshness_investigation.md: correct API/runtime availability labeling and maintained onboarding/docs; replace historical Git-age gate with substantive authority/containment validation after CI-domain review clears. Preserve snapshot, counters, run state and CanonRec; independently review implementation.",
+      "definition_of_done": "Historical bytes unchanged; APIs distinguish provenance from unbound/live run; retirement/preflight/containment regressions are blocking; old snapshot age alone passes; current docs/API compatibility and hosted PR/main checks verified with root pins synchronized.",
+      "approval_required": false,
+      "waiting_on": "artifact",
+      "trigger": "Independent Claude CI review receipt clears rd-20261109-ci-consolidation, permitting the replacement workflow review without stacking CI debt.",
+      "evidence_refs": [
+        "reports/analysis/simulation_state_freshness_investigation.md"
+      ]
     }
   ],
   "completed_tasks": [
@@ -888,11 +908,18 @@
       "completed_at": "2026-11-10T02:43:22Z",
       "platform": "codex",
       "detail": "Implemented by Claude in #1699, independently approved by Codex and merged b68c4717; root pins synchronized in #114."
+    },
+    {
+      "id": "investigate-simulation-freshness-gap",
+      "status": "completed",
+      "completed_at": "2026-11-10T03:38:46Z",
+      "platform": "codex",
+      "detail": "Read-only investigation complete: #1083 closed in July; August authority retires legacy snapshot, but Git-age workflow and API/docs retain old semantics. Preflight ready at tick0/no run; 20 tests pass; snapshot bytes unchanged. Evidence and repair plan recorded; implementation waits for CI review."
     }
   ],
-  "last_updated": "2026-11-10T02:43:22Z",
+  "last_updated": "2026-11-10T03:38:46Z",
   "last_platform": "codex",
-  "last_session_summary": "Independent SSE guard review approves d01a6853: 3863 source tests pass, real transports and SDK1.30 installed-wheel compatibility verified. CloudBank #1699 merged b68c4717; root #114 includes review receipt, cleared patch debt and synchronized owner pins. Source main canonical run 42744570449 passed: 3863 tests plus 101 subtests. PR #113 still awaits separate Claude coordination review.",
+  "last_session_summary": "Investigated simulation freshness without changing CloudBank: the snapshot was retired as genesis in August, while its Git-age gate and API/docs retain legacy assumptions. Read-only preflight passes, 20 targeted tests pass, snapshot hash unchanged. Report and concrete authority/consumer repair task prepared; repair waits for existing CI review receipt.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -915,6 +942,18 @@
     "pip-audit": "2.10.1 (isolated scratch audit helper; application environments unchanged)"
   },
   "recent_commits": [
+    {
+      "sha": "e1b07d3",
+      "date": "2026-11-10",
+      "platform": "claude-code",
+      "summary": "docs(review): approve SSE guard and sync merged CloudBank pin (#114)"
+    },
+    {
+      "sha": "0e8fc75",
+      "date": "2026-11-09",
+      "platform": "codex",
+      "summary": "chore(ci): sync verified workflow cleanup and review handoff (#112)"
+    },
     {
       "sha": "1bbc742",
       "date": "2026-11-09",
@@ -962,18 +1001,6 @@
       "date": "2026-11-08",
       "platform": "codex",
       "summary": "fix(registry): preserve explicit pins and refuse branch mismatch"
-    },
-    {
-      "sha": "1801d00",
-      "date": "2026-11-08",
-      "platform": "claude-code",
-      "summary": "fix(session-state): record commit provenance from the commit, not the sync (#87)"
-    },
-    {
-      "sha": "083a532",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "chore(ai): pin current OpenAI migration and close GPT-4o retirement (#104)"
     }
   ],
   "security_events": [
@@ -990,7 +1017,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "e350488a6ab2eafb0dd75d82e1c4b020d5043755",
+    "main_sha": "e1b07d38df5aff9d78c0a5c69021ee437584f51b",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
