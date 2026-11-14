@@ -36,7 +36,7 @@ boundaries and are validated through `catalog/repo_registry.yaml`.
 
 The automation definitions live under:
 
-`/Users/travisstreets/.codex/automations/`
+`~/.codex/automations/`
 
 That directory is machine-local Codex state and is not synced by publishing the
 root repo. This receipt is the root-control record of the configured matrix.

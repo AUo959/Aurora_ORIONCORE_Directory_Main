@@ -22,7 +22,7 @@ Confirmed available:
 - macOS 26.5 on arm64.
 - `git` 2.50.1, `gh` 2.88.0, OpenSSH 10.2p1.
 - `python3` 3.9.6 with root verifier-compatible packages already present.
-- `uv` 0.10.9 at `/Users/travisstreets/.local/bin/uv`.
+- `uv` 0.10.9 at `~/.local/bin/uv`.
 - `node` 24.14.0 and `npm` 11.9.0 through nvm.
 - `corepack` is present through the active Node install.
 - `pnpm` 11.1.2 is enabled through Corepack.

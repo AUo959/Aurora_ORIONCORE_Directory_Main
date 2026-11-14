@@ -40,7 +40,7 @@
   },
   "execution_environment": {
     "platform": "macOS-26.5.2-arm64-arm-64bit",
-    "python_executable": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+    "python_executable": "~/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
     "python_version": "3.12.13"
   },
   "generated_at": "2026-08-15T06:42:10Z",
@@ -100,7 +100,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "~/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -186,7 +186,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "~/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -261,7 +261,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "~/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -377,7 +377,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "~/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -460,7 +460,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "~/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -555,7 +555,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "~/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -733,7 +733,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "~/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -902,7 +902,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "~/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -974,7 +974,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "~/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -1066,7 +1066,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "~/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
           "-m",
           "pytest",
           "-q",
@@ -1165,7 +1165,7 @@
       "missing_dependencies": [],
       "practical": {
         "command": [
-          "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
+          "~/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python",
           "-m",
           "pytest",
           "-q",

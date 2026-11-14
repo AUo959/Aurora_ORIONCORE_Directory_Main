@@ -639,7 +639,7 @@
   "replay": {
     "deterministic": true,
     "non_replayable_reasons": [],
-    "replay_command": "python3 tools/aurora_ace.py resolve --query /Users/travisstreets/dev/aurora-ace-sandbox/workspace/reports/ace/mcp_runtime/sandbox-demo-create-one/query_envelope.json --out /Users/travisstreets/dev/aurora-ace-sandbox/workspace/reports/ace/mcp_runtime/sandbox-demo-create-one-replay",
+    "replay_command": "python3 tools/aurora_ace.py resolve --query ~/dev/aurora-ace-sandbox/workspace/reports/ace/mcp_runtime/sandbox-demo-create-one/query_envelope.json --out ~/dev/aurora-ace-sandbox/workspace/reports/ace/mcp_runtime/sandbox-demo-create-one-replay",
     "replayable": true,
     "required_artifact_refs": [
       "query_envelope.json",

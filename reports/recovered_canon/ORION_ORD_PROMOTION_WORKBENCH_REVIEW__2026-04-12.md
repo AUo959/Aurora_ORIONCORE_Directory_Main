@@ -54,7 +54,7 @@ Observed packaging caveat:
 
 Command run:
 
-- `python3 /Users/travisstreets/.codex/skills/aurora-governance-orchestrator/scripts/orchestrate_governance.py --repo "<package-root>" --out-json /tmp/orion_ord_review_fix_governance.json --out-md /tmp/orion_ord_review_fix_governance.md`
+- `python3 ~/.codex/skills/aurora-governance-orchestrator/scripts/orchestrate_governance.py --repo "<package-root>" --out-json /tmp/orion_ord_review_fix_governance.json --out-md /tmp/orion_ord_review_fix_governance.md`
 
 Outcome:
 

@@ -10,9 +10,9 @@
     "pid": 42961,
     "ppid": "41578",
     "parent_command": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python -m pytest tests/ -q",
-    "argv": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/tools/hour_aboard.py --scenario hour_aboard_scenario --no-mesh",
-    "cwd": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
-    "user": "travisstreets"
+    "argv": "~/dev/Aurora_ORIONCORE_Directory_Main/tools/hour_aboard.py --scenario hour_aboard_scenario --no-mesh",
+    "cwd": "~/dev/Aurora_ORIONCORE_Directory_Main",
+    "user": "[redacted]"
   },
   "environment": {
     "claude_code": false,

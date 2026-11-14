@@ -2,7 +2,7 @@
 
 ## Authoritative Root
 
-`/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19`
+`~/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19`
 
 Required files:
 

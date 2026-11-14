@@ -218,7 +218,7 @@
       "status": "completed",
       "completed_at": "2026-07-04T08:20:08Z",
       "platform": "claude-code",
-      "detail": "Umbrella task retired 2026-07-04 after its lanes closed or moved to discrete queue items: adapter lane done (PR #1182 merged); test-branch triage done (receipt reports/analysis/cloudbank_test_branch_triage__2026-07-04.md); iCloud salvage complete and the iCloud tree deleted; remaining publication-debt work split to pending item publication-debt-triage-continuation. Final narrative: Continuation 2026-07-03T17:36:37Z: Opened and operated from canonical root /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main, not the inert iCloud copy. Read docs/WORKSPACE_MIGRATION_2026-07-01 [full handoff: catalog/handoffs/20260704T053301Z-codex-continue-publication-debt-triage.md]"
+      "detail": "Umbrella task retired 2026-07-04 after its lanes closed or moved to discrete queue items: adapter lane done (PR #1182 merged); test-branch triage done (receipt reports/analysis/cloudbank_test_branch_triage__2026-07-04.md); iCloud salvage complete and the iCloud tree deleted; remaining publication-debt work split to pending item publication-debt-triage-continuation. Final narrative: Continuation 2026-07-03T17:36:37Z: Opened and operated from canonical root ~/dev/Aurora_ORIONCORE_Directory_Main, not the inert iCloud copy. Read docs/WORKSPACE_MIGRATION_2026-07-01 [full handoff: catalog/handoffs/20260704T053301Z-codex-continue-publication-debt-triage.md]"
     },
     {
       "id": "roadmap-0.5",

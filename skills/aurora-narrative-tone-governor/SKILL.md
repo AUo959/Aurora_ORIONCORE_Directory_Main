@@ -79,7 +79,7 @@ Execute the workflow in this order.
 For repository preflight or orchestration use the bundled scanner:
 
 ```bash
-python3 /Users/travisstreets/.codex/skills/aurora-narrative-tone-governor/scripts/narrative_tone_scan.py \
+python3 ~/.codex/skills/aurora-narrative-tone-governor/scripts/narrative_tone_scan.py \
   --repo /path/to/repo \
   --out-json /tmp/narrative_tone_scan.json \
   --out-md /tmp/narrative_tone_scan.md
@@ -108,13 +108,13 @@ notes:
   - <optional operator note>
 ```
 
-When participating in multi-skill governance workflows, align individual findings to the shared schema at `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/finding_schema.md`.
+When participating in multi-skill governance workflows, align individual findings to the shared schema at `~/.codex/skills/aurora-governance-orchestrator/references/finding_schema.md`.
 
 ## Workflow Position
 
 - Upstream: `aurora-skill-finder`, `gumas-simulation-engine`, or `aurora-quantum-forge-ops` when prose artifacts need governance.
 - Downstream: hand merged promotion gating to `aurora-governance-orchestrator`; hand polished summaries to `aurora-exec-brief-pipeline`.
-- Preset reference: `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
+- Preset reference: `~/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
 
 ## Query Discipline
 Use reproducible repository queries from [references/query_recipes.md](references/query_recipes.md).

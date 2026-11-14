@@ -29,7 +29,7 @@ that a root task applies to nested repos.
 
 ## Current Root Baseline
 
-- Workspace: `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
+- Workspace: `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
 - Scope: root control-plane repo only unless the user names a nested repo.
 - Branch at primer time: `main`
 - Upstream at primer time: `origin/main`

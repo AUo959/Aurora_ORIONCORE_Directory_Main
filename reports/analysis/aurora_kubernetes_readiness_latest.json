@@ -1353,7 +1353,7 @@
       "recommended_next_action": "Replace placeholder Secret entries through sealed-secrets or external secret management; do not commit live plaintext secrets."
     }
   ],
-  "root": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
+  "root": "~/dev/Aurora_ORIONCORE_Directory_Main",
   "run_mode": "read_only",
   "schema_version": 1,
   "status": "attention",
