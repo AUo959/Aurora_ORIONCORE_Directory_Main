@@ -73,7 +73,7 @@ PYTHONPYCACHEPREFIX=/private/tmp/cloudbank-l2-scenario-pycache python3 -m py_com
 
 Plain `python3 -m py_compile ...` failed before validation on the known macOS
 cache-prefix permission path under
-`/Users/travisstreets/Library/Caches/com.apple.python/private/tmp/...`.
+`~/Library/Caches/com.apple.python/private/tmp/...`.
 
 Root uptake generator check from the root workspace:
 

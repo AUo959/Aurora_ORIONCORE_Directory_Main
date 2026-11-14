@@ -26,11 +26,11 @@ decision.
 
 ## Installed User-Space Tools
 
-- `pre-commit` 4.6.0 at `/Users/travisstreets/.local/bin/pre-commit`
-- `ruff` 0.15.13 at `/Users/travisstreets/.local/bin/ruff`
-- `mypy` 2.1.0 at `/Users/travisstreets/.local/bin/mypy`
-- `pipx` 1.12.0 at `/Users/travisstreets/.local/bin/pipx`
-- `pnpm` 11.1.2 at `/Users/travisstreets/.nvm/versions/node/v24.14.0/bin/pnpm`
+- `pre-commit` 4.6.0 at `~/.local/bin/pre-commit`
+- `ruff` 0.15.13 at `~/.local/bin/ruff`
+- `mypy` 2.1.0 at `~/.local/bin/mypy`
+- `pipx` 1.12.0 at `~/.local/bin/pipx`
+- `pnpm` 11.1.2 at `~/.nvm/versions/node/v24.14.0/bin/pnpm`
 
 ## Active Automations
 

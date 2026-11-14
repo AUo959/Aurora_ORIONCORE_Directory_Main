@@ -1,6 +1,6 @@
 # Archive Entropy Guard Receipt - Post Move - 2026-05-03
 
-- Scan root: `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
+- Scan root: `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
 - Action: moved active `_entropy_quarantine/` contents to reviewed holding; no deletions.
 - Holding path: `archives/reviewed_quarantine_delete_candidates/2026-05-03`
 - Active quarantine top-level entries after move: `0`

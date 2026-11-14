@@ -62,13 +62,13 @@ After edits:
 2. rerun scanner to confirm finding reduction
 3. report: high-risk findings, applied fixes, residual risks
 
-For cross-skill package workflows, align findings to the shared schema at `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/finding_schema.md`.
+For cross-skill package workflows, align findings to the shared schema at `~/.codex/skills/aurora-governance-orchestrator/references/finding_schema.md`.
 
 ## Workflow Position
 
 - Upstream: `aurora-skill-finder` for routing, or `aurora-repo-stabilizer` when repo hardening narrows into script-surface work.
 - Downstream: hand merged governance requests to `aurora-governance-orchestrator`.
-- Preset reference: `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
+- Preset reference: `~/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
 
 ## Command Patterns
 

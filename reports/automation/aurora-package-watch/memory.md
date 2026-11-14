@@ -4,7 +4,7 @@
 - The workspace moved off iCloud on 2026-07-01. All `…/Library/Mobile
   Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/…` paths in
   the run record below now resolve under
-  `/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/…` (same tails).
+  `~/dev/Aurora_ORIONCORE_Directory_Main/…` (same tails).
 - Future runs must operate only in `~/dev`; the iCloud copy is inert.
   See `docs/WORKSPACE_MIGRATION_2026-07-01.md`.
 
@@ -21,19 +21,19 @@
 
 ## Repairs applied
 - Restored canonical skill directory:
-  - `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/skills/mesh-router`
+  - `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/skills/mesh-router`
 - Restored canonical CLI files:
-  - `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/mesh_cli.py`
-  - `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora/cli/mesh_cli.py`
+  - `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/mesh_cli.py`
+  - `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/aurora/cli/mesh_cli.py`
 - Patched canonical `mesh_cli.py` wrapper to invoke the CLI by path instead of importing through `src.aurora`.
 - Restored canonical mesh runtime package:
-  - `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/mesh/__init__.py`
-  - `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/mesh/live_agents.py`
-  - `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/mesh/manifests.py`
-  - `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/mesh/models.py`
-  - `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/mesh/runtime.py`
+  - `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/mesh/__init__.py`
+  - `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/mesh/live_agents.py`
+  - `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/mesh/manifests.py`
+  - `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/mesh/models.py`
+  - `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/src/mesh/runtime.py`
 - Restored canonical agent manifests:
-  - `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/config/mesh/agents/*.json`
+  - `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/config/mesh/agents/*.json`
 
 ## Validation
 - Package validator: `status=ok`, `skill_count=25`, `error_count=0`
@@ -41,7 +41,7 @@
 - Runtime health: `/health` returned `status=healthy`
 - Mesh status: `mesh_status=operational`, `total_agents=6`, `active_agents=1`
 - Installed CLI check:
-  - `python3 /Users/travisstreets/.codex/skills/mesh-router/scripts/mesh_router.py status` -> ok
+  - `python3 ~/.codex/skills/mesh-router/scripts/mesh_router.py status` -> ok
 - Smoke test:
   - Sent direct message to `archy`
   - Event stream recorded `message_accepted`, `agent_ack`, `agent_typing`, and `agent_reply`
@@ -49,7 +49,7 @@
 
 ## Runtime state
 - Server launched from:
-  - `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python src/servers/l2_integration_server.py`
+  - `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python src/servers/l2_integration_server.py`
 - Managed session id: `54736`
 - Base URL: `http://127.0.0.1:8000`
 - Live adapter availability: `false` (OpenAI live adapter not active), deterministic agent routing works

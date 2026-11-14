@@ -19,7 +19,7 @@ The CloudDocs worktree at the authoritative nested repo path is not a normal beh
 ## Local Worktree State
 
 - Local repo path:
-  - `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
+  - `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main`
 - Local `main` head:
   - `42e0b9fb9f1e0e10a9091d595cf2811f2c14eacf`
 - Local `main` subject:

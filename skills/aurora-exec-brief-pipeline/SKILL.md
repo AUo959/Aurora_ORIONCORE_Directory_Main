@@ -15,7 +15,7 @@ Produce a concise executive brief and a structured JSON findings artifact from m
 Run the bundled CLI:
 
 ```bash
-python3 /Users/travisstreets/.codex/skills/aurora-exec-brief-pipeline/scripts/build_exec_brief.py \
+python3 ~/.codex/skills/aurora-exec-brief-pipeline/scripts/build_exec_brief.py \
   --input-dir /path/to/folder \
   --emit-run-manifest
 ```
@@ -38,7 +38,7 @@ Do not use this skill for governance verdicts or canon governance work. Route th
 Use optional controls when needed:
 
 ```bash
-python3 /Users/travisstreets/.codex/skills/aurora-exec-brief-pipeline/scripts/build_exec_brief.py \
+python3 ~/.codex/skills/aurora-exec-brief-pipeline/scripts/build_exec_brief.py \
   --input-dir /path/to/folder \
   --out-dir /path/to/folder/reports \
   --max-files 200 \
@@ -84,7 +84,7 @@ When `--strict` is enabled, the script exits non-zero if high risks or parse fai
 
 - Upstream: `gumas-simulation-engine`, `aurora-quantum-forge-ops`, or mixed-data ingestion.
 - Downstream: optional `aurora-narrative-tone-governor` before final leadership delivery when prose governance matters.
-- Preset reference: `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
+- Preset reference: `~/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
 
 ## Trigger examples
 

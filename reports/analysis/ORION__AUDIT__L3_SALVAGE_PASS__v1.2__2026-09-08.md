@@ -24,7 +24,7 @@ v1.0 reported 7 unpushed commits across three repos, caveated as measured agains
 
 ## 3. The GH007 decision, executed
 
-Twelve commits — not three — carried `tlstreets@gmail.com` in both author and committer: the 3 connectivity commits plus a 9-commit Velar ruling chain behind the five 2026-07-21 tags (two parallel lineages of the same rulings, plus `63349bfe`). GitHub's email-privacy protection rejected every one.
+Twelve commits — not three — carried `[redacted email]` in both author and committer: the 3 connectivity commits plus a 9-commit Velar ruling chain behind the five 2026-07-21 tags (two parallel lineages of the same rulings, plus `63349bfe`). GitHub's email-privacy protection rejected every one.
 
 Per the owner decision on queue item `connectivity-branch-email-privacy`, **option 2** was taken: rewrite author and committer email to `206913296+AUo959@users.noreply.github.com`.
 

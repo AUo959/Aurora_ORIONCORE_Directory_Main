@@ -32,8 +32,8 @@ Both temporary Git fixture repositories now set `commit.gpgsign=false` so user-l
 
 - `python3 -m pytest tests/test_workspace_verify.py tests/test_aurora_nested_repo_normalizer.py -q` - 31 passed
 - `python3 -m pytest tests/ -q` - 161 passed, 25 skipped
-- `uv run --python /Users/travisstreets/.local/bin/python3.12 --with pytest --with pyyaml python -m pytest tests/ -q` - 161 passed, 25 skipped
-- `/Users/travisstreets/.local/bin/python3.12 tools/workspace_verify.py` - warn only, 0 blocking findings
+- `uv run --python ~/.local/bin/python3.12 --with pytest --with pyyaml python -m pytest tests/ -q` - 161 passed, 25 skipped
+- `~/.local/bin/python3.12 tools/workspace_verify.py` - warn only, 0 blocking findings
 - YAML manifest validation - passed
 - JSON catalog validation - passed
 - Codex plugin JSON validation - passed

@@ -11,7 +11,7 @@ This spec is based on direct local inspection of two layers:
    - `./`
    - local Git worktree for the root metadata repo
 2. Canonical workspace root:
-   - `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
+   - `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
    - contains the actual nested project repos, archives, reports, and operational assets
 
 Important distinction:
