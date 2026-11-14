@@ -40,7 +40,7 @@
   "reverified_gates": [
     {
       "gate": "environment",
-      "command": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python --version; import pytest, yaml, jsonschema",
+      "command": "~/dev/Aurora_ORIONCORE_Directory_Main/.venv/bin/python --version; import pytest, yaml, jsonschema",
       "result": "pass",
       "evidence": "Python 3.12.13 with pytest/yaml/jsonschema. System python3 is 3.9.6 without jsonschema, so the repo venv was used. ruff is not installed in it, so lint was not re-run."
     },

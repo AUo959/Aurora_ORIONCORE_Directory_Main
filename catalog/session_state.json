@@ -998,10 +998,10 @@
       "salvage/stash-root-diff-cleanup-2026-04-14"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main                    d674266 [main]",
-      "/Users/travisstreets/.codex/worktrees/19cf/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/a12a/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/cdb0/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)"
+      "~/dev/Aurora_ORIONCORE_Directory_Main                    d674266 [main]",
+      "~/.codex/worktrees/19cf/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)",
+      "~/.codex/worktrees/a12a/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)",
+      "~/.codex/worktrees/cdb0/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)"
     ],
     "open_prs": [
       "CloudBank #837 remains closed unmerged, but now has extraction-plan comment #4644456473",
