@@ -39,7 +39,7 @@
       "CanonRec:canon/L2/entities/char_expedition_archivist_ee86138dfc73"
     ],
     "canon_targets_file": null,
-    "validation_run_file": "~/dev/aurora-ace-reviews/jorenon-morrowen-20260906/validation_run.json"
+    "validation_run_file": "/Users/travisstreets/dev/aurora-ace-reviews/jorenon-morrowen-20260906/validation_run.json"
   },
   "kind": "EG_LITE_PROTO_RECEIPT",
   "output_hash": "6137588e313844b6fcf6880adc6189ab09fc0b972726c47ebc3c17b665f78a4c",
