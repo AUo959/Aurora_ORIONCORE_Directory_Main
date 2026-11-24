@@ -1,11 +1,11 @@
 import hashlib
 import json
-import subprocess
 
 from jsonschema import Draft202012Validator
 import pytest
 
 from tools import canon_ops_query as bridge
+from tools._workspace_common import git
 
 
 def put(repo_path, path, data):
@@ -15,20 +15,20 @@ def put(repo_path, path, data):
 
 
 def commit(repo_path):
-    subprocess.run(["git", "-C", str(repo_path), "add", "."], check=True)
-    subprocess.run(
+    git(["add", "."], repo_path)
+    git(
         [
-            "git", "-C", str(repo_path), "-c", "user.name=Test", "-c",
+            "-c", "user.name=Test", "-c",
             "user.email=test@example.invalid", "commit", "--no-gpg-sign", "-qm", "Fixture",
         ],
-        check=True,
+        repo_path,
     )
-    return subprocess.check_output(["git", "-C", str(repo_path), "rev-parse", "HEAD"], text=True).strip()
+    return git(["rev-parse", "HEAD"], repo_path).stdout.strip()
 
 
 @pytest.fixture
 def snapshot(tmp_path, monkeypatch):
-    subprocess.run(["git", "-C", str(tmp_path), "init", "-q"], check=True)
+    git(["init", "-q"], tmp_path)
     put(tmp_path, "canon/L2/entities/01.json", json.dumps({
         "entity_id": "vessel-a", "vessel_id": "VSL-A", "entity_kind": "vessel",
         "certainty": "CANON", "aliases": ["Dawn"], "captain_id": "person-a",
@@ -59,15 +59,15 @@ def test_query_pins_blob_bytes_and_paginates(snapshot):
     put(repo.path, path, '{"entity_id": "working-tree-only"}')
     first = bridge.query(repo, request)
     item, = first["results"]["canonical_facts"]
-    assert item["record_id"] == "vessel-a"
-    assert item["source"] == {
+    assert item["record_id"] == "vessel-a"  # nosec B101 - pytest assertion
+    assert item["source"] == {  # nosec B101 - pytest assertion
         "commit": request["commit"], "layer": "L2", "path": path,
         "repository": "AUo959/CanonRec", "sha256": hashlib.sha256(committed).hexdigest(),
     }
     request["page"]["after"] = first["next_after"]
     second = bridge.query(repo, request)
-    assert [item["record_id"] for item in second["results"]["canonical_facts"]] == ["vessel-b"]
-    assert second["next_after"] is None
+    assert [item["record_id"] for item in second["results"]["canonical_facts"]] == ["vessel-b"]  # nosec B101 - pytest assertion
+    assert second["next_after"] is None  # nosec B101 - pytest assertion
 
 
 def test_query_combines_identity_alias_and_relationship_filters(snapshot):
@@ -77,8 +77,8 @@ def test_query_combines_identity_alias_and_relationship_filters(snapshot):
         "relationships": [{"kind": "captain_id", "target_id": "person-a"}],
     }
     result = bridge.query(repo, request)
-    assert [item["record_id"] for item in result["results"]["canonical_facts"]] == ["vessel-a"]
-    assert result["next_after"] is None
+    assert [item["record_id"] for item in result["results"]["canonical_facts"]] == ["vessel-a"]  # nosec B101 - pytest assertion
+    assert result["next_after"] is None  # nosec B101 - pytest assertion
 
 
 def test_query_chronicle_date_bounds_preserve_operational_classification(snapshot):
@@ -87,9 +87,9 @@ def test_query_chronicle_date_bounds_preserve_operational_classification(snapsho
     request["filters"] = {"since": "2026-02-01T00:00:00Z", "until": "2026-02-01T00:00:00Z"}
     result = bridge.query(repo, request)
     item, = result["results"]["operational_atoms"]
-    assert item["record_id"] == "event-b"
-    assert item["certainty"] == "UNCONFIRMED"
-    assert result["results"]["canonical_facts"] == []
+    assert item["record_id"] == "event-b"  # nosec B101 - pytest assertion
+    assert item["certainty"] == "UNCONFIRMED"  # nosec B101 - pytest assertion
+    assert result["results"]["canonical_facts"] == []  # nosec B101 - pytest assertion
 
 
 def test_query_rejects_scope_in_a_different_layer(snapshot):

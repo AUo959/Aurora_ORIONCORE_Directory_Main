@@ -5,14 +5,17 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
-import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Iterator
+from typing import Any, Iterator, cast
 
 from jsonschema import Draft202012Validator, FormatChecker
 from referencing import Registry, Resource
+
+if __package__:
+    from ._workspace_common import git
+else:
+    from _workspace_common import git
 
 
 CONTRACT_COMMIT = "778ba3b3aced338f30bc4b35accecf14ecf419a3"
@@ -34,23 +37,21 @@ class QueryError(ValueError):
 
 class CanonRec:
     def __init__(self, path: Path):
+        """Attach to the specified local CanonRec repository."""
         self.path = path
 
     def git(self, *arguments: str) -> bytes:
-        git_env = {
-            key: value
-            for key, value in os.environ.items()
-            if key not in {"GIT_DIR", "GIT_COMMON_DIR", "GIT_WORK_TREE", "GIT_INDEX_FILE", "GIT_PREFIX"}
-        }
-        git_env.update(GIT_NO_LAZY_FETCH="1", GIT_NO_REPLACE_OBJECTS="1")
+        message = f"CanonRec Git data unavailable for {arguments[0]}"
         try:
-            return subprocess.check_output(
-                ["git", "--literal-pathspecs", "-C", str(self.path), *arguments],
-                env=git_env,
-                stderr=subprocess.DEVNULL,
+            response = git(
+                ["--literal-pathspecs", *arguments], self.path,
+                check=False, text=False, local_objects_only=True,
             )
-        except (OSError, subprocess.CalledProcessError) as exc:
-            raise QueryError(f"CanonRec Git data unavailable for {arguments[0]}") from exc
+        except OSError as exc:
+            raise QueryError(message) from exc
+        if response.returncode:
+            raise QueryError(message)
+        return cast(bytes, response.stdout)
 
     def blob(self, reference: str) -> bytes:
         return self.git("cat-file", "blob", reference)
