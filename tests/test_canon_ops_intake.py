@@ -1,5 +1,7 @@
 import hashlib
+import sqlite3
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing
 from copy import deepcopy
 from unittest import TestCase
 
@@ -268,3 +270,17 @@ def test_gumas_registration_denies_wrong_provenance_and_duplicate_run_ids(run_in
     with pytest.raises(journal.JournalError, match="already registered"):
         run(*make_request("register-again", **fields, run=make_run(origin)))
     CHECK.assertEqual(len(journal.read_entries(path)), 2)
+
+
+def test_projection_rejects_changed_journal_records(run_intake):
+    run, path, _ = run_intake
+    run(*make_request())
+    entry, = journal.read_entries(path)
+    entry["receipt"]["reason"] = "edited after intake"
+    with closing(sqlite3.connect(path)) as connection:
+        with connection:
+            connection.execute(
+                "UPDATE intake SET packet = ? WHERE sequence = 1", (journal.canonical_json(entry),)
+            )
+    with pytest.raises(journal.JournalError, match="history digest"):
+        events.chronicle_atoms(journal.read_entries(path))
