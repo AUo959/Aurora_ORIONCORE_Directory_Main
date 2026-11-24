@@ -115,15 +115,21 @@ def _timestamp(value: str) -> datetime:
     return instant
 
 
+def _record_time(record: dict) -> datetime | None:
+    value = record.get("occurred_at") or record.get("timestamp") or record.get("updated_at")
+    if not isinstance(value, str):
+        return None
+    try:
+        return _timestamp(value)
+    except ValueError:
+        return None
+
+
 def _matches_time(record: dict, filters: dict) -> bool:
     if not {"since", "until"}.intersection(filters):
         return True
-    source_time = record.get("occurred_at") or record.get("timestamp") or record.get("updated_at")
-    if not isinstance(source_time, str):
-        return False
-    try:
-        value = _timestamp(source_time)
-    except ValueError:
+    value = _record_time(record)
+    if value is None:
         return False
     return (
         ("since" not in filters or _timestamp(filters["since"]) <= value)
@@ -139,6 +145,14 @@ def _relationship_matches(record: dict, relationship: dict) -> bool:
     return kind.endswith(("_id", "_ids")) and relationship["target_id"] in _strings(record.get(kind))
 
 
+def _matches_aliases(record: dict, identities: list[str], expected: list[str] | None) -> bool:
+    if expected is None:
+        return True
+    aliases = identities[1:] + _strings(record.get("aliases")) + _strings(record.get("name"))
+    aliases.extend(_strings(record.get("canonical_name")))
+    return bool({alias.casefold() for alias in aliases} & {alias.casefold() for alias in expected})
+
+
 def _matches(record: dict, identities: list[str], kind: str, certainty: str, filters: dict) -> bool:
     for key, value in (
         ("entity_kinds", kind),
@@ -147,11 +161,7 @@ def _matches(record: dict, identities: list[str], kind: str, certainty: str, fil
     ):
         if key in filters and value not in filters[key]:
             return False
-    aliases = identities[1:] + _strings(record.get("aliases")) + _strings(record.get("name"))
-    aliases.extend(_strings(record.get("canonical_name")))
-    if "aliases" in filters and not (
-        {alias.casefold() for alias in aliases} & {alias.casefold() for alias in filters["aliases"]}
-    ):
+    if not _matches_aliases(record, identities, filters.get("aliases")):
         return False
     return all(
         _relationship_matches(record, related) for related in filters.get("relationships", [])
@@ -168,20 +178,24 @@ def _collection(chronicle: bool, native_certainty: str) -> str:
     return "staging_material" if native_certainty else "unknowns"
 
 
-def _entry(path: str, digest: str, record: dict, request: dict) -> tuple[dict, dict] | None:
-    chronicle = path.startswith("canon/L1/station/chronicle/") and bool(record.get("event_id"))
-    identities = [
+def _identities(record: dict) -> list[str]:
+    return [
         identity
         for field in ("canonical_id", "entity_id", "vessel_id", "record_id", "event_id", "id")
         for identity in _strings(record.get(field))
         if identity
     ]
+
+
+def _entry(path: str, digest: str, record: dict, request: dict) -> tuple[dict, dict] | None:
+    chronicle = path.startswith("canon/L1/station/chronicle/") and bool(record.get("event_id"))
+    identities = _identities(record)
     if not identities:
         return None
     layer = request["layer"]
     if record.get("layer", layer) not in (None, layer):
         raise QueryError(f"{path}: source record declares another layer")
-    kind = "chronicle_atom" if chronicle else record.get("entity_kind") or record.get("kind")
+    kind = "chronicle_atom" if chronicle else (record.get("entity_kind") or record.get("kind"))
     if not isinstance(kind, str) or not kind:
         return None
     native_certainty = record.get("certainty") or ""
@@ -226,9 +240,7 @@ def _validate(validator: Draft202012Validator, document: dict) -> None:
         raise QueryError(f"{pointer}: {error.message}")
 
 
-def query(repo: CanonRec, request: dict, *, contract_commit: str = CONTRACT_COMMIT) -> dict:
-    query_validator, result_validator = _validator_pair(repo, contract_commit)
-    _validate(query_validator, request)
+def _validate_scope(request: dict) -> None:
     expected_root = f"canon/{request['layer']}"
     for index, path in enumerate(request["source_paths"]):
         if path != expected_root and not path.startswith(expected_root + "/"):
@@ -238,6 +250,8 @@ def query(repo: CanonRec, request: dict, *, contract_commit: str = CONTRACT_COMM
         if _timestamp(filters["since"]) > _timestamp(filters["until"]):
             raise QueryError("/filters/until: precedes the lower time bound")
 
+
+def _ordered_entries(repo: CanonRec, request: dict) -> list[tuple[dict, dict]]:
     entries = (
         _entry(path, digest, record, request)
         for path, digest, record in repo.records(request["commit"], request["source_paths"])
@@ -246,7 +260,10 @@ def query(repo: CanonRec, request: dict, *, contract_commit: str = CONTRACT_COMM
     keys = [_cursor_key(cursor) for cursor, _ in pairs]
     if len(keys) != len(set(keys)):
         raise QueryError("CanonRec returned repeated result identities in the same source")
+    return pairs
 
+
+def _result_page(pairs: list[tuple[dict, dict]], request: dict) -> dict:
     page = request["page"]
     if "after" in page:
         after = _cursor_key(page["after"])
@@ -256,6 +273,14 @@ def query(repo: CanonRec, request: dict, *, contract_commit: str = CONTRACT_COMM
     for cursor, item in pairs[: page["limit"]]:
         result["results"][cursor["collection"]].append(item)
     result["next_after"] = pairs[page["limit"] - 1][0] if len(pairs) > page["limit"] else None
+    return result
+
+
+def query(repo: CanonRec, request: dict, *, contract_commit: str = CONTRACT_COMMIT) -> dict:
+    query_validator, result_validator = _validator_pair(repo, contract_commit)
+    _validate(query_validator, request)
+    _validate_scope(request)
+    result = _result_page(_ordered_entries(repo, request), request)
     _validate(result_validator, result)
     return result
 
