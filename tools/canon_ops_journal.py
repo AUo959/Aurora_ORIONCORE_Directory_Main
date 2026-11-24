@@ -6,8 +6,8 @@ import hashlib
 import json
 import os
 import sqlite3
-from collections.abc import Callable, Iterable
-from contextlib import closing
+from collections.abc import Callable, Iterable, Iterator
+from contextlib import closing, contextmanager
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -71,6 +71,15 @@ def _create_table(connection: sqlite3.Connection) -> None:
     )
 
 
+@contextmanager
+def _write_transaction(path: Path) -> Iterator[sqlite3.Connection]:
+    with closing(_connection(path, writable=True)) as connection:
+        _create_table(connection)
+        with connection:
+            connection.execute("BEGIN IMMEDIATE")
+            yield connection
+
+
 def _entry_rows(connection: sqlite3.Connection) -> list[dict]:
     return [
         json.loads(packet)
@@ -92,9 +101,7 @@ def append_request(
     evaluate: Callable[[dict[tuple[str, str, str], dict]], dict],
 ) -> dict:
     """Serialize disposition and optimistic state checks in a single write transaction."""
-    with closing(_connection(path, writable=True)) as connection, connection:
-        _create_table(connection)
-        connection.execute("BEGIN IMMEDIATE")
+    with _write_transaction(path) as connection:
         history = _entry_rows(connection)
         if history and history[0]["receipt"]["canon_commit"] != snapshot:
             raise JournalError("Use a separate journal for a different CanonRec snapshot")
@@ -161,9 +168,7 @@ def rebuild(path: Path, entries: list[dict], *, expected_tip: str) -> None:
 
     with TemporaryDirectory(dir=path.parent, prefix=".restore-") as directory:
         temporary = Path(directory) / "intake.sqlite3"
-        with closing(_connection(temporary, writable=True)) as connection, connection:
-            connection.execute("BEGIN IMMEDIATE")
-            _create_table(connection)
+        with _write_transaction(temporary) as connection:
             for entry in entries:
                 _insert(connection, entry)
         os.link(temporary, path)

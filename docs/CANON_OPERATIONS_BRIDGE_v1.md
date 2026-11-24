@@ -23,7 +23,7 @@ Run intake from a trusted local operator context. The caller supplies the authen
 | `target_paths` | Map from layer to paths within that layer |
 | `grants` | Objects with `principal`, `actor_id`, `system`, `layer`, and `operation` |
 | `approvers` | Map from layer to approved authority IDs |
-| `gate_origins` | Map from gate name to trusted `repository` and `commit` objects |
+| `gate_origins` | Map from gate name to lists of trusted origin objects with `repository` and `commit` |
 
 The CanonRec validator checks the request against the fixed contract and verifies artifact bytes and receipt identity. For bridge intake, gate payloads also carry `subject_sha256`. Compute it from the request with `content_hash` and `gate_receipts` omitted, using the CanonRec canonical JSON encoding. The authorization receipt records `decision` and `authority` from the approved, pending, or rejected determination. The final reconciliation receipt records its `recommendation`. Acceptance requires approved authority, passing gates, and a recommendation of `STAGING`. The bridge retains all receipt references.
 

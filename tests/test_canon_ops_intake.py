@@ -1,5 +1,4 @@
 import hashlib
-import json
 from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
 from unittest import TestCase
@@ -162,9 +161,10 @@ def test_amendment_checks_and_advances_the_current_local_staging_revision(run_in
 
 
 def test_pinned_existing_record_blocks_create_with_null_expected_state(run_intake):
-    run, _, _ = run_intake
+    run, path, _ = run_intake
     with pytest.raises(bridge.IntakeError, match="stale CanonRec or staging revision"):
         run(*make_request(), resolve_target=lambda _: {"certainty": "CANON", "revision": "a" * 64})
+    CHECK.assertEqual(journal.read_entries(path), [])
 
 
 def test_journal_rebuild_checks_history_and_reconstructs_state(run_intake, tmp_path):
