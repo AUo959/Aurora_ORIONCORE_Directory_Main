@@ -187,23 +187,29 @@ def _identities(record: dict) -> list[str]:
     ]
 
 
+def _record_kind(path: str, record: dict) -> tuple[str | None, bool]:
+    if path.startswith("canon/L1/station/chronicle/") and record.get("event_id"):
+        return "chronicle_atom", True
+    kind = record.get("entity_kind") or record.get("kind")
+    return (kind if isinstance(kind, str) and kind else None), False
+
+
 def _entry(path: str, digest: str, record: dict, request: dict) -> tuple[dict, dict] | None:
-    chronicle = path.startswith("canon/L1/station/chronicle/") and bool(record.get("event_id"))
     identities = _identities(record)
     if not identities:
         return None
     layer = request["layer"]
     if record.get("layer", layer) not in (None, layer):
         raise QueryError(f"{path}: source record declares another layer")
-    kind = "chronicle_atom" if chronicle else (record.get("entity_kind") or record.get("kind"))
-    if not isinstance(kind, str) or not kind:
+    kind, is_chronicle = _record_kind(path, record)
+    if kind is None:
         return None
     native_certainty = record.get("certainty") or ""
     certainty = native_certainty or "UNCONFIRMED"
     if not _matches(record, identities, kind, certainty, request.get("filters", {})):
         return None
     cursor = {
-        "collection": _collection(chronicle, native_certainty),
+        "collection": _collection(is_chronicle, native_certainty),
         "kind": kind,
         "record_id": identities[0],
         "source_path": path,
