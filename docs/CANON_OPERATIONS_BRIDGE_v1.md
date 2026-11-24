@@ -11,3 +11,32 @@ The local Python environment needs `jsonschema` and its date-time format support
 Entity IDs use the canonical record identifier. Aliases match names, recorded alternate identifiers, and aliases case-insensitively. Relationship filters match an explicit relationship pair or a matching native field ending in `_id` or `_ids`. Time filters use inclusive bounds. The adapter returns a source repository, path, layer, commit, and SHA-256 for each result. Requests with the same scope and pinned data return the same ordered page and cursor.
 
 Station Chronicle entries are operational atoms. For a record without a native certainty tag, the adapter uses `UNCONFIRMED` and preserves the original record in the result. Collection labels distinguish sources by evidence status. CanonRec continues to own certainty and promotion decisions.
+
+## Staging intake and receipts
+
+Run intake from a trusted local operator context. The caller supplies the authenticated principal separately from the proposed request. The operator-owned policy binds exact grants to a principal, represented actor, submitting system, layer, and operation. It also pins the CanonRec data commit, target paths by layer, approving identities by layer, and trusted receipt origins by gate. Each origin is a repository and full commit. Paths must cover the target namespace used for revision comparisons.
+
+| Policy field | Value |
+| --- | --- |
+| `version` | `"1.0"` |
+| `canon_commit` | Full local CanonRec data commit |
+| `target_paths` | Map from layer to paths within that layer |
+| `grants` | Objects with `principal`, `actor_id`, `system`, `layer`, and `operation` |
+| `approvers` | Map from layer to approved authority IDs |
+| `gate_origins` | Map from gate name to trusted `repository` and `commit` objects |
+
+The CanonRec validator checks the request against the fixed contract and verifies artifact bytes and receipt identity. For bridge intake, gate payloads also carry `subject_sha256`. Compute it from the request with `content_hash` and `gate_receipts` omitted, using the CanonRec canonical JSON encoding. The authorization receipt records `decision` and `authority` from the approved, pending, or rejected determination. The final reconciliation receipt records its `recommendation`. Acceptance requires approved authority, passing gates, and a recommendation of `STAGING`. The bridge retains all receipt references.
+
+An accepted request records a local staging revision after comparing the expected state with the journal or the pinned CanonRec record. A pending decision or promotion-review request records a review disposition with no target change. Replaying an identical request returns the original receipt with `DUPLICATE`. An altered request needs a new request ID. The journal retains the pinned source and expected-state evidence, and CanonRec continues to control promotion.
+
+```bash
+python tools/canon_ops_intake.py --journal /path/to/staging.db submit request.json \
+  --canonrec /path/to/CanonRec --policy policy.json --principal l1-relay \
+  --repository Org/Source=/path/to/Source
+python tools/canon_ops_intake.py --journal /path/to/staging.db status request-id
+python tools/canon_ops_intake.py --journal /path/to/staging.db export > intake.json
+python tools/canon_ops_intake.py --journal /path/to/restored.db rebuild intake.json \
+  --expected-tip "$trusted_terminal_sha256"
+```
+
+Keep the journal outside the source checkouts. Use one journal per pinned CanonRec data snapshot. Save the exported history and its terminal digest in trusted custody. Reconstruction validates sequence, content identity, and the trusted terminal digest before publishing a new database.
