@@ -99,6 +99,8 @@ def append_request(
     snapshot: str,
     request: dict,
     evaluate: Callable[[dict[tuple[str, str, str], dict]], dict],
+    *,
+    project_events: Callable[[list[dict]], list[dict]] | None = None,
 ) -> dict:
     """Serialize disposition and optimistic state checks in a single write transaction."""
     with _write_transaction(path) as connection:
@@ -116,6 +118,8 @@ def append_request(
             return {"status": "DUPLICATE", "receipt": receipt}
 
         receipt = evaluate(staging_state(history))
+        if receipt["status"] == "ACCEPTED" and project_events is not None:
+            receipt["events"] = project_events(history)
         entry = encode_entry(len(history) + 1, previous, request, receipt)
         _insert(connection, entry)
         return {"status": receipt["status"], "receipt": receipt}

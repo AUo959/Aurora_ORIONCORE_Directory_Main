@@ -40,3 +40,15 @@ python tools/canon_ops_intake.py --journal /path/to/restored.db rebuild intake.j
 ```
 
 Keep the journal outside the source checkouts. Use one journal per pinned CanonRec data snapshot. Save the exported history and its terminal digest in trusted custody. Reconstruction validates sequence, content identity, and the trusted terminal digest before publishing a new database.
+
+## Outcomes and Chronicle input
+
+An approved `attach_outcome` receipt retains the verified source references and links each target to its recorded staging origin when available. This supports QGIA outcome and calibration attachments alongside the originating approval and forecast evidence. It preserves the target revision.
+
+To register a GUMAS run, submit an approved L2 `attach_outcome` request in `deterministic_simulation` mode. Its pinned `deterministic_run` gate payload includes a normalized `run` object with `version`, `run_id`, `origin_request_id`, `origin_content_hash`, `engine_commit`, `seed`, `event_count`, and `completed_at`. The origin must match the approved staging revision of every target. A distinct request cannot register the same run ID again. The journal retains a reference to the original pinned receipt.
+
+```bash
+python tools/canon_ops_intake.py --journal /path/to/staging.db chronicle > chronicle-input.ndjson
+```
+
+The command emits sorted `STAGING` atoms using the Station Chronicle format. Each atom carries the approving actor and the pinned run receipt with its digest. A journal rebuilt from the same export produces the same atoms.
