@@ -1,0 +1,21 @@
+{
+  "character_context": {
+    "declared_role": "Expedition Archivist",
+    "faction_id": "galactic_union",
+    "layer": "L2"
+  },
+  "cns_version": "0.2.0",
+  "retrieval": {
+    "mode": "tag_overlap",
+    "top_k": 5
+  },
+  "self_checks": {
+    "layer_safety": true,
+    "style_ctl": false,
+    "truthfulness": true
+  },
+  "tool_policy": {
+    "filesystem_write": "state.bin_only",
+    "internet": false
+  }
+}

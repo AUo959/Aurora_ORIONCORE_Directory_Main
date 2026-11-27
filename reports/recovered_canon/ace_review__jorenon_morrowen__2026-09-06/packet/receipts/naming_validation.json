@@ -1,0 +1,12 @@
+{
+  "blocks": 0,
+  "findings": [
+    {
+      "code": "NAMING_REGISTRY_ADVANCED",
+      "level": "WARN",
+      "message": "Receipt was minted against a different registry snapshot; recheck crowding before merge",
+      "path": "./candidate/char_expedition_archivist_ee86138dfc73.json"
+    }
+  ],
+  "passed": true
+}

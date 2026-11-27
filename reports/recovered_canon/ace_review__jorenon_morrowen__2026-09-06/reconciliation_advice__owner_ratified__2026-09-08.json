@@ -1,0 +1,27 @@
+{
+  "note": "Re-run of scripts/reconciliation_advisor.py on the SAME entity data and the SAME validation findings as reconciliation_advice.json, with two inputs corrected: user_reviewed=true (owner ratification, see OWNER_APPROVAL__2026-09-08.json) and origin_is_simulation=true (Canon Protocol section 5 -- the entity comes from an ACE simulation world). The original file is retained unmodified alongside this one; this does not replace it.",
+  "generated_at": "2026-09-08T04:35:00Z",
+  "inputs_changed_vs_original": {
+    "user_reviewed": {"was": false, "now": true},
+    "origin_is_simulation": {"was": false, "now": true}
+  },
+  "recommended_tag": "CANON_PROMOTE",
+  "confidence": 0.16,
+  "uncertainty_band": "HIGH",
+  "score": 9.14,
+  "entity_profile": {
+    "field_completeness": 1.0,
+    "conflict_freedom": 1.0,
+    "provenance_strength": 0.48,
+    "schema_compliance": 1.0,
+    "layer_integrity": 1.0,
+    "review_status": 1.0
+  },
+  "alternatives": [
+    {"tag": "STAGING", "score": 7.7},
+    {"tag": "APPROX", "score": 5.05}
+  ],
+  "explanation": "Recommending 'CANON_PROMOTE' for 'Jorenon Morrowen' (score: 9.14). Strengths: review_status (1.00 >= 0.80). Gaps: provenance_strength (0.48 < 0.80). Excluded tags: ['map'].",
+  "why_this_matters": "In the original run CANON_PROMOTE and STAGING scored identically (7.70 each, delta=0.00) -- a tie, not a recommendation. With owner review supplied the gap opens to delta=1.44 and CANON_PROMOTE is a decision rather than a coin toss. It holds even with the stricter simulation-provenance flag applied, which is the point of checking both ways.",
+  "residual_gap": "provenance_strength 0.48 < 0.80, inherent to simulation-origin material and accepted by owner approval. Confidence stays low (0.16, HIGH band) and that is honest -- the tag is owner-conferred, not evidence-forced."
+}

@@ -1,16 +1,19 @@
 # Workspace Map
 
-- Generated: `2026-08-20T21:58:31Z`
+- Generated: `2026-09-23T13:01:49Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `45`
+- Top-level entries cataloged: `47`
 - Nested repos registered: `9`
-- Archive or binary artifacts inventoried: `613`
-- Classification overrides loaded: `10` from `catalog/classification_overrides.yaml`
-- Top-level paths excluded by privacy screen: `12`
+- Archive or binary artifacts inventoried: `615`
+- Classification overrides loaded: `11` from `catalog/classification_overrides.yaml`
+- Top-level paths excluded by privacy screen: `13`
+
+Targeted inventory update (November 8, 2026): `.claude` is managed in place as
+a root control surface. Other canonical inventory entries are retained.
 
 ## Zones
 
-- `_staging`: `7` top-level entries
+- `_staging`: `8` top-level entries
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `11` top-level entries
@@ -18,7 +21,7 @@
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
-- `tools`: `11` top-level entries
+- `tools`: `12` top-level entries
 
 ## Active Nested Repos
 
@@ -44,7 +47,7 @@
 
 ## Privacy Screen
 
-- `auto_scope_unknown`: `12` top-level paths excluded
+- `auto_scope_unknown`: `13` top-level paths excluded
 
 ## Largest Archive/Binary Artifacts
 

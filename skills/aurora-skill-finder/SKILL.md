@@ -17,18 +17,18 @@ Prefer precision over recall. Suppress weak/noisy matches and route borderline r
 Run the scanner with focused defaults:
 
 ```bash
-python3 /Users/travisstreets/.codex/skills/aurora-skill-finder/scripts/scan_skill_fit.py \
-  --root /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main \
+python3 ~/.codex/skills/aurora-skill-finder/scripts/scan_skill_fit.py \
+  --root ~/dev/Aurora_ORIONCORE_Directory_Main \
   --scope focused
 ```
 
 Use explicit outputs when needed:
 
 ```bash
-python3 /Users/travisstreets/.codex/skills/aurora-skill-finder/scripts/scan_skill_fit.py \
+python3 ~/.codex/skills/aurora-skill-finder/scripts/scan_skill_fit.py \
   --root /path/to/root \
   --scope focused \
-  --catalog /Users/travisstreets/.codex/skills/aurora-skill-finder/references/session_skill_catalog.json \
+  --catalog ~/.codex/skills/aurora-skill-finder/references/session_skill_catalog.json \
   --out-json /tmp/skill_map.json \
   --out-md /tmp/skill_map.md \
   --min-score 0.45 \

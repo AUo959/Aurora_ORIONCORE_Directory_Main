@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "generated_at": "2026-08-15T05:32:26Z",
-  "root": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
-  "manifest_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
+  "root": "~/dev/Aurora_ORIONCORE_Directory_Main",
+  "manifest_path": "~/dev/Aurora_ORIONCORE_Directory_Main/catalog/dev_toolkit_manifest.json",
   "toolkit_id": "aurora-dev-toolkit",
   "status": "WARN",
   "toolchain": [
@@ -30,7 +30,7 @@
         "gh",
         "--version"
       ],
-      "path": "/Users/travisstreets/.local/bin/gh",
+      "path": "~/.local/bin/gh",
       "returncode": 0,
       "output": "gh version 2.88.0 (2026-03-10)\nhttps://github.com/cli/cli/releases/tag/v2.88.0"
     },
@@ -58,7 +58,7 @@
         "python3.12",
         "--version"
       ],
-      "path": "/Users/travisstreets/.local/bin/python3.12",
+      "path": "~/.local/bin/python3.12",
       "returncode": 0,
       "output": "Python 3.12.13"
     },
@@ -88,7 +88,7 @@
         "uv",
         "--version"
       ],
-      "path": "/Users/travisstreets/.local/bin/uv",
+      "path": "~/.local/bin/uv",
       "returncode": 0,
       "output": "uv 0.10.9 (f675560f3 2026-03-06)"
     },
@@ -158,7 +158,7 @@
         "pre-commit",
         "--version"
       ],
-      "path": "/Users/travisstreets/.local/bin/pre-commit",
+      "path": "~/.local/bin/pre-commit",
       "returncode": 0,
       "output": "pre-commit 4.6.0"
     },
@@ -172,7 +172,7 @@
         "ruff",
         "--version"
       ],
-      "path": "/Users/travisstreets/.local/bin/ruff",
+      "path": "~/.local/bin/ruff",
       "returncode": 0,
       "output": "ruff 0.15.20"
     },
@@ -186,7 +186,7 @@
         "mypy",
         "--version"
       ],
-      "path": "/Users/travisstreets/.local/bin/mypy",
+      "path": "~/.local/bin/mypy",
       "returncode": 0,
       "output": "mypy 2.1.0 (compiled: yes)"
     },
@@ -214,7 +214,7 @@
         "pipx",
         "--version"
       ],
-      "path": "/Users/travisstreets/.local/bin/pipx",
+      "path": "~/.local/bin/pipx",
       "returncode": 0,
       "output": "1.15.0"
     },
@@ -284,7 +284,7 @@
         "rustc",
         "--version"
       ],
-      "path": "/Users/travisstreets/.local/bin/rustc",
+      "path": "~/.local/bin/rustc",
       "returncode": 0,
       "output": "rustc 1.95.0 (59807616e 2026-04-14)"
     },
@@ -298,7 +298,7 @@
         "go",
         "version"
       ],
-      "path": "/Users/travisstreets/.local/bin/go",
+      "path": "~/.local/bin/go",
       "returncode": 0,
       "output": "go version go1.26.3 darwin/arm64"
     }
@@ -600,7 +600,7 @@
       "python_command": [
         ".venv/bin/python"
       ],
-      "resolved_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "resolved_path": "~/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
       "path_resolution": "root",
       "required_imports": [
         "fastapi",
@@ -643,7 +643,7 @@
             ".venv/bin/python",
             "--version"
           ],
-          "path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "path": "~/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
           "returncode": 0,
           "output": "Python 3.12.13"
         },
@@ -655,9 +655,9 @@
             "pip",
             "--version"
           ],
-          "path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "path": "~/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
           "returncode": 0,
-          "output": "pip 25.0.1 from /Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/lib/python3.12/site-packages/pip (python 3.12)"
+          "output": "pip 25.0.1 from ~/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/lib/python3.12/site-packages/pip (python 3.12)"
         },
         "required_imports": {
           "status": "ok",
@@ -666,7 +666,7 @@
             "-c",
             "import importlib, json; names=['fastapi', 'httpx', 'slowapi']; versions={}; missing=[]; \nfor name in names:\n    try:\n        module = importlib.import_module(name)\n        versions[name] = getattr(module, '__version__', 'unknown')\n    except Exception as exc:\n        missing.append({'name': name, 'error': f'{type(exc).__name__}: {exc}'})\nprint(json.dumps({'versions': versions, 'missing': missing}, sort_keys=True))"
           ],
-          "path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "path": "~/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
           "returncode": 0,
           "output": "{\"missing\": [], \"versions\": {\"fastapi\": \"0.139.0\", \"httpx\": \"0.28.1\", \"slowapi\": \"unknown\"}}"
         },
@@ -678,7 +678,7 @@
             "pip",
             "check"
           ],
-          "path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
+          "path": "~/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/.venv/bin/python",
           "returncode": 0,
           "output": "No broken requirements found."
         }
@@ -735,7 +735,7 @@
       ],
       "missing_updates": [],
       "notes": "Root dependency automation should open PRs for GitHub Actions, pre-commit hook revisions, and devcontainer features.",
-      "resolved_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
+      "resolved_path": "~/dev/Aurora_ORIONCORE_Directory_Main",
       "path_resolution": "root"
     },
     {
@@ -823,7 +823,7 @@
       ],
       "missing_updates": [],
       "notes": "CloudBank dependency automation should open PRs for active Python, JavaScript, GitHub Actions, and pre-commit manifests. Archived docs and dependency caches remain excluded.",
-      "resolved_path": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "resolved_path": "~/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
       "path_resolution": "root"
     }
   ],
@@ -877,7 +877,7 @@
     "repo_local_count": 16,
     "installed_count": 26,
     "missing_installed_for_repo_source": [],
-    "skills_root": "/Users/travisstreets/.codex/skills"
+    "skills_root": "~/.codex/skills"
   },
   "automations": [
     {
@@ -885,98 +885,98 @@
       "name": "Archive Entropy Guard",
       "status": "PAUSED",
       "rrule": "FREQ=WEEKLY;BYDAY=SA;BYHOUR=12;BYMINUTE=0",
-      "path": "/Users/travisstreets/.codex/automations/archive-entropy-guard/automation.toml"
+      "path": "~/.codex/automations/archive-entropy-guard/automation.toml"
     },
     {
       "id": "archive-entropy-guard-2",
       "name": "Archive Entropy Guard",
       "status": "PAUSED",
       "rrule": "FREQ=WEEKLY;BYDAY=SA;BYHOUR=12;BYMINUTE=0",
-      "path": "/Users/travisstreets/.codex/automations/archive-entropy-guard-2/automation.toml"
+      "path": "~/.codex/automations/archive-entropy-guard-2/automation.toml"
     },
     {
       "id": "aurora-dev-toolkit-user-space-update",
       "name": "Aurora Dev Toolkit User-Space Update",
       "status": "PAUSED",
       "rrule": "FREQ=WEEKLY;BYDAY=SU;BYHOUR=9;BYMINUTE=15",
-      "path": "/Users/travisstreets/.codex/automations/aurora-dev-toolkit-user-space-update/automation.toml"
+      "path": "~/.codex/automations/aurora-dev-toolkit-user-space-update/automation.toml"
     },
     {
       "id": "aurora-dev-toolkit-watch",
       "name": "Aurora Dev Toolkit Watch",
       "status": "PAUSED",
       "rrule": "FREQ=WEEKLY;BYDAY=SU;BYHOUR=9;BYMINUTE=0",
-      "path": "/Users/travisstreets/.codex/automations/aurora-dev-toolkit-watch/automation.toml"
+      "path": "~/.codex/automations/aurora-dev-toolkit-watch/automation.toml"
     },
     {
       "id": "aurora-multi-repo-git-health",
       "name": "Aurora Multi-Repo Git Health",
       "status": "ACTIVE",
       "rrule": "FREQ=WEEKLY;BYDAY=FR;BYHOUR=9;BYMINUTE=30",
-      "path": "/Users/travisstreets/.codex/automations/aurora-multi-repo-git-health/automation.toml"
+      "path": "~/.codex/automations/aurora-multi-repo-git-health/automation.toml"
     },
     {
       "id": "aurora-package-watch",
       "name": "Aurora Package Watch",
       "status": "PAUSED",
       "rrule": "FREQ=HOURLY;INTERVAL=4",
-      "path": "/Users/travisstreets/.codex/automations/aurora-package-watch/automation.toml"
+      "path": "~/.codex/automations/aurora-package-watch/automation.toml"
     },
     {
       "id": "aurora-package-watch-bb49e52dcc54",
       "name": "Aurora Package Watch",
       "status": "PAUSED",
       "rrule": "FREQ=HOURLY;INTERVAL=4",
-      "path": "/Users/travisstreets/.codex/automations/aurora-package-watch-bb49e52dcc54/automation.toml"
+      "path": "~/.codex/automations/aurora-package-watch-bb49e52dcc54/automation.toml"
     },
     {
       "id": "aurora-root-workspace-health",
       "name": "Aurora Root Workspace Health",
       "status": "ACTIVE",
       "rrule": "FREQ=WEEKLY;BYDAY=WE;BYHOUR=9;BYMINUTE=0",
-      "path": "/Users/travisstreets/.codex/automations/aurora-root-workspace-health/automation.toml"
+      "path": "~/.codex/automations/aurora-root-workspace-health/automation.toml"
     },
     {
       "id": "cloudbank-pr-sentinel",
       "name": "CloudBank PR Sentinel",
       "status": "ACTIVE",
       "rrule": "FREQ=DAILY;BYHOUR=9;BYMINUTE=20",
-      "path": "/Users/travisstreets/.codex/automations/cloudbank-pr-sentinel/automation.toml"
+      "path": "~/.codex/automations/cloudbank-pr-sentinel/automation.toml"
     },
     {
       "id": "cloudbank-script-drift-audit",
       "name": "CloudBank Script Drift Audit",
       "status": "PAUSED",
       "rrule": "FREQ=WEEKLY;BYDAY=MO,TH;BYHOUR=9;BYMINUTE=0",
-      "path": "/Users/travisstreets/.codex/automations/cloudbank-script-drift-audit/automation.toml"
+      "path": "~/.codex/automations/cloudbank-script-drift-audit/automation.toml"
     },
     {
       "id": "cloudbank-script-drift-audit-2",
       "name": "CloudBank Script Drift Audit",
       "status": "PAUSED",
       "rrule": "FREQ=WEEKLY;BYDAY=MO,TH;BYHOUR=9;BYMINUTE=0",
-      "path": "/Users/travisstreets/.codex/automations/cloudbank-script-drift-audit-2/automation.toml"
+      "path": "~/.codex/automations/cloudbank-script-drift-audit-2/automation.toml"
     },
     {
       "id": "hourly-sim-retro",
       "name": "Hourly Sim Retro",
       "status": "PAUSED",
       "rrule": "FREQ=HOURLY;INTERVAL=1",
-      "path": "/Users/travisstreets/.codex/automations/hourly-sim-retro/automation.toml"
+      "path": "~/.codex/automations/hourly-sim-retro/automation.toml"
     },
     {
       "id": "qgia-closed-loop-validation",
       "name": "QGIA Closed-Loop Validation",
       "status": "PAUSED",
       "rrule": "FREQ=WEEKLY;BYDAY=TH;BYHOUR=9;BYMINUTE=0",
-      "path": "/Users/travisstreets/.codex/automations/qgia-closed-loop-validation/automation.toml"
+      "path": "~/.codex/automations/qgia-closed-loop-validation/automation.toml"
     },
     {
       "id": "weekly-skill-audit",
       "name": "Weekly Skill Audit",
       "status": "PAUSED",
       "rrule": "FREQ=WEEKLY;BYDAY=MO;BYHOUR=9;BYMINUTE=0",
-      "path": "/Users/travisstreets/.codex/automations/weekly-skill-audit/automation.toml"
+      "path": "~/.codex/automations/weekly-skill-audit/automation.toml"
     }
   ],
   "findings": [

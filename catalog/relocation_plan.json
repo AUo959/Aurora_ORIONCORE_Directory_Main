@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-08-10T02:14:11Z",
+  "generated_at": "2026-09-23T13:01:56Z",
   "root": ".",
   "policy": {
     "default_mode": "dry-run",
     "delete_allowed": false,
     "quarantine_required": true
   },
-  "manifest_generated_at": "2026-08-10T02:14:03Z",
+  "manifest_generated_at": "2026-09-23T13:01:49Z",
   "batches": [
     {
       "batch_id": "wave2_automation_reports_initial",
@@ -412,6 +412,32 @@
           "approved": false,
           "applied_at": null,
           "path_kind": "file"
+        },
+        {
+          "batch_id": "wave4_root_intake_cleanup_initial",
+          "source": "ecguard_pr_body.md",
+          "destination": "intake/ecguard_pr_body.md",
+          "operation": "move",
+          "pre_hash": "5d074c462c794d7475400f726b7c6a3fe3e2dad35307700c341c896d4a27d7bf",
+          "post_hash": "5d074c462c794d7475400f726b7c6a3fe3e2dad35307700c341c896d4a27d7bf",
+          "rollback_source": "ecguard_pr_body.md",
+          "reason": "Relocate ecguard_pr_body.md into intake/ecguard_pr_body.md.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "file"
+        },
+        {
+          "batch_id": "wave4_root_intake_cleanup_initial",
+          "source": "recovery",
+          "destination": "intake/recovery",
+          "operation": "move",
+          "pre_hash": "8eb414304a3ced79914346bb7b76e85539dc056a9169883a5f45fa982be0bd86",
+          "post_hash": "8eb414304a3ced79914346bb7b76e85539dc056a9169883a5f45fa982be0bd86",
+          "rollback_source": "recovery",
+          "reason": "Relocate recovery into intake/recovery.",
+          "approved": false,
+          "applied_at": null,
+          "path_kind": "tree"
         },
         {
           "batch_id": "wave4_root_intake_cleanup_initial",

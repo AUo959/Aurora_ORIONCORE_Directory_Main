@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "confidence_audit_batch",
+  "generated_at": "2026-09-24T00:13:58Z",
+  "tool": "aurora_confidence_audit",
+  "run_mode": "audit_scoring_only",
+  "live_runtime_execution": false,
+  "nested_repo_mutation": false,
+  "default_threshold": 0.7,
+  "schema_ref": "catalog/schemas/aurora_confidence_record.schema.json",
+  "contract_ref": "catalog/contracts/aurora_confidence_audit_contract_v1.json",
+  "summary": {
+    "record_count": 1,
+    "user_alert_count": 0,
+    "below_threshold_count": 0,
+    "claim_type_counts": {
+      "conclusion": 1
+    },
+    "minimum_score": 0.95,
+    "maximum_score": 0.95,
+    "thresholds": [
+      0.7
+    ],
+    "verdict": "pass"
+  },
+  "records": [
+    {
+      "schema_version": "1.0.0",
+      "record_type": "confidence_assessment",
+      "assessment_id": "aurora.confidence.88426ab4015fbd47",
+      "created_at": "2026-09-24T00:13:58Z",
+      "tool": "aurora_confidence_audit",
+      "authority_refs": [
+        "catalog/schemas/aurora_confidence_record.schema.json",
+        "catalog/contracts/aurora_confidence_audit_contract_v1.json"
+      ],
+      "claim": {
+        "claim_id": "live-review-20260924",
+        "claim_type": "conclusion",
+        "text": "The listed current repository-health findings and bounded repairs are supported by fresh Git and validator evidence; historical write scope remains unverified.",
+        "producer": "aurora-system",
+        "visibility": "internal",
+        "source_ref": null,
+        "subject_refs": [],
+        "authority_refs": [],
+        "evidence_refs": [
+          "reports/analysis/live_review_20260924/evidence.json",
+          "reports/analysis/live_review_20260924/review.md"
+        ],
+        "receipt_refs": [],
+        "assumptions": [],
+        "uncertainty_factors": [
+          "Historical no-write claim is not retrospectively provable; remote-only content and CloudBank runtime were not tested."
+        ],
+        "contradiction_refs": [],
+        "resolution_policy_ref": null
+      },
+      "confidence": {
+        "score": 0.95,
+        "threshold": 0.7,
+        "band": "high",
+        "evidence_level": "deterministic_check",
+        "score_source": "explicit_score",
+        "scoring_method": "aurora_confidence_audit_v1",
+        "calibration_profile": "bootstrap_default_v1",
+        "calibration_adjustment": 0.0,
+        "adjustments": []
+      },
+      "audit": {
+        "requires_user_alert": false,
+        "alert_level": "none",
+        "alert_reason": "meets_threshold",
+        "user_facing_message": null,
+        "recommended_next_action": "Keep confidence metadata in the audit trail; no user-facing alert is required by the current threshold.",
+        "run_mode": "audit_scoring_only",
+        "live_runtime_execution": false,
+        "nested_repo_mutation": false
+      }
+    }
+  ]
+}
