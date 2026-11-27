@@ -1388,7 +1388,7 @@
       "detail": "Read-only investigation complete: #1083 closed in July; August authority retires legacy snapshot, but Git-age workflow and API/docs retain old semantics. Preflight ready at tick0/no run; 20 tests pass; snapshot bytes unchanged. Evidence and repair plan recorded; implementation waits for CI review."
     }
   ],
-  "last_updated": "2026-11-27T19:00:35Z",
+  "last_updated": "2026-11-27T19:04:46Z",
   "last_platform": "claude-code",
   "last_session_summary": "Migrated 24 open backlog issues (19 CloudBank, 5 ORIONCORE) into task_queue as gh-* items, with verbatim archives in catalog/backlog_archive/, ahead of closing the GitHub issues during zero-open triage.",
   "tool_versions": {
@@ -1413,6 +1413,30 @@
     "pip-audit": "2.10.1 (isolated scratch audit helper; application environments unchanged)"
   },
   "recent_commits": [
+    {
+      "sha": "e6f06b2",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "Merge main into codex/health-easy-wins-20260926"
+    },
+    {
+      "sha": "d59cb6d",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "Add read-only Aurora session-status mod for Claude Code (#94)"
+    },
+    {
+      "sha": "4988a73",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "feat(ui): add authenticated, local-only Mission Control snapshot retrieval (#98)"
+    },
+    {
+      "sha": "41f1162",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "chore(state): refresh session_state mechanical fields"
+    },
     {
       "sha": "ef18af1",
       "date": "2026-11-27",
@@ -1448,30 +1472,6 @@
       "date": "2026-11-27",
       "platform": "claude-code",
       "summary": "chore(state): refresh session_state mechanical fields"
-    },
-    {
-      "sha": "ae22c81",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "Merge main into codex/health-easy-wins-20260926"
-    },
-    {
-      "sha": "6ad76ce",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "chore(queue): migrate 24 open GitHub backlog issues into task_queue with verbatim archives (#128)"
-    },
-    {
-      "sha": "c7b1d0c",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "docs: investigate legacy simulation freshness and authority mismatch (#115)"
-    },
-    {
-      "sha": "9cd35f1",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "docs(automation): record Friday brief acceptance and remaining gates (#93)"
     }
   ],
   "security_events": [
@@ -1488,7 +1488,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "ef18af1773ee5b324460e6e0f1a4ce3487d263e6",
+    "main_sha": "e6f06b2d09d59954b667041c4a61494c50307208",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
