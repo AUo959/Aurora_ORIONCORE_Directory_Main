@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "review_id": "pr-20261127-gumas-unified-p0-p6-stack",
+  "reviewed_debt_ids": [],
+  "target": {
+    "repository": "AUo959/aurora-cloudbank-symbolic",
+    "tracker": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1711",
+    "pull_requests": [
+      "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1701",
+      "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1702",
+      "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1703",
+      "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1704",
+      "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1705",
+      "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1706",
+      "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1710",
+      "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1712",
+      "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1724",
+      "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1726"
+    ],
+    "heads": {
+      "#1701 P0": "303a7f20",
+      "#1702 P1": "71ecd9e9",
+      "#1703 P2": "f9c036b1",
+      "#1704 P3": "bf4561c4",
+      "#1724 P3 corrected": "ea32f28f",
+      "#1705 P4": "cfbd593c",
+      "#1726 P4 corrected": "76167093",
+      "#1706 P5": "cfc561fb",
+      "#1710 P6": "642d5747",
+      "#1712 P6 corrected": "2bfb38f3"
+    },
+    "diff_base": "4a4c60b7",
+    "main_at_review": "dabaa67",
+    "change_class": "significant",
+    "domain": "gumas-unified-causal-engine",
+    "excluded": {
+      "#1730": "Claude-authored; needs Codex as reviewer (protocol section 5)",
+      "#1506": "draft, Phase 10 incomplete"
+    },
+    "notes": "Reviewed as a stack. Author platform recorded as codex per the project's triage routing; commit metadata names the owner only."
+  },
+  "author_platform": "codex",
+  "reviewer_platform": "claude-code",
+  "reviewed_at": "2026-11-27T19:45:00Z",
+  "warrant_level": "artifact",
+  "verdict": "changes-requested",
+  "summary": "The code is behaviorally sound and well isolated, but the stack is not landable as-is. The P3 and P4 corrections (#1724, #1726) are side branches that never reached P5/P6, so the final head 2bfb38f3 still carries F821 and the old validate_protocol complexity. F401 deepcopy from P2 was never fixed, and P0/P1/P2/P5 Codacy findings remain, with Universe.validate at CC 147. The #1710 high ErrorProne is attributed (F401 federated_scenario.py:12) and fixed in #1712. Both corrections apply cleanly on top of 2bfb38f3 with 179/179 tests and identical scenario output, so the path forward is one combined candidate plus the deepcopy fix, then the P0 split (#1730, Codex review) and inherited complexity work before merge. Stack not merged; #1711 stays open.",
+  "reverified_gates": [
+    {
+      "gate": "environment",
+      "command": "Detached worktrees of the CloudBank clone at each of the 10 heads; local Python 3.13.18 (CI uses 3.12); gh API read-only",
+      "result": "pass",
+      "evidence": "No live Aurora, CanonRec writes, model-provider credentials or network calls. No PR, branch or issue in CloudBank was modified."
+    },
+    {
+      "gate": "stack topology",
+      "command": "gh api pulls/{n} for the 10 PRs; git merge-base each head with origin/main",
+      "result": "fail",
+      "evidence": "Linear chain P0 #1701 -> main, P1..P6 each on the previous original branch, #1712 on P6. The corrected heads are side branches: #1724 sits on P2 (alternate P3), #1726 on ORIGINAL P3 bf4561c4, so neither correction is in the #1706/#1710/#1712 lineage. All heads share merge base 4a4c60b7 and are 28 commits behind main dabaa67."
+    },
+    {
+      "gate": "unit suites (per head)",
+      "command": "python -m unittest discover -s tests -p 'test_gumas_unified*.py' in each worktree",
+      "result": "pass",
+      "evidence": "P0 13/13; P1 26/26; P2 49/49; P3 74/74; P3fix 74/74; P4 97/97; P4fix 97/97; P5 130/130; P6 166/166; P6fix 179/179. Matches the author's 74/97/179 counts."
+    },
+    {
+      "gate": "scenario scripts (per head)",
+      "command": "python -m simulation.runtime.gumas_unified.{scenario,political_scenario,governance_scenario,distributed_scenario,federated_scenario}; sha256 of stdout",
+      "result": "pass",
+      "evidence": "All exit 0 on every head where present. P0 scenario 621f86f1 identical on all 10 heads. P3 53b00c23, P4 3ed92c90, P5 d67cf074 identical original vs corrected. P6 ba6121ad (original) -> c060255f (corrected); the sorted-JSON diff differs only in digest/before/after/previous/final_state hashes, consistent with #1712 adding shipment times to state without changing receipt shape."
+    },
+    {
+      "gate": "P0 validator golden harness",
+      "command": "PYTHONPATH=<head> python -m unittest discover on /mnt/project-files/gumas-p0-validator-split (golden json sha256 93bb99ed...)",
+      "result": "pass",
+      "evidence": "12/12 tests, all 741 golden outcomes identical on all 10 heads."
+    },
+    {
+      "gate": "Codacy (per PR, via check-run annotations)",
+      "command": "gh api check-runs/{id}/annotations for 'Codacy Static Code Analysis' on each head (app.codacy.com API is not reachable from this environment)",
+      "result": "fail",
+      "evidence": "New-issue counts vs each PR's base: #1701 3, #1702 6, #1703 9, #1704 2, #1705 8, #1706 4, #1710 18, #1712 0, #1724 0, #1726 0. Codacy is action_required on all 7 original PRs. #1712/#1724/#1726 'up to standards' is relative to their own bases only."
+    },
+    {
+      "gate": "#1710 high ErrorProne attribution",
+      "command": "annotation list for #1710 check run; flake8 --select=F at 642d5747 and 2bfb38f3",
+      "result": "pass",
+      "evidence": "Pyflakes F401 simulation/runtime/gumas_unified/federated_scenario.py:12 '.political_scenario.p3_fixture' imported but unused. Present at 642d5747, absent at 2bfb38f3 (removed in #1712 b34ee452). Matches the tracker's 2026-11-23 attribution."
+    },
+    {
+      "gate": "cumulative static check at final head",
+      "command": "flake8 --isolated --select=F and --select=C901 --max-complexity=8; radon cc -n C, at 2bfb38f3",
+      "result": "fail",
+      "evidence": "F401 bindings.py:12 'copy.deepcopy' (from P2 #1703, never fixed); F821 kernel.py:140 'ReliefProposal' (from P3; fixed only in side branch #1724). 7 C901 functions; Universe.validate CC 147 (Codacy flagged 31 at P0), time_alignment 29/23/22, bindings 26/14, governance_rules.validate_protocol 20 (fixed only in side branch #1726), external_evidence 16/16/13/12/11."
+    },
+    {
+      "gate": "composition of corrections (scratch only)",
+      "command": "worktree at 2bfb38f3; git apply --3way (bf4561c4..ea32f28f) and (cfbd593c..76167093); rerun suites, scenarios, flake8 F",
+      "result": "pass",
+      "evidence": "Both deltas apply cleanly. 179/179 tests; all five scenario hashes identical to 2bfb38f3; F821 cleared; only F401 deepcopy remains. Nothing pushed."
+    },
+    {
+      "gate": "isolation and scope",
+      "command": "git diff --name-only 4a4c60b7 2bfb38f3; grep imports and I/O in simulation/runtime/gumas_unified",
+      "result": "pass",
+      "evidence": "Every changed path is under simulation/runtime/gumas_unified, simulation/specs, simulation/audits, tests/test_gumas_unified*, or .github/workflows/gumas-unified-p0.yml. Stdlib-only imports; no open/socket/requests/subprocess/environ. 2bfb38f3 merges into main without conflict (git merge-tree)."
+    },
+    {
+      "gate": "hosted checks",
+      "command": "gh api commits/{sha}/check-runs for each head",
+      "result": "pass",
+      "evidence": "isolated-p0 (GUMAS P0-P6 workflow), GitGuardian and evaluate jobs success on all heads. SonarCloud quality gate failed on #1704 and #1705, passed elsewhere."
+    }
+  ],
+  "findings": [
+    {
+      "id": "f1",
+      "severity": "blocking",
+      "disposition": "must-fix",
+      "evidence": "stack topology + cumulative static check gates: #1724 base f9c036b1, #1726 base bf4561c4; F821 kernel.py:140 and validate_protocol CC 20 at 2bfb38f3",
+      "description": "There is no single coherent head to land. The P3 and P4 corrections live on side branches and are absent from P5/P6/#1712, so landing 'in order using #1724/#1726/#1712' either drops those fixes or conflicts with the original #1704/#1705 commits that #1706+ carry. The composition gate shows they combine cleanly onto 2bfb38f3; that combined branch should be the landing candidate."
+    },
+    {
+      "id": "f2",
+      "severity": "blocking",
+      "disposition": "must-fix",
+      "evidence": "Codacy annotations #1703 bindings.py:12; flake8 F401 at 2bfb38f3",
+      "description": "F401 'copy.deepcopy' imported but unused in bindings.py:12 (introduced in P2 #1703) survives to the final head. It is the same Pyflakes class as the #1710 ErrorProne finding the tracker treated as a merge blocker. One-line fix."
+    },
+    {
+      "id": "f3",
+      "severity": "blocking",
+      "disposition": "must-fix",
+      "evidence": "Codacy annotations on #1701/#1702/#1703/#1706; radon at 2bfb38f3; tracker #1711 'Next' and 'Required remediation' item 5",
+      "description": "Inherited P0/P1/P2/P5 Codacy complexity findings are unresolved, and Universe.validate has grown from CC 31 to 147 across the stack. #1701 targets main, so merging it lands 3 new Codacy issues on main under the repo's zero-new-issues gate. The tracker's own stated gate is to reconcile these before merging any stacked PR; the P0 split is in flight as #1730."
+    },
+    {
+      "id": "f4",
+      "severity": "note",
+      "disposition": "accepted-with-note",
+      "evidence": "#1710 high ErrorProne attribution gate",
+      "description": "The #1710 high ErrorProne finding is identified (F401 federated_scenario.py:12) and fixed in #1712. That part of the #1711 merge gate is satisfied."
+    },
+    {
+      "id": "f5",
+      "severity": "note",
+      "disposition": "accepted-with-note",
+      "evidence": "unit suites, scenario scripts and golden harness gates",
+      "description": "Behavior is stable: every head passes its suite, P0-P5 scenario outputs are byte-identical between original and corrected heads, and the 741-outcome P0 validator golden set is identical on all 10 heads."
+    },
+    {
+      "id": "f6",
+      "severity": "note",
+      "disposition": "accepted-with-note",
+      "evidence": "isolation and scope gate",
+      "description": "The stack is confined to GUMAS paths, uses only the standard library, does no I/O, and does not touch CanonRec, L1 or live services."
+    },
+    {
+      "id": "f7",
+      "severity": "note",
+      "disposition": "accepted-with-note",
+      "evidence": "environment gate",
+      "description": "Reverified on Python 3.13 locally; CI pins 3.12 and its hosted isolated-p0 runs are green on every head. Codacy was read through GitHub check-run annotations because app.codacy.com is blocked by this environment's network policy."
+    },
+    {
+      "id": "f8",
+      "severity": "note",
+      "disposition": "accepted-with-note",
+      "evidence": "PR #1730 head 397da8b4 authored by claude-code",
+      "description": "#1730 (P0 validator split) is out of scope here. It is Claude-authored, so under protocol section 5 its review belongs to Codex."
+    }
+  ],
+  "follow_up": [
+    "Build one combined candidate: 2bfb38f3 + (bf4561c4..ea32f28f) + (cfbd593c..76167093) + drop bindings.py deepcopy import; rerun suites, scenarios and cumulative Codacy vs main.",
+    "Codex review of #1730 (P0 validator split).",
+    "Resolve or explicitly disposition the P1/P2/P5 complexity findings before any PR in the stack merges to main."
+  ]
+}
