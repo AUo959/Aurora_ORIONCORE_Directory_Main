@@ -885,7 +885,7 @@
       ]
     }
   ],
-  "last_updated": "2026-11-10T03:50:40Z",
+  "last_updated": "2026-11-27T16:25:23Z",
   "last_platform": "claude-code",
   "last_session_summary": "SSE guard independently approved and landed (#1699/#114); source main 3863 tests plus 101 subtests passed. Reconciled unmerged coordination PR #113 with root main, preserving cleared SSE debt and pending Claude review. Implementation 382d4c5 unchanged; no self-review or merge of #113.",
   "tool_versions": {
@@ -911,64 +911,64 @@
   },
   "recent_commits": [
     {
-      "sha": "1bbc742",
-      "date": "2026-11-09",
+      "sha": "ef4bba4",
+      "date": "2026-11-27",
+      "platform": "codex",
+      "summary": "Execute approved GUMAS seeds with native run receipts (#125)"
+    },
+    {
+      "sha": "626bcc5",
+      "date": "2026-11-27",
+      "platform": "codex",
+      "summary": "Make native GUMAS replay artifacts reproducible (#124)"
+    },
+    {
+      "sha": "90c6ec5",
+      "date": "2026-11-27",
+      "platform": "codex",
+      "summary": "Complete pinned CanonRec reconciliation and record provenance (#123)"
+    },
+    {
+      "sha": "3e08039",
+      "date": "2026-11-27",
+      "platform": "codex",
+      "summary": "Register staged outcomes and project Chronicle input (#122)"
+    },
+    {
+      "sha": "8802b91",
+      "date": "2026-11-24",
+      "platform": "codex",
+      "summary": "Journal authorized CanonRec staging requests (#121)"
+    },
+    {
+      "sha": "9d41c12",
+      "date": "2026-11-24",
+      "platform": "codex",
+      "summary": "Query pinned CanonRec records through Canon Operations (#120)"
+    },
+    {
+      "sha": "6f28f88",
+      "date": "2026-11-14",
       "platform": "claude-code",
-      "summary": "docs(review): independent peer review of session coordination fixes (#109)"
+      "summary": "chore(privacy): redact local user paths and a personal email (#117)"
     },
     {
-      "sha": "f2425a7",
-      "date": "2026-11-09",
-      "platform": "codex",
-      "summary": "chore(mcp): sync verified SDK v2 migration and independent review handoff (#110)"
-    },
-    {
-      "sha": "6643b2d",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "fix(coordination): share worktree claims and preserve hook platform attribution (#108)"
-    },
-    {
-      "sha": "7987620",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "chore(ci): sync verified CI consolidation and preserve follow-up roadmap work (#107)"
-    },
-    {
-      "sha": "d5f15f5",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "chore(security): sync verified dependency remediation and close targeted queue item (#106)"
-    },
-    {
-      "sha": "334cfb3",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "fix(queue): preserve registry pins and record backlog reconciliation (#105)"
-    },
-    {
-      "sha": "8b677b6",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "fix(registry): document audited scanner invocation and update gate guidance"
-    },
-    {
-      "sha": "30d65a2",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "fix(registry): preserve explicit pins and refuse branch mismatch"
-    },
-    {
-      "sha": "1801d00",
-      "date": "2026-11-08",
+      "sha": "284d657",
+      "date": "2026-11-14",
       "platform": "claude-code",
-      "summary": "fix(session-state): record commit provenance from the commit, not the sync (#87)"
+      "summary": "ci: pin the py3.9 test leg to ubuntu-24.04 (#118)"
     },
     {
-      "sha": "083a532",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "chore(ai): pin current OpenAI migration and close GPT-4o retirement (#104)"
+      "sha": "2179f1e",
+      "date": "2026-11-10",
+      "platform": "claude-code",
+      "summary": "docs(review): independent peer review of CloudBank CI consolidation (#116)"
+    },
+    {
+      "sha": "35088f0",
+      "date": "2026-11-10",
+      "platform": "claude-code",
+      "summary": "fix(coordination): scrub inherited GIT_COMMON_DIR from claim discovery (#113)"
     }
   ],
   "security_events": [
@@ -985,7 +985,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "e1b07d38df5aff9d78c0a5c69021ee437584f51b",
+    "main_sha": "ef4bba4",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -1185,17 +1185,16 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-09-01T16:37:07Z",
+    "checked_at": "2026-11-27T16:25:23Z",
     "entries": [
       {
         "repo": "root",
         "class": "stranded_branch",
-        "branch": "integration/connectivity-pass-2026-08-19",
-        "detail": "3 commit(s) exist only on this machine",
-        "remediation": "Push and open a PR: git push -u origin integration/connectivity-pass-2026-08-19 && gh pr create"
+        "branch": "pr126",
+        "detail": "1 commit(s) exist only on this machine",
+        "remediation": "Push and open a PR: git push -u origin pr126 && gh pr create"
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
-  },
-  "_summary_set_manually": true
+  }
 }
