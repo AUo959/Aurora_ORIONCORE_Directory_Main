@@ -9,7 +9,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 tools/session_stop_hook.py session-start",
+            "command": "AURORA_SESSION_PLATFORM=claude-code python3 tools/session_stop_hook.py session-start",
             "statusMessage": "Session start: project focus + orphan check + auto-claim"
           }
         ]
@@ -21,7 +21,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 tools/session_stop_hook.py"
+            "command": "AURORA_SESSION_PLATFORM=claude-code python3 tools/session_stop_hook.py"
           }
         ]
       }

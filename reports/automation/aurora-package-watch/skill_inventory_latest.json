@@ -1,5 +1,5 @@
 {
-  "skills_root": "/Users/travisstreets/.codex/skills",
+  "skills_root": "~/.codex/skills",
   "count": 25,
   "names": [
     "aurora-canon-reconciler",

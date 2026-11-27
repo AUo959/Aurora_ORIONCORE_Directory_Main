@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "review_id": "pr-20261110-mcp-sse-dns-rebinding-guard",
+  "reviewed_debt_ids": [
+    "rd-20261110-mcp-sse-dns-rebinding-guard"
+  ],
+  "target": {
+    "repository": "AUo959/aurora-cloudbank-symbolic",
+    "commits": [
+      "d01a6853dd3552cd4059f54e87914fe527662e79"
+    ],
+    "diff_base": "fe99f3e5a300ecdc21c9fdf86563834d9e782568",
+    "change_class": "cross-repo",
+    "domain": "mcp-connector",
+    "root_handoff_commit": "78d87d30deaf6d3a5e44d56b7e244f2702db2eb9"
+  },
+  "author_platform": "claude-code",
+  "reviewer_platform": "codex",
+  "reviewed_at": "2026-11-10T02:41:46.517265Z",
+  "warrant_level": "artifact",
+  "verdict": "approve",
+  "summary": "Independent re-verification finds no blocking defect in the DNS-rebinding patch. SDK validation protects GET /sse and POST /messages/ before session creation/delivery. Default loopback, explicit remote configuration, invalid-call isolation, tool schemas, backend authentication and installed-wheel SDK1.30 compatibility are preserved.",
+  "reverified_gates": [
+    {
+      "gate": "fixed revisions",
+      "command": "git diff fe99f3e5 d01a6853; root diff 0e8fc755 78d87d30",
+      "result": "pass",
+      "evidence": "Reviewed all five CloudBank changed files, both root handoff files and supporting MCP SDK validation/SSE code; source worktree unchanged."
+    },
+    {
+      "gate": "real transport and connector tests",
+      "command": "python -m pytest tests/connector tests/test_mcp_connector_wired.py -q",
+      "result": "pass",
+      "evidence": "116 passed, 73 live-backend skips; all 45 new transport cases pass, including actual IPv6 loopback."
+    },
+    {
+      "gate": "mutation control",
+      "command": "Remove security settings only in separate sse-review-mutation worktree; pytest test_sse_transport_security.py",
+      "result": "pass",
+      "evidence": "18 failed, 27 passed; the unmodified target remains unchanged."
+    },
+    {
+      "gate": "full final-head suite",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check using mcp-v2-final-venv",
+      "result": "pass",
+      "evidence": "3863 passed, 92 skipped, 9 xfailed, 2 existing xpassed; 319.61 seconds on d01a6853."
+    },
+    {
+      "gate": "fresh dependency and wheel environment",
+      "command": "pip install --require-hashes --only-binary=:all: -r requirements-ci-hashed.txt; pip wheel --no-deps ./connector; install wheel; pip check",
+      "result": "pass",
+      "evidence": "Fresh environment uses unchanged hash lock; no broken requirements. Wheel sha256 9ae72bb1b809bcd4835ca1f2df2b2e7eb2294424493ea8d258a2bbc9a37e4b34; imported from site-packages outside checkout."
+    },
+    {
+      "gate": "independent SDK 1.30 compatibility",
+      "command": "sse-review-legacy-harness.py against checkout, installed aurora-mcp, and base fe99f3e5",
+      "result": "pass",
+      "evidence": "SDK 1.30.0 completes stdio and SSE; five descriptions/input schemas identical across base/checkout/wheel. Five invalid/unknown calls per transport cause zero backend requests; valid health calls retain bearer auth. Host/Origin refused on GET/POST for target and wheel; no SSE tracebacks."
+    },
+    {
+      "gate": "additional live edge profiles",
+      "command": "sse-review-edge-isolated.py default-port, ::, [::], 0:0:0:0:0:0:0:0, remote",
+      "result": "pass",
+      "evidence": "Each profile in a fresh process passes: portless Host/Origin with port-80 policy, no unspecified IPv6 implicit trust, exact remote host/port, explicit port-wildcard origin, suffix and wrong-port refusals."
+    },
+    {
+      "gate": "unchanged contracts and boundaries",
+      "command": "git diff --exit-code fe99f3e5 d01a6853 -- simulation/ connector/auth connector/tools connector/transport connector/pyproject.toml requirements-ci-hashed.txt requirements-lock.txt",
+      "result": "pass",
+      "evidence": "No diff. l1_runtime.py blob remains 5b6d93515fb219cb26d267db6c6df6c052413ae1."
+    },
+    {
+      "gate": "root handoff verification",
+      "command": "root-venv/bin/python -m pytest tests/ -q with pinned CloudBank/CanonRec references",
+      "result": "pass",
+      "evidence": "773 passed, 41 skipped in 37.62 seconds after resolving environment inode exhaustion."
+    },
+    {
+      "gate": "hosted source checks",
+      "command": "GitHub check-runs on d01a6853 and root #114 original head",
+      "result": "pass",
+      "evidence": "All source checks success/skipped; original root handoff checks pass. One outdated default-port thread is resolved based on source correction and live probe."
+    }
+  ],
+  "findings": [],
+  "threat_model": {
+    "scope": "Changed SSE HTTP transport and allowlist CLI; root review/pin handoff. Malicious browser origins/DNS rebinding cross the public Host/Origin boundary into SDK session creation and message delivery. Backend bearer credentials remain on the existing bridge; remote gateway authentication remains external.",
+    "limitations": [
+      "Header checks are not authentication. Native clients can supply arbitrary headers; remote deployments still require an authenticated gateway protecting both endpoints.",
+      "Loopback HTTP web origins are intentionally trusted at any port. Matching remains SDK case-sensitive."
+    ]
+  },
+  "not_verified": [
+    "Managed security plugin preflight resource and scan tools unavailable: this is a manual project peer review, not a finalized plugin security scan.",
+    "No live Aurora backend or production remote authenticated gateway was exercised."
+  ],
+  "methodology_notes": [
+    "Used independent loopback backend and SDK1.30 subprocess client; baseline run compares protocols/schemas, not hostile-header refusal.",
+    "Initial custom harness used a nonexistent capsule property as an invalid-input test; corrected to the published ethics severity enum, then reran successfully.",
+    "An initial root run exhausted workspace inodes; removed only prior task disposable npm/pip caches and node_modules, then reran root tests successfully. Claude environments preserved.",
+    "Multi-server edge probe encountered the existing sse-starlette global graceful-shutdown latch. Isolated each profile in a separate process matching CLI lifetime; all pass."
+  ],
+  "follow_up_tasks": [],
+  "debt_disposition": "Clear this patch debt with this receipt; retain cleared prior MCP migration debt and unrelated pending CI/coordination reviews.",
+  "landing": {
+    "cloudbank_pr": 1699,
+    "merged_sha": "b68c4717332f57b5bca0d07e06b448380ad3b76d",
+    "source_tree_equals_reviewed_head": true,
+    "root_pr": 114,
+    "registry_policy_and_test_sha": "b68c4717332f57b5bca0d07e06b448380ad3b76d",
+    "owner_blob": "5b6d93515fb219cb26d267db6c6df6c052413ae1",
+    "simulation_diff_empty": true,
+    "owner_tests": "10 passed",
+    "registry_drift": 0,
+    "root_integration_gate": "all six subprocesses zero; warn for existing environment/skill/queue advisories",
+    "source_main_ci_run": 42744570449,
+    "source_main_ci_status": "success",
+    "known_main_only_failure": "simulation-state freshness guard, pre-existing GAP-010/#1083",
+    "source_main_result": "3863 passed, 92 skipped, 9 xfailed, 2 existing xpassed, 101 subtests; 454.87 seconds"
+  }
+}
