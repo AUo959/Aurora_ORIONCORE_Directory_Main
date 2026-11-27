@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "status": "accepted",
+  "date": "2026-09-06",
+  "implementation_revision": "9f4400baa000af5f9e19a68ea40a6bea6f32f37c",
+  "world_directory": "/Users/travisstreets/dev/aurora-ace-sandbox",
+  "world_id": "aurora-world-a64638e56af946f4a9f14af1c8f4f80a",
+  "composition_acceptance": {
+    "rows_passed": 13,
+    "rows_total": 13,
+    "require_ready": true,
+    "receipt": "reports/analysis/aurora_ace_v1_acceptance_latest.json"
+  },
+  "sandbox_tests": {
+    "passed": 15,
+    "command": "ACE_SANDBOX_E2E=1 python -m pytest tests/test_aurora_ace_sandbox.py -q"
+  },
+  "integration_gate": "pass",
+  "codex_demonstration": {
+    "transport": "project-scoped stdio MCP",
+    "model": "gpt-6-astra",
+    "first_task": "01a074d5-9835-7072-9fd2-11046e5e403c",
+    "second_task": "01a074d9-067a-7f60-b812-6679bbd62d1c",
+    "fresh_process": true,
+    "exact_match_fields": [
+      "world_id",
+      "entity_id",
+      "name",
+      "background",
+      "commit_sha"
+    ],
+    "creation": {
+      "world_id": "aurora-world-a64638e56af946f4a9f14af1c8f4f80a",
+      "world_scope": "isolated_aurora_world",
+      "entity_id": "char_expedition_archivist_ee86138dfc73",
+      "name": "Jorenon Morrowen",
+      "background": "Jorenon Morrowen holds the role of Expedition Archivist within Galactic Union (federation). Dominant cognitive profile: hyper_rationalism_bias (intensity 0.42, plasticity 0.54). Legitimacy: 0.62; elite support: 0.61; institutional control: 0.60. Decision-making archetype: hyper_rationalism_bias. Tone: analytical; cadence: precise. Risk tolerance: 0.47; diplomacy openness: 0.80; escalation threshold: 0.57; oversight resistance: 0.22. In the observed encounter aboard the archive outpost, Jorenon Morrowen Carefully cross-checks conflicting expedition logs.",
+      "determination_id": "ace.determination.character.c0a1b8640fd932dfdc86.materialized.c5a69e946618",
+      "commit_sha": "c5a69e9466189356314f81c0dde42365825f7f88",
+      "inherited_retrieval_status": "RETRIEVED_CANON"
+    },
+    "recall": {
+      "world_id": "aurora-world-a64638e56af946f4a9f14af1c8f4f80a",
+      "entity_id": "char_expedition_archivist_ee86138dfc73",
+      "name": "Jorenon Morrowen",
+      "background": "Jorenon Morrowen holds the role of Expedition Archivist within Galactic Union (federation). Dominant cognitive profile: hyper_rationalism_bias (intensity 0.42, plasticity 0.54). Legitimacy: 0.62; elite support: 0.61; institutional control: 0.60. Decision-making archetype: hyper_rationalism_bias. Tone: analytical; cadence: precise. Risk tolerance: 0.47; diplomacy openness: 0.80; escalation threshold: 0.57; oversight resistance: 0.22. In the observed encounter aboard the archive outpost, Jorenon Morrowen Carefully cross-checks conflicting expedition logs.",
+      "creation_determination_id": "ace.determination.character.c0a1b8640fd932dfdc86.materialized.c5a69e946618",
+      "commit_sha": "c5a69e9466189356314f81c0dde42365825f7f88"
+    },
+    "canon_head_after_recall": "c5a69e9466189356314f81c0dde42365825f7f88",
+    "host_approval": "Codex automatic approval review; first task resumed after noninteractive approval-never refusal"
+  },
+  "preservation": {
+    "before": {
+      "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main": {
+        "head": "e3d9dc107749baabf5b9b66d928c40712a1b6086",
+        "status": " M catalog/path_aliases.csv\n M catalog/relocation_plan.json\n M catalog/rollback_wave4_root_intake_cleanup_initial.json\n?? archives/recovered_prototypes/biological_pneumatic_engine/Biological_Pneumatic_Engine_Whitepaper.docx\n?? reports/simulation/hour_aboard_v1__2026-08-18/\n?? reports/simulation/hour_aboard_v1__2026-08-19/\n?? reports/simulation/hour_aboard_v1__2026-08-20/\n?? reports/simulation/hour_aboard_v1__2026-08-27/\n?? reports/simulation/hour_aboard_v1__2026-09-01/\n",
+        "diff_sha256": "8c0601cdc1996dd361d3e8ef84da6b67dad89dbbd3e10fd2c96119e0587d3ce4"
+      },
+      "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/CanonRec": {
+        "head": "971e78b672ba85ff4360580718499b46d9a7714a",
+        "status": "",
+        "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main": {
+        "head": "a19870a576a4136fc7ee8c30a2a8d869f36156d9",
+        "status": "",
+        "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "protected_runs": {
+        "/Users/travisstreets/.aurora/l1-runs/9f906aa3-a16d-4495-9398-fb141b40c6df/state.json": "f9549d6ed12e8e4aa72ca59a11fe75108dd292af5a7d44ecd3fb34e41c66db55",
+        "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/migration_projection_v1_2.json": "0bb0ec98cba862aabce77f0d5ca70b9c63e8c53b7d50da49b91c88939bb38f2b",
+        "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/state.json": "1349f58389c93a18b96eb9d7460ba35c3273a85e743db86127b491c705eb1fa4",
+        "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/migration_receipt.json": "625ad896b32a1a3471c70d6359cb3e46d0dd007b81291ec27e347002b0a36190",
+        "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/recovery_receipt.json": "5e8a4369d0aadf7ba7f974636012de76dd51f1bcf929585987cca2380c38e1e0",
+        "/Users/travisstreets/.aurora/l1-runs/59da8a1c-df89-4203-bdd9-5e5ad89090e6/state.json": "36111a123af65ca7905ece92556a2895a0641d49ce35c1f941f6f06bfd359e7d",
+        "/Users/travisstreets/.aurora/l1-runs/c1503ce5-d6e8-4c84-b91d-63b55d1b38f0/state.json": "6c7755b2c8ea62f07f00a93967aace20b12b024641af73b0c3fed30ffe45d98a"
+      }
+    },
+    "after": {
+      "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main": {
+        "head": "e3d9dc107749baabf5b9b66d928c40712a1b6086",
+        "status": " M catalog/path_aliases.csv\n M catalog/relocation_plan.json\n M catalog/rollback_wave4_root_intake_cleanup_initial.json\n?? archives/recovered_prototypes/biological_pneumatic_engine/Biological_Pneumatic_Engine_Whitepaper.docx\n?? reports/simulation/hour_aboard_v1__2026-08-18/\n?? reports/simulation/hour_aboard_v1__2026-08-19/\n?? reports/simulation/hour_aboard_v1__2026-08-20/\n?? reports/simulation/hour_aboard_v1__2026-08-27/\n?? reports/simulation/hour_aboard_v1__2026-09-01/\n",
+        "diff_sha256": "8c0601cdc1996dd361d3e8ef84da6b67dad89dbbd3e10fd2c96119e0587d3ce4"
+      },
+      "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/CanonRec": {
+        "head": "971e78b672ba85ff4360580718499b46d9a7714a",
+        "status": "",
+        "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main": {
+        "head": "a19870a576a4136fc7ee8c30a2a8d869f36156d9",
+        "status": "",
+        "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "protected_runs": {
+        "/Users/travisstreets/.aurora/l1-runs/9f906aa3-a16d-4495-9398-fb141b40c6df/state.json": "f9549d6ed12e8e4aa72ca59a11fe75108dd292af5a7d44ecd3fb34e41c66db55",
+        "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/migration_projection_v1_2.json": "0bb0ec98cba862aabce77f0d5ca70b9c63e8c53b7d50da49b91c88939bb38f2b",
+        "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/state.json": "1349f58389c93a18b96eb9d7460ba35c3273a85e743db86127b491c705eb1fa4",
+        "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/migration_receipt.json": "625ad896b32a1a3471c70d6359cb3e46d0dd007b81291ec27e347002b0a36190",
+        "/Users/travisstreets/.aurora/l1-runs/0d67389f-c444-421d-89cb-f6f7673c347b/recovery_receipt.json": "5e8a4369d0aadf7ba7f974636012de76dd51f1bcf929585987cca2380c38e1e0",
+        "/Users/travisstreets/.aurora/l1-runs/59da8a1c-df89-4203-bdd9-5e5ad89090e6/state.json": "36111a123af65ca7905ece92556a2895a0641d49ce35c1f941f6f06bfd359e7d",
+        "/Users/travisstreets/.aurora/l1-runs/c1503ce5-d6e8-4c84-b91d-63b55d1b38f0/state.json": "6c7755b2c8ea62f07f00a93967aace20b12b024641af73b0c3fed30ffe45d98a"
+      }
+    }
+  },
+  "limitations": [
+    "Isolated world only; no authoritative canon promotion or Orion progression.",
+    "Desktop project picker was not automated; actual two-task proof used persisted Codex CLI tasks with project MCP configuration."
+  ]
+}
