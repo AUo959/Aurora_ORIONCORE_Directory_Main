@@ -631,53 +631,16 @@
       ]
     },
     {
-      "id": "session-claim-git-common-dir-scrub",
-      "status": "ready",
-      "priority": "medium",
-      "assigned_to": "either",
-      "kind": "work",
-      "repo": "root",
-      "description": "Scrub GIT_COMMON_DIR in _workspace_common.git() so an inherited value cannot redirect the shared claim store (review pr-20261108-session-coordination f1); optionally fix the 'task: ?' BLOCKED message (f3) and guard the stop hook's session_state_io import (f5).",
-      "created_at": "2026-11-09T00:42:19Z",
-      "updated_at": "2026-11-09T00:42:19Z",
-      "review_at": "2026-11-16T00:00:00Z",
-      "next_action": "Add GIT_COMMON_DIR to the scrubbed env names in tools/_workspace_common.py git(); parametrise the GIT_DIR regression in tests/test_session_coordination.py over GIT_COMMON_DIR; re-run focused suite and integration gate. This is a coordination-class change: record review debt; the complementary reviewer is whichever of codex/claude-code did NOT implement the fix (per AURORA_PEER_REVIEW_PROTOCOL_v1 \u00a76.3).",
-      "definition_of_done": "Repro 'GIT_COMMON_DIR=<foreign>/.git session_claim.py create' writes into the canonical store; new test fails without the fix; focused suite and integration gate pass; review debt recorded.",
-      "approval_required": false,
-      "evidence_refs": [
-        "reports/analysis/peer_reviews/pr-20261108-session-coordination.json"
-      ]
-    },
-    {
-      "id": "review-ci-consolidation-20261109",
-      "status": "ready",
-      "priority": "high",
-      "assigned_to": "claude-code",
-      "kind": "work",
-      "repo": "aurora-cloudbank-symbolic-main",
-      "description": "Complementary review of CloudBank inert-lane cleanup and root synchronization.",
-      "created_at": "2026-11-09T05:14:07Z",
-      "updated_at": "2026-11-09T05:14:07Z",
-      "review_at": "2026-11-10T00:00:00Z",
-      "next_action": "Independently review CloudBank PR #1693 against f289f69c: verify required CI Check mapping, consumer audit, retained Kubernetes checkout proof, single-install Constellation types/audit/lint/build artifacts, installed-tool security assertion and root pins. Record JSON/Markdown receipt and clear only the CI-domain debt after verification.",
-      "definition_of_done": "Claude Code independent receipt records commands, coverage and verdict; CI-domain debt is cleared or concrete corrections are queued.",
-      "approval_required": false,
-      "evidence_refs": [
-        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
-        "reports/ci_consolidation_2026-11-09.md"
-      ]
-    },
-    {
       "id": "roadmap-1.1",
-      "status": "waiting",
+      "status": "ready",
       "priority": "medium",
       "assigned_to": "codex",
       "kind": "work",
       "repo": "aurora-cloudbank-symbolic-main",
       "description": "Consolidate CloudBank core CI ownership without losing unique coverage; 37 workflows remain after verified inert-lane cleanup.",
       "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-11-09T05:23:22Z",
-      "next_action": "Cleanup landed in CloudBank #1693 (41 to 37 workflows); after complementary CI review clears rd-20261109-ci-consolidation, audit specialized validation and legacy build/publish consumers against CI_WORKFLOW_MAP.md before any further CI floor change.",
+      "updated_at": "2026-11-10T03:50:29Z",
+      "next_action": "CI debt rd-20261109-ci-consolidation is cleared (receipt pr-20261109-ci-consolidation). Resume the specialized-validation and legacy build/publish consumer audit against CI_WORKFLOW_MAP.md; fold in review notes: repoint stale retired-workflow references in CLAUDE.md, docs/CODE_QUALITY_SYSTEM.md and .github/BOT_*.md (f1), retire the unwired branch-protection.yml generator in automation/health/phase2_health_optimizer.py (f2). No further CI floor change until that audit is recorded. Simulation freshness guard stays out of scope (closed #1083 vs red guard, f3).",
       "definition_of_done": "About 6-8 core validation lanes have explicit substantive owners, with event/deployment services counted separately; duplicate validation is removed, unique coverage remains, required-check/workflow mapping is verified, and PR plus main-push checks pass with a documented map and synchronized root pins.",
       "approval_required": false,
       "evidence_refs": [
@@ -686,14 +649,13 @@
         "reports/ci_consolidation_2026-11-08.md",
         "reports/state_briefs/development_roadmap__2026-05-24.md",
         "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
-        "reports/ci_consolidation_2026-11-09.md"
+        "reports/ci_consolidation_2026-11-09.md",
+        "reports/analysis/peer_reviews/pr-20261109-ci-consolidation.json"
       ],
       "started_at": "2026-11-09T05:08:30Z",
       "pr_number": 1693,
       "evidence": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
-      "review_at": "2026-11-10T00:00:00Z",
-      "waiting_on": "artifact",
-      "trigger": "Claude complementary CI review receipt clears rd-20261109-ci-consolidation; then resume remaining specialized/build owner audit."
+      "review_at": "2026-11-10T00:00:00Z"
     },
     {
       "id": "repair-legacy-simulation-authority-surfaces",
@@ -915,11 +877,44 @@
       "completed_at": "2026-11-10T03:38:46Z",
       "platform": "codex",
       "detail": "Read-only investigation complete: #1083 closed in July; August authority retires legacy snapshot, but Git-age workflow and API/docs retain old semantics. Preflight ready at tick0/no run; 20 tests pass; snapshot bytes unchanged. Evidence and repair plan recorded; implementation waits for CI review."
+    },
+    {
+      "id": "review-git-common-dir-scrub-20261110",
+      "status": "completed",
+      "completed_at": "2026-11-10T03:39:45Z",
+      "platform": "claude-code",
+      "detail": "Independent receipt pr-20261110-git-common-dir-scrub: approve-with-notes; regression fails without / passes with fix; focused 55, full 770 passed + 1 environmental failure.",
+      "evidence_refs": [
+        "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/113"
+      ]
+    },
+    {
+      "id": "session-claim-git-common-dir-scrub",
+      "status": "completed",
+      "completed_at": "2026-11-10T03:39:45Z",
+      "platform": "claude-code",
+      "detail": "GIT_COMMON_DIR scrub landed via root PR #113 after independent approval (optional f3/f5 not included).",
+      "evidence_refs": [
+        "reports/analysis/peer_reviews/pr-20261108-session-coordination.json",
+        "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/113"
+      ],
+      "trigger": "Claude independent review receipt for PR #113 and passing hosted checks."
+    },
+    {
+      "id": "review-ci-consolidation-20261109",
+      "status": "completed",
+      "completed_at": "2026-11-10T03:50:40Z",
+      "platform": "claude-code",
+      "detail": "Independent receipt pr-20261109-ci-consolidation: approve-with-notes; CI debt cleared; roadmap-1.1 stays open with updated next action.",
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
+        "reports/ci_consolidation_2026-11-09.md"
+      ]
     }
   ],
-  "last_updated": "2026-11-10T03:38:46Z",
-  "last_platform": "codex",
-  "last_session_summary": "Investigated simulation freshness without changing CloudBank: the snapshot was retired as genesis in August, while its Git-age gate and API/docs retain legacy assumptions. Read-only preflight passes, 20 targeted tests pass, snapshot hash unchanged. Report and concrete authority/consumer repair task prepared; repair waits for existing CI review receipt.",
+  "last_updated": "2026-11-27T16:25:23Z",
+  "last_platform": "claude-code",
+  "last_session_summary": "SSE guard independently approved and landed (#1699/#114); source main 3863 tests plus 101 subtests passed. Reconciled unmerged coordination PR #113 with root main, preserving cleared SSE debt and pending Claude review. Implementation 382d4c5 unchanged; no self-review or merge of #113.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -943,64 +938,64 @@
   },
   "recent_commits": [
     {
-      "sha": "e1b07d3",
+      "sha": "ef4bba4",
+      "date": "2026-11-27",
+      "platform": "codex",
+      "summary": "Execute approved GUMAS seeds with native run receipts (#125)"
+    },
+    {
+      "sha": "626bcc5",
+      "date": "2026-11-27",
+      "platform": "codex",
+      "summary": "Make native GUMAS replay artifacts reproducible (#124)"
+    },
+    {
+      "sha": "90c6ec5",
+      "date": "2026-11-27",
+      "platform": "codex",
+      "summary": "Complete pinned CanonRec reconciliation and record provenance (#123)"
+    },
+    {
+      "sha": "3e08039",
+      "date": "2026-11-27",
+      "platform": "codex",
+      "summary": "Register staged outcomes and project Chronicle input (#122)"
+    },
+    {
+      "sha": "8802b91",
+      "date": "2026-11-24",
+      "platform": "codex",
+      "summary": "Journal authorized CanonRec staging requests (#121)"
+    },
+    {
+      "sha": "9d41c12",
+      "date": "2026-11-24",
+      "platform": "codex",
+      "summary": "Query pinned CanonRec records through Canon Operations (#120)"
+    },
+    {
+      "sha": "6f28f88",
+      "date": "2026-11-14",
+      "platform": "claude-code",
+      "summary": "chore(privacy): redact local user paths and a personal email (#117)"
+    },
+    {
+      "sha": "284d657",
+      "date": "2026-11-14",
+      "platform": "claude-code",
+      "summary": "ci: pin the py3.9 test leg to ubuntu-24.04 (#118)"
+    },
+    {
+      "sha": "2179f1e",
       "date": "2026-11-10",
       "platform": "claude-code",
-      "summary": "docs(review): approve SSE guard and sync merged CloudBank pin (#114)"
+      "summary": "docs(review): independent peer review of CloudBank CI consolidation (#116)"
     },
     {
-      "sha": "0e8fc75",
-      "date": "2026-11-09",
-      "platform": "codex",
-      "summary": "chore(ci): sync verified workflow cleanup and review handoff (#112)"
-    },
-    {
-      "sha": "1bbc742",
-      "date": "2026-11-09",
+      "sha": "35088f0",
+      "date": "2026-11-10",
       "platform": "claude-code",
-      "summary": "docs(review): independent peer review of session coordination fixes (#109)"
-    },
-    {
-      "sha": "f2425a7",
-      "date": "2026-11-09",
-      "platform": "codex",
-      "summary": "chore(mcp): sync verified SDK v2 migration and independent review handoff (#110)"
-    },
-    {
-      "sha": "6643b2d",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "fix(coordination): share worktree claims and preserve hook platform attribution (#108)"
-    },
-    {
-      "sha": "7987620",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "chore(ci): sync verified CI consolidation and preserve follow-up roadmap work (#107)"
-    },
-    {
-      "sha": "d5f15f5",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "chore(security): sync verified dependency remediation and close targeted queue item (#106)"
-    },
-    {
-      "sha": "334cfb3",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "fix(queue): preserve registry pins and record backlog reconciliation (#105)"
-    },
-    {
-      "sha": "8b677b6",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "fix(registry): document audited scanner invocation and update gate guidance"
-    },
-    {
-      "sha": "30d65a2",
-      "date": "2026-11-08",
-      "platform": "codex",
-      "summary": "fix(registry): preserve explicit pins and refuse branch mismatch"
+      "summary": "fix(coordination): scrub inherited GIT_COMMON_DIR from claim discovery (#113)"
     }
   ],
   "security_events": [
@@ -1017,7 +1012,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "e1b07d38df5aff9d78c0a5c69021ee437584f51b",
+    "main_sha": "ef4bba4",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -1030,10 +1025,10 @@
       "salvage/stash-root-diff-cleanup-2026-04-14"
     ],
     "active_worktrees": [
-      "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main                    d674266 [main]",
-      "/Users/travisstreets/.codex/worktrees/19cf/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/a12a/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)",
-      "/Users/travisstreets/.codex/worktrees/cdb0/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)"
+      "~/dev/Aurora_ORIONCORE_Directory_Main                    d674266 [main]",
+      "~/.codex/worktrees/19cf/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)",
+      "~/.codex/worktrees/a12a/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)",
+      "~/.codex/worktrees/cdb0/Aurora_ORIONCORE_Directory_Main  2ce76d4 (detached HEAD)"
     ],
     "open_prs": [
       "CloudBank #837 remains closed unmerged, but now has extraction-plan comment #4644456473",
@@ -1175,10 +1170,11 @@
       "domain": "ci-consolidation",
       "author_platform": "codex",
       "incurred_at": "2026-11-09T05:22:00Z",
-      "status": "pending",
-      "review_receipt": null,
-      "blocks": "next floor-change in the ci-consolidation domain",
-      "note": "Complementary Claude review of required checks, retired workflow consumers, retained unique validation and root pin synchronization; separate from MCP review."
+      "status": "cleared",
+      "review_receipt": "reports/analysis/peer_reviews/pr-20261109-ci-consolidation.json",
+      "blocks": "none (cleared)",
+      "note": "Cleared by Claude Code approve-with-notes receipt (f1 stale docs, f2 unwired generator, f3 closed GAP-010 issue vs red guard; none blocks). Separate from the MCP, SSE and coordination debts.",
+      "cleared_at": "2026-11-10T03:50:29Z"
     },
     {
       "id": "rd-20261110-mcp-sse-dns-rebinding-guard",
@@ -1197,17 +1193,33 @@
       "note": "Independent Codex approve receipt verifies d01a6853; CloudBank #1699 squash merged b68c4717 with identical source tree. Pins synchronized; simulation owner unchanged.",
       "cleared_at": "2026-11-10T02:41:46.517265Z",
       "reviewed_head_sha": "d01a6853dd3552cd4059f54e87914fe527662e79"
+    },
+    {
+      "id": "rd-20261110-git-common-dir-scrub",
+      "commits": [
+        "382d4c5aa5f6c0fe482f8b307fb4c3877790b359"
+      ],
+      "diff_base": "0e8fc755acc8758ab0187ce07cd4f1823c4a5eef",
+      "change_class": "coordination",
+      "domain": "session-coordination",
+      "author_platform": "codex",
+      "incurred_at": "2026-11-10T00:37:00Z",
+      "status": "cleared",
+      "review_receipt": "reports/analysis/peer_reviews/pr-20261110-git-common-dir-scrub.json",
+      "blocks": "none (cleared)",
+      "note": "Cleared by Claude Code approve-with-notes receipt (f1 sibling raw git calls, f2 environment-dependent totals; neither blocks). Prior coordination, MCP and SSE debts remain cleared.",
+      "cleared_at": "2026-11-10T03:39:38Z"
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-09-01T16:37:07Z",
+    "checked_at": "2026-11-27T16:25:23Z",
     "entries": [
       {
         "repo": "root",
         "class": "stranded_branch",
-        "branch": "integration/connectivity-pass-2026-08-19",
-        "detail": "3 commit(s) exist only on this machine",
-        "remediation": "Push and open a PR: git push -u origin integration/connectivity-pass-2026-08-19 && gh pr create"
+        "branch": "pr126",
+        "detail": "1 commit(s) exist only on this machine",
+        "remediation": "Push and open a PR: git push -u origin pr126 && gh pr create"
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."

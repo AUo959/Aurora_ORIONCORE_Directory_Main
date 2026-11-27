@@ -3,8 +3,11 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+from unittest import TestCase
 
 import pytest
+
+from tools.aurora_simulation_readiness import run_command
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -130,6 +133,26 @@ def test_export_contains_top_level_l2_state(tmp_path: Path) -> None:
     assert "l2_state" in payload
     assert set(payload["l2_state"]["indexes"]["by_faction_id"]) == set(engine.get_state().factions)
     assert payload["l2_state"]["schema_version"] == "l2-state-bundle-v1"
+
+
+def test_replay_artifacts_match_across_process_hash_seeds(tmp_path: Path) -> None:
+    check = TestCase()
+    runner = REPO_ROOT / "skills/gumas-simulation-engine/scripts/run_gumas_advanced.py"
+    for hash_seed in ("1", "2"):
+        output = tmp_path / hash_seed / "state.json"
+        run = run_command(
+            [sys.executable, str(runner), "--workspace", str(REPO_ROOT), "--seed", "42",
+             "--turns", "5", "--output", str(output), "--replay-artifacts"],
+            REPO_ROOT, timeout=15, env={"PYTHONHASHSEED": hash_seed},
+        )
+        check.assertEqual(run.returncode, 0, run.stderr)
+
+    for name in ("state.json", "advanced_event_ledger.ndjson"):
+        check.assertEqual((tmp_path / "1" / name).read_bytes(), (tmp_path / "2" / name).read_bytes())
+    state = json.loads((tmp_path / "1" / "state.json").read_bytes())
+    check.assertEqual(state["turn"], 5)
+    check.assertEqual(state["event_ledger"]["path"], "advanced_event_ledger.ndjson")
+    check.assertGreater(state["event_ledger"]["record_count"], 0)
 
 
 @requires_l2_sources

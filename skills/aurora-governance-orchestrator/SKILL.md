@@ -15,7 +15,7 @@ Run a single governance preflight that executes selected Aurora specialist scann
 Use the script in this skill:
 
 ```bash
-python3 /Users/travisstreets/.codex/skills/aurora-governance-orchestrator/scripts/orchestrate_governance.py \
+python3 ~/.codex/skills/aurora-governance-orchestrator/scripts/orchestrate_governance.py \
   --repo /path/to/repo \
   --out-json /tmp/aurora_governance_orchestrator.json \
   --out-md /tmp/aurora_governance_orchestrator.md
@@ -24,7 +24,7 @@ python3 /Users/travisstreets/.codex/skills/aurora-governance-orchestrator/script
 Optional routing controls:
 
 ```bash
-python3 /Users/travisstreets/.codex/skills/aurora-governance-orchestrator/scripts/orchestrate_governance.py \
+python3 ~/.codex/skills/aurora-governance-orchestrator/scripts/orchestrate_governance.py \
   --repo /path/to/repo \
   --mode changed-paths \
   --changed-paths "path/a.json,scripts/tool.sh" \
@@ -34,7 +34,7 @@ python3 /Users/travisstreets/.codex/skills/aurora-governance-orchestrator/script
 Optional canon validation path:
 
 ```bash
-python3 /Users/travisstreets/.codex/skills/aurora-governance-orchestrator/scripts/orchestrate_governance.py \
+python3 ~/.codex/skills/aurora-governance-orchestrator/scripts/orchestrate_governance.py \
   --repo /path/to/repo \
   --draft-input /path/to/draft.json \
   --draft-auto-detect

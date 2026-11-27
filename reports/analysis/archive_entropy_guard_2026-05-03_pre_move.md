@@ -1,6 +1,6 @@
 # Archive Entropy Guard Receipt - Pre Move - 2026-05-03
 
-- Scan root: `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
+- Scan root: `~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main`
 - Scope: archive and binary/document artifacts; dependency/vendor/build caches excluded.
 - Action: pre-move receipt only; no deletions.
 - Total scoped artifacts: `2421` files / `18220384889` bytes.
