@@ -1388,7 +1388,7 @@
       "detail": "Read-only investigation complete: #1083 closed in July; August authority retires legacy snapshot, but Git-age workflow and API/docs retain old semantics. Preflight ready at tick0/no run; 20 tests pass; snapshot bytes unchanged. Evidence and repair plan recorded; implementation waits for CI review."
     }
   ],
-  "last_updated": "2026-11-27T18:56:31Z",
+  "last_updated": "2026-11-27T19:00:35Z",
   "last_platform": "claude-code",
   "last_session_summary": "Migrated 24 open backlog issues (19 CloudBank, 5 ORIONCORE) into task_queue as gh-* items, with verbatim archives in catalog/backlog_archive/, ahead of closing the GitHub issues during zero-open triage.",
   "tool_versions": {
@@ -1414,6 +1414,42 @@
   },
   "recent_commits": [
     {
+      "sha": "ef18af1",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "Merge main into codex/health-easy-wins-20260926"
+    },
+    {
+      "sha": "c38d688",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "feat(ace): persistent Aurora worlds and contextual simulation completion (#85)"
+    },
+    {
+      "sha": "5855632",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "feat(recovery): read-only Drive provenance intake, private by default (#100)"
+    },
+    {
+      "sha": "c0c295b",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "feat(project-space): adopt VPC registry bridge (#80)"
+    },
+    {
+      "sha": "51c93f4",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "feat(ui): introduce read-only Aurora Intelligent UI snapshot bridge (#97)"
+    },
+    {
+      "sha": "861e1b7",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "chore(state): refresh session_state mechanical fields"
+    },
+    {
       "sha": "ae22c81",
       "date": "2026-11-27",
       "platform": "claude-code",
@@ -1436,42 +1472,6 @@
       "date": "2026-11-27",
       "platform": "claude-code",
       "summary": "docs(automation): record Friday brief acceptance and remaining gates (#93)"
-    },
-    {
-      "sha": "d6f29f7",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "Merge main into codex/health-easy-wins-20260926"
-    },
-    {
-      "sha": "57d6d15",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "docs: record Aurora plug-in consolidation review and provenance (#92)"
-    },
-    {
-      "sha": "baadd29",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "Merge main into codex/health-easy-wins-20260926"
-    },
-    {
-      "sha": "9a0f618",
-      "date": "2026-11-27",
-      "platform": "codex",
-      "summary": "docs(governance): propose continuity package policy (#119)"
-    },
-    {
-      "sha": "4c908fe",
-      "date": "2026-11-27",
-      "platform": "codex",
-      "summary": "deps: bump actions/upload-artifact from 7.0.1 to 7.0.2 (#96)"
-    },
-    {
-      "sha": "e5edfd5",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "Expose authenticated local Canon Operations reads (#126)"
     }
   ],
   "security_events": [
@@ -1488,7 +1488,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "ae22c81e6c04cbd0438352647b131b6197c0fe6c",
+    "main_sha": "ef18af1773ee5b324460e6e0f1a4ce3487d263e6",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
