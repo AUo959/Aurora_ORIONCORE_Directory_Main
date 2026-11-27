@@ -35,7 +35,7 @@ python3 tools/aurora_salvage_scan.py
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=_staging/orion_ord_review_fix/package \
   python3 -m pytest -q _staging/orion_ord_review_fix/package/tests -p no:cacheprovider
 python3 tools/workspace_recovery_index.py \
-  --root "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs" \
+  --root "~/Library/Mobile Documents/com~apple~CloudDocs" \
   --manifest /tmp/aurora_icloud_recovery_manifest_20260612.json \
   --report-out /tmp/aurora_icloud_salvage_candidates_20260612.json \
   --summary
@@ -180,7 +180,7 @@ Disposition: include candidate for root workflow/docs reconciliation.
 
 Evidence:
 
-- `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Downloads/AURORA_GOVERNANCE__PACK__GITHUBOPS_GOVERNANCE_LAYER__v1.0__2026-06-12/AURORA_GOVERNANCE__WORKFLOW__CANON_PROMOTION_PIPELINE__v1.0__2026-06-12.md`
+- `~/Library/Mobile Documents/com~apple~CloudDocs/Downloads/AURORA_GOVERNANCE__PACK__GITHUBOPS_GOVERNANCE_LAYER__v1.0__2026-06-12/AURORA_GOVERNANCE__WORKFLOW__CANON_PROMOTION_PIPELINE__v1.0__2026-06-12.md`
   hash `b481d63effd38d6559aa3bb8dfb07a0bfb4c7e78814d61e8ea57fb9a61a8b3b7`
 
 Current fit:
@@ -203,11 +203,11 @@ helpers after security review.
 
 Evidence:
 
-- `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Extras_Backups (Au)/aurora_instruction_shell.py`
+- `~/Library/Mobile Documents/com~apple~CloudDocs/Extras_Backups (Au)/aurora_instruction_shell.py`
   hash `4f868518172aff8d4072119c74c7c11a2366137a350290a236ecada55179be93`
-- `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Extras_Backups (Au)/gumas_recovery_wizard.py`
+- `~/Library/Mobile Documents/com~apple~CloudDocs/Extras_Backups (Au)/gumas_recovery_wizard.py`
   hash `f3c3de70fe93e792a8fa4b0273a260afbd8bb46b4f5922c96855e0ae81ff3bb0`
-- `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Extras_Backups (Au)/Extra Folders/ZIPWIZ_v2.2.6b_Optimized_Release/Aurora_v2.2.6b_GUI_CLOUD_SNAPSHOT_20250407_FINAL/aurora_gui_cloudhub_fastapi.py`
+- `~/Library/Mobile Documents/com~apple~CloudDocs/Extras_Backups (Au)/Extra Folders/ZIPWIZ_v2.2.6b_Optimized_Release/Aurora_v2.2.6b_GUI_CLOUD_SNAPSHOT_20250407_FINAL/aurora_gui_cloudhub_fastapi.py`
   hash `7c394a8534180dbd63e33e02ea128967c756e939c2179804b54865082144d18d`
 
 Current fit:
@@ -229,7 +229,7 @@ Disposition: prototype review, owner/domain decision required before routing.
 
 Evidence:
 
-- `/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Downloads/biological_pneumatic_engine.py`
+- `~/Library/Mobile Documents/com~apple~CloudDocs/Downloads/biological_pneumatic_engine.py`
   hash `20df62806321976e63b3c209750b51e67bb34413d4bfbf59b2dd72bab501fe33`
 
 Current fit:

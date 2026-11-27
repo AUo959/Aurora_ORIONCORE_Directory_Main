@@ -23,7 +23,17 @@ RUN_ID = "11111111-1111-4111-8111-111111111111"
 # test would make the assertion tautological. Re-baselined 2026-08-20 for
 # CloudBank a19870a5 / blob 5b6d9351 (was 9c34d8e9 / dd3ae6f7); see
 # docs/ORION__ADR_LITE__ORION_V013_CLOUDBANK_REBASELINE__v1.0__2026-08-20.md.
-CLOUDBANK_SHA = "0fac980967ac7802a399f091fadf24bcd67b3126"
+# Restart re-baseline 2026-11-07: unchanged simulation tree and owner blob;
+# See reports/dev_restart_completion_2026-11-07.md.
+# Current-model migration re-baseline 2026-11-08: same owner blob/simulation tree;
+# See reports/openai_current_model_migration_2026-11-08.md.
+# Queue reconciliation re-baseline: unchanged runtime owner/simulation tree;
+# See reports/queue_reconciliation_2026-11-08.md.
+# Dependency remediation re-baseline: owner blob and simulation tree unchanged;
+# see reports/dependency_remediation_2026-11-08.md.
+# CI consolidation re-baseline: owner blob and simulation tree unchanged.
+# MCP SDK v2 re-baseline: unchanged simulation tree and runtime owner blob.
+CLOUDBANK_SHA = "b68c4717332f57b5bca0d07e06b448380ad3b76d"
 CANONREC_SHA = "dc629a566b2f42fa1c652140b9eef72a4fb0d58a"
 OWNER_BLOB = "5b6d93515fb219cb26d267db6c6df6c052413ae1"
 AUTHORITY_REF = "owner:orion-l1:test-authorization"

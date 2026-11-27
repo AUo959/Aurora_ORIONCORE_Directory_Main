@@ -19,9 +19,15 @@ def main() -> int:
         default=None,
         help="Optional output JSON path (default: workspace/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/advanced_skill_output.json)",
     )
+    parser.add_argument(
+        "--replay-artifacts", action="store_true",
+        help="Export reproducible state and ledger files to an explicit path outside the workspace",
+    )
     args = parser.parse_args()
 
     workspace = Path(args.workspace).resolve()
+    if args.replay_artifacts and (not args.output or Path(args.output).resolve().is_relative_to(workspace)):
+        parser.error("--replay-artifacts requires --output outside the workspace")
     engine_dir = workspace / "GUMAS_SIM_2.5" / "SIM_ENGINE_OUTPUTS"
     if not engine_dir.is_dir():
         raise FileNotFoundError(f"Engine directory not found: {engine_dir}")
@@ -51,7 +57,12 @@ def main() -> int:
     )
 
     if hasattr(engine, "export_advanced_state"):
-        engine.export_advanced_state(str(output_path), include_base_history=False, include_advanced_history=False)
+        options = {"replay_artifacts": True} if args.replay_artifacts else {}
+        engine.export_advanced_state(
+            str(output_path), include_base_history=False, include_advanced_history=False, **options,
+        )
+    elif args.replay_artifacts:
+        parser.error("--replay-artifacts requires the advanced engine")
     else:
         engine.export_state(str(output_path), include_history=False)
 

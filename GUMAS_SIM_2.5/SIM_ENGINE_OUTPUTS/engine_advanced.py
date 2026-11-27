@@ -324,9 +324,12 @@ class GUMASAdvancedEngine(BaseGUMASEngine):
         include_advanced_history: bool = True,
         include_event_ledger: bool = True,
         event_ledger_path: Optional[str] = None,
+        replay_artifacts: bool = False,
     ) -> None:
         self._require_init()
         state = self.get_state()
+        if replay_artifacts and (include_base_history or include_advanced_history):
+            raise ValueError("Replay exports use the event ledger instead of timestamped tick histories")
 
         l2_state: Optional[L2StateBundle] = None
         if self._v3_state is not None:
@@ -361,6 +364,7 @@ class GUMASAdvancedEngine(BaseGUMASEngine):
             payload["advanced_history"] = [item.to_dict() for item in self._advanced_history]
 
         output = Path(path)
+        output_directory = output.resolve().parent
         output.parent.mkdir(parents=True, exist_ok=True)
 
         if include_event_ledger:
@@ -369,12 +373,26 @@ class GUMASAdvancedEngine(BaseGUMASEngine):
                 if event_ledger_path
                 else output.with_name("advanced_event_ledger.ndjson").resolve()
             )
+            if replay_artifacts and not resolved_ledger_path.is_relative_to(output_directory):
+                raise ValueError("The replay ledger must remain in the state output directory")
+            if resolved_ledger_path == output.resolve():
+                raise ValueError("The event ledger and state must have different paths")
             self._write_event_ledger(resolved_ledger_path)
             payload["event_ledger"] = {
                 "schema_version": "event-ledger-v1",
                 "record_count": len(self._event_ledger_records),
-                "path": str(resolved_ledger_path),
+                "path": resolved_ledger_path.relative_to(output_directory).as_posix()
+                if replay_artifacts else str(resolved_ledger_path),
             }
+
+        if replay_artifacts:
+            del payload["export_timestamp"]
+            del payload["base_state"]["timestamp"]
+            manifest = Path(payload["l2_state"]["source_manifest_path"])
+            payload["l2_state"]["source_manifest_path"] = manifest.relative_to(
+                _THIS_DIR.parent.parent
+            ).as_posix()
+            payload = self._canonicalize_value(payload)
 
         self._atomic_write_json(output, payload)
 

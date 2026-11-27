@@ -703,10 +703,15 @@ def git(
     cwd: Path,
     check: bool = True,
     text: bool = True,
+    *,
+    local_objects_only: bool = False,
 ) -> subprocess.CompletedProcess[str]:
     env = os.environ.copy()
-    for key in ("GIT_DIR", "GIT_WORK_TREE", "GIT_INDEX_FILE", "GIT_PREFIX"):
+    # Resolve repository identity from cwd, including linked-worktree common dirs.
+    for key in ("GIT_DIR", "GIT_COMMON_DIR", "GIT_WORK_TREE", "GIT_INDEX_FILE", "GIT_PREFIX"):
         env.pop(key, None)
+    if local_objects_only:
+        env.update(GIT_NO_LAZY_FETCH="1", GIT_NO_REPLACE_OBJECTS="1")
     return subprocess.run(
         ["git", *args],
         cwd=cwd,

@@ -5,7 +5,7 @@ Claude Code counterpart of `~/.codex/AGENTS.md` — both platforms follow the
 same shared-state protocol.
 
 **Canonical workspace path (since 2026-07-01):**
-`/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main`. The old iCloud
+`~/dev/Aurora_ORIONCORE_Directory_Main`. The old iCloud
 copy was deleted 2026-07-04; legacy `Mobile Documents` paths in historical
 artifacts map to current locations via
 `docs/WORKSPACE_MIGRATION_2026-07-01.md`.

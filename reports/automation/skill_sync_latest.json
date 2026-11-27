@@ -3,7 +3,7 @@
   "source": "skills/",
   "targets": {
     "codex": {
-      "dest": "/Users/travisstreets/.codex/skills",
+      "dest": "~/.codex/skills",
       "files_changed": 0,
       "skills_changed": {}
     }

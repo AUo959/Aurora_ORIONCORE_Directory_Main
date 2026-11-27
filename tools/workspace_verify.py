@@ -1036,7 +1036,7 @@ def verify_skill_sync(root: Path) -> list[Finding]:
     try:
         import sync_skills  # lives alongside this tool in tools/
 
-        drift = sync_skills.collect_drift()
+        drift = sync_skills.collect_drift(root=root)
     except Exception as exc:
         return [warning("skill_sync", f"Could not run skill drift check: {exc}",
                         "Run `python3 tools/sync_skills.py --check` manually.")]

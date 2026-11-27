@@ -133,8 +133,8 @@ class TestProjectFocusStartup(unittest.TestCase):
 
 class TestPrecommitClassification(unittest.TestCase):
     def test_only_pure_regenerable_sets_qualify(self):
-        self.assertTrue({"repo_head_match"}.issubset(wvp.REGENERABLE_CHECKS))
-        self.assertTrue(
+        self.assertFalse({"repo_head_match"}.issubset(wvp.REGENERABLE_CHECKS))
+        self.assertFalse(
             {"repo_head_match", "manifest_top_level_coverage",
              "repo_branch_match"}.issubset(wvp.REGENERABLE_CHECKS))
         self.assertFalse(
