@@ -59,3 +59,16 @@ The code is behaviorally sound and well isolated, but the stack is not landable 
 1. Build one combined candidate: 2bfb38f3 + (bf4561c4..ea32f28f) + (cfbd593c..76167093) + drop bindings.py deepcopy import; rerun suites, scenarios and cumulative Codacy vs main.
 2. Codex review of #1730 (P0 validator split).
 3. Resolve or explicitly disposition the P1/P2/P5 complexity findings before any PR in the stack merges to main.
+
+## Addendum: combined candidate #1735
+
+Head `fcc0bd2b` (2bfb38f3 + (bf4561c4..ea32f28f) + (cfbd593c..76167093) + drop bindings.py deepcopy import + merge main dabaa67). f1 and f2 resolved on #1735; f3 open. Verdict unchanged (changes-requested) until f3 is fixed or explicitly waived by the owner.
+
+| Gate | Result | Evidence |
+|---|---|---|
+| unit suite | pass | 179/179 |
+| scenario scripts | pass | 621f86f1, 53b00c23, 3ed92c90, d67cf074, c060255f: identical to 2bfb38f3 |
+| P0 golden harness | pass | 12/12, 741 outcomes identical |
+| pyflakes | pass | clean; f1 F821 and f2 F401 resolved |
+| hosted checks | pass | isolated-p0, test, build, guardrails, GitGuardian, PR evaluation (0.91) success |
+| Codacy vs main | fail | 25 new issues: 23 medium Complexity, 2 minor markdown table style; 0 high or ErrorProne. Largest: Universe.validate CC 147 / 245 LOC; time_alignment 29/23/22; bindings 26/14; external_evidence 16/16/13/12/11; kernel.advance_to 16. |

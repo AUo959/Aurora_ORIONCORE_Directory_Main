@@ -117,14 +117,14 @@
     {
       "id": "f1",
       "severity": "blocking",
-      "disposition": "must-fix",
+      "disposition": "must-fix (resolved in #1735)",
       "evidence": "stack topology + cumulative static check gates: #1724 base f9c036b1, #1726 base bf4561c4; F821 kernel.py:140 and validate_protocol CC 20 at 2bfb38f3",
       "description": "There is no single coherent head to land. The P3 and P4 corrections live on side branches and are absent from P5/P6/#1712, so landing 'in order using #1724/#1726/#1712' either drops those fixes or conflicts with the original #1704/#1705 commits that #1706+ carry. The composition gate shows they combine cleanly onto 2bfb38f3; that combined branch should be the landing candidate."
     },
     {
       "id": "f2",
       "severity": "blocking",
-      "disposition": "must-fix",
+      "disposition": "must-fix (resolved in #1735)",
       "evidence": "Codacy annotations #1703 bindings.py:12; flake8 F401 at 2bfb38f3",
       "description": "F401 'copy.deepcopy' imported but unused in bindings.py:12 (introduced in P2 #1703) survives to the final head. It is the same Pyflakes class as the #1710 ErrorProne finding the tracker treated as a merge blocker. One-line fix."
     },
@@ -175,5 +175,50 @@
     "Build one combined candidate: 2bfb38f3 + (bf4561c4..ea32f28f) + (cfbd593c..76167093) + drop bindings.py deepcopy import; rerun suites, scenarios and cumulative Codacy vs main.",
     "Codex review of #1730 (P0 validator split).",
     "Resolve or explicitly disposition the P1/P2/P5 complexity findings before any PR in the stack merges to main."
-  ]
+  ],
+  "combined_candidate": {
+    "pull_request": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1735",
+    "head": "fcc0bd2b",
+    "author_platform": "claude-code",
+    "construction": "2bfb38f3 + (bf4561c4..ea32f28f) + (cfbd593c..76167093) + drop bindings.py deepcopy import + merge main dabaa67",
+    "reverified_gates": [
+      {
+        "gate": "unit suite",
+        "command": "python -m unittest discover -s tests -p 'test_gumas_unified*.py'",
+        "result": "pass",
+        "evidence": "179/179"
+      },
+      {
+        "gate": "scenario scripts",
+        "command": "five gumas_unified scenario modules; sha256 stdout",
+        "result": "pass",
+        "evidence": "621f86f1, 53b00c23, 3ed92c90, d67cf074, c060255f: identical to 2bfb38f3"
+      },
+      {
+        "gate": "P0 golden harness",
+        "command": "project-files golden suite",
+        "result": "pass",
+        "evidence": "12/12, 741 outcomes identical"
+      },
+      {
+        "gate": "pyflakes",
+        "command": "flake8 --isolated --select=F",
+        "result": "pass",
+        "evidence": "clean; f1 F821 and f2 F401 resolved"
+      },
+      {
+        "gate": "hosted checks",
+        "command": "gh api commits/fcc0bd2b/check-runs",
+        "result": "pass",
+        "evidence": "isolated-p0, test, build, guardrails, GitGuardian, PR evaluation (0.91) success"
+      },
+      {
+        "gate": "Codacy vs main",
+        "command": "check-run annotations on #1735",
+        "result": "fail",
+        "evidence": "25 new issues: 23 medium Complexity, 2 minor markdown table style; 0 high or ErrorProne. Largest: Universe.validate CC 147 / 245 LOC; time_alignment 29/23/22; bindings 26/14; external_evidence 16/16/13/12/11; kernel.advance_to 16."
+      }
+    ],
+    "status": "f1 and f2 resolved on #1735; f3 open. Verdict unchanged (changes-requested) until f3 is fixed or explicitly waived by the owner."
+  }
 }
