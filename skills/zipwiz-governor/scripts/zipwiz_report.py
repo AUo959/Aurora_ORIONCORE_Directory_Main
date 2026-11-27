@@ -80,6 +80,24 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines.append("# ZIPWIZ Governance Report")
     lines.append("")
 
+    cov = report["scan_meta"].get("coverage") or {}
+    if cov.get("canonical_roots_resolved") == 0:
+        lines.append("> **NO COVERAGE — this scan inspected nothing.**")
+        lines.append(">")
+        lines.append(
+            f"> {cov.get('canonical_roots_configured', 0)} canonical root(s) were configured "
+            "and none exist on disk. This verdict describes the absence of a corpus, "
+            "not the absence of findings. Several canonical roots live under gitignored "
+            "lanes, so a fresh clone reproduces this state."
+        )
+        lines.append("")
+    elif cov.get("canonical_roots_missing"):
+        lines.append(
+            f"> **Partial coverage** — {cov.get('canonical_roots_resolved')} of "
+            f"{cov.get('canonical_roots_configured')} canonical roots resolved."
+        )
+        lines.append("")
+
     lines.append("## Scope")
     lines.append(f"- Repo: `{report['scan_meta']['repo']}`")
     lines.append(f"- Strictness: `{report['scan_meta']['strictness']}`")
@@ -90,6 +108,17 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines.append("- Reference roots:")
     for root in report["scan_meta"]["reference_roots"]:
         lines.append(f"- `{root}`")
+    if cov:
+        lines.append(
+            f"- Canonical roots resolved: {cov.get('canonical_roots_resolved')}"
+            f" / {cov.get('canonical_roots_configured')}"
+        )
+        for miss in cov.get("canonical_roots_missing", []):
+            lines.append(f"  - missing: `{miss}`")
+        lines.append(
+            f"- Reference roots resolved: {cov.get('reference_roots_resolved')}"
+            f" / {cov.get('reference_roots_configured')}"
+        )
     lines.append(f"- Total artifacts: {report['summary']['total_artifacts']}")
     lines.append(f"- Total findings: {report['summary']['total_findings']}")
     lines.append("")

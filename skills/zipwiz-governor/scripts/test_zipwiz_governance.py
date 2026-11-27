@@ -474,6 +474,56 @@ class ZipWizGovernanceTests(unittest.TestCase):
         self.assertEqual(warn_summary["warn_count"], 0)
 
 
+    def test_t21_absent_canonical_roots_yield_no_coverage(self) -> None:
+        """A scan whose canonical roots do not exist must not report PASS.
+
+        Regression for 2026-08-19: several canonical roots live under gitignored
+        lanes, so a fresh clone resolved zero of them and the scanner returned
+        PASS / READY on nothing.
+        """
+        missing = self.repo / "does_not_exist"
+        report = scan_repo(
+            repo_root=str(self.repo),
+            roots=[str(missing)],
+            reference_roots=[],
+            strictness="balanced",
+            include_evolution=False,
+        )
+        self.assertEqual(report["verdict"], "NO_COVERAGE")
+        self.assertEqual(report["promotion_readiness"], "UNKNOWN")
+        coverage = report["scan_meta"]["coverage"]
+        self.assertEqual(coverage["canonical_roots_configured"], 1)
+        self.assertEqual(coverage["canonical_roots_resolved"], 0)
+        self.assertEqual(len(coverage["canonical_roots_missing"]), 1)
+
+    def test_t22_resolved_roots_with_no_findings_still_pass(self) -> None:
+        """Coverage gating must not turn a genuinely clean scan into NO_COVERAGE."""
+        report = scan_repo(
+            repo_root=str(self.repo),
+            roots=[str(self.packaging)],
+            reference_roots=[],
+            strictness="balanced",
+            include_evolution=False,
+        )
+        self.assertEqual(report["scan_meta"]["coverage"]["canonical_roots_resolved"], 1)
+        self.assertIn(report["verdict"], {"PASS", "REVIEW", "BLOCK"})
+        self.assertNotEqual(report["verdict"], "NO_COVERAGE")
+
+    def test_t23_partial_coverage_is_reported(self) -> None:
+        """One resolved root plus one missing must scan, and say so."""
+        report = scan_repo(
+            repo_root=str(self.repo),
+            roots=[str(self.packaging), str(self.repo / "nope")],
+            reference_roots=[],
+            strictness="balanced",
+            include_evolution=False,
+        )
+        coverage = report["scan_meta"]["coverage"]
+        self.assertEqual(coverage["canonical_roots_configured"], 2)
+        self.assertEqual(coverage["canonical_roots_resolved"], 1)
+        self.assertNotEqual(report["verdict"], "NO_COVERAGE")
+
+
 
 if __name__ == "__main__":
     unittest.main()

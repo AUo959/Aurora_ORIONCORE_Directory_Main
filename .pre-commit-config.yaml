@@ -2,10 +2,13 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
+      # reports/recovered_canon/ace_review__ holds evidence archives whose files
+      # are hash-pinned by their own promotion_review.json manifest. Whitespace
+      # normalisation breaks that chain, so these two hooks must not touch them.
       - id: trailing-whitespace
-        exclude: ^(archives/|GUMAS_SIM_2.5/)
+        exclude: ^(archives/|GUMAS_SIM_2.5/|reports/recovered_canon/ace_review__)
       - id: end-of-file-fixer
-        exclude: ^(archives/|GUMAS_SIM_2.5/)
+        exclude: ^(archives/|GUMAS_SIM_2.5/|reports/recovered_canon/ace_review__)
       - id: check-yaml
         args: [--allow-multiple-documents]
       - id: check-json

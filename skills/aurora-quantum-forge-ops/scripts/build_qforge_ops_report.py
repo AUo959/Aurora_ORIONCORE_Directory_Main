@@ -5,8 +5,11 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import importlib
+import inspect
 import json
+import os
 import re
 import subprocess
 import sys
@@ -109,6 +112,45 @@ def import_forge_modules(forge_root: Path):
     return engine_mod, charforge_mod
 
 
+def describe_binding(engine: Any) -> Dict[str, Any]:
+    """Record which base engine GUMASEngineV3 actually bound to.
+
+    GUMASEngineV3 resolves its base by dynamic import at construction time and
+    falls back to a fabricated three-faction state on ImportError with only a
+    log line. Nothing downstream distinguishes those cases, so a report whose
+    base engine is unknown is indistinguishable from one whose base is correct.
+    Capture the identity so every artifact is self-describing.
+
+    See simulation/specs/GUMAS__DECISION__V3_ENGINE_BINDING__v1.0__2026-08-18.md
+    """
+    base = getattr(engine, "_base_engine", None)
+    state = getattr(engine, "_state", None)
+    info: Dict[str, Any] = {
+        "delegate_mode": bool(getattr(engine, "_delegate_mode", False)),
+        "base_engine_class": type(base).__name__ if base is not None else None,
+        "base_engine_module": getattr(type(base), "__module__", None) if base is not None else None,
+        "base_engine_file": None,
+        "base_engine_sha256": None,
+        "state_type": type(state).__name__ if state is not None else None,
+        "state_has_fleets": bool(getattr(state, "fleets", None)),
+        "fleet_count": len(getattr(state, "fleets", {}) or {}),
+        "tactical_state_attrs": sorted(
+            a for a in ("fleets", "combat_zones", "doctrines", "precursor_sites", "operatives")
+            if hasattr(state, a)
+        ),
+    }
+    if base is not None:
+        try:
+            src = inspect.getsourcefile(type(base))
+            if src and os.path.exists(src):
+                info["base_engine_file"] = os.path.realpath(src)
+                with open(src, "rb") as fh:
+                    info["base_engine_sha256"] = hashlib.sha256(fh.read()).hexdigest()
+        except (OSError, TypeError):
+            pass
+    return info
+
+
 def run_engine(engine_mod, seed: int, turns: int) -> Dict[str, Any]:
     engine_cls = getattr(engine_mod, "GUMASEngineV3")
     engine = engine_cls(seed=seed)
@@ -149,6 +191,7 @@ def run_engine(engine_mod, seed: int, turns: int) -> Dict[str, Any]:
     return {
         "engine": engine,
         "state": state,
+        "binding_provenance": describe_binding(engine),
         "engine_metrics": {
             "seed": seed,
             "turns_requested": turns,
@@ -516,6 +559,34 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     state = engine_run["state"]
     engine_metrics = engine_run["engine_metrics"]
     event_breakdown = engine_run["event_breakdown"]
+    binding = engine_run["binding_provenance"]
+
+    if not binding["delegate_mode"]:
+        risks.append(
+            {
+                "code": "v3_base_engine_absent",
+                "severity": "high",
+                "message": (
+                    "GUMASEngineV3 fell back to standalone mode: no base engine was "
+                    "imported. All figures below derive from a fabricated three-faction "
+                    "test state and describe no real world-state."
+                ),
+            }
+        )
+    elif not binding["state_has_fleets"]:
+        risks.append(
+            {
+                "code": "v3_base_engine_non_tactical",
+                "severity": "medium",
+                "message": (
+                    f"Base engine {binding['base_engine_class']} "
+                    f"({(binding['base_engine_sha256'] or '')[:16]}) exposes no fleet state. "
+                    "Phases 8-9 do not exist on this base and v3 combat-facing "
+                    "multipliers have no tactical state to act on. See "
+                    "GUMAS__DECISION__V3_ENGINE_BINDING__v1.0__2026-08-18.md"
+                ),
+            }
+        )
 
     try:
         export_v3_state(engine, state_path)

@@ -19,6 +19,7 @@ import aurora_devkit
 import aurora_integration_gate
 import aurora_recommendation_engine
 import project_focus_announcement
+import session_queue_health
 import workspace_recovery_index
 import workspace_verify
 from _workspace_common import now_iso_utc, serialized_root, write_json
@@ -47,6 +48,7 @@ INBOX_FIELDS = (
 
 DEFAULT_SOURCE_IDS = [
     "project_focus",
+    "queue_health",
     "workspace_verify",
     "integration_gate",
     "recovery_index",
@@ -173,8 +175,14 @@ def collect_project_focus(root: Path, manifest: dict[str, Any]) -> dict[str, Any
     )
 
 
+def collect_queue_health(root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
+    del manifest
+    return session_queue_health.build_report(root)
+
+
 DEFAULT_COLLECTORS: dict[str, Collector] = {
     "project_focus": collect_project_focus,
+    "queue_health": collect_queue_health,
     "workspace_verify": collect_workspace_verify,
     "integration_gate": collect_integration_gate,
     "recovery_index": collect_recovery_index,
@@ -353,6 +361,82 @@ def inbox_from_project_focus(report: dict[str, Any], manifest: dict[str, Any]) -
     return out
 
 
+def inbox_from_queue_health(report: dict[str, Any], manifest: dict[str, Any]) -> list[dict[str, Any]]:
+    del manifest
+    out: list[dict[str, Any]] = []
+    for index, item in enumerate(report.get("findings", [])):
+        if not isinstance(item, dict):
+            continue
+        blocking = bool(item.get("blocking", False))
+        check = str(item.get("check", "queue-health"))
+        priority = "P0" if blocking else (
+            "P1" if check in {"queue_review_due", "suspended_task_review_due"} else "P2"
+        )
+        out.append(
+            {
+                "item_id": f"mission-{priority.lower()}-queue-{check}-{index}",
+                "title": f"Queue lifecycle: {item.get('details', check)}",
+                "category": "queue_health",
+                "priority": priority,
+                "source": "queue_health",
+                "target_repo": "root",
+                "owner_surface": "catalog/session_state.json",
+                "evidence_refs": ["catalog/session_state.json", "catalog/session_queue_policy.json"],
+                "recommended_next_action": str(item.get("suggested_fix", "Run make queue-health.")),
+                "suggested_commands": ["make queue-health"],
+                "approval_required": False,
+                "mutation_posture": "advisory_only",
+                "blocking": blocking,
+                "status": "blocked" if blocking else "open",
+            }
+        )
+
+    summary = report.get("summary", {})
+    ready_count = int(summary.get("ready_count", 0) or 0)
+    if ready_count:
+        next_ids = [str(item.get("id")) for item in report.get("next_ready", [])[:3]]
+        out.append(
+            {
+                "item_id": "mission-p2-queue-ready-work",
+                "title": f"{ready_count} actionable queue item(s) are ready",
+                "category": "queue_health",
+                "priority": "P2",
+                "source": "queue_health",
+                "target_repo": "root",
+                "owner_surface": "catalog/session_state.json",
+                "evidence_refs": ["catalog/session_state.json::task_queue"],
+                "recommended_next_action": f"Start the highest-priority relevant item; current top ids: {', '.join(next_ids)}.",
+                "suggested_commands": ["make queue-health"],
+                "approval_required": False,
+                "mutation_posture": "advisory_only",
+                "blocking": False,
+                "status": "open",
+            }
+        )
+
+    owner_gate_count = int(summary.get("owner_gate_count", 0) or 0)
+    if owner_gate_count:
+        out.append(
+            {
+                "item_id": "mission-p2-queue-owner-decisions",
+                "title": f"{owner_gate_count} concrete owner decision(s) are waiting",
+                "category": "queue_health",
+                "priority": "P2",
+                "source": "queue_health",
+                "target_repo": "root",
+                "owner_surface": "catalog/session_state.json",
+                "evidence_refs": ["catalog/session_state.json::task_queue"],
+                "recommended_next_action": "Review only the concrete evidence-backed decisions; routine reversible work remains agent-actionable.",
+                "suggested_commands": ["make queue-health"],
+                "approval_required": True,
+                "mutation_posture": "advisory_only",
+                "blocking": False,
+                "status": "open",
+            }
+        )
+    return out
+
+
 def sort_and_limit_inbox(items: list[dict[str, Any]], manifest: dict[str, Any]) -> list[dict[str, Any]]:
     priority_rank = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
     status_rank = {"blocked": 0, "open": 1, "informational": 2}
@@ -378,6 +462,9 @@ def build_operator_inbox(
     project_focus = sources.get("project_focus", {})
     if project_focus and "error" not in project_focus:
         out.extend(inbox_from_project_focus(project_focus, manifest))
+    queue_health = sources.get("queue_health", {})
+    if queue_health and "error" not in queue_health:
+        out.extend(inbox_from_queue_health(queue_health, manifest))
     recommendations = sources.get("recommendations", {})
     if recommendations and "error" not in recommendations:
         out.extend(inbox_from_recommendations(recommendations, manifest))
@@ -436,6 +523,17 @@ def source_summary(name: str, report: dict[str, Any]) -> dict[str, Any]:
             "status": report.get("status"),
             "announcement_count": summary.get("announcement_count"),
             "active_count": summary.get("active_count"),
+        }
+    if name == "queue_health":
+        summary = report.get("summary", {})
+        return {
+            "status": report.get("status"),
+            "open_count": summary.get("open_count"),
+            "ready_count": summary.get("ready_count"),
+            "waiting_count": summary.get("waiting_count"),
+            "owner_gate_count": summary.get("owner_gate_count"),
+            "due_review_count": summary.get("due_review_count"),
+            "blocking_count": summary.get("blocking_count"),
         }
     return {"status": report.get("status", "unknown")}
 

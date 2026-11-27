@@ -29,6 +29,7 @@ def write_manifest(path: Path) -> None:
         "max_evidence_refs": 12,
         "sources": [
             {"id": "project_focus", "enabled": True},
+            {"id": "queue_health", "enabled": True},
             {"id": "workspace_verify", "enabled": True},
             {"id": "integration_gate", "enabled": True},
             {"id": "recovery_index", "enabled": True},
@@ -125,7 +126,7 @@ def recommendations_report(blocking: bool = False) -> dict[str, Any]:
             "source": "recovery_index",
             "recommended_next_action": "Handle restricted candidates through a separate review decision; do not copy them.",
             "suggested_commands": ["python3 tools/workspace_recovery_index.py --summary"],
-            "approval_required": True,
+            "approval_required": False,
             "mutation_posture": "advisory_only",
             "blocking": False,
             "status": "open",
@@ -142,7 +143,7 @@ def recommendations_report(blocking: bool = False) -> dict[str, Any]:
             "source": "recovery_index",
             "recommended_next_action": "Review candidates as routing evidence only. Do not promote.",
             "suggested_commands": ["python3 tools/workspace_recovery_index.py --summary"],
-            "approval_required": True,
+            "approval_required": False,
             "mutation_posture": "advisory_only",
             "blocking": False,
             "status": "open",
@@ -174,7 +175,7 @@ def recommendations_report(blocking: bool = False) -> dict[str, Any]:
         "summary": {
             "recommendation_count": len(recommendations),
             "blocking_count": 1 if blocking else 0,
-            "approval_required_count": 2,
+            "approval_required_count": 0,
         },
         "recommendations": recommendations,
     }
@@ -206,6 +207,30 @@ def project_focus_report() -> dict[str, Any]:
     }
 
 
+def queue_health_report() -> dict[str, Any]:
+    return {
+        "status": "ready",
+        "summary": {
+            "open_count": 5,
+            "ready_count": 4,
+            "waiting_count": 1,
+            "parked_count": 0,
+            "owner_gate_count": 1,
+            "due_review_count": 0,
+            "finding_count": 0,
+            "blocking_count": 0,
+        },
+        "next_ready": [
+            {
+                "id": "routine-reversible-fix",
+                "priority": "high",
+                "next_action": "Implement and validate the narrow fix.",
+            }
+        ],
+        "findings": [],
+    }
+
+
 def git_report(dirty: bool = False) -> dict[str, Any]:
     return {
         "status": "dirty" if dirty else "clean",
@@ -222,6 +247,7 @@ def collectors(
 ) -> dict[str, mission.Collector]:
     return {
         "project_focus": lambda root, manifest: project_focus_report(),
+        "queue_health": lambda root, manifest: queue_health_report(),
         "workspace_verify": lambda root, manifest: workspace_report(blocking),
         "integration_gate": lambda root, manifest: integration_report(blocking),
         "recovery_index": lambda root, manifest: recovery_report(),
@@ -256,9 +282,9 @@ def test_report_shape_and_read_only_invariants(tmp_path: Path) -> None:
     assert report["mutation_posture"] == "advisory_only"
     assert report["nested_repo_mutation"] is False
     assert report["status"] == "attention"
-    assert report["summary"]["source_count"] == 7
-    assert report["summary"]["operator_inbox_count"] == 3
-    assert report["summary"]["approval_required_count"] == 2
+    assert report["summary"]["source_count"] == 8
+    assert report["summary"]["operator_inbox_count"] == 5
+    assert report["summary"]["approval_required_count"] == 1
     assert report["operator_inbox"][0]["mutation_posture"] == "advisory_only"
 
 
@@ -342,3 +368,20 @@ def test_project_focus_becomes_open_advisory_inbox_item(tmp_path: Path) -> None:
     assert focus_items[0]["status"] == "open"
     assert focus_items[0]["approval_required"] is False
     assert focus_items[0]["suggested_commands"] == ["make demo-readiness"]
+
+
+def test_queue_health_separates_ready_work_from_owner_decisions(tmp_path: Path) -> None:
+    report = build_test_report(tmp_path)
+
+    queue_items = {
+        item["item_id"]: item
+        for item in report["operator_inbox"]
+        if item["category"] == "queue_health"
+    }
+    assert queue_items["mission-p2-queue-ready-work"]["approval_required"] is False
+    assert "routine-reversible-fix" in queue_items[
+        "mission-p2-queue-ready-work"
+    ]["recommended_next_action"]
+    assert queue_items[
+        "mission-p2-queue-owner-decisions"
+    ]["approval_required"] is True

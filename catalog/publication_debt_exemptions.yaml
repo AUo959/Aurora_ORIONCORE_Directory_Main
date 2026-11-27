@@ -5,6 +5,94 @@ purpose: >
   recorded decision. Every entry needs a reason and a date — an exemption
   without a reason is itself debt.
 exemptions:
+# --- Live publication-debt reconciliation 2026-08-26.
+#     Evidence: reports/analysis/publication_debt_reconciliation__2026-08-26.md
+- repo: root
+  branches: [agent/github-auth-context-hardening, agent/root-license-session-closeout,
+             agent/root-mit-community-profile, codex/charforge-capsule-implementation-2026-06-14-rebased,
+             codex/public-readiness-closeout-2026-08-01, codex/root-cloudbank-pin-refresh-2026-07-29,
+             codex/root-public-metadata-2026-07-29, fix/ci-dynamic-registry-pins]
+  reason: >-
+    Verified published 2026-08-26: each local tip exactly matches the head of
+    its merged root PR (#42, #58, #57, #38, #55, #51, #53, and #41,
+    respectively). Remote branch deletion or a retained remote head does not
+    make these merged commits new publication work; preserve them as parallel
+    history unless a separate branch-retirement pass removes them.
+  recorded: "2026-08-26"
+- repo: root
+  branches: [codex/cloudbank-backlog-handoff-20260810]
+  reason: >-
+    Retired-in-place 2026-08-26: this four-commit branch changes only
+    catalog/session_state.json and ends at the 2026-08-10 CloudBank draft
+    backlog receipt. Current main carries a structurally newer session ledger
+    through 2026-08-20, and the canonical checkout was refreshed again on
+    2026-08-26. Republishing the stale state snapshot would regress shared
+    queue and receipt state rather than recover implementation work.
+  recorded: "2026-08-26"
+- repo: aurora-cloudbank-symbolic-main
+  branches: [agent/aurora-bridge-review-blurb, claude/architecture-advancements-review-v2cxi0,
+             codex/cloudbank-canonrec-provenance-2026-07-29, codex/cloudbank-codeql-backlog-2026-07-29,
+             codex/cloudbank-high-dependabot-2026-07-29,
+             codex/cloudbank-issue-1024-instance-bridge-role-closure,
+             codex/cloudbank-issue-1056-opal2-standalone-topology,
+             codex/cloudbank-issue-1131-reconcile-closed-queue-items,
+             codex/cloudbank-issue-1139-ethics-readme-index,
+             codex/cloudbank-issue-1140-topology-qgia-reconcile,
+             codex/cloudbank-issue-1142-api-catalog-snapshot-regeneration,
+             codex/cloudbank-issue-1143-scaling-topology-reconcile,
+             codex/cloudbank-issue-1144-api-surface-inventory-reconcile,
+             codex/cloudbank-issue-1145-rd-api-reference-refresh,
+             codex/cloudbank-issue-1146-governance-self-audit,
+             codex/cloudbank-issue-1161-coordination-spine-reconcile,
+             codex/cloudbank-issue-1231-qgia-axiom-reconcile,
+             codex/cloudbank-issue-1231-qgia-docs-surface,
+             codex/cloudbank-issue-1231-qgia-index-wiring,
+             codex/cloudbank-issue-1231-qgia-roadmap,
+             codex/cloudbank-issue-1232-docs-cross-reference-module-coverage,
+             codex/cloudbank-issue-1235-repo-structural-naming-cleanup,
+             codex/cloudbank-issue-1247-halo-residual-canon,
+             codex/cloudbank-issue-1247-halo-system-activation,
+             codex/cloudbank-issue-1255-src-structure-audit,
+             codex/cloudbank-issue-1257-onboarding-module,
+             codex/cloudbank-issue-1342-pr-evaluation-blocking,
+             codex/cloudbank-issue-1362-root-test-contract,
+             codex/cloudbank-issue-1403-diagnostics-test-hygiene,
+             codex/cloudbank-issue-1424-qgia-casefold-hygiene,
+             codex/cloudbank-issue-1446-gate-registry-coherence,
+             codex/cloudbank-issue-1460-opal2-codacy-table-spacing,
+             codex/cloudbank-issue-1481-postmerge-1482-hardening,
+             codex/public-readiness-debt-2026-07-29]
+  reason: >-
+    Verified published 2026-08-26: all 34 local tips exactly match their
+    merged CloudBank PR head OIDs. The branch-to-PR map and merge evidence are
+    recorded in publication_debt_reconciliation__2026-08-26.md; these are
+    retained parallel histories, not unpublished work.
+  recorded: "2026-08-26"
+- repo: aurora-cloudbank-symbolic-main
+  branches: [codex/cloudbank-issue-1020-mesh-router-contract,
+             codex/cloudbank-issue-1384-mcp-server-compat,
+             codex/cloudbank-issue-1393-native-vsa-correctness,
+             codex/ga-ethics-hub-integration-2026-07-08,
+             codex/l2-scenario-seed-simulation-initializer,
+             codex/mesh-security-lint-hardening-2026-07-22,
+             codex/narrative-phase2-evidence-2026-07-04]
+  reason: >-
+    Verified published or superseded 2026-08-26 by fetched PR-head objects and
+    git range-diff. The local series are equal to or strict subsets of merged
+    PRs #1191, #1392, #1397, #1193, #1182 plus #1190, #1306, and #1183.
+    The scenario branch's final test-only delta is the older form of the file
+    now on main; current main adds the unit pytest marker. Detailed commit
+    correspondence is in publication_debt_reconciliation__2026-08-26.md.
+  recorded: "2026-08-26"
+- repo: CanonRec
+  branches: [agent/canonrec-mit-license, codex/canonrec-public-readiness-2026-07-29,
+             codex/canonrec-strict-integrity-recovery-2026-07-29,
+             codex/public-vulnerability-reporting-2026-07-29]
+  reason: >-
+    Verified published 2026-08-26: each local tip exactly matches the head of
+    its merged CanonRec PR (#8, #6, #9, and #7, respectively). Preserve as
+    parallel history; no unpublished delta remains on these refs.
+  recorded: "2026-08-26"
 # --- Test-branch triage 2026-07-04 (receipt: reports/analysis/cloudbank_test_branch_triage__2026-07-04.md)
 - repo: aurora-cloudbank-symbolic-main
   branches: [copilot/replace-shallow-assertions-tier1]

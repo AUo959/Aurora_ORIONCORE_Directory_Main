@@ -699,3 +699,98 @@ def test_flight_overdue_logic(tmp_path):
     }))
     overdue = {o["name"] for o in fc.overdue_flights(tmp_path)}
     assert overdue == {"stale", "never"}
+
+
+SANDBOX_REPORT = json.dumps(
+    {
+        "root": "/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main",
+        "tools": {"gh": {"status": "missing", "path": None}},
+    },
+    indent=2,
+)
+
+
+def test_execution_context_paths_block_when_staged(workspace_root: Path) -> None:
+    """A contaminated artifact must not reach the tracked record in the first place."""
+    write_file(workspace_root / "reports" / "analysis" / "toolchain_latest.json", SANDBOX_REPORT)
+    run_command(["git", "add", "reports/analysis/toolchain_latest.json"], cwd=workspace_root)
+
+    result = run_verify(workspace_root, "--git-pre-commit")
+
+    assert result.returncode == 1
+    assert "Blocking failures:" in result.stdout
+    assert "execution_context_paths" in result.stdout
+    assert "/sessions/clever-ecstatic-meitner/mnt/" in result.stdout
+
+
+def test_execution_context_paths_warn_without_blocking_once_committed(workspace_root: Path) -> None:
+    """Already-committed contamination stays visible but must not block every later commit.
+
+    This is the devkit's asymmetry: a demoted real problem still gets read, while
+    a blocking verdict on history would leave the repo uncommittable until someone
+    rewrote it.
+    """
+    write_file(workspace_root / "reports" / "analysis" / "toolchain_latest.json", SANDBOX_REPORT)
+    run_command(["git", "add", "reports/analysis/toolchain_latest.json"], cwd=workspace_root)
+    run_command(["git", "commit", "-m", "record a sandbox toolchain view"], cwd=workspace_root)
+
+    pre_commit = run_verify(workspace_root, "--git-pre-commit")
+    assert pre_commit.returncode == 0
+    assert "execution_context_paths" not in pre_commit.stdout
+
+    manual = run_verify(workspace_root)
+    findings = {
+        finding["check"]: finding for finding in json.loads(manual.stdout)["findings"]
+    }
+    assert manual.returncode == 0
+    assert findings["execution_context_paths"]["severity"] == "warning"
+    assert findings["execution_context_paths"]["blocking"] is False
+    assert "toolchain_latest.json" in findings["execution_context_paths"]["details"]
+
+
+def test_execution_context_exemption_silences_the_finding(workspace_root: Path) -> None:
+    write_file(workspace_root / "reports" / "analysis" / "toolchain_latest.json", SANDBOX_REPORT)
+    write_file(
+        workspace_root / "catalog" / "execution_context_exemption.yaml",
+        "exempt_paths:\n  - reports/analysis/toolchain_latest.json\n",
+    )
+    run_command(["git", "add", "."], cwd=workspace_root)
+
+    result = run_verify(workspace_root, "--git-pre-commit")
+
+    assert result.returncode == 0
+    assert "execution_context_paths" not in result.stdout
+
+
+def test_execution_context_ignores_prose_and_fixtures(workspace_root: Path) -> None:
+    """docs/ and tests/ quote these paths legitimately — the audit record is full of them."""
+    write_file(
+        workspace_root / "docs" / "sandbox_contamination_note.md",
+        "The committed root was `/sessions/clever-ecstatic-meitner/mnt/Aurora`.\n",
+    )
+    run_command(["git", "add", "docs/sandbox_contamination_note.md"], cwd=workspace_root)
+
+    result = run_verify(workspace_root, "--git-pre-commit")
+
+    assert result.returncode == 0
+    assert "execution_context_paths" not in result.stdout
+
+
+def test_report_records_which_machine_produced_it(workspace_root: Path) -> None:
+    """A reader must be able to tell a workspace finding from a sandbox finding."""
+    report = json.loads(run_verify(workspace_root).stdout)
+
+    assert report["execution_context"]["canonical"] is False
+
+
+def test_canonical_context_helper_has_one_definition() -> None:
+    """aurora_devkit re-exports the shared helper rather than keeping its own copy."""
+    sys.path.insert(0, str(TOOLS_DIR))
+    import aurora_devkit
+
+    assert (
+        aurora_devkit.is_canonical_workspace_context
+        is workspace_common.is_canonical_workspace_context
+    )
+    devkit_source = (TOOLS_DIR / "aurora_devkit.py").read_text(encoding="utf-8")
+    assert "def is_canonical_workspace_context" not in devkit_source

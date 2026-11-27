@@ -1,0 +1,16 @@
+a31e04bea6bd41120dd9eba5b3a7bf24e29e44fc87c1c028cb1a73f8ccc4d24a  ./BEHAVIOR_INVENTORY__2026-08-18.md
+bdd8bf3e7aa4bb93c43993d76b632704697482194b68b667e9bf30478346a724  ./RECOVERY_RECORD__2026-08-18.md
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./modules/__init__.py
+81a3a120873df3e7507b6c76210e42746cf00697d3f985b379f7136695a60b38  ./modules/gumas/__init__.py
+ff486487b9dbac8abbc87824ead5ae0aadfdce7ab366c0a0cc164bb36053bfb6  ./modules/gumas/combat.py
+04d250595b6c7d0ab8373eb17998e69f76f55d08701c12cdf38d64148e031fdc  ./modules/gumas/doctrine.py
+0c0faf9af1e2bc4d82623b60fb83fe29608efa267ecfc955b67a67b320f973cb  ./modules/gumas/economics.py
+5a0517646285fcfc1dd54c229361c69110d13a468e3ac6aa2561ac0f14258598  ./modules/gumas/engine.py
+2bea7ad4366668422bac3fa1707be1744331588b86a85c0b8402f554b9d4b813  ./modules/gumas/forecaster.py
+d5435511abec6d734d28828669ecb6d3c37cb1c8cc52886758bd982b11bb9a9e  ./modules/gumas/formulas.py
+7ccdc15fb11f513c71e3732d2420fb35c498f2ab8000b623d3a131a68fbe6ac5  ./modules/gumas/media.py
+75a464ac6d1986a70b9baeed249f00241797d61b31340368b93cc9fc00d7bbed  ./modules/gumas/models.py
+7a5f4ffbd5b7d6f7488137cfa1511ff26ec95b9d6be75aa475ad4de1e00fd134  ./modules/gumas/precursors.py
+305053324231d9d87650319bbbdbf3899bec7aae0aedfeb6e716b194e0d78648  ./modules/gumas/scenarios.py
+23899a9da0121709e37e69ed19bc7083d6127c1b5e8073449ccd8ddf71f737c2  ./modules/gumas/sentinels.py
+5375e91c95d49885ac4573f17b009c32b38fda8b755020f12f501beddc865d0b  ./modules/gumas/topology.py

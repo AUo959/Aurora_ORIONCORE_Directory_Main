@@ -7,7 +7,7 @@
         "config",
         "--quiet"
       ],
-      "cwd": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "cwd": "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
       "returncode": 0,
       "stderr_preview": "",
       "stdout_preview": ""
@@ -20,14 +20,14 @@
         "--format",
         "json"
       ],
-      "cwd": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+      "cwd": "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
       "returncode": 0,
       "stderr_preview": "",
-      "stdout_preview": "{\"Command\":\"\\\"uvicorn aurora_gui_\u2026\\\"\",\"CreatedAt\":\"2026-06-26 22:08:08 -0400 EDT\",\"ExitCode\":0,\"Health\":\"healthy\",\"ID\":\"b24431877785\",\"Image\":\"aurora-cloudbank-symbolic-main-aurora_gui\",\"Labels\":\"com.docker.compose.depends_on=,com.docker.compose.project.working_dir=/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architectur"
+      "stdout_preview": "{\"Command\":\"\\\"uvicorn aurora_gui_\u2026\\\"\",\"CreatedAt\":\"2026-06-26 22:08:08 -0400 EDT\",\"ExitCode\":0,\"Health\":\"healthy\",\"ID\":\"b24431877785\",\"Image\":\"aurora-cloudbank-symbolic-main-aurora_gui\",\"Labels\":\"com.docker.compose.depends_on=,com.docker.compose.project.working_dir=~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architectur"
     }
   ],
   "compose": {
-    "compose_file": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docker-compose.yml",
+    "compose_file": "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main/docker-compose.yml",
     "config_status": "ready",
     "exists": true,
     "parse_error": null,
@@ -63,7 +63,7 @@
   "live_runtime_execution": false,
   "mutation_posture": "advisory_only",
   "nested_repo_mutation": false,
-  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "root": "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "run_mode": "read_only",
   "schema_version": 1,
   "services": [

@@ -1,24 +1,27 @@
 # Workspace Map
 
-- Generated: `2026-08-15T05:26:07Z`
+- Generated: `2026-09-23T13:01:49Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `44`
+- Top-level entries cataloged: `47`
 - Nested repos registered: `9`
-- Archive or binary artifacts inventoried: `602`
-- Classification overrides loaded: `10` from `catalog/classification_overrides.yaml`
-- Top-level paths excluded by privacy screen: `11`
+- Archive or binary artifacts inventoried: `615`
+- Classification overrides loaded: `11` from `catalog/classification_overrides.yaml`
+- Top-level paths excluded by privacy screen: `13`
+
+Targeted inventory update (November 8, 2026): `.claude` is managed in place as
+a root control surface. Other canonical inventory entries are retained.
 
 ## Zones
 
-- `_staging`: `7` top-level entries
+- `_staging`: `8` top-level entries
 - `archives`: `1` top-level entries
 - `catalog`: `1` top-level entries
 - `docs`: `11` top-level entries
-- `intake`: `7` top-level entries
+- `intake`: `8` top-level entries
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
-- `tools`: `11` top-level entries
+- `tools`: `12` top-level entries
 
 ## Active Nested Repos
 
@@ -38,12 +41,13 @@
 - `Aurora_Sim_Architecture` -> `intake/Aurora_Sim_Architecture` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 - `QGIA_Axiom_Doctrine_Narrative.md` -> `intake/QGIA_Axiom_Doctrine_Narrative.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `QGIA_Runtime_OnePager.md` -> `intake/QGIA_Runtime_OnePager.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
+- `ecguard_pr_body.md` -> `intake/ecguard_pr_body.md` (intake_file, batch `wave4_root_intake_cleanup_initial`)
 - `recovery` -> `intake/recovery` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 - `warrant-lens` -> `intake/warrant-lens` (intake_collection, batch `wave4_root_intake_cleanup_initial`)
 
 ## Privacy Screen
 
-- `auto_scope_unknown`: `11` top-level paths excluded
+- `auto_scope_unknown`: `13` top-level paths excluded
 
 ## Largest Archive/Binary Artifacts
 

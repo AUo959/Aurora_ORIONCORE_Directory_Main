@@ -1,0 +1,16 @@
+# Paths where an execution-context reference is deliberate, not a provenance defect.
+#
+# The execution_context_paths check keeps a sandbox's view of itself out of
+# tracked generated artifacts. Documents that *describe* such a contamination
+# have to quote the offending path as evidence, which trips the same check.
+# Those go here, one entry per path, each with a reason.
+#
+# This file exempts documentation only. Do not add a generated artifact
+# (a run_meta.json, a scan output) here to silence a real finding — regenerate
+# it from the canonical workspace instead.
+
+exempt_paths:
+  # Salvage audit: quotes the sandbox argv/cwd recorded in the 2026-08-18 and
+  # 2026-08-19 hour-aboard run_meta.json files as the evidence for holding
+  # those two runs back from the commit. The reference is the finding.
+  - reports/analysis/ORION__AUDIT__L3_SALVAGE_PASS__v1.1__2026-09-08.md

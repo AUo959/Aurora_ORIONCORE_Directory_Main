@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "aurora-session-queue-lifecycle",
+  "suspended_warning_days": 7,
+  "suspended_review_days": 14,
+  "ready_review_grace_days": 0,
+  "owner_gate": {
+    "principle": "Owner approval gates apply to concrete consequential decisions, not to reversible investigation or implementation preparation.",
+    "allowed_scopes": [
+      "canon_promotion",
+      "credential_or_external_account_action",
+      "public_license_selection",
+      "authority_selection",
+      "irreversible_destructive_action"
+    ],
+    "never_gate_before": [
+      "read_only_investigation",
+      "diagnosis",
+      "test_or_validation_work",
+      "reversible_local_edit",
+      "draft_or_pr_preparation",
+      "evidence_packet_preparation"
+    ],
+    "requirements": [
+      "kind=decision",
+      "status=waiting",
+      "waiting_on=owner",
+      "assigned_to=owner",
+      "at least one evidence reference",
+      "at least two decision options",
+      "a concrete trigger",
+      "a review_at timestamp"
+    ]
+  },
+  "selection_order": [
+    "explicit_current_user_request",
+    "actionable_active_or_suspended_task",
+    "ready_queue_by_priority_then_review_at",
+    "triggered_or_due_waiting_item"
+  ]
+}

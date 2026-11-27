@@ -1,0 +1,174 @@
+{
+  "generated_at": "2026-08-01T06:21:39Z",
+  "artifact": "aurora_state_model_design_package",
+  "version": "0.1",
+  "status": "draft_adoption_ready",
+  "runtime_status": "not_implemented",
+  "canon_status": "non_canonical_design_proposal",
+  "repository_committed_to": "Aurora_ORIONCORE_Directory_Main",
+  "nested_repositories_modified": false,
+  "purpose": "Provide a reviewable white paper, normative system specification, phased implementation plan, machine-readable contract, schemas, and synthetic conformance fixtures for an Aurora-native learned state model.",
+  "files_created": [
+    "docs/AURORA_STATE_MODEL_WHITE_PAPER_v0_1.md",
+    "docs/AURORA_STATE_MODEL_SYSTEM_SPEC_v0_1.md",
+    "docs/AURORA_STATE_MODEL_IMPLEMENTATION_PLAN_v0_1.md",
+    "catalog/contracts/aurora_state_model_contract_v0_1.json",
+    "catalog/schemas/aurora_state_episode_v1.schema.json",
+    "catalog/schemas/aurora_epistemic_trace_v1.schema.json",
+    "catalog/schemas/aurora_dataset_manifest_v1.schema.json",
+    "catalog/schemas/aurora_teacher_sufficiency_report_v1.schema.json",
+    "tests/fixtures/aurora_state_model/episode_v1.json",
+    "tests/fixtures/aurora_state_model/epistemic_trace_v1.json",
+    "tests/fixtures/aurora_state_model/dataset_manifest_v1.json",
+    "tests/fixtures/aurora_state_model/teacher_sufficiency_report_v1.json",
+    "tests/test_aurora_state_model_contract.py"
+  ],
+  "review_revision_files": [
+    ".github/workflows/ci.yml",
+    "docs/AURORA_STATE_MODEL_WHITE_PAPER_v0_1.md",
+    "docs/AURORA_STATE_MODEL_SYSTEM_SPEC_v0_1.md",
+    "docs/AURORA_STATE_MODEL_IMPLEMENTATION_PLAN_v0_1.md",
+    "catalog/contracts/aurora_state_model_contract_v0_1.json",
+    "catalog/schemas/aurora_state_episode_v1.schema.json",
+    "catalog/schemas/aurora_dataset_manifest_v1.schema.json",
+    "tests/fixtures/aurora_state_model/episode_v1.json",
+    "tests/fixtures/aurora_state_model/dataset_manifest_v1.json",
+    "tests/test_aurora_state_model_contract.py"
+  ],
+  "publication_base": {
+    "refreshed_at": "2026-08-01T06:21:39Z",
+    "origin_main_revision": "5084f622e62abd7719d777a3da63a5919d1c77c4",
+    "integrated": true,
+    "notes": "Includes root PRs #55, #57, and #58; CanonRec registry pin and root MIT/community metadata are current in the PR branch."
+  },
+  "source_snapshot": {
+    "refreshed_at": "2026-08-01T04:41:39Z",
+    "Aurora_ORIONCORE_Directory_Main": {
+      "inspected_revision": "046fc1d3b9b0ebf00add28061b961b22ec028e49",
+      "github_head_revision": "046fc1d3b9b0ebf00add28061b961b22ec028e49",
+      "relation": "aligned",
+      "worktree_note": "Design artifacts were created in an isolated feature worktree; unrelated canonical generated-surface edits were not included."
+    },
+    "aurora-cloudbank-symbolic-main": {
+      "inspected_revision": "b83b968028a3888a869ca047016e28e39c3ec46a",
+      "github_head_revision": "5b56ae3efae031e4eab859da5d4e366ff2f563a7",
+      "relation": "inspected_behind",
+      "github_delta": [
+        "53a0ee8a fix: close CodeQL public review alerts (#1388)",
+        "5b56ae3e security: refresh vulnerable dependency locks (#1389)"
+      ]
+    },
+    "CanonRec": {
+      "inspected_revision": "4b907df28ec2758f038b41c0279302d79c6f94b9",
+      "github_head_revision": "4b907df28ec2758f038b41c0279302d79c6f94b9",
+      "relation": "aligned"
+    },
+    "DuelSim_v2.0": {
+      "inspected_revision": "0716f36ea5cf84707eba8c6ec16bead04809cf8c",
+      "github_head_revision": "0716f36ea5cf84707eba8c6ec16bead04809cf8c",
+      "relation": "aligned"
+    },
+    "qgia-knowledge-library-main": {
+      "inspected_revision": "3f05a2ae5c1b659c9fd2322bd47f660bc81df931",
+      "github_head_revision": "3f05a2ae5c1b659c9fd2322bd47f660bc81df931",
+      "relation": "aligned",
+      "local_worktree": "dirty_pre_existing_untouched",
+      "dirty_paths": [
+        ".aurora/knowledge-index.json",
+        "README.md",
+        "scripts/knowledge_contract.py",
+        "tests/test_knowledge_contract.py",
+        "audits/domain-structure-check-2026-07-04.md"
+      ]
+    },
+    "qgia-knowledge-spine-main": {
+      "inspected_revision": "c98c4592e82ebd09b8882f2b148714b8bd60e84c",
+      "github_head_revision": "c98c4592e82ebd09b8882f2b148714b8bd60e84c",
+      "relation": "aligned"
+    }
+  },
+  "design_decisions": [
+    "The first model predicts typed world-state and epistemic-state transitions rather than prose-first output.",
+    "GUMAS-compatible simulation is the ontic teacher; QGIA and QSFE are the epistemic teacher; CanonRec and deterministic validators remain judges.",
+    "The epistemic teacher is currently more mature than the ontic scenario space: QSFE computes belief history but does not export it, while GUMAS has one hardcoded default world plus a usable event-injection seam.",
+    "G1.5 teacher sufficiency is evaluated after ASM-001 generation and blocks adapter expansion or training when conditional information, trajectory spread, or effective scenario diversity is inadequate; it does not block completion of ASM-001.",
+    "L2 scenario cards are design sources for a future typed L2-to-GUMAS compiler, not current GUMAS runtime inputs.",
+    "Every episode records requested seeds, realized post-initialization seeds, a consistency classification, and a post-initialization RNG-state fingerprint.",
+    "A grouped split cannot claim a passed leakage check with fewer than two scenario families.",
+    "The root control plane owns contracts and conformance fixtures; nested repositories require separate adoption commits.",
+    "Synthetic episodes remain simulation-authority and are prohibited from canonical QGIA truth and forecast ledgers.",
+    "ASM-001 produces 12 governed episodes and explicitly does not authorize model training."
+  ],
+  "validation": [
+    {
+      "command": "python3 -m unittest tests/test_aurora_state_model_contract.py",
+      "status": "passed",
+      "result": "14 tests passed using jsonschema Draft202012Validator with format checking"
+    },
+    {
+      "command": "python3 -m unittest tests/test_qgia_closed_loop_contract.py",
+      "status": "passed",
+      "result": "6 tests passed"
+    },
+    {
+      "command": "make session-state-check",
+      "status": "passed"
+    },
+    {
+      "command": "python3 tools/workspace_verify.py",
+      "status": "warn_nonblocking",
+      "result": "Feature worktree reported four nonblocking warnings: two existing canon/propagation warnings and two expected isolated-worktree context warnings."
+    },
+    {
+      "command": "python3 tools/workspace_verify.py from canonical workspace",
+      "status": "failed_local_checkout_behind_origin",
+      "result": "The local canonical checkout reported its CanonRec pin one commit behind the clean nested head. Origin/main already resolves that drift via root PR #55; the feature branch will merge the refreshed base before publication."
+    },
+    {
+      "command": "make devkit-check",
+      "status": "warn_nonblocking",
+      "result": "21 of 21 tools available; existing paused-automation and CloudBank Python-environment warnings."
+    },
+    {
+      "command": "make registry-sync-check",
+      "status": "failed_local_checkout_behind_origin",
+      "result": "Four local repositories in sync, the local canonical root pin one commit behind CanonRec, and four remote-only entries skipped; origin/main already pins CanonRec 1fc35f08."
+    },
+    {
+      "command": "python3 -m pytest tests/test_aurora_state_model_contract.py tests/test_qgia_closed_loop_contract.py tests/test_ci_public_dependencies.py -q",
+      "status": "passed",
+      "result": "25 focused contract and public-dependency tests passed after merging origin/main"
+    },
+    {
+      "command": "JSON parse sweep over contract, ASM schemas, fixtures, and receipt",
+      "status": "passed",
+      "result": "10 JSON artifacts parsed"
+    },
+    {
+      "command": "PyYAML parse of .github/workflows/ci.yml",
+      "status": "passed",
+      "result": "Workflow parsed with test, lint, and sync-audit jobs; actionlint was unavailable locally."
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "known_gaps": [
+    "No nested repository has adopted the contract or implemented an adapter.",
+    "No runtime episode dataset has been generated.",
+    "The current GUMAS default scenario builder exposes one hardcoded world; a versioned mapping from L2 prose knobs to typed GUMAS state and intervention parameters remains unwritten.",
+    "G1.5 thresholds must be predeclared during ASM-001 implementation; the synthetic fixture intentionally reports not_evaluated.",
+    "No model training, evaluation, serving, or canonical promotion is authorized.",
+    "CloudBank's inspected local checkout is two security-only commits behind its refreshed GitHub head.",
+    "The QGIA closed-loop ledgers and calibration surfaces require repo-local adoption and population before real-world calibration claims.",
+    "Training-source and derivative-artifact licensing remain owner decisions, so public dataset or checkpoint release is ineligible."
+  ],
+  "notes": [
+    "The package is Markdown and JSON source. No binary DOCX derivative was committed to the root control plane.",
+    "The dirty QGIA Library checkout was inspected read-only and left untouched.",
+    "A committed historical GUMAS ledger was independently measured at 5,621 atoms, 153 turns, 14 event types, 2.717 bits of event-type entropy, 822 distinct rounded joint symbols, and 7.478 bits of joint entropy per atom; it is diagnostic evidence, not a G1.5 pass.",
+    "The unrelated CloudBank VSA issue discussed in PR review was explicitly left outside this root design PR.",
+    "Artifact hashes in the hand-authored dataset fixture are schema-shaped placeholders, not claims about generated artifacts."
+  ]
+}

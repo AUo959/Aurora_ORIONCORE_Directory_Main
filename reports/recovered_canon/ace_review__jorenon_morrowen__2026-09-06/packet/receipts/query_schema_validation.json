@@ -1,0 +1,7 @@
+{
+  "artifact": "./query_envelope.json",
+  "errors": [],
+  "ok": true,
+  "schema": "/Users/travisstreets/dev/aurora-ace-sandbox/workspace/catalog/schemas/aurora_ace_query_envelope.schema.json",
+  "validator_python": "/Users/travisstreets/dev/aurora-ace-runtime/bin/python"
+}

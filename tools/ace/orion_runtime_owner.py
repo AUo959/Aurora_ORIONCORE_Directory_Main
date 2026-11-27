@@ -37,9 +37,14 @@ _POLICY_FIELDS = {
     "state_uncertain_requires_operator_reconciliation": True,
     "required_principal": "ORION.ROLE.PILOT",
 }
+#: The owner attestation of record. `orion_progression_v0_13.json` carries a
+#: copy of these same fields and the two must move together — see
+#: tests/test_ace_orion_policy_pin_coherence.py, which pins that agreement.
 _OWNER_FIELDS = {
     "path": "simulation/l1_runtime.py",
-    "git_blob_sha": "dd3ae6f73bb2d2130981011a7c2443c0e39b8210",
+    # Re-attested 2026-08-20 for CloudBank a19870a5 (was dd3ae6f7 @ 9c34d8e9).
+    # Evidence: docs/ORION__ADR_LITE__ORION_V013_CLOUDBANK_REBASELINE__v1.0__2026-08-20.md
+    "git_blob_sha": "5b6d93515fb219cb26d267db6c6df6c052413ae1",
     "class": "OrionL1Runtime",
     "preflight_method": "preflight",
     "load_method": "load_run",

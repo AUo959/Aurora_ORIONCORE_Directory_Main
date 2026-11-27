@@ -1,0 +1,26 @@
+{
+  "record_type": "owner_approval",
+  "schema_version": 1,
+  "entity_id": "char_expedition_archivist_ee86138dfc73",
+  "canonical_name": "Jorenon Morrowen",
+  "layer": "L2",
+  "entity_kind": "character",
+  "approved_tag": "CANON_PROMOTE",
+  "approved_by": "owner",
+  "approved_at": "2026-09-08T04:35:00Z",
+  "approval_basis": "Explicit owner ratification. CERTAINTY_TAGS.md defines CANON_PROMOTE as 'Owner-approved; next commit locks as CANON.' Prior to this record no approval existed, so the tag asserted a state that had not occurred.",
+  "what_this_record_fixes": "reconciliation_advice.json was produced with user_reviewed=False, giving review_status 0.00 -- the single gap the advisor named, and the reason CANON_PROMOTE and STAGING tied at 7.70 (delta=0.00, confidence 0.05, band HIGH). This record supplies the missing dimension.",
+  "residual_gap_accepted_by_owner": {
+    "dimension": "provenance_strength",
+    "value": 0.48,
+    "threshold_for_tag": 0.8,
+    "reason": "The entity originates in ACE simulation world aurora-world-a64638e56af946f4a9f14af1c8f4f80a -- Tertiary Canon under Canon Protocol section 5. Simulation-origin material cannot reach 0.8 provenance on its own; owner approval is the documented mechanism for promoting it anyway. The gap is accepted knowingly, not scored away."
+  },
+  "publication_scope": "NOT A PUBLICATION AUTHORITY. This record ratifies the certainty tag only. Writing the entity into CanonRec canon/ remains with the ACE delegated-publication path, whose freshness and authenticated-authority checks must pass at publication time (REVIEW.md).",
+  "evidence": [
+    "validation_run.json -- CLEAN_ENTITY, 10/10 required L2 character fields, 0 blocks, 0 warnings",
+    "independent re-validation 2026-09-08 via validate_entity.py --layer L2 --type character reproduced the same result",
+    "reconciliation_advice__owner_ratified__2026-09-08.json -- advisor re-run with the corrected flags"
+  ],
+  "reverses_to": "STAGING, by deleting this record and re-running the advisor with user_reviewed=false."
+}

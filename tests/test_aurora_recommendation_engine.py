@@ -237,7 +237,7 @@ def test_recovery_candidates_are_grouped_without_promotion(tmp_path: Path) -> No
     assert recovery_items
     grouped = [item for item in recovery_items if "routed to root" in item["title"]]
     assert grouped
-    assert grouped[0]["approval_required"] is True
+    assert grouped[0]["approval_required"] is False
     assert "Do not promote" in grouped[0]["recommended_next_action"]
     assert grouped[0]["target_repo"] == "root"
 
@@ -252,7 +252,7 @@ def test_restricted_recovery_candidates_get_careful_handling_recommendation(tmp_
     ]
     assert len(restricted) == 1
     assert restricted[0]["priority"] == "P1"
-    assert restricted[0]["approval_required"] is True
+    assert restricted[0]["approval_required"] is False
     assert "do not copy" in restricted[0]["recommended_next_action"].lower()
 
 
@@ -373,6 +373,29 @@ def test_devkit_warnings_remain_approval_gated(tmp_path: Path) -> None:
     assert devkit_items[0]["priority"] == "P2"
     assert devkit_items[0]["approval_required"] is True
     assert devkit_items[0]["blocking"] is False
+
+
+def test_devkit_diagnostic_without_install_or_automation_is_not_gated() -> None:
+    items = engine.recommendations_from_devkit(
+        {
+            "findings": [
+                {
+                    "severity": "warning",
+                    "id": "repo_python_env_cloudbank_warn",
+                    "message": "CloudBank Python environment is stale.",
+                    "next_step": "Use the repo-local interpreter for validation.",
+                }
+            ],
+            "install_plan": [],
+        },
+        {"max_evidence_refs": 12},
+    )
+
+    assert len(items) == 1
+    assert items[0]["approval_required"] is False
+    assert items[0]["suggested_commands"] == [
+        "python3 tools/aurora_devkit.py --install-plan"
+    ]
 
 
 def test_dirty_worktree_is_informational_not_failure(tmp_path: Path) -> None:

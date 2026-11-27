@@ -63,6 +63,31 @@ COMMON_NOUN_NAMES = {
     "diplomacy", "senate", "marshals", "sentinels", "union", "navy", "judiciary",
     "military", "cross", "prime", "core", "vanguard", "collective", "compact",
     "pact", "order", "orders", "clans", "nomads", "empire", "republic",
+    # "human" is the hardest case and the reason this list exists.
+    #
+    # Matching the bare word gave species_human 562 claims in one corpus. The
+    # case-sensitive rule below cut that to 57 — and a 2026-08-15 triage of those
+    # 57 found only THREE in-world (5%). The rest were real-world news (Musk/DOGE,
+    # the UN Human Rights Chief, the Universal Declaration, AP Human Geography)
+    # and project engineering prose ("human-in-the-loop", "human interface",
+    # "human resources"). Capitalisation cannot separate them: "Human Rights" and
+    # "Human Services" are proper nouns in the real world, and title-case headings
+    # capitalise everything.
+    #
+    # The three genuine claims were reconciled by hand on 2026-08-15 (Separatists
+    # as "Human Dissidents", the Varlithian Paradox's origin, and the "right to
+    # rule" reaction to AI ascendancy). Claims about humans must be reached by
+    # DISTINCTIVE multi-word phrases, not by the species name.
+    "human", "humans", "humanity",
+    # Multi-word forms need to be here too — see the stoplist bug noted below.
+    #
+    # "The Prime" is a legitimate canon alias of char_prime_construct_leader,
+    # and it produced 7 claims of which 7 were noise: the prime meridian at
+    # Greenwich, "the prime example" of Spanish surnames, "the prime candidate",
+    # "the prime thread" of Aurora's continuum, an AI "prime directive", and the
+    # Prime Video channel. A generic article-plus-adjective alias cannot be
+    # matched as a name.
+    "the prime",
 }
 
 #: A sentence only counts as a claim if it asserts something.
@@ -107,7 +132,15 @@ def load_entity_forms() -> dict[str, str]:
             form = form.strip()
             if len(form) < 5:
                 continue
-            if " " not in form and form.lower() in COMMON_NOUN_NAMES:
+            # The stoplist applies to EVERY form, not just single words.
+            #
+            # It used to be gated on `" " not in form`, on the reasoning that
+            # multi-word names are distinctive enough to be safe. "The Prime" is
+            # the counterexample: two words, entirely generic, and matched
+            # case-insensitively against lowercased text, so it caught every
+            # occurrence of "the prime <noun>" in the corpus — 7 claims, 7 noise.
+            # Distinctiveness comes from the words, not from how many there are.
+            if form.lower() in COMMON_NOUN_NAMES:
                 continue
             forms.setdefault(form.lower(), eid)
     return forms
