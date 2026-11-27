@@ -21,7 +21,7 @@ Usage:
     python3 tools/registry_sync_heads.py --json     # machine-readable report
 
 Exit codes: 0 = no drift (or drift applied), 1 = drift found in --check mode,
-2 = execution error.
+2 = execution error or refused branch mismatch in apply mode.
 """
 
 from __future__ import annotations
@@ -104,7 +104,7 @@ def main():
     lines = text.splitlines(keepends=True)
     repos, order = parse_registry(text)
 
-    drifted, skipped, ok = [], [], []
+    drifted, skipped, ok, mismatches = [], [], [], []
     for name in order:
         entry = repos[name]
         pinned = entry.get("head_sha", "")
@@ -124,11 +124,17 @@ def main():
             continue
         actual = head.stdout.strip()
 
+        branch = git(["rev-parse", "--abbrev-ref", "HEAD"], cwd=repo_dir).stdout.strip()
+        expected_branch = entry.get("branch", "")
+        detached_reference = branch == "HEAD" and actual == pinned
+        if expected_branch and branch != expected_branch and not detached_reference:
+            mismatches.append({"repo": name, "expected": expected_branch, "actual": branch})
+            continue
+
         if actual == pinned:
             ok.append(name)
             continue
 
-        branch = git(["rev-parse", "--abbrev-ref", "HEAD"], cwd=repo_dir).stdout.strip()
         ahead = commits_between(repo_dir, pinned, actual)
         drifted.append({
             "repo": name, "path": rel, "pinned": pinned, "actual": actual,
@@ -136,7 +142,7 @@ def main():
             "line": entry.get("_line_head_sha"),
         })
 
-    if drifted and not args.check:
+    if drifted and not args.check and not mismatches:
         for d in drifted:
             i = d["line"]
             lines[i] = re.sub(r"(head_sha:\s*).*", rf"\g<1>{d['actual']}", lines[i])
@@ -147,9 +153,10 @@ def main():
             "registry": str(REGISTRY.relative_to(ROOT)),
             "mode": "check" if args.check else "apply",
             "in_sync": ok, "skipped": skipped, "drifted": drifted,
+            "branch_mismatches": mismatches,
         }, indent=2))
     else:
-        verb = "STALE" if args.check else "UPDATED"
+        verb = "STALE" if args.check or mismatches else "UPDATED"
         print(f"registry-sync: {len(ok)} in sync, {len(drifted)} drifted, "
               f"{len(skipped)} skipped")
         for d in drifted:
@@ -157,13 +164,21 @@ def main():
                       if d["pin_behind_by"] else "")
             print(f"  [{verb}] {d['repo']} @{d['branch']}{behind}")
             print(f"      {d['pinned'][:12]} -> {d['actual'][:12]}")
+        for mismatch in mismatches:
+            print(f"  [REFUSED] {mismatch['repo']}: expected branch "
+                  f"{mismatch['expected']}, observed {mismatch['actual']}")
         for s in skipped:
             print(f"  [skipped ] {s['repo']}: {s['reason']}")
-        if drifted and not args.check:
+        if drifted and not args.check and not mismatches:
             print("\nPins refreshed. Commit catalog/repo_registry.yaml with your changes.")
-        elif drifted:
+        elif drifted and not mismatches:
             print("\nRun `make registry-sync` to refresh these pins.")
 
+        if mismatches:
+            print("Branch mismatch: no pins written. Review the checkout/registry branch explicitly.")
+
+    if mismatches:
+        return 1 if args.check else 2
     return 1 if (drifted and args.check) else 0
 
 

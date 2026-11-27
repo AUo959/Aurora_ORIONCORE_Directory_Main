@@ -23,15 +23,15 @@ Execute deterministic Quantum Forge operations from the GUMAS v3.0 Forge root an
 Base run:
 
 ```bash
-python3 /Users/travisstreets/.codex/skills/aurora-quantum-forge-ops/scripts/build_qforge_ops_report.py \
-  --forge-root "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19"
+python3 ~/.codex/skills/aurora-quantum-forge-ops/scripts/build_qforge_ops_report.py \
+  --forge-root "$HOME/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19"
 ```
 
 Run with capsule generation and verification:
 
 ```bash
-python3 /Users/travisstreets/.codex/skills/aurora-quantum-forge-ops/scripts/build_qforge_ops_report.py \
-  --forge-root "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19" \
+python3 ~/.codex/skills/aurora-quantum-forge-ops/scripts/build_qforge_ops_report.py \
+  --forge-root "$HOME/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19" \
   --turns 10 \
   --generate-capsules \
   --verify-capsules \
@@ -41,8 +41,8 @@ python3 /Users/travisstreets/.codex/skills/aurora-quantum-forge-ops/scripts/buil
 Run with payload context:
 
 ```bash
-python3 /Users/travisstreets/.codex/skills/aurora-quantum-forge-ops/scripts/build_qforge_ops_report.py \
-  --forge-root "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19" \
+python3 ~/.codex/skills/aurora-quantum-forge-ops/scripts/build_qforge_ops_report.py \
+  --forge-root "$HOME/dev/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/FORGE__GUMAS_v3.0__2026-02-19" \
   --qforge-manifest "/path/to/QUANTUM_FORGE_Manifest.json" \
   --vector-injections "/path/to/Symbolic_Vector_Injections.json"
 ```
@@ -91,4 +91,4 @@ Markdown section contract:
 
 - Upstream: direct Forge operations and diagnostics.
 - Downstream: `aurora-narrative-tone-governor` for prose governance and `aurora-exec-brief-pipeline` for leadership summaries.
-- Preset reference: `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
+- Preset reference: `~/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.

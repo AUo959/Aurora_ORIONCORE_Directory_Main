@@ -40,9 +40,9 @@ The committed `reports/analysis/aurora_devkit_latest.json` (2026-08-15) records:
 
 | Field | Committed value | Reality on the owner's Mac |
 |---|---|---|
-| `root` | `/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main` | `/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main` |
+| `root` | `/sessions/clever-ecstatic-meitner/mnt/Aurora_ORIONCORE_Directory_Main` | `~/dev/Aurora_ORIONCORE_Directory_Main` |
 | `gh.status` | `missing` | `ok` |
-| `gh.path` | `null` | `/Users/travisstreets/.local/bin/gh` |
+| `gh.path` | `null` | `~/.local/bin/gh` |
 | `gh.output` | `""` | `gh version 2.88.0` |
 | `git.output` | `git version 2.34.1` | `git version 2.50.1 (Apple Git-155)` |
 

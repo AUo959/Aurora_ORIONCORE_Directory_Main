@@ -46,7 +46,7 @@ class OrchestratorTests(unittest.TestCase):
             (repo_root / "GUMAS_SIM_2.5").mkdir(parents=True, exist_ok=True)
 
             stale_root = (
-                "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/"
+                "~/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/"
                 "Documents/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5"
             )
             entries = og.resolve_roots([stale_root], repo_root)
@@ -60,7 +60,7 @@ class OrchestratorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             repo_root = Path(td).resolve()
             stale_root = (
-                "/Users/travisstreets/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/"
+                "~/Library/Mobile Documents/3L68KQB4HG~com~readdle~CommonDocuments/"
                 "Documents/Aurora_ORIONCORE_Directory_Main/DOES_NOT_EXIST"
             )
             entries = og.resolve_roots([stale_root], repo_root)
