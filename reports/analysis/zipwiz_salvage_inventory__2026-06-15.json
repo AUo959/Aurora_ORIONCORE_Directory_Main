@@ -3,7 +3,7 @@
   "generated_at": "2026-06-15T22:08:03Z",
   "domain": "zipwiz",
   "scope": {
-    "filesystem_root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+    "filesystem_root": "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
     "github_owner": "AUo959",
     "primary_github_repo": "AUo959/zip_wizard",
     "posture": "salvage_inventory_no_canon_promotion"

@@ -12,7 +12,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-SKILLS_ROOT_DEFAULT = Path("/Users/travisstreets/.codex/skills")
+SKILLS_ROOT_DEFAULT = Path.home() / ".codex" / "skills"
 CATALOG_FILES = {
     "session": "aurora-skill-finder/references/session_skill_catalog.json",
     "aurora-core": "aurora-skill-finder/references/aurora_core_skill_catalog.json",
