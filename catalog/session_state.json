@@ -154,6 +154,33 @@
       "trigger": "Owner reviews the queue and rules on this item."
     },
     {
+      "id": "roadmap-1.1",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "codex",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Consolidate CloudBank core CI ownership without losing unique coverage; 37 workflows remain after verified inert-lane cleanup.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-11-10T03:50:29Z",
+      "next_action": "CI debt rd-20261109-ci-consolidation is cleared (receipt pr-20261109-ci-consolidation). Resume the specialized-validation and legacy build/publish consumer audit against CI_WORKFLOW_MAP.md; fold in review notes: repoint stale retired-workflow references in CLAUDE.md, docs/CODE_QUALITY_SYSTEM.md and .github/BOT_*.md (f1), retire the unwired branch-protection.yml generator in automation/health/phase2_health_optimizer.py (f2). No further CI floor change until that audit is recorded. Simulation freshness guard stays out of scope (closed #1083 vs red guard, f3).",
+      "definition_of_done": "About 6-8 core validation lanes have explicit substantive owners, with event/deployment services counted separately; duplicate validation is removed, unique coverage remains, required-check/workflow mapping is verified, and PR plus main-push checks pass with a documented map and synchronized root pins.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1689",
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1690",
+        "reports/ci_consolidation_2026-11-08.md",
+        "reports/state_briefs/development_roadmap__2026-05-24.md",
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
+        "reports/ci_consolidation_2026-11-09.md",
+        "reports/analysis/peer_reviews/pr-20261109-ci-consolidation.json"
+      ],
+      "started_at": "2026-11-09T05:08:30Z",
+      "pr_number": 1693,
+      "evidence": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
+      "review_at": "2026-11-10T00:00:00Z"
+    },
+    {
       "id": "p7-external-latency-divergence",
       "status": "ready",
       "assigned_to": "either",
@@ -400,21 +427,6 @@
       "approval_required": false
     },
     {
-      "id": "sandbox-missing-test-deps",
-      "status": "ready",
-      "assigned_to": "either",
-      "priority": "medium",
-      "kind": "work",
-      "repo": "root",
-      "description": "tests/test_live_watch_link.py fails in the sandboxed workspace with ModuleNotFoundError: No module named 'fastapi' (tools/live_watch.py clone driver). Not a code regression \u2014 a missing dependency in the execution context, the same class as the Mission Control 'gh is missing' false P1. Either add fastapi to the dev toolkit/test extras or mark the test to skip when the dep is absent, so a green suite means the same thing everywhere.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-08-27T20:06:05Z",
-      "review_at": "2026-09-10T20:06:05Z",
-      "next_action": "[migrated] tests/test_live_watch_link.py fails in the sandboxed workspace with ModuleNotFoundError: No module named 'fastapi' (tools/live_watch.py clone driver).",
-      "definition_of_done": "[migrated] Derived from the queued description; confirm the real exit condition when this item is next picked up.",
-      "approval_required": false
-    },
-    {
       "id": "l2-location-subtype-classification",
       "status": "ready",
       "assigned_to": "either",
@@ -631,31 +643,22 @@
       ]
     },
     {
-      "id": "roadmap-1.1",
+      "id": "plugin-constellation-peer-review-20260930",
       "status": "ready",
       "priority": "medium",
-      "assigned_to": "codex",
+      "assigned_to": "claude-code",
       "kind": "work",
       "repo": "aurora-cloudbank-symbolic-main",
-      "description": "Consolidate CloudBank core CI ownership without losing unique coverage; 37 workflows remain after verified inert-lane cleanup.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-11-10T03:50:29Z",
-      "next_action": "CI debt rd-20261109-ci-consolidation is cleared (receipt pr-20261109-ci-consolidation). Resume the specialized-validation and legacy build/publish consumer audit against CI_WORKFLOW_MAP.md; fold in review notes: repoint stale retired-workflow references in CLAUDE.md, docs/CODE_QUALITY_SYSTEM.md and .github/BOT_*.md (f1), retire the unwired branch-protection.yml generator in automation/health/phase2_health_optimizer.py (f2). No further CI floor change until that audit is recorded. Simulation freshness guard stays out of scope (closed #1083 vs red guard, f3).",
-      "definition_of_done": "About 6-8 core validation lanes have explicit substantive owners, with event/deployment services counted separately; duplicate validation is removed, unique coverage remains, required-check/workflow mapping is verified, and PR plus main-push checks pass with a documented map and synchronized root pins.",
+      "description": "Complementary review of CloudBank plug-in consolidation #1622; debt rd-20260930-plugin-constellation.",
+      "created_at": "2026-10-01T01:31:56Z",
+      "updated_at": "2026-10-01T01:31:56Z",
+      "review_at": "2026-10-07T01:30:00Z",
+      "next_action": "Independently verify the four-file diff, source hashes, identity boundaries and canon checks; record a peer-review receipt.",
+      "definition_of_done": "Complementary receipt recorded and debt cleared or concrete findings assigned.",
       "approval_required": false,
       "evidence_refs": [
-        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1689",
-        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1690",
-        "reports/ci_consolidation_2026-11-08.md",
-        "reports/state_briefs/development_roadmap__2026-05-24.md",
-        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
-        "reports/ci_consolidation_2026-11-09.md",
-        "reports/analysis/peer_reviews/pr-20261109-ci-consolidation.json"
-      ],
-      "started_at": "2026-11-09T05:08:30Z",
-      "pr_number": 1693,
-      "evidence": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
-      "review_at": "2026-11-10T00:00:00Z"
+        "reports/analysis/plugin_constellation_landing_20260930.md"
+      ]
     },
     {
       "id": "gh-cloudbank-1233",
@@ -1090,24 +1093,6 @@
       ]
     },
     {
-      "id": "plugin-constellation-peer-review-20260930",
-      "status": "ready",
-      "priority": "medium",
-      "assigned_to": "claude-code",
-      "kind": "work",
-      "repo": "aurora-cloudbank-symbolic-main",
-      "description": "Complementary review of CloudBank plug-in consolidation #1622; debt rd-20260930-plugin-constellation.",
-      "created_at": "2026-10-01T01:31:56Z",
-      "updated_at": "2026-10-01T01:31:56Z",
-      "review_at": "2026-10-07T01:30:00Z",
-      "next_action": "Independently verify the four-file diff, source hashes, identity boundaries and canon checks; record a peer-review receipt.",
-      "definition_of_done": "Complementary receipt recorded and debt cleared or concrete findings assigned.",
-      "approval_required": false,
-      "evidence_refs": [
-        "reports/analysis/plugin_constellation_landing_20260930.md"
-      ]
-    },
-    {
       "id": "repair-legacy-simulation-authority-surfaces",
       "status": "waiting",
       "priority": "high",
@@ -1229,9 +1214,30 @@
     {
       "id": "ace-capability-manifest-discovery",
       "status": "completed",
-      "completed_at": "2026-11-07T22:43:52Z",
+      "completed_at": "2026-09-26T23:27:51Z",
       "platform": "codex",
-      "detail": "Verified on root main af72c39: tools/ace/core.py build_capability_index delegates to capability_discovery.build_capability_index; capability_discovery.py loads validated committed manifests. The hardcoded _capability_specs function is absent. This closure is also corroborated by executive_brief__2026-08-15.md and the passing root suite. The queue description is obsolete."
+      "detail": "Verified implemented at root 8569f743: tools/ace/core.py build_capability_index delegates to capability_discovery.py; committed manifest catalog validates 20 capabilities against schema. Existing discovery tests passed in the 670-pass non-simulation root suite on 2026-09-26. Stale queue entry closed; no capability behavior changed."
+    },
+    {
+      "id": "friday-action-brief-component-acceptance-20261001",
+      "status": "completed",
+      "completed_at": "2026-10-02T02:00:48Z",
+      "platform": "codex",
+      "detail": "Component acceptance verified: live root source snapshots, disk continuity reload, controlled transport failure preserving context, and real canonical add/start/complete lifecycle. Receipt: reports/analysis/friday_action_brief_acceptance_20261001.md. Scheduler dispatch, fresh-chat model recovery, UI click and Claude execution remain unverified."
+    },
+    {
+      "id": "sandbox-missing-test-deps",
+      "status": "completed",
+      "completed_at": "2026-10-10T14:32:56Z",
+      "platform": "codex",
+      "detail": "Refreshed 2026-10-10 in the canonical root using its existing .venv: tests/test_live_watch_link.py passed. The prior missing-fastapi environment blocker is resolved in this checkout; no packages installed."
+    },
+    {
+      "id": "cloudbank-queue-ci-1558",
+      "status": "completed",
+      "completed_at": "2026-10-10T14:40:27Z",
+      "platform": "codex",
+      "detail": "Prepared and published draft CloudBank PR #1635 for #1558 at 16eb667decf98766886aac84a0039181d70293e4. 73 focused regressions, syntax, Ruff, complexity and queue-view checks pass. Full-suite environment failures reproduced on main and scoped rerun passed. Latest remote checks and live dispatch rollout remain pending; no merge/cleanup approval. Receipt: reports/analysis/cloudbank_sentinel_triage_20261010.md."
     },
     {
       "id": "gpt4o-retirement-2027-01-14",
@@ -1342,13 +1348,6 @@
       "detail": "Implemented by Claude in #1699, independently approved by Codex and merged b68c4717; root pins synchronized in #114."
     },
     {
-      "id": "investigate-simulation-freshness-gap",
-      "status": "completed",
-      "completed_at": "2026-11-10T03:38:46Z",
-      "platform": "codex",
-      "detail": "Read-only investigation complete: #1083 closed in July; August authority retires legacy snapshot, but Git-age workflow and API/docs retain old semantics. Preflight ready at tick0/no run; 20 tests pass; snapshot bytes unchanged. Evidence and repair plan recorded; implementation waits for CI review."
-    },
-    {
       "id": "review-git-common-dir-scrub-20261110",
       "status": "completed",
       "completed_at": "2026-11-10T03:39:45Z",
@@ -1382,17 +1381,14 @@
       ]
     },
     {
-      "id": "friday-action-brief-component-acceptance-20261001",
+      "id": "investigate-simulation-freshness-gap",
       "status": "completed",
-      "completed_at": "2026-10-02T02:04:21Z",
+      "completed_at": "2026-11-10T03:38:46Z",
       "platform": "codex",
-      "detail": "Component acceptance verified: live root source snapshots, disk continuity reload, controlled transport failure preserving context, and real canonical add/start/complete lifecycle. Receipt: reports/analysis/friday_action_brief_acceptance_20261001.md. Scheduler dispatch, fresh-chat model recovery, UI click and Claude execution remain unverified.",
-      "evidence_refs": [
-        "reports/analysis/friday_action_brief_acceptance_20261001.md"
-      ]
+      "detail": "Read-only investigation complete: #1083 closed in July; August authority retires legacy snapshot, but Git-age workflow and API/docs retain old semantics. Preflight ready at tick0/no run; 20 tests pass; snapshot bytes unchanged. Evidence and repair plan recorded; implementation waits for CI review."
     }
   ],
-  "last_updated": "2026-11-27T19:00:32Z",
+  "last_updated": "2026-11-27T19:04:46Z",
   "last_platform": "claude-code",
   "last_session_summary": "Migrated 24 open backlog issues (19 CloudBank, 5 ORIONCORE) into task_queue as gh-* items, with verbatim archives in catalog/backlog_archive/, ahead of closing the GitHub issues during zero-open triage.",
   "tool_versions": {
@@ -1418,10 +1414,34 @@
   },
   "recent_commits": [
     {
-      "sha": "273c076",
+      "sha": "e6f06b2",
       "date": "2026-11-27",
       "platform": "claude-code",
-      "summary": "Merge main into codex/aurora-session-status-mod-20261002"
+      "summary": "Merge main into codex/health-easy-wins-20260926"
+    },
+    {
+      "sha": "d59cb6d",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "Add read-only Aurora session-status mod for Claude Code (#94)"
+    },
+    {
+      "sha": "4988a73",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "feat(ui): add authenticated, local-only Mission Control snapshot retrieval (#98)"
+    },
+    {
+      "sha": "41f1162",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "chore(state): refresh session_state mechanical fields"
+    },
+    {
+      "sha": "ef18af1",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "Merge main into codex/health-easy-wins-20260926"
     },
     {
       "sha": "c38d688",
@@ -1448,34 +1468,10 @@
       "summary": "feat(ui): introduce read-only Aurora Intelligent UI snapshot bridge (#97)"
     },
     {
-      "sha": "888627f",
+      "sha": "861e1b7",
       "date": "2026-11-27",
       "platform": "claude-code",
       "summary": "chore(state): refresh session_state mechanical fields"
-    },
-    {
-      "sha": "e448ecd",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "Merge main into codex/aurora-session-status-mod-20261002"
-    },
-    {
-      "sha": "6ad76ce",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "chore(queue): migrate 24 open GitHub backlog issues into task_queue with verbatim archives (#128)"
-    },
-    {
-      "sha": "c7b1d0c",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "docs: investigate legacy simulation freshness and authority mismatch (#115)"
-    },
-    {
-      "sha": "9cd35f1",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "docs(automation): record Friday brief acceptance and remaining gates (#93)"
     }
   ],
   "security_events": [
@@ -1492,7 +1488,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "273c0764052b8c3a35509488f5263458b05fee8e",
+    "main_sha": "e6f06b2d09d59954b667041c4a61494c50307208",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",

@@ -44,7 +44,7 @@ repos:
 - name: qgia-knowledge-spine-main
   path: qgia-knowledge-spine-main
   branch: main
-  head_sha: c98c4592e82ebd09b8882f2b148714b8bd60e84c
+  head_sha: 1cf04fa61878ce19b4c63b724395747f62a9b006
   remote_status: configured
   validation_command: env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX
     git -C qgia-knowledge-spine-main rev-parse HEAD && env -u GIT_DIR -u GIT_WORK_TREE
