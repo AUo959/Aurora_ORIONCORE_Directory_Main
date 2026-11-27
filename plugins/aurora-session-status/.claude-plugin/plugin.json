@@ -1,0 +1,6 @@
+{
+  "name": "aurora-session-status",
+  "version": "0.1.0",
+  "description": "Read-only local Aurora repository, claim, pin and handoff status above the prompt.",
+  "author": {"name": "Travis Streets"}
+}
