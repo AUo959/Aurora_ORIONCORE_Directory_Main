@@ -38,13 +38,13 @@ The root cause was two-part:
 
 ## Verification
 
-- `UV_CACHE_DIR=/private/tmp/uv-cache /Users/travisstreets/.local/bin/uv run --python /Users/travisstreets/.local/bin/python3.12 --with pytest python -m pytest --confcutdir=tests tests/test_aggregate_knowledge_indexes.py -q`
+- `UV_CACHE_DIR=/private/tmp/uv-cache ~/.local/bin/uv run --python ~/.local/bin/python3.12 --with pytest python -m pytest --confcutdir=tests tests/test_aggregate_knowledge_indexes.py -q`
   - Result: `2 passed`
-- `/Users/travisstreets/.local/bin/python3.12 -m py_compile scripts/aggregate-knowledge-indexes.py tests/test_aggregate_knowledge_indexes.py`
+- `~/.local/bin/python3.12 -m py_compile scripts/aggregate-knowledge-indexes.py tests/test_aggregate_knowledge_indexes.py`
   - Result: passed
 - `ruby -e 'require "yaml"; YAML.load_file(".github/workflows/constellation-knowledge-aggregator.yml"); puts "yaml ok"'`
   - Result: `yaml ok`
-- `/Users/travisstreets/.local/bin/python3.12 scripts/aggregate-knowledge-indexes.py --local`
+- `~/.local/bin/python3.12 scripts/aggregate-knowledge-indexes.py --local`
   - Result: no material changes; generated timestamp churn suppressed
 - `git diff -- knowledge-indexes`
   - Result: no diff

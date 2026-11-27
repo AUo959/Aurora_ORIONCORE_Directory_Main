@@ -21,17 +21,17 @@ or Docker GUI install was attempted.
 ## User-Space Fixes Applied
 
 - Rust installed through the official `rustup` bootstrap into:
-  - `/Users/travisstreets/.cargo`
-  - `/Users/travisstreets/.rustup`
+  - `~/.cargo`
+  - `~/.rustup`
 - Rust tools exposed through existing PATH lane:
-  - `/Users/travisstreets/.local/bin/rustc`
-  - `/Users/travisstreets/.local/bin/cargo`
-  - `/Users/travisstreets/.local/bin/rustup`
+  - `~/.local/bin/rustc`
+  - `~/.local/bin/cargo`
+  - `~/.local/bin/rustup`
 - Go `go1.26.3` installed from the official Go darwin/arm64 tarball into:
-  - `/Users/travisstreets/.local/opt/go1.26.3`
+  - `~/.local/opt/go1.26.3`
 - Go tools exposed through existing PATH lane:
-  - `/Users/travisstreets/.local/bin/go`
-  - `/Users/travisstreets/.local/bin/gofmt`
+  - `~/.local/bin/go`
+  - `~/.local/bin/gofmt`
 
 ## Verification
 

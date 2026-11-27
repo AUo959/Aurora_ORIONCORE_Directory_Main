@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import timezone
 from pathlib import Path
 
 import pytest

@@ -135,6 +135,20 @@
       "status": "planned_move",
       "scan_policy": "include",
       "notes": "Local early project specification for a narrative engine; include in root intake routing metadata without promoting the source text into canon or a nested repo."
+    },
+    {
+      "current_path": ".claude",
+      "id": "dot-claude",
+      "kind": "control_surface",
+      "logical_zone": "tools",
+      "planned_path": ".claude",
+      "git_boundary": "root",
+      "storage_tier": "workspace-control",
+      "retention_policy": "versioned",
+      "owner": "workspace-admin",
+      "batch_id": "",
+      "status": "managed",
+      "notes": "Tracked Claude session hook configuration; keep at the repository root."
     }
   ]
 }

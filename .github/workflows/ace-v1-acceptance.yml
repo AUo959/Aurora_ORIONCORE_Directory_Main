@@ -8,6 +8,7 @@ on:
       - "tools/aurora_ace*.py"
       - "tests/test_aurora_ace*.py"
       - "catalog/ace/**"
+      - "catalog/repo_registry.yaml"
       - "catalog/contracts/aurora_ace*.json"
       - "catalog/schemas/aurora_ace*.json"
       - "docs/AURORA_ACE*.md"
@@ -20,6 +21,7 @@ on:
       - "tools/aurora_ace*.py"
       - "tests/test_aurora_ace*.py"
       - "catalog/ace/**"
+      - "catalog/repo_registry.yaml"
       - "catalog/contracts/aurora_ace*.json"
       - "catalog/schemas/aurora_ace*.json"
       - "docs/AURORA_ACE*.md"
@@ -102,12 +104,28 @@ jobs:
           python tools/aurora_ace_acceptance.py \
             --run-practical \
             --include-isolated \
+            --require-ready \
             --report-out reports/ci/aurora-ace-v1-acceptance.json \
             --summary
 
       - name: Upload ACE v1 acceptance receipt
         if: always() && hashFiles('reports/ci/aurora-ace-v1-acceptance.json') != ''
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.0
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.0
         with:
           name: aurora-ace-v1-acceptance
           path: reports/ci/aurora-ace-v1-acceptance.json
+
+      - name: Verify persistent sandbox through real MCP processes
+        env:
+          ACE_SANDBOX_E2E: "1"
+        run: python -m pytest tests/test_aurora_ace_sandbox.py -q
+
+      - name: Verify offline character promotion handoff
+        env:
+          ACE_PROMOTION_E2E: "1"
+        run: python -m pytest tests/test_aurora_ace_promotion.py -q
+
+      - name: Verify L3-governed background simulation needs
+        env:
+          ACE_CONTEXT_E2E: "1"
+        run: python -m pytest tests/test_aurora_ace_contextual.py -q

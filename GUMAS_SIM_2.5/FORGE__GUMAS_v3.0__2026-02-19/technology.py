@@ -145,7 +145,7 @@ class FactionTechState:
             "tech_levels": dict(self.tech_levels),
             "active_rd": dict(self.active_rd),
             "rd_capacity": self.rd_capacity,
-            "unlocked_nodes": list(self.unlocked_nodes),
+            "unlocked_nodes": sorted(self.unlocked_nodes),
             "stolen_tech": dict(self.stolen_tech),
             "research_progress": dict(self.research_progress),
         }
@@ -412,7 +412,7 @@ class TechnologyEngine:
     def get_combat_multiplier(self, ts: FactionTechState) -> float:
         """Aggregate combat multiplier from all unlocked nodes."""
         mult = 1.0
-        for nid in ts.unlocked_nodes:
+        for nid in sorted(ts.unlocked_nodes):
             node = self._tree.get(nid)
             if node:
                 mult *= node.combat_multiplier
@@ -421,7 +421,7 @@ class TechnologyEngine:
     def get_economic_multiplier(self, ts: FactionTechState) -> float:
         """Aggregate economic multiplier from all unlocked nodes."""
         mult = 1.0
-        for nid in ts.unlocked_nodes:
+        for nid in sorted(ts.unlocked_nodes):
             node = self._tree.get(nid)
             if node:
                 mult *= node.economic_multiplier

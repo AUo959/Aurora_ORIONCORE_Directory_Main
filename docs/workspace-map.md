@@ -2,11 +2,14 @@
 
 - Generated: `2026-09-23T13:01:49Z`
 - Root: `Aurora_ORIONCORE_Directory_Main`
-- Top-level entries cataloged: `46`
+- Top-level entries cataloged: `47`
 - Nested repos registered: `9`
 - Archive or binary artifacts inventoried: `615`
-- Classification overrides loaded: `10` from `catalog/classification_overrides.yaml`
+- Classification overrides loaded: `11` from `catalog/classification_overrides.yaml`
 - Top-level paths excluded by privacy screen: `13`
+
+Targeted inventory update (November 8, 2026): `.claude` is managed in place as
+a root control surface. Other canonical inventory entries are retained.
 
 ## Zones
 
@@ -18,7 +21,7 @@
 - `projects`: `1` top-level entries
 - `reports`: `1` top-level entries
 - `repos`: `4` top-level entries
-- `tools`: `11` top-level entries
+- `tools`: `12` top-level entries
 
 ## Active Nested Repos
 

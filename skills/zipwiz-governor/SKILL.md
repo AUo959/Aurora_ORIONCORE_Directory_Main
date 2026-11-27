@@ -87,13 +87,13 @@ These are compatible with downstream L3 canon workflows and have no hard runtime
 - Default to curated roots and reference-only evolution sources.
 - Exclude archive-heavy mirror paths by default.
 - Always emit both JSON and markdown outputs.
-- Align findings to the shared schema at `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/finding_schema.md` for multi-skill governance workflows.
+- Align findings to the shared schema at `~/.codex/skills/aurora-governance-orchestrator/references/finding_schema.md` for multi-skill governance workflows.
 
 ## Workflow Position
 
 - Upstream: `aurora-skill-finder` or `aurora-selective-integration` when ZIPWIZ surfaces are part of a wider batch.
 - Downstream: hand findings to `aurora-governance-orchestrator` for any merged promotion verdict.
-- Preset reference: `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
+- Preset reference: `~/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
 
 ## Resources
 

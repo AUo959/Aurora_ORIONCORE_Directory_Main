@@ -31,16 +31,16 @@
               "stability_index": 0.35677148888945076,
               "summary": "Turn 123: stability=0.357, risk=0.652, v3_events=33"
             },
-            "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/advanced_skill_output.json",
+            "path": "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/advanced_skill_output.json",
             "turn": 123,
             "version": "4.0.0-synth"
           },
           "primary_event_ledger": {
-            "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/advanced_event_ledger.ndjson",
+            "path": "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS/advanced_event_ledger.ndjson",
             "record_count": 4411
           },
           "seed99_event_ledger": {
-            "path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS_SEED99/advanced_event_ledger.ndjson",
+            "path": "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS_SEED99/advanced_event_ledger.ndjson",
             "record_count": 5621
           }
         },
@@ -72,9 +72,9 @@
         "smoke_probe": {
           "command": [
             "python3",
-            "/Users/travisstreets/.codex/skills/gumas-simulation-engine/scripts/run_gumas_advanced.py",
+            "~/.codex/skills/gumas-simulation-engine/scripts/run_gumas_advanced.py",
             "--workspace",
-            "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+            "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
             "--turns",
             "5",
             "--seed",
@@ -89,7 +89,7 @@
           "requested": true,
           "result": {
             "engine_class": "GUMASAdvancedEngine",
-            "engine_dir": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS",
+            "engine_dir": "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS",
             "engine_mode": "advanced",
             "last_summary": "Turn 5: stability=0.597, risk=0.360, v3_events=25",
             "output_exists": true,
@@ -97,13 +97,13 @@
             "scenario_id": "gumas_canonical_v1",
             "turns_completed": 5,
             "turns_requested": 5,
-            "workspace": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main"
+            "workspace": "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main"
           },
           "returncode": 0,
           "seed": 42,
           "status": "ready",
           "stderr_preview": "",
-          "stdout_preview": "{\n  \"workspace\": \"/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main\",\n  \"engine_dir\": \"/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS\",\n  \"engine_mode\": \"advanced\",\n  \"engine_class\": \"GUMASAdvancedEngine\",\n  \"scenario_id\": \"gumas_canonical_v1\",\n  \"turns_requested\": 5,\n  \"turns_completed\": 5,\n  \"last_summary\": \"Turn 5: stability=0.597, risk=0.360, v3_events=25\",\n  \"output_path\": \"/private/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/aurora_gumas_smoke_latest.json\",\n  \"output_exists\": true\n}\n",
+          "stdout_preview": "{\n  \"workspace\": \"~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main\",\n  \"engine_dir\": \"~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/SIM_ENGINE_OUTPUTS\",\n  \"engine_mode\": \"advanced\",\n  \"engine_class\": \"GUMASAdvancedEngine\",\n  \"scenario_id\": \"gumas_canonical_v1\",\n  \"turns_requested\": 5,\n  \"turns_completed\": 5,\n  \"last_summary\": \"Turn 5: stability=0.597, risk=0.360, v3_events=25\",\n  \"output_path\": \"/private/var/folders/p3/5w4rg02s3mj0r06pknc88yzm0000gn/T/aurora_gumas_smoke_latest.json\",\n  \"output_exists\": true\n}\n",
           "turns": 5,
           "writes_to_repo": false
         },
@@ -511,7 +511,7 @@
         "path_resolution": "root",
         "raw_status": "ok",
         "repo_name": "aurora-cloudbank-symbolic-main",
-        "resolved_path": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
+        "resolved_path": "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main/GUMAS_SIM_2.5/Aurora_Sim_Architecture/aurora-cloudbank-symbolic-main",
         "status": "ready",
         "status_file_state": "ok"
       },
@@ -770,7 +770,7 @@
       "title": "Review attention lanes before treating the console as green"
     }
   ],
-  "root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "root": "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "run_mode": "read_only",
   "schema_version": 1,
   "source_reports": [

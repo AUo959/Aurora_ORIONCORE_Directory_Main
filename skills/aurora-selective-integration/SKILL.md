@@ -15,7 +15,7 @@ Convert external kits/archives into deterministic selective-integration capsules
 Run the capsule builder:
 
 ```bash
-python3 /Users/travisstreets/.codex/skills/aurora-selective-integration/scripts/build_selective_integration_capsule.py \
+python3 ~/.codex/skills/aurora-selective-integration/scripts/build_selective_integration_capsule.py \
   --protocol-json /path/to/Aurora_SelectiveIntegrationProtocol_v2.5_VIEW.json \
   --modules-json /path/to/modules_manifest.json \
   --source-name "GUMAS_AI_Agents_Kit.zip" \
@@ -98,7 +98,7 @@ The report includes:
 
 - Upstream: `aurora-skill-finder` when ingest scope is unclear.
 - Downstream: specialist governors for affected domains, then `aurora-governance-orchestrator` for the final gate.
-- Preset reference: `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
+- Preset reference: `~/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
 
 ## References
 

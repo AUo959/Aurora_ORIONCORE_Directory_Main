@@ -21,6 +21,6 @@
 
 ```bash
 PYTHONPYCACHEPREFIX=/tmp \
-python3 /Users/travisstreets/.codex/skills/gumas-simulation-engine/scripts/run_gumas_advanced.py \
+python3 ~/.codex/skills/gumas-simulation-engine/scripts/run_gumas_advanced.py \
   --workspace "$PWD" --turns 5 --seed 42
 ```

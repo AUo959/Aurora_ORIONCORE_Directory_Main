@@ -83,13 +83,13 @@ Bridge output is standalone JSON and does not import or require runtime coupling
 - Limit default scan scope to focused canonical roots.
 - Use `balanced` strictness by default.
 - Produce both JSON and Markdown outputs each run.
-- Align findings to the shared schema at `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/finding_schema.md` for multi-skill governance workflows.
+- Align findings to the shared schema at `~/.codex/skills/aurora-governance-orchestrator/references/finding_schema.md` for multi-skill governance workflows.
 
 ## Workflow Position
 
 - Upstream: `aurora-skill-finder` or `aurora-selective-integration` when the affected domain is unclear.
 - Downstream: hand findings to `aurora-governance-orchestrator` when THREADCORE is part of a wider promotion gate.
-- Preset reference: `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
+- Preset reference: `~/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
 
 ## Resources
 
