@@ -154,6 +154,33 @@
       "trigger": "Owner reviews the queue and rules on this item."
     },
     {
+      "id": "roadmap-1.1",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "codex",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Consolidate CloudBank core CI ownership without losing unique coverage; 37 workflows remain after verified inert-lane cleanup.",
+      "created_at": "2026-08-27T20:06:05Z",
+      "updated_at": "2026-11-10T03:50:29Z",
+      "next_action": "CI debt rd-20261109-ci-consolidation is cleared (receipt pr-20261109-ci-consolidation). Resume the specialized-validation and legacy build/publish consumer audit against CI_WORKFLOW_MAP.md; fold in review notes: repoint stale retired-workflow references in CLAUDE.md, docs/CODE_QUALITY_SYSTEM.md and .github/BOT_*.md (f1), retire the unwired branch-protection.yml generator in automation/health/phase2_health_optimizer.py (f2). No further CI floor change until that audit is recorded. Simulation freshness guard stays out of scope (closed #1083 vs red guard, f3).",
+      "definition_of_done": "About 6-8 core validation lanes have explicit substantive owners, with event/deployment services counted separately; duplicate validation is removed, unique coverage remains, required-check/workflow mapping is verified, and PR plus main-push checks pass with a documented map and synchronized root pins.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1689",
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1690",
+        "reports/ci_consolidation_2026-11-08.md",
+        "reports/state_briefs/development_roadmap__2026-05-24.md",
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
+        "reports/ci_consolidation_2026-11-09.md",
+        "reports/analysis/peer_reviews/pr-20261109-ci-consolidation.json"
+      ],
+      "started_at": "2026-11-09T05:08:30Z",
+      "pr_number": 1693,
+      "evidence": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
+      "review_at": "2026-11-10T00:00:00Z"
+    },
+    {
       "id": "p7-external-latency-divergence",
       "status": "ready",
       "assigned_to": "either",
@@ -631,31 +658,22 @@
       ]
     },
     {
-      "id": "roadmap-1.1",
+      "id": "plugin-constellation-peer-review-20260930",
       "status": "ready",
       "priority": "medium",
-      "assigned_to": "codex",
+      "assigned_to": "claude-code",
       "kind": "work",
       "repo": "aurora-cloudbank-symbolic-main",
-      "description": "Consolidate CloudBank core CI ownership without losing unique coverage; 37 workflows remain after verified inert-lane cleanup.",
-      "created_at": "2026-08-27T20:06:05Z",
-      "updated_at": "2026-11-10T03:50:29Z",
-      "next_action": "CI debt rd-20261109-ci-consolidation is cleared (receipt pr-20261109-ci-consolidation). Resume the specialized-validation and legacy build/publish consumer audit against CI_WORKFLOW_MAP.md; fold in review notes: repoint stale retired-workflow references in CLAUDE.md, docs/CODE_QUALITY_SYSTEM.md and .github/BOT_*.md (f1), retire the unwired branch-protection.yml generator in automation/health/phase2_health_optimizer.py (f2). No further CI floor change until that audit is recorded. Simulation freshness guard stays out of scope (closed #1083 vs red guard, f3).",
-      "definition_of_done": "About 6-8 core validation lanes have explicit substantive owners, with event/deployment services counted separately; duplicate validation is removed, unique coverage remains, required-check/workflow mapping is verified, and PR plus main-push checks pass with a documented map and synchronized root pins.",
+      "description": "Complementary review of CloudBank plug-in consolidation #1622; debt rd-20260930-plugin-constellation.",
+      "created_at": "2026-10-01T01:31:56Z",
+      "updated_at": "2026-10-01T01:31:56Z",
+      "review_at": "2026-10-07T01:30:00Z",
+      "next_action": "Independently verify the four-file diff, source hashes, identity boundaries and canon checks; record a peer-review receipt.",
+      "definition_of_done": "Complementary receipt recorded and debt cleared or concrete findings assigned.",
       "approval_required": false,
       "evidence_refs": [
-        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1689",
-        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1690",
-        "reports/ci_consolidation_2026-11-08.md",
-        "reports/state_briefs/development_roadmap__2026-05-24.md",
-        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
-        "reports/ci_consolidation_2026-11-09.md",
-        "reports/analysis/peer_reviews/pr-20261109-ci-consolidation.json"
-      ],
-      "started_at": "2026-11-09T05:08:30Z",
-      "pr_number": 1693,
-      "evidence": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
-      "review_at": "2026-11-10T00:00:00Z"
+        "reports/analysis/plugin_constellation_landing_20260930.md"
+      ]
     }
   ],
   "completed_tasks": [
@@ -1196,5 +1214,6 @@
       }
     ],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
-  }
+  },
+  "_summary_set_manually": true
 }
