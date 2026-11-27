@@ -1,7 +1,7 @@
 ---
 title: Aurora Canon Engine Current State and v1 Acceptance Handoff
 doc_type: implementation_handoff
-status: acceptance_candidate_not_sealed
+status: composition_accepted
 version: 1.1.0
 date: 2026-08-15
 owner_repo: AUo959/Aurora_ORIONCORE_Directory_Main
@@ -12,6 +12,25 @@ matrix_ref: catalog/contracts/aurora_ace_v1_acceptance_matrix.json
 ---
 
 # Aurora Canon Engine — Current State and v1 Acceptance Handoff
+
+## Acceptance update — 2026-09-06
+
+The complete 13-row composition matrix passes with `seal_eligible=true` in a
+Python 3.12 environment with the declared transport dependencies. The latest
+receipt is `reports/analysis/aurora_ace_v1_acceptance_latest.json`. CI now uses
+`--require-ready` and includes registry changes in its triggers. The compatibility
+and dependency blockers described in the historical August baseline below no
+longer describe the current executed acceptance result.
+
+The new persistent sandbox experience is a separate operator surface over those
+accepted components. Its three MCP tools support inherited-character retrieval,
+explicit sandbox character creation, and durable provenance inspection. A
+15-test suite verifies creation, independent-server recall, baseline advancement,
+idempotency, interrupted-save recovery, concurrency, and refusal boundaries.
+See `docs/AURORA_ACE_SANDBOX.md` for setup and the two-task acceptance story.
+Neither acceptance result authorizes source-world canon promotion or Orion
+runtime progression. The remainder of this handoff preserves its August design
+and baseline history.
 
 ## Executive state
 

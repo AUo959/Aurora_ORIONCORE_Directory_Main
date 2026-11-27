@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aurora_intelligent_ui_snapshot.schema.json",
+  "title": "Aurora Intelligent UI read-only Mission Control snapshot",
+  "description": "A governed, allowlisted representation of a saved report; not a live-state guarantee.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "generated_at",
+    "authority",
+    "source",
+    "health",
+    "operator_inbox",
+    "build_lanes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "aurora.mission_control.snapshot"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "mutation_posture",
+        "canon_write",
+        "runtime_execution",
+        "nested_repo_mutation"
+      ],
+      "properties": {
+        "mode": {
+          "const": "read_only"
+        },
+        "mutation_posture": {
+          "const": "advisory_only"
+        },
+        "canon_write": {
+          "const": false
+        },
+        "runtime_execution": {
+          "const": false
+        },
+        "nested_repo_mutation": {
+          "const": false
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "report_ref",
+        "generated_at",
+        "sha256",
+        "freshness",
+        "age_seconds",
+        "max_age_hours"
+      ],
+      "properties": {
+        "repository": {
+          "const": "AUo959/Aurora_ORIONCORE_Directory_Main"
+        },
+        "report_ref": {
+          "const": "reports/analysis/aurora_mission_control_latest.json"
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "freshness": {
+          "enum": [
+            "fresh",
+            "stale"
+          ]
+        },
+        "age_seconds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_age_hours": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "health": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "sources",
+        "source_errors",
+        "inbox_items",
+        "approval_required",
+        "blocking_items",
+        "lanes"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "ready",
+            "attention",
+            "blocked"
+          ]
+        },
+        "sources": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_errors": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "inbox_items": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "approval_required": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "blocking_items": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lanes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ready",
+            "attention",
+            "blocked"
+          ],
+          "properties": {
+            "ready": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "attention": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "blocked": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "operator_inbox": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "priority",
+          "status",
+          "category",
+          "source",
+          "target_repo",
+          "approval_required",
+          "blocking",
+          "evidence_restricted",
+          "evidence_refs",
+          "next_action"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "priority": {
+            "enum": [
+              "P0",
+              "P1",
+              "P2",
+              "P3"
+            ]
+          },
+          "status": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "target_repo": {
+            "type": "string"
+          },
+          "approval_required": {
+            "type": "boolean"
+          },
+          "blocking": {
+            "type": "boolean"
+          },
+          "evidence_restricted": {
+            "type": "boolean"
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "next_action": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "build_lanes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "status",
+          "missing_required_tools",
+          "evidence_refs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "ready",
+              "attention",
+              "blocked"
+            ]
+          },
+          "missing_required_tools": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
