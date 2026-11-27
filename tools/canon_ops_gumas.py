@@ -47,6 +47,7 @@ class RunError(ValueError):
 
 class FabricReview(RunError):
     def __init__(self, findings: dict):
+        """Preserve the pinned checker findings with the review disposition."""
         super().__init__("The pinned Fabric Invariants evidence requires review")
         self.findings = findings
 

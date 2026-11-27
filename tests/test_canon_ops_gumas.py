@@ -14,6 +14,30 @@ CHECK = TestCase()
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def pinned_canonrec(path, status):
+    path.mkdir()
+    git(["init", "-q"], path)
+    entity = path / "canon/L2/entities/fixture.json"
+    entity.parent.mkdir(parents=True)
+    entity.write_text(journal.canonical_json({
+        "entity_kind": "character", "entity_id": "example", "allegiance": "galactic_union", "status": status,
+    }), encoding="utf-8")
+    git(["add", "."], path)
+    git(["-c", "user.name=Fixture", "-c", "user.email=fixture@example.invalid",
+         "commit", "--no-gpg-sign", "-qm", "Fabric fixture"], path)
+    return gumas.CanonRec(path), git(["rev-parse", "HEAD"], path).stdout.strip()
+
+
+def stage_fixture(path, snapshot, proposal, identity, certainty):
+    proposal["content_hash"] = journal.request_digest(proposal)
+    journal.append_request(path, snapshot, proposal, lambda _: {
+        "request_id": proposal["request_id"], "content_hash": proposal["content_hash"],
+        "canon_commit": snapshot, "status": "ACCEPTED", "target_updates": [
+            {**identity, "state": {"revision": proposal["content_hash"], "certainty": certainty}},
+        ],
+    })
+
+
 @pytest.fixture
 def approved(tmp_path, request):
     repo = gumas.CanonRec(ROOT)
@@ -48,40 +72,17 @@ def approved(tmp_path, request):
         "subject_sha256": subject_digest(proposal), "decision": proposal["approval"]["state"], "authority": "reviewer",
     })
     proposal["gate_receipts"] = {"authorization_approval": {"artifact": gate}}
-    proposal["content_hash"] = journal.request_digest(proposal)
-    canon_path = tmp_path / "canonrec"
-    canon_path.mkdir()
-    git(["init", "-q"], canon_path)
-    entity = canon_path / "canon/L2/entities/fixture.json"
-    entity.parent.mkdir(parents=True)
-    entity.write_text(journal.canonical_json({
-        "entity_kind": "character", "entity_id": "example", "allegiance": "galactic_union",
-        "status": overrides.get("canon_status", "active"),
-    }), encoding="utf-8")
-    git(["add", "."], canon_path)
-    git(["-c", "user.name=Fixture", "-c", "user.email=fixture@example.invalid",
-         "commit", "--no-gpg-sign", "-qm", "Fabric fixture"], canon_path)
-    snapshot = git(["rev-parse", "HEAD"], canon_path).stdout.strip()
+    canonrec, snapshot = pinned_canonrec(tmp_path / "canonrec", overrides.get("canon_status", "active"))
     policy = {
         "canon_commit": snapshot, "engine_commit": revision, "l1_relays": ["l1-relay"],
         "approvers": {"L2": ["reviewer"]},
         "gate_origins": {"authorization_approval": [{"repository": "Fixture/Gumas", "commit": source_commit}]},
     }
     journal_path = tmp_path / "staging.db"
-    journal.append_request(journal_path, snapshot, proposal, lambda _: {
-        "request_id": proposal["request_id"], "content_hash": proposal["content_hash"],
-        "canon_commit": snapshot, "status": "ACCEPTED",
-        "target_updates": [{**identity, "state": {"revision": proposal["content_hash"], "certainty": "STAGING"}}],
-    })
+    stage_fixture(journal_path, snapshot, proposal, identity, "STAGING")
     if overrides.get("superseded"):
         withdrawn = {**proposal, "request_id": "withdraw-fixture", "operation": "supersede_staging_record"}
-        withdrawn["content_hash"] = journal.request_digest(withdrawn)
-        journal.append_request(journal_path, snapshot, withdrawn, lambda _: {
-            "request_id": withdrawn["request_id"], "content_hash": withdrawn["content_hash"],
-            "canon_commit": snapshot, "status": "ACCEPTED", "target_updates": [
-                {**identity, "state": {"revision": withdrawn["content_hash"], "certainty": "SUPERSEDED"}},
-            ],
-        })
+        stage_fixture(journal_path, snapshot, withdrawn, identity, "SUPERSEDED")
     spec = {
         "version": "1.0", "layer": "L2", "origin_request_id": proposal["request_id"],
         "origin_content_hash": proposal["content_hash"], "scenario_seed": seed,
@@ -94,7 +95,7 @@ def approved(tmp_path, request):
             lambda reference: blobs[reference["path"]],
         )
 
-    return prepare, spec, blobs, repo, gumas.CanonRec(canon_path)
+    return prepare, spec, blobs, repo, canonrec
 
 
 def test_approved_native_run_publishes_and_replays_identical_receipts(approved, tmp_path):
