@@ -1395,5 +1395,149 @@
       }
     ],
     "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1711,
+    "title": "GUMAS Unified P6: quality cleared; inherited stack and independent review pending",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1711",
+    "labels": [],
+    "archive": "catalog/backlog_archive/cloudbank-1711.md",
+    "comments": 2,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1701,
+        "title": "feat(gumas): isolated Unified Causal Field P0 kernel and cross-scale fixture",
+        "state": "closed",
+        "merged": false,
+        "draft": true,
+        "head_ref": "feat/gumas-unified-causal-field-p0-20261114",
+        "head_sha": "303a7f208a6268a08261b09e703ea32bef54bb73",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1701"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1704,
+        "title": "feat(gumas): P3 causally governed noncombat relief allocation across scales",
+        "state": "closed",
+        "merged": false,
+        "draft": true,
+        "head_ref": "feat/gumas-unified-political-action-p3-20261115",
+        "head_sha": "bf4561c4d0bde70564b5e8fcae6b0cf7aeb58ba1",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1704"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1705,
+        "title": "feat(gumas): P4 data-defined governance protocols with alignment audit",
+        "state": "closed",
+        "merged": false,
+        "draft": true,
+        "head_ref": "feat/gumas-unified-governance-protocols-p4-20261115",
+        "head_sha": "cfbd593c48427909fef47d439df232b46ac4260d",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1705"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1706,
+        "title": "feat(gumas): P5 directed remote notice and delayed political ballots",
+        "state": "closed",
+        "merged": false,
+        "draft": true,
+        "head_ref": "feat/gumas-unified-distributed-governance-p5-20261115",
+        "head_sha": "cfc561fb404a7252662caa25b8001f8cc25b9031",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1706"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1710,
+        "title": "feat(gumas): P6 seatless associations and causally delayed reciprocal mandates",
+        "state": "closed",
+        "merged": false,
+        "draft": true,
+        "head_ref": "feat/gumas-unified-seatless-associations-p6-20261116",
+        "head_sha": "642d5747f3e09851a131ba33d5d97caec0b961ce",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1710"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1712,
+        "title": "fix(gumas): P6 shipment provenance and causal state validation",
+        "state": "closed",
+        "merged": false,
+        "draft": true,
+        "head_ref": "fix/gumas-p6-quality-remediation-20261117",
+        "head_sha": "2bfb38f3601a5f00e5528d3ff4d18dfc49088a64",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1712"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1718,
+        "title": "audit(gumas): P6 cumulative quality gate after validator refactor",
+        "state": "closed",
+        "merged": false,
+        "draft": true,
+        "head_ref": "audit/gumas-p6-combined-quality-gate-20261123",
+        "head_sha": "2bfb38f3601a5f00e5528d3ff4d18dfc49088a64",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1718"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1724,
+        "title": "fix(gumas): P3 reliability and deterministic replay quality remediation",
+        "state": "closed",
+        "merged": false,
+        "draft": true,
+        "head_ref": "fix/gumas-p3-preflight-remediation-20261123",
+        "head_sha": "ea32f28fc1dab1d8b6a5dd35facbc002213996c3",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1724"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1726,
+        "title": "fix(gumas): P4 governance validation and replay quality remediation",
+        "state": "closed",
+        "merged": false,
+        "draft": true,
+        "head_ref": "fix/gumas-p4-preflight-remediation-20261124",
+        "head_sha": "76167093ad6b642b6caa2abe844378ead9e84cb4",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1726"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1730,
+        "title": "refactor(gumas): characterize and split P0 sections of Universe.validate",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "claude/project-thread-3jctq9",
+        "head_sha": "6a8691b527cd5a8dfb46d7e35cc4550e2ceaeaf5",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1730"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1735,
+        "title": "feat(gumas): Unified Causal Engine P0-P6 combined landing candidate",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "claude/project-thread-pihhxb",
+        "head_sha": "fcc0bd2b7371e75de5f5c45b372c0c4768f0d27b",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1735"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1736,
+        "title": "fix(gumas): accept mandate cargo arriving at the current instant",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "claude/project-thread-pihhxb",
+        "head_sha": "940d8b9f6ea8ac9eb11a7c137ff08987ef6113f3",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1736"
+      }
+    ],
+    "branches": []
   }
 ]
