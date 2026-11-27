@@ -656,6 +656,496 @@
       "pr_number": 1693,
       "evidence": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
       "review_at": "2026-11-10T00:00:00Z"
+    },
+    {
+      "id": "gh-cloudbank-1233",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1233] Ethics documentation follow-ups (consolidated). Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1233 on 2026-11-27 (issue closed with pointer). Full body, 2 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1233.md.",
+      "created_at": "2026-11-27T17:15:17Z",
+      "updated_at": "2026-11-27T17:15:17Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1233.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1233.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1233"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1361",
+      "status": "ready",
+      "priority": "high",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1361] security: resolve SHADOWFAX identity and custody ambiguity across ORD runtime surfaces. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1361 on 2026-11-27 (issue closed with pointer). Full body, 1 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1361.md.",
+      "created_at": "2026-11-27T17:15:17Z",
+      "updated_at": "2026-11-27T17:15:17Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1361.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1361.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1361"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1380",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1380] security(continuity): define trust, consent, revocation, retention, and execution-default-off controls. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1380 on 2026-11-27 (issue closed with pointer). Full body, 2 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1380.md.",
+      "created_at": "2026-11-27T17:15:17Z",
+      "updated_at": "2026-11-27T17:15:17Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1380.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1380.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1380"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1459",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1459] OPAL2: ship SHERLOCK / WATSON as a neutral evidence-to-understanding product. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1459 on 2026-11-27 (issue closed with pointer). Full body, 2 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1459.md. Branch(es) named in the issue but not on the remote, may exist only in a local clone/worktree: agent/opal2-sherlock-watson-product.",
+      "created_at": "2026-11-27T17:15:17Z",
+      "updated_at": "2026-11-27T17:15:17Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1459.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1459.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1459"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1466",
+      "status": "ready",
+      "priority": "high",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1466] chore: establish the post-#1461 experiment baseline and rerun preflight. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1466 on 2026-11-27 (issue closed with pointer). Full body, 1 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1466.md.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1466.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1466.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1466"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1467",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1467] feat: implement RiverCycle Phase 1 passive diagnostics. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1467 on 2026-11-27 (issue closed with pointer). Full body, 1 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1467.md.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1467.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1467.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1467"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1468",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1468] research: define the Aurora native learner foundation. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1468 on 2026-11-27 (issue closed with pointer). Full body, 1 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1468.md.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1468.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1468.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1468"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1469",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1469] research: refine canon-grounded GUMAS pressure and recovery dynamics. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1469 on 2026-11-27 (issue closed with pointer). Full body, 1 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1469.md.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1469.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1469.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1469"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1477",
+      "status": "ready",
+      "priority": "high",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1477] ci: SONAR_TOKEN is unauthorized \u2014 every SonarCloud API query returns 401. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1477 on 2026-11-27 (issue closed with pointer). Full body, 2 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1477.md. Open linked PRs: aurora-cloudbank-symbolic#1506.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1477.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1477.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1477"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1504",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1504] Outside review: agent-legibility strengths, regrowth-prone sprawl, and a ratchet-first roadmap. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1504 on 2026-11-27 (issue closed with pointer). Full body, 5 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1504.md.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1504.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1504.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1504"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1526",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1526] feat(salvage): build provenance-aware corpus archaeology and intent recovery engine. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1526 on 2026-11-27 (issue closed with pointer). Full body, 11 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1526.md. Open linked PRs: aurora-cloudbank-symbolic#1506. Branch(es) named in the issue but not on the remote, may exist only in a local clone/worktree: feat/1526-corpus-archaeology-phase1.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1526.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1526.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1526"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1527",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1527] feat(memory): restore Thermax divergent-truth arbitration and memory-governance contract. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1527 on 2026-11-27 (issue closed with pointer). Full body, 0 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1527.md.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1527.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1527.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1527"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1528",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1528] feat(gumas): restore simulation-native RiverCycle pressure and feedback regulator. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1528 on 2026-11-27 (issue closed with pointer). Full body, 0 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1528.md.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1528.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1528.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1528"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1529",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1529] feat(operations): restore role-based workplace problem-solving runtime. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1529 on 2026-11-27 (issue closed with pointer). Full body, 0 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1529.md.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1529.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1529.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1529"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1530",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1530] security(playground): fail closed when isolated sandbox runtime is unavailable. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1530 on 2026-11-27 (issue closed with pointer). Full body, 0 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1530.md.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1530.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1530.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1530"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1531",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1531] feat(edusim): recover governed participatory Game experience over GUMAS. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1531 on 2026-11-27 (issue closed with pointer). Full body, 0 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1531.md.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1531.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1531.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1531"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1532",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1532] feat(l3): complete executable contracts for Glyphon, Sentari, Velatrix, and Harmion. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1532 on 2026-11-27 (issue closed with pointer). Full body, 0 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1532.md.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1532.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1532.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1532"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1534",
+      "status": "ready",
+      "priority": "high",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1534] ci: align SonarQube Automatic Analysis scope with repository intent. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1534 on 2026-11-27 (issue closed with pointer). Full body, 0 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1534.md.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1534.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1534.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1534"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1578",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1578] ci: the SIMULATION_STATE freshness gate outlived its premise and is now unsatisfiable. Migrated from GitHub issue https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1578 on 2026-11-27 (issue closed with pointer). Full body, 0 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/cloudbank-1578.md.",
+      "created_at": "2026-11-27T17:15:18Z",
+      "updated_at": "2026-11-27T17:15:18Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1578.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/cloudbank-1578.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1578"
+      ]
+    },
+    {
+      "id": "gh-orioncore-46",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "root",
+      "description": "[GitHub Aurora_ORIONCORE_Directory_Main#46] governance(continuity): define canonical trust, consent, retention, revocation, and execution-risk policy. Migrated from GitHub issue https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/46 on 2026-11-27 (issue closed with pointer). Full body, 1 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/orioncore-46.md.",
+      "created_at": "2026-11-27T17:15:19Z",
+      "updated_at": "2026-11-27T17:15:19Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/orioncore-46.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/orioncore-46.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/46"
+      ]
+    },
+    {
+      "id": "gh-orioncore-47",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "root",
+      "description": "[GitHub Aurora_ORIONCORE_Directory_Main#47] epic(canon-ops): connect QGIA, CanonRec, GUMAS, AuroraOS, and CloudBank. Migrated from GitHub issue https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/47 on 2026-11-27 (issue closed with pointer). Full body, 0 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/orioncore-47.md.",
+      "created_at": "2026-11-27T17:15:19Z",
+      "updated_at": "2026-11-27T17:15:19Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/orioncore-47.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/orioncore-47.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/47"
+      ]
+    },
+    {
+      "id": "gh-orioncore-50",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "root",
+      "description": "[GitHub Aurora_ORIONCORE_Directory_Main#50] test(canon-ops): prove the end-to-end QGIA-to-CanonRec vertical slice. Migrated from GitHub issue https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/50 on 2026-11-27 (issue closed with pointer). Full body, 0 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/orioncore-50.md.",
+      "created_at": "2026-11-27T17:15:19Z",
+      "updated_at": "2026-11-27T17:15:19Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/orioncore-50.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/orioncore-50.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/50"
+      ]
+    },
+    {
+      "id": "gh-orioncore-90",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "root",
+      "description": "[GitHub Aurora_ORIONCORE_Directory_Main#90] [Work Order] GPT-6 adoption across Aurora runtime and agent surfaces. Migrated from GitHub issue https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/90 on 2026-11-27 (issue closed with pointer). Full body, 2 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/orioncore-90.md. Open linked PRs: Aurora_ORIONCORE_Directory_Main#101.",
+      "created_at": "2026-11-27T17:15:19Z",
+      "updated_at": "2026-11-27T17:15:19Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/orioncore-90.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/orioncore-90.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/90"
+      ]
+    },
+    {
+      "id": "gh-orioncore-95",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "root",
+      "description": "[GitHub Aurora_ORIONCORE_Directory_Main#95] [Architecture] Define delegated-agent execution and validated state-delta contract. Migrated from GitHub issue https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/95 on 2026-11-27 (issue closed with pointer). Full body, 1 comment(s), labels and linked PR head SHAs preserved in catalog/backlog_archive/orioncore-95.md.",
+      "created_at": "2026-11-27T17:15:19Z",
+      "updated_at": "2026-11-27T17:15:19Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/orioncore-95.md (original issue body and comment history) and resume from its last recorded state.",
+      "definition_of_done": "The acceptance criteria recorded in catalog/backlog_archive/orioncore-95.md are met on main, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/95"
+      ]
+    },
+    {
+      "id": "plugin-constellation-peer-review-20260930",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "claude-code",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Complementary review of CloudBank plug-in consolidation #1622; debt rd-20260930-plugin-constellation.",
+      "created_at": "2026-10-01T01:31:56Z",
+      "updated_at": "2026-10-01T01:31:56Z",
+      "review_at": "2026-10-07T01:30:00Z",
+      "next_action": "Independently verify the four-file diff, source hashes, identity boundaries and canon checks; record a peer-review receipt.",
+      "definition_of_done": "Complementary receipt recorded and debt cleared or concrete findings assigned.",
+      "approval_required": false,
+      "evidence_refs": [
+        "reports/analysis/plugin_constellation_landing_20260930.md"
+      ]
+    },
+    {
+      "id": "repair-legacy-simulation-authority-surfaces",
+      "status": "waiting",
+      "priority": "high",
+      "assigned_to": "codex",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Align historical simulation-state consumers and CI with the retired snapshot authority; preserve historical bytes and keep live-run liveness separate.",
+      "created_at": "2026-11-10T03:38:46Z",
+      "updated_at": "2026-11-10T03:38:46Z",
+      "review_at": "2026-11-12T00:00:00Z",
+      "next_action": "Use reports/analysis/simulation_state_freshness_investigation.md: correct API/runtime availability labeling and maintained onboarding/docs; replace historical Git-age gate with substantive authority/containment validation after CI-domain review clears. Preserve snapshot, counters, run state and CanonRec; independently review implementation.",
+      "definition_of_done": "Historical bytes unchanged; APIs distinguish provenance from unbound/live run; retirement/preflight/containment regressions are blocking; old snapshot age alone passes; current docs/API compatibility and hosted PR/main checks verified with root pins synchronized.",
+      "approval_required": false,
+      "waiting_on": "artifact",
+      "trigger": "Independent Claude CI review receipt clears rd-20261109-ci-consolidation, permitting the replacement workflow review without stacking CI debt.",
+      "evidence_refs": [
+        "reports/analysis/simulation_state_freshness_investigation.md"
+      ]
+    },
+    {
+      "id": "friday-action-brief-end-to-end-acceptance",
+      "status": "waiting",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "watch",
+      "repo": "root",
+      "description": "Verify the real Friday scheduled Action Brief, fresh-chat recovery and rendered follow-up activation; component checks have passed but these gates remain unverified.",
+      "created_at": "2026-10-02T02:04:21Z",
+      "updated_at": "2026-10-02T02:04:21Z",
+      "review_at": "2026-10-02T13:00:00Z",
+      "next_action": "Observe the actual automation dispatch and validate its generated brief against saved context and live evidence; test fresh-chat recovery and follow-up activation through supported UI.",
+      "definition_of_done": "Actual scheduler run identified with timestamp; generated brief validates source completeness, stable IDs, retained decisions, completed-task recognition and unresolved-action carry-forward; fresh-chat recovery and real follow-up activation evidenced.",
+      "approval_required": false,
+      "waiting_on": "date",
+      "trigger": "Friday 2026-10-02 09:00 America/New_York scheduled dispatch; owner may initiate Run now when available.",
+      "evidence_refs": [
+        "reports/analysis/friday_action_brief_acceptance_20261001.md"
+      ]
     }
   ],
   "completed_tasks": [
@@ -852,6 +1342,13 @@
       "detail": "Implemented by Claude in #1699, independently approved by Codex and merged b68c4717; root pins synchronized in #114."
     },
     {
+      "id": "investigate-simulation-freshness-gap",
+      "status": "completed",
+      "completed_at": "2026-11-10T03:38:46Z",
+      "platform": "codex",
+      "detail": "Read-only investigation complete: #1083 closed in July; August authority retires legacy snapshot, but Git-age workflow and API/docs retain old semantics. Preflight ready at tick0/no run; 20 tests pass; snapshot bytes unchanged. Evidence and repair plan recorded; implementation waits for CI review."
+    },
+    {
       "id": "review-git-common-dir-scrub-20261110",
       "status": "completed",
       "completed_at": "2026-11-10T03:39:45Z",
@@ -883,11 +1380,21 @@
         "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
         "reports/ci_consolidation_2026-11-09.md"
       ]
+    },
+    {
+      "id": "friday-action-brief-component-acceptance-20261001",
+      "status": "completed",
+      "completed_at": "2026-10-02T02:04:21Z",
+      "platform": "codex",
+      "detail": "Component acceptance verified: live root source snapshots, disk continuity reload, controlled transport failure preserving context, and real canonical add/start/complete lifecycle. Receipt: reports/analysis/friday_action_brief_acceptance_20261001.md. Scheduler dispatch, fresh-chat model recovery, UI click and Claude execution remain unverified.",
+      "evidence_refs": [
+        "reports/analysis/friday_action_brief_acceptance_20261001.md"
+      ]
     }
   ],
-  "last_updated": "2026-11-27T16:25:23Z",
+  "last_updated": "2026-11-27T17:15:29Z",
   "last_platform": "codex",
-  "last_session_summary": "SSE guard independently approved and landed (#1699/#114); source main 3863 tests plus 101 subtests passed. Reconciled unmerged coordination PR #113 with root main, preserving cleared SSE debt and pending Claude review. Implementation 382d4c5 unchanged; no self-review or merge of #113.",
+  "last_session_summary": "Migrated 24 open backlog issues (19 CloudBank, 5 ORIONCORE) into task_queue as gh-* items, with verbatim archives in catalog/backlog_archive/, ahead of closing the GitHub issues during zero-open triage.",
   "tool_versions": {
     "gitleaks": "8.30.1",
     "codacy-analysis-cli": "installed (bundled Agentlinter 0.3.3)",
@@ -910,6 +1417,30 @@
     "pip-audit": "2.10.1 (isolated scratch audit helper; application environments unchanged)"
   },
   "recent_commits": [
+    {
+      "sha": "9a0f618",
+      "date": "2026-11-27",
+      "platform": "codex",
+      "summary": "docs(governance): propose continuity package policy (#119)"
+    },
+    {
+      "sha": "4c908fe",
+      "date": "2026-11-27",
+      "platform": "codex",
+      "summary": "deps: bump actions/upload-artifact from 7.0.1 to 7.0.2 (#96)"
+    },
+    {
+      "sha": "e5edfd5",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "Expose authenticated local Canon Operations reads (#126)"
+    },
+    {
+      "sha": "874f2fd",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "chore(session-state): refresh handoff anchor to current main (#127)"
+    },
     {
       "sha": "ef4bba4",
       "date": "2026-11-27",
@@ -945,30 +1476,6 @@
       "date": "2026-11-24",
       "platform": "codex",
       "summary": "Query pinned CanonRec records through Canon Operations (#120)"
-    },
-    {
-      "sha": "6f28f88",
-      "date": "2026-11-14",
-      "platform": "claude-code",
-      "summary": "chore(privacy): redact local user paths and a personal email (#117)"
-    },
-    {
-      "sha": "284d657",
-      "date": "2026-11-14",
-      "platform": "claude-code",
-      "summary": "ci: pin the py3.9 test leg to ubuntu-24.04 (#118)"
-    },
-    {
-      "sha": "2179f1e",
-      "date": "2026-11-10",
-      "platform": "claude-code",
-      "summary": "docs(review): independent peer review of CloudBank CI consolidation (#116)"
-    },
-    {
-      "sha": "35088f0",
-      "date": "2026-11-10",
-      "platform": "claude-code",
-      "summary": "fix(coordination): scrub inherited GIT_COMMON_DIR from claim discovery (#113)"
     }
   ],
   "security_events": [
@@ -985,7 +1492,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "ef4bba4",
+    "main_sha": "9a0f618",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
@@ -1185,16 +1692,8 @@
     }
   ],
   "publication_debt": {
-    "checked_at": "2026-11-27T16:25:23Z",
-    "entries": [
-      {
-        "repo": "root",
-        "class": "stranded_branch",
-        "branch": "pr126",
-        "detail": "1 commit(s) exist only on this machine",
-        "remediation": "Push and open a PR: git push -u origin pr126 && gh pr create"
-      }
-    ],
+    "checked_at": "2026-11-27T17:15:29Z",
+    "entries": [],
     "rule": "Clear by publishing (push + PR) or deliberately retiring; the next session reads this FIRST."
   },
   "_summary_set_manually": true
