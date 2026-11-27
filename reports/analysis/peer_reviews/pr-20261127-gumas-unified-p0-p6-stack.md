@@ -72,3 +72,7 @@ Head `fcc0bd2b` (2bfb38f3 + (bf4561c4..ea32f28f) + (cfbd593c..76167093) + drop b
 | pyflakes | pass | clean; f1 F821 and f2 F401 resolved |
 | hosted checks | pass | isolated-p0, test, build, guardrails, GitGuardian, PR evaluation (0.91) success |
 | Codacy vs main | fail | 25 new issues: 23 medium Complexity, 2 minor markdown table style; 0 high or ErrorProne. Largest: Universe.validate CC 147 / 245 LOC; time_alignment 29/23/22; bindings 26/14; external_evidence 16/16/13/12/11; kernel.advance_to 16. |
+
+## Owner decision
+
+On 2026-11-27 at 19:32 UTC, the owner chose to merge now and keep #1711 open. #1735 squash-merged as `e0c41a86`. #1701–#1706, #1710, #1712, #1724 and #1726 are closed as superseded. Finding f3 is accepted as tracked debt in #1711.

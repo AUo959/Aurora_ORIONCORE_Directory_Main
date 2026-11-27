@@ -131,7 +131,7 @@
     {
       "id": "f3",
       "severity": "blocking",
-      "disposition": "must-fix",
+      "disposition": "accepted-with-note (owner decision 2026-11-27; tracked in #1711)",
       "evidence": "Codacy annotations on #1701/#1702/#1703/#1706; radon at 2bfb38f3; tracker #1711 'Next' and 'Required remediation' item 5",
       "description": "Inherited P0/P1/P2/P5 Codacy complexity findings are unresolved, and Universe.validate has grown from CC 31 to 147 across the stack. #1701 targets main, so merging it lands 3 new Codacy issues on main under the repo's zero-new-issues gate. The tracker's own stated gate is to reconcile these before merging any stacked PR; the P0 split is in flight as #1730."
     },
@@ -220,5 +220,11 @@
       }
     ],
     "status": "f1 and f2 resolved on #1735; f3 open. Verdict unchanged (changes-requested) until f3 is fixed or explicitly waived by the owner."
+  },
+  "owner_decision": {
+    "at": "2026-11-27T19:32:33Z",
+    "choice": "Merge now, keep #1711 open",
+    "landed": "AUo959/aurora-cloudbank-symbolic#1735 squash e0c41a86",
+    "effect": "f3 accepted by owner as tracked debt in #1711; superseded PRs closed"
   }
 }
