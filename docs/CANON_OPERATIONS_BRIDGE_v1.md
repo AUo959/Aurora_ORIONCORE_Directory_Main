@@ -29,6 +29,8 @@ The CanonRec validator checks the request against the fixed contract and verifie
 
 An accepted request records a local staging revision after comparing the expected state with the journal or the pinned CanonRec record. A pending decision or promotion-review request records a review disposition with no target change. Replaying an identical request returns the original receipt with `DUPLICATE`. An altered request needs a new request ID. The journal retains the pinned source and expected-state evidence, and CanonRec continues to control promotion.
 
+When the final reconciliation gate includes a verified `entity_profile`, intake runs the CanonRec advisor at the pinned contract commit. It excludes promotion and map-lock recommendations and records the semantic result under `reconciliation_advisory`. The issued verdict and the bridge's staging disposition retain their original authority. A receipt without a profile retains the issuing gate's recommendation. A replay returns the original advisory without recalculating it.
+
 ```bash
 python tools/canon_ops_intake.py --journal /path/to/staging.db submit request.json \
   --canonrec /path/to/CanonRec --policy policy.json --principal l1-relay \

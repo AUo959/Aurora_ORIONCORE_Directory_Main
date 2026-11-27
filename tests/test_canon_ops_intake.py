@@ -21,12 +21,14 @@ GATES = (
 ORIGIN = {"repository": "Fixture/Gates", "commit": "b" * 40}
 
 
-def gate_payload(gate, subject, approval, run):
+def gate_payload(gate, subject, approval, run, profile):
     payload = {"gate": gate, "receipt_id": gate, "subject_sha256": subject, "verdict": "PASS"}
     if gate == "authorization_approval":
         payload.update(decision=approval["state"], authority=approval.get("authority"))
     if gate == "final_reconciliation":
         payload["recommendation"] = "STAGING"
+        if profile is not None:
+            payload["entity_profile"] = profile
     if gate == "deterministic_run":
         payload["run"] = run
     return payload
@@ -34,7 +36,7 @@ def gate_payload(gate, subject, approval, run):
 
 def make_request(
     request_id="request-one", *, state="approved", operation="create_staging_claim",
-    revision=None, layer="L1", run=None, sources=None,
+    revision=None, layer="L1", run=None, sources=None, profile=None,
 ):
     approval = {"state": state}
     if state != "pending":
@@ -57,7 +59,7 @@ def make_request(
     required_gates = (*GATES, "deterministic_run") if run else GATES
     for gate in required_gates:
         path = f"gates/{gate}.json"
-        payload = gate_payload(gate, subject, approval, run)
+        payload = gate_payload(gate, subject, approval, run, profile)
         data = journal.canonical_json(payload).encode()
         blobs[path] = data
         references[gate] = {"receipt_id": gate, "artifact": {
@@ -284,3 +286,23 @@ def test_projection_rejects_changed_journal_records(run_intake):
             )
     with pytest.raises(journal.JournalError, match="history digest"):
         events.chronicle_atoms(journal.read_entries(path))
+
+
+def test_receipt_records_advisor_output_and_does_not_recalculate_on_replay(run_intake):
+    run, path, _ = run_intake
+    profile = {"readiness": 0.9}
+    request, blobs = make_request(profile=profile)
+    calls = []
+
+    def advisor(supplied, target):
+        calls.append((supplied, target))
+        return {"recommended_tag": "UNCONFIRMED", "confidence": 0.4}
+
+    first = run(request, blobs, advisor=advisor)
+    replay = run(request, blobs, advisor=advisor)
+    CHECK.assertEqual(calls, [(profile, "forecast-a")])
+    CHECK.assertEqual(replay["status"], "DUPLICATE")
+    CHECK.assertEqual(first["receipt"], replay["receipt"])
+    CHECK.assertEqual(first["receipt"]["reconciliation_advisory"]["recommended_tag"], "UNCONFIRMED")
+    entry, = journal.read_entries(path)
+    CHECK.assertEqual(entry["receipt"]["target_updates"][0]["state"]["certainty"], "STAGING")

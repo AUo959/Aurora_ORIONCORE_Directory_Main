@@ -17,10 +17,12 @@ from typing import Optional
 if __package__:
     from . import canon_ops_events as events
     from . import canon_ops_journal as journal
+    from . import canon_ops_reconciliation as reconciliation
     from .canon_ops_query import CONTRACT_COMMIT, CONTRACT_PATH, SOURCE_REPOSITORY, CanonRec, query
 else:
     import canon_ops_events as events
     import canon_ops_journal as journal
+    import canon_ops_reconciliation as reconciliation
     from canon_ops_query import CONTRACT_COMMIT, CONTRACT_PATH, SOURCE_REPOSITORY, CanonRec, query
 
 
@@ -205,6 +207,7 @@ def _target_updates(
 def submit(
     request: dict, *, policy: dict, principal: str, journal_path: Path,
     validate: Validator, read_artifact: Reader, resolve_target: TargetLookup,
+    advisor: reconciliation.Advisory | None = None,
 ) -> dict:
     """Validate authority and append one durable disposition to the staging journal."""
     if policy["version"] != "1.0":
@@ -217,7 +220,7 @@ def submit(
 
     def evaluate(staged: dict[tuple[str, str, str], dict]) -> dict:
         updates = _target_updates(request, staged, resolve_target) if status == "ACCEPTED" else []
-        return {
+        receipt = {
             "version": "1.0",
             "request_id": request["request_id"],
             "content_hash": request["content_hash"],
@@ -228,6 +231,11 @@ def submit(
             "recommendation": gates["final_reconciliation"].get("recommendation"),
             "target_updates": updates,
         }
+        if status != "REJECTED":
+            advisory = reconciliation.assess_gate(request, gates["final_reconciliation"], advisor)
+            if advisory is not None:
+                receipt["reconciliation_advisory"] = advisory
+        return receipt
 
     return journal.append_request(
         journal_path, policy["canon_commit"], request, evaluate,
@@ -265,6 +273,7 @@ def _submission(args: argparse.Namespace) -> dict:
             _object(args.request), policy=policy, principal=args.principal, journal_path=args.journal,
             validate=validate, read_artifact=read_artifact_from(repositories),
             resolve_target=snapshot_targets(canonrec, policy),
+            advisor=lambda profile, name: reconciliation.pinned_advisor(canonrec)(profile, name),
         )
 
 
