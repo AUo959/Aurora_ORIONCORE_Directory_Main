@@ -170,7 +170,7 @@ def _materialize(repo: CanonRec, revision: str, workspace: Path, paths: tuple[st
         attributes, raw_path = entry.split(b"\t", 1)
         mode, kind, oid = attributes.decode("ascii").split()
         path = Path(raw_path.decode("utf-8"))
-        if path.is_absolute() or ".." in path.parts or path.suffix not in {".py", ".json", ".md", ".csv"}:
+        if path.is_absolute() or ".." in path.parts or path.suffix not in {".py", ".json", ".jsonl", ".md", ".csv"}:
             continue
         if kind != "blob" or mode == "120000":
             raise RunError(f"Run input is not a regular Git blob: {path}")
