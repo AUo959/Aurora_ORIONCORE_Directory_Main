@@ -261,7 +261,7 @@ def submit(
 
     return journal.append_request(
         journal_path, policy["canon_commit"], request, evaluate,
-        project_events=lambda history: events.link_outcome(request, gates, history),
+        project_events=lambda history: events.link_outcome(request, gates, history, read_artifact),
     )
 
 
