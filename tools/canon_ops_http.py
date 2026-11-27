@@ -53,6 +53,12 @@ async def _body(request: Request) -> dict:
     return payload
 
 
+def _path_in_scope(path: object, allowed: list[str]) -> bool:
+    if not isinstance(path, str):
+        return False
+    return any(path == root or path.startswith(root + "/") for root in allowed)
+
+
 def _allow_query(payload: dict, policy: dict) -> None:
     if payload.get("commit") != policy["canon_commit"]:
         raise _http_error(403, "snapshot_denied", "Use the configured CanonRec snapshot")
@@ -60,9 +66,8 @@ def _allow_query(payload: dict, policy: dict) -> None:
     if not isinstance(layer, str) or not isinstance(paths, list):
         raise _http_error(400, "invalid_query", "Expected a layer and source path list")
     allowed = policy["target_paths"].get(layer, [])
-    for path in paths:
-        if not isinstance(path, str) or not any(path == root or path.startswith(root + "/") for root in allowed):
-            raise _http_error(403, "path_denied", "A requested source path is outside the configured layer scope")
+    if not all(_path_in_scope(path, allowed) for path in paths):
+        raise _http_error(403, "path_denied", "A requested source path is outside the configured layer scope")
 
 
 def _request_status(path: Path, request_id: str, policy: dict) -> dict:

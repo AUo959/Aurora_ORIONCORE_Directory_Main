@@ -1,5 +1,6 @@
 import hashlib
 import json
+import secrets
 from unittest import TestCase
 
 import pytest
@@ -14,7 +15,7 @@ from tools._workspace_common import git
 
 
 CHECK = TestCase()
-TOKEN = "local-reader-fixture"
+TOKEN = secrets.token_urlsafe(32)  # per-run fixture bearer, never a stored credential
 HEADERS = {"Authorization": f"Bearer {TOKEN}"}
 
 
