@@ -1392,7 +1392,7 @@
       ]
     }
   ],
-  "last_updated": "2026-11-27T18:56:28Z",
+  "last_updated": "2026-11-27T19:00:32Z",
   "last_platform": "claude-code",
   "last_session_summary": "Migrated 24 open backlog issues (19 CloudBank, 5 ORIONCORE) into task_queue as gh-* items, with verbatim archives in catalog/backlog_archive/, ahead of closing the GitHub issues during zero-open triage.",
   "tool_versions": {
@@ -1418,10 +1418,46 @@
   },
   "recent_commits": [
     {
-      "sha": "56d6a7d",
+      "sha": "273c076",
       "date": "2026-11-27",
       "platform": "claude-code",
-      "summary": "Merge main into codex/ace-persistent-continuity-20260906"
+      "summary": "Merge main into codex/aurora-session-status-mod-20261002"
+    },
+    {
+      "sha": "c38d688",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "feat(ace): persistent Aurora worlds and contextual simulation completion (#85)"
+    },
+    {
+      "sha": "5855632",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "feat(recovery): read-only Drive provenance intake, private by default (#100)"
+    },
+    {
+      "sha": "c0c295b",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "feat(project-space): adopt VPC registry bridge (#80)"
+    },
+    {
+      "sha": "51c93f4",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "feat(ui): introduce read-only Aurora Intelligent UI snapshot bridge (#97)"
+    },
+    {
+      "sha": "888627f",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "chore(state): refresh session_state mechanical fields"
+    },
+    {
+      "sha": "e448ecd",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "Merge main into codex/aurora-session-status-mod-20261002"
     },
     {
       "sha": "6ad76ce",
@@ -1440,42 +1476,6 @@
       "date": "2026-11-27",
       "platform": "claude-code",
       "summary": "docs(automation): record Friday brief acceptance and remaining gates (#93)"
-    },
-    {
-      "sha": "57d6d15",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "docs: record Aurora plug-in consolidation review and provenance (#92)"
-    },
-    {
-      "sha": "c529056",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "Merge main into codex/ace-persistent-continuity-20260906"
-    },
-    {
-      "sha": "9a0f618",
-      "date": "2026-11-27",
-      "platform": "codex",
-      "summary": "docs(governance): propose continuity package policy (#119)"
-    },
-    {
-      "sha": "4c908fe",
-      "date": "2026-11-27",
-      "platform": "codex",
-      "summary": "deps: bump actions/upload-artifact from 7.0.1 to 7.0.2 (#96)"
-    },
-    {
-      "sha": "e5edfd5",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "Expose authenticated local Canon Operations reads (#126)"
-    },
-    {
-      "sha": "874f2fd",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "chore(session-state): refresh handoff anchor to current main (#127)"
     }
   ],
   "security_events": [
@@ -1492,7 +1492,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "56d6a7d84a345445f3a45a8873edfe7f076d36eb",
+    "main_sha": "273c0764052b8c3a35509488f5263458b05fee8e",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
