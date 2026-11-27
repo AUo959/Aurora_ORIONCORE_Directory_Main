@@ -79,3 +79,15 @@ The pinned Fabric checker audits the approved domain's source records at the app
 An ordinary repeat verifies the existing inventory. Add `--replay` to run the same inputs again and compare the resulting semantic receipt. The identity excludes the output path and wall-clock execution time. Reproducibility is scoped to the supported engine version and Python runtime. The adapter only publishes a completed run directory after verifying its native files.
 
 To register the run in Chronicle, include the pinned `receipt.json` as a source in the approved `attach_outcome` request. Set the `deterministic_run` gate's `run_receipt` to that same artifact. Supply the normalized `run` fields described above, including the authorized completion time. Intake verifies the native receipt's semantic digest and compares its run identity, origin, seed, engine commit, and ledger count with the gate. The Chronicle atom then preserves both the native source and the registration gate.
+
+## Authenticated local reads
+
+The optional HTTP reader uses the FastAPI and Uvicorn dependencies in `requirements-ace-mcp.txt`. It binds to `127.0.0.1`. Configure the existing `ACE_REMOTE_PRINCIPALS_JSON` policy with a principal identifier, a bearer token SHA-256 digest, and the `ace:read` scope. A browser client requires its exact origin on the command line.
+
+```bash
+python -m tools.canon_ops_http --canonrec /path/to/CanonRec \
+  --journal /path/to/staging.db --policy policy.json \
+  --browser-origin http://localhost:4177
+```
+
+Send JSON requests with `Authorization: Bearer <token>`. `POST /v1/query` accepts a Canon Operations query within the configured snapshot and source scope. `POST /v1/provenance` accepts `layer`, `kind`, and `record_id`. `POST /v1/status` accepts `request_id` and returns the pinned journal entry with its receipt. Missing requests return an `unknown` finding. Staging and execution continue through the operator CLI.
