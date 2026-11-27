@@ -1,0 +1,26 @@
+{
+  "policy_id": "ace.policy.l3.contextual-truth.v1",
+  "governing_layer": "L3",
+  "scope": "isolated_world_context",
+  "L1": {
+    "purpose": "reality_oriented_bounded_simulation",
+    "settings_mode": "evidence_bound",
+    "capability": "committed_canon_fact_resolution",
+    "generation_establishes_truth": false,
+    "runtime_progression_authorized": false,
+    "independent_reality_verification_claimed": false
+  },
+  "L2": {
+    "purpose": "generative_sandbox",
+    "settings_mode": "world_scoped_immutable_version",
+    "capability": "character_completion",
+    "generation_establishes_truth": "after_existing_ACE_reconciliation_validation_and_native_commit",
+    "automatic_bounded_save": true
+  },
+  "cross_layer_promotion": "requires_separate_target_layer_validation_and_authority",
+  "geometry_scope": "existing_character_location_type_context_only",
+  "arbitrary_geometry_or_physics_settings_supported": false,
+  "canonical_workspace_mutation_authorized": false,
+  "publication_authorized": false,
+  "max_jobs_per_assignment": 100
+}

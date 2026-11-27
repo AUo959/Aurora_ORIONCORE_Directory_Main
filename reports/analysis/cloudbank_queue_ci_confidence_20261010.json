@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "confidence_audit_batch",
+  "generated_at": "2026-10-10T14:34:28Z",
+  "tool": "aurora_confidence_audit",
+  "run_mode": "audit_scoring_only",
+  "live_runtime_execution": false,
+  "nested_repo_mutation": false,
+  "default_threshold": 0.7,
+  "schema_ref": "catalog/schemas/aurora_confidence_record.schema.json",
+  "contract_ref": "catalog/contracts/aurora_confidence_audit_contract_v1.json",
+  "summary": {
+    "record_count": 1,
+    "user_alert_count": 0,
+    "below_threshold_count": 0,
+    "claim_type_counts": {
+      "conclusion": 1
+    },
+    "minimum_score": 0.8,
+    "maximum_score": 0.8,
+    "thresholds": [
+      0.7
+    ],
+    "verdict": "pass"
+  },
+  "records": [
+    {
+      "schema_version": "1.0.0",
+      "record_type": "confidence_assessment",
+      "assessment_id": "aurora.confidence.e9df431fec4a28e5",
+      "created_at": "2026-10-10T14:34:28Z",
+      "tool": "aurora_confidence_audit",
+      "authority_refs": [
+        "catalog/schemas/aurora_confidence_record.schema.json",
+        "catalog/contracts/aurora_confidence_audit_contract_v1.json"
+      ],
+      "claim": {
+        "claim_id": "cloudbank-queue-ci-local-validation-20261010",
+        "claim_type": "conclusion",
+        "text": "The isolated CloudBank queue automation repair passes 73 focused regressions, workflow YAML/shell syntax checks, Ruff, and current queue-view freshness; GitHub dispatch and required-check acceptance remain unverified until rollout.",
+        "producer": "codex",
+        "visibility": "receipt_only",
+        "source_ref": null,
+        "subject_refs": [],
+        "authority_refs": [],
+        "evidence_refs": [
+          "reports/analysis/cloudbank_sentinel_triage_20261010.json"
+        ],
+        "receipt_refs": [],
+        "assumptions": [],
+        "uncertainty_factors": [
+          "Live workflow dispatch is intentionally not run before the PR is reviewed and merged."
+        ],
+        "contradiction_refs": [],
+        "resolution_policy_ref": null
+      },
+      "confidence": {
+        "score": 0.8,
+        "threshold": 0.7,
+        "band": "substantial",
+        "evidence_level": "deterministic_check",
+        "score_source": "rubric_default",
+        "scoring_method": "aurora_confidence_audit_v1",
+        "calibration_profile": "bootstrap_default_v1",
+        "calibration_adjustment": 0.0,
+        "adjustments": [
+          {
+            "code": "evidence_refs",
+            "delta": 0.03,
+            "reason": "linked evidence references strengthen audit confidence"
+          },
+          {
+            "code": "missing_authority_refs",
+            "delta": -0.03,
+            "reason": "no authority reference was supplied"
+          },
+          {
+            "code": "uncertainty_factor_1",
+            "delta": -0.04,
+            "reason": "explicit uncertainty factor lowers confidence"
+          }
+        ]
+      },
+      "audit": {
+        "requires_user_alert": false,
+        "alert_level": "none",
+        "alert_reason": "meets_threshold",
+        "user_facing_message": null,
+        "recommended_next_action": "Keep confidence metadata in the audit trail; no user-facing alert is required by the current threshold.",
+        "run_mode": "audit_scoring_only",
+        "live_runtime_execution": false,
+        "nested_repo_mutation": false
+      }
+    }
+  ]
+}

@@ -17,7 +17,7 @@ from typing import Any
 ORCHESTRATOR_VERSION = "1.1.0"
 REPO_MARKER = "/Aurora_ORIONCORE_Directory_Main/"
 
-SKILLS_ROOT = Path("/Users/travisstreets/.codex/skills")
+SKILLS_ROOT = Path.home() / ".codex" / "skills"
 
 THREADCORE_SCAN_SCRIPT = SKILLS_ROOT / "threadcore-governor" / "scripts" / "threadcore_governance_scan.py"
 THREADCORE_RULES_SCRIPT = SKILLS_ROOT / "threadcore-governor" / "scripts" / "threadcore_rules.py"

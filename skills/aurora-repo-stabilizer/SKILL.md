@@ -86,10 +86,10 @@ python /path/to/skill/scripts/repo_stabilizer_scan.py --repo . --out /tmp/scan.j
 ## Resources
 - `scripts/repo_stabilizer_scan.py`: deterministic scanner for script-surface risk profiling
 - `references/stabilization-playbook.md`: fix-order rules and decision guide
-- For cross-skill governance workflows, align findings to the shared schema at `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/finding_schema.md`.
+- For cross-skill governance workflows, align findings to the shared schema at `~/.codex/skills/aurora-governance-orchestrator/references/finding_schema.md`.
 
 ## Workflow Position
 
 - Upstream: `aurora-skill-finder` when repo-surface routing is unclear.
 - Downstream: hand targeted setup/wrapper/hazard work to `aurora-script-governor`; hand merged governance to `aurora-governance-orchestrator`.
-- Preset reference: `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
+- Preset reference: `~/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.

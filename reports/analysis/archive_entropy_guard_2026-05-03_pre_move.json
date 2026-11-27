@@ -1,6 +1,6 @@
 {
   "generated_at": "2026-05-03T01:40:00Z",
-  "scan_root": "/Users/travisstreets/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
+  "scan_root": "~/Library/Mobile Documents/com~apple~CloudDocs/Aurora_ORIONCORE_Directory_Main",
   "scope": "archive and binary/document artifacts; dependency/vendor/build caches excluded",
   "action": "pre-move receipt; no deletions",
   "total_files": 2421,

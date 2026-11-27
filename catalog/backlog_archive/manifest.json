@@ -1,0 +1,1399 @@
+[
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1233,
+    "title": "Ethics documentation follow-ups (consolidated)",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1233",
+    "labels": [
+      "documentation",
+      "needs info",
+      "security",
+      "ethics",
+      "implementation-needed",
+      "backlog"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1233.md",
+    "comments": 2,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1310,
+        "title": "docs: make the repository navigable, and its claims checkable",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "docs/navigation",
+        "head_sha": "7eda34d34541d0fff996e535241d60aa99db33fa",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1310"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1311,
+        "title": "docs: make the repository navigable, and its claims checkable",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "docs/navigation",
+        "head_sha": "8b80c9e4a117a92012d66b7a98828800feda6cba",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1311"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1547,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20260831-0627",
+        "head_sha": "1ae40d53ec9b3c43445c07e4d78b869b987ff7ed",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1547"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1580,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20260907-0627",
+        "head_sha": "a71ef88de7b4d0cf91e12014ae3db08ea267c245",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1580"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1592,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20260914-0628",
+        "head_sha": "63925666199e49b35769bfb41cd321e30cb7d759",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1592"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1626,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20261005-0634",
+        "head_sha": "ce94a1c31e41872657cf17b7106550b773da9441",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1626"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1636,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20261012-0634",
+        "head_sha": "fbeec39d1309f54ab4cc0881bb716aff940660aa",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1636"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1650,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20261019-0628",
+        "head_sha": "67c5f16a0edb0385d779577ab062ebb33e0ef22b",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1650"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1662,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20261026-0628",
+        "head_sha": "3ab7cbaa2503354ea167f5a97207f34472e1a46f",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1662"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1719,
+        "title": "feat(ethics): add advisory curvature and reconcile custody evidence",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/1233-ethics-followups",
+        "head_sha": "c90c480c7c5bd0ca219d77093dda44ff562fb99b",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1719"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1721,
+        "title": "Remove the unverified SHADOWFAX arbitration binding",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/ord-custody-boundary",
+        "head_sha": "af57b3ea69c254b17923a0b622f708323d672bda",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1721"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1361,
+    "title": "security: resolve SHADOWFAX identity and custody ambiguity across ORD runtime surfaces",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1361",
+    "labels": [
+      "needs info",
+      "security",
+      "high-priority",
+      "audit-integrity",
+      "owner-decision"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1361.md",
+    "comments": 1,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1360,
+        "title": "security: record Gate-001A Run 001 recovered-protocol verification",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "security/gate-001a-run-001-recovered-protocol-wiring",
+        "head_sha": "a16b591833dfa5875ecc7699c6e79d669be35308",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1360"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1547,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20260831-0627",
+        "head_sha": "1ae40d53ec9b3c43445c07e4d78b869b987ff7ed",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1547"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1579,
+        "title": "docs(ethics): record the located SHADOWFAX bundle identity in custody",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "fix/1361-shadowfax-custody-identity",
+        "head_sha": "a6b1572c57e3a456808949459c50cace48091aa0",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1579"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1580,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20260907-0627",
+        "head_sha": "a71ef88de7b4d0cf91e12014ae3db08ea267c245",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1580"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1592,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20260914-0628",
+        "head_sha": "63925666199e49b35769bfb41cd321e30cb7d759",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1592"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1626,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20261005-0634",
+        "head_sha": "ce94a1c31e41872657cf17b7106550b773da9441",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1626"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1636,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20261012-0634",
+        "head_sha": "fbeec39d1309f54ab4cc0881bb716aff940660aa",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1636"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1650,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20261019-0628",
+        "head_sha": "67c5f16a0edb0385d779577ab062ebb33e0ef22b",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1650"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1662,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20261026-0628",
+        "head_sha": "3ab7cbaa2503354ea167f5a97207f34472e1a46f",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1662"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1719,
+        "title": "feat(ethics): add advisory curvature and reconcile custody evidence",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/1233-ethics-followups",
+        "head_sha": "c90c480c7c5bd0ca219d77093dda44ff562fb99b",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1719"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1721,
+        "title": "Remove the unverified SHADOWFAX arbitration binding",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/ord-custody-boundary",
+        "head_sha": "af57b3ea69c254b17923a0b622f708323d672bda",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1721"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1380,
+    "title": "security(continuity): define trust, consent, revocation, retention, and execution-default-off controls",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1380",
+    "labels": [
+      "stale",
+      "backlog"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1380.md",
+    "comments": 2,
+    "linked_prs": [
+      {
+        "repo": "Aurora_ORIONCORE_Directory_Main",
+        "number": 119,
+        "title": "Define continuity package governance policy",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/continuity-package-policy",
+        "head_sha": "1adebbc8d6666d9b5e5d36b29da90c045f320c90",
+        "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/119"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 46,
+        "title": "deps: bump dotenv from 17.0.0 to 17.0.1",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "dependabot/npm_and_yarn/dotenv-17.0.1",
+        "head_sha": "71b5dfce8e55d94042850236ccd674aa4cb6f213",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/46"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1381,
+        "title": "feat(continuity): add neutral Universal Thread Beacon schema and offline validator",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "feat/1377-utb-neutral-schema",
+        "head_sha": "83dcf25f8e092e8295b76f1302a30fd955e54710",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1381"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1511,
+        "title": "feat(contracts): OPAL2 shipment-manifest schema with worked example (#1510)",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1510-shipment-manifest",
+        "head_sha": "86fde15158c5b5b02dc904c2f9d469f397c1df82",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1511"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1533,
+        "title": "feat(salvage): add deterministic corpus archaeology Phase 1",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "feat/1526-corpus-archaeology-phase1",
+        "head_sha": "6b7dffdd94dedce920223addc37497380dc5ad62",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1533"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1536,
+        "title": "feat(salvage): add custody-release corpus adapter",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "feat/1535-corpus-custody-release-adapter",
+        "head_sha": "f22f48a0dd91479dd30047ce08adafc2259e8bb2",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1536"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1459,
+    "title": "OPAL2: ship SHERLOCK / WATSON as a neutral evidence-to-understanding product",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1459",
+    "labels": [
+      "enhancement",
+      "opal2",
+      "stale",
+      "implementation-needed",
+      "backlog"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1459.md",
+    "comments": 2,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1460,
+        "title": "feat(opal2): productize SHERLOCK / WATSON evidence workflow",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "agent/opal2-sherlock-watson-product",
+        "head_sha": "4709859383f311204e2467c5a5656ba659eaecf6",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1460"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1511,
+        "title": "feat(contracts): OPAL2 shipment-manifest schema with worked example (#1510)",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1510-shipment-manifest",
+        "head_sha": "86fde15158c5b5b02dc904c2f9d469f397c1df82",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1511"
+      }
+    ],
+    "branches": [
+      {
+        "name": "agent/opal2-sherlock-watson-product",
+        "exists": false,
+        "sha": null
+      }
+    ]
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1466,
+    "title": "chore: establish the post-#1461 experiment baseline and rerun preflight",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1466",
+    "labels": [
+      "maintenance",
+      "ci",
+      "tests",
+      "high-priority",
+      "stale",
+      "follow-up"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1466.md",
+    "comments": 1,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1461,
+        "title": "feat(l1): clear Orion preflight bootstrap blockers",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "agent/l1-preflight-alignment",
+        "head_sha": "af4f23273f924a1c099057271b1bf870a7d2374d",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1461"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1467,
+    "title": "feat: implement RiverCycle Phase 1 passive diagnostics",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1467",
+    "labels": [
+      "enhancement",
+      "simulation",
+      "architecture",
+      "stale",
+      "phase-1",
+      "implementation-needed"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1467.md",
+    "comments": 1,
+    "linked_prs": [],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1468,
+    "title": "research: define the Aurora native learner foundation",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1468",
+    "labels": [
+      "needs-triage",
+      "simulation",
+      "architecture",
+      "stale",
+      "ethics",
+      "follow-up"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1468.md",
+    "comments": 1,
+    "linked_prs": [],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1469,
+    "title": "research: refine canon-grounded GUMAS pressure and recovery dynamics",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1469",
+    "labels": [
+      "documentation",
+      "simulation",
+      "architecture",
+      "stale",
+      "follow-up",
+      "canon"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1469.md",
+    "comments": 1,
+    "linked_prs": [],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1477,
+    "title": "ci: SONAR_TOKEN is unauthorized \u2014 every SonarCloud API query returns 401",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1477",
+    "labels": [
+      "ci",
+      "needs info",
+      "high-priority",
+      "owner-decision"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1477.md",
+    "comments": 2,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1381,
+        "title": "feat(continuity): add neutral Universal Thread Beacon schema and offline validator",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "feat/1377-utb-neutral-schema",
+        "head_sha": "83dcf25f8e092e8295b76f1302a30fd955e54710",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1381"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1442,
+        "title": "fix(security): repair secure_storage key derivation and unskip its tests",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "claude/cloudbank-issues-prs-0dvl1n",
+        "head_sha": "4047ce67773b837372ec51c105acc4b16dd9581e",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1442"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1476,
+        "title": "fix(ci): make the SonarCloud reporter answer why the gate failed",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "claude/cloudbank-issues-prs-0dvl1n-sonar-reporter",
+        "head_sha": "5a21152ee5e38ff039c39ddb8c9e7c97d515a13b",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1476"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1506,
+        "title": "sim: restore recovered complete GUMAS v2 tactical lineage for deterministic control run",
+        "state": "open",
+        "merged": false,
+        "draft": true,
+        "head_ref": "agent/gumas-flash-rebellion-battle-baseline",
+        "head_sha": "40b5866dba2d8ac3a0636736dcf069adaa451c8a",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1506"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1513,
+        "title": "docs: record AI-assisted authorship provenance",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1504-ai-authorship",
+        "head_sha": "42d7bf7234801c4aff4c92bb9aaaaf0a8eedb9d0",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1513"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1533,
+        "title": "feat(salvage): add deterministic corpus archaeology Phase 1",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "feat/1526-corpus-archaeology-phase1",
+        "head_sha": "6b7dffdd94dedce920223addc37497380dc5ad62",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1533"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1546,
+        "title": "fix(constellation): make the hub able to accept and route a real event",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "integration/connectivity-pass-2026-08-19",
+        "head_sha": "7108d574d0f6f067c6e69c59d7ea90ee18d6f7db",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1546"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1729,
+        "title": "ci(sonar): fall back to anonymous SonarCloud API when SONAR_TOKEN is refused",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "claude/project-thread-68fxeb",
+        "head_sha": "c6e9d768b61220eb62af5564b2fc2a707650a2b8",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1729"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1504,
+    "title": "Outside review: agent-legibility strengths, regrowth-prone sprawl, and a ratchet-first roadmap",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1504",
+    "labels": [
+      "documentation",
+      "stale",
+      "audit",
+      "repo-hygiene"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1504.md",
+    "comments": 5,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 33,
+        "title": "deps: bump plotly from 5.22.0 to 6.2.0",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "dependabot/pip/plotly-6.2.0",
+        "head_sha": "eb1277fead910266121d0128028d125e6170df3d",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/33"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 46,
+        "title": "deps: bump dotenv from 17.0.0 to 17.0.1",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "dependabot/npm_and_yarn/dotenv-17.0.1",
+        "head_sha": "71b5dfce8e55d94042850236ccd674aa4cb6f213",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/46"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 47,
+        "title": "deps: bump dotenv from 17.0.0 to 17.1.0",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "dependabot/npm_and_yarn/dotenv-17.1.0",
+        "head_sha": "eb9f426ea72b2f4a995ea25bebb92b675b637820",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/47"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1343,
+        "title": "feat: add the triggered Narrative River scene workflow",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "agent/narrative-river-adapter-spec",
+        "head_sha": "24d2b3f396eb3d338abd24e7156352b4d7987bdb",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1343"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1381,
+        "title": "feat(continuity): add neutral Universal Thread Beacon schema and offline validator",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "feat/1377-utb-neutral-schema",
+        "head_sha": "83dcf25f8e092e8295b76f1302a30fd955e54710",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1381"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1476,
+        "title": "fix(ci): make the SonarCloud reporter answer why the gate failed",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "claude/cloudbank-issues-prs-0dvl1n-sonar-reporter",
+        "head_sha": "5a21152ee5e38ff039c39ddb8c9e7c97d515a13b",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1476"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1482,
+        "title": "feat(l1): bind deterministic fleet runtime",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1481-l1-fleet-runtime",
+        "head_sha": "b07de9eb8b0fb195ad1e7dbcd0aedef5b919df39",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1482"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1487,
+        "title": "fix(ops): reconcile gate registry projection",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1446-gate-registry-coherence",
+        "head_sha": "b0c96de3f33b0b1fade708964b67ef3e0798e5dc",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1487"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1488,
+        "title": "fix(repo): unify QGIA path casing",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1424-qgia-casefold-hygiene",
+        "head_sha": "7beef42377f2c7cba44523713b9394d08fdd4b97",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1488"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1492,
+        "title": "aurora(queue): record gate escalation surfacing",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "queue/escalation-surfaced-20260810-0655",
+        "head_sha": "f78a960395bd85d20e000a6772c66dbaaa2ed099",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1492"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1500,
+        "title": "fix(l1): harden restored fleet authority evidence",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1481-postmerge-1482-hardening",
+        "head_sha": "18dc169d9c17b8068aa58622e5043e6c46266cd9",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1500"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1501,
+        "title": "feat(l1): add governed staffing runtime",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1453-l1-staffing-runtime",
+        "head_sha": "b27ecb7138f06c38a90eabd46c6caea33daf6f7d",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1501"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1502,
+        "title": "feat(characters): add identity continuity registry",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1457-character-identity-provenance",
+        "head_sha": "aaf4e23bb8c28bf7c205461283429e42691c4469",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1502"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1503,
+        "title": "fix(l1): reject reactivated locus claims",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1456-locus-conflict-validation",
+        "head_sha": "d5ee0bcf8ef8215ebea668e5f9bb908f32a2b994",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1503"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1509,
+        "title": "feat(ci): declaration gate for root objects and dependency-file set (#1504)",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1504-declaration-gates",
+        "head_sha": "00f30c0143aa98f1336323df4dbb335374f2341f",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1509"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1511,
+        "title": "feat(contracts): OPAL2 shipment-manifest schema with worked example (#1510)",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1510-shipment-manifest",
+        "head_sha": "86fde15158c5b5b02dc904c2f9d469f397c1df82",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1511"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1512,
+        "title": "docs(opal2): complete shipment-manifest checklist path",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1510-shipment-checklist-closeout-20260815",
+        "head_sha": "8103f45e57eb4e0054fe89afb489e8ae63720891",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1512"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1513,
+        "title": "docs: record AI-assisted authorship provenance",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1504-ai-authorship",
+        "head_sha": "42d7bf7234801c4aff4c92bb9aaaaf0a8eedb9d0",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1513"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1514,
+        "title": "ci: enforce root declaration in pre-commit",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1504-root-declaration-precommit",
+        "head_sha": "742ff7270339d9b4568389279df4fae9a18aacbd",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1514"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1526,
+    "title": "feat(salvage): build provenance-aware corpus archaeology and intent recovery engine",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1526",
+    "labels": [],
+    "archive": "catalog/backlog_archive/cloudbank-1526.md",
+    "comments": 11,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 46,
+        "title": "deps: bump dotenv from 17.0.0 to 17.0.1",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "dependabot/npm_and_yarn/dotenv-17.0.1",
+        "head_sha": "71b5dfce8e55d94042850236ccd674aa4cb6f213",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/46"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1343,
+        "title": "feat: add the triggered Narrative River scene workflow",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "agent/narrative-river-adapter-spec",
+        "head_sha": "24d2b3f396eb3d338abd24e7156352b4d7987bdb",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1343"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1382,
+        "title": "feat(salvage): add read-only legacy artifact inventory and archive safety gates",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "feat/1375-readonly-legacy-inventory",
+        "head_sha": "3c4723798ac121a2306efddd0c66b03d9092ffb2",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1382"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1501,
+        "title": "feat(l1): add governed staffing runtime",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1453-l1-staffing-runtime",
+        "head_sha": "b27ecb7138f06c38a90eabd46c6caea33daf6f7d",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1501"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1506,
+        "title": "sim: restore recovered complete GUMAS v2 tactical lineage for deterministic control run",
+        "state": "open",
+        "merged": false,
+        "draft": true,
+        "head_ref": "agent/gumas-flash-rebellion-battle-baseline",
+        "head_sha": "40b5866dba2d8ac3a0636736dcf069adaa451c8a",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1506"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1533,
+        "title": "feat(salvage): add deterministic corpus archaeology Phase 1",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "feat/1526-corpus-archaeology-phase1",
+        "head_sha": "6b7dffdd94dedce920223addc37497380dc5ad62",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1533"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1536,
+        "title": "feat(salvage): add custody-release corpus adapter",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "feat/1535-corpus-custody-release-adapter",
+        "head_sha": "f22f48a0dd91479dd30047ce08adafc2259e8bb2",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1536"
+      }
+    ],
+    "branches": [
+      {
+        "name": "feat/1526-corpus-archaeology-phase1",
+        "exists": false,
+        "sha": null
+      }
+    ]
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1527,
+    "title": "feat(memory): restore Thermax divergent-truth arbitration and memory-governance contract",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1527",
+    "labels": [
+      "backlog"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1527.md",
+    "comments": 0,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1000,
+        "title": "docs: add recovered ethics protocol promotion plan",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "docs/993-recovered-protocol-promotion-plan",
+        "head_sha": "4eeb12cebd685dab836605cc446c0c935b9f5204",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1000"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1528,
+    "title": "feat(gumas): restore simulation-native RiverCycle pressure and feedback regulator",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1528",
+    "labels": [
+      "backlog"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1528.md",
+    "comments": 0,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1343,
+        "title": "feat: add the triggered Narrative River scene workflow",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "agent/narrative-river-adapter-spec",
+        "head_sha": "24d2b3f396eb3d338abd24e7156352b4d7987bdb",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1343"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1529,
+    "title": "feat(operations): restore role-based workplace problem-solving runtime",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1529",
+    "labels": [
+      "backlog"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1529.md",
+    "comments": 0,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1501,
+        "title": "feat(l1): add governed staffing runtime",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1453-l1-staffing-runtime",
+        "head_sha": "b27ecb7138f06c38a90eabd46c6caea33daf6f7d",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1501"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1530,
+    "title": "security(playground): fail closed when isolated sandbox runtime is unavailable",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1530",
+    "labels": [
+      "bug",
+      "security"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1530.md",
+    "comments": 0,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1547,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20260831-0627",
+        "head_sha": "1ae40d53ec9b3c43445c07e4d78b869b987ff7ed",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1547"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1580,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20260907-0627",
+        "head_sha": "a71ef88de7b4d0cf91e12014ae3db08ea267c245",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1580"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1592,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20260914-0628",
+        "head_sha": "63925666199e49b35769bfb41cd321e30cb7d759",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1592"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1624,
+        "title": "fix(playground): refuse execution without isolated sandbox",
+        "state": "closed",
+        "merged": false,
+        "draft": true,
+        "head_ref": "codex/cloudbank-issue-1530-work",
+        "head_sha": "3b9df9ed0fe9f2b26ba07a0dc268afa21687e809",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1624"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1626,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20261005-0634",
+        "head_sha": "ce94a1c31e41872657cf17b7106550b773da9441",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1626"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1636,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20261012-0634",
+        "head_sha": "fbeec39d1309f54ab4cc0881bb716aff940660aa",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1636"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1650,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20261019-0628",
+        "head_sha": "67c5f16a0edb0385d779577ab062ebb33e0ef22b",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1650"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1662,
+        "title": "aurora(queue): auto-ingest labeled issues",
+        "state": "closed",
+        "merged": false,
+        "draft": false,
+        "head_ref": "queue/auto-ingest-20261026-0628",
+        "head_sha": "3ab7cbaa2503354ea167f5a97207f34472e1a46f",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1662"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1531,
+    "title": "feat(edusim): recover governed participatory Game experience over GUMAS",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1531",
+    "labels": [
+      "backlog"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1531.md",
+    "comments": 0,
+    "linked_prs": [],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1532,
+    "title": "feat(l3): complete executable contracts for Glyphon, Sentari, Velatrix, and Harmion",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1532",
+    "labels": [
+      "backlog"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1532.md",
+    "comments": 0,
+    "linked_prs": [],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1534,
+    "title": "ci: align SonarQube Automatic Analysis scope with repository intent",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1534",
+    "labels": [
+      "ci",
+      "high-priority",
+      "repo-hygiene"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1534.md",
+    "comments": 0,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1533,
+        "title": "feat(salvage): add deterministic corpus archaeology Phase 1",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "feat/1526-corpus-archaeology-phase1",
+        "head_sha": "6b7dffdd94dedce920223addc37497380dc5ad62",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1533"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1561,
+        "title": "fix(ai_core): stop sending parameters the Claude models reject",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "fix/1560-anthropic-sampling-params",
+        "head_sha": "46a3916e7ba6989fe56ce113bd0f19261d88cf20",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1561"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "aurora-cloudbank-symbolic",
+    "number": 1578,
+    "title": "ci: the SIMULATION_STATE freshness gate outlived its premise and is now unsatisfiable",
+    "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1578",
+    "labels": [
+      "ci",
+      "repo-hygiene"
+    ],
+    "archive": "catalog/backlog_archive/cloudbank-1578.md",
+    "comments": 0,
+    "linked_prs": [
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1240,
+        "title": "fix: GAP-010 \u2014 SIMULATION_STATE.json staleness (3-layer fix per #1083)",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "fix/simulation-state-freshness-1083",
+        "head_sha": "7d2880677b2f77db2cc633040d2806b018a405b1",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1240"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1461,
+        "title": "feat(l1): clear Orion preflight bootstrap blockers",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "agent/l1-preflight-alignment",
+        "head_sha": "af4f23273f924a1c099057271b1bf870a7d2374d",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1461"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1491,
+        "title": "fix(ai): separate catalog availability from routing policy",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1329-catalog-routing-alerts",
+        "head_sha": "b9fd06e84b3f5241720048a322b3374048cc1810",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1491"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "Aurora_ORIONCORE_Directory_Main",
+    "number": 46,
+    "title": "governance(continuity): define canonical trust, consent, retention, revocation, and execution-risk policy",
+    "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/46",
+    "labels": [],
+    "archive": "catalog/backlog_archive/orioncore-46.md",
+    "comments": 1,
+    "linked_prs": [
+      {
+        "repo": "Aurora_ORIONCORE_Directory_Main",
+        "number": 119,
+        "title": "Define continuity package governance policy",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/continuity-package-policy",
+        "head_sha": "1adebbc8d6666d9b5e5d36b29da90c045f320c90",
+        "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/119"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "Aurora_ORIONCORE_Directory_Main",
+    "number": 47,
+    "title": "epic(canon-ops): connect QGIA, CanonRec, GUMAS, AuroraOS, and CloudBank",
+    "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/47",
+    "labels": [],
+    "archive": "catalog/backlog_archive/orioncore-47.md",
+    "comments": 0,
+    "linked_prs": [
+      {
+        "repo": "Aurora_ORIONCORE_Directory_Main",
+        "number": 120,
+        "title": "Query pinned CanonRec records through Canon Operations",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/canon-ops-query",
+        "head_sha": "6fa98e8d0f13cf55bb986161d3e32ad7e1645d07",
+        "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/120"
+      },
+      {
+        "repo": "Aurora_ORIONCORE_Directory_Main",
+        "number": 121,
+        "title": "Journal authorized CanonRec staging requests",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/canon-ops-intake",
+        "head_sha": "1889ae0c84ffa9af5cb62c652562b8081237db97",
+        "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/121"
+      },
+      {
+        "repo": "Aurora_ORIONCORE_Directory_Main",
+        "number": 123,
+        "title": "Complete pinned CanonRec reconciliation and record provenance",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/canon-ops-reconciliation",
+        "head_sha": "e955b5d053fd2d441ffa8a18b38bcf3542d5a6eb",
+        "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/123"
+      },
+      {
+        "repo": "Aurora_ORIONCORE_Directory_Main",
+        "number": 125,
+        "title": "Execute approved GUMAS seeds with native run receipts",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/canon-ops-gumas-execution",
+        "head_sha": "a04e0f7859ce3973a2cb37b9c06c2adf34b24b87",
+        "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/125"
+      },
+      {
+        "repo": "Aurora_ORIONCORE_Directory_Main",
+        "number": 126,
+        "title": "Expose authenticated local Canon Operations reads",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/canon-operations-local-reader",
+        "head_sha": "29ee4102e5a41fd469cc9bf30d0b56ae6c12a7bd",
+        "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/126"
+      },
+      {
+        "repo": "CanonRec",
+        "number": 12,
+        "title": "Define and verify Canon Operations v1 contracts",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/canon-ops-v1",
+        "head_sha": "9d62e3b3369ced71997fb2f3944bcac9aea2d133",
+        "url": "https://github.com/AUo959/CanonRec/pull/12"
+      },
+      {
+        "repo": "aurora-cloudbank-symbolic",
+        "number": 1727,
+        "title": "Prepare L1-mediated QGIA staging requests for CanonRec",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "codex/cloudbank-issue-1383-mediated-canon-staging",
+        "head_sha": "94ae82fc7447e4114c6a0b0936a633695bd2ac4b",
+        "url": "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1727"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "Aurora_ORIONCORE_Directory_Main",
+    "number": 50,
+    "title": "test(canon-ops): prove the end-to-end QGIA-to-CanonRec vertical slice",
+    "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/50",
+    "labels": [],
+    "archive": "catalog/backlog_archive/orioncore-50.md",
+    "comments": 0,
+    "linked_prs": [],
+    "branches": []
+  },
+  {
+    "repo": "Aurora_ORIONCORE_Directory_Main",
+    "number": 90,
+    "title": "[Work Order] GPT-6 adoption across Aurora runtime and agent surfaces",
+    "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/90",
+    "labels": [],
+    "archive": "catalog/backlog_archive/orioncore-90.md",
+    "comments": 2,
+    "linked_prs": [
+      {
+        "repo": "Aurora_ORIONCORE_Directory_Main",
+        "number": 13,
+        "title": "deps: bump actions/checkout from 4 to 6",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "dependabot/github_actions/actions/checkout-6",
+        "head_sha": "35aa1801c7cc8d5fc3ee3488a35e4b1425a9cea3",
+        "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/13"
+      },
+      {
+        "repo": "Aurora_ORIONCORE_Directory_Main",
+        "number": 101,
+        "title": "feat(ui): add offline Aurora Operator Atlas interactive preview",
+        "state": "open",
+        "merged": false,
+        "draft": true,
+        "head_ref": "feat/intelligent-ui-interactive-demo-20261015",
+        "head_sha": "acc11f6cef9c395255e09f1120e58af34b33206f",
+        "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/101"
+      }
+    ],
+    "branches": []
+  },
+  {
+    "repo": "Aurora_ORIONCORE_Directory_Main",
+    "number": 95,
+    "title": "[Architecture] Define delegated-agent execution and validated state-delta contract",
+    "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/95",
+    "labels": [],
+    "archive": "catalog/backlog_archive/orioncore-95.md",
+    "comments": 1,
+    "linked_prs": [
+      {
+        "repo": "Aurora_ORIONCORE_Directory_Main",
+        "number": 12,
+        "title": "deps: bump actions/upload-artifact from 4 to 7",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "dependabot/github_actions/actions/upload-artifact-7",
+        "head_sha": "7411845766663d9cf357bfe7f62667936821d759",
+        "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/12"
+      },
+      {
+        "repo": "Aurora_ORIONCORE_Directory_Main",
+        "number": 13,
+        "title": "deps: bump actions/checkout from 4 to 6",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "head_ref": "dependabot/github_actions/actions/checkout-6",
+        "head_sha": "35aa1801c7cc8d5fc3ee3488a35e4b1425a9cea3",
+        "url": "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/13"
+      }
+    ],
+    "branches": []
+  }
+]

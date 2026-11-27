@@ -99,11 +99,11 @@ python3 tools/workspace_verify.py --persist-report
 
 Results:
 
-- `pre-commit` visible at `/Users/travisstreets/.local/bin/pre-commit`
-- `ruff` visible at `/Users/travisstreets/.local/bin/ruff`
-- `mypy` visible at `/Users/travisstreets/.local/bin/mypy`
-- `pipx` visible at `/Users/travisstreets/.local/bin/pipx`
-- `pnpm` visible at `/Users/travisstreets/.nvm/versions/node/v24.14.0/bin/pnpm`
+- `pre-commit` visible at `~/.local/bin/pre-commit`
+- `ruff` visible at `~/.local/bin/ruff`
+- `mypy` visible at `~/.local/bin/mypy`
+- `pipx` visible at `~/.local/bin/pipx`
+- `pnpm` visible at `~/.nvm/versions/node/v24.14.0/bin/pnpm`
 - Install plan reduced from 10 items to 5 remaining system-level items.
 - Focused devkit tests: 4 passed.
 - Full root tests: 94 passed, 23 skipped.

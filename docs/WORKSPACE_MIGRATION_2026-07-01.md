@@ -6,8 +6,9 @@ find in configs, reports, session state, or your own memory/history.
 
 **One-line summary:** on 2026-07-01 the entire Aurora/ORIONCORE workspace was
 migrated from iCloud Drive to local disk at
-`/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main`. The iCloud copy
-still exists but is deliberately inert. Work only in `~/dev`.
+`~/dev/Aurora_ORIONCORE_Directory_Main`. The iCloud copy
+was first made inert, then deleted with Pilot approval on 2026-07-04 after
+verification (see §6). Work only in `~/dev`.
 
 ---
 

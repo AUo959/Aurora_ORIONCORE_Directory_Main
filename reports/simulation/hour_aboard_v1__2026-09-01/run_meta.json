@@ -10,9 +10,9 @@
     "pid": 60894,
     "ppid": "59950",
     "parent_command": ".venv/bin/python -m pytest tests/ -q",
-    "argv": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main/tools/hour_aboard.py --scenario hour_aboard_scenario --no-mesh",
-    "cwd": "/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main",
-    "user": "travisstreets"
+    "argv": "~/dev/Aurora_ORIONCORE_Directory_Main/tools/hour_aboard.py --scenario hour_aboard_scenario --no-mesh",
+    "cwd": "~/dev/Aurora_ORIONCORE_Directory_Main",
+    "user": "[redacted]"
   },
   "environment": {
     "claude_code": false,

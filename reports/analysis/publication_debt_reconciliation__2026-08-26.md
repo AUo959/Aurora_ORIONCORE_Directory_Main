@@ -2,7 +2,7 @@
 
 ## Receipt
 
-- Canonical audit root: `/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main`
+- Canonical audit root: `~/dev/Aurora_ORIONCORE_Directory_Main`
 - Live GitHub identity: `AUo959`
 - Remote refresh: `gitwiz_sync_audit.py --repo all --fetch --check-gh-auth`
 - Initial non-exempt debt: **58 branch entries**
