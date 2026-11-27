@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -130,6 +132,26 @@ def test_export_contains_top_level_l2_state(tmp_path: Path) -> None:
     assert "l2_state" in payload
     assert set(payload["l2_state"]["indexes"]["by_faction_id"]) == set(engine.get_state().factions)
     assert payload["l2_state"]["schema_version"] == "l2-state-bundle-v1"
+
+
+def test_replay_artifacts_match_across_process_hash_seeds(tmp_path: Path) -> None:
+    runner = REPO_ROOT / "skills/gumas-simulation-engine/scripts/run_gumas_advanced.py"
+    for hash_seed in ("1", "2"):
+        output = tmp_path / hash_seed / "state.json"
+        subprocess.run(  # nosec B603 - run the tracked fixture script
+            [sys.executable, str(runner), "--workspace", str(REPO_ROOT), "--seed", "42",
+             "--turns", "5", "--output", str(output), "--replay-artifacts"],
+            check=True,
+            capture_output=True,
+            env={**os.environ, "PYTHONHASHSEED": hash_seed},
+        )
+
+    for name in ("state.json", "advanced_event_ledger.ndjson"):
+        assert (tmp_path / "1" / name).read_bytes() == (tmp_path / "2" / name).read_bytes()
+    state = json.loads((tmp_path / "1" / "state.json").read_bytes())
+    assert state["turn"] == 5
+    assert state["event_ledger"]["path"] == "advanced_event_ledger.ndjson"
+    assert state["event_ledger"]["record_count"] > 0
 
 
 @requires_l2_sources
