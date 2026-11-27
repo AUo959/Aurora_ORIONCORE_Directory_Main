@@ -79,7 +79,7 @@ def _run_time(run: dict) -> str:
 
 
 def _native_reference(
-    request: dict, gate: dict, run: dict, read_artifact: Callable[[dict], bytes],
+    request: dict, gate: dict, run: dict, origin: dict, read_artifact: Callable[[dict], bytes],
 ) -> dict:
     reference = gate["run_receipt"]
     if reference not in request["sources"]:
@@ -93,10 +93,18 @@ def _native_reference(
         "origin_content_hash": native["origin_content_hash"], "engine_commit": native["seed"]["engine"]["commit"],
         "seed": native["seed"]["parameters"]["seed"], "event_count": native["layer_gate"]["event_count"],
     }
-    if (actual != {key: run[key] for key in actual} or native["layer"] != "L2"
-            or native["canonical_promotion"] is not False or native["layer_gate"]["status"] != "PASS"):
+    approval = native["approval"]
+    matches = (
+        actual == {key: run[key] for key in actual}, native["layer"] == "L2",
+        native["canonical_promotion"] is False, native["layer_gate"]["status"] == "PASS",
+        approval["actor"] == origin["approving_actor"],
+    )
+    if not all(matches):
         raise JournalError("/gate_receipts/deterministic_run: native receipt differs from the approved run")
-    return {"source": reference, "semantic_sha256": semantic}
+    return {
+        "source": reference, "semantic_sha256": semantic,
+        "participants": list(dict.fromkeys((approval["actor"], approval["relay"]))),
+    }
 
 
 def _run_registration(
@@ -124,7 +132,7 @@ def _run_registration(
         "source": gate_reference,
     }
     if "run_receipt" in gate:
-        registration.update(_native_reference(request, gate, run, read_artifact))
+        registration.update(_native_reference(request, gate, run, origins[0], read_artifact))
         registration["registration_gate"] = gate_reference
     return registration
 
@@ -164,7 +172,7 @@ def _run_atom(event: dict) -> dict:
     return atom(
         event["completed_at"], "STAGING", "simulation", "gumas_run_registered",
         f"Registered GUMAS run {run['run_id']} with {run['event_count']} events.",
-        [event["origin"]["approving_actor"]], source, event,
+        event.get("participants", [event["origin"]["approving_actor"]]), source, event,
     )
 
 

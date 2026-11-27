@@ -273,6 +273,7 @@ def test_chronicle_registration_binds_native_receipt_identity(run_intake):
     native = {
         "run_id": summary["run_id"], "origin_request_id": origin["request_id"],
         "origin_content_hash": origin["content_hash"], "layer": "L2", "canonical_promotion": False,
+        "approval": {"actor": origin["approval"]["authority"], "relay": origin["submitter"]["relay_id"]},
         "layer_gate": {"status": "PASS", "event_count": summary["event_count"]},
         "seed": {"engine": {"commit": summary["engine_commit"]}, "parameters": {"seed": summary["seed"]}},
     }

@@ -63,16 +63,18 @@ The command emits sorted `STAGING` atoms using the Station Chronicle format. Eac
 
 The local run adapter accepts an L2 `scenario_seed` that is still at the approved staging revision. The mutation's sources must include the exact seed artifact. The run request identifies the accepted `origin_request_id` and `origin_content_hash`, sets `version` to `1.0` and `layer` to `L2`, and supplies that same pinned artifact as `scenario_seed`.
 
-The seed artifact carries `version`, `seed_id`, optional `forecast_id`, `parameters`, and `engine`. The first supported parameter set contains `scenario_id` (`gumas_canonical_v1`), integer `seed`, and positive integer `turns`. The engine object pins `version` (`4.0.0-synth`) and the full Git `commit`. The operator policy uses the bridge trust pins and adds the permitted `engine_commit` and a list of authorized `l1_relays`. The CLI checks the journal's trusted terminal digest and re-reads the pinned authorization receipt before invoking GUMAS.
+The seed artifact carries `version`, `seed_id`, optional `forecast_id`, `parameters`, and `engine`. The first supported parameter set contains `scenario_id` (`gumas_canonical_v1`), integer `seed`, positive integer `turns`, and `fabric_domain` (`union` or `velar`). The engine object pins `version` (`4.0.0-synth`) and the full Git `commit`. The operator policy uses the bridge trust pins and adds the permitted `engine_commit` and a list of authorized `l1_relays`. The CLI checks the journal's trusted terminal digest and re-reads the pinned authorization receipt before invoking GUMAS.
 
 ```bash
 python tools/canon_ops_gumas.py run-request.json \
   --journal /path/to/staging.db --journal-tip "$trusted_terminal_sha256" \
-  --policy policy.json --engine-repository /path/to/ORIONCORE \
+  --policy policy.json --engine-repository /path/to/ORIONCORE --canonrec /path/to/CanonRec \
   --repository Org/Evidence=/path/to/evidence-git --run-root /path/to/run-artifacts
 ```
 
-Each run directory contains the start and end state, the native event ledger, and a semantic receipt. The receipt records the approval, approved inputs, exact engine files, state pointers, and artifact hashes. The state and ledger are checked against the approved scenario, seed, engine version, and turn interval. These checks cover run integrity. Domain-specific Fabric Invariants require their own evidence.
+Each run directory contains the start and end state, the native event ledger, the Fabric Invariants report, and a semantic receipt. The receipt records the approval, approved inputs, exact engine files, state pointers, and artifact hashes. The state and ledger are checked against the approved scenario, seed, engine version, and turn interval.
+
+The pinned Fabric checker audits the approved domain's source records at the approved CanonRec commit. It applies the project's static temporal, physical, and corporeal checks. Its findings cover that source scope. The native event ledger is verified separately. Source gaps remain visible in the receipt. A Fabric violation returns `NEEDS_REVIEW` with the findings before starting the simulation or publishing a run.
 
 An ordinary repeat verifies the existing inventory. Add `--replay` to run the same inputs again and compare the resulting semantic receipt. The identity excludes the output path and wall-clock execution time. Reproducibility is scoped to the supported engine version and Python runtime. The adapter only publishes a completed run directory after verifying its native files.
 
