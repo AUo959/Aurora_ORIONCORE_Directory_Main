@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Aurora Operator Atlas · Offline Interface Preview</title>
+<style>
+:root{--bg:#0a1020;--surface:#111b2d;--surface2:#16233a;--border:#263853;--text:#eaf1fb;--muted:#9dafc8;--aqua:#60dfd0;--blue:#8faeff;--amber:#f1bf73;--red:#ed8a8a;--shadow:0 16px 50px #0005}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}button,input,select{font:inherit}button{cursor:pointer}a{color:#9de4ef;text-decoration:none}a:hover{text-decoration:underline}
+.layout{display:grid;grid-template-columns:238px minmax(0,1fr);min-height:100vh}.sidebar{background:#0d1729;border-right:1px solid var(--border);padding:28px 16px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:16px}.logo{display:flex;align-items:center;gap:11px;padding:3px 12px 22px;border-bottom:1px solid var(--border)}.sigil{width:38px;height:38px;border:1px solid #55d4dc;display:grid;place-items:center;border-radius:11px;background:linear-gradient(135deg,#1b475a,#0d2538);color:var(--aqua);font-size:22px}.brand strong{display:block;font-size:18px;letter-spacing:.08em}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:.1em}
+.nav-caption{font-size:10px;color:#8299b6;letter-spacing:.2em;text-transform:uppercase;padding:8px 12px}.nav{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid transparent;color:#b6c6df;background:none;border-radius:11px;padding:12px}.nav svg{width:17px;height:17px;flex-shrink:0}.nav:hover{background:#1a2a42}.nav[aria-current="page"]{color:#e9fcff;border-color:#2e5b72;background:#16334a}.nav .count{margin-left:auto;background:#26334b;border-radius:7px;padding:1px 7px;font-size:10px}.sidebar-bottom{margin-top:auto;padding:16px 12px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)}
+.content{max-width:1320px;width:100%;margin:auto;padding:36px clamp(20px,4vw,56px) 80px}.eyebrow{color:var(--aqua);text-transform:uppercase;font-size:11px;letter-spacing:.19em;font-weight:700}.headline{display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;align-items:center}.headline h1{font-size:clamp(28px,3.2vw,43px);letter-spacing:-.04em;margin:6px 0 4px;font-weight:650}.subtle{color:var(--muted);margin:0}.tag{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);padding:5px 9px;border-radius:100px;background:#19253a;color:#b9c9dc;font-size:11px;font-weight:700}.tag i{display:inline-block;width:7px;height:7px;background:var(--amber);border-radius:50%}.tag.good i{background:var(--aqua)}
+.notice{margin-top:24px;border:1px solid #5e4b35;background:linear-gradient(90deg,#392e23,#242637);border-radius:13px;padding:12px 15px;display:flex;align-items:flex-start;gap:11px;color:#e9ceb0;font-size:13px}.notice strong{color:#ffe1a7}.notice .glyph{font-size:20px;line-height:1}
+.panel{display:none;animation:enter .2s ease}.panel.active{display:block}@keyframes enter{from{opacity:.55;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:26px 0 12px}.section-head h2{font-size:18px;letter-spacing:-.015em;margin:0}.section-head p{margin:0;font-size:12px;color:var(--muted)}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:24px 0}.metric{border:1px solid var(--border);border-radius:15px;padding:19px;background:linear-gradient(135deg,#17243b,#111b2e);min-height:121px}.metric span{display:block;color:#9cafc8;font-size:12px}.metric strong{font-size:31px;letter-spacing:-.04em;line-height:1.4}.metric small{display:block;color:var(--muted);font-size:11px}.metric strong.amber{color:var(--amber)}.metric strong.aqua{color:var(--aqua)}
+.grid2{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.85fr);gap:15px}.card{background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:20px;box-shadow:var(--shadow)}.card h3{font-size:15px;margin:0 0 7px}.card h4{font-size:13px;margin:0}.card p{color:var(--muted);font-size:12.5px}.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.pill{color:var(--aqua);border:1px solid #2e615e;border-radius:100px;padding:4px 9px;font-size:11px}.sources{font-size:12px;display:flex;flex-wrap:wrap;gap:9px;padding-top:12px}.line{border:0;border-top:1px solid var(--border);margin:16px 0}.state-line{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:12px;margin:12px 0}.state-line b{color:var(--text);font-weight:500}.dot{width:8px;height:8px;display:inline-block;border-radius:100%;background:var(--aqua)}.dot.warn{background:var(--amber)}.dot.unknown{background:#93a5c0}
+.stage-diagram{width:100%;display:block;max-height:270px}.stage-diagram text{font:12px ui-sans-serif,system-ui;fill:#cbd9e9}.stage-diagram .minor{font-size:9px;fill:#9aacbf}.stage-diagram rect{fill:#1a304a;stroke:#36536b}.stage-diagram path{fill:none;stroke:#5c7f9a;stroke-width:1.7;stroke-dasharray:5 5}
+.controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0}.chip{background:#152238;border:1px solid #32445e;color:#bdd0e5;border-radius:9px;padding:8px 11px;font-size:12px}.chip[aria-pressed="true"]{border-color:var(--aqua);color:#e7ffff;background:#1a3c4c}.search{flex:1;min-width:180px;background:#122036;color:#fff;border:1px solid #30455e;padding:10px 12px;border-radius:10px;outline:0}.search:focus{border-color:var(--aqua)}.inbox-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,.85fr);gap:15px}.items{display:flex;flex-direction:column;gap:9px;max-height:530px;overflow:auto;padding-right:3px}.item{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;width:100%;text-align:left;color:var(--text);border:1px solid var(--border);background:#111c30;border-radius:12px;padding:13px}.item:hover,.item.selected{border-color:#5395ac;background:#1a3047}.item-title{font-weight:600;font-size:13px}.item-info{color:var(--muted);font-size:11px;margin-top:4px}.rank{font-size:11px;background:#3b302c;color:var(--amber);border-radius:6px;padding:3px 7px;white-space:nowrap}.rank.p2{background:#253b51;color:#a8c8e8}.detail{min-height:240px}.kv{display:grid;grid-template-columns:90px 1fr;gap:8px;font-size:12px;padding:8px 0;border-bottom:1px solid #25364c}.kv span:first-child{color:var(--muted)}.detail .description{line-height:1.8;color:#cfdbeb;margin:14px 0}.lane-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.lane{border:1px solid var(--border);background:#142037;border-radius:12px;padding:14px;min-height:104px;color:var(--text);text-align:left}.lane:hover,.lane.active{border-color:var(--blue);background:#1c304b}.lane strong,.lane small{display:block}.lane strong{font-size:13px}.lane small{color:var(--muted);margin-top:9px;font-size:11px}
+.demo-banner{color:#ffdca2;font-size:12px;background:#3a2c22;border:1px solid #6c5331;padding:10px 12px;border-radius:9px;margin:12px 0 18px}.lab{display:grid;grid-template-columns:270px minmax(0,1fr);gap:15px}.field{display:block;margin:18px 0}.field label{display:block;margin-bottom:7px;color:#bdcde1;font-size:12px}.field select{width:100%;background:#101e32;color:#edf8ff;border:1px solid #43536a;border-radius:8px;padding:9px}.field input{width:100%;accent-color:#6ce0d4}.field .value{float:right;color:var(--aqua)}.chart{width:100%;height:230px}.chart .gridline{stroke:#39506a;stroke-width:1;opacity:.5}.chart .area{fill:#5ce5ce;opacity:.08}.chart polyline{fill:none;stroke:#6be2cb;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.chart .risk{stroke:#edbf7c}.chart .legend{font:11px system-ui;fill:#aebfd7}.triple{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.layer{border:1px solid #30445d;background:#192b42;border-radius:12px;padding:15px;min-height:128px;cursor:pointer;text-align:left;color:var(--text)}.layer[aria-pressed="true"]{outline:1px solid var(--aqua);background:#1a3f4a}.layer .small{font-size:11px;color:var(--aqua);letter-spacing:.1em}.layer strong{display:block;margin:8px 0 5px}.layer p{font-size:11px;color:var(--muted);margin:0}.pathway{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;align-items:stretch;margin:20px 0}.pathway span{display:flex;align-items:center;justify-content:center;text-align:center;padding:14px 7px;border:1px solid #36516c;background:#192b42;border-radius:8px;font-size:11px}.pathway span:last-child{border-color:#846c49}.status-row{padding:13px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px}.status-row small{color:var(--muted)}.dependency{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.repo-card{padding:15px;border:1px solid var(--border);background:var(--surface2);border-radius:12px}.repo-card h3{font-size:13px;margin:6px 0}.repo-card p{margin:0 0 8px}.repo-card small{display:block;color:var(--muted);margin-top:9px}.footnote{margin:26px 0;color:#899fb9;font-size:11px;max-width:840px}
+@media(max-width:1000px){.grid2{grid-template-columns:1fr}.lane-grid,.dependency{grid-template-columns:repeat(2,1fr)}}@media(max-width:720px){.layout{grid-template-columns:1fr}.sidebar{position:static;height:auto;padding:12px;gap:4px}.logo{padding:4px 8px 12px}.sidebar-bottom,.nav-caption{display:none}.navlist{display:flex;overflow-x:auto}.nav{width:auto;white-space:nowrap;padding:9px;flex-shrink:0}.content{padding:24px 15px 50px}.metrics{grid-template-columns:repeat(2,1fr)}.inbox-layout,.lab{grid-template-columns:1fr}.triple,.dependency,.lane-grid{grid-template-columns:1fr}.pathway{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+ <div class="logo"><div class="sigil">✧</div><div class="brand"><strong>AURORA</strong><small>OPERATOR ATLAS</small></div></div>
+ <div class="nav-caption">EXPLORATION VIEWS</div>
+ <nav class="navlist" aria-label="Aurora views">
+ <button class="nav" data-view="overview" aria-current="page">◈ &nbsp; Overview</button>
+ <button class="nav" data-view="mission">☷ &nbsp; Mission Control <span class="count">12</span></button>
+ <button class="nav" data-view="simulation">⌁ &nbsp; GUMAS Lab</button>
+ <button class="nav" data-view="canon">◇ &nbsp; Canon &amp; ACE</button>
+ <button class="nav" data-view="integration">⑂ &nbsp; Integration Map</button>
+ </nav>
+ <div class="sidebar-bottom">Local offline prototype · No credentials, network requests, engine execution, or canonical writes.</div>
+</aside>
+<main class="content">
+ <header class="headline"><div><div class="eyebrow">AURORA / INTELLIGENT INTERFACE</div><h1 id="pageTitle">Project overview</h1><p class="subtle" id="pageDesc">A navigable window into existing Aurora capabilities.</p></div><div class="tag"><i></i> SOURCE-ATTRIBUTED PREVIEW</div></header>
+ <div class="notice" role="note"><span class="glyph">◷</span><div><strong>Historical source snapshot · August 15, 2026, 05:30 UTC.</strong> Mission Control values are from a saved repository report, not current telemetry. Simulation graphics are illustrative. This preview is offline and read-only.</div></div>
+
+ <section id="overview" class="panel active" aria-label="Project overview">
+  <div class="metrics"><div class="metric"><span>Report sources</span><strong>7</strong><small>Recorded source errors: 0</small></div><div class="metric"><span>Operator inbox</span><strong>12</strong><small>4 P1 / 8 P2 items</small></div><div class="metric"><span>Approval required</span><strong>9</strong><small>Requests, not authorizations</small></div><div class="metric"><span>Build readiness</span><strong class="amber">0 / 6</strong><small>6 blocked in recorded context</small></div></div>
+  <div class="grid2">
+   <article class="card"><div class="card-head"><h3>How the interface connects Aurora</h3><span class="pill">Concept architecture</span></div>
+    <svg class="stage-diagram" role="img" aria-label="Mission Control report connected through a read-only data bridge to the interface, with independent simulation and canon authorities" viewBox="0 0 620 270">
+     <path d="M125 63 H250 M360 63 H489 M308 87 V172 M175 213 H246 M368 213 H447"></path>
+     <rect x="8" y="29" width="165" height="70" rx="12"></rect><text x="91" y="55" text-anchor="middle">Mission Control</text><text x="91" y="75" class="minor" text-anchor="middle">Saved JSON report</text>
+     <rect x="239" y="29" width="140" height="70" rx="12"></rect><text x="309" y="53" text-anchor="middle">UI Bridge</text><text x="309" y="75" class="minor" text-anchor="middle">Schema + redaction</text>
+     <rect x="452" y="29" width="158" height="70" rx="12" style="stroke:#58bfc0"></rect><text x="531" y="55" text-anchor="middle">Operator Atlas</text><text x="531" y="75" class="minor" text-anchor="middle">Interactive views</text>
+     <rect x="84" y="178" width="185" height="70" rx="12"></rect><text x="176" y="201" text-anchor="middle">GUMAS · L2</text><text x="176" y="221" class="minor" text-anchor="middle">Isolated simulation</text>
+     <rect x="350" y="178" width="185" height="70" rx="12"></rect><text x="442" y="201" text-anchor="middle">CanonRec · ACE</text><text x="442" y="221" class="minor" text-anchor="middle">Governed determination</text>
+     <text x="309" y="145" text-anchor="middle" class="minor">Independent authority boundaries</text>
+    </svg>
+    <p>The interface reuses the Mission Control report contract, GUMAS engine APIs, and ACE/CanonRec provenance machinery. The visualization does not confer execution or publication authority.</p>
+   </article>
+   <article class="card"><h3>Capability maturity</h3>
+    <div class="state-line"><span class="dot"></span><b>Saved snapshot bridge</b> — tested, draft PR</div>
+    <div class="state-line"><span class="dot"></span><b>Local retrieval service</b> — tested, draft PR</div>
+    <div class="state-line"><span class="dot"></span><b>Private MCP adapter</b> — protocol-tested, draft PR</div>
+    <div class="state-line"><span class="dot warn"></span><b>Live ChatGPT link</b> — not connected</div>
+    <div class="state-line"><span class="dot unknown"></span><b>GUMAS/ACE live visual adapters</b> — proposed</div>
+    <hr class="line"><h4>Existing code assets</h4>
+    <div class="sources"><a target="_blank" rel="noopener" href="https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/blob/main/tools/gumas_api.py">GUMAS API ↗</a><a target="_blank" rel="noopener" href="https://github.com/AUo959/DuelSim_v2.0/blob/main/UI_CONTRACT__v2.4.1.md">DuelSim contract ↗</a><a target="_blank" rel="noopener" href="https://github.com/AUo959/CanonRec">CanonRec ↗</a></div>
+   </article>
+  </div>
+ </section>
+
+ <section id="mission" class="panel" aria-label="Mission Control">
+  <div class="section-head"><h2>Operator inbox</h2><p>Historical work queue · select an item to inspect</p></div>
+  <div class="controls"><button class="chip" data-filter="all" aria-pressed="true">All · 12</button><button class="chip" data-filter="P1" aria-pressed="false">P1 · 4</button><button class="chip" data-filter="P2" aria-pressed="false">P2 · 8</button><input id="search" class="search" placeholder="Search recorded findings…" aria-label="Search recorded findings"></div>
+  <div class="inbox-layout"><div id="inboxList" class="items" aria-live="polite"></div><article class="card detail" id="inboxDetail" aria-live="polite"><h3>Select an item</h3><p>Inspect its recorded source and next review step.</p></article></div>
+  <div class="section-head"><h2>Build readiness lanes</h2><p>Environment-specific findings, not live outages</p></div>
+  <div class="lane-grid" id="laneGrid"></div>
+  <div class="card" id="laneDetail" style="margin-top:12px"><p>Choose a build lane to inspect its recorded missing tooling.</p></div>
+ </section>
+
+ <section id="simulation" class="panel" aria-label="GUMAS simulation lab">
+  <div class="section-head"><h2>GUMAS simulation laboratory</h2><span class="pill">Exploratory interface prototype</span></div>
+  <div class="demo-banner"><strong>Illustrative synthetic trajectory.</strong> The chart below is generated locally to demonstrate controls. It is NOT an executed GUMAS scenario, benchmark, or measured result.</div>
+  <div class="lab"><article class="card"><h3>Scenario controls</h3><p>These controls show the interaction pattern we can attach to the existing GUMAS v3 session and metric endpoints later.</p>
+    <div class="field"><label for="scenario">Scenario type</label><select id="scenario"><option value="diplomacy">Diplomatic pressure</option><option value="supply">Supply disruption</option><option value="recovery">Coordinated recovery</option></select></div>
+    <div class="field"><label for="turns">Exploration horizon <strong class="value" id="turnsText">6 turns</strong></label><input id="turns" type="range" min="3" max="10" value="6"></div>
+    <div class="field"><label for="intensity">Scenario intensity <strong class="value" id="intensityText">40%</strong></label><input id="intensity" type="range" min="10" max="90" step="10" value="40"></div>
+    <div class="tag"><i></i> DEMO · NO ENGINE SESSION</div>
+   </article><article class="card"><div class="card-head"><h3>Outcome trajectory</h3><span class="tag">SYNTHETIC</span></div>
+    <svg id="simChart" class="chart" viewBox="0 0 600 240" role="img" aria-label="Illustrative local stability and risk lines"></svg>
+    <div class="state-line"><span class="dot"></span><b>Stability</b> <span style="margin-left:20px"><span class="dot warn"></span><b>Risk</b></span></div><p id="simNote">Adjust controls to explore how a real simulation viewer could respond. No GUMAS execution occurs.</p>
+   </article></div>
+  <div class="grid2" style="margin-top:15px"><article class="card"><h3>What Aurora can reuse</h3><div class="status-row"><span>GUMAS scenario session and step endpoints</span><span class="tag good"><i></i> Implemented source</span></div><div class="status-row"><span>Metrics, faction and event state views</span><span class="tag good"><i></i> Implemented source</span></div><div class="status-row"><span>DuelSim replay map + golden fixtures</span><span class="tag good"><i></i> Implemented source</span></div></article><article class="card"><h3>Safe attachment strategy</h3><p>Start with signed-off snapshots or exported JSON. Later, attach a bounded session adapter that carries seed, engine identity, scenario ID, version, and source provenance. No simulated output crosses into L1 canon automatically.</p><a target="_blank" rel="noopener" href="https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/blob/main/tools/gumas_api.py">Inspect GUMAS REST surface ↗</a></article></div>
+ </section>
+
+ <section id="canon" class="panel" aria-label="Canon and provenance">
+  <div class="section-head"><h2>Authority &amp; provenance explorer</h2><p>Click a layer to inspect its permitted role</p></div>
+  <div class="triple">
+   <button class="layer" data-layer="L1" aria-pressed="true"><div class="small">LAYER 01</div><strong>L1 · Canon</strong><p>Authoritative deterministic records and controlled state.</p></button>
+   <button class="layer" data-layer="L2" aria-pressed="false"><div class="small">LAYER 02</div><strong>L2 · Simulation</strong><p>GUMAS scenarios and candidate outcomes.</p></button>
+   <button class="layer" data-layer="L3" aria-pressed="false"><div class="small">LAYER 03</div><strong>L3 · Governance</strong><p>Evidence, review, drift and promotion checks.</p></button>
+  </div>
+  <article class="card" id="layerDetail" style="margin-top:13px" aria-live="polite"></article>
+  <div class="section-head"><h2>ACE determination workflow</h2><p>Conceptual—not an execution interface</p></div>
+  <div class="pathway"><span>1 · Query</span><span>2 · Source resolution</span><span>3 · Provenance review</span><span>4 · Determination</span><span>5 · Owner-gated publication</span></div>
+  <article class="card"><h3>Existing authority assets</h3><p>CanonRec contains L1, L2 and L3 records. ORIONCORE ACE includes character and facility resolution, determination receipts, generic entity handling, and gated materialization. This view can eventually expose what was resolved and why, without adding a second authority system.</p><div class="sources"><a target="_blank" rel="noopener" href="https://github.com/AUo959/CanonRec">CanonRec ↗</a><a target="_blank" rel="noopener" href="https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/tree/main/tools/ace">ACE source ↗</a></div></article>
+ </section>
+
+ <section id="integration" class="panel" aria-label="Integration map">
+  <div class="section-head"><h2>Delivery chain</h2><p>Verified code groundwork versus pending account integration</p></div>
+  <article class="card"><div class="status-row"><div><strong>#97 · Snapshot projection</strong><br><small>Validated read-only report structure and redaction</small></div><span class="tag good"><i></i> CI passed · draft</span></div>
+   <div class="status-row"><div><strong>#98 · Local retrieval</strong><br><small>Authenticated read-only HTTP interface</small></div><span class="tag good"><i></i> CI passed · draft</span></div>
+   <div class="status-row"><div><strong>#99 · Private MCP</strong><br><small>One-tool stdio server; no write calls</small></div><span class="tag good"><i></i> CI passed · draft</span></div>
+   <div class="status-row"><div><strong>Offline visual prototype</strong><br><small>This static UI, with historical/synthetic sources explicitly separated</small></div><span class="tag"><i></i> Offline</span></div>
+   <div class="status-row"><div><strong>Secure tunnel and ChatGPT plugin</strong><br><small>Requires account-controlled credentials and connection</small></div><span class="tag"><i></i> Not connected</span></div></article>
+  <div class="section-head"><h2>Active cross-repository work</h2><p>Checked GitHub issues · October 15, 2026</p></div>
+  <div class="dependency">
+   <article class="repo-card"><div class="eyebrow">ORIONCORE</div><h3>GPT-6 integration governance</h3><p>Root adoption order, dependency tracking, acceptance and boundaries.</p><a href="https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/90" target="_blank" rel="noopener">Issue #90 ↗</a><small>Open at last check</small></article>
+   <article class="repo-card"><div class="eyebrow">CLOUDBANK</div><h3>Model roles and routing</h3><p>Responses reasoning, cache-aware routing, telemetry and evaluations.</p><a href="https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1610" target="_blank" rel="noopener">Issue #1610 ↗</a><small>Open at last check</small></article>
+   <article class="repo-card"><div class="eyebrow">AURORAOS</div><h3>Agent-facing integration</h3><p>Role selection and prompt/cache interoperability.</p><a href="https://github.com/AUo959/AuroraOS/issues/12" target="_blank" rel="noopener">Issue #12 ↗</a><small>Open at last check</small></article>
+  </div><div class="sources" style="margin-top:17px"><a target="_blank" rel="noopener" href="https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/97">PR #97 ↗</a><a target="_blank" rel="noopener" href="https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/98">PR #98 ↗</a><a target="_blank" rel="noopener" href="https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/pull/99">PR #99 ↗</a></div>
+ </section>
+ <div class="footnote">Aurora Operator Atlas prototype · 2026-10-15. No browser network calls, credentials, account connection, runtime execution or write capabilities. External links open repository references only. Historical facts come from the saved Mission Control report; simulation trajectories are explicitly synthetic.</div>
+</main></div>
+<script>
+(function(){
+"use strict";
+const summaries={
+ overview:["Project overview","A navigable window into existing Aurora capabilities."],
+ mission:["Mission Control","Evidence-backed historical operator findings and build readiness."],
+ simulation:["GUMAS laboratory","A simulation viewer prototype, deliberately disconnected from the engine."],
+ canon:["Canon & provenance","Explore L1, L2 and L3 without crossing authority boundaries."],
+ integration:["Integration map","How existing work fits together and what remains gated."]
+};
+const items=[
+["P1","Resolve repository registry coverage","workspace_verify","boundary",false,"Recorded workspace verifier noted a repo_registry_coverage finding. Verify the canonical checkout and registry before editing any paths."],
+["P1","Review restricted recovery candidates","recovery_index","recovery_review",true,"Restricted recovery material requires a separately authorized review in the governed source workspace. Evidence is not exported here."],
+["P1","Resolve brief freshness finding","workspace_verify","validation",false,"The historical workspace report flagged a stale brief. Review source freshness before regeneration."],
+["P1","Resolve session-state freshness","workspace_verify","validation",false,"Review the existing session-state freshness rule; do not infer live session condition from this saved result."],
+["P2","Docker absent in recorded context","devkit","developer_tooling",true,"Recheck from the canonical development machine before treating this as a missing installed dependency."],
+["P2","GitHub CLI absent in recorded context","devkit","developer_tooling",true,"Recheck from the canonical development machine before treating this as a missing installed dependency."],
+["P2","Go absent in recorded context","devkit","developer_tooling",true,"Optional systems tooling; verify the environment first."],
+["P2","Rust absent in recorded context","devkit","developer_tooling",true,"Optional systems tooling; verify the environment first."],
+["P2","SQLite CLI absent in recorded context","devkit","developer_tooling",true,"Recorded missing sqlite3 command in a noncanonical workspace."],
+["P2","CloudBank Python environment blocked","devkit","developer_tooling",true,"CloudBank should be checked using the repo-local interpreter rather than a generic system Python."],
+["P2","Homebrew absent in recorded context","devkit","developer_tooling",true,"Recheck local package-manager configuration from the canonical machine."],
+["P2","Gitleaks absent in recorded context","devkit","developer_tooling",true,"Recheck the local tool; repository CI has independent secret scanning."]
+];
+const lanes=[
+["Root Python control tooling","sqlite3"],["Frontend dashboard","pnpm"],["Container services","docker"],["Apple platforms","xcodebuild"],["Systems helper tooling","rust, go"],["GitHub maintenance","gh"]
+];
+let selectedPriority="all",selectedIndex=0;
+const el=id=>document.getElementById(id);
+const text=(tag,cls,value)=>{const node=document.createElement(tag);if(cls)node.className=cls;node.textContent=value;return node;};
+function show(view){document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===view));document.querySelectorAll(".nav").forEach(b=>b.setAttribute("aria-current",b.dataset.view===view?"page":"false"));el("pageTitle").textContent=summaries[view][0];el("pageDesc").textContent=summaries[view][1];if(window.innerWidth<721)window.scrollTo({top:0,behavior:"smooth"});}
+document.querySelectorAll(".nav").forEach(b=>b.addEventListener("click",()=>show(b.dataset.view)));
+function displayItem(i){
+ const item=items[i];selectedIndex=i;const host=el("inboxDetail");host.replaceChildren(text("h3","",item[1]));
+ const rank=text("span","tag",item[0]+" · "+item[3]);host.append(rank);
+ const desc=text("p","description",item[5]);host.append(desc);
+ for(const [name,value] of [["Recorded source",item[2]],["Approval required",item[4]?"Yes":"No"],["Authority","Advisory only"],["Observed","Aug 15, 2026"]]){
+ const row=text("div","kv","");row.append(text("span","",name),text("span","",value));host.append(row);}
+ document.querySelectorAll(".item").forEach(b=>b.classList.toggle("selected",Number(b.dataset.index)===i));
+}
+function renderInbox(){
+ const host=el("inboxList");host.replaceChildren();const query=el("search").value.trim().toLowerCase();let visible=[];
+ items.forEach((it,i)=>{if(selectedPriority!=="all"&&it[0]!==selectedPriority)return;if(!it.join(" ").toLowerCase().includes(query))return;visible.push(i);
+ const b=text("button","item","");b.type="button";b.dataset.index=String(i);
+ const col=text("div","", "");col.append(text("div","item-title",it[1]),text("div","item-info",it[2]+" · "+(it[4]?"Approval required":"Advisory")));
+ b.append(col,text("span","rank "+(it[0]==="P2"?"p2":""),it[0]));b.addEventListener("click",()=>displayItem(i));host.append(b);});
+ if(!visible.length){host.append(text("p","subtle","No matching historical items."));el("inboxDetail").replaceChildren(text("p","subtle","No item selected."));}
+ else if(!visible.includes(selectedIndex))displayItem(visible[0]);else displayItem(selectedIndex);
+}
+document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{selectedPriority=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));renderInbox();}));
+el("search").addEventListener("input",renderInbox);renderInbox();
+lanes.forEach((lane,i)=>{const b=text("button","lane","");b.append(text("strong","",lane[0]),text("small","","Missing: "+lane[1]));b.addEventListener("click",()=>{document.querySelectorAll(".lane").forEach(x=>x.classList.toggle("active",x===b));const target=el("laneDetail");target.replaceChildren(text("h3","",lane[0]),text("p","", "Recorded missing tools: "+lane[1]+". This was a historical, environment-specific assessment, not an observed production outage."));});el("laneGrid").append(b);if(i===0)b.click();});
+const desc={
+ L1:["Deterministic canonical authority","L1 records hold approved canonical state. Simulation output, model suggestions, and inferred relations do not automatically override this layer."],
+ L2:["GUMAS exploratory simulation","L2 permits bounded scenario testing and candidate outcomes. Every result should carry its engine identity, seed, turn number and source provenance. No automatic promotion."],
+ L3:["Review and governance","L3 documents evidence, certainty, drift, reconciliation decisions and promotion receipts. Review makes a change eligible for separate explicit authorization, not automatic publication."]
+};
+function chooseLayer(layer){document.querySelectorAll(".layer").forEach(b=>b.setAttribute("aria-pressed",b.dataset.layer===layer?"true":"false"));el("layerDetail").replaceChildren(text("h3","",desc[layer][0]),text("p","",desc[layer][1]));}
+document.querySelectorAll(".layer").forEach(b=>b.addEventListener("click",()=>chooseLayer(b.dataset.layer)));chooseLayer("L1");
+function plot(){
+ let turns=Number(el("turns").value),intensity=Number(el("intensity").value)/100,scenario=el("scenario").value;
+ el("turnsText").textContent=turns+" turns";el("intensityText").textContent=Math.round(intensity*100)+"%";
+ const factor=scenario==="supply"?1.3:scenario==="recovery"?-0.7:0.6;
+ const svg=el("simChart");svg.replaceChildren();const NS="http://www.w3.org/2000/svg";
+ function S(tag,attrs){const node=document.createElementNS(NS,tag);Object.keys(attrs).forEach(k=>node.setAttribute(k,String(attrs[k])));svg.append(node);return node;}
+ for(let i=0;i<=4;i++){let y=26+i*44;S("line",{x1:35,y1:y,x2:580,y2:y,class:"gridline"});let label=S("text",{x:5,y:y+4,class:"legend"});label.textContent=String(Math.round((1-i/4)*100));}
+ let stability=[],risk=[];
+ for(let i=0;i<=turns;i++){const x=35+i*545/turns;const swing=Math.sin(i*1.3)*.045;let a=Math.max(.1,Math.min(.93,.75-(i/turns)*intensity*factor*.65+swing));let b=Math.max(.06,Math.min(.95,.24+(i/turns)*intensity*factor*.64-swing));stability.push(x.toFixed(1)+","+(202-a*176).toFixed(1));risk.push(x.toFixed(1)+","+(202-b*176).toFixed(1));}
+ S("polyline",{points:stability.join(" "),class:""});S("polyline",{points:risk.join(" "),class:"risk"});
+ for(let i=0;i<=turns;i++){let t=S("text",{x:35+i*545/turns,y:226,"text-anchor":"middle",class:"legend"});t.textContent=String(i);}
+ el("simNote").textContent="Synthetic "+scenario.replace("-"," ")+" profile, "+turns+" turns, "+Math.round(intensity*100)+"% intensity. This is a local UI interaction only.";
+}
+for(const key of ["scenario","turns","intensity"])el(key).addEventListener("input",plot);plot();
+})();
+</script>
+</body>
+</html>
