@@ -1,11 +1,14 @@
 import hashlib
+import sqlite3
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing
 from copy import deepcopy
 from unittest import TestCase
 
 import pytest
 
 from tools import canon_ops_intake as bridge
+from tools import canon_ops_events as events
 from tools import canon_ops_journal as journal
 from tools import canon_ops_query as query
 
@@ -18,8 +21,21 @@ GATES = (
 ORIGIN = {"repository": "Fixture/Gates", "commit": "b" * 40}
 
 
-def make_request(request_id="request-one", *, state="approved", operation="create_staging_claim",
-                 revision=None):
+def gate_payload(gate, subject, approval, run):
+    payload = {"gate": gate, "receipt_id": gate, "subject_sha256": subject, "verdict": "PASS"}
+    if gate == "authorization_approval":
+        payload.update(decision=approval["state"], authority=approval.get("authority"))
+    if gate == "final_reconciliation":
+        payload["recommendation"] = "STAGING"
+    if gate == "deterministic_run":
+        payload["run"] = run
+    return payload
+
+
+def make_request(
+    request_id="request-one", *, state="approved", operation="create_staging_claim",
+    revision=None, layer="L1", run=None, sources=None,
+):
     approval = {"state": state}
     if state != "pending":
         approval["authority"] = "reviewer"
@@ -27,30 +43,25 @@ def make_request(request_id="request-one", *, state="approved", operation="creat
         "version": "1.0",
         "request_id": request_id,
         "submitter": {"system": "QGIA", "actor_id": "forecaster", "relay_id": "l1-relay"},
-        "layer": "L1",
+        "layer": layer,
         "operation": operation,
-        "targets": [{"layer": "L1", "kind": "forecast", "record_id": "forecast-a",
+        "targets": [{"layer": layer, "kind": "forecast", "record_id": "forecast-a",
                      "expected_state": revision}],
-        "sources": [],
+        "sources": list(sources or []),
         "approval": approval,
-        "execution_mode": "reference",
+        "execution_mode": "deterministic_simulation" if run else "reference",
     }
     subject = bridge.subject_digest(request)
     blobs = {}
     references = {}
-    for gate in GATES:
+    required_gates = (*GATES, "deterministic_run") if run else GATES
+    for gate in required_gates:
         path = f"gates/{gate}.json"
-        payload = {
-            "gate": gate, "receipt_id": gate, "subject_sha256": subject, "verdict": "PASS",
-        }
-        if gate == "authorization_approval":
-            payload.update(decision=state, authority=approval.get("authority"))
-        if gate == "final_reconciliation":
-            payload["recommendation"] = "STAGING"
+        payload = gate_payload(gate, subject, approval, run)
         data = journal.canonical_json(payload).encode()
         blobs[path] = data
         references[gate] = {"receipt_id": gate, "artifact": {
-            **ORIGIN, "layer": "L1", "path": path, "sha256": hashlib.sha256(data).hexdigest(),
+            **ORIGIN, "layer": layer, "path": path, "sha256": hashlib.sha256(data).hexdigest(),
         }}
     request["gate_receipts"] = references
     request["content_hash"] = journal.request_digest(request)
@@ -64,18 +75,25 @@ def validate_fixture(request, read_artifact):
         artifact = receipt["artifact"]
         if hashlib.sha256(read_artifact(artifact)).hexdigest() != artifact["sha256"]:
             raise bridge.IntakeError("/gate_receipts: digest mismatch")
+    for source in request["sources"]:
+        if hashlib.sha256(read_artifact(source)).hexdigest() != source["sha256"]:
+            raise bridge.IntakeError("/sources: digest mismatch")
 
 
 @pytest.fixture
 def run_intake(tmp_path):
     path = tmp_path / "staging.db"
     policy = {
-        "version": "1.0", "canon_commit": "a" * 40, "approvers": {"L1": ["reviewer"]},
-        "gate_origins": {gate: [ORIGIN] for gate in GATES},
+        "version": "1.0", "canon_commit": "a" * 40,
+        "approvers": {"L1": ["reviewer"], "L2": ["reviewer"]},
+        "gate_origins": {gate: [ORIGIN] for gate in (*GATES, "deterministic_run")},
         "grants": [
             {"principal": "l1-relay", "actor_id": "forecaster", "system": "QGIA",
-             "layer": "L1", "operation": operation}
-            for operation in ("create_staging_claim", "amend_staging_claim", "request_promotion_review")
+             "layer": layer, "operation": operation}
+            for layer in ("L1", "L2")
+            for operation in (
+                "create_staging_claim", "amend_staging_claim", "request_promotion_review", "attach_outcome",
+            )
         ],
     }
 
@@ -188,3 +206,81 @@ def test_snapshot_lookup_fails_when_canonrec_is_unavailable(tmp_path):
     missing = query.CanonRec(tmp_path / "missing-canonrec")
     with pytest.raises(query.QueryError, match="CanonRec Git data unavailable"):
         bridge.snapshot_targets(missing, {"canon_commit": "a" * 40})
+
+
+def test_qgia_outcome_links_to_accepted_revision_without_advancing_it(run_intake):
+    run, path, _ = run_intake
+    origin, blobs = make_request()
+    run(origin, blobs)
+    state = {"revision": origin["content_hash"], "certainty": "STAGING"}
+    source_bytes = b'{"kind":"calibration_fixture"}'
+    source = {**ORIGIN, "layer": "L1", "path": "outcome.json",
+              "sha256": hashlib.sha256(source_bytes).hexdigest()}
+    outcome, artifacts = make_request(
+        "qgia-outcome", operation="attach_outcome", revision=state, sources=[source],
+    )
+    artifacts["outcome.json"] = source_bytes
+    registered, = run(outcome, artifacts)["receipt"]["events"]
+    CHECK.assertEqual(registered["kind"], "outcome_attachment")
+    CHECK.assertEqual(registered["origins"][0]["request_id"], origin["request_id"])
+    CHECK.assertEqual(registered["sources"], [source])
+    CHECK.assertEqual(journal.staging_state(journal.read_entries(path))[("L1", "forecast", "forecast-a")], state)
+
+
+def make_run(origin):
+    return {
+        "version": "1.0", "run_id": "run-fixture",
+        "origin_request_id": origin["request_id"], "origin_content_hash": origin["content_hash"],
+        "engine_commit": "c" * 40, "seed": 51, "event_count": 3,
+        "completed_at": "2026-07-01T06:00:00-04:00",
+    }
+
+
+def test_gumas_registration_and_chronicle_projection_rebuild_from_the_journal(run_intake, tmp_path):
+    run, path, _ = run_intake
+    origin, blobs = make_request(layer="L2")
+    run(origin, blobs)
+    state = {"revision": origin["content_hash"], "certainty": "STAGING"}
+    request, artifacts = make_request(
+        "register-run", operation="attach_outcome", revision=state, layer="L2", run=make_run(origin),
+    )
+    CHECK.assertEqual(run(request, artifacts)["status"], "ACCEPTED")
+    CHECK.assertEqual(run(request, artifacts)["status"], "DUPLICATE")
+    history = journal.read_entries(path)
+    projection = events.chronicle_atoms(history)
+    entry, = projection
+    CHECK.assertEqual(entry["tier"], "STAGING")
+    CHECK.assertEqual(entry["occurred_at"], "2026-07-01T10:00:00Z")
+    CHECK.assertIn("deterministic_run.json", entry["source"])
+    restored = tmp_path / "restored.db"
+    journal.rebuild(restored, history, expected_tip=history[-1]["sha256"])
+    CHECK.assertEqual(events.chronicle_atoms(journal.read_entries(restored)), projection)
+
+
+def test_gumas_registration_denies_wrong_provenance_and_duplicate_run_ids(run_intake):
+    run, path, _ = run_intake
+    origin, blobs = make_request(layer="L2")
+    run(origin, blobs)
+    state = {"revision": origin["content_hash"], "certainty": "STAGING"}
+    fields = {"operation": "attach_outcome", "revision": state, "layer": "L2"}
+    incorrect = {**make_run(origin), "origin_request_id": "different-request"}
+    with pytest.raises(journal.JournalError, match="origin must match"):
+        run(*make_request("incorrect", **fields, run=incorrect))
+    run(*make_request("register", **fields, run=make_run(origin)))
+    with pytest.raises(journal.JournalError, match="already registered"):
+        run(*make_request("register-again", **fields, run=make_run(origin)))
+    CHECK.assertEqual(len(journal.read_entries(path)), 2)
+
+
+def test_projection_rejects_changed_journal_records(run_intake):
+    run, path, _ = run_intake
+    run(*make_request())
+    entry, = journal.read_entries(path)
+    entry["receipt"]["reason"] = "edited after intake"
+    with closing(sqlite3.connect(path)) as connection:
+        with connection:
+            connection.execute(
+                "UPDATE intake SET packet = ? WHERE sequence = 1", (journal.canonical_json(entry),)
+            )
+    with pytest.raises(journal.JournalError, match="history digest"):
+        events.chronicle_atoms(journal.read_entries(path))

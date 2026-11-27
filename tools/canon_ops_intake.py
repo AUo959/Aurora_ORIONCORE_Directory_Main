@@ -15,9 +15,11 @@ from tempfile import TemporaryDirectory
 from typing import Optional
 
 if __package__:
+    from . import canon_ops_events as events
     from . import canon_ops_journal as journal
     from .canon_ops_query import CONTRACT_COMMIT, CONTRACT_PATH, SOURCE_REPOSITORY, CanonRec, query
 else:
+    import canon_ops_events as events
     import canon_ops_journal as journal
     from canon_ops_query import CONTRACT_COMMIT, CONTRACT_PATH, SOURCE_REPOSITORY, CanonRec, query
 
@@ -227,7 +229,10 @@ def submit(
             "target_updates": updates,
         }
 
-    return journal.append_request(journal_path, policy["canon_commit"], request, evaluate)
+    return journal.append_request(
+        journal_path, policy["canon_commit"], request, evaluate,
+        project_events=lambda history: events.link_outcome(request, gates, history),
+    )
 
 
 def _unique_object(pairs: list[tuple[str, object]]) -> dict:
@@ -277,6 +282,7 @@ def main() -> int:
     status = commands.add_parser("status")
     status.add_argument("request_id")
     commands.add_parser("export")
+    commands.add_parser("chronicle")
     restore = commands.add_parser("rebuild")
     restore.add_argument("export", type=Path)
     restore.add_argument("--expected-tip", required=True)
@@ -290,6 +296,10 @@ def main() -> int:
                 raise IntakeError("Request is absent from the staging journal")
         elif args.action == "export":
             payload = journal.read_entries(args.journal)
+        elif args.action == "chronicle":
+            for entry in events.chronicle_atoms(journal.read_entries(args.journal)):
+                print(journal.canonical_json(entry))
+            return 0
         else:
             entries = json.loads(args.export.read_text(encoding="utf-8"))
             journal.rebuild(args.journal, entries, expected_tip=args.expected_tip)

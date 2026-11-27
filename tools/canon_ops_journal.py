@@ -99,6 +99,8 @@ def append_request(
     snapshot: str,
     request: dict,
     evaluate: Callable[[dict[tuple[str, str, str], dict]], dict],
+    *,
+    project_events: Callable[[list[dict]], list[dict]] | None = None,
 ) -> dict:
     """Serialize disposition and optimistic state checks in a single write transaction."""
     with _write_transaction(path) as connection:
@@ -116,6 +118,8 @@ def append_request(
             return {"status": "DUPLICATE", "receipt": receipt}
 
         receipt = evaluate(staging_state(history))
+        if receipt["status"] == "ACCEPTED" and project_events is not None:
+            receipt["events"] = project_events(history)
         entry = encode_entry(len(history) + 1, previous, request, receipt)
         _insert(connection, entry)
         return {"status": receipt["status"], "receipt": receipt}
@@ -124,16 +128,26 @@ def append_request(
 def read_entries(path: Path) -> list[dict]:
     """Read the request and receipt artifacts in journal order."""
     with closing(_connection(path, writable=False)) as connection:
-        return _entry_rows(connection)
+        history = _entry_rows(connection)
+    if history:
+        _verify_history(history, history[0]["receipt"]["canon_commit"])
+    return history
 
 
 def read_request(path: Path, request_id: str) -> dict | None:
     """Fetch the request and receipt associated with an exact request ID."""
     with closing(_connection(path, writable=False)) as connection:
         match = connection.execute(
-            "SELECT packet FROM intake WHERE request_id = ?", (request_id,)
+            "SELECT sequence, packet FROM intake WHERE request_id = ?", (request_id,)
         ).fetchone()
-        return json.loads(match[0]) if match else None
+    if not match:
+        return None
+    sequence, packet = match
+    entry = json.loads(packet)
+    _validate_packet(entry, sequence, entry["previous_sha256"])
+    if entry["request"]["request_id"] != request_id:
+        raise JournalError("Stored request ID differs from the journal index")
+    return entry
 
 
 def _validate_packet(entry: dict, index: int, previous: str | None) -> str:
