@@ -2,15 +2,17 @@
 
 from __future__ import annotations
 
+import json
+from collections.abc import Callable
 from datetime import datetime, timezone
 
 from jsonschema import Draft202012Validator, FormatChecker
 
 if __package__:
-    from .canon_ops_journal import JournalError
+    from .canon_ops_journal import JournalError, digest
     from .station_chronicle import atom
 else:
-    from canon_ops_journal import JournalError
+    from canon_ops_journal import JournalError, digest
     from station_chronicle import atom
 
 
@@ -76,8 +78,40 @@ def _run_time(run: dict) -> str:
     return completed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
-def _run_registration(request: dict, gates: dict, history: list[dict], origins: list[dict]) -> dict:
-    run = gates["deterministic_run"].get("run")
+def _native_reference(
+    request: dict, gate: dict, run: dict, origin: dict, read_artifact: Callable[[dict], bytes],
+) -> dict:
+    reference = gate["run_receipt"]
+    if reference not in request["sources"]:
+        raise JournalError("/gate_receipts/deterministic_run: native receipt must be a verified request source")
+    native = json.loads(read_artifact(reference))
+    semantic = native.pop("semantic_sha256")
+    if digest(native) != semantic:
+        raise JournalError("/gate_receipts/deterministic_run: native receipt fails its semantic digest")
+    actual = {
+        "run_id": native["run_id"], "origin_request_id": native["origin_request_id"],
+        "origin_content_hash": native["origin_content_hash"], "engine_commit": native["seed"]["engine"]["commit"],
+        "seed": native["seed"]["parameters"]["seed"], "event_count": native["layer_gate"]["event_count"],
+    }
+    approval = native["approval"]
+    matches = (
+        actual == {key: run[key] for key in actual}, native["layer"] == "L2",
+        native["canonical_promotion"] is False, native["layer_gate"]["status"] == "PASS",
+        approval["actor"] == origin["approving_actor"],
+    )
+    if not all(matches):
+        raise JournalError("/gate_receipts/deterministic_run: native receipt differs from the approved run")
+    return {
+        "source": reference, "semantic_sha256": semantic,
+        "participants": list(dict.fromkeys((approval["actor"], approval["relay"]))),
+    }
+
+
+def _run_registration(
+    request: dict, gate: dict, history: list[dict], origins: list[dict],
+    read_artifact: Callable[[dict], bytes],
+) -> dict:
+    run = gate.get("run")
     error = next(RUN_VALIDATOR.iter_errors(run), None)
     if error:
         field = "/".join(map(str, error.absolute_path))
@@ -89,13 +123,18 @@ def _run_registration(request: dict, gates: dict, history: list[dict], origins: 
     if links != {parent} or len(origins) != len(request["targets"]):
         raise JournalError("/gate_receipts/deterministic_run: origin must match all staged targets")
     _check_run_id(run["run_id"], history)
-    return {
+    gate_reference = request["gate_receipts"]["deterministic_run"]["artifact"]
+    registration = {
         "kind": "gumas_run",
         "run": run,
         "completed_at": _run_time(run),
         "origin": origins[0],
-        "source": request["gate_receipts"]["deterministic_run"]["artifact"],
+        "source": gate_reference,
     }
+    if "run_receipt" in gate:
+        registration.update(_native_reference(request, gate, run, origins[0], read_artifact))
+        registration["registration_gate"] = gate_reference
+    return registration
 
 
 def _check_run_id(run_id: str, history: list[dict]) -> None:
@@ -105,14 +144,16 @@ def _check_run_id(run_id: str, history: list[dict]) -> None:
                 raise JournalError("GUMAS run ID is already registered")
 
 
-def link_outcome(request: dict, gates: dict, history: list[dict]) -> list[dict]:
+def link_outcome(
+    request: dict, gates: dict, history: list[dict], read_artifact: Callable[[dict], bytes],
+) -> list[dict]:
     """Link sources to the prior approved staging revision when one is recorded."""
     if request["operation"] != "attach_outcome":
         return []
     origins = _outcome_origins(request, history)
     run_receipt = gates.get("deterministic_run", {})
     if request["execution_mode"] == "deterministic_simulation" and "run" in run_receipt:
-        return [_run_registration(request, gates, history, origins)]
+        return [_run_registration(request, run_receipt, history, origins, read_artifact)]
     return [{
         "kind": "outcome_attachment",
         "origins": origins,
@@ -131,7 +172,7 @@ def _run_atom(event: dict) -> dict:
     return atom(
         event["completed_at"], "STAGING", "simulation", "gumas_run_registered",
         f"Registered GUMAS run {run['run_id']} with {run['event_count']} events.",
-        [event["origin"]["approving_actor"]], source, event,
+        event.get("participants", [event["origin"]["approving_actor"]]), source, event,
     )
 
 

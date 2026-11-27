@@ -265,6 +265,48 @@ def make_run(origin):
     }
 
 
+def test_chronicle_registration_binds_native_receipt_identity(run_intake):
+    run_intake_request, path, _ = run_intake
+    origin, blobs = make_request(layer="L2")
+    run_intake_request(origin, blobs)
+    summary = make_run(origin)
+    native = {
+        "run_id": summary["run_id"], "origin_request_id": origin["request_id"],
+        "origin_content_hash": origin["content_hash"], "layer": "L2", "canonical_promotion": False,
+        "approval": {"actor": origin["approval"]["authority"], "relay": origin["submitter"]["relay_id"]},
+        "layer_gate": {"status": "PASS", "event_count": summary["event_count"]},
+        "seed": {"engine": {"commit": summary["engine_commit"]}, "parameters": {"seed": summary["seed"]}},
+    }
+    semantic = journal.digest(native)
+    raw = journal.canonical_json({**native, "semantic_sha256": semantic}).encode()
+    source = {**ORIGIN, "layer": "L2", "path": "native-receipt.json", "sha256": hashlib.sha256(raw).hexdigest()}
+    revision = {"revision": origin["content_hash"], "certainty": "STAGING"}
+
+    def attachment(run_summary):
+        request, artifacts = make_request(
+            "register-native", operation="attach_outcome", revision=revision,
+            layer="L2", run=run_summary, sources=[source],
+        )
+        artifacts[source["path"]] = raw
+        artifact = request["gate_receipts"]["deterministic_run"]["artifact"]
+        gate = gate_payload("deterministic_run", bridge.subject_digest(request), request["approval"], run_summary, None)
+        gate["run_receipt"] = source
+        data = journal.canonical_json(gate).encode()
+        artifacts[artifact["path"]] = data
+        artifact["sha256"] = hashlib.sha256(data).hexdigest()
+        request["content_hash"] = journal.request_digest(request)
+        return request, artifacts
+
+    with pytest.raises(journal.JournalError, match="differs from the approved run"):
+        run_intake_request(*attachment({**summary, "seed": summary["seed"] + 1}))
+    accepted = run_intake_request(*attachment(summary))
+    event, = accepted["receipt"]["events"]
+    CHECK.assertEqual(event["source"], source)
+    CHECK.assertEqual(event["semantic_sha256"], semantic)
+    chronicle, = events.chronicle_atoms(journal.read_entries(path))
+    CHECK.assertIn(f"#sha256={source['sha256']}", journal.canonical_json(chronicle))
+
+
 def test_gumas_registration_and_chronicle_projection_rebuild_from_the_journal(run_intake, tmp_path):
     run, path, _ = run_intake
     origin, blobs = make_request(layer="L2")
