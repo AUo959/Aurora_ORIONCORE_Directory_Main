@@ -694,6 +694,26 @@
       "evidence_refs": [
         "reports/analysis/plugin_constellation_landing_20260930.md"
       ]
+    },
+    {
+      "id": "friday-action-brief-end-to-end-acceptance",
+      "status": "waiting",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "watch",
+      "repo": "root",
+      "description": "Verify the real Friday scheduled Action Brief, fresh-chat recovery and rendered follow-up activation; component checks have passed but these gates remain unverified.",
+      "created_at": "2026-10-02T02:04:21Z",
+      "updated_at": "2026-10-02T02:04:21Z",
+      "review_at": "2026-10-02T13:00:00Z",
+      "next_action": "Observe the actual automation dispatch and validate its generated brief against saved context and live evidence; test fresh-chat recovery and follow-up activation through supported UI.",
+      "definition_of_done": "Actual scheduler run identified with timestamp; generated brief validates source completeness, stable IDs, retained decisions, completed-task recognition and unresolved-action carry-forward; fresh-chat recovery and real follow-up activation evidenced.",
+      "approval_required": false,
+      "waiting_on": "date",
+      "trigger": "Friday 2026-10-02 09:00 America/New_York scheduled dispatch; owner may initiate Run now when available.",
+      "evidence_refs": [
+        "reports/analysis/friday_action_brief_acceptance_20261001.md"
+      ]
     }
   ],
   "completed_tasks": [
@@ -927,6 +947,16 @@
       "evidence_refs": [
         "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
         "reports/ci_consolidation_2026-11-09.md"
+      ]
+    },
+    {
+      "id": "friday-action-brief-component-acceptance-20261001",
+      "status": "completed",
+      "completed_at": "2026-10-02T02:04:21Z",
+      "platform": "codex",
+      "detail": "Component acceptance verified: live root source snapshots, disk continuity reload, controlled transport failure preserving context, and real canonical add/start/complete lifecycle. Receipt: reports/analysis/friday_action_brief_acceptance_20261001.md. Scheduler dispatch, fresh-chat model recovery, UI click and Claude execution remain unverified.",
+      "evidence_refs": [
+        "reports/analysis/friday_action_brief_acceptance_20261001.md"
       ]
     }
   ],
