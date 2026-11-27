@@ -74,15 +74,15 @@ Handoff instruction for Claude Code:
 
 ### Detached Codex Worktrees
 
-- `/Users/travisstreets/.codex/worktrees/5c2f/Aurora_ORIONCORE_Directory_Main`:
+- `~/.codex/worktrees/5c2f/Aurora_ORIONCORE_Directory_Main`:
   clean detached worktree at `c8a24b3`.
-- `/Users/travisstreets/.codex/worktrees/61ad/Aurora_ORIONCORE_Directory_Main`:
+- `~/.codex/worktrees/61ad/Aurora_ORIONCORE_Directory_Main`:
   clean detached worktree at `853add6`.
-- `/Users/travisstreets/.codex/worktrees/77bb/Aurora_ORIONCORE_Directory_Main`:
+- `~/.codex/worktrees/77bb/Aurora_ORIONCORE_Directory_Main`:
   dirty detached devkit worktree; its useful code/test changes were ported into
   root `main` in this consolidation. Treat remaining generated-report diff
   there as redundant after this root commit lands.
-- `/Users/travisstreets/.codex/worktrees/7e25/Aurora_ORIONCORE_Directory_Main`:
+- `~/.codex/worktrees/7e25/Aurora_ORIONCORE_Directory_Main`:
   clean detached worktree at `f9bb5da`.
 
 Handoff instruction for Claude Code:

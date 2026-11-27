@@ -12,7 +12,7 @@ Run the bundled runner from the target workspace:
 
 ```bash
 PYTHONPYCACHEPREFIX=/tmp \
-python3 /Users/travisstreets/.codex/skills/gumas-simulation-engine/scripts/run_gumas_advanced.py \
+python3 ~/.codex/skills/gumas-simulation-engine/scripts/run_gumas_advanced.py \
   --workspace "$PWD" --turns 20 --seed 42
 ```
 
@@ -41,4 +41,4 @@ Return:
 
 - Upstream: direct simulation execution and comparison.
 - Downstream: `aurora-narrative-tone-governor` when prose artifacts need governance and `aurora-exec-brief-pipeline` when outputs must become leadership-ready.
-- Preset reference: `/Users/travisstreets/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
+- Preset reference: `~/.codex/skills/aurora-governance-orchestrator/references/workflow_presets.md`.
