@@ -36,12 +36,16 @@ python tools/canon_ops_intake.py --journal /path/to/staging.db submit request.js
   --canonrec /path/to/CanonRec --policy policy.json --principal l1-relay \
   --repository Org/Source=/path/to/Source
 python tools/canon_ops_intake.py --journal /path/to/staging.db status request-id
+python tools/canon_ops_intake.py --journal /path/to/staging.db provenance L1 forecast forecast-id \
+  --canonrec /path/to/CanonRec --policy policy.json
 python tools/canon_ops_intake.py --journal /path/to/staging.db export > intake.json
 python tools/canon_ops_intake.py --journal /path/to/restored.db rebuild intake.json \
   --expected-tip "$trusted_terminal_sha256"
 ```
 
 Keep the journal outside the source checkouts. Use one journal per pinned CanonRec data snapshot. Save the exported history and its terminal digest in trusted custody. Reconstruction validates sequence, content identity, and the trusted terminal digest before publishing a new database.
+
+`provenance` verifies the journal and returns the pinned CanonRec record, when present, and the ordered request and receipt entries for the exact layer, kind, and record ID. Entries retain the expected revisions, gate and source references, advisory results, and outcome links. Its policy must pin the same CanonRec commit as the journal. Use the full `export` to verify a terminal digest or rebuild the journal.
 
 ## Outcomes and Chronicle input
 

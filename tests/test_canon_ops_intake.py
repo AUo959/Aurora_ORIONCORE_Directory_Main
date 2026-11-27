@@ -187,6 +187,33 @@ def test_pinned_existing_record_blocks_create_with_null_expected_state(run_intak
     CHECK.assertEqual(journal.read_entries(path), [])
 
 
+def test_record_provenance_joins_pinned_source_and_exact_target_history(run_intake, monkeypatch):
+    run, path, policy = run_intake
+    source = {"sha256": "d" * 64, "commit": policy["canon_commit"], "path": "canon/L1/forecast.json"}
+    pinned = {"record_id": "forecast-a", "certainty": "STAGING", "source": source}
+    monkeypatch.setattr(bridge, "_snapshot_records", lambda *_: lambda _: pinned)
+    target = {"layer": "L1", "kind": "forecast", "record_id": "forecast-a"}
+    create, create_blobs = make_request(
+        revision={"revision": source["sha256"], "certainty": "STAGING"},
+    )
+    run(create, create_blobs, resolve_target=lambda _: create["targets"][0]["expected_state"])
+    run(*make_request("other-layer", layer="L2"))
+    amend = make_request(
+        "amend", operation="amend_staging_claim",
+        revision={"revision": create["content_hash"], "certainty": "STAGING"},
+    )
+    run(*amend)
+
+    repo = query.CanonRec(path.parent)
+    result = bridge.record_provenance(repo, policy, path, target)
+    CHECK.assertEqual(result["record"], pinned)
+    CHECK.assertEqual([entry["sequence"] for entry in result["entries"]], [1, 3])
+    CHECK.assertEqual(result["entries"][1]["request"]["targets"][0]["expected_state"]["revision"],
+                      create["content_hash"])
+    with pytest.raises(bridge.IntakeError, match="different CanonRec snapshot"):
+        bridge.record_provenance(repo, {**policy, "canon_commit": "b" * 40}, path, target)
+
+
 def test_journal_rebuild_checks_history_and_reconstructs_state(run_intake, tmp_path):
     run, path, _ = run_intake
     run(*make_request())

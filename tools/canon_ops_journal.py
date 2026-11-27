@@ -57,6 +57,15 @@ def staging_state(entries: Iterable[dict]) -> dict[tuple[str, str, str], dict]:
     return state
 
 
+def entries_for_target(entries: Iterable[dict], target: dict) -> list[dict]:
+    """Select the ordered history for an exact layer, kind, and record ID."""
+    identity = _record_key(target)
+    return [
+        entry for entry in entries
+        if any(_record_key(item) == identity for item in entry["request"]["targets"])
+    ]
+
+
 def _connection(path: Path, *, writable: bool) -> sqlite3.Connection:
     if writable:
         path.touch(mode=0o600, exist_ok=True)

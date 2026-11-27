@@ -156,8 +156,7 @@ def _gate_disposition(request: dict, approval: str, gates: dict) -> tuple[str, s
     return "ACCEPTED", "approved for local staging"
 
 
-def snapshot_targets(repo: CanonRec, policy: dict) -> TargetLookup:
-    """Resolve target revisions against the pinned CanonRec snapshot and scope."""
+def _snapshot_records(repo: CanonRec, policy: dict) -> TargetLookup:
     snapshot = policy["canon_commit"]
     _require_commit(repo, snapshot)
 
@@ -176,12 +175,35 @@ def snapshot_targets(repo: CanonRec, policy: dict) -> TargetLookup:
         matches = [record for collection in response["results"].values() for record in collection]
         if len(matches) > 1 or response["next_after"] is not None:
             raise IntakeError(f"/targets: ambiguous pinned record {target['record_id']}")
-        if not matches:
+        return matches[0] if matches else None
+
+    return lookup
+
+
+def snapshot_targets(repo: CanonRec, policy: dict) -> TargetLookup:
+    """Resolve target revisions against the pinned CanonRec snapshot and scope."""
+    read_record = _snapshot_records(repo, policy)
+
+    def lookup(target: dict) -> dict | None:
+        record = read_record(target)
+        if record is None:
             return None
-        record = matches[0]
         return {"revision": record["source"]["sha256"], "certainty": record["certainty"]}
 
     return lookup
+
+
+def record_provenance(repo: CanonRec, policy: dict, path: Path, target: dict) -> dict:
+    """Read the pinned record and its verified staging history for one target."""
+    snapshot = policy["canon_commit"]
+    history = journal.read_entries(path)
+    if history and history[0]["receipt"]["canon_commit"] != snapshot:
+        raise IntakeError("The journal uses a different CanonRec snapshot")
+    record = _snapshot_records(repo, policy)(target)
+    entries = journal.entries_for_target(history, target)
+    if record is None and not entries:
+        raise IntakeError("Record is absent from the pinned snapshot and staging journal")
+    return {"target": target, "canon_commit": snapshot, "record": record, "entries": entries}
 
 
 def _target_updates(
@@ -268,17 +290,21 @@ def _submission(args: argparse.Namespace) -> dict:
     if any(args.journal.resolve().is_relative_to(repo.path.resolve()) for repo in repositories.values()):
         raise IntakeError("The staging journal must be outside the source checkouts")
     policy = _object(args.policy)
+
+    def advise(profile: dict, name: str) -> dict:
+        return reconciliation.pinned_advisor(canonrec)(profile, name)
+
     with pinned_validator(canonrec) as validate:
         return submit(
             _object(args.request), policy=policy, principal=args.principal, journal_path=args.journal,
             validate=validate, read_artifact=read_artifact_from(repositories),
             resolve_target=snapshot_targets(canonrec, policy),
-            advisor=lambda profile, name: reconciliation.pinned_advisor(canonrec)(profile, name),
+            advisor=advise,
         )
 
 
 def main() -> int:
-    """Run a staging intake, status, export, or reconstruction command."""
+    """Run a staging intake, journal read, or reconstruction command."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--journal", type=Path, required=True)
     commands = parser.add_subparsers(dest="action", required=True)
@@ -290,6 +316,12 @@ def main() -> int:
     submission.add_argument("--repository", action="append", default=[], metavar="OWNER/REPO=PATH")
     status = commands.add_parser("status")
     status.add_argument("request_id")
+    provenance = commands.add_parser("provenance")
+    provenance.add_argument("layer", choices=("L1", "L2", "L3"))
+    provenance.add_argument("kind")
+    provenance.add_argument("record_id")
+    provenance.add_argument("--canonrec", type=Path, required=True)
+    provenance.add_argument("--policy", type=Path, required=True)
     commands.add_parser("export")
     commands.add_parser("chronicle")
     restore = commands.add_parser("rebuild")
@@ -303,6 +335,11 @@ def main() -> int:
             payload = journal.read_request(args.journal, args.request_id)
             if payload is None:
                 raise IntakeError("Request is absent from the staging journal")
+        elif args.action == "provenance":
+            payload = record_provenance(
+                CanonRec(args.canonrec), _object(args.policy), args.journal,
+                {"layer": args.layer, "kind": args.kind, "record_id": args.record_id},
+            )
         elif args.action == "export":
             payload = journal.read_entries(args.journal)
         elif args.action == "chronicle":
