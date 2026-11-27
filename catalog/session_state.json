@@ -1088,6 +1088,24 @@
       "evidence_refs": [
         "https://github.com/AUo959/Aurora_ORIONCORE_Directory_Main/issues/95"
       ]
+    },
+    {
+      "id": "plugin-constellation-peer-review-20260930",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "claude-code",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Complementary review of CloudBank plug-in consolidation #1622; debt rd-20260930-plugin-constellation.",
+      "created_at": "2026-10-01T01:31:56Z",
+      "updated_at": "2026-10-01T01:31:56Z",
+      "review_at": "2026-10-07T01:30:00Z",
+      "next_action": "Independently verify the four-file diff, source hashes, identity boundaries and canon checks; record a peer-review receipt.",
+      "definition_of_done": "Complementary receipt recorded and debt cleared or concrete findings assigned.",
+      "approval_required": false,
+      "evidence_refs": [
+        "reports/analysis/plugin_constellation_landing_20260930.md"
+      ]
     }
   ],
   "completed_tasks": [
