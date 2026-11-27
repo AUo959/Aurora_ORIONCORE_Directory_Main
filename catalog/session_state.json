@@ -1131,6 +1131,42 @@
       "evidence_refs": [
         "reports/analysis/friday_action_brief_acceptance_20261001.md"
       ]
+    },
+    {
+      "id": "gh-cloudbank-1711",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1711] GUMAS Unified tracker: remaining Codacy complexity findings (23 medium Complexity, 2 minor markdown on #1735; largest Universe.validate CC 147, then time_alignment, bindings, external_evidence, kernel.advance_to) and outstanding root/CanonRec provenance checks. Stack merged; migrated 2026-11-27 (issue closed with pointer). Full body, 2 comments and 12 linked PR head SHAs in catalog/backlog_archive/cloudbank-1711.md.",
+      "created_at": "2026-11-27T21:10:17Z",
+      "updated_at": "2026-11-27T21:10:17Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1711.md and refactor the listed high-complexity GUMAS Unified functions into small tested helpers, preserving deterministic SHA256 state/receipt ancestry.",
+      "definition_of_done": "Codacy shows no new Complexity findings for the GUMAS Unified code on main and the root/CanonRec provenance checks in catalog/backlog_archive/cloudbank-1711.md are recorded, with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1711"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1711-zero-capacity",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "decision",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1711] Open design question: disrupt_route('corridor_a', 0, ...) is accepted but Universe.validate (model.py:271) rejects zero capacity ('capacity_units_per_window must be a positive integer'). Choose: allow zero capacity (relaxes the P0 positive-capacity invariant) or have disrupt_route reject 0 up front. P0 split-plan characterization tests pin today's behavior. Context in catalog/backlog_archive/cloudbank-1711.md (comment 2).",
+      "created_at": "2026-11-27T21:10:17Z",
+      "updated_at": "2026-11-27T21:10:17Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Run the conflict check against the P0 invariant spec, pick the option that survives it, and land the matching code plus updated characterization tests.",
+      "definition_of_done": "disrupt_route and Universe.validate agree on zero capacity on main, with a test covering the chosen behavior.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1711"
+      ]
     }
   ],
   "completed_tasks": [
@@ -1388,7 +1424,7 @@
       "detail": "Read-only investigation complete: #1083 closed in July; August authority retires legacy snapshot, but Git-age workflow and API/docs retain old semantics. Preflight ready at tick0/no run; 20 tests pass; snapshot bytes unchanged. Evidence and repair plan recorded; implementation waits for CI review."
     }
   ],
-  "last_updated": "2026-11-27T19:04:46Z",
+  "last_updated": "2026-11-27T21:10:39Z",
   "last_platform": "claude-code",
   "last_session_summary": "Migrated 24 open backlog issues (19 CloudBank, 5 ORIONCORE) into task_queue as gh-* items, with verbatim archives in catalog/backlog_archive/, ahead of closing the GitHub issues during zero-open triage.",
   "tool_versions": {
@@ -1413,6 +1449,30 @@
     "pip-audit": "2.10.1 (isolated scratch audit helper; application environments unchanged)"
   },
   "recent_commits": [
+    {
+      "sha": "c2905b4",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "feat(ui): add offline Aurora Operator Atlas interactive preview (#101)"
+    },
+    {
+      "sha": "187d2ca",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "docs(review): GUMAS Unified P0-P6 stack peer review receipt (#129)"
+    },
+    {
+      "sha": "0657af7",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "feat(ui): add private read-only MCP tool for ChatGPT Secure Tunnel (#99)"
+    },
+    {
+      "sha": "8348338",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "chore(health): sync published spine and close verified housekeeping gaps (#91)"
+    },
     {
       "sha": "e6f06b2",
       "date": "2026-11-27",
@@ -1448,30 +1508,6 @@
       "date": "2026-11-27",
       "platform": "claude-code",
       "summary": "feat(ace): persistent Aurora worlds and contextual simulation completion (#85)"
-    },
-    {
-      "sha": "5855632",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "feat(recovery): read-only Drive provenance intake, private by default (#100)"
-    },
-    {
-      "sha": "c0c295b",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "feat(project-space): adopt VPC registry bridge (#80)"
-    },
-    {
-      "sha": "51c93f4",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "feat(ui): introduce read-only Aurora Intelligent UI snapshot bridge (#97)"
-    },
-    {
-      "sha": "861e1b7",
-      "date": "2026-11-27",
-      "platform": "claude-code",
-      "summary": "chore(state): refresh session_state mechanical fields"
     }
   ],
   "security_events": [
@@ -1488,7 +1524,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "e6f06b2d09d59954b667041c4a61494c50307208",
+    "main_sha": "c2905b4e7162ef202b4e5c3fbc32ee8433d60171",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
