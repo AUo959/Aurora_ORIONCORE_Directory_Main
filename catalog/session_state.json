@@ -1392,7 +1392,7 @@
       ]
     }
   ],
-  "last_updated": "2026-11-27T17:15:29Z",
+  "last_updated": "2026-11-27T18:56:28Z",
   "last_platform": "claude-code",
   "last_session_summary": "Migrated 24 open backlog issues (19 CloudBank, 5 ORIONCORE) into task_queue as gh-* items, with verbatim archives in catalog/backlog_archive/, ahead of closing the GitHub issues during zero-open triage.",
   "tool_versions": {
@@ -1418,6 +1418,42 @@
   },
   "recent_commits": [
     {
+      "sha": "56d6a7d",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "Merge main into codex/ace-persistent-continuity-20260906"
+    },
+    {
+      "sha": "6ad76ce",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "chore(queue): migrate 24 open GitHub backlog issues into task_queue with verbatim archives (#128)"
+    },
+    {
+      "sha": "c7b1d0c",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "docs: investigate legacy simulation freshness and authority mismatch (#115)"
+    },
+    {
+      "sha": "9cd35f1",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "docs(automation): record Friday brief acceptance and remaining gates (#93)"
+    },
+    {
+      "sha": "57d6d15",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "docs: record Aurora plug-in consolidation review and provenance (#92)"
+    },
+    {
+      "sha": "c529056",
+      "date": "2026-11-27",
+      "platform": "claude-code",
+      "summary": "Merge main into codex/ace-persistent-continuity-20260906"
+    },
+    {
       "sha": "9a0f618",
       "date": "2026-11-27",
       "platform": "codex",
@@ -1440,42 +1476,6 @@
       "date": "2026-11-27",
       "platform": "claude-code",
       "summary": "chore(session-state): refresh handoff anchor to current main (#127)"
-    },
-    {
-      "sha": "ef4bba4",
-      "date": "2026-11-27",
-      "platform": "codex",
-      "summary": "Execute approved GUMAS seeds with native run receipts (#125)"
-    },
-    {
-      "sha": "626bcc5",
-      "date": "2026-11-27",
-      "platform": "codex",
-      "summary": "Make native GUMAS replay artifacts reproducible (#124)"
-    },
-    {
-      "sha": "90c6ec5",
-      "date": "2026-11-27",
-      "platform": "codex",
-      "summary": "Complete pinned CanonRec reconciliation and record provenance (#123)"
-    },
-    {
-      "sha": "3e08039",
-      "date": "2026-11-27",
-      "platform": "codex",
-      "summary": "Register staged outcomes and project Chronicle input (#122)"
-    },
-    {
-      "sha": "8802b91",
-      "date": "2026-11-24",
-      "platform": "codex",
-      "summary": "Journal authorized CanonRec staging requests (#121)"
-    },
-    {
-      "sha": "9d41c12",
-      "date": "2026-11-24",
-      "platform": "codex",
-      "summary": "Query pinned CanonRec records through Canon Operations (#120)"
     }
   ],
   "security_events": [
@@ -1492,7 +1492,7 @@
   ],
   "pending_for_next_session": [],
   "known_state": {
-    "main_sha": "9a0f618",
+    "main_sha": "56d6a7d84a345445f3a45a8873edfe7f076d36eb",
     "local_branches": [
       "codex/charforge-capsule-implementation-2026-06-14",
       "codex/root-control-plane-local-2026-03-25",
