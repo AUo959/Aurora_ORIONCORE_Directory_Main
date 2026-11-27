@@ -129,7 +129,7 @@ valid finding; "this is bureaucracy" without that analysis is not.
 ## Rule 7 — Environment Caveat
 
 As of 2026-07-01 this workspace lives on local disk at
-`/Users/travisstreets/dev/Aurora_ORIONCORE_Directory_Main`. It previously
+`~/dev/Aurora_ORIONCORE_Directory_Main`. It previously
 lived in iCloud Drive (`com~apple~CloudDocs`), where file eviction
 placeholders and sync drift corrupted Git behavior; that copy still exists
 but is inert (git disabled via renamed `.git/HEAD`, guard notices in place —
