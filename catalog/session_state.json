@@ -1106,6 +1106,46 @@
       "evidence_refs": [
         "reports/analysis/plugin_constellation_landing_20260930.md"
       ]
+    },
+    {
+      "id": "repair-legacy-simulation-authority-surfaces",
+      "status": "waiting",
+      "priority": "high",
+      "assigned_to": "codex",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Align historical simulation-state consumers and CI with the retired snapshot authority; preserve historical bytes and keep live-run liveness separate.",
+      "created_at": "2026-11-10T03:38:46Z",
+      "updated_at": "2026-11-10T03:38:46Z",
+      "review_at": "2026-11-12T00:00:00Z",
+      "next_action": "Use reports/analysis/simulation_state_freshness_investigation.md: correct API/runtime availability labeling and maintained onboarding/docs; replace historical Git-age gate with substantive authority/containment validation after CI-domain review clears. Preserve snapshot, counters, run state and CanonRec; independently review implementation.",
+      "definition_of_done": "Historical bytes unchanged; APIs distinguish provenance from unbound/live run; retirement/preflight/containment regressions are blocking; old snapshot age alone passes; current docs/API compatibility and hosted PR/main checks verified with root pins synchronized.",
+      "approval_required": false,
+      "waiting_on": "artifact",
+      "trigger": "Independent Claude CI review receipt clears rd-20261109-ci-consolidation, permitting the replacement workflow review without stacking CI debt.",
+      "evidence_refs": [
+        "reports/analysis/simulation_state_freshness_investigation.md"
+      ]
+    },
+    {
+      "id": "friday-action-brief-end-to-end-acceptance",
+      "status": "waiting",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "watch",
+      "repo": "root",
+      "description": "Verify the real Friday scheduled Action Brief, fresh-chat recovery and rendered follow-up activation; component checks have passed but these gates remain unverified.",
+      "created_at": "2026-10-02T02:04:21Z",
+      "updated_at": "2026-10-02T02:04:21Z",
+      "review_at": "2026-10-02T13:00:00Z",
+      "next_action": "Observe the actual automation dispatch and validate its generated brief against saved context and live evidence; test fresh-chat recovery and follow-up activation through supported UI.",
+      "definition_of_done": "Actual scheduler run identified with timestamp; generated brief validates source completeness, stable IDs, retained decisions, completed-task recognition and unresolved-action carry-forward; fresh-chat recovery and real follow-up activation evidenced.",
+      "approval_required": false,
+      "waiting_on": "date",
+      "trigger": "Friday 2026-10-02 09:00 America/New_York scheduled dispatch; owner may initiate Run now when available.",
+      "evidence_refs": [
+        "reports/analysis/friday_action_brief_acceptance_20261001.md"
+      ]
     }
   ],
   "completed_tasks": [
@@ -1302,6 +1342,13 @@
       "detail": "Implemented by Claude in #1699, independently approved by Codex and merged b68c4717; root pins synchronized in #114."
     },
     {
+      "id": "investigate-simulation-freshness-gap",
+      "status": "completed",
+      "completed_at": "2026-11-10T03:38:46Z",
+      "platform": "codex",
+      "detail": "Read-only investigation complete: #1083 closed in July; August authority retires legacy snapshot, but Git-age workflow and API/docs retain old semantics. Preflight ready at tick0/no run; 20 tests pass; snapshot bytes unchanged. Evidence and repair plan recorded; implementation waits for CI review."
+    },
+    {
       "id": "review-git-common-dir-scrub-20261110",
       "status": "completed",
       "completed_at": "2026-11-10T03:39:45Z",
@@ -1332,6 +1379,16 @@
       "evidence_refs": [
         "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1693",
         "reports/ci_consolidation_2026-11-09.md"
+      ]
+    },
+    {
+      "id": "friday-action-brief-component-acceptance-20261001",
+      "status": "completed",
+      "completed_at": "2026-10-02T02:04:21Z",
+      "platform": "codex",
+      "detail": "Component acceptance verified: live root source snapshots, disk continuity reload, controlled transport failure preserving context, and real canonical add/start/complete lifecycle. Receipt: reports/analysis/friday_action_brief_acceptance_20261001.md. Scheduler dispatch, fresh-chat model recovery, UI click and Claude execution remain unverified.",
+      "evidence_refs": [
+        "reports/analysis/friday_action_brief_acceptance_20261001.md"
       ]
     }
   ],
