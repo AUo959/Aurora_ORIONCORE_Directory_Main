@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Run generated L2 scenario seed fixtures end-to-end through the L1 harness.
+"""
+Run generated L2 scenario seed fixtures end-to-end through the L1 harness.
 
 Each fixture in ``catalog/generated_watch_scenarios/`` (see
 ``tools/l2_scenario_fixture_generator.py``) runs through ``tools/hour_aboard.py``
@@ -32,7 +33,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import subprocess
+import subprocess  # nosec B404 - runs this repo's own harness with fixed argv
 import sys
 import tempfile
 from datetime import datetime, timezone
@@ -97,8 +98,8 @@ def run_harness(fixture_id: str, out_dir: Path, mesh: bool) -> subprocess.Comple
     ]
     if not mesh:
         argv.append("--no-mesh")
-    return subprocess.run(  # noqa: S603 - our own harness with fixed argv
-        argv, capture_output=True, text=True, cwd=ROOT, env=env, timeout=900
+    return subprocess.run(  # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit.dangerous-subprocess-use-audit # noqa: S603 # nosec B603
+        argv, capture_output=True, text=True, cwd=ROOT, env=env, timeout=900, check=False
     )
 
 
@@ -122,30 +123,73 @@ def _read(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 
 
-def evaluate(fixture: dict[str, Any], out_dir: Path, proc: subprocess.CompletedProcess[str],
-             init: dict[str, Any]) -> dict[str, Any]:
-    sim = _read(out_dir / "sim_raw.json")
-    ops = _read(out_dir / "companion_ops.json")
-    souls = _read(out_dir / "souls_accounting.json")
-    summary = sim.get("summary", {})
-    verdict = ops.get("l3_receipt", {}).get("narrative_audit_verdict")
-    task_ids = [t["id"] for t in fixture["tasks"]]
-    initial = init.get("initial_state", {})
-    checks = {
-        "harness_exit_ok": proc.returncode == 0,
-        "all_tasks_registered": sorted(sim.get("task_names", {})) == sorted(task_ids),
-        "work_recorded": float(summary.get("total_spent", 0)) > 0,
-        "souls_accounting_complete": bool(souls.get("complete")),
+def _initializer_matches(fixture: dict[str, Any], initial: dict[str, Any]) -> bool:
+    expected = {
+        "source_card_id": fixture["source_scenario_seed"]["card_id"],
+        "seed": fixture["seed"],
+        "ticks": fixture["ticks"],
+        "anchor_seed": fixture["anchor_seed"],
+    }
+    return all(initial.get(key) == value for key, value in expected.items())
+
+
+def _checks(fixture: dict[str, Any], run: dict[str, Any], init: dict[str, Any]) -> dict[str, bool]:
+    sim, verdict = run["sim"], run["verdict"]
+    return {
+        "harness_exit_ok": run["returncode"] == 0,
+        "all_tasks_registered": sorted(sim.get("task_names", {})) == sorted(t["id"] for t in fixture["tasks"]),
+        "work_recorded": float(sim.get("summary", {}).get("total_spent", 0)) > 0,
+        "souls_accounting_complete": bool(run["souls"].get("complete")),
         "l3_verdict_valid": verdict in VALID_VERDICTS,
         "ord_dispatch_receipt": bool(sim.get("ord_dispatch", {}).get("receipt_sha256")),
         "initializer_accepted": bool(init.get("accepted")),
-        "initializer_matches_fixture": (
-            initial.get("source_card_id") == fixture["source_scenario_seed"]["card_id"]
-            and initial.get("seed") == fixture["seed"]
-            and initial.get("ticks") == fixture["ticks"]
-            and initial.get("anchor_seed") == fixture["anchor_seed"]
-        ),
+        "initializer_matches_fixture": _initializer_matches(fixture, init.get("initial_state", {})),
     }
+
+
+def _observations(fixture: dict[str, Any], run: dict[str, Any]) -> dict[str, Any]:
+    sim = run["sim"]
+    summary = sim.get("summary", {})
+    return {
+        "seed": fixture["seed"],
+        "ticks": summary.get("ticks"),
+        "characters_engaged": summary.get("characters_used"),
+        "tasks_completed": len(summary.get("completed_ids", [])),
+        "task_count": len(fixture["tasks"]),
+        "hours_worked": summary.get("total_spent"),
+        "emergent_events": len(sim.get("events", [])),
+        "l3_verdict": run["verdict"],
+        "souls_logged": run["souls"].get("crew_logged"),
+        "ord_drones": sim.get("ord_dispatch", {}).get("drones_required", []),
+    }
+
+
+def _initializer_summary(init: dict[str, Any]) -> dict[str, Any]:
+    vector = init.get("initial_state", {}).get("initial_condition_vector", {})
+    return {
+        "accepted": bool(init.get("accepted")),
+        "error": init.get("error"),
+        "pressure_axes": vector.get("pressure", []),
+        "role_count": len(vector.get("roles", [])),
+        "knob_count": len(vector.get("knobs", {})),
+    }
+
+
+def _stderr_tail(proc: subprocess.CompletedProcess[str]) -> str | None:
+    if proc.returncode == 0 or not proc.stderr.strip():
+        return None
+    return proc.stderr.strip().splitlines()[-1][:240]
+
+
+def evaluate(fixture: dict[str, Any], out_dir: Path, proc: subprocess.CompletedProcess[str],
+             init: dict[str, Any]) -> dict[str, Any]:
+    run = {
+        "returncode": proc.returncode,
+        "sim": _read(out_dir / "sim_raw.json"),
+        "souls": _read(out_dir / "souls_accounting.json"),
+        "verdict": _read(out_dir / "companion_ops.json").get("l3_receipt", {}).get("narrative_audit_verdict"),
+    }
+    checks = _checks(fixture, run, init)
     overlay = fixture["scenario_seed_overlay"]
     return {
         "card_id": fixture["source_scenario_seed"]["card_id"],
@@ -153,28 +197,11 @@ def evaluate(fixture: dict[str, Any], out_dir: Path, proc: subprocess.CompletedP
         "fixture_id": fixture["name"],
         "status": "pass" if all(checks.values()) else "fail",
         "checks": checks,
-        "observations": {
-            "seed": fixture["seed"],
-            "ticks": summary.get("ticks"),
-            "characters_engaged": summary.get("characters_used"),
-            "tasks_completed": len(summary.get("completed_ids", [])),
-            "task_count": len(task_ids),
-            "hours_worked": summary.get("total_spent"),
-            "emergent_events": len(sim.get("events", [])),
-            "l3_verdict": verdict,
-            "souls_logged": souls.get("crew_logged"),
-            "ord_drones": sim.get("ord_dispatch", {}).get("drones_required", []),
-        },
-        "initializer": {
-            "accepted": bool(init.get("accepted")),
-            "error": init.get("error"),
-            "pressure_axes": initial.get("initial_condition_vector", {}).get("pressure", []),
-            "role_count": len(initial.get("initial_condition_vector", {}).get("roles", [])),
-            "knob_count": len(initial.get("initial_condition_vector", {}).get("knobs", {})),
-        },
+        "observations": _observations(fixture, run),
+        "initializer": _initializer_summary(init),
         "end_state_categories_open": list(overlay["expected_end_state_categories"]),
         "end_state_handling": overlay["end_state_handling"],
-        "harness_stderr_tail": proc.stderr.strip().splitlines()[-1][:240] if proc.returncode and proc.stderr else None,
+        "harness_stderr_tail": _stderr_tail(proc),
     }
 
 
@@ -216,6 +243,18 @@ def suite_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def render_line(result: dict[str, Any]) -> str:
+    obs = result["observations"]
+    mark = "✅" if result["status"] == "pass" else "❌"
+    failed = [k for k, ok in result["checks"].items() if not ok]
+    initializer = "ok" if result["initializer"]["accepted"] else "REJECTED"
+    tail = f" — failed: {', '.join(failed)}" if failed else ""
+    return (
+        f"{mark} {result['card_id']} {result['handle']}: tasks {obs['tasks_completed']}/{obs['task_count']}, "
+        f"events {obs['emergent_events']}, L3 {obs['l3_verdict']}, initializer {initializer}{tail}"
+    )
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     group = parser.add_mutually_exclusive_group(required=True)
@@ -246,15 +285,7 @@ def main(argv: list[str] | None = None) -> int:
     for row in rows:
         result = run_fixture(row, run_root, args.mesh)
         results.append(result)
-        obs = result["observations"]
-        mark = "✅" if result["status"] == "pass" else "❌"
-        failed = [k for k, ok in result["checks"].items() if not ok]
-        print(
-            f"{mark} {result['card_id']} {result['handle']}: tasks {obs['tasks_completed']}/{obs['task_count']}, "
-            f"events {obs['emergent_events']}, L3 {obs['l3_verdict']}, "
-            f"initializer {'ok' if result['initializer']['accepted'] else 'REJECTED'}"
-            + (f" — failed: {', '.join(failed)}" if failed else "")
-        )
+        print(render_line(result))
     summary = suite_summary(results)
     if args.all and not args.no_summary:
         write_json(SUITE_SUMMARY, summary)

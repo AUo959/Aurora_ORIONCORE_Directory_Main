@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Generate runnable watch-scenario fixtures from the L2 scenario seed shortlist.
+"""
+Generate runnable watch-scenario fixtures from the L2 scenario seed shortlist.
 
 Implements ``catalog/contracts/l2_scenario_fixture_generator_contract_v1.json``:
 every ``fixture_ready_shortlist`` entry in ``catalog/l2_scenario_seed_catalog.json``
@@ -142,7 +143,7 @@ def related_references(catalog: dict[str, Any], card_id: str) -> list[dict[str, 
 
 
 def unresolved_self_references(catalog: dict[str, Any], card_id: str) -> list[str]:
-    """IDs this card's own wiring links point at that resolve to no card."""
+    """Return ids that this card's own wiring links point at that resolve to no card."""
     support = catalog.get("normalized_support_structures", {})
     missing: list[str] = []
     for link in support.get("wiring_links", []):
@@ -161,6 +162,53 @@ def emission_basis(entry: dict[str, Any]) -> str:
     return "contract_candidate_emitted_by_owner_direction_2026-11-28"
 
 
+def _source_seed(entry: dict[str, Any], card: dict[str, Any]) -> dict[str, Any]:
+    card_id = str(entry["id"])
+    blueprint = entry["fixture_blueprint"]
+    return {
+        "card_id": card_id,
+        "handle": entry["handle"],
+        "catalog_ref": f"{CATALOG_REF}#/cards/{card_id}",
+        "promotion_status": card.get("promotion_status", "root_catalog_only_not_canon_or_runtime"),
+        "fixture_status": blueprint["fixture_status"],
+        "emission_basis": emission_basis(entry),
+        "score": entry.get("score"),
+        "value_lanes": list(entry.get("value_lanes", [])),
+        "lineage_provenance": uptake.lineage_provenance(card),
+    }
+
+
+def _seed_overlay(blueprint: dict[str, Any], catalog: dict[str, Any], card_id: str) -> dict[str, Any]:
+    return {
+        "objective": blueprint["objective"],
+        "opposition": blueprint["opposition"],
+        "roles": list(blueprint["roles"]),
+        "pressure": list(blueprint["pressure"]),
+        "knobs": dict(blueprint["knobs"]),
+        "ethical_hook": blueprint["ethical_hook"],
+        "expected_end_state_categories": list(blueprint["expected_end_states"]),
+        "end_state_handling": "observation categories for branch coverage; not required endings",
+        "related_references": related_references(catalog, card_id),
+    }
+
+
+def _fixture_meta(fixture_id: str) -> dict[str, Any]:
+    return {
+        "schema_version": FIXTURE_SCHEMA_VERSION,
+        "generator": "tools/l2_scenario_fixture_generator.py",
+        "generator_contract": GENERATOR_CONTRACT_REF,
+        "runner": "tools/l2_scenario_fixture_run.py",
+        "harness": "tools/hour_aboard.py",
+        "harness_scenario_arg": f"generated_watch_scenarios/{fixture_id}",
+        "boundary": {
+            "root_control_plane_only": True,
+            "writes_nested_repos": False,
+            "canonrec_promotion": "not_authorized",
+            "cloudbank_runtime_mutation": "not_authorized",
+        },
+    }
+
+
 def build_fixture(entry: dict[str, Any], card: dict[str, Any], catalog: dict[str, Any]) -> dict[str, Any]:
     blueprint = entry["fixture_blueprint"]
     card_id = str(entry["id"])
@@ -168,8 +216,6 @@ def build_fixture(entry: dict[str, Any], card: dict[str, Any], catalog: dict[str
     if missing:
         raise FixtureGenerationError(f"{card_id}: unresolved wiring reference(s) {', '.join(missing)}")
     fixture_id = str(blueprint["fixture_id"])
-    l3 = dict(blueprint["l3_audit_blueprint"])
-    provenance = uptake.lineage_provenance(card)
     fixture = {
         "name": fixture_id,
         "about": (
@@ -191,60 +237,35 @@ def build_fixture(entry: dict[str, Any], card: dict[str, Any], catalog: dict[str
             "destination": f"station://scenario_seed/{card_id.lower()}",
         },
         "companions": [{"agent": a, "role_line": line} for a, line in COMPANION_AGENTS],
-        "l3_audit": l3,
-        "source_scenario_seed": {
-            "card_id": card_id,
-            "handle": entry["handle"],
-            "catalog_ref": f"{CATALOG_REF}#/cards/{card_id}",
-            "promotion_status": card.get("promotion_status", "root_catalog_only_not_canon_or_runtime"),
-            "fixture_status": blueprint["fixture_status"],
-            "emission_basis": emission_basis(entry),
-            "score": entry.get("score"),
-            "value_lanes": list(entry.get("value_lanes", [])),
-            "lineage_provenance": provenance,
-        },
-        "scenario_seed_overlay": {
-            "objective": blueprint["objective"],
-            "opposition": blueprint["opposition"],
-            "roles": list(blueprint["roles"]),
-            "pressure": list(blueprint["pressure"]),
-            "knobs": dict(blueprint["knobs"]),
-            "ethical_hook": blueprint["ethical_hook"],
-            "expected_end_state_categories": list(blueprint["expected_end_states"]),
-            "end_state_handling": "observation categories for branch coverage; not required endings",
-            "related_references": related_references(catalog, card_id),
-        },
-        "fixture_meta": {
-            "schema_version": FIXTURE_SCHEMA_VERSION,
-            "generator": "tools/l2_scenario_fixture_generator.py",
-            "generator_contract": GENERATOR_CONTRACT_REF,
-            "runner": "tools/l2_scenario_fixture_run.py",
-            "harness": "tools/hour_aboard.py",
-            "harness_scenario_arg": f"generated_watch_scenarios/{fixture_id}",
-            "boundary": {
-                "root_control_plane_only": True,
-                "writes_nested_repos": False,
-                "canonrec_promotion": "not_authorized",
-                "cloudbank_runtime_mutation": "not_authorized",
-            },
-        },
+        "l3_audit": dict(blueprint["l3_audit_blueprint"]),
+        "source_scenario_seed": _source_seed(entry, card),
+        "scenario_seed_overlay": _seed_overlay(blueprint, catalog, card_id),
+        "fixture_meta": _fixture_meta(fixture_id),
     }
     lint_fixture(fixture)
     return fixture
 
 
+def _missing(required: list[str], present: dict[str, Any]) -> list[str]:
+    return [k for k in required if k not in present]
+
+
+def _lint_task(task: dict[str, Any], shape: dict[str, Any], name: str) -> None:
+    lacking = _missing(shape["task_required_keys"], task)
+    if lacking:
+        raise FixtureGenerationError(f"{name}: task {task.get('id')} missing {lacking}")
+    if not str(task["source"]).startswith(CATALOG_REF):
+        raise FixtureGenerationError(f"{name}: task {task['id']} source must point at {CATALOG_REF}")
+
+
 def _lint_shape(fixture: dict[str, Any], name: str) -> None:
     shape = load_json(DEFAULT_GENERATOR_CONTRACT)["candidate_fixture_shape"]
-    missing = [k for k in shape["required_top_level_keys"] if k not in fixture]
+    missing = _missing(shape["required_top_level_keys"], fixture)
     if missing:
         raise FixtureGenerationError(f"{name}: missing top-level key(s) {missing}")
     for task in fixture["tasks"]:
-        lacking = [k for k in shape["task_required_keys"] if k not in task]
-        if lacking:
-            raise FixtureGenerationError(f"{name}: task {task.get('id')} missing {lacking}")
-        if not str(task["source"]).startswith(CATALOG_REF):
-            raise FixtureGenerationError(f"{name}: task {task['id']} source must point at {CATALOG_REF}")
-    lacking = [k for k in shape["source_scenario_seed_required_keys"] if k not in fixture["source_scenario_seed"]]
+        _lint_task(task, shape, name)
+    lacking = _missing(shape["source_scenario_seed_required_keys"], fixture["source_scenario_seed"])
     if lacking:
         raise FixtureGenerationError(f"{name}: source_scenario_seed missing {lacking}")
     if len(fixture["tasks"]) < 4:
@@ -345,6 +366,13 @@ def render_receipt(manifest: dict[str, Any], date: str) -> str:
     return "\n".join(lines)
 
 
+def _write_if_changed(path: Path, text: str) -> bool:
+    if path.exists() and path.read_text(encoding="utf-8") == text:
+        return False
+    path.write_text(text, encoding="utf-8")
+    return True
+
+
 def write_outputs(
     fixtures: dict[str, dict[str, Any]],
     manifest: dict[str, Any] | None,
@@ -352,22 +380,12 @@ def write_outputs(
     receipt_dir: Path | None,
     date: str,
 ) -> list[Path]:
-    written = []
     out_dir.mkdir(parents=True, exist_ok=True)
-    for rel, fixture in fixtures.items():
-        path = out_dir / Path(rel).name
-        text = _dump(fixture)
-        if not path.exists() or path.read_text(encoding="utf-8") != text:
-            path.write_text(text, encoding="utf-8")
-            written.append(path)
-    if manifest is None:  # partial (--ids) run: leave the full-shortlist manifest alone
-        return written
-    mpath = out_dir / MANIFEST_NAME
-    text = _dump(manifest)
-    if not mpath.exists() or mpath.read_text(encoding="utf-8") != text:
-        mpath.write_text(text, encoding="utf-8")
-        written.append(mpath)
-    if receipt_dir is not None and written:
+    targets = [(out_dir / Path(rel).name, _dump(fixture)) for rel, fixture in fixtures.items()]
+    if manifest is not None:  # partial (--ids) runs leave the full-shortlist manifest alone
+        targets.append((out_dir / MANIFEST_NAME, _dump(manifest)))
+    written = [path for path, text in targets if _write_if_changed(path, text)]
+    if manifest is not None and receipt_dir is not None and written:
         receipt_dir.mkdir(parents=True, exist_ok=True)
         rpath = receipt_dir / f"l2_scenario_fixture_generation__{date}.md"
         rpath.write_text(render_receipt(manifest, date), encoding="utf-8")
