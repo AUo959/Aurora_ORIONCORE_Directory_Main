@@ -271,7 +271,7 @@ def _list(manifest: dict[str, Any]) -> int:
 
 
 def _run_root(arg: str | None) -> Path:
-    root = Path(arg) if arg else DEFAULT_RUN_ROOT / datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    root = Path(arg).resolve() if arg else DEFAULT_RUN_ROOT / datetime.now(timezone.utc).strftime("%Y-%m-%d")
     root.mkdir(parents=True, exist_ok=True)
     return root
 

@@ -31,10 +31,10 @@ TOOLS = {
 }
 
 
-def _run_tool(tool: str, *args: str) -> subprocess.CompletedProcess[str]:
+def _run_tool(tool: str, *args: str, cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
     argv = [sys.executable, str(TOOLS[tool]), *args]
     return subprocess.run(  # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit.dangerous-subprocess-use-audit # noqa: S603 # nosec B603
-        argv, capture_output=True, text=True, cwd=ROOT, timeout=900, check=False
+        argv, capture_output=True, text=True, cwd=cwd, timeout=900, check=False
     )
 
 
@@ -180,3 +180,12 @@ def test_fixture_runs_are_deterministic_and_leave_station_clock_alone(tmp_path):
         observations.append(receipt["observations"])
     CHECK.assertEqual(observations[0], observations[1])
     CHECK.assertEqual(state.read_text() if state.exists() else None, before)
+
+
+@pytest.mark.simulation
+@pytest.mark.slow
+def test_relative_run_root_from_outside_repo(tmp_path):
+    """A relative --run-root resolves against the caller's cwd, not the repo."""
+    result = _run_tool("runner", "--fixture", "SCN-0903", "--run-root", "runs", cwd=tmp_path)
+    CHECK.assertEqual(result.returncode, 0, result.stdout[-800:] + result.stderr[-800:])
+    CHECK.assertTrue(next((tmp_path / "runs").glob("*/fixture_run_receipt.json"), None))
