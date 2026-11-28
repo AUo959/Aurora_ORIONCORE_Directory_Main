@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Compile an L2 scenario seed overlay into station-sim dynamics.
+"""
+Compile an L2 scenario seed overlay into station-sim dynamics.
 
 A generated watch fixture (``catalog/generated_watch_scenarios/``) carries a
 ``scenario_seed_overlay``: roles, pressure axes, and knobs. Without this module
@@ -60,7 +61,8 @@ LEXICON: Dict[str, Dict[str, float]] = {
         "strategic": 0.55, "medium": 0.5, "moderate": 0.45, "low": 0.25, "abundant": 0.1,
     },
     "opacity": {
-        "hidden": 0.85, "secret": 0.85, "tabooed": 0.75, "controlled": 0.75, "sanitized": 0.7,
+        "hidden": 0.85, "secret": 0.85,  # nosec B105 - lexicon word, not a credential
+        "tabooed": 0.75, "controlled": 0.75, "sanitized": 0.7,
         "rumor": 0.7, "need-to-know": 0.6, "mixed": 0.5, "cute": 0.6, "forced": 0.45,
         "disclosure": 0.4, "plural": 0.3, "traceable": 0.25, "public": 0.2, "open": 0.2,
     },
@@ -195,17 +197,13 @@ def role_tasks(card_id: str, overlay: Dict[str, Any], tasks: List[Dict[str, Any]
     return out
 
 
-def compile_plan(fixture: Dict[str, Any], seed: int) -> Dict[str, Any]:
-    """Build the dynamics plan for ``fixture`` at ``seed``. Pure and deterministic."""
-    overlay = fixture["scenario_seed_overlay"]
-    card_id = fixture["source_scenario_seed"]["card_id"]
-    rng = _rng(card_id, seed, "knobs")
-
+def _score_knobs(knob_map: Dict[str, str], rng: random.Random) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, float]]:
+    """Score every knob; return (per-knob detail, dominant solver, channel means)."""
     knobs: Dict[str, Dict[str, Any]] = {}
     solver: Dict[str, Any] = {"options": [], "selected": "", "coercive": False}
     buckets: Dict[str, List[float]] = {}
-    for name in sorted(overlay.get("knobs", {})):
-        raw = overlay["knobs"][name]
+    for name in sorted(knob_map):
+        raw = knob_map[name]
         channel = channel_for(name)
         if channel is None:
             solver = pick_solver(raw, rng)
@@ -214,21 +212,26 @@ def compile_plan(fixture: Dict[str, Any], seed: int) -> Dict[str, Any]:
         scored = score_knob(raw, channel, rng)
         knobs[name] = {"raw": raw, "channel": channel, **scored}
         buckets.setdefault(channel, []).append(scored["intensity"])
-
     channels = {c: round(sum(v) / len(v), 4) for c, v in sorted(buckets.items())}
-    volatility = round(sum(channels.values()) / len(channels), 4) if channels else NEUTRAL
-    fragility = channels.get("fragility", NEUTRAL)
-    severity = channels.get("rigidity", NEUTRAL)
-    shock_rate = _clamp(0.12 + 0.45 * volatility + (0.08 if solver["coercive"] else 0.0), 0.05, 0.85)
-    axes = [
-        {
-            "axis": axis,
-            # Later axes in the card are secondary pressures; they fire a little less.
-            "shock_rate": round(_clamp(shock_rate * (1.0 - 0.1 * i), 0.05, 0.85), 4),
-        }
-        for i, axis in enumerate(overlay.get("pressure", []))
+    return knobs, solver, channels
+
+
+def _pressure_axes(pressure: List[str], volatility: float, coercive: bool) -> List[Dict[str, Any]]:
+    shock_rate = _clamp(0.12 + 0.45 * volatility + (0.08 if coercive else 0.0), 0.05, 0.85)
+    # Later axes in the card are secondary pressures; they fire a little less.
+    return [
+        {"axis": axis, "shock_rate": round(_clamp(shock_rate * (1.0 - 0.1 * i), 0.05, 0.85), 4)}
+        for i, axis in enumerate(pressure)
     ]
-    tasks = list(fixture.get("tasks", []))
+
+
+def compile_plan(fixture: Dict[str, Any], seed: int) -> Dict[str, Any]:
+    """Build the dynamics plan for ``fixture`` at ``seed``. Pure and deterministic."""
+    overlay = fixture["scenario_seed_overlay"]
+    card_id = fixture["source_scenario_seed"]["card_id"]
+    knobs, solver, channels = _score_knobs(overlay.get("knobs", {}), _rng(card_id, seed, "knobs"))
+    volatility = round(sum(channels.values()) / len(channels), 4) if channels else NEUTRAL
+    coercive = bool(solver["coercive"])
     return {
         "schema": SCHEMA,
         "card_id": card_id,
@@ -237,27 +240,25 @@ def compile_plan(fixture: Dict[str, Any], seed: int) -> Dict[str, Any]:
         "channels": channels,
         "volatility": volatility,
         "dominant_solver": solver,
-        "pressure_axes": axes,
-        "absorb_rate": round(_clamp(0.75 - 0.6 * fragility, 0.1, 0.9), 4),
-        "shock_drag": round(_clamp(0.95 - 0.25 * severity, 0.6, 0.95), 4),
+        "pressure_axes": _pressure_axes(list(overlay.get("pressure", [])), volatility, coercive),
+        "absorb_rate": round(_clamp(0.75 - 0.6 * channels.get("fragility", NEUTRAL), 0.1, 0.9), 4),
+        "shock_drag": round(_clamp(0.95 - 0.25 * channels.get("rigidity", NEUTRAL), 0.6, 0.95), 4),
         "escalation": {
             "after_tag": "decision_path",
-            "shock_rate_delta": 0.15 if solver["coercive"] else 0.0,
-            "absorb_rate_delta": 0.0 if solver["coercive"] else 0.1,
+            "shock_rate_delta": 0.15 if coercive else 0.0,
+            "absorb_rate_delta": 0.0 if coercive else 0.1,
         },
         "crew_diversion_rate": round(_clamp(0.6 * channels.get("scarcity", NEUTRAL), 0.0, 0.6), 4),
-        "role_tasks": role_tasks(card_id, overlay, tasks, channels),
+        "role_tasks": role_tasks(card_id, overlay, list(fixture.get("tasks", [])), channels),
         "rng_stream": f"{card_id}:{seed}:shocks",
     }
 
 
 def apply_plan(scenario: Dict[str, Any]) -> Optional[Dict[str, Any]]:
-    """Attach a dynamics plan to a fixture scenario in place (after the hour clock ran).
-
-    Adds the role-position tasks, makes end-state branching wait on them, and
-    stores the plan under ``scenario["seed_dynamics"]``. Scenarios without a
-    ``scenario_seed_overlay`` are left untouched and ``None`` is returned.
-    """
+    """Attach a dynamics plan to a fixture scenario in place (after the hour clock ran)."""
+    # Adds the role-position tasks, makes end-state branching wait on them, and
+    # stores the plan under scenario["seed_dynamics"]. Scenarios without a
+    # scenario_seed_overlay are left untouched and None is returned.
     if not scenario.get("scenario_seed_overlay") or not scenario.get("source_scenario_seed"):
         return None
     plan = compile_plan(scenario, int(scenario["seed"]))
@@ -266,7 +267,8 @@ def apply_plan(scenario: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     for task in scenario["tasks"]:
         task = dict(task)
         if "outcome" in task.get("tags", []):
-            task["depends_on"] = list(task.get("depends_on", [])) + [r for r in role_ids if r not in task.get("depends_on", [])]
+            deps = list(task.get("depends_on", []))
+            task["depends_on"] = deps + [r for r in role_ids if r not in deps]
         tasks.append(task)
     scenario["tasks"] = tasks + plan["role_tasks"]
     scenario["seed_dynamics"] = plan
@@ -287,49 +289,68 @@ def _axis_outcomes(plan: Dict[str, Any], run: Dict[str, Any], completed: set) ->
     return out
 
 
+def _axis_pressures(plan: Dict[str, Any], run: Dict[str, Any], completed: set) -> List[Dict[str, Any]]:
+    out = []
+    for axis, counts in _axis_outcomes(plan, run, completed).items():
+        if counts["open"]:
+            out.append({"label": f"{axis} pressure left {counts['open']} stalled task(s) open at watch close",
+                        "direction": "against", "strength": round(min(1.0, 0.4 + 0.2 * counts["open"]), 2)})
+        else:
+            out.append({"label": f"{axis} pressure carried by the watch "
+                                 f"({counts['absorbed']} absorbed, {counts['recovered']} stall(s) recovered)",
+                        "direction": "toward", "strength": 0.6})
+    return out
+
+
+def _ethics_pressure(tasks: List[Dict[str, Any]], completed: set) -> List[Dict[str, Any]]:
+    ethics = _tagged(tasks, "ethics")
+    if not ethics:
+        return []
+    if all(t in completed for t in ethics):
+        return [{"label": "duty to the charter", "direction": "toward", "strength": 0.9}]
+    return [{"label": "ethics gate left open at watch close", "direction": "against", "strength": 0.9}]
+
+
+def _role_pressure(plan: Dict[str, Any], completed: set) -> List[Dict[str, Any]]:
+    role_ids = [t["id"] for t in plan.get("role_tasks", [])]
+    unheld = [r for r in role_ids if r not in completed]
+    if not unheld:
+        return []
+    return [{"label": f"{len(unheld)}/{len(role_ids)} seed role positions unrepresented at closeout",
+             "direction": "against", "strength": round(min(1.0, 0.3 + 0.1 * len(unheld)), 2)}]
+
+
+def _solver_pressure(solver: Dict[str, Any]) -> List[Dict[str, Any]]:
+    if not solver.get("coercive"):
+        return []
+    return [{"label": f"consent strained by {solver['selected']} as dominant solver",
+             "direction": "against", "strength": 0.7}]
+
+
 def derive_l3_audit(audit: Dict[str, Any], plan: Optional[Dict[str, Any]], sim: Dict[str, Any],
                     tasks: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """L3 audit payload whose pressures come from what the run actually did.
-
-    * an axis whose stall left a task open at watch close pulls *against* the closeout;
-    * an axis the station absorbed, recovered from, or never landed pulls *toward* it;
-    * the ethics gate closing gives the charter-duty pressure, missing it pulls against;
-    * seed roles whose positions were never held leave stakeholders unrepresented;
-    * a coercive dominant solver strains consent.
-    """
+    """Return an L3 audit payload whose pressures come from what the run actually did."""
+    # * an axis whose stall left a task open at watch close pulls against the closeout;
+    # * an axis the station absorbed, recovered from, or never landed pulls toward it;
+    # * the ethics gate closing gives the charter-duty pressure, missing it pulls against;
+    # * seed roles whose positions were never held leave stakeholders unrepresented;
+    # * a coercive dominant solver strains consent.
     if not plan:
         return dict(audit)
     run = sim.get("seed_dynamics", {})
     completed = set(sim.get("summary", {}).get("completed_ids", []))
-    pressures: List[Dict[str, Any]] = []
-    for axis, counts in _axis_outcomes(plan, run, completed).items():
-        if counts["open"]:
-            label = f"{axis} pressure left {counts['open']} stalled task(s) open at watch close"
-            pressures.append({"label": label, "direction": "against",
-                              "strength": round(min(1.0, 0.4 + 0.2 * counts["open"]), 2)})
-        else:
-            label = (f"{axis} pressure carried by the watch "
-                     f"({counts['absorbed']} absorbed, {counts['recovered']} stall(s) recovered)")
-            pressures.append({"label": label, "direction": "toward", "strength": 0.6})
-    ethics = _tagged(tasks, "ethics")
-    if ethics and all(t in completed for t in ethics):
-        pressures.append({"label": "duty to the charter", "direction": "toward", "strength": 0.9})
-    elif ethics:
-        pressures.append({"label": "ethics gate left open at watch close", "direction": "against", "strength": 0.9})
-    role_ids = [t["id"] for t in plan.get("role_tasks", [])]
-    unheld = [r for r in role_ids if r not in completed]
-    if unheld:
-        pressures.append({"label": f"{len(unheld)}/{len(role_ids)} seed role positions unrepresented at closeout",
-                          "direction": "against", "strength": round(min(1.0, 0.3 + 0.1 * len(unheld)), 2)})
     solver = plan.get("dominant_solver", {})
-    if solver.get("coercive"):
-        pressures.append({"label": f"consent strained by {solver['selected']} as dominant solver",
-                          "direction": "against", "strength": 0.7})
-    total = len(tasks)
+    pressures = (
+        _axis_pressures(plan, run, completed)
+        + _ethics_pressure(tasks, completed)
+        + _role_pressure(plan, completed)
+        + _solver_pressure(solver)
+    )
     stalls = sum(1 for s in run.get("shocks", []) if not s["absorbed"])
+    closed = len(completed & {t["id"] for t in tasks})
     action = (
         f"{audit['action']}; dominant solver {solver.get('selected') or 'unset'}; "
-        f"{len(completed & {t['id'] for t in tasks})}/{total} tasks closed under {stalls} pressure stall(s)"
+        f"{closed}/{len(tasks)} tasks closed under {stalls} pressure stall(s)"
     )
     notes = [
         f"Seed {plan['seed']} sampled volatility {plan['volatility']} across {len(plan['channels'])} channels.",
