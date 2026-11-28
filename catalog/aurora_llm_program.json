@@ -1,0 +1,82 @@
+{
+  "program_id": "aurora_llm_program",
+  "version": "1.0",
+  "status": "active",
+  "canon_status": "non_canonical_program_registry",
+  "charter": "docs/AURORA_LLM_PROGRAM_CHARTER_v1.md",
+  "steward": {
+    "skill": "skills/aurora-llm-steward/SKILL.md",
+    "claude_code_agent": ".claude/agents/aurora-llm-steward.md",
+    "status_tool": "tools/aurora_llm_program_status.py"
+  },
+  "governing_rule": "Models reason; Aurora governs.",
+  "tracks": [
+    {
+      "id": "T1",
+      "name": "Model routing and catalog",
+      "summary": "Provider LLMs used by Aurora runtimes today: catalog, role routing, evals, cost and drift telemetry.",
+      "primary_repo": "aurora-cloudbank-symbolic",
+      "surfaces": [
+        "modules/ai_core/unified_ai_interface.py",
+        "scripts/validate_model_catalog.py",
+        ".github/workflows/model-catalog-validation.yml",
+        "tests/test_model_catalog_freshness.py",
+        "docs/MODEL_CATALOG_VERIFICATION_2026-11-07.md"
+      ],
+      "task_ids": ["gh-orioncore-90", "gh-orioncore-95"]
+    },
+    {
+      "id": "T2",
+      "name": "Aurora State Model (native learned model)",
+      "summary": "Governed episode factory, then a small specialized model of simulated world and belief state.",
+      "primary_repo": "Aurora_ORIONCORE_Directory_Main",
+      "surfaces": [
+        "catalog/contracts/aurora_state_model_contract_v0_1.json",
+        "catalog/schemas/aurora_state_episode_v1.schema.json",
+        "catalog/schemas/aurora_epistemic_trace_v1.schema.json",
+        "catalog/schemas/aurora_dataset_manifest_v1.schema.json",
+        "catalog/schemas/aurora_teacher_sufficiency_report_v1.schema.json",
+        "docs/AURORA_STATE_MODEL_WHITE_PAPER_v0_1.md",
+        "docs/AURORA_STATE_MODEL_SYSTEM_SPEC_v0_1.md",
+        "docs/AURORA_STATE_MODEL_IMPLEMENTATION_PLAN_v0_1.md",
+        "tests/test_aurora_state_model_contract.py"
+      ],
+      "task_ids": ["aurora-llm-asm-root-contract-review", "aurora-llm-asm-adapter-discovery"]
+    },
+    {
+      "id": "T3",
+      "name": "Native learner experiment program",
+      "summary": "Baseline, passive RiverCycle telemetry, and the learner design gate. Feeds T2 and must not fork its authority.",
+      "primary_repo": "aurora-cloudbank-symbolic",
+      "surfaces": [
+        "catalog/backlog_archive/cloudbank-1466.md",
+        "catalog/backlog_archive/cloudbank-1467.md",
+        "catalog/backlog_archive/cloudbank-1468.md"
+      ],
+      "task_ids": ["gh-cloudbank-1466", "gh-cloudbank-1467", "gh-cloudbank-1468"]
+    },
+    {
+      "id": "T4",
+      "name": "LLM-facing runtime surfaces",
+      "summary": "Consumers of T1: narrative generation, RAG chat, prompt safety, token budgets, ACE character continuity, NeMo inference.",
+      "primary_repo": "aurora-cloudbank-symbolic",
+      "surfaces": [
+        "modules/narrative_river/prompt_contract.py",
+        "modules/ai_core/rag_chat.py",
+        "modules/ai_core/prompt_safety.py",
+        "modules/ai_core/token_budget.py",
+        "services/nemo_service/",
+        "docs/AURORA_ACE_SANDBOX.md (root)"
+      ],
+      "task_ids": ["ace-next-scope"]
+    }
+  ],
+  "owner_gates": [
+    "Merging or committing to main in any repo.",
+    "Authorizing any model training run (contract first_slice.model_training_authorized stays false until then).",
+    "Public release of any dataset or checkpoint (implementation plan D5).",
+    "Licensing of training sources and derivative artifacts.",
+    "Paid provider spend beyond the existing weekly catalog check."
+  ],
+  "catalog_max_claim_age_days": 90
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aurora LLM Steward"
+  short_description: "Run the Aurora LLM program: status, next gated step, routed work, recorded evidence."
+  default_prompt: "Use $aurora-llm-steward to read the Aurora LLM program status with tools/aurora_llm_program_status.py, pick the next unblocked step from docs/AURORA_LLM_PROGRAM_CHARTER_v1.md, and either do it or route it, without authorizing training, deployment, release, or spend."

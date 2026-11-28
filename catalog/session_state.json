@@ -1167,6 +1167,43 @@
       "evidence_refs": [
         "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1711"
       ]
+    },
+    {
+      "id": "aurora-llm-asm-root-contract-review",
+      "status": "ready",
+      "priority": "high",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "Aurora_ORIONCORE_Directory_Main",
+      "description": "Aurora LLM program T2, ASM adoption step 1 (review_root_contract): independent review of the Aurora State Model design package (contract, 4 schemas, fixtures, white paper, spec, implementation plan) per docs/AURORA_PEER_REVIEW_PROTOCOL_v1.md. Charter: docs/AURORA_LLM_PROGRAM_CHARTER_v1.md.",
+      "created_at": "2026-11-28T02:07:03Z",
+      "updated_at": "2026-11-28T02:07:03Z",
+      "review_at": "2026-12-05T00:00:00Z",
+      "next_action": "Review the design package against the spec gates G0-G5 and the #1468 learner constraints; record a peer-review receipt under reports/analysis/peer_reviews/ and set the root adoption_status from proposal_committed to reviewed (or record concrete findings).",
+      "definition_of_done": "Peer-review receipt committed; contract repository_roles.Aurora_ORIONCORE_Directory_Main.adoption_status updated or findings assigned as queue items.",
+      "approval_required": false,
+      "evidence_refs": [
+        "catalog/contracts/aurora_state_model_contract_v0_1.json",
+        "docs/AURORA_STATE_MODEL_IMPLEMENTATION_PLAN_v0_1.md"
+      ]
+    },
+    {
+      "id": "aurora-llm-asm-adapter-discovery",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "Aurora LLM program T2, ASM-002 (GUMAS state adapter) and ASM-003 (QSFE epistemic export) as READ-ONLY adapter discovery in CloudBank, plus process-routed resolution of implementation-plan decisions D1-D3 (dataset home, world-state boundary, belief-trace granularity). No CloudBank code changes in this item.",
+      "created_at": "2026-11-28T02:07:03Z",
+      "updated_at": "2026-11-28T02:07:03Z",
+      "review_at": "2026-12-12T00:00:00Z",
+      "next_action": "Inventory the GUMAS world-state surface and the QSFE belief surface in CloudBank, map each to the root episode/epistemic-trace schemas field by field, and record gaps in a discovery receipt under reports/analysis/.",
+      "definition_of_done": "Discovery receipt committed with a field map for both adapters and a recorded decision for D1-D3 that cites the implementation-plan recommendation it adopts or rejects.",
+      "approval_required": false,
+      "evidence_refs": [
+        "docs/AURORA_STATE_MODEL_IMPLEMENTATION_PLAN_v0_1.md"
+      ]
     }
   ],
   "completed_tasks": [
@@ -1424,7 +1461,7 @@
       "detail": "Read-only investigation complete: #1083 closed in July; August authority retires legacy snapshot, but Git-age workflow and API/docs retain old semantics. Preflight ready at tick0/no run; 20 tests pass; snapshot bytes unchanged. Evidence and repair plan recorded; implementation waits for CI review."
     }
   ],
-  "last_updated": "2026-11-28T01:03:23Z",
+  "last_updated": "2026-11-28T02:07:03Z",
   "last_platform": "claude-code",
   "last_session_summary": "Built runnable fixtures for all 25 L2 scenario seed shortlist cards: generator (tools/l2_scenario_fixture_generator.py, --check drift gate), runner (tools/l2_scenario_fixture_run.py: hour_aboard on an isolated clock + CloudBank scenario_seed_initializer), 25 fixtures in catalog/generated_watch_scenarios, tests/test_l2_scenario_fixtures.py. 25/25 pass end-to-end.",
   "tool_versions": {
