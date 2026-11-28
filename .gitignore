@@ -100,6 +100,8 @@
 !/archives/recovered_prototypes/
 # Byte-preserved historical test outputs with a provenance manifest.
 !/archives/historical_simulation_outputs/
+# Byte-preserved recovered records (local-only originals) with a recovery record.
+!/archives/recovered_records/
 /intake/*
 !/intake/.gitkeep
 !/intake/README.md
