@@ -1,9 +1,7 @@
-"""
-Seed dynamics: L2 scenario seed roles, pressures and knobs drive the station sim.
+"""Seed dynamics: L2 scenario seed roles, pressures and knobs drive the station sim."""
 
-These are CloudBank-independent unit tests (they run on the 3.9 subset too).
-The end-to-end suite checks live in tests/test_l2_scenario_fixtures.py.
-"""
+# CloudBank-independent unit tests (they run on the 3.9 subset too). The
+# end-to-end suite checks live in tests/test_l2_scenario_fixtures.py.
 
 from __future__ import annotations
 

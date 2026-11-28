@@ -1,36 +1,33 @@
 #!/usr/bin/env python3
-"""
-Compile an L2 scenario seed overlay into station-sim dynamics.
-
-A generated watch fixture (``catalog/generated_watch_scenarios/``) carries a
-``scenario_seed_overlay``: roles, pressure axes, and knobs. Without this module
-``tools/hour_aboard.py`` ignored all three, so every fixture ran the same five
-task steps and every L3 audit came back ``supported``. This module turns the
-overlay into a deterministic *dynamics plan* that the harness feeds the
-CloudBank station sim:
-
-* **Knobs** are scored into six pressure channels (scarcity, opacity,
-  fragility, rigidity, imbalance, constraint). A range knob (``weak->totalizing``)
-  is sampled at a seed-chosen point along the range, and the dominant-solver
-  knob (``bureaucracy | violence | wealth``) picks one solver per seed. That is
-  the seed's ``knob_sweep_or_sensitivity_run`` freedom.
-* **Pressure axes** become per-hour pressure shocks. A shock either lands on an
-  open task and stalls it for that hour, or the station's institutions absorb
-  it. Coercive solvers escalate shocks once the decision path closes; other
-  solvers raise absorption.
-* **Roles** become role-position tasks the crew must hold before end-state
-  branching can close.
-* **Scarcity** diverts a share of the crew each hour to scarcity response.
-
-After the run, :func:`derive_l3_audit` turns what actually happened (stalls,
-absorptions, the ethics gate, the solver) into pressures for the L3 narrative
-audit, so its verdict follows the run instead of a fixed input.
-
-Everything is deterministic per ``(card_id, seed)``: all randomness comes from
-``random.Random`` seeded with a string, which does not depend on
-``PYTHONHASHSEED``. Nothing here reads or writes the station clock. Expected
-end states stay observation categories; this module never picks an ending.
-"""
+"""Compile an L2 scenario seed overlay into station-sim dynamics."""
+# A generated watch fixture (``catalog/generated_watch_scenarios/``) carries a
+# ``scenario_seed_overlay``: roles, pressure axes, and knobs. Without this module
+# ``tools/hour_aboard.py`` ignored all three, so every fixture ran the same five
+# task steps and every L3 audit came back ``supported``. This module turns the
+# overlay into a deterministic *dynamics plan* that the harness feeds the
+# CloudBank station sim:
+#
+# * **Knobs** are scored into six pressure channels (scarcity, opacity,
+#   fragility, rigidity, imbalance, constraint). A range knob (``weak->totalizing``)
+#   is sampled at a seed-chosen point along the range, and the dominant-solver
+#   knob (``bureaucracy | violence | wealth``) picks one solver per seed. That is
+#   the seed's ``knob_sweep_or_sensitivity_run`` freedom.
+# * **Pressure axes** become per-hour pressure shocks. A shock either lands on an
+#   open task and stalls it for that hour, or the station's institutions absorb
+#   it. Coercive solvers escalate shocks once the decision path closes; other
+#   solvers raise absorption.
+# * **Roles** become role-position tasks the crew must hold before end-state
+#   branching can close.
+# * **Scarcity** diverts a share of the crew each hour to scarcity response.
+#
+# After the run, :func:`derive_l3_audit` turns what actually happened (stalls,
+# absorptions, the ethics gate, the solver) into pressures for the L3 narrative
+# audit, so its verdict follows the run instead of a fixed input.
+#
+# Everything is deterministic per ``(card_id, seed)``: all randomness comes from
+# ``random.Random`` seeded with a string, which does not depend on
+# ``PYTHONHASHSEED``. Nothing here reads or writes the station clock. Expected
+# end states stay observation categories; this module never picks an ending.
 
 from __future__ import annotations
 
