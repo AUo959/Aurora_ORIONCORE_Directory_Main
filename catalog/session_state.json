@@ -1149,24 +1149,6 @@
       "evidence_refs": [
         "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1711"
       ]
-    },
-    {
-      "id": "gh-cloudbank-1711-zero-capacity",
-      "status": "ready",
-      "priority": "medium",
-      "assigned_to": "either",
-      "kind": "decision",
-      "repo": "aurora-cloudbank-symbolic-main",
-      "description": "[GitHub aurora-cloudbank-symbolic#1711] Open design question: disrupt_route('corridor_a', 0, ...) is accepted but Universe.validate (model.py:271) rejects zero capacity ('capacity_units_per_window must be a positive integer'). Choose: allow zero capacity (relaxes the P0 positive-capacity invariant) or have disrupt_route reject 0 up front. P0 split-plan characterization tests pin today's behavior. Context in catalog/backlog_archive/cloudbank-1711.md (comment 2).",
-      "created_at": "2026-11-27T21:10:17Z",
-      "updated_at": "2026-11-27T21:10:17Z",
-      "review_at": "2026-12-27T17:00:00Z",
-      "next_action": "Run the conflict check against the P0 invariant spec, pick the option that survives it, and land the matching code plus updated characterization tests.",
-      "definition_of_done": "disrupt_route and Universe.validate agree on zero capacity on main, with a test covering the chosen behavior.",
-      "approval_required": false,
-      "evidence_refs": [
-        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1711"
-      ]
     }
   ],
   "completed_tasks": [
@@ -1422,9 +1404,19 @@
       "completed_at": "2026-11-10T03:38:46Z",
       "platform": "codex",
       "detail": "Read-only investigation complete: #1083 closed in July; August authority retires legacy snapshot, but Git-age workflow and API/docs retain old semantics. Preflight ready at tick0/no run; 20 tests pass; snapshot bytes unchanged. Evidence and repair plan recorded; implementation waits for CI review."
+    },
+    {
+      "id": "gh-cloudbank-1711-zero-capacity",
+      "status": "completed",
+      "completed_at": "2026-11-28T02:08:33Z",
+      "platform": "claude-code",
+      "detail": "Resolved by aurora-cloudbank-symbolic PR #1739 (squash 4aaab54): disrupt_route refuses capacity < 1 up front; explicit close_route/reopen_route toggle Corridor.enabled (blocks cargo and signals, in-transit still arrives, capacity preserved); validate requires enabled to be bool. Positive-capacity P0 invariant kept. 201 tests pass; all five scenario outputs byte-identical.",
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1711"
+      ]
     }
   ],
-  "last_updated": "2026-11-28T01:03:23Z",
+  "last_updated": "2026-11-28T02:08:33Z",
   "last_platform": "claude-code",
   "last_session_summary": "Built runnable fixtures for all 25 L2 scenario seed shortlist cards: generator (tools/l2_scenario_fixture_generator.py, --check drift gate), runner (tools/l2_scenario_fixture_run.py: hour_aboard on an isolated clock + CloudBank scenario_seed_initializer), 25 fixtures in catalog/generated_watch_scenarios, tests/test_l2_scenario_fixtures.py. 25/25 pass end-to-end.",
   "tool_versions": {
