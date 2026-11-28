@@ -1,0 +1,198 @@
+{
+  "name": "l2_scn_0108_human_specialist_guilds_v1",
+  "about": "L2 scenario seed SCN-0108 (Human Specialist Guilds) overlaid on an Orion Station watch. A ban on certain technology forces reliance on rare human specialists who become power centers. The seed is a pressure field and initial-condition template: roles, pressure axes, and knobs shape the run; expected end states are observation categories, never required endings. Root fixture only; not canon.",
+  "seed": 108,
+  "ticks": 4,
+  "anchor_seed": "EOS_SEED_ORION",
+  "ethics_protocol": "Picard_Delta_3",
+  "full_roster": true,
+  "tasks": [
+    {
+      "id": "SCN-0108-T1",
+      "name": "Frame Human Specialist Guilds as setting-neutral Dune-derived pressure",
+      "hours": 0.5,
+      "tags": [
+        "scenario_seed",
+        "dune_lineage",
+        "abstraction",
+        "power",
+        "access",
+        "legitimacy"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0108"
+    },
+    {
+      "id": "SCN-0108-T2",
+      "name": "Map power holders, dependency points, and local agency",
+      "hours": 1.0,
+      "tags": [
+        "stakeholder_map",
+        "power",
+        "dependency",
+        "jurisdiction",
+        "exposure"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0108",
+      "depends_on": [
+        "SCN-0108-T1"
+      ]
+    },
+    {
+      "id": "SCN-0108-T3",
+      "name": "Select reform, containment, or sovereignty-preserving response path",
+      "hours": 1.0,
+      "tags": [
+        "decision_path",
+        "knobs",
+        "simulation_input"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0108",
+      "depends_on": [
+        "SCN-0108-T1"
+      ]
+    },
+    {
+      "id": "SCN-0108-T4",
+      "name": "Run Picard Delta 3 ethics gate against the lineage ethical hook",
+      "hours": 0.75,
+      "tags": [
+        "ethics",
+        "picard_delta_3",
+        "audit"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0108",
+      "depends_on": [
+        "SCN-0108-T3"
+      ]
+    },
+    {
+      "id": "SCN-0108-T5",
+      "name": "Branch expected end states into fixture assertions",
+      "hours": 0.75,
+      "tags": [
+        "outcome",
+        "assertions",
+        "fixture_ready"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0108",
+      "depends_on": [
+        "SCN-0108-T2",
+        "SCN-0108-T3",
+        "SCN-0108-T4"
+      ]
+    }
+  ],
+  "ord_mission": {
+    "mission_id": "l2_scn_0108_human_specialist_guilds_v1-ethics-gate",
+    "tool_name": "preflight_reconnaissance",
+    "risk_level": 0.45,
+    "destination": "station://scenario_seed/scn-0108"
+  },
+  "companions": [
+    {
+      "agent": "aurora",
+      "role_line": "Arbitrate the scenario-seed hour; acknowledge the ethics gate status."
+    },
+    {
+      "agent": "archy",
+      "role_line": "Archive the scenario-seed run records; acknowledge intake."
+    },
+    {
+      "agent": "oppy",
+      "role_line": "Cross-check pressure carriers against the station plot; report alignment."
+    },
+    {
+      "agent": "liora",
+      "role_line": "Read the crew wellbeing pulse under scenario pressure; report morale signal."
+    },
+    {
+      "agent": "starling_au",
+      "role_line": "Verify comms integrity for the scenario-seed run; confirm channels."
+    },
+    {
+      "agent": "riverthread_808",
+      "role_line": "Weave the run into the continuity thread (anchor EOS_SEED_ORION); confirm."
+    }
+  ],
+  "l3_audit": {
+    "question": "Does the proposed response to Human Specialist Guilds preserve agency and avoid hiding the scenario pressure?",
+    "actor": "scenario_fixture_generator",
+    "action": "produce a setting-neutral fixture candidate for SCN-0108",
+    "motive": "test Dune-derived power, dependency, and long-horizon pressure without canon promotion",
+    "knowledge": "Is safety worth hereditary monopoly and stagnation?",
+    "event_label": "L2 Dune lineage scenario seed fixture candidate: SCN-0108 Human Specialist Guilds"
+  },
+  "source_scenario_seed": {
+    "card_id": "SCN-0108",
+    "handle": "Human Specialist Guilds",
+    "catalog_ref": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0108",
+    "promotion_status": "root_catalog_only_not_canon_or_runtime",
+    "fixture_status": "ready_candidate",
+    "emission_basis": "ready_candidate_with_runtime_fixture_lane",
+    "score": null,
+    "value_lanes": [
+      "canon_engine",
+      "ethics_gate",
+      "narrative_engine",
+      "runtime_fixture"
+    ],
+    "lineage_provenance": {
+      "id": "SCN-0108",
+      "handle": "Human Specialist Guilds",
+      "source_version": "v0.2.2",
+      "source_status": "lineage_only_missing_from_v0_2_15",
+      "source_path": "projects/GUMAS_SIM_2.0/02_DEVELOPMENT/Project_Main/Project_Files_GUMAS2_0/ORION_SCENARIO_CATALOG_v0_2_2.html",
+      "original_category": "Dune-derived expansion (early lineage only)",
+      "promotion_basis": "owner_override_2026-06-19_add_if_you_can",
+      "promotion_status": "root_catalog_only_not_canon_or_runtime"
+    }
+  },
+  "scenario_seed_overlay": {
+    "objective": "Keep capability available without surrendering sovereignty.",
+    "opposition": "Guild capture, sabotage, black-market tech, succession crises.",
+    "roles": [
+      "Specialist Guild",
+      "State Patron",
+      "Rival Guild",
+      "Common Users",
+      "Dissident Technologists"
+    ],
+    "pressure": [
+      "jurisdiction",
+      "exposure"
+    ],
+    "knobs": {
+      "Power distribution": "rare",
+      "Institution strength": "totalizing",
+      "Transparency": "mixed",
+      "Mobility": "fluid",
+      "Dominant solver": "bureaucracy | ability",
+      "Scarcity": "strained",
+      "Norm enforcement": "taboo"
+    },
+    "ethical_hook": "Is safety worth hereditary monopoly and stagnation?",
+    "expected_end_state_categories": [
+      "Monopoly entrenched",
+      "Regulated access",
+      "Reform breaks taboo",
+      "Illicit tech returns",
+      "Capability collapse triggers chaos"
+    ],
+    "end_state_handling": "observation categories for branch coverage; not required endings",
+    "related_references": []
+  },
+  "fixture_meta": {
+    "schema_version": "1.0.0",
+    "generator": "tools/l2_scenario_fixture_generator.py",
+    "generator_contract": "catalog/contracts/l2_scenario_fixture_generator_contract_v1.json",
+    "runner": "tools/l2_scenario_fixture_run.py",
+    "harness": "tools/hour_aboard.py",
+    "harness_scenario_arg": "generated_watch_scenarios/l2_scn_0108_human_specialist_guilds_v1",
+    "boundary": {
+      "root_control_plane_only": true,
+      "writes_nested_repos": false,
+      "canonrec_promotion": "not_authorized",
+      "cloudbank_runtime_mutation": "not_authorized"
+    }
+  }
+}

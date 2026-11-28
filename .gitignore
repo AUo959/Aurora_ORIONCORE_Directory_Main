@@ -126,6 +126,9 @@ __pycache__/
 _entropy_quarantine/
 /reports/analysis/gitwiz/GITWIZ_*.json
 /reports/analysis/gitwiz/GITWIZ_*.md
+# L2 scenario fixture run artifacts (tools/l2_scenario_fixture_run.py); the
+# tracked evidence is reports/analysis/l2_scenario_fixture_runs_latest.json.
+/reports/scenario_fixture_runs/
 
 # Local rollback snapshots from the 2026-07 iCloud-to-dev migration.
 *.pre-icloud-sync-*.bak

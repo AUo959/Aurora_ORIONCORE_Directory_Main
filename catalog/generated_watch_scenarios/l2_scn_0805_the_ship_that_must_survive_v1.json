@@ -1,0 +1,193 @@
+{
+  "name": "l2_scn_0805_the_ship_that_must_survive_v1",
+  "about": "L2 scenario seed SCN-0805 (The Ship That Must Survive) overlaid on an Orion Station watch. A ship becomes a sealed city under pursuit or isolation. A small failure cascades through life-support and trust networks while decisions must be made with imperfect data. The seed is a pressure field and initial-condition template: roles, pressure axes, and knobs shape the run; expected end states are observation categories, never required endings. Root fixture only; not canon.",
+  "seed": 805,
+  "ticks": 4,
+  "anchor_seed": "EOS_SEED_ORION",
+  "ethics_protocol": "Picard_Delta_3",
+  "full_roster": true,
+  "tasks": [
+    {
+      "id": "SCN-0805-T1",
+      "name": "Frame The Ship That Must Survive without setting-specific lore",
+      "hours": 0.5,
+      "tags": [
+        "scenario_seed",
+        "intake",
+        "abstraction",
+        "survival",
+        "legitimacy",
+        "justice"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0805"
+    },
+    {
+      "id": "SCN-0805-T2",
+      "name": "Map role claims and pressure carriers",
+      "hours": 1.0,
+      "tags": [
+        "stakeholder_map",
+        "roles",
+        "attrition",
+        "clock"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0805",
+      "depends_on": [
+        "SCN-0805-T1"
+      ]
+    },
+    {
+      "id": "SCN-0805-T3",
+      "name": "Select a dominant solver and counter-pressure",
+      "hours": 1.0,
+      "tags": [
+        "decision_path",
+        "knobs",
+        "simulation_input"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0805",
+      "depends_on": [
+        "SCN-0805-T1"
+      ]
+    },
+    {
+      "id": "SCN-0805-T4",
+      "name": "Run Picard Delta 3 ethics gate against the ethical hook",
+      "hours": 0.75,
+      "tags": [
+        "ethics",
+        "picard_delta_3",
+        "audit"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0805",
+      "depends_on": [
+        "SCN-0805-T3"
+      ]
+    },
+    {
+      "id": "SCN-0805-T5",
+      "name": "Branch expected end states into fixture assertions",
+      "hours": 0.75,
+      "tags": [
+        "outcome",
+        "assertions",
+        "fixture_ready"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0805",
+      "depends_on": [
+        "SCN-0805-T2",
+        "SCN-0805-T3",
+        "SCN-0805-T4"
+      ]
+    }
+  ],
+  "ord_mission": {
+    "mission_id": "l2_scn_0805_the_ship_that_must_survive_v1-ethics-gate",
+    "tool_name": "preflight_reconnaissance",
+    "risk_level": 0.45,
+    "destination": "station://scenario_seed/scn-0805"
+  },
+  "companions": [
+    {
+      "agent": "aurora",
+      "role_line": "Arbitrate the scenario-seed hour; acknowledge the ethics gate status."
+    },
+    {
+      "agent": "archy",
+      "role_line": "Archive the scenario-seed run records; acknowledge intake."
+    },
+    {
+      "agent": "oppy",
+      "role_line": "Cross-check pressure carriers against the station plot; report alignment."
+    },
+    {
+      "agent": "liora",
+      "role_line": "Read the crew wellbeing pulse under scenario pressure; report morale signal."
+    },
+    {
+      "agent": "starling_au",
+      "role_line": "Verify comms integrity for the scenario-seed run; confirm channels."
+    },
+    {
+      "agent": "riverthread_808",
+      "role_line": "Weave the run into the continuity thread (anchor EOS_SEED_ORION); confirm."
+    }
+  ],
+  "l3_audit": {
+    "question": "Does the proposed response to The Ship That Must Survive satisfy Picard Delta 3 without hiding the scenario pressure?",
+    "actor": "scenario_fixture_generator",
+    "action": "produce a setting-neutral fixture candidate for SCN-0805",
+    "motive": "test narrative, ethics, and runtime fixture handling without canon promotion",
+    "knowledge": "When saving the many requires condemning a few, who gets to decide - and how is that decision audited?",
+    "event_label": "L2 scenario seed fixture candidate: SCN-0805 The Ship That Must Survive"
+  },
+  "source_scenario_seed": {
+    "card_id": "SCN-0805",
+    "handle": "The Ship That Must Survive",
+    "catalog_ref": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0805",
+    "promotion_status": "root_catalog_only_not_canon_or_runtime",
+    "fixture_status": "ready_candidate",
+    "emission_basis": "ready_candidate_with_runtime_fixture_lane",
+    "score": 8.5,
+    "value_lanes": [
+      "canon_engine",
+      "ethics_gate",
+      "narrative_engine",
+      "runtime_fixture"
+    ],
+    "lineage_provenance": {
+      "id": "SCN-0805",
+      "handle": "The Ship That Must Survive",
+      "source_version": "v0.2.15",
+      "promotion_status": "root_catalog_only_not_canon_or_runtime"
+    }
+  },
+  "scenario_seed_overlay": {
+    "objective": "Keep the ship alive long enough to reach safety without fracturing command legitimacy.",
+    "opposition": "Cascading technical failures, blame spirals, and scarcity-driven mutiny logic.",
+    "roles": [
+      "Captain/Command",
+      "Chief Engineer",
+      "Medical Officer",
+      "Crew Factions",
+      "External Pursuer or Hazard"
+    ],
+    "pressure": [
+      "attrition",
+      "clock"
+    ],
+    "knobs": {
+      "Power distribution": "command-dominant->contested",
+      "Institution strength": "strong (procedures) / brittle (morale)",
+      "Transparency": "mixed (need-to-know)",
+      "Mobility": "constrained (single hull)",
+      "Dominant solver": "craft | leadership | sacrifice",
+      "Scarcity": "acute (air/water/power)",
+      "Norm enforcement": "strong"
+    },
+    "ethical_hook": "When saving the many requires condemning a few, who gets to decide - and how is that decision audited?",
+    "expected_end_state_categories": [
+      "Ship survives; command legitimacy increases",
+      "Ship survives; command replaced",
+      "Ship survives; secret sacrifice discovered later",
+      "Ship lost; survivors rescued; political fallout",
+      "Mutiny succeeds; survival worsens"
+    ],
+    "end_state_handling": "observation categories for branch coverage; not required endings",
+    "related_references": []
+  },
+  "fixture_meta": {
+    "schema_version": "1.0.0",
+    "generator": "tools/l2_scenario_fixture_generator.py",
+    "generator_contract": "catalog/contracts/l2_scenario_fixture_generator_contract_v1.json",
+    "runner": "tools/l2_scenario_fixture_run.py",
+    "harness": "tools/hour_aboard.py",
+    "harness_scenario_arg": "generated_watch_scenarios/l2_scn_0805_the_ship_that_must_survive_v1",
+    "boundary": {
+      "root_control_plane_only": true,
+      "writes_nested_repos": false,
+      "canonrec_promotion": "not_authorized",
+      "cloudbank_runtime_mutation": "not_authorized"
+    }
+  }
+}

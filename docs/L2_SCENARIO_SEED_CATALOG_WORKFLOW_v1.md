@@ -39,6 +39,8 @@ Validation:
 - `python3 -m unittest tests/test_l2_scenario_seed_catalog.py`
 - `python3 -m unittest tests/test_l2_scenario_seed_uptake.py`
 - `python3 tools/l2_scenario_seed_uptake.py --summary`
+- `python3 tools/l2_scenario_fixture_generator.py --check`
+- `python3 -m pytest tests/test_l2_scenario_fixtures.py`
 
 ## Disposition Rules
 
@@ -85,6 +87,38 @@ The first fixture candidates are:
 Fixture candidates are root JSON overlays only until a separate task authorizes
 an owning runtime repo. The contract requires root output paths and receipts,
 and explicitly keeps CanonRec and CloudBank out of scope.
+
+### Generated fixtures (2026-11-28)
+
+All 25 shortlist cards are emitted as runnable watch-scenario overlays. Root
+hosts them because the runner (`tools/hour_aboard.py`) lives here; CloudBank and
+CanonRec are read, never written.
+
+- Generator: `tools/l2_scenario_fixture_generator.py` writes
+  `catalog/generated_watch_scenarios/<fixture_id>.json`, the manifest
+  `catalog/generated_watch_scenarios/index.json`, and a receipt at
+  `reports/analysis/l2_scenario_fixture_generation__<date>.md`. Output is
+  deterministic; `--check` (`make l2-scenario-fixtures-check`) fails on drift,
+  stale, missing, or orphan fixtures. Generation fails closed on `unresolved_id`
+  in a card's own wiring links, setting-specific lore, prohibited outcome keys,
+  nested output paths, and sub-minimum emergence dimensions.
+- Runner: `tools/l2_scenario_fixture_run.py --fixture SCN-0903` or `--all`
+  (`make l2-scenario-fixtures-run`). Each fixture runs through `hour_aboard.py`
+  on an isolated, fresh station clock (deterministic per seed; Orion Station's
+  chronicle and `catalog/station_state.json` are untouched), then its uptake
+  packet goes through CloudBank `simulation/scenario_seed_initializer.py`. Run
+  artifacts go to git-ignored `reports/scenario_fixture_runs/`; `--all` refreshes
+  `reports/analysis/l2_scenario_fixture_runs_latest.json`.
+- Contract candidates (`SCN-0307`, `SCN-0002`, `SCN-0928`, `SCN-0906`,
+  `SCN-0505`, `SCN-0911`; no `runtime_fixture` lane) are emitted on owner
+  direction and carry `emission_basis:
+  contract_candidate_emitted_by_owner_direction_2026-11-28`.
+- Fixture tasks keep the five-step blueprint and add structural ordering only
+  (framing before mapping and solver selection; the ethics gate after solver
+  selection; end-state branching last). Expected end states stay
+  `expected_end_state_categories` for observation.
+- Tests: `tests/test_l2_scenario_fixtures.py` (the end-to-end run tests are
+  `@simulation` and need the CloudBank and CanonRec clones).
 
 ## Uptake And Emergence Contract
 
