@@ -1,32 +1,30 @@
 #!/usr/bin/env python3
-"""
-Run generated L2 scenario seed fixtures end-to-end through the L1 harness.
+"""Run generated L2 scenario seed fixtures end-to-end through the L1 harness."""
 
-Each fixture in ``catalog/generated_watch_scenarios/`` (see
-``tools/l2_scenario_fixture_generator.py``) runs through ``tools/hour_aboard.py``
-against the CloudBank Orion Station simulation, then:
-
-1. checks the harness run (all fixture tasks registered, work recorded, full
-   souls accounting, a valid L3 narrative-audit verdict, ORD dispatch receipt);
-2. builds the fixture's root uptake packet and feeds it to CloudBank's
-   ``simulation/scenario_seed_initializer.py`` adapter, confirming the runtime
-   initializer accepts it with the fixture's seed, ticks, and anchor;
-3. writes ``fixture_run_receipt.json`` beside the run artifacts.
-
-Fixture runs use an isolated station clock (fresh state per run), so they are
-deterministic per seed and never advance Orion Station's chronicle. Run
-artifacts land under ``reports/scenario_fixture_runs/`` (git-ignored, outside
-``reports/simulation`` so the station chronicle does not ingest them). A suite
-run (``--all``) also refreshes ``reports/analysis/l2_scenario_fixture_runs_latest.json``.
-
-Expected end states are observation categories: the receipt records what the
-run produced, never which ending "won".
-
-Usage:
-    python3 tools/l2_scenario_fixture_run.py --fixture SCN-0903
-    python3 tools/l2_scenario_fixture_run.py --all
-    python3 tools/l2_scenario_fixture_run.py --list
-"""
+# Each fixture in ``catalog/generated_watch_scenarios/`` (see
+# ``tools/l2_scenario_fixture_generator.py``) runs through ``tools/hour_aboard.py``
+# against the CloudBank Orion Station simulation, then:
+#
+# 1. checks the harness run (all fixture tasks registered, work recorded, full
+#    souls accounting, a valid L3 narrative-audit verdict, ORD dispatch receipt);
+# 2. builds the fixture's root uptake packet and feeds it to CloudBank's
+#    ``simulation/scenario_seed_initializer.py`` adapter, confirming the runtime
+#    initializer accepts it with the fixture's seed, ticks, and anchor;
+# 3. writes ``fixture_run_receipt.json`` beside the run artifacts.
+#
+# Fixture runs use an isolated station clock (fresh state per run), so they are
+# deterministic per seed and never advance Orion Station's chronicle. Run
+# artifacts land under ``reports/scenario_fixture_runs/`` (git-ignored, outside
+# ``reports/simulation`` so the station chronicle does not ingest them). A suite
+# run (``--all``) also refreshes ``reports/analysis/l2_scenario_fixture_runs_latest.json``.
+#
+# Expected end states are observation categories: the receipt records what the
+# run produced, never which ending "won".
+#
+# Usage:
+#     python3 tools/l2_scenario_fixture_run.py --fixture SCN-0903
+#     python3 tools/l2_scenario_fixture_run.py --all
+#     python3 tools/l2_scenario_fixture_run.py --list
 
 from __future__ import annotations
 
@@ -35,7 +33,6 @@ import json
 import os
 import subprocess  # nosec B404 - runs this repo's own harness with fixed argv
 import sys
-import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -271,21 +268,15 @@ def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     manifest = load_manifest()
     if args.list:
-        for row in manifest["fixtures"]:
-            print(f"{row['card_id']}  {row['fixture_id']}  ({row['fixture_status']})")
+        print(*(f"{r['card_id']}  {r['fixture_id']}  ({r['fixture_status']})" for r in manifest["fixtures"]), sep="\n")
         return 0
     rows = manifest["fixtures"] if args.all else resolve(args.fixture, manifest)
-    if args.run_root:
-        run_root = Path(args.run_root)
-    else:
-        run_root = DEFAULT_RUN_ROOT / datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    default_root = DEFAULT_RUN_ROOT / datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    run_root = Path(args.run_root) if args.run_root else default_root
     run_root.mkdir(parents=True, exist_ok=True)
 
-    results = []
-    for row in rows:
-        result = run_fixture(row, run_root, args.mesh)
-        results.append(result)
-        print(render_line(result))
+    results = [run_fixture(row, run_root, args.mesh) for row in rows]
+    print(*(render_line(r) for r in results), sep="\n")
     summary = suite_summary(results)
     if args.all and not args.no_summary:
         write_json(SUITE_SUMMARY, summary)

@@ -1,23 +1,21 @@
 #!/usr/bin/env python3
-"""
-Generate runnable watch-scenario fixtures from the L2 scenario seed shortlist.
+"""Generate runnable watch-scenario fixtures from the L2 scenario seed shortlist."""
 
-Implements ``catalog/contracts/l2_scenario_fixture_generator_contract_v1.json``:
-every ``fixture_ready_shortlist`` entry in ``catalog/l2_scenario_seed_catalog.json``
-becomes a root watch-scenario overlay under ``catalog/generated_watch_scenarios/``
-that the existing L1 harness (``tools/hour_aboard.py``) can execute, plus a
-manifest (``index.json``) and a root receipt.
-
-Seeds stay pressure fields, not scripts: the overlay carries roles, pressure
-axes, knobs, and expected end states as *observation categories*; it never
-selects an ending. Generation is deterministic (no timestamps in fixtures), so
-``--check`` can gate drift between the catalog and the committed fixtures.
-
-Usage:
-    python3 tools/l2_scenario_fixture_generator.py            # write fixtures + manifest + receipt
-    python3 tools/l2_scenario_fixture_generator.py --check    # exit 1 if fixtures drift from catalog
-    python3 tools/l2_scenario_fixture_generator.py --ids SCN-0903 SCN-0708
-"""
+# Implements ``catalog/contracts/l2_scenario_fixture_generator_contract_v1.json``:
+# every ``fixture_ready_shortlist`` entry in ``catalog/l2_scenario_seed_catalog.json``
+# becomes a root watch-scenario overlay under ``catalog/generated_watch_scenarios/``
+# that the existing L1 harness (``tools/hour_aboard.py``) can execute, plus a
+# manifest (``index.json``) and a root receipt.
+#
+# Seeds stay pressure fields, not scripts: the overlay carries roles, pressure
+# axes, knobs, and expected end states as *observation categories*; it never
+# selects an ending. Generation is deterministic (no timestamps in fixtures), so
+# ``--check`` can gate drift between the catalog and the committed fixtures.
+#
+# Usage:
+#     python3 tools/l2_scenario_fixture_generator.py            # write fixtures + manifest + receipt
+#     python3 tools/l2_scenario_fixture_generator.py --check    # exit 1 if fixtures drift from catalog
+#     python3 tools/l2_scenario_fixture_generator.py --ids SCN-0903 SCN-0708
 
 from __future__ import annotations
 
@@ -393,20 +391,24 @@ def write_outputs(
     return written
 
 
+def _shown(path: Path) -> str:
+    return str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path)
+
+
+def _file_drift(path: Path, text: str) -> str | None:
+    if not path.exists():
+        return f"missing: {_shown(path)}"
+    if path.read_text(encoding="utf-8") != text:
+        return f"stale: {_shown(path)}"
+    return None
+
+
 def check_drift(fixtures: dict[str, dict[str, Any]], manifest: dict[str, Any], out_dir: Path) -> list[str]:
-    drift = []
     expected = {Path(rel).name: _dump(f) for rel, f in fixtures.items()}
     expected[MANIFEST_NAME] = _dump(manifest)
-    for name, text in expected.items():
-        path = out_dir / name
-        if not path.exists():
-            drift.append(f"missing: {path.relative_to(ROOT) if path.is_relative_to(ROOT) else path}")
-        elif path.read_text(encoding="utf-8") != text:
-            drift.append(f"stale: {path.relative_to(ROOT) if path.is_relative_to(ROOT) else path}")
-    if out_dir.exists():
-        for path in sorted(out_dir.glob("*.json")):
-            if path.name not in expected:
-                drift.append(f"orphan: {path.name}")
+    drift = [d for d in (_file_drift(out_dir / n, t) for n, t in expected.items()) if d]
+    present = sorted(out_dir.glob("*.json")) if out_dir.exists() else []
+    drift.extend(f"orphan: {p.name}" for p in present if p.name not in expected)
     return drift
 
 
@@ -420,6 +422,19 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
+def run_check(fixtures: dict[str, dict[str, Any]], manifest: dict[str, Any], out_dir: Path, partial: bool) -> int:
+    if partial:
+        print("--check compares the full shortlist; do not combine with --ids", file=sys.stderr)
+        return 2
+    drift = check_drift(fixtures, manifest, out_dir)
+    if drift:
+        print("generated watch scenarios drift from catalog:", *drift, sep="\n  ", file=sys.stderr)
+        print("regenerate: python3 tools/l2_scenario_fixture_generator.py", file=sys.stderr)
+        return 1
+    print(f"✓ {manifest['fixture_count']} generated watch scenarios match the catalog")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     catalog = load_json(Path(args.catalog))
@@ -430,16 +445,7 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     out_dir = Path(args.out_dir)
     if args.check:
-        if args.ids:
-            print("--check compares the full shortlist; do not combine with --ids", file=sys.stderr)
-            return 2
-        drift = check_drift(fixtures, manifest, out_dir)
-        if drift:
-            print("generated watch scenarios drift from catalog:", *drift, sep="\n  ", file=sys.stderr)
-            print("regenerate: python3 tools/l2_scenario_fixture_generator.py", file=sys.stderr)
-            return 1
-        print(f"✓ {manifest['fixture_count']} generated watch scenarios match the catalog")
-        return 0
+        return run_check(fixtures, manifest, out_dir, partial=bool(args.ids))
     date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     written = write_outputs(
         fixtures,
@@ -450,7 +456,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     print(f"{manifest['fixture_count']} fixtures generated; {len(written)} file(s) written")
     for path in written:
-        print(f"  - {path.relative_to(ROOT) if path.is_relative_to(ROOT) else path}")
+        print(f"  - {_shown(path)}")
     return 0
 
 
