@@ -9,7 +9,10 @@ import sys
 from datetime import date
 from pathlib import Path
 
-import pytest
+import tempfile
+import unittest
+from contextlib import redirect_stdout
+from io import StringIO
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "tools"))
@@ -51,7 +54,8 @@ CATALOG_SAMPLE = '''
 
 def _frontmatter(path: Path) -> dict[str, str]:
     match = re.match(r"---\n(?P<body>.*?)\n---\n", path.read_text(encoding="utf-8"), re.DOTALL)
-    assert match, f"{path} must start with YAML frontmatter"
+    if not match:
+        raise AssertionError(f"{path} must start with YAML frontmatter")
     out: dict[str, str] = {}
     for line in match.group("body").splitlines():
         key, _, value = line.partition(":")
@@ -68,93 +72,115 @@ def _copy_root(tmp_path: Path) -> Path:
     return root
 
 
-def test_registry_points_at_existing_root_surfaces() -> None:
-    program = json.loads(PROGRAM.read_text(encoding="utf-8"))
-    for rel in (program["charter"], *program["steward"].values()):
-        assert (REPO_ROOT / rel).exists(), rel
-    for track in program["tracks"]:
-        if track["primary_repo"] == "Aurora_ORIONCORE_Directory_Main":
-            for surface in track["surfaces"]:
-                assert (REPO_ROOT / surface).exists(), surface
+def _load(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
-def test_registry_task_ids_exist_in_session_state() -> None:
-    program = json.loads(PROGRAM.read_text(encoding="utf-8"))
-    state = json.loads((REPO_ROOT / status.SESSION_STATE_PATH).read_text(encoding="utf-8"))
-    known = {item["id"] for item in state.get("task_queue", [])}
-    known |= {item["id"] for item in state.get("completed_tasks", [])}
-    for track in program["tracks"]:
-        for task_id in track["task_ids"]:
-            assert task_id in known, task_id
+TODAY = date(2026, 11, 28)
 
 
-def test_skill_and_agent_definitions_agree() -> None:
-    skill = _frontmatter(SKILL_MD)
-    agent = _frontmatter(CLAUDE_AGENT)
-    assert skill["name"] == agent["name"] == "aurora-llm-steward"
-    assert skill["description"] and agent["description"]
-    assert "$aurora-llm-steward" in OPENAI_YAML.read_text(encoding="utf-8")
-    agent_text = CLAUDE_AGENT.read_text(encoding="utf-8")
-    assert "skills/aurora-llm-steward/SKILL.md" in agent_text
-    assert "docs/AURORA_LLM_PROGRAM_CHARTER_v1.md" in agent_text
+class RegistryTests(unittest.TestCase):
+    def test_registry_points_at_existing_root_surfaces(self) -> None:
+        program = _load(PROGRAM)
+        for rel in (program["charter"], *program["steward"].values()):
+            self.assertTrue((REPO_ROOT / rel).exists(), rel)
+        for track in program["tracks"]:
+            if track["primary_repo"] == "Aurora_ORIONCORE_Directory_Main":
+                for surface in track["surfaces"]:
+                    self.assertTrue((REPO_ROOT / surface).exists(), surface)
+
+    def test_registry_task_ids_exist_in_session_state(self) -> None:
+        program = _load(PROGRAM)
+        state = _load(REPO_ROOT / status.SESSION_STATE_PATH)
+        known = {item["id"] for item in state.get("task_queue", [])}
+        known |= {item["id"] for item in state.get("completed_tasks", [])}
+        for track in program["tracks"]:
+            for task_id in track["task_ids"]:
+                self.assertIn(task_id, known)
+
+    def test_skill_and_agent_definitions_agree(self) -> None:
+        skill = _frontmatter(SKILL_MD)
+        agent = _frontmatter(CLAUDE_AGENT)
+        self.assertEqual(skill["name"], "aurora-llm-steward")
+        self.assertEqual(agent["name"], "aurora-llm-steward")
+        self.assertTrue(skill["description"] and agent["description"])
+        self.assertIn("$aurora-llm-steward", OPENAI_YAML.read_text(encoding="utf-8"))
+        agent_text = CLAUDE_AGENT.read_text(encoding="utf-8")
+        self.assertIn("skills/aurora-llm-steward/SKILL.md", agent_text)
+        self.assertIn("docs/AURORA_LLM_PROGRAM_CHARTER_v1.md", agent_text)
+
+    def test_charter_keeps_the_governing_rule_and_owner_gates(self) -> None:
+        text = CHARTER.read_text(encoding="utf-8")
+        self.assertIn("Models reason; Aurora governs.", text)
+        for gate in ("G0", "G1", "G1.5", "G2", "G3", "G4", "G5"):
+            self.assertIn(f"| {gate} |", text)
+        self.assertIn("authorizing any model training run", text)
 
 
-def test_charter_keeps_the_governing_rule_and_owner_gates() -> None:
-    text = CHARTER.read_text(encoding="utf-8")
-    assert "Models reason; Aurora governs." in text
-    for gate in ("G0", "G1", "G1.5", "G2", "G3", "G4", "G5"):
-        assert f"| {gate} |" in text
-    assert "authorizing any model training run" in text
+class CatalogTests(unittest.TestCase):
+    def test_parse_catalog_reads_availability_and_claims(self) -> None:
+        entries = {e["model"]: e for e in status.parse_catalog(CATALOG_SAMPLE)}
+        self.assertEqual(set(entries), {"FRESH", "STALE", "RETIRED", "PLACEHOLDER"})
+        self.assertFalse(entries["RETIRED"]["available"])
+        self.assertEqual(entries["FRESH"]["verified_on"], "2026-11-07")
+        self.assertEqual(entries["PLACEHOLDER"]["verified_source"], "unverified")
+
+    def test_catalog_findings_flag_stale_and_unverified_available_entries(self) -> None:
+        findings = status._catalog_findings(status.parse_catalog(CATALOG_SAMPLE), TODAY, 90)
+        actions = [f.message for f in findings if f.severity == "action"]
+        self.assertTrue(any("STALE" in m for m in actions))
+        self.assertTrue(any("PLACEHOLDER" in m for m in actions))
+        self.assertFalse(any("FRESH" in m or "RETIRED" in m for m in actions))
+
+    def test_no_available_model_is_flagged(self) -> None:
+        findings = status._catalog_findings([], TODAY, 90)
+        self.assertEqual([f.severity for f in findings], ["action"])
 
 
-def test_parse_catalog_reads_availability_and_claims() -> None:
-    entries = {e["model"]: e for e in status.parse_catalog(CATALOG_SAMPLE)}
-    assert set(entries) == {"FRESH", "STALE", "RETIRED", "PLACEHOLDER"}
-    assert entries["RETIRED"]["available"] is False
-    assert entries["FRESH"]["verified_on"] == "2026-11-07"
-    assert entries["PLACEHOLDER"]["verified_source"] == "unverified"
+class ReportTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self._tmp = tempfile.TemporaryDirectory()
+        self.tmp_path = Path(self._tmp.name)
+
+    def tearDown(self) -> None:
+        self._tmp.cleanup()
+
+    def test_report_on_repo_has_no_action_findings_without_cloudbank(self) -> None:
+        report = status.build_report(REPO_ROOT, None, TODAY)
+        self.assertFalse(report.needs_action, [f.message for f in report.findings])
+        self.assertFalse(report.asm["model_training_authorized"])
+        self.assertTrue(report.asm["next_adoption_step"])
+        self.assertTrue(any("not checked" in f.message for f in report.findings))
+        self.assertIn("## Tracks", status.render_markdown(report))
+
+    def test_training_flag_flip_is_flagged(self) -> None:
+        root = _copy_root(self.tmp_path)
+        contract_path = root / status.CONTRACT_PATH
+        contract = _load(contract_path)
+        contract["first_slice"]["model_training_authorized"] = True
+        contract_path.write_text(json.dumps(contract), encoding="utf-8")
+        report = status.build_report(root, None, TODAY)
+        self.assertTrue(report.needs_action)
+        self.assertTrue(any(f.track == "T2" and "training" in f.message for f in report.findings))
+
+    def test_missing_task_id_is_flagged(self) -> None:
+        root = _copy_root(self.tmp_path)
+        program_path = root / status.PROGRAM_PATH
+        program = _load(program_path)
+        program["tracks"][0]["task_ids"].append("does-not-exist")
+        program_path.write_text(json.dumps(program), encoding="utf-8")
+        report = status.build_report(root, None, TODAY)
+        actions = [f.message for f in report.findings if f.severity == "action"]
+        self.assertTrue(any("does-not-exist" in m for m in actions))
+
+    def test_cli_exit_codes(self) -> None:
+        out = StringIO()
+        with redirect_stdout(out):
+            code = status.main(["--today", "2026-11-28", "--json"])
+        self.assertEqual(code, 0)
+        self.assertFalse(json.loads(out.getvalue())["needs_action"])
+        self.assertEqual(status.main(["--root", str(self.tmp_path / "missing")]), 2)
 
 
-def test_catalog_findings_flag_stale_and_unverified_available_entries() -> None:
-    entries = status.parse_catalog(CATALOG_SAMPLE)
-    findings = status._catalog_findings(entries, date(2026, 11, 28), 90)
-    actions = [f.message for f in findings if f.severity == "action"]
-    assert any("STALE" in m for m in actions)
-    assert any("PLACEHOLDER" in m for m in actions)
-    assert not any("FRESH" in m or "RETIRED" in m for m in actions)
-
-
-def test_report_on_repo_has_no_action_findings_without_cloudbank() -> None:
-    report = status.build_report(REPO_ROOT, None, date(2026, 11, 28))
-    assert not report.needs_action, [f.message for f in report.findings]
-    assert report.asm["model_training_authorized"] is False
-    assert report.asm["next_adoption_step"]
-    assert any("not checked" in f.message for f in report.findings)
-
-
-def test_training_flag_flip_is_flagged(tmp_path: Path) -> None:
-    root = _copy_root(tmp_path)
-    contract_path = root / status.CONTRACT_PATH
-    contract = json.loads(contract_path.read_text(encoding="utf-8"))
-    contract["first_slice"]["model_training_authorized"] = True
-    contract_path.write_text(json.dumps(contract), encoding="utf-8")
-    report = status.build_report(root, None, date(2026, 11, 28))
-    assert report.needs_action
-    assert any(f.track == "T2" and "training" in f.message for f in report.findings)
-
-
-def test_missing_task_id_is_flagged(tmp_path: Path) -> None:
-    root = _copy_root(tmp_path)
-    program_path = root / status.PROGRAM_PATH
-    program = json.loads(program_path.read_text(encoding="utf-8"))
-    program["tracks"][0]["task_ids"].append("does-not-exist")
-    program_path.write_text(json.dumps(program), encoding="utf-8")
-    report = status.build_report(root, None, date(2026, 11, 28))
-    assert any("does-not-exist" in f.message for f in report.findings if f.severity == "action")
-
-
-def test_cli_exit_codes(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
-    assert status.main(["--today", "2026-11-28", "--json"]) == 0
-    payload = json.loads(capsys.readouterr().out)
-    assert payload["needs_action"] is False
-    assert status.main(["--root", str(tmp_path / "missing")]) == 2
+if __name__ == "__main__":
+    unittest.main()

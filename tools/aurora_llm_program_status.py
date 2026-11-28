@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Report the state of the Aurora LLM program from repository evidence.
+"""
+Report the state of the Aurora LLM program from repository evidence.
 
 Reads, never writes:
 
@@ -34,7 +35,7 @@ import sys
 from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 PROGRAM_PATH = Path("catalog/aurora_llm_program.json")
@@ -103,17 +104,18 @@ def _surface_exists(root: Path, surface: str, primary_repo: str, cloudbank: Opti
     return None
 
 
+def _index_items(items: Any, index: Dict[str, Dict[str, Any]], where: str, default: Optional[str]) -> None:
+    for item in items or []:
+        if isinstance(item, dict) and item.get("id"):
+            index.setdefault(item["id"], {"status": default or item.get("status"), "where": where})
+
+
 def _task_index(session_state: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
     index: Dict[str, Dict[str, Any]] = {}
-    for item in session_state.get("task_queue", []) or []:
-        if isinstance(item, dict) and item.get("id"):
-            index[item["id"]] = {"status": item.get("status"), "where": "task_queue"}
-    for item in session_state.get("completed_tasks", []) or []:
-        if isinstance(item, dict) and item.get("id"):
-            index.setdefault(item["id"], {"status": "completed", "where": "completed_tasks"})
     active = session_state.get("active_task")
-    if isinstance(active, dict) and active.get("id"):
-        index[active["id"]] = {"status": active.get("status", "active"), "where": "active_task"}
+    _index_items([active] if isinstance(active, dict) else [], index, "active_task", None)
+    _index_items(session_state.get("task_queue"), index, "task_queue", None)
+    _index_items(session_state.get("completed_tasks"), index, "completed_tasks", "completed")
     return index
 
 
@@ -135,61 +137,54 @@ def parse_catalog(source: str) -> List[Dict[str, Any]]:
     return entries
 
 
+def _entry_finding(entry: Dict[str, Any], today: date, max_age: int) -> Optional[Finding]:
+    model = entry["model"]
+    if not entry["verified_on"] or entry["verified_source"] == "unverified":
+        return Finding("action", "T1", f"{model} is available but unverified.")
+    try:
+        age = (today - date.fromisoformat(entry["verified_on"])).days
+    except ValueError:
+        return Finding("action", "T1", f"{model} has an unparseable verified_on date.")
+    entry["age_days"] = age
+    if age > max_age:
+        return Finding("action", "T1", f"{model} catalog claim is {age} days old (limit {max_age}).")
+    if age > max_age - 14:
+        return Finding("info", "T1", f"{model} catalog claim expires in {max_age - age} days.")
+    return None
+
+
 def _catalog_findings(entries: List[Dict[str, Any]], today: date, max_age: int) -> List[Finding]:
-    findings: List[Finding] = []
     available = [e for e in entries if e["available"]]
     if not available:
-        findings.append(Finding("action", "T1", "No available model in the CloudBank catalog."))
-    for entry in available:
-        if not entry["verified_on"] or entry["verified_source"] == "unverified":
-            findings.append(Finding("action", "T1", f"{entry['model']} is available but unverified."))
-            continue
-        try:
-            age = (today - date.fromisoformat(entry["verified_on"])).days
-        except ValueError:
-            findings.append(Finding("action", "T1", f"{entry['model']} has an unparseable verified_on date."))
-            continue
-        entry["age_days"] = age
-        if age > max_age:
-            findings.append(
-                Finding("action", "T1", f"{entry['model']} catalog claim is {age} days old (limit {max_age}).")
-            )
-        elif age > max_age - 14:
-            findings.append(
-                Finding("info", "T1", f"{entry['model']} catalog claim expires in {max_age - age} days.")
-            )
-    return findings
+        return [Finding("action", "T1", "No available model in the CloudBank catalog.")]
+    findings = [_entry_finding(entry, today, max_age) for entry in available]
+    return [f for f in findings if f is not None]
 
 
-def build_report(root: Path, cloudbank: Optional[Path], today: date) -> Report:
-    program = _load_json(root / PROGRAM_PATH)
-    contract = _load_json(root / CONTRACT_PATH)
-    session_state = _load_json(root / SESSION_STATE_PATH)
-    tasks = _task_index(session_state)
-    report = Report(today=today.isoformat())
+def _track_section(
+    track: Dict[str, Any], root: Path, cloudbank: Optional[Path], tasks: Dict[str, Dict[str, Any]]
+) -> Tuple[Dict[str, Any], List[Finding]]:
+    findings: List[Finding] = []
+    surfaces = []
+    for surface in track.get("surfaces", []):
+        exists = _surface_exists(root, surface, track.get("primary_repo", ""), cloudbank)
+        surfaces.append({"path": surface, "exists": exists})
+        if exists is False:
+            findings.append(Finding("action", track["id"], f"Surface missing: {surface}"))
+    linked = []
+    for task_id in track.get("task_ids", []):
+        state = tasks.get(task_id)
+        linked.append({"id": task_id, "status": state["status"] if state else None})
+        if state is None:
+            findings.append(Finding("action", track["id"], f"Task id {task_id} is not in session_state.json."))
+    section = {"id": track["id"], "name": track["name"], "surfaces": surfaces, "tasks": linked}
+    return section, findings
 
-    for track in program.get("tracks", []):
-        surfaces = []
-        for surface in track.get("surfaces", []):
-            exists = _surface_exists(root, surface, track.get("primary_repo", ""), cloudbank)
-            surfaces.append({"path": surface, "exists": exists})
-            if exists is False:
-                report.findings.append(Finding("action", track["id"], f"Surface missing: {surface}"))
-        linked = []
-        for task_id in track.get("task_ids", []):
-            state = tasks.get(task_id)
-            linked.append({"id": task_id, "status": state["status"] if state else None})
-            if state is None:
-                report.findings.append(
-                    Finding("action", track["id"], f"Task id {task_id} is not in session_state.json.")
-                )
-        report.tracks.append(
-            {"id": track["id"], "name": track["name"], "surfaces": surfaces, "tasks": linked}
-        )
 
+def _asm_section(contract: Dict[str, Any]) -> Tuple[Dict[str, Any], List[Finding]]:
     first_slice = contract.get("first_slice", {})
     roles = contract.get("repository_roles", {})
-    report.asm = {
+    asm = {
         "contract_status": contract.get("status"),
         "runtime_status": contract.get("runtime_status"),
         "adoption": {repo: info.get("adoption_status") for repo, info in roles.items()},
@@ -198,29 +193,48 @@ def build_report(root: Path, cloudbank: Optional[Path], today: date) -> Report:
         "model_training_authorized": bool(first_slice.get("model_training_authorized")),
         "next_adoption_step": _next_adoption_step(contract),
     }
-    if report.asm["model_training_authorized"]:
-        report.findings.append(
+    findings: List[Finding] = []
+    if asm["model_training_authorized"]:
+        findings.append(
             Finding(
                 "action",
                 "T2",
                 "first_slice.model_training_authorized is true; confirm an owner-approved training issue exists.",
             )
         )
+    return asm, findings
 
-    if cloudbank is not None:
-        source_path = cloudbank / CATALOG_SOURCE
-        if source_path.exists():
-            entries = parse_catalog(source_path.read_text(encoding="utf-8"))
-            report.findings.extend(
-                _catalog_findings(entries, today, int(program.get("catalog_max_claim_age_days", 90)))
-            )
-            report.catalog = {"source": str(CATALOG_SOURCE), "entries": entries}
-        else:
-            report.findings.append(Finding("action", "T1", f"CloudBank catalog not found at {source_path}."))
-    else:
-        report.findings.append(
-            Finding("info", "T1", "CloudBank checkout not given; catalog freshness not checked (--cloudbank).")
-        )
+
+def _catalog_section(
+    cloudbank: Optional[Path], max_age: int, today: date
+) -> Tuple[Optional[Dict[str, Any]], List[Finding]]:
+    if cloudbank is None:
+        return None, [Finding("info", "T1", "CloudBank checkout not given; catalog freshness not checked (--cloudbank).")]
+    source_path = cloudbank / CATALOG_SOURCE
+    if not source_path.exists():
+        return None, [Finding("action", "T1", f"CloudBank catalog not found at {source_path}.")]
+    entries = parse_catalog(source_path.read_text(encoding="utf-8"))
+    findings = _catalog_findings(entries, today, max_age)
+    return {"source": str(CATALOG_SOURCE), "entries": entries}, findings
+
+
+def build_report(root: Path, cloudbank: Optional[Path], today: date) -> Report:
+    program = _load_json(root / PROGRAM_PATH)
+    contract = _load_json(root / CONTRACT_PATH)
+    tasks = _task_index(_load_json(root / SESSION_STATE_PATH))
+    report = Report(today=today.isoformat())
+
+    for track in program.get("tracks", []):
+        section, findings = _track_section(track, root, cloudbank, tasks)
+        report.tracks.append(section)
+        report.findings.extend(findings)
+
+    report.asm, findings = _asm_section(contract)
+    report.findings.extend(findings)
+
+    max_age = int(program.get("catalog_max_claim_age_days", 90))
+    report.catalog, findings = _catalog_section(cloudbank, max_age, today)
+    report.findings.extend(findings)
     return report
 
 
@@ -228,50 +242,57 @@ def _next_adoption_step(contract: Dict[str, Any]) -> Optional[str]:
     """First adoption step whose owning repo has not adopted. Coarse by design: a reading, not a plan."""
     roles = contract.get("repository_roles", {})
     order = contract.get("adoption_order", [])
+    if not order:
+        return None
     root_status = roles.get("Aurora_ORIONCORE_Directory_Main", {}).get("adoption_status")
-    if order and root_status in (None, "proposal_committed"):
+    if root_status in (None, "proposal_committed"):
         return order[0]
     cloudbank_status = roles.get("aurora-cloudbank-symbolic-main", {}).get("adoption_status")
     if len(order) > 1 and cloudbank_status in (None, "not_started"):
         return order[1]
-    return order[-1] if order else None
+    return order[-1]
+
+
+def _render_asm(asm: Dict[str, Any]) -> List[str]:
+    lines = [
+        "## Aurora State Model (T2)",
+        f"- Contract: {asm['contract_status']} · runtime: {asm['runtime_status']}",
+        f"- Training authorized: {asm['model_training_authorized']}",
+        f"- Next adoption step: {asm['next_adoption_step']}",
+    ]
+    lines.extend(f"  - {repo}: {status}" for repo, status in asm["adoption"].items())
+    return lines
+
+
+def _render_track_row(track: Dict[str, Any]) -> str:
+    tasks = ", ".join(f"{t['id']} ({t['status'] or 'absent'})" for t in track["tasks"]) or "-"
+    missing = ", ".join(s["path"] for s in track["surfaces"] if s["exists"] is False) or "none"
+    return f"| {track['id']} {track['name']} | {tasks} | {missing} |"
+
+
+def _render_catalog(catalog: Optional[Dict[str, Any]]) -> List[str]:
+    if not catalog:
+        return []
+    lines = ["", "## Model catalog (T1)", "| Model | Available | Verified on | Source |", "| --- | --- | --- | --- |"]
+    lines.extend(
+        f"| {e['model']} | {e['available']} | {e['verified_on'] or '-'} | {e['verified_source']} |"
+        for e in catalog["entries"]
+    )
+    return lines
 
 
 def render_markdown(report: Report) -> str:
     lines = [f"# Aurora LLM program status — {report.today}", ""]
     lines.append(f"Needs action: **{'yes' if report.needs_action else 'no'}**")
     lines.append("")
-    asm = report.asm
-    lines.append("## Aurora State Model (T2)")
-    lines.append(f"- Contract: {asm['contract_status']} · runtime: {asm['runtime_status']}")
-    lines.append(f"- Training authorized: {asm['model_training_authorized']}")
-    lines.append(f"- Next adoption step: {asm['next_adoption_step']}")
-    for repo, status in asm["adoption"].items():
-        lines.append(f"  - {repo}: {status}")
-    lines.append("")
-    lines.append("## Tracks")
-    lines.append("| Track | Linked tasks | Missing surfaces |")
-    lines.append("| --- | --- | --- |")
-    for track in report.tracks:
-        tasks = ", ".join(f"{t['id']} ({t['status'] or 'absent'})" for t in track["tasks"]) or "-"
-        missing = [s["path"] for s in track["surfaces"] if s["exists"] is False]
-        lines.append(f"| {track['id']} {track['name']} | {tasks} | {', '.join(missing) or 'none'} |")
-    if report.catalog:
-        lines.append("")
-        lines.append("## Model catalog (T1)")
-        lines.append("| Model | Available | Verified on | Source |")
-        lines.append("| --- | --- | --- | --- |")
-        for entry in report.catalog["entries"]:
-            lines.append(
-                f"| {entry['model']} | {entry['available']} | {entry['verified_on'] or '-'} | "
-                f"{entry['verified_source']} |"
-            )
-    lines.append("")
-    lines.append("## Findings")
+    lines.extend(_render_asm(report.asm))
+    lines.extend(["", "## Tracks", "| Track | Linked tasks | Missing surfaces |", "| --- | --- | --- |"])
+    lines.extend(_render_track_row(track) for track in report.tracks)
+    lines.extend(_render_catalog(report.catalog))
+    lines.extend(["", "## Findings"])
+    lines.extend(f"- [{f.severity}] {f.track}: {f.message}" for f in report.findings)
     if not report.findings:
         lines.append("- none")
-    for finding in report.findings:
-        lines.append(f"- [{finding.severity}] {finding.track}: {finding.message}")
     return "\n".join(lines) + "\n"
 
 
