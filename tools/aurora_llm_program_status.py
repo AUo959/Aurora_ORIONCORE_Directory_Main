@@ -1,30 +1,28 @@
 #!/usr/bin/env python3
-"""
-Report the state of the Aurora LLM program from repository evidence.
+"""Report the state of the Aurora LLM program from repository evidence."""
 
-Reads, never writes:
-
-* ``catalog/aurora_llm_program.json``  (program registry: tracks, task ids, owner gates)
-* ``catalog/contracts/aurora_state_model_contract_v0_1.json``  (ASM contract)
-* ``catalog/session_state.json``  (task queue status for each linked task id)
-* optionally a CloudBank checkout (``--cloudbank PATH``) for the model catalog in
-  ``modules/ai_core/unified_ai_interface.py``
-
-The output is an instrument reading for the aurora-llm-steward agent. It does not
-decide what to do next and it does not authorize anything.
-
-Usage:
-    python3 tools/aurora_llm_program_status.py
-    python3 tools/aurora_llm_program_status.py --json
-    python3 tools/aurora_llm_program_status.py --cloudbank ../aurora-cloudbank-symbolic
-    python3 tools/aurora_llm_program_status.py --today 2026-11-28
-
-Exit codes:
-    0  report produced, no findings that need action
-    1  report produced, at least one finding needs action (stale catalog claim,
-       missing surface, task id not in the queue, training flag flipped)
-    2  a required input file is missing or unreadable
-"""
+# Reads, never writes:
+#
+# * ``catalog/aurora_llm_program.json``  (program registry: tracks, task ids, owner gates)
+# * ``catalog/contracts/aurora_state_model_contract_v0_1.json``  (ASM contract)
+# * ``catalog/session_state.json``  (task queue status for each linked task id)
+# * optionally a CloudBank checkout (``--cloudbank PATH``) for the model catalog in
+#   ``modules/ai_core/unified_ai_interface.py``
+#
+# The output is an instrument reading for the aurora-llm-steward agent. It does not
+# decide what to do next and it does not authorize anything.
+#
+# Usage:
+#     python3 tools/aurora_llm_program_status.py
+#     python3 tools/aurora_llm_program_status.py --json
+#     python3 tools/aurora_llm_program_status.py --cloudbank ../aurora-cloudbank-symbolic
+#     python3 tools/aurora_llm_program_status.py --today 2026-11-28
+#
+# Exit codes:
+#     0  report produced, no findings that need action
+#     1  report produced, at least one finding needs action (stale catalog claim,
+#        missing surface, task id not in the queue, training flag flipped)
+#     2  a required input file is missing or unreadable
 
 from __future__ import annotations
 
