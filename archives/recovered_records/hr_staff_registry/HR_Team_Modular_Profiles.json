@@ -1,0 +1,68 @@
+[
+    {
+        "name": "Helena Vu",
+        "role": "HR Director",
+        "specialty": "AI-integrated organizational strategy",
+        "core_functions": [
+            "Staff forecasting",
+            "Org behavior calibration",
+            "Sim-integrated empathy models"
+        ],
+        "clearance_level": "HR-Prime",
+        "reporting_to": "Alex Thorne",
+        "linked_modules": [
+            "Culture Charter",
+            "Onboarding Framework",
+            "Conflict Mediation Grid"
+        ]
+    },
+    {
+        "name": "Tomas Erien",
+        "role": "Organizational Architect",
+        "specialty": "Workflow mapping, systems layout",
+        "core_functions": [
+            "Team topology modeling",
+            "Simulation structure alignment",
+            "Departmental interlink optimization"
+        ],
+        "clearance_level": "HR-Core",
+        "reporting_to": "Helena Vu",
+        "linked_modules": [
+            "OrgMap Toolset",
+            "Simulation Workflow Grid"
+        ]
+    },
+    {
+        "name": "Marla Osei",
+        "role": "Onboarding & Cultural Immersion Specialist",
+        "specialty": "Immersive first contact design",
+        "core_functions": [
+            "Staff ritual onboarding",
+            "Culture imprint sync",
+            "Welcome suite sequencing"
+        ],
+        "clearance_level": "HR-Onboard",
+        "reporting_to": "Helena Vu",
+        "linked_modules": [
+            "Culture Charter",
+            "Onboarding Scripts",
+            "Terminal Welcome Shells"
+        ]
+    },
+    {
+        "name": "Lior Venn",
+        "role": "Interpersonal Systems Mediator",
+        "specialty": "Diplomatic conflict frameworks",
+        "core_functions": [
+            "Simulation conflict resolution",
+            "AI-human empathy sync",
+            "Mediation grid activation"
+        ],
+        "clearance_level": "HR-Mediator",
+        "reporting_to": "Helena Vu",
+        "linked_modules": [
+            "Mediation Logic Core",
+            "Interpersonal Tracker"
+        ]
+    }
+]
