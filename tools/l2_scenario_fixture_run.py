@@ -264,20 +264,35 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
+def _list(manifest: dict[str, Any]) -> int:
+    for row in manifest["fixtures"]:
+        print(f"{row['card_id']}  {row['fixture_id']}  ({row['fixture_status']})")
+    return 0
+
+
+def _run_root(arg: str | None) -> Path:
+    root = Path(arg) if arg else DEFAULT_RUN_ROOT / datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    root.mkdir(parents=True, exist_ok=True)
+    return root
+
+
+def run_suite(rows: list[dict[str, Any]], run_root: Path, mesh: bool) -> list[dict[str, Any]]:
+    results = []
+    for row in rows:
+        result = run_fixture(row, run_root, mesh)
+        print(render_line(result))
+        results.append(result)
+    return results
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     manifest = load_manifest()
     if args.list:
-        print(*(f"{r['card_id']}  {r['fixture_id']}  ({r['fixture_status']})" for r in manifest["fixtures"]), sep="\n")
-        return 0
+        return _list(manifest)
     rows = manifest["fixtures"] if args.all else resolve(args.fixture, manifest)
-    default_root = DEFAULT_RUN_ROOT / datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    run_root = Path(args.run_root) if args.run_root else default_root
-    run_root.mkdir(parents=True, exist_ok=True)
-
-    results = [run_fixture(row, run_root, args.mesh) for row in rows]
-    print(*(render_line(r) for r in results), sep="\n")
-    summary = suite_summary(results)
+    run_root = _run_root(args.run_root)
+    summary = suite_summary(run_suite(rows, run_root, args.mesh))
     if args.all and not args.no_summary:
         write_json(SUITE_SUMMARY, summary)
     print(f"\n{summary['passed']}/{summary['fixture_count']} fixtures passed; artifacts under {run_root}")
