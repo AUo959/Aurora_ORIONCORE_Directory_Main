@@ -193,3 +193,17 @@ def test_compile_plan_does_not_touch_station_state(tmp_path, monkeypatch):
         sd.apply_plan(copy.deepcopy(fixture))
     CHECK.assertEqual(state.read_text() if state.exists() else None, before)
     CHECK.assertEqual(list(tmp_path.iterdir()), [])
+
+
+def test_suite_summary_tolerates_a_run_without_an_l3_verdict():
+    import l2_scenario_fixture_run as runner
+
+    def result(verdict, status):
+        obs = {"tasks_completed": 1, "task_count": 2, "emergent_events": 0, "l3_verdict": verdict,
+               "seed_dynamics": runner._dynamics_summary({})}
+        return {"card_id": "SCN-0000", "fixture_id": "x", "status": status, "checks": {"ok": status == "pass"},
+                "observations": obs, "initializer": {"accepted": True}}
+
+    summary = runner.suite_summary([result("supported", "pass"), result(None, "fail")])
+    CHECK.assertEqual(summary["l3_verdicts"], {"missing": 1, "supported": 1})
+    CHECK.assertEqual(summary["status"], "fail")

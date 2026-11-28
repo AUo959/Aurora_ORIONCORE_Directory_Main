@@ -273,7 +273,8 @@ def suite_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
         # How many runs came out differently (tasks closed, L3 verdict, solver,
         # stalls, absorptions). Before seed dynamics every fixture ran alike.
         "distinct_run_signatures": len(signatures),
-        "l3_verdicts": dict(sorted(Counter(r["observations"]["l3_verdict"] for r in results).items())),
+        # A run that fails before its L3 receipt has no verdict; count it as "missing".
+        "l3_verdicts": dict(sorted(Counter(r["observations"]["l3_verdict"] or "missing" for r in results).items())),
         "results": [
             {
                 "card_id": r["card_id"],
