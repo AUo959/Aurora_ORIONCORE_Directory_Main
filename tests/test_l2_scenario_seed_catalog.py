@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import unittest
 from pathlib import Path
@@ -164,6 +165,26 @@ class L2ScenarioSeedCatalogTests(unittest.TestCase):
             )
         )
 
+
+    def test_tracked_v0_2_15_source_matches_recorded_hash(self) -> None:
+        primary = [
+            entry
+            for entry in self.catalog["source_evidence"]["source_files"]
+            if entry["role"] == "primary_machine_source"
+        ]
+        self.assertEqual(len(primary), 1)
+        tracked = primary[0]["tracked_copy"]
+        self.assertEqual(tracked["path"], "catalog/sources/ORION_SCENARIO_CATALOG_v0_2_15.html")
+        self.assertEqual(tracked["sha256"], primary[0]["sha256"])
+        data = (ROOT / tracked["path"]).read_bytes()
+        self.assertEqual(len(data), primary[0]["size_bytes"])
+        self.assertEqual(hashlib.sha256(data).hexdigest(), primary[0]["sha256"])
+        self.assertTrue((ROOT / tracked["provenance_ref"]).is_file())
+        v0215_cards = [c for c in self.catalog["cards"] if c.get("source_version") == "v0.2.15"]
+        html = data.decode("utf-8")
+        self.assertEqual(len(v0215_cards), 87)
+        for card in v0215_cards:
+            self.assertIn(f'id="{card["id"]}"', html)
 
 if __name__ == "__main__":
     unittest.main()
