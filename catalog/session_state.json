@@ -1133,24 +1133,6 @@
       ]
     },
     {
-      "id": "gh-cloudbank-1711",
-      "status": "ready",
-      "priority": "medium",
-      "assigned_to": "either",
-      "kind": "work",
-      "repo": "aurora-cloudbank-symbolic-main",
-      "description": "[GitHub aurora-cloudbank-symbolic#1711] GUMAS Unified tracker: remaining Codacy complexity findings (23 medium Complexity, 2 minor markdown on #1735; largest Universe.validate CC 147, then time_alignment, bindings, external_evidence, kernel.advance_to) and outstanding root/CanonRec provenance checks. Stack merged; migrated 2026-11-27 (issue closed with pointer). Full body, 2 comments and 12 linked PR head SHAs in catalog/backlog_archive/cloudbank-1711.md.",
-      "created_at": "2026-11-27T21:10:17Z",
-      "updated_at": "2026-11-27T21:10:17Z",
-      "review_at": "2026-12-27T17:00:00Z",
-      "next_action": "Read catalog/backlog_archive/cloudbank-1711.md and refactor the listed high-complexity GUMAS Unified functions into small tested helpers, preserving deterministic SHA256 state/receipt ancestry.",
-      "definition_of_done": "Codacy shows no new Complexity findings for the GUMAS Unified code on main and the root/CanonRec provenance checks in catalog/backlog_archive/cloudbank-1711.md are recorded, with evidence linked here.",
-      "approval_required": false,
-      "evidence_refs": [
-        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1711"
-      ]
-    },
-    {
       "id": "aurora-llm-asm-root-contract-review",
       "status": "ready",
       "priority": "high",
@@ -1185,6 +1167,25 @@
       "approval_required": false,
       "evidence_refs": [
         "docs/AURORA_STATE_MODEL_IMPLEMENTATION_PLAN_v0_1.md"
+      ]
+    },
+    {
+      "id": "gh-cloudbank-1711-provenance",
+      "status": "ready",
+      "priority": "medium",
+      "assigned_to": "either",
+      "kind": "work",
+      "repo": "aurora-cloudbank-symbolic-main",
+      "description": "[GitHub aurora-cloudbank-symbolic#1711, split 2026-11-28] Root/CanonRec provenance checks for the GUMAS Unified P0-P6 stack, carried over from gh-cloudbank-1711 after its Codacy half merged via CloudBank #1741. Scope in catalog/backlog_archive/cloudbank-1711.md (source authority / CanonRec reconciliation, root/CloudBank integration checks).",
+      "created_at": "2026-11-28T02:42:27Z",
+      "updated_at": "2026-11-28T02:42:27Z",
+      "review_at": "2026-12-27T17:00:00Z",
+      "next_action": "Read catalog/backlog_archive/cloudbank-1711.md, run the root/CanonRec provenance and integration checks against CloudBank main be83f040, and record the results with evidence.",
+      "definition_of_done": "Root/CanonRec provenance checks from catalog/backlog_archive/cloudbank-1711.md are recorded with evidence linked here.",
+      "approval_required": false,
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1711",
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/pull/1741"
       ]
     }
   ],
@@ -1451,9 +1452,19 @@
       "evidence_refs": [
         "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1711"
       ]
+    },
+    {
+      "id": "gh-cloudbank-1711",
+      "status": "completed",
+      "completed_at": "2026-11-28T02:42:27Z",
+      "platform": "claude-code",
+      "detail": "Codacy half done: CloudBank #1741 squash-merged as be83f040 cleared all 23 Complexity + 2 markdown findings from #1735 (Codacy 0 new, Sonar 0). No behavior change: 5 scenario sha256s, 861 P0 golden outcomes and 772k old-vs-new differential outcomes identical. Provenance checks split to gh-cloudbank-1711-provenance.",
+      "evidence_refs": [
+        "https://github.com/AUo959/aurora-cloudbank-symbolic/issues/1711"
+      ]
     }
   ],
-  "last_updated": "2026-11-28T02:08:33Z",
+  "last_updated": "2026-11-28T02:42:27Z",
   "last_platform": "claude-code",
   "last_session_summary": "Built runnable fixtures for all 25 L2 scenario seed shortlist cards: generator (tools/l2_scenario_fixture_generator.py, --check drift gate), runner (tools/l2_scenario_fixture_run.py: hour_aboard on an isolated clock + CloudBank scenario_seed_initializer), 25 fixtures in catalog/generated_watch_scenarios, tests/test_l2_scenario_fixtures.py. 25/25 pass end-to-end.",
   "tool_versions": {
