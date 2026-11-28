@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import subprocess  # nosec B404 - runs this repo's own tools with fixed argv
 import sys
 from pathlib import Path
@@ -15,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 import l2_scenario_fixture_generator as gen  # noqa: E402
+import scenario_seed_dynamics as seed_dynamics  # noqa: E402
 
 CHECK = TestCase()
 CATALOG = json.loads((ROOT / "catalog/l2_scenario_seed_catalog.json").read_text(encoding="utf-8"))
@@ -159,12 +161,23 @@ def test_all_fixtures_run_end_to_end(tmp_path):
     CHECK.assertEqual(result.returncode, 0, result.stdout[-2000:] + result.stderr[-800:])
     receipts = sorted(tmp_path.glob("*/fixture_run_receipt.json"))
     CHECK.assertEqual(len(receipts), 25)
+    signatures, verdicts, completions = set(), set(), set()
     for path in receipts:
         receipt = json.loads(path.read_text())
+        obs = receipt["observations"]
         CHECK.assertEqual(receipt["status"], "pass", (receipt["card_id"], receipt["checks"]))
-        CHECK.assertEqual(receipt["observations"]["tasks_completed"], receipt["observations"]["task_count"])
+        CHECK.assertTrue(receipt["checks"]["seed_dynamics_applied"], receipt["card_id"])
+        CHECK.assertGreater(obs["tasks_completed"], 0, receipt["card_id"])
         CHECK.assertTrue(receipt["initializer"]["accepted"])
         CHECK.assertTrue(receipt["end_state_categories_open"], "end states must stay open categories")
+        signatures.add(seed_dynamics.run_signature(obs))
+        verdicts.add(obs["l3_verdict"])
+        completions.add(obs["tasks_completed"])
+    # Seed settings must make runs differ: before seed dynamics every fixture
+    # closed the same five tasks and every L3 audit came back "supported".
+    CHECK.assertGreaterEqual(len(signatures), 15, signatures)
+    CHECK.assertGreaterEqual(len(verdicts), 2, verdicts)
+    CHECK.assertGreaterEqual(len(completions), 4, completions)
 
 
 @pytest.mark.simulation
@@ -180,6 +193,32 @@ def test_fixture_runs_are_deterministic_and_leave_station_clock_alone(tmp_path):
         observations.append(receipt["observations"])
     CHECK.assertEqual(observations[0], observations[1])
     CHECK.assertEqual(state.read_text() if state.exists() else None, before)
+    for run in ("a", "b"):
+        sim = json.loads(next((tmp_path / run).glob("*/sim_raw.json")).read_text())
+        observations.append(sim["seed_dynamics"])
+    CHECK.assertEqual(observations[2], observations[3], "shock/diversion trace must replay per seed")
+
+
+@pytest.mark.simulation
+@pytest.mark.slow
+def test_seed_changes_the_run_on_the_live_clock(tmp_path):
+    """Off the isolated clock, each station hour re-seeds the knobs and shocks."""
+    traces = set()
+    for hour in range(4):
+        out = tmp_path / f"h{hour}"
+        out.mkdir()
+        state = out / "state.json"
+        state.write_text(json.dumps({"hours_elapsed": hour, "pair_familiarity": {}}) + "\n")
+        result = subprocess.run(  # nosemgrep: python.lang.security.audit.dangerous-subprocess-use-audit.dangerous-subprocess-use-audit # noqa: S603 # nosec B603
+            [sys.executable, str(ROOT / "tools" / "hour_aboard.py"), "--scenario",
+             "generated_watch_scenarios/l2_scn_0903_the_war_nobody_names_v1", "--out-dir", str(out), "--no-mesh"],
+            capture_output=True, text=True, cwd=ROOT, env={**os.environ, "AURORA_STATION_STATE": str(state)},
+            timeout=900, check=False,
+        )
+        CHECK.assertEqual(result.returncode, 0, result.stderr[-800:])
+        dyn = json.loads((out / "sim_raw.json").read_text())["seed_dynamics"]
+        traces.add(json.dumps(dyn, sort_keys=True))
+    CHECK.assertGreaterEqual(len(traces), 3)
 
 
 @pytest.mark.simulation

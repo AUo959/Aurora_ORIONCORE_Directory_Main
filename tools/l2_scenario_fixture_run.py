@@ -33,6 +33,7 @@ import json
 import os
 import subprocess  # nosec B404 - runs this repo's own harness with fixed argv
 import sys
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -42,6 +43,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 
 import hour_aboard  # noqa: E402
 import l2_scenario_seed_uptake as uptake  # noqa: E402
+import scenario_seed_dynamics as seed_dynamics  # noqa: E402
 from _workspace_common import write_json  # noqa: E402
 
 FIXTURE_DIR = ROOT / "catalog" / "generated_watch_scenarios"
@@ -130,11 +132,32 @@ def _initializer_matches(fixture: dict[str, Any], initial: dict[str, Any]) -> bo
     return all(initial.get(key) == value for key, value in expected.items())
 
 
+def _expected_task_ids(fixture: dict[str, Any], sim: dict[str, Any]) -> list[str]:
+    """Fixture tasks plus one role-position task per seed role."""
+    card = fixture["source_scenario_seed"]["card_id"]
+    roles = fixture["scenario_seed_overlay"]["roles"]
+    return [t["id"] for t in fixture["tasks"]] + [f"{card}-R{i}" for i in range(1, len(roles) + 1)]
+
+
+def _seed_dynamics_applied(fixture: dict[str, Any], sim: dict[str, Any]) -> bool:
+    """The run consumed the seed: plan schema present, every axis wired, solver chosen."""
+    dyn = sim.get("seed_dynamics", {})
+    solver = dyn.get("dominant_solver")
+    shock_axes = {s["axis"] for s in dyn.get("shocks", [])}
+    return (
+        dyn.get("schema") == seed_dynamics.SCHEMA
+        and isinstance(solver, str)
+        and bool(solver)
+        and shock_axes <= set(fixture["scenario_seed_overlay"]["pressure"])
+    )
+
+
 def _checks(fixture: dict[str, Any], run: dict[str, Any], init: dict[str, Any]) -> dict[str, bool]:
     sim, verdict = run["sim"], run["verdict"]
     return {
         "harness_exit_ok": run["returncode"] == 0,
-        "all_tasks_registered": sorted(sim.get("task_names", {})) == sorted(t["id"] for t in fixture["tasks"]),
+        "all_tasks_registered": sorted(sim.get("task_names", {})) == sorted(_expected_task_ids(fixture, sim)),
+        "seed_dynamics_applied": _seed_dynamics_applied(fixture, sim),
         "work_recorded": float(sim.get("summary", {}).get("total_spent", 0)) > 0,
         "souls_accounting_complete": bool(run["souls"].get("complete")),
         "l3_verdict_valid": verdict in VALID_VERDICTS,
@@ -152,13 +175,35 @@ def _observations(fixture: dict[str, Any], run: dict[str, Any]) -> dict[str, Any
         "ticks": summary.get("ticks"),
         "characters_engaged": summary.get("characters_used"),
         "tasks_completed": len(summary.get("completed_ids", [])),
-        "task_count": len(fixture["tasks"]),
+        "task_count": len(sim.get("task_names", {})) or len(fixture["tasks"]),
         "hours_worked": summary.get("total_spent"),
         "emergent_events": len(sim.get("events", [])),
         "l3_verdict": run["verdict"],
         "souls_logged": run["souls"].get("crew_logged"),
         "ord_drones": sim.get("ord_dispatch", {}).get("drones_required", []),
+        "seed_dynamics": _dynamics_summary(sim),
     }
+
+
+def _dynamics_summary(sim: dict[str, Any]) -> dict[str, Any]:
+    dyn = sim.get("seed_dynamics", {})
+    return {
+        "dominant_solver": dyn.get("dominant_solver"),
+        "pressure_stalls": dyn.get("pressure_stalls", 0),
+        "pressure_absorbed": dyn.get("pressure_absorbed", 0),
+        "stalls_by_axis": _stalls_by_axis(dyn),
+        "crew_diverted_hours": sum(len(v) for v in dyn.get("diversions", {}).values()),
+        "role_positions_held": len(dyn.get("role_tasks_completed", [])),
+        "escalated_at_hour": None if dyn.get("escalated_at") is None else dyn["escalated_at"] + 1,
+    }
+
+
+def _stalls_by_axis(dyn: dict[str, Any]) -> dict[str, int]:
+    out: dict[str, int] = {}
+    for shock in dyn.get("shocks", []):
+        if not shock["absorbed"]:
+            out[shock["axis"]] = out.get(shock["axis"], 0) + 1
+    return dict(sorted(out.items()))
 
 
 def _initializer_summary(init: dict[str, Any]) -> dict[str, Any]:
@@ -215,6 +260,7 @@ def run_fixture(row: dict[str, Any], run_root: Path, mesh: bool) -> dict[str, An
 
 def suite_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
     passed = sum(1 for r in results if r["status"] == "pass")
+    signatures = {seed_dynamics.run_signature(r["observations"]) for r in results}
     return {
         "artifact_id": "l2_scenario_fixture_runs",
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -224,6 +270,11 @@ def suite_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
         "passed": passed,
         "failed": len(results) - passed,
         "status": "pass" if passed == len(results) else "fail",
+        # How many runs came out differently (tasks closed, L3 verdict, solver,
+        # stalls, absorptions). Before seed dynamics every fixture ran alike.
+        "distinct_run_signatures": len(signatures),
+        # A run that fails before its L3 receipt has no verdict; count it as "missing".
+        "l3_verdicts": dict(sorted(Counter(r["observations"]["l3_verdict"] or "missing" for r in results).items())),
         "results": [
             {
                 "card_id": r["card_id"],
@@ -234,6 +285,9 @@ def suite_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
                 "emergent_events": r["observations"]["emergent_events"],
                 "l3_verdict": r["observations"]["l3_verdict"],
                 "initializer_accepted": r["initializer"]["accepted"],
+                "dominant_solver": r["observations"]["seed_dynamics"]["dominant_solver"],
+                "pressure_stalls": r["observations"]["seed_dynamics"]["pressure_stalls"],
+                "role_positions_held": r["observations"]["seed_dynamics"]["role_positions_held"],
             }
             for r in results
         ],
@@ -242,13 +296,15 @@ def suite_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
 
 def render_line(result: dict[str, Any]) -> str:
     obs = result["observations"]
+    dyn = obs["seed_dynamics"]
     mark = "✅" if result["status"] == "pass" else "❌"
     failed = [k for k, ok in result["checks"].items() if not ok]
     initializer = "ok" if result["initializer"]["accepted"] else "REJECTED"
     tail = f" — failed: {', '.join(failed)}" if failed else ""
     return (
         f"{mark} {result['card_id']} {result['handle']}: tasks {obs['tasks_completed']}/{obs['task_count']}, "
-        f"events {obs['emergent_events']}, L3 {obs['l3_verdict']}, initializer {initializer}{tail}"
+        f"events {obs['emergent_events']}, stalls {dyn['pressure_stalls']}, solver {dyn['dominant_solver']}, "
+        f"L3 {obs['l3_verdict']}, initializer {initializer}{tail}"
     )
 
 
@@ -295,7 +351,11 @@ def main(argv: list[str] | None = None) -> int:
     summary = suite_summary(run_suite(rows, run_root, args.mesh))
     if args.all and not args.no_summary:
         write_json(SUITE_SUMMARY, summary)
-    print(f"\n{summary['passed']}/{summary['fixture_count']} fixtures passed; artifacts under {run_root}")
+    print(
+        f"\n{summary['passed']}/{summary['fixture_count']} fixtures passed "
+        f"({summary['distinct_run_signatures']} distinct run signatures, L3 {summary['l3_verdicts']}); "
+        f"artifacts under {run_root}"
+    )
     return 0 if summary["status"] == "pass" else 1
 
 

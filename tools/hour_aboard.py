@@ -42,6 +42,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT / "tools"))
+
+import scenario_seed_dynamics as seed_dynamics  # noqa: E402
 
 
 def _resolve(candidates: list[Path], marker: str, default: Path) -> Path:
@@ -195,6 +198,81 @@ for pair, weight in scenario.get("history", {}).get("pair_familiarity", {}).item
             sim.agents[b].collaborators.add(a)
             history_pairs_applied += 1
 
+# L2 scenario seed dynamics (tools/scenario_seed_dynamics.py compiles the plan
+# root-side): pressure shocks stall or are absorbed, scarcity diverts crew, and
+# the dominant solver escalates or steadies pressure once the decision closes.
+# Only wraps this run's sim instance; CloudBank code is not modified.
+dyn = scenario.get("seed_dynamics")
+dyn_out = None
+if dyn:
+    import random as _random
+    import re as _re
+    from orion_station_simulation_v2 import Event
+
+    dyn_rng = _random.Random(dyn["rng_stream"])
+    dyn_out = {"schema": dyn["schema"], "shocks": [], "diversions": {}, "escalated_at": None}
+    frozen, diverted, hardened = set(), set(), set()
+    decision_ids = {t["id"] for t in scenario["tasks"] if dyn["escalation"]["after_tag"] in t.get("tags", [])}
+    _orig_emit = sim.aurora.maybe_emit_events
+
+    def _slug(text):
+        return _re.sub(r"[^a-z0-9]+", "_", text.lower()).strip("_")
+
+    def _emit(tick, agents, tasks):
+        events = _orig_emit(tick, agents, tasks)
+        # Crew on a task stalled last hour have adapted: that task absorbs this hour.
+        hardened.clear()
+        hardened.update(frozen)
+        frozen.clear()
+        diverted.clear()
+        escalated = bool(decision_ids) and decision_ids <= sim.completed
+        if escalated and dyn_out["escalated_at"] is None:
+            dyn_out["escalated_at"] = tick
+        esc = dyn["escalation"]
+        names = sorted(agents)
+        n_div = int(round(dyn["crew_diversion_rate"] * len(names)))
+        if n_div:
+            diverted.update(dyn_rng.sample(names, n_div))
+            dyn_out["diversions"][str(tick)] = sorted(diverted)
+        absorb = min(0.95, dyn["absorb_rate"] + (esc["absorb_rate_delta"] if escalated else 0.0))
+        for axis in dyn["pressure_axes"]:
+            rate = min(0.95, axis["shock_rate"] + (esc["shock_rate_delta"] if escalated else 0.0))
+            if dyn_rng.random() >= rate:
+                continue
+            open_tasks = sorted(
+                (t for t in tasks.values() if not t.completed and t.can_start(sim.completed) and t.id not in frozen),
+                key=lambda t: t.id,
+            )
+            aligned = [t for t in open_tasks if _slug(axis["axis"]) in t.semantic_tags]
+            pool = aligned or open_tasks
+            target = dyn_rng.choice(pool) if pool else None
+            absorbed = target is None or target.id in hardened or dyn_rng.random() < absorb
+            shock = {"tick": tick, "axis": axis["axis"], "task": target.id if target else None,
+                     "absorbed": absorbed}
+            dyn_out["shocks"].append(shock)
+            if absorbed:
+                where = f" on {target.name}" if target else ""
+                e = Event(tick, "pressure_absorbed", f"{axis['axis']} pressure absorbed{where}",
+                          dyn["shock_drag"], [])
+            else:
+                frozen.add(target.id)
+                e = Event(tick, "pressure_stall", f"{axis['axis']} pressure stalls {target.name}",
+                          1.0, sorted(a.name for a in agents.values() if a.assigned_task == target.id))
+            sim.aurora.events.append(e)
+            events.append(e)
+        return events
+
+    sim.aurora.maybe_emit_events = _emit
+    _orig_process = sim._process_agent_work
+
+    def _process(agent, events):
+        if agent.name in diverted or agent.assigned_task in frozen:
+            agent.tick_recovery()
+            return None
+        return _orig_process(agent, events)
+
+    sim._process_agent_work = _process
+
 records = []
 _orig_apply = sim._apply_work
 def _capture(events):
@@ -234,6 +312,13 @@ out = {
     "task_sources": {t["id"]: t.get("source", "") for t in scenario["tasks"]},
     "history_pairs_applied": history_pairs_applied,
 }
+if dyn_out is not None:
+    role_ids = {t["id"] for t in dyn["role_tasks"]}
+    dyn_out["role_tasks_completed"] = sorted(role_ids & sim.completed)
+    dyn_out["pressure_stalls"] = sum(1 for s in dyn_out["shocks"] if not s["absorbed"])
+    dyn_out["pressure_absorbed"] = sum(1 for s in dyn_out["shocks"] if s["absorbed"])
+    dyn_out["dominant_solver"] = dyn["dominant_solver"]["selected"]
+    out["seed_dynamics"] = dyn_out
 
 try:
     from modules.ord import MissionBrief, OrdPolicyEngine, canonical_sha256
@@ -264,9 +349,12 @@ run = NarrativeValidationEngine().run({
     "entities": [{"name": audit["actor"], "entity_type": "character", "role": "Station Commander"}],
     "events": [{"label": audit["event_label"], "timing": "now", "participants": [audit["actor"]]}],
     "motives": [{"actor": audit["actor"], "label": audit["motive"], "strength": 0.95}],
-    "pressures": [{"actor": audit["actor"], "label": "duty to the charter", "direction": "toward", "strength": 0.9}],
+    # Seed fixtures pass run-derived pressures (tools/scenario_seed_dynamics.py);
+    # other scenarios keep the standing charter-duty pressure.
+    "pressures": [{"actor": audit["actor"], **p} for p in audit.get("pressures") or
+                  [{"label": "duty to the charter", "direction": "toward", "strength": 0.9}]],
     "knowledge_states": [{"holder": audit["actor"], "fact": audit["knowledge"]}],
-    "continuity": {"notes": ["Thorne upholds arbitration discipline."]},
+    "continuity": {"notes": ["Thorne upholds arbitration discipline."] + list(audit.get("continuity_notes", []))},
 }, proposal={"actor": audit["actor"], "action": audit["action"], "type": "action"})
 
 
@@ -371,6 +459,7 @@ def build_hour_records(sim: dict, scenario: dict, canon_souls: list[dict]) -> di
                 "hours": {},
             }
 
+    diversions = {k: set(v) for k, v in sim.get("seed_dynamics", {}).get("diversions", {}).items()}
     events_by_tick = defaultdict(list)
     for ev in sim.get("events", []):
         events_by_tick[ev["tick"]].append(ev)
@@ -398,11 +487,14 @@ def build_hour_records(sim: dict, scenario: dict, canon_souls: list[dict]) -> di
                         }
                     )
             if not any(e["type"] == "work" for e in entries):
+                diverted = soul["name"] in diversions.get(str(tick), ())
                 entries.insert(
                     0,
                     {
                         "type": "duty",
-                        "detail": duty_for(seed, tick, soul["name"], division, pools),
+                        "detail": "diverted to scarcity response"
+                        if diverted
+                        else duty_for(seed, tick, soul["name"], division, pools),
                     },
                 )
             soul["hours"][str(tick)] = entries
@@ -853,6 +945,16 @@ def main() -> int:
         )
 
     hour_index = apply_hour_clock(scenario)
+    # L2 seed fixtures: roles, pressures and knobs become sim dynamics at this
+    # hour's seed (no-op for scenarios without a scenario_seed_overlay).
+    plan = seed_dynamics.apply_plan(scenario)
+    if plan:
+        solver = plan["dominant_solver"]
+        print(
+            f"🌪  Seed dynamics: volatility {plan['volatility']}, solver {solver['selected'] or 'unset'}"
+            f"{' (coercive)' if solver['coercive'] else ''}, {len(plan['role_tasks'])} role positions, "
+            f"{len(plan['pressure_axes'])} pressure axes"
+        )
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     out_dir = (
@@ -897,6 +999,7 @@ def main() -> int:
             )
 
     print("⚖️  L3 narrative audit ...")
+    scenario["l3_audit"] = seed_dynamics.derive_l3_audit(scenario["l3_audit"], plan, sim, scenario["tasks"])
     audit = _run_in_clone(L3_AUDIT_DRIVER, scenario["l3_audit"])
     print(f"   verdict: {audit['verdict']}")
 
