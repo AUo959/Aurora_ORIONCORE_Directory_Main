@@ -94,6 +94,9 @@ class RegistryTests(unittest.TestCase):
         state = _load(REPO_ROOT / status.SESSION_STATE_PATH)
         known = {item["id"] for item in state.get("task_queue", [])}
         known |= {item["id"] for item in state.get("completed_tasks", [])}
+        active = state.get("active_task")
+        if isinstance(active, dict) and active.get("id"):
+            known.add(active["id"])
         for track in program["tracks"]:
             for task_id in track["task_ids"]:
                 self.assertIn(task_id, known)
@@ -172,6 +175,15 @@ class ReportTests(unittest.TestCase):
         report = status.build_report(root, None, TODAY)
         actions = [f.message for f in report.findings if f.severity == "action"]
         self.assertTrue(any("does-not-exist" in m for m in actions))
+
+    def test_next_adoption_step_never_skips_unevidenced_steps(self) -> None:
+        contract = _load(REPO_ROOT / status.CONTRACT_PATH)
+        self.assertEqual(status._next_adoption_step(contract), "review_root_contract")
+        for repo in contract["repository_roles"].values():
+            repo["adoption_status"] = "adopted"
+        step = status._next_adoption_step(contract)
+        self.assertTrue(step.startswith("generate_asm_001"), step)
+        self.assertNotIn("authorize_baseline_training", step)
 
     def test_cli_exit_codes(self) -> None:
         out = StringIO()

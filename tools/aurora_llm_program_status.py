@@ -236,19 +236,29 @@ def build_report(root: Path, cloudbank: Optional[Path], today: date) -> Report:
     return report
 
 
+# Adoption steps whose completion the contract records through a repository's adoption_status.
+# Steps not listed here (generation, sealing, teacher sufficiency, training authorization) leave
+# no evidence in the contract, so the tool cannot claim they are done.
+_STEP_EVIDENCE = {
+    "review_root_contract": "Aurora_ORIONCORE_Directory_Main",
+    "map_world_state_adapter": "aurora-cloudbank-symbolic-main",
+    "map_qsfe_epistemic_adapter": "aurora-cloudbank-symbolic-main",
+    "define_qgia_simulation_namespace": "qgia-knowledge-library-main",
+    "implement_canonrec_episode_validator": "CanonRec",
+}
+_NOT_ADOPTED = {None, "", "not_started", "proposal_committed", "deferred"}
+
+
 def _next_adoption_step(contract: Dict[str, Any]) -> Optional[str]:
-    """First adoption step whose owning repo has not adopted. Coarse by design: a reading, not a plan."""
+    """Earliest adoption step not evidenced as done; steps without contract evidence are reported as such."""
     roles = contract.get("repository_roles", {})
-    order = contract.get("adoption_order", [])
-    if not order:
-        return None
-    root_status = roles.get("Aurora_ORIONCORE_Directory_Main", {}).get("adoption_status")
-    if root_status in (None, "proposal_committed"):
-        return order[0]
-    cloudbank_status = roles.get("aurora-cloudbank-symbolic-main", {}).get("adoption_status")
-    if len(order) > 1 and cloudbank_status in (None, "not_started"):
-        return order[1]
-    return order[-1]
+    for step in contract.get("adoption_order", []):
+        repo = _STEP_EVIDENCE.get(step)
+        if repo is None:
+            return f"{step} (completion not recorded in the contract; check receipts)"
+        if roles.get(repo, {}).get("adoption_status") in _NOT_ADOPTED:
+            return step
+    return None
 
 
 def _render_asm(asm: Dict[str, Any]) -> List[str]:
