@@ -1,4 +1,4 @@
-.PHONY: help setup test verify scan sync-audit sync-audit-all gh-auth-check pr-packet lint health devkit-check devkit-report devkit-install-plan skills-check skills-install session-claims session-claim-check session-state-check project-focus cloudbank-broker cloudbank-broker-check recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report stack-validation stack-validation-report command-intent-snapshot command-intent-snapshot-report simulation-readiness simulation-readiness-report simulation-smoke-report demo-readiness demo-readiness-report kubernetes-readiness kubernetes-readiness-report operator-snapshot operator-snapshot-report confidence-audit confidence-audit-report integration-gate l2-scenario-uptake ace-check ace-live-check ace-acceptance ace-acceptance-report clean queue-health queue-health-report
+.PHONY: help setup test verify scan sync-audit sync-audit-all gh-auth-check pr-packet lint health devkit-check devkit-report devkit-install-plan skills-check skills-install session-claims session-claim-check session-state-check project-focus cloudbank-broker cloudbank-broker-check recovery-index recovery-report recommendations recommendations-report mission-control mission-control-report stack-validation stack-validation-report command-intent-snapshot command-intent-snapshot-report simulation-readiness simulation-readiness-report simulation-smoke-report demo-readiness demo-readiness-report kubernetes-readiness kubernetes-readiness-report operator-snapshot operator-snapshot-report confidence-audit confidence-audit-report integration-gate l2-scenario-uptake l2-scenario-fixtures l2-scenario-fixtures-check l2-scenario-fixtures-run ace-check ace-live-check ace-acceptance ace-acceptance-report clean queue-health queue-health-report
 
 PYTHON ?= python3
 PYTEST ?= pytest
@@ -180,6 +180,15 @@ integration-gate: ## Run the root command/agent/provenance integration gate
 
 l2-scenario-uptake: ## Validate L2 scenario seed uptake packets and emergence guardrails
 	$(PYTHON) tools/l2_scenario_seed_uptake.py --summary
+
+l2-scenario-fixtures: ## Regenerate L2 scenario seed fixtures (catalog/generated_watch_scenarios)
+	$(PYTHON) tools/l2_scenario_fixture_generator.py
+
+l2-scenario-fixtures-check: ## Fail when generated L2 scenario fixtures drift from the seed catalog
+	$(PYTHON) tools/l2_scenario_fixture_generator.py --check
+
+l2-scenario-fixtures-run: ## Run every L2 scenario fixture through hour_aboard + CloudBank seed initializer
+	$(PYTHON) tools/l2_scenario_fixture_run.py --all
 
 # ── Git / Sync ───────────────────────────────────────────────────────────
 

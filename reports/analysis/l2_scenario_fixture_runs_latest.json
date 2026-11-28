@@ -1,0 +1,262 @@
+{
+  "artifact_id": "l2_scenario_fixture_runs",
+  "generated_at": "2026-11-28T01:00:27Z",
+  "runner": "tools/l2_scenario_fixture_run.py",
+  "harness": "tools/hour_aboard.py (isolated station clock, no mesh)",
+  "fixture_count": 25,
+  "passed": 25,
+  "failed": 0,
+  "status": "pass",
+  "results": [
+    {
+      "card_id": "SCN-0903",
+      "fixture_id": "l2_scn_0903_the_war_nobody_names_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 4,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0708",
+      "fixture_id": "l2_scn_0708_the_one_vs_the_many_selves_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 2,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0002",
+      "fixture_id": "l2_scn_0002_the_contested_claim_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 0,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0307",
+      "fixture_id": "l2_scn_0307_synthetic_personhood_dispute_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 3,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0805",
+      "fixture_id": "l2_scn_0805_the_ship_that_must_survive_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 2,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0902",
+      "fixture_id": "l2_scn_0902_the_protein_line_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 4,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0906",
+      "fixture_id": "l2_scn_0906_creature_labor_substitutes_industry_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 3,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0928",
+      "fixture_id": "l2_scn_0928_the_queen_s_secret_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 0,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0301",
+      "fixture_id": "l2_scn_0301_occupation_and_insurgency_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 2,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0403",
+      "fixture_id": "l2_scn_0403_wanted_passenger_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 3,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0405",
+      "fixture_id": "l2_scn_0405_war_veteran_faultline_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 0,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0505",
+      "fixture_id": "l2_scn_0505_the_sentient_tool_dispute_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 0,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0506",
+      "fixture_id": "l2_scn_0506_the_time_loop_investigation_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 2,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0705",
+      "fixture_id": "l2_scn_0705_the_handler_s_weapon_learns_freedom_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 2,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0911",
+      "fixture_id": "l2_scn_0911_the_captured_pillar_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 5,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0601",
+      "fixture_id": "l2_scn_0601_the_succession_vacuum_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 1,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0701",
+      "fixture_id": "l2_scn_0701_the_assassination_with_a_political_story_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 3,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0703",
+      "fixture_id": "l2_scn_0703_the_tournament_that_determines_policy_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 5,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0704",
+      "fixture_id": "l2_scn_0704_the_cop_in_a_city_that_lies_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 1,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0806",
+      "fixture_id": "l2_scn_0806_the_colony_without_a_charter_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 2,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0103",
+      "fixture_id": "l2_scn_0103_planetary_redesign_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 1,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0105",
+      "fixture_id": "l2_scn_0105_alliance_with_the_local_power_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 0,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0106",
+      "fixture_id": "l2_scn_0106_system_addiction_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 1,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0107",
+      "fixture_id": "l2_scn_0107_foreknowledge_trap_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 2,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    },
+    {
+      "card_id": "SCN-0108",
+      "fixture_id": "l2_scn_0108_human_specialist_guilds_v1",
+      "status": "pass",
+      "failed_checks": [],
+      "tasks_completed": "5/5",
+      "emergent_events": 1,
+      "l3_verdict": "supported",
+      "initializer_accepted": true
+    }
+  ]
+}

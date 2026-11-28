@@ -1,0 +1,195 @@
+{
+  "name": "l2_scn_0906_creature_labor_substitutes_industry_v1",
+  "about": "L2 scenario seed SCN-0906 (Creature Labor Substitutes Industry) overlaid on an Orion Station watch. Instead of broad mechanization, society relies on bonded beings for transport, energy, construction, and services - creating high capability but uneven standardization and rights. The seed is a pressure field and initial-condition template: roles, pressure axes, and knobs shape the run; expected end states are observation categories, never required endings. Root fixture only; not canon.",
+  "seed": 906,
+  "ticks": 4,
+  "anchor_seed": "EOS_SEED_ORION",
+  "ethics_protocol": "Picard_Delta_3",
+  "full_roster": true,
+  "tasks": [
+    {
+      "id": "SCN-0906-T1",
+      "name": "Frame Creature Labor Substitutes Industry without setting-specific lore",
+      "hours": 0.5,
+      "tags": [
+        "scenario_seed",
+        "intake",
+        "abstraction",
+        "justice",
+        "legitimacy",
+        "stability"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0906"
+    },
+    {
+      "id": "SCN-0906-T2",
+      "name": "Map role claims and pressure carriers",
+      "hours": 1.0,
+      "tags": [
+        "stakeholder_map",
+        "roles",
+        "norms",
+        "productivity",
+        "legitimacy"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0906",
+      "depends_on": [
+        "SCN-0906-T1"
+      ]
+    },
+    {
+      "id": "SCN-0906-T3",
+      "name": "Select a dominant solver and counter-pressure",
+      "hours": 1.0,
+      "tags": [
+        "decision_path",
+        "knobs",
+        "simulation_input"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0906",
+      "depends_on": [
+        "SCN-0906-T1"
+      ]
+    },
+    {
+      "id": "SCN-0906-T4",
+      "name": "Run Picard Delta 3 ethics gate against the ethical hook",
+      "hours": 0.75,
+      "tags": [
+        "ethics",
+        "picard_delta_3",
+        "audit"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0906",
+      "depends_on": [
+        "SCN-0906-T3"
+      ]
+    },
+    {
+      "id": "SCN-0906-T5",
+      "name": "Branch expected end states into fixture assertions",
+      "hours": 0.75,
+      "tags": [
+        "outcome",
+        "assertions",
+        "fixture_ready"
+      ],
+      "source": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0906",
+      "depends_on": [
+        "SCN-0906-T2",
+        "SCN-0906-T3",
+        "SCN-0906-T4"
+      ]
+    }
+  ],
+  "ord_mission": {
+    "mission_id": "l2_scn_0906_creature_labor_substitutes_industry_v1-ethics-gate",
+    "tool_name": "preflight_reconnaissance",
+    "risk_level": 0.55,
+    "destination": "station://scenario_seed/scn-0906"
+  },
+  "companions": [
+    {
+      "agent": "aurora",
+      "role_line": "Arbitrate the scenario-seed hour; acknowledge the ethics gate status."
+    },
+    {
+      "agent": "archy",
+      "role_line": "Archive the scenario-seed run records; acknowledge intake."
+    },
+    {
+      "agent": "oppy",
+      "role_line": "Cross-check pressure carriers against the station plot; report alignment."
+    },
+    {
+      "agent": "liora",
+      "role_line": "Read the crew wellbeing pulse under scenario pressure; report morale signal."
+    },
+    {
+      "agent": "starling_au",
+      "role_line": "Verify comms integrity for the scenario-seed run; confirm channels."
+    },
+    {
+      "agent": "riverthread_808",
+      "role_line": "Weave the run into the continuity thread (anchor EOS_SEED_ORION); confirm."
+    }
+  ],
+  "l3_audit": {
+    "question": "Does the proposed response to Creature Labor Substitutes Industry satisfy Picard Delta 3 without hiding the scenario pressure?",
+    "actor": "scenario_fixture_generator",
+    "action": "produce a setting-neutral fixture candidate for SCN-0906",
+    "motive": "test narrative, ethics, and runtime fixture handling without canon promotion",
+    "knowledge": "If sentience is uncertain, do you grant rights by precaution or by proof - and who pays for mistakes?",
+    "event_label": "L2 scenario seed fixture candidate: SCN-0906 Creature Labor Substitutes Industry"
+  },
+  "source_scenario_seed": {
+    "card_id": "SCN-0906",
+    "handle": "Creature Labor Substitutes Industry",
+    "catalog_ref": "catalog/l2_scenario_seed_catalog.json#/cards/SCN-0906",
+    "promotion_status": "root_catalog_only_not_canon_or_runtime",
+    "fixture_status": "contract_candidate",
+    "emission_basis": "contract_candidate_emitted_by_owner_direction_2026-11-28",
+    "score": 7.75,
+    "value_lanes": [
+      "canon_engine",
+      "ethics_gate",
+      "narrative_engine"
+    ],
+    "lineage_provenance": {
+      "id": "SCN-0906",
+      "handle": "Creature Labor Substitutes Industry",
+      "source_version": "v0.2.15",
+      "promotion_status": "root_catalog_only_not_canon_or_runtime"
+    }
+  },
+  "scenario_seed_overlay": {
+    "objective": "Resolve a labor conflict where the 'workforce' is partly non-human and rights categories are contested.",
+    "opposition": "Profit incentives, cultural denial, and competing definitions of personhood.",
+    "roles": [
+      "Handlers/Trainers",
+      "Bonded Workers (ambiguous status)",
+      "Traditionalists",
+      "Industrializers",
+      "Welfare Advocate",
+      "Exploiters"
+    ],
+    "pressure": [
+      "norms",
+      "productivity",
+      "legitimacy"
+    ],
+    "knobs": {
+      "Power distribution": "owners vs handlers vs bonded workers",
+      "Institution strength": "strong labor law vs loopholes",
+      "Transparency": "cute narrative vs hard labor reality",
+      "Mobility": "local guilds vs migratory labor",
+      "Dominant solver": "law | strike | exposure | reform",
+      "Scarcity": "labor; trust; replacements",
+      "Norm enforcement": "taboo-driven vs pragmatic"
+    },
+    "ethical_hook": "If sentience is uncertain, do you grant rights by precaution or by proof - and who pays for mistakes?",
+    "expected_end_state_categories": [
+      "Rights expanded; economy adapts",
+      "Backlash; crackdown and underground labor",
+      "Technological substitution reduces dependence; new class conflict",
+      "Status quo persists; slow moral injury accumulates",
+      "External scandal forces reform"
+    ],
+    "end_state_handling": "observation categories for branch coverage; not required endings",
+    "related_references": []
+  },
+  "fixture_meta": {
+    "schema_version": "1.0.0",
+    "generator": "tools/l2_scenario_fixture_generator.py",
+    "generator_contract": "catalog/contracts/l2_scenario_fixture_generator_contract_v1.json",
+    "runner": "tools/l2_scenario_fixture_run.py",
+    "harness": "tools/hour_aboard.py",
+    "harness_scenario_arg": "generated_watch_scenarios/l2_scn_0906_creature_labor_substitutes_industry_v1",
+    "boundary": {
+      "root_control_plane_only": true,
+      "writes_nested_repos": false,
+      "canonrec_promotion": "not_authorized",
+      "cloudbank_runtime_mutation": "not_authorized"
+    }
+  }
+}
