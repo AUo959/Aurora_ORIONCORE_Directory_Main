@@ -30,6 +30,10 @@ Maintained outputs:
 - `catalog/schemas/l2_scenario_seed_uptake_contract.schema.json`
 - `tools/l2_scenario_seed_uptake.py`
 
+Tracked source:
+
+- `catalog/sources/ORION_SCENARIO_CATALOG_v0_2_15.html`
+
 Validation:
 
 - `python3 -m unittest tests/test_l2_scenario_seed_catalog.py`
@@ -46,8 +50,12 @@ Validation:
 - The owner-promoted `v0.2.2` cards keep explicit `source_version` and
   `source_status` provenance; incorporation here is not canon promotion or
   runtime wiring.
-- Source HTML/PDF files remain local ignored lineage sources. Do not move them
-  into root Git without a separate packaging decision.
+- `ORION_SCENARIO_CATALOG_v0_2_15.html`, the primary machine source, is tracked
+  as a byte-identical copy at `catalog/sources/ORION_SCENARIO_CATALOG_v0_2_15.html`
+  (packaging decision 2026-11-28; provenance in `catalog/sources/README.md`).
+  The PDF rendering and older lineage HTML/PDF files remain local ignored
+  lineage sources. Do not move them into root Git without a separate packaging
+  decision.
 
 ## Reference Normalization
 

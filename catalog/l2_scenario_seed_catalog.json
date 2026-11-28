@@ -16,7 +16,7 @@
     "mutation_boundaries": {
       "cloudbank": "no_edit_without_explicit_nested_repo_task",
       "canonrec": "no_edit_without_explicit_canon_promotion_task",
-      "source_html_pdf": "local_ignored_lineage_sources_not_moved"
+      "source_html_pdf": "v0_2_15_html_tracked_copy_in_catalog_sources_others_local_ignored"
     }
   },
   "authority_and_promotion": {
@@ -43,7 +43,15 @@
         "status": "local_ignored",
         "exists": true,
         "size_bytes": 204853,
-        "sha256": "59d9caa58f3dd424a7c92d0a826c7ee094161741c5c80ff5267114ccd8845dfe"
+        "sha256": "59d9caa58f3dd424a7c92d0a826c7ee094161741c5c80ff5267114ccd8845dfe",
+        "tracked_copy": {
+          "path": "catalog/sources/ORION_SCENARIO_CATALOG_v0_2_15.html",
+          "status": "tracked_byte_identical_source_artifact",
+          "sha256": "59d9caa58f3dd424a7c92d0a826c7ee094161741c5c80ff5267114ccd8845dfe",
+          "size_bytes": 204853,
+          "added_at": "2026-11-28",
+          "provenance_ref": "catalog/sources/README.md"
+        }
       },
       {
         "path": "GUMAS_SIM_2.5/ORION_SCENARIO_CATALOG_v0_2_15.pdf",
