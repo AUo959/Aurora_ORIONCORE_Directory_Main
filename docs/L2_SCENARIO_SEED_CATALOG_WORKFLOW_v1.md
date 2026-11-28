@@ -109,6 +109,21 @@ CanonRec are read, never written.
   packet goes through CloudBank `simulation/scenario_seed_initializer.py`. Run
   artifacts go to git-ignored `reports/scenario_fixture_runs/`; `--all` refreshes
   `reports/analysis/l2_scenario_fixture_runs_latest.json`.
+- Seed dynamics: `tools/scenario_seed_dynamics.py` compiles each fixture's
+  `scenario_seed_overlay` into the run at that hour's seed. Knobs are scored
+  into six pressure channels (range knobs such as `weak->totalizing` are sampled
+  at a seed-chosen point; the dominant-solver knob picks one option per seed).
+  Pressure axes become per-hour shocks that either stall an open task for the
+  hour or are absorbed (crew on a task stalled last hour adapt and absorb).
+  Coercive solvers escalate shocks once the decision path closes; other solvers
+  raise absorption. Each seed role becomes a role-position task that end-state
+  branching waits on, and scarcity diverts a share of the crew each hour. The
+  L3 audit then receives run-derived pressures (open stalls, the ethics gate,
+  unheld role positions, a coercive solver), so its verdict follows the run.
+  The harness wraps only its own sim instance; CloudBank code is unchanged, and
+  scenarios without an overlay run exactly as before. Receipts carry an
+  `observations.seed_dynamics` block and a `seed_dynamics_applied` check; the
+  `--all` summary reports `distinct_run_signatures` and the L3 verdict mix.
 - Contract candidates (`SCN-0307`, `SCN-0002`, `SCN-0928`, `SCN-0906`,
   `SCN-0505`, `SCN-0911`; no `runtime_fixture` lane) are emitted on owner
   direction and carry `emission_basis:
@@ -118,7 +133,9 @@ CanonRec are read, never written.
   selection; end-state branching last). Expected end states stay
   `expected_end_state_categories` for observation.
 - Tests: `tests/test_l2_scenario_fixtures.py` (the end-to-end run tests are
-  `@simulation` and need the CloudBank and CanonRec clones).
+  `@simulation` and need the CloudBank and CanonRec clones) and
+  `tests/test_scenario_seed_dynamics.py` (CloudBank-independent plan and audit
+  derivation tests).
 
 ## Uptake And Emergence Contract
 
